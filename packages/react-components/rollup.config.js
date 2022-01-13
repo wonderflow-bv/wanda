@@ -22,22 +22,22 @@ export default [
     ],
     external: ['react', 'react-dom', 'framer-motion'],
     plugins: [
+      external(),
       cleaner({
         targets: [
           './dist/'
         ]
       }),
-      external(),
+      typescript({ tsconfig: './tsconfig.json' }),
       nodeResolve(),
       commonjs(),
-      typescript({ tsconfig: './tsconfig.json' }),
       svg({
         extract: true,
         publicPath: './'
       }),
       postcss({
         modules: true,
-        extract: true,
+        // extract: true,
         minimize: true
       }),
       terser()
