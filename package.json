@@ -9,9 +9,11 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
-    "lint": "turbo run lint"
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
+    "prettier": "^2.5.1",
     "turbo": "latest"
   },
   "turbo": {
@@ -34,7 +36,7 @@
     }
   },
   "engines": {
-    "npm": ">=8.0.0",
+    "npm": ">=7.0.0",
     "node": ">=14.0.0"
   }
 }

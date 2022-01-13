@@ -1,20 +1,102 @@
 {
-  "name": "r",
-  "version": "0.0.0",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+  "name": "@wonderflow/react-components",
+  "version": "3.0.0-beta.32",
+  "description": "UI components from Wonderflow's Wanda design system",
+  "author": "Wonderflow",
+  "license": "MIT",
+  "types": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
   },
-  "dependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=14.x",
+    "npm": ">=8.x"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "lint": "run-s lint:scripts && run-s lint:styles",
+    "lint:scripts": "eslint \"src/**/*.{tsx,ts}\"",
+    "lint:styles": "stylelint src/**/*.css",
+    "lint:commits": "commitlint --edit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wonderflow-bv/react-components.git"
+  },
+  "browserslist": [
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Safari versions",
+    "last 2 Edge versions"
+  ],
+  "keywords": [
+    "design-system",
+    "wonderflow",
+    "components",
+    "react"
+  ],
+  "peerDependencies": {
+    "framer-motion": "^5.5.7",
+    "postcss": "^8.4.5",
+    "react": "^17.0",
+    "react-dom": "^17.0"
   },
   "devDependencies": {
-    "@types/react": "^17.0.33",
-    "@types/react-dom": "^17.0.10",
-    "@vitejs/plugin-react": "^1.0.7",
-    "typescript": "^4.4.4",
-    "vite": "^2.7.2"
+    "@commitlint/cli": "16.0.2",
+    "@commitlint/config-conventional": "16.0.0",
+    "@rollup/plugin-alias": "3.1.9",
+    "@rollup/plugin-commonjs": "21.0.1",
+    "@rollup/plugin-image": "2.1.1",
+    "@rollup/plugin-json": "4.1.0",
+    "@rollup/plugin-node-resolve": "13.1.3",
+    "@rollup/plugin-typescript": "8.3.0",
+    "@types/react": "17.0.38",
+    "@types/react-dom": "17.0.11",
+    "@typescript-eslint/eslint-plugin": "5.9.1",
+    "@typescript-eslint/parser": "5.9.1",
+    "@wonderflow/config": "3.1.2",
+    "@wonderflow/eslint-config": "1.1.11",
+    "@wonderflow/stylelint-config": "1.1.3",
+    "eslint": "7.32.0",
+    "eslint-plugin-react": "7.28.0",
+    "npm-run-all": "4.1.5",
+    "rollup-plugin-cleaner": "1.0.0",
+    "rollup-plugin-dts": "4.1.0",
+    "rollup-plugin-peer-deps-external": "2.2.4",
+    "rollup-plugin-postcss": "4.0.2",
+    "rollup-plugin-svg-sprite-loader": "0.0.4",
+    "rollup-plugin-terser": "7.0.2",
+    "typescript": "4.5.4",
+    "tsconfig": "*"
+  },
+  "dependencies": {
+    "@wonderflow/tokens": "1.3.7",
+    "ahooks": "3.1.5",
+    "clsx": "1.1.1",
+    "framer-motion": "^5.5.7",
+    "postcss": "^8.4.5",
+    "react": "^17.0",
+    "react-data-table-component": "7.4.6",
+    "react-dom": "^17.0",
+    "react-focus-on": "3.5.4",
+    "react-loading-skeleton": "3.0.2",
+    "react-masonry-css": "1.0.16",
+    "react-paginate": "8.1.0",
+    "react-popper-tooltip": "4.3.1",
+    "react-roving-tabindex": "3.1.1",
+    "react-uid": "2.3.1",
+    "type-fest": "2.9.0"
   }
 }

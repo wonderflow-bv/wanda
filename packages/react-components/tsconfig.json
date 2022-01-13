@@ -1,20 +1,56 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "React Components",
   "compilerOptions": {
-    "target": "ESNext",
-    "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "allowJs": false,
-    "skipLibCheck": false,
-    "esModuleInterop": false,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
+    "composite": false,
+    "declaration": true,
+    "declarationMap": true,
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "resolveJsonModule": true,
+    "inlineSources": false,
     "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
+    "moduleResolution": "node",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "preserveWatchOutput": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "baseUrl": "./",
+    "outDir": "dist",
+    "module": "ESNext",
+    "target": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "sourceMap": true,
+    "allowJs": false,
+    "jsx": "react-jsx",
+    "removeComments": false,
+    "emitDeclarationOnly": true,
+    "declarationDir": "./dist/types",
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true
   },
-  "include": ["./src"]
+  "typeRoots": [
+    "node_modules/@types"
+  ],
+  "paths": {
+    "@/components/*": [
+      "src/components/*"
+    ]
+  },
+  "exclude": [
+    "node_modules",
+    "src-old",
+    "**/*.stories.tsx",
+    "dist"
+  ],
+  "include": [
+    "types/*",
+    "**/*.ts",
+    "**/*.tsx"
+  ]
 }
