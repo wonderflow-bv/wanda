@@ -6,14 +6,6 @@
   "license": "MIT",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
-  "module": "dist/index.js",
-  "exports": {
-    ".": {
-      "require": "./dist/index.js",
-      "import": "./dist/index.js",
-      "default": "./dist/index.js"
-    }
-  },
   "files": [
     "dist"
   ],
@@ -33,7 +25,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wonderflow-bv/react-components.git"
+    "url": "git+https://github.com/wonderflow-bv/wanda.git"
   },
   "browserslist": [
     "last 2 Chrome versions",
@@ -76,10 +68,8 @@
     "nanospinner": "0.6.0",
     "npm-run-all": "4.1.5",
     "picocolors": "1.0.0",
-    "react-components": "0.5.1",
     "rimraf": "3.0.2",
     "rollup-plugin-cleaner": "1.0.0",
-    "rollup-plugin-dts": "4.1.0",
     "rollup-plugin-peer-deps-external": "2.2.4",
     "rollup-plugin-postcss": "4.0.2",
     "rollup-plugin-svg-sprite-loader": "0.0.4",

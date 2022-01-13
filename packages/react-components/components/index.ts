@@ -1,3 +1,3 @@
-export { Spinner } from './spinner'
-export { Avatar } from './avatar'
-export { CircularProgress } from './circular-progress'
+export * from './spinner'
+export * from './avatar'
+export * from './circular-progress'

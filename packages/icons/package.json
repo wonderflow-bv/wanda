@@ -1,8 +1,21 @@
 {
   "name": "@wonderflow/icons",
+  "description": "Wanda's iconography",
   "version": "1.0.0",
-  "description": "",
-  "main": "sprites.js",
+  "author": "Wonderflow",
+  "license": "MIT",
+  "main": "all.svg",
+  "types": "types.d.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=14.x",
+    "npm": ">=8.x"
+  },
   "scripts": {
     "build": "run-s prepare build:copy build:optimize build:sprite build:clean",
     "prepare": "rimraf dist",
@@ -11,9 +24,17 @@
     "build:sprite": "node ./sprites.js",
     "build:clean": "rimraf dist/svgs"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wonderflow-bv/wanda.git"
+  },
+  "keywords": [
+    "design-system",
+    "wonderflow",
+    "components",
+    "react",
+    "icons"
+  ],
   "devDependencies": {
     "copyfiles": "2.4.1",
     "directory-tree": "3.0.1",
