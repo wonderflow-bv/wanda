@@ -12,8 +12,8 @@ export default [
     input: 'index.ts',
     output: [
       {
-        file: "dist/index.js",
-        format: "cjs",
+        file: 'dist/index.js',
+        format: 'cjs',
         sourcemap: true
       }
     ],
