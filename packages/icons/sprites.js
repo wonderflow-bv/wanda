@@ -39,10 +39,10 @@ const run = () => {
   fs.writeFileSync(path.join('dist', 'all.svg'), sprite)
   fs.writeFileSync(path.join('dist', 'all.d.ts'), `
 declare module "@wonderflow/icons/sprite" {
-  import React = require("react");
-  export const ReactComponent: React.SFC<React.SVGProps<SVGSVGElement>>;
-  const src: string;
-  export default src;
+  const svgUrl: string
+  const svgComponent: React.StatelessComponent<React.SVGAttributes<SVGElement>>
+  export default svgUrl
+  export { svgComponent as ReactComponent }
 }
 `)
   fs.writeFileSync(path.join('dist', 'structure.json'), JSON.stringify([...new Set(jsonStructure.iconNames)], null, 2))
