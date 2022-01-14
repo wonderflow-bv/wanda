@@ -37,8 +37,16 @@ const run = () => {
     })
   })
   fs.writeFileSync(path.join('dist', 'all.svg'), sprite)
+  fs.writeFileSync(path.join('dist', 'all.d.ts'), `
+declare module "@wonderflow/icons/sprite" {
+  import React = require("react");
+  export const ReactComponent: React.SFC<React.SVGProps<SVGSVGElement>>;
+  const src: string;
+  export default src;
+}
+`)
   fs.writeFileSync(path.join('dist', 'structure.json'), JSON.stringify([...new Set(jsonStructure.iconNames)], null, 2))
-  fs.writeFileSync(path.join('dist', 'types.d.ts'), generateTypes(jsonStructure))
+  fs.writeFileSync(path.join('dist', 'index.ts'), generateTypes(jsonStructure))
   console.clear()
   spinner.success({ text: colors.green('Icons and types generated'), mark: colors.green('✔') })
 }

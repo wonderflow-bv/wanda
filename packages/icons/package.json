@@ -4,11 +4,18 @@
   "version": "1.0.0",
   "author": "Wonderflow",
   "license": "MIT",
-  "main": "all.svg",
-  "types": "types.d.ts",
-  "files": [
-    "dist"
-  ],
+  "main": "dist/index",
+  "exports": {
+    ".": "./dist",
+    "./sprite": "./dist/all.svg",
+    "./structure": "./dist/structure.json"
+  },
+  "typesVersions": {
+    "*": {
+      "sprite": ["dist/all.d.ts"],
+      "structure": ["dist/structure.json"]
+    }
+  },
   "publishConfig": {
     "access": "public"
   },
