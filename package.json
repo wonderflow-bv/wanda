@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "build": "turbo run build",
-    "dev": "turbo run dev --parallel",
+    "start": "turbo run start --parallel",
     "lint": "turbo run lint",
     "prepare": "husky install"
   },
@@ -38,7 +38,7 @@
       "lint": {
         "outputs": []
       },
-      "dev": {
+      "start": {
         "cache": false
       }
     }
