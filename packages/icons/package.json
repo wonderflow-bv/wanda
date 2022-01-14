@@ -6,12 +6,12 @@
   "license": "MIT",
   "main": "dist/index",
   "exports": {
-    "./sprite": "./dist/all.svg",
+    "./sprite": "./dist/sprite.svg",
     "./structure": "./dist/structure.json"
   },
   "typesVersions": {
     "*": {
-      "sprite": ["dist/all.d.ts"],
+      "sprite": ["dist/sprite.d.ts"],
       "structure": ["dist/structure.json"]
     }
   },

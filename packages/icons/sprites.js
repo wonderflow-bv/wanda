@@ -36,8 +36,8 @@ const run = () => {
       jsonStructure.iconNames.push(`${file.name.replace(/-\d.*/gm, '')}`)
     })
   })
-  fs.writeFileSync(path.join('dist', 'all.svg'), sprite)
-  fs.writeFileSync(path.join('dist', 'all.d.ts'), `
+  fs.writeFileSync(path.join('dist', 'sprite.svg'), sprite)
+  fs.writeFileSync(path.join('dist', 'sprite.d.ts'), `
 declare module "@wonderflow/icons/sprite" {
   const svgUrl: string
   const svgComponent: React.StatelessComponent<React.SVGAttributes<SVGElement>>
