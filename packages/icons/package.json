@@ -11,8 +11,12 @@
   },
   "typesVersions": {
     "*": {
-      "sprite": ["dist/sprite.d.ts"],
-      "structure": ["dist/structure.json"]
+      "sprite": [
+        "dist/sprite.d.ts"
+      ],
+      "structure": [
+        "dist/structure.json"
+      ]
     }
   },
   "publishConfig": {

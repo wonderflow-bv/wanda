@@ -1,0 +1,8 @@
+{
+  "extends": "@wonderflow/eslint-config",
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "parserOptions": {
+     "project": "./tsconfig.eslint.json"
+  }
+}
