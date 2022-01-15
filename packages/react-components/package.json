@@ -17,7 +17,7 @@
     "npm": ">=8.x"
   },
   "scripts": {
-    "build": "rollup -c",
+    "build": "rollup -c --silent",
     "lint": "run-s lint:styles",
     "lint:styles": "stylelint components/**/*.css"
   },
