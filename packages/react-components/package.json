@@ -18,7 +18,7 @@
   },
   "scripts": {
     "build": "rollup -c --silent",
-    "start": "start-storybook --quiet -p 6006",
+    "start": "start-storybook --quiet -p 6006 --docs --no-manager-cache",
     "lint": "run-s lint:styles",
     "lint:styles": "stylelint components/**/*.css"
   },
