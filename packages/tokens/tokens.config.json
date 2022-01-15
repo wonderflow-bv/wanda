@@ -1,0 +1,23 @@
+{
+  "source": ["src/**/*.json"],
+  "platforms": {
+    "web": {
+      "basePxFontSize": 18,
+      "buildPath": "platforms/web/",
+      "transformGroup": "custom-web",
+      "files": [
+        {
+          "format": "css/variables",
+          "destination": "tokens.css"
+        },
+        {
+          "format": "json/nested",
+          "destination": "tokens.json"
+        }
+      ],
+      "options": {
+        "showFileHeader": true
+      }
+    }
+  }
+}

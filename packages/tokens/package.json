@@ -1,0 +1,44 @@
+{
+  "name": "@wonderflow/tokens",
+  "version": "1.3.6",
+  "description": "Design tokens from Wonderflow design language",
+  "main": "platforms/web/index",
+  "files": [
+    "platforms/"
+  ],
+  "scripts": {
+    "prebuild": "rimraf platforms/",
+    "build": "run-s build:tokens build:types",
+    "build:tokens": "node index.js",
+    "build:types": "node src/generate-types.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wonderflow-bv/wanda.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "tokens",
+    "wanda",
+    "design",
+    "system",
+    "wonderflow"
+  ],
+  "author": "Wonderflow",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wonderflow-bv/wanda/issues"
+  },
+  "homepage": "https://github.com/wonderflow-bv/wanda",
+  "dependencies": {},
+  "devDependencies": {
+    "@wonderflow/eslint-config": "1.1.6",
+    "fs-extra": "10.0.0",
+    "npm-run-all": "4.1.5",
+    "rimraf": "3.0.2",
+    "style-dictionary": "3.0.3",
+    "tinycolor2": "1.4.2"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "duration": {
+    "100": {
+      "value": 100,
+      "attributes": {
+        "category": "time"
+      }
+    },
+    "200": {
+      "value": 200,
+      "attributes": {
+        "category": "time"
+      }
+    },
+    "250": {
+      "value": 250,
+      "attributes": {
+        "category": "time"
+      }
+    },
+    "300": {
+      "value": 300,
+      "attributes": {
+        "category": "time"
+      }
+    },
+    "500": {
+      "value": 500,
+      "attributes": {
+        "category": "time"
+      }
+    }
+  }
+}

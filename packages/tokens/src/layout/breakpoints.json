@@ -1,0 +1,34 @@
+{
+  "breakpoint": {
+    "extra-small": {
+      "value": 480,
+      "attributes": {
+        "category": "media"
+      }
+    },
+    "small": {
+      "value": 768,
+      "attributes": {
+        "category": "media"
+      }
+    },
+    "medium": {
+      "value": 960,
+      "attributes": {
+        "category": "media"
+      }
+    },
+    "large": {
+      "value": 1280,
+      "attributes": {
+        "category": "media"
+      }
+    },
+    "extra-large": {
+      "value": 1600,
+      "attributes": {
+        "category": "media"
+      }
+    }
+  }
+}

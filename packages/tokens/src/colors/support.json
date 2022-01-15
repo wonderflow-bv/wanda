@@ -1,0 +1,24 @@
+{
+  "color": {
+    "support": {
+      "brand": {
+        "value": "#ee0000",
+        "attributes": {
+          "category": "color"
+        }
+      },
+      "black": {
+        "value": "#000000",
+        "attributes": {
+          "category": "color"
+        }
+      },
+      "white": {
+        "value": "#ffffff",
+        "attributes": {
+          "category": "color"
+        }
+      }
+    }
+  }
+}

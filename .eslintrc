@@ -1,5 +1,5 @@
 {
-  "extends": "@wonderflow/eslint-config",
+  "extends": ["@wonderflow/eslint-config", "plugin:json/recommended"],
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint"],
   "parserOptions": {
