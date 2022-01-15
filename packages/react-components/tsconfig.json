@@ -1,18 +1,45 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "React Components",
-  "extends": "tsconfig/react-components.json",
   "typeRoots": ["node_modules/@types"],
   "compilerOptions": {
+    "composite": false,
+    "declaration": true,
+    "declarationMap": false,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "inlineSources": false,
+    "isolatedModules": true,
+    "moduleResolution": "node",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "preserveWatchOutput": true,
+    "skipLibCheck": true,
     "baseUrl": "./",
-    "declarationDir": "./"
+    "declarationDir": "./",
+    "sourceMap": true,
+    "strict": true,
+    "module": "ESNext",
+    "target": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "allowJs": false,
+    "jsx": "react-jsx",
+    "removeComments": false,
+    "emitDeclarationOnly": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true
   },
   "paths": {
     "@/components/*": ["./components/*"]
   },
   "exclude": [
     "node_modules",
-    "__fixtures__",
+    "packages/tokens",
     "dist"
   ],
   "include": [
