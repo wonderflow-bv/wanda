@@ -7,7 +7,7 @@
     "declarationDir": "./"
   },
   "paths": {
-    "@/components/*": ["components/*"]
+    "@/components/*": ["./components/*"]
   },
   "include": [
     "types/*",
