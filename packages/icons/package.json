@@ -55,5 +55,9 @@
     "rimraf": "3.0.2",
     "svgo": "2.8.0",
     "svgstore": "3.0.1"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/wonderflow-bv/wanda/issues"
+  },
+  "homepage": "https://github.com/wonderflow-bv/wanda#readme"
 }

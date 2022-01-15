@@ -53,5 +53,6 @@
     "rimraf": "3.0.2",
     "tsconfig": "*",
     "typescript": "4.5.4"
-  }
+  },
+  "types": "./dist/index.d.ts"
 }
