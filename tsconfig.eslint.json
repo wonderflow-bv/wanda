@@ -1,5 +1,5 @@
 {
-  "extends": "./packages/react-components/tsconfig.json",
+  "extends": "tsconfig/base.json",
   "include": [
     "**/*.ts",
     "**/*.tsx",

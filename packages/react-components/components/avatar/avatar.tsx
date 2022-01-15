@@ -1,4 +1,4 @@
-import React, { forwardRef, ImgHTMLAttributes } from 'react'
+import { forwardRef, ImgHTMLAttributes } from 'react'
 import clsx from 'clsx'
 import styles from './avatar.module.css'
 

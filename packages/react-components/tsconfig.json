@@ -1,52 +1,14 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "React Components",
+  "extends": "tsconfig/react-components.json",
   "compilerOptions": {
-    "composite": false,
-    "declaration": true,
-    "declarationMap": false,
-    "sourceMap": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "inlineSources": false,
-    "isolatedModules": true,
-    "moduleResolution": "node",
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "preserveWatchOutput": true,
-    "skipLibCheck": true,
-    "strict": true,
     "baseUrl": "./",
-    "declarationDir": "./",
-    "module": "ESNext",
-    "target": "ESNext",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "allowJs": false,
-    "jsx": "react-jsx",
-    "removeComments": false,
-    "emitDeclarationOnly": true,
-    "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "suppressImplicitAnyIndexErrors": true
+    "declarationDir": "./"
   },
-  "typeRoots": [
-    "node_modules/@types"
-  ],
   "paths": {
-    "@/components/*": [
-      "src/components/*"
-    ]
+    "@/components/*": ["components/*"]
   },
-  "exclude": [
-    "node_modules",
-    "src-old",
-    "**/*.stories.tsx",
-    "dist"
-  ],
   "include": [
     "types/*",
     "**/*.ts",
