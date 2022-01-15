@@ -9,7 +9,7 @@
   "scripts": {
     "prebuild": "rimraf platforms/",
     "build": "run-s build:tokens build:types",
-    "build:tokens": "node index.js",
+    "build:tokens": "node src/index.js",
     "build:types": "node src/generate-types.js"
   },
   "repository": {

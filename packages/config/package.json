@@ -1,0 +1,57 @@
+{
+  "name": "@wonderflow/config",
+  "description": "Wanda design system shared configurations ",
+  "version": "3.1.2",
+  "author": "Wonderflow",
+  "license": "MIT",
+  "main": "dist/index",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wonderflow-bv/wanda.git"
+  },
+  "keywords": [
+    "design-system",
+    "wonderflow",
+    "components",
+    "configurations"
+  ],
+  "bugs": {
+    "url": "https://github.com/wonderflow-bv/wanda/issues"
+  },
+  "homepage": "https://github.com/wonderflow-bv/wanda",
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "tsc",
+    "minify": "minimize-js -w dist",
+    "postbuild": "run-s minify"
+  },
+  "peerDependencies": {
+    "postcss": ">=8.x"
+  },
+  "dependencies": {
+    "@wonderflow/tokens": "*",
+    "cssnano": "5.0.15",
+    "cssnano-preset-default": "5.1.10",
+    "flat": "5.0.2",
+    "postcss-import": "14.0.2",
+    "postcss-mixins": "9.0.1",
+    "postcss-preset-env": "7.2.3"
+  },
+  "devDependencies": {
+    "@types/flat": "5.0.2",
+    "@typescript-eslint/eslint-plugin": "5.9.1",
+    "@typescript-eslint/parser": "5.9.1",
+    "@wonderflow/eslint-config": "1.1.11",
+    "minimize-js": "1.2.0",
+    "npm-run-all": "4.1.5",
+    "rimraf": "3.0.2",
+    "tsconfig": "*",
+    "typescript": "4.5.4"
+  }
+}

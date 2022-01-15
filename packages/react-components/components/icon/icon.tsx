@@ -4,7 +4,7 @@ import {
   SVGAttributes
 } from 'react'
 import sprite from '@wonderflow/icons/sprite'
-import { TokensTypes } from '@wonderflow/tokens/platforms/web/types'
+import { TokensTypes } from '@wonderflow/tokens/platforms/web'
 
 export type IconProps = SVGAttributes<SVGElement | SVGSVGElement> & {
   /**
