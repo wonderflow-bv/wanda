@@ -35,11 +35,10 @@
     "suppressImplicitAnyIndexErrors": true
   },
   "paths": {
-    "@/components/*": ["./components/*"]
+    "@/components/*": ["./src/components/*"]
   },
   "exclude": [
     "node_modules",
-    "packages/tokens",
     "dist"
   ],
   "include": [
