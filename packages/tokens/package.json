@@ -32,7 +32,6 @@
     "url": "https://github.com/wonderflow-bv/wanda/issues"
   },
   "homepage": "https://github.com/wonderflow-bv/wanda",
-  "dependencies": {},
   "devDependencies": {
     "@wonderflow/eslint-config": "1.1.6",
     "fs-extra": "10.0.0",

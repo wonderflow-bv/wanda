@@ -18,8 +18,6 @@
   },
   "scripts": {
     "build": "rollup -c",
-    "start": "cosmos --config cosmos.config.json",
-    "cosmos:export": "cosmos-export",
     "lint": "run-s lint:styles",
     "lint:styles": "stylelint components/**/*.css"
   },
@@ -47,10 +45,6 @@
     "framer-motion": "^5.5.7"
   },
   "devDependencies": {
-    "tsconfig": "*",
-    "@babel/core": "7.16.7",
-    "@babel/preset-env": "7.16.8",
-    "@babel/preset-react": "7.16.7",
     "@babel/preset-typescript": "7.16.7",
     "@rollup/plugin-commonjs": "21.0.1",
     "@rollup/plugin-image": "2.1.1",
@@ -61,13 +55,8 @@
     "@types/react-dom": "17.0.11",
     "@wonderflow/config": "3.1.2",
     "@wonderflow/stylelint-config": "1.1.3",
-    "babel-loader": "8.2.3",
-    "css-loader": "6.5.1",
-    "html-webpack-plugin": "4.5.2",
     "npm-run-all": "4.1.5",
-    "postcss-loader": "6.2.1",
     "react": "17.0.2",
-    "react-cosmos": "5.6.6",
     "react-dom": "17.0.2",
     "rimraf": "3.0.2",
     "rollup-plugin-cleaner": "1.0.0",
@@ -75,7 +64,7 @@
     "rollup-plugin-postcss": "4.0.2",
     "rollup-plugin-svg-sprite-loader": "0.0.4",
     "rollup-plugin-terser": "7.0.2",
-    "style-loader": "3.3.1",
+    "tsconfig": "*",
     "typescript": "4.5.4"
   },
   "dependencies": {

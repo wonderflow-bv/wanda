@@ -7,7 +7,5 @@
     "base.json",
     "nextjs.json",
     "react-components.json"
-  ],
-  "devDependencies": {},
-  "dependencies": {}
+  ]
 }
