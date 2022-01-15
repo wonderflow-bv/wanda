@@ -26,10 +26,10 @@
   },
   "homepage": "https://github.com/wonderflow-bv/wanda",
   "scripts": {
-    "prebuild": "rimraf dist",
-    "build": "tsc",
-    "minify": "minimize-js -w dist",
-    "postbuild": "run-s minify"
+    "build": "run-s clean build:ts build:minify",
+    "clean": "rimraf dist",
+    "build:ts": "tsc",
+    "build:minify": "minimize-js -w dist"
   },
   "peerDependencies": {
     "postcss": ">=8.x"
