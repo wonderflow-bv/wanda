@@ -2,6 +2,7 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "React Components",
   "extends": "tsconfig/react-components.json",
+  "typeRoots": ["node_modules/@types"],
   "compilerOptions": {
     "baseUrl": "./",
     "declarationDir": "./"
@@ -9,6 +10,11 @@
   "paths": {
     "@/components/*": ["./components/*"]
   },
+  "exclude": [
+    "node_modules",
+    "__fixtures__",
+    "dist"
+  ],
   "include": [
     "types/*",
     "**/*.ts",

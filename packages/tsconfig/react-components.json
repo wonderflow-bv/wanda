@@ -21,7 +21,5 @@
     "noImplicitAny": true,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true
-  },
-  "typeRoots": ["node_modules/@types"],
-  "exclude": ["node_modules", "dist"]
+  }
 }
