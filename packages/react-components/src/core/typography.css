@@ -1,0 +1,118 @@
+:where(p) {
+  line-height: 1.5;
+  min-block-size: 0.01vh;
+  font-size: env(--font-size-16);
+}
+
+small {
+  font-size: 0.7em;
+}
+
+strong,
+b {
+  font-weight: 600;
+}
+
+:where(a:any-link) {
+  color: var(--global-interactive-text);
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0% 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  word-break: break-word;
+  transition: background-size env(--duration-200) env(--easing-entrance);
+
+  &:hover,
+  &:focus {
+    background-size: 100% 1px;
+  }
+}
+
+
+del {
+  padding: 2px 4px;
+  background-color: var(--highlight-red-background);
+  box-shadow: 0 0 0 2px var(--highlight-red-background);
+  color: var(--highlight-red-foreground);
+  border-radius: env(--radius-4);
+}
+
+ins {
+  padding: 2px 4px;
+  background-color: var(--highlight-green-background);
+  box-shadow: 0 0 0 2px var(--highlight-green-background);
+  text-decoration: none;
+  color: var(--highlight-green-foreground);
+  border-radius: env(--radius-4);
+}
+
+address {
+  font-style: normal;
+  line-height: inherit;
+}
+
+dt {
+  font-weight: 600;
+}
+
+dd {
+  margin: 0;
+  padding: 0;
+}
+
+ol,
+ul {
+  padding-left: 1rem;
+}
+
+ul {
+  & li::marker {
+    font-size: inherit;
+    text-align: right;
+    font-weight: 600;
+    min-inline-size: env(--space-32);
+  }
+}
+
+ol {
+  & li::marker {
+    font-size: inherit;
+    font-weight: 600;
+    min-inline-size: env(--space-32);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+}
+
+kbd {
+  border: 1px solid var(--dimmed-1);
+  padding: 2px 4px;
+  box-shadow: 0 2px 0 var(--dimmed-1);
+  border-radius: env(--radius-4);
+  font-weight: 600;
+}
+
+mark {
+  background: var(--highlight-yellow-background);
+  color: var(--highlight-yellow-foreground);
+  padding: 0 2px;
+}
+
+abbr {
+  text-decoration: underline dashed var(--cta-default);
+}
+
+label,
+legend {
+  font-size: inherit;
+}
+
+code {
+  background-color: var(--global-vibrancy-background);
+  border-radius: env(--radius-4);
+  padding: 0 4px 3px;
+  font-size: 1em;
+  font-family: env(--font-family-mono);
+  vertical-align: top;
+}

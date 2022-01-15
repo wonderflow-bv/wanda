@@ -1,5 +1,5 @@
 module.exports = {
-  stories: ["../src/components/**/*.stories.tsx"],
+  stories: ["../src/**/*.stories.tsx"],
   features: {
     storyStoreV7: true
   },

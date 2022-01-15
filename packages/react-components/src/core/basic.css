@@ -1,0 +1,49 @@
+html {
+  font-size: 112.5%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+  line-height: 1.5;
+  background-color: var(--global-background);
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  box-sizing: inherit;
+  -webkit-tap-highlight-color: hsl(env(--color-support-brand) / 20%);
+}
+
+*:focus-visible {
+  outline: 5px auto Highlight;
+  outline: 5px auto -webkit-focus-ring-color;
+}
+
+body {
+  color: var(--global-foreground);
+  font-family: env(--font-family-sans);
+  font-feature-settings: 'calt' off;
+  scroll-padding: env(--space-80);
+  margin: 0;
+}
+
+::selection {
+  background-color: var(--dimmed-7);
+  color: var(--dimmed-0);
+  text-shadow: none;
+}
+
+img {
+  display: block;
+  inline-size: 100%;
+  max-inline-size: 100%;
+}
+
+svg:not([fill]) {
+  fill: currentColor;
+}
+
+fieldset {
+  border: 0;
+}
