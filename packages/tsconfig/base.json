@@ -4,7 +4,7 @@
   "compilerOptions": {
     "composite": false,
     "declaration": true,
-    "declarationMap": true,
+    "declarationMap": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "inlineSources": false,
@@ -13,8 +13,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "preserveWatchOutput": true,
-    "skipLibCheck": true,
-    "strict": true
+    "skipLibCheck": true
   },
   "exclude": ["node_modules"]
 }

@@ -18,9 +18,10 @@
   },
   "scripts": {
     "build": "rollup -c",
+    "start": "cosmos --config cosmos.config.json",
+    "cosmos:export": "cosmos-export",
     "lint": "lint:styles",
-    "lint:styles": "stylelint src/**/*.css",
-    "lint:commits": "commitlint --edit"
+    "lint:styles": "stylelint src/**/*.css"
   },
   "repository": {
     "type": "git",
@@ -38,14 +39,19 @@
     "components",
     "react"
   ],
+  "bugs": {
+    "url": "https://github.com/wonderflow-bv/wanda/issues"
+  },
+  "homepage": "https://github.com/wonderflow-bv/wanda",
   "peerDependencies": {
-    "framer-motion": "^5.5.7",
-    "react": "^17.0",
-    "react-dom": "^17.0"
+    "framer-motion": "^5.5.7"
   },
   "devDependencies": {
-    "@commitlint/cli": "16.0.2",
-    "@commitlint/config-conventional": "16.0.0",
+    "tsconfig": "*",
+    "@babel/core": "7.16.7",
+    "@babel/preset-env": "7.16.8",
+    "@babel/preset-react": "7.16.7",
+    "@babel/preset-typescript": "7.16.7",
     "@rollup/plugin-commonjs": "21.0.1",
     "@rollup/plugin-image": "2.1.1",
     "@rollup/plugin-json": "4.1.0",
@@ -55,23 +61,21 @@
     "@types/react-dom": "17.0.11",
     "@wonderflow/config": "3.1.2",
     "@wonderflow/stylelint-config": "1.1.3",
-    "copyfiles": "2.4.1",
-    "directory-tree": "3.0.1",
-    "eslint": "7.32.0",
-    "eslint-plugin-react": "7.28.0",
-    "fs-extra": "10.0.0",
-    "icons": "1.0.0",
-    "nanospinner": "0.6.0",
+    "babel-loader": "8.2.3",
+    "css-loader": "6.5.1",
+    "html-webpack-plugin": "4.5.2",
     "npm-run-all": "4.1.5",
-    "picocolors": "1.0.0",
+    "postcss-loader": "6.2.1",
+    "react": "17.0.2",
+    "react-cosmos": "5.6.6",
+    "react-dom": "17.0.2",
     "rimraf": "3.0.2",
     "rollup-plugin-cleaner": "1.0.0",
     "rollup-plugin-peer-deps-external": "2.2.4",
     "rollup-plugin-postcss": "4.0.2",
     "rollup-plugin-svg-sprite-loader": "0.0.4",
     "rollup-plugin-terser": "7.0.2",
-    "svgo": "2.8.0",
-    "svgstore": "3.0.1",
+    "style-loader": "3.3.1",
     "typescript": "4.5.4"
   },
   "dependencies": {
@@ -81,9 +85,7 @@
     "clsx": "1.1.1",
     "framer-motion": "^5.5.7",
     "postcss": "8.4.5",
-    "react": "^17.0",
     "react-data-table-component": "7.4.6",
-    "react-dom": "^17.0",
     "react-focus-on": "3.5.4",
     "react-loading-skeleton": "3.0.2",
     "react-masonry-css": "1.0.16",
