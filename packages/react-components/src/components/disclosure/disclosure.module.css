@@ -1,0 +1,93 @@
+.Disclosure {
+  --icon-size: 1.11rem;
+  --icon-padding: env(--space-8);
+  --padding: calc(var(--icon-size) + var(--icon-padding) + (var(--icon-size) / 2));
+
+  display: block;
+  position: relative;
+  transform: translateZ(0);
+  z-index: 0;
+
+  & * {
+    box-sizing: border-box;
+  }
+
+  &[data-disclosure-dimension='small'] {
+    --icon-size: env(--space-16);
+  }
+
+  &[data-disclosure-dimension='regular'] {
+    --icon-size: 1.11rem;
+  }
+
+  &[data-disclosure-dimension='big'] {
+    --icon-size: env(--space-24);
+    --icon-padding: env(--space-16);
+  }
+}
+
+.Summary {
+  display: list-item;
+  touch-action: manipulation;
+  position: relative;
+  padding: env(--space-2) 0;
+  outline-offset: -2px;
+  user-select: none;
+
+  @nest .Disclosure[data-disclosure-icon-position='right'][data-disclosure-expandable='true'] & {
+    padding-inline-end: var(--padding);
+  }
+  @nest .Disclosure[data-disclosure-icon-position='left'][data-disclosure-expandable='true'] & {
+    padding-inline-start: var(--padding);
+  }
+  @nest .Disclosure[data-disclosure-expandable='true'] & {
+    cursor: pointer;
+  }
+
+  &::marker {
+    content: '';
+  }
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+}
+
+.ExpandIcon {
+  content: '';
+  transform-box: fill-box;
+  position: absolute;
+  top: calc(var(--icon-size) / 4);
+  right: calc(var(--icon-size) / 2);
+  inline-size: var(--icon-size);
+  block-size: var(--icon-size);
+  transition: transform env(--duration-100) env(--easing-standard);
+  transform-origin: 50% center;
+
+  @nest .Disclosure[data-disclosure-icon-position='left'] & {
+    left: calc(var(--icon-size) / 2);
+    right: auto;
+  }
+  @nest .Disclosure[open] & {
+    transform: rotate(90deg);
+  }
+}
+
+
+.Content {
+  box-sizing: border-box;
+
+  @nest .Disclosure[data-disclosure-icon-position='left'] &[data-disclosure-padding='true'] {
+    padding-inline-start: var(--padding);
+  }
+  @nest .Disclosure[data-disclosure-icon-position='right'] &[data-disclosure-padding='true'] {
+    padding-right: var(--padding);
+  }
+
+  &[data-disclosure-height='true'] {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    max-block-size: var(--maxHeight);
+    overflow: auto;
+  }
+}
