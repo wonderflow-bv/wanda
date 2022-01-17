@@ -4,7 +4,7 @@
   "editor.formatOnSave": false,
   "javascript.validate.enable": false,
   "typescript.tsdk": "node_modules/typescript/lib",
-  "cssEnvVarsAutocomplete.varFiles": ["./dist/themes/light.css"],
+  "cssEnvVarsAutocomplete.varFiles": ["./packages/themes/dist/themes/light.css"],
   "cssEnvVarsAutocomplete.envFiles": ["./node_modules/@wonderflow/tokens/platforms/web/tokens.css"],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true,

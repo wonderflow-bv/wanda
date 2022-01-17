@@ -20,7 +20,7 @@
     "build": "rollup -c --silent",
     "start": "start-storybook --quiet -p 6006",
     "lint": "run-s lint:styles",
-    "lint:styles": "stylelint components/**/*.css"
+    "lint:styles": "stylelint ./src/components/**/*.css"
   },
   "repository": {
     "type": "git",
