@@ -1,0 +1,60 @@
+@import '../../core/utils/media.css';
+
+.Drawer {
+  display: contents;
+}
+
+.Container {
+  position: absolute;
+  display: grid;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  pointer-events: none;
+  align-items: stretch;
+
+  &[data-drawer-side='right'] {
+    justify-content: flex-end;
+  }
+
+  &[data-drawer-side='left'] {
+    justify-content: flex-start;
+  }
+
+  @media (--from-extra-small) {
+    overflow: auto;
+  }
+
+  & > * {
+    pointer-events: auto;
+  }
+}
+
+.Content {
+  background-color: var(--global-background);
+  overscroll-behavior: contain;
+  inline-size: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  max-inline-size: var(--max-w);
+}
+
+.Header {
+  position: sticky;
+  top: 0;
+  background-color: inherit;
+  border-bottom: 1px solid var(--dimmed-1);
+  padding:
+    env(--space-16)
+    env(--space-80)
+    env(--space-16)
+    env(--space-24);
+}
+
+.CloseButton.CloseButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: env(--space-8);
+}

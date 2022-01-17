@@ -20,7 +20,7 @@ export type AutocompleteOptionProps = PropsWithChildren<PropsWithClass> & Except
    * Label of the option. This is the text that will be displayed in the option, which can be
    * different from the value.
    */
-  children: string;
+  children: string | string[];
 }
 
 export const AutocompleteOption = forwardRef<HTMLButtonElement, AutocompleteOptionProps>(({

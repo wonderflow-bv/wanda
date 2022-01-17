@@ -27,7 +27,7 @@ const Template: ComponentStory<typeof Autocomplete> = (args) => (
         >
           Option
           {' '}
-          {i}
+          {`${i}`}
         </Autocomplete.Option>
       ))}
     </Autocomplete>
