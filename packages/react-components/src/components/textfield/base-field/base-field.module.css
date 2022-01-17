@@ -1,0 +1,123 @@
+@import '../../../core/utils/vibrancy.css';
+
+.BaseField {
+  margin: 0;
+  text-overflow: ellipsis;
+  font-size: var(--font-size);
+  border-radius: env(--radius-4);
+  font-family: inherit;
+  line-height: 1;
+  appearance: none;
+  inline-size: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  color: inherit;
+  background-color: var(--global-background);
+  border: 1px solid var(--dimmed-2);
+  block-size: var(--field-height);
+  padding: 0 var(--field-padding);
+  display: flex;
+  caret-color: var(--cta-default);
+  outline-offset: 2px;
+
+  @nest [data-textfield-has-icon='true'] &::-webkit-calendar-picker-indicator {
+    opacity: 0%;
+    position: absolute;
+    right: calc(var(--field-padding) / 2);
+  }
+
+  &:-moz-ui-invalid {
+    box-shadow: none;
+  }
+
+  &::placeholder {
+    color: var(--dimmed-5);
+  }
+
+  &:focus-visible {
+    border-color: var(--dimmed-5);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    border-color: transparent;
+    color: var(--global-disabled-foreground);
+    background:
+      linear-gradient(
+        to bottom,
+        var(--global-disabled-background),
+        var(--global-disabled-background)
+      );
+
+    &::placeholder {
+      color: var(--dimmed-6);
+    }
+  }
+
+  &[readonly] {
+    border-style: dashed;
+    box-shadow: none;
+    cursor: default;
+  }
+
+  &:autofill,
+  &:autofill:hover,
+  &:autofill:focus,
+  &:autofill:active {
+    border: 1px solid var(--dimmed-2);
+    box-shadow: 0 0 0 100px var(--global-background) inset;
+  }
+
+  &:is(:invalid, [data-basefield-invalid='true'], :out-of-range),
+  &:is(:invalid, [data-basefield-invalid='true'], :out-of-range):focus-visible {
+    border-color: var(--highlight-red-foreground);
+  }
+
+
+  &[type='number'] {
+    appearance: textfield;
+  }
+
+  &[type='number']::-webkit-inner-spin-button,
+  &[type='number']::-webkit-outer-spin-button {
+    display: none;
+  }
+
+  &[type='search'] {
+    appearance: none;
+  }
+
+  &[type='search']::-webkit-search-cancel-button,
+  &[type='search']::-webkit-search-decoration {
+    appearance: none;
+  }
+}
+
+
+textarea.BaseField {
+  block-size: auto;
+  min-block-size: env(--space-32);
+  line-height: env(--font-lh-standard);
+  resize: vertical;
+  padding:
+    calc(var(--field-padding) / 2)
+    calc(var(--field-padding) + env(--space-16))
+    calc(var(--field-padding) / 2)
+    var(--field-padding);
+
+  &::-webkit-datetime-edit-text {
+    opacity: 30%;
+  }
+
+  &::-webkit-calendar-picker-indicator {
+    color: var(--global-foreground);
+  }
+
+  &:-moz-ui-invalid {
+    box-shadow: none;
+  }
+
+  &::-webkit-calendar-picker-indicator:hover {
+    background-color: transparent;
+  }
+}

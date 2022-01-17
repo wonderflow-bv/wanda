@@ -1,0 +1,22 @@
+.IconButton.IconButton {
+  border-radius: 200px;
+  padding: 0;
+
+  &[data-button-dimension='small'] {
+    inline-size: env(--space-24);
+    min-inline-size: env(--space-24);
+    padding: 0;
+  }
+
+  &[data-button-dimension='regular'] {
+    inline-size: env(--space-40);
+    min-inline-size: env(--space-40);
+    padding: 0;
+  }
+
+  &[data-button-dimension='big'] {
+    inline-size: env(--space-48);
+    min-inline-size: env(--space-48);
+    padding: 0;
+  }
+}

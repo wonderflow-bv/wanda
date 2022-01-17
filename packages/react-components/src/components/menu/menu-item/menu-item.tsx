@@ -97,6 +97,7 @@ export const MenuItem = forwardRef(({
     <Stack
       direction={isIconRight ? 'row-reverse' : 'row'}
       as="span"
+      fill={false}
       className={styles.ItemContent}
       horizontalAlign={isIconRight ? 'space-between' : 'start'}
       verticalAlign="center"

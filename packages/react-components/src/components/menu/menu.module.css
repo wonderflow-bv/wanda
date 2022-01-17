@@ -3,7 +3,6 @@
   background-color: var(--global-background);
   border: 1px solid var(--dimmed-1);
   border-radius: env(--radius-8);
-  padding: env(--space-8) 0;
   overflow: hidden;
   position: relative;
 

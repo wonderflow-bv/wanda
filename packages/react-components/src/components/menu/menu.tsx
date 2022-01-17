@@ -38,6 +38,7 @@ export const Menu = forwardRef<HTMLUListElement, MenuProps>(({
         as="ul"
         ref={forwardedRef}
         className={clsx(styles.Menu, className)}
+        verticalPadding={8}
         role="menu"
         {...otherProps}
       >

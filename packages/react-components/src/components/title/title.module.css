@@ -1,0 +1,130 @@
+@import '../../core/utils/media.css';
+
+.Title {
+  &:is(.H1, .H2, .H3, .H4, .H5, .H6, .Display) {
+    --lh: env(--font-lh-standard);
+
+    display: block;
+    line-height: env(--font-lh-small);
+    color: var(--heading-foreground);
+    min-block-size: 0.01vh;
+    font-size: var(--fs-max);
+    max-inline-size: var(--maxW, initial);
+    text-align: var(--tAlign);
+    overflow-wrap: break-word;
+
+
+    &[data-title-line-height='small'] {
+      --lh: env(--font-lh-small);
+    }
+
+    &[data-title-line-height='large'] {
+      line-height: env(--font-lh-standard);
+    }
+  }
+
+  &:is(.H6) {
+    --fs-min: env(--font-size-14);
+    --fs-max: env(--font-size-18);
+
+    font-weight: 700;
+  }
+
+  &:is(.H5) {
+    --fs-min: 1rem;
+    --fs-max: 1.33rem;
+
+    font-weight: 700;
+
+    &::before {
+      content: '';
+      display: block;
+      height: 0;
+      width: 0;
+      margin-top: calc((1 - var(--lh)) * 0.6em);
+    }
+  }
+
+  &:is(.H4) {
+    --fs-min: 1.33rem;
+    --fs-max: 1.77rem;
+
+    font-weight: 700;
+
+    &::before {
+      content: '';
+      display: block;
+      height: 0;
+      width: 0;
+      margin-top: calc((1 - var(--lh)) * 0.6em);
+    }
+  }
+
+  &:is(.H3) {
+    --fs-min: 1.77rem;
+    --fs-max: 2.37rem;
+
+    font-weight: 800;
+
+    &::before {
+      content: '';
+      display: block;
+      height: 0;
+      width: 0;
+      margin-top: calc((1 - var(--lh)) * 0.6em);
+    }
+  }
+
+  &:is(.H2) {
+    --fs-min: 2.37rem;
+    --fs-max: 3.16rem;
+
+    font-weight: 800;
+
+    &::before {
+      content: '';
+      display: block;
+      height: 0;
+      width: 0;
+      margin-top: calc((1 - var(--lh)) * 0.6em);
+    }
+  }
+
+  &:is(.H1) {
+    --fs-min: 3.16rem;
+    --fs-max: 4.2rem;
+
+    font-weight: 800;
+
+    &::before {
+      content: '';
+      display: block;
+      height: 0;
+      width: 0;
+      margin-top: calc((1 - var(--lh)) * 0.6em);
+    }
+  }
+
+  &.Display {
+    --fs-min: 4.2rem;
+    --fs-max: 5.6rem;
+
+    font-weight: 800;
+
+    &::before {
+      content: '';
+      display: block;
+      height: 0;
+      width: 0;
+      margin-top: calc((1 - var(--lh)) * 0.6em);
+    }
+  }
+
+  &[data-title-responsive='true'] {
+    font-size: var(--fs-min);
+
+    @media (--from-small) {
+      font-size: var(--fs-max);
+    }
+  }
+}

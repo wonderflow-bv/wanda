@@ -1,6 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Text } from '../text'
-import { Polymorphic } from '../..'
 import { Container } from '../container'
 
 export default {
@@ -31,7 +30,7 @@ export default {
       control: { type: 'inline-radio' }
     }
   }
-} as ComponentMeta<Polymorphic.IntrinsicElement<typeof Text>>
+} as ComponentMeta<typeof Text>
 
 const Template: ComponentStory<typeof Text> = (args) => <Container dimension="medium"><Text {...args} /></Container>
 

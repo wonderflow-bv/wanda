@@ -1,0 +1,103 @@
+.Textfield {
+  appearance: none;
+  position: relative;
+  padding: 0;
+
+  &[data-textfield-dimension='small'] {
+    --field-height: env(--space-24);
+    --field-padding: 0.33rem;
+    --font-size: env(--font-size-14);
+  }
+
+  &[data-textfield-dimension='regular'] {
+    --field-height: env(--space-40);
+    --field-padding: env(--space-16);
+    --font-size: env(--font-size-16);
+  }
+
+  &[data-textfield-dimension='big'] {
+    --field-height: env(--space-48);
+    --field-padding: env(--space-16);
+    --font-size: env(--font-size-18);
+  }
+}
+
+.FieldContainer {
+  position: relative;
+}
+
+.InputField {
+  --factor: 4;
+
+  @nest [data-textfield-has-icon='true'][data-textfield-icon-position='right'] & {
+    padding:
+      0
+      calc(var(--field-padding) * var(--factor))
+      0
+      var(--field-padding);
+  }
+  @nest [data-textfield-has-icon='true'][data-textfield-icon-position='left'] & {
+    padding:
+      0
+      var(--field-padding)
+      0
+      calc(var(--field-padding) * var(--factor));
+  }
+  @nest [data-textfield-dimension*='regular'] &,
+  [data-textfield-dimension*='big'] & {
+    --factor: 3;
+  }
+}
+
+.Icon {
+  border-radius: env(--radius-4);
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  @nest [data-textfield-icon-position='left'] & {
+    right: auto;
+    left: var(--field-padding);
+  }
+  @nest [data-textfield-icon-position='right'] & {
+    left: auto;
+    right: var(--field-padding);
+  }
+  @nest .Textfield[data-textfield-invalid='true'] & {
+    fill: var(--highlight-red-foreground);
+  }
+}
+
+.IconButton.IconButton.IconButton {
+  --x: 19%;
+
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) translateX(var(--x));
+  outline-offset: -0.25em;
+
+  &[data-button-kind='flat']:is(:hover, :active, :focus, [data-button-disabled='true']) {
+    background-color: transparent;
+    backdrop-filter: none;
+  }
+
+  @nest [data-textfield-icon-position='left'] & {
+    --x: -19%;
+
+    right: auto;
+    left: var(--field-padding);
+  }
+  @nest [data-textfield-icon-position='right'] & {
+    left: auto;
+    right: var(--field-padding);
+  }
+  @nest .Textfield[data-textfield-invalid='true'] & {
+    color: var(--highlight-red-foreground);
+  }
+}
+
+.InputField:invalid + .Icon {
+  fill: var(--highlight-red-foreground);
+}
+

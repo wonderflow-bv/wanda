@@ -41,7 +41,7 @@ const WithCheckboxTemplate: ComponentStory<typeof Menu.ItemCheckbox> = (args) =>
   const [checked, setChecked] = useState<boolean>(false)
 
   return (
-    <Menu>
+    <>
       <Menu.ItemCheckbox
         checked={checked}
         icon={checked ? 'check' : undefined}
@@ -57,7 +57,7 @@ const WithCheckboxTemplate: ComponentStory<typeof Menu.ItemCheckbox> = (args) =>
       >
         List item text
       </Menu.Item>
-    </Menu>
+    </>
   )
 }
 
