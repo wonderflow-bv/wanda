@@ -1,0 +1,20 @@
+.Grid {
+  --column-size: minmax(min(var(--column-min-w), 100%), 1fr);
+
+  display: grid;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  grid-template-columns: repeat(var(--columns), var(--column-size));
+  grid-template-rows: repeat(var(--rows), var(--row-min-h));
+  grid-gap: var(--rGap, env(--space-8)) var(--cGap, env(--space-8));
+
+  &[data-grid-filling-type='fill'] {
+    grid-template-columns: repeat(auto-fill, var(--column-size));
+  }
+
+  &[data-grid-filling-type='fit'] {
+    grid-template-columns: repeat(auto-fit, var(--column-size));
+  }
+}
+
