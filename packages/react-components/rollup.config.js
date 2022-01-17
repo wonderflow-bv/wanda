@@ -51,7 +51,10 @@ export default [
     input: 'src/core.css',
     output: [{ file: 'dist/core.css' }],
     plugins: [
-      postcss(),
+      postcss({
+        extract: true,
+        minimize: true
+      }),
       copy({
         targets: [
           { src: 'src/core/utils/**/*', dest: 'dist/core/utils' }
