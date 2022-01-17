@@ -1,0 +1,38 @@
+:where(.Stack) {
+  display: flex;
+  grid-gap: var(--rGap, 0) var(--cGap, 0);
+  flex-direction: column;
+  align-items: var(--hAlign);
+  justify-content: var(--vAlign);
+  padding: var(--vPadding, 0) var(--hPadding, 0);
+
+  &:where([data-stack-fill='true']) > * {
+    flex-grow: 1;
+  }
+
+  &[data-stack-direction='column-reverse'] {
+    flex-direction: column-reverse;
+  }
+
+  &[data-stack-direction^='row'] {
+    align-items: var(--vAlign);
+    justify-content: var(--hAlign);
+  }
+
+  &[data-stack-direction='row'] {
+    flex-direction: row;
+  }
+
+  &[data-stack-direction='row-reverse'] {
+    flex-direction: row-reverse;
+  }
+
+  &[data-stack-inline='true'] {
+    display: inline-flex;
+    flex-grow: 0;
+  }
+
+  &[data-stack-wrap='true'] {
+    flex-wrap: wrap;
+  }
+}

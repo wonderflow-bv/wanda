@@ -1,17 +1,15 @@
-/* eslint-disable */
-import React from 'react'
-import { Container } from '../container'
-import { Stack } from '../stack'
+import { Meta } from '@storybook/react'
+import { Container } from '../components/container'
+import { Stack } from '../components/stack'
 
 export default {
   title: 'Core/Elevations',
   parameters: {
     controls: { hideNoControlsWarning: true }
   }
-}
+} as Meta
 
-const divStyle = { display: 'flex', width: 100, flexShrink: 0, height: 100, borderRadius: 8, placeContent: 'center'}
-
+const divStyle = { display: 'flex', width: 100, flexShrink: 0, height: 100, borderRadius: 8, placeContent: 'center' }
 
 export const Resting = () => (
   <Container dimension="large">
@@ -24,11 +22,10 @@ export const Resting = () => (
   </Container>
 )
 
-
 export const Hoverable = () => (
   <Container dimension="large">
     <Stack direction="row" rowGap={24} columnGap={88} fill={false}>
-      <div data-elevation="1" data-elevation-hover="2"style={divStyle}>1</div>
+      <div data-elevation="1" data-elevation-hover="2" style={divStyle}>1</div>
     </Stack>
   </Container>
 )

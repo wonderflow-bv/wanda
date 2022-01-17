@@ -1,19 +1,18 @@
-/* eslint-disable */
-import React from 'react'
-import { Container } from '../container'
+import { Meta } from '@storybook/react'
+import { Container } from '../components/container'
 
 export default {
   title: 'Core/Typograhy',
   parameters: {
     controls: { hideNoControlsWarning: true }
   }
-}
+} as Meta
 
 export const Basic = () => (
   <Container dimension="medium">
     <p>This is a standard paragraph</p>
 
-    <p><a href="#">Text link</a></p>
+    <p><a href="https://wooo.google.com">Text link</a></p>
     <p>
       <a>
         This is a link without
@@ -163,7 +162,7 @@ export const Code = () => (
       <kbd>ctrl + ,</kbd>
     </p>
     <p>
-      <a href="#">
+      <a href="https://google.com">
         This is a link with
         <code>code</code>
       </a>

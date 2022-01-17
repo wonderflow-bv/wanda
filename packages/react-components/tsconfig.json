@@ -35,7 +35,7 @@
     "suppressImplicitAnyIndexErrors": true
   },
   "paths": {
-    "@/components/*": ["./src/components/*"]
+    "@src/*": ["./src/*"]
   },
   "exclude": [
     "node_modules",
