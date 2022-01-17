@@ -11,7 +11,7 @@ export default {
   },
   argTypes: {
     dimension: {
-      options: ['small', 'regular', 'big'],
+      options: ['small', 'regular'],
       control: { type: 'radio' }
     }
   }

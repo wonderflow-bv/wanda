@@ -4,7 +4,10 @@
   flex-direction: column;
   align-items: var(--hAlign);
   justify-content: var(--vAlign);
-  padding: var(--vPadding, 0) var(--hPadding, 0);
+
+  &:where([data-stack-has-padding='true']) {
+    padding: var(--vPadding, 0) var(--hPadding, 0);
+  }
 
   &:where([data-stack-fill='true']) > * {
     flex-grow: 1;
