@@ -8,6 +8,7 @@ import svg from 'rollup-plugin-svg-sprite-loader'
 import cleaner from 'rollup-plugin-cleaner'
 import copy from 'rollup-plugin-copy'
 import json from '@rollup/plugin-json'
+import pkg from './package.json'
 
 export default [
   {
@@ -19,7 +20,10 @@ export default [
         sourcemap: true
       }
     ],
-    external: ['react', 'react-dom', 'framer-motion', /\.json$/],
+    external: [
+      ...Object.keys(pkg.dependencies || {}),
+      /\.json$/
+    ],
     plugins: [
       external(),
       json(),
@@ -47,10 +51,7 @@ export default [
     input: 'src/core.css',
     output: [{ file: 'dist/core.css' }],
     plugins: [
-      postcss({
-        extract: true,
-        minimize: true
-      }),
+      postcss(),
       copy({
         targets: [
           { src: 'src/core/utils/**/*', dest: 'dist/core/utils' }
