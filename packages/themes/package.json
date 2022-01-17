@@ -21,7 +21,7 @@
     "yargs": "17.3.1"
   },
   "scripts": {
-    "build": "run-s build:prepare && run-p build:light build:dark && run-s build:combine",
+    "build": "run-s build:prepare && run-s build:light build:dark && run-s build:combine",
     "build:prepare": "rimraf dist",
     "build:combine": "node src/combine.js",
     "build:light": "node src/index.js --name light",
