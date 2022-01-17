@@ -37,7 +37,7 @@
   "exclude": [
     "node_modules",
     "dist",
-    "core"
+    "src/core"
   ],
   "include": [
     "types/*",
