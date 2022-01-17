@@ -1,0 +1,14 @@
+.Autocomplete {
+  display: contents;
+}
+
+.PopUp {
+  z-index: 2;
+}
+
+.OptionsList {
+  max-block-size: var(--max-h);
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
