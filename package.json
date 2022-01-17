@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "build": "turbo run build",
-    "start": "turbo run start --parallel",
+    "start": "turbo run build && turbo run start --parallel",
     "lint": "turbo run lint",
     "prepare": "husky install"
   },

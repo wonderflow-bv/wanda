@@ -1,0 +1,112 @@
+{
+  "global": {
+    "foreground": {
+      "value": "hsl({color.primary.70})"
+    },
+    "background": {
+      "value": "hsl({color.support.white})"
+    },
+    "interactive-text": {
+      "value": "hsl({color.blue.40})"
+    },
+    "interactive-text-hover": {
+      "value": "hsl({color.blue.60})"
+    },
+    "vibrancy-foreground": {
+      "value": "hsl({color.support.black})"
+    },
+    "vibrancy-background": {
+      "value": "hsl({color.primary.10} / 40%)"
+    },
+    "vibrancy-background-hover": {
+      "value": "hsl({color.primary.50} / 30%)"
+    },
+    "disabled-background": {
+      "value": "hsl({color.primary.100} / 6%)"
+    },
+    "disabled-foreground": {
+      "value": "hsl({color.support.black} / 20%)"
+    }
+  },
+  "cta": {
+    "default": {
+      "value": "hsl({color.support.brand})"
+    },
+    "dark": {
+      "value": "hsl(0 100% 41%)"
+    },
+    "foreground": {
+      "value": "hsl({color.support.white})"
+    }
+  },
+  "dimmed": {
+    "0": {
+      "value": "hsl({color.primary.0})"
+    },
+    "1": {
+      "value": "hsl({color.primary.5})"
+    },
+    "2": {
+      "value": "hsl({color.primary.10})"
+    },
+    "3": {
+      "value": "hsl({color.primary.20})"
+    },
+    "4": {
+      "value": "hsl({color.primary.30})"
+    },
+    "5": {
+      "value": "hsl({color.primary.50})"
+    },
+    "6": {
+      "value": "hsl({color.primary.60})"
+    },
+    "7": {
+      "value": "hsl({color.primary.70})"
+    }
+  },
+  "highlight": {
+    "gray-background": {
+      "value": "hsl({color.primary.5})"
+    },
+    "gray-foreground": {
+      "value": "hsl({color.primary.60})"
+    },
+    "yellow-background": {
+      "value": "hsl({color.yellow.0})"
+    },
+    "yellow-foreground": {
+      "value": "hsl({color.yellow.50})"
+    },
+    "green-background": {
+      "value": "hsl({color.green.0})"
+    },
+    "green-foreground": {
+      "value": "hsl({color.green.60})"
+    },
+    "blue-background": {
+      "value": "hsl({color.blue.5})"
+    },
+    "blue-foreground": {
+      "value": "hsl({color.blue.40})"
+    },
+    "red-background": {
+      "value": "hsl({color.red.0})"
+    },
+    "red-foreground": {
+      "value": "hsl({color.red.40})"
+    },
+    "cyan-background": {
+      "value": "hsl({color.cyan.0})"
+    },
+    "cyan-foreground": {
+      "value": "hsl({color.cyan.50})"
+    },
+    "purple-background": {
+      "value": "hsl({color.purple.0})"
+    },
+    "purple-foreground": {
+      "value": "hsl({color.purple.50})"
+    }
+  }
+}
