@@ -72,6 +72,7 @@
     "rimraf": "3.0.2",
     "rollup": "2.64.0",
     "rollup-plugin-cleaner": "1.0.0",
+    "rollup-plugin-copy": "3.4.0",
     "rollup-plugin-peer-deps-external": "2.2.4",
     "rollup-plugin-postcss": "4.0.2",
     "rollup-plugin-svg-sprite-loader": "0.0.4",

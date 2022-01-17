@@ -6,6 +6,7 @@ import external from 'rollup-plugin-peer-deps-external'
 import postcss from 'rollup-plugin-postcss'
 import svg from 'rollup-plugin-svg-sprite-loader'
 import cleaner from 'rollup-plugin-cleaner'
+import copy from 'rollup-plugin-copy'
 
 export default [
   {
@@ -38,6 +39,21 @@ export default [
         minimize: true
       }),
       terser()
+    ]
+  },
+  {
+    input: 'src/core.css',
+    output: [{ file: 'dist/core.css' }],
+    plugins: [
+      postcss({
+        extract: true,
+        minimize: true
+      }),
+      copy({
+        targets: [
+          { src: 'src/core/utils/**/*', dest: 'dist/core/utils' }
+        ]
+      })
     ]
   }
 ]
