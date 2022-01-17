@@ -18,7 +18,7 @@
   "Import Wanda css media queries from inside a component": {
 		"prefix": "media",
 		"body": [
-			"@import '../core/utils/media.css';"
+			"@import '../../core/utils/media.css';"
 		],
     "scope": "css, postcss",
 		"description": "Import Wanda css media queries from inside a component"
@@ -34,7 +34,7 @@
   "Import Wanda css utils": {
 		"prefix": "utils",
 		"body": [
-			"@import '../core/utils/vibrancy.css';"
+			"@import '../../core/utils/vibrancy.css';"
 		],
     "scope": "css, postcss",
 		"description": "Import Wanda css utilities inside a component"

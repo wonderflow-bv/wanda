@@ -1,0 +1,52 @@
+@import '../../core/utils/vibrancy.css';
+
+:where(.Card) {
+  background: var(--global-background);
+  padding: var(--padding);
+  border-radius: var(--radius);
+  position: relative;
+
+  &[data-card-dimmed='1'] {
+    background: var(--dimmed-0);
+  }
+
+  &[data-card-dimmed='2'] {
+    background: var(--dimmed-1);
+  }
+
+  &[data-card-dimmed='3'] {
+    background: var(--dimmed-2);
+  }
+
+  &[data-card-vibrant='true'] {
+
+    @mixin vibrancy;
+
+    background-color: var(--global-vibrancy-background);
+  }
+
+  &[data-card-highlight-hover='true'][data-card-vibrant='true']:hover,
+  &[data-card-highlight-hover='true'][data-card-vibrant='true']:focus-visible {
+    background-color: var(--global-vibrancy-background-hover);
+  }
+
+  &[data-card-bordered='true'] {
+    border: solid 1px var(--dimmed-1);
+  }
+
+  &[data-card-vibrant='true'][data-card-bordered='true'] {
+    border: solid 1px var(--dimmed-2);
+  }
+}
+
+.Left {
+  flex-shrink: 0;
+}
+
+.Content {
+  flex-grow: 1;
+}
+
+.Right {
+  flex-shrink: 0;
+}
