@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
 import { Polymorphic } from '../..'
-import { Container as ContainerClass } from './container.module.css'
+import styles from './container.module.css'
 import clsx from 'clsx'
 
 export type ContainerProps = {
@@ -27,7 +27,7 @@ export const Container = forwardRef(({
   return (
     <Wrapper
       ref={forwardedRef}
-      className={clsx(ContainerClass, className)}
+      className={clsx(styles.Container, className)}
       data-container-dimension={dimension}
       data-container-padding={padding}
       {...otherProps}

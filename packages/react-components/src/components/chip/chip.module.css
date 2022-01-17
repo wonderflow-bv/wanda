@@ -1,0 +1,60 @@
+.Chip {
+  padding: 2px env(--space-8) env(--space-4);
+  border-radius: env(--radius-48);
+  background-color: var(--highlight-gray-background);
+  color: var(--highlight-gray-foreground);
+  font-size: env(--font-size-16);
+  block-size: env(--space-32);
+  font-weight: 600;
+
+  &[data-chip-dimension='small'] {
+    block-size: env(--space-24);
+    font-size: env(--font-size-14);
+  }
+
+  &[data-chip-dimension='big'] {
+    font-size: env(--font-size-18);
+  }
+
+  &[data-chip-color='cyan'] {
+    background-color: var(--highlight-cyan-background);
+    color: var(--highlight-cyan-foreground);
+  }
+
+  &[data-chip-color='green'] {
+    background-color: var(--highlight-green-background);
+    color: var(--highlight-green-foreground);
+  }
+
+  &[data-chip-color='purple'] {
+    background-color: var(--highlight-purple-background);
+    color: var(--highlight-purple-foreground);
+  }
+
+  &[data-chip-color='yellow'] {
+    background-color: var(--highlight-yellow-background);
+    color: var(--highlight-yellow-foreground);
+  }
+
+  &[data-chip-color='red'] {
+    background-color: var(--highlight-red-background);
+    color: var(--highlight-red-foreground);
+  }
+
+  &[data-chip-color='blue'] {
+    background-color: var(--highlight-blue-background);
+    color: var(--highlight-blue-foreground);
+  }
+}
+
+.Action {
+  display: inline-flex;
+  appearance: none;
+  border: 0;
+  background: none;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  margin-top: 1px;
+  cursor: pointer;
+}

@@ -1,4 +1,4 @@
-:where(.Stack) {
+.Stack {
   display: flex;
   grid-gap: var(--rGap, 0) var(--cGap, 0);
   flex-direction: column;

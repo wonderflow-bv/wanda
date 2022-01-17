@@ -1,0 +1,66 @@
+.Tooltip {
+  display: contents;
+}
+
+
+.Balloon {
+  position: relative;
+  padding: env(--space-8) env(--space-16);
+  border-radius: env(--radius-4);
+  background-color: hsl(env(--color-primary-80));
+  font-size: env(--font-size-16);
+  max-inline-size: var(--maxW);
+  word-wrap: break-word;
+  z-index: 2;
+
+  &[data-popper-reference-hidden='true'] {
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+.Arrow {
+  &::before {
+    content: '';
+    position: absolute;
+    inline-size: 12px;
+    block-size: 12px;
+    background-color: hsl(env(--color-primary-80));
+    visibility: visible;
+    transform: rotate(45deg);
+  }
+
+  @nest .Balloon[data-popper-reference-hidden='true'] & {
+    visibility: hidden;
+    pointer-events: none;
+  }
+  @nest .Balloon[data-popper-placement^='top'] & {
+    bottom: 6px;
+
+
+    &::before {
+      transform: translateX(-50%) rotate(45deg);
+    }
+  }
+  @nest .Balloon[data-popper-placement^='left'] & {
+    right: 6px;
+
+    &::before {
+      transform: translateY(-50%) rotate(45deg);
+    }
+  }
+  @nest .Balloon[data-popper-placement^='bottom'] & {
+    top: -6px;
+
+    &::before {
+      transform: translateX(-50%) rotate(45deg);
+    }
+  }
+  @nest .Balloon[data-popper-placement^='right'] & {
+    left: -6px;
+
+    &::before {
+      transform: translateY(-50%) rotate(45deg);
+    }
+  }
+}
