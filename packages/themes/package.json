@@ -1,0 +1,20 @@
+{
+  "name": "@wonderflow/themes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wonderflow-bv/wanda.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wonderflow-bv/wanda/issues"
+  },
+  "homepage": "https://github.com/wonderflow-bv/wanda#readme"
+}
