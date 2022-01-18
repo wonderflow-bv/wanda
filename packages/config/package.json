@@ -26,10 +26,9 @@
   },
   "homepage": "https://github.com/wonderflow-bv/wanda",
   "scripts": {
-    "build": "run-s clean build:ts build:minify",
+    "build": "run-s clean build:ts",
     "clean": "rimraf dist",
-    "build:ts": "tsc",
-    "build:minify": "minimize-js -w dist"
+    "build:ts": "tsc"
   },
   "peerDependencies": {
     "postcss": ">=8.x"
@@ -48,7 +47,6 @@
     "@typescript-eslint/eslint-plugin": "5.9.1",
     "@typescript-eslint/parser": "5.9.1",
     "@wonderflow/eslint-config": "1.1.11",
-    "minimize-js": "1.2.0",
     "npm-run-all": "4.1.5",
     "rimraf": "3.0.2",
     "typescript": "4.5.4"
