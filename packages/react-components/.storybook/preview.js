@@ -1,4 +1,4 @@
-import '@wonderflow/themes/themes.css';
+import '@wonderflow/themes';
 import '../src/core.css';
 import './overrides.css';
 
