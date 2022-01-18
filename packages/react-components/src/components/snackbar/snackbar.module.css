@@ -1,0 +1,47 @@
+.Snackbar {
+  display: block;
+  padding: env(--space-16) env(--space-24);
+  background: linear-gradient(to right, var(--snackbar-fg) 4px, var(--snackbar-bg) 4px);
+  color: var(--snackbar-fg);
+  border-radius: env(--radius-4);
+  overflow: hidden;
+
+  & p {
+    font-size: env(--font-size-16);
+  }
+
+  &[data-snackbar-kind='neutral'] {
+    --snackbar-bg: var(--highlight-gray-background);
+    --snackbar-fg: var(--highlight-gray-foreground);
+  }
+
+  &[data-snackbar-kind='positive'] {
+    --snackbar-bg: var(--highlight-green-background);
+    --snackbar-fg: var(--highlight-green-foreground);
+  }
+
+  &[data-snackbar-kind='warning'] {
+    --snackbar-bg: var(--highlight-yellow-background);
+    --snackbar-fg: var(--highlight-yellow-foreground);
+  }
+
+  &[data-snackbar-kind='info'] {
+    --snackbar-bg: var(--highlight-blue-background);
+    --snackbar-fg: var(--highlight-blue-foreground);
+  }
+
+  &[data-snackbar-kind='danger'] {
+    --snackbar-bg: var(--highlight-red-background);
+    --snackbar-fg: var(--highlight-red-foreground);
+  }
+}
+
+
+.Icon {
+  flex-shrink: 0;
+}
+
+.Action:is(.Action.Action) {
+  color: var(--snackbar-bg);
+  background-color: var(--snackbar-fg);
+}
