@@ -1,0 +1,117 @@
+@import '../../core/utils/vibrancy.css';
+
+.Select {
+  appearance: none;
+  position: relative;
+  padding: 0;
+
+  &[data-select-dimension='small'] {
+    --field-height: env(--space-24);
+    --field-padding: 0.33rem;
+    --font-size: env(--font-size-14);
+  }
+
+  &[data-select-dimension='regular'] {
+    --field-height: env(--space-40);
+    --field-padding: env(--space-16);
+    --font-size: env(--font-size-16);
+  }
+
+  &[data-select-dimension='big'] {
+    --field-height: env(--space-48);
+    --field-padding: env(--space-16);
+    --font-size: env(--font-size-18);
+  }
+}
+
+.FieldContainer {
+  position: relative;
+  color: var(--global-vibrancy-foreground);
+  inline-size: 100%;
+
+  @nest .Select[aria-disabled='true'] & {
+    color: var(--global-disabled-foreground);
+  }
+}
+
+.Field {
+
+  @mixin vibrancy;
+
+  margin: 0;
+  border: 0;
+  text-overflow: ellipsis;
+  font-size: var(--font-size);
+  border-radius: env(--radius-4);
+  font-family: inherit;
+  appearance: none;
+  display: block;
+  inline-size: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  color: inherit;
+  block-size: var(--field-height);
+  padding:
+    0
+    calc(var(--field-padding) * 3.5)
+    0
+    var(--field-padding);
+  background:
+    linear-gradient(
+      to bottom,
+      var(--global-vibrancy-background),
+      var(--global-vibrancy-background)
+    );
+
+  &:disabled {
+    cursor: not-allowed;
+    color: var(--global-disabled-foreground);
+    background:
+      linear-gradient(
+        to bottom,
+        var(--global-disabled-background),
+        var(--global-disabled-background)
+      );
+  }
+
+  & option {
+    color: black;
+  }
+
+  & optgroup {
+    color: initial;
+  }
+
+  &[multiple] {
+    block-size: auto;
+    padding: env(--space-8) env(--space-16) env(--space-8) env(--space-16);
+    overflow: auto;
+
+    & option {
+      color: currentColor;
+      padding: calc(var(--field-padding) / 2) var(--field-padding);
+    }
+
+    & option:checked {
+      color: var(--dimmed-0);
+      background: var(--dimmed-4) linear-gradient(to bottom, var(--dimmed-4) 0%, var(--dimmed-4) 100%);
+      background-color: var(--dimmed-4);
+    }
+
+    & optgroup {
+      color: currentColor;
+      margin: 0 0 1rem;
+      font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
+    }
+  }
+}
+
+.Icon {
+  border-radius: env(--radius-4);
+  pointer-events: none;
+  position: absolute;
+  top: calc(var(--field-padding) - calc(var(--field-padding) / 4));
+  right: calc(var(--field-padding) - calc(var(--field-padding) / 3));
+}
