@@ -1,0 +1,58 @@
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "jsx": "preserve",
+    "baseUrl": "./",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ],
+    "paths": {
+      "@/styles/*": [
+        "src/styles/*"
+      ],
+      "@/components/*": [
+        "src/components/*"
+      ],
+      "@/services/*": [
+        "src/services/*"
+      ],
+      "@/utils/*": [
+        "src/utils/*"
+      ]
+    },
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "types/*",
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ]
+}

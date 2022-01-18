@@ -1,0 +1,91 @@
+import { MdxLayout } from "@/components/layouts/mdx";
+import { Playground } from "@/components/playground";
+import { Props } from "@/components/props";
+import * as components from "@wonderflow/react-components";
+
+export const example = `<List marker="check">
+  <li>Lorem ipsum dolor</li>
+  <li>Sit amen consectur</li>
+  <li>Adipiscing lorem</li>
+</List>`;
+
+export default ({ children }) => (
+  <MdxLayout
+    title="List"
+    description="Element to create customizable bullet and ordered lists"
+    showMeta
+    features={[
+      "Custmo marker",
+      "Multiple sizes",
+      "Ordered and unordered",
+      "Themes ready",
+    ]}
+    hero={<Playground scope={{ ...components }} code={example} />}
+  >
+    {children}
+  </MdxLayout>
+);
+
+## Anatomy
+
+```tsx highlight=1,5-9
+import { List } from "@wonderflow/react-components";
+
+export default () => {
+  return (
+    <List marker="check">
+      <li>Lorem ipsum dolor</li>
+      <li>Sit amen consectur</li>
+      <li>Adipiscing lorem</li>
+    </List>
+  );
+};
+```
+
+## API Reference
+
+<Props
+  properties={[
+    {
+      name: "dimension",
+      type: ['"small"', '"regular"', '"big"'],
+      default: '"regular"',
+      required: false,
+      dangerous: false,
+      description: "Set the element font size",
+    },
+    {
+      name: "marker",
+      type: ["IconNames"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Set the marker icon used as bullet",
+    },
+    {
+      name: "markerColor",
+      type: ["string"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Set the marker color",
+    },
+    {
+      name: "hideMarker",
+      type: ["boolean"],
+      default: "false",
+      required: false,
+      dangerous: false,
+      description: "Hide the marker indicator from items",
+    },
+    {
+      name: "as",
+      type: ["keyof JSX.IntrinsicElements | React.ComponentType<any>"],
+      default: '"ul"',
+      required: false,
+      dangerous: false,
+      description:
+        "Set the component to a different HTML tag or custom component",
+    },
+  ]}
+/>

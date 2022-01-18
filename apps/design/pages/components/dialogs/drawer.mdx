@@ -1,0 +1,274 @@
+import { useState } from "react";
+import { MdxLayout } from "@/components/layouts/mdx";
+import { Playground } from "@/components/playground";
+import { Props } from "@/components/props";
+import { LiveArea } from "@/components/live-area";
+import dynamic from "next/dynamic";
+import * as Components from "@wonderflow/react-components";
+
+export const DynOverlayContainer = dynamic(
+  import("@wonderflow/react-components").then((m) => m.OverlayContainer),
+  { ssr: false }
+);
+
+export const example = `() => {
+  const [visible, setVisible] = useState(false);
+  return (
+    <>
+      <Button onClick={() => setVisible(true)}>Open drawer</Button>
+        <OverlayContainer onClose={() => setVisible(false)}>
+        {visible && (
+          <Drawer title="Account deletion">
+            <Stack
+              fill={false}
+              horizontalAlign="center"
+              rowGap={32}
+              horizontalPadding={24}
+              verticalPadding={24}
+            >
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus et magnam distinctio qui quod ducimus libero magni earum perspiciatis.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus et magnam distinctio qui quod ducimus libero magni earum perspiciatis.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus et magnam distinctio qui quod ducimus libero magni earum perspiciatis.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus et magnam distinctio qui quod ducimus libero magni earum perspiciatis.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus et magnam distinctio qui quod ducimus libero magni earum perspiciatis.
+              <img width="100%" height="auto" src="https://images.unsplash.com/photo-1579332649290-10b7da0cd111?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=cover&w=1600&q=80" />
+              <Button onClick={() => setVisible(false)}>Close drawer</Button>
+            </Stack>
+          </Drawer>
+        )}
+      </OverlayContainer>
+    </>
+  );
+}`;
+
+export default ({ children }) => (
+  <MdxLayout
+    title="Drawer"
+    description="A side content overlaid on either the primary window"
+    showMeta
+    features={[
+      "Keyboard accessible",
+      "Focus is automatically trapped when modal",
+      "Manages screen reader announcements with Title",
+      "Themes ready",
+    ]}
+    links={[
+      {
+        label: "ARIA design",
+        url: "https://www.w3.org/TR/wai-aria-1.2/#dialog",
+      },
+      {
+        label: "ARIA authoring",
+        url: "https://www.w3.org/TR/wai-aria-practices-1.2/#dialog_modal",
+      },
+    ]}
+    hero={
+      <Playground
+        scope={{ ...Components, useState, DynOverlayContainer }}
+        code={example}
+      />
+    }
+  >
+    {children}
+  </MdxLayout>
+);
+
+## Anatomy
+
+```tsx highlight=1,4,7-13
+import { Drawer, OverlayContainer } from "@wonderflow/react-components";
+
+export default () => {
+  const [visible, setVisible] = useState<boolean>(false);
+
+  return (
+    <OverlayContainer onClose={() => setVisible(false)}>
+      {visible && <Drawer title="Drawer title">....</Drawer>}
+    </OverlayContainer>
+  );
+};
+```
+
+### Context and non-modal drawers
+
+You can pass any content to the drawer. If you have a custom react component and you want to close the `Drawer` from inside, you can get the `onClose` callback from `OverlayContext`.
+
+In the following example we're going to use a custom component as Drawer's content, that will close the drawer when the user clicks on the button. We're also creating a non-modal drawer, which allows interactions with the rest of the page (the `closeOnClickOutside` property is ignored when `isModal` is `false`)
+
+export const CustomDrawerContent = () => {
+  const { onClose, titleId } = Components.useOverlayContext();
+  return (
+    <Components.Stack horizontalPadding={24} verticalPadding={24} rowGap={32}>
+      <Components.Stack direction="row" verticalAlign="center" columnGap={48}>
+        <Components.Title id={titleId} level="4">
+          Custom drawer title
+        </Components.Title>
+      </Components.Stack>
+      <p>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas
+        perspiciatis provident sit ut dolorem velit obcaecati, expedita minus
+        cumque commodi repudiandae temporibus veniam non accusamus hic tenetur
+        optio sapiente id?
+      </p>
+      <Components.Button onClick={onClose} icon="xmark">
+        Close drawer
+      </Components.Button>
+    </Components.Stack>
+  );
+};
+
+export const CustomDrawer = () => {
+  const [visible, setVisible] = useState(false);
+  return (
+    <>
+      <Components.Button onClick={() => setVisible(true)}>
+        Open drawer
+      </Components.Button>
+      <DynOverlayContainer obfuscate={false} onClose={() => setVisible(false)}>
+        {visible && (
+          <Components.Drawer isModal={false}>
+            <CustomDrawerContent />
+          </Components.Drawer>
+        )}
+      </DynOverlayContainer>
+    </>
+  );
+};
+
+<LiveArea>
+  <CustomDrawer />
+</LiveArea>
+
+```tsx highlight=1-7,10,13-20,25,28-37
+import {
+  Drawer,
+  OverlayContainer,
+  useOverlayContext,
+  Button,
+  Title,
+} from "@wonderflow/react-components";
+
+export const CustomDrawerContent = () => {
+  const { onClose, titleId } = useOverlayContext();
+
+  return (
+    <Stack horizontalPadding={24} verticalPadding={24} rowGap={32}>
+      <Title id={titleId} level="4">
+        My custom drawer title
+      </Title>
+      <Button onClick={onClose} icon="xmark">
+        Close drawer
+      </Button>
+    </Stack>
+  );
+};
+
+export const PageExample = () => {
+  const [visible, setVisible] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setVisible(true)}>Show drawer</Button>
+      <OverlayContainer obfuscate={false} onClose={() => setVisible(false)}>
+        {visible && (
+          <Drawer isModal={false}>
+            <CustomDrawerContent />
+          </Drawer>
+        )}
+      </OverlayContainer>
+    </>
+  );
+};
+```
+
+## API Reference
+
+<Props
+  properties={[
+    {
+      name: "closeOnClickOutside",
+      type: ["boolean"],
+      default: "true",
+      required: false,
+      dangerous: false,
+      description: "Run onClose callback when clicking the backdrop layer",
+    },
+    {
+      name: "showHeader",
+      type: ["boolean"],
+      default: "true",
+      required: false,
+      dangerous: false,
+      description:
+        "Hide or show the drawer header which includes the title and the close button. If you hide the title, make sure to add yuor own title element in order to provide an accessible label to the drawer.",
+    },
+    {
+      name: "isModal",
+      type: ["boolean"],
+      default: "true",
+      required: false,
+      dangerous: false,
+      description:
+        "Disable the modal behavior of the drawer. If `false`, disable the prop `closeOnClickOutside` and the page is not blocked when the drawer is open.",
+    },
+    {
+      name: "title",
+      type: ['"ReactNode"'],
+      default: "",
+      required: false,
+      dangerous: false,
+      description:
+        "Set the accessible title of the drawer. This is used by screen readers to announce the title of the drawer when opened.",
+    },
+    {
+      name: "theme",
+      type: ['"light"', '"dark"', '"auto"'],
+      default: '"light"',
+      required: false,
+      dangerous: false,
+      description: "Set the drawer content style. By default is always light",
+    },
+    {
+      name: "maxWidth",
+      type: ["string"],
+      default: '"400px"',
+      required: false,
+      dangerous: false,
+      description:
+        "Set the maximum width of the drawer, on mobile the drawer will be automatically collapsed when the width is reached.",
+    },
+    {
+      name: "side",
+      type: ['"left"', '"right"'],
+      default: '"right"',
+      required: false,
+      dangerous: false,
+      description: "Set the side on which the drawer will be positioned",
+    },
+  ]}
+/>
+
+## Accessibility
+
+Adheres to the [`dialog` role requirements](https://www.w3.org/TR/wai-aria-1.2/#dialog) whe the property `isModal` is `true`.
+
+### Keyboard interactions
+
+<Props
+  properties={[
+    {
+      name: "tab",
+      description:
+        "Moves focus to the next focusable element inside the drawer",
+    },
+    {
+      name: "shif + tab",
+      description:
+        "Moves focus to the previous focusable element inside the drawer",
+    },
+    {
+      name: "esc",
+      description: "Close the drawer and move the focus on the trigger element",
+    },
+  ]}
+/>

@@ -1,0 +1,85 @@
+import { MdxLayout } from "@/components/layouts/mdx";
+import { Playground } from "@/components/playground";
+import { Props } from "@/components/props";
+import * as components from "@wonderflow/react-components";
+
+export const example = `<Chip color="blue" interactive>Chip text</Chip>`;
+
+export default ({ children }) => (
+  <MdxLayout
+    title="Chip"
+    description="Dismissable tag elements"
+    showMeta
+    features={[
+      "Keyboard accessible",
+      "Multiple styles and sizes",
+      "Dismissable",
+      "Themes ready",
+    ]}
+    hero={<Playground scope={{ ...components }} code={example} />}
+  >
+    {children}
+  </MdxLayout>
+);
+
+## Anatomy
+
+```tsx highlight=1,4
+import { Chip } from "@wonderflow/react-components";
+
+export default () => {
+  return <Chip>Text</Chip>;
+};
+```
+
+## API Reference
+
+<Props
+  properties={[
+    {
+      name: "dimension",
+      type: ['"small"', '"regular"', '"big"'],
+      default: '"regular"',
+      required: false,
+      dangerous: false,
+      description: "Set the element size",
+    },
+    {
+      name: "color",
+      type: ["gray", "cyan", "green", "purple", "yellow", "red", "blue"],
+      default: '"gray"',
+      required: false,
+      dangerous: false,
+      description: "Set the colour of the element",
+    },
+    {
+      name: "interactive",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "When enabled, the chip becomes dismissable",
+    },
+    {
+      name: "onDismissClick",
+      type: ["() => void"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Callback for the click event",
+    },
+  ]}
+/>
+
+## Accessibility
+
+### Keyboard interactions
+
+<Props
+  properties={[
+    {
+      name: "tab",
+      description: "If interactive, move focus on the button element inside",
+    },
+  ]}
+/>

@@ -1,0 +1,226 @@
+import { MdxLayout } from "@/components/layouts/mdx";
+import { Playground } from "@/components/playground";
+import { Props } from "@/components/props";
+import * as Components from "@wonderflow/react-components";
+
+export const columns = [
+  {
+    name: "ID",
+    selector: (row) => row.id,
+    width: "80px",
+    sortable: true,
+    reorder: true,
+  },
+  {
+    name: "First column",
+    selector: (row) => row.someKey,
+    sortable: true,
+    reorder: true,
+    hide: "sm",
+  },
+  {
+    name: "Second column",
+    selector: (row) => row.anotherKey,
+    sortable: true,
+    reorder: true,
+    hide: "md",
+  },
+  {
+    name: "Value",
+    selector: (row) => row.value,
+    sortable: true,
+    reorder: true,
+    right: true,
+  },
+];
+
+export const data = [
+  {
+    id: 1,
+    someKey: "Some data to print",
+    anotherKey: "Another key data",
+    value: 123,
+  },
+  {
+    id: 2,
+    someKey: "Some data to print 2",
+    anotherKey: "Another key data 2",
+    value: 1234,
+  },
+  {
+    id: 3,
+    someKey: "Some data to print 3",
+    anotherKey: "Another key data 3",
+    value: 5324,
+  },
+  {
+    id: 4,
+    someKey: "Some data to print 4",
+    anotherKey: "Another key data 4",
+    value: 124,
+  },
+  {
+    id: 5,
+    someKey: "Some data to print",
+    anotherKey: "Another key data",
+    value: 123,
+  },
+  {
+    id: 6,
+    someKey: "Some data to print 2",
+    anotherKey: "Another key data 2",
+    value: 1234,
+  },
+  {
+    id: 7,
+    someKey: "Some data to print 3",
+    anotherKey: "Another key data 3",
+    value: 5324,
+  },
+  {
+    id: 8,
+    someKey: "Some data to print 4",
+    anotherKey: "Another key data 4",
+    value: 124,
+  },
+  {
+    id: 9,
+    someKey: "Some data to print 3",
+    anotherKey: "Another key data 3",
+    value: 5324,
+  },
+  {
+    id: 10,
+    someKey: "Some data to print 4",
+    anotherKey: "Another key data 4",
+    value: 124,
+  },
+  {
+    id: 11,
+    someKey: "Some data to print",
+    anotherKey: "Another key data",
+    value: 123,
+  },
+  {
+    id: 12,
+    someKey: "Some data to print 2",
+    anotherKey: "Another key data 2",
+    value: 1234,
+  },
+  {
+    id: 13,
+    someKey: "Some data to print 3",
+    anotherKey: "Another key data 3",
+    value: 5324,
+  },
+  {
+    id: 14,
+    someKey: "Some data to print 4",
+    anotherKey: "Another key data 4",
+    value: 124,
+  },
+];
+
+export const example = `<Table
+  noHeader={false}
+  title={<Title level="5">Sample Title</Title>}
+  columns={columns}
+  data={data}
+  selectableRows
+  actions={<Button kind="secondary">See more</Button>}
+  contextActions={<Button>Delete</Button>}
+  pagination
+  paginationPerPage={3}
+/>`;
+
+export default ({ children }) => (
+  <MdxLayout
+    title="Table"
+    description="Makes tabular data readable and interactive"
+    showMeta
+    features={[
+      "Highly customizable",
+      "Support sorting, reorder and many other interactions",
+      "Pagination and loading state out of the box",
+      "Themes ready",
+    ]}
+    links={[
+      {
+        label: "Reference library",
+        url: "https://github.com/jbetancur/react-data-table-component",
+      },
+    ]}
+    hero={
+      <Playground
+        liveAreaProps={{ fill: true }}
+        scope={{ ...Components, columns, data }}
+        code={example}
+      />
+    }
+  >
+    {children}
+  </MdxLayout>
+);
+
+## Anatomy
+
+```tsx highlight=1,4
+import { Table } from "@wonderflow/react-components";
+
+export default () => {
+  return <Table columns={columns} data={data} />;
+};
+```
+
+## API Reference
+
+This component extends the [`react-data-table-component`](https://github.com/jbetancur/react-data-table-component) library, which exposes different props that enables multiple functionalities, including (but not limited to) `fixedHeader`, `pagination`, `striped`, and `responsive`.
+
+<Components.Button
+  kind="secondary"
+  as="a"
+  href="https://react-data-table-component.netlify.app/?path=/docs/api-props--page"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  Original API reference
+</Components.Button>
+
+### Custom extended API
+
+<Props
+  properties={[
+    {
+      name: "ExpandableRowsComponent",
+      type: ["React.FC<{data: T}>"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Set the component to render when an expandable row is open",
+    },
+    {
+      name: "collapsedRowIcon",
+      type: ["IconNames"],
+      default: "chevron-right",
+      required: false,
+      dangerous: false,
+      description: "Set the icon used to expand a row",
+    },
+    {
+      name: "expandedRowIcon",
+      type: ["IconNames"],
+      default: "chevron-down",
+      required: false,
+      dangerous: false,
+      description: "Set the icon used to collapse a row",
+    },
+    {
+      name: "minRowHeight",
+      type: ["string"],
+      default: "48px",
+      required: false,
+      dangerous: false,
+      description: "set the minimum row height",
+    },
+  ]}
+/>

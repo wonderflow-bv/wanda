@@ -1,0 +1,160 @@
+import { MdxLayout } from "@/components/layouts/mdx";
+import { Playground } from "@/components/playground";
+import { Props } from "@/components/props";
+import * as components from "@wonderflow/react-components";
+
+export const example = `<Elevator resting={1}>
+  <Card padding={false}>
+    <Tab>
+      <Tab.Panel icon="check" label="Sign-up">
+        <Card>
+          <Stack rowGap={24}>
+            <Textfield label="Name" type="text" />
+            <Textfield label="E-Mail" type="email" />
+            <Textfield
+              label="Password"
+              type="password"
+              autoComplete="new-password"
+              id="new-password"
+            />
+            <Button>Submit</Button>
+          </Stack>
+        </Card>
+      </Tab.Panel>
+      <Tab.Panel icon="envelope" label="Login">
+        <Card>
+          <Stack rowGap={24}>
+            <Textfield label="E-Mail" type="email" />
+            <Textfield
+              label="Password"
+              type="password"
+              autoComplete="new-password"
+              id="new-password"
+            />
+            <Button>Submit</Button>
+          </Stack>
+        </Card>
+      </Tab.Panel>
+    </Tab>
+  </Card>
+</Elevator>`;
+
+export default ({ children }) => (
+  <MdxLayout
+    title="Tab"
+    description="A set of layered sections of content — known as tab panels — that are displayed one at a time."
+    showMeta
+    features={[
+      "Keyboard accessible",
+      "Supports automatic activation",
+      "Themes ready",
+    ]}
+    links={[
+      {
+        label: "ARIA design",
+        url: "https://www.w3.org/TR/wai-aria-1.2/#tab",
+      },
+      {
+        label: "ARIA authoring",
+        url: "https://www.w3.org/TR/wai-aria-practices-1.2/#tabpanel",
+      },
+    ]}
+    hero={<Playground scope={{ ...components }} code={example} />}
+  >
+    {children}
+  </MdxLayout>
+);
+
+## Anatomy
+
+```tsx highlight=1,5-8
+import { Tab } from "@wonderflow/react-components";
+
+export default () => {
+  return (
+    <Tab>
+      <Tab.Panel label="Tab item 1">Tab panel 1</Tab.Panel>
+      <Tab.Panel label="Tab item 2">Tab panel 2</Tab.Panel>
+    </Tab>
+  );
+};
+```
+
+## API Reference
+
+### Tab
+
+Contains all the tabs component parts.
+
+<Props
+  properties={[
+    {
+      name: "state",
+      type: ["[number, React.Dispatch<React.SetStateAction<number>>]"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Set the initial active tab",
+    },
+    {
+      name: "onChange",
+      type: ["(index: number) => void"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description:
+        "Callback for the tab change event. Returns the current tab index",
+    },
+  ]}
+/>
+
+### Tab.Panel
+
+Contains the content associated with each trigger.
+
+<Props
+  properties={[
+    {
+      name: "label",
+      type: ["ReactNode"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Define the tab name associated with the content",
+    },
+    {
+      name: "icon",
+      type: ["IconNames"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Add an icon on the tab label",
+    },
+  ]}
+/>
+
+## Accessibility
+
+Adheres to the [Tabs WAI-ARIA design pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#tabpanel).
+
+### Keyboard interactions
+
+<Props
+  properties={[
+    {
+      name: "tab",
+      description:
+        "When focus moves onto the tabs, focuses the active trigger. When a trigger is focused, moves focus to the active content",
+    },
+    {
+      name: "ArrowRight",
+      description:
+        "Moves focus to the next trigger and activates its associated content",
+    },
+    {
+      name: "ArrowLeft",
+      description:
+        "Moves focus to the previous trigger and activates its associated content",
+    },
+  ]}
+/>

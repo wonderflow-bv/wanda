@@ -1,0 +1,163 @@
+import { useState } from "react";
+import { MdxLayout } from "@/components/layouts/mdx";
+import { Playground } from "@/components/playground";
+import { Props } from "@/components/props";
+import * as Components from "@wonderflow/react-components";
+
+export const example = `() => {
+  const [checked, setChecked] = useState(false);
+  return (
+    <Dropdown
+      placement="bottom-start"
+      trigger={<Button kind="flat">Open dropdown</Button>}
+    >
+      <Menu>
+        <Menu.Item icon="user">Item option 1</Menu.Item>
+        <Menu.ItemCheckbox
+          onClick={() => setChecked(val => !val)}
+          icon={checked ? 'check' : undefined}
+          checked={checked}
+        >
+          Checkable option 2
+        </Menu.ItemCheckbox>
+        <Separator />
+        <Menu.Item icon="right-from-bracket">
+          Item option 3
+        </Menu.Item>
+        <Menu.Item disabled icon="right-from-bracket">
+          Disabled option 4
+        </Menu.Item>
+      </Menu>
+    </Dropdown>
+  )
+}`;
+
+export default ({ children }) => (
+  <MdxLayout
+    title="Dropdown"
+    description="Add extra actions to elements"
+    showMeta
+    features={[
+      "Keyboard accessible",
+      "Focus is fully managed",
+      "Multiple sizes",
+      "Supports custom element as dropdown",
+      "Custom icons and icon position",
+      "Auto placement based on viewport boundaries",
+      "Themes ready",
+    ]}
+    links={[
+      {
+        label: "ARIA authoring",
+        url: "https://www.w3.org/TR/wai-aria-practices-1.2/#menubutton",
+      },
+    ]}
+    hero={<Playground scope={{ ...Components, useState }} code={example} />}
+  >
+    {children}
+  </MdxLayout>
+);
+
+## Anatomy
+
+```tsx highlight=1,5-11
+import { Dropdown, Button } from "@wonderflow/react-components";
+
+export default () => {
+  return (
+    <Dropdown trigger={<Button>Open dropdown</Button>}>
+      <Menu>
+        <Menu.Item>Item option 1</Menu.Item>
+        <Menu.Item>Item option 2</Menu.Item>
+        <Menu.Item>Item option 3</Menu.Item>
+      </Menu>
+    </Dropdown>
+  );
+};
+```
+
+## API Reference
+
+### Dropdown
+
+<Props
+  properties={[
+    {
+      name: "trigger",
+      type: ["ReactNode"],
+      default: "",
+      required: true,
+      dangerous: false,
+      description: "Set the element that triggers the dropdown",
+    },
+    {
+      name: "offset",
+      type: ["number"],
+      default: "8",
+      required: false,
+      dangerous: false,
+      description: "Set the gap between the trigger and the popup",
+    },
+    {
+      name: "placement",
+      type: [
+        "auto",
+        "auto-start",
+        "auto-end",
+        "top",
+        "bottom",
+        "right",
+        "left",
+        "top-start",
+        "top-end",
+        "bottom-start",
+        "bottom-end",
+        "right-start",
+        "right-end",
+        "left-start",
+        "left-end",
+      ],
+      default: "auto-start",
+      required: false,
+      dangerous: false,
+      description:
+        "Set the placement logic. Auto means the popup is placed based on the available space inside the viewport.",
+    },
+  ]}
+/>
+
+## Accessibility
+
+Adheres to the [`menu button` role requirements](https://www.w3.org/TR/wai-aria-practices-1.2/#menubutton).
+
+The `Dropdown` component accepts custom elements as children. This means that you can show your component as dropodown when the trigger is activated. Said that, if you're using custom elements you have to follow all the ARIA requirements and introduce the required behaviours, like focus handling (eg. using the autofocus attribute) and keyboard navigation with the [roving tabindex](https://developers.google.com/web/fundamentals/accessibility/focus/using-tabindex). There is also a [react package](https://www.npmjs.com/package/react-roving-tabindex) to easily handle this.
+
+### Example
+
+export const exampleCustom = `<Dropdown trigger={<Button>Open dropdown</Button>}>
+  <>
+    <p>Custom element</p>
+    <Button autoFocus dimension="small" kind="flat">
+      Another button
+    </Button>
+  </>
+</Dropdown>`;
+
+<Playground scope={{ ...Components }} code={exampleCustom} />
+
+### Keyboard interactions
+
+<Props
+  properties={[
+    {
+      name: "tab",
+      description:
+        "Move focus on the trigger if closed. If opened move the focus inside the dropdown. If no focusable elements are found, move focus outside and close the dropdown.",
+    },
+    {
+      name: "enter",
+      description:
+        "Open the menu and set the focus on the first focusable element inside the dropdown.",
+    },
+  ]}
+/>

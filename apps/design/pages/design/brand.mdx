@@ -1,0 +1,121 @@
+import { MdxLayout } from "@/components/layouts/mdx";
+import { Zoomer } from "@/components/zoomer";
+import { Tile } from "@/components/tile";
+import { Stack, Text, Grid } from "@wonderflow/react-components";
+import { ThemedImg } from "@/components/themed-img";
+
+export default ({ children }) => (
+  <MdxLayout title="Brand" description="Wonderflow's digital identity">
+    {children}
+  </MdxLayout>
+);
+
+Wanda relies on the Wonderflow's design language and principles and it helps designers and developers to keep brand consistency across projects and design assets. There are many resources shared across the teams like company logos, assets and icons. Here you can find everything related to the Wonderflow brand.
+
+## Anatomy
+
+Optical kerning, refined weight and defined clear space, as well as delineated placement in relation to other content help to make it as instantly recognizable as possible at all sizes and in all contexts.
+
+<ThemedImg src="/design/brand/logo-anatomy.svg" />
+
+![](/design/brand/logo-colors.svg)
+
+## Logo formats
+
+At Wonderflow we use three different version of the company logo based on the situation.
+
+The full logo is used when the brand communication is strong and prominent. It needs a big white space area around in order to keep the information readable.
+
+<Stack direction="row" columnGap={24}>
+  <Zoomer>
+    <img
+      loading="lazy"
+      decoding="async"
+      src="/design/brand/full-logo-light.svg"
+    />
+  </Zoomer>
+  <Zoomer>
+    <img
+      loading="lazy"
+      decoding="async"
+      src="/design/brand/full-logo-dark.svg"
+    />
+  </Zoomer>
+</Stack>
+
+### Mark
+
+The mark logo is often used when the brand identity should not be so prominent and when the is not enought room for the full logo.
+
+<Stack direction="row" columnGap={24}>
+  <Zoomer>
+    <img
+      loading="lazy"
+      decoding="async"
+      src="/design/brand/mark-logo-light.svg"
+    />
+  </Zoomer>
+  <Zoomer>
+    <img
+      loading="lazy"
+      decoding="async"
+      src="/design/brand/mark-logo-dark.svg"
+    />
+  </Zoomer>
+</Stack>
+
+### Icons
+
+Icons are versions of the mark logo. The stroke is thicker in order to keep readability on really small sizes. They are used as tab icon inside web pages.
+
+<Stack direction="row" columnGap={24}>
+  <Zoomer>
+    <img
+      loading="lazy"
+      decoding="async"
+      src="/design/brand/icon-logo-light.svg"
+    />
+  </Zoomer>
+  <Zoomer>
+    <img
+      loading="lazy"
+      decoding="async"
+      src="/design/brand/icon-logo-dark.svg"
+    />
+  </Zoomer>
+</Stack>
+
+## Resources
+
+<Grid colMinWidth="10rem" columnGap={2} rowGap={2}>
+  <Grid.Item>
+    <Tile
+      icon="arrow-down-to-bracket"
+      as="a"
+      href="/assets/logo/full-logo.zip"
+      download
+    >
+      <Text weight="bold">Full Logo</Text>
+    </Tile>
+  </Grid.Item>
+  <Grid.Item>
+    <Tile
+      icon="arrow-down-to-bracket"
+      as="a"
+      href="/assets/logo/mark-logo.zip"
+      download
+    >
+      <Text weight="bold">Mark logo</Text>
+    </Tile>
+  </Grid.Item>
+  <Grid.Item>
+    <Tile
+      icon="arrow-down-to-bracket"
+      as="a"
+      href="/assets/logo/icons.zip"
+      download
+    >
+      <Text weight="bold">Icons</Text>
+    </Tile>
+  </Grid.Item>
+</Grid>

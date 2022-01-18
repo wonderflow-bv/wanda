@@ -1,0 +1,1 @@
+export { PostLayout } from './post'

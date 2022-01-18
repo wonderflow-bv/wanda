@@ -1,0 +1,42 @@
+import { MdxLayout } from "@/components/layouts/mdx";
+import { Snackbar, Chip } from "@wonderflow/react-components";
+import { Markdown } from "@/components/markdown";
+
+export default ({ children }) => (
+  <MdxLayout
+    title="Presence"
+    description="Allows exit animations when a component is unmounted"
+    showMeta
+    showLinks={false}
+    tags={<Chip color="yellow">Deprecated</Chip>}
+    features={["Enable exiting animations when components are unmounted"]}
+  >
+    {children}
+  </MdxLayout>
+);
+
+Wanda's components use internally [Framer Motion](https://www.framer.com/docs/) to do animations and transitions. Sometime, when you want to run exiting animations when a component is unmounted you need to use a provider which delay the component unmounting until the exiting animation is completed.
+
+For this purpose, we exposed the `Presence` component, which is a wrapped version of `AnimatePresence` from Framer Motion to which you can pass [any property allowed](https://www.framer.com/docs/animate-presence/#props) by it. Read more about `AnimatePresence` on the [official documentation](https://www.framer.com/docs/animate-presence/).
+
+## Anatomy
+
+```tsx highlight=1,4
+import { Presence } from "@wonderflow/react-components";
+
+export default () => (
+  <Presence initial={false}>{visible && ...}</Presence>
+);
+```
+
+<Snackbar kind="info">
+  <Markdown>
+    `Presence` is a wrapper of framer-motion's `AnimatePresence` which you can
+    use in specific case without installing it. If you're already using
+    `framer-motion` in you project you can use `AnimatePresence` directly.
+  </Markdown>
+</Snackbar>
+
+## API Reference
+
+For the API reference use the official documentation. [Read more](https://www.framer.com/docs/animate-presence/#props).

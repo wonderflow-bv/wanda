@@ -1,0 +1,10 @@
+:where(.BlankButton) {
+  appearance: none;
+  border: 0;
+  background: none;
+  font-size: inherit;
+  font-family: inherit;
+  display: inline-flex;
+  cursor: pointer;
+  color: inherit;
+}

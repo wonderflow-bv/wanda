@@ -1,0 +1,27 @@
+.ContrastCalc {
+  position: relative;
+}
+
+.Preview {
+  inline-size: 180px;
+  block-size: 180px;
+  background-color: var(--bg);
+  color: var(--fg);
+  position: relative;
+  border-radius: env(--radius-8);
+  border: 2px solid var(--dimmed-1);
+}
+
+.Badge {
+  padding: env(--space-8) env(--space-16);
+  border-radius: env(--radius-4);
+
+  @nest .ContrastCalc[data-contrast-calc-valid='true'] & {
+    background-color: var(--highlight-green-background);
+    color: var(--highlight-green-foreground);
+  }
+  @nest .ContrastCalc[data-contrast-calc-valid='false'] & {
+    background-color: var(--highlight-red-background);
+    color: var(--highlight-red-foreground);
+  }
+}

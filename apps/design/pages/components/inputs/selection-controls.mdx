@@ -1,0 +1,142 @@
+import { Fragment } from "react";
+import { MdxLayout } from "@/components/layouts/mdx";
+import { Playground } from "@/components/playground";
+import { Props } from "@/components/props";
+import * as components from "@wonderflow/react-components";
+
+export const example = `<>
+  <Checkbox defaultChecked />
+  <Radio defaultChecked />
+  <Toggle defaultChecked />
+</>`;
+
+export default ({ children }) => (
+  <MdxLayout
+    title="Selection controls"
+    description="Content selection and toggles"
+    showMeta
+    features={["Keyboard accessible", "Multiple sizes", "Themes ready"]}
+    links={[
+      {
+        label: "ARIA checkbox design",
+        url: "https://www.w3.org/TR/wai-aria-1.2/#checkbox",
+      },
+      {
+        label: "ARIA radio design",
+        url: "https://www.w3.org/TR/wai-aria-1.2/#radio",
+      },
+      {
+        label: "ARIA checkbox auth.",
+        url: "https://www.w3.org/TR/wai-aria-practices-1.2/#checkbox",
+      },
+      {
+        label: "ARIA radio auth.",
+        url: "https://www.w3.org/TR/wai-aria-practices-1.2/#radiobutton",
+      },
+    ]}
+    hero={
+      <Playground
+        liveAreaProps={{
+          direction: "row",
+        }}
+        scope={{ ...components }}
+        code={example}
+      />
+    }
+  >
+    {children}
+  </MdxLayout>
+);
+
+## Anatomy
+
+```tsx highlight=1,6-8
+import { Checkbox, Radio, Toggle } from "@wonderflow/react-components";
+
+export default () => {
+  return (
+    <>
+      <Checkbox />
+      <Radio />
+      <Toggle />
+    </>
+  );
+};
+```
+
+## API Reference
+
+<Props
+  properties={[
+    {
+      name: "disabled",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Set the disabled state",
+    },
+    {
+      name: "indeterminate",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Set the indeterminate state. Checkbox only.",
+    },
+    {
+      name: "dimension",
+      type: ['"small"', '"big"'],
+      default: '"big"',
+      required: false,
+      dangerous: false,
+      description: "Set the element size",
+    },
+    {
+      name: "onChange",
+      type: ["(ChangeEvent<HTMLInputElement>) => void"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Callback for the change event",
+    },
+  ]}
+/>
+
+## Accessibility
+
+`<Checkbox />` adheres to the [`checkbox` role requirements](https://www.w3.org/TR/wai-aria-1.2/#checkbox).
+`<Radio />` adheres to the [`radio` role requirements](https://www.w3.org/TR/wai-aria-1.2/#radio).
+
+Both components require an associated `label` element and `id` to describes the field.
+
+### Keyboard interactions
+
+<Props
+  properties={[
+    {
+      name: "tab",
+      description: "Move focus on the element or outside",
+    },
+    {
+      name: "space",
+      description: "Activate or deactivate the element",
+    },
+    {
+      name: "arrowDown",
+      description: "Inside radio groups, moves focus on the next element",
+    },
+    {
+      name: "arrowUp",
+      description: "Inside radio groups, moves focus on the previous element",
+    },
+    {
+      name: "arrowLeft",
+      description: "Inside radio groups, moves focus on the previous element",
+    },
+    {
+      name: "arrowRight",
+      description: "Inside radio groups, moves focus on the next element",
+    },
+  ]}
+/>

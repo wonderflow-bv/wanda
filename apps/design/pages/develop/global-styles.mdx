@@ -1,0 +1,149 @@
+import { MdxLayout } from "@/components/layouts/mdx";
+import { CodeBlock } from "@/components/code-block";
+import { LiveArea } from "@/components/live-area";
+import { Stack, Tab } from "@wonderflow/react-components";
+import tkns from "@wonderflow/tokens/platforms/web/tokens.json";
+
+export default ({ children }) => (
+  <MdxLayout title="Global styles" description="Global styles on the rescue">
+    {children}
+  </MdxLayout>
+);
+
+Core styles are what you need to write your custom css. They include custom properties, custom media queries and utilities.
+
+## Media queries
+
+Inside the core style, we provide a set of breakpoints which you can use while building components and applications. To use them you have to import the relative file:
+
+```css
+@import "@wonderflow/react-components/core/utils/media.css";
+```
+
+Here the complete list of the available custom media queries you can use:
+
+### Viewport
+
+```css
+@media (--from-extra-small);
+/* min-width: 30em => 480px */
+
+@media (--from-small);
+/* (min-width: 48em) => 768px */
+
+@media (--from-medium);
+/* (min-width: 60em) => 960px */
+
+@media (--from-large);
+/* (min-width: 80em) => 1280px */
+
+@media (--from-extra-large);
+/* (min-width: 100em) => 1600px */
+```
+
+### Orientation
+
+```css
+@media (--portrait);
+/* (orientation: portrait) */
+
+@media (--landscape);
+/* (orientation: landscape) */
+```
+
+### System preferences
+
+```css
+@media (--dark-scheme);
+/* (prefers-color-scheme: dark) */
+
+@media (--light-scheme);
+/* (prefers-color-scheme: light) */
+
+@media (--motion);
+/* (prefers-reduced-motion: no-preference) */
+
+@media (--reduced-motion);
+/* (prefers-reduced-motion: reduce) */
+
+@media (--opacity);
+/* (prefers-reduced-transparency: no-preference) */
+
+@media (--reduce-opacity);
+/* (prefers-reduced-transparency: reduce) */
+
+@media (--high-contrast);
+/* (prefers-contrast: high) */
+
+@media (--low-contraast);
+/* (prefers-contrast: low) */
+```
+
+### Pointers
+
+```css
+@media (--touch);
+/* (hover: none) and (pointer: coarse) */
+
+@media (--stylus);
+/* (hover: none) and (pointer: fine) */
+
+@media (--pointer);
+/* (hover) and (pointer: coarse) */
+
+@media (--mouse);
+/* (hover) and (pointer: fine) */
+```
+
+## Mixins
+
+If you need to create dynamic css declaration, or reuse block of declarations inside your css you can define and use CSS mixins.
+
+<Tab>
+  <Tab.Panel icon="layer-group" label="Source">
+
+```css hideCopy
+@define-mixin icon $network, $color: blue {
+  .Icon.is-$(network) {
+    color: white;
+    background: $color;
+    @mixin-content;
+  }
+}
+
+@mixin icon youtube, red {
+  background: url("/youtube.png");
+}
+```
+
+  </Tab.Panel>
+  <Tab.Panel icon="arrow-right" label="Output">
+
+```css hideCopy
+.Icon.is-youtube {
+  color: white;
+  background: red;
+  background: url("/youtube.png");
+}
+```
+
+  </Tab.Panel>
+</Tab>
+
+The mixins implementation is based on `postcss-mixins`. To learn more about the mixins syntax and advanced features, please refer to the [postcss-mixins documentation](https://github.com/postcss/postcss-mixins).
+
+### Builtin mixins
+
+Wanda's core style comes with a set of prebuilt mixins you can use inside your css. These mixins allows you to reuse the same css declaration inside your components.
+
+#### Vibrancy
+
+Add a vibrancy effect to any element. You can use it to add blur effect and filters to underlyings elements.
+
+```css
+@import "@wonderflow/react-components/core/utils/vibrancy.css";
+
+.MyVibrantElement {
+  @mixin vibrancy;
+}
+```

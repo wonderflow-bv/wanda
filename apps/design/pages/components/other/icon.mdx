@@ -1,0 +1,60 @@
+import { MdxLayout } from "@/components/layouts/mdx";
+import { Playground } from "@/components/playground";
+import { Props } from "@/components/props";
+import * as components from "@wonderflow/react-components";
+
+export const example = `<Icon name="message" dimension={32} />`;
+
+export default ({ children }) => (
+  <MdxLayout
+    title="Icon"
+    description="Graphic elements that quickly and concisely convey information to the user."
+    showMeta
+    features={[
+      "Scalable vector graphic",
+      "Fully stylizable",
+      "Multiple visual styles",
+      "Auto adjust style based on rendering size",
+    ]}
+    hero={<Playground scope={{ ...components }} code={example} />}
+  >
+    {children}
+  </MdxLayout>
+);
+
+## Anatomy
+
+```tsx highlight=1,4
+import { Icon } from "@wonderflow/react-components";
+
+export default () => {
+  return <Icon name="bell">;
+};
+```
+
+## API Reference
+
+<Props
+  properties={[
+    {
+      name: "name",
+      type: ["IconNames"],
+      default: "",
+      required: true,
+      dangerous: false,
+      description: "Set the icon to render based on the name",
+    },
+    {
+      name: "dimension",
+      type: ["14", "16", "24", "32", "40", "48", "56"],
+      default: "16",
+      required: false,
+      dangerous: false,
+      description: "Set the icon size",
+    },
+  ]}
+/>
+
+## Accessibility
+
+Svg are considered as images. If they are coupled with a text you have to hide them to AT by using the `aria-hidden` attribute.

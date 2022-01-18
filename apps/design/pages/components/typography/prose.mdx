@@ -1,0 +1,61 @@
+import { MdxLayout } from "@/components/layouts/mdx";
+import { Playground } from "@/components/playground";
+import { Props } from "@/components/props";
+import * as components from "@wonderflow/react-components";
+
+export const example = `<Prose>
+  <Title as="h1" level="4">
+    Title
+  </Title>
+  <Text>
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius
+    dolores, tempore quas labore officiis praesentium.
+  </Text>
+</Prose>`;
+
+export default ({ children }) => (
+  <MdxLayout
+    title="Prose"
+    description="Vertical rhythm for text content"
+    showMeta
+    features={[
+      "Auto space titles and text content",
+      "Useful for pages with many text elements",
+    ]}
+    hero={
+      <Playground
+        liveAreaProps={{ maxHeight: "50vh" }}
+        scope={{ ...components }}
+        code={example}
+      />
+    }
+  >
+    {children}
+  </MdxLayout>
+);
+
+## Anatomy
+
+```tsx highlight=1,4
+import { Prose } from "@wonderflow/react-components";
+
+export default () => {
+  return <Prose>...</Prose>;
+};
+```
+
+## API Reference
+
+<Props
+  properties={[
+    {
+      name: "as",
+      type: ["keyof JSX.IntrinsicElements | React.ComponentType<any>"],
+      default: '"div"',
+      required: false,
+      dangerous: false,
+      description:
+        "Set the component to a different HTML tag or custom component.",
+    },
+  ]}
+/>

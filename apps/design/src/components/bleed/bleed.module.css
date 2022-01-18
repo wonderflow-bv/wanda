@@ -1,0 +1,16 @@
+@import '@wonderflow/react-components/core/utils/media.css';
+
+.Bleed {
+
+  /* max-width: calc(var(--max-w, auto) - var(--offset, 0)); */
+
+  @media (--from-large) {
+    max-width: calc(var(--max-w, auto) - var(--offset, 0px));
+    width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
+  @media (min-width: 120em) {
+    max-width: calc(var(--max-w, auto) + var(--offset, 0px));
+  }
+}

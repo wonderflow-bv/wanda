@@ -1,0 +1,18 @@
+
+.MdxLayout {
+  position: relative;
+}
+
+.Links {
+  max-inline-size: 12.11rem;
+}
+
+.Hero {
+  position: relative;
+}
+
+.Action {
+  position: absolute;
+  bottom: env(--space-8);
+  right: env(--space-8);
+}

@@ -1,0 +1,134 @@
+import { MdxLayout } from "@/components/layouts/mdx";
+import { List, Text } from "@wonderflow/react-components";
+
+export default ({ children }) => (
+  <MdxLayout
+    title="Elevations"
+    description="Elevation brings depth into your application. It puts more emphasis on most elevated elements of your interface."
+  >
+    {children}
+  </MdxLayout>
+);
+
+## Introduction
+
+The elevation is the relative distance between two elements along the z-axis. Any object in real-world cast a shadow when elevated, and the shadow has specific properties and appearance based on the elevation degree. At Wonderflow, we want to provide a similar experience by introducing different elevation degrees and systematic shadows based on predefined layers of elevation.
+
+## Placement layers
+
+Our elevation system is made by four layers, in which elements can be placed in order to provide depth and cast shadows.
+
+<img
+  loading="lazy"
+  decoding="async"
+  src="/design/elevations/elevation-axis.svg"
+/>
+
+### Plane layer
+
+Consider this layer as the "plane" on which elements are placed by default if not declaring any elevation value. Here is some example of elements usually placed on this layer:
+
+<List marker="arrow-right" markerColor="var(--highlight-green-foreground)">
+  <li>Document root</li>
+  <li>Document body</li>
+  <li>Backgrounds</li>
+  <li>Any element that is not elevated</li>
+</List>
+
+### Layer 1
+
+This is the first level of elevation from Z0, elements placed here cast a small and hard shadow. Here some elements that can be placed on this level:
+
+<List marker="arrow-right" markerColor="var(--highlight-green-foreground)">
+  <li>Cards and wrappers</li>
+  <li>Text fields and selects</li>
+  <li>Selection controls</li>
+  <li>Buttons</li>
+</List>
+
+### Layer 2
+
+The second layer of elevation can hold elements like:
+
+<List marker="arrow-right" markerColor="var(--highlight-green-foreground)">
+  <li>Dialogs</li>
+  <li>Popover</li>
+  <li>Tooltips</li>
+</List>
+
+### Layer 3
+
+The third layer can contain fixed elements like:
+
+<List marker="arrow-right" markerColor="var(--highlight-green-foreground)">
+  <li>Header</li>
+  <li>Navbar</li>
+  <li>Floating buttons</li>
+</List>
+
+### Layer 4
+
+Elements that can be placed on this elevation layer are those that are always palced above everything else.
+
+<List marker="arrow-right" markerColor="var(--highlight-green-foreground)">
+  <li>Modal dialogs</li>
+  <li>Modal drawers</li>
+  <li>Global notifications</li>
+</List>
+
+## Default elevations
+
+Some UI elements are placed by default on a specific layer because they must be always placed on that layer, indipendently from the context and the design. For example, a `Dropdown` element is always placed on the **layer 2** and so it will cast always the same shadow across the experiences.
+
+Here you can find the full list of the elements that have a predefined elevetaion value:
+
+<table style={{ width: "100%", textAlign: "match-parent" }}>
+  <thead>
+    <tr>
+      <th scope="col">
+        <Text textAlign="start">Component</Text>
+      </th>
+      <th scope="col">
+        <Text textAlign="end">Layer</Text>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Tooltip</td>
+      <td>
+        <Text textAlign="end">2</Text>
+      </td>
+    </tr>
+    <tr>
+      <td>Dropdown</td>
+      <td>
+        <Text textAlign="end">2</Text>
+      </td>
+    </tr>
+    <tr>
+      <td>Floating snackbars</td>
+      <td>
+        <Text textAlign="end">3</Text>
+      </td>
+    </tr>
+    <tr>
+      <td>Floating buttons</td>
+      <td>
+        <Text textAlign="end">3</Text>
+      </td>
+    </tr>
+    <tr>
+      <td>Modal drawers</td>
+      <td>
+        <Text textAlign="end">4</Text>
+      </td>
+    </tr>
+    <tr>
+      <td>Modal dialogs</td>
+      <td>
+        <Text textAlign="end">4</Text>
+      </td>
+    </tr>
+  </tbody>
+</table>

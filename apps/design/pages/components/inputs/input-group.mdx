@@ -1,0 +1,106 @@
+import { MdxLayout } from "@/components/layouts/mdx";
+import { Playground } from "@/components/playground";
+import { Props } from "@/components/props";
+import * as components from "@wonderflow/react-components";
+
+export const example = `<InputGroup
+  label="Sample label"
+  start={<Textfield readOnly size={6} defaultValue="https://" />}
+  input={<Textfield type="text" defaultValue="sample-domain" />}
+  end={(
+    <Select defaultValue={1}>
+      <option value="1">.com</option>
+      <option value="2">.it</option>
+      <option value="3">.org</option>
+      <option value="4">.dev</option>
+      <option value="5">.io</option>
+    </Select>
+  )}
+/>`;
+
+export default ({ children }) => (
+  <MdxLayout
+    title="Input group"
+    description="Decorate inputs with other elements to create a single field"
+    showMeta
+    features={[
+      "Keyboard accessible",
+      "Works with any inputs and buttons",
+      "Themes ready",
+    ]}
+    hero={<Playground scope={{ ...components }} code={example} />}
+  >
+    {children}
+  </MdxLayout>
+);
+
+## Anatomy
+
+```tsx highlight=1,4
+import { InputGroup } from "@wonderflow/react-components";
+
+export default () => {
+  return <InputGroup start="" input="" end="" />;
+};
+```
+
+## API Reference
+
+<Props
+  properties={[
+    {
+      name: "input",
+      type: ["ReactNode"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "The input to decorate.",
+    },
+    {
+      name: "start",
+      type: ["ReactNode"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "The element to show before the input",
+    },
+    {
+      name: "end",
+      type: ["ReactNode"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "The element to show after the input",
+    },
+    {
+      name: "label",
+      type: ["ReactNode"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "The descriptive label for the decorated input",
+    },
+    {
+      name: "dimension",
+      type: ['"small", "big", "regular"'],
+      default: '"regular"',
+      required: false,
+      dangerous: false,
+      description:
+        "The dimension for all the inputs. It overrides the single ones.",
+    },
+  ]}
+/>
+
+## Accessibility
+
+### Keyboard interactions
+
+<Props
+  properties={[
+    {
+      name: "tab",
+      description: "Move focus on the elements inside the composition",
+    },
+  ]}
+/>

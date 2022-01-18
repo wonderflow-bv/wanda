@@ -1,0 +1,10 @@
+.Banner {
+  border-radius: env(--radius-8);
+  border: 1px solid var(--dimmed-1);
+  color: var(--global-foreground);
+  background-color: var(--global-background);
+  background-image: url('/banner-bg.svg');
+  background-position: right top;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

@@ -1,0 +1,30 @@
+.Checklist {
+  list-style: none;
+  padding: 0;
+}
+
+
+.Li {
+  position: relative;
+  padding-left: env(--space-40);
+  min-block-size: env(--space-32);
+}
+
+.Bullet {
+  background-color: var(--highlight-green-background);
+  color: var(--highlight-green-foreground);
+  inline-size: 24px;
+  block-size: 24px;
+  border-radius: 100%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  top: env(--space-2);
+
+  & svg {
+    inline-size: 0.55rem;
+    block-size: 0.55rem;
+  }
+}

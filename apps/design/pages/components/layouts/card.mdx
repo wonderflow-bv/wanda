@@ -1,0 +1,151 @@
+import { MdxLayout } from "@/components/layouts/mdx";
+import { Playground } from "@/components/playground";
+import { Props } from "@/components/props";
+import * as components from "@wonderflow/react-components";
+
+export const example = `<Card
+  left={<Icon name="message" dimension={32} />}
+  right={<Icon name="compass" dimension={32} />}
+  vibrant
+>
+  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius
+  dolores, tempore quas labore officiis praesentium. Porro sed dolorem,
+  numquam temporibus.
+</Card>`;
+
+export default ({ children }) => (
+  <MdxLayout
+    title="Card"
+    description="Wrap your content with style"
+    showMeta
+    features={["Highly customizable", "Multiple slots", "Polymorphic"]}
+    hero={<Playground scope={{ ...components }} code={example} />}
+  >
+    {children}
+  </MdxLayout>
+);
+
+## Anatomy
+
+```tsx highlight=1,4
+import { Card } from "@wonderflow/react-components";
+
+export default () => {
+  return <Card>Lorem ipsum dolor sit.</Card>;
+};
+```
+
+## API Reference
+
+<Props
+  properties={[
+    {
+      name: "wrap",
+      type: ["StackProps['wrap']"],
+      default: "false",
+      required: false,
+      dangerous: false,
+      description: "Wrap the children if there isn't enought space",
+    },
+    {
+      name: "columnGap",
+      type: ["StackProps['columnGap']"],
+      default: "24",
+      required: false,
+      dangerous: false,
+      description: "Set the space between columns",
+    },
+    {
+      name: "verticalAlign",
+      type: ["StackProps['verticalAlign']"],
+      default: "start",
+      required: false,
+      dangerous: false,
+      description:
+        "Set the vertical alignment for children. Any align-items or justify-content value is accepted",
+    },
+    {
+      name: "horizontalAlign",
+      type: ["StackProps['horizontalAlign']"],
+      default: "space-between",
+      required: false,
+      dangerous: false,
+      description:
+        "Set the horizontal alignment for children. Any align-items or justify-content value is accepted",
+    },
+    {
+      name: "padding",
+      type: ["false", "TokensTypes['space']"],
+      default: "24",
+      required: false,
+      dangerous: false,
+      description: "Set the padding or remove it",
+    },
+    {
+      name: "left",
+      type: ["ReactNode"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Place content on the left side of children.",
+    },
+    {
+      name: "right",
+      type: ["ReactNode"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Place content on the right side of children.",
+    },
+    {
+      name: "radius",
+      type: ["false", "TokensTypes['radius']"],
+      default: "8",
+      required: false,
+      dangerous: false,
+      description: "Set the ednge radius",
+    },
+    {
+      name: "dimmed",
+      type: ["1", "2", "3"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Set the dimmed background",
+    },
+    {
+      name: "bordered",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Set a small border on the card",
+    },
+    {
+      name: "vibrant",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Set the vibrant style for the card",
+    },
+    {
+      name: "highlightOnHover",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description:
+        "Highlight the card on hover and focus. Applied only if `vibrant`",
+    },
+    {
+      name: "as",
+      type: ["keyof JSX.IntrinsicElements | React.ComponentType<any>"],
+      default: '"div"',
+      required: false,
+      dangerous: false,
+      description:
+        "Set the component to a different HTML tag or custom component.",
+    },
+  ]}
+/>

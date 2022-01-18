@@ -1,0 +1,121 @@
+import { MdxLayout } from "@/components/layouts/mdx";
+import { Playground } from "@/components/playground";
+import { Props } from "@/components/props";
+import * as components from "@wonderflow/react-components";
+
+export const example = `<Text>
+  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius
+  dolores, tempore quas labore officiis praesentium. Porro sed dolorem,
+  numquam temporibus.
+</Text>`;
+
+export default ({ children }) => (
+  <MdxLayout
+    title="Text"
+    description="Dynamic and responsive typography with control"
+    showMeta
+    features={[
+      "Dynamic HTML tag",
+      "Fully customizzable",
+      "Responsive text",
+      "Themes ready",
+    ]}
+    hero={<Playground scope={{ ...components }} code={example} />}
+  >
+    {children}
+  </MdxLayout>
+);
+
+## Anatomy
+
+```tsx highlight=1,4
+import { Text } from "@wonderflow/react-components";
+
+export default () => {
+  return <Text>Click</Text>;
+};
+```
+
+## API Reference
+
+<Props
+  properties={[
+    {
+      name: "size",
+      type: ["14", "16", "18", "22", "28"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Set the text font-size",
+    },
+    {
+      name: "dimmed",
+      type: ["5", "6", "7"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Set the text color to match dimmed color themes",
+    },
+    {
+      name: "sentiment",
+      type: ["positive", "informative", "danger", "warning"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description:
+        "Set the text color. This changes based on the current theme",
+    },
+    {
+      name: "weight",
+      type: ["thin", "bold"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Set the weight of the text",
+    },
+    {
+      name: "responsive",
+      type: ["boolean"],
+      default: "true",
+      required: false,
+      dangerous: false,
+      description:
+        "Set the responsive font-size which scale down by one size on mobile",
+    },
+    {
+      name: "lineHeight",
+      type: ['"none"', '"small"', '"large"'],
+      default: '"large"',
+      required: false,
+      dangerous: false,
+      description: "Set the text line height.",
+    },
+    {
+      name: "maxWidth",
+      type: ["string"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description:
+        "Set the max width of the line. Accepts all units (protip: use ch)",
+    },
+    {
+      name: "textAlign",
+      type: ["start", "center", "end"],
+      default: "start",
+      required: false,
+      dangerous: false,
+      description:
+        "Set the text alignment. Consistent even on different writing direction (e.g. rtl)",
+    },
+    {
+      name: "as",
+      type: ["keyof JSX.IntrinsicElements | React.ComponentType<any>"],
+      default: '"p"',
+      required: false,
+      dangerous: false,
+      description:
+        "Set the component to a different HTML tag or custom component.",
+    },
+  ]}
+/>

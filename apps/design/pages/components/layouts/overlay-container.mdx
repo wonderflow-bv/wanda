@@ -1,0 +1,235 @@
+import { useState } from "react";
+import { MdxLayout } from "@/components/layouts/mdx";
+import { Playground } from "@/components/playground";
+import { LiveArea } from "@/components/live-area";
+import { Props } from "@/components/props";
+import dynamic from "next/dynamic";
+import * as Components from "@wonderflow/react-components";
+
+export const DynOverlayContainer = dynamic(
+  import("@wonderflow/react-components").then((m) => m.OverlayContainer),
+  { ssr: false }
+);
+
+export const example = `() => {
+  const [visible, setVisible] = useState(false);
+  return (
+    <>
+      <Button onClick={() => setVisible(true)}>Open Overlay</Button>
+      {visible && (
+        <OverlayContainer>
+          <Stack
+            fill={false}
+            horizontalAlign="center"
+            verticalAlign="center"
+            style={{ height: '100%' }}
+          >
+            I'm over the top
+            <Button
+              kind="secondary"
+              onClick={() => setVisible(false)}
+            >
+              Close me
+            </Button>
+          </Stack>
+        </OverlayContainer>
+      )}
+    </>
+)}`;
+
+export default ({ children }) => (
+  <MdxLayout
+    title="Overlay container"
+    description="Render content above everything"
+    showMeta
+    features={[
+      "Easy usage",
+      "Create a portal to the desired container",
+      "No z-index issues",
+    ]}
+    hero={
+      <Playground
+        liveAreaProps={{ direction: "row" }}
+        scope={{ ...Components, useState }}
+        code={example}
+      />
+    }
+  >
+    {children}
+  </MdxLayout>
+);
+
+## Anatomy
+
+```tsx highlight=1,4
+import { OverlayContainer } from "@wonderflow/react-components";
+
+export default () => {
+  return <OverlayContainer>...</OverlayContainer>;
+};
+```
+
+## Overlay context
+
+The `OverlayContainer` component exposes a `useOverlayContext` hook to its children. You can use it to access some properties of the overlay container from within your children.
+
+export const OverlayContent = () => {
+  const { onClose, titleId } = Components.useOverlayContext();
+  return (
+    <Components.Stack
+      fill={false}
+      style={{ height: "100%" }}
+      horizontalAlign="center"
+      verticalAlign="center"
+    >
+      <Components.Stack
+        fill={false}
+        direction="row"
+        verticalAlign="center"
+        columnGap={48}
+      >
+        <Components.Title id={titleId} level="4">
+          Overlay title is: {titleId}
+        </Components.Title>
+        <Components.IconButton
+          onClick={onClose}
+          icon="xmark"
+          aria-label="Close overlay"
+        />
+      </Components.Stack>
+      <p>My custom content</p>
+    </Components.Stack>
+  );
+};
+
+export const CustomOverlay = () => {
+  const [visible, setVisible] = useState(false);
+  return (
+    <>
+      <Components.Button onClick={() => setVisible(true)}>
+        Show overlay
+      </Components.Button>
+      <DynOverlayContainer onClose={() => setVisible(false)}>
+        {visible && <OverlayContent />}
+      </DynOverlayContainer>
+    </>
+  );
+};
+
+<LiveArea>
+  <CustomOverlay />
+</LiveArea>
+
+```tsx highlight=1-7,10,13-20,25,28-33
+import {
+  OverlayContainer,
+  useOverlayContext,
+  Button,
+  Title,
+  Card,
+} from "@wonderflow/react-components";
+
+export const OverlayContent = () => {
+  const { onClose, titleId } = useOverlayContext();
+
+  return (
+    <Card>
+      <Title id={titleId} level="4">
+        Overlay title is: {titleId}
+      </Title>
+      <Button onClick={() => onClose()} icon="xmark">
+        Close modal
+      </Button>
+    </Card>
+  );
+};
+
+export const PageExample = () => {
+  const [visible, setVisible] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setVisible(true)}>Show Modal</Button>
+      <OverlayContainer onClose={() => setVisible(false)}>
+        {visible && <OverlayContent />}
+      </OverlayContainer>
+    </>
+  );
+};
+```
+
+## API Reference
+
+### OverlayContainer
+
+<Props
+  properties={[
+    {
+      name: "root",
+      type: ["HTMLElement"],
+      default: "document.body",
+      required: false,
+      dangerous: false,
+      description: "Set the root element to render the container",
+    },
+    {
+      name: "index",
+      type: ["number"],
+      default: "4",
+      required: false,
+      dangerous: false,
+      description: "Define the z-index of the container",
+    },
+    {
+      name: "overlayColor",
+      type: ['"light" | "dark" | "auto"'],
+      default: '"dark"',
+      required: false,
+      dangerous: false,
+      description:
+        'Set the overlay style. This is used to obscure the content behind the overlay if `obfuscate` is `true`. The `"auto"` value means that the overlay will be dark if the theme is dark and light if the theme is light.',
+    },
+    {
+      name: "obfuscate",
+      type: ["boolean"],
+      default: "true",
+      required: false,
+      dangerous: false,
+      description: "Set the overlay to obscure the page content behind it.",
+    },
+    {
+      name: "onClose",
+      type: ["() => void"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description:
+        "Callback to close the overlay. You can access this callback also inside the content, by using `useOverlayContext`",
+    },
+  ]}
+/>
+
+### useOverlayContext
+
+<Props
+  properties={[
+    {
+      name: "titleId",
+      type: ["string"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description:
+        "The auto generated id to assign to the custom modal title to give it an accessbility name",
+    },
+    {
+      name: "onClose",
+      type: ["() => void"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description:
+        "The callback passed to the Modal and available inside the Modal content.",
+    },
+  ]}
+/>

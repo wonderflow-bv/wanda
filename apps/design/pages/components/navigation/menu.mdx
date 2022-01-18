@@ -1,0 +1,210 @@
+import { useState } from "react";
+import { MdxLayout } from "@/components/layouts/mdx";
+import { Playground } from "@/components/playground";
+import { Props } from "@/components/props";
+import * as Components from "@wonderflow/react-components";
+
+export const example = `() => {
+  const [checked, setChecked] = useState(false);
+  return (
+    <Menu style={{ inlineSize: '100%', maxInlineSize: 400 }}>
+      <Menu.Item
+        autoFocus
+        decoration={<Chip dimension="small">Decoration</Chip>}
+        icon="user"
+      >
+      Item option 1
+      </Menu.Item>
+      <Menu.ItemCheckbox
+        onClick={() => setChecked(val => !val)}
+        icon={checked ? 'check' : undefined}
+        checked={checked}
+      >
+        Checkable option 2
+      </Menu.ItemCheckbox>
+      <Separator />
+      <Menu.Item
+        decoration={<Text size={14} sentiment="danger">Danger</Text>}
+        icon="right-from-bracket"
+      >
+        Item option 3
+      </Menu.Item>
+      <Menu.Item disabled icon="right-from-bracket">
+        Disabled option 4
+      </Menu.Item>
+    </Menu>
+  )
+}`;
+
+export default ({ children }) => (
+  <MdxLayout
+    title="Menu"
+    description="Interactive menu with items made easy"
+    showMeta
+    features={[
+      "Keyboard accessible",
+      "Reusable",
+      "Checkable items",
+      "Themes ready",
+    ]}
+    links={[
+      {
+        label: "ARIA design",
+        url: "https://www.w3.org/TR/wai-aria-1.2/#menu",
+      },
+    ]}
+    hero={<Playground scope={{ ...Components, useState }} code={example} />}
+  >
+    {children}
+  </MdxLayout>
+);
+
+## Anatomy
+
+```tsx highlight=1,5-9
+import { Menu } from "@wonderflow/react-components";
+
+export default () => {
+  return (
+    <Menu>
+      <Menu.Item>Item</Menu.Item>
+      <Menu.ItemCheckbox>Checkable item</Menu.ItemCheckbox>
+      <Menu.Item>Item</Menu.Item>
+    </Menu>
+  );
+};
+```
+
+## API Reference
+
+### Menu.Item
+
+<Props
+  properties={[
+    {
+      name: "icon",
+      type: ["IconNames"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Set a custom icon beside the element",
+    },
+    {
+      name: "description",
+      type: ["ReactNode"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Add a rich description tooltip to the item",
+    },
+    {
+      name: "dimension",
+      type: ["small", "regular"],
+      default: '"regular"',
+      required: false,
+      dangerous: false,
+      description: "Set the element size",
+    },
+    {
+      name: "disabled",
+      type: ["boolean"],
+      default: "false",
+      required: false,
+      dangerous: false,
+      description: "Set the disabled state",
+    },
+    {
+      name: "padding",
+      type: ["boolean"],
+      default: "true",
+      required: false,
+      dangerous: false,
+      description: "Add padding to align text with items with icon",
+    },
+    {
+      name: "decoration",
+      type: ["ReactNode"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description:
+        "Add an element to decorate the menu item. This is useful for adding extra elements and informations to the menu item. Don't use interactive elements (link, buttons, etc..) as decoration if `Menu.Item` is rendered as ´<button>´ (default).",
+    },
+    {
+      name: "autoFocus",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description:
+        "Set item to gain focus automatically when the menu is opened. This property is commonly used on the first item in the menu.",
+    },
+    {
+      name: "onClick",
+      type: ["(event?: Event) => void"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Callback for the click event",
+    },
+    {
+      name: "iconPosition",
+      type: ["left", "right"],
+      default: '"left"',
+      required: false,
+      dangerous: false,
+      description: "Set where to place the icon inside the item",
+    },
+    {
+      name: "as",
+      type: ["keyof JSX.IntrinsicElements | React.ComponentType<any>"],
+      default: '"button"',
+      required: false,
+      dangerous: false,
+      description:
+        "Set the component to a different HTML tag or custom component",
+    },
+  ]}
+/>
+
+### Menu.ItemCheckbox
+
+The `Menu.ItemCheckbox` extends all the `Menu.Item` properties and adds the following ones:
+
+<Props
+  properties={[
+    {
+      name: "checked",
+      type: ["boolean"],
+      default: "false",
+      required: false,
+      dangerous: false,
+      description: "Set the checked status",
+    },
+  ]}
+/>
+
+## Accessibility
+
+### Keyboard interactions
+
+<Props
+  properties={[
+    {
+      name: "tab",
+      description: "Move focus on the next focusable element inside the menu.",
+    },
+    {
+      name: "enter",
+      description: "Trigger the menu item action.",
+    },
+    {
+      name: "ArrowUp",
+      description: "Move the focus on the previous menu item",
+    },
+    {
+      name: "ArrowDown",
+      description: "Move the focus on the next menu item",
+    },
+  ]}
+/>

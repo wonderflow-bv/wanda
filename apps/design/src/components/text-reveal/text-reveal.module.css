@@ -1,0 +1,36 @@
+@import '@wonderflow/react-components/core/utils/media.css';
+
+.TextReveal {
+  --animation-delay: 0;
+  --animation-duration: 1.2s;
+
+  animation-delay: var(--animation-delay, 2s);
+  animation-iteration-count: 1;
+  animation-duration: var(--animation-duration, 800ms);
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+
+  @media (--motion) {
+    position: relative;
+    cursor: default;
+    display: inline-block;
+    animation-name: clip-text;
+    animation-play-state: paused;
+
+    &[data-text-reveal-is-running='true'] {
+      animation-play-state: running;
+    }
+  }
+}
+
+@keyframes clip-text {
+  from {
+    transform: translateX(var(--x));
+    clip-path: inset(0 100% 0 0);
+  }
+
+  to {
+    transform: none;
+    clip-path: inset(0 0 0 0);
+  }
+}

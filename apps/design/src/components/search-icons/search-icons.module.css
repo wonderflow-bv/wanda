@@ -1,0 +1,70 @@
+.SearchIcons {
+  position: relative;
+  z-index: 0;
+}
+
+.Grid {
+  display: grid;
+  grid-gap: env(--space-16);
+  grid-template-columns: repeat(auto-fill, minmax(min(8rem, 100%), 1fr));
+}
+
+.ToolBar {
+  position: sticky;
+  top: env(--space-56);
+  padding: env(--space-24) env(--space-4) env(--space-48);
+  z-index: 1;
+  background-color: var(--dimmed-0);
+  mask-image: linear-gradient(to bottom, var(--dimmed-0) 60%, transparent);
+}
+
+.IconTile {
+  --bg: var(--dimmed-1);
+
+  position: relative;
+  background-color: var(--bg);
+  padding: env(--space-16) env(--space-24);
+  border-radius: env(--radius-4);
+  aspect-ratio: 1/1;
+  text-align: center;
+
+  &[data-icon-tile-copied='true'] {
+    animation: positiveFeedback 2s 1;
+  }
+
+  &:hover,
+  &:focus-visible {
+    --bg: var(--dimmed-2);
+  }
+}
+
+.IconPreview {
+  width: env(--space-24);
+  height: env(--space-24);
+  transform: translateY(-80%);
+}
+
+.IconPreview + * {
+  position: absolute;
+  top: 60%;
+  padding: 0 env(--space-16);
+}
+
+.Label {
+  position: absolute;
+  bottom: env(--space-8);
+}
+
+@keyframes positiveFeedback {
+  0% {
+    background-color: var(--highlight-green-background);
+    color: var(--highlight-green-foreground);
+    box-shadow: inset 0 0 0 2px var(--highlight-green-foreground);
+  }
+
+  100% {
+    background-color: var(--bg);
+    color: revert;
+    box-shadow: inset 0 0 0 2px transparent;
+  }
+}

@@ -1,0 +1,151 @@
+import { MdxLayout } from "@/components/layouts/mdx";
+import { Playground } from "@/components/playground";
+import { Props } from "@/components/props";
+import * as components from "@wonderflow/react-components";
+
+export const example = `<Textfield
+  type="text"
+  label="Label"
+  defaultValue="Prefilled value"
+/>`;
+
+export default ({ children }) => (
+  <MdxLayout
+    title="Textfield"
+    description="Text inputs enable the user to interact with and input content and data."
+    showMeta
+    features={[
+      "Keyboard accessible",
+      "Can contain icons",
+      "Multiple sizes",
+      "Value format validation",
+      "Can be rendered as textarea",
+      "Themes ready",
+    ]}
+    links={[
+      {
+        label: "ARIA design",
+        url: "https://www.w3.org/TR/wai-aria-1.2/#button",
+      },
+      {
+        label: "ARIA authoring",
+        url: "https://www.w3.org/TR/wai-aria-practices-1.2/#button",
+      },
+    ]}
+    hero={
+      <Playground
+        liveAreaProps={{ direction: "row" }}
+        scope={{ ...components }}
+        code={example}
+      />
+    }
+  >
+    {children}
+  </MdxLayout>
+);
+
+## Anatomy
+
+```tsx highlight=1,5-10
+import { Textfield } from "@wonderflow/react-components";
+
+export default () => {
+  return (
+    <Textfield type="text" label="Filled" defaultValue="Prefilled value" />
+  );
+};
+```
+
+## API Reference
+
+<Props
+  properties={[
+    {
+      name: "icon",
+      type: ["IconNames"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Set the icon to show inside the element",
+    },
+    {
+      name: "label",
+      type: ["string"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Add a label to the field. Requires the ID attribute.",
+    },
+    {
+      name: "textarea",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Convert the field into multiline textarea",
+    },
+    {
+      name: "dimension",
+      type: ['"small"', '"regular"', '"big"'],
+      default: '"regular"',
+      required: false,
+      dangerous: false,
+      description: "Set the element size",
+    },
+    {
+      name: "readOnly",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Makes the element readonly to prevent edits",
+    },
+    {
+      name: "iconPosition",
+      type: ['"left"', '"right"'],
+      default: '"right"',
+      required: false,
+      dangerous: false,
+      description: "Change the position of the icon",
+    },
+    {
+      name: "disabled",
+      type: ["boolean"],
+      default: "false",
+      required: false,
+      dangerous: false,
+      description: "Set the disabled state",
+    },
+    {
+      name: "invalid",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Set the invalid state",
+    },
+    {
+      name: "onChange",
+      type: ["(ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Callback for the change event",
+    },
+  ]}
+/>
+
+## Accessibility
+
+The `Textfield` component requires an associated `label` element and `id` to describes the field. You can use the `label` and `id` properties or add a custom external `label`.
+
+### Keyboard interactions
+
+<Props
+  properties={[
+    {
+      name: "tab",
+      description: "Move focus on the element or outside",
+    },
+  ]}
+/>

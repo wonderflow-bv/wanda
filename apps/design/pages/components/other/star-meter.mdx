@@ -1,0 +1,98 @@
+import { MdxLayout } from "@/components/layouts/mdx";
+import { Playground } from "@/components/playground";
+import { Props } from "@/components/props";
+import * as components from "@wonderflow/react-components";
+
+export default ({ children }) => (
+  <MdxLayout
+    title="Star meter"
+    description="Visual representation of a star rating."
+    showMeta
+    features={[
+      "Dynamic rounding",
+      "Custom label",
+      "Custom max value",
+      "Multiple sizes",
+      "Themes ready",
+    ]}
+    links={[
+      {
+        label: "ARIA design",
+        url: "https://www.w3.org/TR/wai-aria-1.2/#meter",
+      },
+      {
+        label: "ARIA authoring",
+        url: "https://www.w3.org/TR/wai-aria-practices-1.2/#meter",
+      },
+    ]}
+    hero={
+      <Playground
+        scope={{ ...components }}
+        code={`<StarMeter value={3.58} />`}
+      />
+    }
+  >
+    {children}
+  </MdxLayout>
+);
+
+## Anatomy
+
+```tsx highlight=1,4
+import { StarMeter } from "@wonderflow/react-components";
+
+export default () => {
+  return <StarMeter value={3.58}>;
+};
+```
+
+## API Reference
+
+<Props
+  properties={[
+    {
+      name: "value",
+      type: ["number"],
+      default: "0",
+      required: true,
+      dangerous: false,
+      description: "Set the rating value",
+    },
+    {
+      name: "starCount",
+      type: ["number"],
+      default: "5",
+      required: false,
+      dangerous: false,
+      description: "Set how many stars to render",
+    },
+    {
+      name: "label",
+      type: ["ReactNode"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Replace the default label",
+    },
+    {
+      name: "dimension",
+      type: ['"small"', '"regular"', '"big"'],
+      default: '"regular"',
+      required: false,
+      dangerous: false,
+      description: "Set the element size",
+    },
+    {
+      name: "hideLabel",
+      type: ["boolean"],
+      default: "false",
+      required: false,
+      dangerous: false,
+      description: "Hide the label beside the stars",
+    },
+  ]}
+/>
+
+## Accessibility
+
+Adheres to the [`meter` role requirements](https://www.w3.org/TR/wai-aria-1.2/#meter).

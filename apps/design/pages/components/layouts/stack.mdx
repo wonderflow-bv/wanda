@@ -1,0 +1,161 @@
+import { MdxLayout } from "@/components/layouts/mdx";
+import { Playground } from "@/components/playground";
+import { Props } from "@/components/props";
+import * as components from "@wonderflow/react-components";
+
+export const example = `<Stack
+  columnGap={8}
+  direction="row"
+  horizontalAlign="center"
+  fill={false}
+>
+  <Select>
+    <option value="1">Option 1</option>
+    <option value="2">Option 2</option>
+    <option value="3">Option 3</option>
+  </Select>
+  <Button>Confirm</Button>
+</Stack>`;
+
+export default ({ children }) => (
+  <MdxLayout
+    title="Stack"
+    description="Elements placing and spacing made easy"
+    showMeta
+    features={[
+      "Content placement made easy",
+      "Flex based",
+      "Fully controllable",
+      "Nestable",
+    ]}
+    hero={
+      <Playground
+        liveAreaProps={{ fill: true }}
+        scope={{ ...components }}
+        code={example}
+      />
+    }
+  >
+    {children}
+  </MdxLayout>
+);
+
+## Anatomy
+
+```tsx highlight=1,5-14
+import { Stack } from "@wonderflow/react-components";
+
+export default () => {
+  return (
+    <Stack
+      columnGap={8}
+      direction="row"
+      horizontalAlign="center"
+      fill={false}
+      wrap
+    >
+      <Select>...</Select>
+      <Button>Confirm</Button>
+    </Stack>
+  );
+};
+```
+
+## API Reference
+
+<Props
+  properties={[
+    {
+      name: "rowGap",
+      type: ["0", "TokensTypes['space']"],
+      default: "0",
+      required: false,
+      dangerous: false,
+      description: "Set the space between rows",
+    },
+    {
+      name: "columnGap",
+      type: ["0", "TokensTypes['space']"],
+      default: "0",
+      required: false,
+      dangerous: false,
+      description: "Set the space between columns",
+    },
+    {
+      name: "inline",
+      type: ["boolean"],
+      default: "false",
+      required: false,
+      dangerous: false,
+      description: "Apply `inline-flex` instead of `flex`",
+    },
+    {
+      name: "wrap",
+      type: ["boolean"],
+      default: "false",
+      required: false,
+      dangerous: false,
+      description: "Wrap the children if there isn't enought space",
+    },
+    {
+      name: "fill",
+      type: ["boolean"],
+      default: "true",
+      required: false,
+      dangerous: false,
+      description: "Force direct children to equally fill the space",
+    },
+    {
+      name: "verticalAlign",
+      type: ["string"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description:
+        "Set the vertical alignment for children. Any align-items or justify-content value is accepted",
+    },
+    {
+      name: "horizontalAlign",
+      type: ["string"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description:
+        "Set the horizontal alignment for children. Any align-items or justify-content value is accepted",
+    },
+    {
+      name: "verticalPadding",
+      type: ["TokensTypes['space']"],
+      default: "0",
+      required: false,
+      dangerous: false,
+      description: "Set the vertical padding",
+    },
+    {
+      name: "horizontalPadding",
+      type: ["TokensTypes['space']"],
+      default: "0",
+      required: false,
+      dangerous: false,
+      description: "Set the horizontal padding",
+    },
+    {
+      name: "direction",
+      type: ['"row"', '"column"', '"row-reverse"', '"column-reverse"'],
+      default: '"column"',
+      required: false,
+      dangerous: false,
+      description:
+        "Distribute the elements along the horizontal or vertical axis by using the flexbox layout model",
+    },
+    {
+      name: "as",
+      type: ["keyof JSX.IntrinsicElements | React.ComponentType<any>"],
+      default: '"div"',
+      required: false,
+      dangerous: false,
+      description:
+        "Set the component to a different HTML tag or custom component.",
+    },
+  ]}
+/>

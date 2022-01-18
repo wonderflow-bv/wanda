@@ -1,0 +1,64 @@
+import { MdxLayout } from "@/components/layouts/mdx";
+import { Playground } from "@/components/playground";
+import { Props } from "@/components/props";
+import * as components from "@wonderflow/react-components";
+
+export const example = `<Datetime date={Date.now()} locale="it-IT" options={{ year: '2-digit' }} />`;
+
+export default ({ children }) => (
+  <MdxLayout
+    title="Datetime"
+    description="Format dates and times in a smart way"
+    showMeta
+    features={[
+      "Native options",
+      "Uses the correct semantic markup",
+      "Supports ISO date formats",
+    ]}
+    hero={<Playground scope={{ ...components }} code={example} />}
+  >
+    {children}
+  </MdxLayout>
+);
+
+## Anatomy
+
+```tsx highlight=1,4
+import { Datetime } from "@wonderflow/react-components";
+
+export default () => {
+  return <Datetime date="" />;
+};
+```
+
+## API Reference
+
+<Props
+  properties={[
+    {
+      name: "date",
+      type: ["string"],
+      default: "",
+      required: true,
+      dangerous: false,
+      description: "Pass the datetime ISO string",
+    },
+    {
+      name: "locale",
+      type: ["string"],
+      default: '"en-US"',
+      required: false,
+      dangerous: false,
+      description: "Set the locale for the date",
+    },
+    {
+      name: "options",
+      type: ["Intl.DateTimeFormatOptions"],
+      default: "{ year: 'numeric', month: 'long', day: 'numeric' }",
+      required: false,
+      dangerous: false,
+      description:
+        "All the options available in the [Intl.DateTimeFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat)",
+    },
+  ]}
+/>

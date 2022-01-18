@@ -1,0 +1,7 @@
+.ThemedImg {
+  display: block;
+
+  & > img {
+    inline-size: 100%;
+  }
+}
