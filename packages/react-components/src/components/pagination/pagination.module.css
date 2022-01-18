@@ -1,0 +1,31 @@
+.Pagination {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+
+  & > li > a {
+    border-radius: env(--radius-4);
+    line-height: 1;
+    padding: 0 env(--space-8);
+    cursor: pointer;
+    font-weight: 700;
+    user-select: none;
+    color: var(--dimmed-5);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: env(--space-32);
+
+    &[aria-current='page'] {
+      background-color: var(--cta-default);
+      color: var(--cta-foreground);
+    }
+
+    &[aria-disabled='true'] {
+      opacity: 50%;
+    }
+  }
+}
+
