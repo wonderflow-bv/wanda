@@ -1,0 +1,51 @@
+.ToggleButton {
+  border-radius: 200px;
+  line-height: 1;
+  padding: 0;
+  transition: box-shadow env(--duration-300) env(--easing-entrance);
+
+  &[aria-pressed='true'] {
+    box-shadow:
+      0 0 0 var(--border-width) var(--border-color),
+      0 0 0 var(--border-width) var(--border-color);
+  }
+
+  &[data-button-kind='primary'] {
+    --border-color: hsl(env(--color-red-30) / 25%);
+
+    &[aria-pressed='true'] {
+      color: var(--cta-default);
+      background: none;
+    }
+  }
+
+  &[data-button-kind='secondary'] {
+    --border-color: var(--dimmed-2);
+
+    &[aria-pressed='true'] {
+      color: var(--global-vibrancy-foreground);
+      background: none;
+    }
+  }
+
+  &[data-button-kind='flat'] {
+    --border-color: var(--dimmed-2);
+
+    &[aria-pressed='true'] {
+      color: var(--global-vibrancy-foreground);
+      background: none;
+    }
+  }
+
+  &[data-button-dimension='small'] {
+    --border-width: 2px;
+  }
+
+  &[data-button-dimension='regular'] {
+    --border-width: 4px;
+  }
+
+  &[data-button-dimension='big'] {
+    --border-width: 6px;
+  }
+}
