@@ -8,7 +8,7 @@ import { AnimatePresence } from 'framer-motion'
 import Head from 'next/head'
 
 import '@docsearch/css'
-import '@wonderflow/react-components/themes.css'
+import '@wonderflow/themes'
 import '@wonderflow/react-components/core.css'
 import '@/styles/app.css'
 import '@/styles/docsearch.css'

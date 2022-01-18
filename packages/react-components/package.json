@@ -23,12 +23,12 @@
     "npm": ">=8.x"
   },
   "scripts": {
+    "start": "start-storybook --quiet -p 6006",
     "prebuild": "rimraf dist",
-    "build:ts": "tsc",
-    "build:css": "cpy '**/*.css' '../dist' --parents --cwd=src && postcss dist/*.css \"dist/**/!(utils)/!(_mixins).css\" --replace",
     "build": "run-s build:ts build:css",
     "postbuild": "rimraf dist/**/_mixins.css",
-    "start": "start-storybook --quiet -p 6006",
+    "build:ts": "tsc",
+    "build:css": "cpy '**/*.css' '../dist' --parents --cwd=src && postcss dist/*.css \"dist/**/!(utils)/!(_mixins).css\" --replace",
     "lint": "run-s lint:styles",
     "lint:styles": "stylelint ./src/**/*.css"
   },

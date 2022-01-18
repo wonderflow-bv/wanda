@@ -5,9 +5,11 @@
   "author": "Wonderflow",
   "main": "dist/themes.css",
   "exports": {
-    "./themes/dark.css": "./dist/themes/dark.css",
-    "./themes/light.css": "./dist/themes/light.css",
-    "./themes.css": "./dist/themes.css"
+    ".": "./dist/themes.css",
+    "./dark.css": "./dist/themes/dark.css",
+    "./light.css": "./dist/themes/light.css",
+    "./dark.json": "./dist/themes/dark.json",
+    "./light.json": "./dist/themes/light.json"
   },
   "publishConfig": {
     "access": "public"
