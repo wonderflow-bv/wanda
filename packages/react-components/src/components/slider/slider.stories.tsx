@@ -14,12 +14,6 @@ export default {
     disabled: false
   },
   argTypes: {
-    onInput: {
-      action: 'changed',
-      table: {
-        disable: true
-      }
-    },
     showValues: {
       options: [true, false],
       control: { type: 'inline-radio' }
