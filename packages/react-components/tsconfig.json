@@ -3,6 +3,8 @@
   "display": "React Components",
   "typeRoots": ["node_modules/@types"],
   "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "dist",
     "composite": false,
     "declaration": true,
     "declarationMap": false,
@@ -15,8 +17,6 @@
     "noUnusedParameters": true,
     "preserveWatchOutput": true,
     "skipLibCheck": true,
-    "baseUrl": "./",
-    "declarationDir": "./",
     "sourceMap": true,
     "strict": true,
     "module": "ESNext",
@@ -25,7 +25,6 @@
     "allowJs": false,
     "jsx": "react-jsx",
     "removeComments": false,
-    "emitDeclarationOnly": true,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "noImplicitReturns": true,
@@ -38,7 +37,8 @@
   "exclude": [
     "node_modules",
     "dist",
-    "src/core"
+    "src/core",
+    "src/components/**/*.stories.tsx"
   ],
   "include": [
     "types/*",
