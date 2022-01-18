@@ -1,0 +1,80 @@
+.IconWrapper {
+  border-radius: env(--radius-8);
+  padding: env(--space-8);
+  display: block;
+  position: relative;
+  background-color: var(--bg);
+  color: var(--fg);
+
+  &::before {
+    content: '';
+    background-color: var(--bg, currentColor);
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+    border-radius: inherit;
+    animation: pulse 6s ease 0.5s infinite;
+    animation-fill-mode: backwards;
+  }
+
+  & svg {
+    display: block;
+  }
+
+  &[data-info-state-icon-color='cyan'] {
+    --bg: var(--highlight-cyan-background);
+    --fg: var(--highlight-cyan-foreground);
+  }
+
+  &[data-info-state-icon-color='gray'] {
+    --bg: var(--highlight-gray-background);
+    --fg: var(--highlight-gray-foreground);
+  }
+
+  &[data-info-state-icon-color='green'] {
+    --bg: var(--highlight-green-background);
+    --fg: var(--highlight-green-foreground);
+  }
+
+  &[data-info-state-icon-color='purple'] {
+    --bg: var(--highlight-purple-background);
+    --fg: var(--highlight-purple-foreground);
+  }
+
+  &[data-info-state-icon-color='yellow'] {
+    --bg: var(--highlight-yellow-background);
+    --fg: var(--highlight-yellow-foreground);
+  }
+
+  &[data-info-state-icon-color='red'] {
+    --bg: var(--highlight-red-background);
+    --fg: var(--highlight-red-foreground);
+  }
+
+  &[data-info-state-icon-color='blue'] {
+    --bg: var(--highlight-blue-background);
+    --fg: var(--highlight-blue-foreground);
+  }
+}
+
+.Image {
+  max-inline-size: 22rem;
+  max-block-size: 22rem;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 80%;
+    transform: scale(0.8);
+  }
+
+  30%,
+  100% {
+    opacity: 0%;
+    transform: scale(3);
+    border-radius: 50px;
+  }
+}

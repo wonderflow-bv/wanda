@@ -80,7 +80,8 @@
     "rollup-plugin-terser": "7.0.2",
     "storybook-addon-themes": "6.1.0",
     "storybook-css-modules-preset": "1.1.1",
-    "typescript": "4.5.4"
+    "typescript": "4.5.4",
+    "typescript-plugin-css-modules": "3.4.0"
   },
   "dependencies": {
     "@wonderflow/icons": "*",

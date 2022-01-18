@@ -1,8 +1,12 @@
+/* eslint-disable no-unused-vars */
+declare module '*.module.css' {
+  const classes: { [key: string]: string }
+  export default classes
+}
+
 /**
  * Default CSS definition for typescript
  */
- declare module '*.css'
-
 declare module 'csstype' {
   interface Properties {
     [index: string]: any;
