@@ -1,0 +1,119 @@
+@import '../../core/utils/vibrancy.css';
+
+.Checkbox {
+  --w: 24px;
+  --h: 24px;
+
+  @mixin vibrancy;
+
+  appearance: none;
+  inline-size: var(--w);
+  block-size: var(--h);
+  max-inline-size: var(--w);
+  max-block-size: var(--h);
+  color: var(--global-background);
+  border-radius: env(--radius-4);
+  position: relative;
+  background-color: var(--global-vibrancy-background);
+
+  &::after {
+    content: '';
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -80%) rotate(-45deg);
+    inline-size: 50%;
+    block-size: 27%;
+    border-left: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+  }
+
+  &:active {
+    background-color: var(--global-vibrancy-background-hover);
+  }
+
+  &:checked,
+  &[data-control-indeterminate='true'] {
+    background: var(--dimmed-7);
+
+    &::after {
+      display: block;
+    }
+  }
+
+  &:disabled {
+    color: var(--global-disabled-foreground);
+    background-color: var(--global-disabled-background);
+    cursor: not-allowed;
+  }
+
+  &[data-control-dimension='small'] {
+    --w: 16px;
+    --h: 16px;
+  }
+
+  &[data-control-indeterminate='true']::after {
+    border-left: 0;
+    block-size: 2px;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.Radio {
+
+  /* stylelint-disable-next-line value-keyword-case */
+  composes: Checkbox;
+  border-radius: 100%;
+
+  &::after {
+    border: 0;
+    border-radius: 100%;
+    transform: translate(-50%, -50%);
+    inline-size: 50%;
+    block-size: 50%;
+    background-color: currentColor;
+  }
+}
+
+.Toggle {
+  --w: 44px;
+  --h: 24px;
+  --p: 2px;
+
+  /* stylelint-disable-next-line value-keyword-case */
+  composes: Radio;
+  border-radius: 200px;
+  color: var(--dimmed-7);
+
+  &:checked {
+    color: var(--global-background);
+  }
+
+  &:disabled {
+    color: var(--global-disabled-foreground);
+  }
+
+  &::after {
+    inline-size: calc(var(--h) - (var(--p) * 2));
+    block-size: calc(var(--h) - (var(--p) * 2));
+    transform: none;
+    left: var(--p);
+    top: var(--p);
+    bottom: var(--p);
+    display: block;
+    transition:
+      transform env(--duration-100) env(--easing-standard),
+      background-color env(--duration-100) env(--easing-standard);
+  }
+
+  &:checked::after {
+    display: block;
+    transform: translateX(100%);
+  }
+
+  &[data-control-dimension='small'] {
+    --w: 28px;
+    --h: 16px;
+  }
+}
