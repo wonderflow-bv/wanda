@@ -1,0 +1,35 @@
+import { useState } from "react";
+import { MdxLayout } from "@/components/layouts/mdx";
+import { ThemeList } from "@/components/theme-list";
+import lightTheme from "@wonderflow/react-components/themes/light.json";
+import darkTheme from "@wonderflow/react-components/themes/dark.json";
+import {
+  Stack,
+  Radio,
+  Text,
+  Separator,
+  Tab,
+} from "@wonderflow/react-components";
+
+export default ({ children }) => (
+  <MdxLayout title="Themes" description="Color schemes for scalability">
+    {children}
+  </MdxLayout>
+);
+
+Wanda introduces a well-proven theme system which help designers and developer building a product.
+
+A theme is a set of predefined `key ↔ color` combinations to be used whenever possible in order keep consistency, accessibility and dynamicity.
+
+## Available themes
+
+Here you can check the theme keys for all the available themes from Wanda. These themes are shared as library on Figma and as `css/json` from the [components library](/develop/using-themes/).
+
+<Tab>
+  <Tab.Panel label="Light">
+    <ThemeList theme={lightTheme} />
+  </Tab.Panel>
+  <Tab.Panel label="Dark">
+    <ThemeList theme={darkTheme} />
+  </Tab.Panel>
+</Tab>

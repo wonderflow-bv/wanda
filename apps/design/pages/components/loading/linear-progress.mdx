@@ -1,0 +1,88 @@
+import { MdxLayout } from "@/components/layouts/mdx";
+import { Playground } from "@/components/playground";
+import { Props } from "@/components/props";
+import * as components from "@wonderflow/react-components";
+
+export const example = `<LinearProgress showProgress value={30} />`;
+
+export default ({ children }) => (
+  <MdxLayout
+    title="Linear progress"
+    description="Indicates determinate and indeterminate loading status"
+    showMeta
+    features={[
+      "Multiple sizes",
+      "Supports determinate and indeterminate states",
+      "Themes ready",
+    ]}
+    hero={
+      <Playground
+        liveAreaProps={{ fill: true }}
+        scope={{ ...components }}
+        code={example}
+      />
+    }
+    links={[
+      {
+        label: "ARIA design",
+        url: "https://www.w3.org/TR/wai-aria-1.2/#progressbar",
+      },
+    ]}
+  >
+    {children}
+  </MdxLayout>
+);
+
+## Anatomy
+
+```tsx highlight=1,4
+import { LinearProgress } from "@wonderflow/react-components";
+
+export default () => {
+  return <LinearProgress />;
+};
+```
+
+## API Reference
+
+<Props
+  properties={[
+    {
+      name: "value",
+      type: ["number"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description:
+        "Define the current progress value. If missing the indeterminate status is activated.",
+    },
+    {
+      name: "max",
+      type: ["number"],
+      default: "100",
+      required: false,
+      dangerous: false,
+      description: "Set the max value equal to 100% of the bar",
+    },
+    {
+      name: "dimension",
+      type: ['"regular"', '"big"'],
+      default: '"regular"',
+      required: false,
+      dangerous: false,
+      description: "Set the element size",
+    },
+    {
+      name: "showProgress",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Show the progress percentage",
+    },
+  ]}
+/>
+
+## Accessibility
+
+Adheres to the [`progressbar` role requirements](https://www.w3.org/TR/wai-aria-1.2/#progressbar).

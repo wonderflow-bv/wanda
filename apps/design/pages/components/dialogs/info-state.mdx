@@ -1,0 +1,109 @@
+import { MdxLayout } from "@/components/layouts/mdx";
+import { Playground } from "@/components/playground";
+import { Props } from "@/components/props";
+import * as components from "@wonderflow/react-components";
+
+export const example = `<InfoState
+  title="Need help?"
+  icon="compass"
+  actions={
+    <>
+      <Button>Primary</Button>
+      <Button kind="flat">Secondary</Button>
+    </>
+  }
+>
+  Cras ultricies, elit sit amet cursus consectetur, risus felis ullamcorper
+  nulla.
+</InfoState>`;
+
+export default ({ children }) => (
+  <MdxLayout
+    title="Info state"
+    description="Provide informations when data is missing"
+    showMeta
+    features={[
+      "Supports icons and images",
+      "Multiple directions",
+      "Themes ready",
+    ]}
+    hero={
+      <Playground
+        liveAreaProps={{ minHeight: "600px" }}
+        scope={{ ...components }}
+        code={example}
+      />
+    }
+  >
+    {children}
+  </MdxLayout>
+);
+
+## Anatomy
+
+```tsx highlight=1,5-7
+import { InfoState } from "@wonderflow/react-components";
+
+export default () => {
+  return (
+    <InfoState title="Need help?" icon="compass">
+      ...
+    </InfoState>
+  );
+};
+```
+
+## API Reference
+
+<Props
+  properties={[
+    {
+      name: "title",
+      type: ["ReactNode"],
+      default: "",
+      required: true,
+      dangerous: false,
+      description: "Add a title",
+    },
+    {
+      name: "icon",
+      type: ["IconNames"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Set the icon to show",
+    },
+    {
+      name: "image",
+      type: ["string"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Set the URL of the image to use in place of the icon",
+    },
+    {
+      name: "direction",
+      type: ["StackProps['direction']"],
+      default: "column",
+      required: false,
+      dangerous: false,
+      description: "Set the direction of the content",
+    },
+    {
+      name: "iconColor",
+      type: ["gray", "cyan", "green", "purple", "yellow", "red", "blue"],
+      default: '"blue"',
+      required: false,
+      dangerous: false,
+      description: "Set the color of the icon when present",
+    },
+    {
+      name: "actions",
+      type: ["ReactNode"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Add actions to show below the content",
+    },
+  ]}
+/>

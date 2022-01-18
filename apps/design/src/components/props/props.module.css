@@ -1,0 +1,23 @@
+.Props {
+  position: relative;
+}
+
+.PropName {
+  display: block;
+  inline-size: 80px;
+}
+
+.PropsValue {
+  padding: 0;
+  list-style: none;
+
+  & code {
+    background-color: var(--dimmed-1);
+    color: var(--dimmed-6);
+  }
+}
+
+.Props summary small code {
+  background-color: var(--highlight-cyan-background);
+  color: var(--highlight-cyan-foreground);
+}

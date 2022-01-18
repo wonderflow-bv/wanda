@@ -1,0 +1,97 @@
+import { MdxLayout } from "@/components/layouts/mdx";
+import { LiveArea } from "@/components/live-area";
+import { HintCard } from "@/components/hint-card";
+import {
+  Spinner,
+  SkeletonBlock,
+  LinearProgress,
+  CircularProgress,
+  Stack,
+} from "@wonderflow/react-components";
+import { Markdown } from "@/components/markdown";
+
+export default ({ children }) => (
+  <MdxLayout title="Loading" description="Ease the pain of waiting">
+    {children}
+  </MdxLayout>
+);
+
+Loading indicators inform the user that the system is currently performing an operation, and it could take a while to complete it. In doing so, loading indicators make the users focus their attention on the visual representation of the process rather than the waiting time.
+
+## Determinate and indeterminate
+
+The waiting time can be displayed in two different ways:
+
+- **Determinate**, generally showing the percentage of completion. It can be only used when process completion rate can be detected.
+- **Indeterminate**, usually represented through an animation loop. It is used when the waiting time is unspecified either because is indetectable or there's no need to specify it.
+
+Every time a process takes more than 2 seconds to complete, a progress indicator should be shown. However, if the waiting time would exceed 10 seconds, consider using a determinate progress bar to show the percentage of completion.
+
+Using a progress indicator is never for merely decorative purpose, its aim is to capture the users' attention and lessen the discomfort of waiting for the completion of an operation.
+
+Moreover, to maintain consistency and not to confuse the user, the same kind of action should trigger the same type of progress indicator throughout the experience.
+
+## Indicators
+
+Wanda provides four visual indicators that can be used based on the situation and position, each of them with specific properties.
+
+### Spinner
+
+<LiveArea>
+  <Spinner />
+</LiveArea>
+
+Indeterminate indicator useful when loading a section of the page or when user performs an action (used for example inside a button). This component fits well when you are loading context-aware and inline content. [See more about this element.](/develop/components/spinner/)
+
+### Skeleton
+
+<LiveArea columnGap={32} verticalAlign="start">
+  <SkeletonBlock inline circle width={50} height={50} />
+  <SkeletonBlock count={4} width={400} />
+</LiveArea>
+
+Indeterminate indicator useful when the page is already available but content inside can take a long time to load. In some advanced use cases applications or websites load faster than the content inside that might require longer time to load, based on specific conditions (connection speed, servers response time, etc...). [See more about this element.](/develop/components/skeleton-block/)
+
+### Linear progress
+
+<LiveArea>
+  <div style={{ width: "100%" }}>
+    <LinearProgress value={40} />
+  </div>
+  <div style={{ width: "100%" }}>
+    <LinearProgress />
+  </div>
+</LiveArea>
+
+Is the most flexible progress indicator, it allows to show both determinate and indeterminate waiting times. [See more about this element.](/develop/components/linear-progress/)
+
+### Circular progress
+
+<LiveArea>
+  <CircularProgress value={40} showProgress />
+</LiveArea>
+
+This loading indicator is similar to the linear progress, while this is less subtle it doesn't have an indeterminate state. [See more about this element.](/develop/components/circular-progress/)
+
+## Usage
+
+Don't use the spinner element for determinate loading states. Use more approriate indicators like linear or circular progress.
+
+<Stack direction="row" columnGap={24}>
+  <HintCard isBad image="/design/recipes/loading/spinner-percentage-dont.png" />
+  <HintCard image="/design/recipes/loading/spinner-percentage-do.png" />
+</Stack>
+
+Don't use and mix loading indicators within the same context. Use the appropriate indicator to create a consistent experience and feel.
+
+<Stack direction="row" columnGap={24}>
+  <HintCard isBad image="/design/recipes/loading/progress-content-dont.png" />
+  <HintCard image="/design/recipes/loading/progress-content-do.png" />
+</Stack>
+
+Avoid to combine indicators in the same loading phase.
+
+<Stack direction="row" columnGap={24}>
+  <HintCard isBad image="/design/recipes/loading/combine-dont.png" />
+  <HintCard image="/design/recipes/loading/combine-do.png" />
+</Stack>

@@ -1,0 +1,152 @@
+import { MdxLayout } from "@/components/layouts/mdx";
+import { Playground } from "@/components/playground";
+import { Props } from "@/components/props";
+import * as Components from "@wonderflow/react-components";
+
+export const example = `<Autocomplete icon="magnifying-glass">
+  <Autocomplete.Option value="apple">
+    🍎{'  '}Apple
+  </Autocomplete.Option>
+  <Autocomplete.Option
+    value="banana"
+    decoration={<Chip dimension="small" color="green">110 Cal</Chip>}
+  >
+    🍌{'  '}Banana
+  </Autocomplete.Option>
+  <Autocomplete.Option value="cherry">
+    🍒{'  '}Cherry
+  </Autocomplete.Option>
+</Autocomplete>`;
+
+export default ({ children }) => (
+  <MdxLayout
+    title="Autocomplete"
+    description="Decorate inputs with other elements to create a single field"
+    showMeta
+    features={[
+      "Keyboard accessible",
+      "Composable and full control over options",
+      "Themes ready",
+    ]}
+    tags={<Components.Chip color="blue">Beta</Components.Chip>}
+    hero={<Playground scope={{ ...Components }} code={example} />}
+  >
+    {children}
+  </MdxLayout>
+);
+
+## Anatomy
+
+```tsx highlight=1,5-9
+import { Autocomplete } from "@wonderflow/react-components";
+
+export default () => {
+  return (
+    <Autocomplete>
+      <Autocomplete.Option value="1">Option 1</Autocomplete.Option>
+      <Autocomplete.Option value="2">Option 2</Autocomplete.Option>
+      <Autocomplete.Option value="3">Option 3</Autocomplete.Option>
+    </Autocomplete>
+  );
+};
+```
+
+## API Reference
+
+### Autocomplete
+
+This component extends all the properties from [Textfield](/components/inputs/textfield#api-reference) and adds the following ones:
+
+<Props
+  properties={[
+    {
+      name: "onChange",
+      type: ["(value?: string) => void"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description:
+        "The callback called when an option is picked from the list.",
+    },
+    {
+      name: "maxHeight",
+      type: ["string"],
+      default: "200px",
+      required: false,
+      dangerous: false,
+      description:
+        "Set the maximum height of the options list after which it will scroll.",
+    },
+    {
+      name: "emptyMessage",
+      type: ["ReactNode"],
+      default: "No results found",
+      required: false,
+      dangerous: false,
+      description:
+        "Custom empty message to display when there are no options or when the value does not match any of the options.",
+    },
+  ]}
+/>
+
+### Autocomplete.Option
+
+This component extends all the properties from [Menu.Item](/components/navigation/menu#menuitem/menu#api-reference) and adds the following ones:
+
+<Props
+  properties={[
+    {
+      name: "value",
+      type: ["string"],
+      default: "",
+      required: true,
+      dangerous: false,
+      description:
+        "Value of the option. This is the value that will be passed to the `onChange` callback.",
+    },
+    {
+      name: "onClick",
+      type: ["(value?: string, content?: string) => void"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description:
+        "Callback called when the option is clicked. It passes the value and the inner text of the option as arguments.",
+    },
+    {
+      name: "children",
+      type: ["tring"],
+      default: "",
+      required: true,
+      dangerous: false,
+      description:
+        "Label of the option. This is the text that will be displayed in the option, which can be different from the value.",
+    },
+  ]}
+/>
+
+## Accessibility
+
+### Keyboard interactions
+
+<Props
+  properties={[
+    {
+      name: "tab",
+      description:
+        "If the field is focused, move the focus on the listbox, otherwise move the focus on the field.",
+    },
+    {
+      name: "arrowDown",
+      description: "Inside the listbox, moves focus on the next element",
+    },
+    {
+      name: "arrowUp",
+      description: "Inside the listbox, moves focus on the previous element",
+    },
+    {
+      name: "Enter",
+      description: "Pick the option selected in the listbox.",
+    },
+  ]}
+/>

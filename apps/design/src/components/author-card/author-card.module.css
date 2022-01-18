@@ -1,0 +1,40 @@
+.AuthorCard {
+  overflow: hidden;
+  height: 40px;
+}
+
+.AuthorInfo {
+  white-space: nowrap;
+  padding-left: env(--space-8);
+  padding-right: env(--space-8);
+
+  @nest .AuthorCard[data-author-card-collapsed='true'] & {
+    --duration: env(--duration-200);
+
+    padding-left: 0;
+    padding-right: 0;
+    transition:
+      max-width var(--duration),
+      transform var(--duration),
+      opacity var(--duration),
+      padding-right var(--duration),
+      padding-left var(--duration);
+    transform: translateX(-5px);
+    opacity: 0%;
+    max-width: 0;
+  }
+  @nest .AuthorCard[data-author-card-collapsed='true']:hover & {
+    transition:
+      max-width 800ms,
+      transform var(--duration),
+      opacity var(--duration),
+      padding-right var(--duration),
+      padding-left var(--duration);
+    padding-left: env(--space-8);
+    padding-right: env(--space-8);
+    transform: none;
+    opacity: 100%;
+    max-width: 300px;
+  }
+}
+

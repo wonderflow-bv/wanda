@@ -1,0 +1,99 @@
+import { MdxLayout } from "@/components/layouts/mdx";
+import { Playground } from "@/components/playground";
+import { Props } from "@/components/props";
+import * as components from "@wonderflow/react-components";
+
+export const example = `<Title as="h3" level="3">Title</Title>`;
+
+export default ({ children }) => (
+  <MdxLayout
+    title="Title"
+    description="Dynamic and responsive titles with control"
+    showMeta
+    features={[
+      "Dynamic HTML tag",
+      "Fully customizzable",
+      "Responsive text",
+      "Decoupled size and semantic",
+      "Themes ready",
+    ]}
+    hero={<Playground scope={{ ...components }} code={example} />}
+  >
+    {children}
+  </MdxLayout>
+);
+
+## Anatomy
+
+```tsx highlight=1,4
+import { Title } from "@wonderflow/react-components";
+
+export default () => {
+  return <Title>Title</Title>;
+};
+```
+
+## API Reference
+
+<Props
+  properties={[
+    {
+      name: "level",
+      type: ['"display"', '"1"', '"2"', '"3"', '"4"', '"5"', '"6"'],
+      default: '"1"',
+      required: false,
+      dangerous: false,
+      description: "Set the title size and visual appearance",
+    },
+    {
+      name: "lineHeight",
+      type: ['"none"', '"small"', '"large"'],
+      default: '"small"',
+      required: false,
+      dangerous: false,
+      description: "Set the title line height. Useful for long titles.",
+    },
+    {
+      name: "responsive",
+      type: ["boolean"],
+      default: "true",
+      required: false,
+      dangerous: false,
+      description:
+        "Set the responsive font-size which scale down by one size on mobile",
+    },
+    {
+      name: "maxWidth",
+      type: ["string"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description:
+        "Set the max width of the line. Accepts all units (protip: use ch)",
+    },
+    {
+      name: "textAlign",
+      type: ["start", "center", "end"],
+      default: "start",
+      required: false,
+      dangerous: false,
+      description:
+        "Set the text alignment. Consistent even on different writing direction (e.g. rtl)",
+    },
+    {
+      name: "as",
+      type: ["keyof JSX.IntrinsicElements | React.ComponentType<any>"],
+      default: '"span"',
+      required: false,
+      dangerous: false,
+      description:
+        "Set the component to a different HTML tag or custom component.",
+    },
+  ]}
+/>
+
+## Accessibility
+
+The `Title` component is rendered as `span` by default. Make sure to define the correct heading tag when semantic is required to make the content navigable and accessible with AT.
+
+Read more about how to [manage headings and accessibility](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements#accessibility_concerns).

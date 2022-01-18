@@ -1,0 +1,60 @@
+.Tree {
+  font-size: env(--font-size-16);
+
+  & ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  & summary {
+    padding: env(--space-4) env(--space-24);
+  }
+
+  & details ul {
+    padding-left: env(--space-24);
+    margin: 0 0 env(--space-24);
+  }
+}
+
+.Title {
+  text-transform: uppercase;
+  padding: 0 env(--space-24);
+}
+
+.Li {
+  & > :is(a, span) {
+    padding: env(--space-2) env(--space-24);
+    outline-offset: -2px;
+    font-weight: 600;
+  }
+
+  & > :is(details) {
+    padding-right: env(--space-8);
+  }
+
+  & > :is(a),
+  & details > summary {
+    cursor: pointer;
+
+    &:hover:not([aria-current='page']) {
+      color: var(--dimmed-6);
+    }
+  }
+
+  @nest details & :is(a, span) {
+    font-weight: 400;
+  }
+
+  & > *[aria-current='page'] {
+    color: var(--cta-default);
+  }
+
+  /* Stupid Safari fix
+   * https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns
+   */
+  &::before {
+    position: absolute;
+    content: '\200B';
+  }
+}

@@ -1,0 +1,154 @@
+import { MdxLayout } from "@/components/layouts/mdx";
+import { Playground } from "@/components/playground";
+import { Props } from "@/components/props";
+import * as components from "@wonderflow/react-components";
+
+export const example = `<Tooltip trigger={<span>Hover me</span>}>
+  This is an extended description.
+</Tooltip>`;
+
+export default ({ children }) => (
+  <MdxLayout
+    title="Tooltip"
+    description="A popup that displays information related to an element."
+    showMeta
+    features={[
+      "Opens when the trigger is focused or hovered.",
+      "Closes when the trigger is activated or when pressing escape.",
+      "Supports custom timing.",
+    ]}
+    links={[
+      {
+        label: "ARIA design",
+        url: "https://www.w3.org/TR/wai-aria-1.2/#tooltip",
+      },
+      {
+        label: "ARIA authoring",
+        url: "https://www.w3.org/TR/wai-aria-practices-1.2/#tooltip",
+      },
+    ]}
+    hero={
+      <Playground
+        liveAreaProps={{ direction: "row" }}
+        scope={{ ...components }}
+        code={example}
+      />
+    }
+  >
+    {children}
+  </MdxLayout>
+);
+
+## Anatomy
+
+```tsx highlight=1,5-7
+import { Tooltip } from "@wonderflow/react-components";
+
+export default () => {
+  return (
+    <Tooltip trigger={<span tabIndex={0}>Hover me</span>}>
+      This is an extended description.
+    </Tooltip>
+  );
+};
+```
+
+## API Reference
+
+<Props
+  properties={[
+    {
+      name: "trigger",
+      type: ['"ReactNode"'],
+      default: "",
+      required: true,
+      dangerous: false,
+      description: "Set the element that triggers the dropdown",
+    },
+    {
+      name: "placement",
+      type: [
+        "auto",
+        "auto-start",
+        "auto-end",
+        "top",
+        "bottom",
+        "right",
+        "left",
+        "top-start",
+        "top-end",
+        "bottom-start",
+        "bottom-end",
+        "right-start",
+        "right-end",
+        "left-start",
+        "left-end",
+      ],
+      default: "bottom-start",
+      required: false,
+      dangerous: false,
+      description:
+        "Set the placement logic. Auto means the dropdown is placed based on the available space inside the viewport.",
+    },
+    {
+      name: "open",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description:
+        "Set the visibility of the tooltip. This makes the tooltip a controlled component.",
+    },
+    {
+      name: "interactive",
+      type: ["boolean"],
+      default: "false",
+      required: false,
+      dangerous: false,
+      description: "Enable interactions on the tooltip",
+    },
+    {
+      name: "delay",
+      type: ["number"],
+      default: "500",
+      required: false,
+      dangerous: false,
+      description: "Set the delay before showing the tooltip on mouse hover",
+    },
+    {
+      name: "maxWidth",
+      type: ['"string"'],
+      default: '"40ch"',
+      required: false,
+      dangerous: false,
+      description: "Set the max width of the tooltip",
+    },
+    {
+      name: "fill",
+      type: ["boolean"],
+      default: "false",
+      required: false,
+      dangerous: false,
+      description: "Set the trigger to fill the available space",
+    },
+  ]}
+/>
+
+## Accessibility
+
+Adheres to the [`tooltip` role requirements](https://www.w3.org/TR/wai-aria-1.2/#tooltip).
+
+### Keyboard interactions
+
+<Props
+  properties={[
+    {
+      name: "tab",
+      description: "Move focus on the trigger and open the tooltip.",
+    },
+    {
+      name: "esc",
+      description: "Close the tooltip",
+    },
+  ]}
+/>

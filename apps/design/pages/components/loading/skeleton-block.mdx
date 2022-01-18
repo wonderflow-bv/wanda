@@ -1,0 +1,108 @@
+import { MdxLayout } from "@/components/layouts/mdx";
+import { Playground } from "@/components/playground";
+import { Props } from "@/components/props";
+import * as components from "@wonderflow/react-components";
+
+export const example = `<Card left={<SkeletonBlock width={48} height={48} circle />}>
+  <SkeletonBlock count={3} />
+</Card>`;
+
+export default ({ children }) => (
+  <MdxLayout
+    title="Skeleton block"
+    description="Optimistic UI made easy"
+    showMeta
+    features={["Highly customizable", "Can be inline or block", "Themes ready"]}
+    hero={
+      <Playground
+        liveAreaProps={{ fill: true }}
+        scope={{ ...components }}
+        code={example}
+      />
+    }
+  >
+    {children}
+  </MdxLayout>
+);
+
+## Anatomy
+
+```tsx highlight=1,4
+import { SkeletonBlock } from "@wonderflow/react-components";
+
+export default () => {
+  return <SkeletonBlock />;
+};
+```
+
+## API Reference
+
+<Props
+  properties={[
+    {
+      name: "count",
+      type: ["number"],
+      default: "1",
+      required: false,
+      dangerous: false,
+      description: "Set how many elements to display",
+    },
+    {
+      name: "circle",
+      type: ["boolean"],
+      default: "false",
+      required: false,
+      dangerous: false,
+      description: "Set each element to be circle",
+    },
+    {
+      name: "containerTestId",
+      type: ["string"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description:
+        "A string that is added to the container element as a data-testid attribute. Used with React Testing Library",
+    },
+    {
+      name: "width",
+      type: ["string" | "number"],
+      default: '"100%"',
+      required: false,
+      dangerous: false,
+      description: "The width of the element",
+    },
+    {
+      name: "height",
+      type: ["string" | "number"],
+      default: "inherit from font-size",
+      required: false,
+      dangerous: false,
+      description: "The height of the element",
+    },
+    {
+      name: "borderRadius",
+      type: ["TokensTypes['radius']"],
+      default: "4",
+      required: false,
+      dangerous: false,
+      description: "The edge radius",
+    },
+    {
+      name: "inline",
+      type: ["booelan"],
+      default: "false",
+      required: false,
+      dangerous: false,
+      description: "Place elements on single line istead of their own line",
+    },
+    {
+      name: "enableAnimation",
+      type: ["booelan"],
+      default: "true",
+      required: false,
+      dangerous: false,
+      description: "Whether the animation should play",
+    },
+  ]}
+/>

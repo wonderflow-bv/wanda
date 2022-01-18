@@ -1,0 +1,95 @@
+@import '@wonderflow/react-components/core/utils/media.css';
+
+.Notes {
+  --timeline-color: var(--dimmed-1);
+  --timeline-width: 80px;
+
+  position: relative;
+  z-index: 0;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    left: calc(var(--timeline-width) / 2);
+    top: 0;
+    bottom: 0;
+    transform: translateX(-50%);
+    background: var(--timeline-color);
+    z-index: -1;
+  }
+
+  &:first-child {
+    &::before {
+      background: linear-gradient(to bottom, transparent 20px, var(--timeline-color) 60px);
+    }
+  }
+
+  &:last-child {
+    &::before {
+      background: linear-gradient(to bottom, var(--timeline-color), transparent);
+    }
+  }
+}
+
+.Tag {
+  min-inline-size: var(--timeline-width);
+  display: none;
+
+  @media (--from-medium) {
+    display: initial;
+  }
+}
+
+.Changes.Changes {
+  & li {
+    position: relative;
+    margin-top: env(--space-16);
+    margin-bottom: env(--space-16);
+    margin-left: env(--space-88);
+    gap: env(--space-8);
+    align-items: flex-start;
+    flex-wrap: wrap;
+    line-height: 1.2;
+    font-size: env(--font-size-16);
+
+    @media (--from-small) {
+      flex-wrap: nowrap;
+    }
+  }
+
+  & li::before {
+    position: absolute;
+    top: 0;
+    left: calc(env(--space-88) * -1);
+    display: inline-block;
+    font-size: 0.66rem;
+    border-radius: env(--radius-4);
+    font-weight: 600;
+    min-inline-size: env(--space-80);
+    text-align: center;
+    padding-top: 1px;
+    line-height: 1.8;
+  }
+
+  & [data-note-type='breaking'] li::before {
+    content: 'BREAKING';
+    background-color: var(--highlight-red-background);
+    color: var(--highlight-red-foreground);
+  }
+
+  & [data-note-type='fixes'] li::before {
+    content: 'FIXED';
+    background-color: var(--highlight-blue-background);
+    color: var(--highlight-blue-foreground);
+  }
+
+  & [data-note-type='new'] li::before {
+    content: 'NEW';
+    background-color: var(--highlight-green-background);
+    color: var(--highlight-green-foreground);
+  }
+}
+

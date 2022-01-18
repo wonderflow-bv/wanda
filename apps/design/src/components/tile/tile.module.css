@@ -1,0 +1,33 @@
+.Tile {
+  display: block;
+  min-block-size: env(--space-152);
+  padding: env(--space-24);
+  min-inline-size: env(--space-168);
+  position: relative;
+  border-radius: env(--radius-4);
+  background-color: var(--dimmed-1);
+
+  @supports (backdrop-filter: blur(1px)) {
+    backdrop-filter: blur(62px);
+    background-color: var(--global-vibrancy-background);
+  }
+
+  &:is(:hover, :focus) {
+    background-color: var(--dimmed-2);
+
+    @supports (backdrop-filter: blur(1px)) {
+      background-color: var(--global-vibrancy-background-hover);
+    }
+  }
+}
+
+.Content {
+  display: block;
+}
+
+.IconBullet {
+  position: absolute;
+  bottom: env(--space-16);
+  left: env(--space-16);
+  color: var(--dimmed-5);
+}

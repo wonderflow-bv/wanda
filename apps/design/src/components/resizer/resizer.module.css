@@ -1,0 +1,40 @@
+.Resizer {
+  --color: var(--dimmed-1);
+
+  position: relative;
+  border: 1px solid var(--color);
+  overflow: hidden;
+
+  &[data-resizer-padding='true'] {
+    padding: env(--space-24) env(--space-56) env(--space-24) env(--space-32);
+  }
+
+  & > * {
+    inline-size: 100%;
+  }
+
+  & iframe {
+    inline-size: 100%;
+    block-size: 100%;
+    border: 0;
+  }
+
+  &:hover {
+    --color: var(--dimmed-2);
+  }
+}
+
+.Handle {
+  background:
+    repeating-linear-gradient(
+      to right,
+      transparent,
+      transparent 2px,
+      var(--dimmed-4) 2px,
+      var(--dimmed-4) 3px
+    ),
+    var(--color);
+  background-size: 16px 25%;
+  background-position: center center;
+  background-repeat: no-repeat;
+}

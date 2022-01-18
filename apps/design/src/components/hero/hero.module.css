@@ -1,0 +1,54 @@
+@import '@wonderflow/react-components/core/utils/media.css';
+
+.Hero {
+  min-block-size: calc(100vh - 57px);
+  background-color: var(--dimmed-0);
+  overflow: hidden;
+  padding: env(--space-32) env(--space-24) max(env(--space-96), env(safe-area-inset-bottom));
+  color: var(--global-foreground);
+  position: relative;
+  z-index: 0;
+
+  @media (--from-large) {
+    padding: env(--space-96);
+  }
+  @media (width >= 120em) {
+    padding-left: 20rem;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(var(--dimmed-2) 0.9px, transparent 0.9px);
+    background-size: 30px 30px;
+    pointer-events: none;
+  }
+}
+
+.Content {
+  position: relative;
+  z-index: 1;
+}
+
+.Video {
+  filter: saturate(2) hue-rotate(333deg);
+  min-block-size: 100%;
+  min-inline-size: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  position: absolute;
+  inset: 0;
+  opacity: 5%;
+
+  @nest [data-theme='light'] & {
+    filter: invert(1);
+  }
+  @nest [data-theme='auto'] & {
+
+    @media (prefers-color-scheme: light) {
+      filter: invert(1);
+    }
+  }
+}

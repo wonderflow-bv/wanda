@@ -1,0 +1,179 @@
+import { MdxLayout } from "@/components/layouts/mdx";
+import { Playground } from "@/components/playground";
+import { Props } from "@/components/props";
+import * as Components from "@wonderflow/react-components";
+
+export const example = `<Slider aria-label="Items count" showValues />`;
+
+export default ({ children }) => (
+  <MdxLayout
+    title="Slider"
+    description="An input where the user selects a value from within a given range."
+    showMeta
+    features={[
+      "Multiple sizes",
+      "Can be controlled or uncontrolled",
+      "Supports touch or click on track to update value",
+      "Supports Right to Left direction",
+      "Full keyboard navigation",
+    ]}
+    links={[
+      {
+        label: "ARIA design",
+        url: "https://www.w3.org/TR/wai-aria-1.2/#slider",
+      },
+      {
+        label: "ARIA authoring",
+        url: "https://www.w3.org/TR/wai-aria-practices-1.2/#slider",
+      },
+    ]}
+    hero={<Playground scope={{ ...Components }} code={example} />}
+  >
+    {children}
+  </MdxLayout>
+);
+
+## Anatomy
+
+```tsx highlight=1,4
+import { Slider } from "@wonderflow/react-components";
+
+export default () => {
+  return <Slider />;
+};
+```
+
+## Examples
+
+### With icons
+
+If you don't want to use numeric values you can use icons instead.
+
+export const exampleWithIcons = `<Slider aria-label="brightness" iconMin="moon" iconMax="sun-bright" />`;
+
+<Playground scope={{ ...Components }} code={exampleWithIcons} />
+
+## API Reference
+
+<Props
+  properties={[
+    {
+      name: "min",
+      type: ["number"],
+      default: "0",
+      required: false,
+      dangerous: false,
+      description: "The minimum value",
+    },
+    {
+      name: "max",
+      type: ["number"],
+      default: "100",
+      required: false,
+      dangerous: false,
+      description: "The maximum value",
+    },
+    {
+      name: "step",
+      type: ["number"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Set the incrementation step",
+    },
+    {
+      name: "onInput",
+      type: ["(value: number) => void"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description:
+        "Callback for the input event. The current value is passed as argument",
+    },
+    {
+      name: "defaultValue",
+      type: ["number"],
+      default: "0",
+      required: false,
+      dangerous: false,
+      description: "The initial value",
+    },
+    {
+      name: "showValues",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Show the current value and max. This hides icons.",
+    },
+    {
+      name: "iconMin",
+      type: ["IconNames"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Use icon for the min value",
+    },
+    {
+      name: "iconMax",
+      type: ["IconNames"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Use icon for the max value",
+    },
+    {
+      name: "dimension",
+      type: ['"small"', '"regular"'],
+      default: '"regular"',
+      required: false,
+      dangerous: false,
+      description: "Set the element size",
+    },
+  ]}
+/>
+
+## Accessibility
+
+Adheres to the [`slider` role requirements](https://www.w3.org/TR/wai-aria-1.2/#slider).
+
+### Keyboard interactions
+
+<Props
+  properties={[
+    {
+      name: "ArrowRight",
+      description:
+        "Increments/decrements by the step value depending on orientation",
+    },
+    {
+      name: "ArrowLeft",
+      description:
+        "Increments/decrements by the step value depending on orientation",
+    },
+    {
+      name: "ArrowUp",
+      description: "Increases the value by the step amount",
+    },
+    {
+      name: "ArrowDown",
+      description: "IDecreases the value by the step amount",
+    },
+    {
+      name: "PageUp",
+      description: "Increases the value by a larger step",
+    },
+    {
+      name: "PageDown",
+      description: "Decreases the value by a larger step",
+    },
+    {
+      name: "Home",
+      description: "Sets the value to its minimum",
+    },
+    {
+      name: "End",
+      description: "Sets the value to its maximum",
+    },
+  ]}
+/>

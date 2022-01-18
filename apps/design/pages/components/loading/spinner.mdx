@@ -1,0 +1,56 @@
+import { MdxLayout } from "@/components/layouts/mdx";
+import { Playground } from "@/components/playground";
+import { Props } from "@/components/props";
+import * as components from "@wonderflow/react-components";
+
+export const example = `<Spinner />`;
+
+export default ({ children }) => (
+  <MdxLayout
+    title="Spinner"
+    description="Animated indicator for loading and waiting states"
+    showMeta
+    features={[
+      "Scalable vector graphic",
+      "Allow custom color",
+      "Multiple sizes",
+      "Themes ready",
+    ]}
+    hero={<Playground scope={{ ...components }} code={example} />}
+  >
+    {children}
+  </MdxLayout>
+);
+
+## Anatomy
+
+```tsx highlight=1,4
+import { Spinner } from "@wonderflow/react-components";
+
+export default () => {
+  return <Spinner />;
+};
+```
+
+## API Reference
+
+<Props
+  properties={[
+    {
+      name: "dimension",
+      type: ['"small"', '"regular"', '"big"'],
+      default: '"big"',
+      required: false,
+      dangerous: false,
+      description: "Set the element size",
+    },
+    {
+      name: "color",
+      type: ["string"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Set the color",
+    },
+  ]}
+/>

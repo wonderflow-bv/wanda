@@ -1,0 +1,52 @@
+@import '@wonderflow/react-components/core/utils/media.css';
+
+.CodeBlock {
+  position: relative;
+  font-family: env(--font-family-mono);
+  display: grid;
+  margin: env(--space-32) 0;
+  font-size: 0.9em;
+
+  @media (--from-small) {
+    font-size: env(--font-size-18);
+  }
+
+  &[data-code-block-has-highlight='true'] [data-code-block-highlight='false'] {
+    opacity: 50%;
+    filter: saturate(0);
+  }
+}
+
+.Code {
+  overflow: auto;
+  padding: env(--space-48) env(--space-24) env(--space-24);
+  border: 1px solid var(--dimmed-1);
+  border-radius: env(--radius-8);
+
+  & *::selection {
+    background-color: var(--dimmed-3);
+    color: inherit;
+    text-shadow: none;
+  }
+}
+
+.Toolbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: env(--space-8) env(--space-8) env(--space-8) env(--space-16);
+  border-radius: env(--radius-8) env(--radius-8) 0 0;
+}
+
+.LineNumber {
+  display: table-cell;
+  text-align: right;
+  padding-right: 1em;
+  user-select: none;
+  opacity: 50%;
+}
+
+.LineContent {
+  display: table-cell;
+}

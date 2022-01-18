@@ -1,0 +1,71 @@
+import { MdxLayout } from "@/components/layouts/mdx";
+import { Playground } from "@/components/playground";
+import { Props } from "@/components/props";
+import * as components from "@wonderflow/react-components";
+
+export const example = `<Container dimension="large" className="ContainerEx"></Container>`;
+
+export default ({ children }) => (
+  <MdxLayout
+    title="Container"
+    description="Who contains the content"
+    showMeta
+    features={[
+      "Auto centering",
+      "Predefined sizes",
+      "Auto adjust paddings",
+      "Fluid by default",
+    ]}
+    hero={
+      <Playground
+        liveAreaProps={{ fill: true }}
+        scope={{ ...components }}
+        code={example}
+      />
+    }
+  >
+    {children}
+  </MdxLayout>
+);
+
+## Anatomy
+
+```tsx highlight=1,4
+import { Container } from "@wonderflow/react-components";
+
+export default () => {
+  return <Container>...</Container>;
+};
+```
+
+## API Reference
+
+<Props
+  properties={[
+    {
+      name: "dimension",
+      type: ['"full"', '"medium"', '"large"'],
+      default: '"full"',
+      required: false,
+      dangerous: false,
+      description: "Set the element max width",
+    },
+    {
+      name: "padding",
+      type: ["boolean"],
+      default: "true",
+      required: false,
+      dangerous: false,
+      description: "Enable or disable the predefined padding",
+    },
+    {
+      name: "as",
+      type: ["keyof JSX.IntrinsicElements | React.ComponentType<any>"],
+      default: '"div"',
+      required: false,
+      dangerous: false,
+      description:
+        "Set the component to a different HTML tag or custom component.",
+    },
+  ]}
+/>

@@ -1,0 +1,129 @@
+import { MdxLayout } from "@/components/layouts/mdx";
+import { Playground } from "@/components/playground";
+import { Props } from "@/components/props";
+import * as components from "@wonderflow/react-components";
+
+export const example = `<Snackbar dismissable>
+  The Relevance section uses only Feedback with that can be analysed
+  with NLP and have a score. <a href="#">Learn more</a>
+</Snackbar>`;
+
+export default ({ children }) => (
+  <MdxLayout
+    title="Snackbar"
+    description="Highlight prominent messages"
+    showMeta
+    features={[
+      "Keyboard accessible",
+      "Customizable icon",
+      "Multiple levels of severity",
+      "Themes ready",
+    ]}
+    links={[
+      {
+        label: "ARIA design",
+        url: "https://www.w3.org/TR/wai-aria-1.2/#status",
+      },
+    ]}
+    hero={
+      <Playground
+        liveAreaProps={{ fill: true }}
+        scope={{ ...components }}
+        code={example}
+      />
+    }
+  >
+    {children}
+  </MdxLayout>
+);
+
+## Anatomy
+
+```tsx highlight=1,4
+import { Snackbar } from "@wonderflow/react-components";
+
+export default () => {
+  return <Snackbar>...</Snackbar>;
+};
+```
+
+## API Reference
+
+<Props
+  properties={[
+    {
+      name: "icon",
+      type: ["IconNames"],
+      default: '"based on the type prop"',
+      required: false,
+      dangerous: false,
+      description: "Set the icon to show inside the element",
+    },
+    {
+      name: "title",
+      type: ["string"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Set the label associated with the element",
+    },
+    {
+      name: "dismissable",
+      type: ["boolean"],
+      default: "false",
+      required: false,
+      dangerous: false,
+      description: "Add a dismiss action on the modal",
+    },
+    {
+      name: "onDismiss",
+      type: ["() => void"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Callback for the dismiss action",
+    },
+    {
+      name: "dismissLabel",
+      type: ["string"],
+      default: '"Dismiss"',
+      required: false,
+      dangerous: false,
+      description: "The text for the dismiss action",
+    },
+    {
+      name: "kind",
+      type: ['"info"', '"warning"', '"neutral"', '"positive"', '"danger"'],
+      default: '"neutral"',
+      required: false,
+      dangerous: false,
+      description: "Set the severity of the message",
+    },
+    {
+      name: "as",
+      type: ["keyof JSX.IntrinsicElements | React.ComponentType<any>"],
+      default: '"div"',
+      required: false,
+      dangerous: false,
+      description:
+        "Set the component to a different HTML tag or custom component.",
+    },
+  ]}
+/>
+
+## Accessibility
+
+Adheres to the [`status` role requirements](https://www.w3.org/TR/wai-aria-1.2/#status).
+
+The `Snackbar` component uses the element `output` by default with inplicits `aria-live="polite"` and `aria-atomic="true"` attributes. Add those to change the default values.
+
+### Keyboard interactions
+
+<Props
+  properties={[
+    {
+      name: "tab",
+      description: "Move focus on the first focusable element inside",
+    },
+  ]}
+/>

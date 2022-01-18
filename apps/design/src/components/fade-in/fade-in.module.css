@@ -1,0 +1,40 @@
+@import '@wonderflow/react-components/core/utils/media.css';
+
+.FadeIn {
+
+  @media (--motion) {
+    animation-duration: var(--duration, 0.8s);
+    animation-iteration-count: 1;
+    animation-play-state: paused;
+    animation-fill-mode: both;
+    animation-delay: var(--delay, 0);
+    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+
+    &[data-fade-in-only-desktop='false'] {
+      animation-name: fade-in;
+    }
+
+    &[data-fade-in-is-running='true'] {
+      animation-play-state: running;
+    }
+  }
+
+  &[data-fade-in-only-desktop='true'] {
+
+    @media (--from-medium) {
+      animation-name: fade-in;
+    }
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0%;
+    transform: translate(var(--fromX, 0), var(--fromY, 20px));
+  }
+
+  100% {
+    opacity: 100%;
+    transform: translate(var(--toX, 0), var(--toY, 0));
+  }
+}

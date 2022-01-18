@@ -1,0 +1,30 @@
+import { MdxLayout } from "@/components/layouts/mdx";
+import { SearchIcons } from "@/components/search-icons";
+import { Banner } from "@/components/banner";
+import { Stack, Text, Icon } from "@wonderflow/react-components";
+
+export default ({ children }) => (
+  <MdxLayout
+    title="Iconography"
+    description="Search through our icons library and copy the name"
+  >
+    {children}
+  </MdxLayout>
+);
+
+<Stack rowGap={200}>
+  <SearchIcons />
+  <Banner
+    as="a"
+    href="https://github.com/wonderflow-bv/design/issues/new?assignees=equinusocio&labels=feature&template=new_icons.yml&title=New+icons+request"
+    target="_blank"
+    title="Didn't find the icon?"
+    rel="noopener noreferrer"
+    description={
+      <Stack direction="row" verticalAlign="center" columnGap={8} fill={false}>
+        <Text>Ask for a new icon on Github</Text>
+        <Icon name="arrow-up-right" />
+      </Stack>
+    }
+  />
+</Stack>

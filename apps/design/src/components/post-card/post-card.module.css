@@ -1,0 +1,64 @@
+@import '@wonderflow/react-components/core/utils/media.css';
+
+.PostCard {
+  --dot-color: var(--dimmed-3);
+
+  counter-increment: post-counter;
+  position: relative;
+  border-radius: env(--radius-8);
+  background-image:
+    linear-gradient(178deg, var(--dimmed-0), hsl(env(--color-primary-80) / 0%)),
+    radial-gradient(var(--dot-color) 0.9px, transparent 0.9px);
+  background-size: 100%, 30px 30px;
+
+  /* Safari Only trick */
+
+  @supports (-webkit-hyphens: none) {
+    background-image: radial-gradient(var(--dot-color) 0.9px, transparent 0.9px);
+    background-size: 30px 30px;
+  }
+
+
+  &:where(:hover, :focus-within) {
+    --dot-color: var(--dimmed-5);
+  }
+
+  & a {
+    color: var(--global-foreground);
+    background: none;
+    cursor: pointer;
+  }
+
+  &::before {
+    content: counters(post-counter, '.', decimal-leading-zero);
+    position: absolute;
+    bottom: 0;
+    right: -2.8rem;
+    display: none;
+    color: var(--dimmed-6);
+    opacity: 10%;
+    line-height: 1;
+    font-size: 8rem;
+    font-weight: 100;
+    transition: all 200ms;
+
+    @media (--from-medium) {
+      display: block;
+    }
+  }
+
+  &:where(:hover, :focus-within)::before {
+    color: var(--c);
+    opacity: 100%;
+  }
+}
+
+.Authors {
+  background-color: var(--dimmed-0);
+  padding: env(--space-8);
+  border-radius: 1e5px;
+  position: absolute;
+  bottom: 0;
+  transform: translateY(calc(50% - 14px));
+  border: 1px solid var(--dimmed-1);
+}

@@ -1,0 +1,211 @@
+import { MdxLayout } from "@/components/layouts/mdx";
+import { Playground } from "@/components/playground";
+import { Props } from "@/components/props";
+import { Checklist } from "@/components/checklist";
+import * as Components from "@wonderflow/react-components";
+import { Markdown } from "@/components/markdown";
+
+export default ({ children }) => (
+  <MdxLayout
+    title="Button"
+    description="A button is a box area or text that communicates and triggers user actions when clicked."
+    showMeta
+    features={[
+      "Keyboard accessible",
+      "Focusable even when disabled",
+      "Can contain icons",
+      "Multiple styles and sizes",
+      "Themes ready",
+    ]}
+    links={[
+      {
+        label: "ARIA design",
+        url: "https://www.w3.org/TR/wai-aria-1.2/#button",
+      },
+      {
+        label: "ARIA authoring",
+        url: "https://www.w3.org/TR/wai-aria-practices-1.2/#button",
+      },
+    ]}
+    hero={
+      <Playground
+        liveAreaProps={{ direction: "row" }}
+        scope={{ ...Components }}
+        code={`<Button icon="check">Button</Button>`}
+      />
+    }
+  >
+    {children}
+  </MdxLayout>
+);
+
+## Anatomy
+
+```tsx highlight=1,4
+import { Button } from "@wonderflow/react-components";
+
+export default () => {
+  return <Button>Click</Button>;
+};
+```
+
+## Grouping buttons
+
+Sometimes you need to group buttons together to create a single visual context or to create a set of related actions. To group buttons, you can use the `ButtonsGroup` component.
+
+export const exampleWithGroup = `<ButtonsGroup dimension="big" kind="secondary">
+  <Button>Action 1</Button>
+  <Button>Action 2</Button>
+  <Button>Action 3</Button>
+</ButtonsGroup>`;
+
+<Components.Stack rowGap={24}>
+  <Playground scope={{ ...Components }} code={exampleWithGroup} />
+  <Components.Snackbar kind="info">
+    <Markdown>
+      The `ButtonsGroup` component overrides the buttons style and dimension.
+      The style is always set to `secondary` while `dimension` is defined by the
+      property applied on the group itself
+    </Markdown>
+  </Components.Snackbar>
+</Components.Stack>
+
+## API Reference
+
+### Button
+
+<Props
+  properties={[
+    {
+      name: "kind",
+      type: ['"primary"', '"secondary"', '"flat"'],
+      default: '"primary"',
+      required: false,
+      dangerous: false,
+      description: "Set the element visual style",
+    },
+    {
+      name: "dimension",
+      type: ['"small"', '"regular"', '"big"'],
+      default: '"regular"',
+      required: false,
+      dangerous: false,
+      description: "Set the element size",
+    },
+    {
+      name: "fullWidth",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Set the element to fill the available space",
+    },
+    {
+      name: "pressed",
+      type: ["boolean"],
+      default: "false",
+      required: false,
+      dangerous: false,
+      description: "Set the pressed state and visual",
+    },
+    {
+      name: "icon",
+      type: ["IconNames"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Set the icon to show inside the element",
+    },
+    {
+      name: "iconPosition",
+      type: ['"left"', '"right"'],
+      default: '"left"',
+      required: false,
+      dangerous: false,
+      description: "Set the icon position",
+    },
+    {
+      name: "iconColor",
+      type: ["string"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Set the icon color",
+    },
+    {
+      name: "disabled",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Set the disabled state",
+    },
+    {
+      name: "busy",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Set the loading/busy state and show the spinner",
+    },
+    {
+      name: "onClick",
+      type: ["(MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void"],
+      default: "",
+      required: false,
+      dangerous: false,
+      description: "Callback for the click event",
+    },
+    {
+      name: "as",
+      type: ["keyof JSX.IntrinsicElements | React.ComponentType<any>"],
+      default: '"button"',
+      required: false,
+      dangerous: false,
+      description:
+        "Set the component to a different HTML tag or custom component",
+    },
+  ]}
+/>
+
+### ButtonsGroup
+
+<Props
+  properties={[
+    {
+      name: "dimension",
+      type: ['"small"', '"regular"', '"big"'],
+      default: '"regular"',
+      required: false,
+      dangerous: false,
+      description: "Set the element size",
+    },
+    {
+      name: "kind",
+      type: ['"primary"', '"secondary"', '"flat"'],
+      default: '"primary"',
+      required: false,
+      dangerous: false,
+      description: "Set the style for the buttons inside",
+    },
+  ]}
+/>
+
+## Accessibility
+
+Adheres to the [`button` role requirements](https://www.w3.org/TR/wai-aria-1.2/#button).
+
+### Keyboard interactions
+
+<Props
+  properties={[
+    {
+      name: "tab",
+      description: "Move focus on the element or outside",
+    },
+    {
+      name: "enter",
+      description: "Trigger the component action",
+    },
+  ]}
+/>
