@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "start-storybook --quiet -p 6006",
-    "prebuild": "rimraf dist",
+    "prebuild": "rimraf dist core core.css",
     "build": "run-s build:ts build:css",
     "postbuild": "rimraf dist/**/_mixins.css",
     "build:ts": "tsc",
@@ -86,7 +86,6 @@
   },
   "dependencies": {
     "@wonderflow/icons": "*",
-    "@wonderflow/themes": "*",
     "ahooks": "3.1.5",
     "clsx": "1.1.1",
     "framer-motion": "^5.5.7",

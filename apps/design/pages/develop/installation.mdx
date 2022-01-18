@@ -20,7 +20,7 @@ While some of the developing tools like [PostCSS](https://postcss.org/) are mand
 Wanda's core elements are formed by [tokens](/develop/design-tokens/), [react-components](https://github.com/wonderflow-bv/react-components) and the [shared configurations](https://github.com/wonderflow-bv/config/).
 
 ```bash
-npm install @wonderflow/react-components
+npm install @wonderflow/react-components @wonderflow/themes
 npm install -D @wonderflow/config
 ```
 
@@ -60,11 +60,11 @@ module.exports = {
 
 ### Importing themes
 
-Then inside your app entry point you have to import two required css files, one is the core styles and other is a theme file which contains all the theme keys used by components and that you can use inside your custom css.
+Then inside your app entry javascript point you have to import two required css files, one is the core styles and the other one includes themes with all the theme keys used by components and that you can also use inside your custom css.
 
 ```js
 import "@wonderflow/react-components/core.css";
-import "@wonderflow/react-components/themes.css";
+import "@wonderflow/themes";
 ```
 
 ## Recommended tools
@@ -122,14 +122,21 @@ npm install -D @typescript-eslint/parser @typescript-eslint/eslint-plugin
 {
   "extends": "@wonderflow/eslint-config",
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"]
+  "plugins": ["@typescript-eslint"],
+  "parserOptions": {
+    "project": "./tsconfig.eslint.json"
+  }
 }
 ```
 
-Then create a `tsconfig.eslint.json` at the project root that extends your typescript configuration:
+Then create a `tsconfig.eslint.json` at the project root to configure typescript:
 
 ```json
 {
-  "extends": "./tsconfig.json"
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "baseUrl": "./",
+  },
+  "exclude": ["node_modules"],
 }
 ```
