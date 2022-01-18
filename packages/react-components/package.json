@@ -30,7 +30,7 @@
     "postbuild": "rimraf dist/**/_mixins.css",
     "start": "start-storybook --quiet -p 6006",
     "lint": "run-s lint:styles",
-    "lint:styles": "stylelint ./src/components/**/*.css"
+    "lint:styles": "stylelint ./src/**/*.css"
   },
   "repository": {
     "type": "git",
