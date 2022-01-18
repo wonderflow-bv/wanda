@@ -1,0 +1,23 @@
+@custom-selector :--headings h1, h2, h3, h4, h5, h6;
+@custom-selector :--blocks h1, h2, h3, h4, h5, h6,
+  hgroup, ul, ol, dd, p, figure,
+  img, pre, table, fieldset, blockquote, picture;
+
+.Prose {
+  & > :--headings:is(:--headings) {
+    margin-block-end: 0;
+  }
+
+  & > :--blocks:where(:not(:first-child)) {
+    margin-block-start: 2em;
+    margin-block-end: 2em;
+  }
+
+  & > :--headings:first-child {
+    margin-block-start: 0;
+  }
+
+  & > :--headings + * {
+    margin-block-start: 1.3em;
+  }
+}
