@@ -1,0 +1,33 @@
+.InputGroup {
+  position: relative;
+}
+
+.Start {
+
+  @nest .InputGroup[data-input-group-has-end='true'] &  * {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+.InputField {
+
+  @nest .InputGroup[data-input-group-has-end='true'] & input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: 0;
+  }
+  @nest .InputGroup[data-input-group-has-start='true'] & input {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: 0;
+  }
+}
+
+.End {
+
+  @nest .InputGroup[data-input-group-has-end='true'] & * {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
