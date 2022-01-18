@@ -1,0 +1,30 @@
+.StarMeter {
+  --star-color: hsl(env(--color-yellow-20));
+  --star-dimmed-color: var(--dimmed-2);
+  --icon-size: 18px;
+
+  position: relative;
+
+  &[data-star-meter-dimension='small'] {
+    --icon-size: 16px;
+  }
+
+  &[data-star-meter-dimension='big'] {
+    --icon-size: 20px;
+  }
+}
+
+.Gradient {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  block-size: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  inline-size: 1px;
+}
+
+.Icon {
+  inline-size: var(--icon-size);
+  block-size: var(--icon-size);
+}

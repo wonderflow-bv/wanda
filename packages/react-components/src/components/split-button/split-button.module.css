@@ -1,0 +1,28 @@
+.SplitButton {
+  & > :nth-child(1) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+
+    &[data-button-dimension='big'] {
+      padding-left: env(--space-16);
+      padding-right: env(--space-16);
+    }
+  }
+
+  & > * > button {
+    --separator-color: hsl(0deg 0% 40% / 40%);
+
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    box-shadow: inset 1px 0 0 0 var(--separator-color);
+
+    &[data-button-kind='primary'] {
+      --separator-color: hsl(0deg 0% 100% / 30%);
+    }
+
+    &:is([data-button-dimension='big'], [data-button-dimension='regular']) {
+      padding-left: env(--space-8);
+      padding-right: env(--space-8);
+    }
+  }
+}
