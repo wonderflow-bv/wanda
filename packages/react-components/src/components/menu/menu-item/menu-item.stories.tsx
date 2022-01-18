@@ -1,6 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { useState } from 'react'
-import { Menu, Chip } from '../..'
+import { Menu } from '..'
+import { Chip } from '../..'
 
 export default {
   title: 'Components/Navigation/Menu Item',

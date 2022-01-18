@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { ClampText } from './clamp-text'
-import { Container } from '../container'
+import { Container } from '../..'
 
 export default {
   title: 'Components/Typography/Clamp Text',

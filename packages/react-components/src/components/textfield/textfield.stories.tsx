@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Stack } from '../stack'
+import { Stack } from '../..'
 import { Textfield } from './textfield'
 
 export default {

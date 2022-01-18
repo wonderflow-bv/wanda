@@ -1,6 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { useState } from 'react'
-import { Button, Dropdown, Separator, Textfield, Menu, Title } from '..'
+import { Dropdown } from './dropdown'
+import { Button, Separator, Textfield, Menu, Title } from '../..'
 
 export default {
   title: 'Components/Dialogs/Dropdown',

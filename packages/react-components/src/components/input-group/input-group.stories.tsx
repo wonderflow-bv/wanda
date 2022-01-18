@@ -1,5 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Stack, Button, Select, Textfield, InputGroup } from '../..'
+import { InputGroup } from './input-group'
+import { Stack, Button, Select, Textfield } from '../..'
 
 export default {
   title: 'Components/Inputs/Input group',

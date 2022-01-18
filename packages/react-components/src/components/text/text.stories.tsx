@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Text } from '../text'
-import { Container } from '../container'
+import { Text } from './text'
+import { Container } from '../..'
 
 export default {
   title: 'Components/Typography/Text',

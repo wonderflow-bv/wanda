@@ -1,7 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Title } from '../title'
-import { Polymorphic } from '../..'
-import { Container } from '../container'
+import { Title } from './title'
+import { Polymorphic, Container } from '../..'
 
 export default {
   title: 'Components/Typography/Title',

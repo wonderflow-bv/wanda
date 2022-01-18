@@ -1,5 +1,5 @@
-import { Prose } from './prose'
 import { ComponentStory, Meta } from '@storybook/react'
+import { Prose } from './prose'
 import { Container, Separator, Text, Title } from '../..'
 
 export default {

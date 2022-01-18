@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { InfoState } from './info-state'
-import { Button } from '../button'
+import { Button } from '../..'
 
 export default {
   title: 'Components/Dialogs/InfoState',

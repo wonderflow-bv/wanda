@@ -1,6 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { useState } from 'react'
-import { Modal, useOverlayContext, OverlayContainer, Button, IconButton, Title, Stack } from '../..'
+import { Modal } from './modal'
+import { useOverlayContext, OverlayContainer, Button, IconButton, Title, Stack } from '../..'
 
 export default {
   title: 'Components/Dialogs/Modal',

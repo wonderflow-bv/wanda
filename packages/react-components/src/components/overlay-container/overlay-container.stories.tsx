@@ -1,8 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { useState } from 'react'
 import { OverlayContainer } from './overlay-container'
-import { Button } from '../button'
-import { Stack } from '../stack'
+import { Button, Stack } from '../..'
 
 export default {
   title: 'Layouts/Overlay container',

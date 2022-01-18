@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { StarMeter } from '../star-meter'
+import { StarMeter } from './star-meter'
 
 export default {
   title: 'Components/Widgets/Star meter',

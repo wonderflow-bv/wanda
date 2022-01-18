@@ -1,9 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Card } from './card'
-import { Text } from '../text'
-import { Title } from '../title'
-import { Icon } from '../icon'
-import { Stack } from '../stack'
+import { Text, Title, Icon, Stack } from '../..'
 
 export default {
   title: 'Layouts/Card',
