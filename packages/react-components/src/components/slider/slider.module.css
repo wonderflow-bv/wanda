@@ -1,0 +1,101 @@
+@import './_mixins.css';
+
+.Slider svg {
+  flex-shrink: 0;
+}
+
+.Input {
+  --track-color: var(--global-vibrancy-background);
+  --progress-color: var(--dimmed-3);
+  --thumb-size: 24px;
+  --progress-direction: calc(-9999px - var(--thumb-size) / 2);
+
+  width: 100%;
+  background: transparent;
+  appearance: none;
+  overflow: hidden;
+  height: var(--thumb-size);
+  border-radius: 100px;
+
+  @nest :dir(rtl) & {
+    --progress-direction: calc(9999px + var(--thumb-size) / 2);
+  }
+  @nest .Slider[data-slider-dimension='small'] & {
+    --thumb-size: 16px;
+  }
+
+  &::-webkit-slider-runnable-track {
+
+    @mixin track;
+  }
+
+  &::-moz-range-track {
+
+    @mixin track;
+  }
+
+  &::-moz-focus-outer {
+    border: 0;
+  }
+
+  &::-webkit-slider-thumb {
+
+    @mixin thumb;
+
+
+    &:active,
+    &:focus {
+      background-color: var(--dimmed-6);
+    }
+  }
+
+  &::-moz-range-thumb {
+
+    @mixin thumb;
+
+
+    &:active,
+    &:focus {
+      background-color: var(--dimmed-6);
+    }
+  }
+
+  &:active::-webkit-slider-thumb {
+    cursor: grabbing;
+
+    @mixin active-thumb;
+  }
+
+  &:active::-moz-range-thumb {
+    cursor: grabbing;
+
+    @mixin active-thumb;
+  }
+
+
+  &:disabled {
+    &::-webkit-slider-runnable-track {
+
+      @mixin disabled-track;
+    }
+
+    &::-moz-range-track {
+
+      @mixin disabled-track;
+    }
+
+    &::-webkit-slider-thumb {
+
+      @mixin disabled-thumb;
+    }
+
+    &::-moz-range-thumb {
+
+      @mixin disabled-thumb;
+    }
+  }
+}
+
+.Value {
+  inline-size: 48px;
+}
