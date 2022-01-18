@@ -8,7 +8,7 @@ export default {
     padding: true,
     expandable: true,
     dimension: 'regular',
-    summar: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.'
+    summary: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.'
   },
   argTypes: {
     expandable: {
@@ -27,9 +27,7 @@ export default {
 } as ComponentMeta<typeof Disclosure>
 
 const Template: ComponentStory<typeof Disclosure> = (args) => (
-  <Disclosure
-    {...args}
-  >
+  <Disclosure {...args}>
     Lorem ipsum dolor sit amet consectetur adipisicing elit.
     Doloribus corporis nobis ipsum natus laudantium dolorem sapiente,
     sint adipisci at asperiores quia ex voluptatum veniam! Quos rerum natus eos excepturi atque!
