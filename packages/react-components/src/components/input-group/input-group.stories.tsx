@@ -1,24 +1,21 @@
-import React from 'react'
-import { Stack } from '../stack'
-import { Button } from '../button'
-import { Select } from '../select'
-import { Textfield } from '../textfield'
-import { InputGroup } from './input-group'
+import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Stack, Button, Select, Textfield, InputGroup } from '../..'
 
 export default {
   title: 'Components/Inputs/Input group',
-  component: InputGroup
-}
+  component: InputGroup,
+  args: {
+    input: <Textfield type="text" defaultValue="sample" />
+  }
+} as ComponentMeta<typeof Select>
 
-const Default = (args) => (
+const Default: ComponentStory<typeof InputGroup> = (args) => (
   <Stack inline fill={false} horizontalAlign="start" rowGap={32}>
     <InputGroup
-      input={<Textfield type="text" defaultValue="cicc" />}
       end={<Button>Confirm</Button>}
       {...args}
     />
     <InputGroup
-      input={<Textfield type="text" defaultValue="sample" />}
       end={<Textfield disabled size={9} placeholder="@mail.com" />}
       {...args}
     />
@@ -26,7 +23,6 @@ const Default = (args) => (
       dimension="big"
       label="Sample label"
       start={<Textfield readOnly size={6} defaultValue="https://" />}
-      input={<Textfield type="text" defaultValue="sample-domain" />}
       end={(
         <Select defaultValue={1}>
           <option value="1">.com</option>

@@ -1,0 +1,27 @@
+@import '../../core/utils/media.css';
+
+.Modal {
+  display: contents;
+}
+
+.Container {
+  position: absolute;
+  display: grid;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  pointer-events: none;
+  align-items: center;
+  justify-content: center;
+
+  @media (--from-extra-small) {
+    overflow: auto;
+    padding: 0 env(--space-24);
+  }
+
+  & > * {
+    pointer-events: auto;
+  }
+}
