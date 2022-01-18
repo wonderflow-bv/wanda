@@ -7,14 +7,10 @@
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "files": [
-    "dist"
+    "dist",
+    "core",
+    "core.css"
   ],
-  "exports": {
-    ".": "./dist/index.js",
-    "./core.css": "./dist/core.css",
-    "./core/utils/vibrancy.css": "./dist/core/utils/vibrancy.css",
-    "./core/utils/media.css": "./dist/core/utils/media.css"
-  },
   "publishConfig": {
     "access": "public"
   },
@@ -29,6 +25,7 @@
     "postbuild": "rimraf dist/**/_mixins.css",
     "build:ts": "tsc",
     "build:css": "cpy '**/*.css' '../dist' --parents --cwd=src && postcss dist/*.css \"dist/**/!(utils)/!(_mixins).css\" --replace",
+    "postbuild:css": "mv dist/core.css ./core.css && mv dist/core ./core",
     "lint": "run-s lint:styles",
     "lint:styles": "stylelint ./src/**/*.css"
   },

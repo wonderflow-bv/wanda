@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "build": "turbo run build",
+    "build:nocache": "turbo run build --no-cache",
     "start": "turbo run build && turbo run start --parallel",
     "lint": "turbo run lint",
     "prepare": "husky install"
