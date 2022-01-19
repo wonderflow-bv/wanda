@@ -27,7 +27,7 @@
     "build:prepare": "rimraf dist",
     "build:combine": "node src/combine.js",
     "build:light": "node src/index.js --name light",
-    "build:dark": "node src/index.js --name dark"
+    "build:dark": "node src/index.js --name dark",
     "test": "uvu tests --bail"
   },
   "repository": {

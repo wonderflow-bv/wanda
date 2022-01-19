@@ -28,7 +28,7 @@
     "icons": "1.0.0",
     "lint-staged": "12.1.7",
     "prettier": "^2.5.1",
-    "turbo": "latest",
+    "turbo": "1.0.28",
     "uvu": "0.5.3"
   },
   "turbo": {

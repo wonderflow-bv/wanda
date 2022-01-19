@@ -16,7 +16,7 @@
     "preserveWatchOutput": true,
     "skipLibCheck": true
   },
-  "exclude": ["node_modules", "packages/tokens"],
+  "exclude": ["node_modules"],
   "include": [
     "**/*.ts",
     "**/*.tsx",
