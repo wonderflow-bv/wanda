@@ -12,8 +12,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  release:
-    name: Intall, build and release
+  install:
+    name: Intall
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -41,18 +41,6 @@ jobs:
       - name: Install Dependencies
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
         run: npm ci
-
-      - name: Build
-        env:
-          CMS_ENDPOINT: ${{ secrets.CMS_ENDPOINT }}
-          NEXT_PUBLIC_DOMAIN: ${{ secrets.NEXT_PUBLIC_DOMAIN }}
-        run: npm run build
-
-      - name: Lint
-        run: npm run lint
-
-      - name: Test
-        run: npm run test
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
