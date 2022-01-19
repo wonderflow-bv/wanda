@@ -1,4 +1,4 @@
-name: Continuous Deployment
+name: Release
 
 on: workflow_dispatch
 # on:
@@ -13,7 +13,7 @@ concurrency:
 
 jobs:
   install:
-    name: Intall and release
+    name: Release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
