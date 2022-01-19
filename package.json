@@ -13,7 +13,7 @@
     "start": "turbo run start --parallel",
     "lint": "turbo run lint",
     "test": "turbo run test",
-    "release": "npm run build:nocache && changeset publish",
+    "release": "changeset publish",
     "prepare": "husky install"
   },
   "lint-staged": {
