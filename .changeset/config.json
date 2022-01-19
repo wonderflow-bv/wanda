@@ -4,7 +4,7 @@
     "@changesets/changelog-github",
     { "repo": "wonderflow-bv/wanda" }
   ],
-  "commit": false,
+  "commit": true,
   "linked": [],
   "access": "restricted",
   "baseBranch": "main",
