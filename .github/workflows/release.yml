@@ -2,9 +2,9 @@ name: Release
 
 # on: workflow_dispatch
 on:
-  pull_request:
+  push:
     branches:
-      - main
+      - master
 
 # Cancel in-progress jobs or runs for the current workflow
 concurrency:

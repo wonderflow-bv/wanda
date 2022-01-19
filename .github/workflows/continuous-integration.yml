@@ -1,9 +1,9 @@
 name: Continuous Integration
 
 on:
-  push:
+  pull_request:
     branches:
-      - master
+      - main
 
 # Cancel in-progress jobs or runs for the current workflow
 concurrency:
