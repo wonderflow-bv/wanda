@@ -3,7 +3,7 @@
   "rules": {
     "designtokens/check": [
       true,
-      "../../../node_modules/@wonderflow/tokens/platforms/web/tokens.json"
+      "@wonderflow/tokens/platforms/web/tokens.json"
     ]
   },
   "ignoreFiles": [
