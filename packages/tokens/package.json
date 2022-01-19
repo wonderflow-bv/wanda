@@ -1,6 +1,6 @@
 {
   "name": "@wonderflow/tokens",
-  "version": "1.3.6",
+  "version": "1.3.7",
   "description": "Design tokens from Wonderflow design language",
   "main": "platforms/web/index",
   "files": [
