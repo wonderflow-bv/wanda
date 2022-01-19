@@ -1,6 +1,17 @@
 # @wonderflow/themes
 
+## 1.0.2
+
+### Patch Changes
+
+- [#21](https://github.com/wonderflow-bv/wanda/pull/21) [`5d6fda0`](https://github.com/wonderflow-bv/wanda/commit/5d6fda0a920f5915741a6b4f0c6bd9ac5903388d) Thanks [@equinusocio](https://github.com/equinusocio)! - init
+
+* [`23dcabe`](https://github.com/wonderflow-bv/wanda/commit/23dcabe148c3420b286d78e06abc82e627dfe083) Thanks [@equinusocio](https://github.com/equinusocio)! - init
+
+- [#22](https://github.com/wonderflow-bv/wanda/pull/22) [`4a4464b`](https://github.com/wonderflow-bv/wanda/commit/4a4464b034dbf18fc75ed355454ba7bbdd4b67b4) Thanks [@equinusocio](https://github.com/equinusocio)! - Init
+
 ## 1.0.1
+
 ### Patch Changes
 
 - aa91e4d: Init new packages
