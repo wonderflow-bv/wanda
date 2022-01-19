@@ -1,10 +1,10 @@
-name: Release
+name: Continuous Deployment
 
-# on: workflow_dispatch
-on:
-  pull_request:
-    branches:
-      - main
+on: workflow_dispatch
+# on:
+#   pull_request:
+#     branches:
+#       - main
 
 # Cancel in-progress jobs or runs for the current workflow
 concurrency:
@@ -13,7 +13,7 @@ concurrency:
 
 jobs:
   install:
-    name: Intall
+    name: Intall and release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository

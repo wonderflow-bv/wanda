@@ -45,7 +45,7 @@ jobs:
         env:
           CMS_ENDPOINT: ${{ secrets.CMS_ENDPOINT }}
           NEXT_PUBLIC_DOMAIN: ${{ secrets.NEXT_PUBLIC_DOMAIN }}
-        run: npm run build
+        run: npm run build:nocache
 
       - name: Lint
         run: npm run lint
