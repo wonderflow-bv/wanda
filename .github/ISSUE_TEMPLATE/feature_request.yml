@@ -1,0 +1,48 @@
+name: Feature request
+description: Suggest an idea for this project
+title: "New feature request"
+labels: ["feature", "enhancement"]
+assignees:
+  - equinusocio
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this new feature request!
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Feature description
+      description: "Is your feature request related to a problem? Please describe."
+      value: "A clear and concise description of what the problem is. Ex. I'm always frustrated when ..."
+    validations:
+      required: true
+  - type: textarea
+    id: feature-solution
+    attributes:
+      label: "Describe the solution you'd like"
+      description: A clear and concise description of what you want to happen.
+    validations:
+      required: false
+  - type: textarea
+    id: feature-alternatives
+    attributes:
+      label: "Describe alternatives you've considered"
+      description: "A clear and concise description of any alternative solutions or features you've considered."
+    validations:
+      required: false
+  - type: textarea
+    id: feature-additional-info
+    attributes:
+      label: "Additional context and information"
+      description: "Add any other context or screenshots about the feature request here."
+    validations:
+      required: false
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you confirm that you read the [documentation](https://design.wonderflow.ai)
+      options:
+        - label: I've searched across open and closed issues for similiar requests
+          required: true

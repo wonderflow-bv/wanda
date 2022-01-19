@@ -1,0 +1,39 @@
+name: New component
+description: Add new component to the library
+title: "New component: [COMPONENT NAME]"
+labels: [feature]
+assignees:
+  - equinusocio
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this new component request!
+  - type: input
+    id: component-name
+    attributes:
+      label: Component name
+      description: Suggest a name or representation for the component you're asking for
+    validations:
+      required: true
+  - type: textarea
+    id: component-description
+    attributes:
+      label: Description and use cases
+      description: Describe the component you're asking for and add references if any
+      value: "Add a `[component name]` component that ..."
+    validations:
+      required: true
+  - type: textarea
+    id: component-specs
+    attributes:
+      label: Specifications
+      description: If you want add specifications and requirements for this component
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you confirm that you read the [documentation](https://design.wonderflow.ai)
+      options:
+        - label: I've searched across open and closed issues for similiar requests
+          required: true

@@ -1,0 +1,37 @@
+name: New icons
+description: Ask for a new icons
+title: "New icons request"
+labels: ["feature"]
+assignees:
+  - equinusocio
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this new icons request!
+  - type: textarea
+    id: icons-list
+    attributes:
+      label: Icon names
+      description: "We need to add a new icons to represent these purposes/actions/topics:"
+      value: |
+        - User
+        - People
+        - Etc.."
+    validations:
+      required: true
+  - type: textarea
+    id: icons-proposal
+    attributes:
+      label: Icons proposal
+      description: Search the icon to propose here https://fontawesome.com/v6.0/icons and provide the name.
+    validations:
+      required: false
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you confirm that you read the [documentation](https://design.wonderflow.ai)
+      options:
+        - label: I've searched across open and closed issues for similiar requests
+          required: true
