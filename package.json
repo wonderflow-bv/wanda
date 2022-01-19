@@ -11,6 +11,7 @@
     "build:nocache": "turbo run build --no-cache",
     "start": "turbo run start --parallel",
     "lint": "turbo run lint",
+    "test": "turbo run test",
     "prepare": "husky install"
   },
   "lint-staged": {
@@ -27,7 +28,8 @@
     "icons": "1.0.0",
     "lint-staged": "12.1.7",
     "prettier": "^2.5.1",
-    "turbo": "latest"
+    "turbo": "latest",
+    "uvu": "0.5.3"
   },
   "turbo": {
     "pipeline": {
@@ -40,11 +42,14 @@
           ".next/**"
         ]
       },
-      "lint": {
-        "outputs": []
-      },
       "start": {
         "cache": false
+      },
+      "test": {
+        "cache": false
+      },
+      "lint": {
+        "outputs": []
       }
     }
   },
