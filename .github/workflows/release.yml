@@ -1,4 +1,4 @@
-name: Release
+name: Continuous Deployment
 
 # on: workflow_dispatch
 on:
