@@ -84,6 +84,12 @@ Then add the following code inside your `.stylelintrc.json` configuration file.
 ```json
 {
   "extends": "@wonderflow/stylelint-config",
+  "rules": {
+    "designtokens/check": [
+      true,
+      "./node_modules/@wonderflow/tokens/platforms/web/tokens.json"
+    ]
+  },
   "ignoreFiles": [
     "!**/*.css",
     "**/*.jsx",
