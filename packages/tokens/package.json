@@ -10,7 +10,8 @@
     "prebuild": "rimraf platforms/",
     "build": "run-s build:tokens build:types",
     "build:tokens": "node src/index.js",
-    "build:types": "node src/generate-types.js"
+    "build:types": "node src/generate-types.js",
+    "test": "uvu tests --bail"
   },
   "repository": {
     "type": "git",
