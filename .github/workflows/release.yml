@@ -13,7 +13,7 @@ concurrency:
 
 jobs:
   install:
-    name: Intall
+    name: Intall and release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
