@@ -1,6 +1,9 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@1.6.3/schema.json",
-  "changelog": "@changesets/changelog-github",
+  "changelog": [
+    "@changesets/changelog-github",
+    { "repo": "wonderflow-bv/wanda" }
+  ],
   "commit": true,
   "linked": [],
   "access": "restricted",
