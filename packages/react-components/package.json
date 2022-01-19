@@ -54,6 +54,7 @@
     "react-dom": "^17.0"
   },
   "devDependencies": {
+    "@wonderflow/config": "*",
     "@babel/preset-typescript": "7.16.7",
     "@storybook/addon-actions": "6.5.0-alpha.4",
     "@storybook/addon-essentials": "6.5.0-alpha.4",
