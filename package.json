@@ -7,8 +7,8 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "turbo run build",
-    "build:nocache": "turbo run build --no-cache",
+    "build": "turbo run build --scope=\"@wonderflow/*\" --no-deps",
+    "build:nocache": "turbo run build --scope=\"@wonderflow/*\" --no-deps --no-cache",
     "start": "turbo run start --parallel",
     "lint": "turbo run lint",
     "test": "turbo run test",
