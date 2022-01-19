@@ -1,0 +1,69 @@
+name: Release
+
+on: workflow_dispatch
+# on:
+#   pull_request:
+#     branches:
+#       - main
+
+# Cancel in-progress jobs or runs for the current workflow
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  install:
+    name: Intall
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+      - run: npm i -g npm
+
+      - name: Cache Dependencies
+        uses: actions/cache@v2
+        id: cache-dependencies
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Install Dependencies
+        if: steps.cache-dependencies.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Build
+        env:
+          CMS_ENDPOINT: ${{ secrets.CMS_ENDPOINT }}
+          NEXT_PUBLIC_DOMAIN: ${{ secrets.NEXT_PUBLIC_DOMAIN }}
+        run: npm run build
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm run test
+
+  release:
+    name: Release changes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Release Pull Request or Publish to npm
+      id: changesets
+      uses: changesets/action@v1
+      with:
+        # This expects you to have a script called release which does a build for your packages and calls changeset publish
+        publish: npm run release
+      env:
+        GITHUB_TOKEN: ${{ secrets.WONDERFLOW_WORKFLOW_TOKEN }}
+        NPM_TOKEN: ${{ secrets.WONDERFLOW_NPM_TOKEN }}

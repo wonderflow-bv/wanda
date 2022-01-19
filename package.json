@@ -13,6 +13,7 @@
     "start": "turbo run start --parallel",
     "lint": "turbo run lint",
     "test": "turbo run test",
+    "release": "turbo run build && changeset publish",
     "prepare": "husky install"
   },
   "lint-staged": {
