@@ -1,10 +1,12 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@1.6.3/schema.json",
   "changelog": "@changesets/cli/changelog",
-  "commit": false,
-  "linked": [],
+  "commit": true,
+  "linked": [
+    ["@wonderflow/config", "@wonderflow/react-components", "@wonderflow/icons"]
+  ],
   "access": "restricted",
-  "baseBranch": "master",
+  "baseBranch": "main",
   "updateInternalDependencies": "patch",
   "ignore": []
 }
