@@ -34,6 +34,7 @@
     "type": "git",
     "url": "git+https://github.com/wonderflow-bv/wanda.git"
   },
+  "homepage": "https://github.com/wonderflow-bv/wanda",
   "license": "MIT",
   "keywords": [
     "design-system",
@@ -43,6 +44,5 @@
   ],
   "bugs": {
     "url": "https://github.com/wonderflow-bv/wanda/issues"
-  },
-  "homepage": "https://github.com/wonderflow-bv/wanda"
+  }
 }
