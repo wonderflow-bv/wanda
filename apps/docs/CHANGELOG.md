@@ -1,5 +1,12 @@
 # docs
 
+## 1.53.10
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @wonderflow/react-components@3.1.5
+
 ## 1.53.9
 
 ### Patch Changes
