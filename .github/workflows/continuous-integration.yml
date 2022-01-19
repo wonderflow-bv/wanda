@@ -67,6 +67,9 @@ jobs:
         run: npm ci
 
       - name: Build
+        env:
+          CMS_ENDPOINT: ${{ secrets.CMS_ENDPOINT }}
+          NEXT_PUBLIC_DOMAIN: ${{ secrets.NEXT_PUBLIC_DOMAIN }}
         run: npm run build
 
   lint:
