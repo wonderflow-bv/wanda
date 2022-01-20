@@ -22,7 +22,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 14
-      - run: npm i -g npm
+      - run: npm i -g npm@8
 
       - name: Cache Dependencies
         uses: actions/cache@v2
