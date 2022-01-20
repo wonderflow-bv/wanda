@@ -1,6 +1,24 @@
+# Contributing to the project
+
 Wanda's design system monorepo is built on top of a modern toolchain composed by [Turborepo][turborepo], [NPM Workspaces](https://docs.npmjs.com/cli/v8/using-npm/workspaces), [Changeset][changeset], and [GitHub Actions](https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions).
 
 To work on this project you have to know how a monorepo works and how to use the above mentioned tools to being able to introduce features, fixes and changes.
+
+
+## Table of Content
+
+- [Workspaces](#workspaces)
+- [How to contribute](#how-to-contribute)
+  * [Installation](#installation)
+  * [Running the project](#running-the-project)
+  * [Building the project](#building-the-project)
+  * [Running tests](#running-tests)
+  * [Adding a change](#adding-a-change)
+    + [Add a change](#add-a-change)
+    + [Start prerelease](#start-prerelease)
+    + [Close prerelease](#close-prerelease)
+
+---
 
 ## Workspaces
 
