@@ -30,7 +30,7 @@ export const Tree: {
         className={Title}
         weight="bold"
       >
-        <Stack as="span" columnGap={8} direction="row" inline>
+        <Stack as="span" verticalAlign="center" columnGap={8} direction="row" inline>
           {icon && <Icon name={icon} />}
           {title}
         </Stack>
