@@ -63,3 +63,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.WONDERFLOW_WORKFLOW_TOKEN }}
           NPM_TOKEN: ${{ secrets.WONDERFLOW_NPM_TOKEN }}
+
+      # - uses: amondnet/vercel-action@v20
+      #   with:
+      #     scope: wanda-ds
+      #     vercel-token: ${{ secrets.VERCEL_TOKEN }}
+      #     vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+      #     vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+      #     working-directory: ./apps/docs
+      #     alias-domains: |
+      #       staging.design.wonderflow.ai
