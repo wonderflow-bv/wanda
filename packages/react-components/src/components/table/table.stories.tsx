@@ -133,6 +133,8 @@ export const ExpandableRows = Template.bind({})
 ExpandableRows.args = {
   ExpandableRowsComponent: ExpndableComponent,
   pagination: true,
+  selectableRows: true,
+  selectableRowsHighlight: true,
   striped: true
 }
 
