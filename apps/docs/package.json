@@ -25,8 +25,8 @@
     "last 2 Edge versions"
   ],
   "scripts": {
+    "build": "next build",
     "start": "next dev",
-    "build:next": "next build",
     "lint": "npm run lint:styles",
     "lint:styles": "stylelint src/**/*.css pages/**/*.css",
     "update:cssdb": "npx browserslist@latest --update-db"

@@ -9,7 +9,6 @@
   "scripts": {
     "build": "turbo run build",
     "build:nocache": "turbo run build --no-cache",
-    "build:apps": "turbo run build:next",
     "start": "turbo run start --parallel",
     "lint": "turbo run lint",
     "test": "turbo run test",
@@ -35,15 +34,6 @@
   "turbo": {
     "pipeline": {
       "build": {
-        "dependsOn": [
-          "^build"
-        ],
-        "outputs": [
-          "dist/**",
-          ".next/**"
-        ]
-      },
-      "build:next": {
         "dependsOn": [
           "^build"
         ],
