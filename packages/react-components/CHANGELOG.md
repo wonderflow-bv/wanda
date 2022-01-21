@@ -1,5 +1,15 @@
 # @wonderflow/react-components
 
+## 4.0.0
+
+### Major Changes
+
+- [`16b7844`](https://github.com/wonderflow-bv/wanda/commit/16b78449102b464a36bb5b23d82b6d3b0b55566f) Thanks [@equinusocio](https://github.com/equinusocio)! - Move icons as public deps and update installation guide
+
+### Patch Changes
+
+- [#28](https://github.com/wonderflow-bv/wanda/pull/28) [`e44a49c`](https://github.com/wonderflow-bv/wanda/commit/e44a49c27fec979aa80b4094369b2cc57d7682c4) Thanks [@equinusocio](https://github.com/equinusocio)! - Fix menu item decoration position
+
 ## 3.1.6
 
 ### Patch Changes
