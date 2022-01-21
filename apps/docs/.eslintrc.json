@@ -2,7 +2,10 @@
   "extends": ["@wonderflow/eslint-config", "plugin:json/recommended"],
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint"],
+  "parserOptions": {
+    "project": "./tsconfig.eslint.json"
+  },
   "rules": {
     "@next/next/no-img-element": 0
-  }
+  },
 }
