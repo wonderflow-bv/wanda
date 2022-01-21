@@ -52,8 +52,9 @@
   ],
   "include": [
     "types/*",
+    "next.config.mjs",
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
   ]
 }
