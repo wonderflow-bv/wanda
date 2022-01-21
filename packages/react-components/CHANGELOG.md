@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 4.0.2
+
+### Patch Changes
+
+- [`5071650`](https://github.com/wonderflow-bv/wanda/commit/5071650f62e84d05ca4b4876ffff88da69a83221) Thanks [@equinusocio](https://github.com/equinusocio)! - Fix starmeter filling space
+
 ## 4.0.1
 
 ### Patch Changes

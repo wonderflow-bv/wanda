@@ -1,5 +1,12 @@
 # docs
 
+## 2.0.3
+
+### Patch Changes
+
+- Updated dependencies [[`5071650`](https://github.com/wonderflow-bv/wanda/commit/5071650f62e84d05ca4b4876ffff88da69a83221)]:
+  - @wonderflow/react-components@4.0.2
+
 ## 2.0.2
 
 ### Patch Changes
