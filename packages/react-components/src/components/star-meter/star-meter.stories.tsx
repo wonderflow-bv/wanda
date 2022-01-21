@@ -1,5 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { StarMeter } from './star-meter'
+import { Stack } from '../..'
 
 export default {
   title: 'Components/Widgets/Star meter',
@@ -16,7 +17,7 @@ export default {
   }
 } as ComponentMeta<typeof StarMeter>
 
-const Template: ComponentStory<typeof StarMeter> = (args) => <StarMeter {...args} />
+const Template: ComponentStory<typeof StarMeter> = (args) => <Stack><StarMeter {...args} /></Stack>
 
 export const Default = Template.bind({})
 

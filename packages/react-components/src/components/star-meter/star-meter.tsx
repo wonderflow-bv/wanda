@@ -106,6 +106,7 @@ export const StarMeter = forwardRef(({
       columnGap={8}
       className={clsx(styles.StarMeter, className)}
       role="meter"
+      fill={false}
       aria-valuenow={clamp(value, 0, starCount)}
       aria-valuemin={0}
       aria-valuemax={starCount}
