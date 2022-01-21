@@ -329,7 +329,11 @@ const routes: NavigationMenu = [
           {
             path: '/components/layouts/table',
             label: 'Table',
-            target: ''
+            target: '',
+            tag: {
+              label: 'beta',
+              color: 'blue'
+            }
           }
         ]
       },

@@ -116,7 +116,7 @@ export const MenuItem = forwardRef(({
           dimension={dimension === 'small' ? 14 : 16}
         />
       )}
-      <Stack columnGap={16} fill={false} direction="row" horizontalAlign="space-between">
+      <Stack className={styles.DecorationContent} columnGap={16} fill={false} direction="row" horizontalAlign="space-between">
         {children}
         {decoration}
       </Stack>
