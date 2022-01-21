@@ -66,6 +66,10 @@
   position: relative;
 }
 
+.DecorationContent {
+  flex-grow: 1;
+}
+
 .Icon {
   flex-shrink: 0;
   margin-top: 4px;

@@ -1,16 +1,11 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { useState } from 'react'
 import { Menu } from './menu'
-import { Separator, Chip, Text } from '../..'
+import { Separator, Chip } from '../..'
 
 export default {
   title: 'Components/Navigation/Menu',
   component: Menu,
-  args: {
-    dimension: 'regular',
-    iconPosition: 'left',
-    padding: true
-  },
   argTypes: {
     dimension: {
       options: ['small', 'regular'],
@@ -82,15 +77,3 @@ const LinksTemplate: ComponentStory<typeof Menu> = (args) => (
 )
 
 export const AsLink = LinksTemplate.bind({})
-
-const WithDecoratorsTemplate: ComponentStory<typeof Menu> = (args) => (
-  <Menu {...args}>
-    <Menu.Item decoration={<Chip dimension="small" color="yellow">Good</Chip>} icon="user">List item text</Menu.Item>
-    <Menu.Item decoration={<Chip dimension="small" color="blue">Example</Chip>} icon="message">List item text List item</Menu.Item>
-    <Separator />
-    <Menu.Item decoration={<Text size={14} sentiment="danger">Warning</Text>} icon="compass">List item text</Menu.Item>
-    <Menu.Item decoration={<Chip dimension="small" color="purple">Decoration</Chip>} icon="bell">List item text</Menu.Item>
-  </Menu>
-)
-
-export const WithDecorations = WithDecoratorsTemplate.bind({})
