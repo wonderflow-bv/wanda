@@ -38,6 +38,7 @@
     "@next/mdx": "12.0.8",
     "@slack/web-api": "6.5.1",
     "@wonderflow/react-components": "*",
+    "@wonderflow/icons": "*",
     "@wonderflow/themes": "*",
     "ahooks": "3.1.5",
     "clsx": "1.1.1",

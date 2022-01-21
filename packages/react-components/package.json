@@ -86,7 +86,6 @@
     "typescript-plugin-css-modules": "3.4.0"
   },
   "dependencies": {
-    "@wonderflow/icons": "*",
     "ahooks": "3.1.7",
     "clsx": "1.1.1",
     "framer-motion": "5.5.7",
