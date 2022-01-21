@@ -1,4 +1,4 @@
-name: Deploy docs to production
+name: Deploy
 
 on: workflow_dispatch
 
