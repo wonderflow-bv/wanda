@@ -1,5 +1,11 @@
 # docs
 
+## 2.0.2
+
+### Patch Changes
+
+- [`14fdeca`](https://github.com/wonderflow-bv/wanda/commit/14fdecae8255483d6faf7d47a8c61ac35b410922) Thanks [@equinusocio](https://github.com/equinusocio)! - Update installation guide about themes import
+
 ## 2.0.1
 
 ### Patch Changes
