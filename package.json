@@ -44,9 +44,6 @@
         ]
       },
       "build:next": {
-        "dependsOn": [
-          "^build"
-        ],
         "outputs": [
           "dist/**",
           ".next/**"
@@ -66,5 +63,8 @@
   "engines": {
     "npm": ">=8.0.0",
     "node": ">=14.0.0"
+  },
+  "dependencies": {
+    "caniuse-lite": "1.0.30001301"
   }
 }
