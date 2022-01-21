@@ -1,5 +1,14 @@
 # docs
 
+## 2.0.1
+
+### Patch Changes
+
+- [#32](https://github.com/wonderflow-bv/wanda/pull/32) [`5a87233`](https://github.com/wonderflow-bv/wanda/commit/5a87233a7972f1b319648c3d447ac7ad5ae70236) Thanks [@equinusocio](https://github.com/equinusocio)! - fix imports
+
+- Updated dependencies [[`5a87233`](https://github.com/wonderflow-bv/wanda/commit/5a87233a7972f1b319648c3d447ac7ad5ae70236)]:
+  - @wonderflow/react-components@4.0.1
+
 ## 2.0.0
 
 ### Major Changes
