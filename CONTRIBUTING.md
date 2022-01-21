@@ -4,19 +4,20 @@ Wanda's design system monorepo is built on top of a modern toolchain composed by
 
 To work on this project you have to know how a monorepo works and how to use the above mentioned tools to being able to introduce features, fixes and changes.
 
-
 ## Table of Content
 
-- [Workspaces](#workspaces)
-- [How to contribute](#how-to-contribute)
-  * [Installation](#installation)
-  * [Running the project](#running-the-project)
-  * [Building the project](#building-the-project)
-  * [Running tests](#running-tests)
-  * [Adding a change](#adding-a-change)
-    + [Add a change](#add-a-change)
-    + [Start prerelease](#start-prerelease)
-    + [Close prerelease](#close-prerelease)
+- [Contributing to the project](#contributing-to-the-project)
+  - [Table of Content](#table-of-content)
+  - [Workspaces](#workspaces)
+  - [How to contribute](#how-to-contribute)
+    - [Installation](#installation)
+    - [Running the project](#running-the-project)
+    - [Building the project](#building-the-project)
+    - [Running tests](#running-tests)
+    - [Adding a change](#adding-a-change)
+      - [Add a change](#add-a-change)
+      - [Start prerelease](#start-prerelease)
+      - [Close prerelease](#close-prerelease)
 
 ---
 
@@ -78,11 +79,11 @@ We rely on [Changeset][changeset] to generate changelogs and release notes acros
 npx changeset
 ```
 
-Register a change which will be included inside changelog and release notes.
+Register a change which will be included inside changelog and release notes. If you run this command before commiting yout changes it will commit both at the same time. Useful if you want to bind a commit to a specific changeset.
 
 #### Start prerelease
 
-```
+```sh
 npx changeset pre enter next
 ```
 
@@ -90,7 +91,7 @@ Start a new prerelease channel called `next`. All `changeset version` commands r
 
 #### Close prerelease
 
-```
+```sh
 npx changeset pre exit
 ```
 
