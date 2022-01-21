@@ -15,7 +15,7 @@ export const Footer = () => {
           <Button
             as="a"
             rel="noopener noreferrer"
-            href="https://github.com/wonderflow-bv/design"
+            href="https://github.com/wonderflow-bv/wanda"
             kind="secondary"
             dimension="big"
             icon="github"

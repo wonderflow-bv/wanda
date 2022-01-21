@@ -39,7 +39,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
       )}
       <IconButton
         as="a"
-        href="https://github.com/wonderflow-bv/design"
+        href="https://github.com/wonderflow-bv/wanda"
         icon="github"
         target="_blank"
         rel="noopner noreferrer"

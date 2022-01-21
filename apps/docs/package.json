@@ -7,7 +7,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wonderflow-bv/design.git"
+    "url": "git+https://github.com/wonderflow-bv/wanda.git"
   },
   "keywords": [
     "design-system",
@@ -15,9 +15,9 @@
     "website"
   ],
   "bugs": {
-    "url": "https://github.com/wonderflow-bv/design/issues"
+    "url": "https://github.com/wonderflow-bv/wanda/issues"
   },
-  "homepage": "https://github.com/wonderflow-bv/design#readme",
+  "homepage": "https://github.com/wonderflow-bv/wanda",
   "browserslist": [
     "last 2 Chrome versions",
     "last 2 Firefox versions",
