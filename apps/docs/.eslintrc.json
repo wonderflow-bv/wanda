@@ -1,4 +1,7 @@
 {
+  "extends": ["@wonderflow/eslint-config", "plugin:json/recommended"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
   "rules": {
     "@next/next/no-img-element": 0
   }
