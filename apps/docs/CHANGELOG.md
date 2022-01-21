@@ -1,5 +1,11 @@
 # docs
 
+## 1.53.12
+
+### Patch Changes
+
+- [`39d8b97`](https://github.com/wonderflow-bv/wanda/commit/39d8b97fb76a6b510625a44788f90d136237bed1) Thanks [@equinusocio](https://github.com/equinusocio)! - update tsconfig and eslint
+
 ## 1.53.11
 
 ### Patch Changes
