@@ -57,6 +57,7 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
+          update-lock: npm i --package-lock-only
           publish: npm run release
           commit: "[ci] release"
           title: "[ci] release"
