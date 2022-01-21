@@ -1,6 +1,7 @@
 import { MdxLayout } from "@/components/layouts/mdx";
 import tkns from "@wonderflow/tokens/platforms/web/tokens.json";
 import { Snackbar } from "@wonderflow/react-components";
+import { Markdown } from "@/components/markdown";
 
 export default ({ children }) => (
   <MdxLayout
@@ -66,6 +67,13 @@ Then inside your app entry javascript point you have to import two required css 
 import "@wonderflow/react-components/core.css";
 import "@wonderflow/themes";
 ```
+
+<Snackbar>
+  <Markdown>
+  Due to a [limitation of postcss-import](https://github.com/postcss/postcss-import/issues/480#issuecomment-1018071406), if you are going to import the themes from within css, you have to specify the path to the file, which is
+  `@wonderflow/themes/dist/themes.css`.
+  </Markdown>
+</Snackbar>
 
 ## Recommended tools
 
