@@ -1,5 +1,18 @@
 # docs
 
+## 3.0.0-beta.0
+
+### Major Changes
+
+- [#37](https://github.com/wonderflow-bv/wanda/pull/37) [`d2295c8`](https://github.com/wonderflow-bv/wanda/commit/d2295c87074488882537ffdbb3fed6c7891a3eac) Thanks [@equinusocio](https://github.com/equinusocio)! - Rename Icon's `icon` property into `source` to allow custom icons.
+
+  We updated the Icon component in order to allow custom icons where needed. This introduce a breaking change on the `name` property which is now named `source`.
+
+### Patch Changes
+
+- Updated dependencies [[`d2295c8`](https://github.com/wonderflow-bv/wanda/commit/d2295c87074488882537ffdbb3fed6c7891a3eac)]:
+  - @wonderflow/react-components@5.0.0-beta.0
+
 ## 2.0.3
 
 ### Patch Changes
