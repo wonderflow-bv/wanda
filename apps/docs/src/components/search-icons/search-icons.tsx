@@ -41,7 +41,7 @@ const IconTile: React.FC<IconTileProps> = ({ icon, size }) => {
       rowGap={24}
     >
       <Stack as="span" horizontalAlign="center" verticalAlign="center" rowGap={16} fill={false}>
-        <Icon className={IconPreview} name={icon} dimension={size} />
+        <Icon className={IconPreview} source={icon} dimension={size} />
         <Text size={14} responsive={false} textAlign="center" weight="bold">{icon}</Text>
       </Stack>
       {(copiedName && copied) && <Text size={14} weight="bold" className={Label}>COPIED</Text>}
@@ -88,11 +88,11 @@ export const SearchIcons = () => {
           />
           <Stack direction="row" fill={false} columnGap={24} inline>
             <Stack verticalAlign="center" direction="row" columnGap={8}>
-              <Radio onChange={() => setIconSize(16)} dimension="small" id="SolidStyle" name="iconstyle" value="solid" defaultChecked />
+              <Radio onChange={() => setIconSize(16)} dimension="small" id="SolidStyle" source="iconstyle" value="solid" defaultChecked />
               <Text as="label" htmlFor="SolidStyle"><b>Solid</b></Text>
             </Stack>
             <Stack verticalAlign="center" direction="row" columnGap={8}>
-              <Radio onChange={() => setIconSize(24)} dimension="small" id="OutlineStyle" name="iconstyle" value="outline" />
+              <Radio onChange={() => setIconSize(24)} dimension="small" id="OutlineStyle" source="iconstyle" value="outline" />
               <Text as="label" htmlFor="OutlineStyle"><b>Outline</b></Text>
             </Stack>
           </Stack>

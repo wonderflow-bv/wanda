@@ -9,6 +9,7 @@
   overscroll-behavior: contain;
   block-size: 100%;
   position: relative;
+  z-index: 1;
 
   @media (--from-medium) {
     padding: env(--space-40) env(--space-64) env(--space-40);

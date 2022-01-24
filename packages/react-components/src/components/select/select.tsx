@@ -1,6 +1,5 @@
 import { ChangeEvent, forwardRef, SelectHTMLAttributes, ReactNode } from 'react'
 import { Text, Stack, Icon, IconProps } from '../..'
-import { IconNames } from '@wonderflow/icons'
 import styles from './select.module.css'
 import clsx from 'clsx'
 import { useUIDSeed } from 'react-uid'
@@ -13,7 +12,7 @@ export type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
   /**
    * Change the default icon displayed on the side of the select.
    */
-  icon?: IconNames;
+  icon?: IconProps['source'];
   /**
    * Set the accessible label for the select.
    */
@@ -86,7 +85,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(({
         { kind === 'single' && (
           <Icon
             className={styles.Icon}
-            name={icon}
+            source={icon}
             dimension={iconSizes[dimension] as IconProps['dimension']}
           />
         ) }

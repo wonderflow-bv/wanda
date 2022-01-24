@@ -1,4 +1,3 @@
-import React from 'react'
 import { useTheme } from 'next-themes'
 import { IconNames } from '@wonderflow/icons'
 import { Select } from '@wonderflow/react-components'

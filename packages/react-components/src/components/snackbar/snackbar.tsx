@@ -1,8 +1,7 @@
 import { forwardRef, ReactNode } from 'react'
 import styles from './snackbar.module.css'
 import clsx from 'clsx'
-import { IconNames } from '@wonderflow/icons'
-import { Title, Stack, Icon, Polymorphic, Button } from '../..'
+import { Title, Stack, Icon, IconProps, Polymorphic, Button } from '../..'
 
 export type SnackbarProps = {
   /**
@@ -14,7 +13,7 @@ export type SnackbarProps = {
    * Set the icon to be displaye alongside the title.
    * This icon have to enforce the message in a not misleading way.
    */
-  icon?: IconNames;
+  icon?: IconProps['source'];
   /**
    * Set the title of the snackbar. This must concisely describe the message.
    */
@@ -54,7 +53,7 @@ export const Snackbar = forwardRef(({
   onDismiss,
   ...otherProps
 }, forwardedRef) => {
-  const defaultIcons = {
+  const defaultIcons: Record<string, IconProps['source']> = {
     info: 'circle-info',
     warning: 'triangle-exclamation',
     neutral: 'compass',
@@ -71,7 +70,7 @@ export const Snackbar = forwardRef(({
       {...otherProps}
     >
       <Stack verticalAlign="start" horizontalAlign="start" direction="row" columnGap={16} fill={false}>
-        <Icon className={styles.Icon} name={icon || defaultIcons[kind] as IconNames} dimension={24} />
+        <Icon className={styles.Icon} source={icon || defaultIcons[kind]} dimension={24} />
         <Stack rowGap={16}>
           <Stack rowGap={8}>
             {title && <Title level="5">{title}</Title>}

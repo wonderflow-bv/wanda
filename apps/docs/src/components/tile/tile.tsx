@@ -26,7 +26,7 @@ export const Tile = forwardRef(({
       <Stack rowGap={32}>
         {children}
       </Stack>
-      {icon && <Icon name={icon} dimension={24} className={IconBullet} />}
+      {icon && <Icon source={icon} dimension={24} className={IconBullet} />}
     </Stack>
   )
 }) as PolymorphicTile

@@ -32,7 +32,7 @@ Default.args = {
 
 export const WithLeft = Template.bind({})
 WithLeft.args = {
-  left: <Icon name="bell" dimension={32} />,
+  left: <Icon source="bell" dimension={32} />,
   children: <Stack>
     <Title level="5">Title</Title>
     <Text>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</Text>
@@ -41,7 +41,7 @@ WithLeft.args = {
 
 export const WithRight = Template.bind({})
 WithRight.args = {
-  right: <Icon name="bell" dimension={32} />,
+  right: <Icon source="bell" dimension={32} />,
   children: <Stack>
     <Title level="5">Title</Title>
     <Text>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</Text>
@@ -50,10 +50,10 @@ WithRight.args = {
 
 export const WithLeftAndRight = Template.bind({})
 WithLeftAndRight.args = {
-  left: <Icon name="bell" dimension={32} />,
+  left: <Icon source="bell" dimension={32} />,
   children: <Stack>
     <Title level="5">Title</Title>
     <Text>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</Text>
   </Stack>,
-  right: <Icon name="calendar" dimension={32} />
+  right: <Icon source="calendar" dimension={32} />
 }

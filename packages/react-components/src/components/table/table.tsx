@@ -1,9 +1,8 @@
 import { useMemo, FC } from 'react'
 import ReactDataTable, { TableProps as ReactTableProps } from 'react-data-table-component'
-import { Icon, SkeletonBlock, Checkbox } from '../..'
+import { Icon, IconProps, SkeletonBlock, Checkbox } from '../..'
 import { customStyle } from './theme'
 import styles from './table.module.css'
-import { IconNames } from '@wonderflow/icons'
 import clsx from 'clsx'
 
 export type TableProps<T> = ReactTableProps<T> & {
@@ -15,11 +14,11 @@ export type TableProps<T> = ReactTableProps<T> & {
   /**
    * Set the icon to use when the expandable rows are collapsed.
    */
-  collapsedRowIcon?: IconNames;
+  collapsedRowIcon?: IconProps['source'];
   /**
    * Set the icon to use when the expandable rows are expanded.
    */
-  expandedRowIcon?: IconNames;
+  expandedRowIcon?: IconProps['source'];
   /**
    * Set minimum height for each row.
    */
@@ -74,16 +73,16 @@ export const Table = <T, >({
       selectableRowsComponent={Checkbox}
       selectableRowsComponentProps={selectProps}
       expandableIcon={{
-        collapsed: <Icon name={collapsedRowIcon} fill="var(--global-foreground)" dimension={16} />,
-        expanded: <Icon name={expandedRowIcon} fill="var(--global-foreground)" dimension={16} />
+        collapsed: <Icon source={collapsedRowIcon} fill="var(--global-foreground)" dimension={16} />,
+        expanded: <Icon source={expandedRowIcon} fill="var(--global-foreground)" dimension={16} />
       }}
-      paginationIconFirstPage={<Icon name="backward-step" dimension={24} />}
-      paginationIconPrevious={<Icon name="chevron-left" dimension={24} />}
-      paginationIconNext={<Icon name="chevron-right" dimension={24} />}
-      paginationIconLastPage={<Icon name="forward-step" dimension={24} />}
+      paginationIconFirstPage={<Icon source="backward-step" dimension={24} />}
+      paginationIconPrevious={<Icon source="chevron-left" dimension={24} />}
+      paginationIconNext={<Icon source="chevron-right" dimension={24} />}
+      paginationIconLastPage={<Icon source="forward-step" dimension={24} />}
       sortIcon={(
         <span className={styles.SortIcon}>
-          <Icon name="arrow-up" />
+          <Icon source="arrow-up" />
         </span>
         )}
       {...otherProps}

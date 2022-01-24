@@ -1,7 +1,6 @@
 import { Children, forwardRef, useMemo } from 'react'
 import styles from './list.module.css'
 import clsx from 'clsx'
-import { IconNames } from '@wonderflow/icons'
 import { Text, Stack, TextProps, Icon, IconProps, Polymorphic } from '../..'
 
 export type ListProps = {
@@ -13,7 +12,7 @@ export type ListProps = {
    * Set the marker style. You can use any icon from the iconography as marker
    * by passing its name.
    */
-  marker?: IconNames;
+  marker?: IconProps['source'];
   /**
    * Set the color of the marker.
    */
@@ -66,7 +65,7 @@ export const List = forwardRef(({
         <Stack as="li" direction="row" horizontalAlign="start" verticalAlign="start" fill={false}>
           {(isUnordered && !hideMarker) && (
             <Icon
-              name={marker}
+              source={marker}
               className={styles.Marker}
               fill={markerColor}
               data-list-default-marker={marker === 'circle'}

@@ -1,8 +1,7 @@
-import { Icon, Polymorphic, Stack, Tooltip } from '../../..'
+import { Icon, Polymorphic, Stack, Tooltip, IconProps } from '../../..'
 import styles from './menu-item.module.css'
 import { ReactNode, forwardRef, useCallback, useMemo, useRef } from 'react'
 import { useFocusEffect, useRovingTabIndex } from 'react-roving-tabindex'
-import { IconNames } from '@wonderflow/icons'
 import clsx from 'clsx'
 
 export type MenuItemProps = {
@@ -13,7 +12,7 @@ export type MenuItemProps = {
   /**
    * Whether the menu item should have an icon
    */
-  icon?: IconNames;
+  icon?: IconProps['source'];
   /**
    * Set the position of the icon. Used only when icon is defined.
    */
@@ -112,7 +111,7 @@ export const MenuItem = forwardRef(({
       {icon && (
         <Icon
           className={styles.IconClass}
-          name={icon}
+          source={icon}
           dimension={dimension === 'small' ? 14 : 16}
         />
       )}

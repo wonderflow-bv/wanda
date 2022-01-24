@@ -1,10 +1,15 @@
 import { IconNames } from '@wonderflow/icons'
 import {
+  Children,
+  cloneElement,
   forwardRef,
+  ReactElement,
   SVGAttributes
 } from 'react'
 import sprite from '@wonderflow/icons/sprite'
 import { TokensTypes } from '@wonderflow/tokens/platforms/web'
+import clsx from 'clsx'
+import styles from './icon.module.css'
 
 export type IconProps = SVGAttributes<SVGElement | SVGSVGElement> & {
   /**
@@ -13,7 +18,7 @@ export type IconProps = SVGAttributes<SVGElement | SVGSVGElement> & {
    *
    * Learn more: https://design.wonderflow.ai/design/iconography/
    */
-  name: IconNames;
+   source: IconNames | ReactElement<HTMLOrSVGElement>;
   /**
    * Set the size of the icon. To improve readability at any size, the style of the icon
    * is automatically defined based on the dimension.
@@ -26,26 +31,40 @@ export type IconProps = SVGAttributes<SVGElement | SVGSVGElement> & {
 
 export const Icon = forwardRef<SVGSVGElement, IconProps>(({
   className,
-  name,
+  source,
   dimension = 16,
   fill,
   ...otherProps
 }: IconProps, forwardedRef) => {
   const computedSize = dimension < 24 ? 16 : 24
 
-  return (
-    <svg
-      aria-hidden="true"
-      width={dimension}
-      height={dimension}
-      fill={fill}
-      className={className}
-      ref={forwardedRef}
-      {...otherProps}
-    >
-      <use href={`${sprite}#${computedSize}/${name}`} />
-    </svg>
-  )
+  return (typeof source === 'string')
+    ? (
+      <svg
+        aria-hidden="true"
+        width={dimension}
+        height={dimension}
+        fill={fill}
+        className={clsx(styles.Icon, className)}
+        ref={forwardedRef}
+        {...otherProps}
+      >
+        <use href={`${sprite}#${computedSize}/${source}`} />
+      </svg>
+      )
+    : (
+      <>
+        {Children.map(source, (child: ReactElement) => cloneElement(
+          child,
+          {
+            className,
+            'aria-hidden': 'true',
+            width: dimension,
+            height: dimension
+          }
+        ))}
+      </>
+      )
 })
 
 Icon.displayName = 'Icon'

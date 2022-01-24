@@ -31,7 +31,7 @@ export const Tree: {
         weight="bold"
       >
         <Stack as="span" verticalAlign="center" columnGap={8} direction="row" inline>
-          {icon && <Icon name={icon} />}
+          {icon && <Icon source={icon} />}
           {title}
         </Stack>
       </Text>

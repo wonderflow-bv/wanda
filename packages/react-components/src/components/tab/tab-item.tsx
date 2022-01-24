@@ -6,8 +6,7 @@ import {
 } from 'react'
 import { useRovingTabIndex, useFocusEffect } from 'react-roving-tabindex'
 import clsx from 'clsx'
-import { IconNames } from '@wonderflow/icons'
-import { Stack, Icon } from '../..'
+import { Stack, Icon, IconProps } from '../..'
 import { useTabState } from './primitive-tab'
 
 import styles from './tab.module.css'
@@ -20,7 +19,7 @@ export type TabItemProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   /**
    * An optional icon to show beside the tab label.
    */
-  icon?: IconNames;
+  icon?: IconProps['source'];
 }
 
 /**
@@ -66,7 +65,7 @@ export const TabItem = forwardRef<HTMLButtonElement, TabItemProps>(({
       tabIndex={isActive ? 0 : -1}
       {...otherProps}
     >
-      {icon && <Icon name={icon} dimension={16} />}
+      {icon && <Icon source={icon} dimension={16} />}
       {children}
     </Stack>
   )
