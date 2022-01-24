@@ -85,7 +85,7 @@ export const PostLayout: React.FC<PostLayoutProps> = ({
               {authors.map(author => (
                 <AuthorCard
                   key={author.id}
-                  source={author.fullName}
+                  name={author.fullName}
                   role={author.role}
                   avatar={author.avatar.url}
                 />
