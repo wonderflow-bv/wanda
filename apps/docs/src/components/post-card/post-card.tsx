@@ -101,7 +101,7 @@ export const PostCard = ({
                     <AuthorCard
                       key={person.id}
                       avatar={person.avatar.url}
-                      source={person.fullName}
+                      name={person.fullName}
                       role={person.role}
                       collapsed={authors?.length > 1}
                     />

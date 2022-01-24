@@ -88,11 +88,11 @@ export const SearchIcons = () => {
           />
           <Stack direction="row" fill={false} columnGap={24} inline>
             <Stack verticalAlign="center" direction="row" columnGap={8}>
-              <Radio onChange={() => setIconSize(16)} dimension="small" id="SolidStyle" source="iconstyle" value="solid" defaultChecked />
+              <Radio onChange={() => setIconSize(16)} dimension="small" id="SolidStyle" name="iconstyle" value="solid" defaultChecked />
               <Text as="label" htmlFor="SolidStyle"><b>Solid</b></Text>
             </Stack>
             <Stack verticalAlign="center" direction="row" columnGap={8}>
-              <Radio onChange={() => setIconSize(24)} dimension="small" id="OutlineStyle" source="iconstyle" value="outline" />
+              <Radio onChange={() => setIconSize(24)} dimension="small" id="OutlineStyle" name="iconstyle" value="outline" />
               <Text as="label" htmlFor="OutlineStyle"><b>Outline</b></Text>
             </Stack>
           </Stack>
