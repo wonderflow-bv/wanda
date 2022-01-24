@@ -1,4 +1,4 @@
-import React, { ChangeEvent, CSSProperties, forwardRef, Ref, useEffect, useMemo, useRef, useState } from 'react'
+import { ChangeEvent, CSSProperties, forwardRef, Ref, useEffect, useMemo, useRef, useState } from 'react'
 import clsx from 'clsx'
 import { Stack, Title, Select, Text, Icon } from '@wonderflow/react-components'
 import { fromString } from 'css-color-converter'
@@ -111,7 +111,7 @@ export const ContrastCalc = () => {
         <Stack horizontalAlign="start" verticalAlign="end" rowGap={24} fill={false}>
           <Stack inline direction="row" columnGap={8} verticalAlign="center" className={Badge}>
             <Text weight="bold" size={28}>{isAAA ? 'AAA' : isAA ? 'AA' : 'FAIL'}</Text>
-            <Icon name={isValid ? 'check' : 'xmark'} dimension={24} />
+            <Icon source={isValid ? 'check' : 'xmark'} dimension={24} />
           </Stack>
         </Stack>
       </Stack>

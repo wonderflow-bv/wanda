@@ -1,12 +1,11 @@
 import React, { Children, cloneElement, ReactElement } from 'react'
-import { Icon } from '@wonderflow/react-components'
-import { IconNames } from '@wonderflow/icons'
+import { Icon, IconProps } from '@wonderflow/react-components'
 
 import { Checklist as ChecklistClass, Li, Bullet } from './checklist.module.css'
 import clsx from 'clsx'
 
 type ChecklistProps = PropsWithClass & {
-  icon?: IconNames
+  icon?: IconProps['source']
 }
 type ChecklistLiProps = ChecklistProps
 
@@ -36,7 +35,7 @@ export const Checklist: {
       <li className={clsx(Li, className)} {...props}>
         {icon && (
           <span className={Bullet}>
-            <Icon name={icon} dimension={14} />
+            <Icon source={icon} dimension={14} />
           </span>
         )}
         {children}

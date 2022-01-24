@@ -80,7 +80,7 @@ export const ToggleButton = forwardRef(({
         small: 16
       }
 
-      return (<Icon name={icon} dimension={iconSize[dimension] as IconProps['dimension']} />)
+      return (<Icon source={icon} dimension={iconSize[dimension] as IconProps['dimension']} />)
     },
     []
   )

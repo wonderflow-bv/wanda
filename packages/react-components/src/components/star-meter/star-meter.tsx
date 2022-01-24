@@ -94,7 +94,7 @@ export const StarMeter = forwardRef(({
         fillType = 'url(#HalfStar)'
       }
 
-      return <Icon name="star" className={styles.Icon} dimension={16} fill={fillType} key={starIndex} />
+      return <Icon source="star" className={styles.Icon} dimension={16} fill={fillType} key={starIndex} />
     })
   }
 

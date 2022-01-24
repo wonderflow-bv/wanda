@@ -2,7 +2,6 @@ import { BaseField, BaseFieldProps, PrimitiveInputType } from './base-field'
 import { ChangeEvent, Ref, forwardRef, useCallback, useState, useMemo } from 'react'
 import styles from './textfield.module.css'
 import { Icon, IconButton, IconButtonProps, IconProps, Stack, Text } from '../'
-import { IconNames } from '@wonderflow/icons'
 import clsx from 'clsx'
 import { useUIDSeed } from 'react-uid'
 
@@ -10,7 +9,7 @@ export type TextfieldProps = BaseFieldProps & {
   /**
    * Set the icon to show on the left or right side of the input.
    */
-  icon?: IconNames;
+  icon?: IconProps['source'];
   /**
    * Set in which side of the field the icon should be displayed.
    */
@@ -153,7 +152,7 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
         { !textarea && icon && !isPassword && (
           <Icon
             className={styles.Icon}
-            name={icon}
+            source={icon}
             dimension={iconSizes[dimension] as IconProps['dimension']}
           />
         )}

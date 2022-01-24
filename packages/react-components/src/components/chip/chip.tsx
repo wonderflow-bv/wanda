@@ -59,7 +59,7 @@ export const Chip = forwardRef<HTMLSpanElement, ChipProps>(({
       <b>{children}</b>
       {interactive && (
         <button onClick={interactive && onDismissClick} className={styles.Action} type="button">
-          <Icon name="xmark" dimension={properties[dimension].iconSize as IconProps['dimension']} />
+          <Icon source="xmark" dimension={properties[dimension].iconSize as IconProps['dimension']} />
         </button>
       )}
     </Stack>

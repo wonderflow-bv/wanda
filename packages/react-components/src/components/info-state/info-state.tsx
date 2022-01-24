@@ -1,6 +1,5 @@
 import { forwardRef, PropsWithChildren, ReactNode } from 'react'
-import { IconNames } from '@wonderflow/icons'
-import { Stack, StackProps, Icon, Title, Text } from '../..'
+import { Stack, StackProps, Icon, IconProps, Title, Text } from '../..'
 import styles from './info-state.module.css'
 
 export type InfoStateProps = PropsWithChildren<PropsWithClass> & {
@@ -13,7 +12,7 @@ export type InfoStateProps = PropsWithChildren<PropsWithClass> & {
    * The icon to display. This is used to enforce the message of the info state.
    * This is not displayed if `image` is set.
    */
-  icon?: IconNames
+  icon?: IconProps['source']
   /**
    * Set the icon color. Please use the correct color based on the type of the message.
    * Eg. Don't use `green` for negative informations.
@@ -62,7 +61,7 @@ export const InfoState = forwardRef<HTMLDivElement, InfoStateProps>(({
     >
       {(!image && icon) && (
         <span data-info-state-icon-color={iconColor} className={styles.IconWrapper}>
-          <Icon name={icon} dimension={48} />
+          <Icon source={icon} dimension={48} />
         </span>
       )}
 

@@ -1,6 +1,5 @@
 import clsx from 'clsx'
 import { FC, Children, cloneElement, forwardRef, MouseEvent, useCallback } from 'react'
-import { IconNames } from '@wonderflow/icons'
 import { Icon, IconProps, Polymorphic, Spinner } from '../..'
 import styles from './button.module.css'
 
@@ -21,7 +20,7 @@ export type ButtonProps = {
   /**
    * Define the icon to use.
    */
-  icon?: IconNames;
+  icon?: IconProps['source'];
   /**
    * Set the position of the icon. Used only when icon is defined.
    */
@@ -105,7 +104,7 @@ export const Button = forwardRef((
     >
       {icon && (
         <Icon
-          name={icon}
+          source={icon}
           fill={iconColor}
           dimension={iconSize[dimension] as IconProps['dimension']}
         />
