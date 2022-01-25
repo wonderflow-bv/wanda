@@ -4,7 +4,9 @@ import {
   cloneElement,
   forwardRef,
   ReactElement,
-  SVGAttributes
+  SVGAttributes,
+  useEffect,
+  useState
 } from 'react'
 import sprite from '@wonderflow/icons/sprite'
 import { TokensTypes } from '@wonderflow/tokens/platforms/web'
@@ -18,7 +20,7 @@ export type IconProps = SVGAttributes<SVGElement | SVGSVGElement> & {
    *
    * Learn more: https://design.wonderflow.ai/design/iconography/
    */
-   source: IconNames | ReactElement<HTMLOrSVGElement>;
+  source: IconNames | ReactElement<HTMLOrSVGElement>;
   /**
    * Set the size of the icon. To improve readability at any size, the style of the icon
    * is automatically defined based on the dimension.
@@ -27,16 +29,22 @@ export type IconProps = SVGAttributes<SVGElement | SVGSVGElement> & {
    * If the size is 24pt or larger, the icon is displayed with the outline style.
    */
   dimension?: TokensTypes['icon']['size'] | 32 | 40 | 48 | 56;
+  style?: 'outline' | 'solid' | 'duotone';
 }
 
 export const Icon = forwardRef<SVGSVGElement, IconProps>(({
   className,
   source,
   dimension = 16,
+  style = 'solid',
   fill,
   ...otherProps
 }: IconProps, forwardedRef) => {
-  const computedSize = dimension < 24 ? 16 : 24
+  const [iconStyle, setIconStyle] = useState<IconProps['style']>(style)
+
+  useEffect(() => {
+    if (dimension < 24) setIconStyle('solid')
+  }, [dimension])
 
   return (typeof source === 'string')
     ? (
@@ -49,7 +57,7 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(({
         ref={forwardedRef}
         {...otherProps}
       >
-        <use href={`${sprite}#${computedSize}/${source}`} />
+        <use href={`${sprite}#${iconStyle}/${source}`} />
       </svg>
       )
     : (

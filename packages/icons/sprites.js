@@ -9,7 +9,7 @@ const colors = require('picocolors')
 
 const generateTypes = jsonStructure => `
 export type IconNames = '${jsonStructure.iconNames.join('\' |\n\'')}';
-export type IconSizes = '${jsonStructure.iconSizes.join('\' |\n\'')}';
+export type IconStyles = '${jsonStructure.iconStyles.join('\' |\n\'')}';
 `
 
 const run = () => {
@@ -20,20 +20,21 @@ const run = () => {
   const jsonStructure = {
     svgs: {},
     iconNames: [],
-    iconSizes: []
+    iconStyles: []
   }
 
   const sprite = svgstore()
 
   directories.children.forEach((dir) => {
     jsonStructure.svgs[dir.name] = []
-    jsonStructure.iconSizes.push(dir.name)
+    jsonStructure.iconStyles.push(dir.name)
     dir.children && dir.children.forEach((file) => {
-      const iconID = `${dir.name}/${file.name.replace(/-\d.*/gm, '')}`
+      const formattedName = file.name.replace(/-\d.*/gm, '').replace('.svg', '').replace(/(-solid|-outline).*?/gm, '')
+      const iconID = `${dir.name}/${formattedName}`
 
       sprite.add(iconID, fs.readFileSync(file.path, 'utf8'))
       jsonStructure.svgs[dir.name].push(file.name)
-      jsonStructure.iconNames.push(`${file.name.replace(/-\d.*/gm, '')}`)
+      jsonStructure.iconNames.push(`${formattedName}`)
     })
   })
   fs.writeFileSync(path.join('dist', 'sprite.svg'), sprite)
