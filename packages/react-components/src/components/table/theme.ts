@@ -1,4 +1,3 @@
-import tkns from '@wonderflow/tokens/platforms/web/tokens.json'
 import { createTheme, TableStyles } from 'react-data-table-component'
 
 /* Reference: https://github.com/jbetancur/react-data-table-component/blob/master/src/DataTable/themes.ts */
@@ -56,17 +55,17 @@ export const customStyle = (rowHeight: string): TableStyles => ({
   headCells: {
     style: {
       fontWeight: 800,
-      fontSize: tkns.font.size[16]
+      fontSize: 'var(--headcell-fs)'
     }
   },
   cells: {
     style: {
-      fontSize: tkns.font.size[16]
+      fontSize: 'var(--cell-fs)'
     }
   },
   pagination: {
     style: {
-      fontSize: tkns.font.size[16]
+      fontSize: 'var(--pagination-fs)'
     },
     pageButtonsStyle: {
       color: 'var(--global-foreground)'

@@ -1,3 +1,9 @@
+.DataTable {
+  --headcell-fs: env(--font-size-16);
+  --cell-fs: env(--font-size-16);
+  --pagination-fs: env(--font-size-16);
+}
+
 .SortIcon {
   margin-left: 4px;
   transform: scale(0.7);

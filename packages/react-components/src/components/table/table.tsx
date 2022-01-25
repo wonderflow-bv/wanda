@@ -56,36 +56,37 @@ export const Table = <T, >({
   ), [ExpandableRowsComponent])
 
   return (
-    <ReactDataTable
-      className={clsx(className)}
-      pagination={pagination}
-      responsive={responsive}
-      fixedHeader={fixedHeader}
-      paginationPerPage={paginationPerPage}
-      expandableRows={Boolean(ExpandableRowsComponent)}
-      expandOnRowClicked={Boolean(ExpandableRowsComponent)}
-      expandableRowsComponent={ExpandComponent}
-      theme={theme}
-      noHeader={noHeader}
-      progressComponent={progressComponent || <div style={{ width: '100%' }}><SkeletonBlock height={40} count={8} /></div>}
-      striped={striped}
-      customStyles={customStyles || customStyle(minRowHeight)}
-      selectableRowsComponent={Checkbox}
-      selectableRowsComponentProps={selectProps}
-      expandableIcon={{
-        collapsed: <Icon source={collapsedRowIcon} fill="var(--global-foreground)" dimension={16} />,
-        expanded: <Icon source={expandedRowIcon} fill="var(--global-foreground)" dimension={16} />
-      }}
-      paginationIconFirstPage={<Icon source="backward-step" dimension={24} />}
-      paginationIconPrevious={<Icon source="chevron-left" dimension={24} />}
-      paginationIconNext={<Icon source="chevron-right" dimension={24} />}
-      paginationIconLastPage={<Icon source="forward-step" dimension={24} />}
-      sortIcon={(
-        <span className={styles.SortIcon}>
-          <Icon source="arrow-up" />
-        </span>
+    <div className={clsx(styles.DataTable, className)}>
+      <ReactDataTable
+        pagination={pagination}
+        responsive={responsive}
+        fixedHeader={fixedHeader}
+        paginationPerPage={paginationPerPage}
+        expandableRows={Boolean(ExpandableRowsComponent)}
+        expandOnRowClicked={Boolean(ExpandableRowsComponent)}
+        expandableRowsComponent={ExpandComponent}
+        theme={theme}
+        noHeader={noHeader}
+        progressComponent={progressComponent || <div style={{ width: '100%' }}><SkeletonBlock height={40} count={8} /></div>}
+        striped={striped}
+        customStyles={customStyles || customStyle(minRowHeight)}
+        selectableRowsComponent={Checkbox}
+        selectableRowsComponentProps={selectProps}
+        expandableIcon={{
+          collapsed: <Icon source={collapsedRowIcon} fill="var(--global-foreground)" dimension={16} />,
+          expanded: <Icon source={expandedRowIcon} fill="var(--global-foreground)" dimension={16} />
+        }}
+        paginationIconFirstPage={<Icon source="backward-step" dimension={24} />}
+        paginationIconPrevious={<Icon source="chevron-left" dimension={24} />}
+        paginationIconNext={<Icon source="chevron-right" dimension={24} />}
+        paginationIconLastPage={<Icon source="forward-step" dimension={24} />}
+        sortIcon={(
+          <span className={styles.SortIcon}>
+            <Icon source="arrow-up" />
+          </span>
         )}
-      {...otherProps}
-    />
+        {...otherProps}
+      />
+    </div>
   )
 }
