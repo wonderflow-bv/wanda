@@ -44,4 +44,10 @@
 .Action:is(.Action.Action) {
   color: var(--snackbar-bg);
   background-color: var(--snackbar-fg);
+
+  &:active {
+    color: var(--snackbar-bg);
+    background-color: var(--snackbar-fg);
+    opacity: 80%;
+  }
 }
