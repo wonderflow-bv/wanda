@@ -24,7 +24,7 @@ body:
     id: icons-proposal
     attributes:
       label: Icons proposal
-      description: Search the icon to propose here https://fontawesome.com/v6.0/icons and provide the name.
+      description: Search the icon to propose from Nucleo and provide the name.
     validations:
       required: false
   - type: checkboxes

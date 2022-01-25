@@ -5,7 +5,7 @@ import {
 } from 'react'
 import clsx from 'clsx'
 import styles from './disclosure.module.css'
-import { Text, TextProps, Icon } from '../..'
+import { Text, TextProps, Icon, IconProps } from '../..'
 import { motion } from 'framer-motion'
 
 export type DisclosureProps = DetailsHTMLAttributes<HTMLDetailsElement> & {
@@ -73,13 +73,16 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
 
   const sizes = {
     small: {
-      summary: 16
+      summary: 16,
+      icon: 14
     },
     regular: {
-      summary: 18
+      summary: 18,
+      icon: 16
     },
     big: {
-      summary: 22
+      summary: 22,
+      icon: 24
     }
   }
 
@@ -126,7 +129,7 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
           <Icon
             className={styles.ExpandIcon}
             source="chevron-right"
-            dimension={dimension !== 'big' ? 16 : 24}
+            dimension={sizes[dimension].icon as IconProps['dimension']}
           />
         )}
       </Text>

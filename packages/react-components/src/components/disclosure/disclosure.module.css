@@ -2,6 +2,7 @@
   --icon-size: 1.11rem;
   --icon-padding: env(--space-8);
   --padding: calc(var(--icon-size) + var(--icon-padding) + (var(--icon-size) / 2));
+  --icon-top-offset: calc(var(--icon-size) / 2);
 
   display: block;
   position: relative;
@@ -13,15 +14,16 @@
   }
 
   &[data-disclosure-dimension='small'] {
-    --icon-size: env(--space-16);
+    --icon-size: env(--icon-size-14);
   }
 
   &[data-disclosure-dimension='regular'] {
-    --icon-size: 1.11rem;
+    --icon-size: env(--icon-size-16);
   }
 
   &[data-disclosure-dimension='big'] {
-    --icon-size: env(--space-24);
+    --icon-top-offset: calc(var(--icon-size) / 4);
+    --icon-size: env(--icon-size-24);
     --icon-padding: env(--space-16);
   }
 }
@@ -57,7 +59,7 @@
   content: '';
   transform-box: fill-box;
   position: absolute;
-  top: calc(var(--icon-size) / 4);
+  top: var(--icon-top-offset);
   right: calc(var(--icon-size) / 2);
   inline-size: var(--icon-size);
   block-size: var(--icon-size);
