@@ -140,7 +140,7 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
           }
         {isPassword && (
           <IconButton
-            className={styles.IconButtonClass}
+            className={styles.IconButton}
             dimension={actionSizes[dimension] as IconButtonProps['dimension']}
             onClick={handlePasswordVisibility}
             kind="flat"
