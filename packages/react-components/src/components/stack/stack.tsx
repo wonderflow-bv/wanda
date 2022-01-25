@@ -1,5 +1,4 @@
 import { CSSProperties, forwardRef } from 'react'
-import tksn from '@wonderflow/tokens/platforms/web/tokens.json'
 import { Polymorphic } from '../..'
 import styles from './stack.module.css'
 import clsx from 'clsx'
@@ -79,12 +78,12 @@ export const Stack = forwardRef(({
   }
 
   const computedStyle: CSSProperties = {
-    '--rGap': rowGap && tksn.space[rowGap],
-    '--cGap': columnGap && tksn.space[columnGap],
+    '--rGap': rowGap && rowGap,
+    '--cGap': columnGap && columnGap,
     '--vAlign': verticalAlign && alignmentTemplate(verticalAlign),
     '--hAlign': horizontalAlign && alignmentTemplate(horizontalAlign),
-    '--vPadding': verticalPadding && tksn.space[verticalPadding],
-    '--hPadding': horizontalPadding && tksn.space[horizontalPadding]
+    '--vPadding': verticalPadding && verticalPadding,
+    '--hPadding': horizontalPadding && horizontalPadding
   }
 
   return (
