@@ -5,8 +5,7 @@ import {
   forwardRef,
   ReactElement,
   SVGAttributes,
-  useEffect,
-  useState
+  useMemo
 } from 'react'
 import sprite from '@wonderflow/icons/sprite'
 import { TokensTypes } from '@wonderflow/tokens/platforms/web'
@@ -36,15 +35,11 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(({
   className,
   source,
   dimension = 16,
-  style = 'solid',
+  style = 'outline',
   fill,
   ...otherProps
 }: IconProps, forwardedRef) => {
-  const [iconStyle, setIconStyle] = useState<IconProps['style']>(style)
-
-  useEffect(() => {
-    if (dimension < 24) setIconStyle('solid')
-  }, [dimension])
+  const computedStyle = useMemo(() => dimension < 24 ? 'solid' : style, [style, dimension])
 
   return (typeof source === 'string')
     ? (
@@ -57,7 +52,7 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(({
         ref={forwardedRef}
         {...otherProps}
       >
-        <use href={`${sprite}#${iconStyle}/${source}`} />
+        <use href={`${sprite}#${computedStyle}/${source}`} />
       </svg>
       )
     : (
