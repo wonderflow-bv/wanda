@@ -1,5 +1,6 @@
 import { CSSProperties, ReactNode, forwardRef } from 'react'
 import clsx from 'clsx'
+import tksn from '@wonderflow/tokens/platforms/web/tokens.json'
 import { TokensTypes } from '@wonderflow/tokens/platforms/web'
 import { GridItem, GridItemProps } from './item/grid-item'
 import styles from './grid.module.css'
@@ -63,8 +64,8 @@ export const Grid = forwardRef<HTMLUListElement, GridProps>(({
   ...otherProps
 }, forwardedRef) => {
   const computedStyle: CSSProperties = {
-    '--rGap': rowGap && rowGap,
-    '--cGap': columnGap && columnGap,
+    '--rGap': rowGap && tksn.space[rowGap],
+    '--cGap': columnGap && tksn.space[columnGap],
     '--columns': columns,
     '--column-min-w': colMinWidth,
     '--rows': rows,

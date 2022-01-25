@@ -1,4 +1,5 @@
 import { CSSProperties, forwardRef, ReactNode } from 'react'
+import tkns from '@wonderflow/tokens/platforms/web/tokens.json'
 import { Stack, StackProps, Polymorphic } from '../..'
 import clsx from 'clsx'
 
@@ -66,8 +67,8 @@ export const Card = forwardRef(({
   ...otherProps
 }, forwardedRef) => {
   const dynamicStyle: CSSProperties = {
-    '--padding': padding && padding,
-    '--radius': radius && radius
+    '--padding': padding && tkns.space[padding],
+    '--radius': radius && tkns.radius[radius]
   }
 
   return (
