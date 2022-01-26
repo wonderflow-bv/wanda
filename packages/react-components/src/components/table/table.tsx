@@ -1,6 +1,6 @@
 import { useMemo, FC } from 'react'
 import ReactDataTable, { TableProps as ReactTableProps } from 'react-data-table-component'
-import { Icon, IconProps, SkeletonBlock, Checkbox } from '../..'
+import { Icon, IconProps, Skeleton, Checkbox } from '../..'
 import { customStyle } from './theme'
 import styles from './table.module.css'
 import clsx from 'clsx'
@@ -67,7 +67,7 @@ export const Table = <T, >({
         expandableRowsComponent={ExpandComponent}
         theme={theme}
         noHeader={noHeader}
-        progressComponent={progressComponent || <div style={{ width: '100%' }}><SkeletonBlock height={40} count={8} /></div>}
+        progressComponent={progressComponent || <div style={{ width: '100%' }}><Skeleton height="40px" count={8} /></div>}
         striped={striped}
         customStyles={customStyles || customStyle(minRowHeight)}
         selectableRowsComponent={Checkbox}

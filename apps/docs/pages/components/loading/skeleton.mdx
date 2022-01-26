@@ -3,13 +3,13 @@ import { Playground } from "@/components/playground";
 import { Props } from "@/components/props";
 import * as components from "@wonderflow/react-components";
 
-export const example = `<Card left={<SkeletonBlock width={48} height={48} circle />}>
-  <SkeletonBlock count={3} />
+export const example = `<Card left={<Skeleton width={48} height={48} circle />}>
+  <Skeleton count={3} />
 </Card>`;
 
 export default ({ children }) => (
   <MdxLayout
-    title="Skeleton block"
+    title="Skeleton"
     description="Optimistic UI made easy"
     showMeta
     features={["Highly customizable", "Can be inline or block", "Themes ready"]}
@@ -28,10 +28,10 @@ export default ({ children }) => (
 ## Anatomy
 
 ```tsx highlight=1,4
-import { SkeletonBlock } from "@wonderflow/react-components";
+import { Skeleton } from "@wonderflow/react-components";
 
 export default () => {
-  return <SkeletonBlock />;
+  return <Skeleton />;
 };
 ```
 

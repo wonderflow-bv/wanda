@@ -353,8 +353,8 @@ const routes: NavigationMenu = [
             target: ''
           },
           {
-            path: '/components/loading/skeleton-block',
-            label: 'Skeleton block',
+            path: '/components/loading/skeleton',
+            label: 'Skeleton',
             target: ''
           },
           {

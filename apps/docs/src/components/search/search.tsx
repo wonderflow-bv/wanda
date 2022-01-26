@@ -1,14 +1,13 @@
-import React from 'react'
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import { DocSearchProps } from '@docsearch/react'
-import { SkeletonBlock } from '@wonderflow/react-components'
+import { Skeleton } from '@wonderflow/react-components'
 
 const DynDocSearch = dynamic<DocSearchProps>(
   import('@docsearch/react').then(m => m.DocSearch),
   {
     ssr: false,
-    loading: () => <SkeletonBlock height={24} width={150} />
+    loading: () => <Skeleton height={24} width={150} />
   }
 )
 

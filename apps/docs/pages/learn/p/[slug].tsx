@@ -4,7 +4,7 @@ import { Params } from 'next/dist/server/router'
 import { Markdown } from '@/components/markdown'
 
 import { PostLayout } from '@/components/layouts/post'
-import { Prose, SkeletonBlock, Title } from '@wonderflow/react-components'
+import { Prose, Skeleton, Title } from '@wonderflow/react-components'
 
 type PostPageProps = PostType
 
@@ -27,9 +27,9 @@ const Post = ({
           ? <Markdown options={{ wrapper: Fragment }}>{content}</Markdown>
           : (
             <div style={{ zIndex: 0, position: 'relative' }}>
-              <Title><SkeletonBlock height={40} /></Title>
-              <SkeletonBlock count={5} />
-              <SkeletonBlock count={20} />
+              <Title><Skeleton height={40} /></Title>
+              <Skeleton count={5} />
+              <Skeleton count={20} />
             </div>
             )}
       </Prose>

@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { FC, Children, cloneElement, CSSProperties } from 'react'
 import MasonryLayout from 'react-masonry-css'
-import tksn from '@wonderflow/tokens/platforms/web/tokens.json'
+import tkns from '@wonderflow/tokens/platforms/web/tokens.json'
 import { TokensTypes } from '@wonderflow/tokens/platforms/web'
 import styles from './masonry.module.css'
 
@@ -56,7 +56,7 @@ export const Masonry: FC<MasonryProps> = ({
   }
 
   const dynamicStyle: CSSProperties = {
-    '--gutter': gutter && tksn.space[gutter]
+    '--gutter': gutter && tkns.space[gutter]
   }
 
   const computedColumns = typeof columns === 'object' && Object.keys(columns).reduce((prev, current) => current !== 'default' && ({

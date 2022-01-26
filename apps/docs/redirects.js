@@ -57,7 +57,7 @@ module.exports = [
   },
   {
     source: '/develop/components/skeleton-block/',
-    destination: '/components/loading/skeleton-block/',
+    destination: '/components/loading/skeleton/',
     permanent: true
   },
   {

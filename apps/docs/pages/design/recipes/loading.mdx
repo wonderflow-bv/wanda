@@ -3,7 +3,7 @@ import { LiveArea } from "@/components/live-area";
 import { HintCard } from "@/components/hint-card";
 import {
   Spinner,
-  SkeletonBlock,
+  Skeleton,
   LinearProgress,
   CircularProgress,
   Stack,
@@ -46,11 +46,11 @@ Indeterminate indicator useful when loading a section of the page or when user p
 ### Skeleton
 
 <LiveArea columnGap={32} verticalAlign="start">
-  <SkeletonBlock inline circle width={50} height={50} />
-  <SkeletonBlock count={4} width={400} />
+  <Skeleton inline circle width={50} height={50} />
+  <Skeleton count={4} width={400} />
 </LiveArea>
 
-Indeterminate indicator useful when the page is already available but content inside can take a long time to load. In some advanced use cases applications or websites load faster than the content inside that might require longer time to load, based on specific conditions (connection speed, servers response time, etc...). [See more about this element.](/develop/components/skeleton-block/)
+Indeterminate indicator useful when the page is already available but content inside can take a long time to load. In some advanced use cases applications or websites load faster than the content inside that might require longer time to load, based on specific conditions (connection speed, servers response time, etc...). [See more about this element.](/develop/components/skeleton/)
 
 ### Linear progress
 
