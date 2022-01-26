@@ -100,9 +100,9 @@ export const Card = forwardRef(({
         )}
 
         {right && (
-          <Stack className={styles.Right}>
+          <div className={styles.Right}>
             {right}
-          </Stack>
+          </div>
         )}
       </Stack>
     </Wrapper>

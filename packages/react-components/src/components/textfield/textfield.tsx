@@ -82,14 +82,14 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
   )
 
   const iconSizes = {
-    small: 14,
+    small: 12,
     regular: 16,
     big: 24
   }
 
   const actionSizes = {
     small: 'small',
-    regular: 'small',
+    regular: 'regular',
     big: 'big'
   }
 

@@ -1,8 +1,8 @@
 {
   "icon": {
     "size": {
-      "14": {
-        "value": 14,
+      "12": {
+        "value": 12,
         "attributes": {
           "category": "size"
         }
@@ -15,6 +15,30 @@
       },
       "24": {
         "value": 24,
+        "attributes": {
+          "category": "size"
+        }
+      },
+      "32": {
+        "value": 32,
+        "attributes": {
+          "category": "size"
+        }
+      },
+      "40": {
+        "value": 40,
+        "attributes": {
+          "category": "size"
+        }
+      },
+      "48": {
+        "value": 48,
+        "attributes": {
+          "category": "size"
+        }
+      },
+      "56": {
+        "value": 56,
         "attributes": {
           "category": "size"
         }

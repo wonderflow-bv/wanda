@@ -124,7 +124,7 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(({
                   className={styles.Header}
                 >
                   <Title responsive={false} level="6" id={titleId}>{title}</Title>
-                  {onClose && <IconButton dimension="small" onClick={onClose} className={styles.CloseButton} icon="xmark" kind="flat" />}
+                  {onClose && <IconButton onClick={onClose} className={styles.CloseButton} icon="xmark" kind="flat" />}
                 </Stack>
               )}
               <AutoFocusInside>

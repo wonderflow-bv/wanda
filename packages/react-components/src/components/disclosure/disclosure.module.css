@@ -14,7 +14,8 @@
   }
 
   &[data-disclosure-dimension='small'] {
-    --icon-size: env(--icon-size-14);
+    --icon-top-offset: calc(var(--icon-size) / 1.5);
+    --icon-size: env(--icon-size-12);
   }
 
   &[data-disclosure-dimension='regular'] {

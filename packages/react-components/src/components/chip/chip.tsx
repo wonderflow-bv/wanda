@@ -33,10 +33,10 @@ export const Chip = forwardRef<HTMLSpanElement, ChipProps>(({
 }, forwardedRef) => {
   const properties = {
     small: {
-      iconSize: 14
+      iconSize: 12
     },
     regular: {
-      iconSize: 14
+      iconSize: 12
     },
     big: {
       iconSize: 16

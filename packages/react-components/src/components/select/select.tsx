@@ -49,7 +49,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(({
   const seedID = useUIDSeed()
 
   const iconSizes = {
-    small: 14,
+    small: 12,
     regular: 16,
     big: 24
   }
