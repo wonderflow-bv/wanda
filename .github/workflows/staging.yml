@@ -2,8 +2,6 @@ name: Release on staging
 
 on:
   workflow_run:
-    branches:
-      - main
     workflows: ["Build, Release and Stage"]
     type:
       - complete
