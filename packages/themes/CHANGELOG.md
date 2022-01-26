@@ -1,5 +1,11 @@
 # @wonderflow/themes
 
+## 2.0.0-beta.0
+
+### Major Changes
+
+- [#47](https://github.com/wonderflow-bv/wanda/pull/47) [`676c15d`](https://github.com/wonderflow-bv/wanda/commit/676c15dbe5c03855a6316da6c1af6ce054dccfa6) Thanks [@equinusocio](https://github.com/equinusocio)! - Rename SkeletonBlock into Skeleton and drop related dependencies
+
 ## 1.0.2
 
 ### Patch Changes
