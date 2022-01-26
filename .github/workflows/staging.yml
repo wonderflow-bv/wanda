@@ -1,0 +1,28 @@
+name: Release on staging
+
+on:
+  workflow_run:
+    branches:
+      - main
+    workflows: ["Build, Release and Stage"]
+    type:
+      - complete
+
+# Cancel in-progress jobs or runs for the current workflow
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  install:
+    name: Release docs on staging
+    runs-on: ubuntu-latest
+    steps:
+      - uses: amondnet/vercel-action@v20
+        with:
+          scope: wanda-ds
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          alias-domains: |
+            staging.design.wonderflow.ai
