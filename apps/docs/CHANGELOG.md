@@ -1,5 +1,19 @@
 # docs
 
+## 3.0.0-beta.1
+
+### Minor Changes
+
+- [#40](https://github.com/wonderflow-bv/wanda/pull/40) [`a5b0620`](https://github.com/wonderflow-bv/wanda/commit/a5b0620fbdee612cb8d131ffec0f967abfe933a8) Thanks [@equinusocio](https://github.com/equinusocio)! - Update current icon styles and rename `grid-2` icon into `grid`
+
+* [#45](https://github.com/wonderflow-bv/wanda/pull/45) [`a37a9c8`](https://github.com/wonderflow-bv/wanda/commit/a37a9c83b231410bdaee3f4127635f9b12329542) Thanks [@equinusocio](https://github.com/equinusocio)! - Iconography has been completely refactored and a new Duotone style is now live.
+
+### Patch Changes
+
+- Updated dependencies [[`43ea50f`](https://github.com/wonderflow-bv/wanda/commit/43ea50f02b7d2863e1516685259b5e180ce03592), [`a5b0620`](https://github.com/wonderflow-bv/wanda/commit/a5b0620fbdee612cb8d131ffec0f967abfe933a8), [`a37a9c8`](https://github.com/wonderflow-bv/wanda/commit/a37a9c83b231410bdaee3f4127635f9b12329542), [`b021143`](https://github.com/wonderflow-bv/wanda/commit/b0211437f7d67e2f7e3dfe78ceadba15c69787f9), [`98ce5f9`](https://github.com/wonderflow-bv/wanda/commit/98ce5f91e499493980ed95f1e9cf756bb641a996), [`944b069`](https://github.com/wonderflow-bv/wanda/commit/944b069168e12a21cd4a6cc2c53cf9a49f50d639), [`7c37cca`](https://github.com/wonderflow-bv/wanda/commit/7c37cca6d1abae2d7500e74b0bdead9a45671809)]:
+  - @wonderflow/react-components@5.0.0-beta.1
+  - @wonderflow/icons@5.0.0-beta.0
+
 ## 3.0.0-beta.0
 
 ### Major Changes

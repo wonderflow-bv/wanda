@@ -1,5 +1,15 @@
 # @wonderflow/icons
 
+## 5.0.0-beta.0
+
+### Major Changes
+
+- [#45](https://github.com/wonderflow-bv/wanda/pull/45) [`a37a9c8`](https://github.com/wonderflow-bv/wanda/commit/a37a9c83b231410bdaee3f4127635f9b12329542) Thanks [@equinusocio](https://github.com/equinusocio)! - Iconography has been completely refactored and a new Duotone style is now live.
+
+### Minor Changes
+
+- [#40](https://github.com/wonderflow-bv/wanda/pull/40) [`a5b0620`](https://github.com/wonderflow-bv/wanda/commit/a5b0620fbdee612cb8d131ffec0f967abfe933a8) Thanks [@equinusocio](https://github.com/equinusocio)! - Update current icon styles and rename `grid-2` icon into `grid`
+
 ## 1.0.3
 
 ### Patch Changes
