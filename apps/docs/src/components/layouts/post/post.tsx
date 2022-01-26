@@ -1,7 +1,7 @@
 import { Bleed } from '@/components/bleed'
 import { Meta } from '@/components/meta'
 import { Toolbar } from '@/components/toolbar'
-import { Chip, ChipProps, Container, Elevator, SkeletonBlock, Stack, Title } from '@wonderflow/react-components'
+import { Chip, ChipProps, Container, Elevator, Skeleton, Stack, Title } from '@wonderflow/react-components'
 import { ShellLayout } from '@/components/layouts/shell'
 import Link from 'next/link'
 import tkns from '@wonderflow/tokens/platforms/web/tokens.json'
@@ -50,7 +50,7 @@ export const PostLayout: React.FC<PostLayoutProps> = ({
           <Stack horizontalAlign="center">
             {title
               ? <Title maxWidth="15ch" as="h1" level={wideTitle ? 'display' : '1'}>{title}</Title>
-              : <SkeletonBlock width="40vw" height={90} />
+              : <Skeleton width="40vw" height={90} />
           }
           </Stack>
         </Bleed>

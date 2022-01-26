@@ -1,7 +1,7 @@
 import React, { HTMLAttributes } from 'react'
 import clsx from 'clsx'
 import { Toolbar as ToolbarClass } from './toolbar.module.css'
-import { IconButton, SkeletonBlock, Stack } from '@wonderflow/react-components'
+import { IconButton, Skeleton, Stack } from '@wonderflow/react-components'
 import { Search } from '@/components/search'
 
 import dynamic from 'next/dynamic'
@@ -10,7 +10,7 @@ const DynThemeSwitcher = dynamic(
   import('@/components/theme-switcher').then(m => m.ThemeSwitcher),
   {
     ssr: false,
-    loading: () => <SkeletonBlock height={24} width={75} />
+    loading: () => <Skeleton height={24} width={75} />
   }
 )
 

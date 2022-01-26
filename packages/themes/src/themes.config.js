@@ -1,12 +1,12 @@
 const yargs = require('yargs/yargs')
 const { hideBin } = require('yargs/helpers')
 const argv = yargs(hideBin(process.argv)).argv
-const tksn = require('@wonderflow/tokens/platforms/web/tokens.json')
+const tkns = require('@wonderflow/tokens/platforms/web/tokens.json')
 
 module.exports = {
   source: [`./src/${argv.name}.json`],
   tokens: {
-    ...tksn
+    ...tkns
   },
   platforms: {
     web: {
