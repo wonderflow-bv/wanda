@@ -5,6 +5,8 @@ on:
     paths:
       - "apps/**"
     types: [opened, edited, reopened, synchronize]
+    branches:
+      - main
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
