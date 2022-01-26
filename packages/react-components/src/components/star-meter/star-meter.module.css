@@ -1,16 +1,16 @@
 .StarMeter {
   --star-color: hsl(env(--color-yellow-20));
   --star-dimmed-color: var(--dimmed-2);
-  --icon-size: 18px;
+  --icon-size: env(--icon-size-16);
 
   position: relative;
 
   &[data-star-meter-dimension='small'] {
-    --icon-size: 16px;
+    --icon-size: env(--icon-size-14);
   }
 
   &[data-star-meter-dimension='big'] {
-    --icon-size: 20px;
+    --icon-size: env(--icon-size-24);
   }
 }
 

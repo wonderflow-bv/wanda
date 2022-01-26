@@ -77,7 +77,7 @@ const DrawerShell: ComponentStory<typeof Drawer> = ({ children, ...args }) => {
       Quibusdam aliquam ipsam praesentium? Eaque officiis officia ad nobis aspernatur iste nam enim, eius veritatis non excepturi aliquam sed deserunt qui nihil eveniet facilis! Necessitatibus asperiores ut repellendus repudiandae in?
       Ipsum odio minima excepturi eaque laboriosam cupiditate repudiandae dolorem, magnam architecto sint perferendis optio, voluptas eligendi doloribus dignissimos illo quis. Voluptatem odio alias, nesciunt architecto voluptatibus delectus aspernatur suscipit sequi?
       Similique dolore esse tempore eligendi. Quo accusamus veniam similique odio necessitatibus nostrum perspiciatis at corporis autem rem aliquid atque veritatis ducimus praesentium tenetur, doloremque perferendis? Dolorum fugiat tenetur cupiditate cum!
-      <OverlayContainer obfuscate onClose={() => setVisible(false)}>
+      <OverlayContainer obfuscate={args.isModal} onClose={() => setVisible(false)}>
         {visible && (
           <Drawer {...args}>
             {children}

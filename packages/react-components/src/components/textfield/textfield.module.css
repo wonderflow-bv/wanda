@@ -69,8 +69,8 @@
   }
 }
 
-.IconButton.IconButton.IconButton {
-  --x: 19%;
+.IconButton:is(.IconButton) {
+  --x: 25%;
 
   position: absolute;
   top: 50%;

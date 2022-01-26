@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable global-require */
 import jsonTokens from '@wonderflow/tokens/platforms/web/tokens.json'
 import postcssMixins from 'postcss-mixins'
 import flatten from 'flat'

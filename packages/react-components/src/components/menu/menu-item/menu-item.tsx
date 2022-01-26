@@ -112,7 +112,7 @@ export const MenuItem = forwardRef(({
         <Icon
           className={styles.IconClass}
           source={icon}
-          dimension={dimension === 'small' ? 14 : 16}
+          dimension={dimension === 'small' ? 12 : 16}
         />
       )}
       <Stack className={styles.DecorationContent} columnGap={16} fill={false} direction="row" horizontalAlign="space-between">

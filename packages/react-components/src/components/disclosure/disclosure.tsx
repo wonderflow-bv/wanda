@@ -74,7 +74,7 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
   const sizes = {
     small: {
       summary: 16,
-      icon: 14
+      icon: 12
     },
     regular: {
       summary: 18,

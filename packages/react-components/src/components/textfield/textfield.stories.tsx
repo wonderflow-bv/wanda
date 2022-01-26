@@ -90,7 +90,11 @@ Types.argTypes = {
   }
 }
 
-export const Textarea = SingleTemplate.bind({})
+const TextareaTemplate: ComponentStory<typeof Textfield> = (args) => (
+  <Textfield {...args} defaultValue="123123klòasj" placeholder="Placeholder" />
+)
+
+export const Textarea = TextareaTemplate.bind({})
 Textarea.args = {
   disabled: false,
   textarea: true

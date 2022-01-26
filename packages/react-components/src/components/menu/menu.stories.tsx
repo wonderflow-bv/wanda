@@ -5,17 +5,7 @@ import { Separator, Chip } from '../..'
 
 export default {
   title: 'Components/Navigation/Menu',
-  component: Menu,
-  argTypes: {
-    dimension: {
-      options: ['small', 'regular'],
-      control: { type: 'radio' }
-    },
-    iconPosition: {
-      options: ['left', 'right'],
-      control: { type: 'radio' }
-    }
-  }
+  component: Menu
 } as ComponentMeta<typeof Menu>
 
 const Template: ComponentStory<typeof Menu> = (args) => (
