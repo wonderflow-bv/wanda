@@ -23,12 +23,14 @@ export type IconProps = SVGAttributes<SVGElement | SVGSVGElement> & {
   /**
    * Set the size of the icon. To improve readability at any size, the style of the icon
    * is automatically defined based on the dimension.
-   *
-   * Icons sized 16pt or less are displayed with the solid style.
-   * If the size is 24pt or larger, the icon is displayed with the outline style.
    */
   dimension?: TokensTypes['icon']['size'] | 32 | 40 | 48 | 56;
-  style?: 'outline' | 'solid' | 'duotone';
+  /**
+   * Set the style of the icon.
+   * The default style is `solid` and outline or duotone icons are available
+   * only for icons sized 24pt or larger.
+  */
+  style?: 'outline' | 'duotone';
 }
 
 export const Icon = forwardRef<SVGSVGElement, IconProps>(({

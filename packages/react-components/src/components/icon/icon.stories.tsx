@@ -5,7 +5,17 @@ export default {
   title: 'Components/Widgets/Icon',
   component: Icon,
   args: {
-    dimension: 24
+    style: 'outline',
+    dimension: 24,
+    fill: 'currentColor'
+  },
+  argTypes: {
+    style: {
+      control: {
+        options: ['outline', 'duotone'],
+        type: 'inline-radio'
+      }
+    }
   }
 } as ComponentMeta<typeof Icon>
 
