@@ -109,7 +109,7 @@ export const MdxLayout: React.FC<MdxLayoutProps> = ({
                   >
                     View source
                     {' '}
-                    <Icon source="arrow-up-right" dimension={14} />
+                    <Icon source="arrow-up-right" dimension={12} />
                   </a>
                   <a
                     href="https://github.com/wonderflow-bv/wanda/issues/new/choose"
@@ -118,7 +118,7 @@ export const MdxLayout: React.FC<MdxLayoutProps> = ({
                   >
                     Report an issue
                     {' '}
-                    <Icon source="arrow-up-right" dimension={14} />
+                    <Icon source="arrow-up-right" dimension={12} />
                   </a>
                   {links && links.map(link => (
                     <a
@@ -129,7 +129,7 @@ export const MdxLayout: React.FC<MdxLayoutProps> = ({
                     >
                       {link.label}
                       {' '}
-                      <Icon source="arrow-up-right" dimension={14} />
+                      <Icon source="arrow-up-right" dimension={12} />
                     </a>
                   ))}
                 </Stack>

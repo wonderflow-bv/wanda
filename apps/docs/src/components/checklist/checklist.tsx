@@ -35,7 +35,7 @@ export const Checklist: {
       <li className={clsx(Li, className)} {...props}>
         {icon && (
           <span className={Bullet}>
-            <Icon source={icon} dimension={14} />
+            <Icon source={icon} dimension={12} />
           </span>
         )}
         {children}
