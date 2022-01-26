@@ -103,7 +103,7 @@ export const MdxLayout: React.FC<MdxLayoutProps> = ({
                 </Title>
                 <Stack horizontalAlign="start" rowGap={8} className={Links}>
                   <a
-                    href={`https://github.com/wonderflow-bv/react-components/tree/main/src/${slugName}`}
+                    href={`https://github.com/wonderflow-bv/wanda/tree/main/packages/react-components/src/components/${slugName}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
