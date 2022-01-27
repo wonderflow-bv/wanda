@@ -1,7 +1,13 @@
-# Wanda React Components [<img src="https://svgshare.com/i/Ygj.svg" alt="Wonderflow Logo" width="90" height="90" align="right">](https://design.wonderflow.ai)
+<p align="center">
+   <img alt="Wonderflow" src="https://repository-images.githubusercontent.com/446459287/4c4d001e-4566-4976-8d01-87540f6d3719">
+</p>
 
-For more info check [design.wonderflow.ai](https://design.wonderflow.ai/)
+---
 
-## Contributing
+<h3 align="center">
+  📄 <a href="https://design.wonderflow.ai"><b>Documentation</b></a>
+  —
+  🤝 <a href="./CONTRIBUTING.md"><b>Contributing</b></a>
+</h3>
 
-See [contributing.md](./CONTRIBUTING.md) to contribute to this project
+---
