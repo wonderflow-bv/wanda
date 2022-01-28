@@ -68,7 +68,7 @@
     color: var(--global-vibrancy-foreground);
 
     &:not([aria-pressed='true'], [aria-disabled='true']):is(:active) {
-      background-color: var(--global-vibrancy-background-hover);
+      background-color: var(--global-vibrancy-background-hard);
       color: var(--global-vibrancy-foreground);
     }
 
@@ -83,7 +83,7 @@
     color: var(--global-vibrancy-foreground);
 
     &:not([aria-pressed='true'], [aria-disabled='true']):is(:active) {
-      background-color: var(--global-vibrancy-background-hover);
+      background-color: var(--global-vibrancy-background-hard);
     }
 
     &:is(:hover, :focus) {
