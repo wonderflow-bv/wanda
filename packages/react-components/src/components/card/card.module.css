@@ -22,12 +22,12 @@
 
     @mixin vibrancy;
 
-    background-color: var(--global-vibrancy-background);
+    background-color: var(--global-vibrancy-background-soft);
   }
 
   &[data-card-highlight-hover='true'][data-card-vibrant='true']:hover,
   &[data-card-highlight-hover='true'][data-card-vibrant='true']:focus-visible {
-    background-color: var(--global-vibrancy-background-hover);
+    background-color: var(--global-vibrancy-background);
   }
 
   &[data-card-bordered='true'] {
