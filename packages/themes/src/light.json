@@ -22,7 +22,7 @@
       "value": "hsl({color.primary.0} / 40%)"
     },
     "vibrancy-background-hard": {
-      "value": "hsl({color.primary.70} / 40%)"
+      "value": "hsl({color.primary.40} / 40%)"
     },
     "disabled-background": {
       "value": "hsl({color.primary.100} / 6%)"
