@@ -18,8 +18,11 @@
     "vibrancy-background": {
       "value": "hsl({color.primary.90} / 80%)"
     },
-    "vibrancy-background-hover": {
-      "value": "hsl({color.primary.70} / 60%)"
+    "vibrancy-background-soft": {
+      "value": "hsl({color.primary.100} / 80%)"
+    },
+    "vibrancy-background-hard": {
+      "value": "hsl({color.primary.80} / 80%)"
     },
     "disabled-background": {
       "value": "hsl({color.primary.50} / 35%)"

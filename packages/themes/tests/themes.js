@@ -2,7 +2,7 @@ const assert = require('uvu/assert')
 const { suite } = require('uvu')
 const Theme = require('../dist/themes/light.json')
 
-const THEME_TOT_KEYS = 34
+const THEME_TOT_KEYS = 35
 
 const Themes = suite('Themes')
 Themes('Light should include all keys', () => {
