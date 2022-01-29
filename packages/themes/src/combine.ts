@@ -1,18 +1,15 @@
-const fs = require('fs-extra')
-const path = require('path')
+/* eslint-disable import/no-extraneous-dependencies */
+import fs from 'fs-extra'
+import path from 'path'
 
-const formatTheme = (path, name) => {
-  const theme = fs.readFileSync(path, 'utf8', (err, data) => {
-    if (err) {
-      return err
-    }
-  })
+const formatTheme = (path: string) => {
+  const theme = fs.readFileSync(path, 'utf8')
   return theme.replace(':root {', '').replace('}', '')
 }
 
 const run = () => {
-  const lightTheme = formatTheme(path.join('dist', 'themes', 'light.css'), 'light')
-  const darkTheme = formatTheme(path.join('dist', 'themes', 'dark.css'), 'dark')
+  const lightTheme = formatTheme(path.join('dist', 'themes', 'light.css'))
+  const darkTheme = formatTheme(path.join('dist', 'themes', 'dark.css'))
 
   const template = `
   :root,
