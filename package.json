@@ -6,6 +6,7 @@
     "apps/*",
     "packages/*"
   ],
+  "packageManager": "npm@8.3.1",
   "scripts": {
     "build": "turbo run build",
     "build:nocache": "turbo run build --no-cache",
@@ -32,37 +33,6 @@
     "lint-staged": "12.3.2",
     "turbo": "1.1.1",
     "uvu": "0.5.3"
-  },
-  "turbo": {
-    "pipeline": {
-      "build": {
-        "dependsOn": [
-          "^build"
-        ],
-        "outputs": [
-          "dist/**",
-          ".next/**"
-        ]
-      },
-      "build:next": {
-        "dependsOn": [
-          "^build"
-        ],
-        "outputs": [
-          "dist/**",
-          ".next/**"
-        ]
-      },
-      "start": {
-        "cache": false
-      },
-      "test": {
-        "cache": false
-      },
-      "lint": {
-        "outputs": []
-      }
-    }
   },
   "engines": {
     "npm": ">=8.0.0",
