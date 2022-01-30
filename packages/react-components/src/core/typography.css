@@ -16,7 +16,7 @@ b {
 :where(a:any-link) {
   color: var(--global-interactive-text);
   text-decoration: none;
-  background-image: linear-gradient(currentColor, currentColor);
+  background-image: linear-gradient(currentcolor, currentcolor);
   background-position: 0% 100%;
   background-repeat: no-repeat;
   background-size: 0% 1px;

@@ -12,6 +12,9 @@
     "./dark.json": "./dist/themes/dark.json",
     "./light.json": "./dist/themes/light.json"
   },
+  "files": [
+    "dist"
+  ],
   "publishConfig": {
     "access": "public"
   },

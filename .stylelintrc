@@ -1,5 +1,7 @@
 {
-  "extends": ["@wonderflow/stylelint-config"],
+  "extends": [
+    "@wonderflow/stylelint-config"
+  ],
   "rules": {
     "designtokens/check": [
       true,

@@ -41,7 +41,7 @@ img {
 }
 
 svg:not([fill]) {
-  fill: currentColor;
+  fill: currentcolor;
 }
 
 fieldset {
