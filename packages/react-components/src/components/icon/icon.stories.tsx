@@ -5,14 +5,14 @@ export default {
   title: 'Components/Widgets/Icon',
   component: Icon,
   args: {
-    style: 'outline',
+    weight: 'outline',
     dimension: 24,
     fill: 'currentColor'
   },
   argTypes: {
-    style: {
+    weight: {
       control: {
-        options: ['outline', 'duotone'],
+        options: ['solid', 'outline', 'duotone'],
         type: 'inline-radio'
       }
     }

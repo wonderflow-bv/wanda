@@ -93,6 +93,14 @@ export const CustomReactIcon = (props) => (
       dangerous: false,
       description: "Set the icon size",
     },
+    {
+      name: "style",
+      type: ["solid", "outline", "duotone"],
+      default: "\"outline\"",
+      required: false,
+      dangerous: false,
+      description: "Set the icon style. If `dimension` is lower than 16, the style is ignored and the icon rendered with solid style.",
+    },
   ]}
 />
 

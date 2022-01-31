@@ -17,7 +17,7 @@ export type IconProps = SVGAttributes<SVGElement | SVGSVGElement> & {
    * Set the icon name to display. Icon names are defined in
    * the `IconNames` enum and are part of Wanda's iconography system.
    *
-   * Learn more: https://design.wonderflow.ai/design/iconography/
+   * Available icons: https://design.wonderflow.ai/design/iconography/
    */
   source: IconNames | ReactElement<HTMLOrSVGElement>;
   /**
@@ -26,22 +26,22 @@ export type IconProps = SVGAttributes<SVGElement | SVGSVGElement> & {
    */
   dimension?: TokensTypes['icon']['size'];
   /**
-   * Set the style of the icon.
-   * The default style is `solid` and outline or duotone icons are available
+   * Set the weight of the icon.
+   * The default weight is `solid` and outline or duotone icons are available
    * only for icons sized 24pt or larger.
   */
-  style?: 'outline' | 'duotone';
+  weight?: 'solid' | 'outline' | 'duotone';
 }
 
 export const Icon = forwardRef<SVGSVGElement, IconProps>(({
   className,
   source,
   dimension = 16,
-  style = 'outline',
+  weight = 'outline',
   fill,
   ...otherProps
 }: IconProps, forwardedRef) => {
-  const computedStyle = useMemo(() => dimension < 24 ? 'solid' : style, [style, dimension])
+  const computedStyle = useMemo(() => dimension < 16 ? 'solid' : weight, [weight, dimension])
 
   return (typeof source === 'string')
     ? (

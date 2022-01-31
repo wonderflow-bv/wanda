@@ -70,7 +70,7 @@ export const Snackbar = forwardRef(({
       {...otherProps}
     >
       <Stack verticalAlign="start" horizontalAlign="start" direction="row" columnGap={16} fill={false}>
-        <Icon className={styles.Icon} source={icon || defaultIcons[kind]} dimension={24} />
+        <Icon className={styles.Icon} weight="duotone" source={icon || defaultIcons[kind]} dimension={24} />
         <Stack rowGap={16}>
           <Stack rowGap={8}>
             {title && <Title level="5">{title}</Title>}

@@ -45,7 +45,7 @@ export const SearchIcons = () => {
   const fieldRef = useRef<HTMLInputElement>(null)
   const [searchTerm, setSearchTerm] = useState<string>('')
   const [iconSize, setIconSize] = useState<IconProps['dimension']>(16)
-  const [iconStyle, setIconStyle] = useState<IconProps['style']>()
+  const [iconStyle, setIconStyle] = useState<IconProps['weight']>()
 
   const debouncedSearchTerm = useDebounce(
     searchTerm,

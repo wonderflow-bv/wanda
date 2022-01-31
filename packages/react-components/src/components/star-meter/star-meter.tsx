@@ -4,6 +4,7 @@ import { useUIDSeed } from 'react-uid'
 import { Text, TextProps, Stack, Icon, Polymorphic } from '../..'
 
 import styles from './star-meter.module.css'
+import { IconProps } from '../icon'
 
 export type StarMeterProps = {
   /**
@@ -53,10 +54,19 @@ export const StarMeter = forwardRef(({
 }, forwardedRef) => {
   const seedID = useUIDSeed()
 
-  const labelSize = {
-    small: 14,
-    regular: 16,
-    big: 18
+  const properties = {
+    small: {
+      labelSize: 14,
+      iconSize: 12
+    },
+    regular: {
+      labelSize: 16,
+      iconSize: 16
+    },
+    big: {
+      labelSize: 18,
+      iconSize: 24
+    }
   }
 
   const clamp = (num: number, min: number, max: number) => Math.min(Math.max(num, min), max)
@@ -94,7 +104,7 @@ export const StarMeter = forwardRef(({
         fillType = 'url(#HalfStar)'
       }
 
-      return <Icon source="star" className={styles.Icon} dimension={16} fill={fillType} key={starIndex} />
+      return <Icon source="star" weight="solid" className={styles.Icon} dimension={properties[dimension].iconSize as IconProps['dimension']} fill={fillType} key={starIndex} />
     })
   }
 
@@ -125,10 +135,10 @@ export const StarMeter = forwardRef(({
           </linearGradient>
         </defs>
       </svg>
-      <Stack direction="row" columnGap={2}>
+      <Stack direction="row" columnGap={dimension === 'small' ? 2 : 4}>
         {starType(starCount, value)}
       </Stack>
-      <Text dimmed={6} id={seedID('star-meter')} size={labelSize[dimension] as TextProps['size']} weight="bold">
+      <Text dimmed={6} id={seedID('star-meter')} size={properties[dimension].labelSize as TextProps['size']} weight="bold">
         {!hideLabel && <>{label || value.toString()}</>}
       </Text>
     </Stack>
