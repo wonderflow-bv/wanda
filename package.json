@@ -19,7 +19,8 @@
     "update:deps": "npx npm-upgrade-monorepo"
   },
   "lint-staged": {
-    "*.{ts,tsx,js,jsx}": "eslint"
+    "*.{ts,tsx,js,jsx}": "eslint",
+    "*.{css}": "stylelint"
   },
   "devDependencies": {
     "@changesets/changelog-github": "0.4.2",
