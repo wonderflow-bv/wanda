@@ -38,7 +38,7 @@
 
   &[data-button-dimension='small'] {
     font-size: env(--font-size-14);
-    padding: 0 env(--space-4) 0.11rem;
+    padding: 0 env(--space-8) 0.11rem;
     block-size: env(--space-24);
     grid-gap: env(--space-4);
   }
