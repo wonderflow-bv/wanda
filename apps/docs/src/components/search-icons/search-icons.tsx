@@ -35,6 +35,7 @@ const IconTile: React.FC<IconProps> = ({ source, weight, ...args }) => {
     >
       <Stack as="span" horizontalAlign="center" verticalAlign="center" rowGap={16} fill={false}>
         <Icon weight={weight} source={source} {...args} />
+        {/* <Text size={14} responsive={false} textAlign="center" weight="bold">{source}</Text> */}
       </Stack>
     </Stack>
   )

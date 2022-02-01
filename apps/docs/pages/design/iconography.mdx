@@ -1,7 +1,7 @@
 import { MdxLayout } from "@/components/layouts/mdx";
 import { SearchIcons } from "@/components/search-icons";
 import { Banner } from "@/components/banner";
-import { Stack, Text, Icon } from "@wonderflow/react-components";
+import { Stack, Text, Icon, Title } from "@wonderflow/react-components";
 
 export default ({ children }) => (
   <MdxLayout
@@ -18,13 +18,10 @@ export default ({ children }) => (
     as="a"
     href="https://github.com/wonderflow-bv/wanda/issues/new?assignees=equinusocio&labels=feature&template=new_icons.yml&title=New+icons+request"
     target="_blank"
-    title="Didn't find the icon?"
     rel="noopener noreferrer"
-    description={
-      <Stack direction="row" verticalAlign="center" columnGap={8} fill={false}>
-        <Text>Ask for a new icon on Github</Text>
-        <Icon source="arrow-up-right" />
-      </Stack>
-    }
-  />
+    icon="circle-question"
+  >
+    <Title level="4">Didn't find the icon?</Title>
+    <Text>Ask for a new icon on Github</Text>
+  </Banner>
 </Stack>

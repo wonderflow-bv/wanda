@@ -39,7 +39,7 @@ StackProps,
    */
   vibrant?: boolean;
   /**
-   * Make the card vibrant. Add tranlucent background.
+   * Change the background color of the card when it is hovered.
    */
   highlightOnHover?: boolean;
 }
