@@ -8,14 +8,26 @@
 
   &[data-card-dimmed='1'] {
     background: var(--dimmed-0);
+
+    &[data-card-highlight-hover='true']:is(:hover, :focus-visible) {
+      background: var(--global-background);
+    }
   }
 
   &[data-card-dimmed='2'] {
     background: var(--dimmed-1);
+
+    &[data-card-highlight-hover='true']:is(:hover, :focus-visible) {
+      background: var(--dimmed-0);
+    }
   }
 
   &[data-card-dimmed='3'] {
     background: var(--dimmed-2);
+
+    &[data-card-highlight-hover='true']:is(:hover, :focus-visible) {
+      background: var(--dimmed-1);
+    }
   }
 
   &[data-card-vibrant='true'] {
@@ -23,11 +35,10 @@
     @mixin vibrancy;
 
     background-color: var(--global-vibrancy-background);
-  }
 
-  &[data-card-highlight-hover='true'][data-card-vibrant='true']:hover,
-  &[data-card-highlight-hover='true'][data-card-vibrant='true']:focus-visible {
-    background-color: var(--global-vibrancy-background-soft);
+    &[data-card-highlight-hover='true']:is(:hover, :focus-visible) {
+      background-color: var(--global-vibrancy-background-soft);
+    }
   }
 
   &[data-card-bordered='true'] {

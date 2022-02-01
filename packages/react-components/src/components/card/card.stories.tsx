@@ -8,7 +8,8 @@ export default {
   args: {
     bordered: false,
     vibrant: false,
-    highlightOnHover: true
+    highlightOnHover: true,
+    dimmed: 1
   },
   argTypes: {
     children: {
