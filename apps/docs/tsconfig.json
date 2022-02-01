@@ -1,5 +1,8 @@
 {
+  "extends": "tsconfig/base.json",
   "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "dist",
     "target": "es2020",
     "lib": [
       "dom",
@@ -7,24 +10,13 @@
       "esnext"
     ],
     "allowJs": true,
-    "skipLibCheck": true,
-    "strict": false,
-    "forceConsistentCasingInFileNames": true,
     "noEmit": true,
-    "esModuleInterop": true,
     "module": "commonjs",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
     "isolatedModules": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "jsx": "preserve",
-    "baseUrl": "./",
     "incremental": true,
     "plugins": [
       {

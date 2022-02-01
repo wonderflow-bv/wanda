@@ -1,0 +1,10 @@
+{
+  "extends": ["../../.eslintrc", "next"],
+  "rules": {
+    "@next/next/no-img-element": 0
+  },
+  "parserOptions": {
+    "extraFileExtensions": [".mjs"],
+    "project": "./tsconfig.json"
+  }
+}
