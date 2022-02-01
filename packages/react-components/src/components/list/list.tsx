@@ -69,6 +69,7 @@ export const List = forwardRef(({
               className={styles.Marker}
               fill={markerColor}
               data-list-default-marker={marker === 'circle'}
+              weight={marker === 'circle' ? 'solid' : undefined}
               dimension={marker !== 'circle' ? sizes[dimension].icon as IconProps['dimension'] : 16}
             />
           )}
