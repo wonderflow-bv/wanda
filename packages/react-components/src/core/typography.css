@@ -14,18 +14,21 @@ b {
 }
 
 :where(a:any-link) {
-  color: var(--global-interactive-text);
   text-decoration: none;
-  background-image: linear-gradient(currentcolor, currentcolor);
-  background-position: 0% 100%;
-  background-repeat: no-repeat;
-  background-size: 0% 1px;
+  color: var(--global-interactive-text);
   word-break: break-word;
-  transition: background-size env(--duration-200) env(--easing-entrance);
 
-  &:hover,
-  &:focus {
-    background-size: 100% 1px;
+  &:not([class]) {
+    background-image: linear-gradient(currentcolor, currentcolor);
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    transition: background-size env(--duration-200) env(--easing-entrance);
+
+    &:hover,
+    &:focus {
+      background-size: 100% 1px;
+    }
   }
 }
 
