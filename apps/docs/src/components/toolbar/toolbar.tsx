@@ -42,9 +42,18 @@ export const Toolbar: React.FC<ToolbarProps> = ({
         href="https://github.com/wonderflow-bv/wanda"
         icon="github"
         target="_blank"
-        rel="noopner noreferrer"
+        rel="noopner"
         kind="flat"
         aria-label="Github link to the source code"
+      />
+      <IconButton
+        as="a"
+        href="https://twitter.com/wandaflow"
+        icon="twitter"
+        target="_blank"
+        rel="noopner"
+        kind="flat"
+        aria-label="Follow us on Twitter"
       />
       <DynThemeSwitcher />
       {children}
