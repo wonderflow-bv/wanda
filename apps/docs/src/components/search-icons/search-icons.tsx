@@ -4,10 +4,10 @@ import IconsList from '@wonderflow/icons/structure'
 import { useDebounce } from 'ahooks'
 import { BlankButton } from '@/components/blank-button'
 import { Bleed } from '@/components/bleed'
-import { SearchIcons as SearchIconsClass, IconTile as IconTileClass, Grid, IconPreview, ToolBar } from './search-icons.module.css'
+import { SearchIcons as SearchIconsClass, IconTile as IconTileClass, Grid, ToolBar } from './search-icons.module.css'
 import { IconNames } from '@wonderflow/icons'
 
-const IconTile: React.FC<IconProps> = ({ source, style, ...args }) => {
+const IconTile: React.FC<IconProps> = ({ source, weight, ...args }) => {
   const [copied, setCopied] = useState<boolean>(false)
 
   const handleCopy = useCallback(
@@ -27,15 +27,14 @@ const IconTile: React.FC<IconProps> = ({ source, style, ...args }) => {
       as={BlankButton}
       onClick={handleCopy(source)}
       className={IconTileClass}
-      data-icon-style={style}
+      data-icon-style={weight}
       horizontalAlign="center"
       data-icon-tile-copied={copied}
       verticalAlign="center"
       rowGap={24}
     >
       <Stack as="span" horizontalAlign="center" verticalAlign="center" rowGap={16} fill={false}>
-        <Icon className={IconPreview} style={style} source={source} {...args} />
-        <Text size={14} responsive={false} textAlign="center" weight="bold">{source}</Text>
+        <Icon weight={weight} source={source} {...args} />
       </Stack>
     </Stack>
   )
@@ -115,7 +114,7 @@ export const SearchIcons = () => {
               )
             : (
               <div className={Grid}>
-                {filteredIcons.map((icon: IconNames) => <IconTile key={icon + '16'} source={icon} style={iconStyle} dimension={iconSize} />)}
+                {filteredIcons.map((icon: IconNames) => <IconTile key={icon + '16'} source={icon} weight={iconStyle} dimension={iconSize} />)}
               </div>
               )
           }

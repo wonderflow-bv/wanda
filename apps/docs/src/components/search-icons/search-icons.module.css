@@ -38,17 +38,6 @@
   }
 }
 
-.IconPreview {
-
-  /* width: env(--space-24);
-  height: env(--space-24); */
-  transform: translateY(-90%);
-
-  @nest [data-icon-style='solid'] & {
-    transform: translateY(-125%);
-  }
-}
-
 .IconPreview + * {
   position: absolute;
   top: 55%;
