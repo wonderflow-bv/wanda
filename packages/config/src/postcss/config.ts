@@ -9,7 +9,7 @@ import flatten from 'flat'
 const flatTokens: Record<string, any> = flatten(jsonTokens, {
   delimiter: '-'
 })
-const environmentVariables = Object.keys(flatTokens).reduce((acc, key) => {
+const environmentVariables = Object.keys(flatTokens).reduce<Record<string, string>>((acc, key) => {
   const newKey = `--${key}`
   acc[newKey] = `${flatTokens[key]}`
   return acc

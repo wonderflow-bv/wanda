@@ -1,17 +1,18 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Table } from './table'
+import { TableRow } from './'
 
 const columns = [{
   name: 'First column',
-  selector: row => row.someKey,
+  selector: (row: TableRow) => row.someKey,
   sortable: true
 }, {
   name: 'Second column',
-  selector: row => row.someKey,
+  selector: (row: TableRow) => row.someKey,
   sortable: true
 }, {
   name: 'Third column',
-  selector: row => row.someKey
+  selector: (row: TableRow) => row.someKey
 }]
 
 const data = [

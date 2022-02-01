@@ -1,5 +1,5 @@
 {
-  "source": ["src/**/*.json"],
+  "source": ["src/configs/**/*.json"],
   "platforms": {
     "web": {
       "basePxFontSize": 18,

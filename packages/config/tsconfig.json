@@ -1,42 +1,11 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "tsconfig/base.json",
   "compilerOptions": {
-    "composite": false,
-    "declaration": true,
-    "declarationMap": false,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "inlineSources": false,
-    "isolatedModules": true,
-    "moduleResolution": "node",
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "preserveWatchOutput": true,
-    "skipLibCheck": true,
     "baseUrl": "./",
     "outDir": "dist",
     "target": "es5",
     "module": "commonjs",
-    "lib": ["dom", "es5"],
-    "declarationDir": "./dist",
-    "sourceMap": false,
-    "allowJs": false,
-    "removeComments": true,
-    "allowSyntheticDefaultImports": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "suppressImplicitAnyIndexErrors": true
   },
-  "typeRoots": ["node_modules/@types"],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ],
-  "include": [
-    "src/**/*",
-    "types"
-  ]
+  "include": ["src", "types"],
+  "exclude": ["dist", "build", "node_modules"]
 }

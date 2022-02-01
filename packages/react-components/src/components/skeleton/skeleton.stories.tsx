@@ -16,7 +16,7 @@ const Template: ComponentStory<typeof Skeleton> = (args) => <Skeleton {...args} 
 export const Default = Template.bind({})
 Default.args = {
   width: '400px',
-  count: '4px',
+  count: 4,
   height: '48px'
 }
 

@@ -1,20 +1,18 @@
-const Color = require('tinycolor2')
+// eslint-disable-next-line import/no-extraneous-dependencies
+import Color from 'tinycolor2'
 
-module.exports = {
+export default {
   name: 'color/hslvalue',
   type: 'value',
-  matcher: (prop) => {
-    return prop.attributes.category === 'color'
-  },
-  transformer: (token) => {
+  matcher: (prop: any) => prop.attributes.category === 'color',
+  transformer: (token: any) => {
     const color = Color(token.value)
     const o = color.toHsl()
     const vals = `${Math.round(o.h)} ${Math.round(o.s * 100)}% ${Math.round(o.l * 100)}%`
 
     if (color.getAlpha() === 1) {
       return `${vals}`
-    } else {
-      return `${vals} / ${o.a}`
     }
+    return `${vals} / ${o.a}`
   }
 }

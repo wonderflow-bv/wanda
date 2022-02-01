@@ -1,8 +1,9 @@
-const StyleDictionary = require('style-dictionary').extend('tokens.config.json')
-const HexHslValues = require('../transformers/hex-hslvalues')
-const SizePxToRem = require('../transformers/px-rem')
-const SizePxToRootEm = require('../transformers/px-rootem')
-const CssBezier = require('../transformers/css-bezier')
+import CssBezier from './transformers/css-bezier'
+import HexHslValues from './transformers/hex-hslvalues'
+import SizePxToRem from './transformers/px-rem'
+import SizePxToRootEm from './transformers/px-rootem'
+
+const StyleDictionary = require('style-dictionary').extend('src/tokens.config.json')
 
 /**
  * Register custom transformers to process token values for

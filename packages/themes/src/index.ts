@@ -7,3 +7,5 @@ const StyleDictionary = require('style-dictionary').extend('src/themes.config.js
  */
 console.clear()
 StyleDictionary.buildAllPlatforms()
+
+export {}

@@ -1,13 +1,12 @@
-/* eslint-disable @typescript-eslint/no-var-requires, no-console */
+import dt from 'directory-tree'
+import fs from 'fs-extra'
+import { createSpinner } from 'nanospinner'
+import path from 'path'
+import colors from 'picocolors'
+// @ts-expect-error
+import svgstore from 'svgstore'
 
-const svgstore = require('svgstore')
-const path = require('path')
-const fs = require('fs-extra')
-const dt = require('directory-tree')
-const { createSpinner } = require('nanospinner')
-const colors = require('picocolors')
-
-const generateTypes = jsonStructure => `
+const generateTypes = (jsonStructure: { iconNames: string[]; iconStyles: string[] }) => `
 export type IconNames = '${jsonStructure.iconNames.join('\' |\n\'')}';
 export type IconStyles = '${jsonStructure.iconStyles.join('\' |\n\'')}';
 `
@@ -17,7 +16,11 @@ const run = () => {
   const directories = dt(path.join('dist', 'svgs'))
   fs.ensureDirSync('dist')
 
-  const jsonStructure = {
+  const jsonStructure: {
+    svgs: Record<string, string[]>;
+    iconNames: string[];
+    iconStyles: string[];
+  } = {
     svgs: {},
     iconNames: [],
     iconStyles: []
@@ -25,10 +28,10 @@ const run = () => {
 
   const sprite = svgstore()
 
-  directories.children.forEach((dir) => {
+  directories.children?.forEach((dir) => {
     jsonStructure.svgs[dir.name] = []
     jsonStructure.iconStyles.push(dir.name)
-    dir.children && dir.children.forEach((file) => {
+    dir.children?.forEach((file) => {
       const formattedName = file.name.replace(/-\d.*/gm, '').replace('.svg', '').replace(/(-solid|-outline|-duotone).*?/gm, '')
       const iconID = `${dir.name}/${formattedName}`
 
@@ -37,7 +40,7 @@ const run = () => {
       jsonStructure.iconNames.push(`${formattedName}`)
     })
   })
-  fs.writeFileSync(path.join('dist', 'sprite.svg'), sprite)
+  fs.writeFileSync(path.join('dist', 'sprite.svg'), sprite.toString())
   fs.writeFileSync(path.join('dist', 'sprite.d.ts'), `
 declare module "@wonderflow/icons/sprite" {
   const svgUrl: string

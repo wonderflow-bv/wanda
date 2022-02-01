@@ -1,5 +1,4 @@
 import { create } from '@storybook/theming';
-import tkns from '@wonderflow/tokens/platforms/web/tokens.json'
 
 export default create({
   base: 'light',

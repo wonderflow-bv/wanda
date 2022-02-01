@@ -1,48 +1,9 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "React Components",
-  "typeRoots": ["node_modules/@types"],
+  "extends": "tsconfig/react-library.json",
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "dist",
-    "composite": false,
-    "declaration": true,
-    "declarationMap": false,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "inlineSources": false,
-    "isolatedModules": true,
-    "moduleResolution": "node",
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "preserveWatchOutput": true,
-    "skipLibCheck": true,
-    "sourceMap": true,
-    "strict": true,
-    "module": "ESNext",
-    "target": "ESNext",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "allowJs": false,
-    "jsx": "react-jsx",
-    "removeComments": false,
-    "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "suppressImplicitAnyIndexErrors": true,
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
-  "exclude": [
-    "node_modules",
-    "dist",
-    "src/core",
-    "src/components/**/*.stories.tsx"
-  ],
-  "include": [
-    "types/*",
-    "**/*.ts",
-    "**/*.tsx"
-  ]
+  "include": ["src", "types"],
+  "exclude": ["dist", "build", "node_modules"]
 }

@@ -1,4 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { SVGAttributes } from 'react'
 import { Polymorphic } from '../..'
 import { Button, ButtonsGroup } from './button'
 
@@ -36,7 +37,7 @@ export default {
   }
 } as ComponentMeta<Polymorphic.IntrinsicElement<typeof Button>>
 
-const CustomReactIcon = (props) => (
+const CustomReactIcon = ({ ...props }: SVGAttributes<SVGElement | SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={48}

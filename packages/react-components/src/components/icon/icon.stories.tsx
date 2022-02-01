@@ -1,4 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { SVGAttributes } from 'react'
 import { Icon } from './icon'
 
 export default {
@@ -21,7 +22,7 @@ export default {
 
 const Template: ComponentStory<typeof Icon> = (args) => <Icon {...args} />
 
-const CustomReactIcon = (props) => (
+const CustomReactIcon = ({ ...props }: SVGAttributes<SVGElement | SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={48}

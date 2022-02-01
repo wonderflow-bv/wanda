@@ -3,7 +3,7 @@ import '../src/core.css';
 import './overrides.css';
 
 export const parameters = {
-  actions: { argTypesRegex: "^on[A-Z].*" },
+  actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
     matchers: {
       color: /(background|color)$/i,
@@ -15,16 +15,16 @@ export const parameters = {
     list: [
       { name: 'auto', color: 'linear-gradient(to bottom right, lightgray 50%, black 50.1%)' },
       { name: 'light', color: 'lightgray' },
-      { name: 'dark', color: 'black' }
+      { name: 'dark', color: 'black' },
     ],
     onChange: (theme) => {
       const iframe = document.querySelector('#storybook-preview-iframe');
       if (theme) {
-        iframe.contentDocument.documentElement.dataset.theme = theme.name
+        iframe.contentDocument.documentElement.dataset.theme = theme.name;
       } else {
-        iframe.contentDocument.documentElement.dataset.theme = 'auto'
+        iframe.contentDocument.documentElement.dataset.theme = 'auto';
       }
     },
-    target: 'root'
-  }
-}
+    target: 'root',
+  },
+};

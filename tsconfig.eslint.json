@@ -1,26 +1,15 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "Default",
-  "compilerOptions": {
-    "composite": false,
-    "declaration": true,
-    "declarationMap": false,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "inlineSources": false,
-    "isolatedModules": true,
-    "moduleResolution": "node",
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "preserveWatchOutput": true,
-    "skipLibCheck": true
-  },
-  "exclude": ["node_modules"],
+  "display": "ESlint",
+  "extends": "./packages/tsconfig/base.json",
+  "exclude": [
+    "node_modules"
+  ],
   "include": [
+    "**/.eslintrc.js",
+    "**/.storybook/*.js",
+    "**/*.js",
     "**/*.ts",
-    "**/*.tsx",
-    "**/*.mjs",
-    "**/*.js"
+    "**/*.tsx"
   ]
 }
