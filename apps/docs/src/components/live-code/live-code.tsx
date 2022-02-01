@@ -3,7 +3,7 @@ import { LiveProvider, LiveEditor, withLive, LiveProviderProps } from 'react-liv
 import theme from '@/components/code-block/wonder-theme'
 import { LiveAreaProps, LiveArea } from '@/components/live-area'
 import { LiveCode as LiveCodeClass, Editor, Toolbar, LiveArea as LiveAreaClass } from './live-code.module.css'
-import { IconButton, Tooltip, Stack, Dropdown, Snackbar, Text } from '@wonderflow/react-components'
+import { IconButton, Tooltip, Stack, Dropdown, Snackbar, Text, ToggleButton } from '@wonderflow/react-components'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useUIDSeed } from 'react-uid'
 import { useDebounce } from 'ahooks'
@@ -45,7 +45,7 @@ const LiveCodeComponent = ({
           </motion.div>
         )}
       </AnimatePresence>
-      <Stack direction="row" columnGap={4} className={Toolbar}>
+      <Stack direction="row" columnGap={8} className={Toolbar}>
         {live.error && (
         <Dropdown
           placement="bottom-start"
@@ -60,17 +60,15 @@ const LiveCodeComponent = ({
         )}
         <Tooltip
           trigger={(
-            <IconButton
-              as={!editorVisible ? 'a' : 'button'}
-              href={!editorVisible ? `#${uid('live-code-editor')}` : undefined}
+            <ToggleButton
               aria-expanded={editorVisible}
-              aria-pressed={editorVisible}
               aria-controls={uid('live-code-editor')}
+              kind="flat"
+              restingIcon="code"
+              aria-label="Play with code"
               onClick={() => {
                 setEditorVisible(!editorVisible)
               }}
-              kind="flat"
-              icon="play"
             />
           )}
         >
@@ -78,7 +76,7 @@ const LiveCodeComponent = ({
         </Tooltip>
         <Tooltip
           trigger={
-            <IconButton onClick={onRestore} kind="flat" icon="arrow-rotate-right" />}
+            <IconButton aria-label="Restore code" onClick={onRestore} kind="flat" icon="arrow-rotate-right" />}
         >
           Restore code
         </Tooltip>
