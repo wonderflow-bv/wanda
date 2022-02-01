@@ -4,6 +4,6 @@
     "outDir": "dist",
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
-  "include": ["src", "types"],
-  "exclude": ["dist", "build", "node_modules"]
+  "exclude": ["dist", "build", "src/core", "src/components/**/*.stories.tsx"],
+  "include": ["src", "types"]
 }

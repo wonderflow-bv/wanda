@@ -30,7 +30,8 @@ export const postcssConfig = {
       },
       insertAfter: {
         'custom-media-queries': postcssMixins
-      }
+      },
+      enableClientSidePolyfills: false
     },
     'postcss-mixins': {},
     cssnano: {
