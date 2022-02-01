@@ -1,5 +1,18 @@
 # @wonderflow/config
 
+## 5.1.0
+
+### Minor Changes
+
+- [`4b4b58e`](https://github.com/wonderflow-bv/wanda/commit/4b4b58e6918e550b43a3bd134e906e36eac4d270) Thanks [@equinusocio](https://github.com/equinusocio)! - Update dependencies
+
+### Patch Changes
+
+- [`86e47d6`](https://github.com/wonderflow-bv/wanda/commit/86e47d665b7949f9d47a8b5c3c765ef40354214e) Thanks [@equinusocio](https://github.com/equinusocio)! - Update some core deps and css output
+
+- Updated dependencies [[`4b4b58e`](https://github.com/wonderflow-bv/wanda/commit/4b4b58e6918e550b43a3bd134e906e36eac4d270)]:
+  - @wonderflow/tokens@5.1.0
+
 ## 5.0.0
 
 ### Major Changes

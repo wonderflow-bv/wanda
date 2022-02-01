@@ -1,5 +1,13 @@
 # @wonderflow/icons
 
+## 5.1.0
+
+### Minor Changes
+
+- [`4b4b58e`](https://github.com/wonderflow-bv/wanda/commit/4b4b58e6918e550b43a3bd134e906e36eac4d270) Thanks [@equinusocio](https://github.com/equinusocio)! - Update dependencies
+
+* [`13c9f37`](https://github.com/wonderflow-bv/wanda/commit/13c9f373e3e19c8de0f849e03d2fc2151815a2a5) Thanks [@equinusocio](https://github.com/equinusocio)! - Improve duotone icons readability by swapping shades in some icons
+
 ## 5.0.0
 
 ### Major Changes
