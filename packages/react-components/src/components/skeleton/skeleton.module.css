@@ -1,7 +1,3 @@
-.Skeleton {
-  display: inline-block;
-}
-
 .SkeletonItem {
   --base-color: var(--dimmed-1);
   --highlight-color: var(--dimmed-0);

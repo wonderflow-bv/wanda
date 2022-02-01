@@ -1,5 +1,4 @@
 import { TokensTypes } from '@wonderflow/tokens/platforms/web'
-import clsx from 'clsx'
 import tkns from '@wonderflow/tokens/platforms/web/tokens.json'
 import { CSSProperties, Fragment, useCallback } from 'react'
 import { useUIDSeed } from 'react-uid'
@@ -79,7 +78,7 @@ export const Skeleton = ({
 
   return (
     <span
-      className={clsx(styles.Skeleton, className)}
+      className={className}
       aria-live="polite"
       aria-busy={enableAnimation}
       {...otherProps}
