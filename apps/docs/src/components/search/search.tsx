@@ -15,7 +15,7 @@ export const Search = () => {
   return (
     <>
       <Head>
-        <link rel="preconnect" href="https://BR3WX4TQPD-dsn.algolia.net" crossOrigin="true" />
+        <link rel="preconnect" href="https://BR3WX4TQPD-dsn.algolia.net" crossOrigin="anonymous" />
       </Head>
       <DynDocSearch
         appId="BR3WX4TQPD"
