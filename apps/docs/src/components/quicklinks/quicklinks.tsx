@@ -5,7 +5,13 @@ export const QuickLinks = () => {
   return (
     <Stack wrap direction="row" columnGap={32} rowGap={32}>
       <Link href="/get-started/accessibility/" passHref>
-        <Card as="a" right={<Icon source="compass" dimension={24} />} vibrant highlightOnHover>
+        <Card
+          as="a"
+          bordered
+          right={<Icon source="compass" weight="duotone" dimension={24} />}
+          vibrant
+          highlightOnHover
+        >
           <Stack rowGap={32}>
             <Stack>
               <Text size={16} dimmed={6} weight="bold">Learn</Text>
@@ -19,7 +25,13 @@ export const QuickLinks = () => {
       </Link>
 
       <Link href="/design/foundations/colors/" passHref>
-        <Card as="a" right={<Icon source="compass" fill="var(--highlight-green-foreground)" dimension={24} />} vibrant highlightOnHover>
+        <Card
+          as="a"
+          bordered
+          right={<Icon source="compass" weight="duotone" fill="var(--highlight-green-foreground)" dimension={24} />}
+          vibrant
+          highlightOnHover
+        >
           <Stack rowGap={32}>
             <Stack>
               <Text size={16} dimmed={6} weight="bold">Start</Text>
@@ -33,7 +45,13 @@ export const QuickLinks = () => {
       </Link>
 
       <Link href="/develop/installation/" passHref>
-        <Card as="a" right={<Icon source="compass" fill="var(--highlight-yellow-foreground)" dimension={24} />} vibrant highlightOnHover>
+        <Card
+          as="a"
+          bordered
+          right={<Icon source="compass" weight="duotone" fill="var(--highlight-yellow-foreground)" dimension={24} />}
+          vibrant
+          highlightOnHover
+        >
           <Stack rowGap={32}>
             <Stack>
               <Text size={16} dimmed={6} weight="bold">Start</Text>
@@ -47,7 +65,13 @@ export const QuickLinks = () => {
       </Link>
 
       <Link href="/components/overview/" passHref>
-        <Card as="a" right={<Icon source="compass" fill="var(--highlight-red-foreground)" dimension={24} />} vibrant highlightOnHover>
+        <Card
+          as="a"
+          bordered
+          right={<Icon source="compass" weight="duotone" fill="var(--highlight-red-foreground)" dimension={24} />}
+          vibrant
+          highlightOnHover
+        >
           <Stack rowGap={32}>
             <Stack>
               <Text size={16} dimmed={6} weight="bold">Use</Text>
