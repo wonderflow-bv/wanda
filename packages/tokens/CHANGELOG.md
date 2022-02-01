@@ -1,5 +1,11 @@
 # @wonderflow/tokens
 
+## 5.1.0
+
+### Minor Changes
+
+- [`4b4b58e`](https://github.com/wonderflow-bv/wanda/commit/4b4b58e6918e550b43a3bd134e906e36eac4d270) Thanks [@equinusocio](https://github.com/equinusocio)! - Update dependencies
+
 ## 5.0.0
 
 ### Minor Changes

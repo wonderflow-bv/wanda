@@ -1,5 +1,13 @@
 # @wonderflow/themes
 
+## 5.1.0
+
+### Minor Changes
+
+- [`c2aee59`](https://github.com/wonderflow-bv/wanda/commit/c2aee59786718bac49a6e755e846bf224c3b5541) Thanks [@equinusocio](https://github.com/equinusocio)! - Update themes import to resolve dist files even inside CSS
+
+* [#57](https://github.com/wonderflow-bv/wanda/pull/57) [`21db8e3`](https://github.com/wonderflow-bv/wanda/commit/21db8e3854b6069bff51024d8939bfaff1280497) Thanks [@equinusocio](https://github.com/equinusocio)! - Add new theme keys to handle vibrancy backgrounds. You can now use also `global-vibrancy-background-soft` and `global-vibrancy-background-hard`
+
 ## 5.0.0
 
 ### Major Changes
