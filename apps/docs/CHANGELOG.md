@@ -1,5 +1,16 @@
 # docs
 
+## 3.2.0
+
+### Minor Changes
+
+- [`24266bd`](https://github.com/wonderflow-bv/wanda/commit/24266bd1b5ab548930eb577a1ab7ba7492c25ca9) Thanks [@equinusocio](https://github.com/equinusocio)! - Fix Skeleton display
+
+### Patch Changes
+
+- Updated dependencies [[`4d93699`](https://github.com/wonderflow-bv/wanda/commit/4d936994a89cf445504301fbf21901cfe31140a9), [`24266bd`](https://github.com/wonderflow-bv/wanda/commit/24266bd1b5ab548930eb577a1ab7ba7492c25ca9)]:
+  - @wonderflow/react-components@5.2.0
+
 ## 3.1.0
 
 ### Minor Changes

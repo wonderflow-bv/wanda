@@ -1,5 +1,13 @@
 # @wonderflow/react-components
 
+## 5.2.0
+
+### Minor Changes
+
+- [`4d93699`](https://github.com/wonderflow-bv/wanda/commit/4d936994a89cf445504301fbf21901cfe31140a9) Thanks [@equinusocio](https://github.com/equinusocio)! - Plain link style is not longer added to link with class
+
+* [`24266bd`](https://github.com/wonderflow-bv/wanda/commit/24266bd1b5ab548930eb577a1ab7ba7492c25ca9) Thanks [@equinusocio](https://github.com/equinusocio)! - Fix Skeleton display
+
 ## 5.1.0
 
 ### Minor Changes
