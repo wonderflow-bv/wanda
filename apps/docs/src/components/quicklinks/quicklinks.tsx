@@ -8,7 +8,7 @@ export const QuickLinks = () => {
         <Card
           as="a"
           bordered
-          right={<Icon source="compass" weight="duotone" dimension={24} />}
+          right={<Icon source="compass" weight="duotone" fill="var(--highlight-cyan-foreground)" dimension={24} />}
           vibrant
           highlightOnHover
         >
@@ -16,7 +16,7 @@ export const QuickLinks = () => {
             <Stack>
               <Text size={16} dimmed={6} weight="bold">Learn</Text>
               <Title as="h2" level="4">
-                <Text as="span">Accessibility</Text>
+                <Text as="span" style={{ color: 'var(--highlight-cyan-foreground)' }}>Accessibility</Text>
               </Title>
             </Stack>
             <Text dimmed={7} maxWidth="30ch">Learn how to design accessible digital products by taking care of everyone.</Text>
@@ -36,7 +36,7 @@ export const QuickLinks = () => {
             <Stack>
               <Text size={16} dimmed={6} weight="bold">Start</Text>
               <Title as="h2" level="4">
-                <Text as="span" sentiment="positive">Designing</Text>
+                <Text as="span" style={{ color: 'var(--highlight-green-foreground)' }}>Designing</Text>
               </Title>
             </Stack>
             <Text dimmed={7} maxWidth="30ch">Learn the foundations of the Wanda design system and how to design digital products.</Text>
@@ -56,7 +56,7 @@ export const QuickLinks = () => {
             <Stack>
               <Text size={16} dimmed={6} weight="bold">Start</Text>
               <Title as="h2" level="4">
-                <Text as="span" sentiment="warning">Developing</Text>
+                <Text as="span" style={{ color: 'var(--highlight-yellow-foreground)' }}>Developing</Text>
               </Title>
             </Stack>
             <Text dimmed={7} maxWidth="30ch">Learn how to install and use the Wanda design system packages to build digital products.</Text>
@@ -68,7 +68,7 @@ export const QuickLinks = () => {
         <Card
           as="a"
           bordered
-          right={<Icon source="compass" weight="duotone" fill="var(--highlight-red-foreground)" dimension={24} />}
+          right={<Icon source="compass" weight="duotone" fill="var(--highlight-purple-foreground)" dimension={24} />}
           vibrant
           highlightOnHover
         >
@@ -76,7 +76,7 @@ export const QuickLinks = () => {
             <Stack>
               <Text size={16} dimmed={6} weight="bold">Use</Text>
               <Title as="h2" level="4">
-                <Text as="span" sentiment="danger">Components</Text>
+                <Text as="span" style={{ color: 'var(--highlight-purple-foreground)' }}>Components</Text>
               </Title>
             </Stack>
             <Text dimmed={7} maxWidth="30ch">Check all the available and ready to use UI components and learn how to use them inside your digital products.</Text>
