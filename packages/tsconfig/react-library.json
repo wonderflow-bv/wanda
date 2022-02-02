@@ -7,17 +7,6 @@
     "module": "ESNext",
     "target": "ESNext",
     "jsx": "react-jsx",
-    "baseUrl": "./",
-    "outDir": "dist",
-    "noUnusedLocals": true,
-    "declarationMap": false,
-    "noUnusedParameters": true,
-    "sourceMap": true,
-    "allowJs": false,
-    "removeComments": false,
-    "allowSyntheticDefaultImports": true,
     "suppressImplicitAnyIndexErrors": true
-  },
-  "exclude": ["dist", "src/core", "src/components/**/*.stories.tsx"],
-  "include": ["types/*", "**/*.ts", "**/*.tsx"]
+  }
 }
