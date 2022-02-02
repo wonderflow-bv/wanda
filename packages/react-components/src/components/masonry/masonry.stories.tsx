@@ -32,10 +32,10 @@ export const WithBreakPoints = Template.bind({})
 WithBreakPoints.args = {
   columns: {
     default: 6,
-    extraLarge: 5,
+    'extra-large': 5,
     large: 4,
     medium: 3,
     small: 2,
-    extraSmall: 1
+    'extra-small': 1
   }
 }

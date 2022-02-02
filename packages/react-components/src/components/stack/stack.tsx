@@ -1,19 +1,19 @@
 import { CSSProperties, forwardRef } from 'react'
 import tkns from '@wonderflow/tokens/platforms/web/tokens.json'
+import { TokensTypes } from '@wonderflow/tokens/platforms/web'
 import { Polymorphic } from '../..'
 import styles from './stack.module.css'
 import clsx from 'clsx'
-import { TokensTypes } from '@wonderflow/tokens/platforms/web'
 
 export type StackProps = {
   /**
    * Add a gap between rows.
    */
-  rowGap?: 0 | TokensTypes['space'];
+  rowGap?: TokensTypes['space'];
   /**
    * Add a gap between columns.
    */
-  columnGap?: 0 | TokensTypes['space'];
+  columnGap?: TokensTypes['space'];
   /**
    * Display the element as inline-flex
    */
@@ -57,8 +57,8 @@ type PolymorphicStack = Polymorphic.ForwardRefComponent<'div', StackProps>;
 export const Stack = forwardRef(({
   children,
   className,
-  rowGap = 0,
-  columnGap = 0,
+  rowGap,
+  columnGap,
   as: Wrapper = 'div',
   inline = false,
   direction = 'column',
@@ -66,8 +66,8 @@ export const Stack = forwardRef(({
   fill = true,
   verticalAlign = 'initial',
   horizontalAlign = 'initial',
-  horizontalPadding = 0,
-  verticalPadding = 0,
+  horizontalPadding,
+  verticalPadding,
   style,
   ...otherProps
 }, forwardedRef) => {
@@ -79,12 +79,12 @@ export const Stack = forwardRef(({
   }
 
   const computedStyle: CSSProperties = {
-    '--rGap': rowGap && tkns.space[rowGap],
-    '--cGap': columnGap && tkns.space[columnGap],
+    '--rGap': rowGap ? tkns.space[rowGap] : 0,
+    '--cGap': columnGap ? tkns.space[columnGap] : 0,
     '--vAlign': verticalAlign && alignmentTemplate(verticalAlign),
     '--hAlign': horizontalAlign && alignmentTemplate(horizontalAlign),
-    '--vPadding': verticalPadding && tkns.space[verticalPadding],
-    '--hPadding': horizontalPadding && tkns.space[horizontalPadding]
+    '--vPadding': verticalPadding ? tkns.space[verticalPadding] : 0,
+    '--hPadding': horizontalPadding ? tkns.space[horizontalPadding] : 0
   }
 
   return (

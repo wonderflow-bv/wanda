@@ -6,7 +6,6 @@
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "module": "ESNext",
     "target": "ESNext",
-    "jsx": "react-jsx",
-    "suppressImplicitAnyIndexErrors": true
+    "jsx": "react-jsx"
   }
 }

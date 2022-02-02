@@ -41,7 +41,6 @@ export const SplitButton = forwardRef(({
     <Stack
       className={clsx(styles.SplitButton, className)}
       direction="row"
-      columnGap={0}
       inline={!fullWidth}
     >
       <Button

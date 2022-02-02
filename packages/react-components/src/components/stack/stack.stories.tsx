@@ -25,13 +25,17 @@ export default {
   },
   args: {
     direction: 'row',
-    wrap: 1,
+    verticalPadding: 16,
+    horizontalPadding: 24,
+    columnGap: 16,
+    rowGap: 80,
+    wrap: true,
     as: 'div'
   }
 } as ComponentMeta<Polymorphic.IntrinsicElement<typeof Stack>>
 
 const Template: ComponentStory<typeof Stack> = (args) => (
-  <Stack rowGap={80} {...args}>
+  <Stack {...args}>
     <div className="DivEx">01</div>
     <div className="DivEx">02</div>
     <div className="DivEx">03</div>

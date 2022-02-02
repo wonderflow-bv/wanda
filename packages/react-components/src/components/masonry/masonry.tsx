@@ -29,14 +29,16 @@ export type MasonryProps = PropsWithClass & {
    *  extraSmall: 1
    *}
    */
-  columns?: number | {
-    default: number,
-    extraSmall?: number,
-    small?: number,
-    medium?: number,
-    large?: number,
-    extraLarge?: number
-  };
+  columns?: number | Columns
+}
+
+type Columns = {
+  default: number,
+  extraSmall?: number,
+  small?: number,
+  medium?: number,
+  large?: number,
+  extraLarge?: number
 }
 
 export const Masonry: FC<MasonryProps> = ({
@@ -47,23 +49,24 @@ export const Masonry: FC<MasonryProps> = ({
   style,
   ...otherProps
 }) => {
-  const breakpoints = {
-    extraSmall: 480,
+  const breakpoints: Record<string, number> = {
+    'extra-small': 480,
     small: 768,
     medium: 960,
     large: 1280,
-    extraLarge: 1600
+    'extra-large': 1600
   }
 
   const dynamicStyle: CSSProperties = {
     '--gutter': gutter && tkns.space[gutter]
   }
 
-  const computedColumns = typeof columns === 'object' && Object.keys(columns).reduce((prev, current) => current !== 'default' && ({
-    ...prev,
-    default: columns.default,
-    [breakpoints[current]]: columns[current]
-  }), {})
+  const computedColumns = typeof columns === 'object' && Object.keys(columns).reduce(
+    (prev, current: keyof Columns) => current !== 'default' && ({
+      ...prev,
+      default: columns.default,
+      [breakpoints[current]]: columns[current]
+    }), {})
 
   return (
     <MasonryLayout

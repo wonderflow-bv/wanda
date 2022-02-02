@@ -23,11 +23,11 @@ export type GridProps = PropsWithClass & {
   /**
    * Add a gap between rows.
    */
-  rowGap?: 0 | TokensTypes['space'];
+  rowGap?: TokensTypes['space'];
   /**
    * Add a gap between columns.
    */
-  columnGap?: 0 | TokensTypes['space'];
+  columnGap?: TokensTypes['space'];
   /**
    * Set the columns repeating behaviour.
    * This refers to the CSS function `repeat()`, which can use both `auto-fit`
@@ -64,8 +64,8 @@ export const Grid = forwardRef<HTMLUListElement, GridProps>(({
   ...otherProps
 }, forwardedRef) => {
   const computedStyle: CSSProperties = {
-    '--rGap': rowGap && tkns.space[rowGap],
-    '--cGap': columnGap && tkns.space[columnGap],
+    '--rGap': rowGap ? tkns.space[rowGap] : 0,
+    '--cGap': columnGap ? tkns.space[columnGap] : 0,
     '--columns': columns,
     '--column-min-w': colMinWidth,
     '--rows': rows,

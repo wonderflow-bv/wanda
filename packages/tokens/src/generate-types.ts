@@ -1,9 +1,13 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable global-require */
+
+// eslint-disable-next-line import/no-extraneous-dependencies
 import fs from 'fs-extra'
 import path from 'path'
 
 const deeperKeys = ['color', 'font', 'icon']
 
-const printCorrectValue = (value: string | number) => (Number.isNaN(Number(value)) ? `'${value}'` : value)
+const printCorrectValue = (value: string | number) => (Number.isNaN(Number(value)) ? `'${value}'` : `${value} | '${value}'`)
 const getTypeUnion = (json: Record<string, unknown>) => Object.keys(json).reduce(
   (acc, key, index) => acc.concat(`${index !== 0 ? '| ' : ''}${printCorrectValue(key)} `), ''
 )
