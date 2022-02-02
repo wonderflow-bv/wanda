@@ -1,13 +1,16 @@
 import { Stack, Text, Title } from '@wonderflow/react-components'
 import { QuickLinks } from '@/components/quicklinks'
 import { Hero as HeroClass, Video, Content } from './hero.module.css'
+import { useReducedMotion } from 'framer-motion'
 
 export const Hero = () => {
+  const shouldReduceMotion = useReducedMotion()
+  console.log(shouldReduceMotion)
   return (
     <Stack className={HeroClass} verticalAlign="end" fill={false}>
       <video
         className={Video}
-        autoPlay
+        autoPlay={!shouldReduceMotion}
         loop
         muted
         playsInline

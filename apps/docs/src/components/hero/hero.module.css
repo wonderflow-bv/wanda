@@ -2,7 +2,7 @@
 
 .Hero {
   min-block-size: calc(100vh - 57px);
-  background-color: var(--dimmed-0);
+  background-color: var(--global-background);
   overflow: hidden;
   padding: env(--space-32) env(--space-24) max(env(--space-96), env(safe-area-inset-bottom));
   color: var(--global-foreground);
@@ -20,8 +20,12 @@
     content: '';
     position: absolute;
     inset: 0;
-    background-image: radial-gradient(var(--dimmed-2) 0.9px, transparent 0.9px);
-    background-size: 30px 30px;
+    background-image:
+      radial-gradient(
+        var(--dimmed-1) 1px,
+        transparent 1px
+      );
+    background-size: 8px 8px;
     pointer-events: none;
   }
 }
@@ -40,9 +44,11 @@
   object-position: center;
   position: absolute;
   inset: 0;
-  opacity: 5%;
+  opacity: 50%;
+
 
   @nest [data-theme='light'] & {
+    opacity: 30%;
     filter: invert(1);
   }
   @nest [data-theme='auto'] & {
