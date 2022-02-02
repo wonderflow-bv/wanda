@@ -8,7 +8,7 @@ export const QuickLinks = () => {
         <Card
           as="a"
           bordered
-          right={<Icon source="compass" weight="duotone" fill="var(--highlight-cyan-foreground)" dimension={24} />}
+          right={<Icon source="accessibility" weight="duotone" fill="var(--highlight-cyan-foreground)" dimension={24} />}
           vibrant
           highlightOnHover
         >
@@ -28,7 +28,7 @@ export const QuickLinks = () => {
         <Card
           as="a"
           bordered
-          right={<Icon source="compass" weight="duotone" fill="var(--highlight-green-foreground)" dimension={24} />}
+          right={<Icon source="style" weight="duotone" fill="var(--highlight-green-foreground)" dimension={24} />}
           vibrant
           highlightOnHover
         >
@@ -48,7 +48,7 @@ export const QuickLinks = () => {
         <Card
           as="a"
           bordered
-          right={<Icon source="compass" weight="duotone" fill="var(--highlight-yellow-foreground)" dimension={24} />}
+          right={<Icon source="code" weight="duotone" fill="var(--highlight-yellow-foreground)" dimension={24} />}
           vibrant
           highlightOnHover
         >
@@ -68,7 +68,7 @@ export const QuickLinks = () => {
         <Card
           as="a"
           bordered
-          right={<Icon source="compass" weight="duotone" fill="var(--highlight-purple-foreground)" dimension={24} />}
+          right={<Icon source="grid" weight="duotone" fill="var(--highlight-purple-foreground)" dimension={24} />}
           vibrant
           highlightOnHover
         >
