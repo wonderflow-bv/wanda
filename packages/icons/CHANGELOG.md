@@ -1,5 +1,11 @@
 # @wonderflow/icons
 
+## 5.2.0
+
+### Minor Changes
+
+- [`eafd1c0`](https://github.com/wonderflow-bv/wanda/commit/eafd1c03bafb9f4cd904145a4bd24f094eeb2e7b) Thanks [@equinusocio](https://github.com/equinusocio)! - Add new style and accessibility icons
+
 ## 5.1.0
 
 ### Minor Changes
