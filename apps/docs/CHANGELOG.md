@@ -1,5 +1,17 @@
 # docs
 
+## 3.3.0
+
+### Minor Changes
+
+- [`eafd1c0`](https://github.com/wonderflow-bv/wanda/commit/eafd1c03bafb9f4cd904145a4bd24f094eeb2e7b) Thanks [@equinusocio](https://github.com/equinusocio)! - Add new style and accessibility icons
+
+### Patch Changes
+
+- Updated dependencies [[`6319696`](https://github.com/wonderflow-bv/wanda/commit/63196963b4de52351e6b9631f97c2004d789ce6d), [`eafd1c0`](https://github.com/wonderflow-bv/wanda/commit/eafd1c03bafb9f4cd904145a4bd24f094eeb2e7b)]:
+  - @wonderflow/react-components@5.3.0
+  - @wonderflow/icons@5.2.0
+
 ## 3.2.0
 
 ### Minor Changes

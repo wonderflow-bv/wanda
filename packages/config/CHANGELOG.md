@@ -1,5 +1,12 @@
 # @wonderflow/config
 
+## 5.1.1
+
+### Patch Changes
+
+- Updated dependencies [[`6319696`](https://github.com/wonderflow-bv/wanda/commit/63196963b4de52351e6b9631f97c2004d789ce6d)]:
+  - @wonderflow/tokens@5.2.0
+
 ## 5.1.0
 
 ### Minor Changes
