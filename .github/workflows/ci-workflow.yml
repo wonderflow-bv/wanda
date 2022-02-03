@@ -1,18 +1,20 @@
-name: Build, Release and Stage
+name: CI Common
 
 on:
-  push:
-    branches:
-      - main
-
-# Cancel in-progress jobs or runs for the current workflow
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  workflow_call:
+    inputs:
+      release:
+        required: false
+        type: boolean
+    secrets:
+      WF_TOKEN:
+        required: true
+      NPM_TOKEN:
+        required: true
 
 jobs:
-  install:
-    name: Release
+  ci:
+    name: CI
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -25,6 +27,8 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 14
+          scope: "@wonderflow"
+
       - run: npm i -g npm@8
 
       - name: Cache Dependencies
@@ -38,6 +42,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
 
+      - name: Cache next build
+        uses: actions/cache@v2
+        with:
+          path: ${{ github.workspace }}/apps/**/.next/cache
+          # Generate a new cache whenever packages or source files change.
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          # If source files changed but packages didn't, rebuild from a prior cache.
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+
       - name: Install Dependencies
         run: npm install
 
@@ -45,7 +59,7 @@ jobs:
         env:
           CMS_ENDPOINT: ${{ secrets.CMS_ENDPOINT }}
           NEXT_PUBLIC_DOMAIN: ${{ secrets.NEXT_PUBLIC_DOMAIN }}
-        run: npm run build:nocache
+        run: npm run build
 
       - name: Lint
         run: npm run lint
@@ -53,14 +67,15 @@ jobs:
       - name: Test
         run: npm run test
 
-      - name: Create Release Pull Request or Publish to npm
+      - name: Create Release Pull Request or Publish to NPM
         id: changesets
         uses: changesets/action@v1
+        if: inputs.release == true
         with:
           version: ./update-lock.sh
           publish: npm run release
-          commit: "[ci] release"
-          title: "[ci] release"
+          commit: "ci: release"
+          title: "ci: release"
         env:
-          GITHUB_TOKEN: ${{ secrets.WONDERFLOW_WORKFLOW_TOKEN }}
-          NPM_TOKEN: ${{ secrets.WONDERFLOW_NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.WF_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

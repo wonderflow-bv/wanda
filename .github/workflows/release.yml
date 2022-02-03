@@ -1,7 +1,7 @@
-name: Continuous Integration
+name: Build, Release and Stage
 
 on:
-  pull_request:
+  push:
     branches:
       - main
 
@@ -15,3 +15,6 @@ jobs:
     uses: wonderflow-bv/wanda/.github/workflows/ci-workflow.yml@main
     secrets:
       WF_TOKEN: ${{ secrets.WONDERFLOW_WORKFLOW_TOKEN }}
+      NPM_TOKEN: ${{ secrets.WONDERFLOW_NPM_TOKEN }}
+    with:
+      release: true
