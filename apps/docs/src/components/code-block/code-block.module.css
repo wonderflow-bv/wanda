@@ -1,5 +1,172 @@
+/* stylelint-disable selector-pseudo-class-no-unknown */
+
+/* stylelint-disable selector-class-pattern */
+
 @import '@wonderflow/react-components/core/utils/media.css';
 
+.CodeBlock {
+  position: relative;
+  margin: env(--space-32) 0;
+  display: grid;
+
+  & code[class*='language-'],
+  & pre[class*='language-'] {
+    overflow: auto;
+    border-radius: env(--radius-8);
+    color: var(--global-foreground);
+    background: none;
+    font-family: env(--font-family-mono);
+    font-size: 1.1em;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+    tab-size: 4;
+    hyphens: none;
+  }
+
+  & *::selection {
+    background-color: var(--dimmed-3);
+    color: inherit;
+    text-shadow: none;
+  }
+
+  /* Code blocks */
+  & pre[class*='language-'] {
+    padding: env(--space-48) env(--space-24) env(--space-24);
+    margin: 0.5em 0;
+    overflow: auto;
+    border: 1px solid var(--dimmed-1);
+  }
+
+  & code[class*='language-'] {
+    padding-left: 0;
+  }
+
+  & :not(pre) > code[class*='language-'],
+  & pre[class*='language-'] {
+    background: transparent;
+  }
+
+  /* Inline code */
+  & :not(pre) > code[class*='language-'] {
+    padding: 0.1em;
+    border-radius: 0.3em;
+    white-space: normal;
+  }
+
+  & :global {
+    & .token:is(.changed) {
+      color: var(--highlight-blue-foreground);
+      font-style: italic;
+    }
+
+    & .token:is(.deleted) {
+      color: var(--highlight-red-foreground);
+      font-style: italic;
+    }
+
+    & .token:is(.inserted, .attr-name) {
+      color: var(--highlight-green-foreground);
+      font-style: italic;
+    }
+
+    & .token:is(.comment, .block-comment, .prolog, .cdata) {
+      color: var(--dimmed-5);
+    }
+
+    & .token:is(.string, .attr-value, .regex, .variable, .url) {
+      color: var(--highlight-green-foreground);
+    }
+
+    & .token:is(.variable) {
+      color: var(--global-foreground);
+    }
+
+    & .token:is(.number, .symbol) {
+      color: var(--highlight-yellow-foreground);
+    }
+
+    & .token:is(.entity) {
+      color: var(--highlight-cyan-foreground);
+    }
+
+
+    & .token:is(.punctuation, .operator) {
+      color: var(--highlight-purple-foreground);
+    }
+
+    & .token:is(.builtin, .char) {
+      color: var(--highlight-cyan-foreground);
+    }
+
+    & .token:is(.function) {
+      color: var(--highlight-yellow-foreground);
+    }
+
+    & .token:is(.function-name, .constant) {
+      color: var(--highlight-blue-foreground);
+    }
+
+    & .token:is(.selector, .doctype) {
+      color: var(--highlight-purple-foreground);
+    }
+
+    & .token:is(.class-name) {
+      color: var(--highlight-cyan-foreground);
+    }
+
+    & .token:is(.tag) {
+      color: var(--highlight-green-foreground);
+    }
+
+    & .token:is(.namespace) {
+      color: var(--dimmed-8);
+    }
+
+    & .token:is(.boolean, .important) {
+      color: var(--highlight-red-foreground);
+    }
+
+    & .token:is(.property) {
+      color: var(--highlight-cyan-foreground);
+    }
+
+    & .token:is(.keyword, .atrule) {
+      color: var(--highlight-red-foreground);
+    }
+
+    & .token:is(.important, .bold) {
+      font-weight: bold;
+    }
+
+    & .token.italic {
+      font-style: italic;
+    }
+
+    & .token.entity {
+      cursor: help;
+    }
+  }
+
+  &[data-code-block-has-highlight='true'] pre[class*='language-'] > *:not(.refractor-marker) {
+    opacity: 50%;
+    filter: saturate(0);
+  }
+}
+
+.Toolbar {
+  position: absolute;
+  top: env(--space-8);
+  left: 0;
+  right: 0;
+  padding: env(--space-8) env(--space-8) env(--space-8) env(--space-16);
+  border-radius: env(--radius-8) env(--radius-8) 0 0;
+}
+
+/*
 .CodeBlock {
   position: relative;
   font-family: env(--font-family-mono);
@@ -49,4 +216,4 @@
 
 .LineContent {
   display: table-cell;
-}
+} */
