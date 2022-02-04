@@ -100,8 +100,12 @@
       color: var(--highlight-cyan-foreground);
     }
 
-    & .token:is(.punctuation, .operator) {
+    & .token:is(.punctuation) {
       color: var(--highlight-gray-foreground);
+    }
+
+    & .token:is(.operator) {
+      color: var(--highlight-purple-foreground);
     }
 
     & .token:is(.script-punctuation) {
