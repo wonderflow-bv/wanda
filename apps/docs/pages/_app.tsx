@@ -15,7 +15,7 @@ import '@/styles/docsearch.css'
 import '@/styles/shame.css'
 
 const Providers = ({ children }: { children: ReactNode }) => (
-  <ThemeProvider defaultTheme="system" disableTransitionOnChange>
+  <ThemeProvider defaultTheme="dark" disableTransitionOnChange>
     <IdProvider>
       {children}
     </IdProvider>
