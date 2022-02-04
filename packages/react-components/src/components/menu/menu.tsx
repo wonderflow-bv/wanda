@@ -3,7 +3,7 @@ import { Children, forwardRef, ReactNode, HTMLAttributes, ForwardRefExoticCompon
 import { RovingTabIndexProvider } from 'react-roving-tabindex'
 import { MenuItem, MenuItemProps } from './menu-item/menu-item'
 import { MenuItemCheckbox, MenuItemCheckboxProps } from './menu-item/menu-item-checkbox'
-import { Stack, Elevator, Polymorphic } from '../..'
+import { Stack, Elevator, Polymorphic } from '@/components'
 import styles from './menu.module.css'
 import clsx from 'clsx'
 

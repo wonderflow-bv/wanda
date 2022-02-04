@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import { forwardRef, PropsWithChildren, ReactNode } from 'react'
 import { AutoFocusInside } from 'react-focus-on'
 import styles from './modal-content.module.css'
-import { Title, Elevator, IconButton, Stack, useOverlayContext } from '../..'
+import { Title, Elevator, IconButton, Stack, useOverlayContext } from '@/components'
 
 export type ModalContentProps = PropsWithChildren<PropsWithClass> & {
   /**

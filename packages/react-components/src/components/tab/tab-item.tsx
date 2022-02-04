@@ -6,7 +6,7 @@ import {
 } from 'react'
 import { useRovingTabIndex, useFocusEffect } from 'react-roving-tabindex'
 import clsx from 'clsx'
-import { Stack, Icon, IconProps } from '../..'
+import { Stack, Icon, IconProps } from '@/components'
 import { useTabState } from './primitive-tab'
 
 import styles from './tab.module.css'

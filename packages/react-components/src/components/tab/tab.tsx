@@ -12,7 +12,7 @@ import { TabItem } from './tab-item'
 import { TabList, TabListProps } from './tab-list'
 import { TabPanel, TabPanelProps } from './tab-panel'
 import { Tabs as TabsWrapper } from './primitive-tab'
-import { Polymorphic } from '../..'
+import { Polymorphic } from '@/components'
 
 import styles from './tab.module.css'
 

@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { forwardRef } from 'react'
-import { Button, Dropdown, DropdownProps, Stack, Polymorphic } from '../..'
+import { Button, Dropdown, DropdownProps, Stack, Polymorphic } from '@/components'
 import styles from './split-button.module.css'
 
 export type SplitButtonProps = Pick<DropdownProps, 'placement' | 'offset'> & {

@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
 import styles from './icon-button.module.css'
-import { Button, ButtonProps, Polymorphic } from '../..'
+import { Button, ButtonProps, Polymorphic } from '@/components'
 import clsx from 'clsx'
 
 export type IconButtonProps = Pick<

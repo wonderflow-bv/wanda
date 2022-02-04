@@ -1,7 +1,7 @@
 import { forwardRef, ReactNode } from 'react'
 import styles from './snackbar.module.css'
 import clsx from 'clsx'
-import { Title, Stack, Icon, IconProps, Polymorphic, Button } from '../..'
+import { Title, Stack, Icon, IconProps, Polymorphic, Button } from '@/components'
 
 export type SnackbarProps = {
   /**

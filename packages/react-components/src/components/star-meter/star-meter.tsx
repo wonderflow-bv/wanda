@@ -1,10 +1,9 @@
 import { forwardRef, ReactNode } from 'react'
 import clsx from 'clsx'
 import { useUIDSeed } from 'react-uid'
-import { Text, TextProps, Stack, Icon, Polymorphic } from '../..'
+import { Text, TextProps, Stack, Icon, Polymorphic, IconProps } from '@/components'
 
 import styles from './star-meter.module.css'
-import { IconProps } from '../icon'
 
 export type StarMeterProps = {
   /**

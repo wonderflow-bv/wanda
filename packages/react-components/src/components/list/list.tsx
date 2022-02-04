@@ -1,7 +1,7 @@
 import { Children, forwardRef, useMemo } from 'react'
 import styles from './list.module.css'
 import clsx from 'clsx'
-import { Text, Stack, TextProps, Icon, IconProps, Polymorphic } from '../..'
+import { Text, Stack, TextProps, Icon, IconProps, Polymorphic } from '@/components'
 
 export type ListProps = {
   /**

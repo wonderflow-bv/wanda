@@ -1,6 +1,6 @@
 import styles from './title.module.css'
 import { CSSProperties, forwardRef } from 'react'
-import { Polymorphic } from '../..'
+import { Polymorphic } from '@/components'
 import clsx from 'clsx'
 
 export type TitleProps = {

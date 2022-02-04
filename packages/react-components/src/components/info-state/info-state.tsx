@@ -1,5 +1,5 @@
 import { forwardRef, PropsWithChildren, ReactNode } from 'react'
-import { Stack, StackProps, Icon, IconProps, Title, Text } from '../..'
+import { Stack, StackProps, Icon, IconProps, Title, Text } from '@/components'
 import styles from './info-state.module.css'
 
 export type InfoStateProps = PropsWithChildren<PropsWithClass> & {

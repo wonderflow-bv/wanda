@@ -1,6 +1,6 @@
 import { useMemo, FC } from 'react'
 import ReactDataTable, { TableProps as ReactTableProps } from 'react-data-table-component'
-import { Icon, IconProps, Skeleton, Checkbox } from '../..'
+import { Icon, IconProps, Skeleton, Checkbox } from '@/components'
 import { customStyle } from './theme'
 import styles from './table.module.css'
 import clsx from 'clsx'

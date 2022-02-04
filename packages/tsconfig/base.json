@@ -19,7 +19,11 @@
     "preserveWatchOutput": true,
     "skipLibCheck": true,
     "strictNullChecks": true,
-    "strict": false
+    "strict": false,
+    "baseUrl": "../..",
+    "paths": {
+      "@/components": ["packages/react-components/src"]
+    }
   },
   "exclude": ["node_modules"]
 }

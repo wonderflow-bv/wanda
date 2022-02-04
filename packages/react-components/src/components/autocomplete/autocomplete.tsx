@@ -6,7 +6,7 @@ import {
   useState, CSSProperties, useEffect, ReactNode
 } from 'react'
 import { useDebounce, useFocusWithin, useKeyPress, useSize } from 'ahooks'
-import { Text, Menu, Textfield, TextfieldProps } from '../..'
+import { Text, Menu, Textfield, TextfieldProps } from '@/components'
 import styles from './autocomplete.module.css'
 import { usePopperTooltip } from 'react-popper-tooltip'
 import { useUIDSeed } from 'react-uid'

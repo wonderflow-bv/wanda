@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import { useEffect, useState } from 'react'
 import ReactPaginate, { ReactPaginateProps } from 'react-paginate'
 import { Except } from 'type-fest'
-import { Icon } from '../..'
+import { Icon } from '@/components'
 
 import styles from './pagination.module.css'
 

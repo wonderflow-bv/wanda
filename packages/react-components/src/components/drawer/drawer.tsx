@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import { FocusOn, AutoFocusInside } from 'react-focus-on'
 import { useKeyPress } from 'ahooks'
 import styles from './drawer.module.css'
-import { useOverlayContext, Elevator, IconButton, Stack, Title } from '../..'
+import { useOverlayContext, Elevator, IconButton, Stack, Title } from '@/components'
 
 export type DrawerProps = PropsWithChildren<PropsWithClass> & {
   /**

@@ -1,5 +1,5 @@
 import { forwardRef, ProgressHTMLAttributes, useCallback } from 'react'
-import { Text } from '../..'
+import { Text } from '@/components'
 import clsx from 'clsx'
 
 import styles from './linear-progress.module.css'

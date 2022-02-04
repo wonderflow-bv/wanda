@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import { FocusOn } from 'react-focus-on'
 import { ModalContent, ModalContentProps } from './content/modal-content'
 import styles from './modal.module.css'
-import { useOverlayContext } from '../..'
+import { useOverlayContext } from '@/components'
 
 export type ModalProps = PropsWithChildren<PropsWithClass> & {
   /**

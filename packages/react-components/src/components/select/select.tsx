@@ -1,5 +1,5 @@
 import { ChangeEvent, forwardRef, SelectHTMLAttributes, ReactNode } from 'react'
-import { Text, Stack, Icon, IconProps } from '../..'
+import { Text, Stack, Icon, IconProps } from '@/components'
 import styles from './select.module.css'
 import clsx from 'clsx'
 import { useUIDSeed } from 'react-uid'

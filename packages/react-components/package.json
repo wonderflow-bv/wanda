@@ -23,7 +23,7 @@
     "prebuild": "rimraf dist core core.css",
     "build": "run-s build:ts build:css",
     "postbuild": "rimraf dist/**/_mixins.css",
-    "build:ts": "tsc",
+    "build:ts": "tsc && tsc-alias",
     "build:css": "cpy '**/*.css' '../dist' --parents --cwd=src && postcss dist/*.css \"dist/**/!(utils)/!(_mixins).css\" --replace",
     "postbuild:css": "mv dist/core.css ./core.css && mv dist/core ./core",
     "lint": "run-s lint:styles",

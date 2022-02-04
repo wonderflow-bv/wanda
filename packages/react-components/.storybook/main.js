@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   stories: [
     '../src/**/*.stories.mdx',
@@ -34,6 +36,10 @@ module.exports = {
       shouldExtractLiteralValuesFromEnum: true,
       propFilter: prop => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
     },
+  },
+  webpackFinal: async (config) => {
+    config.resolve.alias['@/components'] = path.resolve(__dirname, '../src/');
+    return config;
   },
   framework: '@storybook/react',
 };

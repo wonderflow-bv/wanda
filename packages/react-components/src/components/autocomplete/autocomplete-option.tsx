@@ -1,4 +1,4 @@
-import { Menu, MenuItemProps } from '..'
+import { Menu, MenuItemProps } from '@/components'
 import { PropsWithChildren, forwardRef, useCallback, useRef } from 'react'
 import { Except } from 'type-fest'
 

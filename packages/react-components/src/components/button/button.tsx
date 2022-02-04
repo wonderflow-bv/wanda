@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { FC, Children, cloneElement, forwardRef, MouseEvent, useCallback } from 'react'
-import { Icon, IconProps, Polymorphic, Spinner } from '../..'
+import { Icon, IconProps, Polymorphic, Spinner } from '@/components'
 import styles from './button.module.css'
 
 export type ButtonProps = {

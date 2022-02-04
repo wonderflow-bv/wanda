@@ -1,7 +1,7 @@
 import { BaseField, BaseFieldProps, PrimitiveInputType } from './base-field'
 import { ChangeEvent, Ref, forwardRef, useCallback, useState, useMemo } from 'react'
 import styles from './textfield.module.css'
-import { Icon, IconButton, IconButtonProps, IconProps, Stack, Text } from '../'
+import { Icon, IconButton, IconButtonProps, IconProps, Stack, Text } from '@/components'
 import clsx from 'clsx'
 import { useUIDSeed } from 'react-uid'
 

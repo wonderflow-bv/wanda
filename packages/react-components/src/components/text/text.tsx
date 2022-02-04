@@ -1,5 +1,5 @@
 import { CSSProperties, forwardRef } from 'react'
-import { Polymorphic } from '../..'
+import { Polymorphic } from '@/components'
 import styles from './text.module.css'
 import clsx from 'clsx'
 import { TokensTypes } from '@wonderflow/tokens/platforms/web'

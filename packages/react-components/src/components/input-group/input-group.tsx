@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { Children, cloneElement, forwardRef, ReactNode } from 'react'
-import { Stack, Text } from '../'
+import { Stack, Text } from '@/components'
 import { useUIDSeed } from 'react-uid'
 import styles from './input-group.module.css'
 

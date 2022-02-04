@@ -1,6 +1,6 @@
 import { forwardRef, useCallback, useEffect, useState } from 'react'
 import styles from './toggle-button.module.css'
-import { IconButton, IconButtonProps, Polymorphic, Icon, IconProps } from '../..'
+import { IconButton, IconButtonProps, Polymorphic, Icon, IconProps } from '@/components'
 import clsx from 'clsx'
 import { Except } from 'type-fest'
 import { motion } from 'framer-motion'

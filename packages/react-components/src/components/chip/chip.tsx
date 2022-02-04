@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { forwardRef, PropsWithChildren } from 'react'
-import { Icon, IconProps, Stack } from '../'
+import { Icon, IconProps, Stack } from '@/components'
 import styles from './chip.module.css'
 
 export type ChipProps = PropsWithChildren<PropsWithClass> & {

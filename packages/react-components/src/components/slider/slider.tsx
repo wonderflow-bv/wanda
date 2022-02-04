@@ -1,5 +1,5 @@
 import { forwardRef, InputHTMLAttributes, useCallback, useState } from 'react'
-import { Stack, Text, Icon, IconProps } from '..'
+import { Stack, Text, Icon, IconProps } from '@/components'
 import styles from './slider.module.css'
 import clsx from 'clsx'
 

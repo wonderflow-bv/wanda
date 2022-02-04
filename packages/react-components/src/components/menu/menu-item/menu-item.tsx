@@ -1,4 +1,4 @@
-import { Icon, Polymorphic, Stack, Tooltip, IconProps } from '../../..'
+import { Icon, Polymorphic, Stack, Tooltip, IconProps } from '@/components'
 import styles from './menu-item.module.css'
 import { ReactNode, forwardRef, useCallback, useMemo, useRef } from 'react'
 import { useFocusEffect, useRovingTabIndex } from 'react-roving-tabindex'

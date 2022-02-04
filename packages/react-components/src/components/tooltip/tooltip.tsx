@@ -1,7 +1,7 @@
 import { FC, Children, cloneElement, CSSProperties, ReactNode, useState, useRef } from 'react'
 import { useUIDSeed } from 'react-uid'
 import { useKeyPress, useFocusWithin } from 'ahooks'
-import { Elevator } from '../'
+import { Elevator } from '@/components'
 import styles from './tooltip.module.css'
 import { AutoPlacement, BasePlacement, VariationPlacement } from '@popperjs/core/lib'
 import { usePopperTooltip } from 'react-popper-tooltip'

@@ -1,6 +1,5 @@
 import { forwardRef } from 'react'
-import { MenuItem, MenuItemProps } from '..'
-import { Polymorphic } from '../../..'
+import { MenuItem, MenuItemProps, Polymorphic } from '@/components'
 
 export type MenuItemCheckboxProps = MenuItemProps & {
   /**
