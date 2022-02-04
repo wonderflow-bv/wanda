@@ -1,5 +1,15 @@
 # docs
 
+## 3.3.1
+
+### Patch Changes
+
+- d332bb1: Update codeblock component
+- 0292266: Set dark as default theme and update hero style
+- b2fd46a: Updatfix menu trigger and update code-block style
+- a26f8c9: Improve theme switcher
+- 3a31b54: Add dynamic homepage video
+
 ## 3.3.0
 
 ### Minor Changes
