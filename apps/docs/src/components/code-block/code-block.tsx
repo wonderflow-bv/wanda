@@ -50,9 +50,11 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
     [children]
   )
 
+  const formattedChildren = isNotString ? children.props.children.trim() : children.trim()
+
   return (
     <div className={clsx(CodeBlockClass)} data-code-block-has-highlight={Boolean(highlight)}>
-      <Refractor language={language} value={children} markers={highlight ? rangeParser(highlight) : undefined} />
+      <Refractor language={language} value={formattedChildren} markers={highlight ? rangeParser(highlight) : undefined} />
       <Stack direction="row" fill={false} horizontalAlign="space-between" verticalAlign="center" className={Toolbar}>
         {language && <Text responsive={false} size={14} dimmed={5}>{language}</Text>}
         {!hideCopy && (
