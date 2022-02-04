@@ -25,7 +25,7 @@ export const ThemeSwitcher = () => {
     )}
     >
       <Menu>
-        <Menu.ItemCheckbox onClick={() => setTheme('light')} checked={currentTheme === 'light'} icon="sun-bright">Light</Menu.ItemCheckbox>
+        <Menu.ItemCheckbox autoFocus onClick={() => setTheme('light')} checked={currentTheme === 'light'} icon="sun-bright">Light</Menu.ItemCheckbox>
         <Menu.ItemCheckbox onClick={() => setTheme('dark')} checked={currentTheme === 'dark'} icon="moon">Dark</Menu.ItemCheckbox>
         <Menu.ItemCheckbox onClick={() => setTheme('system')} checked={currentTheme === 'system'} icon="pc">System</Menu.ItemCheckbox>
       </Menu>
