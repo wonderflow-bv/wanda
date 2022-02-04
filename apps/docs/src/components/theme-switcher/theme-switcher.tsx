@@ -1,6 +1,6 @@
 import { useTheme } from 'next-themes'
 import { IconNames } from '@wonderflow/icons'
-import { Select } from '@wonderflow/react-components'
+import { Dropdown, IconButton, Menu } from '@wonderflow/react-components'
 
 export const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme()
@@ -13,17 +13,22 @@ export const ThemeSwitcher = () => {
   }
 
   return (
-    <Select
-      dimension="small"
-      onChange={({ currentTarget }) => setTheme(currentTarget.value)}
-      value={currentTheme}
-      icon={currentTheme === 'system' ? icon.system : icon[currentTheme]}
-      aria-label="Change color scheme"
-      style={{ paddingBottom: 0 }}
+    <Dropdown
+      placement="bottom-end"
+      offset={4}
+      trigger={(
+        <IconButton
+          aria-label="Change color scheme"
+          kind="flat"
+          icon={currentTheme === 'system' ? icon.system : icon[currentTheme]}
+        />
+    )}
     >
-      <option value="light">Light</option>
-      <option value="system">System</option>
-      <option value="dark">Dark</option>
-    </Select>
+      <Menu>
+        <Menu.ItemCheckbox onClick={() => setTheme('light')} checked={currentTheme === 'light'} icon="sun-bright">Light</Menu.ItemCheckbox>
+        <Menu.ItemCheckbox onClick={() => setTheme('dark')} checked={currentTheme === 'dark'} icon="moon">Dark</Menu.ItemCheckbox>
+        <Menu.ItemCheckbox onClick={() => setTheme('system')} checked={currentTheme === 'system'} icon="pc">System</Menu.ItemCheckbox>
+      </Menu>
+    </Dropdown>
   )
 }
