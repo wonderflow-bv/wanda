@@ -14,6 +14,7 @@ import tsx from 'refractor/lang/tsx'
 import json from 'refractor/lang/json'
 import html from 'refractor/lang/markup'
 import bash from 'refractor/lang/bash'
+import diff from 'refractor/lang/diff'
 
 import { CodeBlock as CodeBlockClass, Action, Toolbar } from './code-block.module.css'
 
@@ -25,6 +26,7 @@ Refractor.registerLanguage(json)
 Refractor.registerLanguage(html)
 Refractor.registerLanguage(typescript)
 Refractor.registerLanguage(bash)
+Refractor.registerLanguage(diff)
 
 type CodeBlockProps = {
   children: any;
