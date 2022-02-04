@@ -10,7 +10,7 @@ on:
       WF_TOKEN:
         required: true
       NPM_TOKEN:
-        required: true
+        required: false
 
 jobs:
   ci:
