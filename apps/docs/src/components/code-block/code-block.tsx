@@ -32,16 +32,20 @@ type CodeBlockProps = {
   children: any;
   highlight?: string;
   hideCopy?: boolean;
+  language?: string;
+  showLanguage?: boolean;
 } & PropsWithClass
 
 export const CodeBlock: React.FC<CodeBlockProps> = ({
   children,
   highlight,
   hideCopy = false,
-  className
+  language,
+  className,
+  showLanguage = true
 }) => {
   const isNotString = typeof children !== 'string'
-  const language = isNotString ? children?.props.className.replace(/(lang|language)-/g, '') : className?.replace(/(lang|language)-/g, '')
+  const codeLang = isNotString ? children?.props.className.replace(/(lang|language)-/g, '') : className?.replace(/(lang|language)-/g, '')
 
   const copyContent = useCallback(
     () => () => {
@@ -53,10 +57,14 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
   const formattedChildren = isNotString ? children.props.children.trim() : children.trim()
 
   return (
-    <div className={clsx(CodeBlockClass)} data-code-block-has-highlight={Boolean(highlight)}>
-      <Refractor language={language} value={formattedChildren} markers={highlight ? rangeParser(highlight) : undefined} />
+    <div
+      className={clsx(CodeBlockClass, className)}
+      data-code-block-has-highlight={Boolean(highlight)}
+      data-code-block-has-meta={showLanguage || codeLang}
+    >
+      <Refractor language={language || codeLang} value={formattedChildren} markers={highlight ? rangeParser(highlight) : undefined} />
       <Stack direction="row" fill={false} horizontalAlign="space-between" verticalAlign="center" className={Toolbar}>
-        {language && <Text responsive={false} size={14} dimmed={5}>{language}</Text>}
+        {(codeLang && showLanguage) && <Text responsive={false} size={14} dimmed={5}>{codeLang}</Text>}
         {!hideCopy && (
         <Button
           className={Action}

@@ -1,0 +1,54 @@
+.TableProps {
+  inline-size: 100%;
+}
+
+.Row {
+  border: 1px solid var(--dimmed-1);
+  border-radius: env(--radius-8);
+  transition: background-color 0.2s ease-out;
+
+  &:target {
+    background-color: var(--highlight-blue-background);
+    color: var(--highlight-blue-foreground);
+    border-color: var(--highlight-blue-background);
+  }
+}
+
+.Cell {
+  inline-size: 1%;
+  padding: env(--space-4) env(--space-8);
+  justify-content: flex-start;
+  display: flex;
+  align-items: center;
+  flex-basis: 100%;
+  grid-gap: env(--space-4);
+  flex-wrap: wrap;
+
+  &:first-child {
+    flex-basis: 1%;
+    visibility: hidden;
+
+    @nest .Row:hover & {
+      visibility: visible;
+    }
+  }
+
+  &[data-content-align='right'] {
+    justify-content: flex-end;
+  }
+}
+
+.Dropdown {
+  max-inline-size: min(60ch, 100vw);
+}
+
+.CodeBlock {
+  margin: 0;
+  max-block-size: 300px;
+  overflow-y: auto;
+
+  & pre {
+    margin: 0;
+    border: 0;
+  }
+}

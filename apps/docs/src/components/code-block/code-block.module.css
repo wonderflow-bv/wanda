@@ -4,7 +4,7 @@
 
 @import '@wonderflow/react-components/core/utils/media.css';
 
-.CodeBlock {
+:where(.CodeBlock) {
   position: relative;
   margin: env(--space-32) 0;
   display: grid;
@@ -35,10 +35,14 @@
 
   /* Code blocks */
   & pre[class*='language-'] {
-    padding: env(--space-48) env(--space-24) env(--space-24);
-    margin: 0.5em 0;
+    margin: 0;
     overflow: auto;
     border: 1px solid var(--dimmed-1);
+    padding: env(--space-24);
+
+    @nest [data-code-block-has-meta='true'] & {
+      padding-top: env(--space-48);
+    }
   }
 
   & code[class*='language-'] {
@@ -93,7 +97,7 @@
     }
 
     & .token:is(.number, .symbol) {
-      color: var(--highlight-purple-foreground);
+      color: var(--highlight-yellow-foreground);
     }
 
     & .token:is(.entity) {

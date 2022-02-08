@@ -1,8 +1,9 @@
 import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
 import { LiveArea } from "@/components/live-area";
-import { Props } from "@/components/props";
+import { PropsTable } from "@/components/props-table";
 import * as Components from "@wonderflow/react-components";
+import iconNames from '@wonderflow/icons/structure'
 
 export const example = `<Icon source="message" dimension={32} />`;
 
@@ -75,31 +76,31 @@ export const CustomReactIcon = (props) => (
 
 ## API Reference
 
-<Props
+<PropsTable
   properties={[
     {
       name: "source",
-      type: ["IconNames | ReactElement<HTMLOrSVGElement>"],
+      type: ["enum"],
+      typeValue: `ReactElement<HTMLOrSVGElement>\n | ${iconNames.map(name => `"${name}"`).join("\n | ")}`,
       default: "",
       required: true,
-      dangerous: false,
-      description: "Set the icon to render based on the name. You can pass a element to render a custom icon instead.",
+      description: "Set the icon name to display. Icon names are defined in the `IconNames` enum and are part of Wanda's iconography system. Available icons: https://design.wonderflow.ai/design/iconography/",
     },
     {
       name: "dimension",
-      type: ["14", "16", "24", "32", "40", "48", "56"],
+      type: "enum",
+      typeValue: '12 | 16 | 24 | 32 | 40 | 48 | 56',
       default: "16",
       required: false,
-      dangerous: false,
-      description: "Set the icon size",
+      description: "Set the size of the icon. To improve readability at any size, the style of the icon is automatically defined based on the dimension.",
     },
     {
-      name: "style",
-      type: ["solid", "outline", "duotone"],
-      default: "\"outline\"",
+      name: "weight",
+      type: ["enum"],
+      typeValue: "'solid' | 'outline' | 'duotone'",
+      default: "outline",
       required: false,
-      dangerous: false,
-      description: "Set the icon style. If `dimension` is lower than 16, the style is ignored and the icon rendered with solid style.",
+      description: "Set the weight of the icon. The default weight is `solid` and outline or duotone icons are available only for icons sized 24pt or larger.",
     },
   ]}
 />
