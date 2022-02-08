@@ -15,9 +15,16 @@ export const Navigation = ({ data }: NavigationProps) => {
   const router = useRouter()
 
   const includesPath = useCallback(
-    (path) => router.asPath.includes(`${path}`),
+    (path) => {
+      const lastPathFragment = path.replace(/(.+\/)?(.+)/g, '$2')
+      const urlFragments = router.asPath.split('/')
+
+      return urlFragments.includes(lastPathFragment)
+    },
     [router.asPath]
   )
+
+  console.log(router.asPath)
 
   const navigationLink = useCallback(
     (url: string, children: ReactNode, tag?: NavigationItem['tag']) => (
