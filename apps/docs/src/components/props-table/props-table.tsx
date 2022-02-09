@@ -9,7 +9,7 @@ import { useRouter } from 'next/router'
 type Prop = {
   name: string
   description?: string
-  type: string
+  type: string[] | string
   typeValue?: string
   typeLink?: string
   default?: string
@@ -113,7 +113,13 @@ export const PropsTable = ({
           {/* Prop TYPE and TYPEVALUE */}
           {item.type && (
             <div role="cell" className={styles.Cell}>
-              {toMDCode(item.type)}
+              {Array.isArray(item.type)
+                ? item.type.map(type => (
+                  <Fragment key={type}>
+                    {toMDCode(type)}
+                  </Fragment>
+                ))
+                : toMDCode(item.type)}
               {item.typeValue && (
                 <Dropdown
                   placement="top"

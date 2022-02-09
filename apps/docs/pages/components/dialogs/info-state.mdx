@@ -1,5 +1,6 @@
 import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
+import { PropsTable } from "@/components/props-table";
 import { Props } from "@/components/props";
 import * as components from "@wonderflow/react-components";
 
@@ -55,55 +56,54 @@ export default () => {
 
 ## API Reference
 
-<Props
+<PropsTable
   properties={[
     {
       name: "title",
       type: ["ReactNode"],
       default: "",
       required: true,
-      dangerous: false,
-      description: "Add a title",
+      description: "Set the main tagline of the info state. This should be catchy and short as much as possible.",
     },
     {
       name: "icon",
-      type: ["IconProps['source']"],
+      type: ["enum"],
+      typeValue: "IconProps['source']",
+      typeLink: "/components/other/icon#prop-source",
       default: "",
       required: false,
-      dangerous: false,
-      description: "Set the icon to show",
+      description: "The icon to display. This is used to enforce the message of the info state. This is not displayed if `image` is set.",
+    },
+    {
+      name: "iconColor",
+      type: ["enum"],
+      typeValue: "'gray' | 'cyan' | 'green' | 'purple' | 'yellow' | 'red' | 'blue'",
+      default: '"blue"',
+      required: false,
+      description: "Set the icon color. Please use the correct color based on the type of the message. Eg. Don't use `green` for negative informations.",
     },
     {
       name: "image",
       type: ["string"],
       default: "",
       required: false,
-      dangerous: false,
-      description: "Set the URL of the image to use in place of the icon",
+      description: "An image may be used instead of an icon. The image is centered and scaled.",
     },
     {
       name: "direction",
-      type: ["StackProps['direction']"],
+      type: ["enum"],
+      typeValue: "StackProps['direction']",
+      typeLink: "/components/layouts/stack#prop-direction",
       default: "column",
       required: false,
-      dangerous: false,
-      description: "Set the direction of the content",
-    },
-    {
-      name: "iconColor",
-      type: ["gray", "cyan", "green", "purple", "yellow", "red", "blue"],
-      default: '"blue"',
-      required: false,
-      dangerous: false,
-      description: "Set the color of the icon when present",
+      description: "Set the direction of the content (column or row).",
     },
     {
       name: "actions",
       type: ["ReactNode"],
       default: "",
       required: false,
-      dangerous: false,
-      description: "Add actions to show below the content",
+      description: "Pass the suplementary actions to the info state. Even if you can pass as many elements as you want, we suggest to add no more than two actions.",
     },
   ]}
 />

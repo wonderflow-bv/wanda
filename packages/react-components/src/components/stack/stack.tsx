@@ -28,12 +28,12 @@ export type StackProps = {
    */
   fill?: boolean;
   /**
-   * Place the content vertically centered instead of
+   * Set the vertical content placement instead of
    * growing to fill the available space.
    */
   verticalAlign?: string;
   /**
-   * Place the content horizontally centered instead of
+   * Set the horizontal content placement instead of
    * growing to fill the available space.
    */
   horizontalAlign?: string;

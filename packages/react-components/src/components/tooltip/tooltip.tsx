@@ -29,7 +29,7 @@ export type TooltipProps = PropsWithClass & {
    */
   open?: boolean;
   /**
-   * Define a delay time before the tooltip is shown.
+   * Define a delay time in milliseconds before the tooltip is shown.
    */
   delay?: number;
   /**

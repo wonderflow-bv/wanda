@@ -81,7 +81,7 @@ export const CustomReactIcon = (props) => (
     {
       name: "source",
       type: ["enum"],
-      typeValue: `ReactElement<HTMLOrSVGElement>\n | ${iconNames.map(name => `"${name}"`).join("\n | ")}`,
+      typeValue: `ReactElement<HTMLOrSVGElement>\n | ${iconNames.map(name => `"${name}"`).join(" | ")}`,
       default: "",
       required: true,
       description: "Set the icon name to display. Icon names are defined in the `IconNames` enum and are part of Wanda's iconography system. Available icons: https://design.wonderflow.ai/design/iconography/",
