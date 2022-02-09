@@ -2,8 +2,9 @@ import clsx from 'clsx'
 import { Markdown } from '@/components/markdown'
 import styles from './props-table.module.css'
 import { useCallback, Fragment } from 'react'
-import { Card, Chip, Dropdown, Icon, IconButton, Stack, Text, Elevator } from '@wonderflow/react-components'
+import { Card, Chip, Dropdown, IconButton, Stack, Text, Elevator } from '@wonderflow/react-components'
 import { CodeBlock } from '../code-block'
+import { useRouter } from 'next/router'
 
 type Prop = {
   name: string
@@ -24,6 +25,8 @@ export const PropsTable = ({
   properties,
   ...otherProps
 }: PropsTableProps) => {
+  const router = useRouter()
+
   const toMDCode = useCallback((value) => (
     <Markdown options={{ wrapper: Fragment }}>
       {`\`${value}\``}
@@ -71,15 +74,12 @@ export const PropsTable = ({
           id={`prop-${item.name.toLowerCase()}`}
         >
           <div role="cell" className={styles.Cell}>
-            <Text
-              as="a"
-              href={`#prop-${item.name}`}
-              size={14}
-              weight="bold"
-              dimmed={5}
-            >
-              <Icon source="link" dimension={12} />
-            </Text>
+            <IconButton
+              dimension="small"
+              kind="flat"
+              onClick={() => navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_DOMAIN}${router.asPath}#prop-${item.name.toLowerCase()}`)}
+              icon="link"
+            />
           </div>
 
           {/* Prop NAME and DESCRIPTION */}
