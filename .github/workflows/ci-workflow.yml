@@ -11,6 +11,12 @@ on:
         required: true
       NPM_TOKEN:
         required: false
+      VERCEL_TOKEN:
+        required: false
+      VERCEL_ORG_ID:
+        required: false
+      VERCEL_PROJECT_ID:
+        required: false
 
 jobs:
   ci:
