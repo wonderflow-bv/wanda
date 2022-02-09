@@ -133,7 +133,7 @@ export const PropsTableRow = ({
 
       {/* Prop DEFAULT VALUE */}
       <div role="cell" data-content-align="right" className={styles.Cell}>
-        {defaultValue ? toMDCode(defaultValue) : '–'}
+        {defaultValue ? toMDCode(defaultValue) : ''}
       </div>
     </Stack>
   )

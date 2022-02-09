@@ -6,6 +6,7 @@
   border: 1px solid var(--dimmed-1);
   border-radius: env(--radius-8);
   transition: background-color 0.2s ease-out;
+  line-height: initial;
 
   &[data-props-table-link-copied='true'] {
     animation: positive-feedback 2s 1;
@@ -13,7 +14,6 @@
 
   &:target {
     background-color: var(--highlight-cyan-background);
-    color: var(--highlight-cyan-foreground);
     border-color: var(--highlight-cyan-foreground);
 
     & > * > code {

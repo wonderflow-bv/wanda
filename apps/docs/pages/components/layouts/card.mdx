@@ -1,7 +1,9 @@
 import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
+import { PropsTable } from "@/components/props-table";
 import { Props } from "@/components/props";
 import * as components from "@wonderflow/react-components";
+import tkns from "@wonderflow/tokens/platforms/web/tokens.json";
 
 export const example = `<Card
   left={<Icon source="message" dimension={32} />}
@@ -37,45 +39,50 @@ export default () => {
 
 ## API Reference
 
-<Props
+<PropsTable
   properties={[
     {
       name: "wrap",
-      type: ["StackProps['wrap']"],
+      type: ["boolean"],
+      typeValue: "StackProps['wrap']",
+      typeLink: "/components/layouts/stack#prop-wrap",
       default: "false",
       required: false,
-      dangerous: false,
-      description: "Wrap the children if there isn't enought space",
+      description: "Wrap `left`, `children` and `right` there is no space for them",
     },
     {
       name: "columnGap",
-      type: ["StackProps['columnGap']"],
+      type: "enum",
+      typeValue: "StackProps['columnGap']",
+      typeLink: "/components/layouts/stack#prop-columngap",
       default: "24",
       required: false,
-      dangerous: false,
-      description: "Set the space between columns",
+      description: "Set the space between `left`, `children` and `right`",
     },
     {
       name: "verticalAlign",
-      type: ["StackProps['verticalAlign']"],
+      type: ["string"],
+      typeValue: "StackProps['verticalAlign']",
+      typeLink: "/components/layouts/stack#prop-verticalalign",
       default: "start",
       required: false,
-      dangerous: false,
       description:
-        "Set the vertical alignment for children. Any align-items or justify-content value is accepted",
+        "Set the vertical content placement instead of growing to fill the available space.",
     },
     {
       name: "horizontalAlign",
-      type: ["StackProps['horizontalAlign']"],
+      type: ["string"],
+      typeValue: "StackProps['horizontalAlign']",
+      typeLink: "/components/layouts/stack#prop-horizontalalign",
       default: "space-between",
       required: false,
-      dangerous: false,
       description:
-        "Set the horizontal alignment for children. Any align-items or justify-content value is accepted",
+        "Set the horizontal content placement instead of growing to fill the available space.",
     },
     {
       name: "padding",
-      type: ["false", "TokensTypes['space']"],
+      type: ["enum"],
+      typeValue: `false | ${Object.keys(tkns.space).map(name => `${name}`).join(" | ")}`,
       default: "24",
       required: false,
       dangerous: false,
@@ -86,66 +93,61 @@ export default () => {
       type: ["ReactNode"],
       default: "",
       required: false,
-      dangerous: false,
-      description: "Place content on the left side of children.",
+      description: "ontent rendered inside the card on the left side, before children.",
     },
     {
       name: "right",
       type: ["ReactNode"],
       default: "",
       required: false,
-      dangerous: false,
-      description: "Place content on the right side of children.",
-    },
-    {
-      name: "radius",
-      type: ["false", "TokensTypes['radius']"],
-      default: "8",
-      required: false,
-      dangerous: false,
-      description: "Set the ednge radius",
-    },
-    {
-      name: "dimmed",
-      type: ["1", "2", "3"],
-      default: "",
-      required: false,
-      dangerous: false,
-      description: "Set the dimmed background",
+      description: "Content rendered inside the card on the right side, after children.",
     },
     {
       name: "bordered",
       type: ["boolean"],
       default: "",
       required: false,
-      dangerous: false,
-      description: "Set a small border on the card",
+      description: "Add a border to the card to increase its visual weight and contrast.",
+    },
+    {
+      name: "radius",
+      type: ["enum"],
+      typeValue: `false | ${Object.keys(tkns.radius).map(name => `${name}`).join(" | ")}`,
+      default: "8",
+      required: false,
+      description: "Define the edge radius of the card.",
+    },
+    {
+      name: "dimmed",
+      type: ["enum"],
+      typeValue: "1 | 2 | 3",
+      default: "",
+      required: false,
+      description: "Change the background color of the card.",
     },
     {
       name: "vibrant",
       type: ["boolean"],
       default: "",
       required: false,
-      dangerous: false,
-      description: "Set the vibrant style for the card",
+      description: "Make the card vibrant. Add tranlucent background.",
     },
     {
       name: "highlightOnHover",
       type: ["boolean"],
       default: "",
       required: false,
-      dangerous: false,
       description:
-        "Highlight the card on hover and focus. Applied only if `vibrant`",
+        "Change the background color of the card when it is hovered.",
     },
     {
       name: "as",
-      type: ["keyof JSX.IntrinsicElements | React.ComponentType<any>"],
-      default: '"div"',
+      type: ["enum"],
+      typeValue: "keyof JSX.IntrinsicElements | React.ComponentType<any>",
+      default: 'div',
       required: false,
-      dangerous: false,
       description:
-        "Set the component to a different HTML tag or custom component.",
-    },
+        "Set the component to a different HTML tag or custom component",
+    }
   ]}
 />
