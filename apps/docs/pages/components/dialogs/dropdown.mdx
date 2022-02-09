@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
+import { PropsTable } from "@/components/props-table";
 import { Props } from "@/components/props";
 import * as Components from "@wonderflow/react-components";
 
@@ -80,48 +81,37 @@ export default () => {
 
 ### Dropdown
 
-<Props
+<PropsTable
   properties={[
     {
       name: "trigger",
       type: ["ReactNode"],
       default: "",
       required: true,
-      dangerous: false,
-      description: "Set the element that triggers the dropdown",
+      description: "The element to use as the trigger for the dropdown.",
     },
     {
       name: "offset",
       type: ["number"],
       default: "8",
       required: false,
-      dangerous: false,
-      description: "Set the gap between the trigger and the popup",
+      description: "The distance from the trigger to the dropdown.",
     },
     {
       name: "placement",
-      type: [
-        "auto",
-        "auto-start",
-        "auto-end",
-        "top",
-        "bottom",
-        "right",
-        "left",
-        "top-start",
-        "top-end",
-        "bottom-start",
-        "bottom-end",
-        "right-start",
-        "right-end",
-        "left-start",
-        "left-end",
-      ],
+      type: ["enum"],
+      typeValue: '"auto" | "auto-start" | "auto-end" | "top" | "bottom" | "right" | "left" | "top-start" | "top-end" | "bottom-start" | "bottom-end" | "right-start" | "right-end" | "left-start" | "left-end"',
       default: "auto-start",
       required: false,
-      dangerous: false,
       description:
-        "Set the placement logic. Auto means the popup is placed based on the available space inside the viewport.",
+        "The placement of the dropdown. This is automatically handled based on scroll and viewport edges. By default the dropdown is anchored at the beginning of the trigger. The first key refers to the X axis, the second key refers to the Y axis. Eg: `auto-start` means the dropdown will be placed automatically on left or right based on the available space, and anchored at the top (start) of the trigger.",
+    },
+    {
+      name: "disabled",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      description: "Enable or disable the itneraction on the trigger.",
     },
   ]}
 />

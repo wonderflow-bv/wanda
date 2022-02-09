@@ -3,7 +3,7 @@ import { Button, Text, Stack } from '@wonderflow/react-components'
 import clsx from 'clsx'
 import rangeParser from 'parse-numeric-range'
 import Refractor from 'react-refractor'
-import React, { useCallback } from 'react'
+import React, { useCallback, ReactNode } from 'react'
 
 // Load any languages you want to use from `refractor`
 import js from 'refractor/lang/javascript'
@@ -34,6 +34,7 @@ type CodeBlockProps = {
   hideCopy?: boolean;
   language?: string;
   showLanguage?: boolean;
+  actions?: ReactNode;
 } & PropsWithClass
 
 export const CodeBlock: React.FC<CodeBlockProps> = ({
@@ -42,6 +43,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
   hideCopy = false,
   language,
   className,
+  actions,
   showLanguage = true
 }) => {
   const isNotString = typeof children !== 'string'
@@ -60,21 +62,26 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
     <div
       className={clsx(CodeBlockClass, className)}
       data-code-block-has-highlight={Boolean(highlight)}
-      data-code-block-has-meta={showLanguage || codeLang}
+      data-code-block-has-toolbar={!(showLanguage || codeLang) || Boolean(actions) || !hideCopy}
     >
       <Refractor language={language || codeLang} value={formattedChildren} markers={highlight ? rangeParser(highlight) : undefined} />
       <Stack direction="row" fill={false} horizontalAlign="space-between" verticalAlign="center" className={Toolbar}>
         {(codeLang && showLanguage) && <Text responsive={false} size={14} dimmed={5}>{codeLang}</Text>}
-        {!hideCopy && (
-        <Button
-          className={Action}
-          dimension="small"
-          kind="flat"
-          onClick={copyContent()}
-        >
-          Copy
-        </Button>
-        )}
+        <span />
+
+        <Stack direction="row" rowGap={8}>
+          {!hideCopy && (
+            <Button
+              className={Action}
+              dimension="small"
+              kind="flat"
+              onClick={copyContent()}
+            >
+              Copy
+            </Button>
+          )}
+          {actions}
+        </Stack>
       </Stack>
     </div>
   )

@@ -1,5 +1,6 @@
 import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
+import { PropsTable } from "@/components/props-table";
 import { Props } from "@/components/props";
 import { Checklist } from "@/components/checklist";
 import * as Components from "@wonderflow/react-components";
@@ -65,106 +66,99 @@ export default () => {
 
 ## API Reference
 
-<Props
+<PropsTable
   properties={[
     {
       name: "kind",
-      type: ['"primary"', '"secondary"', '"flat"'],
-      default: '"primary"',
+      type: ['enum'],
+      typeValue: "ButtonProps['kind']",
+      typeLink: "/components/actions/button#prop-kind",
+      default: 'primary',
       required: false,
-      dangerous: false,
-      description: "Set the element visual style",
+      description: "Set the style of the button. When the button is `disabled` this property is ignored.",
     },
     {
       name: "dimension",
-      type: ['"small"', '"regular"', '"big"'],
-      default: '"regular"',
+      type: ['enum'],
+      typeValue: "ButtonProps['dimension']",
+      typeLink: "/components/actions/button#prop-dimension",
+      default: 'regular',
       required: false,
-      dangerous: false,
-      description: "Set the element size",
+      description: "Set the size of the button.",
     },
     {
       name: "fullWidth",
       type: ["boolean"],
-      default: "",
+      typeValue: "ButtonProps['fullWidth']",
+      typeLink: "/components/actions/button#prop-fullwidth",
+      default: "false",
       required: false,
-      dangerous: false,
-      description: "Set the element to fill the available space",
+      description: "Make the button full width, filling the available space.",
     },
     {
       name: "icon",
-      type: ["IconProps['source']"],
+      type: ["enum"],
+      typeValue: "ButtonProps['icon']",
+      typeLink: "/components/actions/button#prop-icon",
       default: "",
       required: false,
-      dangerous: false,
-      description: "Set the icon to show inside the element",
+      description: "Define the icon to use",
     },
     {
       name: "disabled",
       type: ["boolean"],
+      typeValue: "ButtonProps['disabled']",
+      typeLink: "/components/actions/button#prop-disabled",
       default: "",
       required: false,
-      dangerous: false,
-      description: "Set the disabled state",
+      description: "Set disabled state. The button is not interactive and grayed out.",
     },
     {
       name: "busy",
       type: ["boolean"],
+      typeValue: "ButtonProps['busy']",
+      typeLink: "/components/actions/button#prop-busy",
       default: "",
       required: false,
-      dangerous: false,
-      description: "Set the loading/busy state and show the spinner",
+      description: "Set the loading state and show a spinner.",
     },
     {
       name: "onClick",
-      type: ["(MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void"],
+      type: ["function"],
+      typeValue: "ButtonProps['onClick']",
+      typeLink: "/components/actions/button#prop-onclick",
       default: "",
       required: false,
-      dangerous: false,
-      description: "Callback for the click event",
+      description: "Callback function to be called when the button is pressed.",
     },
     {
       name: "placement",
-      type: [
-        "auto",
-        "auto-start",
-        "auto-end",
-        "top",
-        "bottom",
-        "right",
-        "left",
-        "top-start",
-        "top-end",
-        "bottom-start",
-        "bottom-end",
-        "right-start",
-        "right-end",
-        "left-start",
-        "left-end",
-      ],
+      type: ["enum"],
+      typeValue: "DropdownProps['placement']",
+      typeLink: "/components/dialogs/dropdown#prop-placement",
       default: "auto-start",
       required: false,
-      dangerous: false,
       description:
-        "Set the placement logic. Auto means the popup is placed based on the available space inside the viewport.",
+        "The placement of the dropdown. This is automatically handled based on scroll and viewport edges. By default the dropdown is anchored at the beginning of the trigger. The first key refers to the X axis, the second key refers to the Y axis. Eg: `auto-start` means the dropdown will be placed automatically on left or right based on the available space, and anchored at the top (start) of the trigger.",
     },
     {
       name: "offset",
       type: ["number"],
+      typeValue: "DropdownProps['offset']",
+      typeLink: "/components/dialogs/dropdown#prop-offset",
       default: "8",
       required: false,
-      dangerous: false,
-      description: "Set the gap between the trigger and the popup",
+      description: "The distance from the trigger to the dropdown.",
     },
     {
       name: "as",
-      type: ["keyof JSX.IntrinsicElements | React.ComponentType<any>"],
-      default: '"button"',
+      type: ["enum"],
+      typeValue: "keyof JSX.IntrinsicElements | React.ComponentType<any>",
+      default: 'button',
       required: false,
-      dangerous: false,
       description:
         "Set the component to a different HTML tag or custom component",
-    },
+    }
   ]}
 />
 

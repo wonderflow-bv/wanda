@@ -46,6 +46,7 @@
   margin: 0;
   max-block-size: 300px;
   overflow-y: auto;
+  overscroll-behavior: contain;
 
   & pre {
     margin: 0;

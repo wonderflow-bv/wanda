@@ -40,7 +40,7 @@
     border: 1px solid var(--dimmed-1);
     padding: env(--space-24);
 
-    @nest [data-code-block-has-meta='true'] & {
+    @nest [data-code-block-has-toolbar='true'] & {
       padding-top: env(--space-48);
     }
   }

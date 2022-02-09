@@ -54,7 +54,8 @@ export default () => {
     {
       name: "kind",
       type: ['enum'],
-      typeValue: "'primary' | 'secondary' | 'flat'",
+      typeValue: "ButtonProps['kind']",
+      typeLink: "/components/actions/button#prop-kind",
       default: 'primary',
       required: false,
       description: "Set the style of the button. When the button is `disabled` this property is ignored.",
@@ -62,7 +63,8 @@ export default () => {
     {
       name: "dimension",
       type: ['enum'],
-      typeValue: "'small' | 'regular' | 'big'",
+      typeValue: "ButtonProps['dimension']",
+      typeLink: "/components/actions/button#prop-dimension",
       default: 'regular',
       required: false,
       description: "Set the size of the button.",
@@ -70,7 +72,8 @@ export default () => {
     {
       name: "icon",
       type: ["enum"],
-      typeValue: "IconProps['source']",
+      typeValue: "ButtonProps['icon']",
+      typeLink: "/components/actions/button#prop-icon",
       default: "",
       required: false,
       description: "Define the icon to use",
@@ -78,6 +81,8 @@ export default () => {
     {
       name: "disabled",
       type: ["boolean"],
+      typeValue: "ButtonProps['disabled']",
+      typeLink: "/components/actions/button#prop-disabled",
       default: "",
       required: false,
       description: "Set disabled state. The button is not interactive and grayed out.",
@@ -85,6 +90,8 @@ export default () => {
     {
       name: "busy",
       type: ["boolean"],
+      typeValue: "ButtonProps['busy']",
+      typeLink: "/components/actions/button#prop-busy",
       default: "",
       required: false,
       description: "Set the loading state and show a spinner.",
@@ -92,6 +99,8 @@ export default () => {
     {
       name: "pressed",
       type: ["boolean"],
+      typeValue: "ButtonProps['pressed']",
+      typeLink: "/components/actions/button#prop-pressed",
       default: "false",
       required: false,
       description: "Set the pressed state and add required aria attributes.",
@@ -99,7 +108,8 @@ export default () => {
     {
       name: "onClick",
       type: ["function"],
-      typeValue: `(MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void`,
+      typeValue: "ButtonProps['onClick']",
+      typeLink: "/components/actions/button#prop-onclick",
       default: "",
       required: false,
       description: "Callback function to be called when the button is pressed.",

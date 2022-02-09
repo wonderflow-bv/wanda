@@ -9,7 +9,8 @@ type Prop = {
   name: string
   description?: string
   type: string
-  typeValue: string
+  typeValue?: string
+  typeLink?: string
   default?: string
   required?: boolean
 }
@@ -67,7 +68,7 @@ export const PropsTable = ({
           className={styles.Row}
           fill={false}
           key={item.name}
-          id={`prop-${item.name}`}
+          id={`prop-${item.name.toLowerCase()}`}
         >
           <div role="cell" className={styles.Cell}>
             <Text
@@ -127,7 +128,21 @@ export const PropsTable = ({
                 >
                   <Elevator resting={2}>
                     <Card bordered padding={false} className={styles.Dropdown}>
-                      <CodeBlock showLanguage={false} className={styles.CodeBlock} language="typescript" hideCopy>
+                      <CodeBlock
+                        showLanguage={false}
+                        className={styles.CodeBlock}
+                        language="typescript"
+                        actions={item.typeLink && (
+                          <IconButton
+                            as="a"
+                            href={item.typeLink}
+                            dimension="small"
+                            kind="secondary"
+                            icon="link"
+                          />
+                        )}
+                        hideCopy
+                      >
                         {item.typeValue}
                       </CodeBlock>
                     </Card>
