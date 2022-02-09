@@ -1,5 +1,6 @@
 import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
+import { PropsTable } from "@/components/props-table";
 import { Props } from "@/components/props";
 import * as components from "@wonderflow/react-components";
 
@@ -46,48 +47,44 @@ export default () => {
 
 ## API Reference
 
-<Props
+<PropsTable
   properties={[
     {
       name: "input",
       type: ["ReactNode"],
       default: "",
       required: false,
-      dangerous: false,
-      description: "The input to decorate.",
+      description: "Pas the input element to decorate",
     },
     {
       name: "start",
       type: ["ReactNode"],
       default: "",
       required: false,
-      dangerous: false,
-      description: "The element to show before the input",
+      description: "Add a decoration element after the input.",
     },
     {
       name: "end",
       type: ["ReactNode"],
       default: "",
       required: false,
-      dangerous: false,
-      description: "The element to show after the input",
+      description: "Add a decoration element before the input.",
     },
     {
       name: "label",
       type: ["ReactNode"],
       default: "",
       required: false,
-      dangerous: false,
-      description: "The descriptive label for the decorated input",
+      description: "Add an accessible label to the componsed input group",
     },
     {
       name: "dimension",
-      type: ['"small", "big", "regular"'],
+      type: ['enum'],
+      typeValue: "'small' | 'big' | 'regular'",
       default: '"regular"',
       required: false,
-      dangerous: false,
       description:
-        "The dimension for all the inputs. It overrides the single ones.",
+        "Pass the dimension down to the imput element.",
     },
   ]}
 />

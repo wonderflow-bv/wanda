@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
+import { PropsTable } from "@/components/props-table";
 import { Props } from "@/components/props";
 import * as Components from "@wonderflow/react-components";
 
@@ -79,91 +80,87 @@ export default () => {
 
 ### Menu.Item
 
-<Props
+<PropsTable
   properties={[
     {
       name: "icon",
-      type: ["IconProps['source']"],
+      type: ["enum"],
+      typeValue: "IconProps['source']",
+      typeLink: "/components/other/icon#prop-source",
       default: "",
       required: false,
-      dangerous: false,
-      description: "Set a custom icon beside the element",
+      description: "Whether the menu item should have an icon",
+    },
+    {
+      name: "iconPosition",
+      type: ["enum"],
+      typeValue: "'left' | 'right'",
+      default: 'left',
+      required: false,
+      description: "Set the position of the icon. Used only when icon is defined.",
+    },
+    {
+      name: "dimension",
+      type: ["enum"],
+      typeValue: "'small' | 'regular'",
+      default: 'regular',
+      required: false,
+      description: "Set the size of the menu item. Font size and icon style will be adjusted to match the size.",
+    },
+    {
+      name: "onClick",
+      type: ["function"],
+      typeValue: "(event?: Event) => void",
+      default: "",
+      required: false,
+      description: "Callback function to be called when the menu item is pressed.",
     },
     {
       name: "description",
       type: ["ReactNode"],
       default: "",
       required: false,
-      dangerous: false,
-      description: "Add a rich description tooltip to the item",
-    },
-    {
-      name: "dimension",
-      type: ["small", "regular"],
-      default: '"regular"',
-      required: false,
-      dangerous: false,
-      description: "Set the element size",
+      description: "Add an extra description to the menu item. This uses the `Tooltip` component internally.",
     },
     {
       name: "disabled",
       type: ["boolean"],
       default: "false",
       required: false,
-      dangerous: false,
-      description: "Set the disabled state",
+      description: "Set disabled state. The item is not interactive and grayed out.",
     },
     {
       name: "padding",
       type: ["boolean"],
       default: "true",
       required: false,
-      dangerous: false,
-      description: "Add padding to align text with items with icon",
-    },
-    {
-      name: "decoration",
-      type: ["ReactNode"],
-      default: "",
-      required: false,
-      dangerous: false,
-      description:
-        "Add an element to decorate the menu item. This is useful for adding extra elements and informations to the menu item. Don't use interactive elements (link, buttons, etc..) as decoration if `Menu.Item` is rendered as ´<button>´ (default).",
+      description: "Add or remove the padding from the menu item. This space is used to keep the content aligned across items with or without icons. We suggest to not remove the padding if you have items with icons in the same menu to keep a good readability. Read more: https://design.wonderflow.ai/design/recipes/menu/#items-with-icons",
     },
     {
       name: "autoFocus",
       type: ["boolean"],
       default: "",
       required: false,
-      dangerous: false,
       description:
         "Set item to gain focus automatically when the menu is opened. This property is commonly used on the first item in the menu.",
     },
     {
-      name: "onClick",
-      type: ["(event?: Event) => void"],
+      name: "decoration",
+      type: ["ReactNode"],
       default: "",
       required: false,
-      dangerous: false,
-      description: "Callback for the click event",
-    },
-    {
-      name: "iconPosition",
-      type: ["left", "right"],
-      default: '"left"',
-      required: false,
-      dangerous: false,
-      description: "Set where to place the icon inside the item",
+      description:
+        "Add an element to decorate the menu item. This is useful for adding extra elements and informations to the menu item. Don't use interactive elements (link, buttons, etc..) as decoration if `Menu.Item` is rendered as `<button>` (default).",
     },
     {
       name: "as",
-      type: ["keyof JSX.IntrinsicElements | React.ComponentType<any>"],
-      default: '"button"',
+      type: ["enum"],
+      typeValue: "keyof JSX.IntrinsicElements | React.ComponentType<any>",
+      default: 'button',
       required: false,
-      dangerous: false,
       description:
         "Set the component to a different HTML tag or custom component",
-    },
+    }
   ]}
 />
 
@@ -171,15 +168,14 @@ export default () => {
 
 The `Menu.ItemCheckbox` extends all the `Menu.Item` properties and adds the following ones:
 
-<Props
+<PropsTable
   properties={[
     {
       name: "checked",
       type: ["boolean"],
-      default: "false",
+      default: "",
       required: false,
-      dangerous: false,
-      description: "Set the checked status",
+      description: "Set the default checked state of the checkbox item",
     },
   ]}
 />

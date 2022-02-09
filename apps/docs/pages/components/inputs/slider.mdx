@@ -1,5 +1,6 @@
 import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
+import { PropsTable } from "@/components/props-table";
 import { Props } from "@/components/props";
 import * as Components from "@wonderflow/react-components";
 
@@ -55,77 +56,75 @@ export const exampleWithIcons = `<Slider aria-label="brightness" iconMin="moon" 
 
 ## API Reference
 
-<Props
+<PropsTable
   properties={[
     {
       name: "min",
       type: ["number"],
       default: "0",
       required: false,
-      dangerous: false,
-      description: "The minimum value",
+      description: "Set the minimum value of the slider. This value must be lower than `max`.",
     },
     {
       name: "max",
       type: ["number"],
       default: "100",
       required: false,
-      dangerous: false,
-      description: "The maximum value",
+      description: "Set the maximum value of the slider. This value must be higher than `min`.",
     },
     {
       name: "step",
       type: ["number"],
       default: "",
       required: false,
-      dangerous: false,
-      description: "Set the incrementation step",
+      description: "Set the step value of the slider. This allows the user to select a value in increments of `step`.",
     },
     {
       name: "onInput",
-      type: ["(value: number) => void"],
+      type: ["function"],
+      typeValue: "(value: number) => void",
       default: "",
       required: false,
-      dangerous: false,
       description:
-        "Callback for the input event. The current value is passed as argument",
+        "Callback function to be called when the value is changed. A parameter `number` is passed to get the new value.",
     },
     {
       name: "defaultValue",
       type: ["number"],
       default: "0",
       required: false,
-      dangerous: false,
-      description: "The initial value",
+      description: "Set the initial value of the slider.",
     },
     {
       name: "showValues",
       type: ["boolean"],
       default: "",
       required: false,
-      dangerous: false,
-      description: "Show the current value and max. This hides icons.",
+      description: "Show or hide the values beside the slider.",
     },
     {
       name: "iconMin",
-      type: ["IconProps['source']"],
+      type: ["enum"],
+      typeValue: "IconProps['source']",
+      typeLink: "/components/other/icon#prop-source",
       default: "",
       required: false,
-      dangerous: false,
-      description: "Use icon for the min value",
+      description: "Add an icon representing the minimum value. This is only available when `showValues` is `false`.",
     },
     {
       name: "iconMax",
-      type: ["IconProps['source']"],
+      type: ["enum"],
+      typeValue: "IconProps['source']",
+      typeLink: "/components/other/icon#prop-source",
       default: "",
       required: false,
-      dangerous: false,
-      description: "Use icon for the max value",
+      description: "Add an icon representing the maximum value. This is only available when `showValues` is `false`",
     },
     {
       name: "dimension",
-      type: ['"small"', '"regular"'],
-      default: '"regular"',
+      type: ['enum'],
+      typeValue: "'small' | 'regular'",
+      default: 'regular',
       required: false,
       dangerous: false,
       description: "Set the element size",

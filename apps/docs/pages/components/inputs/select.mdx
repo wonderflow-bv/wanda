@@ -1,5 +1,6 @@
 import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
+import { PropsTable } from "@/components/props-table";
 import { Props } from "@/components/props";
 import * as components from "@wonderflow/react-components";
 
@@ -72,55 +73,54 @@ export default () => {
 
 ## API Reference
 
-<Props
+<PropsTable
   properties={[
     {
       name: "icon",
-      type: ["IconProps['source']"],
-      default: '"sort-alt"',
+      type: ["enum"],
+      typeValue: "IconProps['source']",
+      typeLink: "/components/other/icon#prop-source",
+      default: "sort-alt",
       required: false,
-      dangerous: false,
-      description: "Set the icon to show inside the element",
+      description: "Change the default icon displayed on the side of the select.",
     },
     {
       name: "label",
       type: ["ReactNode"],
       default: "",
       required: false,
-      dangerous: false,
-      description: "Set the label associated with the element",
+      description: "Set the accessible label for the select.",
     },
     {
       name: "kind",
-      type: ['"single"', '"multiple"'],
-      default: '"single"',
+      type: ['enum'],
+      typeValue: "'single' | 'multiple'",
+      default: 'single',
       required: false,
-      dangerous: false,
-      description: "Enable multiple selection",
+      description: "Set how many options can be selected at once.",
     },
     {
       name: "dimension",
-      type: ['"small"', '"regular"', '"big"'],
-      default: '"regular"',
+      type: ['enum'],
+      typeValue: "'regular' | 'small' | 'big'",
+      default: 'regular',
       required: false,
-      dangerous: false,
-      description: "Set the size of the element",
+      description: "Set the size of the select. This affects alsosize and style of the icon.",
     },
     {
       name: "disabled",
       type: ["boolean"],
-      default: "false",
+      default: "",
       required: false,
-      dangerous: false,
-      description: "Set the disabled state",
+      description: "Set disabled state. The select is not interactive and grayed out.",
     },
     {
       name: "onChange",
-      type: ["(ChangeEvent<HTMLSelectElement>) => void"],
+      type: ["function"],
+      typeValue: "(event: ChangeEvent<HTMLSelectElement>) => void",
       default: "",
       required: false,
-      dangerous: false,
-      description: "Callback for the change event",
+      description: "Callback function to be called when a new value is selected.",
     },
   ]}
 />

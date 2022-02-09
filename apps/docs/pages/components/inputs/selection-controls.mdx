@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
+import { PropsTable } from "@/components/props-table";
 import { Props } from "@/components/props";
 import * as components from "@wonderflow/react-components";
 
@@ -66,39 +67,37 @@ export default () => {
 
 ## API Reference
 
-<Props
+<PropsTable
   properties={[
     {
       name: "disabled",
       type: ["boolean"],
       default: "",
       required: false,
-      dangerous: false,
-      description: "Set the disabled state",
+      description: "Set disabled state. The component is not interactive and grayed out.",
     },
     {
       name: "indeterminate",
       type: ["boolean"],
       default: "",
       required: false,
-      dangerous: false,
-      description: "Set the indeterminate state. Checkbox only.",
+      description: "Set the indeterminate state. This state is used to indicate that the checkbox is partially checked. Is used when a subset of the options are selected but not all of them.",
     },
     {
       name: "dimension",
-      type: ['"small"', '"big"'],
-      default: '"big"',
+      type: ['enum'],
+      typeValue: "'regular' | 'small'",
+      default: 'big',
       required: false,
-      dangerous: false,
-      description: "Set the element size",
+      description: "Set the size of the element.",
     },
     {
       name: "onChange",
-      type: ["(ChangeEvent<HTMLInputElement>) => void"],
+      type: ["enum"],
+      typeValue: "(event: ChangeEvent<HTMLInputElement>) => void",
       default: "",
       required: false,
-      dangerous: false,
-      description: "Callback for the change event",
+      description: "Callback function to be called when is toggled. A parameter `ChangeEvent<HTMLInputElement>` is passed with the event details",
     },
   ]}
 />
