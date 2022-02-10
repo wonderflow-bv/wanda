@@ -71,7 +71,7 @@
     left: calc(var(--icon-size) / 2);
     right: auto;
   }
-  @nest .Disclosure[open] & {
+  @nest .Disclosure[open] > .Summary > & {
     transform: rotate(90deg);
   }
 }

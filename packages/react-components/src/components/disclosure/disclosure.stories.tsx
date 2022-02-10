@@ -35,3 +35,19 @@ const Template: ComponentStory<typeof Disclosure> = (args) => (
 )
 
 export const Default = Template.bind({})
+
+const NestedTemplate: ComponentStory<typeof Disclosure> = (args) => (
+  <Disclosure {...args}>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    Doloribus corporis nobis ipsum natus laudantium dolorem sapiente,
+    sint adipisci at asperiores quia ex voluptatum veniam! Quos rerum natus eos excepturi atque!
+
+    <Disclosure summary="Nested">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      Doloribus corporis nobis ipsum natus laudantium dolorem sapiente,
+      sint adipisci at asperiores quia ex voluptatum veniam! Quos rerum natus eos excepturi atque!
+    </Disclosure>
+  </Disclosure>
+)
+
+export const Nested = NestedTemplate.bind({})
