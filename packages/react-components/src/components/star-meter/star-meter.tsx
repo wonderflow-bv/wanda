@@ -32,7 +32,7 @@ export type StarMeterProps = {
    */
   dimension?: 'small' | 'regular' | 'big';
   /**
-   * Hide the label indicator.
+   * Hide the label beside the stars
    */
   hideLabel?: boolean;
 }

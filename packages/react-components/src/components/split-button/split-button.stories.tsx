@@ -10,7 +10,7 @@ export default {
     kind: 'primary',
     label: 'Click me',
     fullWidth: false,
-    disabled: false,
+    disabled: true,
     loading: false,
     placement: 'auto-start',
     offset: 8

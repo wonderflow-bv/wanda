@@ -1,6 +1,6 @@
 import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
-import { Props } from "@/components/props";
+import { PropsTable } from "@/components/props-table";
 import * as components from "@wonderflow/react-components";
 
 export const example = `<Container dimension="large" className="ContainerEx"></Container>`;
@@ -40,32 +40,31 @@ export default () => {
 
 ## API Reference
 
-<Props
+<PropsTable
   properties={[
     {
       name: "dimension",
-      type: ['"full"', '"medium"', '"large"'],
-      default: '"full"',
+      type: ['enum'],
+      typeValue: "'full' | 'medium' | 'large'",
+      default: 'full',
       required: false,
-      dangerous: false,
-      description: "Set the element max width",
+      description: "Set the horizontal max-width of the container.",
     },
     {
       name: "padding",
       type: ["boolean"],
       default: "true",
       required: false,
-      dangerous: false,
-      description: "Enable or disable the predefined padding",
+      description: "Set or remove the container's predefined horizontal padding.",
     },
     {
       name: "as",
-      type: ["keyof JSX.IntrinsicElements | React.ComponentType<any>"],
-      default: '"div"',
+      type: ["enum"],
+      typeValue: "keyof JSX.IntrinsicElements | React.ComponentType<any>",
+      default: 'div',
       required: false,
-      dangerous: false,
       description:
-        "Set the component to a different HTML tag or custom component.",
-    },
+        "Set the component to a different HTML tag or custom component",
+    }
   ]}
 />

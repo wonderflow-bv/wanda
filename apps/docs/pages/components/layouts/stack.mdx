@@ -1,7 +1,8 @@
 import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
-import { Props } from "@/components/props";
+import { PropsTable } from "@/components/props-table";
 import * as components from "@wonderflow/react-components";
+import tkns from "@wonderflow/tokens/platforms/web/tokens.json";
 
 export const example = `<Stack
   columnGap={8}
@@ -63,22 +64,22 @@ export default () => {
 
 ## API Reference
 
-<Props
+<PropsTable
   properties={[
     {
       name: "rowGap",
-      type: ["0", "TokensTypes['space']"],
+      type: ["TokensTypes['space']"],
+      typeValue: `${Object.keys(tkns.space).map(name => `${name}`).join(" | ")}`,
       default: "0",
       required: false,
-      dangerous: false,
-      description: "Set the space between rows",
+      description: "Add a gap between rows.",
     },
     {
       name: "columnGap",
-      type: ["0", "TokensTypes['space']"],
+      type: ["TokensTypes['space']"],
+      typeValue: `${Object.keys(tkns.space).map(name => `${name}`).join(" | ")}`,
       default: "0",
       required: false,
-      dangerous: false,
       description: "Set the space between columns",
     },
     {
@@ -86,76 +87,71 @@ export default () => {
       type: ["boolean"],
       default: "false",
       required: false,
-      dangerous: false,
-      description: "Apply `inline-flex` instead of `flex`",
+      description: "Display the element as `inline-flex`",
     },
     {
       name: "wrap",
       type: ["boolean"],
       default: "false",
       required: false,
-      dangerous: false,
-      description: "Wrap the children if there isn't enought space",
+      description: "Wrap children whene there is no space for them",
     },
     {
       name: "fill",
       type: ["boolean"],
       default: "true",
       required: false,
-      dangerous: false,
-      description: "Force direct children to equally fill the space",
+      description: "Make the children grow to fill the available space instead of being sized based on their content.",
     },
     {
       name: "verticalAlign",
       type: ["string"],
       default: "",
       required: false,
-      dangerous: false,
       description:
-        "Set the vertical alignment for children. Any align-items or justify-content value is accepted",
+        "Set the vertical content placement instead of growing to fill the available space.",
     },
     {
       name: "horizontalAlign",
       type: ["string"],
       default: "",
       required: false,
-      dangerous: false,
       description:
-        "Set the horizontal alignment for children. Any align-items or justify-content value is accepted",
-    },
-    {
-      name: "verticalPadding",
-      type: ["TokensTypes['space']"],
-      default: "0",
-      required: false,
-      dangerous: false,
-      description: "Set the vertical padding",
+        "Set the horizontal content placement instead of growing to fill the available space.",
     },
     {
       name: "horizontalPadding",
       type: ["TokensTypes['space']"],
+      typeValue: `${Object.keys(tkns.space).map(name => `${name}`).join(" | ")}`,
       default: "0",
       required: false,
-      dangerous: false,
-      description: "Set the horizontal padding",
+      description: "Set the horizontal padding (left/right)",
+    },
+    {
+      name: "verticalPadding",
+      type: ["TokensTypes['space']"],
+      typeValue: `${Object.keys(tkns.space).map(name => `${name}`).join(" | ")}`,
+      default: "0",
+      required: false,
+      description: "Set the vertical padding (top/bottom)",
     },
     {
       name: "direction",
-      type: ['"row"', '"column"', '"row-reverse"', '"column-reverse"'],
+      type: ['enum'],
+      typeValue: "'row' | 'column' | 'row-reverse' | 'column-reverse'",
       default: '"column"',
       required: false,
-      dangerous: false,
       description:
-        "Distribute the elements along the horizontal or vertical axis by using the flexbox layout model",
+        "Renderes children as rows or columns. The value can be one of the flex directions. More info: [https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction)",
     },
     {
       name: "as",
-      type: ["keyof JSX.IntrinsicElements | React.ComponentType<any>"],
-      default: '"div"',
+      type: ["enum"],
+      typeValue: "keyof JSX.IntrinsicElements | React.ComponentType<any>",
+      default: 'div',
       required: false,
-      dangerous: false,
       description:
-        "Set the component to a different HTML tag or custom component.",
-    },
+        "Set the component to a different HTML tag or custom component",
+    }
   ]}
 />

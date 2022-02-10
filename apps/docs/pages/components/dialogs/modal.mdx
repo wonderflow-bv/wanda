@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
+import { PropsTable } from "@/components/props-table";
 import { Props } from "@/components/props";
 import { LiveArea } from "@/components/live-area";
 import dynamic from "next/dynamic";
@@ -187,39 +188,37 @@ export const PageExample = () => {
 
 ### Modal
 
-<Props
+<PropsTable
   properties={[
     {
       name: "closeOnClickOutside",
       type: ["boolean"],
       default: "true",
       required: false,
-      dangerous: false,
       description:
-        "Run onClose callback from the `OverlayContext` when clicking the backdrop layer",
+        "This enable the modal to be closed by clicking on the overlay. Even if this can be set to `false` we strongly recommend to leave it to `true` as it ensures the accessibility of the modal.",
     },
   ]}
 />
 
 ### Modal.Content
 
-<Props
+<PropsTable
   properties={[
     {
       name: "title",
-      type: ['"ReactNode"'],
+      type: ['ReactNode'],
       default: "",
       required: true,
-      dangerous: false,
-      description: "The modal title which labels the modal to AT",
+      description: "Set the accessible title of the modal. This is used by screen readers to announce the title of the modal when opened.",
     },
     {
       name: "theme",
-      type: ['"light"', '"dark"', '"auto"'],
+      type: ['enum'],
+      typeValue: "'dark' | 'light' | 'auto'",
       default: '"light"',
       required: false,
-      dangerous: false,
-      description: "Set the modal content style. By default is always light",
+      description: "Set the theme of the content card. To ensure contrast with the default overlay color (dark), this is set to `light` by default.",
     },
   ]}
 />

@@ -1,6 +1,6 @@
 import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
-import { Props } from "@/components/props";
+import { PropsTable } from "@/components/props-table";
 import * as Components from "@wonderflow/react-components";
 
 export const columns = [
@@ -189,30 +189,31 @@ This component extends the [`react-data-table-component`](https://github.com/jbe
 
 ### Custom extended API
 
-<Props
+<PropsTable
   properties={[
     {
       name: "ExpandableRowsComponent",
       type: ["React.FC<{data: T}>"],
       default: "",
       required: false,
-      dangerous: false,
-      description: "Set the component to render when an expandable row is open",
+      description: "A react component that add additional content when the row is expanded. By passing this prop, the row will be expandable.",
     },
     {
       name: "collapsedRowIcon",
-      type: ["IconProps['source']"],
+      type: "enum",
+      typeValue: "IconProps['source']",
+      typeLink: "/components/other/icon#prop-source",
       default: "chevron-right",
       required: false,
-      dangerous: false,
-      description: "Set the icon used to expand a row",
+      description: "Set the icon to use when the expandable rows are collapsed.",
     },
     {
       name: "expandedRowIcon",
-      type: ["IconProps['source']"],
+      type: "enum",
+      typeValue: "IconProps['source']",
+      typeLink: "/components/other/icon#prop-source",
       default: "chevron-down",
       required: false,
-      dangerous: false,
       description: "Set the icon used to collapse a row",
     },
     {
@@ -220,8 +221,7 @@ This component extends the [`react-data-table-component`](https://github.com/jbe
       type: ["string"],
       default: "48px",
       required: false,
-      dangerous: false,
-      description: "set the minimum row height",
+      description: "Set minimum height for each row.",
     },
   ]}
 />

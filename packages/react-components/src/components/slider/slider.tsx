@@ -27,7 +27,7 @@ export type SliderProps = InputHTMLAttributes<HTMLInputElement> & {
    */
   defaultValue?: number;
   /**
-   * Show or hide the `max` value and the current value.
+   * Show or hide the values beside the slider.
    */
   showValues?: boolean;
   /**

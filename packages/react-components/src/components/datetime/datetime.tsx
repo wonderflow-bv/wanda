@@ -1,8 +1,19 @@
 import { HTMLAttributes, useEffect, useState } from 'react'
 
 export type DatetimeProps = HTMLAttributes<HTMLTimeElement> & {
+  /**
+   * The date to format and display.
+   */
   date: string;
+  /**
+   * Set the locale to use to format the date.
+   */
   locale?: string | string[];
+  /**
+   * Customize the date format by passing options from Intl.DateTimeFormat
+   *
+   * Read more: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat
+   */
   options?: Intl.DateTimeFormatOptions;
 }
 

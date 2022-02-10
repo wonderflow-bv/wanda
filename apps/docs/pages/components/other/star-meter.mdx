@@ -1,6 +1,6 @@
 import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
-import { Props } from "@/components/props";
+import { PropsTable } from "@/components/props-table";
 import * as components from "@wonderflow/react-components";
 
 export default ({ children }) => (
@@ -48,46 +48,42 @@ export default () => {
 
 ## API Reference
 
-<Props
+<PropsTable
   properties={[
     {
       name: "value",
       type: ["number"],
       default: "0",
       required: true,
-      dangerous: false,
-      description: "Set the rating value",
+      description: "Set the value of the star meter. This value must be between `0` and `starCount`. This data is used to calculate the number of filled stars based on predefined thresholds of the fraction. \n\n```bash\nfraction < `0.25` = rounded to 0 (empty star) \nfraction >= `0.75` = rounded to 1 (filled star) \nfraction >= `0.25` and < 0.75 = rounded to 0.5 (half star)\n```",
     },
     {
       name: "starCount",
       type: ["number"],
       default: "5",
       required: false,
-      dangerous: false,
-      description: "Set how many stars to render",
+      description: "Set the number of stars to use as maximum.",
     },
     {
       name: "label",
       type: ["ReactNode"],
       default: "",
       required: false,
-      dangerous: false,
-      description: "Replace the default label",
+      description: "Set a custom label instead of the current value.",
     },
     {
       name: "dimension",
-      type: ['"small"', '"regular"', '"big"'],
+      type: ['enum'],
+      typeValue: "'small' | 'regular' | 'big'",
       default: '"regular"',
       required: false,
-      dangerous: false,
-      description: "Set the element size",
+      description: "Set the size of the star meter.",
     },
     {
       name: "hideLabel",
       type: ["boolean"],
       default: "false",
       required: false,
-      dangerous: false,
       description: "Hide the label beside the stars",
     },
   ]}

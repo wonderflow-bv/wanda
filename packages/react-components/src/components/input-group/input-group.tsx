@@ -10,13 +10,13 @@ export type InputGroupProps = PropsWithClass & {
    */
   input: ReactNode;
   /**
-   * Add a decoration element before the input.
-   */
-  end?: ReactNode;
-  /**
    * Add a decoration element after the input.
    */
   start?: ReactNode;
+  /**
+   * Add a decoration element before the input.
+   */
+  end?: ReactNode;
   /**
    * Add an accessible label to the componsed input group
    */

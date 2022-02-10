@@ -1,6 +1,7 @@
 import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
 import { Props } from "@/components/props";
+import { PropsTable } from "@/components/props-table";
 import { Checklist } from "@/components/checklist";
 import * as Components from "@wonderflow/react-components";
 import { Markdown } from "@/components/markdown";
@@ -74,54 +75,46 @@ export const exampleWithGroup = `<ButtonsGroup dimension="big" kind="secondary">
 
 ### Button
 
-<Props
+<PropsTable
   properties={[
     {
       name: "kind",
-      type: ['"primary"', '"secondary"', '"flat"'],
-      default: '"primary"',
+      type: ['enum'],
+      typeValue: "'primary' | 'secondary' | 'flat'",
+      default: 'primary',
       required: false,
-      dangerous: false,
-      description: "Set the element visual style",
+      description: "Set the style of the button. When the button is `disabled` this property is ignored.",
     },
     {
       name: "dimension",
-      type: ['"small"', '"regular"', '"big"'],
-      default: '"regular"',
+      type: ['enum'],
+      typeValue: "'small' | 'regular' | 'big'",
+      default: 'regular',
       required: false,
-      dangerous: false,
-      description: "Set the element size",
+      description: "Set the size of the button.",
     },
     {
       name: "fullWidth",
       type: ["boolean"],
-      default: "",
-      required: false,
-      dangerous: false,
-      description: "Set the element to fill the available space",
-    },
-    {
-      name: "pressed",
-      type: ["boolean"],
       default: "false",
       required: false,
-      dangerous: false,
-      description: "Set the pressed state and visual",
+      description: "Make the button full width, filling the available space.",
     },
     {
       name: "icon",
-      type: ["IconProps['source']"],
+      type: ["enum"],
+      typeValue: "IconProps['source']",
+      typeLink: "/components/other/icon#prop-source",
       default: "",
       required: false,
-      dangerous: false,
-      description: "Set the icon to show inside the element",
+      description: "Define the icon to use",
     },
     {
       name: "iconPosition",
-      type: ['"left"', '"right"'],
-      default: '"left"',
+      type: ['enum'],
+      typeValue: "'left' | 'right'",
+      default: 'left',
       required: false,
-      dangerous: false,
       description: "Set the icon position",
     },
     {
@@ -129,64 +122,68 @@ export const exampleWithGroup = `<ButtonsGroup dimension="big" kind="secondary">
       type: ["string"],
       default: "",
       required: false,
-      dangerous: false,
-      description: "Set the icon color",
+      description: "Override the color of the icon. Used only when icon is defined.",
     },
     {
       name: "disabled",
       type: ["boolean"],
       default: "",
       required: false,
-      dangerous: false,
-      description: "Set the disabled state",
+      description: "Set disabled state. The button is not interactive and grayed out.",
     },
     {
       name: "busy",
       type: ["boolean"],
       default: "",
       required: false,
-      dangerous: false,
-      description: "Set the loading/busy state and show the spinner",
+      description: "Set the loading state and show a spinner.",
+    },
+    {
+      name: "pressed",
+      type: ["boolean"],
+      default: "false",
+      required: false,
+      description: "Set the pressed state and add required aria attributes.",
     },
     {
       name: "onClick",
-      type: ["(MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void"],
+      type: ["function"],
+      typeValue: `(MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void`,
       default: "",
       required: false,
-      dangerous: false,
-      description: "Callback for the click event",
+      description: "Callback function to be called when the button is pressed.",
     },
     {
       name: "as",
-      type: ["keyof JSX.IntrinsicElements | React.ComponentType<any>"],
-      default: '"button"',
+      type: ["enum"],
+      typeValue: "keyof JSX.IntrinsicElements | React.ComponentType<any>",
+      default: 'button',
       required: false,
-      dangerous: false,
       description:
         "Set the component to a different HTML tag or custom component",
-    },
+    }
   ]}
 />
 
 ### ButtonsGroup
 
-<Props
+<PropsTable
   properties={[
     {
-      name: "dimension",
-      type: ['"small"', '"regular"', '"big"'],
-      default: '"regular"',
+      name: "kind",
+      type: ['enum'],
+      typeValue: "'primary' | 'secondary' | 'flat'",
+      default: 'primary',
       required: false,
-      dangerous: false,
-      description: "Set the element size",
+      description: "Set the style of the button. When the button is `disabled` this property is ignored.",
     },
     {
-      name: "kind",
-      type: ['"primary"', '"secondary"', '"flat"'],
-      default: '"primary"',
+      name: "dimension",
+      type: ['enum'],
+      typeValue: "'small' | 'regular' | 'big'",
+      default: 'regular',
       required: false,
-      dangerous: false,
-      description: "Set the style for the buttons inside",
+      description: "Set the size of the button.",
     },
   ]}
 />

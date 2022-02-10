@@ -2,6 +2,7 @@ import { useState } from "react";
 import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
 import { LiveArea } from "@/components/live-area";
+import { PropsTable } from "@/components/props-table";
 import { Props } from "@/components/props";
 import dynamic from "next/dynamic";
 import * as Components from "@wonderflow/react-components";
@@ -162,49 +163,46 @@ export const PageExample = () => {
 
 ### OverlayContainer
 
-<Props
+<PropsTable
   properties={[
     {
       name: "root",
       type: ["HTMLElement"],
       default: "document.body",
       required: false,
-      dangerous: false,
-      description: "Set the root element to render the container",
+      description: "Set the root element to render the overlay container into.",
     },
     {
       name: "index",
       type: ["number"],
       default: "4",
       required: false,
-      dangerous: false,
-      description: "Define the z-index of the container",
+      description: "Set the css `z-index` of the overlay container. This must be used only if necessary.",
     },
     {
       name: "overlayColor",
-      type: ['"light" | "dark" | "auto"'],
-      default: '"dark"',
+      type: ['enum'],
+      typeValue: "'light' | 'dark' | 'auto'",
+      default: 'dark',
       required: false,
-      dangerous: false,
       description:
-        'Set the overlay style. This is used to obscure the content behind the overlay if `obfuscate` is `true`. The `"auto"` value means that the overlay will be dark if the theme is dark and light if the theme is light.',
+        'Set the overlay style. This is used to obscure the content behind the overlay if `obfuscate` is `true`. If set to `auto`, the overlay color is determined by the global active theme (light or dark).',
+    },
+    {
+      name: "onClose",
+      type: ["function"],
+      typeValue: "() => void",
+      default: "",
+      required: false,
+      description:
+        "The callback function that is called when the overlay is closed.",
     },
     {
       name: "obfuscate",
       type: ["boolean"],
       default: "true",
       required: false,
-      dangerous: false,
-      description: "Set the overlay to obscure the page content behind it.",
-    },
-    {
-      name: "onClose",
-      type: ["() => void"],
-      default: "",
-      required: false,
-      dangerous: false,
-      description:
-        "Callback to close the overlay. You can access this callback also inside the content, by using `useOverlayContext`",
+      description: "Set the overlay to be obscuring the page content behind it.",
     },
   ]}
 />

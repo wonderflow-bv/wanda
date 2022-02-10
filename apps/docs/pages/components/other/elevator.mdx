@@ -1,6 +1,6 @@
 import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
-import { Props } from "@/components/props";
+import { PropsTable } from "@/components/props-table";
 import * as components from "@wonderflow/react-components";
 
 export const example = `<Elevator resting={1} hover={4}>
@@ -43,31 +43,30 @@ export default () => {
 
 ## API Reference
 
-<Props
+<PropsTable
   properties={[
     {
       name: "resting",
-      type: ["0", "1", "2", "3", "4"],
+      type: ["enum"],
+      typeValue: "0 | 1 | 2 | 3 | 4",
       default: "",
       required: true,
-      dangerous: false,
-      description: "Set the elevation while resting",
+      description: "Set the elevation of the component when is resting.",
     },
     {
       name: "hover",
-      type: ["0", "1", "2", "3", "4"],
+      type: ["enum"],
+      typeValue: "0 | 1 | 2 | 3 | 4",
       default: "",
       required: false,
-      dangerous: false,
-      description: "Set the elevation while hovering",
+      description: "Set the elevation of the component when is hovered.",
     },
     {
       name: "children",
       type: ["ReactElement"],
       default: "",
       required: true,
-      dangerous: false,
-      description: "The content to elevate. Only one child is accepted.",
+      description: "The content to be elevated. This component doesn't generate any wrapper. It just applies the elevation by adding the respective attribvtes to the children.",
     },
   ]}
 />

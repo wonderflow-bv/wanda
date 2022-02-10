@@ -37,6 +37,10 @@ export type DropdownProps = PropsWithClass & {
    * based on the available space, and anchored at the top (start) of the trigger.
    */
   placement?: AutoPlacement | BasePlacement | VariationPlacement;
+  /**
+   * Enable or disable the itneraction on the trigger.
+   */
+  disabled?: boolean;
 }
 
 const DropdownAnimation = {
@@ -63,6 +67,7 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(({
   trigger,
   offset = 8,
   placement = 'auto-start',
+  disabled,
   className,
   ...otherProps
 }, forwardedRef) => {
@@ -79,7 +84,7 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(({
   } = usePopperTooltip({
     delayShow: 0,
     delayHide: 0,
-    trigger: ['click'],
+    trigger: !disabled ? ['click'] : null,
     visible: isOpen,
     closeOnTriggerHidden: true,
     onVisibleChange: setIsOpen,

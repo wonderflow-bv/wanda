@@ -1,6 +1,6 @@
 import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
-import { Props } from "@/components/props";
+import { PropsTable } from "@/components/props-table";
 import * as components from "@wonderflow/react-components";
 
 export const example = `<Elevator resting={1}>
@@ -86,24 +86,24 @@ export default () => {
 
 Contains all the tabs component parts.
 
-<Props
+<PropsTable
   properties={[
     {
       name: "state",
-      type: ["[number, React.Dispatch<React.SetStateAction<number>>]"],
+      type: ["state"],
+      typeValue: "[number, React.Dispatch<React.SetStateAction<number>>]",
       default: "",
       required: false,
-      dangerous: false,
-      description: "Set the initial active tab",
+      description: "Set the index of the tab to be selected.",
     },
     {
       name: "onChange",
-      type: ["(index: number) => void"],
+      type: ["function"],
+      typeValue: "(index: number) => void",
       default: "",
       required: false,
-      dangerous: false,
       description:
-        "Callback for the tab change event. Returns the current tab index",
+        "Callback function called when the selected tab changes.",
     },
   ]}
 />
@@ -112,23 +112,23 @@ Contains all the tabs component parts.
 
 Contains the content associated with each trigger.
 
-<Props
+<PropsTable
   properties={[
     {
       name: "label",
       type: ["ReactNode"],
       default: "",
       required: false,
-      dangerous: false,
-      description: "Define the tab name associated with the content",
+      description: "Set the tab panel name and accessible label",
     },
     {
       name: "icon",
-      type: ["IconProps['source']"],
+      type: ["enum"],
+      typeValue: "IconProps['source']",
+      typeLink: "/components/other/icon#prop-source",
       default: "",
       required: false,
-      dangerous: false,
-      description: "Add an icon on the tab label",
+      description: "Add an additional icon to the tab panel label, enforcing the meaning of the name and context.",
     },
   ]}
 />

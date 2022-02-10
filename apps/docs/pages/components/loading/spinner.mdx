@@ -1,6 +1,6 @@
 import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
-import { Props } from "@/components/props";
+import { PropsTable } from "@/components/props-table";
 import * as components from "@wonderflow/react-components";
 
 export const example = `<Spinner />`;
@@ -34,23 +34,22 @@ export default () => {
 
 ## API Reference
 
-<Props
+<PropsTable
   properties={[
     {
       name: "dimension",
-      type: ['"small"', '"regular"', '"big"'],
-      default: '"big"',
+      type: ['enum'],
+      typeValue: "'small' | 'regular' | 'big'",
+      default: 'big',
       required: false,
-      dangerous: false,
-      description: "Set the element size",
+      description: "Set the size of the spinner",
     },
     {
       name: "color",
       type: ["string"],
       default: "",
       required: false,
-      dangerous: false,
-      description: "Set the color",
+      description: "Override the color of the spinner",
     },
   ]}
 />

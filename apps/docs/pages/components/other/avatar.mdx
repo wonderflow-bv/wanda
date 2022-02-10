@@ -1,6 +1,6 @@
 import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
-import { Props } from "@/components/props";
+import { PropsTable } from "@/components/props-table";
 import * as components from "@wonderflow/react-components";
 
 export const example = `<>
@@ -36,23 +36,23 @@ export default () => {
 
 ## API Reference
 
-<Props
+<PropsTable
   properties={[
     {
       name: "src",
       type: ["string"],
       default: "",
       required: true,
-      dangerous: false,
-      description: "The avatar url",
+      description: "The source of the image to use as avatar",
     },
     {
       name: "dimension",
-      type: ['"small"', '"regular"', '"big"'],
-      default: '"regular"',
+      type: ['enum'],
+      typeValue: "'small' | 'regular' | 'big'",
+      default: 'regular',
       required: false,
       dangerous: false,
-      description: "Set the element size",
+      description: "Define the size of the avatar",
     },
   ]}
 />

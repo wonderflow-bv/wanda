@@ -1,5 +1,6 @@
 import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
+import { PropsTable } from "@/components/props-table";
 import { Props } from "@/components/props";
 import * as components from "@wonderflow/react-components";
 
@@ -49,65 +50,64 @@ export default () => {
 
 ## API Reference
 
-<Props
+<PropsTable
   properties={[
     {
       name: "icon",
-      type: ["IconProps['source']"],
-      default: '"based on the type prop"',
+      type: ["enum"],
+      typeValue: "IconProps['source']",
+      typeLink: "/components/other/icon#prop-source",
+      default: "",
       required: false,
-      dangerous: false,
-      description: "Set the icon to show inside the element",
+      description: "Set the icon to be displaye alongside the title. This icon have to enforce the message in a not misleading way.",
     },
     {
       name: "title",
       type: ["string"],
       default: "",
       required: false,
-      dangerous: false,
-      description: "Set the label associated with the element",
+      description: "Set the title of the snackbar. This must concisely describe the message.",
+    },
+    {
+      name: "kind",
+      type: ['enum'],
+      typeValue: "'info' | 'warning' | 'neutral' | 'positive' | 'danger'",
+      default: 'neutral',
+      required: false,
+      description: "Set the color and the sentiment of the snackbar. This affects the the color of all the elements inside and should be defined according to the message.",
     },
     {
       name: "dismissable",
       type: ["boolean"],
-      default: "false",
-      required: false,
-      dangerous: false,
-      description: "Add a dismiss action on the modal",
-    },
-    {
-      name: "onDismiss",
-      type: ["() => void"],
       default: "",
       required: false,
-      dangerous: false,
-      description: "Callback for the dismiss action",
+      description: "Define if the snackbar can be dismissed by user interaction. If `true` a button will be displayed.",
     },
     {
       name: "dismissLabel",
       type: ["string"],
-      default: '"Dismiss"',
+      default: 'Dismiss',
       required: false,
-      dangerous: false,
-      description: "The text for the dismiss action",
+      description: "Set the label of the dismiss button.",
     },
     {
-      name: "kind",
-      type: ['"info"', '"warning"', '"neutral"', '"positive"', '"danger"'],
-      default: '"neutral"',
+      name: "onDismiss",
+      type: ["function"],
+      typeValue: "() => void",
+      default: "",
       required: false,
       dangerous: false,
-      description: "Set the severity of the message",
+      description: "Callback function to be called when the dismiss button is clicked.",
     },
     {
       name: "as",
-      type: ["keyof JSX.IntrinsicElements | React.ComponentType<any>"],
-      default: '"div"',
+      type: ["enum"],
+      typeValue: "keyof JSX.IntrinsicElements | React.ComponentType<any>",
+      default: 'output',
       required: false,
-      dangerous: false,
       description:
-        "Set the component to a different HTML tag or custom component.",
-    },
+        "Set the component to a different HTML tag or custom component",
+    }
   ]}
 />
 

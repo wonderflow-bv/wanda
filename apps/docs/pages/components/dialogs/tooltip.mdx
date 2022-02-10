@@ -1,5 +1,6 @@
 import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
+import { PropsTable } from "@/components/props-table";
 import { Props } from "@/components/props";
 import * as components from "@wonderflow/react-components";
 
@@ -55,81 +56,60 @@ export default () => {
 
 ## API Reference
 
-<Props
+<PropsTable
   properties={[
     {
       name: "trigger",
-      type: ['"ReactNode"'],
+      type: ['ReactNode'],
       default: "",
       required: true,
-      dangerous: false,
-      description: "Set the element that triggers the dropdown",
+      description: "Set the element that will be used as the trigger of the tooltip.",
     },
     {
       name: "placement",
-      type: [
-        "auto",
-        "auto-start",
-        "auto-end",
-        "top",
-        "bottom",
-        "right",
-        "left",
-        "top-start",
-        "top-end",
-        "bottom-start",
-        "bottom-end",
-        "right-start",
-        "right-end",
-        "left-start",
-        "left-end",
-      ],
-      default: "bottom-start",
+      type: ["enum"],
+      typeValue: "DropdownProps['placement']",
+      typeLink: "/components/dialogs/dropdown#prop-placement",
+      default: "auto-start",
       required: false,
-      dangerous: false,
       description:
-        "Set the placement logic. Auto means the dropdown is placed based on the available space inside the viewport.",
+        "The placement of the dropdown. This is automatically handled based on scroll and viewport edges. By default the dropdown is anchored at the beginning of the trigger. The first key refers to the X axis, the second key refers to the Y axis. Eg: `auto-start` means the dropdown will be placed automatically on left or right based on the available space, and anchored at the top (start) of the trigger.",
     },
     {
       name: "open",
       type: ["boolean"],
       default: "",
       required: false,
-      dangerous: false,
       description:
-        "Set the visibility of the tooltip. This makes the tooltip a controlled component.",
-    },
-    {
-      name: "interactive",
-      type: ["boolean"],
-      default: "false",
-      required: false,
-      dangerous: false,
-      description: "Enable interactions on the tooltip",
+        "Set if the tooltip should be shown or hidden.",
     },
     {
       name: "delay",
       type: ["number"],
       default: "500",
       required: false,
-      dangerous: false,
-      description: "Set the delay before showing the tooltip on mouse hover",
+      description: "Define a delay time in milliseconds before the tooltip is shown.",
     },
     {
       name: "maxWidth",
-      type: ['"string"'],
-      default: '"40ch"',
+      type: ['string'],
+      default: '40ch',
       required: false,
-      dangerous: false,
-      description: "Set the max width of the tooltip",
+      description: "Set the max width of the tooltip. This prevents the tooltip content from filling the whole screen.",
+    },
+    {
+      name: "interactive",
+      type: ["boolean"],
+      default: "false",
+      required: false,
+      description: "Make the tooltip interactive. This will allow the user to interact with the tooltip content.",
     },
     {
       name: "fill",
       type: ["boolean"],
       default: "false",
       required: false,
-      dangerous: false,
-      description: "Set the trigger to fill the available space",
+      description: "Set the trigger container to behave like inline or block element",
     },
   ]}
 />

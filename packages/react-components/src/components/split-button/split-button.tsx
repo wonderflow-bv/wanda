@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import { forwardRef } from 'react'
 import { Button, Dropdown, DropdownProps, Stack, Polymorphic } from '@/components'
 import styles from './split-button.module.css'
+import { Except } from 'type-fest'
 
 export type SplitButtonProps = Pick<DropdownProps, 'placement' | 'offset'> & {
   /**
@@ -12,7 +13,7 @@ export type SplitButtonProps = Pick<DropdownProps, 'placement' | 'offset'> & {
 
 type PolymorphicSplitButton = Polymorphic.ForwardRefComponent<
   Polymorphic.IntrinsicElement<typeof Button>,
-  Polymorphic.OwnProps<typeof Button> & SplitButtonProps
+  Except<Polymorphic.OwnProps<typeof Button>, 'iconPosition' | 'iconColor' | 'pressed'> & SplitButtonProps
 >;
 
 export const SplitButton = forwardRef(({
@@ -28,13 +29,12 @@ export const SplitButton = forwardRef(({
   placement,
   offset,
   onClick,
-  pressed = false,
-  iconPosition = 'left',
   ...otherProps
 }, forwardedRef) => {
   const commonProps = {
     kind,
-    dimension
+    dimension,
+    disabled
   }
 
   return (
@@ -45,11 +45,8 @@ export const SplitButton = forwardRef(({
     >
       <Button
         busy={busy}
-        disabled={disabled}
         fullWidth={fullWidth}
         onClick={onClick}
-        pressed={pressed}
-        iconPosition={iconPosition}
         ref={forwardedRef}
         {...commonProps}
         {...otherProps}
@@ -59,6 +56,7 @@ export const SplitButton = forwardRef(({
       <Dropdown
         placement={placement}
         offset={offset}
+        disabled={disabled}
         trigger={<Button icon={icon} {...commonProps} />}
       >
         {children}

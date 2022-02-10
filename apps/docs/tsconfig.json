@@ -13,9 +13,9 @@
     "noEmit": true,
     "module": "commonjs",
     "isolatedModules": true,
-    "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "suppressImplicitAnyIndexErrors": true,
     "jsx": "preserve",
     "incremental": true,
     "plugins": [

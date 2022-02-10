@@ -1,6 +1,6 @@
 import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
-import { Props } from "@/components/props";
+import { PropsTable } from "@/components/props-table";
 import * as components from "@wonderflow/react-components";
 
 export const example = `<List marker="check">
@@ -44,48 +44,47 @@ export default () => {
 
 ## API Reference
 
-<Props
+<PropsTable
   properties={[
     {
       name: "dimension",
-      type: ['"small"', '"regular"', '"big"'],
-      default: '"regular"',
+      type: ['enum'],
+      typeValue: "'small' | 'regular' | 'big'",
+      default: 'regular',
       required: false,
-      dangerous: false,
-      description: "Set the element font size",
+      description: "Set the dimension of the items in the list. This affects also the marker size.",
     },
     {
       name: "marker",
-      type: ["IconProps['source']"],
-      default: "",
+      type: ["enum"],
+      typeValue: "IconProps['source']",
+      typeLink: "/components/other/icon#prop-source",
+      default: "circle",
       required: false,
-      dangerous: false,
-      description: "Set the marker icon used as bullet",
+      description: "Set the marker style. You can use any icon from the iconography as marker by passing its name.",
     },
     {
       name: "markerColor",
       type: ["string"],
       default: "",
       required: false,
-      dangerous: false,
-      description: "Set the marker color",
+      description: "Set the color of the marker",
     },
     {
       name: "hideMarker",
       type: ["boolean"],
       default: "false",
       required: false,
-      dangerous: false,
-      description: "Hide the marker indicator from items",
+      description: "Set to show or hide the marker indicator beside each item in the list.",
     },
     {
       name: "as",
-      type: ["keyof JSX.IntrinsicElements | React.ComponentType<any>"],
-      default: '"ul"',
+      type: ["enum"],
+      typeValue: "keyof JSX.IntrinsicElements | React.ComponentType<any>",
+      default: 'ul',
       required: false,
-      dangerous: false,
       description:
         "Set the component to a different HTML tag or custom component",
-    },
+    }
   ]}
 />

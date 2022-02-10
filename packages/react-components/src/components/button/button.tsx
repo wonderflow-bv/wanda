@@ -6,7 +6,7 @@ import styles from './button.module.css'
 export type ButtonProps = {
   /**
    * Set the style of the button.
-   * When disabled the style is overwritten.
+   * When `disabled` this property is overwritten.
    */
   kind?: 'primary' | 'secondary' | 'flat';
   /**

@@ -1,6 +1,7 @@
 import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
 import { Props } from "@/components/props";
+import { PropsTable } from "@/components/props-table";
 import * as components from "@wonderflow/react-components";
 
 export const example = `<Disclosure summary="Click to expand">
@@ -57,63 +58,58 @@ export default () => {
 
 ## API Reference
 
-<Props
+<PropsTable
   properties={[
     {
       name: "open",
       type: ["boolean"],
       default: "false",
       required: false,
-      dangerous: false,
-      description: "Set the default state",
+      description: "Set the initial state of the disclosure.",
     },
     {
       name: "summary",
       type: ["ReactNode"],
       default: "",
       required: true,
-      dangerous: false,
-      description: "Set the content of trigger",
+      description: "Define the text to be displayed as the summary of the disclosure. This should generally be a short sentenc and related to the content",
     },
     {
       name: "padding",
       type: ["boolean"],
       default: "true",
       required: false,
-      dangerous: false,
-      description: "Align the content with the trigger",
+      description: "Remove or add a padding to align the content with the icon indicator. This is useful when the content inside starts with text and you want to align it summary to improve readability.",
     },
     {
       name: "contentMaxHeight",
       type: ["string"],
       default: "",
       required: false,
-      dangerous: false,
-      description: "Set the max height for the content, enabling the scroll",
+      description: "Set the max height of the content after which the scrollbar will appear.",
     },
     {
       name: "dimension",
-      type: ['"small"', '"regular"', '"big"'],
+      type: ['enum'],
+      typeValue: "'small' | 'regular' | 'big'",
       default: '"regular"',
       required: false,
-      dangerous: false,
-      description: "Set the element size",
+      description: "Set the dimension of the summary toggle",
     },
     {
       name: "iconPosition",
-      type: ['"left"', '"right"'],
+      type: ['enum'],
+      typeValue: "'left' | 'right'",
       default: '"left"',
       required: false,
-      dangerous: false,
-      description: "Set the position of the icon",
+      description: "Set the position of the icon indicator. The content padding is automatically applied based on the icon position.",
     },
     {
       name: "expandable",
       type: ["boolean"],
       default: "true",
       required: false,
-      dangerous: false,
-      description: "Set if the element can be expanded and collapsed",
+      description: "Set or disable the interactivity of the summary toggle.Eg. If `open` is set to `true` the content can't be toggled.",
     },
   ]}
 />
