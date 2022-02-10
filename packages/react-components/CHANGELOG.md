@@ -1,5 +1,15 @@
 # @wonderflow/react-components
 
+## 5.4.0
+
+### Minor Changes
+
+- ddefb25: Add `disabled` property to dropdown. Disabled split buttons are don't trigger the dropdown anymore.
+- ddefb25: Fix vertical alignment for inline code elements
+- ffc093a: Fixed icon orientation for nested Disclosure components
+- ddefb25: Fix Text size 14 not being applied
+- 054a4c5: Fix Disclosure auto opening.
+
 ## 5.3.0
 
 ### Minor Changes

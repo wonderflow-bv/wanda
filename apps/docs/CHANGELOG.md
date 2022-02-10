@@ -1,5 +1,20 @@
 # docs
 
+## 3.4.0
+
+### Minor Changes
+
+- ddefb25: Fix navigation current page highlight
+
+### Patch Changes
+
+- Updated dependencies [ddefb25]
+- Updated dependencies [ddefb25]
+- Updated dependencies [ffc093a]
+- Updated dependencies [ddefb25]
+- Updated dependencies [054a4c5]
+  - @wonderflow/react-components@5.4.0
+
 ## 3.3.1
 
 ### Patch Changes
