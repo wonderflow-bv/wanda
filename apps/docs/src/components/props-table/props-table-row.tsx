@@ -73,7 +73,6 @@ export const PropsTableRow = ({
             <Elevator resting={2}>
               <Card bordered className={styles.Dropdown}>
                 <Markdown options={{ wrapper: Fragment }}>{description}</Markdown>
-                \
               </Card>
             </Elevator>
           </Dropdown>
