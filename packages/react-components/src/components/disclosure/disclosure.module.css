@@ -27,6 +27,11 @@
     --icon-size: env(--icon-size-24);
     --icon-padding: env(--space-16);
   }
+
+  /*
+  @nest .Details:not([open]) > :not(.Summary) {
+    display: none;
+  } */
 }
 
 .Summary {

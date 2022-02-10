@@ -8,7 +8,8 @@ export default {
     padding: true,
     expandable: true,
     dimension: 'regular',
-    summary: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.'
+    summary: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+    open: false
   },
   argTypes: {
     expandable: {

@@ -1,7 +1,7 @@
 import {
   CSSProperties,
   DetailsHTMLAttributes, forwardRef,
-  ReactNode, useCallback, useState
+  ReactNode, useCallback, useEffect, useRef, useState
 } from 'react'
 import clsx from 'clsx'
 import styles from './disclosure.module.css'
@@ -57,14 +57,20 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
   style,
   ...otherProps
 }, forwardedRef) => {
-  const [isOpen, setIsOpen] = useState(open)
+  const ref = useRef<any>(forwardedRef)
+  const [isOpen, setIsOpen] = useState<boolean>(open)
+
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.open = open
+    }
+  }, [expandable, open])
 
   const handleOpen = useCallback(
-    () => (event: any) => {
-      event.preventDefault()
-      expandable && setIsOpen(!isOpen)
+    () => () => {
+      (ref.current && expandable) && setIsOpen(ref.current.open)
     },
-    [isOpen, expandable]
+    [expandable]
   )
 
   const dynamicStyle: CSSProperties = {
@@ -99,7 +105,7 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
         {children}
       </motion.div>
     ),
-    [children, contentMaxHeight, isOpen, padding]
+    [children, contentMaxHeight, padding, isOpen]
   )
 
   return (
@@ -109,14 +115,13 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
       data-disclosure-icon-position={iconPosition}
       data-disclosure-dimension={dimension}
       data-disclosure-expandable={expandable}
+      onToggle={handleOpen()}
       aria-expanded={isOpen ? 'true' : 'false'}
-      open={isOpen}
-      ref={forwardedRef}
+      ref={ref}
       {...otherProps}
     >
       <Text
         as="summary"
-        onClick={handleOpen()}
         responsive={false}
         className={styles.Summary}
         aria-expanded={isOpen}
