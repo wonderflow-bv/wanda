@@ -1,5 +1,11 @@
 # @wonderflow/tokens
 
+## 5.3.0
+
+### Minor Changes
+
+- ddefb25: Add `disabled` property to dropdown. Disabled split buttons are don't trigger the dropdown anymore.
+
 ## 5.2.0
 
 ### Minor Changes

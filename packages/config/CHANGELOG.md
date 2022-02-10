@@ -1,5 +1,12 @@
 # @wonderflow/config
 
+## 5.1.2
+
+### Patch Changes
+
+- Updated dependencies [ddefb25]
+  - @wonderflow/tokens@5.3.0
+
 ## 5.1.1
 
 ### Patch Changes
