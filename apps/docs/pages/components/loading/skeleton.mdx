@@ -1,7 +1,8 @@
 import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
-import { Props } from "@/components/props";
+import { PropsTable } from "@/components/props-table";
 import * as components from "@wonderflow/react-components";
+import tkns from "@wonderflow/tokens/platforms/web/tokens.json";
 
 export const example = `<Card left={<Skeleton width={48} height={48} circle />}>
   <Skeleton count={3} />
@@ -37,72 +38,57 @@ export default () => {
 
 ## API Reference
 
-<Props
+<PropsTable
   properties={[
     {
-      name: "count",
-      type: ["number"],
-      default: "1",
+      name: "borderRadius",
+      type: ["enum"],
+   typeValue: `${Object.keys(tkns.radius).map(name => `${name}`).join(" | ")}`,
+      default: "4",
       required: false,
-      dangerous: false,
-      description: "Set how many elements to display",
+      description: "Set the edge radius of each skeleton block. This value must be one of the available `radius` tokens",
     },
     {
       name: "circle",
       type: ["boolean"],
       default: "false",
       required: false,
-      dangerous: false,
-      description: "Set each element to be circle",
+      description: "Set the block to be a circle, ignoring the `borderRadius` property.",
     },
     {
-      name: "containerTestId",
-      type: ["string"],
-      default: "",
+      name: "count",
+      type: ["number"],
+      default: "1",
       required: false,
-      dangerous: false,
-      description:
-        "A string that is added to the container element as a data-testid attribute. Used with React Testing Library",
+      description: "Set how many skeleton blocks to display.",
     },
     {
       name: "width",
-      type: ["string" | "number"],
-      default: '"100%"',
+      type: ["string", "number"],
+      default: '100%',
       required: false,
-      dangerous: false,
-      description: "The width of the element",
+      description: "Set the width of each skeleton block.",
     },
-    {
+   {
       name: "height",
-      type: ["string" | "number"],
+      type: ["string","number"],
       default: "inherit from font-size",
       required: false,
-      dangerous: false,
-      description: "The height of the element",
-    },
-    {
-      name: "borderRadius",
-      type: ["TokensTypes['radius']"],
-      default: "4",
-      required: false,
-      dangerous: false,
-      description: "The edge radius",
+      description: "Set the height of each skeleton block.",
     },
     {
       name: "inline",
       type: ["booelan"],
       default: "false",
       required: false,
-      dangerous: false,
-      description: "Place elements on single line istead of their own line",
+      description: "Renders every block on their own line or in a single line.Note: By default, if a width is not specified, every items will fill the available space",
     },
     {
       name: "enableAnimation",
       type: ["booelan"],
       default: "true",
       required: false,
-      dangerous: false,
-      description: "Whether the animation should play",
+      description: "Enable the shim animation and the announcement of the loading state.",
     },
   ]}
 />

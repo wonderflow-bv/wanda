@@ -1,6 +1,6 @@
 import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
-import { Props } from "@/components/props";
+import { PropsTable } from "@/components/props-table";
 import * as components from "@wonderflow/react-components";
 
 export const example = `<Datetime date={Date.now()} locale="it-IT" options={{ year: '2-digit' }} />`;
@@ -33,30 +33,27 @@ export default () => {
 
 ## API Reference
 
-<Props
+<PropsTable
   properties={[
     {
       name: "date",
       type: ["string"],
       default: "",
       required: true,
-      dangerous: false,
-      description: "Pass the datetime ISO string",
+      description: "The date to format and display.",
     },
     {
       name: "locale",
       type: ["string"],
-      default: '"en-US"',
+      default: 'en-US',
       required: false,
-      dangerous: false,
-      description: "Set the locale for the date",
+      description: "Set the locale to use to format the date.",
     },
     {
       name: "options",
       type: ["Intl.DateTimeFormatOptions"],
-      default: "{ year: 'numeric', month: 'long', day: 'numeric' }",
+      default: "",
       required: false,
-      dangerous: false,
       description:
         "All the options available in the [Intl.DateTimeFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat)",
     },

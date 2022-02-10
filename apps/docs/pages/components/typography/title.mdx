@@ -1,6 +1,6 @@
 import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
-import { Props } from "@/components/props";
+import { PropsTable } from "@/components/props-table";
 import * as components from "@wonderflow/react-components";
 
 export const example = `<Title as="h3" level="3">Title</Title>`;
@@ -35,60 +35,58 @@ export default () => {
 
 ## API Reference
 
-<Props
+<PropsTable
   properties={[
     {
       name: "level",
-      type: ['"display"', '"1"', '"2"', '"3"', '"4"', '"5"', '"6"'],
-      default: '"1"',
+      type: ['enum'],
+      typeValue: "'1' | '2' | '3' | '4' | '5' | '6' | 'display'",
+      default: '1',
       required: false,
-      dangerous: false,
-      description: "Set the title size and visual appearance",
+      description: "Set the level of the title. This property only affects the visual appearance of the title and not the semantic meaning of the title, which you can define by using the `as` property.",
     },
     {
       name: "lineHeight",
-      type: ['"none"', '"small"', '"large"'],
-      default: '"small"',
+      type: ['enum'],
+      typeValue: "'none' | 'small' | 'large'",
+      default: 'small',
       required: false,
-      dangerous: false,
-      description: "Set the title line height. Useful for long titles.",
+      description: "Set the text line-height of the title. This uses the predefined tokens from the typography system.",
     },
     {
-      name: "responsive",
-      type: ["boolean"],
-      default: "true",
+      name: "textAlign",
+      type: ['enum'],
+      typeValue: "'start' | 'center' | 'end'",
+      default: "start",
       required: false,
-      dangerous: false,
       description:
-        "Set the responsive font-size which scale down by one size on mobile",
+        "Set the text alignment of the title based on the text direction.",
     },
     {
       name: "maxWidth",
       type: ["string"],
       default: "",
       required: false,
-      dangerous: false,
       description:
-        "Set the max width of the line. Accepts all units (protip: use ch)",
+        "Set the maximum width of the text after which it will wrap.",
     },
     {
-      name: "textAlign",
-      type: ["start", "center", "end"],
-      default: "start",
+      name: "responsive",
+      type: ["boolean"],
+      default: "true",
       required: false,
-      dangerous: false,
       description:
-        "Set the text alignment. Consistent even on different writing direction (e.g. rtl)",
+        "Enable or disable the responsiveness of the text. If disabled, the text will be always the same size across all breakpoints.",
     },
     {
       name: "as",
-      type: ["keyof JSX.IntrinsicElements | React.ComponentType<any>"],
-      default: '"span"',
+      type: ["enum"],
+      typeValue: "keyof JSX.IntrinsicElements | React.ComponentType<any>",
+      default: 'span',
       required: false,
-      dangerous: false,
       description:
-        "Set the component to a different HTML tag or custom component.",
-    },
+        "Set the component to a different HTML tag or custom component",
+    }
   ]}
 />
 

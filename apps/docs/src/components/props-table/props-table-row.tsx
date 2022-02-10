@@ -1,4 +1,4 @@
-import { Stack, IconButton, Dropdown, Elevator, Card, Text, Chip } from '@wonderflow/react-components'
+import { Stack, IconButton, Dropdown, Elevator, Card, Chip } from '@wonderflow/react-components'
 import { useCallback, Fragment, useState } from 'react'
 import { Markdown } from '@/components/markdown'
 import { CodeBlock } from '../code-block'
@@ -72,9 +72,8 @@ export const PropsTableRow = ({
           >
             <Elevator resting={2}>
               <Card bordered className={styles.Dropdown}>
-                <Text as="div" size={16}>
-                  <Markdown options={{ wrapper: Fragment }}>{description}</Markdown>
-                </Text>
+                <Markdown options={{ wrapper: Fragment }}>{description}</Markdown>
+                \
               </Card>
             </Elevator>
           </Dropdown>

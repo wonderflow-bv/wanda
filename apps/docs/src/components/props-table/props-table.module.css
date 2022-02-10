@@ -33,6 +33,10 @@
   grid-gap: env(--space-4);
   flex-wrap: wrap;
 
+  &:nth-child(2) {
+    min-width: 25ch;
+  }
+
   &:first-child {
     flex-basis: 5%;
     visibility: hidden;

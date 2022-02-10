@@ -1,5 +1,6 @@
 import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
+import { PropsTable } from "@/components/props-table";
 import { Props } from "@/components/props";
 import * as components from "@wonderflow/react-components";
 
@@ -34,39 +35,38 @@ export default () => {
 
 ## API Reference
 
-<Props
+<PropsTable
   properties={[
     {
       name: "dimension",
-      type: ['"small"', '"regular"', '"big"'],
-      default: '"regular"',
+      type: ['enum'],
+      typeValue: "'small' | 'regular' | 'big'",
+      default: 'regular',
       required: false,
-      dangerous: false,
-      description: "Set the element size",
+      description: "Set the dimension of the component.",
     },
     {
       name: "color",
-      type: ["gray", "cyan", "green", "purple", "yellow", "red", "blue"],
-      default: '"gray"',
+      type: ["enum"],
+      typeValue: "'gray' | 'cyan' | 'green' | 'purple' | 'yellow' | 'red' | 'blue'",
+      default: 'gray',
       required: false,
-      dangerous: false,
-      description: "Set the colour of the element",
+      description: "Set a color from one of the provided values.",
     },
     {
       name: "interactive",
       type: ["boolean"],
       default: "",
       required: false,
-      dangerous: false,
-      description: "When enabled, the chip becomes dismissable",
+      description: "Make the chip dismissable. When `true` adds a close button on the side.",
     },
     {
       name: "onDismissClick",
-      type: ["() => void"],
+      type: ["function"],
+      typeValue: "() => void",
       default: "",
       required: false,
-      dangerous: false,
-      description: "Callback for the click event",
+      description: "Callback function to be called when the dismiss button is pressed.",
     },
   ]}
 />

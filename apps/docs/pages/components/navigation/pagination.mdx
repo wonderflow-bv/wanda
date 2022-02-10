@@ -1,7 +1,8 @@
 import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
+import { PropsTable } from "@/components/props-table";
 import { Props } from "@/components/props";
-import * as components from "@wonderflow/react-components";
+import * as Components from "@wonderflow/react-components";
 
 export const example = `<Pagination
   itemsCount={1000}
@@ -22,7 +23,7 @@ export default ({ children }) => (
       "Can be controlled or uncontrolled",
       "Themes ready",
     ]}
-    hero={<Playground scope={{ ...components }} code={example} />}
+    hero={<Playground scope={{ ...Components }} code={example} />}
   >
     {children}
   </MdxLayout>
@@ -40,168 +41,66 @@ export default () => {
 
 ## API Reference
 
-<Props
+This component extends the [`react-paginate`](https://github.com/AdeleD/react-paginate) library, which exposes different props that enables multiple functionalities.
+
+<Components.Button
+  kind="secondary"
+  as="a"
+  href="https://github.com/AdeleD/react-paginate#props"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  Original API reference
+</Components.Button>
+
+### Custom extended API
+
+<PropsTable
   properties={[
     {
       name: "itemsCount",
       type: ["number"],
       default: "",
       required: true,
-      dangerous: false,
-      description: "Set the total length of the paginated elements",
+      description: "Set the total number of items to paginate through.",
     },
     {
       name: "itemsPerPage",
       type: ["number"],
       default: "10",
       required: false,
-      dangerous: false,
-      description: "Set the total length of the paginated elements",
-    },
-    {
-      name: "onPageClick",
-      type: ["(offset: Record<string, number>) => void"],
-      default: "",
-      required: false,
-      dangerous: false,
-      description: "Callback for the click event",
-    },
-    {
-      name: "onPageActive",
-      type: ["(active: Record<string, number>) => void"],
-      default: "",
-      required: false,
-      dangerous: false,
-      description:
-        "The method to call when an active page is clicked. Exposes the active page object as an argument.",
-    },
-    {
-      name: "pageLabelBuilder",
-      type: ["() => void"],
-      default: "(page) => page",
-      required: false,
-      dangerous: false,
-      description: "Function to set the text on page links.",
-    },
-    {
-      name: "hrefBuilder",
-      type: ["() => void"],
-      default: "(page) => page",
-      required: false,
-      dangerous: false,
-      description:
-        "The method is called to generate the href attribute value on tag a of each page element.",
-    },
-    {
-      name: "hrefAllControls",
-      type: ["boolean"],
-      default: "",
-      required: false,
-      dangerous: false,
-      description:
-        "By default the hrefBuilder add href only to active controls. Set this prop to true so href are generated on all controls",
-    },
-    {
-      name: "ariaLabelBuilder",
-      type: ["() => void"],
-      default: "",
-      required: false,
-      dangerous: false,
-      description:
-        "The method is called to generate the aria-label attribute value on each page link",
-    },
-    {
-      name: "eventListener",
-      type: ["string"],
-      default: "onClick",
-      required: false,
-      dangerous: false,
-      description:
-        "The event to listen onto before changing the selected page.",
-    },
-    {
-      name: "prevRel",
-      type: ["string"],
-      default: "prev",
-      required: false,
-      dangerous: false,
-      description: "The rel property on the a tag for the prev page control.",
-    },
-    {
-      name: "nextRel",
-      type: ["string"],
-      default: "next",
-      required: false,
-      dangerous: false,
-      description: "The rel propery on the a tag for the next page control.",
-    },
-    {
-      name: "prevPageRel",
-      type: ["string"],
-      default: "prev",
-      required: false,
-      dangerous: false,
-      description:
-        "The rel property on the a tag just before the selected page.",
-    },
-    {
-      name: "selectedPageRel",
-      type: ["string"],
-      default: "canonical",
-      required: false,
-      dangerous: false,
-      description: "The rel propery on the a tag for the selected page.",
-    },
-    {
-      name: "nextPageRel",
-      type: ["string"],
-      default: "next",
-      required: false,
-      dangerous: false,
-      description:
-        "The rel property on the a tag just after the selected page.",
+      description: "Set the number of items to display per page.",
     },
     {
       name: "pageCount",
       type: ["number"],
       default: "",
       required: false,
-      dangerous: false,
       description:
-        "Explicitly set how many pages to create instead of computing it",
+        "Set the number of pages to display. If missing this is computed by the `itemsCount` divided by `itemsPerPage`.",
     },
     {
-      name: "forcePage",
-      type: ["number"],
+      name: "onPageClick",
+      type: ["function"],
+      typeValue: "(offset: Record<string, number>) => void",
       default: "",
       required: false,
-      dangerous: false,
-      description:
-        "To override selected page with parent prop. Use this if you want to control the page from your app state.",
-    },
-    {
-      name: "disableInitialCallback",
-      type: ["boolean"],
-      default: "false",
-      required: false,
-      dangerous: false,
-      description: "Disable onPageClick callback with initial page.",
+      description: "Callback function to be called when the page is changed. A an `object` is passed with the following properties:\n - `selected`: The index of the selected page.\n - `offset`: The offset of the selected page.",
     },
     {
       name: "pageRangeDisplayed",
       type: ["number"],
       default: "3",
       required: false,
-      dangerous: false,
-      description: "Define how many page to show in the visibile range",
+      description: "Set how many pages to show in the visible page range (between the '...' break)",
     },
     {
       name: "marginPagesDisplayed",
       type: ["number"],
       default: "3",
       required: false,
-      dangerous: false,
-      description: "The number of visible pages to display on the sides",
+      dangerous:false,
+      description: "The number of visible pages to display on the sides.",
     },
   ]}
 />

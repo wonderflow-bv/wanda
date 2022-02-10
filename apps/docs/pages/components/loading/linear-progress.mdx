@@ -1,6 +1,6 @@
 import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
-import { Props } from "@/components/props";
+import { PropsTable } from "@/components/props-table";
 import * as components from "@wonderflow/react-components";
 
 export const example = `<LinearProgress showProgress value={30} />`;
@@ -45,40 +45,37 @@ export default () => {
 
 ## API Reference
 
-<Props
+<PropsTable
   properties={[
     {
       name: "value",
       type: ["number"],
       default: "",
       required: false,
-      dangerous: false,
       description:
-        "Define the current progress value. If missing the indeterminate status is activated.",
+        "Set the current progress of the progress bar. This value should be between 0 and 'max'. The percentage is automatically computed.",
     },
     {
       name: "max",
       type: ["number"],
       default: "100",
       required: false,
-      dangerous: false,
-      description: "Set the max value equal to 100% of the bar",
+      description: "Set the max value of the progress bar. This determines the computed percentage.",
     },
     {
       name: "dimension",
-      type: ['"regular"', '"big"'],
-      default: '"regular"',
+      type: ['enum'],
+      typeValue: "'regular' | 'big'",
+      default: 'regular',
       required: false,
-      dangerous: false,
-      description: "Set the element size",
+      description: "Set the dimension of the progress bar.",
     },
     {
       name: "showProgress",
       type: ["boolean"],
       default: "",
       required: false,
-      dangerous: false,
-      description: "Show the progress percentage",
+      description: "Show or hide the progress value.",
     },
   ]}
 />

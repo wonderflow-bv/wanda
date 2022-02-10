@@ -1,7 +1,8 @@
 import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
-import { Props } from "@/components/props";
+import { PropsTable } from "@/components/props-table";
 import * as components from "@wonderflow/react-components";
+import tkns from "@wonderflow/tokens/platforms/web/tokens.json";
 
 export const style = {
   style: { background: "var(--dimmed-2)", padding: 24 },
@@ -69,22 +70,22 @@ export default () => {
 
 ## API Reference
 
-<Props
+<PropsTable
   properties={[
     {
       name: "gutter",
-      type: ["0", "TokensTypes['space']"],
+      type: ["enum"],
+      typeValue: `${Object.keys(tkns.space).map(name => `${name}`).join(" | ")}`,
       default: "0",
       required: false,
-      dangerous: false,
-      description: "Set the space between elements",
+      description: "Set the space between items. This is applied on both vertical and horizontal axis.",
     },
     {
       name: "columns",
-      type: ["number", "{}"],
+      type: ["number", "object"],
+      typeValue: "{\n  default: number,\n  extraSmall?: number,\n  small?: number,\n  medium?: number,\n  large?: number,\n  extraLarge?: number \n}",
       default: "3",
       required: false,
-      dangerous: false,
       description:
         "Set how many columns to use. It can be a number or an object: \n `{default: number, extraSmall?: number, small?: number, medium?: number, large?: number, extraLarge?: number}`",
     },
