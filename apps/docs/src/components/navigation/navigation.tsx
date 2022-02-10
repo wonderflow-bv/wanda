@@ -16,11 +16,7 @@ export const Navigation = ({ data }: NavigationProps) => {
 
   const includesPath = useCallback(
     (path) => {
-      return router.asPath.includes(`${path}`)
-      // const lastPathFragment = path.replace(/(.+\/)?(.+)/g, '$2')
-      // const urlFragments = router.asPath.split('/')
-
-      // return urlFragments.includes(lastPathFragment)
+      return router.asPath === path
     },
     [router.asPath]
   )
