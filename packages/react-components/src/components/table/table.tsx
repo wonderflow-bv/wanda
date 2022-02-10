@@ -1,7 +1,7 @@
 
-import { useTable, TableOptions } from 'react-table'
+import { useTable, TableOptions, TableCommonProps } from 'react-table'
 
-export type TableProps<T extends object> = TableOptions<T> & {
+export type TableProps<T extends object> = TableCommonProps & TableOptions<T> & {
   pagination?: boolean
 }
 
