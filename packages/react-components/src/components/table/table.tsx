@@ -3,9 +3,14 @@ import clsx from 'clsx'
 import { TableCommonProps, useTable, TableOptions, Column, useSortBy, useRowSelect } from 'react-table'
 import { TableRow } from './table-row'
 import { TableCell } from './table-cell'
-import { Checkbox } from './table-checkbox'
+import { Checkbox } from '@/components'
+import type {
+  OptionalColumnTypes,
+  CustomTableInstanceType, CustomColumnPropsType, CustomCellPropsType
+} from './custom-types'
+
 import styles from './table.module.css'
-import type { OptionalColumnTypes, CustomTableInstanceType, CustomColumnPropsType, CustomCellPropsType } from './custom-types'
+import { useEffect } from 'react'
 
 export type TableProps<T extends {}> = TableCommonProps & TableOptions<T> & {
   columns: (Column<T> & OptionalColumnTypes)[]
@@ -17,6 +22,7 @@ export const Table = <T extends {}, >({
   columns,
   data,
   className,
+  selectableRows,
   ...otherProps
 }: TableProps<T>) => {
   const {
@@ -24,55 +30,57 @@ export const Table = <T extends {}, >({
     getTableBodyProps,
     headerGroups,
     rows,
+    allColumns,
     prepareRow,
     selectedFlatRows
-  }: CustomTableInstanceType<T> = useTable({
-    columns,
-    data
-  },
-  useSortBy,
-  useRowSelect,
-  hooks => {
-    hooks.visibleColumns.push(columns => [
-      {
-        id: 'selection',
-        Header: ({ getToggleAllRowsSelectedProps }) => (
-          <TableCell role="columnheader">
-            <Checkbox {...getToggleAllRowsSelectedProps()} />
-          </TableCell>
-        ),
-        Cell: ({ row }) => (
-          <TableCell>
-            <Checkbox {...row.getToggleRowSelectedProps()} />
-          </TableCell>
-        )
-      },
-      ...columns
-    ])
-  }
+  }: CustomTableInstanceType<T> = useTable(
+    {
+      columns,
+      data
+    },
+    useSortBy,
+    useRowSelect,
+    hooks => {
+      hooks.visibleColumns.push((columns) => [
+        {
+          id: 'selection',
+          Header: ({ getToggleAllRowsSelectedProps }: CustomTableInstanceType<T>) => {
+            return (getToggleAllRowsSelectedProps && selectableRows) && <Checkbox dimension="small" {...getToggleAllRowsSelectedProps()} />
+          },
+          Cell: ({ row }: any) => (<Checkbox dimension="small" {...row.getToggleRowSelectedProps()} />),
+          isCollapsed: true
+        },
+        ...columns
+      ])
+    }
   )
+
+  useEffect(() => {
+    allColumns[0].toggleHidden(!selectableRows)
+  }, [selectableRows, allColumns])
 
   return (
     <div className={clsx(styles.Table, className)}>
-      <div
-        className={styles.TableElement}
-        role="table"
-        {...getTableProps()}
-        {...otherProps}
-      >
-        {!!selectedFlatRows.length && (
+      {!!selectedFlatRows?.length && (
         <div>
           {`${selectedFlatRows.length}  items selected`}
         </div>
-        )}
+      )}
+
+      <table
+        className={styles.TableElement}
+        {...getTableProps()}
+        {...otherProps}
+      >
+
         {/* THEAD */}
-        <div role="rowgroup" className={styles.THead}>
+        <thead role="rowgroup" className={styles.THead}>
           {headerGroups.map(headerGroup => (
-            <TableRow className={styles.Row} {...headerGroup.getHeaderGroupProps()}>
+            <TableRow {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column: CustomColumnPropsType<T>) => (
                 <TableCell
-                  role="columnheader"
-                  as="button"
+                  as="th"
+                  collapsed
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                 >
                   {column.render('Header')}
@@ -87,10 +95,10 @@ export const Table = <T extends {}, >({
               ))}
             </TableRow>
           ))}
-        </div>
+        </thead>
 
         {/* TBODY */}
-        <div role="rowgroup" className={styles.TBody} {...getTableBodyProps()}>
+        <tbody role="rowgroup" className={styles.TBody} {...getTableBodyProps()}>
           {rows.map((row) => {
             prepareRow(row)
             return (
@@ -98,7 +106,7 @@ export const Table = <T extends {}, >({
                 {row.cells.map((cell: CustomCellPropsType<T>) => {
                   return (
                     <TableCell
-                      role="cell"
+                      collapsed={cell.column.isCollapsed}
                       {...cell.getCellProps()}
                     >
                       {cell.render('Cell')}
@@ -108,8 +116,8 @@ export const Table = <T extends {}, >({
               </TableRow>
             )
           })}
-        </div>
-      </div>
+        </tbody>
+      </table>
     </div>
   )
 }

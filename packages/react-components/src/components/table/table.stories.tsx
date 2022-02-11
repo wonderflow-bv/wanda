@@ -1,49 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { useMemo } from 'react'
 import { Table } from './table'
-
-const columns = [
-  {
-    Header: 'First Name',
-    accessor: 'firstName'
-  },
-  {
-    Header: 'Last Name',
-    accessor: 'lastName'
-  },
-  {
-    Header: 'Info',
-    accessor: 'age',
-    collapse: true
-  }
-]
-
-const data = [
-  {
-    firstName: 'Gianni',
-    lastName: 'Morandi',
-    age: 123
-  },
-  {
-    firstName: 'Simone',
-    lastName: 'Lastname',
-    age: 123
-  },
-  {
-    firstName: 'Matteo',
-    lastName: 'Staffone',
-    age: 123
-  },
-  {
-    firstName: 'Emanuele',
-    lastName: 'Staffo',
-    age: 123
-  },
-  {
-    firstName: 'Simone',
-    lastName: 'Stuffo',
-    age: 123
-  }
-]
 
 export default {
   title: 'Layouts/Table',
@@ -51,15 +8,61 @@ export default {
     centered: { disable: true }
   },
   args: {
-    columns,
-    data
+    selectableRows: false
   }
 } as ComponentMeta<typeof Table>
 
-const Template: ComponentStory<typeof Table> = (args) => (
-  <Table
-    {...args}
-  />
-)
+const Template: ComponentStory<typeof Table> = (args) => {
+  const columns = useMemo(() => [
+    {
+      Header: 'First Name',
+      accessor: 'firstName'
+    },
+    {
+      Header: 'Last Name',
+      accessor: 'lastName'
+    },
+    {
+      Header: 'Info',
+      accessor: 'age'
+    }
+  ], [])
+
+  const data = useMemo(() => [
+    {
+      firstName: 'Gianni',
+      lastName: 'Morandi',
+      age: 123
+    },
+    {
+      firstName: 'Simone',
+      lastName: 'Lastname',
+      age: 123
+    },
+    {
+      firstName: 'Matteo',
+      lastName: 'Staffone',
+      age: 123
+    },
+    {
+      firstName: 'Emanuele',
+      lastName: 'Staffo',
+      age: 123
+    },
+    {
+      firstName: 'Simone',
+      lastName: 'Stuffo',
+      age: 123
+    }
+  ], [])
+
+  return (
+    <Table
+      columns={columns}
+      data={data}
+      {...args}
+    />
+  )
+}
 
 export const Simple = Template.bind({})

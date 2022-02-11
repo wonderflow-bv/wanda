@@ -4,22 +4,23 @@ import { Polymorphic } from '@/components'
 import clsx from 'clsx'
 
 type TableCellProps = PropsWithClass & {
-
+  collapsed?: boolean
 }
 
-type PolymorphicCell = Polymorphic.ForwardRefComponent<'div', TableCellProps>;
+type PolymorphicCell = Polymorphic.ForwardRefComponent<'td', TableCellProps>;
 
 export const TableCell = forwardRef(({
   children,
   className,
-  as: Wrapper = 'div',
+  as: Wrapper = 'td',
+  collapsed,
   ...otherProps
 }, forwardedRef) => {
   return (
     <Wrapper
       ref={forwardedRef}
-      type={Wrapper === 'div' ? undefined : 'button'}
       className={clsx(styles.Cell, className)}
+      data-table-cell-collapsed={collapsed}
       {...otherProps}
     >
       {children}

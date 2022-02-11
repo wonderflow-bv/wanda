@@ -12,8 +12,8 @@ export const TableRow: FC<TableRowProps> = ({
   ...otherProps
 }) => {
   return (
-    <div role="row" className={clsx(styles.Row, className)} {...otherProps}>
+    <tr className={clsx(styles.Row, className)} {...otherProps}>
       {children}
-    </div>
+    </tr>
   )
 }
