@@ -1,15 +1,10 @@
 
 import clsx from 'clsx'
-import { TableCommonProps, useTable, TableOptions, Cell, Column } from 'react-table'
+import { TableCommonProps, useTable, TableOptions, Column, useSortBy } from 'react-table'
 import { TableRow } from './table-row'
 import { TableCell } from './table-cell'
 import styles from './table.module.css'
-
-type OptionalColumnTypes = {
-  collapse?: boolean;
-}
-
-type OptionalCellColumnTypes = { column: OptionalColumnTypes }
+import type { OptionalColumnTypes, CustomTableInstanceType, CustomColumnPropsType, CustomCellPropsType } from './custom-types'
 
 export type TableProps<T extends {}> = TableCommonProps & TableOptions<T> & {
   columns: (Column<T> & OptionalColumnTypes)[]
@@ -28,10 +23,10 @@ export const Table = <T extends {}, >({
     headerGroups,
     rows,
     prepareRow
-  } = useTable({
+  }: CustomTableInstanceType<T> = useTable({
     columns,
     data
-  })
+  }, useSortBy)
 
   return (
     <div
@@ -44,8 +39,21 @@ export const Table = <T extends {}, >({
       <div role="rowgroup" className={styles.THead}>
         {headerGroups.map(headerGroup => (
           <TableRow className={styles.Row} {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map(column => (
-              <TableCell role="columnheader" {...column.getHeaderProps()}>{column.render('Header')}</TableCell>
+            {headerGroup.headers.map((column: CustomColumnPropsType<T>) => (
+              <TableCell
+                role="columnheader"
+                as="button"
+                {...column.getHeaderProps(column.getSortByToggleProps())}
+              >
+                {column.render('Header')}
+                <span>
+                  {column.isSorted
+                    ? column.isSortedDesc
+                      ? ' 🔽'
+                      : ' 🔼'
+                    : ''}
+                </span>
+              </TableCell>
             ))}
           </TableRow>
         ))}
@@ -57,12 +65,11 @@ export const Table = <T extends {}, >({
           prepareRow(row)
           return (
             <TableRow {...row.getRowProps()}>
-              {row.cells.map((cell: Cell<T, unknown> & OptionalCellColumnTypes) => {
+              {row.cells.map((cell: CustomCellPropsType<T>) => {
                 return (
                   <TableCell
                     role="cell"
                     {...cell.getCellProps()}
-                    style={{ background: cell.column.collapse ? 'red' : 'blue' }}
                   >
                     {cell.render('Cell')}
                   </TableCell>

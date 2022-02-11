@@ -6,6 +6,7 @@
 
 .THead {
   display: table-header-group;
+  border-bottom: 3px solid var(--dimmed-2);
 }
 
 .TBody {
@@ -19,6 +20,5 @@
 
 .Cell {
   display: table-cell;
-  border: 1px solid #ccc;
   padding: env(--space-8);
 }

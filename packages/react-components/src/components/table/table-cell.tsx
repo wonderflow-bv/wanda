@@ -1,19 +1,28 @@
 import styles from './table.module.css'
-import { FC } from 'react'
+import { forwardRef } from 'react'
+import { Polymorphic } from '@/components'
 import clsx from 'clsx'
 
 type TableCellProps = PropsWithClass & {
 
 }
 
-export const TableCell: FC<TableCellProps> = ({
+type PolymorphicCell = Polymorphic.ForwardRefComponent<'div', TableCellProps>;
+
+export const TableCell = forwardRef(({
   children,
   className,
+  as: Wrapper = 'div',
   ...otherProps
-}) => {
+}, forwardedRef) => {
   return (
-    <div className={clsx(styles.Cell, className)} {...otherProps}>
+    <Wrapper
+      ref={forwardedRef}
+      type={Wrapper === 'div' ? undefined : 'button'}
+      className={clsx(styles.Cell, className)}
+      {...otherProps}
+    >
       {children}
-    </div>
+    </Wrapper>
   )
-}
+}) as PolymorphicCell
