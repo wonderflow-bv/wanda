@@ -1,20 +1,27 @@
 
 import clsx from 'clsx'
-import { TableCommonProps, useTable, TableOptions } from 'react-table'
+import { TableCommonProps, useTable, TableOptions, Cell, Column } from 'react-table'
 import { TableRow } from './table-row'
 import { TableCell } from './table-cell'
 import styles from './table.module.css'
 
-export type TableProps = TableCommonProps & TableOptions<{collapse?: boolean}> & {
+type OptionalColumnTypes = {
+  collapse?: boolean;
+}
+
+type OptionalCellColumnTypes = { column: OptionalColumnTypes }
+
+export type TableProps<T extends {}> = TableCommonProps & TableOptions<T> & {
+  columns: (Column<T> & OptionalColumnTypes)[]
   pagination?: boolean
 }
 
-export const Table = ({
+export const Table = <T extends {}, >({
   columns,
   data,
   className,
   ...otherProps
-}: TableProps) => {
+}: TableProps<T>) => {
   const {
     getTableProps,
     getTableBodyProps,
@@ -50,7 +57,7 @@ export const Table = ({
           prepareRow(row)
           return (
             <TableRow {...row.getRowProps()}>
-              {row.cells.map((cell) => {
+              {row.cells.map((cell: Cell<T, unknown> & OptionalCellColumnTypes) => {
                 return (
                   <TableCell
                     role="cell"
