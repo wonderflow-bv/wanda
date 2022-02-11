@@ -5,7 +5,7 @@ import { TableRow } from './table-row'
 import { TableCell } from './table-cell'
 import styles from './table.module.css'
 
-export type TableProps = TableCommonProps & TableOptions<{}> & {
+export type TableProps = TableCommonProps & TableOptions<{collapse?: boolean}> & {
   pagination?: boolean
 }
 
@@ -50,7 +50,7 @@ export const Table = ({
           prepareRow(row)
           return (
             <TableRow {...row.getRowProps()}>
-              {row.cells.map((cell: Record<string, any>) => {
+              {row.cells.map((cell) => {
                 return (
                   <TableCell
                     role="cell"

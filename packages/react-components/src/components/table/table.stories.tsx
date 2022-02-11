@@ -17,7 +17,8 @@ const columns = [
   },
   {
     Header: 'Info',
-    accessor: 'age'
+    accessor: 'age',
+    collapse: true
   }
 ]
 
