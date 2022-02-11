@@ -26,6 +26,7 @@
   display: table-cell;
   vertical-align: top;
   padding: env(--space-8);
+  font-variant-numeric: tabular-nums;
 
   &[data-table-cell-collapsed='true'] {
     width: 1e-10%;
