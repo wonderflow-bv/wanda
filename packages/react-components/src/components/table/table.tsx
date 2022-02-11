@@ -1,14 +1,16 @@
 
 import clsx from 'clsx'
-import { TableCommonProps, useTable, TableOptions, Column, useSortBy } from 'react-table'
+import { TableCommonProps, useTable, TableOptions, Column, useSortBy, useRowSelect } from 'react-table'
 import { TableRow } from './table-row'
 import { TableCell } from './table-cell'
+import { Checkbox } from './table-checkbox'
 import styles from './table.module.css'
 import type { OptionalColumnTypes, CustomTableInstanceType, CustomColumnPropsType, CustomCellPropsType } from './custom-types'
 
 export type TableProps<T extends {}> = TableCommonProps & TableOptions<T> & {
   columns: (Column<T> & OptionalColumnTypes)[]
   pagination?: boolean
+  selectableRows?: boolean
 }
 
 export const Table = <T extends {}, >({
@@ -22,11 +24,33 @@ export const Table = <T extends {}, >({
     getTableBodyProps,
     headerGroups,
     rows,
-    prepareRow
+    prepareRow,
+    selectedFlatRows
   }: CustomTableInstanceType<T> = useTable({
     columns,
     data
-  }, useSortBy)
+  },
+  useSortBy,
+  useRowSelect,
+  hooks => {
+    hooks.visibleColumns.push(columns => [
+      {
+        id: 'selection',
+        Header: ({ getToggleAllRowsSelectedProps }) => (
+          <TableCell role="columnheader">
+            <Checkbox {...getToggleAllRowsSelectedProps()} />
+          </TableCell>
+        ),
+        Cell: ({ row }) => (
+          <TableCell>
+            <Checkbox {...row.getToggleRowSelectedProps()} />
+          </TableCell>
+        )
+      },
+      ...columns
+    ])
+  }
+  )
 
   return (
     <div
@@ -35,6 +59,11 @@ export const Table = <T extends {}, >({
       {...getTableProps()}
       {...otherProps}
     >
+      {!!selectedFlatRows.length && (
+      <div>
+        {`${selectedFlatRows.length}  items selected`}
+      </div>
+      )}
       {/* THEAD */}
       <div role="rowgroup" className={styles.THead}>
         {headerGroups.map(headerGroup => (
