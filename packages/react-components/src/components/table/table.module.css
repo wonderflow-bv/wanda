@@ -13,15 +13,19 @@
 
 .THead {
   border-bottom: 3px solid var(--dimmed-2);
+
+  & th {
+    padding: env(--space-4) env(--space-8) env(--space-8);
+  }
 }
 
 .Cell {
   margin: 0;
-  padding: 0.5rem;
   width: 1%;
   text-align: start;
   display: table-cell;
   vertical-align: top;
+  padding: env(--space-8);
 
   &[data-table-cell-collapsed='true'] {
     width: 1e-10%;

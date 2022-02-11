@@ -1,6 +1,6 @@
 
 import clsx from 'clsx'
-import { TableCommonProps, useTable, TableOptions, Column, useSortBy, useRowSelect } from 'react-table'
+import { TableCommonProps, useTable, TableOptions, Row, Column, useSortBy, useRowSelect } from 'react-table'
 import { TableRow } from './table-row'
 import { TableCell } from './table-cell'
 import { Checkbox } from '@/components'
@@ -16,6 +16,7 @@ export type TableProps<T extends {}> = TableCommonProps & TableOptions<T> & {
   columns: (Column<T> & OptionalColumnTypes)[]
   pagination?: boolean
   selectableRows?: boolean
+  onSelectionChange?(selectedRows?: Row<T>[]): void
 }
 
 export const Table = <T extends {}, >({
@@ -23,6 +24,7 @@ export const Table = <T extends {}, >({
   data,
   className,
   selectableRows,
+  onSelectionChange,
   ...otherProps
 }: TableProps<T>) => {
   const {
@@ -58,6 +60,10 @@ export const Table = <T extends {}, >({
   useEffect(() => {
     allColumns[0].toggleHidden(!selectableRows)
   }, [selectableRows, allColumns])
+
+  useEffect(() => {
+    onSelectionChange && onSelectionChange(selectedFlatRows)
+  }, [onSelectionChange, selectedFlatRows])
 
   return (
     <div className={clsx(styles.Table, className)}>
