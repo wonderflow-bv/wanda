@@ -31,3 +31,7 @@
     width: 1e-10%;
   }
 }
+
+.HeadCellIcon {
+  margin-inline-start: env(--space-8);
+}

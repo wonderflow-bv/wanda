@@ -66,3 +66,16 @@ const Template: ComponentStory<typeof Table> = (args) => {
 }
 
 export const Simple = Template.bind({})
+
+export const SelectedRows = Template.bind({})
+SelectedRows.args = {
+  selectableRows: true
+}
+SelectedRows.argTypes = {
+  onSelectionChange: {
+    action: (rows) => { console.log(rows) },
+    table: {
+      disable: true
+    }
+  }
+}

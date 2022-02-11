@@ -87,16 +87,11 @@ export const Table = <T extends {}, >({
                 <TableCell
                   as="th"
                   collapsed
+                  isSorted={column.isSorted}
+                  isSortedDesc={column.isSorted && column.isSortedDesc}
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                 >
                   {column.render('Header')}
-                  <span>
-                    {column.isSorted
-                      ? column.isSortedDesc
-                        ? ' 🔽'
-                        : ' 🔼'
-                      : ''}
-                  </span>
                 </TableCell>
               ))}
             </TableRow>
