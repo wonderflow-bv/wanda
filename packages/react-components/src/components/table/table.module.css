@@ -1,3 +1,24 @@
 .Table {
-  position: relative;
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.THead {
+  display: table-header-group;
+}
+
+.TBody {
+  display: table-row-group;
+}
+
+.Row {
+  display: table-row;
+}
+
+
+.Cell {
+  display: table-cell;
+  border: 1px solid #ccc;
+  padding: env(--space-8);
 }

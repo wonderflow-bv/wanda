@@ -1,15 +1,20 @@
 
-import { useTable, TableOptions, TableCommonProps } from 'react-table'
+import clsx from 'clsx'
+import { TableCommonProps, useTable, TableOptions } from 'react-table'
+import { TableRow } from './table-row'
+import { TableCell } from './table-cell'
+import styles from './table.module.css'
 
-export type TableProps<T extends object> = TableCommonProps & TableOptions<T> & {
+export type TableProps = TableCommonProps & TableOptions<{}> & {
   pagination?: boolean
 }
 
-export const Table = <T extends object, >({
+export const Table = ({
   columns,
   data,
+  className,
   ...otherProps
-}: TableProps<T>) => {
+}: TableProps) => {
   const {
     getTableProps,
     getTableBodyProps,
@@ -22,32 +27,44 @@ export const Table = <T extends object, >({
   })
 
   return (
-    <table {...getTableProps()} {...otherProps}>
-      <thead>
+    <div
+      className={clsx(styles.Table, className)}
+      role="table"
+      {...getTableProps()}
+      {...otherProps}
+    >
+      {/* THEAD */}
+      <div role="rowgroup" className={styles.THead}>
         {headerGroups.map(headerGroup => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
+          <TableRow className={styles.Row} {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map(column => (
-              <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+              <TableCell role="columnheader" {...column.getHeaderProps()}>{column.render('Header')}</TableCell>
             ))}
-          </tr>
+          </TableRow>
         ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map((row, i) => {
+      </div>
+
+      {/* TBODY */}
+      <div role="rowgroup" className={styles.TBody} {...getTableBodyProps()}>
+        {rows.map((row) => {
           prepareRow(row)
           return (
-            <tr {...row.getRowProps()}>
+            <TableRow {...row.getRowProps()}>
               {row.cells.map((cell: Record<string, any>) => {
                 return (
-                  <td {...cell.getCellProps()} style={{ background: cell.column.collapse ? 'red' : 'blue' }}>
+                  <TableCell
+                    role="cell"
+                    {...cell.getCellProps()}
+                    style={{ background: cell.column.collapse ? 'red' : 'blue' }}
+                  >
                     {cell.render('Cell')}
-                  </td>
+                  </TableCell>
                 )
               })}
-            </tr>
+            </TableRow>
           )
         })}
-      </tbody>
-    </table>
+      </div>
+    </div>
   )
 }

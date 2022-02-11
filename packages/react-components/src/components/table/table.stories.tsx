@@ -17,8 +17,7 @@ const columns = [
   },
   {
     Header: 'Info',
-    accessor: 'age',
-    collapse: true
+    accessor: 'age'
   }
 ]
 
@@ -31,8 +30,7 @@ const data = [
   {
     firstName: 'Simone',
     lastName: 'Lastname',
-    age: 123,
-    collapse: true
+    age: 123
   },
   {
     firstName: 'Matteo',
