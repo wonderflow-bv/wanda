@@ -1,24 +1,49 @@
 .Table {
-  display: table;
+  position: relative;
   width: 100%;
-  border-collapse: collapse;
+  display: table;
+  overflow: auto hidden;
+  min-height: 0;
+}
+
+.TableElement {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
 }
 
 .THead {
-  display: table-header-group;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
   border-bottom: 3px solid var(--dimmed-2);
 }
 
 .TBody {
-  display: table-row-group;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .Row {
-  display: table-row;
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  min-height: 52px;
 }
 
-
 .Cell {
-  display: table-cell;
+  border: 0;
+  background: transparent;
+  text-align: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  flex: 1 0 0px;
+  max-width: 100%;
+  min-width: 100px;
   padding: env(--space-8);
 }
