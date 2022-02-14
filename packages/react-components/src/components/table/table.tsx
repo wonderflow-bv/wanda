@@ -16,7 +16,7 @@ export type TableProps<T extends {}> = TableCommonProps & TableOptions<T> & {
   /**
    * Pass column headers as an array of objects.
    */
-  columns: (Column<T> & OptionalColumnTypes)[]
+  columns: (Column<T> & OptionalColumnTypes)[],
   /**
    * Show pagination below the table. This is recommended only for tables with a lot of rows.
    */
@@ -69,7 +69,7 @@ export const Table = <T extends {}, >({
         {
           id: 'selection',
           Header: ({ getToggleAllRowsSelectedProps }: CustomTableInstanceType<T>) => {
-            return (getToggleAllRowsSelectedProps && selectableRows) && <Checkbox className={styles.Checkbox} dimension="small" {...getToggleAllRowsSelectedProps()} />
+            return (getToggleAllRowsSelectedProps && selectableRows) ? <Checkbox className={styles.Checkbox} dimension="small" {...getToggleAllRowsSelectedProps()} /> : null
           },
           Cell: ({ row }: any) => (<Checkbox className={styles.Checkbox} dimension="small" {...row.getToggleRowSelectedProps()} />),
           isCollapsed: true
