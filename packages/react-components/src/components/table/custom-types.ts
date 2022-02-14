@@ -5,6 +5,7 @@ import {
 
 export type OptionalColumnTypes = {
   isCollapsed?: boolean;
+  align?: 'start' | 'center' | 'end';
 }
 
 export type OptionalCellColumnTypes = { column: OptionalColumnTypes }

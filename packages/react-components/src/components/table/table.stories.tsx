@@ -26,7 +26,9 @@ const Template: ComponentStory<typeof Table> = (args) => {
     },
     {
       Header: 'Info',
-      accessor: 'age'
+      accessor: 'info',
+      align: 'end',
+      isCollapsed: true
     }
   ], [])
 
@@ -34,27 +36,27 @@ const Template: ComponentStory<typeof Table> = (args) => {
     {
       firstName: 'Gianni',
       lastName: 'Morandi',
-      age: 123123.12
+      info: 123123.12
     },
     {
       firstName: 'Simone',
       lastName: 'Lastname',
-      age: 123.96
+      info: 123.96
     },
     {
       firstName: 'Matteo',
       lastName: 'Staffone',
-      age: 12.1213
+      info: 12.1213
     },
     {
       firstName: 'Emanuele',
       lastName: 'Staffo',
-      age: 1234
+      info: 1234
     },
     {
       firstName: 'Simone',
       lastName: 'Stuffo',
-      age: 12
+      info: 12
     }
   ], [])
 
@@ -73,6 +75,7 @@ export const SelectedRows = Template.bind({})
 SelectedRows.args = {
   selectableRows: true
 }
+
 SelectedRows.argTypes = {
   onSelectionChange: {
     action: (rows) => { console.log(rows) },

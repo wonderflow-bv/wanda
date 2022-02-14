@@ -69,9 +69,9 @@ export const Table = <T extends {}, >({
         {
           id: 'selection',
           Header: ({ getToggleAllRowsSelectedProps }: CustomTableInstanceType<T>) => {
-            return (getToggleAllRowsSelectedProps && selectableRows) && <Checkbox dimension="small" {...getToggleAllRowsSelectedProps()} />
+            return (getToggleAllRowsSelectedProps && selectableRows) && <Checkbox className={styles.Checkbox} dimension="small" {...getToggleAllRowsSelectedProps()} />
           },
-          Cell: ({ row }: any) => (<Checkbox dimension="small" {...row.getToggleRowSelectedProps()} />),
+          Cell: ({ row }: any) => (<Checkbox className={styles.Checkbox} dimension="small" {...row.getToggleRowSelectedProps()} />),
           isCollapsed: true
         },
         ...columns
@@ -113,6 +113,7 @@ export const Table = <T extends {}, >({
                   collapsed
                   isSorted={column.isSorted}
                   isSortedDesc={column.isSorted && column.isSortedDesc}
+                  align={column.align}
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                 >
                   {column.render('Header')}
@@ -132,6 +133,7 @@ export const Table = <T extends {}, >({
                   return (
                     <TableCell
                       collapsed={cell.column.isCollapsed}
+                      align={cell.column.align}
                       {...cell.getCellProps()}
                     >
                       {cell.render('Cell')}

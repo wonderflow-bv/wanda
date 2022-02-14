@@ -4,6 +4,7 @@
   display: table;
   overflow: auto hidden;
   min-height: 0;
+  font-size: env(--font-size-16);
 }
 
 .TableElement {
@@ -15,11 +16,13 @@
   border-bottom: 3px solid var(--dimmed-2);
 
   & th {
-    padding: env(--space-4) env(--space-8) env(--space-8);
+    padding-top: env(--space-16);
+    padding-bottom: env(--space-16);
   }
 }
 
 .Row {
+  height: env(--space-48);
 
   @nest .TableElement[data-table-stripes='true'] &:nth-child(even) {
     background-color: var(--dimmed-0);
@@ -32,10 +35,11 @@
 .Cell {
   margin: 0;
   width: 1%;
-  text-align: start;
+  text-align: var(--text-align, 'start');
   display: table-cell;
-  padding: env(--space-8);
+  padding: calc(env(--space-8) + env(--space-4)) env(--space-16);
   font-variant-numeric: tabular-nums;
+  line-height: env(--font-lh-small);
 
   &[data-table-cell-collapsed='true'] {
     width: 1e-10%;
@@ -44,4 +48,8 @@
 
 .HeadCellIcon {
   margin-inline-start: env(--space-8);
+}
+
+.Checkbox {
+  display: block;
 }
