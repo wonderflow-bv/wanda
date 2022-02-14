@@ -131,17 +131,15 @@ export const Table = ({
             prepareRow(row)
             return (
               <TableRow highlight={row.isSelected} {...row.getRowProps()}>
-                {row.cells.map((cell: CustomCell<OptionalColumnTypes>) => {
-                  return (
-                    <TableCell
-                      collapsed={cell.column.isCollapsed}
-                      align={cell.column.align}
-                      {...cell.getCellProps()}
-                    >
-                      {cell.render('Cell')}
-                    </TableCell>
-                  )
-                })}
+                {row.cells.map((cell: CustomCell<OptionalColumnTypes>) => (
+                  <TableCell
+                    collapsed={cell.column.isCollapsed}
+                    align={cell.column.align}
+                    {...cell.getCellProps()}
+                  >
+                    {cell.render('Cell')}
+                  </TableCell>
+                ))}
               </TableRow>
             )
           })}
