@@ -19,6 +19,10 @@
   }
 }
 
+.TableElement[data-table-stripes='true'] .Row:nth-child(even) {
+  background-color: var(--dimmed-0);
+}
+
 .Cell {
   margin: 0;
   width: 1%;

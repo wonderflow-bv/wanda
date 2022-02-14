@@ -8,7 +8,8 @@ export default {
     centered: { disable: true }
   },
   args: {
-    selectableRows: false
+    selectableRows: false,
+    stripes: false
   }
 } as ComponentMeta<typeof Table>
 

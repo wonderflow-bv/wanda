@@ -13,10 +13,26 @@ import styles from './table.module.css'
 import { useEffect } from 'react'
 
 export type TableProps<T extends {}> = TableCommonProps & TableOptions<T> & {
+  /**
+   * Pass column headers as an array of objects.
+   */
   columns: (Column<T> & OptionalColumnTypes)[]
+  /**
+   * Show pagination below the table. This is recommended only for tables with a lot of rows.
+   */
   pagination?: boolean
+  /**
+   * Enable row selection
+   */
   selectableRows?: boolean
+  /**
+   * Callback run when the selected rows change
+   */
   onSelectionChange?(selectedRows?: Row<T>[]): void
+  /**
+   * Add an alternate style to the table rows
+   */
+  stripes?: boolean
 }
 
 export const Table = <T extends {}, >({
@@ -25,6 +41,7 @@ export const Table = <T extends {}, >({
   className,
   selectableRows,
   onSelectionChange,
+  stripes,
   ...otherProps
 }: TableProps<T>) => {
   const {
@@ -75,6 +92,7 @@ export const Table = <T extends {}, >({
 
       <table
         className={styles.TableElement}
+        data-table-stripes={stripes}
         {...getTableProps()}
         {...otherProps}
       >
@@ -82,7 +100,10 @@ export const Table = <T extends {}, >({
         {/* THEAD */}
         <thead role="rowgroup" className={styles.THead}>
           {headerGroups.map(headerGroup => (
-            <TableRow {...headerGroup.getHeaderGroupProps()}>
+            <TableRow {...headerGroup.getHeaderGroupProps({
+              className: styles.Row
+            })}
+            >
               {headerGroup.headers.map((column: CustomColumnPropsType<T>) => (
                 <TableCell
                   as="th"
@@ -103,7 +124,10 @@ export const Table = <T extends {}, >({
           {rows.map((row) => {
             prepareRow(row)
             return (
-              <TableRow {...row.getRowProps()}>
+              <TableRow {...row.getRowProps({
+                className: styles.Row
+              })}
+              >
                 {row.cells.map((cell: CustomCellPropsType<T>) => {
                   return (
                     <TableCell
