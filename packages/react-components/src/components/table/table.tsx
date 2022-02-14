@@ -130,7 +130,7 @@ export const Table = ({
           {rows.map((row) => {
             prepareRow(row)
             return (
-              <TableRow {...row.getRowProps()}>
+              <TableRow highlight={row.isSelected} {...row.getRowProps()}>
                 {row.cells.map((cell: CustomCell<OptionalColumnTypes>) => {
                   return (
                     <TableCell
