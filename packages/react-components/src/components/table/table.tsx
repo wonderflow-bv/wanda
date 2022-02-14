@@ -1,22 +1,23 @@
 
 import clsx from 'clsx'
-import { TableCommonProps, useTable, TableOptions, Row, Column, useSortBy, useRowSelect } from 'react-table'
+import {
+  useTable, useSortBy, useRowSelect,
+  Column, Row, CustomHeaderGroup, CustomCell
+} from 'react-table'
 import { TableRow } from './table-row'
 import { TableCell } from './table-cell'
-import { Checkbox } from '@/components'
-import type {
-  OptionalColumnTypes,
-  CustomTableInstanceType, CustomColumnPropsType, CustomCellPropsType
-} from './custom-types'
+import { TableCheckbox } from './table-checkbox'
 
 import styles from './table.module.css'
 import { useEffect } from 'react'
 
-export type TableProps<T extends {}> = TableCommonProps & TableOptions<T> & {
-  /**
-   * Pass column headers as an array of objects.
-   */
-  columns: (Column<T> & OptionalColumnTypes)[],
+export type OptionalColumnTypes = {
+  isCollapsed?: boolean;
+  align?: 'start' | 'center' | 'end';
+}
+export type TableProps = PropsWithClass & {
+  columns: (Column<object> & OptionalColumnTypes)[],
+  data: Array<object>,
   /**
    * Show pagination below the table. This is recommended only for tables with a lot of rows.
    */
@@ -28,7 +29,7 @@ export type TableProps<T extends {}> = TableCommonProps & TableOptions<T> & {
   /**
    * Callback run when the selected rows change
    */
-  onSelectionChange?(selectedRows?: Row<T>[]): void
+  onSelectionChange?(selectedRows?: Row[]): void
   /**
    * Add an alternate style to the table rows
    */
@@ -39,7 +40,7 @@ export type TableProps<T extends {}> = TableCommonProps & TableOptions<T> & {
   showSeparators?: boolean
 }
 
-export const Table = <T extends {}, >({
+export const Table = ({
   columns,
   data,
   className,
@@ -48,7 +49,7 @@ export const Table = <T extends {}, >({
   stripes,
   showSeparators,
   ...otherProps
-}: TableProps<T>) => {
+}: TableProps) => {
   const {
     getTableProps,
     getTableBodyProps,
@@ -57,7 +58,7 @@ export const Table = <T extends {}, >({
     allColumns,
     prepareRow,
     selectedFlatRows
-  }: CustomTableInstanceType<T> = useTable(
+  } = useTable(
     {
       columns,
       data
@@ -68,10 +69,11 @@ export const Table = <T extends {}, >({
       hooks.visibleColumns.push((columns) => [
         {
           id: 'selection',
-          Header: ({ getToggleAllRowsSelectedProps }: CustomTableInstanceType<T>) => {
-            return (getToggleAllRowsSelectedProps && selectableRows) ? <Checkbox className={styles.Checkbox} dimension="small" {...getToggleAllRowsSelectedProps()} /> : null
+          value: 'checkbox',
+          Header: ({ getToggleAllRowsSelectedProps }) => {
+            return selectableRows ? <TableCheckbox {...getToggleAllRowsSelectedProps()} /> : null
           },
-          Cell: ({ row }: any) => (<Checkbox className={styles.Checkbox} dimension="small" {...row.getToggleRowSelectedProps()} />),
+          Cell: ({ row }) => (<TableCheckbox {...row.getToggleRowSelectedProps()} />),
           isCollapsed: true
         },
         ...columns
@@ -107,7 +109,7 @@ export const Table = <T extends {}, >({
         <thead role="rowgroup" className={styles.THead}>
           {headerGroups.map(headerGroup => (
             <TableRow {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column: CustomColumnPropsType<T>) => (
+              {headerGroup.headers.map((column: CustomHeaderGroup<OptionalColumnTypes>) => (
                 <TableCell
                   as="th"
                   collapsed
@@ -129,7 +131,7 @@ export const Table = <T extends {}, >({
             prepareRow(row)
             return (
               <TableRow {...row.getRowProps()}>
-                {row.cells.map((cell: CustomCellPropsType<T>) => {
+                {row.cells.map((cell: CustomCell<OptionalColumnTypes>) => {
                   return (
                     <TableCell
                       collapsed={cell.column.isCollapsed}
