@@ -19,8 +19,14 @@
   }
 }
 
-.TableElement[data-table-stripes='true'] .Row:nth-child(even) {
-  background-color: var(--dimmed-0);
+.Row {
+
+  @nest .TableElement[data-table-stripes='true'] &:nth-child(even) {
+    background-color: var(--dimmed-0);
+  }
+  @nest .TableElement[data-table-separators='true'] & + & {
+    border-top: 1px solid var(--dimmed-1);
+  }
 }
 
 .Cell {
@@ -28,7 +34,6 @@
   width: 1%;
   text-align: start;
   display: table-cell;
-  vertical-align: top;
   padding: env(--space-8);
   font-variant-numeric: tabular-nums;
 

@@ -9,7 +9,8 @@ export default {
   },
   args: {
     selectableRows: false,
-    stripes: false
+    stripes: false,
+    showSeparators: false
   }
 } as ComponentMeta<typeof Table>
 
@@ -33,27 +34,27 @@ const Template: ComponentStory<typeof Table> = (args) => {
     {
       firstName: 'Gianni',
       lastName: 'Morandi',
-      age: 123
+      age: 123123.12
     },
     {
       firstName: 'Simone',
       lastName: 'Lastname',
-      age: 123
+      age: 123.96
     },
     {
       firstName: 'Matteo',
       lastName: 'Staffone',
-      age: 123
+      age: 12.1213
     },
     {
       firstName: 'Emanuele',
       lastName: 'Staffo',
-      age: 123
+      age: 1234
     },
     {
       firstName: 'Simone',
       lastName: 'Stuffo',
-      age: 123
+      age: 12
     }
   ], [])
 

@@ -33,6 +33,10 @@ export type TableProps<T extends {}> = TableCommonProps & TableOptions<T> & {
    * Add an alternate style to the table rows
    */
   stripes?: boolean
+  /**
+   * Enable horizontal separators between the table rows
+   */
+  showSeparators?: boolean
 }
 
 export const Table = <T extends {}, >({
@@ -42,6 +46,7 @@ export const Table = <T extends {}, >({
   selectableRows,
   onSelectionChange,
   stripes,
+  showSeparators,
   ...otherProps
 }: TableProps<T>) => {
   const {
@@ -93,6 +98,7 @@ export const Table = <T extends {}, >({
       <table
         className={styles.TableElement}
         data-table-stripes={stripes}
+        data-table-separators={showSeparators}
         {...getTableProps()}
         {...otherProps}
       >
@@ -100,10 +106,7 @@ export const Table = <T extends {}, >({
         {/* THEAD */}
         <thead role="rowgroup" className={styles.THead}>
           {headerGroups.map(headerGroup => (
-            <TableRow {...headerGroup.getHeaderGroupProps({
-              className: styles.Row
-            })}
-            >
+            <TableRow {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column: CustomColumnPropsType<T>) => (
                 <TableCell
                   as="th"
@@ -124,10 +127,7 @@ export const Table = <T extends {}, >({
           {rows.map((row) => {
             prepareRow(row)
             return (
-              <TableRow {...row.getRowProps({
-                className: styles.Row
-              })}
-              >
+              <TableRow {...row.getRowProps()}>
                 {row.cells.map((cell: CustomCellPropsType<T>) => {
                   return (
                     <TableCell
