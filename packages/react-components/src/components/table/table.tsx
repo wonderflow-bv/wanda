@@ -10,9 +10,8 @@ import { TableCheckbox } from './table-checkbox'
 import { AnimatePresence, motion } from 'framer-motion'
 
 import styles from './table.module.css'
-import { useEffect } from 'react'
-import { Checkbox, Stack, Dropdown, Menu, Button } from '@/components'
-import { Title } from '../title'
+import { ReactNode, useEffect } from 'react'
+import { Checkbox, Title, Text, Stack, Dropdown, Menu, Button } from '@/components'
 
 export type OptionalColumnTypes = {
   isCollapsed?: boolean;
@@ -59,6 +58,14 @@ export type TableProps = PropsWithClass & {
    * Enable the dropdown to choose the visibility of the column
    */
   hasColumnHiding?: boolean
+  /**
+   * Set the label for selected items in the table. Default to "Selected items"
+   */
+  selectedLabel?: string
+  /**
+  * Pass custom components to show when rows are selected.
+  */
+  selectedActions?: ReactNode
 }
 
 export const Table = ({
@@ -117,44 +124,50 @@ export const Table = ({
   }, [onSelectionChange, selectedFlatRows])
 
   return (
-    <Stack rowGap={16} className={clsx(styles.Table, className)}>
+    <div className={clsx(styles.Table, className)}>
 
-      {!noHeader && (
-        <Stack direction="row">
-          {title && <Title level="5">{title}</Title>}
+      {(!noHeader || selectableRows) && (
+      <Stack
+        direction="row"
+        horizontalPadding={8}
+        verticalAlign="center"
+        className={styles.Header}
+      >
+        {title && <Title level="5">{title}</Title>}
 
-          {!!hasColumnHiding && (
-          <Dropdown
-            placement="bottom-start"
-            trigger={<Button kind="secondary" dimension="small">Manage columns</Button>}
-          >
-            <Menu>
-              {allColumns.map(column => {
-                if (column.id !== 'selection') {
-                  return (
-                    <Menu.Item as="div" padding={false}>
-                      <Stack direction="row" fill={false} verticalAlign="center" columnGap={8} horizontalAlign="space-between">
-                        <Checkbox
-                          className={styles.Checkbox}
-                          dimension="small"
-                          {...column.getToggleHiddenProps()}
-                          disabled={column.getToggleHiddenProps().checked && visibleColumns.length === 1}
-                        />
-                        {column.render('Header')}
-                      </Stack>
-                    </Menu.Item>
-                  )
-                }
-                return null
+        {!!hasColumnHiding && (
+        <Dropdown
+          placement="bottom-start"
+          trigger={<Button kind="secondary" dimension="small">Manage columns</Button>}
+        >
+          <Menu>
+            {allColumns.map(column => {
+              if (column.id !== 'selection') {
+                return (
+                  <Menu.Item as="div" padding={false} key={column.id}>
+                    <Stack direction="row" fill={false} verticalAlign="center" columnGap={8} horizontalAlign="space-between">
+                      <Checkbox
+                        className={styles.Checkbox}
+                        dimension="small"
+                        {...column.getToggleHiddenProps()}
+                        disabled={column.getToggleHiddenProps().checked && visibleColumns.length === 1}
+                      />
+                      {column.render('Header')}
+                    </Stack>
+                  </Menu.Item>
+                )
               }
-              )}
-            </Menu>
-          </Dropdown>
-          )}
-        </Stack>
+              return null
+            }
+            )}
+          </Menu>
+        </Dropdown>
+        )}
+      </Stack>
       )}
 
-      {!!selectedFlatRows?.length && (
+      <AnimatePresence>
+        {!!selectedFlatRows?.length && (
         <Stack
           as={motion.div}
           className={styles.Toast}
@@ -175,17 +188,6 @@ export const Table = ({
         )}
       </AnimatePresence>
 
-      {(!noHeader || selectableRows) && (
-        <Stack
-          direction="row"
-          horizontalPadding={8}
-          verticalPadding={8}
-          verticalAlign="center"
-          className={styles.Header}
-        >
-          {title && <Title level="5">{title}</Title>}
-        </Stack>
-      )}
       <table
         className={styles.TableElement}
         data-table-stripes={stripes}
@@ -234,6 +236,6 @@ export const Table = ({
           })}
         </tbody>
       </table>
-    </Stack>
+    </div>
   )
 }
