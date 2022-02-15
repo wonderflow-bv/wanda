@@ -1,9 +1,9 @@
 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_230_335)">
-<path d="M8 16C3.6 16 0 12.4 0 8C0 3.6 3.6 0 8 0C12.4 0 16 3.6 16 8C16 12.4 12.4 16 8 16ZM8 4C7.4 4 7 4.4 7 5C7 5.6 7.4 6 8 6C8.6 6 9 5.6 9 5C9 4.4 8.6 4 8 4ZM9 7H7V12H9V7Z" fill="black"/>
+<g clip-path="url(#clip0_1139_9143)">
+<path d="M8 0C3.6 0 0 3.6 0 8C0 12.4 3.6 16 8 16C12.4 16 16 12.4 16 8C16 3.6 12.4 0 8 0ZM9 12H7V7H9V12ZM8 6C7.4 6 7 5.6 7 5C7 4.4 7.4 4 8 4C8.6 4 9 4.4 9 5C9 5.6 8.6 6 8 6Z" fill="black"/>
 </g>
 <defs>
-<clipPath id="clip0_230_335">
+<clipPath id="clip0_1139_9143">
 <rect width="16" height="16" fill="white"/>
 </clipPath>
 </defs>
