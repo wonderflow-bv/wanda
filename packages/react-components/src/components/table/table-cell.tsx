@@ -2,7 +2,7 @@ import styles from './table.module.css'
 import { CSSProperties, forwardRef } from 'react'
 import { Polymorphic, Icon } from '@/components'
 import clsx from 'clsx'
-import { OptionalColumnTypes } from './custom-types'
+import { OptionalColumnTypes } from './table'
 
 type TableCellProps = PropsWithClass & {
   collapsed?: OptionalColumnTypes['isCollapsed']
