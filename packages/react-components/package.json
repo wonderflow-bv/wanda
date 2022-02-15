@@ -56,16 +56,16 @@
     "react-dom": "^17.0"
   },
   "devDependencies": {
-    "@babel/core": "7.17.0",
+    "@babel/core": "7.17.2",
     "@babel/preset-typescript": "7.16.7",
-    "@storybook/addon-actions": "6.4.18",
-    "@storybook/addon-essentials": "6.4.18",
-    "@storybook/addon-links": "6.4.18",
+    "@storybook/addon-actions": "6.4.19",
+    "@storybook/addon-essentials": "6.4.19",
+    "@storybook/addon-links": "6.4.19",
     "@storybook/addon-postcss": "2.0.0",
     "@storybook/addons": "6.5.0-alpha.21",
     "@storybook/builder-webpack5": "6.5.0-alpha.21",
     "@storybook/manager-webpack5": "6.5.0-alpha.21",
-    "@storybook/react": "6.4.18",
+    "@storybook/react": "6.4.19",
     "@storybook/theming": "6.5.0-alpha.21",
     "@types/react": "17.0.39",
     "@types/react-dom": "17.0.11",
@@ -87,7 +87,7 @@
   "dependencies": {
     "ahooks": "3.1.9",
     "clsx": "1.1.1",
-    "framer-motion": "6.2.4",
+    "framer-motion": "6.2.6",
     "react-data-table-component": "7.4.7",
     "react-focus-on": "3.5.4",
     "react-masonry-css": "1.0.16",
@@ -96,6 +96,6 @@
     "react-roving-tabindex": "3.1.1",
     "react-uid": "2.3.1",
     "styled-components": "5.3.3",
-    "type-fest": "2.11.1"
+    "type-fest": "2.11.2"
   }
 }
