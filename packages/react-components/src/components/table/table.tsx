@@ -2,7 +2,7 @@
 import clsx from 'clsx'
 import {
   useTable, useSortBy, useRowSelect,
-  Column, Row, CustomHeaderGroup, CustomCell
+  Column, Row, CustomHeaderGroup, CustomCell, useExpanded
 } from 'react-table'
 import { TableRow } from './table-row'
 import { TableCell } from './table-cell'
@@ -10,7 +10,7 @@ import { TableCheckbox } from './table-checkbox'
 import { AnimatePresence, motion } from 'framer-motion'
 
 import styles from './table.module.css'
-import { CSSProperties, ReactNode, useEffect } from 'react'
+import { CSSProperties, Fragment, ReactNode, useEffect } from 'react'
 import { Title, Text, Stack } from '@/components'
 import { ToggleColumnsControl } from './table-controls'
 
@@ -118,9 +118,11 @@ export const Table = ({
   } = useTable(
     {
       columns,
-      data
+      data,
+      expandSubRows: false
     },
     useSortBy,
+    useExpanded,
     useRowSelect,
     hooks => {
       hooks.visibleColumns.push((columns) => [
@@ -130,9 +132,21 @@ export const Table = ({
           Header: ({ getToggleAllRowsSelectedProps }) => {
             return (selectableRows ? <TableCheckbox {...getToggleAllRowsSelectedProps()} /> : null)
           },
-          Cell: ({ row }) => (<TableCheckbox {...row.getToggleRowSelectedProps()} />),
           isCollapsed: true,
           hideFromList: true
+        },
+        {
+          id: 'expander',
+          isCollapsed: true,
+          hideFromList: true,
+          Cell: ({ row }) =>
+            row.canExpand
+              ? (
+                <span {...row.getToggleRowExpandedProps()}>
+                  {row.isExpanded ? '👇' : '👉'}
+                </span>
+                )
+              : null
         },
         ...columns
       ])
@@ -182,23 +196,23 @@ export const Table = ({
       {/* CONTEXT TOAST */}
       <AnimatePresence>
         {!!selectedFlatRows?.length && (
-        <Stack
-          as={motion.div}
-          className={styles.Toast}
-          direction="row"
-          horizontalAlign="space-between"
-          verticalAlign="center"
-          horizontalPadding={16}
-          verticalPadding={8}
-          fill={false}
-          columnGap={16}
-          initial={{ y: '-100%' }}
-          animate={{ y: 0 }}
-          exit={{ y: '-100%', transition: { ease: 'easeOut' } }}
-        >
-          <Text as="span" size={14} weight="bold">{`${selectedLabel}: ${selectedFlatRows.length}`}</Text>
-          {selectedActions}
-        </Stack>
+          <Stack
+            as={motion.div}
+            className={styles.Toast}
+            direction="row"
+            horizontalAlign="space-between"
+            verticalAlign="center"
+            horizontalPadding={16}
+            verticalPadding={8}
+            fill={false}
+            columnGap={16}
+            initial={{ y: '-100%' }}
+            animate={{ y: 0 }}
+            exit={{ y: '-100%', transition: { ease: 'easeOut' } }}
+          >
+            <Text as="span" size={14} weight="bold">{`${selectedLabel}: ${selectedFlatRows.length}`}</Text>
+            {selectedActions}
+          </Stack>
         )}
       </AnimatePresence>
 
@@ -237,7 +251,7 @@ export const Table = ({
             prepareRow(row)
             return (
               <TableRow highlight={row.isSelected} {...row.getRowProps()}>
-                {row.cells.map((cell: CellType) => (
+                {row.cells.map((cell: CustomCell<OptionalColumnTypes>) => (
                   <TableCell
                     collapsed={cell.column.isCollapsed}
                     align={cell.column.align}

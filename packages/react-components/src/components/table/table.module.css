@@ -45,6 +45,7 @@
 
   & + & {
     border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
   }
 
   @nest .TableElement[data-table-stripes='true'] &:nth-child(even):not([data-table-row-highlight='true']) {
@@ -59,7 +60,7 @@
     color: var(--highlight-blue-foreground);
 
     & + & {
-      border-color: var(--global-background);
+      border-top-color: var(--global-background);
     }
   }
 }
