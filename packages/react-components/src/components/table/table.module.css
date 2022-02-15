@@ -1,15 +1,16 @@
+@import '../../core/utils/vibrancy.css';
+
 .Table {
   position: relative;
   width: 100%;
-  display: table;
   overflow: auto hidden;
   min-height: 0;
-  font-size: env(--font-size-16);
 }
 
 .TableElement {
   width: 100%;
   border-collapse: collapse;
+  font-size: env(--font-size-16);
 }
 
 .THead {
@@ -65,4 +66,17 @@
 
 .Checkbox {
   display: block;
+}
+
+.Toast {
+
+  @mixin vibrancy;
+
+  background-color: var(--global-vibrancy-background);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  border-radius: env(--radius-8);
 }

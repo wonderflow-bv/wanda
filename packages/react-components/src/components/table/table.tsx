@@ -10,13 +10,21 @@ import { TableCheckbox } from './table-checkbox'
 
 import styles from './table.module.css'
 import { useEffect } from 'react'
+import { Stack } from '@/components'
+import { Title } from '../title'
 
 export type OptionalColumnTypes = {
   isCollapsed?: boolean;
   align?: 'start' | 'center' | 'end';
 }
 export type TableProps = PropsWithClass & {
+  /**
+   * Define the column headers of the table.
+   */
   columns: (Column<object> & OptionalColumnTypes)[],
+  /**
+   * Pass the data structure to the table. Each object key can be used as `accessor` for a column.
+   */
   data: Array<object>,
   /**
    * Show pagination below the table. This is recommended only for tables with a lot of rows.
@@ -38,6 +46,14 @@ export type TableProps = PropsWithClass & {
    * Enable horizontal separators between the table rows
    */
   showSeparators?: boolean
+  /**
+   * Show the table header title
+   */
+  title?: string
+  /**
+   * Hide the table header which includes the title and controls.
+   */
+  noHeader?: boolean
 }
 
 export const Table = ({
@@ -48,6 +64,8 @@ export const Table = ({
   onSelectionChange,
   stripes,
   showSeparators,
+  title,
+  noHeader = false,
   ...otherProps
 }: TableProps) => {
   const {
@@ -90,11 +108,24 @@ export const Table = ({
   }, [onSelectionChange, selectedFlatRows])
 
   return (
-    <div className={clsx(styles.Table, className)}>
+    <Stack rowGap={16} className={clsx(styles.Table, className)}>
+
+      {!noHeader && (
+        <Stack direction="row">
+          {title && <Title level="5">{title}</Title>}
+        </Stack>
+      )}
+
       {!!selectedFlatRows?.length && (
-        <div>
+        <Stack
+          className={styles.Toast}
+          direction="row"
+          horizontalAlign="space-between"
+          horizontalPadding={24}
+          verticalPadding={8}
+        >
           {`${selectedFlatRows.length}  items selected`}
-        </div>
+        </Stack>
       )}
 
       <table
@@ -145,6 +176,6 @@ export const Table = ({
           })}
         </tbody>
       </table>
-    </div>
+    </Stack>
   )
 }

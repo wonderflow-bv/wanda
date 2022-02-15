@@ -9,6 +9,7 @@ export default {
   args: {
     stripes: false,
     showSeparators: false,
+    title: 'Table title',
     columns: [
       {
         Header: 'First Name',
