@@ -70,7 +70,12 @@ export default {
         lastName: 'Stuffo',
         address: 'Via Roma, 15 Monza',
         uid: '123123',
-        info: 12
+        info: 12,
+        subRows: [
+          {
+            firstName: 'ciao'
+          }
+        ]
       },
       {
         firstName: 'Gianni',
@@ -106,7 +111,8 @@ export default {
         address: 'Via Roma, 15 Monza',
         uid: '123123',
         info: 12
-      }
+      },
+      
     ]
   }
 } as ComponentMeta<typeof Table>
