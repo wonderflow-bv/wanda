@@ -7,6 +7,7 @@ import {
 import { TableRow } from './table-row'
 import { TableCell } from './table-cell'
 import { TableCheckbox } from './table-checkbox'
+import { AnimatePresence, motion } from 'framer-motion'
 
 import styles from './table.module.css'
 import { ReactNode, useEffect } from 'react'
@@ -118,9 +119,10 @@ export const Table = ({
 
   return (
     <Stack className={clsx(styles.Table, className)}>
-
-      {!!selectedFlatRows?.length && (
+      <AnimatePresence>
+        {!!selectedFlatRows?.length && (
         <Stack
+          as={motion.div}
           className={styles.Toast}
           direction="row"
           horizontalAlign="space-between"
@@ -128,11 +130,15 @@ export const Table = ({
           horizontalPadding={16}
           fill={false}
           verticalPadding={8}
+          initial={{ y: '-100%' }}
+          animate={{ y: 0 }}
+          exit={{ y: '-100%' }}
         >
           <Text as="span" size={14} weight="bold">{`${selectedLabel}: ${selectedFlatRows.length}`}</Text>
           {selectedActions}
         </Stack>
-      )}
+        )}
+      </AnimatePresence>
 
       {(!noHeader || selectableRows) && (
         <Stack
