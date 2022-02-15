@@ -68,6 +68,10 @@
   display: block;
 }
 
+.Header {
+  min-block-size: env(--space-56);
+}
+
 .Toast {
 
   @mixin vibrancy;

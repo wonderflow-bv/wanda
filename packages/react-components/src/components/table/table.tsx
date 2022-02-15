@@ -9,9 +9,8 @@ import { TableCell } from './table-cell'
 import { TableCheckbox } from './table-checkbox'
 
 import styles from './table.module.css'
-import { useEffect } from 'react'
-import { Stack } from '@/components'
-import { Title } from '../title'
+import { ReactNode, useEffect } from 'react'
+import { Stack, Text, Title } from '@/components'
 
 export type OptionalColumnTypes = {
   isCollapsed?: boolean;
@@ -54,6 +53,14 @@ export type TableProps = PropsWithClass & {
    * Hide the table header which includes the title and controls.
    */
   noHeader?: boolean
+  /**
+   * Set the label for selected items in the table. Default to "Selected items"
+   */
+   selectedLabel?: string
+  /**
+   * Pass custom components to show when rows are selected.
+   */
+   selectedActions?: ReactNode
 }
 
 export const Table = ({
@@ -65,6 +72,8 @@ export const Table = ({
   stripes,
   showSeparators,
   title,
+  selectedLabel = 'Selected items',
+  selectedActions,
   noHeader = false,
   ...otherProps
 }: TableProps) => {
@@ -108,23 +117,32 @@ export const Table = ({
   }, [onSelectionChange, selectedFlatRows])
 
   return (
-    <Stack rowGap={16} className={clsx(styles.Table, className)}>
-
-      {!noHeader && (
-        <Stack direction="row">
-          {title && <Title level="5">{title}</Title>}
-        </Stack>
-      )}
+    <Stack className={clsx(styles.Table, className)}>
 
       {!!selectedFlatRows?.length && (
         <Stack
           className={styles.Toast}
           direction="row"
           horizontalAlign="space-between"
-          horizontalPadding={24}
+          verticalAlign="center"
+          horizontalPadding={16}
+          fill={false}
           verticalPadding={8}
         >
-          {`${selectedFlatRows.length}  items selected`}
+          <Text as="span" size={14} weight="bold">{`${selectedLabel}: ${selectedFlatRows.length}`}</Text>
+          {selectedActions}
+        </Stack>
+      )}
+
+      {(!noHeader || selectableRows) && (
+        <Stack
+          direction="row"
+          horizontalPadding={8}
+          verticalPadding={8}
+          verticalAlign="center"
+          className={styles.Header}
+        >
+          {title && <Title level="5">{title}</Title>}
         </Stack>
       )}
 

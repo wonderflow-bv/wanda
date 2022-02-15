@@ -1,5 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Table } from './table'
+import { Button } from '../..'
 
 export default {
   title: 'Layouts/Table',
@@ -10,6 +11,7 @@ export default {
     stripes: false,
     showSeparators: false,
     title: 'Table title',
+    noHeader: false,
     columns: [
       {
         Header: 'First Name',
@@ -53,7 +55,7 @@ export default {
         firstName: 'Matteo',
         lastName: 'Staffone',
         address: 'Via Roma, 13, Genova',
-        uid: '23456789',
+        uid: <code>23456789</code>,
         info: 12.1213
       },
       {
@@ -86,7 +88,8 @@ export const Simple = Template.bind({})
 
 export const SelectedRows = Template.bind({})
 SelectedRows.args = {
-  selectableRows: true
+  selectableRows: true,
+  selectedActions: (<Button>Delete</Button>)
 }
 
 SelectedRows.argTypes = {
