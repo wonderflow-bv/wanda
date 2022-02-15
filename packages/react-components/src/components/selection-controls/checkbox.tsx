@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { ChangeEvent, forwardRef, InputHTMLAttributes } from 'react'
+import { ChangeEvent, forwardRef, InputHTMLAttributes, useEffect, useRef } from 'react'
 import styles from './selection-controls.module.css'
 
 export type CheckboxProps = InputHTMLAttributes<HTMLInputElement> & {
@@ -31,16 +31,23 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({
   indeterminate,
   ...otherProps
 }, forwardedRef) => {
+  const ref = useRef<any>(forwardedRef)
+
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.indeterminate = indeterminate
+    }
+  }, [indeterminate])
+
   return (
     <input
       type="checkbox"
       disabled={disabled}
       aria-disabled={disabled}
       data-control-dimension={dimension}
-      data-control-indeterminate={indeterminate}
       onChange={onChange}
       className={clsx(styles.Checkbox, className)}
-      ref={forwardedRef}
+      ref={ref}
       {...otherProps}
     />
   )

@@ -25,8 +25,8 @@
     transform: translate(-50%, -80%) rotate(-45deg);
     inline-size: 50%;
     block-size: 27%;
-    border-left: 2px solid currentColor;
-    border-bottom: 2px solid currentColor;
+    border-left: 2px solid currentcolor;
+    border-bottom: 2px solid currentcolor;
   }
 
   &:active {
@@ -34,7 +34,7 @@
   }
 
   &:checked,
-  &[data-control-indeterminate='true'] {
+  &:indeterminate {
     background: var(--dimmed-7);
 
     &::after {
@@ -53,7 +53,7 @@
     --h: 16px;
   }
 
-  &[data-control-indeterminate='true']::after {
+  &:indeterminate::after {
     border-left: 0;
     block-size: 2px;
     transform: translate(-50%, -50%);
@@ -72,7 +72,7 @@
     transform: translate(-50%, -50%);
     inline-size: 50%;
     block-size: 50%;
-    background-color: currentColor;
+    background-color: currentcolor;
   }
 }
 
