@@ -100,3 +100,6 @@ SelectedRows.argTypes = {
     }
   }
 }
+
+export const HidingColumn = Template.bind({})
+HidingColumn.args = { hasColumnHiding: true }

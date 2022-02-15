@@ -10,8 +10,9 @@ import { TableCheckbox } from './table-checkbox'
 import { AnimatePresence, motion } from 'framer-motion'
 
 import styles from './table.module.css'
-import { ReactNode, useEffect } from 'react'
-import { Stack, Text, Title } from '@/components'
+import { useEffect } from 'react'
+import { Checkbox, Stack, Dropdown, Menu, Button } from '@/components'
+import { Title } from '../title'
 
 export type OptionalColumnTypes = {
   isCollapsed?: boolean;
@@ -55,13 +56,9 @@ export type TableProps = PropsWithClass & {
    */
   noHeader?: boolean
   /**
-   * Set the label for selected items in the table. Default to "Selected items"
+   * Enable the dropdown to choose the visibility of the column
    */
-   selectedLabel?: string
-  /**
-   * Pass custom components to show when rows are selected.
-   */
-   selectedActions?: ReactNode
+  hasColumnHiding?: boolean
 }
 
 export const Table = ({
@@ -76,6 +73,7 @@ export const Table = ({
   selectedLabel = 'Selected items',
   selectedActions,
   noHeader = false,
+  hasColumnHiding = false,
   ...otherProps
 }: TableProps) => {
   const {
@@ -85,7 +83,8 @@ export const Table = ({
     rows,
     allColumns,
     prepareRow,
-    selectedFlatRows
+    selectedFlatRows,
+    visibleColumns
   } = useTable(
     {
       columns,
@@ -99,7 +98,7 @@ export const Table = ({
           id: 'selection',
           value: 'checkbox',
           Header: ({ getToggleAllRowsSelectedProps }) => {
-            return selectableRows ? <TableCheckbox {...getToggleAllRowsSelectedProps()} /> : null
+            return (selectableRows ? <TableCheckbox {...getToggleAllRowsSelectedProps()} /> : null)
           },
           Cell: ({ row }) => (<TableCheckbox {...row.getToggleRowSelectedProps()} />),
           isCollapsed: true
@@ -118,9 +117,44 @@ export const Table = ({
   }, [onSelectionChange, selectedFlatRows])
 
   return (
-    <Stack className={clsx(styles.Table, className)}>
-      <AnimatePresence>
-        {!!selectedFlatRows?.length && (
+    <Stack rowGap={16} className={clsx(styles.Table, className)}>
+
+      {!noHeader && (
+        <Stack direction="row">
+          {title && <Title level="5">{title}</Title>}
+
+          {!!hasColumnHiding && (
+          <Dropdown
+            placement="bottom-start"
+            trigger={<Button kind="secondary" dimension="small">Manage columns</Button>}
+          >
+            <Menu>
+              {allColumns.map(column => {
+                if (column.id !== 'selection') {
+                  return (
+                    <Menu.Item as="div" padding={false}>
+                      <Stack direction="row" fill={false} verticalAlign="center" columnGap={8} horizontalAlign="space-between">
+                        <Checkbox
+                          className={styles.Checkbox}
+                          dimension="small"
+                          {...column.getToggleHiddenProps()}
+                          disabled={column.getToggleHiddenProps().checked && visibleColumns.length === 1}
+                        />
+                        {column.render('Header')}
+                      </Stack>
+                    </Menu.Item>
+                  )
+                }
+                return null
+              }
+              )}
+            </Menu>
+          </Dropdown>
+          )}
+        </Stack>
+      )}
+
+      {!!selectedFlatRows?.length && (
         <Stack
           as={motion.div}
           className={styles.Toast}
@@ -152,7 +186,6 @@ export const Table = ({
           {title && <Title level="5">{title}</Title>}
         </Stack>
       )}
-
       <table
         className={styles.TableElement}
         data-table-stripes={stripes}
