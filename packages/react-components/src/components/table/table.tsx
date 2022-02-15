@@ -132,7 +132,7 @@ export const Table = ({
           verticalPadding={8}
           initial={{ y: '-100%' }}
           animate={{ y: 0 }}
-          exit={{ y: '-100%' }}
+          exit={{ y: '-100%', transition: { ease: 'easeOut' } }}
         >
           <Text as="span" size={14} weight="bold">{`${selectedLabel}: ${selectedFlatRows.length}`}</Text>
           {selectedActions}
