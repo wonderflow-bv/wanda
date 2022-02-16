@@ -59,7 +59,7 @@
     color: var(--highlight-blue-foreground);
 
     & + & {
-      border-color: var(--global-background);
+      border-color: hsl(env(--color-primary-40) / 30%);
     }
   }
 }
