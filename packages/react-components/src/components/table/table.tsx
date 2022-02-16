@@ -132,32 +132,39 @@ export const Table = ({
     useExpanded,
     useRowSelect,
     hooks => {
-      hooks.visibleColumns.push((columns) => [
-        {
-          id: 'selection',
-          value: 'checkbox',
-          Header: ({ getToggleAllRowsSelectedProps }) => {
-            return (selectableRows ? <TableCheckbox {...getToggleAllRowsSelectedProps()} /> : null)
+      if (selectableRows) {
+        hooks.visibleColumns.unshift((columns) => [
+          {
+            id: 'selection',
+            value: 'checkbox',
+            Header: ({ getToggleAllRowsSelectedProps }) => {
+              return <TableCheckbox {...getToggleAllRowsSelectedProps()} />
+            },
+            Cell: ({ row }) => row.depth === 0 ? (<TableCheckbox {...row.getToggleRowSelectedProps()} />) : null,
+            isCollapsed: true,
+            hideFromList: true
           },
-          Cell: ({ row }) => row.depth === 0 && (<TableCheckbox {...row.getToggleRowSelectedProps()} />),
-          isCollapsed: true,
-          hideFromList: true
-        },
-        {
-          id: 'expander',
-          isCollapsed: true,
-          hideFromList: true,
-          Cell: ({ row }) =>
-            row.canExpand && Boolean(ExpandableRowsComponent)
+          ...columns
+        ])
+      }
+
+      if (ExpandableRowsComponent) {
+        hooks.visibleColumns.unshift((columns) => [
+          {
+            id: 'expander',
+            isCollapsed: true,
+            hideFromList: true,
+            Cell: ({ row }) => row.canExpand
               ? (
                 <span {...row.getToggleRowExpandedProps()}>
                   {row.isExpanded ? '👇' : '👉'}
                 </span>
                 )
               : null
-        },
-        ...columns
-      ])
+          },
+          ...columns
+        ])
+      }
     }
   )
 
@@ -174,10 +181,10 @@ export const Table = ({
     '--table-background': background
   }
 
-  const ExpandComponent = useMemo(() => ({ data: innerData }: { data?: object }) => (
+  const ExpandComponent = useMemo(() => (data: object) => (
     <div className={styles.ExpandWrapper}>
       <div className={styles.ExpandContent}>
-        {ExpandableRowsComponent ? <ExpandableRowsComponent data={innerData} /> : null}
+        {ExpandableRowsComponent ? <ExpandableRowsComponent {...data} /> : null}
       </div>
     </div>
   ), [ExpandableRowsComponent])
@@ -282,7 +289,7 @@ export const Table = ({
                   <TableRow>
                     {row.subRows.map((subRow) => (
                       <TableCell colSpan={100} key={subRow.id}>
-                        <ExpandComponent data={subRow.original} />
+                        <ExpandComponent {...subRow.original} />
                       </TableCell>
                     ))}
                   </TableRow>

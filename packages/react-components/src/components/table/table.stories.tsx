@@ -166,5 +166,5 @@ export const Expandable = Template.bind({})
 Expandable.args = {
   hideColumnsControl: true,
   selectableRows: true,
-  ExpandableRowsComponent: ({ data }) => (<div>{data.firstName}</div>)
+  ExpandableRowsComponent: ({ firstName }) => (<div>{firstName}</div>)
 }
