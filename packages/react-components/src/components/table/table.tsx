@@ -140,11 +140,13 @@ export const Table = ({
             return (selectableRows ? <TableCheckbox {...getToggleAllRowsSelectedProps()} /> : null)
           },
           Cell: ({ row }) => row.depth === 0 && (<TableCheckbox {...row.getToggleRowSelectedProps()} />),
-          isCollapsed: true
+          isCollapsed: true,
+          hideFromList: true
         },
         {
           id: 'expander',
           isCollapsed: true,
+          hideFromList: true,
           Cell: ({ row }) =>
             row.canExpand && Boolean(ExpandableRowsComponent)
               ? (
@@ -209,7 +211,7 @@ export const Table = ({
 
       {/* CONTEXT TOAST */}
       <AnimatePresence>
-        {!!selectedFlatRows?.length && (
+        {selectedFlatRows?.length && (
           <Stack
             as={motion.div}
             className={styles.Toast}
