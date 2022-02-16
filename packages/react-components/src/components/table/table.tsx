@@ -132,14 +132,12 @@ export const Table = ({
           Header: ({ getToggleAllRowsSelectedProps }) => {
             return (selectableRows ? <TableCheckbox {...getToggleAllRowsSelectedProps()} /> : null)
           },
-          Cell: ({ row }) => (<TableCheckbox {...row.getToggleRowSelectedProps()} />),
-          isCollapsed: true,
-          hideFromList: true
+          Cell: ({ row }) => row.depth === 0 && (<TableCheckbox {...row.getToggleRowSelectedProps()} />),
+          isCollapsed: true
         },
         {
           id: 'expander',
           isCollapsed: true,
-          hideFromList: true,
           Cell: ({ row }) =>
             row.canExpand
               ? (
