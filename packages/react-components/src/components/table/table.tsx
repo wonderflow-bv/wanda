@@ -137,9 +137,7 @@ export const Table = ({
           {
             id: 'selection',
             value: 'checkbox',
-            Header: ({ getToggleAllRowsSelectedProps }) => {
-              return <TableCheckbox {...getToggleAllRowsSelectedProps()} />
-            },
+            Header: ({ getToggleAllRowsSelectedProps }) => <TableCheckbox {...getToggleAllRowsSelectedProps()} />,
             Cell: ({ row }) => row.depth === 0 ? (<TableCheckbox {...row.getToggleRowSelectedProps()} />) : null,
             isCollapsed: true,
             hideFromList: true
@@ -206,7 +204,9 @@ export const Table = ({
         fill={false}
         className={styles.Header}
       >
-        {title && <Title level="5">{title}</Title>}
+        <div>
+          {title && <Title level="5">{title}</Title>}
+        </div>
 
         <Stack direction="row" verticalAlign="center" columnGap={8} inline>
           {hideColumnsControl && <ToggleColumnsControl columns={allColumns} visibleColumns={visibleColumns} />}
@@ -286,9 +286,9 @@ export const Table = ({
                   ))}
                 </TableRow>
                 {(row.subRows && row.isExpanded) && (
-                  <TableRow>
+                  <TableRow data-table-row-expander>
                     {row.subRows.map((subRow) => (
-                      <TableCell colSpan={100} key={subRow.id}>
+                      <TableCell style={{ padding: 0 }} colSpan={100} key={subRow.id}>
                         <ExpandComponent {...subRow.original} />
                       </TableCell>
                     ))}

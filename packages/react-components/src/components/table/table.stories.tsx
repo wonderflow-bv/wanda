@@ -10,7 +10,6 @@ export default {
   args: {
     stripes: false,
     showSeparators: false,
-    title: 'Table title',
     noHeader: false,
     columns: [
       {
@@ -152,6 +151,7 @@ HidingColumn.args = {
 
 export const Scrollable = Template.bind({})
 Scrollable.args = {
+  noHeader: true,
   height: '400px'
 }
 
