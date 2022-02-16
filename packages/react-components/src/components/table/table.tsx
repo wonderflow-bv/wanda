@@ -13,7 +13,7 @@ import styles from './table.module.css'
 import { CSSProperties, Fragment, ReactNode, useEffect, FC, useMemo } from 'react'
 import { Title, Text, Stack } from '@/components'
 import { ToggleColumnsControl } from './table-controls'
-import { CellType, CustomColumsType, HeaderGroupType } from './types'
+import { CellType, CustomColumsType, HeaderGroupType, OptionalDataTypes } from './types'
 
 export type TableProps<T extends object> = PropsWithClass & {
   /**
@@ -23,7 +23,7 @@ export type TableProps<T extends object> = PropsWithClass & {
   /**
    * Pass the data structure to the table. Each object key can be used as `accessor` for a column.
    */
-  data: Array<T & {subRows?: T[]}>,
+  data: Array<T & OptionalDataTypes<T>>,
   /**
    * Show pagination below the table. This is recommended only for tables with a lot of rows.
    */
