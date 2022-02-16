@@ -10,7 +10,7 @@ import { TableCheckbox } from './table-checkbox'
 import { AnimatePresence, motion } from 'framer-motion'
 
 import styles from './table.module.css'
-import { CSSProperties, Fragment, ReactNode, useEffect } from 'react'
+import { CSSProperties, Fragment, ReactNode, useEffect, FC, useMemo } from 'react'
 import { Title, Text, Stack } from '@/components'
 import { ToggleColumnsControl } from './table-controls'
 
@@ -85,6 +85,11 @@ export type TableProps = PropsWithClass & {
    * the color is used as background for sticky headers.
    */
   background?: string
+  /**
+   * A react component that add additional content when the row is expanded.
+   * By passing this prop, the row will be expandable.
+   */
+   ExpandableRowsComponent?: FC<{data?: object}>;
 }
 
 export const Table = ({
@@ -104,6 +109,7 @@ export const Table = ({
   hideColumnsControl = false,
   height,
   background = 'var(--global-background)',
+  ExpandableRowsComponent,
   ...otherProps
 }: TableProps) => {
   const {
@@ -119,7 +125,8 @@ export const Table = ({
     {
       columns,
       data,
-      expandSubRows: false
+      expandSubRows: false,
+      autoResetExpanded: false
     },
     useSortBy,
     useExpanded,
@@ -139,7 +146,7 @@ export const Table = ({
           id: 'expander',
           isCollapsed: true,
           Cell: ({ row }) =>
-            row.canExpand
+            row.canExpand && Boolean(ExpandableRowsComponent)
               ? (
                 <span {...row.getToggleRowExpandedProps()}>
                   {row.isExpanded ? '👇' : '👉'}
@@ -164,6 +171,14 @@ export const Table = ({
     '--table-height': height,
     '--table-background': background
   }
+
+  const ExpandComponent = useMemo(() => ({ data: innerData }: { data?: object }) => (
+    <div className={styles.ExpandWrapper}>
+      <div className={styles.ExpandContent}>
+        {ExpandableRowsComponent ? <ExpandableRowsComponent data={innerData} /> : null}
+      </div>
+    </div>
+  ), [ExpandableRowsComponent])
 
   return (
     <div
@@ -264,11 +279,15 @@ export const Table = ({
                 {(row.subRows && row.isExpanded) && (
                   <TableRow>
                     {row.subRows.map((subRow) => {
+                      console.log(subRow)
                       prepareRow(subRow)
                       return (
-                        <TableCell colSpan={100}>
-                          {subRow.cells.map((cell: CellType) => cell.render('Cell'))}
+                        <TableCell
+                          colSpan={100}
+                        >
+                          <ExpandComponent data={subRow.original} />
                         </TableCell>
+
                       )
                     })}
                   </TableRow>

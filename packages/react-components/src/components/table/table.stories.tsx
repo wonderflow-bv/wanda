@@ -73,7 +73,11 @@ export default {
         info: 12,
         subRows: [
           {
-            firstName: 'ciao'
+            firstName: 'ciao',
+            lastName: 'Stuffo',
+            address: 'Via Roma, 15 Monza',
+            uid: '123123',
+            info: 12
           }
         ]
       },
@@ -111,8 +115,7 @@ export default {
         address: 'Via Roma, 15 Monza',
         uid: '123123',
         info: 12
-      },
-      
+      }
     ]
   }
 } as ComponentMeta<typeof Table>
@@ -157,4 +160,11 @@ CustomActions.args = {
   hideColumnsControl: true,
   selectableRows: true,
   actions: <Button>Custom action</Button>
+}
+
+export const Expandable = Template.bind({})
+Expandable.args = {
+  hideColumnsControl: true,
+  selectableRows: true,
+  ExpandableRowsComponent: ({ data }) => (<div>{data.firstName}</div>)
 }
