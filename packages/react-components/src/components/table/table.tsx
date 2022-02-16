@@ -22,12 +22,13 @@ export type OptionalColumnTypes = {
 
 export type ColumnType = CustomHeaderGroup<OptionalColumnTypes>
 export type CellType = CustomCell<OptionalColumnTypes>
+type CustomColumsType = (Column<object> & OptionalColumnTypes)[]
 
 export type TableProps = PropsWithClass & {
   /**
    * Define the column headers of the table.
    */
-  columns: (Column<object> & OptionalColumnTypes)[],
+  columns: CustomColumsType,
   /**
    * Pass the data structure to the table. Each object key can be used as `accessor` for a column.
    */
@@ -132,23 +133,18 @@ export const Table = ({
     useExpanded,
     useRowSelect,
     hooks => {
-      if (selectableRows) {
-        hooks.visibleColumns.unshift((columns) => [
-          {
+      const checkboxColumn: CustomColumsType = selectableRows
+        ? [{
             id: 'selection',
-            value: 'checkbox',
             Header: ({ getToggleAllRowsSelectedProps }) => <TableCheckbox {...getToggleAllRowsSelectedProps()} />,
-            Cell: ({ row }) => row.depth === 0 ? (<TableCheckbox {...row.getToggleRowSelectedProps()} />) : null,
+            Cell: ({ row }) => row.depth === 0 ? <TableCheckbox {...row.getToggleRowSelectedProps()} /> : null,
             isCollapsed: true,
             hideFromList: true
-          },
-          ...columns
-        ])
-      }
+          }]
+        : []
 
-      if (ExpandableRowsComponent) {
-        hooks.visibleColumns.unshift((columns) => [
-          {
+      const expanderColumn: CustomColumsType = ExpandableRowsComponent
+        ? [{
             id: 'expander',
             isCollapsed: true,
             hideFromList: true,
@@ -159,10 +155,14 @@ export const Table = ({
                 </span>
                 )
               : null
-          },
-          ...columns
-        ])
-      }
+          }]
+        : []
+
+      hooks.visibleColumns.push((columns) => [
+        ...checkboxColumn,
+        ...expanderColumn,
+        ...columns
+      ])
     }
   )
 

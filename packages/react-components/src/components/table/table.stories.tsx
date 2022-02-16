@@ -132,6 +132,7 @@ export const Simple = Template.bind({})
 export const SelectedRows = Template.bind({})
 SelectedRows.args = {
   selectableRows: true,
+  hideColumnsControl: true,
   selectedActions: (<Button>Delete</Button>)
 }
 
