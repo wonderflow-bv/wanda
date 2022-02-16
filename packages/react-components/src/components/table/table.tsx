@@ -17,7 +17,12 @@ import { ToggleColumnsControl } from './table-controls'
 export type OptionalColumnTypes = {
   isCollapsed?: boolean;
   align?: 'start' | 'center' | 'end';
+  hideFromList?: boolean;
 }
+
+export type ColumnType = CustomHeaderGroup<OptionalColumnTypes>
+export type CellType = CustomCell<OptionalColumnTypes>
+
 export type TableProps = PropsWithClass & {
   /**
    * Define the column headers of the table.
@@ -223,7 +228,7 @@ export const Table = ({
         <thead role="rowgroup" className={styles.THead}>
           {headerGroups.map(headerGroup => (
             <TableRow {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column: CustomHeaderGroup<OptionalColumnTypes>) => (
+              {headerGroup.headers.map((column: ColumnType) => (
                 <TableCell
                   as="th"
                   collapsed
@@ -246,7 +251,7 @@ export const Table = ({
             return (
               <Fragment key={row.id}>
                 <TableRow highlight={row.isSelected && row.depth === 0} {...row.getRowProps()}>
-                  {row.cells.map((cell: CustomCell<OptionalColumnTypes>) => (
+                  {row.cells.map((cell: CellType) => (
                     <TableCell
                       collapsed={cell.column.isCollapsed}
                       align={cell.column.align}
@@ -262,7 +267,7 @@ export const Table = ({
                       prepareRow(subRow)
                       return (
                         <TableCell colSpan={100}>
-                          {subRow.cells.map((cell: CustomCell<OptionalColumnTypes>) => cell.render('Cell'))}
+                          {subRow.cells.map((cell: CellType) => cell.render('Cell'))}
                         </TableCell>
                       )
                     })}
