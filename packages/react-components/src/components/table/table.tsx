@@ -132,6 +132,7 @@ export const Table = ({
           Header: ({ getToggleAllRowsSelectedProps }) => {
             return (selectableRows ? <TableCheckbox {...getToggleAllRowsSelectedProps()} /> : null)
           },
+          Cell: ({ row }) => (<TableCheckbox {...row.getToggleRowSelectedProps()} />),
           isCollapsed: true,
           hideFromList: true
         },
@@ -250,17 +251,31 @@ export const Table = ({
           {rows.map((row) => {
             prepareRow(row)
             return (
-              <TableRow highlight={row.isSelected} {...row.getRowProps()}>
-                {row.cells.map((cell: CustomCell<OptionalColumnTypes>) => (
-                  <TableCell
-                    collapsed={cell.column.isCollapsed}
-                    align={cell.column.align}
-                    {...cell.getCellProps()}
-                  >
-                    {cell.render('Cell')}
-                  </TableCell>
-                ))}
-              </TableRow>
+              <Fragment key={row.id}>
+                <TableRow highlight={row.isSelected && row.depth === 0} {...row.getRowProps()}>
+                  {row.cells.map((cell: CellType) => (
+                    <TableCell
+                      collapsed={cell.column.isCollapsed}
+                      align={cell.column.align}
+                      {...cell.getCellProps()}
+                    >
+                      {cell.render('Cell')}
+                    </TableCell>
+                  ))}
+                </TableRow>
+                {(row.subRows && row.isExpanded) && (
+                  <TableRow>
+                    {row.subRows.map((subRow) => {
+                      prepareRow(subRow)
+                      return (
+                        <TableCell colSpan={100}>
+                          {subRow.cells.map((cell: CellType) => cell.render('Cell'))}
+                        </TableCell>
+                      )
+                    })}
+                  </TableRow>
+                )}
+              </Fragment>
             )
           })}
         </tbody>
