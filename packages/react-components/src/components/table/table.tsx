@@ -17,7 +17,12 @@ import { ToggleColumnsControl } from './table-controls'
 export type OptionalColumnTypes = {
   isCollapsed?: boolean;
   align?: 'start' | 'center' | 'end';
+  hideFromList?: boolean;
 }
+
+export type ColumnType = CustomHeaderGroup<OptionalColumnTypes>
+export type CellType = CustomCell<OptionalColumnTypes>
+
 export type TableProps = PropsWithClass & {
   /**
    * Define the column headers of the table.
@@ -126,7 +131,8 @@ export const Table = ({
             return (selectableRows ? <TableCheckbox {...getToggleAllRowsSelectedProps()} /> : null)
           },
           Cell: ({ row }) => (<TableCheckbox {...row.getToggleRowSelectedProps()} />),
-          isCollapsed: true
+          isCollapsed: true,
+          hideFromList: true
         },
         ...columns
       ])
@@ -209,7 +215,7 @@ export const Table = ({
         <thead role="rowgroup" className={styles.THead}>
           {headerGroups.map(headerGroup => (
             <TableRow {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column: CustomHeaderGroup<OptionalColumnTypes>) => (
+              {headerGroup.headers.map((column: ColumnType) => (
                 <TableCell
                   as="th"
                   collapsed
@@ -231,7 +237,7 @@ export const Table = ({
             prepareRow(row)
             return (
               <TableRow highlight={row.isSelected} {...row.getRowProps()}>
-                {row.cells.map((cell: CustomCell<OptionalColumnTypes>) => (
+                {row.cells.map((cell: CellType) => (
                   <TableCell
                     collapsed={cell.column.isCollapsed}
                     align={cell.column.align}
