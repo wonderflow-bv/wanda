@@ -280,13 +280,11 @@ export const Table = ({
                 </TableRow>
                 {(row.subRows && row.isExpanded) && (
                   <TableRow>
-                    {row.subRows.map((subRow) => {
-                      return (
-                        <TableCell colSpan={100} key={subRow.id}>
-                          <ExpandComponent data={subRow.original} />
-                        </TableCell>
-                      )
-                    })}
+                    {row.subRows.map((subRow) => (
+                      <TableCell colSpan={100} key={subRow.id}>
+                        <ExpandComponent data={subRow.original} />
+                      </TableCell>
+                    ))}
                   </TableRow>
                 )}
               </Fragment>
