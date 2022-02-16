@@ -1,7 +1,7 @@
 
 import clsx from 'clsx'
 import {
-  useTable, useSortBy, useRowSelect,
+  useTable, useSortBy, useRowSelect, usePagination,
   Row, useExpanded, Hooks
 } from 'react-table'
 import { TableRow } from './table-row'
@@ -28,6 +28,14 @@ export type TableProps<T extends object> = PropsWithClass & {
    * Show pagination below the table. This is recommended only for tables with a lot of rows.
    */
   pagination?: boolean
+  /**
+   * The amount of rows on any given page
+   */
+   pageSize?: number
+  /**
+   * The index of the page that should be displayed
+   */
+   pageIndex?: number
   /**
    * Enable row selection
    */
@@ -102,6 +110,9 @@ export const Table = <T extends object>({
   height,
   background = 'var(--global-background)',
   ExpandableRowsComponent,
+  pagination,
+  pageSize = 20,
+  pageIndex = 0,
   ...otherProps
 }: TableProps<T>) => {
   const {
@@ -122,19 +133,18 @@ export const Table = <T extends object>({
     },
     useSortBy,
     useExpanded,
+    usePagination,
     useRowSelect,
     (hooks: Hooks<T>) => {
       const hasSomeExpandableRows = data.some(d => d.subRows)
 
-      const checkboxColumn: CustomColumsType<T> = selectableRows
-        ? [{
-            id: 'selection',
-            Header: ({ getToggleAllRowsSelectedProps }) => <TableCheckbox {...getToggleAllRowsSelectedProps()} />,
-            Cell: ({ row }: {row: Row<T>}) => row.depth === 0 ? <TableCheckbox {...row.getToggleRowSelectedProps()} /> : null,
-            isCollapsed: true,
-            hideFromList: true
-          }]
-        : []
+      const checkboxColumn: CustomColumsType<T> = [{
+        id: 'selection',
+        Header: ({ getToggleAllRowsSelectedProps }) => <TableCheckbox {...getToggleAllRowsSelectedProps()} />,
+        Cell: ({ row }: {row: Row<T>}) => row.depth === 0 ? <TableCheckbox {...row.getToggleRowSelectedProps()} /> : null,
+        isCollapsed: true,
+        hideFromList: true
+      }]
 
       const expanderColumn: CustomColumsType<T> = ExpandableRowsComponent && hasSomeExpandableRows
         ? [{
@@ -160,7 +170,9 @@ export const Table = <T extends object>({
   )
 
   useEffect(() => {
-    allColumns[0].toggleHidden(!selectableRows)
+    if (allColumns[0].id === 'selection') {
+      allColumns[0].toggleHidden(!selectableRows)
+    }
   }, [selectableRows, allColumns])
 
   useEffect(() => {
