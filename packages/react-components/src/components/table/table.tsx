@@ -2,7 +2,7 @@
 import clsx from 'clsx'
 import {
   useTable, useSortBy, useRowSelect,
-  Column, Row, CustomHeaderGroup, CustomCell, useExpanded
+  Row, useExpanded, Hooks
 } from 'react-table'
 import { TableRow } from './table-row'
 import { TableCell } from './table-cell'
@@ -13,26 +13,17 @@ import styles from './table.module.css'
 import { CSSProperties, Fragment, ReactNode, useEffect, FC, useMemo } from 'react'
 import { Title, Text, Stack } from '@/components'
 import { ToggleColumnsControl } from './table-controls'
+import { CellType, CustomColumsType, HeaderGroupType } from './types'
 
-export type OptionalColumnTypes = {
-  isCollapsed?: boolean;
-  align?: 'start' | 'center' | 'end';
-  hideFromList?: boolean;
-}
-
-export type ColumnType = CustomHeaderGroup<OptionalColumnTypes>
-export type CellType = CustomCell<OptionalColumnTypes>
-type CustomColumsType = (Column<object> & OptionalColumnTypes)[]
-
-export type TableProps = PropsWithClass & {
+export type TableProps<T extends object> = PropsWithClass & {
   /**
    * Define the column headers of the table.
    */
-  columns: CustomColumsType,
+  columns: CustomColumsType<T>,
   /**
    * Pass the data structure to the table. Each object key can be used as `accessor` for a column.
    */
-  data: Array<object>,
+  data: Array<T & {subRows?: T[]}>,
   /**
    * Show pagination below the table. This is recommended only for tables with a lot of rows.
    */
@@ -90,10 +81,10 @@ export type TableProps = PropsWithClass & {
    * A react component that add additional content when the row is expanded.
    * By passing this prop, the row will be expandable.
    */
-   ExpandableRowsComponent?: FC<{data?: object}>;
+   ExpandableRowsComponent?: FC<T>;
 }
 
-export const Table = ({
+export const Table = <T extends object>({
   className,
   style,
   columns,
@@ -112,7 +103,7 @@ export const Table = ({
   background = 'var(--global-background)',
   ExpandableRowsComponent,
   ...otherProps
-}: TableProps) => {
+}: TableProps<T>) => {
   const {
     getTableProps,
     getTableBodyProps,
@@ -132,23 +123,25 @@ export const Table = ({
     useSortBy,
     useExpanded,
     useRowSelect,
-    hooks => {
-      const checkboxColumn: CustomColumsType = selectableRows
+    (hooks: Hooks<T>) => {
+      const hasSomeExpandableRows = data.some(d => d.subRows)
+
+      const checkboxColumn: CustomColumsType<T> = selectableRows
         ? [{
             id: 'selection',
             Header: ({ getToggleAllRowsSelectedProps }) => <TableCheckbox {...getToggleAllRowsSelectedProps()} />,
-            Cell: ({ row }) => row.depth === 0 ? <TableCheckbox {...row.getToggleRowSelectedProps()} /> : null,
+            Cell: ({ row }: {row: Row<T>}) => row.depth === 0 ? <TableCheckbox {...row.getToggleRowSelectedProps()} /> : null,
             isCollapsed: true,
             hideFromList: true
           }]
         : []
 
-      const expanderColumn: CustomColumsType = ExpandableRowsComponent
+      const expanderColumn: CustomColumsType<T> = ExpandableRowsComponent && hasSomeExpandableRows
         ? [{
             id: 'expander',
             isCollapsed: true,
             hideFromList: true,
-            Cell: ({ row }) => row.canExpand
+            Cell: ({ row }: {row: Row<T>}) => row.canExpand
               ? (
                 <span {...row.getToggleRowExpandedProps()}>
                   {row.isExpanded ? '👇' : '👉'}
@@ -179,7 +172,7 @@ export const Table = ({
     '--table-background': background
   }
 
-  const ExpandComponent = useMemo(() => (data: object) => (
+  const ExpandComponent = useMemo(() => (data: T) => (
     <div className={styles.ExpandWrapper}>
       <div className={styles.ExpandContent}>
         {ExpandableRowsComponent ? <ExpandableRowsComponent {...data} /> : null}
@@ -252,7 +245,7 @@ export const Table = ({
         <thead role="rowgroup" className={styles.THead}>
           {headerGroups.map(headerGroup => (
             <TableRow {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column: ColumnType) => (
+              {headerGroup.headers.map((column: HeaderGroupType) => (
                 <TableCell
                   as="th"
                   collapsed

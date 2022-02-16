@@ -1,15 +1,14 @@
 import { Dropdown, Menu, Button } from '@/components'
 import { useMemo } from 'react'
-import { ColumnInstance } from 'react-table'
-import { TableProps, ColumnType } from './table'
+import { CustomColumnInstanceType } from './types'
 
 type ToggleColumnsControlProps = {
-  columns: TableProps['columns']
-  visibleColumns: ColumnInstance[]
+  columns: CustomColumnInstanceType[]
+  visibleColumns: CustomColumnInstanceType[]
 }
 
 export const ToggleColumnsControl = ({ columns, visibleColumns }: ToggleColumnsControlProps) => {
-  const filteredColumns = useMemo(() => visibleColumns.filter((col: ColumnType) => !col.hideFromList), [visibleColumns])
+  const filteredColumns = useMemo(() => visibleColumns.filter((col) => !col.hideFromList), [visibleColumns])
 
   return (
     <Dropdown
@@ -17,7 +16,7 @@ export const ToggleColumnsControl = ({ columns, visibleColumns }: ToggleColumnsC
       trigger={<Button kind="secondary">Toggle columns</Button>}
     >
       <Menu>
-        {columns.filter(col => !col.hideFromList).map((column: ColumnType, i) => {
+        {columns.filter(col => !col.hideFromList).map((column, i) => {
           const isVisible = column.isVisible
           return (
             <Menu.ItemCheckbox
