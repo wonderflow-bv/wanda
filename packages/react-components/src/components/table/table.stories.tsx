@@ -71,6 +71,41 @@ export default {
         address: 'Via Roma, 15 Monza',
         uid: '123123',
         info: 12
+      },
+      {
+        firstName: 'Gianni',
+        lastName: 'Morandi',
+        address: 'Via Roma, 1, Treno',
+        uid: '34567895423556789',
+        info: 123123.12
+      },
+      {
+        firstName: 'Simone',
+        lastName: 'Lastname',
+        address: 'Via Roma, 12, Bologna',
+        uid: '345367890',
+        info: 123.96
+      },
+      {
+        firstName: 'Matteo',
+        lastName: 'Staffone',
+        address: 'Via Roma, 13, Genova',
+        uid: <code>23456789</code>,
+        info: 12.1213
+      },
+      {
+        firstName: 'Emanuele',
+        lastName: 'Staffo',
+        address: 'Via Roma, 14, Milano',
+        uid: '2345678',
+        info: 1234
+      },
+      {
+        firstName: 'Simone',
+        lastName: 'Stuffo',
+        address: 'Via Roma, 15 Monza',
+        uid: '123123',
+        info: 12
       }
     ]
   }
@@ -102,4 +137,18 @@ SelectedRows.argTypes = {
 }
 
 export const HidingColumn = Template.bind({})
-HidingColumn.args = { hasColumnHiding: true }
+HidingColumn.args = {
+  hideColumnsControl: true
+}
+
+export const Scrollable = Template.bind({})
+Scrollable.args = {
+  height: '400px'
+}
+
+export const CustomActions = Template.bind({})
+CustomActions.args = {
+  hideColumnsControl: true,
+  selectableRows: true,
+  actions: <Button>Custom action</Button>
+}
