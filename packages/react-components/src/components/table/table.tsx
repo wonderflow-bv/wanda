@@ -11,7 +11,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 
 import styles from './table.module.css'
 import { CSSProperties, ReactNode, useEffect } from 'react'
-import { Title, Text, Stack, Dropdown, Menu, Button } from '@/components'
+import { Title, Text, Stack } from '@/components'
+import { ToggleColumnsControl } from './table-controls'
 
 export type OptionalColumnTypes = {
   isCollapsed?: boolean;
@@ -165,34 +166,7 @@ export const Table = ({
         {title && <Title level="5">{title}</Title>}
 
         <Stack direction="row" verticalAlign="center" columnGap={8} inline>
-          {hideColumnsControl && (
-            <Dropdown
-              placement="bottom-start"
-              trigger={<Button kind="secondary">Toggle columns</Button>}
-            >
-              <Menu>
-                {allColumns.map((column, i) => {
-                  const isChecked = column.getToggleHiddenProps().checked
-                  return column.id !== 'selection'
-                    ? (
-                      <Menu.ItemCheckbox
-                        autoFocus={i === 1}
-                        key={column.id}
-                        checked={isChecked}
-                        icon={isChecked ? 'check' : undefined}
-                        disabled={isChecked && visibleColumns.length === 1}
-                        onClick={() => column.toggleHidden()}
-                        dimension="small"
-                      >
-                        {column.render('Header')}
-                      </Menu.ItemCheckbox>
-                      )
-                    : null
-                }
-                )}
-              </Menu>
-            </Dropdown>
-          )}
+          {hideColumnsControl && <ToggleColumnsControl columns={allColumns} visibleColumns={visibleColumns} />}
 
           {actions}
         </Stack>
