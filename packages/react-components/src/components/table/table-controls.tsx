@@ -17,22 +17,20 @@ export const ToggleColumnsControl = ({ columns, visibleColumns }: ToggleColumnsC
       trigger={<Button kind="secondary">Toggle columns</Button>}
     >
       <Menu>
-        {columns.map((column: ColumnType, i) => {
+        {columns.filter(col => !col.hideFromList).map((column: ColumnType, i) => {
           const isVisible = column.isVisible
-          return !column.hideFromList
-            ? (
-              <Menu.ItemCheckbox
-                autoFocus={i === 1}
-                key={column.id}
-                checked={isVisible}
-                icon={isVisible ? 'check' : undefined}
-                disabled={isVisible && filteredColumns.length === 1}
-                onClick={() => column.toggleHidden()}
-              >
-                {column.render('Header')}
-              </Menu.ItemCheckbox>
-              )
-            : null
+          return (
+            <Menu.ItemCheckbox
+              autoFocus={i === 0}
+              key={column.id}
+              checked={isVisible}
+              icon={isVisible ? 'check' : undefined}
+              disabled={isVisible && filteredColumns.length === 1}
+              onClick={() => column.toggleHidden()}
+            >
+              {column.render('Header')}
+            </Menu.ItemCheckbox>
+          )
         }
         )}
       </Menu>
