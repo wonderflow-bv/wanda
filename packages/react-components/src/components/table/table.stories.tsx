@@ -41,7 +41,16 @@ export default {
         lastName: 'Morandi',
         address: 'Via Roma, 1, Treno',
         uid: '34567895423556789',
-        info: 123123.12
+        info: 123123.12,
+        subRows: [
+          {
+            firstName: 'ciao',
+            lastName: 'Stuffo',
+            address: 'Via Roma, 15 Monza',
+            uid: '123123',
+            info: 12
+          }
+        ]
       },
       {
         firstName: 'Simone',
@@ -55,7 +64,16 @@ export default {
         lastName: 'Staffone',
         address: 'Via Roma, 13, Genova',
         uid: <code>23456789</code>,
-        info: 12.1213
+        info: 12.1213,
+        subRows: [
+          {
+            firstName: 'ciao',
+            lastName: 'Stuffo',
+            address: 'Via Roma, 15 Monza',
+            uid: '123123',
+            info: 12
+          }
+        ]
       },
       {
         firstName: 'Emanuele',
@@ -85,7 +103,16 @@ export default {
         lastName: 'Morandi',
         address: 'Via Roma, 1, Treno',
         uid: '34567895423556789',
-        info: 123123.12
+        info: 123123.12,
+        subRows: [
+          {
+            firstName: 'ciao',
+            lastName: 'Stuffo',
+            address: 'Via Roma, 15 Monza',
+            uid: '123123',
+            info: 12
+          }
+        ]
       },
       {
         firstName: 'Simone',
