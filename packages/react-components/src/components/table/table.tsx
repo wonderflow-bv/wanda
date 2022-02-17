@@ -155,7 +155,14 @@ export const Table = <T extends object>({
             isCollapsed: true,
             hideFromList: true,
             Cell: ({ row }: {row: Row<T>}) => row.canExpand
-              ? <IconButton icon={row.isExpanded ? 'chevron-down' : 'chevron-right'} {...row.getToggleRowExpandedProps()} />
+              ? (
+                <IconButton
+                  kind="flat"
+                  dimension="small"
+                  icon={row.isExpanded ? 'chevron-down' : 'chevron-right'}
+                  {...row.getToggleRowExpandedProps()}
+                />
+                )
               : null
           }]
         : []
