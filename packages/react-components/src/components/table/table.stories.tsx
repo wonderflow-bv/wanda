@@ -148,11 +148,10 @@ export default {
 
 const CustomExpandableComponent = ({ data }) => (
   <Masonry
-    width="100%"
-    columns={2}
+    columns={3}
   >
     {Object.keys(data).map((item, i) => (
-      <div key={item} style={{ background: 'var(--dimmed-2)', padding: 24, minHeight: 50 * (i + 1) }}>
+      <div key={item} style={{ background: 'var(--dimmed-1)', padding: 24, minHeight: 50 * (i + 1) }}>
         <Title level="6">{data[item]}</Title>
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Labore, nostrum minima, debitis qui magni voluptatum.
       </div>
@@ -199,7 +198,7 @@ Scrollable.args = {
 
 export const CustomActions = Template.bind({})
 CustomActions.args = {
-  columnsControl: false,
+  columnsControl: true,
   title: <Title level="3">Custom title element</Title>,
   header: true,
   actions: <Button>Custom action</Button>
@@ -207,7 +206,7 @@ CustomActions.args = {
 
 export const Expandable = Template.bind({})
 Expandable.args = {
-  columnsControl: false,
-  selectableRows: false,
+  columnsControl: true,
+  header: true,
   ExpandableRowsComponent: (data) => <CustomExpandableComponent data={data} />
 }

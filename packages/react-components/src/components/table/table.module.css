@@ -3,11 +3,14 @@
 .Table {
   position: relative;
   width: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.TableWrapper {
   overflow: auto;
-  min-height: 0;
   max-height: var(--table-height);
   background: var(--table-background);
-  z-index: 0;
 }
 
 .TableElement {

@@ -204,29 +204,6 @@ export const Table = <T extends object>({
       style={{ ...dynamicStyle, ...style }}
     >
 
-      {/* HEADER */}
-      {(header || selectableRows) && (
-      <Stack
-        direction="row"
-        horizontalPadding={8}
-        columnGap={16}
-        verticalAlign="center"
-        horizontalAlign="space-between"
-        fill={false}
-        className={styles.Header}
-      >
-        <div>
-          {typeof title === 'string' ? <Title id={uid('table-title')} level="5">{title}</Title> : title}
-        </div>
-
-        <Stack direction="row" verticalAlign="center" columnGap={8} inline>
-          {columnsControl && <ToggleColumnsControl columns={allColumns} visibleColumns={visibleColumns} />}
-
-          {actions}
-        </Stack>
-      </Stack>
-      )}
-
       {/* CONTEXT TOAST */}
       <AnimatePresence>
         {selectedFlatRows?.length && (
@@ -250,54 +227,77 @@ export const Table = <T extends object>({
         )}
       </AnimatePresence>
 
-      {/* TABLE */}
-      <table
-        className={styles.TableElement}
-        data-table-stripes={stripes}
-        data-table-separators={showSeparators}
-        aria-labelledby={uid('table-title')}
-        {...getTableProps()}
-        {...otherProps}
+      {/* HEADER */}
+      {(header || selectableRows) && (
+      <Stack
+        direction="row"
+        columnGap={32}
+        verticalAlign="center"
+        horizontalAlign="space-between"
+        fill={false}
+        className={styles.Header}
       >
+        <div>
+          {typeof title === 'string' ? <Title id={uid('table-title')} level="5">{title}</Title> : title}
+        </div>
 
-        {/* THEAD */}
-        <thead role="rowgroup" className={styles.THead}>
-          {headerGroups.map(headerGroup => (
-            <TableRow {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column: HeaderGroupType) => (
-                <TableCell
-                  as="th"
-                  collapsed
-                  isSorted={column.isSorted}
-                  isSortedDesc={column.isSorted && column.isSortedDesc}
-                  align={column.align}
-                  {...column.getHeaderProps(column.getSortByToggleProps())}
-                >
-                  {column.render('Header')}
-                </TableCell>
-              ))}
-            </TableRow>
-          ))}
-        </thead>
+        <Stack direction="row" verticalAlign="center" columnGap={8} inline>
+          {columnsControl && <ToggleColumnsControl columns={allColumns} visibleColumns={visibleColumns} />}
 
-        {/* TBODY */}
-        <tbody role="rowgroup" className={styles.TBody} {...getTableBodyProps()}>
-          {rows.map((row) => {
-            prepareRow(row)
-            return (
-              <Fragment key={row.id}>
-                <TableRow highlight={row.isSelected && row.depth === 0} {...row.getRowProps()}>
-                  {row.cells.map((cell: CellType) => (
-                    <TableCell
-                      collapsed={cell.column.isCollapsed}
-                      align={cell.column.align}
-                      {...cell.getCellProps()}
-                    >
-                      {cell.render('Cell')}
-                    </TableCell>
-                  ))}
-                </TableRow>
-                {(row.subRows && row.isExpanded) && (
+          {actions}
+        </Stack>
+      </Stack>
+      )}
+
+      {/* TABLE */}
+      <div className={styles.TableWrapper}>
+        <table
+          className={styles.TableElement}
+          data-table-stripes={stripes}
+          data-table-separators={showSeparators}
+          aria-labelledby={uid('table-title')}
+          {...getTableProps()}
+          {...otherProps}
+        >
+
+          {/* THEAD */}
+          <thead role="rowgroup" className={styles.THead}>
+            {headerGroups.map(headerGroup => (
+              <TableRow {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column: HeaderGroupType) => (
+                  <TableCell
+                    as="th"
+                    collapsed
+                    isSorted={column.isSorted}
+                    isSortedDesc={column.isSorted && column.isSortedDesc}
+                    align={column.align}
+                    {...column.getHeaderProps(column.getSortByToggleProps())}
+                  >
+                    {column.render('Header')}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </thead>
+
+          {/* TBODY */}
+          <tbody role="rowgroup" className={styles.TBody} {...getTableBodyProps()}>
+            {rows.map((row) => {
+              prepareRow(row)
+              return (
+                <Fragment key={row.id}>
+                  <TableRow highlight={row.isSelected && row.depth === 0} {...row.getRowProps()}>
+                    {row.cells.map((cell: CellType) => (
+                      <TableCell
+                        collapsed={cell.column.isCollapsed}
+                        align={cell.column.align}
+                        {...cell.getCellProps()}
+                      >
+                        {cell.render('Cell')}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                  {(row.subRows && row.isExpanded) && (
                   <TableRow data-table-row-expander>
                     {row.subRows.map((subRow) => (
                       <TableCell style={{ padding: 0 }} colSpan={100} key={subRow.id}>
@@ -305,12 +305,13 @@ export const Table = <T extends object>({
                       </TableCell>
                     ))}
                   </TableRow>
-                )}
-              </Fragment>
-            )
-          })}
-        </tbody>
-      </table>
+                  )}
+                </Fragment>
+              )
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }
