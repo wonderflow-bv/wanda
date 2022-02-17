@@ -8,6 +8,7 @@ import { TableRow } from './table-row'
 import { TableCell } from './table-cell'
 import { TableCheckbox } from './table-checkbox'
 import { AnimatePresence, motion } from 'framer-motion'
+import { useUIDSeed } from 'react-uid'
 
 import styles from './table.module.css'
 import { CSSProperties, Fragment, ReactNode, useEffect, FC, useMemo } from 'react'
@@ -53,9 +54,9 @@ export type TableProps<T extends object> = PropsWithClass & {
    */
   showSeparators?: boolean
   /**
-   * Show the table header title
+   * Add an accessible title to the table component
    */
-  title?: string
+  title?: string | typeof Title
   /**
    * Hide the table header which includes the title and controls.
    */
@@ -89,7 +90,7 @@ export type TableProps<T extends object> = PropsWithClass & {
    * A react component that add additional content when the row is expanded.
    * By passing this prop, the row will be expandable.
    */
-   ExpandableRowsComponent?: FC<T>;
+  ExpandableRowsComponent?: FC<T>;
 }
 
 export const Table = <T extends object>({
@@ -115,6 +116,8 @@ export const Table = <T extends object>({
   pageIndex = 0,
   ...otherProps
 }: TableProps<T>) => {
+  const uid = useUIDSeed()
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -210,7 +213,7 @@ export const Table = <T extends object>({
         className={styles.Header}
       >
         <div>
-          {title && <Title level="5">{title}</Title>}
+          {typeof title === 'string' ? <Title id={uid('table-title')} level="5">{title}</Title> : title}
         </div>
 
         <Stack direction="row" verticalAlign="center" columnGap={8} inline>
@@ -249,6 +252,7 @@ export const Table = <T extends object>({
         className={styles.TableElement}
         data-table-stripes={stripes}
         data-table-separators={showSeparators}
+        aria-labelledby={uid('table-title')}
         {...getTableProps()}
         {...otherProps}
       >

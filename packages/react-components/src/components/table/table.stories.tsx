@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Table } from './table'
-import { Button } from '../..'
+import { Button, Title } from '../..'
 
 export default {
   title: 'Layouts/Table',
@@ -140,6 +140,7 @@ export const Simple = Template.bind({})
 
 export const SelectedRows = Template.bind({})
 SelectedRows.args = {
+  title: 'With selectable rows',
   selectableRows: true,
   selectedActions: (<Button>Delete</Button>)
 }
@@ -167,6 +168,7 @@ Scrollable.args = {
 export const CustomActions = Template.bind({})
 CustomActions.args = {
   columnsControl: false,
+  title: <Title level="3">Custom title element</Title>,
   header: true,
   actions: <Button>Custom action</Button>
 }
