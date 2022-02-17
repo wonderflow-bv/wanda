@@ -12,7 +12,7 @@ import { useUIDSeed } from 'react-uid'
 
 import styles from './table.module.css'
 import { CSSProperties, Fragment, ReactNode, useEffect, FC, useMemo } from 'react'
-import { Title, Text, Stack } from '@/components'
+import { Title, Text, Stack, IconButton } from '@/components'
 import { ToggleColumnsControl } from './table-controls'
 import { CellType, CustomColumsType, HeaderGroupType, OptionalDataTypes } from './types'
 
@@ -155,11 +155,7 @@ export const Table = <T extends object>({
             isCollapsed: true,
             hideFromList: true,
             Cell: ({ row }: {row: Row<T>}) => row.canExpand
-              ? (
-                <span {...row.getToggleRowExpandedProps()}>
-                  {row.isExpanded ? '👇' : '👉'}
-                </span>
-                )
+              ? <IconButton icon={row.isExpanded ? 'chevron-down' : 'chevron-right'} {...row.getToggleRowExpandedProps()} />
               : null
           }]
         : []
