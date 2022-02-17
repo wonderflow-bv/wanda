@@ -176,10 +176,13 @@ export const Table = <T extends object>({
   )
 
   useEffect(() => {
-    if (allColumns[0].id === 'selection') {
-      allColumns[0].toggleHidden(!selectableRows)
-    }
+    allColumns.find(column => column.id === 'selection')?.toggleHidden(!selectableRows)
   }, [selectableRows, allColumns])
+
+  const hasSomeExpandableRows = data.some(d => d.subRows)
+  useEffect(() => {
+    allColumns.find(column => column.id === 'expander')?.toggleHidden(!ExpandableRowsComponent)
+  }, [ExpandableRowsComponent, hasSomeExpandableRows, allColumns])
 
   useEffect(() => {
     onSelectionChange && onSelectionChange(selectedFlatRows)
@@ -228,7 +231,7 @@ export const Table = <T extends object>({
       </AnimatePresence>
 
       {/* HEADER */}
-      {(header || selectableRows) && (
+      {(header || columnsControl) && (
       <Stack
         direction="row"
         columnGap={32}
