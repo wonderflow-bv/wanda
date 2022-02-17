@@ -10,7 +10,7 @@ export default {
   args: {
     stripes: false,
     showSeparators: false,
-    noHeader: false,
+    header: false,
     columns: [
       {
         Header: 'First Name',
@@ -132,7 +132,6 @@ export const Simple = Template.bind({})
 export const SelectedRows = Template.bind({})
 SelectedRows.args = {
   selectableRows: true,
-  hideColumnsControl: true,
   selectedActions: (<Button>Delete</Button>)
 }
 
@@ -147,25 +146,25 @@ SelectedRows.argTypes = {
 
 export const HidingColumn = Template.bind({})
 HidingColumn.args = {
-  hideColumnsControl: true
+  columnsControl: false
 }
 
 export const Scrollable = Template.bind({})
 Scrollable.args = {
-  noHeader: true,
+  header: false,
   height: '400px'
 }
 
 export const CustomActions = Template.bind({})
 CustomActions.args = {
-  hideColumnsControl: true,
-  selectableRows: true,
+  columnsControl: false,
+  header: true,
   actions: <Button>Custom action</Button>
 }
 
 export const Expandable = Template.bind({})
 Expandable.args = {
-  hideColumnsControl: true,
-  selectableRows: true,
+  columnsControl: false,
+  selectableRows: false,
   ExpandableRowsComponent: ({ firstName }) => (<div>{firstName}</div>)
 }

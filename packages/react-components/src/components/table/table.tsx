@@ -31,11 +31,11 @@ export type TableProps<T extends object> = PropsWithClass & {
   /**
    * The amount of rows on any given page
    */
-   pageSize?: number
+  pageSize?: number
   /**
    * The index of the page that should be displayed
    */
-   pageIndex?: number
+  pageIndex?: number
   /**
    * Enable row selection
    */
@@ -59,11 +59,11 @@ export type TableProps<T extends object> = PropsWithClass & {
   /**
    * Hide the table header which includes the title and controls.
    */
-  noHeader?: boolean
+  header?: boolean
   /**
    * Enable the dropdown to choose the visibility of the column
    */
-  hideColumnsControl?: boolean
+  columnsControl?: boolean
   /**
   * Pass custom actions to the table header
   */
@@ -105,8 +105,8 @@ export const Table = <T extends object>({
   actions,
   selectedActions,
   selectedLabel = 'Selected items',
-  noHeader = false,
-  hideColumnsControl = false,
+  header = false,
+  columnsControl = false,
   height,
   background = 'var(--global-background)',
   ExpandableRowsComponent,
@@ -199,7 +199,7 @@ export const Table = <T extends object>({
     >
 
       {/* HEADER */}
-      {(!noHeader || selectableRows) && (
+      {(header || selectableRows) && (
       <Stack
         direction="row"
         horizontalPadding={8}
@@ -214,7 +214,7 @@ export const Table = <T extends object>({
         </div>
 
         <Stack direction="row" verticalAlign="center" columnGap={8} inline>
-          {hideColumnsControl && <ToggleColumnsControl columns={allColumns} visibleColumns={visibleColumns} />}
+          {columnsControl && <ToggleColumnsControl columns={allColumns} visibleColumns={visibleColumns} />}
 
           {actions}
         </Stack>
