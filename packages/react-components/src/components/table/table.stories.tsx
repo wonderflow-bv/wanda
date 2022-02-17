@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Table } from './table'
-import { Button, Title } from '../..'
+import { Button, Title, Masonry } from '../..'
 
 export default {
   title: 'Layouts/Table',
@@ -147,12 +147,17 @@ export default {
 } as ComponentMeta<typeof Table>
 
 const CustomExpandableComponent = ({ data }) => (
-  <table width="100%" style={{ background: 'var(--dimmed-1)' }}>
-    <thead><tr>{Object.keys(data).map(key => <th key={key} style={{ textAlign: 'left' }}>{key}</th>)}</tr></thead>
-    <tbody>
-      <tr>{Object.keys(data).map(key => <td key={key}>{data[key]}</td>)}</tr>
-    </tbody>
-  </table>
+  <Masonry
+    width="100%"
+    columns={2}
+  >
+    {Object.keys(data).map((item, i) => (
+      <div key={item} style={{ background: 'var(--dimmed-2)', padding: 24, minHeight: 50 * (i + 1) }}>
+        <Title level="6">{data[item]}</Title>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Labore, nostrum minima, debitis qui magni voluptatum.
+      </div>
+    ))}
+  </Masonry>
 )
 
 const Template: ComponentStory<typeof Table> = (args) => {
