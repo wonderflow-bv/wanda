@@ -119,6 +119,15 @@ export default {
   }
 } as ComponentMeta<typeof Table>
 
+const CustomExpandableComponent = ({ data }) => (
+  <table width="100%" style={{ background: 'var(--dimmed-1)' }}>
+    <thead><tr>{Object.keys(data).map(key => <th key={key} style={{ textAlign: 'left' }}>{key}</th>)}</tr></thead>
+    <tbody>
+      <tr>{Object.keys(data).map(key => <td key={key}>{data[key]}</td>)}</tr>
+    </tbody>
+  </table>
+)
+
 const Template: ComponentStory<typeof Table> = (args) => {
   return (
     <Table
@@ -166,5 +175,5 @@ export const Expandable = Template.bind({})
 Expandable.args = {
   columnsControl: false,
   selectableRows: false,
-  ExpandableRowsComponent: ({ firstName }) => (<div>{firstName}</div>)
+  ExpandableRowsComponent: (data) => <CustomExpandableComponent data={data} />
 }
