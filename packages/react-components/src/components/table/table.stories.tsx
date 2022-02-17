@@ -10,6 +10,7 @@ export default {
   args: {
     stripes: false,
     showSeparators: false,
+    selectableRows: false,
     header: false,
     columns: [
       {

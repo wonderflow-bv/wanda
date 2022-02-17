@@ -117,6 +117,7 @@ export const Table = <T extends object>({
   ...otherProps
 }: TableProps<T>) => {
   const uid = useUIDSeed()
+  const hasSomeExpandableRows = useMemo(() => data.some(d => d.subRows), [data])
 
   const {
     getTableProps,
@@ -139,8 +140,6 @@ export const Table = <T extends object>({
     usePagination,
     useRowSelect,
     (hooks: Hooks<T>) => {
-      const hasSomeExpandableRows = data.some(d => d.subRows)
-
       const checkboxColumn: CustomColumsType<T> = [{
         id: 'selection',
         Header: ({ getToggleAllRowsSelectedProps }) => <TableCheckbox {...getToggleAllRowsSelectedProps()} />,
@@ -179,7 +178,6 @@ export const Table = <T extends object>({
     allColumns.find(column => column.id === 'selection')?.toggleHidden(!selectableRows)
   }, [selectableRows, allColumns])
 
-  const hasSomeExpandableRows = data.some(d => d.subRows)
   useEffect(() => {
     allColumns.find(column => column.id === 'expander')?.toggleHidden(!ExpandableRowsComponent)
   }, [ExpandableRowsComponent, hasSomeExpandableRows, allColumns])
@@ -231,7 +229,7 @@ export const Table = <T extends object>({
       </AnimatePresence>
 
       {/* HEADER */}
-      {(header || columnsControl) && (
+      {(header || selectableRows) && (
       <Stack
         direction="row"
         columnGap={32}
