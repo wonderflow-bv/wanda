@@ -12,7 +12,7 @@ import { useUIDSeed } from 'react-uid'
 
 import styles from './table.module.css'
 import { CSSProperties, Fragment, ReactNode, useEffect, FC, useMemo } from 'react'
-import { Text, Stack, IconButton } from '@/components'
+import { Text, Stack, IconButton, Pagination } from '@/components'
 import { CellType, CustomColumnsType, HeaderGroupType, OptionalDataTypes } from './types'
 import { TableHeader, TableHeaderProps } from './table-header'
 import { ToggleColumnsControl } from './table-controls'
@@ -125,6 +125,9 @@ export const Table = <T extends object>({
     getTableBodyProps,
     headerGroups,
     rows,
+    page,
+    pageCount,
+    gotoPage,
     allColumns,
     prepareRow,
     selectedFlatRows,
@@ -133,7 +136,11 @@ export const Table = <T extends object>({
     {
       columns,
       data,
-      expandSubRows: Boolean(!ExpandableRowsComponent)
+      expandSubRows: Boolean(!ExpandableRowsComponent),
+      initialState: {
+        pageIndex,
+        pageSize
+      }
     },
     useSortBy,
     useExpanded,
@@ -182,6 +189,10 @@ export const Table = <T extends object>({
       ])
     }
   )
+
+  const rowsToDisplay = useMemo(() => {
+    return pagination ? page : rows
+  }, [pagination, page, rows])
 
   useEffect(() => {
     allColumns.find(column => column.id === 'selection')?.toggleHidden(!selectableRows)
@@ -278,7 +289,7 @@ export const Table = <T extends object>({
 
           {/* TBODY */}
           <tbody role="rowgroup" className={styles.TBody} {...getTableBodyProps()}>
-            {rows.map((row) => {
+            {rowsToDisplay.map((row) => {
               prepareRow(row)
               return (
                 <Fragment key={row.id}>
@@ -312,6 +323,14 @@ export const Table = <T extends object>({
           </tbody>
         </table>
       </div>
+
+      {/* PAGINATION */}
+
+      {pagination && (
+      <Stack horizontalAlign="center" verticalPadding={16}>
+        <Pagination itemsCount={rows.length} itemsPerPage={pageSize} pageCount={pageCount} onPageClick={({ selected }) => gotoPage(selected)} />
+      </Stack>
+      )}
     </div>
   )
 }
