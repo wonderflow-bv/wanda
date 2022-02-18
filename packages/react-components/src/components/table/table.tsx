@@ -286,7 +286,8 @@ export const Table = <T extends object>({
                     {row.cells.map((cell: CellType) => (
                       <TableCell
                         collapsed={cell.column.isCollapsed}
-                        expander={cell.column.expander}
+                        isExpander={cell.column.expander}
+                        expanded={row.isExpanded}
                         depth={row.depth}
                         align={cell.column.align}
                         {...cell.getCellProps()}
