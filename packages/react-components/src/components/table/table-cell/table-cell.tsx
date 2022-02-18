@@ -1,8 +1,8 @@
-import styles from './table.module.css'
+import styles from './table-cell.module.css'
 import { CSSProperties, forwardRef } from 'react'
 import { Polymorphic, Icon } from '@/components'
 import clsx from 'clsx'
-import { OptionalColumnTypes } from './types'
+import { OptionalColumnTypes } from '../types'
 import tkns from '@wonderflow/tokens/platforms/web/tokens.json'
 
 type TableCellProps = PropsWithClass & {
@@ -49,7 +49,7 @@ export const TableCell = forwardRef(({
   return (
     <Wrapper
       ref={forwardedRef}
-      className={clsx(styles.Cell, className)}
+      className={clsx(styles.TableCell, className)}
       data-table-cell-collapsed={collapsed}
       data-table-cell-padding={padding}
       data-table-cell-expander={expander}

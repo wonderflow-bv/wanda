@@ -1,0 +1,3 @@
+.TableHeader {
+  min-block-size: env(--space-56);
+}

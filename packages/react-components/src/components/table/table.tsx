@@ -12,9 +12,10 @@ import { useUIDSeed } from 'react-uid'
 
 import styles from './table.module.css'
 import { CSSProperties, Fragment, ReactNode, useEffect, FC, useMemo } from 'react'
-import { Title, Text, Stack, IconButton } from '@/components'
-import { ToggleColumnsControl } from './table-controls'
+import { Text, Stack, IconButton } from '@/components'
 import { CellType, CustomColumnsType, HeaderGroupType, OptionalDataTypes } from './types'
+import { TableHeader, TableHeaderProps } from './table-header'
+import { ToggleColumnsControl } from './table-controls'
 
 export type TableProps<T extends object> = PropsWithClass & {
   /**
@@ -56,7 +57,7 @@ export type TableProps<T extends object> = PropsWithClass & {
   /**
    * Add an accessible title to the table component
    */
-  title?: string | typeof Title
+  title?: TableHeaderProps['title']
   /**
    * Hide the table header which includes the title and controls.
    */
@@ -239,24 +240,10 @@ export const Table = <T extends object>({
 
       {/* HEADER */}
       {(showHeader || selectableRows) && (
-      <Stack
-        direction="row"
-        columnGap={32}
-        verticalAlign="center"
-        horizontalAlign="space-between"
-        fill={false}
-        className={styles.Header}
-      >
-        <div>
-          {typeof title === 'string' ? <Title id={uid('table-title')} level="5">{title}</Title> : title}
-        </div>
-
-        <Stack direction="row" verticalAlign="center" columnGap={8} inline>
-          {columnsControl && <ToggleColumnsControl columns={allColumns} visibleColumns={visibleColumns} />}
-
-          {actions}
-        </Stack>
-      </Stack>
+        <TableHeader title={title}>
+            {columnsControl && <ToggleColumnsControl columns={allColumns} visibleColumns={visibleColumns} />}
+            {actions}
+        </TableHeader>
       )}
 
       {/* TABLE */}

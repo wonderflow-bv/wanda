@@ -1,0 +1,27 @@
+.TableRow {
+  &:not([data-table-row-expander]) {
+    height: env(--space-48);
+  }
+
+  & + & {
+    border-top: 1px solid transparent;
+  }
+
+  @nest [data-table-stripes='true'] &:nth-child(even):not(
+  [data-table-row-highlight='true'],
+  [data-table-row-expander]) {
+    background-color: var(--dimmed-0);
+  }
+  @nest [data-table-separators='true'] & + & {
+    border-color: var(--dimmed-1);
+  }
+
+  &[data-table-row-highlight='true'] {
+    background-color: var(--highlight-blue-background);
+    color: var(--highlight-blue-foreground);
+
+    & + & {
+      border-color: hsl(env(--color-primary-40) / 30%);
+    }
+  }
+}
