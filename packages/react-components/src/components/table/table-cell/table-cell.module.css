@@ -22,9 +22,12 @@
   &[data-table-cell-is-expander='true'] {
     & button {
       z-index: 1;
-      box-shadow: 0 0 0 1px var(--line-current-color);
+      box-shadow: 0 0 0 2px var(--line-current-color);
     }
 
+    & button:hover {
+      box-shadow: 0 0 0 4px var(--line-current-color);
+    }
 
     &::before,
     &::after {
