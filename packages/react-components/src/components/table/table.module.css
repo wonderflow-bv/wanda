@@ -73,10 +73,10 @@
 .Cell {
   margin: 0;
   width: 1%;
-  padding: calc(env(--space-8) + env(--space-4)) env(--space-8);
   font-variant-numeric: tabular-nums;
   line-height: env(--font-lh-small);
   text-align: start;
+  padding: 0;
 
   &:not(:only-child) {
     text-align: var(--text-align, start);
@@ -84,6 +84,10 @@
 
   &[data-table-cell-collapsed='true'] {
     width: 1e-10%;
+  }
+
+  &[data-table-cell-padding='true'] {
+    padding: calc(env(--space-8) + env(--space-4)) env(--space-8);
   }
 }
 

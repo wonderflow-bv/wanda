@@ -9,6 +9,7 @@ type TableCellProps = PropsWithClass & {
   isSorted?: boolean
   isSortedDesc?: boolean
   align?: OptionalColumnTypes['align']
+  padding?: boolean
 }
 
 type PolymorphicCell = Polymorphic.ForwardRefComponent<'td', TableCellProps>;
@@ -22,6 +23,7 @@ export const TableCell = forwardRef(({
   style,
   isSortedDesc,
   as: Wrapper = 'td',
+  padding = true,
   ...otherProps
 }, forwardedRef) => {
   const dynamicStyle: CSSProperties = {
@@ -33,6 +35,7 @@ export const TableCell = forwardRef(({
       ref={forwardedRef}
       className={clsx(styles.Cell, className)}
       data-table-cell-collapsed={collapsed}
+      data-table-cell-padding={padding}
       style={{
         ...dynamicStyle,
         ...style,

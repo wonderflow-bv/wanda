@@ -132,6 +132,7 @@ export const Table = <T extends object>({
     {
       columns,
       data,
+      expandSubRows: Boolean(!ExpandableRowsComponent),
       autoResetExpanded: false
     },
     useSortBy,
@@ -300,7 +301,7 @@ export const Table = <T extends object>({
                   {(row.subRows && row.isExpanded && ExpandableRowsComponent) && row.subRows.map((subRow) =>
                     (
                       <TableRow data-table-row-expander key={subRow.id}>
-                        <TableCell style={{ padding: 0 }} colSpan={100}>
+                        <TableCell padding={false} colSpan={100}>
                           <ExpandComponent {...subRow.original} />
                         </TableCell>
                       </TableRow>
