@@ -1,9 +1,9 @@
 import { Checkbox } from '@/components'
-import styles from './table.module.css'
+import styles from './table-checkbox.module.css'
 
 export const TableCheckbox = ({ ...otherProps }) => (
   <Checkbox
-    className={styles.Checkbox}
+    className={styles.TableCheckbox}
     dimension="small"
     {...otherProps}
   />
