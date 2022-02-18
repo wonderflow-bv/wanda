@@ -49,7 +49,191 @@ export default {
             lastName: 'Stuffo',
             address: 'Via Roma, 15 Monza',
             uid: '123123',
-            info: 12
+            info: 12,
+            subRows: [
+              {
+                firstName: '1',
+                lastName: 'Stuffo',
+                address: 'Via Roma, 15 Monza',
+                uid: '123123',
+                info: 12,
+                subRows: [
+                  {
+                    firstName: '1',
+                    lastName: 'Stuffo',
+                    address: 'Via Roma, 15 Monza',
+                    uid: '123123',
+                    info: 12,
+                    subRows: [
+                      {
+                        firstName: '1',
+                        lastName: 'Stuffo',
+                        address: 'Via Roma, 15 Monza',
+                        uid: '123123',
+                        info: 12,
+                        subRows: [
+                          {
+                            firstName: '1',
+                            lastName: 'Stuffo',
+                            address: 'Via Roma, 15 Monza',
+                            uid: '123123',
+                            info: 12,
+                            subRows: [
+                              {
+                                firstName: '1',
+                                lastName: 'Stuffo',
+                                address: 'Via Roma, 15 Monza',
+                                uid: '123123',
+                                info: 12,
+                                subRows: [
+                                  {
+                                    firstName: '1',
+                                    lastName: 'Stuffo',
+                                    address: 'Via Roma, 15 Monza',
+                                    uid: '123123',
+                                    info: 12,
+                                    subRows: [
+                                      {
+                                        firstName: '1',
+                                        lastName: 'Stuffo',
+                                        address: 'Via Roma, 15 Monza',
+                                        uid: '123123',
+                                        info: 12,
+                                        subRows: [
+                                          {
+                                            firstName: '1',
+                                            lastName: 'Stuffo',
+                                            address: 'Via Roma, 15 Monza',
+                                            uid: '123123',
+                                            info: 12
+                                          },
+                                          {
+                                            firstName: '2',
+                                            lastName: 'Stuffo',
+                                            address: 'Via Roma, 15 Monza',
+                                            uid: '123123',
+                                            info: 12
+                                          },
+                                          {
+                                            firstName: '3',
+                                            lastName: 'Stuffo',
+                                            address: 'Via Roma, 15 Monza',
+                                            uid: '123123',
+                                            info: 12
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        firstName: '2',
+                                        lastName: 'Stuffo',
+                                        address: 'Via Roma, 15 Monza',
+                                        uid: '123123',
+                                        info: 12
+                                      },
+                                      {
+                                        firstName: '3',
+                                        lastName: 'Stuffo',
+                                        address: 'Via Roma, 15 Monza',
+                                        uid: '123123',
+                                        info: 12
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    firstName: '2',
+                                    lastName: 'Stuffo',
+                                    address: 'Via Roma, 15 Monza',
+                                    uid: '123123',
+                                    info: 12
+                                  },
+                                  {
+                                    firstName: '3',
+                                    lastName: 'Stuffo',
+                                    address: 'Via Roma, 15 Monza',
+                                    uid: '123123',
+                                    info: 12
+                                  }
+                                ]
+                              },
+                              {
+                                firstName: '2',
+                                lastName: 'Stuffo',
+                                address: 'Via Roma, 15 Monza',
+                                uid: '123123',
+                                info: 12
+                              },
+                              {
+                                firstName: '3',
+                                lastName: 'Stuffo',
+                                address: 'Via Roma, 15 Monza',
+                                uid: '123123',
+                                info: 12
+                              }
+                            ]
+                          },
+                          {
+                            firstName: '2',
+                            lastName: 'Stuffo',
+                            address: 'Via Roma, 15 Monza',
+                            uid: '123123',
+                            info: 12
+                          },
+                          {
+                            firstName: '3',
+                            lastName: 'Stuffo',
+                            address: 'Via Roma, 15 Monza',
+                            uid: '123123',
+                            info: 12
+                          }
+                        ]
+                      },
+                      {
+                        firstName: '2',
+                        lastName: 'Stuffo',
+                        address: 'Via Roma, 15 Monza',
+                        uid: '123123',
+                        info: 12
+                      },
+                      {
+                        firstName: '3',
+                        lastName: 'Stuffo',
+                        address: 'Via Roma, 15 Monza',
+                        uid: '123123',
+                        info: 12
+                      }
+                    ]
+                  },
+                  {
+                    firstName: '2',
+                    lastName: 'Stuffo',
+                    address: 'Via Roma, 15 Monza',
+                    uid: '123123',
+                    info: 12
+                  },
+                  {
+                    firstName: '3',
+                    lastName: 'Stuffo',
+                    address: 'Via Roma, 15 Monza',
+                    uid: '123123',
+                    info: 12
+                  }
+                ]
+              },
+              {
+                firstName: '2',
+                lastName: 'Stuffo',
+                address: 'Via Roma, 15 Monza',
+                uid: '123123',
+                info: 12
+              },
+              {
+                firstName: '3',
+                lastName: 'Stuffo',
+                address: 'Via Roma, 15 Monza',
+                uid: '123123',
+                info: 12
+              }
+            ]
           }
         ]
       },
@@ -79,14 +263,83 @@ export default {
             lastName: 'Stuffo',
             address: 'Via Roma, 15 Monza',
             uid: '123123',
-            info: 12
+            info: 12,
+            subRows: [
+              {
+                firstName: '1',
+                lastName: 'Stuffo',
+                address: 'Via Roma, 15 Monza',
+                uid: '123123',
+                info: 12,
+                subRows: [
+                  {
+                    firstName: '1',
+                    lastName: 'Stuffo',
+                    address: 'Via Roma, 15 Monza',
+                    uid: '123123',
+                    info: 12
+                  },
+                  {
+                    firstName: '2',
+                    lastName: 'Stuffo',
+                    address: 'Via Roma, 15 Monza',
+                    uid: '123123',
+                    info: 12
+                  },
+                  {
+                    firstName: '3',
+                    lastName: 'Stuffo',
+                    address: 'Via Roma, 15 Monza',
+                    uid: '123123',
+                    info: 12
+                  }
+                ]
+              },
+              {
+                firstName: '2',
+                lastName: 'Stuffo',
+                address: 'Via Roma, 15 Monza',
+                uid: '123123',
+                info: 12
+              },
+              {
+                firstName: '3',
+                lastName: 'Stuffo',
+                address: 'Via Roma, 15 Monza',
+                uid: '123123',
+                info: 12
+              }
+            ]
           },
           {
             firstName: '3',
             lastName: 'Stuffo',
             address: 'Via Roma, 15 Monza',
             uid: '123123',
-            info: 12
+            info: 12,
+            subRows: [
+              {
+                firstName: '1',
+                lastName: 'Stuffo',
+                address: 'Via Roma, 15 Monza',
+                uid: '123123',
+                info: 12
+              },
+              {
+                firstName: '2',
+                lastName: 'Stuffo',
+                address: 'Via Roma, 15 Monza',
+                uid: '123123',
+                info: 12
+              },
+              {
+                firstName: '3',
+                lastName: 'Stuffo',
+                address: 'Via Roma, 15 Monza',
+                uid: '123123',
+                info: 12
+              }
+            ]
           }
         ]
       },
@@ -167,7 +420,7 @@ const CustomExpandableComponent = ({ data }) => (
   >
     {Object.keys(data).map((item, i) => (
       <div key={item} style={{ background: 'var(--dimmed-1)', padding: 24, minHeight: 50 * (i + 1) }}>
-        <Title level="6">{typeof item === 'string' ? data[item] : null}</Title>
+        <Title level="6">{typeof data[item] === 'string' ? data[item] : null}</Title>
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Labore, nostrum minima, debitis qui magni voluptatum.
       </div>
     ))}
