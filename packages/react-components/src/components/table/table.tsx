@@ -60,7 +60,7 @@ export type TableProps<T extends object> = PropsWithClass & {
   /**
    * Hide the table header which includes the title and controls.
    */
-  header?: boolean
+  showHeader?: boolean
   /**
    * Enable the dropdown to choose the visibility of the column
    */
@@ -106,7 +106,7 @@ export const Table = <T extends object>({
   actions,
   selectedActions,
   selectedLabel = 'Selected items',
-  header = false,
+  showHeader = false,
   columnsControl = false,
   height,
   background = 'var(--global-background)',
@@ -229,7 +229,7 @@ export const Table = <T extends object>({
       </AnimatePresence>
 
       {/* HEADER */}
-      {(header || selectableRows) && (
+      {(showHeader || selectableRows) && (
       <Stack
         direction="row"
         columnGap={32}

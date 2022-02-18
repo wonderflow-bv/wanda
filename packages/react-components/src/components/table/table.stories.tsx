@@ -11,7 +11,7 @@ export default {
     stripes: false,
     showSeparators: false,
     selectableRows: false,
-    header: false,
+    showHeader: false,
     columns: [
       {
         Header: 'First Name',
@@ -193,7 +193,9 @@ HidingColumn.args = {
 
 export const Scrollable = Template.bind({})
 Scrollable.args = {
-  header: false,
+  columnsControl: true,
+  showHeader: true,
+  title: 'Scrollable table',
   height: '400px'
 }
 
@@ -201,13 +203,13 @@ export const CustomActions = Template.bind({})
 CustomActions.args = {
   columnsControl: true,
   title: <Title level="3">Custom title element</Title>,
-  header: true,
+  showHeader: true,
   actions: <Button>Custom action</Button>
 }
 
 export const Expandable = Template.bind({})
 Expandable.args = {
   columnsControl: true,
-  header: true,
+  showHeader: true,
   ExpandableRowsComponent: (data) => <CustomExpandableComponent data={data} />
 }
