@@ -14,13 +14,13 @@ import styles from './table.module.css'
 import { CSSProperties, Fragment, ReactNode, useEffect, FC, useMemo } from 'react'
 import { Title, Text, Stack, IconButton } from '@/components'
 import { ToggleColumnsControl } from './table-controls'
-import { CellType, CustomColumsType, HeaderGroupType, OptionalDataTypes } from './types'
+import { CellType, CustomColumnsType, HeaderGroupType, OptionalDataTypes } from './types'
 
 export type TableProps<T extends object> = PropsWithClass & {
   /**
    * Define the column headers of the table.
    */
-  columns: CustomColumsType<T>,
+  columns: CustomColumnsType<T>,
   /**
    * Pass the data structure to the table. Each object key can be used as `accessor` for a column.
    */
@@ -140,7 +140,7 @@ export const Table = <T extends object>({
     usePagination,
     useRowSelect,
     (hooks: Hooks<T>) => {
-      const checkboxColumn: CustomColumsType<T> = [{
+      const checkboxColumn: CustomColumnsType<T> = [{
         id: 'selection',
         Header: ({ getToggleAllRowsSelectedProps }) => <TableCheckbox {...getToggleAllRowsSelectedProps()} />,
         Cell: ({ row }: {row: Row<T>}) => row.depth === 0 ? <TableCheckbox {...row.getToggleRowSelectedProps()} /> : null,
@@ -148,7 +148,7 @@ export const Table = <T extends object>({
         hideFromList: true
       }]
 
-      const expanderColumn: CustomColumsType<T> = ExpandableRowsComponent && hasSomeExpandableRows
+      const expanderColumn: CustomColumnsType<T> = ExpandableRowsComponent && hasSomeExpandableRows
         ? [{
             id: 'expander',
             isCollapsed: true,
