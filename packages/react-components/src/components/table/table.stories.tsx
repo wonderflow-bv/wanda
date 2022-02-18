@@ -9,7 +9,6 @@ export default {
   },
   args: {
     stripes: false,
-    showSeparators: false,
     selectableRows: false,
     showHeader: false,
     columns: [
@@ -455,7 +454,8 @@ SelectedRows.argTypes = {
 
 export const HidingColumn = Template.bind({})
 HidingColumn.args = {
-  columnsControl: false
+  showHeader: true,
+  columnsControl: true
 }
 
 export const Scrollable = Template.bind({})

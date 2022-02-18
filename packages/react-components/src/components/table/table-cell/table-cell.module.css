@@ -19,7 +19,7 @@
     padding: calc(env(--space-8) + env(--space-4)) env(--space-8);
   }
 
-  &[data-table-cell-expander='true']::before {
+  &[data-table-cell-is-expander='true']::before {
     content: '';
     position: absolute;
     height: 100%;

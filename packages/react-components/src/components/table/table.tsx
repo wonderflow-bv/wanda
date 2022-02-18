@@ -102,7 +102,7 @@ export const Table = <T extends object>({
   selectableRows,
   onSelectionChange,
   stripes,
-  showSeparators,
+  showSeparators = true,
   title,
   actions,
   selectedActions,
@@ -133,8 +133,7 @@ export const Table = <T extends object>({
     {
       columns,
       data,
-      expandSubRows: Boolean(!ExpandableRowsComponent),
-      autoResetExpanded: false
+      expandSubRows: Boolean(!ExpandableRowsComponent)
     },
     useSortBy,
     useExpanded,
@@ -241,8 +240,8 @@ export const Table = <T extends object>({
       {/* HEADER */}
       {(showHeader || selectableRows) && (
         <TableHeader title={title}>
-            {columnsControl && <ToggleColumnsControl columns={allColumns} visibleColumns={visibleColumns} />}
-            {actions}
+          {columnsControl && <ToggleColumnsControl columns={allColumns} visibleColumns={visibleColumns} />}
+          {actions}
         </TableHeader>
       )}
 
@@ -287,7 +286,7 @@ export const Table = <T extends object>({
                     {row.cells.map((cell: CellType) => (
                       <TableCell
                         collapsed={cell.column.isCollapsed}
-                        expander={(cell.column.expander && row.depth > 0)}
+                        expander={cell.column.expander}
                         depth={row.depth}
                         align={cell.column.align}
                         {...cell.getCellProps()}
