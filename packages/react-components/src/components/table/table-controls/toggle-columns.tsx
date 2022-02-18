@@ -1,6 +1,6 @@
 import { Dropdown, Menu, Button } from '@/components'
 import { useMemo } from 'react'
-import { CustomColumnInstanceType } from './types'
+import { CustomColumnInstanceType } from '../types'
 
 type ToggleColumnsControlProps = {
   columns: CustomColumnInstanceType[]
