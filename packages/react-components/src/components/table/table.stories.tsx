@@ -68,7 +68,44 @@ export default {
         info: 12.1213,
         subRows: [
           {
-            firstName: 'ciao',
+            firstName: '1',
+            lastName: 'Stuffo',
+            address: 'Via Roma, 15 Monza',
+            uid: '123123',
+            info: 12
+          },
+          {
+            firstName: '2',
+            lastName: 'Stuffo',
+            address: 'Via Roma, 15 Monza',
+            uid: '123123',
+            info: 12,
+            subRows: [
+              {
+                firstName: '2.1',
+                lastName: 'Stuffo',
+                address: 'Via Roma, 15 Monza',
+                uid: '123123',
+                info: 12
+              },
+              {
+                firstName: '2.2',
+                lastName: 'Stuffo',
+                address: 'Via Roma, 15 Monza',
+                uid: '123123',
+                info: 12
+              },
+              {
+                firstName: '2.3',
+                lastName: 'Stuffo',
+                address: 'Via Roma, 15 Monza',
+                uid: '123123',
+                info: 12
+              }
+            ]
+          },
+          {
+            firstName: '3',
             lastName: 'Stuffo',
             address: 'Via Roma, 15 Monza',
             uid: '123123',
@@ -210,6 +247,14 @@ CustomActions.args = {
 export const Expandable = Template.bind({})
 Expandable.args = {
   columnsControl: true,
+  selectableRows: true,
+  showHeader: true
+}
+
+export const CustomExpandable = Template.bind({})
+CustomExpandable.args = {
+  columnsControl: true,
   showHeader: true,
+  selectableRows: true,
   ExpandableRowsComponent: (data) => <CustomExpandableComponent data={data} />
 }

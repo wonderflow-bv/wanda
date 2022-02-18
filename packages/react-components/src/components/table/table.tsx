@@ -132,7 +132,6 @@ export const Table = <T extends object>({
     {
       columns,
       data,
-      expandSubRows: false,
       autoResetExpanded: false
     },
     useSortBy,
@@ -143,12 +142,12 @@ export const Table = <T extends object>({
       const checkboxColumn: CustomColumnsType<T> = [{
         id: 'selection',
         Header: ({ getToggleAllRowsSelectedProps }) => <TableCheckbox {...getToggleAllRowsSelectedProps()} />,
-        Cell: ({ row }: {row: Row<T>}) => row.depth === 0 ? <TableCheckbox {...row.getToggleRowSelectedProps()} /> : null,
+        Cell: ({ row }: {row: Row<T>}) => <TableCheckbox {...row.getToggleRowSelectedProps()} />,
         isCollapsed: true,
         hideFromList: true
       }]
 
-      const expanderColumn: CustomColumnsType<T> = ExpandableRowsComponent && hasSomeExpandableRows
+      const expanderColumn: CustomColumnsType<T> = hasSomeExpandableRows
         ? [{
             id: 'expander',
             isCollapsed: true,
@@ -179,7 +178,7 @@ export const Table = <T extends object>({
   }, [selectableRows, allColumns])
 
   useEffect(() => {
-    allColumns.find(column => column.id === 'expander')?.toggleHidden(!ExpandableRowsComponent)
+    allColumns.find(column => column.id === 'expander')?.toggleHidden(!hasSomeExpandableRows)
   }, [ExpandableRowsComponent, hasSomeExpandableRows, allColumns])
 
   useEffect(() => {
@@ -287,7 +286,7 @@ export const Table = <T extends object>({
               prepareRow(row)
               return (
                 <Fragment key={row.id}>
-                  <TableRow highlight={row.isSelected && row.depth === 0} {...row.getRowProps()}>
+                  <TableRow highlight={row.isSelected} {...row.getRowProps()}>
                     {row.cells.map((cell: CellType) => (
                       <TableCell
                         collapsed={cell.column.isCollapsed}
@@ -298,14 +297,14 @@ export const Table = <T extends object>({
                       </TableCell>
                     ))}
                   </TableRow>
-                  {(row.subRows && row.isExpanded) && (
-                  <TableRow data-table-row-expander>
-                    {row.subRows.map((subRow) => (
-                      <TableCell style={{ padding: 0 }} colSpan={100} key={subRow.id}>
-                        <ExpandComponent {...subRow.original} />
-                      </TableCell>
-                    ))}
-                  </TableRow>
+                  {(row.subRows && row.isExpanded && ExpandableRowsComponent) && row.subRows.map((subRow) =>
+                    (
+                      <TableRow data-table-row-expander key={subRow.id}>
+                        <TableCell style={{ padding: 0 }} colSpan={100}>
+                          <ExpandComponent {...subRow.original} />
+                        </TableCell>
+                      </TableRow>
+                    )
                   )}
                 </Fragment>
               )
