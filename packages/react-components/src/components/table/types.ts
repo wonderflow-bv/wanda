@@ -6,6 +6,7 @@ export type OptionalColumnTypes = {
   isCollapsed?: boolean;
   align?: 'start' | 'center' | 'end';
   hideFromList?: boolean;
+  expander?: boolean;
 }
 
 export type OptionalDataTypes<T> = {

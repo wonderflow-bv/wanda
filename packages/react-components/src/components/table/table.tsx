@@ -153,10 +153,19 @@ export const Table = <T extends object>({
             id: 'expander',
             isCollapsed: true,
             hideFromList: true,
+            expander: true,
+            Header: ({ getToggleAllRowsExpandedProps, isAllRowsExpanded }) => (
+              <IconButton
+                kind="flat"
+                dimension="small"
+                icon={isAllRowsExpanded ? 'chevron-down' : 'chevron-right'}
+                {...getToggleAllRowsExpandedProps()}
+              />
+            ),
             Cell: ({ row }: {row: Row<T>}) => row.canExpand
               ? (
                 <IconButton
-                  kind="flat"
+                  kind="secondary"
                   dimension="small"
                   icon={row.isExpanded ? 'chevron-down' : 'chevron-right'}
                   {...row.getToggleRowExpandedProps()}
@@ -291,6 +300,8 @@ export const Table = <T extends object>({
                     {row.cells.map((cell: CellType) => (
                       <TableCell
                         collapsed={cell.column.isCollapsed}
+                        expander={(cell.column.expander && row.depth > 0)}
+                        depth={row.depth}
                         align={cell.column.align}
                         {...cell.getCellProps()}
                       >
