@@ -201,10 +201,6 @@ export const Table = <T extends object>({
     }
   )
 
-  const rowsToDisplay = useMemo(() => {
-    return showPagination ? page : rows
-  }, [showPagination, page, rows])
-
   useEffect(() => {
     allColumns.find(column => column.id === 'selection')?.toggleHidden(!selectableRows)
   }, [selectableRows, allColumns])
@@ -300,7 +296,7 @@ export const Table = <T extends object>({
 
           {/* TBODY */}
           <tbody role="rowgroup" className={styles.TBody} {...getTableBodyProps()}>
-            {rowsToDisplay.map((row) => {
+            {page.map((row) => {
               prepareRow(row)
               return (
                 <Fragment key={row.id}>
