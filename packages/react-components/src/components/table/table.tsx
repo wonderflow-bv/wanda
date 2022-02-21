@@ -39,6 +39,11 @@ export type TableProps<T extends object> = PropsWithClass & {
    */
   activePageIndex?: number
   /**
+   * Set clusters of items to show in a single page. These values are used to
+   * compute the select options for the page size dropdown.
+   */
+  pageClusters?: Array<number>
+  /**
    * Enable row selection. This property will render an additiona column
    * at the start of the table, containing a checkbox.
    */
@@ -116,6 +121,7 @@ export const Table = <T extends object>({
   pagination,
   itemsPerPage = 20,
   activePageIndex = 0,
+  pageClusters = [5, 10, 20, 30, 50, 100],
   ...otherProps
 }: TableProps<T>) => {
   const uid = useUIDSeed()
@@ -347,7 +353,7 @@ export const Table = <T extends object>({
           dimension="small"
           onChange={e => { setPageSize(Number(e.target.value)) }}
         >
-          {[5, 10, 20, 30, 50, 100].map(pSize => (
+          {pageClusters.map(pSize => (
             <option key={pSize} value={pSize}>{`Show ${pSize}`}</option>
           ))}
         </Select>
