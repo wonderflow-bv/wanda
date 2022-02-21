@@ -141,6 +141,7 @@ export const Table = <T extends object>({
       columns,
       data,
       expandSubRows: Boolean(!ExpandableRowsComponent),
+      autoResetExpanded: false,
       paginateExpandedRows: false,
       initialState: {
         pageIndex: activePageIndex,
