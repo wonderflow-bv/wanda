@@ -336,7 +336,6 @@ export const Table = <T extends object>({
       </div>
 
       {/* PAGINATION */}
-
       {pagination && (
       <Stack
         fill={false}
