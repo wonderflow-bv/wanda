@@ -457,6 +457,7 @@ export default {
 const CustomExpandableComponent = ({ data }) => (
   <Masonry
     columns={3}
+    style={{ padding: '16px 0' }}
   >
     {Object.keys(data).map((item, i) => (
       <div key={item} style={{ background: 'var(--dimmed-1)', padding: 24, minHeight: 50 * (i + 1) }}>
