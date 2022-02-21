@@ -53,7 +53,7 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 3;
+  z-index: 4;
   border-radius: env(--radius-8);
   min-block-size: env(--space-56);
 }
