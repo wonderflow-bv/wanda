@@ -49,7 +49,7 @@
       bottom: -1px;
     }
 
-    &[data-table-cell-expanded='true']::after {
+    &[data-table-cell-expanded='true'][data-table-cell-has-subrows='true']::after {
       border-right: 2px var(--line-style) var(--line-next-color);
     }
   }

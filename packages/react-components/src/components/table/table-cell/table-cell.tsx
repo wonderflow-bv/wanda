@@ -14,6 +14,7 @@ type TableCellProps = PropsWithClass & {
   depth?: number
   isExpander?: boolean
   expanded?: boolean
+  hasSubrows?: boolean
 }
 
 type PolymorphicCell = Polymorphic.ForwardRefComponent<'td', TableCellProps>;
@@ -31,6 +32,7 @@ export const TableCell = forwardRef(({
   isExpander,
   expanded,
   depth = 0,
+  hasSubrows,
   ...otherProps
 }, forwardedRef) => {
   const colors = [
@@ -60,6 +62,7 @@ export const TableCell = forwardRef(({
       data-table-cell-padding={padding}
       data-table-cell-is-expander={isExpander}
       data-table-cell-expanded={expanded}
+      data-table-cell-has-subrows={hasSubrows}
       style={{
         ...dynamicStyle,
         ...style,

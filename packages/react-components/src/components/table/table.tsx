@@ -290,6 +290,7 @@ export const Table = <T extends object>({
                         expanded={row.isExpanded}
                         depth={row.depth}
                         align={cell.column.align}
+                        hasSubrows={!!row.subRows?.length}
                         {...cell.getCellProps()}
                       >
                         {cell.render('Cell')}
