@@ -344,11 +344,10 @@ export const Table = <T extends object>({
         <Select
           value={pageSize}
           dimension="small"
-          defaultValue={itemsPerPage}
           onChange={e => { setPageSize(Number(e.target.value)) }}
         >
-          {[5, 10, 20, 30, 50, 100].map(pageSize => (
-            <option key={pageSize} value={pageSize}>{`Show ${pageSize}`}</option>
+          {[5, 10, 20, 30, 50, 100].map(pSize => (
+            <option key={pSize} value={pSize}>{`Show ${pSize}`}</option>
           ))}
         </Select>
         <Pagination
