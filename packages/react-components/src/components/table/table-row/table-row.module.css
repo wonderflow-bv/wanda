@@ -1,6 +1,6 @@
 .TableRow {
-  &:not([data-table-row-expander]) {
-    height: env(--space-48);
+  &:not([data-table-row-expander='true']) {
+    block-size: calc(env(--space-48) + 1px);
   }
 
   & + & {
@@ -23,5 +23,9 @@
     & + & {
       border-color: hsl(env(--color-primary-40) / 30%);
     }
+  }
+
+  &[data-table-row-depth='true'] {
+    background-color: hsl(env(--color-primary-40) / var(--depth-opacity));
   }
 }

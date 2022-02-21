@@ -7,15 +7,15 @@ import {
 import { TableRow } from './table-row'
 import { TableCell } from './table-cell'
 import { TableCheckbox } from './table-checkbox'
+import { TableHeader, TableHeaderProps } from './table-header'
+import { ToggleColumnsControl } from './table-controls'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useUIDSeed } from 'react-uid'
 
 import styles from './table.module.css'
 import { CSSProperties, Fragment, ReactNode, useEffect, FC, useMemo } from 'react'
-import { Text, Stack, IconButton } from '@/components'
+import { Text, Stack, IconButton, Pagination, Select } from '@/components'
 import { CellType, CustomColumnsType, HeaderGroupType, OptionalDataTypes } from './types'
-import { TableHeader, TableHeaderProps } from './table-header'
-import { ToggleColumnsControl } from './table-controls'
 
 export type TableProps<T extends object> = PropsWithClass & {
   /**
@@ -31,15 +31,16 @@ export type TableProps<T extends object> = PropsWithClass & {
    */
   pagination?: boolean
   /**
-   * The amount of rows on any given page
+   * The amount of entries to show for each page.
    */
-  pageSize?: number
+  itemsPerPage?: number
   /**
-   * The index of the page that should be displayed
+   * The index of the page that should be set as active when the table is rendered.
    */
-  pageIndex?: number
+  activePageIndex?: number
   /**
-   * Enable row selection
+   * Enable row selection. This property will render an additiona column
+   * at the start of the table, containing a checkbox.
    */
   selectableRows?: boolean
   /**
@@ -113,8 +114,8 @@ export const Table = <T extends object>({
   background = 'var(--global-background)',
   ExpandableRowsComponent,
   pagination,
-  pageSize = 20,
-  pageIndex = 0,
+  itemsPerPage = 20,
+  activePageIndex = 0,
   ...otherProps
 }: TableProps<T>) => {
   const uid = useUIDSeed()
@@ -125,15 +126,27 @@ export const Table = <T extends object>({
     getTableBodyProps,
     headerGroups,
     rows,
+    page,
+    pageCount,
+    pageOptions,
+    gotoPage,
     allColumns,
     prepareRow,
     selectedFlatRows,
-    visibleColumns
+    visibleColumns,
+    setPageSize,
+    state: { pageIndex, pageSize }
   } = useTable(
     {
       columns,
       data,
-      expandSubRows: Boolean(!ExpandableRowsComponent)
+      expandSubRows: Boolean(!ExpandableRowsComponent),
+      autoResetExpanded: false,
+      paginateExpandedRows: false,
+      initialState: {
+        pageIndex: activePageIndex,
+        pageSize: itemsPerPage
+      }
     },
     useSortBy,
     useExpanded,
@@ -182,6 +195,10 @@ export const Table = <T extends object>({
       ])
     }
   )
+
+  const rowsToDisplay = useMemo(() => {
+    return pagination ? page : rows
+  }, [pagination, page, rows])
 
   useEffect(() => {
     allColumns.find(column => column.id === 'selection')?.toggleHidden(!selectableRows)
@@ -278,7 +295,7 @@ export const Table = <T extends object>({
 
           {/* TBODY */}
           <tbody role="rowgroup" className={styles.TBody} {...getTableBodyProps()}>
-            {rows.map((row) => {
+            {rowsToDisplay.map((row) => {
               prepareRow(row)
               return (
                 <Fragment key={row.id}>
@@ -312,6 +329,37 @@ export const Table = <T extends object>({
           </tbody>
         </table>
       </div>
+
+      {/* PAGINATION */}
+
+      {pagination && (
+      <Stack
+        fill={false}
+        direction="row"
+        columnGap={8}
+        verticalAlign="center"
+        horizontalAlign="end"
+        verticalPadding={16}
+      >
+        <Text aria-hidden="true" weight="bold" size={14}>{`Page ${pageIndex + 1} of ${pageOptions.length}`}</Text>
+        <Select
+          value={pageSize}
+          dimension="small"
+          onChange={e => { setPageSize(Number(e.target.value)) }}
+        >
+          {[5, 10, 20, 30, 50, 100].map(pSize => (
+            <option key={pSize} value={pSize}>{`Show ${pSize}`}</option>
+          ))}
+        </Select>
+        <Pagination
+          itemsCount={page.length}
+          itemsPerPage={itemsPerPage}
+          pageCount={pageCount}
+          onPageClick={({ selected }) => gotoPage(selected)}
+          renderOnZeroPageCount={() => null}
+        />
+      </Stack>
+      )}
     </div>
   )
 }

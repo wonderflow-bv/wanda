@@ -31,8 +31,7 @@ export default {
       {
         Header: 'Info',
         accessor: 'info',
-        align: 'end',
-        isCollapsed: true
+        align: 'end'
       }
     ],
     data: [
@@ -408,6 +407,48 @@ export default {
         address: 'Via Roma, 15 Monza',
         uid: '123123',
         info: 12
+      },
+      {
+        firstName: 'Simone',
+        lastName: 'Stuffo',
+        address: 'Via Roma, 15 Monza',
+        uid: '123123',
+        info: 12
+      },
+      {
+        firstName: 'Simone',
+        lastName: 'Stuffo',
+        address: 'Via Roma, 15 Monza',
+        uid: '123123',
+        info: 12
+      },
+      {
+        firstName: 'Simone',
+        lastName: 'Stuffo',
+        address: 'Via Roma, 15 Monza',
+        uid: '123123',
+        info: 12
+      },
+      {
+        firstName: 'Simone',
+        lastName: 'Stuffo',
+        address: 'Via Roma, 15 Monza',
+        uid: '123123',
+        info: 12
+      },
+      {
+        firstName: 'Simone',
+        lastName: 'Stuffo',
+        address: 'Via Roma, 15 Monza',
+        uid: '123123',
+        info: 12
+      },
+      {
+        firstName: 'Simone',
+        lastName: 'Stuffo',
+        address: 'Via Roma, 15 Monza',
+        uid: '123123',
+        info: 12
       }
     ]
   }
@@ -487,4 +528,14 @@ CustomExpandable.args = {
   showHeader: true,
   selectableRows: true,
   ExpandableRowsComponent: (data) => <CustomExpandableComponent data={data} />
+}
+
+export const Pagination = Template.bind({})
+Pagination.args = {
+  columnsControl: true,
+  showHeader: true,
+  selectableRows: true,
+  // ExpandableRowsComponent: (data) => <CustomExpandableComponent data={data} />,
+  itemsPerPage: 10,
+  pagination: true
 }
