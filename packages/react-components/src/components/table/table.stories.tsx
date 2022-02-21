@@ -9,7 +9,6 @@ export default {
   },
   args: {
     stripes: false,
-    showSeparators: false,
     selectableRows: false,
     showHeader: false,
     columns: [
@@ -32,8 +31,7 @@ export default {
       {
         Header: 'Info',
         accessor: 'info',
-        align: 'end',
-        isCollapsed: true
+        align: 'end'
       }
     ],
     data: [
@@ -497,7 +495,8 @@ SelectedRows.argTypes = {
 
 export const HidingColumn = Template.bind({})
 HidingColumn.args = {
-  columnsControl: false
+  showHeader: true,
+  columnsControl: true
 }
 
 export const Scrollable = Template.bind({})
@@ -536,6 +535,7 @@ Pagination.args = {
   columnsControl: true,
   showHeader: true,
   selectableRows: true,
-  pageSize: 5,
+  // ExpandableRowsComponent: (data) => <CustomExpandableComponent data={data} />,
+  itemsPerPage: 10,
   pagination: true
 }

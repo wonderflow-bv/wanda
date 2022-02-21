@@ -13,7 +13,11 @@ export const TableRow: FC<TableRowProps> = ({
   ...otherProps
 }) => {
   return (
-    <tr data-table-row-highlight={highlight} className={clsx(styles.TableRow, className)} {...otherProps}>
+    <tr
+      data-table-row-highlight={highlight}
+      className={clsx(styles.TableRow, className)}
+      {...otherProps}
+    >
       {children}
     </tr>
   )

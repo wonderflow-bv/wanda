@@ -1,5 +1,5 @@
 import styles from './table-cell.module.css'
-import { CSSProperties, forwardRef } from 'react'
+import { CSSProperties, forwardRef, useMemo } from 'react'
 import { Polymorphic, Icon } from '@/components'
 import clsx from 'clsx'
 import { OptionalColumnTypes } from '../types'
@@ -12,7 +12,9 @@ type TableCellProps = PropsWithClass & {
   align?: OptionalColumnTypes['align']
   padding?: boolean
   depth?: number
-  expander?: boolean
+  isExpander?: boolean
+  expanded?: boolean
+  hasSubrows?: boolean
 }
 
 type PolymorphicCell = Polymorphic.ForwardRefComponent<'td', TableCellProps>;
@@ -27,8 +29,10 @@ export const TableCell = forwardRef(({
   isSortedDesc,
   as: Wrapper = 'td',
   padding = true,
-  expander,
+  isExpander,
+  expanded,
   depth = 0,
+  hasSubrows,
   ...otherProps
 }, forwardedRef) => {
   const colors = [
@@ -40,10 +44,14 @@ export const TableCell = forwardRef(({
     `hsl(${tkns.color.purple[20]})`
   ]
 
+  const currentIndex = useMemo(() => (depth - 1) % colors.length, [colors.length, depth])
+  const nextIndex = useMemo(() => depth % colors.length, [colors.length, depth])
+
   const dynamicStyle: CSSProperties = {
     '--text-align': align,
-    '--line-style': (depth && depth > 6) ? 'dotted' : 'solid',
-    '--line-color': depth && colors[(depth - 1) % 6]
+    '--line-style': (depth && depth > colors.length) ? 'dotted' : 'solid',
+    '--line-current-color': depth ? colors[currentIndex] : undefined,
+    '--line-next-color': depth ? colors[nextIndex] : colors[0]
   }
 
   return (
@@ -52,7 +60,9 @@ export const TableCell = forwardRef(({
       className={clsx(styles.TableCell, className)}
       data-table-cell-collapsed={collapsed}
       data-table-cell-padding={padding}
-      data-table-cell-expander={expander}
+      data-table-cell-is-expander={isExpander}
+      data-table-cell-expanded={expanded}
+      data-table-cell-has-subrows={hasSubrows}
       style={{
         ...dynamicStyle,
         ...style,
