@@ -147,7 +147,8 @@ export const Table = <T extends object>({
       data,
       autoResetExpanded: false,
       expandSubRows: Boolean(!ExpandableRowsComponent),
-      paginateExpandedRows: !showPagination,
+      // This prop prevent expanded rows to be placed in the next page. But it breaks row selection
+      // paginateExpandedRows: !showPagination,
       initialState: {
         pageIndex: activePageIndex,
         pageSize: itemsPerPage
@@ -300,7 +301,7 @@ export const Table = <T extends object>({
               prepareRow(row)
               return (
                 <Fragment key={row.id}>
-                  <TableRow highlight={row.isSelected} {...row.getRowProps()}>
+                  <TableRow {...row.getRowProps()}>
                     {row.cells.map((cell: CellType) => (
                       <TableCell
                         collapsed={cell.column.isCollapsed}

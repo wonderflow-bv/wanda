@@ -15,17 +15,4 @@
   @nest [data-table-separators='true'] & + & {
     border-color: var(--dimmed-1);
   }
-
-  &[data-table-row-highlight='true'] {
-    background-color: var(--highlight-blue-background);
-    color: var(--highlight-blue-foreground);
-
-    & + & {
-      border-color: hsl(env(--color-primary-40) / 30%);
-    }
-  }
-
-  &[data-table-row-depth='true'] {
-    background-color: hsl(env(--color-primary-40) / var(--depth-opacity));
-  }
 }
