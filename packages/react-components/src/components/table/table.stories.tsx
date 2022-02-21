@@ -31,7 +31,8 @@ export default {
       {
         Header: 'Info',
         accessor: 'info',
-        align: 'end'
+        align: 'end',
+        isCollapsed: true
       }
     ],
     data: [

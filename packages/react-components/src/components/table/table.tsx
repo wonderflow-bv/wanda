@@ -145,7 +145,6 @@ export const Table = <T extends object>({
     {
       columns,
       data,
-      autoResetExpanded: false,
       expandSubRows: Boolean(!ExpandableRowsComponent),
       // This prop prevent expanded rows to be placed in the next page. But it breaks row selection
       // paginateExpandedRows: !showPagination,
