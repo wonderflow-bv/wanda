@@ -134,14 +134,13 @@ export const Table = <T extends object>({
     rows,
     page,
     pageCount,
-    pageOptions,
     gotoPage,
     allColumns,
     prepareRow,
     selectedFlatRows,
     visibleColumns,
     setPageSize,
-    state: { pageIndex, pageSize }
+    state: { pageSize }
   } = useTable(
     {
       columns,
@@ -341,21 +340,27 @@ export const Table = <T extends object>({
       <Stack
         fill={false}
         direction="row"
-        columnGap={8}
+        columnGap={16}
         verticalAlign="center"
         horizontalAlign="end"
         verticalPadding={16}
       >
-        <Text aria-hidden="true" weight="bold" size={14}>{`Page ${pageIndex + 1} of ${pageOptions.length}`}</Text>
-        <Select
-          value={pageSize}
-          dimension="small"
-          onChange={e => { setPageSize(Number(e.target.value)) }}
-        >
-          {pageClusters.map(pSize => (
-            <option key={pSize} value={pSize}>{`Show ${pSize}`}</option>
-          ))}
-        </Select>
+        <Stack direction="row" columnGap={4}>
+          <Text as="label" htmlFor={uid('table-i-per-page')} size={14}>Items per page:</Text>
+          <Select
+            value={pageSize}
+            dimension="small"
+            id={uid('table-i-per-page')}
+            onChange={e => { setPageSize(Number(e.target.value)) }}
+          >
+            {pageClusters.map(pSize => (
+              <option key={pSize} value={pSize}>{pSize}</option>
+            ))}
+          </Select>
+        </Stack>
+        <Text aria-hidden="true" weight="bold" size={14}>
+          {`${parseInt(page[0].id) + 1}-${parseInt(page[page.length - 1].id) + 1} of ${rows.length}`}
+        </Text>
         <Pagination
           itemsCount={page.length}
           itemsPerPage={itemsPerPage}
