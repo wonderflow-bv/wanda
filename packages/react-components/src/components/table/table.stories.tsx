@@ -31,8 +31,7 @@ export default {
       {
         Header: 'Info',
         accessor: 'info',
-        align: 'end',
-        isCollapsed: true
+        align: 'end'
       }
     ],
     data: [
@@ -536,6 +535,7 @@ Pagination.args = {
   columnsControl: true,
   showHeader: true,
   selectableRows: true,
+  // ExpandableRowsComponent: (data) => <CustomExpandableComponent data={data} />,
   pageSize: 5,
   pagination: true
 }
