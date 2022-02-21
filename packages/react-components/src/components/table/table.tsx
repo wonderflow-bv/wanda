@@ -29,7 +29,7 @@ export type TableProps<T extends object> = PropsWithClass & {
   /**
    * Show pagination below the table. This is recommended only for tables with a lot of rows.
    */
-  pagination?: boolean
+  showPagination?: boolean
   /**
    * The amount of entries to show for each page.
    */
@@ -118,7 +118,7 @@ export const Table = <T extends object>({
   height,
   background = 'var(--global-background)',
   ExpandableRowsComponent,
-  pagination,
+  showPagination,
   itemsPerPage = 20,
   activePageIndex = 0,
   pageClusters = [5, 10, 20, 30, 50, 100],
@@ -147,7 +147,7 @@ export const Table = <T extends object>({
       data,
       autoResetExpanded: false,
       expandSubRows: Boolean(!ExpandableRowsComponent),
-      paginateExpandedRows: !pagination,
+      paginateExpandedRows: !showPagination,
       initialState: {
         pageIndex: activePageIndex,
         pageSize: itemsPerPage
@@ -202,8 +202,8 @@ export const Table = <T extends object>({
   )
 
   const rowsToDisplay = useMemo(() => {
-    return pagination ? page : rows
-  }, [pagination, page, rows])
+    return showPagination ? page : rows
+  }, [showPagination, page, rows])
 
   useEffect(() => {
     allColumns.find(column => column.id === 'selection')?.toggleHidden(!selectableRows)
@@ -336,7 +336,7 @@ export const Table = <T extends object>({
       </div>
 
       {/* PAGINATION */}
-      {pagination && (
+      {showPagination && (
       <Stack
         fill={false}
         direction="row"

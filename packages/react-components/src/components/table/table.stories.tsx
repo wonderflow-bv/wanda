@@ -538,5 +538,5 @@ Pagination.args = {
   selectableRows: true,
   // ExpandableRowsComponent: (data) => <CustomExpandableComponent data={data} />,
   itemsPerPage: 10,
-  pagination: true
+  showPagination: true
 }
