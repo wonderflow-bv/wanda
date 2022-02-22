@@ -1,7 +1,6 @@
 .TableCell {
   position: relative;
   margin: 0;
-  width: var(--width, 1%);
   max-width: var(--width);
   font-variant-numeric: tabular-nums;
   line-height: env(--font-lh-small);
@@ -11,6 +10,10 @@
 
   &:not(:only-child) {
     text-align: var(--text-align, start);
+  }
+
+  &[data-table-cell-fixed='true'] {
+    width: var(--width, 1%);
   }
 
   &[data-table-cell-collapsed='true'] {

@@ -66,6 +66,7 @@ export const TableCell = forwardRef(({
       data-table-cell-is-expander={isExpander}
       data-table-cell-expanded={expanded}
       data-table-cell-has-subrows={hasSubrows}
+      data-table-cell-fixed={Boolean(width)}
       style={{
         ...dynamicStyle,
         ...style,

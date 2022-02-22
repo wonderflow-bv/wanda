@@ -26,13 +26,15 @@ export default {
       },
       {
         Header: 'UID',
-        accessor: 'uid'
+        accessor: 'uid',
+        minWidth: 200,
+        align: 'end'
       },
       {
         Header: 'Info',
         accessor: 'info',
         align: 'end',
-        isCollapsed: true
+        minWidth: 180
       }
     ],
     data: [
@@ -548,9 +550,10 @@ RowActions.args = {
   columnsControl: true,
   showHeader: true,
   selectableRows: true,
-  ActionsRowComponent: (row) => (
-    <Stack direction="row">
+  ActionsRowComponent: ({ depth }) => (
+    <Stack direction="row" fill={false}>
       <IconButton icon="arrow-rotate-right" kind="flat" dimension="small" />
+      {depth > 0 && (
       <Dropdown
         offset={4}
         placement="bottom-start"
@@ -583,6 +586,7 @@ RowActions.args = {
           <Menu.Item dimension="small" disabled>Really?</Menu.Item>
         </Menu>
       </Dropdown>
+      )}
     </Stack>
   )
 }

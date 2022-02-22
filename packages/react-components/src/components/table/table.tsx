@@ -309,7 +309,7 @@ export const Table = <T extends object>({
                   <TableCell
                     as="th"
                     width={column.minWidth === 0 ? undefined : column.minWidth}
-                    collapsed
+                    collapsed={column.isCollapsed}
                     isSorted={column.isSorted}
                     isSortedDesc={column.isSorted && column.isSortedDesc}
                     align={column.align}
