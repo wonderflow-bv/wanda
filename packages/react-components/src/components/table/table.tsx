@@ -159,6 +159,7 @@ export const Table = <T extends object>({
       data,
       expandSubRows: Boolean(!ExpandableRowsComponent),
       autoResetHiddenColumns: false,
+      autoResetPage: false,
       manualPagination: Boolean(fetchData && showPagination),
       pageCount: (fetchData && showPagination) ? numberOfPages : 4,
       // This prop prevent expanded rows to be placed in the next page. But it breaks row selection
@@ -381,7 +382,7 @@ export const Table = <T extends object>({
           </Select>
         </Stack>
         <Text aria-hidden="true" weight="bold" size={14}>
-          {`${parseInt(page[0].id) + 1}-${parseInt(page[page.length - 1].id) + 1} of ${rows.length}`}
+          {`${parseInt(page[0]?.id) + 1}-${parseInt(page[page.length - 1]?.id) + 1} of ${rows.length}`}
         </Text>
         <Pagination
           itemsCount={page.length}

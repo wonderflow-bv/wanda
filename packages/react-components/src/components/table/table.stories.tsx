@@ -1,3 +1,4 @@
+import { useCallback, useState } from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Table } from './table'
 import { Button, IconButton, Title, Masonry, Stack, Dropdown, Menu, Separator } from '../..'
@@ -369,7 +370,7 @@ export default {
         ]
       },
       {
-        firstName: 'Gianni',
+        firstName: 'Luca',
         lastName: 'Morandi',
         address: 'Via Roma, 1, Treno',
         uid: '34567895423556789',
@@ -385,21 +386,21 @@ export default {
         ]
       },
       {
-        firstName: 'Simone',
+        firstName: 'Mattia',
         lastName: 'Lastname',
         address: 'Via Roma, 12, Bologna',
         uid: '345367890',
         info: 123.96
       },
       {
-        firstName: 'Matteo',
+        firstName: 'Morfeo',
         lastName: 'Staffone',
         address: 'Via Roma, 13, Genova',
         uid: <code>23456789</code>,
         info: 12.1213
       },
       {
-        firstName: 'Emanuele',
+        firstName: 'Gianluca',
         lastName: 'Staffo',
         address: 'Via Roma, 14, Milano',
         uid: '2345678',
@@ -588,4 +589,31 @@ RowActions.args = {
       )}
     </Stack>
   )
+}
+
+const ManualPaginationTemplate: ComponentStory<typeof Table> = ({ data, ...args }) => {
+  const [pageData, setPageData] = useState([])
+  const [itemsPerPage, setItemsPerPage] = useState(0)
+
+  const fetchData = useCallback(({ pageIndex, pageSize }) => {
+    setItemsPerPage(data.length / pageSize)
+    setPageData(data.slice(pageIndex * pageSize, pageIndex * pageSize + pageSize))
+  }, [data])
+
+  return (
+    <Table
+      data={pageData}
+      {...args}
+      fetchData={fetchData}
+      itemsPerPage={itemsPerPage}
+    />
+  )
+}
+export const ManualPagination = ManualPaginationTemplate.bind({})
+ManualPagination.args = {
+  columnsControl: true,
+  showHeader: true,
+  selectableRows: true,
+  showPagination: true,
+  numberOfPages: 3
 }
