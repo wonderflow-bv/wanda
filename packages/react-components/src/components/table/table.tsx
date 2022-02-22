@@ -39,14 +39,9 @@ export type TableProps<T extends object> = PropsWithClass & {
    * The index of the page that should be set as active when the table is rendered.
    */
   activePageIndex?: number
-  /**
-   * Number of available pages if the pagination is manual
-   */
-  pageQuantity?: number
-  /**
-   * Number of available pages if the pagination is manual
-   */
-  fetchData?: Function
+
+  fetchData?: ({ pageIndex, pageSize }: {pageIndex: number, pageSize: number}) => Promise<void>
+  numberOfPages?: number
   /**
    * Set clusters of items to show in a single page. These values are used to
    * compute the select options for the page size dropdown.
@@ -110,7 +105,7 @@ export type TableProps<T extends object> = PropsWithClass & {
   /**
    * A react component that add custom actions to rows
    */
-   ActionsRowComponent?: ComponentType<Row<T>>;
+  ActionsRowComponent?: ComponentType<Row<T>>;
 }
 
 export const Table = <T extends object>({
@@ -133,11 +128,11 @@ export const Table = <T extends object>({
   ExpandableRowsComponent,
   ActionsRowComponent,
   showPagination,
+  fetchData,
   itemsPerPage = 20,
+  numberOfPages,
   activePageIndex = 0,
   pageClusters = [5, 10, 20, 30, 50, 100],
-  pageQuantity,
-  fetchData,
   ...otherProps
 }: TableProps<T>) => {
   const uid = useUIDSeed()
@@ -164,15 +159,15 @@ export const Table = <T extends object>({
       data,
       expandSubRows: Boolean(!ExpandableRowsComponent),
       autoResetHiddenColumns: false,
+      manualPagination: Boolean(fetchData && showPagination),
+      pageCount: (fetchData && showPagination) ? numberOfPages : 4,
       // This prop prevent expanded rows to be placed in the next page. But it breaks row selection
       // paginateExpandedRows: !showPagination,
       initialState: {
         pageIndex: activePageIndex,
         pageSize: showPagination ? itemsPerPage : undefined,
         hiddenColumns: ['selection', 'expander']
-      },
-      pageCount: showPagination ? pageQuantity : undefined,
-      manualPagination: !!fetchData
+      }
     },
     useSortBy,
     useExpanded,

@@ -540,7 +540,6 @@ Pagination.args = {
   columnsControl: true,
   showHeader: true,
   selectableRows: true,
-  // ExpandableRowsComponent: (data) => <CustomExpandableComponent data={data} />,
   itemsPerPage: 10,
   showPagination: true
 }
