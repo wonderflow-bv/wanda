@@ -168,10 +168,10 @@ export const Table = <T extends object>({
       // paginateExpandedRows: !showPagination,
       initialState: {
         pageIndex: activePageIndex,
-        pageSize: itemsPerPage,
+        pageSize: showPagination ? itemsPerPage : undefined,
         hiddenColumns: ['selection', 'expander']
       },
-      pageCount: pageQuantity,
+      pageCount: showPagination ? pageQuantity : undefined,
       manualPagination: !!fetchData
     },
     useSortBy,
@@ -247,6 +247,8 @@ export const Table = <T extends object>({
   useEffect(() => {
     fetchData && fetchData({ pageIndex, pageSize })
   }, [fetchData, pageIndex, pageSize])
+
+  const rowEntries = useMemo(() => showPagination ? page : rows, [page, rows, showPagination])
 
   const dynamicStyle: CSSProperties = {
     '--table-height': height,
@@ -324,7 +326,7 @@ export const Table = <T extends object>({
 
           {/* TBODY */}
           <tbody role="rowgroup" className={styles.TBody} {...getTableBodyProps()}>
-            {page.map((row) => {
+            {rowEntries.map((row) => {
               prepareRow(row)
               return (
                 <Fragment key={row.id}>
