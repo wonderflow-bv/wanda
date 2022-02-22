@@ -140,17 +140,20 @@ export const Table = <T extends object>({
     selectedFlatRows,
     visibleColumns,
     setPageSize,
+    setHiddenColumns,
     state: { pageSize }
   } = useTable(
     {
       columns,
       data,
       expandSubRows: Boolean(!ExpandableRowsComponent),
+      autoResetHiddenColumns: false,
       // This prop prevent expanded rows to be placed in the next page. But it breaks row selection
       // paginateExpandedRows: !showPagination,
       initialState: {
         pageIndex: activePageIndex,
-        pageSize: itemsPerPage
+        pageSize: itemsPerPage,
+        hiddenColumns: ['selection', 'expander']
       }
     },
     useSortBy,
@@ -202,12 +205,12 @@ export const Table = <T extends object>({
   )
 
   useEffect(() => {
-    allColumns.find(column => column.id === 'selection')?.toggleHidden(!selectableRows)
-  }, [selectableRows, allColumns])
+    const visibleColumns = []
+    if (!selectableRows) visibleColumns.push('selection')
+    if (!hasSomeExpandableRows) visibleColumns.push('expander')
 
-  useEffect(() => {
-    allColumns.find(column => column.id === 'expander')?.toggleHidden(!hasSomeExpandableRows)
-  }, [ExpandableRowsComponent, hasSomeExpandableRows, allColumns])
+    setHiddenColumns(visibleColumns)
+  }, [selectableRows, setHiddenColumns, ExpandableRowsComponent, hasSomeExpandableRows])
 
   useEffect(() => {
     onSelectionChange && onSelectionChange(selectedFlatRows)
