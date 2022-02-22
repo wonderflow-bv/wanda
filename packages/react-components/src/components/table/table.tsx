@@ -13,9 +13,10 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useUIDSeed } from 'react-uid'
 
 import styles from './table.module.css'
-import { CSSProperties, Fragment, ReactNode, useEffect, FC, useMemo } from 'react'
+import { CSSProperties, Fragment, ReactNode, useEffect, useMemo, ComponentType } from 'react'
 import { Text, Stack, IconButton, Pagination, Select } from '@/components'
 import { CellType, CustomColumnsType, HeaderGroupType, OptionalDataTypes } from './types'
+import { TableExpand } from './table-expand'
 
 export type TableProps<T extends object> = PropsWithClass & {
   /**
@@ -105,7 +106,7 @@ export type TableProps<T extends object> = PropsWithClass & {
    * A react component that add additional content when the row is expanded.
    * By passing this prop, the row will be expandable.
    */
-  ExpandableRowsComponent?: FC<T>;
+  ExpandableRowsComponent?: ComponentType<T>;
 }
 
 export const Table = <T extends object>({
@@ -250,14 +251,6 @@ export const Table = <T extends object>({
     '--table-background': background
   }
 
-  const ExpandComponent = useMemo(() => (data: T) => (
-    <div className={styles.ExpandWrapper}>
-      <div className={styles.ExpandContent}>
-        {ExpandableRowsComponent ? <ExpandableRowsComponent {...data} /> : null}
-      </div>
-    </div>
-  ), [ExpandableRowsComponent])
-
   return (
     <div
       className={clsx(styles.Table, className)}
@@ -353,7 +346,7 @@ export const Table = <T extends object>({
                     (
                       <TableRow data-table-row-expander key={subRow.id}>
                         <TableCell padding={false} colSpan={100}>
-                          <ExpandComponent {...subRow.original} />
+                          <TableExpand data={subRow.original} component={ExpandableRowsComponent} />
                         </TableCell>
                       </TableRow>
                     )
