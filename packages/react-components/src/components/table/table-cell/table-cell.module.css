@@ -1,11 +1,13 @@
 .TableCell {
   position: relative;
   margin: 0;
-  width: 1%;
+  width: var(--width, 1%);
+  max-width: var(--width);
   font-variant-numeric: tabular-nums;
   line-height: env(--font-lh-small);
   text-align: start;
   padding: 0;
+  word-wrap: break-word;
 
   &:not(:only-child) {
     text-align: var(--text-align, start);

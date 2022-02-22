@@ -15,6 +15,7 @@ type TableCellProps = PropsWithClass & {
   isExpander?: boolean
   expanded?: boolean
   hasSubrows?: boolean
+  width?: string | number
 }
 
 type PolymorphicCell = Polymorphic.ForwardRefComponent<'td', TableCellProps>;
@@ -33,6 +34,7 @@ export const TableCell = forwardRef(({
   expanded,
   depth = 0,
   hasSubrows,
+  width,
   ...otherProps
 }, forwardedRef) => {
   const colors = [
@@ -48,6 +50,7 @@ export const TableCell = forwardRef(({
   const nextIndex = useMemo(() => depth % colors.length, [colors.length, depth])
 
   const dynamicStyle: CSSProperties = {
+    '--width': typeof width === 'string' ? width : typeof width === 'number' ? `${width}px` : undefined,
     '--text-align': align,
     '--line-style': (depth && depth > colors.length) ? 'dotted' : 'solid',
     '--line-current-color': depth ? colors[currentIndex] : undefined,

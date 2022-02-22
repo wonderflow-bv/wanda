@@ -26,7 +26,8 @@ export default {
       },
       {
         Header: 'UID',
-        accessor: 'uid'
+        accessor: 'uid',
+        minWidth: 50
       },
       {
         Header: 'Info',

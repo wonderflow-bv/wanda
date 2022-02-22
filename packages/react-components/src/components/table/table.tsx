@@ -284,6 +284,7 @@ export const Table = <T extends object>({
                 {headerGroup.headers.map((column: HeaderGroupType) => (
                   <TableCell
                     as="th"
+                    width={column.minWidth === 0 ? undefined : column.minWidth}
                     collapsed
                     isSorted={column.isSorted}
                     isSortedDesc={column.isSorted && column.isSortedDesc}
@@ -310,6 +311,7 @@ export const Table = <T extends object>({
                         isExpander={cell.column.expander}
                         expanded={row.isExpanded}
                         depth={row.depth}
+                        width={cell.column.minWidth === 0 ? undefined : cell.column.minWidth}
                         align={cell.column.align}
                         hasSubrows={!!row.subRows?.length}
                         {...cell.getCellProps()}
