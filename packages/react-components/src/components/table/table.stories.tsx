@@ -26,8 +26,7 @@ export default {
       },
       {
         Header: 'UID',
-        accessor: 'uid',
-        minWidth: 50
+        accessor: 'uid'
       },
       {
         Header: 'Info',
@@ -242,7 +241,8 @@ export default {
         lastName: 'Lastname',
         address: 'Via Roma, 12, Bologna',
         uid: '345367890',
-        info: 123.96
+        info: 123.96,
+        actions: <div>azione</div>
       },
       {
         firstName: 'Matteo',

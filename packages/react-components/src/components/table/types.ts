@@ -1,3 +1,4 @@
+import { ReactNode } from 'react'
 import {
   Column, CustomHeaderGroup, CustomCell, ColumnInstance
 } from 'react-table'
@@ -10,7 +11,8 @@ export type OptionalColumnTypes = {
 }
 
 export type OptionalDataTypes<T> = {
-  subRows?: T[]
+  subRows?: T[];
+  actions?: ReactNode | ReactNode[];
 }
 
 export type HeaderGroupType = CustomHeaderGroup<OptionalColumnTypes>

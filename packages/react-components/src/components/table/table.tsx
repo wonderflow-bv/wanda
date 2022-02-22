@@ -136,6 +136,7 @@ export const Table = <T extends object>({
 }: TableProps<T>) => {
   const uid = useUIDSeed()
   const hasSomeExpandableRows = useMemo(() => data.some(d => d.subRows), [data])
+  const hasRowsWithActions = useMemo(() => data.some(d => d.actions), [data])
 
   const {
     getTableProps,
@@ -208,9 +209,21 @@ export const Table = <T extends object>({
           }]
         : []
 
+      const actionsColumn: CustomColumnsType<T> = hasRowsWithActions
+        ? [{
+            id: 'actions',
+            hideFromList: true,
+            isCollapsed: true,
+            Cell: ({ row }: {row: Row<T>}) => row.canExpand
+              ? <div>ciao</div>
+              : null
+          }]
+        : []
+
       hooks.visibleColumns.push((columns) => [
         ...checkboxColumn,
         ...expanderColumn,
+        ...actionsColumn,
         ...columns
       ])
     }
