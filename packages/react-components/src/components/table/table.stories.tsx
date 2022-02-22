@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Table } from './table'
-import { Button, Title, Masonry } from '../..'
+import { Button, IconButton, Title, Masonry, Stack, Dropdown, Menu, Separator } from '../..'
 
 export default {
   title: 'Layouts/Table',
@@ -241,8 +241,8 @@ export default {
         lastName: 'Lastname',
         address: 'Via Roma, 12, Bologna',
         uid: '345367890',
-        info: 123.96,
-        actions: <div>azione</div>
+        canBeDeleted: true,
+        info: 123.96
       },
       {
         firstName: 'Matteo',
@@ -510,8 +510,8 @@ Scrollable.args = {
   height: '400px'
 }
 
-export const CustomActions = Template.bind({})
-CustomActions.args = {
+export const WithTableActions = Template.bind({})
+WithTableActions.args = {
   columnsControl: true,
   title: <Title level="3">Custom title element</Title>,
   showHeader: true,
@@ -541,4 +541,48 @@ Pagination.args = {
   // ExpandableRowsComponent: (data) => <CustomExpandableComponent data={data} />,
   itemsPerPage: 10,
   showPagination: true
+}
+
+export const RowActions = Template.bind({})
+RowActions.args = {
+  columnsControl: true,
+  showHeader: true,
+  selectableRows: true,
+  ActionsRowComponent: (row) => (
+    <Stack direction="row">
+      <IconButton icon="arrow-rotate-right" kind="flat" dimension="small" />
+      <Dropdown
+        offset={4}
+        placement="bottom-start"
+        trigger={<IconButton icon="bars" kind="flat" dimension="small" />}
+      >
+        <Menu>
+          <Menu.Item
+            dimension="small"
+            autoFocus
+            icon="arrow-right"
+            description={<>Description for this item</>}
+          >
+            Sample long menu item
+          </Menu.Item>
+          <Menu.Item
+            dimension="small"
+            icon="user"
+            description={(
+              <>
+                <Title as="h2" level="5">Sample H2 Title longlonglonglonglonglonglonglonglonglonglong</Title>
+                <p>long text content placeholder to test wrapping and sizes</p>
+                <img style={{ width: '100%' }} src="https://images.unsplash.com/photo-1593963171957-d87a6279226d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" />
+              </>
+          )}
+          >
+            Short menu label
+          </Menu.Item>
+          <Separator />
+          <Menu.Item dimension="small" icon="arrow-down-to-bracket">Even shorter</Menu.Item>
+          <Menu.Item dimension="small" disabled>Really?</Menu.Item>
+        </Menu>
+      </Dropdown>
+    </Stack>
+  )
 }

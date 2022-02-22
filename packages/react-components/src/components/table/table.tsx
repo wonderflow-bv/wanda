@@ -107,6 +107,10 @@ export type TableProps<T extends object> = PropsWithClass & {
    * By passing this prop, the row will be expandable.
    */
   ExpandableRowsComponent?: ComponentType<T>;
+  /**
+   * A react component that add custom actions to rows
+   */
+   ActionsRowComponent?: ComponentType<Row<T>>;
 }
 
 export const Table = <T extends object>({
@@ -127,6 +131,7 @@ export const Table = <T extends object>({
   height,
   background = 'var(--global-background)',
   ExpandableRowsComponent,
+  ActionsRowComponent,
   showPagination,
   itemsPerPage = 20,
   activePageIndex = 0,
@@ -137,7 +142,6 @@ export const Table = <T extends object>({
 }: TableProps<T>) => {
   const uid = useUIDSeed()
   const hasSomeExpandableRows = useMemo(() => data.some(d => d.subRows), [data])
-  const hasRowsWithActions = useMemo(() => data.some(d => d.actions), [data])
 
   const {
     getTableProps,
@@ -210,14 +214,12 @@ export const Table = <T extends object>({
           }]
         : []
 
-      const actionsColumn: CustomColumnsType<T> = hasRowsWithActions
+      const actionsColumn: CustomColumnsType<T> = ActionsRowComponent
         ? [{
             id: 'actions',
-            hideFromList: true,
             isCollapsed: true,
-            Cell: ({ row }: {row: Row<T>}) => row.canExpand
-              ? <div>ciao</div>
-              : null
+            hideFromList: true,
+            Cell: ({ row }: {row: Row<T>}) => <ActionsRowComponent {...row} />
           }]
         : []
 
