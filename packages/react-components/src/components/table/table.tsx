@@ -39,6 +39,14 @@ export type TableProps<T extends object> = PropsWithClass & {
    */
   activePageIndex?: number
   /**
+   * Number of available pages if the pagination is manual
+   */
+  pageQuantity?: number
+  /**
+   * Number of available pages if the pagination is manual
+   */
+  fetchData?: Function
+  /**
    * Set clusters of items to show in a single page. These values are used to
    * compute the select options for the page size dropdown.
    */
@@ -122,6 +130,8 @@ export const Table = <T extends object>({
   itemsPerPage = 20,
   activePageIndex = 0,
   pageClusters = [5, 10, 20, 30, 50, 100],
+  pageQuantity,
+  fetchData,
   ...otherProps
 }: TableProps<T>) => {
   const uid = useUIDSeed()
@@ -141,7 +151,7 @@ export const Table = <T extends object>({
     visibleColumns,
     setPageSize,
     setHiddenColumns,
-    state: { pageSize }
+    state: { pageSize, pageIndex }
   } = useTable(
     {
       columns,
@@ -154,7 +164,9 @@ export const Table = <T extends object>({
         pageIndex: activePageIndex,
         pageSize: itemsPerPage,
         hiddenColumns: ['selection', 'expander']
-      }
+      },
+      pageCount: pageQuantity,
+      manualPagination: !!fetchData
     },
     useSortBy,
     useExpanded,
@@ -215,6 +227,10 @@ export const Table = <T extends object>({
   useEffect(() => {
     onSelectionChange && onSelectionChange(selectedFlatRows)
   }, [onSelectionChange, selectedFlatRows])
+
+  useEffect(() => {
+    fetchData && fetchData({ pageIndex, pageSize })
+  }, [fetchData, pageIndex, pageSize])
 
   const dynamicStyle: CSSProperties = {
     '--table-height': height,
