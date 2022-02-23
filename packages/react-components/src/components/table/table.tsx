@@ -315,7 +315,7 @@ export const Table = <T extends object>({
       {/* TABLE */}
       {(data.length && filteredVisibleColumns.length)
         ? (
-          <div className={styles.TableWrapper}>
+          <div className={styles.TableWrapper} data-table-scrolling={Boolean(height)}>
             <table
               className={styles.TableElement}
               data-table-stripes={stripes}

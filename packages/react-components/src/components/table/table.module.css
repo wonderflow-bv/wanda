@@ -7,11 +7,13 @@
 }
 
 .TableWrapper {
-  overflow: auto;
-  max-height: var(--table-height);
-  background: var(--table-background);
-  overscroll-behavior: contain;
-  -webkit-overflow-scrolling: touch;
+  &[data-table-scrolling='true'] {
+    background: var(--table-background);
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    max-height: var(--table-height);
+    overflow: auto;
+  }
 }
 
 .TableElement {

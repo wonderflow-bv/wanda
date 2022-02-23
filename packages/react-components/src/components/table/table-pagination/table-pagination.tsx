@@ -35,8 +35,8 @@ export const TablePagination: FC<TablePaginationProps> = ({
           id={uid('table-i-per-page')}
           onChange={({ currentTarget }) => { onPageSizeChange && onPageSizeChange(Number(currentTarget.value)) }}
         >
-          {clusters.map(pSize => (
-            <option key={pSize} value={pSize}>{pSize}</option>
+          {clusters.map(cluster => (
+            <option key={cluster} value={cluster}>{cluster}</option>
           ))}
         </Select>
       </Stack>
