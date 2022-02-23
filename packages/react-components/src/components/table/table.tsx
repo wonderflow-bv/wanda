@@ -387,7 +387,7 @@ export const Table = <T extends object>({
         <Pagination
           itemsCount={page.length}
           itemsPerPage={itemsPerPage}
-          pageCount={pageCount}
+          pageCount={numberOfPages || pageCount}
           onPageClick={({ selected }) => gotoPage(selected)}
           renderOnZeroPageCount={() => null}
         />
