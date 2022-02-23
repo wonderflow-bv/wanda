@@ -121,7 +121,7 @@ export const Table = <T extends object>({
   className,
   style,
   columns,
-  data,
+  data = [],
   selectableRows,
   onSelectionChange,
   stripes,
@@ -294,18 +294,20 @@ export const Table = <T extends object>({
       {/* HEADER */}
       {(showHeader || selectableRows) && (
         <TableHeader title={title}>
-          {columnsControl && (
-            <ToggleColumnsControl
-              columns={allColumns}
-              visibleColumns={filteredVisibleColumns}
-            />
-          )}
+          {(columnsControl && data.length)
+            ? (
+              <ToggleColumnsControl
+                columns={allColumns}
+                visibleColumns={filteredVisibleColumns}
+              />
+              )
+            : null}
           {actions}
         </TableHeader>
       )}
 
       {/* TABLE */}
-      {(data.length && filteredVisibleColumns.length > 0)
+      {(data.length && filteredVisibleColumns.length)
         ? (
           <div className={styles.TableWrapper}>
             <table

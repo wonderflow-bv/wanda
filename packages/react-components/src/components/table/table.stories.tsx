@@ -592,8 +592,8 @@ RowActions.args = {
   )
 }
 
-export const EmptyState = Template.bind({})
-EmptyState.args = {
+export const CustomEmptyState = Template.bind({})
+CustomEmptyState.args = {
   columnsControl: true,
   showHeader: true,
   selectableRows: true,
