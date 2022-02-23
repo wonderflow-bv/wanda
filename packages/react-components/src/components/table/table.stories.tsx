@@ -542,7 +542,7 @@ CustomExpandable.args = {
   columnsControl: true,
   showHeader: true,
   selectableRows: true,
-  ExpandableRowsComponent: (data) => <CustomExpandableComponent data={data} />
+  expandableRowsComponent: (data) => <CustomExpandableComponent data={data} />
 }
 
 export const Pagination = Template.bind({})
@@ -559,7 +559,7 @@ RowActions.args = {
   columnsControl: true,
   showHeader: true,
   selectableRows: true,
-  ActionsRowComponent: ({ depth }) => (
+  actionsRowComponent: ({ depth }) => (
     <Stack direction="row" fill={false}>
       <IconButton icon="arrow-rotate-right" kind="flat" dimension="small" />
       {depth > 0 && (

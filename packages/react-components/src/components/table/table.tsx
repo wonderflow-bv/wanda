@@ -108,12 +108,15 @@ export type TableProps<T extends object> = PropsWithClass & {
    * A react component that add additional content when the row is expanded.
    * By passing this prop, the row will be expandable.
    */
-  ExpandableRowsComponent?: ComponentType<T>;
+  expandableRowsComponent?: ComponentType<T>;
   /**
    * A react component that add custom actions to rows
    */
-  ActionsRowComponent?: ComponentType<Row<T>>;
-
+  actionsRowComponent?: ComponentType<Row<T>>;
+  /**
+   * Custom component/empty state to show when the table has no data or
+   * all columns have been toggled off.
+   */
   emptyComponent?: ReactNode;
 }
 
@@ -134,8 +137,8 @@ export const Table = <T extends object>({
   columnsControl = false,
   height,
   background = 'var(--global-background)',
-  ExpandableRowsComponent,
-  ActionsRowComponent,
+  expandableRowsComponent: ExpandableRowsComponent,
+  actionsRowComponent: ActionsRowComponent,
   emptyComponent,
   showPagination,
   fetchData,
