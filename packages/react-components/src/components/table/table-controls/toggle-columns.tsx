@@ -11,17 +11,26 @@ export const ToggleColumnsControl = ({
   columns,
   visibleColumns
 }: ToggleColumnsControlProps) => {
+  const someVisibleColums = useMemo(() => visibleColumns.length !== 0, [visibleColumns])
   const filteredColumns = useMemo(() => columns.filter(col => !col.hideFromList), [columns])
 
   const handleToggleAll = useCallback(
     () => {
-      if (visibleColumns.length !== 0) {
-        visibleColumns.map((col) => col.toggleHidden(true))
-      } else {
-        filteredColumns.filter(col => !col.hideFromList).map((col) => col.toggleHidden(false))
+      /**
+       * If there are visible columns (excluding artificial ones),
+       * hide them all by calling `toggleHidden(true)` for each column
+       */
+      if (someVisibleColums) {
+        visibleColumns.forEach((col) => col.toggleHidden(true))
+        return
       }
+      /**
+       * If there are no visible columns (excluding artificial ones), call
+       * toggleHidden(false) for each column
+       */
+      filteredColumns.forEach((col) => col.toggleHidden(false))
     },
-    [filteredColumns, visibleColumns]
+    [someVisibleColums, filteredColumns, visibleColumns]
   )
 
   return (
