@@ -3,6 +3,11 @@ import {
   Column, CustomHeaderGroup, CustomCell, ColumnInstance
 } from 'react-table'
 
+export type PaginationType = {
+  pageIndex: number,
+  pageSize: number
+}
+
 export type OptionalColumnTypes = {
   isCollapsed?: boolean;
   align?: 'start' | 'center' | 'end';

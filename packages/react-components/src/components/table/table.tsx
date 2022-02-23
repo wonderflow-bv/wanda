@@ -15,7 +15,7 @@ import { useUIDSeed } from 'react-uid'
 import styles from './table.module.css'
 import { CSSProperties, Fragment, ReactNode, useEffect, useMemo, ComponentType } from 'react'
 import { Text, Stack, IconButton, Pagination, Select } from '@/components'
-import { CellType, CustomColumnsType, HeaderGroupType, OptionalDataTypes } from './types'
+import { CellType, CustomColumnsType, HeaderGroupType, OptionalDataTypes, PaginationType } from './types'
 import { TableExpand } from './table-expand'
 
 export type TableProps<T extends object> = PropsWithClass & {
@@ -40,7 +40,7 @@ export type TableProps<T extends object> = PropsWithClass & {
    */
   activePageIndex?: number
 
-  fetchData?: ({ pageIndex, pageSize }: {pageIndex: number, pageSize: number}) => Promise<void>
+  fetchData?: ({ pageIndex, pageSize }: PaginationType) => Promise<void>
   numberOfPages?: number
   /**
    * Set clusters of items to show in a single page. These values are used to
@@ -283,7 +283,13 @@ export const Table = <T extends object>({
       {/* HEADER */}
       {(showHeader || selectableRows) && (
         <TableHeader title={title}>
-          {columnsControl && <ToggleColumnsControl columns={allColumns} visibleColumns={visibleColumns} />}
+          {columnsControl && (
+          <ToggleColumnsControl
+            columns={allColumns}
+            visibleColumns={visibleColumns}
+            onToggleAll={(columns) => setHiddenColumns(columns)}
+          />
+          )}
           {actions}
         </TableHeader>
       )}
