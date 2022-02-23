@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Table } from './table'
 import { Button, IconButton, Title, Masonry, Stack, Dropdown, Menu, Separator } from '../..'
+import { InfoState } from '../info-state'
 
 export default {
   title: 'Layouts/Table',
@@ -591,6 +592,20 @@ RowActions.args = {
   )
 }
 
+export const EmptyState = Template.bind({})
+EmptyState.args = {
+  columnsControl: true,
+  showHeader: true,
+  selectableRows: true,
+  data: [],
+  emptyComponent: (
+    <InfoState title="No data to show" icon="frown">
+      It seems there is no data to show inside this table. If data should be present,please
+      check if columns are visible by using the table controls.
+    </InfoState>
+  )
+}
+
 const ManualPaginationTemplate: ComponentStory<typeof Table> = ({ data, ...args }) => {
   const [pageData, setPageData] = useState([])
   const [itemsPerPage, setItemsPerPage] = useState(0)
@@ -602,8 +617,8 @@ const ManualPaginationTemplate: ComponentStory<typeof Table> = ({ data, ...args 
 
   return (
     <Table
-      data={pageData}
       {...args}
+      data={pageData}
       fetchData={fetchData}
       itemsPerPage={itemsPerPage}
     />

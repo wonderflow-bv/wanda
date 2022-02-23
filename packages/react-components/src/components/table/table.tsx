@@ -113,6 +113,8 @@ export type TableProps<T extends object> = PropsWithClass & {
    * A react component that add custom actions to rows
    */
   ActionsRowComponent?: ComponentType<Row<T>>;
+
+  emptyComponent?: ReactNode;
 }
 
 export const Table = <T extends object>({
@@ -134,6 +136,7 @@ export const Table = <T extends object>({
   background = 'var(--global-background)',
   ExpandableRowsComponent,
   ActionsRowComponent,
+  emptyComponent,
   showPagination,
   fetchData,
   itemsPerPage = 20,
@@ -302,7 +305,7 @@ export const Table = <T extends object>({
       )}
 
       {/* TABLE */}
-      {filteredVisibleColumns.length > 0
+      {(data.length && filteredVisibleColumns.length > 0)
         ? (
           <div className={styles.TableWrapper}>
             <table
@@ -373,11 +376,15 @@ export const Table = <T extends object>({
             </table>
           </div>
           )
-        : <div style={{ height: 600 }}>EMPTY STATE</div>
+        : (
+          <Stack verticalAlign="center" horizontalAlign="center">
+            {emptyComponent || 'No data'}
+          </Stack>
+          )
       }
 
       {/* PAGINATION */}
-      {showPagination && (
+      {(showPagination && filteredVisibleColumns.length > 0) && (
       <Stack
         fill={false}
         direction="row"
