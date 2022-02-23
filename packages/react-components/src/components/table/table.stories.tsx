@@ -607,11 +607,11 @@ CustomEmptyState.args = {
 }
 
 const ManualPaginationTemplate: ComponentStory<typeof Table> = ({ data, ...args }) => {
-  const [pageData, setPageData] = useState([])
-  const [itemsPerPage, setItemsPerPage] = useState(0)
+  const [pageData, setPageData] = useState(data.slice(0, args.itemsPerPage))
+  const [numberOfPages, setNumberOfPages] = useState(1)
 
   const fetchData = useCallback(({ pageIndex, pageSize }) => {
-    setItemsPerPage(data.length / pageSize)
+    setNumberOfPages(parseInt(Math.round(data.length / pageSize)))
     setPageData(data.slice(pageIndex * pageSize, pageIndex * pageSize + pageSize))
   }, [data])
 
@@ -620,7 +620,7 @@ const ManualPaginationTemplate: ComponentStory<typeof Table> = ({ data, ...args 
       {...args}
       data={pageData}
       fetchData={fetchData}
-      itemsPerPage={itemsPerPage}
+      numberOfPages={numberOfPages}
     />
   )
 }
@@ -630,5 +630,5 @@ ManualPagination.args = {
   showHeader: true,
   selectableRows: true,
   showPagination: true,
-  numberOfPages: 3
+  itemsPerPage: 5
 }
