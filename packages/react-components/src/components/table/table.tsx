@@ -151,6 +151,10 @@ export const Table = <T extends object>({
 }: TableProps<T>) => {
   const uid = useUIDSeed()
   const hasSomeExpandableRows = useMemo(() => data.some(d => d.subRows), [data])
+  const isManualPaginated = useMemo(() => {
+    return Boolean(fetchData && showPagination && totalRows)
+  },
+  [fetchData, showPagination, totalRows])
 
   const {
     getTableProps,
@@ -174,8 +178,8 @@ export const Table = <T extends object>({
       expandSubRows: Boolean(!ExpandableRowsComponent),
       autoResetHiddenColumns: false,
       autoResetPage: false,
-      manualPagination: Boolean(fetchData && showPagination),
-      pageCount: (fetchData && showPagination && totalRows) ? Math.ceil(totalRows / itemsPerPage) : 10,
+      manualPagination: isManualPaginated,
+      pageCount: (isManualPaginated && totalRows) ? Math.ceil(totalRows / itemsPerPage) : 10,
       // This prop prevent expanded rows to be placed in the next page. But it breaks row selection
       // paginateExpandedRows: !showPagination,
       initialState: {
@@ -397,7 +401,7 @@ export const Table = <T extends object>({
           <Pagination
             itemsCount={rows.length}
             itemsPerPage={itemsPerPage}
-            pageCount={totalRows ? Math.ceil(totalRows / pageSize) : pageCount}
+            pageCount={(isManualPaginated && totalRows) ? Math.ceil(totalRows / pageSize) : pageCount}
             onPageClick={({ selected }) => gotoPage(selected)}
             renderOnZeroPageCount={() => null}
             forcePage={showPagination && fetchData ? pageIndex : undefined}
