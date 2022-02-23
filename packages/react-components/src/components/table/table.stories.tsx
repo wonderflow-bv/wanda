@@ -474,9 +474,17 @@ const CustomExpandableComponent = ({ data }) => (
   </Masonry>
 )
 
+const CustomEmptyComponent = () => (
+  <InfoState title="No data to show" icon="frown">
+    It seems there is no data to show inside this table. If data should be present,please
+    check if columns are visible by using the table controls.
+  </InfoState>
+)
+
 const Template: ComponentStory<typeof Table> = (args) => {
   return (
     <Table
+      emptyComponent={<CustomEmptyComponent />}
       {...args}
     />
   )
@@ -592,18 +600,12 @@ RowActions.args = {
   )
 }
 
-export const CustomEmptyState = Template.bind({})
-CustomEmptyState.args = {
+export const NoData = Template.bind({})
+NoData.args = {
   columnsControl: true,
   showHeader: true,
   selectableRows: true,
-  data: [],
-  emptyComponent: (
-    <InfoState title="No data to show" icon="frown">
-      It seems there is no data to show inside this table. If data should be present,please
-      check if columns are visible by using the table controls.
-    </InfoState>
-  )
+  data: []
 }
 
 const ManualPaginationTemplate: ComponentStory<typeof Table> = ({ data, ...args }) => {
@@ -621,6 +623,7 @@ const ManualPaginationTemplate: ComponentStory<typeof Table> = ({ data, ...args 
       data={pageData}
       fetchData={fetchData}
       itemsPerPage={itemsPerPage}
+      emptyComponent={<CustomEmptyComponent />}
     />
   )
 }
