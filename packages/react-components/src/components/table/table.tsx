@@ -48,7 +48,7 @@ export type TableProps<T extends object> = PropsWithClass & {
   /**
    * Set the number of pages to show in the pagination. Used only when doing manual pagination.
    */
-  numberOfPages?: number
+  totalRows?: number
   /**
    * Set clusters of items to show in a single page. These values are used to
    * compute the select options for the page size dropdown.
@@ -140,7 +140,7 @@ export const Table = <T extends object>({
   showPagination,
   fetchData,
   itemsPerPage = 20,
-  numberOfPages,
+  totalRows,
   activePageIndex = 0,
   pageClusters = [5, 10, 20, 30, 50, 100],
   ...otherProps
@@ -171,7 +171,7 @@ export const Table = <T extends object>({
       autoResetHiddenColumns: false,
       autoResetPage: false,
       manualPagination: Boolean(fetchData && showPagination),
-      pageCount: (fetchData && showPagination) ? numberOfPages : 4,
+      pageCount: (fetchData && showPagination && totalRows) ? Math.ceil(totalRows / itemsPerPage) : 10,
       // This prop prevent expanded rows to be placed in the next page. But it breaks row selection
       // paginateExpandedRows: !showPagination,
       initialState: {
@@ -407,12 +407,13 @@ export const Table = <T extends object>({
           </Select>
         </Stack>
         <Text aria-hidden="true" weight="bold" size={14}>
+          { /* `${pageIndex * pageSize + 1}-${(totalRows && pageIndex * pageSize + pageSize > totalRows) ? totalRows : pageIndex * pageSize + pageSize} of ${totalRows || rows.length}` */}
           {`${parseInt(page[0]?.id) + 1}-${parseInt(page[page.length - 1]?.id) + 1} of ${data.length}`}
         </Text>
         <Pagination
           itemsCount={rows.length}
           itemsPerPage={itemsPerPage}
-          pageCount={numberOfPages || pageCount}
+          pageCount={totalRows ? Math.ceil(totalRows / pageSize) : pageCount}
           onPageClick={({ selected }) => gotoPage(selected)}
           renderOnZeroPageCount={() => null}
           forcePage={showPagination && fetchData ? pageIndex : undefined}
