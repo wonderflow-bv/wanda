@@ -609,11 +609,11 @@ NoData.args = {
 }
 
 const ManualPaginationTemplate: ComponentStory<typeof Table> = ({ data, ...args }) => {
-  const [pageData, setPageData] = useState(data.slice(0, args.itemsPerPage))
+  const [pageData, setPageData] = useState([])
   const [numberOfPages, setNumberOfPages] = useState(1)
 
   const fetchData = useCallback(({ pageIndex, pageSize }) => {
-    setNumberOfPages(parseInt(Math.round(data.length / pageSize)))
+    setNumberOfPages(Math.ceil(data.length / pageSize))
     setPageData(data.slice(pageIndex * pageSize, pageIndex * pageSize + pageSize))
   }, [data])
 

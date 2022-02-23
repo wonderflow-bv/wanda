@@ -193,41 +193,38 @@ export const Table = <T extends object>({
         hideFromList: true
       }]
 
-      const expanderColumn: CustomColumnsType<T> = hasSomeExpandableRows
-        ? [{
-            id: 'expander',
-            isCollapsed: true,
-            hideFromList: true,
-            expander: true,
-            Header: ({ getToggleAllRowsExpandedProps, isAllRowsExpanded }) => (
-              <IconButton
-                kind="flat"
-                dimension="small"
-                icon={isAllRowsExpanded ? 'chevron-down' : 'chevron-right'}
-                {...getToggleAllRowsExpandedProps()}
-              />
-            ),
-            Cell: ({ row }: {row: Row<T>}) => row.canExpand
-              ? (
-                <IconButton
-                  kind="secondary"
-                  dimension="small"
-                  icon={row.isExpanded ? 'chevron-down' : 'chevron-right'}
-                  {...row.getToggleRowExpandedProps()}
-                />
-                )
-              : null
-          }]
-        : []
+      const expanderColumn: CustomColumnsType<T> = [{
+        id: 'expander',
+        isCollapsed: true,
+        hideFromList: true,
+        expander: true,
+        Header: ({ getToggleAllRowsExpandedProps, isAllRowsExpanded }) => (
+          <IconButton
+            kind="flat"
+            dimension="small"
+            icon={isAllRowsExpanded ? 'chevron-down' : 'chevron-right'}
+            {...getToggleAllRowsExpandedProps()}
+          />
+        ),
+        Cell: ({ row }: {row: Row<T>}) => row.canExpand
+          ? (
+            <IconButton
+              kind="secondary"
+              dimension="small"
+              icon={row.isExpanded ? 'chevron-down' : 'chevron-right'}
+              {...row.getToggleRowExpandedProps()}
+            />
+            )
+          : null
+      }]
 
-      const actionsColumn: CustomColumnsType<T> = ActionsRowComponent
-        ? [{
-            id: 'actions',
-            isCollapsed: true,
-            hideFromList: true,
-            Cell: ({ row }: {row: Row<T>}) => <ActionsRowComponent {...row} />
-          }]
-        : []
+      const actionsColumn: CustomColumnsType<T> =
+        [{
+          id: 'actions',
+          isCollapsed: true,
+          hideFromList: true,
+          Cell: ({ row }: {row: Row<T>}) => ActionsRowComponent ? <ActionsRowComponent {...row} /> : null
+        }]
 
       hooks.visibleColumns.push((columns) => [
         ...checkboxColumn,
@@ -242,9 +239,10 @@ export const Table = <T extends object>({
     const visibleColumns = []
     if (!selectableRows) visibleColumns.push('selection')
     if (!hasSomeExpandableRows) visibleColumns.push('expander')
+    if (!ActionsRowComponent) visibleColumns.push('actions')
 
     setHiddenColumns(visibleColumns)
-  }, [selectableRows, setHiddenColumns, ExpandableRowsComponent, hasSomeExpandableRows])
+  }, [selectableRows, setHiddenColumns, ExpandableRowsComponent, hasSomeExpandableRows, ActionsRowComponent])
 
   useEffect(() => {
     onSelectionChange && onSelectionChange(selectedFlatRows)
@@ -386,7 +384,7 @@ export const Table = <T extends object>({
       }
 
       {/* PAGINATION */}
-      {(showPagination && filteredVisibleColumns.length > 0) && (
+      {(showPagination && filteredVisibleColumns.length > 0 && !!rows.length) && (
       <Stack
         fill={false}
         direction="row"
@@ -409,14 +407,15 @@ export const Table = <T extends object>({
           </Select>
         </Stack>
         <Text aria-hidden="true" weight="bold" size={14}>
-          {`${parseInt(page[0]?.id) + 1}-${parseInt(page[page.length - 1]?.id) + 1} of ${rows.length}`}
+          {`${parseInt(page[0]?.id) + 1}-${parseInt(page[page.length - 1]?.id) + 1} of ${data.length}`}
         </Text>
         <Pagination
-          itemsCount={page.length}
+          itemsCount={rows.length}
           itemsPerPage={itemsPerPage}
           pageCount={numberOfPages || pageCount}
           onPageClick={({ selected }) => gotoPage(selected)}
           renderOnZeroPageCount={() => null}
+          forcePage={showPagination && fetchData ? pageIndex : undefined}
         />
       </Stack>
       )}
