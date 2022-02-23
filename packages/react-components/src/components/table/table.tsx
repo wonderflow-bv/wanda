@@ -14,9 +14,10 @@ import { useUIDSeed } from 'react-uid'
 
 import styles from './table.module.css'
 import { CSSProperties, Fragment, ReactNode, useEffect, useMemo, ComponentType } from 'react'
-import { Text, Stack, IconButton, Pagination, Select } from '@/components'
+import { Text, Stack, IconButton, Pagination } from '@/components'
 import { CellType, CustomColumnInstanceType, CustomColumnsType, HeaderGroupType, OptionalDataTypes, PaginationType } from './types'
 import { TableExpand } from './table-expand'
+import { TablePagination, TablePaginationProps } from './table-pagination'
 
 export type TableProps<T extends object> = PropsWithClass & {
   /**
@@ -53,7 +54,7 @@ export type TableProps<T extends object> = PropsWithClass & {
    * Set clusters of items to show in a single page. These values are used to
    * compute the select options for the page size dropdown.
    */
-  pageClusters?: Array<number>
+  pageClusters?: TablePaginationProps['clusters']
   /**
    * Enable row selection. This property will render an additiona column
    * at the start of the table, containing a checkbox.
@@ -388,40 +389,20 @@ export const Table = <T extends object>({
 
       {/* PAGINATION */}
       {(showPagination && filteredVisibleColumns.length > 0 && !!rows.length) && (
-      <Stack
-        fill={false}
-        direction="row"
-        columnGap={16}
-        verticalAlign="center"
-        horizontalAlign="end"
-        verticalPadding={16}
-      >
-        <Stack direction="row" columnGap={4}>
-          <Text as="label" htmlFor={uid('table-i-per-page')} size={14}>Items per page:</Text>
-          <Select
-            value={pageSize}
-            dimension="small"
-            id={uid('table-i-per-page')}
-            onChange={e => { setPageSize(Number(e.target.value)) }}
-          >
-            {pageClusters.map(pSize => (
-              <option key={pSize} value={pSize}>{pSize}</option>
-            ))}
-          </Select>
-        </Stack>
-        <Text aria-hidden="true" weight="bold" size={14}>
-          { /* `${pageIndex * pageSize + 1}-${(totalRows && pageIndex * pageSize + pageSize > totalRows) ? totalRows : pageIndex * pageSize + pageSize} of ${totalRows || rows.length}` */}
-          {`${parseInt(page[0]?.id) + 1}-${parseInt(page[page.length - 1]?.id) + 1} of ${data.length}`}
-        </Text>
-        <Pagination
-          itemsCount={rows.length}
-          itemsPerPage={itemsPerPage}
-          pageCount={totalRows ? Math.ceil(totalRows / pageSize) : pageCount}
-          onPageClick={({ selected }) => gotoPage(selected)}
-          renderOnZeroPageCount={() => null}
-          forcePage={showPagination && fetchData ? pageIndex : undefined}
-        />
-      </Stack>
+        <TablePagination
+          clusters={pageClusters}
+          pageSize={pageSize}
+          onPageSizeChange={newPageSize => setPageSize(newPageSize)}
+        >
+          <Pagination
+            itemsCount={rows.length}
+            itemsPerPage={itemsPerPage}
+            pageCount={totalRows ? Math.ceil(totalRows / pageSize) : pageCount}
+            onPageClick={({ selected }) => gotoPage(selected)}
+            renderOnZeroPageCount={() => null}
+            forcePage={showPagination && fetchData ? pageIndex : undefined}
+          />
+        </TablePagination>
       )}
     </div>
   )
