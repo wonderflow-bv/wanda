@@ -5,27 +5,23 @@ import { CustomColumnInstanceType } from '../types'
 type ToggleColumnsControlProps = {
   columns: CustomColumnInstanceType[]
   visibleColumns: CustomColumnInstanceType[]
-  onToggleAll: (columnsId: string[]) => void
 }
 
 export const ToggleColumnsControl = ({
   columns,
-  visibleColumns,
-  onToggleAll
+  visibleColumns
 }: ToggleColumnsControlProps) => {
-  const filteredColumns = useMemo(() => visibleColumns.filter((col) => !col.hideFromList), [visibleColumns])
-
-  console.log(columns.length, filteredColumns.length)
+  const filteredColumns = useMemo(() => columns.filter(col => !col.hideFromList), [columns])
 
   const handleToggleAll = useCallback(
     () => {
-      if (filteredColumns.length !== 0) {
-        filteredColumns.map((col) => col.toggleHidden(true))
+      if (visibleColumns.length !== 0) {
+        visibleColumns.map((col) => col.toggleHidden(true))
       } else {
-        columns.filter(col => !col.hideFromList).map((col) => col.toggleHidden(false))
+        filteredColumns.filter(col => !col.hideFromList).map((col) => col.toggleHidden(false))
       }
     },
-    [columns, filteredColumns]
+    [filteredColumns, visibleColumns]
   )
 
   return (
@@ -37,7 +33,7 @@ export const ToggleColumnsControl = ({
         <Menu.ItemCheckbox
           onClick={() => handleToggleAll()}
           checked
-          icon={filteredColumns.length === 0 ? 'check' : 'minus'}
+          icon={visibleColumns.length === 0 ? 'check' : 'minus'}
         >
           Toggle All
         </Menu.ItemCheckbox>

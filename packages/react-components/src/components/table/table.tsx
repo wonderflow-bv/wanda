@@ -15,7 +15,7 @@ import { useUIDSeed } from 'react-uid'
 import styles from './table.module.css'
 import { CSSProperties, Fragment, ReactNode, useEffect, useMemo, ComponentType } from 'react'
 import { Text, Stack, IconButton, Pagination, Select } from '@/components'
-import { CellType, CustomColumnsType, HeaderGroupType, OptionalDataTypes, PaginationType } from './types'
+import { CellType, CustomColumnInstanceType, CustomColumnsType, HeaderGroupType, OptionalDataTypes, PaginationType } from './types'
 import { TableExpand } from './table-expand'
 
 export type TableProps<T extends object> = PropsWithClass & {
@@ -39,8 +39,15 @@ export type TableProps<T extends object> = PropsWithClass & {
    * The index of the page that should be set as active when the table is rendered.
    */
   activePageIndex?: number
-
+  /**
+   * The callback that is called when the active page index and pageSize change.
+   * Passing this property along side `showPagination` will enable manual pagination,
+   * disabling the default pagination.
+   */
   fetchData?: ({ pageIndex, pageSize }: PaginationType) => Promise<void>
+  /**
+   * Set the number of pages to show in the pagination. Used only when doing manual pagination.
+   */
   numberOfPages?: number
   /**
    * Set clusters of items to show in a single page. These values are used to
@@ -245,6 +252,7 @@ export const Table = <T extends object>({
   }, [fetchData, pageIndex, pageSize])
 
   const rowEntries = useMemo(() => showPagination ? page : rows, [page, rows, showPagination])
+  const filteredVisibleColumns = useMemo(() => visibleColumns.filter((col: CustomColumnInstanceType) => !col.hideFromList), [visibleColumns])
 
   const dynamicStyle: CSSProperties = {
     '--table-height': height,
@@ -284,85 +292,89 @@ export const Table = <T extends object>({
       {(showHeader || selectableRows) && (
         <TableHeader title={title}>
           {columnsControl && (
-          <ToggleColumnsControl
-            columns={allColumns}
-            visibleColumns={visibleColumns}
-            onToggleAll={(columns) => setHiddenColumns(columns)}
-          />
+            <ToggleColumnsControl
+              columns={allColumns}
+              visibleColumns={filteredVisibleColumns}
+            />
           )}
           {actions}
         </TableHeader>
       )}
 
       {/* TABLE */}
-      <div className={styles.TableWrapper}>
-        <table
-          className={styles.TableElement}
-          data-table-stripes={stripes}
-          data-table-separators={showSeparators}
-          aria-labelledby={uid('table-title')}
-          {...getTableProps()}
-          {...otherProps}
-        >
+      {filteredVisibleColumns.length > 0
+        ? (
+          <div className={styles.TableWrapper}>
+            <table
+              className={styles.TableElement}
+              data-table-stripes={stripes}
+              data-table-separators={showSeparators}
+              aria-labelledby={uid('table-title')}
+              {...getTableProps()}
+              {...otherProps}
+            >
 
-          {/* THEAD */}
-          <thead role="rowgroup" className={styles.THead}>
-            {headerGroups.map(headerGroup => (
-              <TableRow {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column: HeaderGroupType) => (
-                  <TableCell
-                    as="th"
-                    width={column.minWidth === 0 ? undefined : column.minWidth}
-                    collapsed={column.isCollapsed}
-                    isSorted={column.isSorted}
-                    isSortedDesc={column.isSorted && column.isSortedDesc}
-                    align={column.align}
-                    {...column.getHeaderProps(column.getSortByToggleProps())}
-                  >
-                    {column.render('Header')}
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))}
-          </thead>
-
-          {/* TBODY */}
-          <tbody role="rowgroup" className={styles.TBody} {...getTableBodyProps()}>
-            {rowEntries.map((row) => {
-              prepareRow(row)
-              return (
-                <Fragment key={row.id}>
-                  <TableRow {...row.getRowProps()}>
-                    {row.cells.map((cell: CellType) => (
+              {/* THEAD */}
+              <thead role="rowgroup" className={styles.THead}>
+                {headerGroups.map(headerGroup => (
+                  <TableRow {...headerGroup.getHeaderGroupProps()}>
+                    {headerGroup.headers.map((column: HeaderGroupType) => (
                       <TableCell
-                        collapsed={cell.column.isCollapsed}
-                        isExpander={cell.column.expander}
-                        expanded={row.isExpanded}
-                        depth={row.depth}
-                        width={cell.column.minWidth === 0 ? undefined : cell.column.minWidth}
-                        align={cell.column.align}
-                        hasSubrows={!!row.subRows?.length}
-                        {...cell.getCellProps()}
+                        as="th"
+                        width={column.minWidth === 0 ? undefined : column.minWidth}
+                        collapsed={column.isCollapsed}
+                        isSorted={column.isSorted}
+                        isSortedDesc={column.isSorted && column.isSortedDesc}
+                        align={column.align}
+                        {...column.getHeaderProps(column.getSortByToggleProps())}
                       >
-                        {cell.render('Cell')}
+                        {column.render('Header')}
                       </TableCell>
                     ))}
                   </TableRow>
-                  {(row.subRows && row.isExpanded && ExpandableRowsComponent) && row.subRows.map((subRow) =>
-                    (
-                      <TableRow data-table-row-expander key={subRow.id}>
-                        <TableCell padding={false} colSpan={100}>
-                          <TableExpand data={subRow.original} component={ExpandableRowsComponent} />
-                        </TableCell>
+                ))}
+              </thead>
+
+              {/* TBODY */}
+              <tbody role="rowgroup" className={styles.TBody} {...getTableBodyProps()}>
+                {rowEntries.map((row) => {
+                  prepareRow(row)
+                  return (
+                    <Fragment key={row.id}>
+                      <TableRow {...row.getRowProps()}>
+                        {row.cells.map((cell: CellType) => (
+                          <TableCell
+                            collapsed={cell.column.isCollapsed}
+                            isExpander={cell.column.expander}
+                            expanded={row.isExpanded}
+                            depth={row.depth}
+                            width={cell.column.minWidth === 0 ? undefined : cell.column.minWidth}
+                            align={cell.column.align}
+                            hasSubrows={!!row.subRows?.length}
+                            {...cell.getCellProps()}
+                          >
+                            {cell.render('Cell')}
+                          </TableCell>
+                        ))}
                       </TableRow>
-                    )
-                  )}
-                </Fragment>
-              )
-            })}
-          </tbody>
-        </table>
-      </div>
+                      {(row.subRows && row.isExpanded && ExpandableRowsComponent) && row.subRows.map((subRow) =>
+                        (
+                          <TableRow data-table-row-expander key={subRow.id}>
+                            <TableCell padding={false} colSpan={100}>
+                              <TableExpand data={subRow.original} component={ExpandableRowsComponent} />
+                            </TableCell>
+                          </TableRow>
+                        )
+                      )}
+                    </Fragment>
+                  )
+                })}
+              </tbody>
+            </table>
+          </div>
+          )
+        : <div style={{ height: 600 }}>EMPTY STATE</div>
+      }
 
       {/* PAGINATION */}
       {showPagination && (
