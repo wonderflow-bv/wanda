@@ -9,15 +9,15 @@ import { TableCell } from './table-cell'
 import { TableCheckbox } from './table-checkbox'
 import { TableHeader, TableHeaderProps } from './table-header'
 import { ToggleColumnsControl } from './table-controls'
+import { TableExpand } from './table-expand'
+import { TablePagination, TablePaginationProps } from './table-pagination'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useUIDSeed } from 'react-uid'
 
 import styles from './table.module.css'
 import { CSSProperties, Fragment, ReactNode, useEffect, useMemo, ComponentType } from 'react'
-import { Text, Stack, IconButton } from '@/components'
+import { Text, Stack, IconButton, Skeleton } from '@/components'
 import { CellType, CustomColumnInstanceType, CustomColumnsType, HeaderGroupType, OptionalDataTypes, PaginationType } from './types'
-import { TableExpand } from './table-expand'
-import { TablePagination, TablePaginationProps } from './table-pagination'
 
 export type TableProps<T extends object> = PropsWithClass & {
   /**
@@ -72,6 +72,10 @@ export type TableProps<T extends object> = PropsWithClass & {
    * Add an alternate style to the table rows
    */
   stripes?: boolean
+  /**
+   * Set the loading state of the table. This will sho skeleton loaders instead of the actual data.
+   */
+  loading?: boolean
   /**
    * Enable horizontal separators between the table rows
    */
@@ -142,6 +146,7 @@ export const Table = <T extends object>({
   columnsControl = false,
   defaultHiddenColumns,
   height,
+  loading,
   background = 'var(--global-background)',
   expandableRowsComponent: ExpandableRowsComponent,
   actionsRowComponent: ActionsRowComponent,
@@ -201,7 +206,7 @@ export const Table = <T extends object>({
     (hooks: Hooks<T>) => {
       const checkboxColumn: CustomColumnsType<T> = [{
         id: 'selection',
-        Header: ({ getToggleAllRowsSelectedProps }) => <TableCheckbox {...getToggleAllRowsSelectedProps()} />,
+        Header: ({ getToggleAllRowsSelectedProps }) => !loading ? <TableCheckbox {...getToggleAllRowsSelectedProps()} /> : null,
         Cell: ({ row }: {row: Row<T>}) => <TableCheckbox {...row.getToggleRowSelectedProps()} />,
         isCollapsed: true,
         hideFromList: true
@@ -213,12 +218,16 @@ export const Table = <T extends object>({
         hideFromList: true,
         expander: true,
         Header: ({ getToggleAllRowsExpandedProps, isAllRowsExpanded }) => (
-          <IconButton
-            kind="flat"
-            dimension="small"
-            icon={isAllRowsExpanded ? 'chevron-down' : 'chevron-right'}
-            {...getToggleAllRowsExpandedProps()}
-          />
+          !loading
+            ? (
+              <IconButton
+                kind="flat"
+                dimension="small"
+                icon={isAllRowsExpanded ? 'chevron-down' : 'chevron-right'}
+                {...getToggleAllRowsExpandedProps()}
+              />
+              )
+            : null
         ),
         Cell: ({ row }: {row: Row<T>}) => row.canExpand
           ? (
@@ -353,38 +362,44 @@ export const Table = <T extends object>({
 
               {/* TBODY */}
               <tbody role="rowgroup" className={styles.TBody} {...getTableBodyProps()}>
-                {rowEntries.map((row) => {
-                  prepareRow(row)
-                  return (
-                    <Fragment key={row.id}>
-                      <TableRow {...row.getRowProps()}>
-                        {row.cells.map((cell: CellType) => (
-                          <TableCell
-                            collapsed={cell.column.isCollapsed}
-                            isExpander={cell.column.expander}
-                            expanded={row.isExpanded}
-                            depth={row.depth}
-                            width={cell.column.minWidth === 0 ? undefined : cell.column.minWidth}
-                            align={cell.column.align}
-                            hasSubrows={!!row.subRows?.length}
-                            {...cell.getCellProps()}
-                          >
-                            {cell.render('Cell')}
-                          </TableCell>
-                        ))}
-                      </TableRow>
-                      {(row.subRows && row.isExpanded && ExpandableRowsComponent) && row.subRows.map((subRow) =>
-                        (
-                          <TableRow data-table-row-expander key={subRow.id}>
-                            <TableCell padding={false} colSpan={100}>
-                              <TableExpand data={subRow.original} component={ExpandableRowsComponent} />
+                {loading
+                  ? (
+                    <TableRow>
+                      <TableCell style={{ lineHeight: 3 }} colSpan={200}><Skeleton height={40} count={10} /></TableCell>
+                    </TableRow>
+                    )
+                  : rowEntries.map((row) => {
+                    prepareRow(row)
+                    return (
+                      <Fragment key={row.id}>
+                        <TableRow {...row.getRowProps()}>
+                          {row.cells.map((cell: CellType) => (
+                            <TableCell
+                              collapsed={cell.column.isCollapsed}
+                              isExpander={cell.column.expander}
+                              expanded={row.isExpanded}
+                              depth={row.depth}
+                              width={cell.column.minWidth === 0 ? undefined : cell.column.minWidth}
+                              align={cell.column.align}
+                              hasSubrows={!!row.subRows?.length}
+                              {...cell.getCellProps()}
+                            >
+                              {cell.render('Cell')}
                             </TableCell>
-                          </TableRow>
-                        )
-                      )}
-                    </Fragment>
-                  )
-                })}
+                          ))}
+                        </TableRow>
+                        {(row.subRows && row.isExpanded && ExpandableRowsComponent) && row.subRows.map((subRow) =>
+                          (
+                            <TableRow data-table-row-expander key={subRow.id}>
+                              <TableCell padding={false} colSpan={100}>
+                                <TableExpand data={subRow.original} component={ExpandableRowsComponent} />
+                              </TableCell>
+                            </TableRow>
+                          )
+                        )}
+                      </Fragment>
+                    )
+                  })}
               </tbody>
             </table>
           </div>

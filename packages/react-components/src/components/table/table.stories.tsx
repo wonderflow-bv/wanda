@@ -12,6 +12,7 @@ export default {
   args: {
     stripes: false,
     selectableRows: false,
+    showSeparators: true,
     showHeader: false,
     columns: [
       {
@@ -631,4 +632,11 @@ ManualPagination.args = {
   selectableRows: true,
   showPagination: true,
   itemsPerPage: 5
+}
+
+export const Loading = Template.bind({})
+Loading.args = {
+  columnsControl: true,
+  showHeader: true,
+  loading: true
 }
