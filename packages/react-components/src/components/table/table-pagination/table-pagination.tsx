@@ -1,11 +1,16 @@
-import { Select, Stack, Text } from '@/components'
-import { FC } from 'react'
+import { Select, Stack, Text, Pagination } from '@/components'
+import { FC, useMemo } from 'react'
 import { useUIDSeed } from 'react-uid'
 
 export type TablePaginationProps = PropsWithClass & {
   clusters?: Array<number>
-  pageSize?: number
+  pageSize: number
+  totalItems: number
+  totalPages: number
+  currentPage: number
   onPageSizeChange?: (pageSize: number) => void
+  onPageClick?: (page: number) => void
+  isManual?: boolean
 }
 
 export const TablePagination: FC<TablePaginationProps> = ({
@@ -13,9 +18,17 @@ export const TablePagination: FC<TablePaginationProps> = ({
   pageSize,
   onPageSizeChange,
   clusters = [5, 10, 20, 30, 50, 100],
+  totalItems,
+  currentPage,
+  isManual,
+  totalPages,
+  onPageClick,
   ...otherProps
 }) => {
   const uid = useUIDSeed()
+  const computedPageCount = useMemo(() => isManual ? Math.ceil(totalItems / pageSize) : totalPages, [isManual, pageSize, totalItems, totalPages])
+  const computedItemsInPageStart = useMemo(() => (currentPage && pageSize) && currentPage * pageSize, [currentPage, pageSize])
+  const computedItemsInPageEnd = useMemo(() => currentPage * pageSize + pageSize, [currentPage, pageSize])
 
   return (
     <Stack
@@ -41,10 +54,16 @@ export const TablePagination: FC<TablePaginationProps> = ({
         </Select>
       </Stack>
       <Text aria-hidden="true" weight="bold" size={14}>
-        { /* `${pageIndex * pageSize + 1}-${(totalRows && pageIndex * pageSize + pageSize > totalRows) ? totalRows : pageIndex * pageSize + pageSize} of ${totalRows || rows.length}` */}
-        {/* {`${parseInt(page[0]?.id) + 1}-${parseInt(page[page.length - 1]?.id) + 1} of ${data.length}`} */}
+        {`${computedItemsInPageStart + 1}-${computedItemsInPageEnd > totalItems ? totalItems : computedItemsInPageEnd} of ${totalItems}`}
       </Text>
-      {children}
+      <Pagination
+        itemsCount={totalItems}
+        itemsPerPage={pageSize}
+        pageCount={computedPageCount}
+        onPageClick={({ selected }) => onPageClick && onPageClick(selected)}
+        renderOnZeroPageCount={() => null}
+        forcePage={currentPage}
+      />
     </Stack>
   )
 }

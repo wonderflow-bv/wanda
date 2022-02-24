@@ -14,7 +14,7 @@ import { useUIDSeed } from 'react-uid'
 
 import styles from './table.module.css'
 import { CSSProperties, Fragment, ReactNode, useEffect, useMemo, ComponentType } from 'react'
-import { Text, Stack, IconButton, Pagination } from '@/components'
+import { Text, Stack, IconButton } from '@/components'
 import { CellType, CustomColumnInstanceType, CustomColumnsType, HeaderGroupType, OptionalDataTypes, PaginationType } from './types'
 import { TableExpand } from './table-expand'
 import { TablePagination, TablePaginationProps } from './table-pagination'
@@ -396,17 +396,13 @@ export const Table = <T extends object>({
         <TablePagination
           clusters={pageClusters}
           pageSize={pageSize}
+          totalItems={totalRows || rows.length}
+          currentPage={pageIndex}
+          totalPages={pageCount}
+          isManual={Boolean(isManualPaginated && totalRows)}
           onPageSizeChange={newPageSize => setPageSize(newPageSize)}
-        >
-          <Pagination
-            itemsCount={rows.length}
-            itemsPerPage={itemsPerPage}
-            pageCount={(isManualPaginated && totalRows) ? Math.ceil(totalRows / pageSize) : pageCount}
-            onPageClick={({ selected }) => gotoPage(selected)}
-            renderOnZeroPageCount={() => null}
-            forcePage={showPagination && fetchData ? pageIndex : undefined}
-          />
-        </TablePagination>
+          onPageClick={(selected) => gotoPage(selected)}
+        />
       )}
     </div>
   )
