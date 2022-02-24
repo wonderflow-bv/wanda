@@ -496,16 +496,8 @@ export const SelectedRows = Template.bind({})
 SelectedRows.args = {
   title: 'With selectable rows',
   selectableRows: true,
-  selectedActions: (<Button>Delete</Button>)
-}
-
-SelectedRows.argTypes = {
-  onSelectionChange: {
-    action: (rows) => { console.log(rows) },
-    table: {
-      disable: true
-    }
-  }
+  selectedActions: (<Button>Delete</Button>),
+  onSelectionChange: (selectedRows, selectedIds) => { console.log({ selectedRows, selectedIds }) }
 }
 
 export const HidingColumn = Template.bind({})
@@ -528,13 +520,6 @@ WithTableActions.args = {
   title: <Title level="3">Custom title element</Title>,
   showHeader: true,
   actions: <Button>Custom action</Button>
-}
-
-export const Expandable = Template.bind({})
-Expandable.args = {
-  columnsControl: true,
-  selectableRows: true,
-  showHeader: true
 }
 
 export const CustomExpandable = Template.bind({})

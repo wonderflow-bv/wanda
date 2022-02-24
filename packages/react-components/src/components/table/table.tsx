@@ -2,7 +2,7 @@
 import clsx from 'clsx'
 import {
   useTable, useSortBy, useRowSelect, usePagination,
-  Row, useExpanded, Hooks
+  Row, useExpanded, Hooks, IdType
 } from 'react-table'
 import { TableRow } from './table-row'
 import { TableCell } from './table-cell'
@@ -63,7 +63,7 @@ export type TableProps<T extends object> = PropsWithClass & {
   /**
    * Callback run when the selected rows change
    */
-  onSelectionChange?(selectedRows?: Row[]): void
+  onSelectionChange?(selectedRows?: Row[], selectedRowIds?: Record<IdType<T>, boolean>): void
   /**
    * Add an alternate style to the table rows
    */
@@ -85,8 +85,8 @@ export type TableProps<T extends object> = PropsWithClass & {
    */
   columnsControl?: boolean
   /**
-  * Pass custom actions to the table header
-  */
+   * Pass custom actions to the table header
+   */
   actions?: ReactNode
   /**
    * Set the label for selected items in the table. Default to "Selected items"
@@ -97,8 +97,8 @@ export type TableProps<T extends object> = PropsWithClass & {
   */
   selectedActions?: ReactNode
   /**
-  * Set the table height (including header) after which the table will scroll.
-  */
+   * Set the table height (including header) after which the table will scroll.
+   */
   height?: string
   /**
    * Set the table background color. This must be set if `height` is set because
@@ -170,7 +170,7 @@ export const Table = <T extends object>({
     visibleColumns,
     setPageSize,
     setHiddenColumns,
-    state: { pageSize, pageIndex }
+    state: { pageSize, pageIndex, selectedRowIds }
   } = useTable(
     {
       columns,
@@ -179,8 +179,9 @@ export const Table = <T extends object>({
       autoResetHiddenColumns: false,
       autoResetPage: false,
       manualPagination: isManualPaginated,
+      autoResetSelectedRows: false,
       pageCount: (isManualPaginated && totalRows) ? Math.ceil(totalRows / itemsPerPage) : 10,
-      // This prop prevent expanded rows to be placed in the next page. But it breaks row selection
+      // This `paginateExpandedRows` prop prevent expanded rows to be placed in the next page. But it breaks row selection
       // paginateExpandedRows: !showPagination,
       initialState: {
         pageIndex: activePageIndex,
@@ -253,8 +254,8 @@ export const Table = <T extends object>({
   }, [selectableRows, setHiddenColumns, ExpandableRowsComponent, hasSomeExpandableRows, ActionsRowComponent])
 
   useEffect(() => {
-    onSelectionChange && onSelectionChange(selectedFlatRows)
-  }, [onSelectionChange, selectedFlatRows])
+    onSelectionChange && onSelectionChange(selectedFlatRows, selectedRowIds)
+  }, [onSelectionChange, selectedFlatRows, selectedRowIds])
 
   useEffect(() => {
     fetchData && fetchData({ pageIndex, pageSize })
