@@ -29,6 +29,10 @@ export type TableProps<T extends object> = PropsWithClass & {
    */
   data: Array<T & OptionalDataTypes<T>>,
   /**
+   * Define the default visibility of the columns. This is an array of columns `id`,
+   */
+  defaultHiddenColumns? : Array<IdType<T>>,
+  /**
    * Show pagination below the table. This is recommended only for tables with a lot of rows.
    */
   showPagination?: boolean
@@ -136,6 +140,7 @@ export const Table = <T extends object>({
   selectedLabel = 'Selected items',
   showHeader = false,
   columnsControl = false,
+  defaultHiddenColumns,
   height,
   background = 'var(--global-background)',
   expandableRowsComponent: ExpandableRowsComponent,
@@ -227,13 +232,12 @@ export const Table = <T extends object>({
           : null
       }]
 
-      const actionsColumn: CustomColumnsType<T> =
-        [{
-          id: 'actions',
-          isCollapsed: true,
-          hideFromList: true,
-          Cell: ({ row }: {row: Row<T>}) => ActionsRowComponent ? <ActionsRowComponent {...row} /> : null
-        }]
+      const actionsColumn: CustomColumnsType<T> = [{
+        id: 'actions',
+        isCollapsed: true,
+        hideFromList: true,
+        Cell: ({ row }: {row: Row<T>}) => ActionsRowComponent ? <ActionsRowComponent {...row} /> : null
+      }]
 
       hooks.visibleColumns.push((columns) => [
         ...checkboxColumn,
@@ -245,13 +249,13 @@ export const Table = <T extends object>({
   )
 
   useEffect(() => {
-    const visibleColumns = []
-    if (!selectableRows) visibleColumns.push('selection')
-    if (!hasSomeExpandableRows) visibleColumns.push('expander')
-    if (!ActionsRowComponent) visibleColumns.push('actions')
+    const artificialColumns = defaultHiddenColumns || []
+    if (!selectableRows) artificialColumns.push('selection')
+    if (!hasSomeExpandableRows) artificialColumns.push('expander')
+    if (!ActionsRowComponent) artificialColumns.push('actions')
 
-    setHiddenColumns(visibleColumns)
-  }, [selectableRows, setHiddenColumns, ExpandableRowsComponent, hasSomeExpandableRows, ActionsRowComponent])
+    setHiddenColumns(artificialColumns)
+  }, [selectableRows, setHiddenColumns, defaultHiddenColumns, ExpandableRowsComponent, hasSomeExpandableRows, ActionsRowComponent])
 
   useEffect(() => {
     onSelectionChange && onSelectionChange(selectedFlatRows, selectedRowIds)

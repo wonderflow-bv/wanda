@@ -15,24 +15,29 @@ export default {
     showHeader: false,
     columns: [
       {
+        id: 'firstname',
         Header: 'First Name',
         accessor: 'firstName'
       },
       {
+        id: 'lastname',
         Header: 'Last Name',
         accessor: 'lastName'
       },
       {
+        id: 'address',
         Header: 'Address',
         accessor: 'address'
       },
       {
+        id: 'uid',
         Header: 'UID',
         accessor: 'uid',
         minWidth: 200,
         align: 'end'
       },
       {
+        id: 'info',
         Header: 'Info',
         accessor: 'info',
         align: 'end',
@@ -496,7 +501,7 @@ export const SelectedRows = Template.bind({})
 SelectedRows.args = {
   title: 'With selectable rows',
   selectableRows: true,
-  selectedActions: (<Button>Delete</Button>),
+  selectedActions: <Button>Delete</Button>,
   onSelectionChange: (selectedRows, selectedIds) => { console.log({ selectedRows, selectedIds }) }
 }
 
@@ -504,6 +509,13 @@ export const HidingColumn = Template.bind({})
 HidingColumn.args = {
   showHeader: true,
   columnsControl: true
+}
+
+export const defaultHiddenColumns = Template.bind({})
+defaultHiddenColumns.args = {
+  showHeader: true,
+  columnsControl: true,
+  defaultHiddenColumns: ['address', 'uid']
 }
 
 export const Scrollable = Template.bind({})
