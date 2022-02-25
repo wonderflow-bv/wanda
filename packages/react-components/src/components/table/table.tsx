@@ -147,7 +147,7 @@ export const Table = <T extends object>({
   defaultHiddenColumns,
   height,
   loading,
-  background = 'var(--global-background)',
+  background,
   expandableRowsComponent: ExpandableRowsComponent,
   actionsRowComponent: ActionsRowComponent,
   emptyComponent,
@@ -302,8 +302,16 @@ export const Table = <T extends object>({
             fill={false}
             columnGap={16}
             initial={{ y: '-100%', opacity: 0 }}
-            animate={{ y: 0, opacity: 1, transition: { duration: 0.2, ease: 'easeOut' } }}
-            exit={{ y: '-100%', opacity: 0, transition: { ease: 'easeInOut' } }}
+            animate={{
+              y: 0,
+              opacity: 1,
+              transition: {
+                type: 'spring',
+                stiffness: 700,
+                damping: 30
+              }
+            }}
+            exit={{ y: '-100%', opacity: 0 }}
           >
             <Text as="span" size={14} weight="bold">{`${selectedLabel}: ${selectedFlatRows.length}`}</Text>
             {selectedActions}

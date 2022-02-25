@@ -18,29 +18,30 @@ export default {
       {
         id: 'firstname',
         Header: 'First Name',
-        accessor: 'firstName'
+        accessor: row => row.firstName
       },
       {
         id: 'lastname',
         Header: 'Last Name',
-        accessor: 'lastName'
+        accessor: row => row.lastName
       },
       {
         id: 'address',
         Header: 'Address',
-        accessor: 'address'
+        accessor: row => row.address
       },
       {
         id: 'uid',
         Header: 'UID',
-        accessor: 'uid',
+        accessor: row => row.uid,
         minWidth: 200,
         align: 'end'
       },
       {
         id: 'info',
         Header: 'Info',
-        accessor: 'info',
+        accessor: row => row.info,
+        disableSortBy: true,
         align: 'end',
         minWidth: 180
       }
