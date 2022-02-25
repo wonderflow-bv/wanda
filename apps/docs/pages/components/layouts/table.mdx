@@ -127,7 +127,7 @@ export const example = `<Table
   actions={<Button kind="secondary">See more</Button>}
   selectedActions={<Button>Delete</Button>}
   showPagination
-  itemsPerPage={3}
+  itemsPerPage={5}
 />`;
 
 export default ({ children }) => (
@@ -229,7 +229,7 @@ This component extends [`react-table`](https://react-table.tanstack.com/docs/ove
     {
       name: "itemsPerPage",
       type: ["number"],
-      default: "20",
+      default: "10",
       required: false,
       description: "The amount of entries to show for each page.",
     },
@@ -378,7 +378,7 @@ This component extends [`react-table`](https://react-table.tanstack.com/docs/ove
       description: "A react component that add custom actions to rows. If fuction is passed, the function will be called with the `row` data and the function must return a component.",
     },
     {
-      name: "actionsRowComponent",
+      name: "emptyComponent",
       type: ["ReactNode"],
       default: "",
       required: false,

@@ -163,7 +163,7 @@ export const Table = <T extends object>({
   emptyComponent,
   showPagination,
   onDataUpdate,
-  itemsPerPage = 20,
+  itemsPerPage = 10,
   totalRows,
   activePageIndex = 0,
   pageClusters,

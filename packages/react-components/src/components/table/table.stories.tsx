@@ -549,7 +549,7 @@ Pagination.args = {
   columnsControl: true,
   showHeader: true,
   selectableRows: true,
-  itemsPerPage: 10,
+  itemsPerPage: 3,
   showPagination: true
 }
 
