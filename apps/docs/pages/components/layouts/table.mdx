@@ -5,32 +5,29 @@ import * as Components from "@wonderflow/react-components";
 
 export const columns = [
   {
-    name: "ID",
-    selector: (row) => row.id,
+    id: "id",
+    Header: "ID",
+    accessor: (row) => row.id,
     width: "80px",
-    sortable: true,
-    reorder: true,
+    disableSortBy: true,
+    isCollapsed: true
   },
   {
-    name: "First column",
-    selector: (row) => row.someKey,
-    sortable: true,
-    reorder: true,
-    hide: "sm",
+    id: "someKey",
+    Header: "First column",
+    accessor: (row) => row.someKey,
   },
   {
-    name: "Second column",
-    selector: (row) => row.anotherKey,
-    sortable: true,
-    reorder: true,
-    hide: "md",
+    id: 'anotherKey',
+    Header: "Second column",
+    accessor: (row) => row.anotherKey,
   },
   {
-    name: "Value",
-    selector: (row) => row.value,
-    sortable: true,
-    reorder: true,
-    right: true,
+    id: "value",
+    Header: "Value",
+    accessor: (row) => row.value,
+    disableSortBy: true,
+    align: 'end',
   },
 ];
 
@@ -122,15 +119,15 @@ export const data = [
 ];
 
 export const example = `<Table
-  noHeader={false}
+  showHeader={true}
   title={<Title level="5">Sample Title</Title>}
   columns={columns}
   data={data}
   selectableRows
   actions={<Button kind="secondary">See more</Button>}
-  contextActions={<Button>Delete</Button>}
-  pagination
-  paginationPerPage={3}
+  selectedActions={<Button>Delete</Button>}
+  showPagination
+  itemsPerPage={3}
 />`;
 
 export default ({ children }) => (
@@ -175,12 +172,12 @@ export default () => {
 
 ## API Reference
 
-This component extends the [`react-data-table-component`](https://github.com/jbetancur/react-data-table-component) library, which exposes different props that enables multiple functionalities, including (but not limited to) `fixedHeader`, `pagination`, `striped`, and `responsive`.
+This component extends [`react-table`](https://react-table.tanstack.com/docs/overview) library, which exposes different props that enables multiple functionalities, including (but not limited to) sorting, pagination, and expanded rows.
 
 <Components.Button
   kind="secondary"
   as="a"
-  href="https://react-data-table-component.netlify.app/?path=/docs/api-props--page"
+  href="https://react-table.tanstack.com/docs/api/overview"
   target="_blank"
   rel="noopener noreferrer"
 >
@@ -192,36 +189,200 @@ This component extends the [`react-data-table-component`](https://github.com/jbe
 <PropsTable
   properties={[
     {
-      name: "ExpandableRowsComponent",
-      type: ["React.FC<{data: T}>"],
+      name: "columns",
+      type: ["(Column<T> & ColumnOptions<T>)[]"],
+      typeValue: `ColumnOptions<T> = {
+        isCollapsed?: boolean;
+        align?: 'start' | 'center' | 'end';
+        hideFromList?: boolean;
+      }`,
+      typeLink: 'https://react-table.tanstack.com/docs/api/useTable#column-options',
+      default: "",
+      required: true,
+      description: "Define the columns and headers of the table.",
+    },
+    {
+      name: "data",
+      type: ["({} & DataOptions<T>)[]"],
+      typeValue: `DataOptions<T> = {
+        subRows?: T[];
+        actions?: ReactNode | ReactNode[];
+      }`,
+      default: "[]",
+      required: true,
+      description: "Pass the data structure to the table. Each object key can be used as `accessor` for a column.",
+    },
+    {
+      name: "defaultHiddenColumns",
+      type: "Array<IdType<T>>",
       default: "",
       required: false,
-      description: "A react component that add additional content when the row is expanded. By passing this prop, the row will be expandable.",
+      description: "Define the default visibility of the columns. This is an array of columns `id`",
     },
     {
-      name: "collapsedRowIcon",
-      type: "enum",
-      typeValue: "IconProps['source']",
-      typeLink: "/components/other/icon#prop-source",
-      default: "chevron-right",
+      name: "showPagination",
+      type: "boolean",
+      default: "",
       required: false,
-      description: "Set the icon to use when the expandable rows are collapsed.",
+      description: "Show pagination below the table. This is recommended only for tables with a lot of rows.",
     },
     {
-      name: "expandedRowIcon",
-      type: "enum",
-      typeValue: "IconProps['source']",
-      typeLink: "/components/other/icon#prop-source",
-      default: "chevron-down",
+      name: "itemsPerPage",
+      type: ["number"],
+      default: "20",
       required: false,
-      description: "Set the icon used to collapse a row",
+      description: "The amount of entries to show for each page.",
     },
     {
-      name: "minRowHeight",
+      name: "activePageIndex",
+      type: ["number"],
+      default: "0",
+      required: false,
+      description: "The index of the page that should be set as active when the table is rendered.",
+    },
+    {
+      name: "onDataUpdate",
+      type: ["function"],
+      typeValue: `({ pageIndex, pageSize }) => Promise<void>`,
+      default: "",
+      required: false,
+      description: "The callback that is called when the active page index and page size change. Passing this property along side `showPagination` will enable manual pagination, disabling the automatic one.",
+    },
+    {
+      name: "totalRows",
+      type: ["number"],
+      default: "",
+      required: false,
+      description: "Set the number of pages to show in the pagination. Used only when doing manual pagination.",
+    },
+    {
+      name: "pageClusters",
+      type: ["Arrray<number>"],
+      default: "[5, 10, 20, 30, 50, 100]",
+      required: false,
+      description: "Set clusters of items to show in a single page. These values are used to compute the select options for the page size dropdown.",
+    },
+    {
+      name: "selectableRows",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      description: "Enable row selection. This property will render an additiona column at the start of the table, containing a checkbox.",
+    },
+    {
+      name: "onSelectionChange",
+      type: ["function"],
+      typeValue: "(selectedRows, selectedRowIds) => void",
+      default: "",
+      required: false,
+      description: "Callback run when the selected rows change",
+    },
+    {
+      name: "stripes",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      description: "Add an alternate background to the table rows",
+    },
+    {
+      name: "loading",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      description: "Set the loading state of the table. This will sho skeleton loaders instead of the actual data.",
+    },
+    {
+      name: "showSeparators",
+      type: ["boolean"],
+      default: "true",
+      required: false,
+      description: "Enable horizontal separators between the table rows.",
+    },
+    {
+      name: "title",
+      type: ["string", "Title"],
+      default: "",
+      required: false,
+      description: "Add an accessible title to the table component",
+    },
+    {
+      name: "showHeader",
+      type: ["boolean"],
+      default: "false",
+      required: false,
+      description: "Hide the header which includes the title and controls. This option is ignored and set to `true` if `selectableRows` is set to `true`.",
+    },
+    {
+      name: "showTableHead",
+      type: ["boolean"],
+      default: "true",
+      required: false,
+      description: "Hide the table header which includes columns names.",
+    },
+    {
+      name: "columnsControl",
+      type: ["boolean"],
+      default: "false",
+      required: false,
+      description: "Enable the dropdown to choose the visibility of the column.",
+    },
+    {
+      name: "actions",
+      type: ["ReactNode"],
+      default: "",
+      required: false,
+      description: "Pass custom actions to the table header.",
+    },
+    {
+      name: "selectedLabel",
       type: ["string"],
-      default: "48px",
+      default: "Selected items",
       required: false,
-      description: "Set minimum height for each row.",
+      description: "Set the label for selected items in the table.",
+    },
+    {
+      name: "selectedActions",
+      type: ["ReactNode"],
+      default: "",
+      required: false,
+      description: "Pass custom components to show when rows are selected.",
+    },
+    {
+      name: "height",
+      type: ["string"],
+      default: "",
+      required: false,
+      description: "Set the table height after which the table will scroll.",
+    },
+    {
+      name: "background",
+      type: ["string"],
+      default: "",
+      required: false,
+      description: "Set the table background color. This must be set if `height` is set because the color is used as background for sticky headers.",
+    },
+    {
+      name: "expandableRowsComponent",
+      type: ["ReactNode", "function"],
+      typeValue: "ReactNode | (subRow: T) => ReactNode",
+      default: "",
+      required: false,
+      description: "A react component that add additional content when the row is expanded. By passing this prop, the row will be expandable. If fuction is passed, the function will be called with the `subRow` data and the function must return a component.",
+    },
+    {
+      name: "actionsRowComponent",
+      type: ["ReactNode", "function"],
+      typeValue: "ReactNode | (row: Row<T>) => ReactNode",
+      default: "",
+      required: false,
+      description: "A react component that add custom actions to rows. If fuction is passed, the function will be called with the `row` data and the function must return a component.",
+    },
+    {
+      name: "actionsRowComponent",
+      type: ["ReactNode"],
+      default: "",
+      required: false,
+      description: "Custom component/empty state to show when the table has no data or all columns have been toggled off.",
     },
   ]}
 />

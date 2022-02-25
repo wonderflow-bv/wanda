@@ -1,10 +1,11 @@
-import { Stack, IconButton, Dropdown, Elevator, Card, Chip } from '@wonderflow/react-components'
+import { Stack, IconButton, Dropdown, Elevator, Card, Text } from '@wonderflow/react-components'
 import { useCallback, Fragment, useState } from 'react'
 import { Markdown } from '@/components/markdown'
 import { CodeBlock } from '../code-block'
 import { Prop } from './props-table'
 import styles from './props-table.module.css'
 import { useRouter } from 'next/router'
+import { outdent } from '@mvasilkov/outdent'
 
 export const PropsTableRow = ({
   name,
@@ -57,7 +58,6 @@ export const PropsTableRow = ({
       {/* Prop NAME and DESCRIPTION */}
       {name && (
       <div role="cell" className={styles.Cell}>
-        {toMDCode(name)}
         {description && (
           <Dropdown
             placement="top"
@@ -77,6 +77,8 @@ export const PropsTableRow = ({
             </Elevator>
           </Dropdown>
         )}
+        {toMDCode(name)}
+        {!required && <Text as="span" sentiment="warning" size={14}>?</Text>}
       </div>
       )}
 
@@ -119,13 +121,12 @@ export const PropsTableRow = ({
                   )}
                   hideCopy
                 >
-                  {typeValue}
+                  {outdent(typeValue)}
                 </CodeBlock>
               </Card>
             </Elevator>
           </Dropdown>
         )}
-        {required && <Chip color="yellow" dimension="small">required</Chip>}
       </div>
       )}
 

@@ -21,7 +21,7 @@ import { CellType, CustomColumnInstanceType, CustomColumnsType, HeaderGroupType,
 
 export type TableProps<T extends object> = PropsWithClass & {
   /**
-   * Define the column headers of the table.
+   * Define the columns and headers of the table.
    */
   columns: CustomColumnsType<T>,
   /**
@@ -86,6 +86,7 @@ export type TableProps<T extends object> = PropsWithClass & {
   title?: TableHeaderProps['title']
   /**
    * Hide the header which includes the title and controls.
+   * This option is ignored and set to `true` if `selectableRows` is set to `true`.
    */
   showHeader?: boolean
   /**
@@ -109,7 +110,7 @@ export type TableProps<T extends object> = PropsWithClass & {
   */
   selectedActions?: ReactNode
   /**
-   * Set the table height (including header) after which the table will scroll.
+   * Set the table height after which the table will scroll.
    */
   height?: string
   /**
@@ -119,11 +120,15 @@ export type TableProps<T extends object> = PropsWithClass & {
   background?: string
   /**
    * A react component that add additional content when the row is expanded.
-   * By passing this prop, the row will be expandable.
+   * By passing this prop, the row will be expandable. If fuction is passed,
+   * the function will be called with the `subRow` data and the function must return
+   * a component.
    */
   expandableRowsComponent?: ComponentType<T>;
   /**
-   * A react component that add custom actions to rows
+   * A react component that add custom actions to rows. If fuction is passed,
+   * the function will be called with the row data and the function must return
+   * a component.
    */
   actionsRowComponent?: ComponentType<Row<T>>;
   /**
@@ -161,7 +166,7 @@ export const Table = <T extends object>({
   itemsPerPage = 20,
   totalRows,
   activePageIndex = 0,
-  pageClusters = [5, 10, 20, 30, 50, 100],
+  pageClusters,
   ...otherProps
 }: TableProps<T>) => {
   const uid = useUIDSeed()
