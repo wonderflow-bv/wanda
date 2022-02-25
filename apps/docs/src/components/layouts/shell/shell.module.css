@@ -4,6 +4,7 @@
   --sidebar-width: 16.55rem;
 
   position: relative;
+  z-index: 0;
 }
 
 .Aside {
