@@ -365,7 +365,11 @@ export const Table = <T extends object>({
                 {loading
                   ? (
                     <TableRow>
-                      <TableCell style={{ lineHeight: 3 }} colSpan={200}><Skeleton height={40} count={10} /></TableCell>
+                      {visibleColumns.map(() => (
+                        <TableCell>
+                          <Skeleton gap={16} height={16} count={5} />
+                        </TableCell>
+                      ))}
                     </TableRow>
                     )
                   : rowEntries.map((row) => {
