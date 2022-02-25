@@ -620,7 +620,7 @@ const ManualPaginationTemplate: ComponentStory<typeof Table> = ({ data, ...args 
     <Table
       {...args}
       data={pageData}
-      fetchData={fetchData}
+      onDataUpdate={fetchData}
       totalRows={totalRows}
       emptyComponent={<CustomEmptyComponent />}
     />

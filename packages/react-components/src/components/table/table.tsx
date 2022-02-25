@@ -45,11 +45,11 @@ export type TableProps<T extends object> = PropsWithClass & {
    */
   activePageIndex?: number
   /**
-   * The callback that is called when the active page index and pageSize change.
+   * The callback that is called when the active page index and page size change.
    * Passing this property along side `showPagination` will enable manual pagination,
-   * disabling the default pagination.
+   * disabling the automatic one.
    */
-  fetchData?: ({ pageIndex, pageSize }: PaginationType) => Promise<void>
+  onDataUpdate?: ({ pageIndex, pageSize }: PaginationType) => Promise<void>
   /**
    * Set the number of pages to show in the pagination. Used only when doing manual pagination.
    */
@@ -157,7 +157,7 @@ export const Table = <T extends object>({
   actionsRowComponent: ActionsRowComponent,
   emptyComponent,
   showPagination,
-  fetchData,
+  onDataUpdate,
   itemsPerPage = 20,
   totalRows,
   activePageIndex = 0,
@@ -167,9 +167,9 @@ export const Table = <T extends object>({
   const uid = useUIDSeed()
   const hasSomeExpandableRows = useMemo(() => data.some(d => d.subRows), [data])
   const isManualPaginated = useMemo(() => {
-    return Boolean(fetchData && showPagination && totalRows)
+    return Boolean(onDataUpdate && showPagination && totalRows)
   },
-  [fetchData, showPagination, totalRows])
+  [onDataUpdate, showPagination, totalRows])
 
   const {
     getTableProps,
@@ -276,8 +276,8 @@ export const Table = <T extends object>({
   }, [onSelectionChange, selectedFlatRows, selectedRowIds])
 
   useEffect(() => {
-    fetchData && fetchData({ pageIndex, pageSize })
-  }, [fetchData, pageIndex, pageSize])
+    onDataUpdate && onDataUpdate({ pageIndex, pageSize })
+  }, [onDataUpdate, pageIndex, pageSize])
 
   const rowEntries = useMemo(() => showPagination ? page : rows, [page, rows, showPagination])
   const filteredVisibleColumns = useMemo(() => visibleColumns.filter((col: CustomColumnInstanceType) => !col.hideFromList), [visibleColumns])
