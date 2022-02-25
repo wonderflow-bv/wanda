@@ -131,7 +131,6 @@ export type TableProps<T extends object> = PropsWithClass & {
    * all columns have been toggled off.
    */
   emptyComponent?: ReactNode;
-
 }
 
 export const Table = <T extends object>({
@@ -307,7 +306,7 @@ export const Table = <T extends object>({
             verticalPadding={8}
             fill={false}
             columnGap={16}
-            initial={{ y: '-100%', opacity: 0 }}
+            initial={{ y: '-16px', opacity: 0 }}
             animate={{
               y: 0,
               opacity: 1,
@@ -317,7 +316,7 @@ export const Table = <T extends object>({
                 damping: 30
               }
             }}
-            exit={{ y: '-100%', opacity: 0 }}
+            exit={{ y: '-16px', opacity: 0 }}
           >
             <Text as="span" size={14} weight="bold">{`${selectedLabel}: ${selectedFlatRows.length}`}</Text>
             {selectedActions}
