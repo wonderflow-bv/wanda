@@ -85,9 +85,13 @@ export type TableProps<T extends object> = PropsWithClass & {
    */
   title?: TableHeaderProps['title']
   /**
-   * Hide the table header which includes the title and controls.
+   * Hide the header which includes the title and controls.
    */
   showHeader?: boolean
+  /**
+   * Hide the table header which includes columns names.
+   */
+  showTableHead?: boolean
   /**
    * Enable the dropdown to choose the visibility of the column
    */
@@ -127,6 +131,7 @@ export type TableProps<T extends object> = PropsWithClass & {
    * all columns have been toggled off.
    */
   emptyComponent?: ReactNode;
+
 }
 
 export const Table = <T extends object>({
@@ -143,6 +148,7 @@ export const Table = <T extends object>({
   selectedActions,
   selectedLabel = 'Selected items',
   showHeader = false,
+  showTableHead = true,
   columnsControl = false,
   defaultHiddenColumns,
   height,
@@ -348,25 +354,27 @@ export const Table = <T extends object>({
             >
 
               {/* THEAD */}
-              <thead role="rowgroup" className={styles.THead}>
-                {headerGroups.map(headerGroup => (
-                  <TableRow {...headerGroup.getHeaderGroupProps()}>
-                    {headerGroup.headers.map((column: HeaderGroupType) => (
-                      <TableCell
-                        as="th"
-                        width={column.minWidth === 0 ? undefined : column.minWidth}
-                        collapsed={column.isCollapsed}
-                        isSorted={column.isSorted}
-                        isSortedDesc={column.isSorted && column.isSortedDesc}
-                        align={column.align}
-                        {...column.getHeaderProps(column.getSortByToggleProps())}
-                      >
-                        {column.render('Header')}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                ))}
-              </thead>
+              {showTableHead && (
+                <thead role="rowgroup" className={styles.THead}>
+                  {headerGroups.map(headerGroup => (
+                    <TableRow {...headerGroup.getHeaderGroupProps()}>
+                      {headerGroup.headers.map((column: HeaderGroupType) => (
+                        <TableCell
+                          as="th"
+                          width={column.minWidth === 0 ? undefined : column.minWidth}
+                          collapsed={column.isCollapsed}
+                          isSorted={column.isSorted}
+                          isSortedDesc={column.isSorted && column.isSortedDesc}
+                          align={column.align}
+                          {...column.getHeaderProps(column.getSortByToggleProps())}
+                        >
+                          {column.render('Header')}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  ))}
+                </thead>
+              )}
 
               {/* TBODY */}
               <tbody role="rowgroup" className={styles.TBody} {...getTableBodyProps()}>
