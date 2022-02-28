@@ -414,7 +414,11 @@ export const Table = <T extends object>({
                     prepareRow(row)
                     return (
                       <Fragment key={row.id}>
-                        <TableRow {...row.getRowProps()}>
+                        <TableRow
+                          {...row.getRowProps()}
+                          data-row-expanded={row.isExpanded || undefined}
+                          data-row-depth={row.depth > 0 ? row.depth : undefined}
+                        >
                           {row.cells.map((cell: CellType) => (
                             <TableCell
                               collapsed={cell.column.isCollapsed}

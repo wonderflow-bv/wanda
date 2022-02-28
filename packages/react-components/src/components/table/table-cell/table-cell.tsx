@@ -52,7 +52,6 @@ export const TableCell = forwardRef(({
   const dynamicStyle: CSSProperties = {
     '--width': typeof width === 'string' ? width : typeof width === 'number' ? `${width}px` : undefined,
     '--text-align': align,
-    '--line-style': (depth && depth > colors.length) ? 'dotted' : 'solid',
     '--line-current-color': depth ? colors[currentIndex] : undefined,
     '--line-next-color': depth ? colors[nextIndex] : colors[0]
   }
@@ -63,7 +62,7 @@ export const TableCell = forwardRef(({
       className={clsx(styles.TableCell, className)}
       data-table-cell-collapsed={collapsed}
       data-table-cell-padding={padding}
-      data-table-cell-is-expander={isExpander}
+      data-table-cell-is-nested={isExpander && (depth > 0 || hasSubrows)}
       data-table-cell-expanded={expanded}
       data-table-cell-has-subrows={hasSubrows}
       data-table-cell-fixed={Boolean(width)}
