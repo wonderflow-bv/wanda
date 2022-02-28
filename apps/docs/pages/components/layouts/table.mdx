@@ -288,6 +288,13 @@ This component extends [`react-table`](https://react-table.tanstack.com/docs/ove
       description: "Callback run when the selected rows change.",
     },
     {
+      name: "isManualSorted",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      description: "If true, disable the automatic column sorting of the table. Turn this on if you want to to control the sorting yourself.",
+    },
+    {
       name: "onSortChange",
       type: ["function"],
       typeValue: "(sorting) => void",

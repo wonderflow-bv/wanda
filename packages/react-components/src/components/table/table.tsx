@@ -69,6 +69,11 @@ export type TableProps<T extends object> = PropsWithClass & {
    */
   onSelectionChange?(selectedRows?: Row[], selectedRowIds?: Record<IdType<T>, boolean>): void
   /**
+   * If true, disable the automatic column sorting of the table. Turn this on if you want to
+   * to control the sorting yourself.
+   */
+  isManualSorted?: boolean
+  /**
    * Callback run when a column is sorted
    */
   onSortChange?(sorting?: SortingRule<T>[]): void
@@ -166,6 +171,7 @@ export const Table = <T extends object>({
   actionsRowComponent: ActionsRowComponent,
   emptyComponent,
   showPagination,
+  isManualSorted,
   onDataUpdate,
   onSortChange,
   itemsPerPage = 10,
@@ -200,6 +206,7 @@ export const Table = <T extends object>({
     {
       columns,
       data,
+      manualSortBy: isManualSorted,
       disableMultiSort: true,
       expandSubRows: Boolean(!ExpandableRowsComponent),
       autoResetHiddenColumns: false,
