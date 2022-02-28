@@ -133,7 +133,7 @@ export type TableProps<T extends object> = PropsWithClass & {
    * the function will be called with the `subRow` data and the function must return
    * a component.
    */
-  expandableRowsComponent?: ComponentType<T>;
+  expandableRowComponent?: ComponentType<T>;
   /**
    * A react component that add custom actions to rows. If fuction is passed,
    * the function will be called with the row data and the function must return
@@ -167,7 +167,7 @@ export const Table = <T extends object>({
   height,
   loading,
   background,
-  expandableRowsComponent: ExpandableRowsComponent,
+  expandableRowComponent,
   actionsRowComponent: ActionsRowComponent,
   emptyComponent,
   showPagination,
@@ -208,7 +208,7 @@ export const Table = <T extends object>({
       data,
       manualSortBy: isManualSorted,
       disableMultiSort: true,
-      expandSubRows: Boolean(!ExpandableRowsComponent),
+      expandSubRows: Boolean(!expandableRowComponent),
       autoResetHiddenColumns: false,
       autoResetPage: false,
       manualPagination: isManualPaginated,
@@ -287,7 +287,7 @@ export const Table = <T extends object>({
     if (!ActionsRowComponent) artificialColumns.push('actions')
 
     setHiddenColumns(artificialColumns)
-  }, [selectableRows, setHiddenColumns, defaultHiddenColumns, ExpandableRowsComponent, hasSomeExpandableRows, ActionsRowComponent])
+  }, [selectableRows, setHiddenColumns, defaultHiddenColumns, expandableRowComponent, hasSomeExpandableRows, ActionsRowComponent])
 
   useEffect(() => {
     onSelectionChange && onSelectionChange(selectedFlatRows, selectedRowIds)
@@ -430,11 +430,11 @@ export const Table = <T extends object>({
                             </TableCell>
                           ))}
                         </TableRow>
-                        {(row.subRows && row.isExpanded && ExpandableRowsComponent) && row.subRows.map((subRow) =>
+                        {(row.subRows && row.isExpanded && expandableRowComponent) && row.subRows.map((subRow) =>
                           (
                             <TableRow data-table-row-expander key={subRow.id}>
                               <TableCell padding={false} colSpan={100}>
-                                <TableExpand data={subRow.original} component={ExpandableRowsComponent} />
+                                <TableExpand data={subRow.original} component={expandableRowComponent} />
                               </TableCell>
                             </TableRow>
                           )

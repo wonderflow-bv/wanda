@@ -542,7 +542,7 @@ CustomExpandable.args = {
   columnsControl: true,
   showHeader: true,
   selectableRows: true,
-  expandableRowsComponent: (data) => <CustomExpandableComponent data={data} />
+  expandableRowComponent: (data) => <CustomExpandableComponent data={data} />
 }
 
 export const Pagination = Template.bind({})

@@ -188,7 +188,7 @@ export const CustomExpandTable = () => {
     <Components.Table
       columns={columns}
       data={data.slice(0, 4)}
-      expandableRowsComponent={(data) => <CodeBlock background="var(--global-background)" className="language-json">{JSON.stringify(data, null, 2)}</CodeBlock>}
+      expandableRowComponent={(data) => <CodeBlock background="var(--global-background)" className="language-json">{JSON.stringify(data, null, 2)}</CodeBlock>}
     />
   );
 };
@@ -204,7 +204,7 @@ export default () => {
   return <Table
     columns={columns}
     data={data}
-    expandableRowsComponent={(subRow) => (
+    expandableRowComponent={(subRow) => (
       <div>
         {JSON.stringify(subRow, null, 2)}
       </div>
@@ -424,7 +424,7 @@ This component extends [`react-table`](https://react-table.tanstack.com/docs/ove
       description: "Set the table background color. This must be set if `height` is set because the color is used as background for sticky headers.",
     },
     {
-      name: "expandableRowsComponent",
+      name: "expandableRowComponent",
       type: ["ReactNode", "function"],
       typeValue: "ReactNode | (subRow: T) => ReactNode",
       default: "",
