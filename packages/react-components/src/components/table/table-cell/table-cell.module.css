@@ -1,4 +1,6 @@
 .TableCell {
+  --indent-guide-width: 24px;
+
   position: relative;
   margin: 0;
   max-width: var(--width);
@@ -41,7 +43,7 @@
       width: 0;
       transform: translateX(-50%);
       left: 50%;
-      border-right: 4px var(--line-style) var(--line-current-color);
+      border-right: var(--indent-guide-width) var(--line-style) var(--line-current-color);
       height: calc(50% + 1px);
     }
 
@@ -55,7 +57,7 @@
     }
 
     &[data-table-cell-expanded='true'][data-table-cell-has-subrows='true']::after {
-      border-right: 4px var(--line-style) var(--line-next-color);
+      border-right: var(--indent-guide-width) var(--line-style) var(--line-next-color);
     }
   }
 }
