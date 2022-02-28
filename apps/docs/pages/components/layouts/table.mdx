@@ -137,14 +137,14 @@ export default ({ children }) => (
     showMeta
     features={[
       "Highly customizable",
-      "Support sorting, reorder and many other interactions",
+      "Support sorting, expand, row selection and many other interactions",
       "Pagination and loading state out of the box",
       "Themes ready",
     ]}
     links={[
       {
         label: "Reference library",
-        url: "https://github.com/jbetancur/react-data-table-component",
+        url: "https://react-table.tanstack.com/docs/overview",
       },
     ]}
     tags={<Components.Chip color="blue">Beta</Components.Chip>}
@@ -190,8 +190,10 @@ This component extends [`react-table`](https://react-table.tanstack.com/docs/ove
   properties={[
     {
       name: "columns",
-      type: ["(Column<T> & ColumnOptions<T>)[]"],
-      typeValue: `ColumnOptions<T> = {
+      type: ["array"],
+      typeValue: `
+      Columns<T> = Array<Column<T> & ColumnOptions<T>>\n
+      ColumnOptions<T> = {
         isCollapsed?: boolean;
         align?: 'start' | 'center' | 'end';
         hideFromList?: boolean;
@@ -203,8 +205,10 @@ This component extends [`react-table`](https://react-table.tanstack.com/docs/ove
     },
     {
       name: "data",
-      type: ["({} & DataOptions<T>)[]"],
-      typeValue: `DataOptions<T> = {
+      type: ["array"],
+      typeValue: `
+      Data<T> = Array<{} & DataOptions<T>>\n
+      DataOptions<T> = {
         subRows?: T[];
         actions?: ReactNode | ReactNode[];
       }`,

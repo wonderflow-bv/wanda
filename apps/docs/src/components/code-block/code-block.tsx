@@ -62,7 +62,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
     <div
       className={clsx(CodeBlockClass, className)}
       data-code-block-has-highlight={Boolean(highlight)}
-      data-code-block-has-toolbar={(showLanguage || codeLang) || Boolean(actions) || !hideCopy}
+      data-code-block-has-toolbar={!(showLanguage || codeLang) || Boolean(actions) || !hideCopy}
     >
       <Refractor language={language || codeLang} value={formattedChildren} markers={highlight ? rangeParser(highlight) : undefined} />
       <Stack direction="row" fill={false} horizontalAlign="space-between" verticalAlign="center" className={Toolbar}>
