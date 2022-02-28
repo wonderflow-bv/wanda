@@ -345,13 +345,14 @@ export const Table = <T extends object>({
       )}
 
       {/* TABLE */}
-      {(data.length && filteredVisibleColumns.length)
+      {((data.length || loading) && filteredVisibleColumns.length)
         ? (
           <div className={styles.TableWrapper} data-table-scrolling={Boolean(height)}>
             <table
               className={styles.TableElement}
               data-table-stripes={stripes}
               data-table-separators={showSeparators}
+              data-table-loading={loading}
               aria-labelledby={uid('table-title')}
               {...getTableProps()}
               {...otherProps}

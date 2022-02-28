@@ -524,6 +524,7 @@ export const Scrollable = Template.bind({})
 Scrollable.args = {
   columnsControl: true,
   showHeader: true,
+  background: 'var(--global-background)',
   title: 'Scrollable table',
   height: '400px'
 }
@@ -637,6 +638,7 @@ ManualPagination.args = {
 
 export const Loading = Template.bind({})
 Loading.args = {
+  data: [],
   columnsControl: true,
   showHeader: true,
   loading: true

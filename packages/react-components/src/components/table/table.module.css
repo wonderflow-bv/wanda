@@ -21,6 +21,11 @@
   width: 100%;
   border-collapse: collapse;
   font-size: env(--font-size-16);
+
+  &[data-table-loading='true'] {
+    pointer-events: none;
+    user-select: none;
+  }
 }
 
 .THead {
