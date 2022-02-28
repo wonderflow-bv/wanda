@@ -79,6 +79,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
 
       <Stack direction="row" fill={false} horizontalAlign="space-between" verticalAlign="center" className={Toolbar}>
         {(codeLang && showLanguage) && <Text responsive={false} size={14} dimmed={5}>{codeLang}</Text>}
+        <span />
 
         <Stack direction="row" rowGap={8}>
           {!hideCopy && (
