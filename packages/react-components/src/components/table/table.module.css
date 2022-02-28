@@ -64,3 +64,10 @@
   border-radius: env(--radius-8);
   min-block-size: env(--space-56);
 }
+
+.ExpandButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

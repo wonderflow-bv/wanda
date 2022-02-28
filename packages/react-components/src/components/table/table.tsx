@@ -246,6 +246,7 @@ export const Table = <T extends object>({
               <IconButton
                 kind="flat"
                 dimension="small"
+                className={styles.ExpandButton}
                 icon={isAllRowsExpanded ? 'chevron-down' : 'chevron-right'}
                 {...getToggleAllRowsExpandedProps()}
               />
