@@ -2,6 +2,8 @@ import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
 import { PropsTable } from "@/components/props-table";
 import * as Components from "@wonderflow/react-components";
+import { CodeBlock } from "@/components/code-block";
+import { LiveArea } from "@/components/live-area";
 
 export const columns = [
   {
@@ -126,7 +128,7 @@ export const data = [
 ];
 
 export const example = `<Table
-  title={<Title level="5">Sample Title</Title>}
+  title="Sample Title"
   columns={columns}
   data={data}
   selectableRows
@@ -173,6 +175,41 @@ import { Table } from "@wonderflow/react-components";
 
 export default () => {
   return <Table columns={columns} data={data} />;
+};
+```
+
+## Custom expand
+
+If you want to use a custom expand component to bypass the default behaviour, you can do so by passing a custom expand function to the table.
+
+export const CustomExpandTable = () => {
+  const { onClose, titleId } = Components.useOverlayContext();
+  return (
+    <Components.Table
+      columns={columns}
+      data={data.slice(0, 4)}
+      expandableRowsComponent={(data) => <CodeBlock background="var(--global-background)" className="language-json">{JSON.stringify(data, null, 2)}</CodeBlock>}
+    />
+  );
+};
+
+<LiveArea>
+  <CustomExpandTable />
+</LiveArea>
+
+```tsx highlight=7-13
+import { Table } from "@wonderflow/react-components";
+
+export default () => {
+  return <Table
+    columns={columns}
+    data={data}
+    expandableRowsComponent={(subRow) => (
+      <div>
+        {JSON.stringify(subRow, null, 2)}
+      </div>
+    )}
+  />;
 };
 ```
 

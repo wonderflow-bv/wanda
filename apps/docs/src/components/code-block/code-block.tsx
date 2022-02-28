@@ -3,7 +3,7 @@ import { Button, Text, Stack } from '@wonderflow/react-components'
 import clsx from 'clsx'
 import rangeParser from 'parse-numeric-range'
 import Refractor from 'react-refractor'
-import React, { useCallback, ReactNode } from 'react'
+import React, { useCallback, ReactNode, CSSProperties } from 'react'
 
 // Load any languages you want to use from `refractor`
 import js from 'refractor/lang/javascript'
@@ -35,6 +35,7 @@ type CodeBlockProps = {
   language?: string;
   showLanguage?: boolean;
   actions?: ReactNode;
+  background?: string;
 } & PropsWithClass
 
 export const CodeBlock: React.FC<CodeBlockProps> = ({
@@ -44,6 +45,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
   language,
   className,
   actions,
+  background = 'transparent',
   showLanguage = true
 }) => {
   const isNotString = typeof children !== 'string'
@@ -58,16 +60,25 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
 
   const formattedChildren = isNotString ? children.props.children.trim() : children.trim()
 
+  const dynamicStyle: CSSProperties = {
+    '--code-bg': background
+  }
+
   return (
     <div
       className={clsx(CodeBlockClass, className)}
       data-code-block-has-highlight={Boolean(highlight)}
       data-code-block-has-toolbar={!(showLanguage || codeLang) || Boolean(actions) || !hideCopy}
+      style={dynamicStyle}
     >
-      <Refractor language={language || codeLang} value={formattedChildren} markers={highlight ? rangeParser(highlight) : undefined} />
+      <Refractor
+        language={language || codeLang}
+        value={formattedChildren}
+        markers={highlight ? rangeParser(highlight) : undefined}
+      />
+
       <Stack direction="row" fill={false} horizontalAlign="space-between" verticalAlign="center" className={Toolbar}>
         {(codeLang && showLanguage) && <Text responsive={false} size={14} dimmed={5}>{codeLang}</Text>}
-        <span />
 
         <Stack direction="row" rowGap={8}>
           {!hideCopy && (
