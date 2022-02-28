@@ -39,10 +39,9 @@ export const data = [
     value: 123,
     subRows: [
       {
-        id: '1.1',
         someKey: 'Sub data 1',
         anotherKey: 'Sub data 2',
-        value: '213.48',
+        value: '21.48',
       }
     ]
   },
@@ -286,7 +285,15 @@ This component extends [`react-table`](https://react-table.tanstack.com/docs/ove
       typeValue: "(selectedRows, selectedRowIds) => void",
       default: "",
       required: false,
-      description: "Callback run when the selected rows change",
+      description: "Callback run when the selected rows change.",
+    },
+    {
+      name: "onSortChange",
+      type: ["function"],
+      typeValue: "(sorting) => void",
+      default: "",
+      required: false,
+      description: "Callback run when a column is sorted.",
     },
     {
       name: "stripes",

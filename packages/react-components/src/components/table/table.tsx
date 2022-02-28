@@ -2,7 +2,7 @@
 import clsx from 'clsx'
 import {
   useTable, useSortBy, useRowSelect, usePagination,
-  Row, useExpanded, Hooks, IdType
+  Row, useExpanded, Hooks, IdType, SortingRule
 } from 'react-table'
 import { TableRow } from './table-row'
 import { TableCell } from './table-cell'
@@ -68,6 +68,10 @@ export type TableProps<T extends object> = PropsWithClass & {
    * Callback run when the selected rows change
    */
   onSelectionChange?(selectedRows?: Row[], selectedRowIds?: Record<IdType<T>, boolean>): void
+  /**
+   * Callback run when a column is sorted
+   */
+  onSortChange?(sorting?: SortingRule<T>[]): void
   /**
    * Add an alternate style to the table rows
    */
@@ -163,6 +167,7 @@ export const Table = <T extends object>({
   emptyComponent,
   showPagination,
   onDataUpdate,
+  onSortChange,
   itemsPerPage = 10,
   totalRows,
   activePageIndex = 0,
@@ -190,11 +195,12 @@ export const Table = <T extends object>({
     visibleColumns,
     setPageSize,
     setHiddenColumns,
-    state: { pageSize, pageIndex, selectedRowIds }
+    state: { pageSize, pageIndex, selectedRowIds, sortBy }
   } = useTable(
     {
       columns,
       data,
+      disableMultiSort: true,
       expandSubRows: Boolean(!ExpandableRowsComponent),
       autoResetHiddenColumns: false,
       autoResetPage: false,
@@ -279,6 +285,10 @@ export const Table = <T extends object>({
   useEffect(() => {
     onSelectionChange && onSelectionChange(selectedFlatRows, selectedRowIds)
   }, [onSelectionChange, selectedFlatRows, selectedRowIds])
+
+  useEffect(() => {
+    onSortChange && onSortChange(sortBy)
+  }, [onSortChange, sortBy])
 
   useEffect(() => {
     onDataUpdate && onDataUpdate({ pageIndex, pageSize })
