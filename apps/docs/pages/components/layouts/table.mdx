@@ -2,7 +2,6 @@ import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
 import { PropsTable } from "@/components/props-table";
 import * as Components from "@wonderflow/react-components";
-import dynamic from "next/dynamic";
 
 export const columns = [
   {
@@ -40,11 +39,10 @@ export const data = [
     value: 123,
     subRows: [
       {
-        firstName: 'ciao',
-        lastName: 'Stuffo',
-        address: 'Via Roma, 15 Monza',
-        uid: '123123',
-        info: 12
+        id: '1.1',
+        someKey: 'Sub data 1',
+        anotherKey: 'Sub data 2',
+        value: '213.48',
       }
     ]
   },
@@ -128,12 +126,7 @@ export const data = [
   },
 ];
 
-export const DynTable = dynamic(
-  import("@wonderflow/react-components").then((m) => m.Table),
-  { ssr: false }
-);
-
-export const example = `<DynTable
+export const example = `<Table
   title={<Title level="5">Sample Title</Title>}
   columns={columns}
   data={data}
@@ -165,7 +158,7 @@ export default ({ children }) => (
     hero={
       <Playground
         liveAreaProps={{ fill: true }}
-        scope={{ ...Components, columns, data, DynTable }}
+        scope={{ ...Components, columns, data }}
         code={example}
       />
     }
