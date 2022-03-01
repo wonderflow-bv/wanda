@@ -653,13 +653,21 @@ const ManualSortingTemplate: ComponentStory<typeof Table> = ({ data, ...args }) 
     setTotalRows(data.length)
 
     const result = [...data]
-
+    console.log(sortBy[0])
     if (sortBy[0]) {
       result.sort((a, b) => {
-        if (sortBy[0].desc) {
-          return a[sortBy[0].id] - b[sortBy[0].id]
+        if (typeof b[sortBy[0].id] === 'number' || typeof a[sortBy[0].id] === 'number') {
+          if (sortBy[0].desc) {
+            return b[sortBy[0].id] - a[sortBy[0].id]
+          } else {
+            return a[sortBy[0].id] - b[sortBy[0].id]
+          }
         } else {
-          return b[sortBy[0].id] - a[sortBy[0].id]
+          if (sortBy[0].desc) {
+            return b[sortBy[0].id].localeCompare(a[sortBy[0].id])
+          } else {
+            return a[sortBy[0].id].localeCompare(b[sortBy[0].id])
+          }
         }
       })
     }
