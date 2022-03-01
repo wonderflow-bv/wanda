@@ -1,5 +1,14 @@
 # @wonderflow/react-components
 
+## 5.5.0
+
+### Minor Changes
+
+- 30d5f4c: Add new gap property to Skeleton
+- ee29f69: Add missing indeterminate internal state to checkbox
+- 30d5f4c: Add new Table component
+- 30d5f4c: Fix menu-item icon padding on small
+
 ## 5.4.0
 
 ### Minor Changes

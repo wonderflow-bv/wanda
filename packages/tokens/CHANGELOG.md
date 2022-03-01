@@ -1,5 +1,11 @@
 # @wonderflow/tokens
 
+## 5.4.0
+
+### Minor Changes
+
+- 30d5f4c: Add new Table component
+
 ## 5.3.0
 
 ### Minor Changes

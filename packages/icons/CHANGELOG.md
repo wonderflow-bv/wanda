@@ -1,5 +1,13 @@
 # @wonderflow/icons
 
+## 5.3.0
+
+### Minor Changes
+
+- 19cd986: Add new board icon
+- d0da160: Add new icons `more-vert` and `trash-can`
+- 30d5f4c: Add new Table component
+
 ## 5.2.0
 
 ### Minor Changes

@@ -1,5 +1,25 @@
 # docs
 
+## 3.5.0
+
+### Minor Changes
+
+- 30d5f4c: Add new gap property to Skeleton
+- 30d5f4c: Update shell index
+- 30d5f4c: Add new Table component
+
+### Patch Changes
+
+- Updated dependencies [30d5f4c]
+- Updated dependencies [19cd986]
+- Updated dependencies [ee29f69]
+- Updated dependencies [d0da160]
+- Updated dependencies [30d5f4c]
+- Updated dependencies [30d5f4c]
+  - @wonderflow/react-components@5.5.0
+  - @wonderflow/icons@5.3.0
+  - @wonderflow/themes@5.2.0
+
 ## 3.4.0
 
 ### Minor Changes
