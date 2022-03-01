@@ -227,6 +227,50 @@ export default () => {
 };
 ```
 
+## Row actions
+
+If needed each row can show related actions ior any custom element.
+
+export const CustomActionsTable = () => {
+  const { onClose, titleId } = Components.useOverlayContext();
+  return (
+    <Components.Table
+      columns={columns}
+      data={data.slice(1, data.length - 5)}
+      actionsRowComponent={({ id }) => (
+        <Components.Stack direction="row" fill={false}>
+          <Components.IconButton icon="arrow-rotate-right" kind="flat" dimension="small" />
+          <Components.Tooltip
+            trigger={<Components.IconButton dimension="small" icon="message" kind="flat" />}
+          >
+            Row id is {id}
+          </Components.Tooltip>
+        </Components.Stack>
+      )}
+    />
+  );
+};
+
+<LiveArea>
+  <CustomActionsTable />
+</LiveArea>
+
+```tsx highlight=7-13
+import { Table } from "@wonderflow/react-components";
+
+export default () => {
+  return <Table
+    columns={columns}
+    data={data}
+    expandableRowComponent={(subRow) => (
+      <div>
+        {JSON.stringify(subRow, null, 2)}
+      </div>
+    )}
+  />;
+};
+```
+
 ## API Reference
 
 This component extends [`react-table`](https://react-table.tanstack.com/docs/overview) library, which exposes different props that enables multiple functionalities, including (but not limited to) sorting, pagination, and expanded rows.
