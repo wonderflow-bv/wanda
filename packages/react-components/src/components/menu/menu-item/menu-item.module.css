@@ -1,4 +1,6 @@
 .MenuItem {
+  --padding: env(--space-40);
+
   border: 0;
   background: none;
   font: inherit;
@@ -11,6 +13,7 @@
   text-align: start;
   position: relative;
   padding: 0;
+
 
   &:hover {
     color: var(--global-foreground);
@@ -41,6 +44,8 @@
   }
 
   &[data-menu-item-dimension='small'] {
+    --padding: calc(env(--space-32) + env(--space-4));
+
     font-size: env(--font-size-14);
   }
 
@@ -54,11 +59,11 @@
   }
 
   & [data-menu-item-padding='true'][data-menu-item-has-icon='false'][data-menu-item-icon-right='false'] {
-    padding-left: env(--space-40);
+    padding-left: var(--padding);
   }
 
   & [data-menu-item-padding='true'][data-menu-item-has-icon='false'][data-menu-item-icon-right='true'] {
-    padding-right: env(--space-40);
+    padding-right: var(--padding);
   }
 }
 

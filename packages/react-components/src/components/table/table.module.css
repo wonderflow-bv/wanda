@@ -1,34 +1,73 @@
-.DataTable {
-  --headcell-fs: env(--font-size-16);
-  --cell-fs: env(--font-size-16);
-  --pagination-fs: env(--font-size-16);
+@import '../../core/utils/vibrancy.css';
+
+.Table {
+  position: relative;
+  width: 100%;
+  z-index: 0;
 }
 
-.SortIcon {
-  margin-left: 4px;
-  transform: scale(0.7);
-  display: block;
+.TableWrapper {
+  -webkit-overflow-scrolling: touch;
+  overflow: auto;
+
+  &[data-table-scrolling='true'] {
+    max-height: var(--table-height);
+    background: var(--table-background);
+    overscroll-behavior: contain;
+  }
 }
 
-.ExpandWrapper {
-  overflow: hidden;
+.TableElement {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: env(--font-size-16);
+
+  &[data-table-loading='true'] {
+    pointer-events: none;
+    user-select: none;
+  }
 }
 
-.ExpandContent {
-  --fade-from-y: -5px;
+.THead {
+  box-shadow: inset 0 -3px 0 var(--dimmed-2);
+  background: var(--table-background);
+  position: sticky;
+  top: 0;
+  z-index: 2;
 
-  animation: fade-in env(--duration-200);
-  animation-timing-function: env(--easing-entrance);
-}
+  /* stylelint-disable number-max-precision */
 
-@keyframes fade-in {
-  0% {
-    opacity: 0%;
-    transform: translate(var(--fade-from-x, 0), var(--fade-from-y, 0));
+  @media not all and (min-resolution: 0.001dpcm) {
+
+    @supports (-webkit-appearance:none) and (stroke-color:transparent) {
+      box-shadow: none;
+      border-bottom: 3px solid var(--dimmed-2);
+    }
   }
 
-  100% {
-    opacity: unset;
-    transform: none;
+  & th {
+    padding-top: env(--space-16);
+    padding-bottom: env(--space-16);
   }
+}
+
+.Toast {
+
+  @mixin vibrancy;
+
+  background-color: var(--global-vibrancy-background);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 4;
+  border-radius: env(--radius-8);
+  min-block-size: env(--space-56);
+}
+
+.ExpandButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

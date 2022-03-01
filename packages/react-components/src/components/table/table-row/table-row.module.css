@@ -1,0 +1,18 @@
+.TableRow {
+  &:not([data-table-row-expander='true']) {
+    block-size: calc(env(--space-48) + 1px);
+  }
+
+  & + & {
+    border-top: 1px solid transparent;
+  }
+
+  @nest [data-table-stripes='true'] &:nth-child(even):not(
+  [data-table-row-highlight='true'],
+  [data-table-row-expander]) {
+    background-color: var(--dimmed-0);
+  }
+  @nest [data-table-separators='true'] & + & {
+    border-color: var(--dimmed-1);
+  }
+}

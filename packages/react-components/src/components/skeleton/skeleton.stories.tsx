@@ -6,6 +6,7 @@ export default {
   component: Skeleton,
   args: {
     radius: 8,
+    gap: 8,
     enableAnimation: true,
     inline: false
   }
@@ -32,4 +33,11 @@ Rounded.args = {
   width: '400px',
   height: '48px',
   borderRadius: 16
+}
+
+export const WithGap = Template.bind({})
+WithGap.args = {
+  gap: 32,
+  count: 4,
+  height: '48px'
 }

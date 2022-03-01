@@ -36,6 +36,10 @@ export type SkeletonProps = PropsWithClass & {
    * Enable the shim animation and the announcement of the loading state.
    */
   enableAnimation?: boolean,
+  /**
+   * Set the gap between stacked skeleton items.
+   */
+  gap?: TokensTypes['space'],
 }
 
 export const Skeleton = ({
@@ -45,6 +49,7 @@ export const Skeleton = ({
   width,
   height,
   count = 1,
+  gap,
   enableAnimation = true,
   inline,
   circle,
@@ -58,7 +63,8 @@ export const Skeleton = ({
     const dynamicStyle: CSSProperties = {
       '--radius': borderRadius && tkns.radius[borderRadius],
       '--width': width && computedWidth,
-      '--height': height && computedHeight
+      '--height': height && computedHeight,
+      '--gap': gap ? tkns.space[gap] : undefined
     }
 
     return (
@@ -71,10 +77,7 @@ export const Skeleton = ({
         &zwnj;
       </span>
     )
-  }, [
-    borderRadius, width, computedWidth, height,
-    computedHeight, circle, style, enableAnimation
-  ])
+  }, [borderRadius, width, computedWidth, height, computedHeight, gap, circle, enableAnimation, style])
 
   return (
     <span

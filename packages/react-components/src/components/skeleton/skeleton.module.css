@@ -14,6 +14,10 @@
   overflow: hidden;
   z-index: 1;
 
+  & + br + & {
+    margin-top: var(--gap, 0);
+  }
+
   &::after {
     content: ' ';
     display: block;

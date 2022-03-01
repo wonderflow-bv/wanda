@@ -49,6 +49,14 @@ export default () => {
       description: "Set the edge radius of each skeleton block. This value must be one of the available `radius` tokens",
     },
     {
+      name: "gap",
+      type: ["enum"],
+   typeValue: `${Object.keys(tkns.space).map(name => `${name}`).join(" | ")}`,
+      default: "",
+      required: false,
+      description: "Set the gap between stacked skeleton items.",
+    },
+    {
       name: "circle",
       type: ["boolean"],
       default: "false",

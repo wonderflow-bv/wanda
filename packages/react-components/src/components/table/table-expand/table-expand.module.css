@@ -1,0 +1,22 @@
+.TableExpand {
+  overflow: hidden;
+}
+
+.ExpandContent {
+  --fade-from-y: -5px;
+
+  animation: fade-in env(--duration-200);
+  animation-timing-function: env(--easing-entrance);
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0%;
+    transform: translate(var(--fade-from-x, 0), var(--fade-from-y, 0));
+  }
+
+  100% {
+    opacity: unset;
+    transform: none;
+  }
+}

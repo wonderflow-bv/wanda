@@ -23,9 +23,9 @@
     "*.{css}": "stylelint"
   },
   "devDependencies": {
-    "@changesets/cli": "2.20.0",
-    "@typescript-eslint/eslint-plugin": "5.12.0",
-    "@typescript-eslint/parser": "5.12.0",
+    "@changesets/cli": "2.21.0",
+    "@typescript-eslint/eslint-plugin": "5.12.1",
+    "@typescript-eslint/parser": "5.12.1",
     "@wonderflow/eslint-config": "1.1.11",
     "eslint-plugin-json": "3.1.0",
     "husky": "7.0.4",
@@ -34,8 +34,8 @@
     "npm-run-all": "4.1.5",
     "rimraf": "3.0.2",
     "ts-node": "10.5.0",
-    "tsc-alias": "1.6.0",
-    "turbo": "1.1.2",
+    "tsc-alias": "1.6.3",
+    "turbo": "1.1.4",
     "uvu": "0.5.3"
   },
   "engines": {
