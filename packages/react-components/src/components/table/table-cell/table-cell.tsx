@@ -79,7 +79,7 @@ export const TableCell = forwardRef(({
           dimension={12}
           className={styles.HeadCellIcon}
           fill="var(--highlight-red-foreground)"
-          source={isSortedDesc ? 'bars-sort-up' : 'bars-sort-down'}
+          source={isSortedDesc ? 'bars-sort-down' : 'bars-sort-up'}
         />
       )}
     </Wrapper>

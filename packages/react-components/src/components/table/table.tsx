@@ -145,6 +145,10 @@ export type TableProps<T extends object> = PropsWithClass & {
    * all columns have been toggled off.
    */
   emptyComponent?: ReactNode;
+  /**
+   * Set the initial sorting column and order
+   */
+   initialSortBy?: Array<SortingRule<T>>
 }
 
 export const Table = <T extends object>({
@@ -178,6 +182,7 @@ export const Table = <T extends object>({
   totalRows,
   activePageIndex = 0,
   pageClusters,
+  initialSortBy = [],
   ...otherProps
 }: TableProps<T>) => {
   const uid = useUIDSeed()
@@ -217,6 +222,7 @@ export const Table = <T extends object>({
       // This `paginateExpandedRows` prop prevent expanded rows to be placed in the next page. But it breaks row selection
       // paginateExpandedRows: !showPagination,
       initialState: {
+        sortBy: initialSortBy,
         pageIndex: activePageIndex,
         pageSize: showPagination ? itemsPerPage : undefined,
         hiddenColumns: ['selection', 'expander']
