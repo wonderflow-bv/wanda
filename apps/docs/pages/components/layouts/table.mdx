@@ -460,5 +460,16 @@ This component extends [`react-table`](https://react-table.tanstack.com/docs/ove
       required: false,
       description: "Custom component/empty state to show when the table has no data or all columns have been toggled off.",
     },
+    {
+      name: "initialSortBy",
+      type: ["Array<SortingRule<T>>"],
+      typeValue: `SortingRule<T> = {
+        id: IdType<T>;
+        desc?: boolean | undefined;
+      }`,
+      default: "",
+      required: false,
+      description: "Set the initial sorted column and order by passing column id and order.",
+    },
   ]}
 />

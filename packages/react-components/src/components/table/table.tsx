@@ -146,9 +146,9 @@ export type TableProps<T extends object> = PropsWithClass & {
    */
   emptyComponent?: ReactNode;
   /**
-   * Set the initial sorting column and order
+   * Set the initial sorted column and order by passing column id and order.
    */
-   initialSortBy?: Array<SortingRule<T>>
+  initialSortBy?: Array<SortingRule<T>>
 }
 
 export const Table = <T extends object>({
