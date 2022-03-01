@@ -40,10 +40,10 @@
     &::after {
       content: '';
       position: absolute;
-      width: 0;
+      width: var(--indent-guide-width);
       transform: translateX(-50%);
       left: 50%;
-      border-right: var(--indent-guide-width) solid var(--line-current-color);
+      background: var(--line-current-color);
       height: calc(50% + 1px);
     }
 
@@ -57,7 +57,7 @@
     }
 
     &[data-table-cell-expanded='true'][data-table-cell-has-subrows='true']::after {
-      border-right: var(--indent-guide-width) solid var(--line-next-color);
+      background: var(--line-next-color);
     }
   }
 }
