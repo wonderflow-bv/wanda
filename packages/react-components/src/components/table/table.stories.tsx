@@ -651,9 +651,8 @@ const ManualSortingTemplate: ComponentStory<typeof Table> = ({ data, ...args }) 
 
   const fetchData = useCallback(({ pageIndex, pageSize }) => {
     setTotalRows(data.length)
-    const result = data.slice(pageIndex * pageSize, pageIndex * pageSize + pageSize)
     if (sortBy[0]) {
-      result.sort((a, b) => {
+      data.sort((a, b) => {
         if (sortBy[0].desc) {
           return a[sortBy[0].id] - b[sortBy[0].id]
         } else {
@@ -662,7 +661,7 @@ const ManualSortingTemplate: ComponentStory<typeof Table> = ({ data, ...args }) 
       })
     }
 
-    setPageData(result)
+    setPageData(data.slice(pageIndex * pageSize, pageIndex * pageSize + pageSize))
   }, [data, sortBy])
 
   return (
