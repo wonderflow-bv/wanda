@@ -16,12 +16,12 @@ export default {
     showHeader: false,
     columns: [
       {
-        id: 'firstname',
+        id: 'firstName',
         Header: 'First Name',
         accessor: row => row.firstName
       },
       {
-        id: 'lastname',
+        id: 'lastName',
         Header: 'Last Name',
         accessor: row => row.lastName
       },
@@ -51,84 +51,84 @@ export default {
         firstName: 'Gianni',
         lastName: 'Morandi',
         address: 'Via Roma, 1, Treno',
-        uid: '34567895423556789',
+        uid: 3456789542556789,
         info: 123123.12,
         subRows: [
           {
             firstName: 'ciao',
             lastName: 'Stuffo',
             address: 'Via Roma, 15 Monza',
-            uid: '123123',
+            uid: 123123,
             info: 12,
             subRows: [
               {
                 firstName: '1',
                 lastName: 'Stuffo',
                 address: 'Via Roma, 15 Monza',
-                uid: '123123',
+                uid: 123123,
                 info: 12,
                 subRows: [
                   {
                     firstName: '1',
                     lastName: 'Stuffo',
                     address: 'Via Roma, 15 Monza',
-                    uid: '123123',
+                    uid: 123123,
                     info: 12,
                     subRows: [
                       {
                         firstName: '1',
                         lastName: 'Stuffo',
                         address: 'Via Roma, 15 Monza',
-                        uid: '123123',
+                        uid: 123123,
                         info: 12,
                         subRows: [
                           {
                             firstName: '1',
                             lastName: 'Stuffo',
                             address: 'Via Roma, 15 Monza',
-                            uid: '123123',
+                            uid: 123123,
                             info: 12,
                             subRows: [
                               {
                                 firstName: '1',
                                 lastName: 'Stuffo',
                                 address: 'Via Roma, 15 Monza',
-                                uid: '123123',
+                                uid: 123123,
                                 info: 12,
                                 subRows: [
                                   {
                                     firstName: '1',
                                     lastName: 'Stuffo',
                                     address: 'Via Roma, 15 Monza',
-                                    uid: '123123',
+                                    uid: 123123,
                                     info: 12,
                                     subRows: [
                                       {
                                         firstName: '1',
                                         lastName: 'Stuffo',
                                         address: 'Via Roma, 15 Monza',
-                                        uid: '123123',
+                                        uid: 123123,
                                         info: 12,
                                         subRows: [
                                           {
                                             firstName: '1',
                                             lastName: 'Stuffo',
                                             address: 'Via Roma, 15 Monza',
-                                            uid: '123123',
+                                            uid: 123123,
                                             info: 12
                                           },
                                           {
                                             firstName: '2',
                                             lastName: 'Stuffo',
                                             address: 'Via Roma, 15 Monza',
-                                            uid: '123123',
+                                            uid: 123123,
                                             info: 12
                                           },
                                           {
                                             firstName: '3',
                                             lastName: 'Stuffo',
                                             address: 'Via Roma, 15 Monza',
-                                            uid: '123123',
+                                            uid: 123123,
                                             info: 12
                                           }
                                         ]
@@ -137,14 +137,14 @@ export default {
                                         firstName: '2',
                                         lastName: 'Stuffo',
                                         address: 'Via Roma, 15 Monza',
-                                        uid: '123123',
+                                        uid: 123123,
                                         info: 12
                                       },
                                       {
                                         firstName: '3',
                                         lastName: 'Stuffo',
                                         address: 'Via Roma, 15 Monza',
-                                        uid: '123123',
+                                        uid: 123123,
                                         info: 12
                                       }
                                     ]
@@ -153,14 +153,14 @@ export default {
                                     firstName: '2',
                                     lastName: 'Stuffo',
                                     address: 'Via Roma, 15 Monza',
-                                    uid: '123123',
+                                    uid: 123123,
                                     info: 12
                                   },
                                   {
                                     firstName: '3',
                                     lastName: 'Stuffo',
                                     address: 'Via Roma, 15 Monza',
-                                    uid: '123123',
+                                    uid: 123123,
                                     info: 12
                                   }
                                 ]
@@ -169,14 +169,14 @@ export default {
                                 firstName: '2',
                                 lastName: 'Stuffo',
                                 address: 'Via Roma, 15 Monza',
-                                uid: '123123',
+                                uid: 123123,
                                 info: 12
                               },
                               {
                                 firstName: '3',
                                 lastName: 'Stuffo',
                                 address: 'Via Roma, 15 Monza',
-                                uid: '123123',
+                                uid: 123123,
                                 info: 12
                               }
                             ]
@@ -185,14 +185,14 @@ export default {
                             firstName: '2',
                             lastName: 'Stuffo',
                             address: 'Via Roma, 15 Monza',
-                            uid: '123123',
+                            uid: 123123,
                             info: 12
                           },
                           {
                             firstName: '3',
                             lastName: 'Stuffo',
                             address: 'Via Roma, 15 Monza',
-                            uid: '123123',
+                            uid: 123123,
                             info: 12
                           }
                         ]
@@ -201,14 +201,14 @@ export default {
                         firstName: '2',
                         lastName: 'Stuffo',
                         address: 'Via Roma, 15 Monza',
-                        uid: '123123',
+                        uid: 123123,
                         info: 12
                       },
                       {
                         firstName: '3',
                         lastName: 'Stuffo',
                         address: 'Via Roma, 15 Monza',
-                        uid: '123123',
+                        uid: 123123,
                         info: 12
                       }
                     ]
@@ -217,14 +217,14 @@ export default {
                     firstName: '2',
                     lastName: 'Stuffo',
                     address: 'Via Roma, 15 Monza',
-                    uid: '123123',
+                    uid: 123123,
                     info: 12
                   },
                   {
                     firstName: '3',
                     lastName: 'Stuffo',
                     address: 'Via Roma, 15 Monza',
-                    uid: '123123',
+                    uid: 123123,
                     info: 12
                   }
                 ]
@@ -233,14 +233,14 @@ export default {
                 firstName: '2',
                 lastName: 'Stuffo',
                 address: 'Via Roma, 15 Monza',
-                uid: '123123',
+                uid: 123123,
                 info: 12
               },
               {
                 firstName: '3',
                 lastName: 'Stuffo',
                 address: 'Via Roma, 15 Monza',
-                uid: '123123',
+                uid: 123123,
                 info: 12
               }
             ]
@@ -259,49 +259,49 @@ export default {
         firstName: 'Matteo',
         lastName: 'Staffone',
         address: 'Via Roma, 13, Genova',
-        uid: <code>23456789</code>,
-        info: 12.1213,
+        uid: 23456789,
+        info: <code>23456789</code>,
         subRows: [
           {
             firstName: '1',
             lastName: 'Stuffo',
             address: 'Via Roma, 15 Monza',
-            uid: '123123',
+            uid: 123123,
             info: 12
           },
           {
             firstName: '2',
             lastName: 'Stuffo',
             address: 'Via Roma, 15 Monza',
-            uid: '123123',
+            uid: 123123,
             info: 12,
             subRows: [
               {
                 firstName: '1',
                 lastName: 'Stuffo',
                 address: 'Via Roma, 15 Monza',
-                uid: '123123',
+                uid: 123123,
                 info: 12,
                 subRows: [
                   {
                     firstName: '1',
                     lastName: 'Stuffo',
                     address: 'Via Roma, 15 Monza',
-                    uid: '123123',
+                    uid: 123123,
                     info: 12
                   },
                   {
                     firstName: '2',
                     lastName: 'Stuffo',
                     address: 'Via Roma, 15 Monza',
-                    uid: '123123',
+                    uid: 123123,
                     info: 12
                   },
                   {
                     firstName: '3',
                     lastName: 'Stuffo',
                     address: 'Via Roma, 15 Monza',
-                    uid: '123123',
+                    uid: 123123,
                     info: 12
                   }
                 ]
@@ -310,14 +310,14 @@ export default {
                 firstName: '2',
                 lastName: 'Stuffo',
                 address: 'Via Roma, 15 Monza',
-                uid: '123123',
+                uid: 123123,
                 info: 12
               },
               {
                 firstName: '3',
                 lastName: 'Stuffo',
                 address: 'Via Roma, 15 Monza',
-                uid: '123123',
+                uid: 123123,
                 info: 12
               }
             ]
@@ -326,28 +326,28 @@ export default {
             firstName: '3',
             lastName: 'Stuffo',
             address: 'Via Roma, 15 Monza',
-            uid: '123123',
+            uid: 123123,
             info: 12,
             subRows: [
               {
                 firstName: '1',
                 lastName: 'Stuffo',
                 address: 'Via Roma, 15 Monza',
-                uid: '123123',
+                uid: 123123,
                 info: 12
               },
               {
                 firstName: '2',
                 lastName: 'Stuffo',
                 address: 'Via Roma, 15 Monza',
-                uid: '123123',
+                uid: 123123,
                 info: 12
               },
               {
                 firstName: '3',
                 lastName: 'Stuffo',
                 address: 'Via Roma, 15 Monza',
-                uid: '123123',
+                uid: 123123,
                 info: 12
               }
             ]
@@ -365,14 +365,14 @@ export default {
         firstName: 'Simone',
         lastName: 'Stuffo',
         address: 'Via Roma, 15 Monza',
-        uid: '123123',
+        uid: 123123,
         info: 12,
         subRows: [
           {
             firstName: 'ciao',
             lastName: 'Stuffo',
             address: 'Via Roma, 15 Monza',
-            uid: '123123',
+            uid: 123123,
             info: 12
           }
         ]
@@ -381,14 +381,14 @@ export default {
         firstName: 'Luca',
         lastName: 'Morandi',
         address: 'Via Roma, 1, Treno',
-        uid: '34567895423556789',
+        uid: 3456795423556789,
         info: 123123.12,
         subRows: [
           {
             firstName: 'ciao',
             lastName: 'Stuffo',
             address: 'Via Roma, 15 Monza',
-            uid: '123123',
+            uid: 123123,
             info: 12
           }
         ]
@@ -397,70 +397,70 @@ export default {
         firstName: 'Mattia',
         lastName: 'Lastname',
         address: 'Via Roma, 12, Bologna',
-        uid: '345367890',
+        uid: 345367890,
         info: 123.96
       },
       {
         firstName: 'Morfeo',
         lastName: 'Staffone',
         address: 'Via Roma, 13, Genova',
-        uid: <code>23456789</code>,
+        uid: 3434235,
         info: 12.1213
       },
       {
         firstName: 'Gianluca',
         lastName: 'Staffo',
         address: 'Via Roma, 14, Milano',
-        uid: '2345678',
+        uid: 2345678,
         info: 1234
       },
       {
         firstName: 'Simone',
         lastName: 'Stuffo',
         address: 'Via Roma, 15 Monza',
-        uid: '123123',
+        uid: 123123,
         info: 12
       },
       {
         firstName: 'Simone',
         lastName: 'Stuffo',
         address: 'Via Roma, 15 Monza',
-        uid: '123123',
+        uid: 123123,
         info: 12
       },
       {
         firstName: 'Simone',
         lastName: 'Stuffo',
         address: 'Via Roma, 15 Monza',
-        uid: '123123',
+        uid: 123123,
         info: 12
       },
       {
         firstName: 'Simone',
         lastName: 'Stuffo',
         address: 'Via Roma, 15 Monza',
-        uid: '123123',
+        uid: 123123,
         info: 12
       },
       {
         firstName: 'Simone',
         lastName: 'Stuffo',
         address: 'Via Roma, 15 Monza',
-        uid: '123123',
+        uid: 123123,
         info: 12
       },
       {
         firstName: 'Simone',
         lastName: 'Stuffo',
         address: 'Via Roma, 15 Monza',
-        uid: '123123',
+        uid: 123123,
         info: 12
       },
       {
         firstName: 'Simone',
         lastName: 'Stuffo',
         address: 'Via Roma, 15 Monza',
-        uid: '123123',
+        uid: 123123,
         info: 12
       }
     ]
@@ -642,4 +642,46 @@ Loading.args = {
   columnsControl: true,
   showHeader: true,
   loading: true
+}
+
+const ManualSortingTemplate: ComponentStory<typeof Table> = ({ data, ...args }) => {
+  const [pageData, setPageData] = useState([])
+  const [totalRows, setTotalRows] = useState(1)
+  const [sortBy, setSortBy] = useState([])
+
+  const fetchData = useCallback(({ pageIndex, pageSize }) => {
+    setTotalRows(data.length)
+    const result = data.slice(pageIndex * pageSize, pageIndex * pageSize + pageSize)
+    if (sortBy[0]) {
+      result.sort((a, b) => {
+        if (sortBy[0].desc) {
+          return a[sortBy[0].id] - b[sortBy[0].id]
+        } else {
+          return b[sortBy[0].id] - a[sortBy[0].id]
+        }
+      })
+    }
+
+    setPageData(result)
+  }, [data, sortBy])
+
+  return (
+    <Table
+      {...args}
+      data={pageData}
+      onSortChange={sortBy => setSortBy(sortBy)}
+      onDataUpdate={fetchData}
+      totalRows={totalRows}
+      emptyComponent={<CustomEmptyComponent />}
+    />
+  )
+}
+
+export const ManualSorting = ManualSortingTemplate.bind({})
+ManualSorting.args = {
+  isManualSorted: true,
+  columnsControl: true,
+  selectableRows: true,
+  showPagination: true,
+  itemsPerPage: 5
 }
