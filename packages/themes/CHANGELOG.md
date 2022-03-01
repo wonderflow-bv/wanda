@@ -1,5 +1,11 @@
 # @wonderflow/themes
 
+## 5.2.0
+
+### Minor Changes
+
+- 30d5f4c: Add new Table component
+
 ## 5.1.0
 
 ### Minor Changes

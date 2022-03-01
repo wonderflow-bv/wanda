@@ -1,5 +1,16 @@
 # @wonderflow/config
 
+## 5.2.0
+
+### Minor Changes
+
+- 30d5f4c: Add new Table component
+
+### Patch Changes
+
+- Updated dependencies [30d5f4c]
+  - @wonderflow/tokens@5.4.0
+
 ## 5.1.2
 
 ### Patch Changes
