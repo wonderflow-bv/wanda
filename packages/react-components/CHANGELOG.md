@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 5.6.0
+
+### Minor Changes
+
+- c7da4b1: Update sprite export path and improve Icon description
+
 ## 5.5.0
 
 ### Minor Changes

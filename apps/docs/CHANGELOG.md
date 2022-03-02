@@ -1,5 +1,17 @@
 # docs
 
+## 3.6.0
+
+### Minor Changes
+
+- c7da4b1: Update sprite export path and improve Icon description
+
+### Patch Changes
+
+- Updated dependencies [c7da4b1]
+  - @wonderflow/icons@5.4.0
+  - @wonderflow/react-components@5.6.0
+
 ## 3.5.0
 
 ### Minor Changes

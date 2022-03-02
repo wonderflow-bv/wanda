@@ -1,5 +1,11 @@
 # @wonderflow/icons
 
+## 5.4.0
+
+### Minor Changes
+
+- c7da4b1: Update sprite export path and improve Icon description
+
 ## 5.3.0
 
 ### Minor Changes
