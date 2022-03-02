@@ -92,7 +92,7 @@ export const CustomReactIcon = (props) => (
       typeValue: '12 | 16 | 24 | 32 | 40 | 48 | 56',
       default: "16",
       required: false,
-      description: "Set the size of the icon. To improve readability at any size, the style of the icon is automatically defined based on the dimension.",
+      description: "Set the size of the icon. If set to `12`, will force the icon to use the `solid` weight.",
     },
     {
       name: "weight",
@@ -100,7 +100,7 @@ export const CustomReactIcon = (props) => (
       typeValue: "'solid' | 'outline' | 'duotone'",
       default: "outline",
       required: false,
-      description: "Set the weight of the icon. The default weight is `solid` and outline or duotone icons are available only for icons sized 24pt or larger.",
+      description: "Set the weight of the icon. The default weight is `outline` if `dimension` is greather than `12` or `undefined`. If `dimension` is set to `12`, the weight is ignored and the icon forced to use the `solid` style to improve the readability.",
     },
   ]}
 />

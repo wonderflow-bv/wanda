@@ -7,7 +7,7 @@ import {
   SVGAttributes,
   useMemo
 } from 'react'
-import sprite from '@wonderflow/icons/sprite'
+import sprite from '@wonderflow/icons/sprite.svg'
 import { TokensTypes } from '@wonderflow/tokens/platforms/web'
 import clsx from 'clsx'
 import styles from './icon.module.css'
@@ -27,8 +27,9 @@ export type IconProps = SVGAttributes<SVGElement | SVGSVGElement> & {
   dimension?: TokensTypes['icon']['size'];
   /**
    * Set the weight of the icon.
-   * The default weight is `solid` and outline or duotone icons are available
-   * only for icons sized 24pt or larger.
+   * The default weight is `outline` if `dimension` is greather than `12` or `undefined`.
+   * If `dimension` is set to `12`, the weight is ignored and the icon forced to use
+   * the `solid` style to improve the readability.
   */
   weight?: 'solid' | 'outline' | 'duotone';
 }
