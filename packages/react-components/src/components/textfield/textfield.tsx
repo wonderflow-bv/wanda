@@ -133,6 +133,7 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
               id={fieldID}
               ref={forwardedRef as Ref<HTMLInputElement>}
               type={passwordVisible ? 'text' : type}
+              spellCheck={isPassword ? false : undefined}
               {...commonProps}
               {...otherProps}
             />
