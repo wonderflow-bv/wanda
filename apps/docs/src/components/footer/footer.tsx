@@ -41,7 +41,7 @@ export const Footer = () => {
               as="a"
               target="_blank"
               rel="noopener noreferrer"
-              href="https://twitter.com/wonderflow"
+              href="https://twitter.com/wandaflow"
               kind="flat"
               dimension="big"
               icon="twitter"
