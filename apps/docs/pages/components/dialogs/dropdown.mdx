@@ -60,36 +60,6 @@ export default ({ children }) => (
   </MdxLayout>
 );
 
-## Controlled dropdown
-
-The `Dropdown` component can be controlled from the outside by using the `open` property. If set to `true`, the dropdown will be open once rendered, while passing `false` when it's open, it will force close.
-
-export const PrgrammaticDropdown = () => {
-  const [isOpen, setIsOpen] = useState(false)
-  return (
-    <Components.Stack direction="row" columnGap={16} verticalAlign="center">
-      <Components.Button onClick={() => setIsOpen(open => !open)}>
-        {isOpen ? 'Close' : 'Open'} dropdown
-      </Components.Button>
-      <Components.Dropdown
-        open={isOpen}
-        placement="right"
-        trigger={<Components.Icon source="circle-question" />}
-      >
-        <div style={{ background: 'var(--global-vibrancy-background)', backdropFilter: 'blur(10px)', border: '2px solid black', maxInlineSize: '30ch', padding: 24 }}>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-          Magni error unde sapiente beatae! Nostrum praesentium similique
-          veniam non ut nulla, incidunt velit et, placeat cupiditate, aliquid saepe. Atque, provident perferendis?
-        </div>
-      </Components.Dropdown>
-    </Components.Stack>
-  );
-};
-
-<LiveArea>
-  <PrgrammaticDropdown />
-</LiveArea>
-
 ## Anatomy
 
 ```tsx highlight=1,5-11
@@ -103,6 +73,62 @@ export default () => {
         <Menu.Item>Item option 2</Menu.Item>
         <Menu.Item>Item option 3</Menu.Item>
       </Menu>
+    </Dropdown>
+  );
+};
+```
+
+
+## Controlled dropdown
+
+The `Dropdown` component can be controlled from the outside by using the `open` property. If set to `true`, the dropdown will be open once rendered, while passing `false` when it's open, it will force close.
+
+export const PrgrammaticDropdown = () => {
+  const [open, setOpen] = useState(false)
+  return (
+    <Components.Stack direction="row" columnGap={16} verticalAlign="center">
+      <Components.Dropdown
+        open={open}
+        placement="bottom"
+        trigger={
+          <Components.Button onClick={() => setOpen(open => !open)}>
+            {open ? 'Close' : 'Open'} dropdown
+          </Components.Button>
+        }
+      >
+        <div style={{ background: 'var(--global-vibrancy-background-hard)', backdropFilter: 'blur(10px)', border: '2px solid black', maxInlineSize: '30ch', padding: 24 }}>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+          Magni error unde sapiente beatae! Nostrum praesentium similique
+          veniam non ut nulla, incidunt velit et, placeat cupiditate, aliquid saepe. Atque, provident perferendis? <br /><br />
+          <Components.Button kind="secondary" dimension="small" onClick={() => setOpen(false)}>
+            Close dropdown
+          </Components.Button>
+        </div>
+      </Components.Dropdown>
+    </Components.Stack>
+  );
+};
+
+<LiveArea>
+  <PrgrammaticDropdown />
+</LiveArea>
+
+```tsx highlight=4,7-12,15-16
+import { Dropdown, Button } from "@wonderflow/react-components";
+
+export default () => {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <Dropdown
+      open={open}
+      trigger={(
+        <Button onClick={() => setOpen(!open)}>Open dropdown</Button>
+      )}
+    >
+      ....
+
+      <Button onClick={() => setOpen(false)}>Close</Button>
     </Dropdown>
   );
 };
