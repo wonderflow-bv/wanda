@@ -4,7 +4,8 @@ import {
   Children,
   cloneElement,
   useRef,
-  forwardRef
+  forwardRef,
+  useEffect
 } from 'react'
 import { useKeyPress, useFocusWithin } from 'ahooks'
 import styles from './dropdown.module.css'
@@ -41,6 +42,12 @@ export type DropdownProps = PropsWithClass & {
    * Enable or disable the itneraction on the trigger.
    */
   disabled?: boolean;
+  /**
+   * Programmatically open or close the dropdown. If set to `true`, the dropdown
+   * will be open when rendered. If the dropdown is open, it will force close if
+   * `open` is set to `false`.
+   */
+  open?: boolean;
 }
 
 const DropdownAnimation = {
@@ -66,6 +73,7 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(({
   children,
   trigger,
   offset = 8,
+  open = false,
   placement = 'auto-start',
   disabled,
   className,
@@ -74,7 +82,7 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(({
   const renderedChildren = Children.toArray(children).filter(Boolean)
   const seedID = useUIDSeed()
   const dropdownRef = useRef<any>(forwardedRef)
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [isOpen, setIsOpen] = useState<boolean>(open)
 
   const {
     getTooltipProps,
@@ -100,6 +108,14 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(({
       }
     }
   })
+
+  useEffect(() => {
+    setIsOpen(open)
+
+    return () => {
+      setIsOpen(false)
+    }
+  }, [open])
 
   useKeyPress('esc', () => setIsOpen(false))
 

@@ -102,3 +102,28 @@ WithField.args = {
   trigger: <Textfield type="search" icon="magnifying-glass" />,
   placement: 'bottom-start'
 }
+
+const ProgrammaticTemplate: ComponentStory<typeof Dropdown> = (args) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+
+  return (
+    <>
+      <Button onClick={() => setIsOpen(open => !open)}>Open Dropdown</Button>
+      <Dropdown
+        {...args}
+        open={isOpen}
+      >
+        <div style={{ background: 'var(--global-vibrancy-background)', backdropFilter: 'blur(10px)', border: '2px solid black', maxInlineSize: '30ch', padding: 24 }}>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+          Magni error unde sapiente beatae! Nostrum praesentium similique
+          veniam non ut nulla, incidunt velit et, placeat cupiditate, aliquid saepe. Atque, provident perferendis?
+        </div>
+      </Dropdown>
+    </>
+  )
+}
+
+export const ForceCloseAndOpen = ProgrammaticTemplate.bind({})
+ForceCloseAndOpen.args = {
+  trigger: <span>Trigger</span>
+}

@@ -3,6 +3,7 @@ import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
 import { PropsTable } from "@/components/props-table";
 import { Props } from "@/components/props";
+import { LiveArea } from "@/components/live-area";
 import * as Components from "@wonderflow/react-components";
 
 export const example = `() => {
@@ -13,7 +14,7 @@ export const example = `() => {
       trigger={<Button kind="flat">Open dropdown</Button>}
     >
       <Menu>
-        <Menu.Item icon="user">Item option 1</Menu.Item>
+        <Menu.Item autoFocus icon="user">Item option 1</Menu.Item>
         <Menu.ItemCheckbox
           onClick={() => setChecked(val => !val)}
           icon={checked ? 'check' : undefined}
@@ -58,6 +59,36 @@ export default ({ children }) => (
     {children}
   </MdxLayout>
 );
+
+## Controlled dropdown
+
+The `Dropdown` component can be controlled from the outside by using the `open` property. If set to `true`, the dropdown will be open once rendered, while passing `false` when it's open, it will force close.
+
+export const PrgrammaticDropdown = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  return (
+    <Components.Stack direction="row" columnGap={16} verticalAlign="center">
+      <Components.Button onClick={() => setIsOpen(open => !open)}>
+        {isOpen ? 'Close' : 'Open'} dropdown
+      </Components.Button>
+      <Components.Dropdown
+        open={isOpen}
+        placement="right"
+        trigger={<Components.Icon source="circle-question" />}
+      >
+        <div style={{ background: 'var(--global-vibrancy-background)', backdropFilter: 'blur(10px)', border: '2px solid black', maxInlineSize: '30ch', padding: 24 }}>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+          Magni error unde sapiente beatae! Nostrum praesentium similique
+          veniam non ut nulla, incidunt velit et, placeat cupiditate, aliquid saepe. Atque, provident perferendis?
+        </div>
+      </Components.Dropdown>
+    </Components.Stack>
+  );
+};
+
+<LiveArea>
+  <PrgrammaticDropdown />
+</LiveArea>
 
 ## Anatomy
 
@@ -112,6 +143,13 @@ export default () => {
       default: "",
       required: false,
       description: "Enable or disable the itneraction on the trigger.",
+    },
+    {
+      name: "open",
+      type: ["boolean"],
+      default: "false",
+      required: false,
+      description: "Programmatically open or close the dropdown. If set to `true`, the dropdown will be open when rendered. If the dropdown is open, it will force close if `open` is set to `false`.",
     },
   ]}
 />
