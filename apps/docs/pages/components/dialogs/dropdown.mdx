@@ -145,12 +145,26 @@ export default () => {
       description: "Enable or disable the itneraction on the trigger.",
     },
     {
+      name: "open",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      description: "Programmatically open or close the dropdown. If set to `true`, the dropdown will be open when rendered. This make the dropdown a controlled component.",
+    },
+    {
       name: "onOpenChange",
       type: ["function"],
       typeValue: "(open: boolean) => void",
       default: "",
       required: false,
       description: "Calllback triggered when the dropdown state changes. It returns the new `boolean` state.",
+    },
+    {
+      name: "closeOnOutsideClick",
+      type: ["boolean"],
+      default: "true",
+      required: false,
+      description: "Enable or disable the auto close of the dropdown when clicking outside of it.",
     },
   ]}
 />

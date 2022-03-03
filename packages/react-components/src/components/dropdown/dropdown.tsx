@@ -5,7 +5,8 @@ import {
   cloneElement,
   useRef,
   forwardRef,
-  isValidElement
+  isValidElement,
+  useEffect
 } from 'react'
 import { useKeyPress, useFocusWithin } from 'ahooks'
 import styles from './dropdown.module.css'
@@ -47,7 +48,15 @@ export type DropdownProps = PropsWithClass & {
    * It returns the new `boolean` state.
    */
   onOpenChange?: (open: boolean) => void;
+  /**
+   * Programmatically open or close the dropdown. If set to `true`, the dropdown
+   * will be open when rendered. This make the dropdown a controlled component.
+   */
   open?: boolean;
+  /**
+   * Enable or disable the auto close of the dropdown when clicking outside of it.
+   */
+  closeOnOutsideClick?: boolean;
 }
 
 const DropdownAnimation = {
@@ -74,7 +83,9 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(({
   trigger,
   offset = 8,
   placement = 'auto-start',
+  open,
   disabled,
+  closeOnOutsideClick = true,
   className,
   onOpenChange,
   ...otherProps
@@ -95,13 +106,13 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(({
     trigger: !disabled ? ['click'] : null,
     visible: isOpen,
     closeOnTriggerHidden: true,
+    closeOnOutsideClick,
     onVisibleChange: state => {
       onOpenChange?.(state)
       setIsOpen(state)
     },
     placement: placement,
-    offset: [0, offset],
-    closeOnOutsideClick: true
+    offset: [0, offset]
   })
 
   const isFocusWithin = useFocusWithin(dropdownRef, {
@@ -113,6 +124,10 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(({
   })
 
   useKeyPress('esc', () => setIsOpen(false))
+
+  useEffect(() => {
+    open !== undefined && setIsOpen(open)
+  }, [open])
 
   return (
     <div

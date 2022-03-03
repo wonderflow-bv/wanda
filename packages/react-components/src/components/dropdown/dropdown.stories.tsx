@@ -103,33 +103,32 @@ WithField.args = {
   placement: 'bottom-start'
 }
 
-const ProgrammaticTemplate: ComponentStory<typeof Dropdown> = (args) => {
-  const [isOpen, setIsOpen] = useState<boolean>(true)
+const ControlledTemplate: ComponentStory<typeof Dropdown> = (args) => {
+  const [open, setOpen] = useState<boolean>(false)
 
   return (
-    <>
-      <Button onClick={() => setIsOpen(open => !open)}>
-        {isOpen ? 'Close' : 'Open'}
-        {' '}
-        Dropdown
-      </Button>
-      <Dropdown
-        {...args}
-        data-t={isOpen}
-        onOpenChange={(state) => setIsOpen(state)}
-        // open={isOpen}
-      >
-        <div style={{ background: 'var(--global-vibrancy-background)', backdropFilter: 'blur(10px)', border: '2px solid black', maxInlineSize: '30ch', padding: 24 }}>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-          Magni error unde sapiente beatae! Nostrum praesentium similique
-          veniam non ut nulla, incidunt velit et, placeat cupiditate, aliquid saepe. Atque, provident perferendis?
-        </div>
-      </Dropdown>
-    </>
+    <Dropdown
+      {...args}
+      trigger={(
+        <Button onClick={() => setOpen(val => !val)}>
+          {`${open ? 'Close' : 'Open'} Dropdown`}
+        </Button>
+      )}
+      onOpenChange={(state) => setOpen(state)}
+      open={open}
+    >
+      <div style={{ background: 'var(--global-vibrancy-background)', backdropFilter: 'blur(10px)', border: '2px solid black', maxInlineSize: '30ch', padding: 24 }}>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+        Magni error unde sapiente beatae! Nostrum praesentium similique
+        veniam non ut nulla, incidunt velit et, placeat cupiditate, aliquid saepe. Atque, provident perferendis?
+        <button type="button" onClick={() => setOpen(val => !val)}>
+          Close dropdown
+        </button>
+      </div>
+    </Dropdown>
   )
 }
 
-export const ForceCloseAndOpen = ProgrammaticTemplate.bind({})
-ForceCloseAndOpen.args = {
-  trigger: <span>Trigger</span>
+export const Controlled = ControlledTemplate.bind({})
+Controlled.args = {
 }
