@@ -60,7 +60,7 @@ export const PropsTableRow = ({
       <div role="cell" className={styles.Cell}>
         {description && (
           <Dropdown
-            placement="top"
+            placement="top-start"
             trigger={(
               <IconButton
                 kind="flat"
