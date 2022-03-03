@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Tooltip } from './tooltip'
-import { Text } from '../..'
+import { Text, Button } from '../..'
 
 export default {
   title: 'Components/Dialogs/Tooltip',
@@ -28,5 +28,11 @@ const Template: ComponentStory<typeof Tooltip> = (args) => (
 
 export const Default = Template.bind({})
 Default.args = {
+  interactive: true
+}
+
+export const WithButtons = Template.bind({})
+WithButtons.args = {
+  trigger: <Button>HTML</Button>,
   interactive: true
 }

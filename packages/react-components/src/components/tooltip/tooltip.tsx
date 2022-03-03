@@ -1,4 +1,4 @@
-import { FC, Children, cloneElement, CSSProperties, ReactNode, useState, useRef } from 'react'
+import { FC, Children, cloneElement, CSSProperties, ReactNode, useState, useRef, isValidElement } from 'react'
 import { useUIDSeed } from 'react-uid'
 import { useKeyPress, useFocusWithin } from 'ahooks'
 import { Elevator } from '@/components'
@@ -89,7 +89,7 @@ export const Tooltip: FC<TooltipProps> = ({
       setIsOpen(true)
     },
     onBlur: (e: any) => {
-      (e.target?.parentElement !== tooltipContainerRef.current) && setIsOpen(false)
+      if (e.currentTarget?.parentElement !== tooltipContainerRef.current) setIsOpen(false)
     }
   })
 
@@ -105,7 +105,7 @@ export const Tooltip: FC<TooltipProps> = ({
       data-tooltip-has-focus-within={isFocusWithin}
       style={{ ...style }}
     >
-      {Children.map(trigger, (child: any) => cloneElement(
+      {Children.map(trigger, (child) => isValidElement(child) && cloneElement(
         child,
         {
           ref: setTriggerRef,
