@@ -145,11 +145,12 @@ export default () => {
       description: "Enable or disable the itneraction on the trigger.",
     },
     {
-      name: "open",
-      type: ["boolean"],
-      default: "false",
+      name: "onOpenChange",
+      type: ["function"],
+      typeValue: "(open: boolean) => void",
+      default: "",
       required: false,
-      description: "Programmatically open or close the dropdown. If set to `true`, the dropdown will be open when rendered. If the dropdown is open, it will force close if `open` is set to `false`.",
+      description: "Calllback triggered when the dropdown state changes. It returns the new `boolean` state.",
     },
   ]}
 />

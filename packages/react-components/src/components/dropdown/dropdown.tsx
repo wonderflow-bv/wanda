@@ -5,7 +5,7 @@ import {
   cloneElement,
   useRef,
   forwardRef,
-  useEffect
+  isValidElement
 } from 'react'
 import { useKeyPress, useFocusWithin } from 'ahooks'
 import styles from './dropdown.module.css'
@@ -43,10 +43,10 @@ export type DropdownProps = PropsWithClass & {
    */
   disabled?: boolean;
   /**
-   * Programmatically open or close the dropdown. If set to `true`, the dropdown
-   * will be open when rendered. If the dropdown is open, it will force close if
-   * `open` is set to `false`.
+   * Calllback triggered when the dropdown state changes.
+   * It returns the new `boolean` state.
    */
+  onOpenChange?: (open: boolean) => void;
   open?: boolean;
 }
 
@@ -73,16 +73,16 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(({
   children,
   trigger,
   offset = 8,
-  open = false,
   placement = 'auto-start',
   disabled,
   className,
+  onOpenChange,
   ...otherProps
 }, forwardedRef) => {
   const renderedChildren = Children.toArray(children).filter(Boolean)
   const seedID = useUIDSeed()
   const dropdownRef = useRef<any>(forwardedRef)
-  const [isOpen, setIsOpen] = useState<boolean>(open)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
 
   const {
     getTooltipProps,
@@ -95,7 +95,10 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(({
     trigger: !disabled ? ['click'] : null,
     visible: isOpen,
     closeOnTriggerHidden: true,
-    onVisibleChange: setIsOpen,
+    onVisibleChange: state => {
+      onOpenChange?.(state)
+      setIsOpen(state)
+    },
     placement: placement,
     offset: [0, offset],
     closeOnOutsideClick: true
@@ -109,14 +112,6 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(({
     }
   })
 
-  useEffect(() => {
-    setIsOpen(open)
-
-    return () => {
-      setIsOpen(false)
-    }
-  }, [open])
-
   useKeyPress('esc', () => setIsOpen(false))
 
   return (
@@ -125,7 +120,7 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(({
       className={clsx(styles.Dropdown, className)}
       data-dropdown-has-focus={isFocusWithin}
     >
-      {Children.map(trigger, (child: any) => cloneElement(
+      {Children.map(trigger, (child) => isValidElement(child) && cloneElement(
         child,
         {
           ref: setTriggerRef,
@@ -153,7 +148,7 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(({
               exit="hidden"
             >
 
-              {Children.map(renderedChildren, (child: any) => cloneElement(
+              {Children.map(renderedChildren, (child) => isValidElement(child) && cloneElement(
                 child,
                 {
                   id: seedID('dropdown-menu'),
