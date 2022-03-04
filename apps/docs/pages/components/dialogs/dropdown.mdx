@@ -90,9 +90,10 @@ export const PrgrammaticDropdown = () => {
       <Components.Dropdown
         open={open}
         placement="bottom"
+        onOpenChange={(state) => setOpen(state)}
         trigger={
           <Components.Button onClick={() => setOpen(open => !open)}>
-            {open ? 'Close' : 'Open'} dropdown
+            {`${open ? 'Close' : 'Open'} dropdown`}
           </Components.Button>
         }
       >
@@ -100,7 +101,7 @@ export const PrgrammaticDropdown = () => {
           Lorem ipsum dolor, sit amet consectetur adipisicing elit.
           Magni error unde sapiente beatae! Nostrum praesentium similique
           veniam non ut nulla, incidunt velit et, placeat cupiditate, aliquid saepe. Atque, provident perferendis? <br /><br />
-          <Components.Button kind="secondary" dimension="small" onClick={() => setOpen(false)}>
+          <Components.Button kind="secondary" dimension="small" onClick={() => setOpen(val => !val)}>
             Close dropdown
           </Components.Button>
         </div>
@@ -122,6 +123,7 @@ export default () => {
   return (
     <Dropdown
       open={open}
+      onOpenChange={(state) => setOpen(state)}
       trigger={(
         <Button onClick={() => setOpen(!open)}>Open dropdown</Button>
       )}
