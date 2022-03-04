@@ -2,15 +2,7 @@
   "$schema": "https://unpkg.com/@changesets/config@1.6.4/schema.json",
   "changelog": ["@changesets/cli/changelog", { "repo": "wonderflow-bv/wanda" }],
   "commit": false,
-  "linked": [
-    [
-      "@wonderflow/react-components",
-      "@wonderflow/icons",
-      "@wonderflow/themes",
-      "@wonderflow/config",
-      "@wonderflow/tokens"
-    ]
-  ],
+  "linked": [],
   "access": "restricted",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
