@@ -1,4 +1,4 @@
-import { FC, Fragment, Children, cloneElement, ReactElement } from 'react'
+import { FC, Fragment, Children, cloneElement, ReactElement, isValidElement } from 'react'
 
 export type ElevatorProps = {
   /**
@@ -24,7 +24,7 @@ export const Elevator: FC<ElevatorProps> = ({
 }) => {
   return (
     <Fragment>
-      {Children.map(children, (child: ReactElement) => cloneElement(
+      {Children.map(children, (child) => isValidElement(child) && cloneElement(
         child,
         {
           'data-elevation': resting,

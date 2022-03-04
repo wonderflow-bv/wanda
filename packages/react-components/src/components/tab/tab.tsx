@@ -4,7 +4,8 @@ import {
   forwardRef,
   ReactNode,
   Children,
-  cloneElement
+  cloneElement,
+  isValidElement
 } from 'react'
 import clsx from 'clsx'
 import { useUIDSeed } from 'react-uid'
@@ -56,8 +57,6 @@ export const Tab = forwardRef<HTMLDivElement, TabProps>(({
   onChange,
   ...otherProps
 }, forwardedRef) => {
-  const renderedChildren = Children.toArray(children).filter(Boolean)
-
   const innerState = useState(0)
   const tabState = state || innerState
   const [currentTab] = tabState
@@ -82,7 +81,7 @@ export const Tab = forwardRef<HTMLDivElement, TabProps>(({
          * children. Assign required ARIA attributes and ID's
          */}
         <TabList>
-          {Children.map(renderedChildren, (child: any, index) => (
+          {Children.map(children, (child, index) => isValidElement(child) && (
             <TabItem
               id={seedID(`tab-item-${index}`)}
               aria-controls={seedID(`tab-panel-${index}`)}
@@ -96,7 +95,7 @@ export const Tab = forwardRef<HTMLDivElement, TabProps>(({
         {/**
          * Loop children to assign required ARIA attributes and ID's
          */}
-        {Children.map(renderedChildren, (child: any, index) => cloneElement(
+        {Children.map(children, (child, index) => isValidElement(child) && cloneElement(
           child,
           {
             id: seedID(`tab-panel-${index}`),

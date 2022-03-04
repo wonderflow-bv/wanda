@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { FC, Children, cloneElement, forwardRef, MouseEvent, useCallback } from 'react'
+import { FC, Children, cloneElement, forwardRef, MouseEvent, useCallback, isValidElement } from 'react'
 import { Icon, IconProps, Polymorphic, Spinner } from '@/components'
 import styles from './button.module.css'
 
@@ -128,7 +128,7 @@ export const ButtonsGroup: FC<ButtonsGroupProps> = ({
   dimension = 'regular'
 }) => (
   <div className={clsx(styles.ButtonsGroup, className)}>
-    {Children.map(children, (child: any) => cloneElement(
+    {Children.map(children, (child) => isValidElement(child) && cloneElement(
       child,
       {
         kind,

@@ -90,7 +90,6 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(({
   onOpenChange,
   ...otherProps
 }, forwardedRef) => {
-  const renderedChildren = Children.toArray(children).filter(Boolean)
   const seedID = useUIDSeed()
   const dropdownRef = useRef<any>(forwardedRef)
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -163,7 +162,7 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(({
               exit="hidden"
             >
 
-              {Children.map(renderedChildren, (child) => isValidElement(child) && cloneElement(
+              {Children.map(children, (child) => isValidElement(child) && cloneElement(
                 child,
                 {
                   id: seedID('dropdown-menu'),

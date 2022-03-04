@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { FC, Children, cloneElement, CSSProperties } from 'react'
+import { FC, Children, cloneElement, CSSProperties, isValidElement } from 'react'
 import MasonryLayout from 'react-masonry-css'
 import tkns from '@wonderflow/tokens/platforms/web/tokens.json'
 import { TokensTypes } from '@wonderflow/tokens/platforms/web'
@@ -77,7 +77,7 @@ export const Masonry: FC<MasonryProps> = ({
       style={{ ...dynamicStyle, ...style }}
       {...otherProps}
     >
-      {Children.map(children, (child: any) => cloneElement(
+      {Children.map(children, (child) => isValidElement(child) && cloneElement(
         child,
         {
           role: 'listitem'

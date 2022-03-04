@@ -3,7 +3,7 @@ import { AutocompleteOption, AutocompleteOptionProps } from './autocomplete-opti
 import {
   Children, ForwardRefExoticComponent,
   cloneElement, forwardRef, useCallback, useMemo, useRef,
-  useState, CSSProperties, useEffect, ReactNode
+  useState, CSSProperties, useEffect, ReactNode, isValidElement
 } from 'react'
 import { useDebounce, useFocusWithin, useKeyPress, useSize } from 'ahooks'
 import { Text, Menu, Textfield, TextfieldProps } from '@/components'
@@ -178,7 +178,7 @@ export const Autocomplete = forwardRef<HTMLDivElement, AutocompleteProps>(({
             >
               {filteredOptions.length === 0
                 ? <Text as="div" textAlign="center" dimmed={5}>{emptyMessage}</Text>
-                : Children.map(filteredOptions, (child: any) => cloneElement(
+                : Children.map(filteredOptions, (child) => isValidElement(child) && cloneElement(
                   child,
                   {
                     onClick: handleOptionClick
