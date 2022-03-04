@@ -1,5 +1,11 @@
 # @wonderflow/icons
 
+## 6.0.0
+
+### Major Changes
+
+- aa94785: Align versions
+
 ## 5.4.0
 
 ### Minor Changes

@@ -1,5 +1,11 @@
 # @wonderflow/themes
 
+## 6.0.0
+
+### Major Changes
+
+- aa94785: Align versions
+
 ## 5.2.0
 
 ### Minor Changes

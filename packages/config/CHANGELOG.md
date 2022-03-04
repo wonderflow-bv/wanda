@@ -1,5 +1,16 @@
 # @wonderflow/config
 
+## 6.0.0
+
+### Major Changes
+
+- aa94785: Align versions
+
+### Patch Changes
+
+- Updated dependencies [aa94785]
+  - @wonderflow/tokens@6.0.0
+
 ## 5.2.0
 
 ### Minor Changes

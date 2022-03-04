@@ -1,5 +1,17 @@
 # docs
 
+## 5.0.0
+
+### Major Changes
+
+- aa94785: Align versions
+
+### Patch Changes
+
+- Updated dependencies [aa94785]
+  - @wonderflow/icons@6.0.0
+  - @wonderflow/themes@6.0.0
+
 ## 4.0.0
 
 ### Major Changes
