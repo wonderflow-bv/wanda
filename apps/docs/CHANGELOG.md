@@ -1,5 +1,24 @@
 # docs
 
+## 4.0.0
+
+### Major Changes
+
+- 6706e4c: Rename all verical/horizontal padding/align props into vPadding/vAlign and hPadding/hAlign. This change has been made to keep a clean status of the code and reduce the required boilerplate.
+
+### Minor Changes
+
+- 5bca3b0: Add new `open` prop to Dropdown to programmatically open and close the dropdown
+
+### Patch Changes
+
+- Updated dependencies [6706e4c]
+- Updated dependencies [9517873]
+- Updated dependencies [92d2378]
+- Updated dependencies [14afd7e]
+- Updated dependencies [5bca3b0]
+  - @wonderflow/react-components@6.0.0
+
 ## 3.6.0
 
 ### Minor Changes
