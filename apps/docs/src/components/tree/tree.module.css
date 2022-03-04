@@ -23,7 +23,7 @@
 }
 
 .Li {
-  & > :is(a, span) {
+  & > :is(a, span, div) {
     padding: env(--space-2) env(--space-24);
     outline-offset: -2px;
     font-weight: 600;

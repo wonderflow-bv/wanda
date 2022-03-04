@@ -25,6 +25,15 @@ const routes: NavigationMenu = [
         path: '/release-notes',
         label: 'Release notes',
         target: ''
+      },
+      {
+        path: '/resources',
+        label: 'Resources',
+        target: '',
+        tag: {
+          label: 'new',
+          color: 'green'
+        }
       }
     ]
   },
@@ -61,7 +70,11 @@ const routes: NavigationMenu = [
             path: '/design/foundations/motion',
             label: 'Motion',
             target: '',
-            wip: true
+            wip: true,
+            tag: {
+              label: 'soon',
+              color: 'gray'
+            }
           }
         ]
       },
