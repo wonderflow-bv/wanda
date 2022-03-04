@@ -1,5 +1,18 @@
 # @wonderflow/react-components
 
+## 6.0.0
+
+### Major Changes
+
+- 6706e4c: Rename all verical/horizontal padding/align props into vPadding/vAlign and hPadding/hAlign. This change has been made to keep a clean status of the code and reduce the required boilerplate.
+
+### Minor Changes
+
+- 9517873: Fix Tooltip not closing on blur
+- 92d2378: Add new `onOpenChange` callback to Dropdown to return the current state when it changes.
+- 14afd7e: Disable spellCheck on password field
+- 5bca3b0: Add new `open` prop to Dropdown to programmatically open and close the dropdown
+
 ## 5.6.0
 
 ### Minor Changes
