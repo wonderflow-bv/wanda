@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Stack } from '../..'
 import { Textfield } from './textfield'
 
-export default {
+const story: ComponentMeta<typeof Textfield> = {
   title: 'Components/Inputs/Textfield',
   component: Textfield,
   args: {
@@ -38,7 +38,9 @@ export default {
       control: { type: 'inline-radio' }
     }
   }
-} as ComponentMeta<typeof Textfield>
+}
+
+export default story
 
 const SingleTemplate: ComponentStory<typeof Textfield> = (args) => (
   <Stack rowGap={24}>

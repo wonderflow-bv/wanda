@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Dropdown } from './dropdown'
 import { Button, Separator, Textfield, Menu, Title } from '../..'
 
-export default {
+const story: ComponentMeta<typeof Dropdown> = {
   title: 'Components/Dialogs/Dropdown',
   component: Dropdown,
   args: {
@@ -18,7 +18,9 @@ export default {
       }
     }
   }
-} as ComponentMeta<typeof Dropdown>
+}
+
+export default story
 
 const DefaultTemplate: ComponentStory<typeof Dropdown> = (args) => {
   const [checked, setChecked] = useState<boolean>(false)

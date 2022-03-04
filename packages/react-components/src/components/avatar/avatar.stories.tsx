@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Avatar } from './avatar'
 
-export default {
+const story: ComponentMeta<typeof Avatar> = {
   title: 'Components/Widgets/Avatar',
   component: Avatar,
   args: {
@@ -14,7 +14,9 @@ export default {
       control: { type: 'radio' }
     }
   }
-} as ComponentMeta<typeof Avatar>
+}
+
+export default story
 
 const Template: ComponentStory<typeof Avatar> = (args) => <Avatar {...args} />
 

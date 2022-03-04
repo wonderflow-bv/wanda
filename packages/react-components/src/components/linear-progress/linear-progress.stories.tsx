@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { LinearProgress } from './linear-progress'
 
-export default {
+const story: ComponentMeta<typeof LinearProgress> = {
   title: 'Components/Loading/Linear progress',
   component: LinearProgress,
   args: {
@@ -18,7 +18,9 @@ export default {
       control: { type: 'radio' }
     }
   }
-} as ComponentMeta<typeof LinearProgress>
+}
+
+export default story
 
 const Template: ComponentStory<typeof LinearProgress> = (args) => <LinearProgress {...args} />
 

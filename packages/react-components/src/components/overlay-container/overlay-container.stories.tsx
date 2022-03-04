@@ -3,13 +3,15 @@ import { useState } from 'react'
 import { OverlayContainer } from './overlay-container'
 import { Button, Stack } from '../..'
 
-export default {
+const story: ComponentMeta<typeof OverlayContainer> = {
   title: 'Layouts/Overlay container',
   component: OverlayContainer,
   args: {
     obfuscate: true
   }
-} as ComponentMeta<typeof OverlayContainer>
+}
+
+export default story
 
 const Template: ComponentStory<typeof OverlayContainer> = ({ children, ...otherProps }) => {
   const [visible, setVisible] = useState(false)

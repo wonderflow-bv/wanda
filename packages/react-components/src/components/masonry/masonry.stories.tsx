@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Masonry } from './masonry'
 
-export default {
+const story: ComponentMeta<typeof Masonry> = {
   title: 'Layouts/Masonry',
   component: Masonry,
   args: {
@@ -10,7 +10,9 @@ export default {
   argTypes: {
 
   }
-} as ComponentMeta<typeof Masonry>
+}
+
+export default story
 
 const Template: ComponentStory<typeof Masonry> = (args) => (
   <Masonry {...args}>

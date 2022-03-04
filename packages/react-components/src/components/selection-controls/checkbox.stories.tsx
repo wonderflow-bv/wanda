@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Checkbox } from './checkbox'
 
-export default {
+const story: ComponentMeta<typeof Checkbox> = {
   title: 'Components/Inputs/Checkbox',
   component: Checkbox,
   argTypes: {
@@ -16,7 +16,9 @@ export default {
       control: { type: 'inline-radio' }
     }
   }
-} as ComponentMeta<typeof Checkbox>
+}
+
+export default story
 
 const Template: ComponentStory<typeof Checkbox> = (args) => (
   <Checkbox {...args} />

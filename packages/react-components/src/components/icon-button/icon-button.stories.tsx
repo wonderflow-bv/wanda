@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { IconButton } from './icon-button'
 
-export default {
+const story: ComponentMeta<typeof IconButton> = {
   title: 'Components/Actions/IconButton',
   component: IconButton,
   args: {
@@ -25,7 +25,9 @@ export default {
       control: { type: 'radio' }
     }
   }
-} as ComponentMeta<typeof IconButton>
+}
+
+export default story
 
 const Template: ComponentStory<typeof IconButton> = (args) => <IconButton {...args} />
 

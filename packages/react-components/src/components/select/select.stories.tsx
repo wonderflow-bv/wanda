@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Select } from './select'
 
-export default {
+const story: ComponentMeta<typeof Select> = {
   title: 'Components/Inputs/Select',
   component: Select,
   argTypes: {
@@ -27,7 +27,9 @@ export default {
   args: {
     dimension: 'regular'
   }
-} as ComponentMeta<typeof Select>
+}
+
+export default story
 
 const SingleTemplate: ComponentStory<typeof Select> = (args) => (
   <Select defaultValue="placeholder" {...args}>

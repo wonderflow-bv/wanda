@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { StarMeter } from './star-meter'
 import { Stack } from '../..'
 
-export default {
+const story: ComponentMeta<typeof StarMeter> = {
   title: 'Components/Widgets/Star meter',
   component: StarMeter,
   args: {
@@ -15,7 +15,9 @@ export default {
       control: { type: 'radio' }
     }
   }
-} as ComponentMeta<typeof StarMeter>
+}
+
+export default story
 
 const Template: ComponentStory<typeof StarMeter> = (args) => <Stack><StarMeter {...args} /></Stack>
 

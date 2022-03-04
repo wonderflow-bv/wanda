@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Radio } from './radio'
 
-export default {
+const story: ComponentMeta<typeof Radio> = {
   title: 'Components/Inputs/Radio',
   component: Radio,
   argTypes: {
@@ -16,7 +16,9 @@ export default {
       control: { type: 'inline-radio' }
     }
   }
-} as ComponentMeta<typeof Radio>
+}
+
+export default story
 
 const Template: ComponentStory<typeof Radio> = (args) => (
   <Radio {...args} />

@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Spinner } from './spinner'
 
-export default {
+const story: ComponentMeta<typeof Spinner> = {
   title: 'Components/Loading/Spinner',
   component: Spinner,
   args: {
@@ -14,7 +14,9 @@ export default {
       control: { type: 'radio' }
     }
   }
-} as ComponentMeta<typeof Spinner>
+}
+
+export default story
 
 const Template: ComponentStory<typeof Spinner> = (args) => <Spinner {...args} />
 

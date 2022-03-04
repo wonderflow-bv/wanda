@@ -1,9 +1,8 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { SVGAttributes } from 'react'
-import { Polymorphic } from '../..'
 import { Button, ButtonsGroup } from './button'
 
-export default {
+const story: ComponentMeta<typeof Button> = {
   title: 'Components/Actions/Button',
   component: Button,
   args: {
@@ -35,7 +34,9 @@ export default {
       control: { type: 'inline-radio' }
     }
   }
-} as ComponentMeta<Polymorphic.IntrinsicElement<typeof Button>>
+}
+
+export default story
 
 const CustomReactIcon = ({ ...props }: SVGAttributes<SVGElement | SVGSVGElement>) => (
   <svg

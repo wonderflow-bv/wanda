@@ -2,13 +2,15 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Autocomplete } from './autocomplete'
 import { Chip, List } from '../..'
 
-export default {
+const story: ComponentMeta<typeof Autocomplete> = {
   title: 'Components/Inputs/Autocomplete',
   component: Autocomplete,
   args: {
     invalid: false
   }
-} as ComponentMeta<typeof Autocomplete>
+}
+
+export default story
 
 const Template: ComponentStory<typeof Autocomplete> = (args) => (
   <>

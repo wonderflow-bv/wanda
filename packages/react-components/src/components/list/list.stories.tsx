@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { List } from './list'
 
-export default {
+const story: ComponentMeta<typeof List> = {
   title: 'Components/Typography/List',
   component: List,
   args: {
@@ -13,7 +13,9 @@ export default {
       control: { type: 'radio' }
     }
   }
-} as ComponentMeta<typeof List>
+}
+
+export default story
 
 const Template: ComponentStory<typeof List> = (args) => (
   <List {...args}>

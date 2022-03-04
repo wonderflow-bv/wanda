@@ -4,7 +4,7 @@ import { Table } from './table'
 import { Button, IconButton, Title, Masonry, Stack, Dropdown, Menu, Separator } from '../..'
 import { InfoState } from '../info-state'
 
-export default {
+const story: ComponentMeta<typeof Table> = {
   title: 'Layouts/Table',
   parameters: {
     centered: { disable: true }
@@ -465,7 +465,9 @@ export default {
       }
     ]
   }
-} as ComponentMeta<typeof Table>
+}
+
+export default story
 
 const CustomExpandableComponent = ({ data }) => (
   <Masonry

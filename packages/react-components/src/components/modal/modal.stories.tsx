@@ -3,14 +3,16 @@ import { useState } from 'react'
 import { Modal } from './modal'
 import { useOverlayContext, OverlayContainer, Button, IconButton, Title, Stack } from '../..'
 
-export default {
+const story: ComponentMeta<typeof Modal> = {
   title: 'Components/Dialogs/Modal',
   component: Modal,
   argTypes: {
   },
   args: {
   }
-} as ComponentMeta<typeof Modal>
+}
+
+export default story
 
 const ModalShell: ComponentStory<typeof Modal> = ({ children, ...otherProps }) => {
   const [visible, setVisible] = useState(false)

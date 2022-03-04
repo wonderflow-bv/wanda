@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { SVGAttributes } from 'react'
 import { Icon } from './icon'
 
-export default {
+const story: ComponentMeta<typeof Icon> = {
   title: 'Components/Widgets/Icon',
   component: Icon,
   args: {
@@ -18,7 +18,9 @@ export default {
       }
     }
   }
-} as ComponentMeta<typeof Icon>
+}
+
+export default story
 
 const Template: ComponentStory<typeof Icon> = (args) => <Icon {...args} />
 

@@ -1,14 +1,16 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Grid } from './grid'
 
-export default {
+const story: ComponentMeta<typeof Grid> = {
   title: 'Layouts/Grid',
   component: Grid,
   args: {
   },
   argTypes: {
   }
-} as ComponentMeta<typeof Grid>
+}
+
+export default story
 
 const Template: ComponentStory<typeof Grid> = (args) => (
   <Grid {...args}>

@@ -3,10 +3,12 @@ import { useState } from 'react'
 import { Menu } from './menu'
 import { Separator, Chip } from '../..'
 
-export default {
+const story: ComponentMeta<typeof Menu> = {
   title: 'Components/Navigation/Menu',
   component: Menu
-} as ComponentMeta<typeof Menu>
+}
+
+export default story
 
 const Template: ComponentStory<typeof Menu> = (args) => (
   <Menu {...args}>

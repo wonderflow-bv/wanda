@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { CircularProgress } from './circular-progress'
 
-export default {
+const story: ComponentMeta<typeof CircularProgress> = {
   title: 'Components/Loading/Circular progress',
   component: CircularProgress,
   args: {
@@ -22,7 +22,9 @@ export default {
       control: { type: 'inline-radio' }
     }
   }
-} as ComponentMeta<typeof CircularProgress>
+}
+
+export default story
 
 const Template: ComponentStory<typeof CircularProgress> = (args) => <CircularProgress {...args} />
 

@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Skeleton } from './skeleton'
 
-export default {
+const story: ComponentMeta<typeof Skeleton> = {
   title: 'Components/Loading/Skeleton',
   component: Skeleton,
   args: {
@@ -10,7 +10,9 @@ export default {
     enableAnimation: true,
     inline: false
   }
-} as ComponentMeta<typeof Skeleton>
+}
+
+export default story
 
 const Template: ComponentStory<typeof Skeleton> = (args) => <Skeleton {...args} />
 

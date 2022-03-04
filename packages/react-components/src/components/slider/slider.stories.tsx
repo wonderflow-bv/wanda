@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Slider } from './slider'
 
-export default {
+const story: ComponentMeta<typeof Slider> = {
   title: 'Components/Inputs/Slider',
   component: Slider,
   args: {
@@ -19,7 +19,9 @@ export default {
       control: { type: 'inline-radio' }
     }
   }
-} as ComponentMeta<typeof Slider>
+}
+
+export default story
 
 const Template: ComponentStory<typeof Slider> = (args) => <Slider {...args} />
 

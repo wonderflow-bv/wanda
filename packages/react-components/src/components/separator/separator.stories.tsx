@@ -1,9 +1,11 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Separator } from './separator'
 
-export default {
+const story: ComponentMeta<typeof Separator> = {
   title: 'Layouts/Separator',
   component: Separator
-} as ComponentMeta<typeof Separator>
+}
+
+export default story
 
 export const Default: ComponentStory<typeof Separator> = () => <Separator />

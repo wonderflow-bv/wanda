@@ -2,13 +2,15 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { InputGroup } from './input-group'
 import { Stack, Button, Select, Textfield } from '../..'
 
-export default {
+const story: ComponentMeta<typeof InputGroup> = {
   title: 'Components/Inputs/Input group',
   component: InputGroup,
   args: {
     input: <Textfield type="text" defaultValue="sample" />
   }
-} as ComponentMeta<typeof Select>
+}
+
+export default story
 
 const Default: ComponentStory<typeof InputGroup> = (args) => (
   <Stack inline fill={false} hAlign="start" rowGap={32}>

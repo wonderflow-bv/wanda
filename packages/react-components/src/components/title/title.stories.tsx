@@ -1,8 +1,8 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Title } from './title'
-import { Polymorphic, Container } from '../..'
+import { Container } from '../..'
 
-export default {
+const story: ComponentMeta<typeof Title> = {
   title: 'Components/Typography/Title',
   component: Title,
   parameters: {
@@ -25,7 +25,9 @@ export default {
       control: { type: 'inline-radio' }
     }
   }
-} as ComponentMeta<Polymorphic.IntrinsicElement<typeof Title>>
+}
+
+export default story
 
 export const Default: ComponentStory<typeof Title> = ({ lineHeight }) => (
   <Container>

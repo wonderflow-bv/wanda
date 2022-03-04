@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { ClampText } from './clamp-text'
 import { Container } from '../..'
 
-export default {
+const story: ComponentMeta<typeof ClampText> = {
   title: 'Components/Typography/Clamp Text',
   component: ClampText,
   argTypes: {
@@ -10,7 +10,9 @@ export default {
       control: { type: 'number' }
     }
   }
-} as ComponentMeta<typeof ClampText>
+}
+
+export default story
 
 const Template: ComponentStory<typeof ClampText> = (args) => (
   <Container dimension="medium">

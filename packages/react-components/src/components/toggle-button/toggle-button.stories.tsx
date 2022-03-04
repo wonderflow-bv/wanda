@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { ToggleButton } from './toggle-button'
 
-export default {
+const story: ComponentMeta<typeof ToggleButton> = {
   title: 'Components/Actions/Toggle button',
   component: ToggleButton,
   args: {
@@ -20,7 +20,9 @@ export default {
       control: { type: 'radio' }
     }
   }
-} as ComponentMeta<typeof ToggleButton>
+}
+
+export default story
 
 const Template: ComponentStory<typeof ToggleButton> = (args) => <ToggleButton {...args} />
 

@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Card } from './card'
 import { Text, Title, Icon, Stack } from '../..'
 
-export default {
+const story: ComponentMeta<typeof Card> = {
   title: 'Layouts/Card',
   component: Card,
   args: {
@@ -18,7 +18,9 @@ export default {
       }
     }
   }
-} as ComponentMeta<typeof Card>
+}
+
+export default story
 
 const Template: ComponentStory<typeof Card> = (args) => <Card dimmed={1} {...args} />
 

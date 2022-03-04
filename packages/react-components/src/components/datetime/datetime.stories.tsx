@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Datetime } from './datetime'
 
-export default {
+const story: ComponentMeta<typeof Datetime> = {
   title: 'Components/Widgets/Datetime',
   component: Datetime,
   argTypes: {
@@ -11,7 +11,9 @@ export default {
     locale: 'it-IT',
     date: '2021-12-15T16:00:32.507981+00:00'
   }
-} as ComponentMeta<typeof Datetime>
+}
+
+export default story
 
 const Template: ComponentStory<typeof Datetime> = (args) => <Datetime {...args} />
 

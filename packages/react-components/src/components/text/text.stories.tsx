@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Text } from './text'
 import { Container } from '../..'
 
-export default {
+const story: ComponentMeta<typeof Text> = {
   title: 'Components/Typography/Text',
   component: Text,
   args: {
@@ -30,7 +30,9 @@ export default {
       control: { type: 'inline-radio' }
     }
   }
-} as ComponentMeta<typeof Text>
+}
+
+export default story
 
 const Template: ComponentStory<typeof Text> = (args) => <Container dimension="medium"><Text {...args} /></Container>
 

@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Drawer } from './drawer'
 import { useOverlayContext, OverlayContainer, Button, Stack } from '../..'
 
-export default {
+const story:ComponentMeta<typeof Drawer> = {
   title: 'Components/Dialogs/Drawer',
   component: Drawer,
   args: {
@@ -19,7 +19,9 @@ export default {
       control: { type: 'inline-radio' }
     }
   }
-} as ComponentMeta<typeof Drawer>
+}
+
+export default story
 
 const DrawerShell: ComponentStory<typeof Drawer> = ({ children, ...args }) => {
   const [visible, setVisible] = useState(false)

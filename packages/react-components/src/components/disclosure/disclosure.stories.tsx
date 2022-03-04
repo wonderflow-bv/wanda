@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Disclosure } from './disclosure'
 
-export default {
+const story: ComponentMeta<typeof Disclosure> = {
   title: 'Components/Actions/Disclosure',
   component: Disclosure,
   args: {
@@ -25,7 +25,9 @@ export default {
       control: { type: 'inline-radio' }
     }
   }
-} as ComponentMeta<typeof Disclosure>
+}
+
+export default story
 
 const Template: ComponentStory<typeof Disclosure> = (args) => (
   <Disclosure {...args}>

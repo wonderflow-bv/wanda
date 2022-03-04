@@ -2,14 +2,16 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Tooltip } from './tooltip'
 import { Text, Button } from '../..'
 
-export default {
+const story: ComponentMeta<typeof Tooltip> = {
   title: 'Components/Dialogs/Tooltip',
   component: Tooltip,
   args: {
     trigger: <Text as="span">HTML</Text>,
     interactive: true
   }
-} as ComponentMeta<typeof Tooltip>
+}
+
+export default story
 
 const Template: ComponentStory<typeof Tooltip> = (args) => (
   <>

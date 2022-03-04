@@ -1,8 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Polymorphic } from '../..'
 import { Container } from './container'
 
-export default {
+const story: ComponentMeta<typeof Container> = {
   title: 'Layouts/Container',
   component: Container,
   argTypes: {
@@ -22,7 +21,9 @@ export default {
   args: {
     dimension: 'full'
   }
-} as ComponentMeta<Polymorphic.IntrinsicElement<typeof Container>>
+}
+
+export default story
 
 const Template: ComponentStory<typeof Container> = (args) => <Container {...args} />
 

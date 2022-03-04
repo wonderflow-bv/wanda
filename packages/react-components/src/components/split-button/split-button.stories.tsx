@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { SplitButton } from './split-button'
 import { Menu } from '../..'
 
-export default {
+const story: ComponentMeta<typeof SplitButton> = {
   title: 'Components/Actions/Split button',
   component: SplitButton,
   args: {
@@ -31,7 +31,9 @@ export default {
       control: { type: 'radio' }
     }
   }
-} as ComponentMeta<typeof SplitButton>
+}
+
+export default story
 
 const Template: ComponentStory<typeof SplitButton> = (args) => (
   <SplitButton {...args}>

@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Toggle } from './toggle'
 
-export default {
+const story: ComponentMeta<typeof Toggle> = {
   title: 'Components/Inputs/Toggle',
   component: Toggle,
   argTypes: {
@@ -16,7 +16,9 @@ export default {
       control: { type: 'inline-radio' }
     }
   }
-} as ComponentMeta<typeof Toggle>
+}
+
+export default story
 
 export const Default: ComponentStory<typeof Toggle> = (args) => <Toggle {...args} />
 export const Checked: ComponentStory<typeof Toggle> = (args) => <Toggle defaultChecked {...args} />

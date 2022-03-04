@@ -1,10 +1,12 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Elevator } from './elevator'
 
-export default {
+const story: ComponentMeta<typeof Elevator> = {
   title: 'Components/Widgets/Elevator',
   component: Elevator
-} as ComponentMeta<typeof Elevator>
+}
+
+export default story
 
 const Template: ComponentStory<typeof Elevator> = (args) => (
   <Elevator {...args}>

@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Menu } from '..'
 import { Chip, Text } from '../..'
 
-export default {
+const story: ComponentMeta<typeof Menu.Item> = {
   title: 'Components/Navigation/Menu/Menu Item',
   component: Menu.Item,
   args: {
@@ -22,7 +22,9 @@ export default {
       control: { type: 'inline-radio' }
     }
   }
-} as ComponentMeta<typeof Menu.Item>
+}
+
+export default story
 
 const TemplateItem: ComponentStory<typeof Menu.Item> = (args) => (
   <>

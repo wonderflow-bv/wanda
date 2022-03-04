@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { InfoState } from './info-state'
 import { Button } from '../..'
 
-export default {
+const story: ComponentMeta<typeof InfoState> = {
   title: 'Components/Dialogs/InfoState',
   component: InfoState,
   args: {
@@ -14,7 +14,9 @@ export default {
       control: { type: 'select' }
     }
   }
-} as ComponentMeta<typeof InfoState>
+}
+
+export default story
 
 const Template: ComponentStory<typeof InfoState> = (args) => (
   <InfoState {...args}>

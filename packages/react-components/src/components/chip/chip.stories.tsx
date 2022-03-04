@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Chip } from './chip'
 
-export default {
+const story: ComponentMeta<typeof Chip> = {
   title: 'Components/Widgets/Chip',
   component: Chip,
   argTypes: {
@@ -25,7 +25,9 @@ export default {
     interactive: false,
     color: 'gray'
   }
-} as ComponentMeta<typeof Chip>
+}
+
+export default story
 
 const Template: ComponentStory<typeof Chip> = (args) => <Chip {...args}>Chip text</Chip>
 

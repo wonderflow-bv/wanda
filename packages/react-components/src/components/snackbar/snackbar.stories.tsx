@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Snackbar } from './snackbar'
 
-export default {
+const story: ComponentMeta<typeof Snackbar> = {
   title: 'Components/Dialogs/Snackbar',
   component: Snackbar,
   argTypes: {
@@ -10,7 +10,9 @@ export default {
       control: { type: 'radio' }
     }
   }
-} as ComponentMeta<typeof Snackbar>
+}
+
+export default story
 
 const Template: ComponentStory<typeof Snackbar> = (args) => (
   <Snackbar {...args}>

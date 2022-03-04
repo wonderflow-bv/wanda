@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Stack } from './stack'
 
-export default {
+const story: ComponentMeta<typeof Stack> = {
   title: 'Layouts/Stack',
   component: Stack,
   argTypes: {
@@ -31,7 +31,9 @@ export default {
     wrap: true,
     as: 'div'
   }
-} as ComponentMeta<typeof Stack>
+}
+
+export default story
 
 const Template: ComponentStory<typeof Stack> = (args) => (
   <Stack {...args}>

@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Tab } from './tab'
 import { Button, Stack } from '../..'
 
-export default {
+const story: ComponentMeta<typeof Tab> = {
   title: 'Components/Navigation/Tab',
   component: Tab,
   argTypes: {
@@ -14,7 +14,9 @@ export default {
       }
     }
   }
-} as ComponentMeta<typeof Tab>
+}
+
+export default story
 
 const Template: ComponentStory<typeof Tab> = (args) => {
   return (

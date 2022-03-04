@@ -2,13 +2,15 @@ import { ComponentStory, Meta } from '@storybook/react'
 import { Prose } from './prose'
 import { Container, Separator, Text, Title } from '../..'
 
-export default {
+const story: Meta<typeof Prose> = {
   title: 'Components/Typography/Prose',
   component: Prose,
   args: {
     as: 'section'
   }
-} as Meta<typeof Prose>
+}
+
+export default story
 
 export const Default: ComponentStory<typeof Prose> = (args) => (
   <Container dimension="medium">
