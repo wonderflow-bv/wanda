@@ -44,7 +44,7 @@ export type DropdownProps = PropsWithClass & {
    */
   disabled?: boolean;
   /**
-   * Calllback triggered when the dropdown state changes.
+   * Callback triggered when the dropdown state changes.
    * It returns the new `boolean` state.
    */
   onOpenChange?: (open: boolean) => void;
