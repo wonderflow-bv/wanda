@@ -1,5 +1,5 @@
 import { MdxLayout } from "@/components/layouts/mdx";
-import { List, Text } from "@wonderflow/react-components";
+import { List, Text, Table } from "@wonderflow/react-components";
 
 export default ({ children }) => (
   <MdxLayout
@@ -82,53 +82,47 @@ Some UI elements are placed by default on a specific layer because they must be 
 
 Here you can find the full list of the elements that have a predefined elevetaion value:
 
-<table style={{ width: "100%", textAlign: "match-parent" }}>
-  <thead>
-    <tr>
-      <th scope="col">
-        <Text textAlign="start">Component</Text>
-      </th>
-      <th scope="col">
-        <Text textAlign="end">Layer</Text>
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Tooltip</td>
-      <td>
-        <Text textAlign="end">2</Text>
-      </td>
-    </tr>
-    <tr>
-      <td>Dropdown</td>
-      <td>
-        <Text textAlign="end">2</Text>
-      </td>
-    </tr>
-    <tr>
-      <td>Floating snackbars</td>
-      <td>
-        <Text textAlign="end">3</Text>
-      </td>
-    </tr>
-    <tr>
-      <td>Floating buttons</td>
-      <td>
-        <Text textAlign="end">3</Text>
-      </td>
-    </tr>
-    <tr>
-      <td>Modal drawers</td>
-      <td>
-        <Text textAlign="end">4</Text>
-      </td>
-    </tr>
-    <tr>
-      <td>Modal dialogs</td>
-      <td>
-        <Text textAlign="end">4</Text>
-      </td>
-    </tr>
-  </tbody>
-</table>
+
+<Table
+  columns={[
+    {
+      id: "component",
+      Header: "Component",
+      disableSortBy: true,
+      accessor: 'component',
+    },
+    {
+      id: "layer",
+      Header: "Layer",
+      align: "end",
+      disableSortBy: true,
+      accessor: 'layer'
+    },
+  ]}
+  data={[
+    {
+      'component': 'Tooltip',
+      'layer': '2'
+    },
+    {
+      'component': 'Dropdown',
+      'layer': '2'
+    },
+    {
+      'component': 'Floating snackbars',
+      'layer': '3'
+    },
+    {
+      'component': 'Floating buttons',
+      'layer': '3'
+    },
+    {
+      'component': 'Modal drawers',
+      'layer': '4'
+    },
+    {
+      'component': 'Modal dialogs',
+      'layer': '4'
+    }
+  ]}
+/>
