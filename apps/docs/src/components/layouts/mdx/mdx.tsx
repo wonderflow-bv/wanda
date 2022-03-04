@@ -62,7 +62,7 @@ export const MdxLayout: React.FC<MdxLayoutProps> = ({
       {...props}
     >
       <Meta title={`${title} - Wanda Design System`} description={description} />
-      <Stack rowGap={48} verticalPadding={48}>
+      <Stack rowGap={48} vPadding={48}>
         <DocHead title={title} description={description}>
           {tags}
         </DocHead>
@@ -79,12 +79,12 @@ export const MdxLayout: React.FC<MdxLayoutProps> = ({
               direction="row"
               wrap
               fill={false}
-              horizontalAlign="space-between"
+              hAlign="space-between"
               columnGap={40}
               rowGap={40}
             >
               {features && (
-              <Stack rowGap={24} horizontalAlign="start" fill={false}>
+              <Stack rowGap={24} hAlign="start" fill={false}>
                 <Title as="h2" level="5">
                   Features
                 </Title>
@@ -97,11 +97,11 @@ export const MdxLayout: React.FC<MdxLayoutProps> = ({
               )}
 
               {showLinks && (
-              <Stack rowGap={24} horizontalAlign="start" fill={false}>
+              <Stack rowGap={24} hAlign="start" fill={false}>
                 <Title as="h2" level="5">
                   Links
                 </Title>
-                <Stack horizontalAlign="start" rowGap={8} className={Links}>
+                <Stack hAlign="start" rowGap={8} className={Links}>
                   <a
                     href={`https://github.com/wonderflow-bv/wanda/tree/main/packages/react-components/src/components/${slugName}`}
                     target="_blank"

@@ -11,7 +11,7 @@ export default {
 } as ComponentMeta<typeof Select>
 
 const Default: ComponentStory<typeof InputGroup> = (args) => (
-  <Stack inline fill={false} horizontalAlign="start" rowGap={32}>
+  <Stack inline fill={false} hAlign="start" rowGap={32}>
     <InputGroup
       end={<Button>Confirm</Button>}
       {...args}

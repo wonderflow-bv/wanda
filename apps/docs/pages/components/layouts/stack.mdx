@@ -7,7 +7,7 @@ import tkns from "@wonderflow/tokens/platforms/web/tokens.json";
 export const example = `<Stack
   columnGap={8}
   direction="row"
-  horizontalAlign="center"
+  hAlign="center"
   fill={false}
 >
   <Select>
@@ -51,7 +51,7 @@ export default () => {
     <Stack
       columnGap={8}
       direction="row"
-      horizontalAlign="center"
+      hAlign="center"
       fill={false}
       wrap
     >
@@ -104,7 +104,7 @@ export default () => {
       description: "Make the children grow to fill the available space instead of being sized based on their content.",
     },
     {
-      name: "verticalAlign",
+      name: "vAlign",
       type: ["string"],
       default: "",
       required: false,
@@ -112,7 +112,7 @@ export default () => {
         "Set the vertical content placement instead of growing to fill the available space.",
     },
     {
-      name: "horizontalAlign",
+      name: "hAlign",
       type: ["string"],
       default: "",
       required: false,
@@ -120,7 +120,7 @@ export default () => {
         "Set the horizontal content placement instead of growing to fill the available space.",
     },
     {
-      name: "horizontalPadding",
+      name: "hPadding",
       type: ["TokensTypes['space']"],
       typeValue: `${Object.keys(tkns.space).map(name => `${name}`).join(" | ")}`,
       default: "0",
@@ -128,7 +128,7 @@ export default () => {
       description: "Set the horizontal padding (left/right)",
     },
     {
-      name: "verticalPadding",
+      name: "vPadding",
       type: ["TokensTypes['space']"],
       typeValue: `${Object.keys(tkns.space).map(name => `${name}`).join(" | ")}`,
       default: "0",

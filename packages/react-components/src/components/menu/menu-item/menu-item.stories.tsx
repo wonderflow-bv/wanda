@@ -4,7 +4,7 @@ import { Menu } from '..'
 import { Chip, Text } from '../..'
 
 export default {
-  title: 'Components/Navigation/Menu Item',
+  title: 'Components/Navigation/Menu/Menu Item',
   component: Menu.Item,
   args: {
     dimension: 'regular',

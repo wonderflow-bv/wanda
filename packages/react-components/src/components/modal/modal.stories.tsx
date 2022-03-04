@@ -50,8 +50,8 @@ const CustomContentModal = () => {
   const { onClose, titleId } = useOverlayContext()
 
   return (
-    <Stack verticalAlign="center">
-      <Stack direction="row" fill={false} verticalAlign="center" horizontalAlign="space-between">
+    <Stack vAlign="center">
+      <Stack direction="row" fill={false} vAlign="center" hAlign="space-between">
         <Title level="5" id={titleId}>{titleId}</Title>
         <IconButton onClick={() => onClose && onClose()} icon="xmark" kind="flat" aria-label="Close modal" />
       </Stack>

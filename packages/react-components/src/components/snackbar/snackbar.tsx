@@ -69,7 +69,7 @@ export const Snackbar = forwardRef(({
       role="status"
       {...otherProps}
     >
-      <Stack verticalAlign="start" horizontalAlign="start" direction="row" columnGap={16} fill={false}>
+      <Stack vAlign="start" hAlign="start" direction="row" columnGap={16} fill={false}>
         <Icon className={styles.Icon} weight="duotone" source={icon || defaultIcons[kind]} dimension={24} />
         <Stack rowGap={16}>
           <Stack rowGap={8}>
@@ -77,7 +77,7 @@ export const Snackbar = forwardRef(({
             <p>{children}</p>
           </Stack>
           {dismissable && (
-            <Stack horizontalAlign="end">
+            <Stack hAlign="end">
               <Button onClick={onDismiss} className={styles.Action}>{dismissLabel}</Button>
             </Stack>
           )}

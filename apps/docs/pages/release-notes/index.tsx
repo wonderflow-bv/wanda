@@ -23,15 +23,15 @@ const Learn = ({ notes }: ReleaseNotesPageProps) => {
       {notes.map((note) => (
         <Stack
           as="section"
-          verticalPadding={80}
+          vPadding={80}
           rowGap={32}
-          horizontalAlign="start"
+          hAlign="start"
           className={Notes}
           key={note.id}
         >
           <Stack
             direction="row"
-            verticalAlign="start"
+            vAlign="start"
             columnGap={24}
           >
             <Card vibrant padding={8} className={Tag}>
@@ -45,7 +45,7 @@ const Learn = ({ notes }: ReleaseNotesPageProps) => {
 
               {note.content && <Markdown>{note.content}</Markdown>}
 
-              <Stack horizontalAlign="start" className={Changes}>
+              <Stack hAlign="start" className={Changes}>
                 {note.breaking && (
                   <div data-note-type="breaking">
                     <Markdown hideMarkers>{note.breaking}</Markdown>

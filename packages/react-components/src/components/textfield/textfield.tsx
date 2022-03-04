@@ -110,8 +110,8 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
       data-textfield-dimension={dimension}
       data-textfield-invalid={invalid}
       aria-disabled={disabled}
-      horizontalAlign="stretch"
-      verticalAlign="start"
+      hAlign="stretch"
+      vAlign="start"
       tabIndex={disabled ? 0 : undefined}
       style={style}
     >

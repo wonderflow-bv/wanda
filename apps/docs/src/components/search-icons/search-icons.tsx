@@ -28,12 +28,12 @@ const IconTile: React.FC<IconProps> = ({ source, weight, ...args }) => {
       onClick={handleCopy(source)}
       className={IconTileClass}
       data-icon-style={weight}
-      horizontalAlign="center"
+      hAlign="center"
       data-icon-tile-copied={copied}
-      verticalAlign="center"
+      vAlign="center"
       rowGap={24}
     >
-      <Stack as="span" horizontalAlign="center" verticalAlign="center" rowGap={16} fill={false}>
+      <Stack as="span" hAlign="center" vAlign="center" rowGap={16} fill={false}>
         <Icon weight={weight} source={source} {...args} />
         {/* <Text size={14} responsive={false} textAlign="center" weight="bold">{source}</Text> */}
       </Stack>
@@ -76,7 +76,7 @@ export const SearchIcons = () => {
   return (
     <Stack rowGap={48} className={SearchIconsClass}>
       <Bleed className={ToolBar}>
-        <Stack direction="row" verticalAlign="center" horizontalAlign="center" wrap columnGap={24} rowGap={16}>
+        <Stack direction="row" vAlign="center" hAlign="center" wrap columnGap={24} rowGap={16}>
           <Textfield
             ref={fieldRef}
             type="search"
@@ -89,15 +89,15 @@ export const SearchIcons = () => {
             autoFocus
           />
           <Stack direction="row" fill={false} columnGap={24} inline>
-            <Stack verticalAlign="center" direction="row" columnGap={8}>
+            <Stack vAlign="center" direction="row" columnGap={8}>
               <Radio onChange={() => handleStyle('solid')} dimension="small" id="SolidStyle" name="iconstyle" value="solid" defaultChecked />
               <Text as="label" htmlFor="SolidStyle"><b>Solid</b></Text>
             </Stack>
-            <Stack verticalAlign="center" direction="row" columnGap={8}>
+            <Stack vAlign="center" direction="row" columnGap={8}>
               <Radio onChange={() => handleStyle('outline')} dimension="small" id="OutlineStyle" name="iconstyle" value="outline" />
               <Text as="label" htmlFor="OutlineStyle"><b>Outline</b></Text>
             </Stack>
-            <Stack verticalAlign="center" direction="row" columnGap={8}>
+            <Stack vAlign="center" direction="row" columnGap={8}>
               <Radio onChange={() => handleStyle('duotone')} dimension="small" id="DuotoneStyle" name="iconstyle" value="duotone" />
               <Text as="label" htmlFor="DuotoneStyle"><b>Duotone</b></Text>
             </Stack>

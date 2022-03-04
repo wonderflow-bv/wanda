@@ -329,10 +329,10 @@ export const Table = <T extends object>({
             as={motion.div}
             className={styles.Toast}
             direction="row"
-            horizontalAlign="space-between"
-            verticalAlign="center"
-            horizontalPadding={16}
-            verticalPadding={8}
+            hAlign="space-between"
+            vAlign="center"
+            hPadding={16}
+            vPadding={8}
             fill={false}
             columnGap={16}
             initial={{ y: '-16px', opacity: 0 }}
@@ -458,7 +458,7 @@ export const Table = <T extends object>({
           </div>
           )
         : (
-          <Stack verticalAlign="center" horizontalAlign="center">
+          <Stack vAlign="center" hAlign="center">
             {emptyComponent || 'No data'}
           </Stack>
           )

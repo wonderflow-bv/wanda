@@ -47,7 +47,7 @@ export const PostLayout: React.FC<PostLayoutProps> = ({
 
       <Stack rowGap={88}>
         <Bleed maxWidth="100vw" offset="var(--sidebar-width)" className={PostHead}>
-          <Stack horizontalAlign="center">
+          <Stack hAlign="center">
             {title
               ? <Title maxWidth="15ch" as="h1" level={wideTitle ? 'display' : '1'}>{title}</Title>
               : <Skeleton width="40vw" height={90} />
@@ -57,7 +57,7 @@ export const PostLayout: React.FC<PostLayoutProps> = ({
 
         {topics && topics.length > 0 && (
         <Container dimension="large" className={TopicsContainer}>
-          <Stack direction="row" horizontalAlign="end" columnGap={8}>
+          <Stack direction="row" hAlign="end" columnGap={8}>
             {topics.map((topic, i) => (
               <Link href={`/learn/topic/${topic}`} key={topic}>
                 <a style={{ background: 'none' }}>
@@ -74,7 +74,7 @@ export const PostLayout: React.FC<PostLayoutProps> = ({
         {authors && authors.length > 0 && (
           <Stack
             rowGap={16}
-            horizontalAlign="start"
+            hAlign="start"
           >
             <Stack
               direction="row"
@@ -94,7 +94,7 @@ export const PostLayout: React.FC<PostLayoutProps> = ({
           </Stack>
         )}
 
-        <Stack verticalPadding={56}>
+        <Stack vPadding={56}>
           {children}
         </Stack>
       </Stack>

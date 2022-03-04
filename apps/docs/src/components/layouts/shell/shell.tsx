@@ -80,7 +80,7 @@ export const ShellLayout: React.FC<ShellLayoutProps> = ({
         <Stack
           rowGap={88}
           as="header"
-          verticalAlign="space-between"
+          vAlign="space-between"
           fill={false}
           className={Aside}
           ref={scrollerRef}
@@ -89,7 +89,7 @@ export const ShellLayout: React.FC<ShellLayoutProps> = ({
         </Stack>
       </FocusOn>
 
-      <Stack as="main" verticalAlign="start" fill={false} className={Content}>
+      <Stack as="main" vAlign="start" fill={false} className={Content}>
         {header && <section className={Header}>{header}</section>}
         <motion.div
           initial="hidden"
@@ -98,7 +98,7 @@ export const ShellLayout: React.FC<ShellLayoutProps> = ({
           variants={variants}
           transition={{ duration: 0.2, type: 'tween' }}
         >
-          <Stack id="content-quicklink" rowGap={80} verticalAlign="start" fill={false}>
+          <Stack id="content-quicklink" rowGap={80} vAlign="start" fill={false}>
             <Container className={ContentArea}>
               {children}
             </Container>

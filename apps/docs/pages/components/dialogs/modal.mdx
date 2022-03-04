@@ -23,10 +23,10 @@ export const example = `() => {
             <Modal.Content title="Account deletion">
               <Stack
                 fill={false}
-                horizontalAlign="center"
+                hAlign="center"
                 rowGap={32}
-                horizontalPadding={24}
-                verticalPadding={24}
+                hPadding={24}
+                vPadding={24}
               >
                 <Text>Do you really want to delete this account?</Text>
                 <Stack direction="row" columnGap={8}>
@@ -103,8 +103,8 @@ If you want to use the `Modal` component to show custom elements instead of the 
 export const CustomModalContent = () => {
   const { onClose, titleId } = Components.useOverlayContext();
   return (
-    <Components.Stack verticalAlign="center">
-      <Components.Stack direction="row" verticalAlign="center" columnGap={48}>
+    <Components.Stack vAlign="center">
+      <Components.Stack direction="row" vAlign="center" columnGap={48}>
         <Components.Title id={titleId} level="4">
           My custom modal title
         </Components.Title>

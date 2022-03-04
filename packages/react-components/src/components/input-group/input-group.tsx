@@ -41,16 +41,16 @@ export const InputGroup = forwardRef<HTMLFieldSetElement, InputGroupProps>(({
   return (
     <Stack
       rowGap={4}
-      horizontalAlign="stretch"
-      verticalAlign="start"
+      hAlign="stretch"
+      vAlign="start"
       fill={false}
     >
       {label && <Text as="label" size={dimension === 'small' ? 14 : 16} htmlFor={seedID('field')}>{label}</Text>}
       <Stack
         as="fieldset"
         direction="row"
-        verticalAlign="start"
-        horizontalAlign="start"
+        vAlign="start"
+        hAlign="start"
         fill={false}
         inline
         ref={forwardedRef}

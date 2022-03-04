@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 export const Custom404 = () => {
   return (
-    <Stack style={{ minHeight: '100vh' }} fill={false} horizontalAlign="center" verticalAlign="center">
+    <Stack style={{ minHeight: '100vh' }} fill={false} hAlign="center" vAlign="center">
       <video
         style={{
           filter: 'saturate(2) hue-rotate(333deg)',

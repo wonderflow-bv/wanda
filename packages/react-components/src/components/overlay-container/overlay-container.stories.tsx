@@ -20,8 +20,8 @@ const Template: ComponentStory<typeof OverlayContainer> = ({ children, ...otherP
         {visible && (
         <Stack
           fill={false}
-          horizontalAlign="center"
-          verticalAlign="center"
+          hAlign="center"
+          vAlign="center"
         >
           I am over the top
           <Button

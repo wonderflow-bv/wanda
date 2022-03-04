@@ -20,7 +20,7 @@ export const Hero = () => {
   }, [theme])
 
   return (
-    <Stack className={HeroClass} verticalAlign="end" fill={false}>
+    <Stack className={HeroClass} vAlign="end" fill={false}>
       {(mounted) && (
         <video
           src={theme !== 'system' ? `/hero-video-${theme}.mp4` : `/hero-video-${isDark ? 'dark' : 'light'}.mp4`}
@@ -34,7 +34,7 @@ export const Hero = () => {
         />
       )}
       <Stack rowGap={160} className={Content}>
-        <Stack rowGap={32} horizontalAlign="start" inline>
+        <Stack rowGap={32} hAlign="start" inline>
           <Title level="display">
             Wanda
           </Title>

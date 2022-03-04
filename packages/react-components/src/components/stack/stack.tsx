@@ -31,20 +31,20 @@ export type StackProps = {
    * Set the vertical content placement instead of
    * growing to fill the available space.
    */
-  verticalAlign?: string;
+  vAlign?: string;
   /**
    * Set the horizontal content placement instead of
    * growing to fill the available space.
    */
-  horizontalAlign?: string;
+  hAlign?: string;
   /**
    * Set the horizontal padding (left/right)
    */
-  horizontalPadding?: TokensTypes['space'];
+  hPadding?: TokensTypes['space'];
   /**
    * Set the vertical padding (top/bottom)
    */
-  verticalPadding?: TokensTypes['space'];
+  vPadding?: TokensTypes['space'];
   /**
    * Renderes children as rows or columns. The value can be one of the flex directions.
    * More info: https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction
@@ -64,10 +64,10 @@ export const Stack = forwardRef(({
   direction = 'column',
   wrap = false,
   fill = true,
-  verticalAlign = 'initial',
-  horizontalAlign = 'initial',
-  horizontalPadding,
-  verticalPadding,
+  vAlign = 'initial',
+  hAlign = 'initial',
+  hPadding,
+  vPadding,
   style,
   ...otherProps
 }, forwardedRef) => {
@@ -81,10 +81,10 @@ export const Stack = forwardRef(({
   const computedStyle: CSSProperties = {
     '--rGap': rowGap ? tkns.space[rowGap] : 0,
     '--cGap': columnGap ? tkns.space[columnGap] : 0,
-    '--vAlign': verticalAlign && alignmentTemplate(verticalAlign),
-    '--hAlign': horizontalAlign && alignmentTemplate(horizontalAlign),
-    '--vPadding': verticalPadding ? tkns.space[verticalPadding] : 0,
-    '--hPadding': horizontalPadding ? tkns.space[horizontalPadding] : 0
+    '--vAlign': vAlign && alignmentTemplate(vAlign),
+    '--hAlign': hAlign && alignmentTemplate(hAlign),
+    '--vPadding': vPadding ? tkns.space[vPadding] : 0,
+    '--hPadding': hPadding ? tkns.space[hPadding] : 0
   }
 
   return (
@@ -95,7 +95,7 @@ export const Stack = forwardRef(({
       data-stack-wrap={wrap}
       data-stack-direction={direction}
       data-stack-fill={fill}
-      data-stack-has-padding={Boolean(horizontalPadding || verticalPadding)}
+      data-stack-has-padding={Boolean(hPadding || vPadding)}
       className={clsx(styles.Stack, styles.StackWrapper, className)}
       {...otherProps}
     >

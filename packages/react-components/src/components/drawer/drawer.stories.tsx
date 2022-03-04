@@ -93,9 +93,9 @@ const CustomContentDrawer: ComponentStory<typeof Drawer> = () => {
 
   return (
     <Stack
-      verticalAlign="center"
-      verticalPadding={24}
-      horizontalPadding={24}
+      vAlign="center"
+      vPadding={24}
+      hPadding={24}
     >
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus et magnam distinctio qui quod ducimus libero magni earum perspiciatis.
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus et magnam distinctio qui quod ducimus libero magni earum perspiciatis.

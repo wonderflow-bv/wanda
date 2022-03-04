@@ -38,13 +38,13 @@ export const Menu = forwardRef<HTMLUListElement, MenuProps>(({
         as="ul"
         ref={forwardedRef}
         className={clsx(styles.Menu, className)}
-        verticalPadding={8}
+        vPadding={8}
         role="menu"
         {...otherProps}
       >
         <RovingTabIndexProvider options={{ direction: 'vertical', loopAround: true }}>
           {Children.map(renderedChildren, (child: any) => (
-            <Stack as="li" role="none" verticalPadding={child.type?.displayName === 'Separator' ? 8 : undefined}>
+            <Stack as="li" role="none" vPadding={child.type?.displayName === 'Separator' ? 8 : undefined}>
               {child}
             </Stack>
           ))}

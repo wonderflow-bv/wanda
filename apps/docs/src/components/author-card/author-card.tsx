@@ -23,8 +23,8 @@ export const AuthorCard = ({
     <Stack
       className={clsx(AuthorCardClass, className)}
       direction="row"
-      verticalAlign="center"
-      horizontalAlign="start"
+      vAlign="center"
+      hAlign="start"
       data-author-card-collapsed={collapsed}
       fill={false}
       style={{ lineHeight: 1 }}

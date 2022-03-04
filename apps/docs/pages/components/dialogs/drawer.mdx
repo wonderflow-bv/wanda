@@ -22,10 +22,10 @@ export const example = `() => {
           <Drawer title="Account deletion">
             <Stack
               fill={false}
-              horizontalAlign="center"
+              hAlign="center"
               rowGap={32}
-              horizontalPadding={24}
-              verticalPadding={24}
+              hPadding={24}
+              vPadding={24}
             >
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus et magnam distinctio qui quod ducimus libero magni earum perspiciatis.
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus et magnam distinctio qui quod ducimus libero magni earum perspiciatis.
@@ -99,8 +99,8 @@ In the following example we're going to use a custom component as Drawer's conte
 export const CustomDrawerContent = () => {
   const { onClose, titleId } = Components.useOverlayContext();
   return (
-    <Components.Stack horizontalPadding={24} verticalPadding={24} rowGap={32}>
-      <Components.Stack direction="row" verticalAlign="center" columnGap={48}>
+    <Components.Stack hPadding={24} vPadding={24} rowGap={32}>
+      <Components.Stack direction="row" vAlign="center" columnGap={48}>
         <Components.Title id={titleId} level="4">
           Custom drawer title
         </Components.Title>
@@ -153,7 +153,7 @@ export const CustomDrawerContent = () => {
   const { onClose, titleId } = useOverlayContext();
 
   return (
-    <Stack horizontalPadding={24} verticalPadding={24} rowGap={32}>
+    <Stack hPadding={24} vPadding={24} rowGap={32}>
       <Title id={titleId} level="4">
         My custom drawer title
       </Title>

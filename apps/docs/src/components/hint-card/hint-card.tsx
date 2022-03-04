@@ -23,7 +23,7 @@ export const HintCard: React.FC<HintCardProps> = ({
       as="figure"
       fill={false}
       className={HintCardClass}
-      verticalAlign="start"
+      vAlign="start"
       data-isbad={isBad}
       rowGap={8}
     >

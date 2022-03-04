@@ -28,7 +28,7 @@ export const Navigation = ({ data }: NavigationProps) => {
         className={NavigationLink}
         direction="row"
         href={url}
-        verticalAlign="end"
+        vAlign="end"
         columnGap={8}
         fill={false}
         aria-current={includesPath(url) ? 'page' : undefined}
@@ -46,7 +46,7 @@ export const Navigation = ({ data }: NavigationProps) => {
         {subItem.wip
           ? (
             <Text as="span" size={16} dimmed={5} responsive={false}>
-              <Stack as="span" direction="row" columnGap={8} inline verticalAlign="center">
+              <Stack as="span" direction="row" columnGap={8} inline vAlign="center">
                 {subItem.label}
                 <Chip dimension="small">soon</Chip>
               </Stack>
@@ -101,7 +101,7 @@ export const Navigation = ({ data }: NavigationProps) => {
 
   return (
     <nav>
-      <Stack fill={false} horizontalAlign="stretch" rowGap={24}>
+      <Stack fill={false} hAlign="stretch" rowGap={24}>
         {renderNavigation}
       </Stack>
     </nav>

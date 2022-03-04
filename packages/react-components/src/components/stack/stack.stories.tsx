@@ -1,5 +1,4 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Polymorphic } from '../..'
 import { Stack } from './stack'
 
 export default {
@@ -25,14 +24,14 @@ export default {
   },
   args: {
     direction: 'row',
-    verticalPadding: 16,
-    horizontalPadding: 24,
+    vPadding: 16,
+    hPadding: 24,
     columnGap: 16,
     rowGap: 80,
     wrap: true,
     as: 'div'
   }
-} as ComponentMeta<Polymorphic.IntrinsicElement<typeof Stack>>
+} as ComponentMeta<typeof Stack>
 
 const Template: ComponentStory<typeof Stack> = (args) => (
   <Stack {...args}>
@@ -50,6 +49,6 @@ const Template: ComponentStory<typeof Stack> = (args) => (
 
 export const Default = Template.bind({})
 Default.args = {
-  horizontalAlign: 'start',
-  verticalAlign: 'start'
+  hAlign: 'start',
+  vAlign: 'start'
 }

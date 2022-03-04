@@ -26,13 +26,13 @@ export const PropsTable = ({
     <Stack
       className={clsx(styles.TableProps, className)}
       fill={false}
-      verticalAlign="start"
+      vAlign="start"
       role="table"
       {...otherProps}
     >
       <div role="rowgroup">
         <Stack
-          verticalAlign="center"
+          vAlign="center"
           direction="row"
           columnGap={4}
           role="row"

@@ -72,7 +72,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>(({
   return (
     <Stack
       direction="row"
-      verticalAlign="center"
+      vAlign="center"
       columnGap={8}
       className={clsx(styles.Slider, className)}
       data-slider-dimension={dimension}

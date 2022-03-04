@@ -55,7 +55,7 @@ export const Chip = forwardRef<HTMLSpanElement, ChipProps>(({
       data-chip-color={color}
       data-chip-dimension={dimension}
       className={clsx(styles.Chip, className)}
-      verticalAlign="center"
+      vAlign="center"
       ref={forwardedRef}
       {...otherProps}
     >

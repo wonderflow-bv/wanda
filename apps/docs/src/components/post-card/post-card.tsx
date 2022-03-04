@@ -63,13 +63,13 @@ export const PostCard = ({
           target={externalUrl && '_blank'}
           rel={externalUrl && 'noopener noreferrer'}
           rowGap={32}
-          verticalAlign="start"
-          horizontalAlign="start"
-          horizontalPadding={isMedium ? 56 : 16}
-          verticalPadding={40}
+          vAlign="start"
+          hAlign="start"
+          hPadding={isMedium ? 56 : 16}
+          vPadding={40}
         >
           <Stack rowGap={8}>
-            <Stack direction="row" verticalAlign="center" columnGap={8} wrap fill={false}>
+            <Stack direction="row" vAlign="center" columnGap={8} wrap fill={false}>
               <Text as="span" dimmed={5} size={16}>
                 <Datetime date={updatedAt} />
               </Text>
@@ -90,10 +90,10 @@ export const PostCard = ({
                   as="ul"
                   fill={false}
                   direction="row"
-                  verticalAlign="center"
-                  horizontalAlign="start"
-                  verticalPadding={8}
-                  horizontalPadding={8}
+                  vAlign="center"
+                  hAlign="start"
+                  vPadding={8}
+                  hPadding={8}
                   columnGap={8}
                   className={Authors}
                 >

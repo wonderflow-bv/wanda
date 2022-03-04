@@ -22,7 +22,7 @@ const Learn = ({ posts }: PostsPageProps) => {
       <Meta title="Learn - Wanda Design System" description="Learn how to design and develop better user experiences." />
       <ol style={{ counterReset: 'post-counter', padding: 0 }}>
         {posts.map((post, i) => (
-          <Stack as="li" verticalPadding={80} key={post.id}>
+          <Stack as="li" vPadding={80} key={post.id}>
             <FadeIn delay={`${i < 3 ? i * 0.1 : 0}s`}>
               <PostCard
                 externalUrl={post.externalUrl}

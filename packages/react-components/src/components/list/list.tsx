@@ -62,7 +62,7 @@ export const List = forwardRef(({
       {...otherProps}
     >
       {Children.map(children, (child: any) => (
-        <Stack as="li" direction="row" horizontalAlign="start" verticalAlign="start" fill={false}>
+        <Stack as="li" direction="row" hAlign="start" vAlign="start" fill={false}>
           {(isUnordered && !hideMarker) && (
             <Icon
               source={marker}

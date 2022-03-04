@@ -77,7 +77,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
         markers={highlight ? rangeParser(highlight) : undefined}
       />
 
-      <Stack direction="row" fill={false} horizontalAlign="space-between" verticalAlign="center" className={Toolbar}>
+      <Stack direction="row" fill={false} hAlign="space-between" vAlign="center" className={Toolbar}>
         {(codeLang && showLanguage) && <Text responsive={false} size={14} dimmed={5}>{codeLang}</Text>}
         <span />
 

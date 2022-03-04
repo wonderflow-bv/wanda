@@ -111,7 +111,7 @@ export const StarMeter = forwardRef(({
     <Stack
       inline
       direction="row"
-      verticalAlign="center"
+      vAlign="center"
       columnGap={8}
       className={clsx(styles.StarMeter, className)}
       role="meter"

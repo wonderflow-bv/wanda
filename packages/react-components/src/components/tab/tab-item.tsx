@@ -50,8 +50,8 @@ export const TabItem = forwardRef<HTMLButtonElement, TabItemProps>(({
     <Stack
       as="button"
       direction="row"
-      verticalAlign="center"
-      horizontalAlign="start"
+      vAlign="center"
+      hAlign="start"
       fill={false}
       columnGap={8}
       role="tab"

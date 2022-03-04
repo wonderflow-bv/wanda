@@ -117,9 +117,9 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(({
             >
               {(showHeader && title) && (
                 <Stack
-                  verticalAlign="center"
+                  vAlign="center"
                   fill={false}
-                  horizontalAlign="space-between"
+                  hAlign="space-between"
                   direction="row"
                   className={styles.Header}
                 >

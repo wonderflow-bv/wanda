@@ -92,7 +92,7 @@ export const ConditionalTab = () => {
   return (
     <Tab state={state}>
       <Tab.Panel label="Always visible">
-        <Stack direction="column" verticalPadding={16} rowGap={8} inline>
+        <Stack direction="column" vPadding={16} rowGap={8} inline>
           Always visible
           <Button icon="eye" onClick={() => setIsVisible(!isVisible)}>Toggle new tab</Button>
         </Stack>

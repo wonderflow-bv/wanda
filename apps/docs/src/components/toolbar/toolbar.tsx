@@ -29,8 +29,8 @@ export const Toolbar: React.FC<ToolbarProps> = ({
       direction="row"
       fill={false}
       columnGap={8}
-      horizontalAlign="end"
-      verticalAlign="center"
+      hAlign="end"
+      vAlign="center"
       className={clsx(ToolbarClass, className)}
       {...props}
     >

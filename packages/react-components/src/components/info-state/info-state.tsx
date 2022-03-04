@@ -53,8 +53,8 @@ export const InfoState = forwardRef<HTMLDivElement, InfoStateProps>(({
       rowGap={24}
       columnGap={32}
       className={className}
-      horizontalAlign={isHorizontal ? 'start' : 'center'}
-      verticalAlign={(isHorizontal && image) ? 'center' : 'start'}
+      hAlign={isHorizontal ? 'start' : 'center'}
+      vAlign={(isHorizontal && image) ? 'center' : 'start'}
       fill={false}
       wrap={!!image}
       {...otherProps}
@@ -69,14 +69,14 @@ export const InfoState = forwardRef<HTMLDivElement, InfoStateProps>(({
 
       <Stack
         rowGap={16}
-        horizontalAlign={isHorizontal ? 'start' : 'center'}
-        verticalAlign="center"
+        hAlign={isHorizontal ? 'start' : 'center'}
+        vAlign="center"
         fill={false}
       >
         <Title maxWidth="20ch" textAlign={isHorizontal ? 'start' : 'center'} level="4">{title}</Title>
         <Text maxWidth="60ch" dimmed={6} textAlign={isHorizontal ? 'start' : 'center'}>{children}</Text>
         {actions && (
-          <Stack verticalPadding={16} inline direction="row" columnGap={16} rowGap={16} wrap>
+          <Stack vPadding={16} inline direction="row" columnGap={16} rowGap={16} wrap>
             {actions}
           </Stack>
         )}

@@ -20,7 +20,7 @@ const TopicPage = ({ tagName, posts }: TopicPageProps) => (
     )}
   >
     <Meta title="Learn - Wanda Design System" description="Learn how to design and develop better user experiences." />
-    <Stack verticalPadding={80} horizontalAlign="center">
+    <Stack vPadding={80} hAlign="center">
       <Text size={22}>You are seeing content under the category:</Text>
       <Title as="h1" level="display">
         #
@@ -29,7 +29,7 @@ const TopicPage = ({ tagName, posts }: TopicPageProps) => (
     </Stack>
     <ol style={{ counterReset: 'post-counter', padding: 0 }}>
       {posts?.map((post) => (
-        <Stack as="li" verticalPadding={80} key={post.id}>
+        <Stack as="li" vPadding={80} key={post.id}>
           <PostCard
             slug={post.slug}
             title={post.title}

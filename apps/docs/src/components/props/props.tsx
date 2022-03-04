@@ -29,7 +29,7 @@ export const Props: React.FC<PropsProps> = ({
         padding={false}
         expandable={false}
         summary={(
-          <Stack as="span" direction="row" fill={false} verticalAlign="center" columnGap={8}>
+          <Stack as="span" direction="row" fill={false} vAlign="center" columnGap={8}>
             <Title as="span" level="6"><Markdown>{`\`${item.name}\``}</Markdown></Title>
             {item.required && <small><Markdown>`required`</Markdown></small>}
           </Stack>

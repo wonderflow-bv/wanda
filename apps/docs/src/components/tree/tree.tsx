@@ -21,7 +21,7 @@ export const Tree: {
   Li: React.FC;
 } = {
   Group: ({ children, title, icon, color = 'gray', ...props }) => (
-    <Stack rowGap={16} verticalAlign="start" className={TreeClass} {...props}>
+    <Stack rowGap={16} vAlign="start" className={TreeClass} {...props}>
       {title && (
       <Text
         style={{ color: `var(--highlight-${color}-foreground)` }}
@@ -30,7 +30,7 @@ export const Tree: {
         className={Title}
         weight="bold"
       >
-        <Stack as="span" verticalAlign="center" columnGap={8} direction="row" inline>
+        <Stack as="span" vAlign="center" columnGap={8} direction="row" inline>
           {icon && <Icon source={icon} />}
           {title}
         </Stack>

@@ -13,7 +13,7 @@ export const DocHead: React.FC<DocHeadProps> = ({
   ...props
 }) => {
   return (
-    <Stack horizontalAlign="start" rowGap={16} {...props}>
+    <Stack hAlign="start" rowGap={16} {...props}>
       <Title as="h1" level="1">{title}</Title>
       <Text size={28} dimmed={6}>{description}</Text>
       {children}

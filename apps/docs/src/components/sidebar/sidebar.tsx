@@ -8,7 +8,7 @@ import { NavigationMenu } from 'types/navigation'
 
 export const Sidebar = () => {
   return (
-    <Stack fill={false} horizontalAlign="stretch" className={SidebarClass} rowGap={16}>
+    <Stack fill={false} hAlign="stretch" className={SidebarClass} rowGap={16}>
       <Link href="/">
         <a className={Header}>
           <Logo className={LogoClass} />

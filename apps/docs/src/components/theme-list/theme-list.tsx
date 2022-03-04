@@ -28,7 +28,7 @@ export const ThemeList: React.FC<ThemeListProps> = ({
   const themeKeys = Object.keys(groupedData)
 
   return (
-    <Stack rowGap={56} verticalPadding={32} {...props}>
+    <Stack rowGap={56} vPadding={32} {...props}>
       {
         themeKeys.map((item, i) => (
           <Fragment key={item}>

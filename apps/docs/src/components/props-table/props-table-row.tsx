@@ -36,7 +36,7 @@ export const PropsTableRow = ({
     }, [router.asPath])
   return (
     <Stack
-      verticalAlign="center"
+      vAlign="center"
       direction="row"
       role="row"
       columnGap={4}

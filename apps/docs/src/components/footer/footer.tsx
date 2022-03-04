@@ -6,7 +6,7 @@ export const Footer = () => {
     <Stack as="footer" rowGap={96}>
       <Stack direction="row" columnGap={32} rowGap={88} wrap>
 
-        <Stack rowGap={24} fill={false} horizontalAlign="start">
+        <Stack rowGap={24} fill={false} hAlign="start">
           <Title level="4">Open Source</Title>
           <Text maxWidth="35ch" size={16}>
             We strongly believe in the propelling power of community-project, that’s why we choose to open source Wanda on Github.
@@ -26,7 +26,7 @@ export const Footer = () => {
 
         <Stack rowGap={24} fill={false}>
           <Title level="4">Keep in touch</Title>
-          <Stack rowGap={16} horizontalAlign="start" fill={false} direction="row">
+          <Stack rowGap={16} hAlign="start" fill={false} direction="row">
             <IconButton
               as="a"
               target="_blank"

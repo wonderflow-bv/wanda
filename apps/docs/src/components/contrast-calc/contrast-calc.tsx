@@ -83,21 +83,21 @@ export const ContrastCalc = () => {
       className={clsx(ContrastCalcClass)}
       columnGap={32}
       rowGap={32}
-      verticalAlign="center"
+      vAlign="center"
       data-contrast-calc-valid={isValid}
       style={dynamicStyle}
       wrap
     >
       <Stack
-        horizontalAlign="center"
-        verticalAlign="center"
+        hAlign="center"
+        vAlign="center"
         fill={false}
         className={Preview}
       >
         <Title as="span" level="1"><Text size={fs as TokensTypes['font']['size']}>Preview</Text></Title>
       </Stack>
       <Stack rowGap={32}>
-        <Stack direction="row" columnGap={8} rowGap={8} wrap verticalAlign="start">
+        <Stack direction="row" columnGap={8} rowGap={8} wrap vAlign="start">
           <ColorList ref={bgRef} onChange={() => setBg(bgRef.current.value)} defaultValue={bg} label="Background color" />
           <ColorList ref={fgRef} onChange={() => setFg(fgRef.current.value)} defaultValue={fg} label="Foreground color" />
           <Select label="Font size" defaultValue={fs} onChange={(event: ChangeEvent<HTMLSelectElement>) => setFs(parseInt(event.target.value))}>
@@ -108,8 +108,8 @@ export const ContrastCalc = () => {
             <option value="28">28</option>
           </Select>
         </Stack>
-        <Stack horizontalAlign="start" verticalAlign="end" rowGap={24} fill={false}>
-          <Stack inline direction="row" columnGap={8} verticalAlign="center" className={Badge}>
+        <Stack hAlign="start" vAlign="end" rowGap={24} fill={false}>
+          <Stack inline direction="row" columnGap={8} vAlign="center" className={Badge}>
             <Text weight="bold" size={28}>{isAAA ? 'AAA' : isAA ? 'AA' : 'FAIL'}</Text>
             <Icon source={isValid ? 'check' : 'xmark'} dimension={24} />
           </Stack>

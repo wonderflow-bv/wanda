@@ -15,8 +15,8 @@ export const TableHeader: FC<TableHeaderProps> = ({
   <Stack
     direction="row"
     columnGap={32}
-    verticalAlign="center"
-    horizontalAlign="space-between"
+    vAlign="center"
+    hAlign="space-between"
     fill={false}
     className={styles.TableHeader}
     {...otherProps}
@@ -25,7 +25,7 @@ export const TableHeader: FC<TableHeaderProps> = ({
       {typeof title === 'string' ? <Title id={id} level="5">{title}</Title> : title}
     </div>
 
-    <Stack direction="row" verticalAlign="center" columnGap={8} inline>
+    <Stack direction="row" vAlign="center" columnGap={8} inline>
       {children}
     </Stack>
   </Stack>

@@ -8,7 +8,7 @@ import { TokensTypes } from '@wonderflow/tokens/platforms/web'
 
 export type CardProps = Pick<
 StackProps,
-  'wrap' | 'columnGap' | 'rowGap' | 'verticalAlign' | 'horizontalAlign'>
+  'wrap' | 'columnGap' | 'rowGap' | 'vAlign' | 'hAlign'>
   & {
   /**
    * Set the padding on each side of the card.
@@ -58,8 +58,8 @@ export const Card = forwardRef(({
   bordered,
   columnGap = 24,
   rowGap = 24,
-  verticalAlign = 'start',
-  horizontalAlign = 'space-between',
+  vAlign = 'start',
+  hAlign = 'space-between',
   vibrant = false,
   highlightOnHover = false,
   wrap,
@@ -85,8 +85,8 @@ export const Card = forwardRef(({
       <Stack
         direction="row"
         fill={false}
-        verticalAlign={verticalAlign}
-        horizontalAlign={horizontalAlign}
+        vAlign={vAlign}
+        hAlign={hAlign}
         columnGap={columnGap}
         rowGap={rowGap}
         wrap={wrap}

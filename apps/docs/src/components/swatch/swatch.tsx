@@ -48,8 +48,8 @@ export const Swatch: React.FC<SwatchProps> = ({
         direction="row"
         columnGap={16}
         className={Color}
-        verticalAlign="center"
-        horizontalAlign="center"
+        vAlign="center"
+        hAlign="center"
         fill={false}
       >
         {isCopied
@@ -67,8 +67,8 @@ export const Swatch: React.FC<SwatchProps> = ({
       </Stack>
       <Stack
         rowGap={16}
-        verticalAlign="center"
-        horizontalAlign="start"
+        vAlign="center"
+        hAlign="start"
         fill={false}
       >
         {name && <Text size={16} weight="bold">{name}</Text>}

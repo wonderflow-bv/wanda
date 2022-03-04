@@ -35,9 +35,9 @@ export const TablePagination: FC<TablePaginationProps> = ({
       fill={false}
       direction="row"
       columnGap={16}
-      verticalAlign="center"
-      horizontalAlign="end"
-      verticalPadding={16}
+      vAlign="center"
+      hAlign="end"
+      vPadding={16}
       {...otherProps}
     >
       <Stack direction="row" columnGap={4}>

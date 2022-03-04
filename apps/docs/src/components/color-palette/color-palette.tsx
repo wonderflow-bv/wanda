@@ -32,9 +32,9 @@ export const ColorPalette = ({
 
   return (
     <Stack rowGap={16} className={ColoPaletteClass}>
-      <Stack direction="row" fill={false} verticalAlign="center" horizontalAlign="space-between">
+      <Stack direction="row" fill={false} vAlign="center" hAlign="space-between">
         <Title as="span" level="5">{title}</Title>
-        <Stack direction="row" fill={false} columnGap={8} verticalAlign="center">
+        <Stack direction="row" fill={false} columnGap={8} vAlign="center">
           <Text as="label" htmlFor={uid('palette-color-format')} weight="bold" size={14}>{showHex ? 'HEX' : 'HSL'}</Text>
           <Toggle id={uid('palette-color-format')} onClick={() => setShowHex(!showHex)} dimension="small" />
         </Stack>
@@ -54,8 +54,8 @@ export const ColorPalette = ({
             style={{ backgroundColor: `hsl(${colors[item]})` }}
             className={clsx(Drop, (parseInt(item) >= threshold || item === 'black') && White)}
             direction="row"
-            horizontalAlign="space-between"
-            verticalAlign="center"
+            hAlign="space-between"
+            vAlign="center"
             columnGap={16}
             fill={false}
           >
