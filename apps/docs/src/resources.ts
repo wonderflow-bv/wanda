@@ -29,14 +29,14 @@ export const AssetResources: ResourcesType[] = [
         icon: 'arrow-down-to-bracket',
         iconColor: 'cyan',
         url: '/assets/brand/mark-logo.zip',
-        description: 'This version of the logo include only the wordmark.'
+        description: 'This version of the logo include only the mark.'
       },
       {
         title: 'Icons',
         icon: 'arrow-down-to-bracket',
         iconColor: 'cyan',
         url: '/assets/brand/icons.zip',
-        description: 'This version of the logo include only the wordmark.'
+        description: 'Includes the logo icons to use for applications, mobile home shortucuts, or favicons.'
       }
     ]
   },
