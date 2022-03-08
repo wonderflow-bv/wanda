@@ -78,7 +78,7 @@ export const PropsTableRow = ({
           </Dropdown>
         )}
         {toMDCode(name)}
-        {!required && <Text as="span" sentiment="warning" size={14}>?</Text>}
+        {required && <Text as="span" sentiment="warning" size={14}>*</Text>}
       </div>
       )}
 

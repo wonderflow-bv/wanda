@@ -55,8 +55,8 @@ export const Grid = forwardRef<HTMLUListElement, GridProps>(({
   children,
   columns,
   rows,
-  rowGap = 8,
-  columnGap = 8,
+  rowGap,
+  columnGap,
   style,
   filling = 'fill',
   colMinWidth = '10rem',
@@ -64,8 +64,8 @@ export const Grid = forwardRef<HTMLUListElement, GridProps>(({
   ...otherProps
 }, forwardedRef) => {
   const computedStyle: CSSProperties = {
-    '--rGap': rowGap ? tkns.space[rowGap] : 0,
-    '--cGap': columnGap ? tkns.space[columnGap] : 0,
+    '--row-gap': rowGap ? tkns.space[rowGap] : 0,
+    '--column-gap': columnGap ? tkns.space[columnGap] : 0,
     '--columns': columns,
     '--column-min-w': colMinWidth,
     '--rows': rows,

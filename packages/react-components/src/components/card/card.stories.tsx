@@ -22,7 +22,7 @@ const story: ComponentMeta<typeof Card> = {
 
 export default story
 
-const Template: ComponentStory<typeof Card> = (args) => <Card dimmed={1} {...args} />
+const Template: ComponentStory<typeof Card> = (args) => <Card {...args} />
 
 export const Default = Template.bind({})
 Default.args = {

@@ -1,33 +1,22 @@
 .Tile {
   display: block;
-  min-block-size: env(--space-152);
-  padding: env(--space-24);
-  min-inline-size: env(--space-168);
+  min-block-size: env(--space-200);
   position: relative;
-  border-radius: env(--radius-4);
-  background-color: var(--dimmed-1);
-
-  @supports (backdrop-filter: blur(1px)) {
-    backdrop-filter: blur(62px);
-    background-color: var(--global-vibrancy-background);
-  }
-
-  &:is(:hover, :focus) {
-    background-color: var(--dimmed-2);
-
-    @supports (backdrop-filter: blur(1px)) {
-      background-color: var(--global-vibrancy-background-hard);
-    }
-  }
-}
-
-.Content {
-  display: block;
+  color: inherit;
+  height: 100%;
 }
 
 .IconBullet {
-  position: absolute;
-  bottom: env(--space-16);
-  left: env(--space-16);
-  color: var(--dimmed-5);
+  block-size: env(--space-40);
+  inline-size: env(--space-40);
+  position: relative;
+  background-color: var(--dimmed-2);
+  display: grid;
+  place-items: center;
+  place-content: center;
+  border-radius: env(--radius-4);
+}
+
+.Title {
+  margin-top: env(--space-8);
 }

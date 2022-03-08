@@ -22,9 +22,9 @@ export const Navigation = ({ data }: NavigationProps) => {
   )
 
   const navigationLink = useCallback(
-    (url: string, children: ReactNode, tag?: NavigationItem['tag']) => (
+    (url: string, children: ReactNode, tag?: NavigationItem['tag'], wip?: boolean) => (
       <Stack
-        as="a"
+        as={!wip ? 'a' : 'div'}
         className={NavigationLink}
         direction="row"
         href={url}
@@ -33,7 +33,10 @@ export const Navigation = ({ data }: NavigationProps) => {
         fill={false}
         aria-current={includesPath(url) ? 'page' : undefined}
       >
-        <Text as="span" responsive={false}>{children}</Text>
+        {wip
+          ? <Text as="span" size={16} dimmed={5} responsive={false}>{children}</Text>
+          : <Text as="span" responsive={false}>{children}</Text>
+          }
         {tag && <Chip color={tag.color || 'gray'} dimension="small">{tag.label}</Chip>}
       </Stack>
     ),
@@ -43,21 +46,13 @@ export const Navigation = ({ data }: NavigationProps) => {
   const renderSubMenu = useCallback(
     (menu: NavigationItem) => menu.items?.map(subItem => (
       <Tree.Li key={subItem.path}>
-        {subItem.wip
+        {!subItem.wip
           ? (
-            <Text as="span" size={16} dimmed={5} responsive={false}>
-              <Stack as="span" direction="row" columnGap={8} inline vAlign="center">
-                {subItem.label}
-                <Chip dimension="small">soon</Chip>
-              </Stack>
-            </Text>
-            )
-          : (
             <Link href={subItem.path}>
-              {navigationLink(subItem.path, subItem.label, subItem.tag)}
+              {navigationLink(subItem.path, subItem.label, subItem.tag, subItem.wip)}
             </Link>
             )
-          }
+          : navigationLink(subItem.path, subItem.label, subItem.tag, subItem.wip)}
       </Tree.Li>
     )),
     [navigationLink]
@@ -76,7 +71,7 @@ export const Navigation = ({ data }: NavigationProps) => {
           : (
             <Tree.Li>
               <Link href={link.path}>
-                {navigationLink(link.path, link.label)}
+                {navigationLink(link.path, link.label, link.tag, link.wip)}
               </Link>
             </Tree.Li>
             )
