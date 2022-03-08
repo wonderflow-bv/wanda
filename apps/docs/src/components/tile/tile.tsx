@@ -32,6 +32,8 @@ export const Tile = forwardRef(({
       ref={forwardedRef}
       className={clsx(TileClass, className)}
       padding={32}
+      bordered
+      radius={false}
       left={icon && (
         <span className={IconBullet} style={{ backgroundColor: `var(--highlight-${iconColor}-background)` }}>
           <Icon source={icon} weight="duotone" fill={`var(--highlight-${iconColor}-foreground)`} dimension={16} />
