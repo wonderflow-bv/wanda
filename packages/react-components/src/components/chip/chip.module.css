@@ -1,5 +1,5 @@
 .Chip {
-  padding: 2px env(--space-8) env(--space-4);
+  padding: 0 env(--space-8) env(--space-4);
   border-radius: env(--radius-48);
   background-color: var(--highlight-gray-background);
   color: var(--highlight-gray-foreground);
