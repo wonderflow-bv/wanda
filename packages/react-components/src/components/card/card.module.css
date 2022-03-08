@@ -48,10 +48,6 @@
   &[data-card-bordered='true'] {
     border: solid 1px var(--dimmed-1);
   }
-
-  &[data-card-vibrant='true'][data-card-bordered='true'] {
-    border: solid 1px var(--dimmed-2);
-  }
 }
 
 .Left {

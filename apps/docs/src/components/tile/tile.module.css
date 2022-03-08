@@ -14,7 +14,7 @@
   display: grid;
   place-items: center;
   place-content: center;
-  border-radius: env(--radius-8);
+  border-radius: env(--radius-4);
 }
 
 .Title {

@@ -74,14 +74,14 @@ export const AssetResources: ResourcesType[] = [
         icon: 'grip-vertical',
         iconColor: 'green',
         url: '/assets/palettes/wonderflow.aco.zip',
-        description: 'The structured color swatches list for Adobe suite including all the colors tokens.'
+        description: 'The structured color palette for Adobe suite including all the colors tokens.'
       },
       {
         title: 'Adobe ASE',
         icon: 'grip-vertical',
         iconColor: 'green',
         url: '/assets/palettes/wonderflow.ase.zip',
-        description: 'The flat color swatches list for Adobe suite including all the colors tokens.'
+        description: 'The flat color palette for Adobe suite including all the colors tokens.'
       }
     ]
   }
