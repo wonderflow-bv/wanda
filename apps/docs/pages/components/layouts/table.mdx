@@ -452,10 +452,11 @@ This component extends [`react-table`](https://react-table.tanstack.com/docs/ove
     },
     {
       name: "selectedLabel",
-      type: ["string"],
-      default: "Selected items",
+      type: ["function"],
+      typeValue: `(selectedRows: Row<T>[]) => ReactNode`,
+      default: "`Selected items: ${selectedRows.length}`",
       required: false,
-      description: "Set the label for selected items in the table.",
+      description: "Set the label for selected items in the table. The function returns an array containing the selected rows objects.",
     },
     {
       name: "selectedActions",

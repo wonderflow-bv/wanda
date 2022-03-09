@@ -113,7 +113,7 @@ export type TableProps<T extends object> = PropsWithClass & {
   /**
    * Set the label for selected items in the table. Default to "Selected items"
    */
-  selectedLabel?: string
+  selectedLabel?: (selectedRows: Row<T>[]) => ReactNode
   /**
   * Pass custom components to show when rows are selected.
   */
@@ -163,7 +163,7 @@ export const Table = <T extends object>({
   title,
   actions,
   selectedActions,
-  selectedLabel = 'Selected items',
+  selectedLabel = (selectedRows) => `Selected items: ${selectedRows.length}`,
   showHeader = false,
   showTableHead = true,
   columnsControl = false,
@@ -347,7 +347,9 @@ export const Table = <T extends object>({
             }}
             exit={{ y: '-16px', opacity: 0 }}
           >
-            <Text as="span" size={14} weight="bold">{`${selectedLabel}: ${selectedFlatRows.length}`}</Text>
+            <Text as="span" size={14} weight="bold">
+              {selectedLabel(selectedFlatRows)}
+            </Text>
             {selectedActions}
           </Stack>
         )}
