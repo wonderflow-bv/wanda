@@ -84,5 +84,31 @@ export const AssetResources: ResourcesType[] = [
         description: 'The flat color palette for Adobe suite including all the colors tokens.'
       }
     ]
+  },
+  {
+    title: 'Iconography',
+    items: [
+      {
+        title: 'Solid icons',
+        icon: 'star',
+        iconColor: 'yellow',
+        url: 'https://downgit.github.io/#/home?url=https://github.com/wonderflow-bv/wanda/tree/main/packages/icons/svgs/solid',
+        description: 'The full set of solid icons used by Wanda.'
+      },
+      {
+        title: 'Outline icons',
+        icon: 'star',
+        iconColor: 'yellow',
+        url: 'https://downgit.github.io/#/home?url=https://github.com/wonderflow-bv/wanda/tree/main/packages/icons/svgs/outline',
+        description: 'The full set of outline icons used by Wanda.'
+      },
+      {
+        title: 'Duotone icons',
+        icon: 'star',
+        iconColor: 'yellow',
+        url: 'https://downgit.github.io/#/home?url=https://github.com/wonderflow-bv/wanda/tree/main/packages/icons/svgs/duotone',
+        description: 'The full set of duotone icons used by Wanda.'
+      }
+    ]
   }
 ]
