@@ -254,6 +254,11 @@ export const Table = <T extends object>({
               dimension="small"
               icon={row.isExpanded ? 'chevron-down' : 'chevron-right'}
               {...row.getToggleRowExpandedProps()}
+              onClick={() => {
+                const subRowsExpanded = row.subRows.filter(r => r.isExpanded)
+                subRowsExpanded.forEach(r => r.toggleRowExpanded(!r.isExpanded))
+                row.toggleRowExpanded(!row.isExpanded)
+              }}
             />
             )
           : null

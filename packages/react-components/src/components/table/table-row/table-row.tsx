@@ -18,11 +18,10 @@ export const TableRow = <T extends {}>({
   ...otherProps
 }: TableRowProps<T>) => {
   const highlightRow = useCallback(() => {
+    const currentParentRow = rowData?.id.split('.').slice(0, rowData.depth).join('.')
     if (rowDepthGroup && rowData) {
-      const currentParentRow = rowData.id.split('.').slice(0, rowData.depth).join('.')
-
       return rowData.depth > 0 && rowDepthGroup.includes(rowData) && rowDepthGroup.every((rowData) => {
-        const parentRow = rowData.id.split('.').slice(0, rowData.depth).join('.')
+        const parentRow = rowData?.id.split('.').slice(0, rowData.depth).join('.')
 
         return !rowData.isExpanded || parentRow !== currentParentRow
       })
