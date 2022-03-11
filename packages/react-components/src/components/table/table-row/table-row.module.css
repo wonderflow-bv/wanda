@@ -15,4 +15,12 @@
   @nest [data-table-separators='true'] & + & {
     border-color: var(--dimmed-1);
   }
+
+  &[data-table-row-expanded='true'] {
+    background-color: hsl(env(--color-blue-20) / 13%);
+  }
+
+  &[data-table-row-highlight] {
+    background-color: hsl(env(--color-blue-20) / 7%);
+  }
 }

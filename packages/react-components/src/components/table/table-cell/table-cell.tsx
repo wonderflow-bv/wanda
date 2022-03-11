@@ -28,9 +28,6 @@ export const TableCell = forwardRef(({
   width,
   ...otherProps
 }, forwardedRef) => {
-  // const currentIndex = useMemo(() => (depth - 1) % colors.length, [colors.length, depth])
-  // const nextIndex = useMemo(() => depth % colors.length, [colors.length, depth])
-
   const dynamicStyle: CSSProperties = {
     '--width': typeof width === 'string' ? width : typeof width === 'number' ? `${width}px` : undefined,
     '--text-align': align
