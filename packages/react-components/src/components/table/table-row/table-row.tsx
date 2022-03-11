@@ -23,8 +23,7 @@ export const TableRow = <T extends {}>({
 
     return currentParentRowId && expandedRows?.includes(currentParentRowId[0]) && expandedRows.every(r => {
       const parentRow = r.match(/.*(?=\.)/)
-      parentRow && console.log(parentRow[0])
-      console.log(currentParentRowId[0])
+
       return !parentRow || parentRow[0] !== currentParentRowId[0]
     })
   }, [expandedRows, rowData])
