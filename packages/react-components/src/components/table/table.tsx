@@ -304,15 +304,12 @@ export const Table = <T extends object>({
   const rowEntries = useMemo(() => showPagination ? page : rows, [page, rows, showPagination])
   const filteredVisibleColumns = useMemo(() => visibleColumns.filter((col: CustomColumnInstanceType) => !col.hideFromList), [visibleColumns])
 
-  const groupBy = <T extends Array<Record<string, any>>>(array: T, key: string) => (
-    array.reduce((acc, currentValue) => {
-      (acc[currentValue[key]] = acc[currentValue[key]] || []).push(
-        currentValue
-      )
+  const expandedRows = useMemo(() => {
+    return rows.reduce((acc: Array<String>, row: Row<T>) => {
+      row.canExpand && row.isExpanded && acc.push(row.id)
       return acc
-    }, {}))
-
-  const rowsGroupedByDepth = useMemo(() => groupBy(rows, 'depth'), [rows])
+    }, [])
+  }, [rows])
 
   const dynamicStyle: CSSProperties = {
     '--table-height': height,
@@ -430,7 +427,7 @@ export const Table = <T extends object>({
                           {...row.getRowProps()}
                           expanded={row.isExpanded && !row.subRows.some(subrow => subrow.isExpanded && subrow.canExpand)}
                           rowData={row}
-                          rowDepthGroup={rowsGroupedByDepth[row.depth]}
+                          expandedRows={expandedRows}
                         >
                           {row.cells.map((cell: CellType) => (
                             <TableCell

@@ -7,6 +7,7 @@ type TableRowProps<T extends {}> = PropsWithChildren<PropsWithClass> & {
   expanded?: boolean
   rowData?: Row<T>
   rowDepthGroup?: any[]
+  expandedRows?: any[]
 }
 
 export const TableRow = <T extends {}>({
@@ -14,20 +15,19 @@ export const TableRow = <T extends {}>({
   className,
   expanded,
   rowData,
-  rowDepthGroup,
+  expandedRows,
   ...otherProps
 }: TableRowProps<T>) => {
   const highlightRow = useCallback(() => {
-    const currentParentRow = rowData?.id.split('.').slice(0, rowData.depth).join('.')
-    if (rowDepthGroup && rowData) {
-      return rowData.depth > 0 && rowDepthGroup.includes(rowData) && rowDepthGroup.every((rowData) => {
-        const parentRow = rowData?.id.split('.').slice(0, rowData.depth).join('.')
+    const currentParentRowId = rowData?.id.match(/.*(?=\.)/)
 
-        return !rowData.isExpanded || parentRow !== currentParentRow
-      })
-    }
-    return null
-  }, [rowData, rowDepthGroup])
+    return currentParentRowId && expandedRows?.includes(currentParentRowId[0]) && expandedRows.every(r => {
+      const parentRow = r.match(/.*(?=\.)/)
+      parentRow && console.log(parentRow[0])
+      console.log(currentParentRowId[0])
+      return !parentRow || parentRow[0] !== currentParentRowId[0]
+    })
+  }, [expandedRows, rowData])
 
   return (
     <tr
