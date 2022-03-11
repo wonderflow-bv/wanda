@@ -419,12 +419,8 @@ export const Table = <T extends object>({
                           {row.cells.map((cell: CellType) => (
                             <TableCell
                               collapsed={cell.column.isCollapsed}
-                              isExpander={cell.column.expander}
-                              expanded={row.isExpanded}
-                              depth={row.depth}
                               width={cell.column.minWidth === 0 ? undefined : cell.column.minWidth}
                               align={cell.column.align}
-                              hasSubrows={!!row.subRows?.length}
                               {...cell.getCellProps()}
                             >
                               {cell.render('Cell')}

@@ -1,9 +1,8 @@
 import styles from './table-cell.module.css'
-import { CSSProperties, forwardRef, useMemo } from 'react'
+import { CSSProperties, forwardRef } from 'react'
 import { Polymorphic, Icon } from '@/components'
 import clsx from 'clsx'
 import { OptionalColumnTypes } from '../types'
-import tkns from '@wonderflow/tokens/platforms/web/tokens.json'
 
 type TableCellProps = PropsWithClass & {
   collapsed?: OptionalColumnTypes['isCollapsed']
@@ -11,10 +10,6 @@ type TableCellProps = PropsWithClass & {
   isSortedDesc?: boolean
   align?: OptionalColumnTypes['align']
   padding?: boolean
-  depth?: number
-  isExpander?: boolean
-  expanded?: boolean
-  hasSubrows?: boolean
   width?: string | number
 }
 
@@ -30,30 +25,15 @@ export const TableCell = forwardRef(({
   isSortedDesc,
   as: Wrapper = 'td',
   padding = true,
-  isExpander,
-  expanded,
-  depth = 0,
-  hasSubrows,
   width,
   ...otherProps
 }, forwardedRef) => {
-  const colors = [
-    'var(--highlight-gray-background)',
-    `hsl(${tkns.color.blue[30]})`,
-    `hsl(${tkns.color.green[30]})`,
-    `hsl(${tkns.color.red[30]})`,
-    `hsl(${tkns.color.yellow[20]})`,
-    `hsl(${tkns.color.purple[20]})`
-  ]
-
-  const currentIndex = useMemo(() => (depth - 1) % colors.length, [colors.length, depth])
-  const nextIndex = useMemo(() => depth % colors.length, [colors.length, depth])
+  // const currentIndex = useMemo(() => (depth - 1) % colors.length, [colors.length, depth])
+  // const nextIndex = useMemo(() => depth % colors.length, [colors.length, depth])
 
   const dynamicStyle: CSSProperties = {
     '--width': typeof width === 'string' ? width : typeof width === 'number' ? `${width}px` : undefined,
-    '--text-align': align,
-    '--line-current-color': depth ? colors[currentIndex] : undefined,
-    '--line-next-color': depth ? colors[nextIndex] : colors[0]
+    '--text-align': align
   }
 
   return (
@@ -62,9 +42,6 @@ export const TableCell = forwardRef(({
       className={clsx(styles.TableCell, className)}
       data-table-cell-collapsed={collapsed}
       data-table-cell-padding={padding}
-      data-table-cell-is-expander={isExpander && (depth > 0 || hasSubrows)}
-      data-table-cell-expanded={expanded}
-      data-table-cell-has-subrows={hasSubrows}
       data-table-cell-fixed={Boolean(width)}
       style={{
         ...dynamicStyle,
