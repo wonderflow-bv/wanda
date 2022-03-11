@@ -5,7 +5,7 @@ import { Row } from 'react-table'
 
 type TableRowProps<T extends {}> = PropsWithChildren<PropsWithClass> & {
   expanded?: boolean
-  row?: Row<T>
+  rowData?: Row<T>
   rowDepthGroup?: any[]
 }
 
@@ -13,22 +13,22 @@ export const TableRow = <T extends {}>({
   children,
   className,
   expanded,
-  row,
+  rowData,
   rowDepthGroup,
   ...otherProps
 }: TableRowProps<T>) => {
   const highlightRow = useCallback(() => {
-    if (rowDepthGroup && row) {
-      const currentParentRow = row.depth && row.id.split('.').slice(0, row.depth).join('.')
+    if (rowDepthGroup && rowData) {
+      const currentParentRow = rowData.id.split('.').slice(0, rowData.depth).join('.')
 
-      return row.depth > 0 && rowDepthGroup.includes(row) && rowDepthGroup.every((row: Row<T>) => {
-        const parentRow = row.id.split('.').slice(0, row.depth).join('.')
+      return rowData.depth > 0 && rowDepthGroup.includes(rowData) && rowDepthGroup.every((rowData) => {
+        const parentRow = rowData.id.split('.').slice(0, rowData.depth).join('.')
 
-        return !row.isExpanded || parentRow !== currentParentRow
+        return !rowData.isExpanded || parentRow !== currentParentRow
       })
     }
     return null
-  }, [row, rowDepthGroup])
+  }, [rowData, rowDepthGroup])
 
   return (
     <tr

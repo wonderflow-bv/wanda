@@ -423,8 +423,8 @@ export const Table = <T extends object>({
                       <Fragment key={row.id}>
                         <TableRow
                           {...row.getRowProps()}
-                          expanded={(row.isExpanded && !row.subRows.some(subrow => subrow.isExpanded && subrow.canExpand))}
-                          row={row}
+                          expanded={row.isExpanded && !row.subRows.some(subrow => subrow.isExpanded && subrow.canExpand)}
+                          rowData={row}
                           rowDepthGroup={rowsGroupedByDepth[row.depth]}
                         >
                           {row.cells.map((cell: CellType) => (
