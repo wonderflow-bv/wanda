@@ -243,22 +243,10 @@ export const Table = <T extends object>({
 
       const expanderColumn: CustomColumnsType<T> = [{
         id: 'expander',
-        isCollapsed: true,
         hideFromList: true,
         expander: true,
-        Header: ({ getToggleAllRowsExpandedProps, isAllRowsExpanded }) => (
-          !loading
-            ? (
-              <IconButton
-                kind="flat"
-                dimension="small"
-                className={styles.ExpandButton}
-                icon={isAllRowsExpanded ? 'chevron-down' : 'chevron-right'}
-                {...getToggleAllRowsExpandedProps()}
-              />
-              )
-            : null
-        ),
+        minWidth: 40,
+        align: 'center',
         Cell: ({ row }: {row: Row<T>}) => row.canExpand
           ? (
             <IconButton
