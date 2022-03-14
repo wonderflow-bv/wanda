@@ -1,5 +1,11 @@
 # @wonderflow/icons
 
+## 6.0.1
+
+### Patch Changes
+
+- 0353ebb: Add new Text icon
+
 ## 6.0.0
 
 ### Major Changes

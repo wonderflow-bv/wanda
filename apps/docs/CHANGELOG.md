@@ -1,5 +1,24 @@
 # docs
 
+## 5.1.0
+
+### Minor Changes
+
+- a4c6dc8: Update expanded row style for Table
+- 3ef1838: Update `selectedLabel` to function and enable custom text for selected items.
+
+### Patch Changes
+
+- Updated dependencies [a4c6dc8]
+- Updated dependencies [b5a1272]
+- Updated dependencies [90bea7c]
+- Updated dependencies [a66769b]
+- Updated dependencies [95fc95e]
+- Updated dependencies [3ef1838]
+- Updated dependencies [0353ebb]
+  - @wonderflow/react-components@6.1.0
+  - @wonderflow/icons@6.0.1
+
 ## 5.0.0
 
 ### Major Changes
