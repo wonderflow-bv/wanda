@@ -1,5 +1,16 @@
 # @wonderflow/react-components
 
+## 6.1.0
+
+### Minor Changes
+
+- a4c6dc8: Update expanded row style for Table
+- b5a1272: Add enw animation to the active Tabitem indicator
+- 90bea7c: Reduce the size of the icon inside big buttons and set the icon weight to `solid`
+- a66769b: Improve interaction feedback for Radio and Checkbox
+- 95fc95e: Fix Chip paddings
+- 3ef1838: Update `selectedLabel` to function and enable custom text for selected items.
+
 ## 6.0.0
 
 ### Major Changes
