@@ -1,6 +1,11 @@
 @import '../../core/utils/vibrancy.css';
 
-.Checkbox {
+.InputWrapper {
+  display: inline-block;
+  line-height: 0;
+}
+
+.CheckboxInput {
   --w: 24px;
   --h: 24px;
 
@@ -60,10 +65,10 @@
   }
 }
 
-.Radio {
+.RadioInput {
 
   /* stylelint-disable-next-line value-keyword-case */
-  composes: Checkbox;
+  composes: CheckboxInput;
   border-radius: 100%;
 
   &::after {
@@ -82,7 +87,7 @@
   --p: 2px;
 
   /* stylelint-disable-next-line value-keyword-case */
-  composes: Radio;
+  composes: RadioInput;
   border-radius: 200px;
   color: var(--dimmed-7);
 

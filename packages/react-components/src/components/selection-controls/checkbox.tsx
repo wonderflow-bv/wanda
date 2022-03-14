@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { ChangeEvent, forwardRef, InputHTMLAttributes, useEffect, useRef } from 'react'
 import styles from './selection-controls.module.css'
+import { domAnimation, LazyMotion, m } from 'framer-motion'
 
 export type CheckboxProps = InputHTMLAttributes<HTMLInputElement> & {
   /**
@@ -40,16 +41,24 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({
   }, [indeterminate])
 
   return (
-    <input
-      type="checkbox"
-      disabled={disabled}
-      aria-disabled={disabled}
-      data-control-dimension={dimension}
-      onChange={onChange}
-      className={clsx(styles.Checkbox, className)}
-      ref={ref}
-      {...otherProps}
-    />
+    <LazyMotion features={domAnimation} strict>
+      <m.span
+        className={styles.InputWrapper}
+        whileTap={{ scale: 1.15 }}
+        transition={{ duration: 0.3, ease: 'backOut' }}
+      >
+        <input
+          type="checkbox"
+          disabled={disabled}
+          aria-disabled={disabled}
+          data-control-dimension={dimension}
+          onChange={onChange}
+          className={clsx(styles.CheckboxInput, className)}
+          ref={ref}
+          {...otherProps}
+        />
+      </m.span>
+    </LazyMotion>
   )
 })
 

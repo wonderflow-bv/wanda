@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { ChangeEvent, forwardRef, InputHTMLAttributes } from 'react'
 import styles from './selection-controls.module.css'
+import { domAnimation, LazyMotion, m } from 'framer-motion'
 
 export type RadioProps = InputHTMLAttributes<HTMLInputElement> & {
   /**
@@ -26,16 +27,24 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(({
   ...otherProps
 }, forwardedRef) => {
   return (
-    <input
-      type="radio"
-      disabled={disabled}
-      aria-disabled={disabled}
-      data-control-dimension={dimension}
-      onChange={onChange}
-      className={clsx(styles.Radio, className)}
-      ref={forwardedRef}
-      {...otherProps}
-    />
+    <LazyMotion features={domAnimation} strict>
+      <m.span
+        className={styles.InputWrapper}
+        whileTap={{ scale: 1.15 }}
+        transition={{ duration: 0.3, ease: 'backOut' }}
+      >
+        <input
+          type="radio"
+          disabled={disabled}
+          aria-disabled={disabled}
+          data-control-dimension={dimension}
+          onChange={onChange}
+          className={clsx(styles.RadioInput, className)}
+          ref={forwardedRef}
+          {...otherProps}
+        />
+      </m.span>
+    </LazyMotion>
   )
 })
 
