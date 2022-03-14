@@ -20,6 +20,7 @@
   border-radius: env(--radius-4);
   position: relative;
   background-color: var(--global-vibrancy-background);
+  box-shadow: 0 0 0 1px var(--global-background), inset 0 0 0 1px var(--dimmed-2);
 
   &::after {
     content: '';
@@ -41,6 +42,7 @@
   &:checked,
   &:indeterminate {
     background: var(--dimmed-7);
+    box-shadow: 0 0 0 1px var(--global-background), inset 0 0 0 1px transparent;
 
     &::after {
       display: block;
