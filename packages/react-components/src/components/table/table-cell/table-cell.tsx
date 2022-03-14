@@ -1,16 +1,18 @@
-import styles from './table-cell.module.css'
-import { CSSProperties, forwardRef } from 'react'
-import { Polymorphic, Icon } from '@/components'
 import clsx from 'clsx'
+import { CSSProperties, forwardRef } from 'react'
+
+import { Icon, Polymorphic } from '@/components'
+
 import { OptionalColumnTypes } from '../types'
+import styles from './table-cell.module.css'
 
 type TableCellProps = PropsWithClass & {
-  collapsed?: OptionalColumnTypes['isCollapsed']
-  isSorted?: boolean
-  isSortedDesc?: boolean
-  align?: OptionalColumnTypes['align']
-  padding?: boolean
-  width?: string | number
+  collapsed?: OptionalColumnTypes['isCollapsed'];
+  isSorted?: boolean;
+  isSortedDesc?: boolean;
+  align?: OptionalColumnTypes['align'];
+  padding?: boolean;
+  width?: string | number;
 }
 
 type PolymorphicCell = Polymorphic.ForwardRefComponent<'td', TableCellProps>;
@@ -28,8 +30,11 @@ export const TableCell = forwardRef(({
   width,
   ...otherProps
 }, forwardedRef) => {
+  const isWidthString = typeof width === 'string'
+  const computedWidthNumber = typeof width === 'number' ? `${width}px` : undefined
+
   const dynamicStyle: CSSProperties = {
-    '--width': typeof width === 'string' ? width : typeof width === 'number' ? `${width}px` : undefined,
+    '--width': isWidthString ? width : computedWidthNumber,
     '--text-align': align
   }
 

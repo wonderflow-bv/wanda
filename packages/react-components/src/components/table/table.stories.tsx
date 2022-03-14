@@ -1,8 +1,19 @@
+import { ComponentMeta, ComponentStory } from '@storybook/react'
 import { useCallback, useState } from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+
+import {
+  Button, IconButton, Menu, Dropdown, Separator, Stack, Title
+} from '../..'
 import { Table } from './table'
-import { Button, IconButton, Title, Masonry, Stack, Dropdown, Menu, Separator } from '../..'
-import { InfoState } from '../info-state'
+import { CustomColumnsType, CustomSortingRule } from './types'
+
+const firstData = {
+  firstName: 'Gianni',
+  lastName: 'Morandi',
+  address: 'Via Roma, 1, Treno',
+  uid: 3456789542556789,
+  info: 123123.12
+}
 
 const story: ComponentMeta<typeof Table> = {
   title: 'Layouts/Table',
@@ -48,11 +59,7 @@ const story: ComponentMeta<typeof Table> = {
     ],
     data: [
       {
-        firstName: 'Gianni',
-        lastName: 'Morandi',
-        address: 'Via Roma, 1, Treno',
-        uid: 3456789542556789,
-        info: 123123.12,
+        ...firstData,
         subRows: [
           {
             firstName: 'ciao',
@@ -469,10 +476,11 @@ const story: ComponentMeta<typeof Table> = {
 
 export default story
 
-const CustomExpandableComponent = ({ data }) => (
-  <Masonry
-    columns={3}
-    style={{ padding: '16px 0' }}
+const CustomExpandableComponent = ({ data }: { data: any }) => (
+  <Stack
+    vPadding={16}
+    hPadding={16}
+    rowGap={32}
   >
     {Object.keys(data).map((item, i) => (
       <div key={item} style={{ background: 'var(--dimmed-1)', padding: 24, minHeight: 50 * (i + 1) }}>
@@ -480,24 +488,22 @@ const CustomExpandableComponent = ({ data }) => (
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Labore, nostrum minima, debitis qui magni voluptatum.
       </div>
     ))}
-  </Masonry>
+  </Stack>
 )
 
 const CustomEmptyComponent = () => (
-  <InfoState title="No data to show" icon="frown">
+  <div title="No data to show">
     It seems there is no data to show inside this table. If data should be present,please
     check if columns are visible by using the table controls.
-  </InfoState>
+  </div>
 )
 
-const Template: ComponentStory<typeof Table> = (args) => {
-  return (
-    <Table
-      emptyComponent={<CustomEmptyComponent />}
-      {...args}
-    />
-  )
-}
+const Template: ComponentStory<typeof Table> = args => (
+  <Table
+    emptyComponent={<CustomEmptyComponent />}
+    {...args}
+  />
+)
 
 export const Simple = Template.bind({})
 
@@ -506,7 +512,9 @@ SelectedRows.args = {
   title: 'With selectable rows',
   selectableRows: true,
   selectedActions: <Button>Delete</Button>,
-  onSelectionChange: (selectedRows, selectedIds) => { console.log({ selectedRows, selectedIds }) }
+  onSelectionChange: (selectedRows, selectedIds) => {
+    console.log({ selectedRows, selectedIds })
+  }
 }
 
 export const HidingColumn = Template.bind({})
@@ -534,7 +542,7 @@ Scrollable.args = {
 export const WithTableActions = Template.bind({})
 WithTableActions.args = {
   columnsControl: true,
-  title: <Title level="3">Custom title element</Title>,
+  title: 'Custom title element',
   showHeader: true,
   actions: <Button>Custom action</Button>
 }
@@ -544,7 +552,7 @@ CustomExpandable.args = {
   columnsControl: true,
   showHeader: true,
   selectableRows: true,
-  expandableRowComponent: (data) => <CustomExpandableComponent data={data} />
+  expandableRowComponent: data => <CustomExpandableComponent data={data} />
 }
 
 export const Pagination = Template.bind({})
@@ -563,37 +571,25 @@ RowActions.args = {
   selectableRows: true,
   actionsRowComponent: ({ depth }) => (
     <Stack direction="row" fill={false}>
-      <IconButton icon="arrow-rotate-right" kind="flat" dimension="small" />
+      <IconButton icon="view" kind="flat" dimension="small" />
       {depth > 0 && (
-      <Dropdown
-        offset={4}
-        placement="bottom-start"
-        trigger={<IconButton icon="bars" kind="flat" dimension="small" />}
-      >
+      <Dropdown trigger={<IconButton icon="chat" kind="flat" dimension="small" />}>
         <Menu>
           <Menu.Item
             dimension="small"
             autoFocus
-            icon="arrow-right"
-            description={<>Description for this item</>}
+            icon="ctrl-right"
           >
             Sample long menu item
           </Menu.Item>
           <Menu.Item
             dimension="small"
-            icon="user"
-            description={(
-              <>
-                <Title as="h2" level="5">Sample H2 Title longlonglonglonglonglonglonglonglonglonglong</Title>
-                <p>long text content placeholder to test wrapping and sizes</p>
-                <img style={{ width: '100%' }} src="https://images.unsplash.com/photo-1593963171957-d87a6279226d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" />
-              </>
-          )}
+            icon="sun"
           >
             Short menu label
           </Menu.Item>
           <Separator />
-          <Menu.Item dimension="small" icon="arrow-down-to-bracket">Even shorter</Menu.Item>
+          <Menu.Item dimension="small" icon="view">Even shorter</Menu.Item>
           <Menu.Item dimension="small" disabled>Really?</Menu.Item>
         </Menu>
       </Dropdown>
@@ -610,13 +606,18 @@ NoData.args = {
   data: []
 }
 
-const ManualPaginationTemplate: ComponentStory<typeof Table> = ({ data, ...args }) => {
-  const [pageData, setPageData] = useState([])
+const ManualPaginationTemplate: ComponentStory<typeof Table> = ({
+  data,
+  ...args
+}) => {
+  const [pageData, setPageData] = useState<Array<typeof firstData>>([])
   const [totalRows, setTotalRows] = useState(1)
 
-  const fetchData = useCallback(({ pageIndex, pageSize }) => {
+  const fetchData = useCallback(({ pageIndex, pageSize }: { pageIndex: number; pageSize: number }) => {
+    const newIndexStart = pageIndex * pageSize
+    const newIndexEnd = (pageIndex * pageSize) + pageSize
     setTotalRows(data.length)
-    setPageData(data.slice(pageIndex * pageSize, pageIndex * pageSize + pageSize))
+    setPageData((data as Array<typeof firstData>).slice(newIndexStart, newIndexEnd))
   }, [data])
 
   return (
@@ -629,6 +630,7 @@ const ManualPaginationTemplate: ComponentStory<typeof Table> = ({ data, ...args 
     />
   )
 }
+
 export const ManualPagination = ManualPaginationTemplate.bind({})
 ManualPagination.args = {
   columnsControl: true,
@@ -646,45 +648,56 @@ Loading.args = {
   loading: true
 }
 
-const ManualSortingTemplate: ComponentStory<typeof Table> = ({ data, ...args }) => {
-  const [pageData, setPageData] = useState([])
+const ManualSortingTemplate = ({
+  data,
+  ...args
+}: {
+  data: Array<typeof firstData>;
+  columns: CustomColumnsType<typeof firstData>;
+}) => {
+  const [pageData, setPageData] = useState<Array<typeof firstData>>([])
   const [totalRows, setTotalRows] = useState(1)
-  const [sortBy, setSortBy] = useState([])
+  const [sortBy, setSortBy] = useState<Array<CustomSortingRule<typeof firstData>>>([])
 
-  const fetchData = useCallback(({ pageIndex, pageSize }) => {
+  const fetchData = useCallback(({ pageIndex, pageSize }: { pageIndex: number; pageSize: number }) => {
     setTotalRows(data.length)
 
-    const result = [...data]
-    console.log(sortBy[0])
-    if (sortBy[0]) {
-      result.sort((a, b) => {
-        if (typeof b[sortBy[0].id] === 'number' || typeof a[sortBy[0].id] === 'number') {
-          if (sortBy[0].desc) {
-            return b[sortBy[0].id] - a[sortBy[0].id]
-          } else {
-            return a[sortBy[0].id] - b[sortBy[0].id]
-          }
-        } else {
-          if (sortBy[0].desc) {
-            return b[sortBy[0].id].localeCompare(a[sortBy[0].id])
-          } else {
-            return a[sortBy[0].id].localeCompare(b[sortBy[0].id])
-          }
-        }
-      })
+    const result = [...data] as Array<typeof firstData>
+
+    if (sortBy.length === 0) {
+      setPageData(result.slice(pageIndex * pageSize, pageIndex * pageSize + pageSize))
+      return
     }
+
+    const sorting = sortBy[0]
+
+    result.sort((dataA, dataB) => {
+      const isTypeNumber = typeof dataB[sorting.id] === 'number' || typeof dataA[sorting.id] === 'number'
+      if (isTypeNumber) {
+        const numberA = Number(dataA[sorting.id])
+        const numberB = Number(dataB[sorting.id])
+        return sorting.desc ? numberB - numberA : numberA - numberB
+      }
+
+      const stringA = String(dataA[sorting.id])
+      const stringB = String(dataB[sorting.id])
+
+      return sorting.desc
+        ? stringB.localeCompare(stringA)
+        : stringA.localeCompare(stringB)
+    })
 
     setPageData(result.slice(pageIndex * pageSize, pageIndex * pageSize + pageSize))
   }, [data, sortBy])
 
   return (
     <Table
-      {...args}
       data={pageData}
       onSortChange={sortBy => setSortBy(sortBy)}
       onDataUpdate={fetchData}
       totalRows={totalRows}
       emptyComponent={<CustomEmptyComponent />}
+      {...args}
     />
   )
 }

@@ -18,9 +18,15 @@
 
   &[data-table-row-expanded='true'] {
     background-color: hsl(env(--color-blue-20) / 13%);
+
+    /* color: var(--cta-foreground); */
   }
 
   &[data-table-row-highlight] {
     background-color: hsl(env(--color-blue-20) / 7%);
+
+    @nest [data-table-separators='true'] & + & {
+      border-color: hsl(env(--color-blue-20) / 18%);
+    }
   }
 }
