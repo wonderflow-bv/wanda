@@ -28,6 +28,15 @@ const Template: ComponentStory<typeof Tab> = (args) => {
         <Tab.Panel label="Tab 4">Panel 4</Tab.Panel>
         <Tab.Panel label="Tab 5">Panel 5</Tab.Panel>
         <Tab.Panel label="Tab 6">Panel 6</Tab.Panel>
+        <Tab.Panel label="Tab 7">Panel 1</Tab.Panel>
+        <Tab.Panel label="Tab 8">Panel 2</Tab.Panel>
+        <Tab.Panel label="Tab 9">Panel 3</Tab.Panel>
+        <Tab.Panel label="Tab 10">Panel 4</Tab.Panel>
+        <Tab.Panel label="Tab 11">Panel 5</Tab.Panel>
+        <Tab.Panel label="Tab 12">Panel 6</Tab.Panel>
+        <Tab.Panel label="Tab 13">Panel 1</Tab.Panel>
+        <Tab.Panel label="Tab 14">Panel 2</Tab.Panel>
+        <Tab.Panel label="Tab 16">Panel 3</Tab.Panel>
       </Tab>
     </>
   )

@@ -71,7 +71,13 @@ export const TabItem = forwardRef<HTMLButtonElement, TabItemProps>(({
       >
         {icon && <Icon source={icon} dimension={16} />}
         {children}
-        {isActive && <m.span initial={false} className={styles.Highlight} layoutId={id} />}
+        {isActive && (
+        <m.span
+          transition={{ type: 'spring', duration: 0.4, bounce: 0 }}
+          className={styles.Highlight}
+          layoutId={id}
+        />
+        )}
       </Stack>
     </LazyMotion>
   )
