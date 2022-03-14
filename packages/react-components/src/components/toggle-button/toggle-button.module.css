@@ -1,6 +1,6 @@
 .ToggleButton {
   border-radius: 200px;
-  line-height: 1;
+  line-height: 0;
   padding: 0;
   transition: box-shadow env(--duration-300) env(--easing-entrance);
 

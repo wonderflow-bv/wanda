@@ -1,16 +1,18 @@
-import { Dropdown, Menu, Button } from '@/components'
 import { useCallback, useMemo } from 'react'
+
+import { Button, Menu, Dropdown } from '@/components'
+
 import { CustomColumnInstanceType } from '../types'
 
-type ToggleColumnsControlProps = {
-  columns: CustomColumnInstanceType[]
-  visibleColumns: CustomColumnInstanceType[]
+type ToggleColumnsControlProps<T extends Record<string, unknown>> = {
+  columns: Array<CustomColumnInstanceType<T>>;
+  visibleColumns: Array<CustomColumnInstanceType<T>>;
 }
 
-export const ToggleColumnsControl = ({
+export const ToggleColumnsControl = <T extends Record<string, unknown>>({
   columns,
   visibleColumns
-}: ToggleColumnsControlProps) => {
+}: ToggleColumnsControlProps<T>) => {
   const someVisibleColums = useMemo(() => visibleColumns.length !== 0, [visibleColumns])
   const filteredColumns = useMemo(() => columns.filter(col => !col.hideFromList), [columns])
 
@@ -21,14 +23,14 @@ export const ToggleColumnsControl = ({
        * hide them all by calling `toggleHidden(true)` for each column
        */
       if (someVisibleColums) {
-        visibleColumns.forEach((col) => col.toggleHidden(true))
+        visibleColumns.forEach(col => col.toggleHidden(true))
         return
       }
       /**
        * If there are no visible columns (excluding artificial ones), call
        * toggleHidden(false) for each column
        */
-      filteredColumns.forEach((col) => col.toggleHidden(false))
+      filteredColumns.forEach(col => col.toggleHidden(false))
     },
     [someVisibleColums, filteredColumns, visibleColumns]
   )
