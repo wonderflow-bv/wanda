@@ -3,9 +3,11 @@
 }
 
 .TabList {
+  --separator-size: 1px;
+
   display: flex;
   flex-wrap: nowrap;
-  box-shadow: inset 0 -1px 0 var(--dimmed-2);
+  box-shadow: inset 0 calc(var(--separator-size) * -1) 0 var(--dimmed-2);
   outline: none;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -37,6 +39,7 @@
 .TabItem {
   color: var(--dimmed-6);
   appearance: none;
+  overflow: unset;
   padding: env(--space-8) env(--space-16);
   block-size: env(--space-48);
   border: 0;
@@ -47,32 +50,14 @@
   flex-shrink: 0;
   outline-offset: -4px;
   position: relative;
-  overflow: hidden;
-
-  &::after {
-    content: '';
-    block-size: 4px;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 2px 2px 0 0;
-    background-color: var(--cta-default);
-    transform: translateY(5px);
-    transition: transform env(--duration-100) env(--easing-entrance);
-  }
 
   &[aria-selected='true'] {
     color: var(--global-foreground);
-    -webkit-text-stroke: 0.7px currentColor;
-
-    &::after {
-      transform: none;
-    }
+    -webkit-text-stroke: 0.7px currentcolor;
   }
 
   &:not([aria-selected='true']) svg {
-    fill: var(--dimmed-3);
+    fill: var(--dimmed-6);
   }
 
   &:not([aria-selected='true']):hover {
@@ -80,15 +65,21 @@
   }
 }
 
+.Highlight {
+  position: absolute;
+  bottom: calc(var(--separator-size) * -1);
+  width: 100%;
+  left: 0;
+  height: 4px;
+  background: var(--cta-default);
+  pointer-events: none;
+  border-radius: 2px 2px 0 0;
+}
+
 .TabPanel {
   animation: fade-in env(--duration-200);
   animation-timing-function: env(--easing-entrance));
 }
-
-a.TabItem {
-  background-size: 0;
-}
-
 
 @keyframes fade-in {
   0% {

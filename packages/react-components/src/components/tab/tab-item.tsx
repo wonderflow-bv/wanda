@@ -5,6 +5,7 @@ import {
   forwardRef
 } from 'react'
 import { useRovingTabIndex, useFocusEffect } from 'react-roving-tabindex'
+import { domMax, LazyMotion, m } from 'framer-motion'
 import clsx from 'clsx'
 import { Stack, Icon, IconProps } from '@/components'
 import { useTabState } from './primitive-tab'
@@ -47,27 +48,30 @@ export const TabItem = forwardRef<HTMLButtonElement, TabItemProps>(({
   )
 
   return (
-    <Stack
-      as="button"
-      direction="row"
-      vAlign="center"
-      hAlign="start"
-      fill={false}
-      columnGap={8}
-      role="tab"
-      ref={internalRef}
-      className={clsx(styles.TabItem, className)}
-      aria-selected={isActive}
-      onClick={fireClick}
-      onKeyDown={handleKeyDown}
-      onFocus={fireClick}
-      type="button"
-      tabIndex={isActive ? 0 : -1}
-      {...otherProps}
-    >
-      {icon && <Icon source={icon} dimension={16} />}
-      {children}
-    </Stack>
+    <LazyMotion features={domMax} strict>
+      <Stack
+        as="button"
+        direction="row"
+        vAlign="center"
+        hAlign="start"
+        fill={false}
+        columnGap={8}
+        role="tab"
+        ref={internalRef}
+        className={clsx(styles.TabItem, className)}
+        aria-selected={isActive}
+        onClick={fireClick}
+        onKeyDown={handleKeyDown}
+        onFocus={fireClick}
+        type="button"
+        tabIndex={isActive ? 0 : -1}
+        {...otherProps}
+      >
+        {icon && <Icon source={icon} dimension={16} />}
+        {children}
+        {isActive && <m.span initial={false} className={styles.Highlight} layoutId="highlight" />}
+      </Stack>
+    </LazyMotion>
   )
 })
 
