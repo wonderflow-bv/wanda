@@ -67,7 +67,7 @@
 
 .Highlight {
   position: absolute;
-  bottom: calc(var(--separator-size) * -1);
+  bottom: 0;
   width: 100%;
   left: 0;
   height: 4px;
