@@ -31,6 +31,7 @@ export const TabItem = forwardRef<HTMLButtonElement, TabItemProps>(({
   children,
   className,
   icon,
+  id,
   ...otherProps
 }, forwardedRef) => {
   const { onClick, isActive } = useTabState(children)
@@ -65,11 +66,12 @@ export const TabItem = forwardRef<HTMLButtonElement, TabItemProps>(({
         onFocus={fireClick}
         type="button"
         tabIndex={isActive ? 0 : -1}
+        id={id}
         {...otherProps}
       >
         {icon && <Icon source={icon} dimension={16} />}
         {children}
-        {isActive && <m.span initial={false} className={styles.Highlight} layoutId="highlight" />}
+        {isActive && <m.span initial={false} className={styles.Highlight} layoutId={id} />}
       </Stack>
     </LazyMotion>
   )

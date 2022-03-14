@@ -83,8 +83,8 @@ export const Tab = forwardRef<HTMLDivElement, TabProps>(({
         <TabList>
           {Children.map(children, (child, index) => isValidElement(child) && (
             <TabItem
-              id={seedID(`tab-item-${index}`)}
-              aria-controls={seedID(`tab-panel-${index}`)}
+              id={seedID('tab-item')}
+              aria-controls={seedID('tab-panel')}
               icon={child.props.icon}
             >
               {child.props.label}
@@ -98,8 +98,8 @@ export const Tab = forwardRef<HTMLDivElement, TabProps>(({
         {Children.map(children, (child, index) => isValidElement(child) && cloneElement(
           child,
           {
-            id: seedID(`tab-panel-${index}`),
-            'aria-labelledby': seedID(`tab-item-${index}`)
+            id: seedID('tab-panel'),
+            'aria-labelledby': seedID('tab-item')
           }
         ))}
 
