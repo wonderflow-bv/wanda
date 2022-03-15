@@ -251,19 +251,9 @@ export const Table = <T extends Record<string, unknown>>({
         isCollapsed: true,
         hideFromList: true,
         Header: ({ getToggleAllRowsSelectedProps }) => (
-          !loading
-            ? (
-              <TableCheckbox
-                {...getToggleAllRowsSelectedProps()}
-              />
-              )
-            : null
+          !loading ? <TableCheckbox {...getToggleAllRowsSelectedProps()} /> : null
         ),
-        Cell: ({ row }: {row: Row<T>}) => (
-          <TableCheckbox
-            {...row.getToggleRowSelectedProps()}
-          />
-        )
+        Cell: ({ row }: {row: Row<T>}) => <TableCheckbox {...row.getToggleRowSelectedProps()} />
       }]
 
       const expanderColumn: CustomColumnsType<T> = [{
