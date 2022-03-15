@@ -442,8 +442,8 @@ export const Table = <T extends Record<string, unknown>>({
                 {loading
                   ? (
                     <TableRow>
-                      {visibleColumns.map(() => (
-                        <TableCell>
+                      {visibleColumns.map((_, i) => (
+                        <TableCell key={visibleColumns[i].id}>
                           <Skeleton gap={16} height={16} count={5} />
                         </TableCell>
                       ))}
