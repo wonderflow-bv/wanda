@@ -307,7 +307,6 @@ export const Table = <T extends Record<string, unknown>>({
     selectableRows,
     setHiddenColumns,
     defaultHiddenColumns,
-    expandableRowComponent,
     hasSomeExpandableRows,
     ActionsRowComponent
   ])
