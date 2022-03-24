@@ -1,4 +1,4 @@
-import { forwardRef, ReactNode } from 'react'
+import { forwardRef, ReactNode, useCallback, useMemo } from 'react'
 import clsx from 'clsx'
 import { useUIDSeed } from 'react-uid'
 import { Text, TextProps, Stack, Icon, Polymorphic, IconProps } from '@/components'
@@ -53,7 +53,7 @@ export const StarMeter = forwardRef(({
 }, forwardedRef) => {
   const seedID = useUIDSeed()
 
-  const properties = {
+  const properties = useMemo(() => ({
     small: {
       labelSize: 14,
       iconSize: 12
@@ -66,11 +66,11 @@ export const StarMeter = forwardRef(({
       labelSize: 18,
       iconSize: 24
     }
-  }
+  }), [])
 
-  const clamp = (num: number, min: number, max: number) => Math.min(Math.max(num, min), max)
+  const clamp = useMemo(() => (num: number, min: number, max: number) => Math.min(Math.max(num, min), max), [])
 
-  const roundValue = (value: number) => {
+  const roundValue = useCallback((value: number) => {
     const integer = parseInt(String(value), 10)
     const fraction = value - integer
 
@@ -87,9 +87,9 @@ export const StarMeter = forwardRef(({
     }
 
     return 0
-  }
+  }, [])
 
-  const starType = (maxStars: number, value: number) => {
+  const starType = useCallback((maxStars: number, value: number) => {
     const roundedValue = roundValue(value)
     return new Array(maxStars).fill(0).map((_, index) => {
       const starIndex = index + 1
@@ -103,9 +103,18 @@ export const StarMeter = forwardRef(({
         fillType = 'url(#HalfStar)'
       }
 
-      return <Icon source="star" weight="solid" className={styles.Icon} dimension={properties[dimension].iconSize as IconProps['dimension']} fill={fillType} key={starIndex} />
+      return (
+        <Icon
+          source="star"
+          weight="solid"
+          className={styles.Icon}
+          dimension={properties[dimension].iconSize as IconProps['dimension']}
+          fill={fillType}
+          key={starIndex}
+        />
+      )
     })
-  }
+  }, [dimension, properties, roundValue])
 
   return (
     <Stack
