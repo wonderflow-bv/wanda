@@ -1,5 +1,5 @@
 .Grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr));
-  grid-gap: env(--space-32) env(--space-4);
+  grid-gap: token(--space-32) token(--space-4);
 }

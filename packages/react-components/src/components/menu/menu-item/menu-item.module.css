@@ -1,10 +1,10 @@
 .MenuItem {
-  --padding: env(--space-40);
+  --padding: token(--space-40);
 
   border: 0;
   background: none;
   font: inherit;
-  font-size: env(--font-size-16);
+  font-size: token(--font-size-16);
   color: var(--dimmed-6);
   font-weight: 600;
   cursor: pointer;
@@ -26,10 +26,10 @@
   &::before {
     content: '';
     position: absolute;
-    border-radius: env(--radius-4);
+    border-radius: token(--radius-4);
     top: 0;
-    left: env(--space-8);
-    right: env(--space-8);
+    left: token(--space-8);
+    right: token(--space-8);
     bottom: 0;
     opacity: 60%;
     z-index: 0;
@@ -44,9 +44,9 @@
   }
 
   &[data-menu-item-dimension='small'] {
-    --padding: calc(env(--space-32) + env(--space-4));
+    --padding: calc(token(--space-32) + token(--space-4));
 
-    font-size: env(--font-size-14);
+    font-size: token(--font-size-14);
   }
 
   & > * {

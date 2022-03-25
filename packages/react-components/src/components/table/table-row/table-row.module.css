@@ -1,6 +1,6 @@
 .TableRow {
   &:not([data-table-row-expander='true']) {
-    block-size: calc(env(--space-48) + 1px);
+    block-size: calc(token(--space-48) + 1px);
   }
 
   & + & {
@@ -17,16 +17,16 @@
   }
 
   &[data-table-row-expanded='true'] {
-    background-color: hsl(env(--color-blue-20) / 13%);
+    background-color: hsl(token(--color-blue-20) / 13%);
 
     /* color: var(--cta-foreground); */
   }
 
   &[data-table-row-highlight] {
-    background-color: hsl(env(--color-blue-20) / 7%);
+    background-color: hsl(token(--color-blue-20) / 7%);
 
     @nest [data-table-separators='true'] & + & {
-      border-color: hsl(env(--color-blue-20) / 18%);
+      border-color: hsl(token(--color-blue-20) / 18%);
     }
   }
 }

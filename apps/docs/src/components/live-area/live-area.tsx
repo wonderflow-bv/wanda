@@ -19,8 +19,8 @@ export const LiveArea: React.FC<LiveAreaProps> = ({
   ...props
 }) => {
   const dynamicStyle: CSSProperties = {
-    '--minHeight': minHeight,
-    '--maxHeight': maxHeight
+    '--min-height': minHeight,
+    '--max-height': maxHeight
   }
 
   return (

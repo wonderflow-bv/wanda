@@ -5,11 +5,11 @@
 
 .AuthorInfo {
   white-space: nowrap;
-  padding-left: env(--space-8);
-  padding-right: env(--space-8);
+  padding-left: token(--space-8);
+  padding-right: token(--space-8);
 
   @nest .AuthorCard[data-author-card-collapsed='true'] & {
-    --duration: env(--duration-200);
+    --duration: token(--duration-200);
 
     padding-left: 0;
     padding-right: 0;
@@ -30,8 +30,8 @@
       opacity var(--duration),
       padding-right var(--duration),
       padding-left var(--duration);
-    padding-left: env(--space-8);
-    padding-right: env(--space-8);
+    padding-left: token(--space-8);
+    padding-right: token(--space-8);
     transform: none;
     opacity: 100%;
     max-width: 300px;

@@ -4,13 +4,13 @@
   min-block-size: calc(100vh - 57px);
   background-color: var(--global-background);
   overflow: hidden;
-  padding: env(--space-32) env(--space-24) max(env(--space-96), env(safe-area-inset-bottom));
+  padding: token(--space-32) token(--space-24) max(token(--space-96), env(safe-area-inset-bottom));
   color: var(--global-foreground);
   position: relative;
   z-index: 0;
 
   @media (--from-large) {
-    padding: env(--space-96);
+    padding: token(--space-96);
   }
   @media (width >= 120em) {
     padding-left: 20rem;

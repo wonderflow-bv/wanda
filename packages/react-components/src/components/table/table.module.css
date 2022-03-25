@@ -20,7 +20,7 @@
 .TableElement {
   width: 100%;
   border-collapse: collapse;
-  font-size: env(--font-size-16);
+  font-size: token(--font-size-16);
 
   &[data-table-loading='true'] {
     pointer-events: none;
@@ -46,8 +46,8 @@
   }
 
   & th {
-    padding-top: env(--space-16);
-    padding-bottom: env(--space-16);
+    padding-top: token(--space-16);
+    padding-bottom: token(--space-16);
   }
 }
 
@@ -61,8 +61,8 @@
   left: 0;
   right: 0;
   z-index: 4;
-  border-radius: env(--radius-8);
-  min-block-size: env(--space-56);
+  border-radius: token(--radius-8);
+  min-block-size: token(--space-56);
 }
 
 .ExpandButton {

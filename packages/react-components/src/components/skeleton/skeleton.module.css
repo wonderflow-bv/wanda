@@ -7,7 +7,7 @@
   background-color: var(--base-color);
   width: var(--width, 100%);
   height: var(--height);
-  border-radius: var(--radius, env(--radius-32));
+  border-radius: var(--radius, token(--radius-32));
   display: inline-flex;
   line-height: 1;
   position: relative;

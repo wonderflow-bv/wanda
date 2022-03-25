@@ -7,14 +7,14 @@
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   max-block-size: 95vh;
-  border-radius: env(--radius-16) env(--radius-16) 0 0;
+  border-radius: token(--radius-16) token(--radius-16) 0 0;
   justify-self: center;
   align-self: end;
 
   @media (--from-extra-small) {
     max-inline-size: 600px;
     max-block-size: 80vh;
-    border-radius: env(--radius-8);
+    border-radius: token(--radius-8);
     justify-self: center;
     align-self: center;
   }
@@ -26,14 +26,14 @@
   background-color: inherit;
   border-bottom: 1px solid var(--dimmed-1);
   padding:
-    env(--space-16)
-    env(--space-80)
-    env(--space-16)
-    env(--space-24);
+    token(--space-16)
+    token(--space-80)
+    token(--space-16)
+    token(--space-24);
 }
 
 .CloseButton.CloseButton {
   position: absolute;
-  top: env(--space-8);
-  right: env(--space-8);
+  top: token(--space-8);
+  right: token(--space-8);
 }

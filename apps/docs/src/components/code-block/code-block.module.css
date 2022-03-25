@@ -6,16 +6,16 @@
 
 :where(.CodeBlock) {
   position: relative;
-  margin: env(--space-32) 0;
+  margin: token(--space-32) 0;
   display: grid;
 
   & code[class*='language-'],
   & pre[class*='language-'] {
     overflow: auto;
-    border-radius: env(--radius-8);
+    border-radius: token(--radius-8);
     color: var(--global-foreground);
     background: none;
-    font-family: env(--font-family-mono);
+    font-family: token(--font-family-mono);
     font-size: 1.1em;
     text-align: left;
     white-space: pre;
@@ -38,10 +38,10 @@
     margin: 0;
     overflow: auto;
     border: 1px solid var(--dimmed-1);
-    padding: env(--space-24);
+    padding: token(--space-24);
 
     @nest [data-code-block-has-toolbar='true'] & {
-      padding-top: env(--space-48);
+      padding-top: token(--space-48);
     }
   }
 
@@ -181,9 +181,9 @@
 
 .Toolbar {
   position: absolute;
-  top: env(--space-8);
+  top: token(--space-8);
   left: 0;
   right: 0;
-  padding: env(--space-8) env(--space-8) env(--space-8) env(--space-16);
-  border-radius: env(--radius-8) env(--radius-8) 0 0;
+  padding: token(--space-8) token(--space-8) token(--space-8) token(--space-16);
+  border-radius: token(--radius-8) token(--radius-8) 0 0;
 }

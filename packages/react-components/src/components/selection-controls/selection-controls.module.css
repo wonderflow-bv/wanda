@@ -17,7 +17,7 @@
   max-inline-size: var(--w);
   max-block-size: var(--h);
   color: var(--global-background);
-  border-radius: env(--radius-4);
+  border-radius: token(--radius-4);
   position: relative;
   background-color: var(--global-vibrancy-background);
   box-shadow: 0 0 0 1px var(--global-background), inset 0 0 0 1px var(--dimmed-2);
@@ -110,8 +110,8 @@
     bottom: var(--p);
     display: block;
     transition:
-      transform env(--duration-100) env(--easing-standard),
-      background-color env(--duration-100) env(--easing-standard);
+      transform token(--duration-100) token(--easing-standard),
+      background-color token(--duration-100) token(--easing-standard);
   }
 
   &:checked::after {

@@ -12,7 +12,7 @@
 }
 
 .Separator {
-  height: env(--space-4);
+  height: token(--space-4);
   background-color: var(--accent);
 }
 

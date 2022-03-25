@@ -3,8 +3,8 @@
 .Text {
   min-block-size: 0.01vh;
   font-size: var(--fs-max);
-  max-inline-size: var(--maxW, initial);
-  text-align: var(--tAlign);
+  max-inline-size: var(--max-w, initial);
+  text-align: var(--t-align);
 
   /* Colors */
 
@@ -39,28 +39,28 @@
   /* Sizes */
 
   &[data-text-size='14'] {
-    --fs-min: env(--font-size-14);
-    --fs-max: env(--font-size-14);
+    --fs-min: token(--font-size-14);
+    --fs-max: token(--font-size-14);
   }
 
   &[data-text-size='16'] {
-    --fs-min: env(--font-size-14);
-    --fs-max: env(--font-size-16);
+    --fs-min: token(--font-size-14);
+    --fs-max: token(--font-size-16);
   }
 
   &[data-text-size='18'] {
-    --fs-min: env(--font-size-16);
-    --fs-max: env(--font-size-18);
+    --fs-min: token(--font-size-16);
+    --fs-max: token(--font-size-18);
   }
 
   &[data-text-size='22'] {
-    --fs-min: env(--font-size-18);
-    --fs-max: env(--font-size-22);
+    --fs-min: token(--font-size-18);
+    --fs-max: token(--font-size-22);
   }
 
   &[data-text-size='28'] {
-    --fs-min: env(--font-size-22);
-    --fs-max: env(--font-size-28);
+    --fs-min: token(--font-size-22);
+    --fs-max: token(--font-size-28);
   }
 
   /* Weights */
@@ -89,10 +89,10 @@
   }
 
   &[data-text-line-height='small'] {
-    line-height: env(--font-lh-small);
+    line-height: token(--font-lh-small);
   }
 
   &[data-text-line-height='large'] {
-    line-height: env(--font-lh-standard);
+    line-height: token(--font-lh-standard);
   }
 }

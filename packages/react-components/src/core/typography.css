@@ -1,7 +1,7 @@
 :where(p) {
   line-height: 1.5;
   min-block-size: 0.01vh;
-  font-size: env(--font-size-16);
+  font-size: token(--font-size-16);
 }
 
 small {
@@ -23,7 +23,7 @@ b {
     background-position: 0% 100%;
     background-repeat: no-repeat;
     background-size: 0% 1px;
-    transition: background-size env(--duration-200) env(--easing-entrance);
+    transition: background-size token(--duration-200) token(--easing-entrance);
 
     &:hover,
     &:focus {
@@ -38,7 +38,7 @@ del {
   background-color: var(--highlight-red-background);
   box-shadow: 0 0 0 2px var(--highlight-red-background);
   color: var(--highlight-red-foreground);
-  border-radius: env(--radius-4);
+  border-radius: token(--radius-4);
 }
 
 ins {
@@ -47,7 +47,7 @@ ins {
   box-shadow: 0 0 0 2px var(--highlight-green-background);
   text-decoration: none;
   color: var(--highlight-green-foreground);
-  border-radius: env(--radius-4);
+  border-radius: token(--radius-4);
 }
 
 address {
@@ -74,7 +74,7 @@ ul {
     font-size: inherit;
     text-align: right;
     font-weight: 600;
-    min-inline-size: env(--space-32);
+    min-inline-size: token(--space-32);
   }
 }
 
@@ -82,7 +82,7 @@ ol {
   & li::marker {
     font-size: inherit;
     font-weight: 600;
-    min-inline-size: env(--space-32);
+    min-inline-size: token(--space-32);
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
   }
@@ -92,7 +92,7 @@ kbd {
   border: 1px solid var(--dimmed-1);
   padding: 2px 4px;
   box-shadow: 0 2px 0 var(--dimmed-1);
-  border-radius: env(--radius-4);
+  border-radius: token(--radius-4);
   font-weight: 600;
 }
 
@@ -113,8 +113,8 @@ legend {
 
 code {
   background-color: var(--global-vibrancy-background);
-  border-radius: env(--radius-4);
+  border-radius: token(--radius-4);
   padding: 0 4px 3px;
   font-size: 1em;
-  font-family: env(--font-family-mono);
+  font-family: token(--font-family-mono);
 }

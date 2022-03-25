@@ -6,7 +6,7 @@
   overflow: hidden;
 
   &[data-resizer-padding='true'] {
-    padding: env(--space-24) env(--space-56) env(--space-24) env(--space-32);
+    padding: token(--space-24) token(--space-56) token(--space-24) token(--space-32);
   }
 
   & > * {

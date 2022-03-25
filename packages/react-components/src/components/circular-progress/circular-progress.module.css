@@ -3,7 +3,7 @@
   --track-size: 4px;
   --track-bg: var(--dimmed-1);
 
-  inline-size: env(--space-64);
+  inline-size: token(--space-64);
   min-inline-size: 64px;
   aspect-ratio: 1 / 1;
   display: grid;
@@ -21,14 +21,14 @@
     --track-size: 8px;
 
     font-size: 1.77rem;
-    inline-size: env(--space-136);
+    inline-size: token(--space-136);
   }
 
   &[data-circular-progress-dimension='big'] {
     --track-size: 16px;
 
     font-size: 2.37rem;
-    inline-size: env(--space-184);
+    inline-size: token(--space-184);
   }
 
   &::before {

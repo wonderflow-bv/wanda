@@ -2,7 +2,7 @@
   border-radius: 200px;
   line-height: 0;
   padding: 0;
-  transition: box-shadow env(--duration-300) env(--easing-entrance);
+  transition: box-shadow token(--duration-300) token(--easing-entrance);
 
   &[aria-pressed='true'] {
     box-shadow:
@@ -11,7 +11,7 @@
   }
 
   &[data-button-kind='primary'] {
-    --border-color: hsl(env(--color-red-30) / 25%);
+    --border-color: hsl(token(--color-red-30) / 25%);
 
     &[aria-pressed='true'] {
       color: var(--cta-default);

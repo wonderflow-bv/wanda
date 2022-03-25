@@ -96,7 +96,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>(({
       />
 
       {showValues && <Text as="span" size={isSmall ? 14 : 16} weight="bold" className={styles.Value}>{max}</Text>}
-      {showValues && <Textfield readOnly dimension="small" size={max.toString().length} value={value} className={styles.CurrentValue} />}
+      {showValues && <Textfield readOnly dimension="small" size={String(max).length} value={value} className={styles.CurrentValue} />}
       {(iconMax && !showValues) && <Icon source={iconMax} dimension={isSmall ? 16 : 24} />}
     </Stack>
   )

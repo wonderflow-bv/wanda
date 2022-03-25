@@ -3,7 +3,7 @@
 }
 
 .Progress {
-  --progress-height: env(--space-4);
+  --progress-height: token(--space-4);
   --track-color: var(--dimmed-1);
   --fill-color: var(--cta-default);
 
@@ -18,7 +18,7 @@
   height: var(--progress-height);
 
   &[data-progress-dimension='big'] {
-    --progress-height: env(--space-8);
+    --progress-height: token(--space-8);
   }
 
   &::-webkit-progress-bar {

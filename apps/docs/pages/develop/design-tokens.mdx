@@ -19,16 +19,16 @@ For the web platform we provide two ways to use Wanda's design tokens, you can a
 
 ### CSS
 
-Then you can get the tokens by using the `env()` notation as in the following example. Note that **custom environment variables** are replaced with the final token value at build-time, so they are not dynamic like custom properties.
+Then you can get the tokens by using the `token()` notation as in the following example. Note that **custom environment variables** are replaced with the final token value at build-time, so they are not dynamic like custom properties.
 
 <Tab>
   <Tab.Panel icon="layer-group" label="Source">
 
 ```css hideCopy
 .MyCustomComponent {
-  padding: env(--space-8);
-  border-radius: env(--radius-24);
-  color: hsl(env(--color-red-20) / 20%);
+  padding: token(--space-8);
+  border-radius: token(--radius-24);
+  color: hsl(token(--color-red-20) / 20%);
 }
 ```
 

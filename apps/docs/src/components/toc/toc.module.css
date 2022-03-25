@@ -12,7 +12,7 @@
 
   @media (width >= 120em) {
     position: fixed;
-    top: env(--space-104);
+    top: token(--space-104);
     left: calc(100% - 300px);
     max-inline-size: 270px;
   }
@@ -20,11 +20,11 @@
 
 
 .ToCItem {
-  font-size: env(--font-size-22);
+  font-size: token(--font-size-22);
   display: inline-flex;
   justify-content: flex-start;
   align-items: center;
-  grid-gap: env(--space-16);
+  grid-gap: token(--space-16);
   color: var(--global-interactive-text);
 
   & svg {

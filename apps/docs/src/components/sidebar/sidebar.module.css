@@ -4,7 +4,7 @@
 
 .Header {
   background: none;
-  padding: env(--space-24);
+  padding: token(--space-24);
 
   & > a {
     display: block;

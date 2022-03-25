@@ -74,7 +74,7 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
   )
 
   const dynamicStyle: CSSProperties = {
-    '--maxHeight': contentMaxHeight
+    '--max-height': contentMaxHeight
   }
 
   const sizes = {

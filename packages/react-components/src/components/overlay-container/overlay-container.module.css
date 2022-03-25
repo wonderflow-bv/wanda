@@ -21,10 +21,10 @@
   background-color: var(--dimmed-0);
 
   &[data-overlay-color='light'] {
-    background-color: hsl(env(--color-primary-0));
+    background-color: hsl(token(--color-primary-0));
   }
 
   &[data-overlay-color='dark'] {
-    background-color: hsl(env(--color-primary-90));
+    background-color: hsl(token(--color-primary-90));
   }
 }

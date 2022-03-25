@@ -1,5 +1,5 @@
 .Avatar {
-  --size: env(--space-24);
+  --size: token(--space-24);
 
   position: relative;
   inline-size: var(--size);
@@ -12,11 +12,11 @@
   justify-content: center;
 
   &[data-avatar-dimension='regular'] {
-    --size: env(--space-40);
+    --size: token(--space-40);
   }
 
   &[data-avatar-dimension='big'] {
-    --size: env(--space-48);
+    --size: token(--space-48);
   }
 
   & img {

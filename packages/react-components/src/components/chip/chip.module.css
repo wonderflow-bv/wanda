@@ -1,19 +1,19 @@
 .Chip {
-  padding: 0 env(--space-8) env(--space-4);
-  border-radius: env(--radius-48);
+  padding: 0 token(--space-8) token(--space-4);
+  border-radius: token(--radius-48);
   background-color: var(--highlight-gray-background);
   color: var(--highlight-gray-foreground);
-  font-size: env(--font-size-16);
-  block-size: env(--space-32);
+  font-size: token(--font-size-16);
+  block-size: token(--space-32);
   font-weight: 600;
 
   &[data-chip-dimension='small'] {
-    block-size: env(--space-24);
-    font-size: env(--font-size-14);
+    block-size: token(--space-24);
+    font-size: token(--font-size-14);
   }
 
   &[data-chip-dimension='big'] {
-    font-size: env(--font-size-18);
+    font-size: token(--font-size-18);
   }
 
   &[data-chip-color='cyan'] {

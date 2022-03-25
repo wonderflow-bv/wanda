@@ -6,8 +6,8 @@
 
 .Li {
   position: relative;
-  padding-left: env(--space-40);
-  min-block-size: env(--space-32);
+  padding-left: token(--space-40);
+  min-block-size: token(--space-32);
 }
 
 .Bullet {
@@ -21,7 +21,7 @@
   align-items: center;
   position: absolute;
   left: 0;
-  top: env(--space-2);
+  top: token(--space-2);
 
   & svg {
     inline-size: 0.55rem;

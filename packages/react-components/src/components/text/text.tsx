@@ -63,8 +63,8 @@ export const Text = forwardRef(({
   ...otherProps
 }, forwardedRef) => {
   const dynamicStyle: CSSProperties = {
-    '--maxW': maxWidth,
-    '--tAlign': textAlign
+    '--max-w': maxWidth,
+    '--t-align': textAlign
   }
 
   return (

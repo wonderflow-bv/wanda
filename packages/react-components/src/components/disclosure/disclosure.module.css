@@ -1,6 +1,6 @@
 .Disclosure {
   --icon-size: 1.11rem;
-  --icon-padding: env(--space-8);
+  --icon-padding: token(--space-8);
   --padding: calc(var(--icon-size) + var(--icon-padding) + (var(--icon-size) / 2));
   --icon-top-offset: calc(var(--icon-size) / 2);
 
@@ -15,17 +15,17 @@
 
   &[data-disclosure-dimension='small'] {
     --icon-top-offset: calc(var(--icon-size) / 1.5);
-    --icon-size: env(--icon-size-12);
+    --icon-size: token(--icon-size-12);
   }
 
   &[data-disclosure-dimension='regular'] {
-    --icon-size: env(--icon-size-16);
+    --icon-size: token(--icon-size-16);
   }
 
   &[data-disclosure-dimension='big'] {
     --icon-top-offset: calc(var(--icon-size) / 4);
-    --icon-size: env(--icon-size-24);
-    --icon-padding: env(--space-16);
+    --icon-size: token(--icon-size-24);
+    --icon-padding: token(--space-16);
   }
 
   /*
@@ -38,7 +38,7 @@
   display: list-item;
   touch-action: manipulation;
   position: relative;
-  padding: env(--space-2) 0;
+  padding: token(--space-2) 0;
   outline-offset: -2px;
   user-select: none;
 
@@ -69,7 +69,7 @@
   right: calc(var(--icon-size) / 2);
   inline-size: var(--icon-size);
   block-size: var(--icon-size);
-  transition: transform env(--duration-100) env(--easing-standard);
+  transition: transform token(--duration-100) token(--easing-standard);
   transform-origin: 50% center;
 
   @nest .Disclosure[data-disclosure-icon-position='left'] & {
@@ -95,7 +95,7 @@
   &[data-disclosure-height='true'] {
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
-    max-block-size: var(--maxHeight);
+    max-block-size: var(--max-height);
     overflow: auto;
   }
 }

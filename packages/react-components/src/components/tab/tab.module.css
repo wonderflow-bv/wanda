@@ -13,7 +13,7 @@
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
-  padding: 0 env(--space-8);
+  padding: 0 token(--space-8);
 
   @media (width < 48em) {
     -ms-overflow-style: none;
@@ -40,8 +40,8 @@
   color: var(--dimmed-6);
   appearance: none;
   overflow: unset;
-  padding: env(--space-8) env(--space-16);
-  block-size: env(--space-48);
+  padding: token(--space-8) token(--space-16);
+  block-size: token(--space-48);
   border: 0;
   background-color: transparent;
   font-family: inherit;
@@ -77,8 +77,8 @@
 }
 
 .TabPanel {
-  animation: fade-in env(--duration-200);
-  animation-timing-function: env(--easing-entrance));
+  animation: fade-in token(--duration-200);
+  animation-timing-function: token(--easing-entrance));
 }
 
 @keyframes fade-in {

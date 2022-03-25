@@ -94,7 +94,7 @@ export const Tooltip: FC<TooltipProps> = ({
   })
 
   const dynamycStyle: CSSProperties = {
-    '--maxW': maxWidth
+    '--max-w': maxWidth
   }
 
   return (

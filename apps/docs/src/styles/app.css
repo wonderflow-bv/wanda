@@ -18,12 +18,12 @@ h6 {
 :is(h2, h3, h4)[id] {
   & > a {
     display: inline-flex;
-    margin-left: env(--space-16);
+    margin-left: token(--space-16);
     background-image: none;
   }
 
   & .HeadingAnchor {
-    font-size: env(--font-size-16);
+    font-size: token(--font-size-16);
     inline-size: 24px;
     block-size: 24px;
     visibility: hidden;
@@ -31,7 +31,7 @@ h6 {
     align-items: center;
     justify-content: center;
     line-height: 1;
-    border-radius: env(--radius-8);
+    border-radius: token(--radius-8);
     background-color: var(--highlight-cyan-background);
     color: var(--highlight-cyan-foreground);
     padding-bottom: 1px;
@@ -53,7 +53,7 @@ h6 {
 
 
 img {
-  border-radius: env(--radius-4);
+  border-radius: token(--radius-4);
   max-width: 100%;
 }
 

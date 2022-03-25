@@ -4,7 +4,7 @@
 
 .Row {
   border: 1px solid var(--dimmed-1);
-  border-radius: env(--radius-8);
+  border-radius: token(--radius-8);
   transition: background-color 0.2s ease-out;
   line-height: initial;
 
@@ -25,12 +25,12 @@
 
 .Cell {
   inline-size: 1%;
-  padding: env(--space-4) env(--space-8);
+  padding: token(--space-4) token(--space-8);
   justify-content: flex-start;
   display: flex;
   align-items: center;
   flex-basis: 100%;
-  grid-gap: env(--space-4);
+  grid-gap: token(--space-4);
   flex-wrap: wrap;
 
   &:nth-child(2) {

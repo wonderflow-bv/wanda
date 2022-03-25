@@ -8,13 +8,13 @@
   background-color: var(--bg);
   color: var(--fg);
   position: relative;
-  border-radius: env(--radius-8);
+  border-radius: token(--radius-8);
   border: 2px solid var(--dimmed-1);
 }
 
 .Badge {
-  padding: env(--space-8) env(--space-16);
-  border-radius: env(--radius-4);
+  padding: token(--space-8) token(--space-16);
+  border-radius: token(--radius-4);
 
   @nest .ContrastCalc[data-contrast-calc-valid='true'] & {
     background-color: var(--highlight-green-background);

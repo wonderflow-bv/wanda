@@ -1,65 +1,65 @@
 .ContainerEx {
-  background-color: hsl(env(--color-primary-50) / 20%);
+  background-color: hsl(token(--color-primary-50) / 20%);
   background-size: 8px 8px;
-  background-image: radial-gradient(circle, hsl(env(--color-primary-80) / 30%) 1px, rgb(0 0 0 / 0%) 1px);
+  background-image: radial-gradient(circle, hsl(token(--color-primary-80) / 30%) 1px, rgb(0 0 0 / 0%) 1px);
   background-position: 0 0;
-  min-block-size: env(--space-24);
+  min-block-size: token(--space-24);
 }
 
 
 .ContainerEx[data-container-dimension='small'] {
   box-shadow:
-    inset env(--space-16) 0 0 hsl(env(--color-support-brand) / 60%),
-    inset calc(env(--space-16) * -1) 0 0 hsl(env(--color-support-brand) / 60%);
+    inset token(--space-16) 0 0 hsl(token(--color-support-brand) / 60%),
+    inset calc(token(--space-16) * -1) 0 0 hsl(token(--color-support-brand) / 60%);
 }
 
 @media (min-width: 48em) {
   .ContainerEx[data-container-dimension='small'] {
     box-shadow:
-      inset env(--space-32) 0 0 hsl(env(--color-support-brand) / 60%),
-      inset calc(env(--space-32) * -1) 0 0 hsl(env(--color-support-brand) / 60%);
+      inset token(--space-32) 0 0 hsl(token(--color-support-brand) / 60%),
+      inset calc(token(--space-32) * -1) 0 0 hsl(token(--color-support-brand) / 60%);
   }
 }
 
 .ContainerEx[data-container-dimension='medium'] {
   box-shadow:
-    inset env(--space-16) 0 0 hsl(env(--color-support-brand) / 60%),
-    inset calc(env(--space-16) * -1) 0 0 hsl(env(--color-support-brand) / 60%);
+    inset token(--space-16) 0 0 hsl(token(--color-support-brand) / 60%),
+    inset calc(token(--space-16) * -1) 0 0 hsl(token(--color-support-brand) / 60%);
 }
 
 @media (min-width: 48em) {
   .ContainerEx[data-container-dimension='medium'] {
     box-shadow:
-      inset env(--space-32) 0 0 hsl(env(--color-support-brand) / 60%),
-      inset calc(env(--space-32) * -1) 0 0 hsl(env(--color-support-brand) / 60%);
+      inset token(--space-32) 0 0 hsl(token(--color-support-brand) / 60%),
+      inset calc(token(--space-32) * -1) 0 0 hsl(token(--color-support-brand) / 60%);
   }
 }
 
 .ContainerEx[data-container-dimension='large'] {
   box-shadow:
-    inset env(--space-16) 0 0 hsl(env(--color-support-brand) / 60%),
-    inset calc(env(--space-16) * -1) 0 0 hsl(env(--color-support-brand) / 60%);
+    inset token(--space-16) 0 0 hsl(token(--color-support-brand) / 60%),
+    inset calc(token(--space-16) * -1) 0 0 hsl(token(--color-support-brand) / 60%);
 }
 
 @media (min-width: 48em) {
   .ContainerEx[data-container-dimension='large'] {
     box-shadow:
-      inset env(--space-32) 0 0 hsl(env(--color-support-brand) / 60%),
-      inset calc(env(--space-32) * -1) 0 0 hsl(env(--color-support-brand) / 60%);
+      inset token(--space-32) 0 0 hsl(token(--color-support-brand) / 60%),
+      inset calc(token(--space-32) * -1) 0 0 hsl(token(--color-support-brand) / 60%);
   }
 }
 
 .ContainerEx[data-container-dimension='full'] {
   box-shadow:
-    inset env(--space-16) 0 0 hsl(env(--color-support-brand) / 60%),
-    inset calc(env(--space-16) * -1) 0 0 hsl(env(--color-support-brand) / 60%);
+    inset token(--space-16) 0 0 hsl(token(--color-support-brand) / 60%),
+    inset calc(token(--space-16) * -1) 0 0 hsl(token(--color-support-brand) / 60%);
 }
 
 @media (min-width: 48em) {
   .ContainerEx[data-container-dimension='full'] {
     box-shadow:
-      inset env(--space-32) 0 0 hsl(env(--color-support-brand) / 60%),
-      inset calc(env(--space-32) * -1) 0 0 hsl(env(--color-support-brand) / 60%);
+      inset token(--space-32) 0 0 hsl(token(--color-support-brand) / 60%),
+      inset calc(token(--space-32) * -1) 0 0 hsl(token(--color-support-brand) / 60%);
   }
 }
 

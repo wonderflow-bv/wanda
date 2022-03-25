@@ -3,15 +3,15 @@
 }
 
 .LiveArea {
-  padding-top: env(--space-56);
+  padding-top: token(--space-56);
 }
 
 .Editor {
-  border-radius: env(--radius-8);
-  font-size: env(--font-size-18);
-  margin-top: env(--space-8);
+  border-radius: token(--radius-8);
+  font-size: token(--font-size-18);
+  margin-top: token(--space-8);
   border: 1px solid var(--dimmed-1);
-  transition: all env(--duration-100) env(--easing-standard);
+  transition: all token(--duration-100) token(--easing-standard);
 
   &:focus-within {
     border-color: var(--dimmed-3);
@@ -22,7 +22,7 @@
     outline: none;
 
     /* stylelint-disable-next-line declaration-no-important */
-    padding: env(--space-24) !important;
+    padding: token(--space-24) !important;
   }
 
   & *::selection {
@@ -33,7 +33,7 @@
 
 .Toolbar {
   position: absolute;
-  top: env(--space-8);
-  right: env(--space-8);
+  top: token(--space-8);
+  right: token(--space-8);
   z-index: 2;
 }

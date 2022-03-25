@@ -1,6 +1,6 @@
 .IconWrapper {
-  border-radius: env(--radius-8);
-  padding: env(--space-8);
+  border-radius: token(--radius-8);
+  padding: token(--space-8);
   display: block;
   position: relative;
   background-color: var(--bg);

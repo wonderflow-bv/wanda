@@ -2,11 +2,11 @@
   list-style-type: none;
   background-color: var(--global-background);
   border: 1px solid var(--dimmed-1);
-  border-radius: env(--radius-8);
+  border-radius: token(--radius-8);
   overflow: hidden;
   position: relative;
 
   & hr {
-    margin: 0 env(--space-8);
+    margin: 0 token(--space-8);
   }
 }

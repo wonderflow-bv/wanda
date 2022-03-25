@@ -5,55 +5,44 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    border-radius: env(--radius-4);
+    border-radius: token(--radius-4);
     z-index: 0;
   }
 }
 
 .Drop {
-  block-size: env(--space-64);
-  padding: env(--space-8) env(--space-16);
-  color: hsl(env(--color-support-black));
+  block-size: token(--space-64);
+  padding: token(--space-8) token(--space-16);
+  color: hsl(token(--color-support-black));
   transform-origin: 100% 50%;
-  transition: transform 700ms env(--easing-standard);
+  transition: transform 700ms token(--easing-standard);
 
   &:first-of-type {
-    border-radius: env(--radius-4) env(--radius-4) 0 0;
+    border-radius: token(--radius-4) token(--radius-4) 0 0;
   }
 
   &:last-of-type {
-    border-radius: 0 0 env(--radius-4) env(--radius-4);
+    border-radius: 0 0 token(--radius-4) token(--radius-4);
   }
 
   &.White {
-    color: hsl(env(--color-support-white));
+    color: hsl(token(--color-support-white));
   }
 
   &:hover {
     transform: scale(1.02);
     z-index: 1;
-    transition: transform env(--duration-100) env(--easing-standard);
+    transition: transform token(--duration-100) token(--easing-standard);
   }
 }
 
 .ColorValue {
-  opacity: 0;
-  transition: opacity 50ms env(--easing-standard);
+  opacity: 0%;
+  transition: opacity 50ms token(--easing-standard);
   min-inline-size: 130px;
   text-align: right;
 
   @nest .Drop:hover & {
-    opacity: 1;
-  }
-}
-
-
-@keyframes fadeIn {
-  0% {
-    transform: translate(-10px, 0);
-  }
-
-  100% {
-    transform: none;
+    opacity: 100%;
   }
 }

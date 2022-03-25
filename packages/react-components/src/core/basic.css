@@ -12,7 +12,7 @@ html {
 *::after {
   margin: 0;
   box-sizing: inherit;
-  -webkit-tap-highlight-color: hsl(env(--color-support-brand) / 20%);
+  -webkit-tap-highlight-color: hsl(token(--color-support-brand) / 20%);
 }
 
 *:focus-visible {
@@ -22,9 +22,9 @@ html {
 
 body {
   color: var(--global-foreground);
-  font-family: env(--font-family-sans);
+  font-family: token(--font-family-sans);
   font-feature-settings: 'calt' off;
-  scroll-padding: env(--space-80);
+  scroll-padding: token(--space-80);
   margin: 0;
 }
 

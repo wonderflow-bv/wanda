@@ -2,30 +2,30 @@
 
 .Title {
   &:is(.H1, .H2, .H3, .H4, .H5, .H6, .Display) {
-    --lh: env(--font-lh-standard);
+    --lh: token(--font-lh-standard);
 
     display: block;
-    line-height: env(--font-lh-small);
+    line-height: token(--font-lh-small);
     color: var(--heading-foreground);
     min-block-size: 0.01vh;
     font-size: var(--fs-max);
-    max-inline-size: var(--maxW, initial);
-    text-align: var(--tAlign);
+    max-inline-size: var(--max-w, initial);
+    text-align: var(--t-align);
     overflow-wrap: break-word;
 
 
     &[data-title-line-height='small'] {
-      --lh: env(--font-lh-small);
+      --lh: token(--font-lh-small);
     }
 
     &[data-title-line-height='large'] {
-      line-height: env(--font-lh-standard);
+      line-height: token(--font-lh-standard);
     }
   }
 
   &:is(.H6) {
-    --fs-min: env(--font-size-14);
-    --fs-max: env(--font-size-18);
+    --fs-min: token(--font-size-14);
+    --fs-max: token(--font-size-18);
 
     font-weight: 700;
   }

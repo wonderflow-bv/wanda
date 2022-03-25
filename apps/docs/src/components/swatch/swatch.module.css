@@ -7,8 +7,8 @@
   block-size: 90px;
   min-block-size: 90px;
   max-block-size: 90px;
-  border-radius: env(--radius-4);
-  color: hsl(env(--color-support-white));
+  border-radius: token(--radius-4);
+  color: hsl(token(--color-support-white));
   background:
     var(--dimmed-0)
     repeating-conic-gradient(
@@ -22,8 +22,8 @@
     content: '';
     display: block;
     position: absolute;
-    background-color: var(--backgroundColor);
-    box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.05);
+    background-color: var(--background-color);
+    box-shadow: inset 0 0 0 2px rgb(0 0 0 / 5%);
     inset: 0;
   }
 
@@ -38,17 +38,17 @@
 }
 
 .CopyColor.CopyColor {
-  opacity: 0;
+  opacity: 0%;
   pointer-events: none;
   transition: opacity 0.2s;
-  background-color: var(--backgroundColor);
+  background-color: var(--background-color);
 
   &:hover {
-    background-color: var(--backgroundColor);
+    background-color: var(--background-color);
   }
 
   @nest .Swatch:is(:hover, :focus-within) & {
-    opacity: 1;
+    opacity: 100%;
     pointer-events: auto;
   }
 }

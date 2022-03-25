@@ -1,10 +1,10 @@
 @import '@wonderflow/react-components/core/utils/media.css';
 
 .LiveArea {
-  border-radius: env(--radius-8);
-  min-block-size: var(--minHeight);
-  max-block-size: var(--maxHeight);
-  padding: env(--space-16) env(--space-40);
+  border-radius: token(--radius-8);
+  min-block-size: var(--min-height);
+  max-block-size: var(--max-height);
+  padding: token(--space-16) token(--space-40);
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
   block-size: 100%;
@@ -12,7 +12,7 @@
   z-index: 1;
 
   @media (--from-medium) {
-    padding: env(--space-40) env(--space-64) env(--space-40);
+    padding: token(--space-40) token(--space-64) token(--space-40);
   }
 
   &::before {

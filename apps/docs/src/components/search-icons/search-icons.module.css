@@ -5,14 +5,14 @@
 
 .Grid {
   display: grid;
-  grid-gap: env(--space-16);
+  grid-gap: token(--space-16);
   grid-template-columns: repeat(auto-fill, minmax(min(8rem, 100%), 1fr));
 }
 
 .ToolBar {
   position: sticky;
-  top: env(--space-56);
-  padding: env(--space-24) env(--space-4) env(--space-48);
+  top: token(--space-56);
+  padding: token(--space-24) token(--space-4) token(--space-48);
   z-index: 1;
   background-color: var(--dimmed-0);
   mask-image: linear-gradient(to bottom, var(--dimmed-0) 60%, transparent);
@@ -23,8 +23,8 @@
 
   position: relative;
   background-color: var(--bg);
-  padding: env(--space-16) env(--space-24);
-  border-radius: env(--radius-4);
+  padding: token(--space-16) token(--space-24);
+  border-radius: token(--radius-4);
   aspect-ratio: 1/1;
   text-align: center;
 
@@ -41,7 +41,7 @@
 .IconPreview + * {
   position: absolute;
   top: 55%;
-  padding: 0 env(--space-16);
+  padding: 0 token(--space-16);
 }
 
 @keyframes positive-feedback {

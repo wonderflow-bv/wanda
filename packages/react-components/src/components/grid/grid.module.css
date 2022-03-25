@@ -7,7 +7,7 @@
   padding: 0;
   grid-template-columns: repeat(var(--columns), var(--column-size));
   grid-template-rows: repeat(var(--rows), var(--row-min-h));
-  grid-gap: var(--row-gap, env(--space-8)) var(--column-gap, env(--space-8));
+  grid-gap: var(--row-gap, token(--space-8)) var(--column-gap, token(--space-8));
 
   &[data-grid-filling-type='fill'] {
     grid-template-columns: repeat(auto-fill, var(--column-size));

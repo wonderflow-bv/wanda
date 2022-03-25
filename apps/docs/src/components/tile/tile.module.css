@@ -1,22 +1,22 @@
 .Tile {
   display: block;
-  min-block-size: env(--space-200);
+  min-block-size: token(--space-200);
   position: relative;
   color: inherit;
   height: 100%;
 }
 
 .IconBullet {
-  block-size: env(--space-40);
-  inline-size: env(--space-40);
+  block-size: token(--space-40);
+  inline-size: token(--space-40);
   position: relative;
   background-color: var(--dimmed-2);
   display: grid;
   place-items: center;
   place-content: center;
-  border-radius: env(--radius-4);
+  border-radius: token(--radius-4);
 }
 
 .Title {
-  margin-top: env(--space-8);
+  margin-top: token(--space-8);
 }

@@ -40,7 +40,8 @@
     "flat": "5.0.2",
     "postcss-import": "14.0.2",
     "postcss-mixins": "9.0.2",
-    "postcss-preset-env": "7.4.1"
+    "postcss-preset-env": "7.4.1",
+    "postcss-replace": "2.0.0"
   },
   "devDependencies": {
     "@types/flat": "5.0.2",

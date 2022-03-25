@@ -9,11 +9,11 @@
 }
 
 .Icon {
-  inline-size: env(--space-24);
-  block-size: env(--space-24);
+  inline-size: token(--space-24);
+  block-size: token(--space-24);
 
   @media (--from-small) {
-    inline-size: env(--space-40);
-    block-size: env(--space-40);
+    inline-size: token(--space-40);
+    block-size: token(--space-40);
   }
 }

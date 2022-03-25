@@ -4,7 +4,7 @@
   margin: 0;
   text-overflow: ellipsis;
   font-size: var(--font-size);
-  border-radius: env(--radius-4);
+  border-radius: token(--radius-4);
   font-family: inherit;
   line-height: 1;
   appearance: none;
@@ -96,12 +96,12 @@
 
 textarea.BaseField {
   block-size: auto;
-  min-block-size: env(--space-32);
-  line-height: env(--font-lh-standard);
+  min-block-size: token(--space-32);
+  line-height: token(--font-lh-standard);
   resize: vertical;
   padding:
     calc(var(--field-padding) / 2)
-    calc(var(--field-padding) + env(--space-16))
+    calc(var(--field-padding) + token(--space-16))
     calc(var(--field-padding) / 2)
     var(--field-padding);
 

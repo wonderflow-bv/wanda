@@ -39,7 +39,7 @@ export const Swatch: React.FC<SwatchProps> = ({
   )
 
   const dynamicStyle: CSSProperties = {
-    '--backgroundColor': hslColor
+    '--background-color': hslColor
   }
 
   return (

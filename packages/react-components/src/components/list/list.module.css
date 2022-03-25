@@ -1,6 +1,6 @@
 .List {
-  --marker-size: env(--space-16);
-  --marker-gap: env(--space-8);
+  --marker-size: token(--space-16);
+  --marker-gap: token(--space-8);
 
   & li {
     gap: var(--marker-gap);
@@ -19,12 +19,12 @@
 
   &[data-list-size='small'] {
     --marker-size: 0.77rem;
-    --marker-gap: env(--space-8);
+    --marker-gap: token(--space-8);
   }
 
   &[data-list-size='big'] {
     --marker-size: 1.11rem;
-    --marker-gap: env(--space-16);
+    --marker-gap: token(--space-16);
   }
 
   &[data-list-no-marker='true'] {

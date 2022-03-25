@@ -5,7 +5,7 @@
   margin: 0;
   max-width: var(--width);
   font-variant-numeric: tabular-nums;
-  line-height: env(--font-lh-small);
+  line-height: token(--font-lh-small);
   text-align: start;
   padding: 0;
   word-wrap: break-word;
@@ -23,10 +23,10 @@
   }
 
   &[data-table-cell-padding='true'] {
-    padding: calc(env(--space-8) + env(--space-4)) env(--space-8);
+    padding: calc(token(--space-8) + token(--space-4)) token(--space-8);
   }
 }
 
 .HeadCellIcon {
-  margin-inline-start: env(--space-8);
+  margin-inline-start: token(--space-8);
 }

@@ -5,11 +5,11 @@
 
 .Balloon {
   position: relative;
-  padding: env(--space-8) env(--space-16);
-  border-radius: env(--radius-4);
-  background-color: hsl(env(--color-primary-80));
-  font-size: env(--font-size-16);
-  max-inline-size: var(--maxW);
+  padding: token(--space-8) token(--space-16);
+  border-radius: token(--radius-4);
+  background-color: hsl(token(--color-primary-80));
+  font-size: token(--font-size-16);
+  max-inline-size: var(--max-w);
   word-wrap: break-word;
   z-index: 2;
 
@@ -25,7 +25,7 @@
     position: absolute;
     inline-size: 12px;
     block-size: 12px;
-    background-color: hsl(env(--color-primary-80));
+    background-color: hsl(token(--color-primary-80));
     visibility: visible;
     transform: rotate(45deg);
   }

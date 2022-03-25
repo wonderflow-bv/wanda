@@ -9,8 +9,9 @@ import flatten from 'flat'
 const flatTokens: Record<string, any> = flatten(jsonTokens, {
   delimiter: '-'
 })
-const environmentVariables = Object.keys(flatTokens).reduce<Record<string, string>>((acc, key) => {
-  const newKey = `--${key}`
+
+const prepareTokens = () => Object.keys(flatTokens).reduce<Record<string, string>>((acc, key) => {
+  const newKey = key
   acc[newKey] = `${flatTokens[key]}`
   return acc
 }, {})
@@ -18,11 +19,12 @@ const environmentVariables = Object.keys(flatTokens).reduce<Record<string, strin
 export const postcssConfig = {
   plugins: {
     'postcss-import': {},
+    'postcss-replace': {
+      pattern: /token\(.*?--([^\s]+?)\)/gi,
+      data: prepareTokens()
+    },
     'postcss-preset-env': {
       stage: 0,
-      importFrom: [{
-        environmentVariables
-      }],
       features: {
         'logical-properties-and-values': false,
         'prefers-color-scheme-query': false,

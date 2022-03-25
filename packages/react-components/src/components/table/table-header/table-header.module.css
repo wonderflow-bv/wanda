@@ -1,5 +1,5 @@
 .TableHeader {
   position: relative;
-  min-block-size: env(--space-56);
+  min-block-size: token(--space-56);
   z-index: 3;
 }

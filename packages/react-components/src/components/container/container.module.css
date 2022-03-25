@@ -1,23 +1,23 @@
 @import '../../core/utils/media.css';
 
 .Container {
-  padding: 0 env(--space-16);
+  padding: 0 token(--space-16);
   margin: 0 auto;
   inline-size: 100%;
 
   &[data-container-dimension='medium'] {
-    max-inline-size: env(--container-medium);
+    max-inline-size: token(--container-medium);
 
     @media (--from-small) {
-      padding: 0 env(--space-32);
+      padding: 0 token(--space-32);
     }
   }
 
   &[data-container-dimension='large'] {
-    max-inline-size: env(--container-large);
+    max-inline-size: token(--container-large);
 
     @media (--from-small) {
-      padding: 0 env(--space-32);
+      padding: 0 token(--space-32);
     }
   }
 
@@ -25,7 +25,7 @@
     max-inline-size: 100%;
 
     @media (--from-small) {
-      padding: 0 env(--space-32);
+      padding: 0 token(--space-32);
     }
   }
 

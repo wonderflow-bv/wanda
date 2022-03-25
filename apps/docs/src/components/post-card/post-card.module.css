@@ -5,9 +5,9 @@
 
   counter-increment: post-counter;
   position: relative;
-  border-radius: env(--radius-8);
+  border-radius: token(--radius-8);
   background-image:
-    linear-gradient(178deg, var(--dimmed-0), hsl(env(--color-primary-80) / 0%)),
+    linear-gradient(178deg, var(--dimmed-0), hsl(token(--color-primary-80) / 0%)),
     radial-gradient(var(--dot-color) 0.9px, transparent 0.9px);
   background-size: 100%, 30px 30px;
 
@@ -55,7 +55,7 @@
 
 .Authors {
   background-color: var(--dimmed-0);
-  padding: env(--space-8);
+  padding: token(--space-8);
   border-radius: 1e5px;
   position: absolute;
   bottom: 0;

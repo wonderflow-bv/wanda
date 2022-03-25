@@ -18,7 +18,7 @@
 
   @media (--from-extra-small) {
     overflow: auto;
-    padding: 0 env(--space-24);
+    padding: 0 token(--space-24);
   }
 
   & > * {

@@ -46,14 +46,14 @@
 .Changes.Changes {
   & li {
     position: relative;
-    margin-top: env(--space-16);
-    margin-bottom: env(--space-16);
-    margin-left: env(--space-88);
-    gap: env(--space-8);
+    margin-top: token(--space-16);
+    margin-bottom: token(--space-16);
+    margin-left: token(--space-88);
+    gap: token(--space-8);
     align-items: flex-start;
     flex-wrap: wrap;
     line-height: 1.2;
-    font-size: env(--font-size-16);
+    font-size: token(--font-size-16);
 
     @media (--from-small) {
       flex-wrap: nowrap;
@@ -63,12 +63,12 @@
   & li::before {
     position: absolute;
     top: 0;
-    left: calc(env(--space-88) * -1);
+    left: calc(token(--space-88) * -1);
     display: inline-block;
     font-size: 0.66rem;
-    border-radius: env(--radius-4);
+    border-radius: token(--radius-4);
     font-weight: 600;
-    min-inline-size: env(--space-80);
+    min-inline-size: token(--space-80);
     text-align: center;
     padding-top: 1px;
     line-height: 1.8;
