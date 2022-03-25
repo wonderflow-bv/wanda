@@ -1,5 +1,5 @@
 import { forwardRef, InputHTMLAttributes, useCallback, useState } from 'react'
-import { Stack, Text, Icon, IconProps } from '@/components'
+import { Stack, Text, Icon, IconProps, Textfield } from '@/components'
 import styles from './slider.module.css'
 import clsx from 'clsx'
 
@@ -77,7 +77,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>(({
       className={clsx(styles.Slider, className)}
       data-slider-dimension={dimension}
     >
-      {showValues && <Text as="span" size={isSmall ? 14 : 16} weight="bold" textAlign="end" className={styles.Value}>{value}</Text>}
+      {showValues && <Text as="span" size={isSmall ? 14 : 16} weight="bold" textAlign="end" className={styles.Value}>{min}</Text>}
       {(iconMin && !showValues) && <Icon source={iconMin} dimension={isSmall ? 16 : 24} />}
 
       <input
@@ -96,6 +96,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>(({
       />
 
       {showValues && <Text as="span" size={isSmall ? 14 : 16} weight="bold" className={styles.Value}>{max}</Text>}
+      {showValues && <Textfield readOnly dimension="small" size={max.toString().length} value={value} className={styles.CurrentValue} />}
       {(iconMax && !showValues) && <Icon source={iconMax} dimension={isSmall ? 16 : 24} />}
     </Stack>
   )
