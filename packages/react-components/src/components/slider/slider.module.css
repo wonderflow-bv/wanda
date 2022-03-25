@@ -98,7 +98,6 @@
 
 .Value {
   flex-shrink: 0;
-  inline-size: 48px;
 }
 
 .CurrentValue {
