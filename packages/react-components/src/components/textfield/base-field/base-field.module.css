@@ -60,12 +60,17 @@
     cursor: default;
   }
 
-  &:autofill,
-  &:autofill:hover,
-  &:autofill:focus,
-  &:autofill:active {
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
     border: 1px solid var(--dimmed-2);
+    -webkit-text-fill-color: var(--global-vibrancy-foreground);
     box-shadow: 0 0 0 100px var(--global-background) inset;
+
+    &::selection {
+      -webkit-text-fill-color: var(--dimmed-0);
+    }
   }
 
   &:is(:invalid, [data-basefield-invalid='true'], :out-of-range),
