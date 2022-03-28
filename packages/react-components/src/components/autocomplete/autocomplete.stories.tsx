@@ -34,8 +34,8 @@ const Template: ComponentStory<typeof Autocomplete> = (args) => (
       ))}
     </Autocomplete>
     <List>
-      <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus non laboriosam facere? </li>
-      <li>Eum, assumenda ad sunt dolorum aspernatur quia sit! Mollitia eligendi accusantium alias non enim quaerat quidem fugiat architecto.</li>
+      <List.Li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus non laboriosam facere? </List.Li>
+      <List.Li>Eum, assumenda ad sunt dolorum aspernatur quia sit! Mollitia eligendi accusantium alias non enim quaerat quidem fugiat architecto.</List.Li>
     </List>
   </>
 )

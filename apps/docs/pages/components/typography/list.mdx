@@ -3,10 +3,16 @@ import { Playground } from "@/components/playground";
 import { PropsTable } from "@/components/props-table";
 import * as components from "@wonderflow/react-components";
 
-export const example = `<List marker="check">
-  <li>Lorem ipsum dolor</li>
-  <li>Sit amen consectur</li>
-  <li>Adipiscing lorem</li>
+export const example = `<List>
+  <List.Li marker="check" markerColor="var(--highlight-green-foreground)">
+    Lorem ipsum dolor
+  </List.Li>
+  <List.Li marker="triangle-exclamation" markerColor="var(--highlight-yellow-foreground)">
+    Sit amen consectur
+  </List.Li>
+  <List.Li marker="xmark" markerColor="var(--highlight-red-foreground)">
+    Adipiscing lorem
+  </List.Li>
 </List>`;
 
 export default ({ children }) => (
@@ -33,16 +39,18 @@ import { List } from "@wonderflow/react-components";
 
 export default () => {
   return (
-    <List marker="check">
-      <li>Lorem ipsum dolor</li>
-      <li>Sit amen consectur</li>
-      <li>Adipiscing lorem</li>
+    <List>
+      <List.Li>Lorem ipsum dolor</List.Li>
+      <List.Li>Sit amen consectur</List.Li>
+      <List.Li>Adipiscing lorem</List.Li>
     </List>
   );
 };
 ```
 
 ## API Reference
+
+### List
 
 <PropsTable
   properties={[
@@ -53,22 +61,6 @@ export default () => {
       default: 'regular',
       required: false,
       description: "Set the dimension of the items in the list. This affects also the marker size.",
-    },
-    {
-      name: "marker",
-      type: ["enum"],
-      typeValue: "IconProps['source']",
-      typeLink: "/components/other/icon#prop-source",
-      default: "circle",
-      required: false,
-      description: "Set the marker style. You can use any icon from the iconography as marker by passing its name.",
-    },
-    {
-      name: "markerColor",
-      type: ["string"],
-      default: "",
-      required: false,
-      description: "Set the color of the marker",
     },
     {
       name: "hideMarker",
@@ -85,6 +77,30 @@ export default () => {
       required: false,
       description:
         "Set the component to a different HTML tag or custom component",
+    }
+  ]}
+/>
+
+
+### List.Li
+
+<PropsTable
+  properties={[
+    {
+      name: "marker",
+      type: ["enum"],
+      typeValue: "IconProps['source']",
+      typeLink: "/components/other/icon#prop-source",
+      default: "circle",
+      required: false,
+      description: "Set the marker style. You can use any icon from the iconography as marker by passing its name.",
+    },
+    {
+      name: "markerColor",
+      type: ["string"],
+      default: "",
+      required: false,
+      description: "Set the color of the marker",
     }
   ]}
 />
