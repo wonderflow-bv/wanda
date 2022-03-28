@@ -68,7 +68,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
     <div
       className={clsx(CodeBlockClass, className)}
       data-code-block-has-highlight={Boolean(highlight)}
-      data-code-block-has-toolbar={!(showLanguage || codeLang) || Boolean(actions) || !hideCopy}
+      data-code-block-has-toolbar={(showLanguage || codeLang) || Boolean(actions) || !hideCopy}
       style={dynamicStyle}
     >
       <Refractor
