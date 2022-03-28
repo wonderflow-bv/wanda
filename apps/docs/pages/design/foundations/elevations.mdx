@@ -28,11 +28,11 @@ Our elevation system is made by four layers, in which elements can be placed in 
 
 Consider this layer as the "plane" on which elements are placed by default if not declaring any elevation value. Here is some example of elements usually placed on this layer:
 
-<List marker="arrow-right" markerColor="var(--highlight-green-foreground)">
-  <li>Document root</li>
-  <li>Document body</li>
-  <li>Backgrounds</li>
-  <li>Any element that is not elevated</li>
+<List>
+  <List.Li marker="arrow-right" markerColor="var(--highlight-green-foreground)">Document root</List.Li>
+  <List.Li marker="arrow-right" markerColor="var(--highlight-green-foreground)">Document body</List.Li>
+  <List.Li marker="arrow-right" markerColor="var(--highlight-green-foreground)">Backgrounds</List.Li>
+  <List.Li marker="arrow-right" markerColor="var(--highlight-green-foreground)">Any element that is not elevated</List.Li>
 </List>
 
 ### Layer 1
@@ -40,10 +40,10 @@ Consider this layer as the "plane" on which elements are placed by default if no
 This is the first level of elevation from Z0, elements placed here cast a small and hard shadow. Here some elements that can be placed on this level:
 
 <List marker="arrow-right" markerColor="var(--highlight-green-foreground)">
-  <li>Cards and wrappers</li>
-  <li>Text fields and selects</li>
-  <li>Selection controls</li>
-  <li>Buttons</li>
+  <List.Li marker="arrow-right" markerColor="var(--highlight-green-foreground)">Cards and wrappers</List.Li>
+  <List.Li marker="arrow-right" markerColor="var(--highlight-green-foreground)">Text fields and selects</List.Li>
+  <List.Li marker="arrow-right" markerColor="var(--highlight-green-foreground)">Selection controls</List.Li>
+  <List.Li marker="arrow-right" markerColor="var(--highlight-green-foreground)">Buttons</List.Li>
 </List>
 
 ### Layer 2
@@ -51,9 +51,9 @@ This is the first level of elevation from Z0, elements placed here cast a small 
 The second layer of elevation can hold elements like:
 
 <List marker="arrow-right" markerColor="var(--highlight-green-foreground)">
-  <li>Dialogs</li>
-  <li>Popover</li>
-  <li>Tooltips</li>
+  <List.Li marker="arrow-right" markerColor="var(--highlight-green-foreground)">Dialogs</List.Li>
+  <List.Li marker="arrow-right" markerColor="var(--highlight-green-foreground)">Popover</List.Li>
+  <List.Li marker="arrow-right" markerColor="var(--highlight-green-foreground)">Tooltips</List.Li>
 </List>
 
 ### Layer 3
@@ -61,9 +61,9 @@ The second layer of elevation can hold elements like:
 The third layer can contain fixed elements like:
 
 <List marker="arrow-right" markerColor="var(--highlight-green-foreground)">
-  <li>Header</li>
-  <li>Navbar</li>
-  <li>Floating buttons</li>
+  <List.Li marker="arrow-right" markerColor="var(--highlight-green-foreground)">Header</List.Li>
+  <List.Li marker="arrow-right" markerColor="var(--highlight-green-foreground)">Navbar</List.Li>
+  <List.Li marker="arrow-right" markerColor="var(--highlight-green-foreground)">Floating buttons</List.Li>
 </List>
 
 ### Layer 4
@@ -71,9 +71,9 @@ The third layer can contain fixed elements like:
 Elements that can be placed on this elevation layer are those that are always palced above everything else.
 
 <List marker="arrow-right" markerColor="var(--highlight-green-foreground)">
-  <li>Modal dialogs</li>
-  <li>Modal drawers</li>
-  <li>Global notifications</li>
+  <List.Li marker="arrow-right" markerColor="var(--highlight-green-foreground)">Modal dialogs</List.Li>
+  <List.Li marker="arrow-right" markerColor="var(--highlight-green-foreground)">Modal drawers</List.Li>
+  <List.Li marker="arrow-right" markerColor="var(--highlight-green-foreground)">Global notifications</List.Li>
 </List>
 
 ## Default elevations

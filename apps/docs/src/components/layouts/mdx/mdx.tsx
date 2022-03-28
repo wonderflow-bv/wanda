@@ -23,8 +23,9 @@ const components = {
   h4: (props: any) => <Title as="h4" level="5" {...props} />,
   p: (props: any) => <Text size={22} {...props} />,
   a: (props: any) => <Link {...props}><a>{props.children}</a></Link>,
-  ul: (props: any) => <List markerColor="var(--dimmed-5)" {...props}>{props.children}</List>,
+  ul: (props: any) => <List {...props}>{props.children}</List>,
   ol: (props: any) => <List as="ol" {...props}>{props.children}</List>,
+  li: (props: any) => <List.Li markerColor="var(--dimmed-5)" {...props}>{props.children}</List.Li>,
   hr: Separator
 }
 
@@ -88,9 +89,9 @@ export const MdxLayout: React.FC<MdxLayoutProps> = ({
                 <Title as="h2" level="5">
                   Features
                 </Title>
-                <List marker="check" markerColor="var(--highlight-green-foreground)">
+                <List>
                   {features.map(feat => (
-                    <li key={feat}><Markdown>{feat}</Markdown></li>
+                    <List.Li marker="check" markerColor="var(--highlight-green-foreground)" key={feat}><Markdown>{feat}</Markdown></List.Li>
                   ))}
                 </List>
               </Stack>

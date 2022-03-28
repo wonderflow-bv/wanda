@@ -12,7 +12,7 @@ export type MarkdownProps = {
   children: string;
   options?: MarkdownToJSX.Options;
   hideMarkers?: boolean;
-  UlMaker?: Components.ListProps['marker']
+  UlMaker?: Components.ListItemProps['marker']
 }
 
 export const Markdown: React.FC<MarkdownProps> = ({
@@ -27,8 +27,9 @@ export const Markdown: React.FC<MarkdownProps> = ({
         overrides: {
           img: { component: 'img', props: { loading: 'lazy', decoding: 'async' } },
           p: { component: Components.Text, props: { size: 22 } },
-          ul: { component: Components.List, props: { as: 'ul', marker: UlMaker, markerColor: 'var(--dimmed-4)', hideMarker: hideMarkers } },
-          ol: { component: Components.List, props: { as: 'ol', markerColor: 'var(--dimmed-4)', hideMarker: hideMarkers } },
+          ul: { component: Components.List, props: { as: 'ul', marker: UlMaker, hideMarker: hideMarkers } },
+          ol: { component: Components.List, props: { as: 'ol', hideMarker: hideMarkers } },
+          li: { component: Components.List.Li, props: { markerColor: 'var(--dimmed-5)' } },
           a: { component: CustomLink },
           pre: CodeBlock,
           h1: { component: Components.Title, props: { level: '1', as: 'h1' } },
