@@ -1,14 +1,14 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { useState } from 'react'
-import { Dropdown } from './dropdown'
+import { Popover } from './popover'
 import { Button, Separator, Textfield, Menu, Title } from '../..'
 
-const story: ComponentMeta<typeof Dropdown> = {
-  title: 'Components/Dialogs/Dropdown',
-  component: Dropdown,
+const story: ComponentMeta<typeof Popover> = {
+  title: 'Components/Dialogs/Popover',
+  component: Popover,
   args: {
     placement: 'auto-start',
-    trigger: <Button>Open Dropdown</Button>
+    trigger: <Button>Open Popover</Button>
   },
   argTypes: {
     onClick: {
@@ -22,11 +22,11 @@ const story: ComponentMeta<typeof Dropdown> = {
 
 export default story
 
-const DefaultTemplate: ComponentStory<typeof Dropdown> = (args) => {
+const DefaultTemplate: ComponentStory<typeof Popover> = (args) => {
   const [checked, setChecked] = useState<boolean>(false)
 
   return (
-    <Dropdown {...args}>
+    <Popover {...args}>
       <Menu>
         <Menu.Item
           autoFocus
@@ -58,26 +58,26 @@ const DefaultTemplate: ComponentStory<typeof Dropdown> = (args) => {
         <Menu.Item icon="arrow-down-to-bracket">Even shorter</Menu.Item>
         <Menu.Item disabled>Really?</Menu.Item>
       </Menu>
-    </Dropdown>
+    </Popover>
   )
 }
 
 export const Default = DefaultTemplate.bind({})
 
-const CustomTemplate: ComponentStory<typeof Dropdown> = (args) => (
+const CustomTemplate: ComponentStory<typeof Popover> = (args) => (
   <>
-    <Dropdown {...args}>
+    <Popover {...args}>
       <div style={{ background: 'var(--global-vibrancy-background)', backdropFilter: 'blur(10px)', border: '2px solid black', padding: 24 }}>
         Lorem.
       </div>
-    </Dropdown>
-    <Dropdown {...args}>
+    </Popover>
+    <Popover {...args}>
       <div style={{ background: 'var(--global-vibrancy-background)', backdropFilter: 'blur(10px)', border: '2px solid black', padding: 24 }}>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit.
         Magni error unde sapiente beatae! Nostrum praesentium similique
         veniam non ut nulla, incidunt velit et, placeat cupiditate, aliquid saepe. Atque, provident perferendis?
       </div>
-    </Dropdown>
+    </Popover>
   </>
 )
 
@@ -87,9 +87,9 @@ CustomElement.args = {
   placement: 'bottom-start'
 }
 
-const WithFieldTemplate: ComponentStory<typeof Dropdown> = (args) => (
+const WithFieldTemplate: ComponentStory<typeof Popover> = (args) => (
   <>
-    <Dropdown
+    <Popover
       {...args}
     >
       <div style={{ background: 'var(--global-vibrancy-background)', backdropFilter: 'blur(10px)', border: '2px solid black', padding: 24 }}>
@@ -97,7 +97,7 @@ const WithFieldTemplate: ComponentStory<typeof Dropdown> = (args) => (
         Magni error unde sapiente beatae! Nostrum praesentium similique
         veniam non ut nulla, incidunt velit et, placeat cupiditate, aliquid saepe. Atque, provident perferendis?
       </div>
-    </Dropdown>
+    </Popover>
   </>
 )
 
@@ -108,15 +108,15 @@ WithField.args = {
   placement: 'bottom-start'
 }
 
-const ControlledTemplate: ComponentStory<typeof Dropdown> = (args) => {
+const ControlledTemplate: ComponentStory<typeof Popover> = (args) => {
   const [open, setOpen] = useState<boolean>(false)
 
   return (
-    <Dropdown
+    <Popover
       {...args}
       trigger={(
         <Button onClick={() => setOpen(val => !val)}>
-          {`${open ? 'Close' : 'Open'} Dropdown`}
+          {`${open ? 'Close' : 'Open'} Popover`}
         </Button>
       )}
       onOpenChange={(state) => setOpen(state)}
@@ -127,10 +127,10 @@ const ControlledTemplate: ComponentStory<typeof Dropdown> = (args) => {
         Magni error unde sapiente beatae! Nostrum praesentium similique
         veniam non ut nulla, incidunt velit et, placeat cupiditate, aliquid saepe. Atque, provident perferendis?
         <button type="button" onClick={() => setOpen(val => !val)}>
-          Close dropdown
+          Close popover
         </button>
       </div>
-    </Dropdown>
+    </Popover>
   )
 }
 

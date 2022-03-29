@@ -66,7 +66,7 @@ export type TableProps<T extends Record<string, unknown>> = PropsWithClass & {
   totalRows?: number;
   /**
    * Set clusters of items to show in a single page. These values are used to
-   * compute the select options for the page size dropdown.
+   * compute the select options for the page size select.
    */
   pageClusters?: TablePaginationProps['clusters'];
   /**

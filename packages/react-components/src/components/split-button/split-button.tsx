@@ -1,10 +1,10 @@
 import clsx from 'clsx'
 import { forwardRef } from 'react'
-import { Button, Dropdown, DropdownProps, Stack, Polymorphic } from '@/components'
+import { Button, Popover, PopoverProps, Stack, Polymorphic } from '@/components'
 import styles from './split-button.module.css'
 import { Except } from 'type-fest'
 
-export type SplitButtonProps = Pick<DropdownProps, 'placement' | 'offset'> & {
+export type SplitButtonProps = Pick<PopoverProps, 'placement' | 'offset'> & {
   /**
    * Set the label of the action associated to the dropdown.
    */
@@ -53,14 +53,14 @@ export const SplitButton = forwardRef(({
       >
         {label}
       </Button>
-      <Dropdown
+      <Popover
         placement={placement}
         offset={offset}
         disabled={disabled}
         trigger={<Button icon={icon} {...commonProps} />}
       >
         {children}
-      </Dropdown>
+      </Popover>
     </Stack>
   )
 }) as PolymorphicSplitButton

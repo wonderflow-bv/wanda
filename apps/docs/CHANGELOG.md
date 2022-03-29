@@ -39,7 +39,7 @@
 
 ### Minor Changes
 
-- 5bca3b0: Add new `open` prop to Dropdown to programmatically open and close the dropdown
+- 5bca3b0: Add new `open` prop to Popover to programmatically open and close the popover
 
 ### Patch Changes
 

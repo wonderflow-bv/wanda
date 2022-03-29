@@ -97,8 +97,8 @@ module.exports = [
   /*                                 Dialogs                                    */
   /* -------------------------------------------------------------------------- */
   {
-    source: '/develop/components/dropdown/',
-    destination: '/components/dialogs/dropdown/',
+    source: '/develop/components/popover/',
+    destination: '/components/dialogs/popover/',
     permanent: true
   },
   {

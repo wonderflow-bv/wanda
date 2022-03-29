@@ -10,33 +10,33 @@ import {
   useMemo
 } from 'react'
 import { useKeyPress, useFocusWithin } from 'ahooks'
-import styles from './dropdown.module.css'
+import styles from './popover.module.css'
 import { useUIDSeed } from 'react-uid'
 import { AutoPlacement, BasePlacement, VariationPlacement, Modifier } from '@popperjs/core'
 import { usePopperTooltip } from 'react-popper-tooltip'
 import { AnimatePresence, motion } from 'framer-motion'
 import clsx from 'clsx'
 
-export type DropdownProps = PropsWithClass & {
+export type PopoverProps = PropsWithClass & {
   /**
-   * The content of the dropdown to display when the dropdown is open.
+   * The content of the popover to display when the popover is open.
    */
   children: ReactNode;
   /**
-   * The element to use as the trigger for the dropdown.
+   * The element to use as the trigger for the popover.
    */
   trigger: ReactNode;
   /**
-   * The distance from the trigger to the dropdown.
+   * The distance from the trigger to the popover.
    */
   offset?: number,
   /**
-   * The placement of the dropdown. This is automatically handled based on
-   * scroll and viewport edges. By default the dropdown is anchored at
+   * The placement of the popover. This is automatically handled based on
+   * scroll and viewport edges. By default the popover is anchored at
    * the beginning of the trigger.
    *
    * The first key refers to the X axis, the second key refers to the Y axis.
-   * Eg: `auto-start` means the dropdown will be placed automatically on left or right
+   * Eg: `auto-start` means the popover will be placed automatically on left or right
    * based on the available space, and anchored at the top (start) of the trigger.
    */
   placement?: AutoPlacement | BasePlacement | VariationPlacement;
@@ -45,17 +45,17 @@ export type DropdownProps = PropsWithClass & {
    */
   disabled?: boolean;
   /**
-   * Callback triggered when the dropdown state changes.
+   * Callback triggered when the popover state changes.
    * It returns the new `boolean` state.
    */
   onOpenChange?: (open: boolean) => void;
   /**
-   * Programmatically open or close the dropdown. If set to `true`, the dropdown
-   * will be open when rendered. This make the dropdown a controlled component.
+   * Programmatically open or close the popover. If set to `true`, the popover
+   * will be open when rendered. This make the popover a controlled component.
    */
   open?: boolean;
   /**
-   * Enable or disable the auto close of the dropdown when clicking outside of it.
+   * Enable or disable the auto close of the popover when clicking outside of it.
    */
   closeOnOutsideClick?: boolean;
   /**
@@ -64,7 +64,7 @@ export type DropdownProps = PropsWithClass & {
   matchTriggerWidth?: boolean;
 }
 
-const DropdownAnimation = {
+const PopoverAnimation = {
   visible: {
     y: 0,
     opacity: 1,
@@ -83,7 +83,7 @@ const DropdownAnimation = {
   }
 }
 
-export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(({
+export const Popover = forwardRef<HTMLDivElement, PopoverProps>(({
   children,
   trigger,
   offset = 8,
@@ -97,7 +97,7 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(({
   ...otherProps
 }, forwardedRef) => {
   const seedID = useUIDSeed()
-  const dropdownRef = useRef<any>(forwardedRef)
+  const popoverRef = useRef<any>(forwardedRef)
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
   const sameWidth = useMemo<Modifier<string, {}>>(() => ({
@@ -143,7 +143,7 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(({
     ]
   })
 
-  const isFocusWithin = useFocusWithin(dropdownRef, {
+  const isFocusWithin = useFocusWithin(popoverRef, {
     onBlur: (e) => {
       if (e.relatedTarget && visible) {
         setIsOpen(false)
@@ -159,18 +159,18 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(({
 
   return (
     <div
-      ref={dropdownRef}
-      className={clsx(styles.Dropdown, className)}
-      data-dropdown-has-focus={isFocusWithin}
+      ref={popoverRef}
+      className={clsx(styles.Popover, className)}
+      data-popover-has-focus={isFocusWithin}
     >
       {Children.map(trigger, (child) => isValidElement(child) && cloneElement(
         child,
         {
           ref: setTriggerRef,
-          id: seedID('dropdown-trigger'),
-          key: seedID('dropdown-trigger'),
+          id: seedID('popover-trigger'),
+          key: seedID('popover-trigger'),
           'aria-haspopup': 'true',
-          'aria-controls': seedID('dropdown-menu'),
+          'aria-controls': seedID('popover-menu'),
           'aria-expanded': isOpen,
           ...otherProps
         }
@@ -185,7 +185,7 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(({
             {...getTooltipProps({ className: styles.PopUp })}
           >
             <motion.div
-              variants={DropdownAnimation}
+              variants={PopoverAnimation}
               initial="hidden"
               animate="visible"
               exit="hidden"
@@ -194,8 +194,8 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(({
               {Children.map(children, (child) => isValidElement(child) && cloneElement(
                 child,
                 {
-                  id: seedID('dropdown-menu'),
-                  'aria-labelledby': seedID('dropdown-trigger')
+                  id: seedID('popover-menu'),
+                  'aria-labelledby': seedID('popover-trigger')
                 }
               ))}
             </motion.div>
@@ -206,4 +206,4 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(({
   )
 })
 
-Dropdown.displayName = 'Dropdown'
+Popover.displayName = 'Popover'

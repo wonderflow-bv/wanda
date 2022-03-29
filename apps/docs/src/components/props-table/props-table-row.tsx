@@ -1,4 +1,4 @@
-import { Stack, IconButton, Dropdown, Elevator, Card, Text } from '@wonderflow/react-components'
+import { Stack, IconButton, Popover, Elevator, Card, Text } from '@wonderflow/react-components'
 import { useCallback, Fragment, useState } from 'react'
 import { Markdown } from '@/components/markdown'
 import { CodeBlock } from '../code-block'
@@ -59,7 +59,7 @@ export const PropsTableRow = ({
       {name && (
       <div role="cell" className={styles.Cell}>
         {description && (
-          <Dropdown
+          <Popover
             placement="top-start"
             trigger={(
               <IconButton
@@ -71,11 +71,11 @@ export const PropsTableRow = ({
             )}
           >
             <Elevator resting={2}>
-              <Card bordered className={styles.Dropdown}>
+              <Card bordered className={styles.Popover}>
                 <Markdown options={{ wrapper: Fragment }}>{description}</Markdown>
               </Card>
             </Elevator>
-          </Dropdown>
+          </Popover>
         )}
         {toMDCode(name)}
         {required && <Text as="span" sentiment="warning" size={14}>*</Text>}
@@ -93,7 +93,7 @@ export const PropsTableRow = ({
           ))
           : toMDCode(type)}
         {typeValue && (
-          <Dropdown
+          <Popover
             placement="top"
             trigger={(
               <IconButton
@@ -105,7 +105,7 @@ export const PropsTableRow = ({
             )}
           >
             <Elevator resting={2}>
-              <Card bordered padding={false} className={styles.Dropdown}>
+              <Card bordered padding={false} className={styles.Popover}>
                 <CodeBlock
                   showLanguage={false}
                   className={styles.CodeBlock}
@@ -125,7 +125,7 @@ export const PropsTableRow = ({
                 </CodeBlock>
               </Card>
             </Elevator>
-          </Dropdown>
+          </Popover>
         )}
       </div>
       )}

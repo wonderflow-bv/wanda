@@ -3,7 +3,7 @@ import { LiveProvider, LiveEditor, withLive, LiveProviderProps } from 'react-liv
 import theme from '@/components/code-block/wonder-theme'
 import { LiveAreaProps, LiveArea } from '@/components/live-area'
 import { LiveCode as LiveCodeClass, Editor, Toolbar, LiveArea as LiveAreaClass } from './live-code.module.css'
-import { IconButton, Tooltip, Stack, Dropdown, Snackbar, Text, ToggleButton } from '@wonderflow/react-components'
+import { IconButton, Tooltip, Stack, Popover, Snackbar, Text, ToggleButton } from '@wonderflow/react-components'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useUIDSeed } from 'react-uid'
 import { useDebounce } from 'ahooks'
@@ -47,7 +47,7 @@ const LiveCodeComponent = ({
       </AnimatePresence>
       <Stack direction="row" columnGap={8} className={Toolbar}>
         {live.error && (
-        <Dropdown
+        <Popover
           placement="bottom-start"
           trigger={<IconButton kind="flat" icon="circle-exclamation" />}
         >
@@ -56,7 +56,7 @@ const LiveCodeComponent = ({
               {live.error}
             </Text>
           </Snackbar>
-        </Dropdown>
+        </Popover>
         )}
         <Tooltip
           trigger={(

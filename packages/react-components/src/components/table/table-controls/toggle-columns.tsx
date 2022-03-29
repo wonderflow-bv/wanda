@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react'
 
-import { Button, Menu, Dropdown } from '@/components'
+import { Button, Menu, Popover } from '@/components'
 
 import { CustomColumnInstanceType } from '../types'
 
@@ -36,7 +36,7 @@ export const ToggleColumnsControl = <T extends Record<string, unknown>>({
   )
 
   return (
-    <Dropdown
+    <Popover
       placement="bottom-start"
       trigger={<Button kind="secondary">Toggle columns</Button>}
     >
@@ -60,6 +60,6 @@ export const ToggleColumnsControl = <T extends Record<string, unknown>>({
           </Menu.ItemCheckbox>
         ))}
       </Menu>
-    </Dropdown>
+    </Popover>
   )
 }

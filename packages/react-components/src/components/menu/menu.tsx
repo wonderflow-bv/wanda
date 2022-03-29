@@ -9,7 +9,7 @@ import clsx from 'clsx'
 
 export type MenuProps = HTMLAttributes<HTMLUListElement> & {
   /**
-   * The items of the dropdown menu.
+   * The items of the menu.
    */
   children: ReactNode;
 }

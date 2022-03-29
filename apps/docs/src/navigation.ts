@@ -94,8 +94,8 @@ const routes: NavigationMenu = [
             target: ''
           },
           {
-            path: '/design/recipes/dropdown',
-            label: 'Dropdown',
+            path: '/design/recipes/popover',
+            label: 'Popover',
             target: ''
           },
           {
@@ -228,8 +228,8 @@ const routes: NavigationMenu = [
             target: ''
           },
           {
-            path: '/components/dialogs/dropdown',
-            label: 'Dropdown',
+            path: '/components/dialogs/popover',
+            label: 'Popover',
             target: ''
           },
           {

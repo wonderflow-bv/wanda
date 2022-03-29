@@ -22,7 +22,7 @@ export default ({ children }) => (
       "Keyboard accessible",
       "Focusable even when disabled",
       "Multiple styles and sizes",
-      "Custom dropdown and icon",
+      "Custom popover and icon",
       "Themes ready",
     ]}
     links={[
@@ -134,21 +134,21 @@ export default () => {
     {
       name: "placement",
       type: ["enum"],
-      typeValue: "DropdownProps['placement']",
-      typeLink: "/components/dialogs/dropdown#prop-placement",
+      typeValue: "PopoverProps['placement']",
+      typeLink: "/components/dialogs/popover#prop-placement",
       default: "auto-start",
       required: false,
       description:
-        "The placement of the dropdown. This is automatically handled based on scroll and viewport edges. By default the dropdown is anchored at the beginning of the trigger. The first key refers to the X axis, the second key refers to the Y axis. Eg: `auto-start` means the dropdown will be placed automatically on left or right based on the available space, and anchored at the top (start) of the trigger.",
+        "The placement of the popover. This is automatically handled based on scroll and viewport edges. By default the popover is anchored at the beginning of the trigger. The first key refers to the X axis, the second key refers to the Y axis. Eg: `auto-start` means the popover will be placed automatically on left or right based on the available space, and anchored at the top (start) of the trigger.",
     },
     {
       name: "offset",
       type: ["number"],
-      typeValue: "DropdownProps['offset']",
-      typeLink: "/components/dialogs/dropdown#prop-offset",
+      typeValue: "PopoverProps['offset']",
+      typeLink: "/components/dialogs/popover#prop-offset",
       default: "8",
       required: false,
-      description: "The distance from the trigger to the dropdown.",
+      description: "The distance from the trigger to the popover.",
     },
     {
       name: "as",
