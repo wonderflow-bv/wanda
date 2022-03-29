@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react'
 import { useCallback, useState } from 'react'
 
 import {
-  Button, IconButton, Menu, Dropdown, Separator, Stack, Title
+  Button, IconButton, Menu, Popover, Separator, Stack, Title
 } from '../..'
 import { Table } from './table'
 import { CustomColumnsType, CustomSortingRule } from './types'
@@ -573,7 +573,7 @@ RowActions.args = {
     <Stack direction="row" fill={false}>
       <IconButton icon="view" kind="flat" dimension="small" />
       {depth > 0 && (
-      <Dropdown trigger={<IconButton icon="chat" kind="flat" dimension="small" />}>
+      <Popover trigger={<IconButton icon="chat" kind="flat" dimension="small" />}>
         <Menu>
           <Menu.Item
             dimension="small"
@@ -592,7 +592,7 @@ RowActions.args = {
           <Menu.Item dimension="small" icon="view">Even shorter</Menu.Item>
           <Menu.Item dimension="small" disabled>Really?</Menu.Item>
         </Menu>
-      </Dropdown>
+      </Popover>
       )}
     </Stack>
   )

@@ -51,7 +51,7 @@
   }
 }
 
-.Dropdown {
+.Popover {
   max-inline-size: min(60ch, 100vw);
 }
 

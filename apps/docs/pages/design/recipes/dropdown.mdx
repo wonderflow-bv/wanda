@@ -6,7 +6,7 @@ import { Markdown } from "@/components/markdown";
 
 export default ({ children }) => (
   <MdxLayout
-    title="Dropdowns"
+    title="Popovers"
     description="Present a list of actions in a limited space."
   >
     {children}
@@ -15,7 +15,7 @@ export default ({ children }) => (
 
 ## Usage
 
-The dropdown is a versatile component that can be employed in different contexts with different purposes. Dropdowns can be efficiently used as:
+The popover is a versatile component that can be employed in different contexts with different purposes. Popovers can be efficiently used as:
 
 - **Command menus**, which offers a series of contextual actions based on the selected trigger
 - **Navigation menus**, which lead users to a new page or screen
@@ -23,10 +23,10 @@ The dropdown is a versatile component that can be employed in different contexts
 
 ### Considerations
 
-- Please keep in mind that when using a Dropdown, you're making a tradeoff on the discoverability of the actions for the users (they're hidden under yet another click)
-- It is best practice not to use a dropdown if there are two options to choose
+- Please keep in mind that when using a Popover, you're making a tradeoff on the discoverability of the actions for the users (they're hidden under yet another click)
+- It is best practice not to use a popover if there are two options to choose
   from. In this case, use [radio buttons](/develop/components/selection-controls/) instead.
-- Do not nest dropdowns or use them to display overly complex information. Keep option selections as straight forward as possible.
+- Do not nest popovers or use them to display overly complex information. Keep option selections as straight forward as possible.
 - Consider using a select if most of your experience is form-based or frequently used on mobile platforms. The native select works more easily with a native form when submitting data and is also easier to use on a mobile platform.
 - In general, try to avoid drop-downs when there are more than 10 or fewer than 3 options
 
@@ -40,18 +40,18 @@ As for selects only, you should also avoid using them when specific info or data
 
 Often the better option could be a text field with some data validation (e.g. credit card expiring date). Other examples that fit this case are titles, states, regions, shipping methods selection, and so on.
 
-### Dropdown vs select
+### Popover vs select
 
-Even though Dropdowns and [Selects](/develop/components/select/) share similar functionalities, they are actually behaviourally unique and satisfy different use cases:
+Even though Popovers and [Selects](/develop/components/select/) share similar functionalities, they are actually behaviourally unique and satisfy different use cases:
 
-- When you choose something in a select, the value of the select trigger represents the option chosen. When you choose an action in a dropdown, by default the trigger label doesn't change (but it could be implemented)
-- Use a dropdown when you want to present a list of actions in a limited space. If you instead have a list of options for a particular value, like "city", select is the component for you.
-- The dropdown can host all sort of custom components (eg: tooltips search box, images, etc)
+- When you choose something in a select, the value of the select trigger represents the option chosen. When you choose an action in a popover, by default the trigger label doesn't change (but it could be implemented)
+- Use a popover when you want to present a list of actions in a limited space. If you instead have a list of options for a particular value, like "city", select is the component for you.
+- The popover can host all sort of custom components (eg: tooltips search box, images, etc)
 - The native select is convenient on mobile: it uses the native control for the platform which makes it easier to handle.
 
 <Stack direction="row" wrap columnGap={16} rowGap={24} vAlign="start">
   <Stack direction="column" rowGap={8} style={{ maxWidth: "35ch" }}>
-    <Title level="5">Dropdown</Title>
+    <Title level="5">Popover</Title>
     <List>
       <List.Li marker="check" markerColor="var(--highlight-green-foreground)">Design System styled</List.Li>
       <List.Li marker="check" markerColor="var(--highlight-green-foreground)">Trigger actions</List.Li>
@@ -79,13 +79,13 @@ Always sort the actions logically, following a familiar pattern. The most common
 - Predictable or conventional pattern
 
 <Stack direction="row" columnGap={24}>
-  <HintCard isBad image="/design/recipes/dropdowns/order-dont.png" />
-  <HintCard image="/design/recipes/dropdowns/order-do.png" />
+  <HintCard isBad image="/design/recipes/popovers/order-dont.png" />
+  <HintCard image="/design/recipes/popovers/order-do.png" />
 </Stack>
 
 ## Writing labels
 
-In writing labels for dropdown's actions, remember to:
+In writing labels for popover's actions, remember to:
 
 - be informative but brief, accurate but immediate
 - fit the action in a single line of text
@@ -96,35 +96,35 @@ In writing labels for dropdown's actions, remember to:
 - If possible, group related actions together
 
 <Stack direction="row" columnGap={24}>
-  <HintCard isBad image="/design/recipes/dropdowns/labels-dont.png" />
-  <HintCard image="/design/recipes/dropdowns/labels-do.png" />
+  <HintCard isBad image="/design/recipes/popovers/labels-dont.png" />
+  <HintCard image="/design/recipes/popovers/labels-do.png" />
 </Stack>
 
 ## Disabled items
 
-If an action can't be used in a particular moment or condition, display it as disabled rather than temporarily remove it from the dropdown.
+If an action can't be used in a particular moment or condition, display it as disabled rather than temporarily remove it from the popover.
 
 <Stack direction="row" columnGap={24}>
-  <HintCard isBad image="/design/recipes/dropdowns/disabled-dont.png" />
-  <HintCard image="/design/recipes/dropdowns/disabled-do.png" />
+  <HintCard isBad image="/design/recipes/popovers/disabled-dont.png" />
+  <HintCard image="/design/recipes/popovers/disabled-do.png" />
 </Stack>
 
 ## Items with icons
 
-Dropdown items can have icons to enforce the action to be performed. It's important to keep the icon size in mind when designing the dropdown and avoid alignment issues when some items have icons and others don't.
+Popover items can have icons to enforce the action to be performed. It's important to keep the icon size in mind when designing the popover and avoid alignment issues when some items have icons and others don't.
 
 <Stack direction="row" columnGap={24}>
-  <HintCard isBad image="/design/recipes/dropdowns/icons-dont.png" />
-  <HintCard image="/design/recipes/dropdowns/icons-do.png" />
+  <HintCard isBad image="/design/recipes/popovers/icons-dont.png" />
+  <HintCard image="/design/recipes/popovers/icons-do.png" />
 </Stack>
 
 ## Adding Custom items
 
-The dropdown components is highly customisable. Some common use case include adding a tooltip on dropdown items or inserting a search field, but the possibility are really broad
+The popover components is highly customisable. Some common use case include adding a tooltip on popover items or inserting a search field, but the possibility are really broad
 
 <ThemedImg
-  alt="A dropdown with some custom components inside it: tab, disclosure"
-  src="/design/recipes/dropdowns/custom-items.png"
+  alt="A popover with some custom components inside it: tab, disclosure"
+  src="/design/recipes/popovers/custom-items.png"
 />
 
 ## Behaviour
@@ -133,8 +133,8 @@ The dropdown components is highly customisable. Some common use case include add
 
 You don't need to deal with placement issue inside the viewport, because the component handle them by itself and adjust the position of the floating menu based on the most available space.
 
-There are [different preset](/develop/components/dropdown/#dropdown) that you can give to your component, but the `auto`, `auto-start`, `auto-end` are really convenient.
+There are [different preset](/develop/components/popover/#popover) that you can give to your component, but the `auto`, `auto-start`, `auto-end` are really convenient.
 
 ### Elevation
 
-The Dropdown has a [default elevation](/design/foundations/elevations/#default-elevations) of 2
+The Popover has a [default elevation](/design/foundations/elevations/#default-elevations) of 2

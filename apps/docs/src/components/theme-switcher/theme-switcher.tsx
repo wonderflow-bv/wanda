@@ -1,6 +1,6 @@
 import { useTheme } from 'next-themes'
 import { IconNames } from '@wonderflow/icons'
-import { Dropdown, IconButton, Menu } from '@wonderflow/react-components'
+import { Popover, IconButton, Menu } from '@wonderflow/react-components'
 
 export const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme()
@@ -13,7 +13,7 @@ export const ThemeSwitcher = () => {
   }
 
   return (
-    <Dropdown
+    <Popover
       placement="bottom-end"
       offset={4}
       trigger={(
@@ -29,6 +29,6 @@ export const ThemeSwitcher = () => {
         <Menu.ItemCheckbox onClick={() => setTheme('dark')} checked={currentTheme === 'dark'} icon="moon">Dark</Menu.ItemCheckbox>
         <Menu.ItemCheckbox onClick={() => setTheme('system')} checked={currentTheme === 'system'} icon="pc">System</Menu.ItemCheckbox>
       </Menu>
-    </Dropdown>
+    </Popover>
   )
 }

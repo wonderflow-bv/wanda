@@ -20,7 +20,7 @@ export type TooltipProps = PropsWithClass & {
    * scroll and viewport edges.
    *
    * The first key refers to the X axis, the second key refers to the Y axis.
-   * Eg: `auto-start` means the dropdown will be placed automatically on left or right
+   * Eg: `auto-start` means the tooltip will be placed automatically on left or right
    * based on the available space, and anchored at the top (start) of the trigger.
    */
   placement?: AutoPlacement | BasePlacement | VariationPlacement;
