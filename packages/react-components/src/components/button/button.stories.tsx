@@ -74,6 +74,10 @@ const GroupTemplate: ComponentStory<typeof Button> = (args) => (
     <Button pressed>Action</Button>
     <Button>Action</Button>
     <Button>Action</Button>
+    <Button>Action</Button>
+    <Button>Action</Button>
+    <Button>Action</Button>
+    <Button>Action</Button>
     <Button disabled>Action</Button>
   </ButtonsGroup>
 )
