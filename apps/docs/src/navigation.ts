@@ -29,11 +29,7 @@ const routes: NavigationMenu = [
       {
         path: '/resources',
         label: 'Resources',
-        target: '',
-        tag: {
-          label: 'new',
-          color: 'green'
-        }
+        target: ''
       }
     ]
   },
