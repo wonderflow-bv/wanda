@@ -67,14 +67,12 @@ export const Default = DefaultTemplate.bind({})
 const CustomTemplate: ComponentStory<typeof Dropdown> = (args) => (
   <>
     <Dropdown {...args}>
-      <div style={{ background: 'var(--global-vibrancy-background)', backdropFilter: 'blur(10px)', border: '2px solid black', maxInlineSize: '30ch', padding: 24 }}>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-        Magni error unde sapiente beatae! Nostrum praesentium similique
-        veniam non ut nulla, incidunt velit et, placeat cupiditate, aliquid saepe. Atque, provident perferendis?
+      <div style={{ background: 'var(--global-vibrancy-background)', backdropFilter: 'blur(10px)', border: '2px solid black', padding: 24 }}>
+        Lorem.
       </div>
     </Dropdown>
     <Dropdown {...args}>
-      <div style={{ background: 'var(--global-vibrancy-background)', backdropFilter: 'blur(10px)', border: '2px solid black', maxInlineSize: '30ch', padding: 24 }}>
+      <div style={{ background: 'var(--global-vibrancy-background)', backdropFilter: 'blur(10px)', border: '2px solid black', padding: 24 }}>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit.
         Magni error unde sapiente beatae! Nostrum praesentium similique
         veniam non ut nulla, incidunt velit et, placeat cupiditate, aliquid saepe. Atque, provident perferendis?
@@ -84,13 +82,17 @@ const CustomTemplate: ComponentStory<typeof Dropdown> = (args) => (
 )
 
 export const CustomElement = CustomTemplate.bind({})
+CustomElement.args = {
+  matchTriggerWidth: true,
+  placement: 'bottom-start'
+}
 
 const WithFieldTemplate: ComponentStory<typeof Dropdown> = (args) => (
   <>
     <Dropdown
       {...args}
     >
-      <div style={{ background: 'var(--global-vibrancy-background)', backdropFilter: 'blur(10px)', border: '2px solid black', maxInlineSize: '30ch', padding: 24 }}>
+      <div style={{ background: 'var(--global-vibrancy-background)', backdropFilter: 'blur(10px)', border: '2px solid black', padding: 24 }}>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit.
         Magni error unde sapiente beatae! Nostrum praesentium similique
         veniam non ut nulla, incidunt velit et, placeat cupiditate, aliquid saepe. Atque, provident perferendis?
@@ -102,6 +104,7 @@ const WithFieldTemplate: ComponentStory<typeof Dropdown> = (args) => (
 export const WithField = WithFieldTemplate.bind({})
 WithField.args = {
   trigger: <Textfield type="search" icon="magnifying-glass" />,
+  matchTriggerWidth: true,
   placement: 'bottom-start'
 }
 
@@ -119,7 +122,7 @@ const ControlledTemplate: ComponentStory<typeof Dropdown> = (args) => {
       onOpenChange={(state) => setOpen(state)}
       open={open}
     >
-      <div style={{ background: 'var(--global-vibrancy-background)', backdropFilter: 'blur(10px)', border: '2px solid black', maxInlineSize: '30ch', padding: 24 }}>
+      <div style={{ background: 'var(--global-vibrancy-background)', backdropFilter: 'blur(10px)', border: '2px solid black', padding: 24 }}>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit.
         Magni error unde sapiente beatae! Nostrum praesentium similique
         veniam non ut nulla, incidunt velit et, placeat cupiditate, aliquid saepe. Atque, provident perferendis?

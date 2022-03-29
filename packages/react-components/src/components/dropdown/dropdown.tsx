@@ -6,12 +6,13 @@ import {
   useRef,
   forwardRef,
   isValidElement,
-  useEffect
+  useEffect,
+  useMemo
 } from 'react'
 import { useKeyPress, useFocusWithin } from 'ahooks'
 import styles from './dropdown.module.css'
 import { useUIDSeed } from 'react-uid'
-import { AutoPlacement, BasePlacement, VariationPlacement } from '@popperjs/core'
+import { AutoPlacement, BasePlacement, VariationPlacement, Modifier } from '@popperjs/core'
 import { usePopperTooltip } from 'react-popper-tooltip'
 import { AnimatePresence, motion } from 'framer-motion'
 import clsx from 'clsx'
@@ -57,6 +58,10 @@ export type DropdownProps = PropsWithClass & {
    * Enable or disable the auto close of the dropdown when clicking outside of it.
    */
   closeOnOutsideClick?: boolean;
+  /**
+   * Set the popover element the same with of the trigger element.
+   */
+  matchTriggerWidth?: boolean;
 }
 
 const DropdownAnimation = {
@@ -87,12 +92,27 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(({
   disabled,
   closeOnOutsideClick = true,
   className,
+  matchTriggerWidth,
   onOpenChange,
   ...otherProps
 }, forwardedRef) => {
   const seedID = useUIDSeed()
   const dropdownRef = useRef<any>(forwardedRef)
   const [isOpen, setIsOpen] = useState<boolean>(false)
+
+  const sameWidth = useMemo<Modifier<string, {}>>(() => ({
+    name: 'sameWidth',
+    enabled: true,
+    phase: 'beforeWrite',
+    requires: ['computeStyles'],
+    fn: ({ state }) => {
+      if (matchTriggerWidth) state.styles.popper.width = `${state.rects.reference.width}px`
+    },
+    effect: ({ state }) => {
+      const referenceElement: Partial<HTMLElement> = state.elements.reference
+      if (matchTriggerWidth) state.elements.popper.style.width = `${referenceElement.offsetWidth}px`
+    }
+  }), [matchTriggerWidth])
 
   const {
     getTooltipProps,
@@ -109,9 +129,18 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(({
     onVisibleChange: state => {
       onOpenChange?.(state)
       setIsOpen(state)
-    },
-    placement: placement,
-    offset: [0, offset]
+    }
+  }, {
+    placement,
+    modifiers: [
+      sameWidth,
+      {
+        name: 'offset',
+        options: {
+          offset: [0, offset]
+        }
+      }
+    ]
   })
 
   const isFocusWithin = useFocusWithin(dropdownRef, {
