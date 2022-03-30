@@ -56,7 +56,7 @@
     "react-dom": "^17.0"
   },
   "devDependencies": {
-    "@babel/core": "7.17.5",
+    "@babel/core": "7.17.8",
     "@babel/preset-typescript": "7.16.7",
     "@storybook/addon-actions": "6.4.19",
     "@storybook/addon-essentials": "6.4.19",
@@ -67,26 +67,26 @@
     "@storybook/manager-webpack5": "6.5.0-alpha.21",
     "@storybook/react": "6.4.19",
     "@storybook/theming": "6.5.0-alpha.21",
-    "@types/react": "17.0.39",
-    "@types/react-dom": "17.0.11",
-    "@types/react-table": "7.7.9",
+    "@types/react": "17.0.43",
+    "@types/react-dom": "17.0.14",
+    "@types/react-table": "7.7.10",
     "@wonderflow/config": "*",
     "@wonderflow/stylelint-config": "1.1.4",
     "@wonderflow/tokens": "*",
-    "babel-loader": "8.2.3",
+    "babel-loader": "8.2.4",
     "cpy-cli": "3.1.1",
-    "postcss": "8.4.7",
+    "postcss": "8.4.12",
     "postcss-cli": "9.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "storybook-addon-themes": "6.1.0",
     "storybook-css-modules-preset": "1.1.1",
     "tsconfig": "*",
-    "typescript": "4.5.5",
+    "typescript": "4.6.3",
     "typescript-plugin-css-modules": "3.4.0"
   },
   "dependencies": {
-    "ahooks": "3.1.10",
+    "ahooks": "3.3.0",
     "clsx": "1.1.1",
     "framer-motion": "6.2.8",
     "react-focus-on": "3.5.4",
@@ -96,7 +96,6 @@
     "react-roving-tabindex": "3.1.1",
     "react-table": "7.7.0",
     "react-uid": "2.3.1",
-    "styled-components": "5.3.3",
-    "type-fest": "2.12.0"
+    "type-fest": "2.12.1"
   }
 }

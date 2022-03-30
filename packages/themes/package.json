@@ -24,7 +24,7 @@
     "fs-extra": "10.0.1",
     "style-dictionary": "3.7.0",
     "tsconfig": "*",
-    "yargs": "17.3.1"
+    "yargs": "17.4.0"
   },
   "scripts": {
     "build": "run-s build:prepare && run-s build:light build:dark && run-s build:combine",
