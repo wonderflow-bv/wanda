@@ -1,5 +1,11 @@
 # @wonderflow/config
 
+## 7.0.0
+
+### Major Changes
+
+- 1b19649: We dropped the deprecated plugin `postcss-env-function` and we introduced a new syntax to access and use tokens inside you css. Tokens must now be declared using `token()` function notation instead of `env()`.
+
 ## 6.0.0
 
 ### Major Changes

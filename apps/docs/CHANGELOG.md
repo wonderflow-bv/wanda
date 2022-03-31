@@ -1,5 +1,29 @@
 # docs
 
+## 7.0.0
+
+### Major Changes
+
+- 1b19649: We dropped the deprecated plugin `postcss-env-function` and we introduced a new syntax to access and use tokens inside you css. Tokens must now be declared using `token()` function notation instead of `env()`.
+- 9f286fe: Refactoring List component by adding List.Li element to have more control over markers and markers color
+- e490be0: Rename Dropdown into Popover and add `matchTriggerWidth` property
+
+### Patch Changes
+
+- Updated dependencies [1b19649]
+- Updated dependencies [1ae5dd0]
+- Updated dependencies [2952dbc]
+- Updated dependencies [a3da612]
+- Updated dependencies [9079b08]
+- Updated dependencies [9f286fe]
+- Updated dependencies [e490be0]
+- Updated dependencies [c53b855]
+- Updated dependencies [2b02b8c]
+- Updated dependencies [904f1c5]
+- Updated dependencies [7452a9d]
+  - @wonderflow/react-components@7.0.0
+  - @wonderflow/icons@6.2.0
+
 ## 5.1.0
 
 ### Minor Changes

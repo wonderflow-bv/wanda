@@ -1,5 +1,11 @@
 # @wonderflow/icons
 
+## 6.2.0
+
+### Minor Changes
+
+- 2952dbc: Add new icons: astronomy, book-bookmark, bulb, c-pulse, glasses, news, pen, theater, users
+
 ## 6.0.1
 
 ### Patch Changes
