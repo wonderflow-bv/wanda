@@ -1,5 +1,26 @@
 # @wonderflow/react-components
 
+## 7.0.0
+
+### Major Changes
+
+- 1b19649: We dropped the deprecated plugin `postcss-env-function` and we introduced a new syntax to access and use tokens inside you css. Tokens must now be declared using `token()` function notation instead of `env()`.
+- 9f286fe: Refactoring List component by adding List.Li element to have more control over markers and markers color
+- e490be0: Rename Dropdown into Popover and add `matchTriggerWidth` property
+
+### Minor Changes
+
+- a3da612: Improve rendering performance of some components
+- 9079b08: Improved UX or Slider. Now the current value is shown on the right side (when `showValues` is `true`), while min/max are both visible at the same time.
+- c53b855: Improve contrast for selection-controls
+- 2b02b8c: Update Table loading state ui
+- 904f1c5: Fix style for autofilled fields
+- 7452a9d: Fix spring animation on the active tab item indicator
+
+### Patch Changes
+
+- 1ae5dd0: Fix grouped buttons style
+
 ## 6.1.0
 
 ### Minor Changes
