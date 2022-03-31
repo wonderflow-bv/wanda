@@ -354,7 +354,7 @@ export const Table = <T extends Record<string, unknown>>({
             vPadding={8}
             fill={false}
             columnGap={16}
-            initial={{ y: '-16px', opacity: 0 }}
+            initial={{ y: -16, opacity: 0 }}
             animate={{
               y: 0,
               opacity: 1,
@@ -364,7 +364,7 @@ export const Table = <T extends Record<string, unknown>>({
                 damping: 30
               }
             }}
-            exit={{ y: '-16px', opacity: 0 }}
+            exit={{ y: -16, opacity: 0 }}
           >
             <Text as="span" size={14} weight="bold">
               {selectedLabel(selectedFlatRows)}
@@ -372,22 +372,34 @@ export const Table = <T extends Record<string, unknown>>({
             {selectedActions}
           </Stack>
         )}
-      </AnimatePresence>
 
-      {/* HEADER */}
-      {(showHeader || selectableRows) && (
-        <TableHeader title={title}>
-          {(columnsControl && data.length)
-            ? (
-              <ToggleColumnsControl
-                columns={allColumns}
-                visibleColumns={filteredVisibleColumns}
-              />
-              )
-            : null}
-          {actions}
-        </TableHeader>
-      )}
+        {/* HEADER */}
+        {(showHeader || selectableRows) && (
+          <motion.div
+            animate={{
+              y: selectedFlatRows?.length ? 20 : 0,
+              opacity: selectedFlatRows?.length ? 0 : 1,
+              transition: {
+                type: 'spring',
+                stiffness: 700,
+                damping: 30
+              }
+            }}
+          >
+            <TableHeader title={title}>
+              {(columnsControl && data.length)
+                ? (
+                  <ToggleColumnsControl
+                    columns={allColumns}
+                    visibleColumns={filteredVisibleColumns}
+                  />
+                  )
+                : null}
+              {actions}
+            </TableHeader>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* TABLE */}
       {((data.length || loading) && filteredVisibleColumns.length)
