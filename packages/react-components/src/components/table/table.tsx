@@ -195,7 +195,7 @@ export const Table = <T extends Record<string, unknown>>({
   const hasSomeExpandableRows = useMemo(() => data.some(d => d.subRows), [data])
   const isManualPaginated = useMemo(() => Boolean(onDataUpdate && showPagination && totalRows),
     [onDataUpdate, showPagination, totalRows])
-  const manualPaginationPageCount = useMemo(() => (isManualPaginated && totalRows) ? Math.ceil(totalRows / itemsPerPage) : 1, [isManualPaginated, totalRows, itemsPerPage])
+  const manualPaginationPageCount = useMemo(() => (isManualPaginated && totalRows) ? Math.ceil(totalRows / itemsPerPage) : undefined, [isManualPaginated, totalRows, itemsPerPage])
 
   const getHiddenColumns = () => {
     const hiddenColumns = defaultHiddenColumns ?? []
@@ -206,18 +206,9 @@ export const Table = <T extends Record<string, unknown>>({
     return hiddenColumns
   }
 
-  const getRowId = useCallback((originalRow, relativeIndex, parent) => {
-    // if (originalRow._id) {
-    //   console.log('ciao')
-    //   return originalRow._id
-    // }
-    //
-    // return parent ? [parent.id, relativeIndex].join('.') : relativeIndex.toString()
-
-    console.log(parent ? [parent.id, relativeIndex].join('.') : relativeIndex)
-
-    return originalRow?._id || (parent && [parent.id, relativeIndex].join('.')) || relativeIndex.toString()
-  }, [])
+  const getRowId = useCallback((originalRow, relativeIndex, parent) =>
+    originalRow?._id || (parent && [parent.id, relativeIndex].join('.')) || relativeIndex.toString()
+  , [])
 
   const {
     getTableProps,
@@ -245,7 +236,6 @@ export const Table = <T extends Record<string, unknown>>({
       manualPagination: isManualPaginated,
       pageCount: manualPaginationPageCount,
       manualSortBy: isManualSorted,
-
       disableMultiSort: true,
       autoResetHiddenColumns: false,
       autoResetPage: false,
