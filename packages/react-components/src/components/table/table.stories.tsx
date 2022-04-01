@@ -5,7 +5,7 @@ import {
   Button, IconButton, Menu, Popover, Separator, Stack, Title
 } from '../..'
 import { Table } from './table'
-import { CustomColumnsType, CustomSortingRule } from './types'
+import { CustomSortingRule } from './types'
 
 const firstData = {
   firstName: 'Gianni',
@@ -470,6 +470,474 @@ const story: ComponentMeta<typeof Table> = {
         uid: 123123,
         info: 12
       }
+    ],
+    dataWithIds: [
+      {
+        ...firstData,
+        subRows: [
+          {
+            _id: '1.1',
+            firstName: 'ciao',
+            lastName: 'Stuffo',
+            address: 'Via Roma, 15 Monza',
+            uid: 123123,
+            info: 12,
+            subRows: [
+              {
+                _id: '1.1.1',
+                firstName: '1',
+                lastName: 'Stuffo',
+                address: 'Via Roma, 15 Monza',
+                uid: 123123,
+                info: 12,
+                subRows: [
+                  {
+                    _id: '1.1.1.1',
+                    firstName: '1',
+                    lastName: 'Stuffo',
+                    address: 'Via Roma, 15 Monza',
+                    uid: 123123,
+                    info: 12,
+                    subRows: [
+                      {
+                        _id: '1.1.1.1.1',
+                        firstName: '1',
+                        lastName: 'Stuffo',
+                        address: 'Via Roma, 15 Monza',
+                        uid: 123123,
+                        info: 12,
+                        subRows: [
+                          {
+                            _id: '1.1.1.1.1.1',
+                            firstName: '1',
+                            lastName: 'Stuffo',
+                            address: 'Via Roma, 15 Monza',
+                            uid: 123123,
+                            info: 12,
+                            subRows: [
+                              {
+                                _id: '1.1.1.1.1.1.1',
+                                firstName: '1',
+                                lastName: 'Stuffo',
+                                address: 'Via Roma, 15 Monza',
+                                uid: 123123,
+                                info: 12,
+                                subRows: [
+                                  {
+                                    _id: '1.1.1.1.1.1.1.1',
+                                    firstName: '1',
+                                    lastName: 'Stuffo',
+                                    address: 'Via Roma, 15 Monza',
+                                    uid: 123123,
+                                    info: 12,
+                                    subRows: [
+                                      {
+                                        _id: '1.1.1.1.1.1.1.1.1',
+                                        firstName: '1',
+                                        lastName: 'Stuffo',
+                                        address: 'Via Roma, 15 Monza',
+                                        uid: 123123,
+                                        info: 12,
+                                        subRows: [
+                                          {
+                                            _id: '1.1.1.1.1.1.1.1.1.1',
+                                            firstName: '1',
+                                            lastName: 'Stuffo',
+                                            address: 'Via Roma, 15 Monza',
+                                            uid: 123123,
+                                            info: 12
+                                          },
+                                          {
+                                            _id: '1.1.1.1.1.1.1.1.1.2',
+                                            firstName: '2',
+                                            lastName: 'Stuffo',
+                                            address: 'Via Roma, 15 Monza',
+                                            uid: 123123,
+                                            info: 12
+                                          },
+                                          {
+                                            _id: '1.1.1.1.1.1.1.1.1.3',
+                                            firstName: '3',
+                                            lastName: 'Stuffo',
+                                            address: 'Via Roma, 15 Monza',
+                                            uid: 123123,
+                                            info: 12
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        _id: '1.1.1.1.1.1.1.1.2',
+                                        firstName: '2',
+                                        lastName: 'Stuffo',
+                                        address: 'Via Roma, 15 Monza',
+                                        uid: 123123,
+                                        info: 12
+                                      },
+                                      {
+                                        _id: '1.1.1.1.1.1.1.1.3',
+                                        firstName: '3',
+                                        lastName: 'Stuffo',
+                                        address: 'Via Roma, 15 Monza',
+                                        uid: 123123,
+                                        info: 12
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    _id: '1.1.1.1.1.1.1.2',
+                                    firstName: '2',
+                                    lastName: 'Stuffo',
+                                    address: 'Via Roma, 15 Monza',
+                                    uid: 123123,
+                                    info: 12
+                                  },
+                                  {
+                                    _id: '1.1.1.1.1.1.1.3',
+                                    firstName: '3',
+                                    lastName: 'Stuffo',
+                                    address: 'Via Roma, 15 Monza',
+                                    uid: 123123,
+                                    info: 12
+                                  }
+                                ]
+                              },
+                              {
+                                _id: '1.1.1.1.1.1.2',
+                                firstName: '2',
+                                lastName: 'Stuffo',
+                                address: 'Via Roma, 15 Monza',
+                                uid: 123123,
+                                info: 12
+                              },
+                              {
+                                _id: '1.1.1.1.1.1.3',
+                                firstName: '3',
+                                lastName: 'Stuffo',
+                                address: 'Via Roma, 15 Monza',
+                                uid: 123123,
+                                info: 12
+                              }
+                            ]
+                          },
+                          {
+                            _id: '1.1.1.1.1.2',
+                            firstName: '2',
+                            lastName: 'Stuffo',
+                            address: 'Via Roma, 15 Monza',
+                            uid: 123123,
+                            info: 12
+                          },
+                          {
+                            _id: '1.1.1.1.1.3',
+                            firstName: '3',
+                            lastName: 'Stuffo',
+                            address: 'Via Roma, 15 Monza',
+                            uid: 123123,
+                            info: 12
+                          }
+                        ]
+                      },
+                      {
+                        _id: '1.1.1.1.2',
+                        firstName: '2',
+                        lastName: 'Stuffo',
+                        address: 'Via Roma, 15 Monza',
+                        uid: 123123,
+                        info: 12
+                      },
+                      {
+                        _id: '1.1.1.1.3',
+                        firstName: '3',
+                        lastName: 'Stuffo',
+                        address: 'Via Roma, 15 Monza',
+                        uid: 123123,
+                        info: 12
+                      }
+                    ]
+                  },
+                  {
+                    _id: '1.1.1.2',
+                    firstName: '2',
+                    lastName: 'Stuffo',
+                    address: 'Via Roma, 15 Monza',
+                    uid: 123123,
+                    info: 12
+                  },
+                  {
+                    _id: '1.1.1.3',
+                    firstName: '3',
+                    lastName: 'Stuffo',
+                    address: 'Via Roma, 15 Monza',
+                    uid: 123123,
+                    info: 12
+                  }
+                ]
+              },
+              {
+                _id: '1.1.2',
+                firstName: '2',
+                lastName: 'Stuffo',
+                address: 'Via Roma, 15 Monza',
+                uid: 123123,
+                info: 12
+              },
+              {
+                _id: '1.1.3',
+                firstName: '3',
+                lastName: 'Stuffo',
+                address: 'Via Roma, 15 Monza',
+                uid: 123123,
+                info: 12
+              }
+            ]
+          }
+        ]
+      },
+      {
+        _id: '2',
+        firstName: 'Simone',
+        lastName: 'Lastname',
+        address: 'Via Roma, 12, Bologna',
+        uid: '345367890',
+        canBeDeleted: true,
+        info: 123.96
+      },
+      {
+        _id: '3',
+        firstName: 'Matteo',
+        lastName: 'Staffone',
+        address: 'Via Roma, 13, Genova',
+        uid: 23456789,
+        info: <code>23456789</code>,
+        subRows: [
+          {
+            _id: '3.1',
+            firstName: '1',
+            lastName: 'Stuffo',
+            address: 'Via Roma, 15 Monza',
+            uid: 123123,
+            info: 12
+          },
+          {
+            _id: '3.2',
+            firstName: '2',
+            lastName: 'Stuffo',
+            address: 'Via Roma, 15 Monza',
+            uid: 123123,
+            info: 12,
+            subRows: [
+              {
+                _id: '3.2.1',
+                firstName: '1',
+                lastName: 'Stuffo',
+                address: 'Via Roma, 15 Monza',
+                uid: 123123,
+                info: 12,
+                subRows: [
+                  {
+                    _id: '3.2.1.1',
+                    firstName: '1',
+                    lastName: 'Stuffo',
+                    address: 'Via Roma, 15 Monza',
+                    uid: 123123,
+                    info: 12
+                  },
+                  {
+                    _id: '3.2.1.2',
+                    firstName: '2',
+                    lastName: 'Stuffo',
+                    address: 'Via Roma, 15 Monza',
+                    uid: 123123,
+                    info: 12
+                  },
+                  {
+                    _id: '3.2.1.3',
+                    firstName: '3',
+                    lastName: 'Stuffo',
+                    address: 'Via Roma, 15 Monza',
+                    uid: 123123,
+                    info: 12
+                  }
+                ]
+              },
+              {
+                _id: '3.2.2',
+                firstName: '2',
+                lastName: 'Stuffo',
+                address: 'Via Roma, 15 Monza',
+                uid: 123123,
+                info: 12
+              },
+              {
+                _id: '3.2.3',
+                firstName: '3',
+                lastName: 'Stuffo',
+                address: 'Via Roma, 15 Monza',
+                uid: 123123,
+                info: 12
+              }
+            ]
+          },
+          {
+            _id: '3.3',
+            firstName: '3',
+            lastName: 'Stuffo',
+            address: 'Via Roma, 15 Monza',
+            uid: 123123,
+            info: 12,
+            subRows: [
+              {
+                _id: '3.3.1',
+                firstName: '1',
+                lastName: 'Stuffo',
+                address: 'Via Roma, 15 Monza',
+                uid: 123123,
+                info: 12
+              },
+              {
+                _id: '3.3.2',
+                firstName: '2',
+                lastName: 'Stuffo',
+                address: 'Via Roma, 15 Monza',
+                uid: 123123,
+                info: 12
+              },
+              {
+                _id: '3.3.3',
+                firstName: '3',
+                lastName: 'Stuffo',
+                address: 'Via Roma, 15 Monza',
+                uid: 123123,
+                info: 12
+              }
+            ]
+          }
+        ]
+      },
+      {
+        _id: '4',
+        firstName: 'Emanuele',
+        lastName: 'Staffo',
+        address: 'Via Roma, 14, Milano',
+        uid: '2345678',
+        info: 1234
+      },
+      {
+        _id: '5',
+        firstName: 'Simone',
+        lastName: 'Stuffo',
+        address: 'Via Roma, 15 Monza',
+        uid: 123123,
+        info: 12,
+        subRows: [
+          {
+            _id: '5.1',
+            firstName: 'ciao',
+            lastName: 'Stuffo',
+            address: 'Via Roma, 15 Monza',
+            uid: 123123,
+            info: 12
+          }
+        ]
+      },
+      {
+        _id: '6',
+        firstName: 'Luca',
+        lastName: 'Morandi',
+        address: 'Via Roma, 1, Treno',
+        uid: 3456795423556789,
+        info: 123123.12,
+        subRows: [
+          {
+            _id: '6.1',
+            firstName: 'ciao',
+            lastName: 'Stuffo',
+            address: 'Via Roma, 15 Monza',
+            uid: 123123,
+            info: 12
+          }
+        ]
+      },
+      {
+        _id: '7',
+        firstName: 'Mattia',
+        lastName: 'Lastname',
+        address: 'Via Roma, 12, Bologna',
+        uid: 345367890,
+        info: 123.96
+      },
+      {
+        _id: '8',
+        firstName: 'Morfeo',
+        lastName: 'Staffone',
+        address: 'Via Roma, 13, Genova',
+        uid: 3434235,
+        info: 12.1213
+      },
+      {
+        _id: '9',
+        firstName: 'Gianluca',
+        lastName: 'Staffo',
+        address: 'Via Roma, 14, Milano',
+        uid: 2345678,
+        info: 1234
+      },
+      {
+        _id: '10',
+        firstName: 'Simone',
+        lastName: 'Stuffo',
+        address: 'Via Roma, 15 Monza',
+        uid: 123123,
+        info: 12
+      },
+      {
+        _id: '11',
+        firstName: 'Simone',
+        lastName: 'Stuffo',
+        address: 'Via Roma, 15 Monza',
+        uid: 123123,
+        info: 12
+      },
+      {
+        _id: '12',
+        firstName: 'Simone',
+        lastName: 'Stuffo',
+        address: 'Via Roma, 15 Monza',
+        uid: 123123,
+        info: 12
+      },
+      {
+        _id: '13',
+        firstName: 'Simone',
+        lastName: 'Stuffo',
+        address: 'Via Roma, 15 Monza',
+        uid: 123123,
+        info: 12
+      },
+      {
+        _id: '14',
+        firstName: 'Simone',
+        lastName: 'Stuffo',
+        address: 'Via Roma, 15 Monza',
+        uid: 123123,
+        info: 12
+      },
+      {
+        _id: '15',
+        firstName: 'Simone',
+        lastName: 'Stuffo',
+        address: 'Via Roma, 15 Monza',
+        uid: 123123,
+        info: 12
+      },
+      {
+        _id: '16',
+        firstName: 'Simone',
+        lastName: 'Stuffo',
+        address: 'Via Roma, 15 Monza',
+        uid: 123123,
+        info: 12
+      }
     ]
   }
 }
@@ -607,25 +1075,23 @@ NoData.args = {
 }
 
 const ManualPaginationTemplate: ComponentStory<typeof Table> = ({
-  data,
+  dataWithIds,
   ...args
 }) => {
-  const [pageData, setPageData] = useState<Array<typeof firstData>>([])
-  const [totalRows, setTotalRows] = useState(1)
+  const [pageData, setPageData] = useState<Array<typeof firstData>>(dataWithIds.slice(0, 5))
 
   const fetchData = useCallback(({ pageIndex, pageSize }: { pageIndex: number; pageSize: number }) => {
     const newIndexStart = pageIndex * pageSize
     const newIndexEnd = (pageIndex * pageSize) + pageSize
-    setTotalRows(data.length)
-    setPageData((data as Array<typeof firstData>).slice(newIndexStart, newIndexEnd))
-  }, [data])
+    setPageData((dataWithIds as Array<typeof firstData>).slice(newIndexStart, newIndexEnd))
+  }, [dataWithIds])
 
   return (
     <Table
       {...args}
       data={pageData}
       onDataUpdate={fetchData}
-      totalRows={totalRows}
+      totalRows={dataWithIds.length}
       emptyComponent={<CustomEmptyComponent />}
     />
   )
@@ -648,21 +1114,15 @@ Loading.args = {
   loading: true
 }
 
-const ManualSortingTemplate = ({
-  data,
+const ManualSortingTemplate: ComponentStory<typeof Table> = ({
+  dataWithIds,
   ...args
-}: {
-  data: Array<typeof firstData>;
-  columns: CustomColumnsType<typeof firstData>;
 }) => {
-  const [pageData, setPageData] = useState<Array<typeof firstData>>([])
-  const [totalRows, setTotalRows] = useState(1)
+  const [pageData, setPageData] = useState<Array<typeof firstData>>(dataWithIds.slice(0, 5))
   const [sortBy, setSortBy] = useState<Array<CustomSortingRule<typeof firstData>>>([])
 
   const fetchData = useCallback(({ pageIndex, pageSize }: { pageIndex: number; pageSize: number }) => {
-    setTotalRows(data.length)
-
-    const result = [...data] as Array<typeof firstData>
+    const result = [...dataWithIds] as Array<typeof firstData>
 
     if (sortBy.length === 0) {
       setPageData(result.slice(pageIndex * pageSize, pageIndex * pageSize + pageSize))
@@ -688,15 +1148,18 @@ const ManualSortingTemplate = ({
     })
 
     setPageData(result.slice(pageIndex * pageSize, pageIndex * pageSize + pageSize))
-  }, [data, sortBy])
+  }, [dataWithIds, sortBy])
+
+  const selectedAction = useCallback((selectedRowIds) => <Button onClick={() => console.log(selectedRowIds)}>Action button</Button>, [])
 
   return (
     <Table
       data={pageData}
       onSortChange={sortBy => setSortBy(sortBy)}
       onDataUpdate={fetchData}
-      totalRows={totalRows}
+      totalRows={dataWithIds.length}
       emptyComponent={<CustomEmptyComponent />}
+      selectedAction={selectedAction}
       {...args}
     />
   )
