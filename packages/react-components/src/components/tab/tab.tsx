@@ -11,11 +11,17 @@ import { TabPanel } from './tabs-panel'
 import { useUIDSeed } from 'react-uid'
 
 export type TabProps = PropsWithChildren<PropsWithClass> & {
-  /** The value for the selected tab, if controlled */
+  /**
+   * The value for the selected tab, if controlled
+   */
   value?: TabsPrimitive.TabsProps['value'];
-  /** The value of the tab to select by default, if uncontrolled */
+  /**
+   * The value of the tab to select by default, if uncontrolled
+   */
   defaultValue?: TabsPrimitive.TabsProps['defaultValue'];
-  /** A function called when a new tab is selected */
+  /**
+   * A function called when a new tab is selected
+   */
   onValueChange?: TabsPrimitive.TabsProps['onValueChange'];
   /**
    * The direction of navigation between toolbar items.
