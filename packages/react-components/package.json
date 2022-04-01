@@ -86,6 +86,7 @@
     "typescript-plugin-css-modules": "3.4.0"
   },
   "dependencies": {
+    "@radix-ui/react-tabs": "0.1.5",
     "ahooks": "3.3.0",
     "clsx": "1.1.1",
     "framer-motion": "6.2.8",
