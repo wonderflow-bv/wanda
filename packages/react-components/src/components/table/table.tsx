@@ -142,12 +142,6 @@ export type TableProps<T extends Record<string, unknown>> = PropsWithClass & {
    */
   expandableRowComponent?: ComponentType<T>;
   /**
-   * A react component that add custom actions to rows. If fuction is passed,
-   * the function will be called with the row data and the function must return
-   * a component.
-   */
-  actionsRowComponent?: ComponentType<Row<T>>;
-  /**
    * Custom component/empty state to show when the table has no data or
    * all columns have been toggled off.
    */
@@ -178,7 +172,6 @@ export const Table = <T extends Record<string, unknown>>({
   loading,
   background,
   expandableRowComponent,
-  actionsRowComponent: ActionsRowComponent,
   emptyComponent,
   showPagination,
   isManualSorted,
@@ -201,7 +194,6 @@ export const Table = <T extends Record<string, unknown>>({
     const hiddenColumns = defaultHiddenColumns ?? []
     if (!selectableRows) hiddenColumns.push('selection')
     if (!hasSomeExpandableRows) hiddenColumns.push('expander')
-    if (!ActionsRowComponent) hiddenColumns.push('actions')
 
     return hiddenColumns
   }
@@ -292,17 +284,9 @@ export const Table = <T extends Record<string, unknown>>({
           : null)
       }]
 
-      const actionsColumn: CustomColumnsType<T> = [{
-        id: 'actions',
-        isCollapsed: true,
-        hideFromList: true,
-        Cell: ({ row }: {row: Row<T>}) => (ActionsRowComponent ? <ActionsRowComponent {...row} /> : null)
-      }]
-
       hooks.visibleColumns.push(columns => [
         ...checkboxColumn,
         ...expanderColumn,
-        ...actionsColumn,
         ...columns
       ])
     }
@@ -315,8 +299,7 @@ export const Table = <T extends Record<string, unknown>>({
     setHiddenColumns,
     selectableRows,
     defaultHiddenColumns,
-    hasSomeExpandableRows,
-    ActionsRowComponent
+    hasSomeExpandableRows
   ])
 
   useUpdateEffect(() => {
