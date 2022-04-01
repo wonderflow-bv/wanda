@@ -8,6 +8,7 @@ import { Button } from '@/components'
 
 import styles from './tab.module.css'
 import { TabPanel } from './tabs-panel'
+import { useUIDSeed } from 'react-uid'
 
 export type TabProps = PropsWithChildren<PropsWithClass> & {
   /** The value for the selected tab, if controlled */
@@ -42,7 +43,7 @@ export const Tab = ({
   ...otherProps
 }: TabProps) => {
   const [activeItem, setActiveItem] = useState<string>(defaultValue ?? '')
-
+  const uid = useUIDSeed()
   const handleOnVlaueChange = useCallback(
     (value: string) => {
       onValueChange?.(value)
@@ -69,7 +70,7 @@ export const Tab = ({
               <Button kind="flat" icon={child.props.icon}>
                 {child.props.label}
                 {(child.props.value === activeItem) && 'active' && (
-                  <m.span className={styles.Highlight} layoutId="highlight" />
+                  <m.span className={styles.Highlight} layoutId={uid('tab-highlight')} />
                 )}
               </Button>
             </TabsPrimitive.Trigger>
