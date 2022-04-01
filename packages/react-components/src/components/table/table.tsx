@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { AnimatePresence, motion } from 'framer-motion'
 import {
-  ComponentType, CSSProperties, Fragment, ReactNode, useEffect, useMemo
+  ComponentType, CSSProperties, Fragment, ReactNode, useCallback, useMemo
 } from 'react'
 import {
   Hooks, IdType, Row, SortingRule,
@@ -9,6 +9,7 @@ import {
   useRowSelect, useSortBy, useTable
 } from 'react-table'
 import { useUIDSeed } from 'react-uid'
+import { useUpdateEffect } from 'ahooks'
 
 import {
   Skeleton, Stack, Text,
@@ -75,10 +76,6 @@ export type TableProps<T extends Record<string, unknown>> = PropsWithClass & {
    */
   selectableRows?: boolean;
   /**
-   * Callback run when the selected rows change
-   */
-  onSelectionChange?: (selectedRows?: Array<Row<T>>, selectedRowIds?: Record<IdType<T>, boolean>) => void;
-  /**
    * If true, disable the automatic column sorting of the table. Turn this on if you want to
    * to control the sorting yourself.
    */
@@ -123,11 +120,11 @@ export type TableProps<T extends Record<string, unknown>> = PropsWithClass & {
   /**
    * Set the label for selected items in the table. Default to "Selected items"
    */
-  selectedLabel?: (selectedRows: Array<Row<T>>) => ReactNode;
-  /**
-  * Pass custom components to show when rows are selected.
-  */
-  selectedActions?: ReactNode;
+   selectedLabel?: (selectedRowIds: Array<IdType<T>>) => ReactNode;
+   /**
+   * Pass custom components to show when rows are selected.
+   */
+   selectedActions?: (selectedRowIds: Array<IdType<T>>) => ReactNode;
   /**
    * Set the table height after which the table will scroll.
    */
@@ -167,7 +164,6 @@ export const Table = <T extends Record<string, unknown>>({
   columns,
   data = [],
   selectableRows,
-  onSelectionChange,
   stripes,
   showSeparators = true,
   title,
@@ -199,6 +195,29 @@ export const Table = <T extends Record<string, unknown>>({
   const hasSomeExpandableRows = useMemo(() => data.some(d => d.subRows), [data])
   const isManualPaginated = useMemo(() => Boolean(onDataUpdate && showPagination && totalRows),
     [onDataUpdate, showPagination, totalRows])
+  const manualPaginationPageCount = useMemo(() => (isManualPaginated && totalRows) ? Math.ceil(totalRows / itemsPerPage) : 1, [isManualPaginated, totalRows, itemsPerPage])
+
+  const getHiddenColumns = () => {
+    const hiddenColumns = defaultHiddenColumns ?? []
+    if (!selectableRows) hiddenColumns.push('selection')
+    if (!hasSomeExpandableRows) hiddenColumns.push('expander')
+    if (!ActionsRowComponent) hiddenColumns.push('actions')
+
+    return hiddenColumns
+  }
+
+  const getRowId = useCallback((originalRow, relativeIndex, parent) => {
+    // if (originalRow._id) {
+    //   console.log('ciao')
+    //   return originalRow._id
+    // }
+    //
+    // return parent ? [parent.id, relativeIndex].join('.') : relativeIndex.toString()
+
+    console.log(parent ? [parent.id, relativeIndex].join('.') : relativeIndex)
+
+    return originalRow?._id || (parent && [parent.id, relativeIndex].join('.')) || relativeIndex.toString()
+  }, [])
 
   const {
     getTableProps,
@@ -221,14 +240,17 @@ export const Table = <T extends Record<string, unknown>>({
     {
       columns,
       data,
-      manualSortBy: isManualSorted,
-      disableMultiSort: true,
+      getRowId,
       expandSubRows: Boolean(!expandableRowComponent),
+      manualPagination: isManualPaginated,
+      pageCount: manualPaginationPageCount,
+      manualSortBy: isManualSorted,
+
+      disableMultiSort: true,
       autoResetHiddenColumns: false,
       autoResetPage: false,
-      manualPagination: isManualPaginated,
+      autoResetSortBy: false,
       autoResetSelectedRows: false,
-      pageCount: (isManualPaginated && totalRows) ? Math.ceil(totalRows / itemsPerPage) : 10,
       /**
        * This `paginateExpandedRows` prop prevent expanded rows to
        * be placed in the next page. But it breaks row selection
@@ -238,7 +260,7 @@ export const Table = <T extends Record<string, unknown>>({
         sortBy: initialSortBy,
         pageIndex: activePageIndex,
         pageSize: showPagination ? itemsPerPage : undefined,
-        hiddenColumns: ['selection', 'expander']
+        hiddenColumns: getHiddenColumns()
       }
     },
     useSortBy,
@@ -296,30 +318,22 @@ export const Table = <T extends Record<string, unknown>>({
     }
   )
 
-  useEffect(() => {
-    const artificialColumns = defaultHiddenColumns ?? []
-    if (!selectableRows) artificialColumns.push('selection')
-    if (!hasSomeExpandableRows) artificialColumns.push('expander')
-    if (!ActionsRowComponent) artificialColumns.push('actions')
-
-    setHiddenColumns(artificialColumns)
+  useUpdateEffect(() => {
+    const hiddenColumns = getHiddenColumns()
+    setHiddenColumns(hiddenColumns)
   }, [
-    selectableRows,
     setHiddenColumns,
+    selectableRows,
     defaultHiddenColumns,
     hasSomeExpandableRows,
     ActionsRowComponent
   ])
 
-  useEffect(() => {
-    onSelectionChange?.(selectedFlatRows, selectedRowIds)
-  }, [onSelectionChange, selectedFlatRows, selectedRowIds])
-
-  useEffect(() => {
+  useUpdateEffect(() => {
     onSortChange?.(sortBy)
   }, [onSortChange, sortBy])
 
-  useEffect(() => {
+  useUpdateEffect(() => {
     onDataUpdate?.({ pageIndex, pageSize })
   }, [onDataUpdate, pageIndex, pageSize])
 
@@ -343,34 +357,34 @@ export const Table = <T extends Record<string, unknown>>({
 
       {/* CONTEXT TOAST */}
       <AnimatePresence>
-        {selectedFlatRows?.length && (
-          <Stack
-            as={motion.div}
-            className={styles.Toast}
-            direction="row"
-            hAlign="space-between"
-            vAlign="center"
-            hPadding={16}
-            vPadding={8}
-            fill={false}
-            columnGap={16}
-            initial={{ y: -16, opacity: 0 }}
-            animate={{
-              y: 0,
-              opacity: 1,
-              transition: {
-                type: 'spring',
-                stiffness: 700,
-                damping: 30
-              }
-            }}
-            exit={{ y: -16, opacity: 0 }}
-          >
-            <Text as="span" size={14} weight="bold">
-              {selectedLabel(selectedFlatRows)}
-            </Text>
-            {selectedActions}
-          </Stack>
+        {Object.keys(selectedRowIds).length && selectableRows && (
+        <Stack
+          as={motion.div}
+          className={styles.Toast}
+          direction="row"
+          hAlign="space-between"
+          vAlign="center"
+          hPadding={16}
+          vPadding={8}
+          fill={false}
+          columnGap={16}
+          initial={{ y: '-16px', opacity: 0 }}
+          animate={{
+            y: 0,
+            opacity: 1,
+            transition: {
+              type: 'spring',
+              stiffness: 700,
+              damping: 30
+            }
+          }}
+          exit={{ y: '-16px', opacity: 0 }}
+        >
+          <Text as="span" size={14} weight="bold">
+            {selectedLabel(Object.keys(selectedRowIds))}
+          </Text>
+          {selectedActions?.(Object.keys(selectedRowIds))}
+        </Stack>
         )}
 
         {/* HEADER */}
