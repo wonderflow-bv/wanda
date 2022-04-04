@@ -6,7 +6,7 @@ import { Stack, IconButton, Container, Separator, Elevator } from '@wonderflow/r
 import tkns from '@wonderflow/tokens/platforms/web/tokens.json'
 import { Shell, MenuTrigger, Aside, Content, Header, ContentArea, SkipToContent } from './shell.module.css'
 import { Footer } from '@/components/footer'
-import { motion } from 'framer-motion'
+import { domMax, LazyMotion, m } from 'framer-motion'
 import { FocusOn } from 'react-focus-on'
 
 type ShellLayoutProps = {
@@ -91,27 +91,29 @@ export const ShellLayout: React.FC<ShellLayoutProps> = ({
 
       <Stack as="main" vAlign="start" fill={false} className={Content}>
         {header && <section className={Header}>{header}</section>}
-        <motion.div
-          initial="hidden"
-          animate="enter"
-          exit="exit"
-          variants={variants}
-          transition={{ duration: 0.2, type: 'tween' }}
-        >
-          <Stack id="content-quicklink" rowGap={80} vAlign="start" fill={false}>
-            <Container className={ContentArea}>
-              {children}
-            </Container>
-            {showFooter && (
+        <LazyMotion features={domMax}>
+          <m.div
+            initial="hidden"
+            animate="enter"
+            exit="exit"
+            variants={variants}
+            transition={{ duration: 0.2, type: 'tween' }}
+          >
+            <Stack id="content-quicklink" rowGap={80} vAlign="start" fill={false}>
+              <Container className={ContentArea}>
+                {children}
+              </Container>
+              {showFooter && (
               <>
                 <Separator />
                 <Container className={ContentArea}>
                   <Footer />
                 </Container>
               </>
-            )}
-          </Stack>
-        </motion.div>
+              )}
+            </Stack>
+          </m.div>
+        </LazyMotion>
       </Stack>
     </Stack>
   )
