@@ -331,35 +331,35 @@ export const Table = <T extends Record<string, unknown>>({
       {/* CONTEXT TOAST */}
       <AnimatePresence>
         <LazyMotion features={domMax}>
-        {Object.keys(selectedRowIds).length && selectableRows && (
-        <Stack
-          as={motion.div}
-          className={styles.Toast}
-          direction="row"
-          hAlign="space-between"
-          vAlign="center"
-          hPadding={16}
-          vPadding={8}
-          fill={false}
-          columnGap={16}
-          initial={{ y: '-16px', opacity: 0 }}
-          animate={{
-            y: 0,
-            opacity: 1,
-            transition: {
-              type: 'spring',
-              stiffness: 700,
-              damping: 30
-            }
-          }}
-          exit={{ y: '-16px', opacity: 0 }}
-        >
-          <Text as="span" size={14} weight="bold">
-            {selectedLabel(Object.keys(selectedRowIds))}
-          </Text>
-          {selectedActions?.(Object.keys(selectedRowIds))}
-        </Stack>
-        )}
+          {Object.keys(selectedRowIds).length && selectableRows && (
+          <Stack
+            as={m.div}
+            className={styles.Toast}
+            direction="row"
+            hAlign="space-between"
+            vAlign="center"
+            hPadding={16}
+            vPadding={8}
+            fill={false}
+            columnGap={16}
+            initial={{ y: '-16px', opacity: 0 }}
+            animate={{
+              y: 0,
+              opacity: 1,
+              transition: {
+                type: 'spring',
+                stiffness: 700,
+                damping: 30
+              }
+            }}
+            exit={{ y: '-16px', opacity: 0 }}
+          >
+            <Text as="span" size={14} weight="bold">
+              {selectedLabel(Object.keys(selectedRowIds))}
+            </Text>
+            {selectedActions?.(Object.keys(selectedRowIds))}
+          </Stack>
+          )}
 
           {/* HEADER */}
           {(showHeader || selectableRows) && (
