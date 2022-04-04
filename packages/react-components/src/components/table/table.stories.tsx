@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 
 import {
   Button, IconButton, Menu, Popover, Separator, Stack, Title
@@ -1029,7 +1029,54 @@ Pagination.args = {
   showPagination: true
 }
 
-export const RowActions = Template.bind({})
+const RowActionsTemplate: ComponentStory<typeof Table> = ({
+  columns,
+  ...args
+}) => {
+  const tableColumns = useMemo(() => {
+    return [
+      {
+        id: 'actions',
+        disableSortBy: true,
+        hideFromList: true,
+        minWidth: 50,
+        accessor: row => (
+          <Stack direction="row" fill={false}>
+            <IconButton icon="astronomy" kind="flat" dimension="small" />
+            <Popover trigger={<IconButton icon="more-vert" kind="flat" dimension="small" />}>
+              <Menu>
+                <Menu.Item
+                  dimension="small"
+                  autoFocus
+                  icon="ctrl-right"
+                >
+                  Sample long menu item
+                </Menu.Item>
+                <Menu.Item
+                  dimension="small"
+                  icon="arrow-down-to-bracket"
+                >
+                  Short menu label
+                </Menu.Item>
+                <Separator />
+                <Menu.Item dimension="small" icon="view">Even shorter</Menu.Item>
+                <Menu.Item dimension="small" disabled>Really?</Menu.Item>
+              </Menu>
+            </Popover>
+          </Stack>
+        )
+      },
+      ...columns]
+  }, [columns])
+  return (
+    <Table
+      columns={tableColumns}
+      {...args}
+    />
+  )
+}
+
+export const RowActions = RowActionsTemplate.bind({})
 RowActions.args = {
   columnsControl: true,
   showHeader: true,
