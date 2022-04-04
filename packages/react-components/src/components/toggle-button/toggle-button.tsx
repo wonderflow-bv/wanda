@@ -3,7 +3,7 @@ import styles from './toggle-button.module.css'
 import { IconButton, IconButtonProps, Polymorphic, Icon, IconProps } from '@/components'
 import clsx from 'clsx'
 import { Except } from 'type-fest'
-import { motion } from 'framer-motion'
+import { domMax, LazyMotion, m } from 'framer-motion'
 
 export type ToggleButtonProps = Except<IconButtonProps, 'icon'> & {
   /**
@@ -97,28 +97,30 @@ export const ToggleButton = forwardRef(({
       className={clsx(styles.ToggleButton, className)}
       {...otherProps}
     >
-      {isPressed && pressedIcon
-        ? (
-          <motion.span
-            key="pressedIcon"
-            variants={scaleAnimation}
-            initial={firstRender && isPressed ? false : 'scaleOut'}
-            animate="scaleIn"
-          >
-            {renderIcon(pressedIcon, dimension)}
-          </motion.span>
-          )
-        : restingIcon && (
-          <motion.span
+      <LazyMotion features={domMax} strict>
+        {isPressed && pressedIcon
+          ? (
+            <m.span
+              key="pressedIcon"
+              variants={scaleAnimation}
+              initial={firstRender && isPressed ? false : 'scaleOut'}
+              animate="scaleIn"
+            >
+              {renderIcon(pressedIcon, dimension)}
+            </m.span>
+            )
+          : restingIcon && (
+          <m.span
             key="restingIcon"
             variants={scaleAnimation}
             initial={firstRender && !isPressed ? false : 'scaleOut'}
             animate="scaleIn"
           >
             {renderIcon(restingIcon, dimension)}
-          </motion.span>
-        )
+          </m.span>
+          )
       }
+      </LazyMotion>
     </IconButton>
   )
 }) as PolymorphicToggleButton

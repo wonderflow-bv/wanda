@@ -8,13 +8,20 @@ import { Button } from '@/components'
 
 import styles from './tab.module.css'
 import { TabPanel } from './tabs-panel'
+import { useUIDSeed } from 'react-uid'
 
 export type TabProps = PropsWithChildren<PropsWithClass> & {
-  /** The value for the selected tab, if controlled */
+  /**
+   * The value for the selected tab, if controlled
+   */
   value?: TabsPrimitive.TabsProps['value'];
-  /** The value of the tab to select by default, if uncontrolled */
+  /**
+   * The value of the tab to select by default, if uncontrolled
+   */
   defaultValue?: TabsPrimitive.TabsProps['defaultValue'];
-  /** A function called when a new tab is selected */
+  /**
+   * A function called when a new tab is selected
+   */
   onValueChange?: TabsPrimitive.TabsProps['onValueChange'];
   /**
    * The direction of navigation between toolbar items.
@@ -42,7 +49,7 @@ export const Tab = ({
   ...otherProps
 }: TabProps) => {
   const [activeItem, setActiveItem] = useState<string>(defaultValue ?? '')
-
+  const uid = useUIDSeed()
   const handleOnVlaueChange = useCallback(
     (value: string) => {
       onValueChange?.(value)
@@ -69,7 +76,7 @@ export const Tab = ({
               <Button kind="flat" icon={child.props.icon}>
                 {child.props.label}
                 {(child.props.value === activeItem) && 'active' && (
-                  <m.span className={styles.Highlight} layoutId="highlight" />
+                  <m.span className={styles.Highlight} layoutId={uid('tab-highlight')} />
                 )}
               </Button>
             </TabsPrimitive.Trigger>

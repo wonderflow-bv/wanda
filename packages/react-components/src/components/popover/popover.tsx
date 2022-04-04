@@ -14,7 +14,7 @@ import styles from './popover.module.css'
 import { useUIDSeed } from 'react-uid'
 import { AutoPlacement, BasePlacement, VariationPlacement, Modifier } from '@popperjs/core'
 import { usePopperTooltip } from 'react-popper-tooltip'
-import { AnimatePresence, motion } from 'framer-motion'
+import { domMax, LazyMotion, m, AnimatePresence } from 'framer-motion'
 import clsx from 'clsx'
 
 export type PopoverProps = PropsWithClass & {
@@ -170,7 +170,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(({
           id: seedID('popover-trigger'),
           key: seedID('popover-trigger'),
           'aria-haspopup': 'true',
-          'aria-controls': seedID('popover-menu'),
+          'aria-controls': seedID('popover-dialog'),
           'aria-expanded': isOpen,
           ...otherProps
         }
@@ -184,21 +184,23 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(({
             key={seedID('tooltip-content')}
             {...getTooltipProps({ className: styles.PopUp })}
           >
-            <motion.div
-              variants={PopoverAnimation}
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-            >
+            <LazyMotion features={domMax}>
+              <m.div
+                variants={PopoverAnimation}
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+              >
 
-              {Children.map(children, (child) => isValidElement(child) && cloneElement(
-                child,
-                {
-                  id: seedID('popover-menu'),
-                  'aria-labelledby': seedID('popover-trigger')
-                }
-              ))}
-            </motion.div>
+                {Children.map(children, (child) => isValidElement(child) && cloneElement(
+                  child,
+                  {
+                    id: seedID('popover-dialog'),
+                    'aria-labelledby': seedID('popover-trigger')
+                  }
+                ))}
+              </m.div>
+            </LazyMotion>
           </div>
         )}
       </AnimatePresence>

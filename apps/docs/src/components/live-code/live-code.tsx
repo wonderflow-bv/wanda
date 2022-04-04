@@ -4,7 +4,7 @@ import theme from '@/components/code-block/wonder-theme'
 import { LiveAreaProps, LiveArea } from '@/components/live-area'
 import { LiveCode as LiveCodeClass, Editor, Toolbar, LiveArea as LiveAreaClass } from './live-code.module.css'
 import { IconButton, Tooltip, Stack, Popover, Snackbar, Text, ToggleButton } from '@wonderflow/react-components'
-import { AnimatePresence, motion } from 'framer-motion'
+import { domMax, LazyMotion, m, AnimatePresence } from 'framer-motion'
 import { useUIDSeed } from 'react-uid'
 import { useDebounce } from 'ahooks'
 
@@ -32,8 +32,9 @@ const LiveCodeComponent = ({
         {live.element && <live.element />}
       </LiveArea>
       <AnimatePresence>
-        {editorVisible && (
-          <motion.div
+        <LazyMotion features={domMax} strict>
+          {editorVisible && (
+          <m.div
             id={uid('live-code-editor')}
             style={{ transformPerspective: '1000px', originY: 0 }}
             initial={{ opacity: 0.8, rotateX: -90, height: 0 }}
@@ -42,8 +43,9 @@ const LiveCodeComponent = ({
             transition={{ duration: 0.2 }}
           >
             <LiveEditor className={Editor} onChange={onEdit} />
-          </motion.div>
-        )}
+          </m.div>
+          )}
+        </LazyMotion>
       </AnimatePresence>
       <Stack direction="row" columnGap={8} className={Toolbar}>
         {live.error && (
