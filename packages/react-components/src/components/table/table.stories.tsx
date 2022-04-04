@@ -966,7 +966,7 @@ const CustomEmptyComponent = () => (
   </div>
 )
 
-const Template: ComponentStory<typeof Table> = args => (
+const Template: ComponentStory<typeof Table> = ({ dataWithIds, ...args }) => (
   <Table
     emptyComponent={<CustomEmptyComponent />}
     {...args}
@@ -978,8 +978,7 @@ export const Simple = Template.bind({})
 export const SelectedRows = Template.bind({})
 SelectedRows.args = {
   title: 'With selectable rows',
-  selectableRows: true,
-  selectedActions: (selectedRowIds) => <Button onClick={() => console.log(selectedRowIds)}>Delete</Button>
+  selectableRows: true
 }
 
 export const HidingColumn = Template.bind({})
@@ -1026,6 +1025,7 @@ Pagination.args = {
   showHeader: true,
   selectableRows: true,
   itemsPerPage: 3,
+  pageClusters: [3, 6, 9, 12],
   showPagination: true
 }
 
@@ -1107,7 +1107,7 @@ const ManualPaginationTemplate: ComponentStory<typeof Table> = ({
     <Table
       {...args}
       data={pageData}
-      onDataUpdate={fetchData}
+      onPaginationChange={fetchData}
       totalRows={dataWithIds.length}
       emptyComponent={<CustomEmptyComponent />}
     />
@@ -1132,6 +1132,7 @@ Loading.args = {
 }
 
 const ManualSortingTemplate: ComponentStory<typeof Table> = ({
+  data,
   dataWithIds,
   ...args
 }) => {
@@ -1167,16 +1168,13 @@ const ManualSortingTemplate: ComponentStory<typeof Table> = ({
     setPageData(result.slice(pageIndex * pageSize, pageIndex * pageSize + pageSize))
   }, [dataWithIds, sortBy])
 
-  const selectedAction = useCallback((selectedRowIds) => <Button onClick={() => console.log(selectedRowIds)}>Action button</Button>, [])
-
   return (
     <Table
       data={pageData}
       onSortChange={sortBy => setSortBy(sortBy)}
-      onDataUpdate={fetchData}
+      onPaginationChange={fetchData}
       totalRows={dataWithIds.length}
       emptyComponent={<CustomEmptyComponent />}
-      selectedAction={selectedAction}
       {...args}
     />
   )
