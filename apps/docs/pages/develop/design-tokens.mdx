@@ -21,8 +21,8 @@ For the web platform we provide two ways to use Wanda's design tokens, you can a
 
 Then you can get the tokens by using the `token()` notation as in the following example. Note that **custom environment variables** are replaced with the final token value at build-time, so they are not dynamic like custom properties.
 
-<Tab>
-  <Tab.Panel icon="layer-group" label="Source">
+<Tab defaultValue="source">
+  <Tab.Panel icon="layer-group" label="Source" value="source">
 
 ```css hideCopy
 .MyCustomComponent {
@@ -33,7 +33,7 @@ Then you can get the tokens by using the `token()` notation as in the following 
 ```
 
   </Tab.Panel>
-  <Tab.Panel icon="arrow-right" label="Output">
+  <Tab.Panel icon="arrow-right" label="Output" value="output">
 
 ```css hideCopy
 .MyCustomComponent {

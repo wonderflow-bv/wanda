@@ -5,8 +5,8 @@ import * as components from "@wonderflow/react-components";
 
 export const example = `<Elevator resting={1}>
   <Card padding={false}>
-    <Tab>
-      <Tab.Panel icon="check" label="Sign-up" value="1">
+    <Tab defaultValue="signup">
+      <Tab.Panel icon="check" label="Sign-up" value="signup">
         <Card>
           <Stack rowGap={24}>
             <Textfield label="Name" type="text" />
@@ -21,7 +21,7 @@ export const example = `<Elevator resting={1}>
           </Stack>
         </Card>
       </Tab.Panel>
-      <Tab.Panel icon="envelope" label="Login" value="1">
+      <Tab.Panel icon="envelope" label="Login" value="login">
         <Card>
           <Stack rowGap={24}>
             <Textfield label="E-Mail" type="email" />
