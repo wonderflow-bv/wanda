@@ -1039,7 +1039,7 @@ const RowActionsTemplate: ComponentStory<typeof Table> = ({
         id: 'actions',
         disableSortBy: true,
         hideFromList: true,
-        minWidth: 50,
+        isCollapsed: true,
         accessor: row => (
           <Stack direction="row" fill={false}>
             <IconButton icon="astronomy" kind="flat" dimension="small" />
@@ -1080,34 +1080,7 @@ export const RowActions = RowActionsTemplate.bind({})
 RowActions.args = {
   columnsControl: true,
   showHeader: true,
-  selectableRows: true,
-  actionsRowComponent: ({ depth }) => (
-    <Stack direction="row" fill={false}>
-      <IconButton icon="view" kind="flat" dimension="small" />
-      {depth > 0 && (
-      <Popover trigger={<IconButton icon="chat" kind="flat" dimension="small" />}>
-        <Menu>
-          <Menu.Item
-            dimension="small"
-            autoFocus
-            icon="ctrl-right"
-          >
-            Sample long menu item
-          </Menu.Item>
-          <Menu.Item
-            dimension="small"
-            icon="sun"
-          >
-            Short menu label
-          </Menu.Item>
-          <Separator />
-          <Menu.Item dimension="small" icon="view">Even shorter</Menu.Item>
-          <Menu.Item dimension="small" disabled>Really?</Menu.Item>
-        </Menu>
-      </Popover>
-      )}
-    </Stack>
-  )
+  selectableRows: true
 }
 
 export const NoData = Template.bind({})

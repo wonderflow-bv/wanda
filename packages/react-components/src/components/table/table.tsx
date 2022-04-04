@@ -4,7 +4,7 @@ import {
   ComponentType, CSSProperties, Fragment, ReactNode, useCallback, useMemo
 } from 'react'
 import {
-  Hooks, IdType, Row, SortingRule,
+  Hooks, IdType, Row,
   useExpanded, usePagination,
   useRowSelect, useSortBy, useTable
 } from 'react-table'
@@ -22,59 +22,12 @@ import { TableCheckbox } from './table-checkbox'
 import { ToggleColumnsControl } from './table-controls'
 import { TableExpand } from './table-expand'
 import { TableHeader, TableHeaderProps } from './table-header'
-import { TablePagination, TablePaginationProps } from './table-pagination'
+import { TablePagination } from './table-pagination'
 import { TableRow } from './table-row'
 import {
   CellType, CustomColumnInstanceType, CustomColumnsType,
-  CustomSortingRule,
-  HeaderGroupType, OptionalDataTypes, PaginationType
+  HeaderGroupType, OptionalDataTypes, PaginationType, SortingType
 } from './types'
-
-type Pagination = {
-  /**
-   * Show pagination below the table. This is recommended only for tables with a lot of rows.
-   */
-  showPagination?: boolean;
-  /**
-   * The index of the page that should be set as active when the table is rendered.
-   */
-   initialPageIndex?: number;
-  /**
-   * The amount of entries to show for each page.
-   */
-   itemsPerPage?: number;
-  /**
-   * Set the number of pages to show in the pagination. Used only when doing manual pagination.
-   */
-  totalRows?: number;
-  /**
-   * Set clusters of items to show in a single page. These values are used to
-   * compute the select options for the page size select.
-   */
-  pageClusters?: TablePaginationProps['clusters'];
-  /**
-   * The callback that is called when the active page index and page size change.
-   * Passing this property will enable manual pagination,
-   * disabling the automatic one.
-   */
-   onPaginationChange?: ({ pageIndex, pageSize }: PaginationType) => Promise<void> | void;
-}
-
-type Sorting<T> = {
-  /**
-   * If true, disable the automatic column sorting of the table. Turn this on if you want to
-   * to control the sorting yourself.
-   */
-   isManualSorted?: boolean;
-   /**
-   * Set the initial sorted column and order by passing column id and order.
-   */
-  initialSortBy?: Array<SortingRule<T>>;
-   /**
-    * Callback run when a column is sorted
-    */
-   onSortChange?: (sorting: Array<CustomSortingRule<T>>) => void;
-}
 
 export type TableProps<T extends Record<string, unknown>> = PropsWithClass & {
   /**
@@ -157,13 +110,17 @@ export type TableProps<T extends Record<string, unknown>> = PropsWithClass & {
    */
   emptyComponent?: ReactNode;
   /**
+   * Show pagination below the table. This is recommended only for tables with a lot of rows.
+   */
+  showPagination?: boolean;
+  /**
    * Contains all the props used for the pagination of the table
    */
-  pagination?: Pagination
+  paginationProps?: PaginationType
   /**
    * Contains all the props used for the sorting of the table
    */
-  sorting?: Sorting<T>
+  sortingProps?: SortingType<T>
 }
 
 export const Table = <T extends Record<string, unknown>>({
@@ -187,9 +144,9 @@ export const Table = <T extends Record<string, unknown>>({
   background,
   expandableRowComponent,
   emptyComponent,
-  pagination,
-  sorting,
-  // showPagination,
+  showPagination,
+  paginationProps,
+  sortingProps,
   // isManualSorted,
   // itemsPerPage = 10,
   // totalRows,
@@ -202,9 +159,9 @@ export const Table = <T extends Record<string, unknown>>({
 }: TableProps<T>) => {
   const uid = useUIDSeed()
   const hasSomeExpandableRows = useMemo(() => data.some(d => d.subRows), [data])
-  const isManualSorted = useMemo(() => sorting?.isManualSorted, [sorting?.isManualSorted])
-  const isManualPaginated = useMemo(() => Boolean(pagination?.onPaginationChange && pagination?.totalRows), [pagination?.totalRows, pagination?.onPaginationChange])
-  const manualPaginationPageCount = useMemo(() => (isManualPaginated && pagination?.totalRows) ? Math.ceil(pagination.totalRows / (pagination?.itemsPerPage || 10)) : undefined, [isManualPaginated, pagination])
+  const isManualSorted = useMemo(() => sortingProps?.isManualSorted, [sortingProps?.isManualSorted])
+  const isManualPaginated = useMemo(() => Boolean(paginationProps?.onPaginationChange && paginationProps?.totalRows), [paginationProps?.totalRows, paginationProps?.onPaginationChange])
+  const manualPaginationPageCount = useMemo(() => (isManualPaginated && paginationProps?.totalRows) ? Math.ceil(paginationProps.totalRows / (paginationProps?.itemsPerPage || 10)) : undefined, [isManualPaginated, paginationProps])
 
   const getHiddenColumns = () => {
     const hiddenColumns = defaultHiddenColumns ?? []
@@ -255,9 +212,9 @@ export const Table = <T extends Record<string, unknown>>({
        * paginateExpandedRows: !showPagination,
        */
       initialState: {
-        sortBy: sorting?.initialSortBy || [],
-        pageIndex: pagination?.initialPageIndex || 0,
-        pageSize: pagination?.itemsPerPage,
+        sortBy: sortingProps?.initialSortBy || [],
+        pageIndex: paginationProps?.initialPageIndex || 0,
+        pageSize: paginationProps?.itemsPerPage,
         hiddenColumns: getHiddenColumns()
       }
     },
@@ -319,14 +276,14 @@ export const Table = <T extends Record<string, unknown>>({
   ])
 
   useUpdateEffect(() => {
-    sorting?.onSortChange?.(sortBy)
-  }, [sorting?.onSortChange, sortBy])
+    sortingProps?.onSortChange?.(sortBy)
+  }, [sortingProps?.onSortChange, sortBy])
 
   useUpdateEffect(() => {
-    pagination?.onPaginationChange?.({ pageIndex, pageSize })
-  }, [pagination?.onPaginationChange, pageIndex, pageSize])
+    paginationProps?.onPaginationChange?.({ pageIndex, pageSize })
+  }, [paginationProps?.onPaginationChange, pageIndex, pageSize])
 
-  const rowEntries = useMemo(() => (pagination ? page : rows), [page, rows, pagination])
+  const rowEntries = useMemo(() => (paginationProps ? page : rows), [page, rows, paginationProps])
   const filteredVisibleColumns = useMemo(() => (
     visibleColumns.filter((col: CustomColumnInstanceType<T>) => !col.hideFromList)
   ), [visibleColumns])
@@ -347,7 +304,7 @@ export const Table = <T extends Record<string, unknown>>({
       {/* CONTEXT TOAST */}
       <AnimatePresence>
         <LazyMotion features={domMax}>
-          {Object.keys(selectedRowIds).length && selectableRows && (
+          {!!Object.keys(selectedRowIds).length && selectableRows && (
           <Stack
             as={m.div}
             className={styles.Toast}
@@ -498,14 +455,14 @@ export const Table = <T extends Record<string, unknown>>({
       }
 
       {/* PAGINATION */}
-      {(pagination && filteredVisibleColumns.length > 0 && !!rows.length) && (
+      {(paginationProps && filteredVisibleColumns.length > 0 && !!rows.length) && (
         <TablePagination
-          clusters={pagination?.pageClusters}
+          clusters={paginationProps?.pageClusters}
           pageSize={pageSize}
-          totalItems={pagination?.totalRows ?? rows.length}
+          totalItems={paginationProps?.totalRows ?? rows.length}
           currentPage={pageIndex}
           totalPages={pageCount}
-          isManual={Boolean(isManualPaginated && pagination?.totalRows)}
+          isManual={Boolean(isManualPaginated && paginationProps?.totalRows)}
           onPageSizeChange={newPageSize => setPageSize(newPageSize)}
           onPageClick={selected => gotoPage(selected)}
         />
