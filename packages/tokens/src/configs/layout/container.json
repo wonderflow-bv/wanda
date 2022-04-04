@@ -7,13 +7,13 @@
       }
     },
     "medium": {
-      "value": 640,
+      "value": 1000,
       "attributes": {
         "category": "size"
       }
     },
     "small": {
-      "value": 360,
+      "value": 640,
       "attributes": {
         "category": "size"
       }
