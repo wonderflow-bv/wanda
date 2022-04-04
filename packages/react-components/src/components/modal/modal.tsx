@@ -1,5 +1,5 @@
 import { forwardRef, PropsWithChildren } from 'react'
-import { motion } from 'framer-motion'
+import { domMax, LazyMotion, m } from 'framer-motion'
 import clsx from 'clsx'
 import { FocusOn } from 'react-focus-on'
 import { ModalContent, ModalContentProps } from './content/modal-content'
@@ -59,15 +59,17 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(({
         onClickOutside={closeOnClickOutside ? onClose : undefined}
         onEscapeKey={onClose}
       >
-        <motion.div
-          variants={ModalAnimation}
-          initial="hidden"
-          animate="visible"
-          exit="hidden"
-          className={styles.Container}
-        >
-          {children}
-        </motion.div>
+        <LazyMotion features={domMax}>
+          <m.div
+            variants={ModalAnimation}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            className={styles.Container}
+          >
+            {children}
+          </m.div>
+        </LazyMotion>
       </FocusOn>
     </div>
   )

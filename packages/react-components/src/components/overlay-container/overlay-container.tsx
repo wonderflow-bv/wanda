@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion'
+import { domMax, LazyMotion, m, AnimatePresence } from 'framer-motion'
 import { ReactNode, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { useUIDSeed } from 'react-uid'
@@ -63,8 +63,9 @@ export const OverlayContainer: React.FC<OverlayContainerProps> = ({
             className={styles.OverlayContainer}
             style={{ zIndex: index }}
           >
-            {obfuscate && (
-              <motion.span
+            <LazyMotion features={domMax}>
+              {obfuscate && (
+              <m.span
                 key={seedID('modal-backdrop')}
                 className={styles.Backdrop}
                 data-overlay-color={overlayColor}
@@ -73,8 +74,9 @@ export const OverlayContainer: React.FC<OverlayContainerProps> = ({
                 transition={{ duration: 0.2 }}
                 exit={{ opacity: 0 }}
               />
-            )}
-            {children}
+              )}
+              {children}
+            </LazyMotion>
           </div>
         )}
       </AnimatePresence>

@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion'
+import { domMax, LazyMotion, m, AnimatePresence } from 'framer-motion'
 import { AutocompleteOption, AutocompleteOptionProps } from './autocomplete-option'
 import {
   Children, ForwardRefExoticComponent,
@@ -163,30 +163,32 @@ export const Autocomplete = forwardRef<HTMLDivElement, AutocompleteProps>(({
           ref={setTooltipRef}
           {...getTooltipProps({ className: styles.PopUp, style: { minInlineSize: triggerSize ? (triggerSize.width + 2) : 'auto' } })}
         >
-          <motion.div
-            variants={AutocompleteAnimation}
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-          >
-            <Menu
-              role="listbox"
-              id={seedID('autocomplete-menu')}
-              className={styles.OptionsList}
-              style={dynamicStyle}
-              aria-labelledby={seedID('autocomplete-trigger')}
+          <LazyMotion features={domMax} strict>
+            <m.div
+              variants={AutocompleteAnimation}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
             >
-              {filteredOptions.length === 0
-                ? <Text as="div" textAlign="center" dimmed={5}>{emptyMessage}</Text>
-                : Children.map(filteredOptions, (child) => isValidElement(child) && cloneElement(
-                  child,
-                  {
-                    onClick: handleOptionClick
-                  }
-                ))
+              <Menu
+                role="listbox"
+                id={seedID('autocomplete-menu')}
+                className={styles.OptionsList}
+                style={dynamicStyle}
+                aria-labelledby={seedID('autocomplete-trigger')}
+              >
+                {filteredOptions.length === 0
+                  ? <Text as="div" textAlign="center" dimmed={5}>{emptyMessage}</Text>
+                  : Children.map(filteredOptions, (child) => isValidElement(child) && cloneElement(
+                    child,
+                    {
+                      onClick: handleOptionClick
+                    }
+                  ))
               }
-            </Menu>
-          </motion.div>
+              </Menu>
+            </m.div>
+          </LazyMotion>
         </div>
         )}
       </AnimatePresence>

@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { AnimatePresence, motion } from 'framer-motion'
+import { domMax, LazyMotion, m, AnimatePresence } from 'framer-motion'
 import {
   ComponentType, CSSProperties, Fragment, ReactNode, useEffect, useMemo
 } from 'react'
@@ -343,9 +343,10 @@ export const Table = <T extends Record<string, unknown>>({
 
       {/* CONTEXT TOAST */}
       <AnimatePresence>
-        {selectedFlatRows?.length && (
+        <LazyMotion features={domMax} strict>
+          {selectedFlatRows?.length && (
           <Stack
-            as={motion.div}
+            as={m.div}
             className={styles.Toast}
             direction="row"
             hAlign="space-between"
@@ -371,11 +372,11 @@ export const Table = <T extends Record<string, unknown>>({
             </Text>
             {selectedActions}
           </Stack>
-        )}
+          )}
 
-        {/* HEADER */}
-        {(showHeader || selectableRows) && (
-          <motion.div
+          {/* HEADER */}
+          {(showHeader || selectableRows) && (
+          <m.div
             animate={{
               y: selectedFlatRows?.length ? 20 : 0,
               opacity: selectedFlatRows?.length ? 0 : 1,
@@ -397,8 +398,9 @@ export const Table = <T extends Record<string, unknown>>({
                 : null}
               {actions}
             </TableHeader>
-          </motion.div>
-        )}
+          </m.div>
+          )}
+        </LazyMotion>
       </AnimatePresence>
 
       {/* TABLE */}
