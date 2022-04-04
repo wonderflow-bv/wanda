@@ -979,10 +979,7 @@ export const SelectedRows = Template.bind({})
 SelectedRows.args = {
   title: 'With selectable rows',
   selectableRows: true,
-  selectedActions: () => <Button>Delete</Button>,
-  onSelectionChange: (selectedRows, selectedIds) => {
-    console.log({ selectedRows, selectedIds })
-  }
+  selectedActions: (selectedRowIds) => <Button onClick={() => console.log(selectedRowIds)}>Delete</Button>
 }
 
 export const HidingColumn = Template.bind({})

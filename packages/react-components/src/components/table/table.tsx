@@ -54,7 +54,7 @@ export type TableProps<T extends Record<string, unknown>> = PropsWithClass & {
   /**
    * The index of the page that should be set as active when the table is rendered.
    */
-  activePageIndex?: number;
+  initialPageIndex?: number;
   /**
    * The callback that is called when the active page index and page size change.
    * Passing this property along side `showPagination` will enable manual pagination,
@@ -175,11 +175,11 @@ export const Table = <T extends Record<string, unknown>>({
   emptyComponent,
   showPagination,
   isManualSorted,
-  onDataUpdate,
-  onSortChange,
   itemsPerPage = 10,
   totalRows,
-  activePageIndex = 0,
+  initialPageIndex = 0,
+  onDataUpdate,
+  onSortChange,
   pageClusters,
   initialSortBy = [],
   ...otherProps
@@ -240,7 +240,7 @@ export const Table = <T extends Record<string, unknown>>({
        */
       initialState: {
         sortBy: initialSortBy,
-        pageIndex: activePageIndex,
+        pageIndex: initialPageIndex,
         pageSize: showPagination ? itemsPerPage : undefined,
         hiddenColumns: getHiddenColumns()
       }
