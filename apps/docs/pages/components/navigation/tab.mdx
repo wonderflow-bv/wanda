@@ -5,8 +5,8 @@ import * as components from "@wonderflow/react-components";
 
 export const example = `<Elevator resting={1}>
   <Card padding={false}>
-    <Tab>
-      <Tab.Panel icon="check" label="Sign-up">
+    <Tab defaultValue="signup">
+      <Tab.Panel icon="check" label="Sign-up" value="signup">
         <Card>
           <Stack rowGap={24}>
             <Textfield label="Name" type="text" />
@@ -21,7 +21,7 @@ export const example = `<Elevator resting={1}>
           </Stack>
         </Card>
       </Tab.Panel>
-      <Tab.Panel icon="envelope" label="Login">
+      <Tab.Panel icon="envelope" label="Login" value="login">
         <Card>
           <Stack rowGap={24}>
             <Textfield label="E-Mail" type="email" />
@@ -73,8 +73,8 @@ import { Tab } from "@wonderflow/react-components";
 export default () => {
   return (
     <Tab>
-      <Tab.Panel label="Tab item 1">Tab panel 1</Tab.Panel>
-      <Tab.Panel label="Tab item 2">Tab panel 2</Tab.Panel>
+      <Tab.Panel value="1" label="Tab item 1">Tab panel 1</Tab.Panel>
+      <Tab.Panel value="2" label="Tab item 2">Tab panel 2</Tab.Panel>
     </Tab>
   );
 };
@@ -89,21 +89,46 @@ Contains all the tabs component parts.
 <PropsTable
   properties={[
     {
-      name: "state",
-      type: ["state"],
-      typeValue: "[number, React.Dispatch<React.SetStateAction<number>>]",
+      name: "defaultValue",
+      type: ["string"],
       default: "",
       required: false,
-      description: "Set the index of the tab to be selected.",
+      description: "Set the value of the tab to be selected on the first render.",
     },
     {
-      name: "onChange",
+      name: "onValueChange",
       type: ["function"],
-      typeValue: "(index: number) => void",
+      typeValue: "(value: string) => void",
       default: "",
       required: false,
       description:
         "Callback function called when the selected tab changes.",
+    },
+    {
+      name: "dir",
+      type: ["enum"],
+      typeValue: "'ltr' | 'rtl'",
+      default: "ltr",
+      required: false,
+      description:
+        "The direction of navigation between toolbar items.",
+    },
+    {
+      name: "activationMode",
+      type: ["enum"],
+      typeValue: "'automatic' | 'manual'",
+      default: "automatic",
+      required: false,
+      description:
+        "Whether a tab is activated automatically or manually.",
+    },
+    {
+      name: "loop",
+      type: ["boolean"],
+      default: "true",
+      required: false,
+      description:
+        "When true, keyboard navigation will loop from last tab to first, and vice versa.",
     },
   ]}
 />
@@ -115,8 +140,15 @@ Contains the content associated with each trigger.
 <PropsTable
   properties={[
     {
+      name: "value",
+      type: ["string"],
+      default: "",
+      required: true,
+      description: "Set the value of the tab to use as a unique identifier.",
+    },
+    {
       name: "label",
-      type: ["ReactNode"],
+      type: ["string"],
       default: "",
       required: false,
       description: "Set the tab panel name and accessible label",

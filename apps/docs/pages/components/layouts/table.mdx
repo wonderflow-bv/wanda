@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { MdxLayout } from "@/components/layouts/mdx";
 import { Playground } from "@/components/playground";
 import { PropsTable } from "@/components/props-table";
@@ -233,20 +234,48 @@ If needed each row can show related actions ior any custom element.
 
 export const CustomActionsTable = () => {
   const { onClose, titleId } = Components.useOverlayContext();
+  const tableColumns = useMemo(() =>  [
+    {
+      id: 'actions',
+      disableSortBy: true,
+      isToggable: true,
+      isCollapsed: true,
+      accessor: row => (
+        <Components.Stack direction="row" fill={false}>
+          <Components.IconButton icon="astronomy" kind="flat" dimension="small" />
+          <Components.Popover trigger={<Components.IconButton icon="more-vert" kind="flat" dimension="small" />}>
+            <Components.Menu>
+              <Components.Menu.Item
+                dimension="small"
+                autoFocus
+                icon="ctrl-right"
+              >
+                Sample long menu item
+              </Components.Menu.Item>
+              <Components.Menu.Item
+                dimension="small"
+                icon="arrow-down-to-bracket"
+              >
+                Short menu label
+              </Components.Menu.Item>
+              <Components.Separator />
+              <Components.Menu.Item dimension="small" icon="view">
+                Even shorter
+              </Components.Menu.Item>
+              <Components.Menu.Item dimension="small" disabled>
+                Really?
+              </Components.Menu.Item>
+            </Components.Menu>
+          </Components.Popover>
+        </Components.Stack>
+      )
+    },
+  ...columns
+  ], [columns])
   return (
     <Components.Table
-      columns={columns}
+      columns={tableColumns}
       data={data.slice(1, data.length - 5)}
-      actionsRowComponent={({ id }) => (
-        <Components.Stack direction="row" fill={false}>
-          <Components.IconButton icon="arrow-rotate-right" kind="flat" dimension="small" />
-          <Components.Tooltip
-            trigger={<Components.IconButton dimension="small" icon="message" kind="flat" />}
-          >
-            Row id is {id}
-          </Components.Tooltip>
-        </Components.Stack>
-      )}
     />
   );
 };
@@ -255,16 +284,17 @@ export const CustomActionsTable = () => {
   <CustomActionsTable />
 </LiveArea>
 
-```tsx highlight=7
-import { Table } from "@wonderflow/react-components";
-
-export default () => {
-  return <Table
-    columns={columns}
-    data={data}
-    actionsRowComponent={({ id }) => <div>Row id: {id}</div>}
-  />;
-};
+```tsx
+const columns = [
+  {
+    id: 'actions',
+    disableSortBy: true,
+    isToggable: true,
+    isCollapsed: true,
+    accessor: row => <div>actions</div>
+  },
+  /* ...other columns */
+]
 ```
 
 ## API Reference
@@ -289,12 +319,15 @@ This component extends [`react-table`](https://react-table.tanstack.com/docs/ove
       name: "columns",
       type: ["array"],
       typeValue: `
-      Columns<T> = Array<Column<T> & ColumnOptions<T>>\n
       ColumnOptions<T> = {
+        /* Set width based on the content */
         isCollapsed?: boolean;
+        /* Align column content */
         align?: 'start' | 'center' | 'end';
-        hideFromList?: boolean;
-      }`,
+        /* Hide column from visible columns */
+        isToggable?: boolean;
+      }\n
+      Columns<T> = Array<Column<T> & ColumnOptions<T>>`,
       typeLink: 'https://react-table.tanstack.com/docs/api/useTable#column-options',
       default: "",
       required: true,
@@ -307,7 +340,6 @@ This component extends [`react-table`](https://react-table.tanstack.com/docs/ove
       Data<T> = Array<{} & DataOptions<T>>\n
       DataOptions<T> = {
         subRows?: T[];
-        actions?: ReactNode | ReactNode[];
       }`,
       default: "[]",
       required: true,
@@ -335,16 +367,16 @@ This component extends [`react-table`](https://react-table.tanstack.com/docs/ove
       description: "The amount of entries to show for each page.",
     },
     {
-      name: "activePageIndex",
+      name: "initialPageIndex",
       type: ["number"],
       default: "0",
       required: false,
       description: "The index of the page that should be set as active when the table is rendered.",
     },
     {
-      name: "onDataUpdate",
+      name: "onPaginationChange",
       type: ["function"],
-      typeValue: `({ pageIndex, pageSize }) => Promise<void>`,
+      typeValue: `({ pageIndex, pageSize }) => Promise<void> | void`,
       default: "",
       required: false,
       description: "The callback that is called when the active page index and page size change. Passing this property along side `showPagination` will enable manual pagination, disabling the automatic one.",
@@ -369,14 +401,6 @@ This component extends [`react-table`](https://react-table.tanstack.com/docs/ove
       default: "",
       required: false,
       description: "Enable row selection. This property will render an additiona column at the start of the table, containing a checkbox.",
-    },
-    {
-      name: "onSelectionChange",
-      type: ["function"],
-      typeValue: "(selectedRows, selectedRowIds) => void",
-      default: "",
-      required: false,
-      description: "Callback run when the selected rows change.",
     },
     {
       name: "isManualSorted",
@@ -452,14 +476,15 @@ This component extends [`react-table`](https://react-table.tanstack.com/docs/ove
     {
       name: "selectedLabel",
       type: ["function"],
-      typeValue: `(selectedRows: Row<T>[]) => ReactNode`,
+      typeValue: `(selectedRowIds: IdType<T>[]) => ReactNode`,
       default: "`Selected items: ${selectedRows.length}`",
       required: false,
       description: "Set the label for selected items in the table. The function returns an array containing the selected rows objects.",
     },
     {
       name: "selectedActions",
-      type: ["ReactNode"],
+      type: ["function"],
+      typeValue: `(selectedRowIds: IdType<T>[]) => ReactNode`,
       default: "",
       required: false,
       description: "Pass custom components to show when rows are selected.",
@@ -485,14 +510,6 @@ This component extends [`react-table`](https://react-table.tanstack.com/docs/ove
       default: "",
       required: false,
       description: "A react component that add additional content when the row is expanded. By passing this prop, the row will be expandable. If fuction is passed, the function will be called with the `subRow` data and the function must return a component.",
-    },
-    {
-      name: "actionsRowComponent",
-      type: ["ReactNode", "function"],
-      typeValue: "ReactNode | (row: Row<T>) => ReactNode",
-      default: "",
-      required: false,
-      description: "A react component that add custom actions to rows. If fuction is passed, the function will be called with the `row` data and the function must return a component.",
     },
     {
       name: "emptyComponent",

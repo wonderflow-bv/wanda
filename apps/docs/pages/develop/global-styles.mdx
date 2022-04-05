@@ -99,8 +99,8 @@ Here the complete list of the available custom media queries you can use:
 
 If you need to create dynamic css declaration, or reuse block of declarations inside your css you can define and use CSS mixins.
 
-<Tab>
-  <Tab.Panel icon="layer-group" label="Source">
+<Tab defaultValue="source">
+  <Tab.Panel icon="layer-group" label="Source" value="source">
 
 ```css hideCopy
 @define-mixin icon $network, $color: blue {
@@ -117,7 +117,7 @@ If you need to create dynamic css declaration, or reuse block of declarations in
 ```
 
   </Tab.Panel>
-  <Tab.Panel icon="arrow-right" label="Output">
+  <Tab.Panel icon="arrow-right" label="Output" value="output">
 
 ```css hideCopy
 .Icon.is-youtube {

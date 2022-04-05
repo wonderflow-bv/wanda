@@ -1,5 +1,5 @@
 import { CSSProperties, forwardRef, PropsWithChildren, ReactNode } from 'react'
-import { motion } from 'framer-motion'
+import { domMax, LazyMotion, m } from 'framer-motion'
 import clsx from 'clsx'
 import { FocusOn, AutoFocusInside } from 'react-focus-on'
 import { useKeyPress } from 'ahooks'
@@ -100,22 +100,23 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(({
         onClickOutside={closeOnClickOutside ? onClose : undefined}
         onEscapeKey={onClose}
       >
-        <motion.div
-          variants={DrawerAnimation}
-          initial="hidden"
-          animate="visible"
-          exit="hidden"
-          className={styles.Container}
-          data-drawer-side={side}
-        >
-          <Elevator resting={4}>
-            <div
-              className={styles.Content}
-              style={dynamicStyle}
-              ref={forwardedRef}
-              {...otherProps}
-            >
-              {(showHeader && title) && (
+        <LazyMotion features={domMax}>
+          <m.div
+            variants={DrawerAnimation}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            className={styles.Container}
+            data-drawer-side={side}
+          >
+            <Elevator resting={4}>
+              <div
+                className={styles.Content}
+                style={dynamicStyle}
+                ref={forwardedRef}
+                {...otherProps}
+              >
+                {(showHeader && title) && (
                 <Stack
                   vAlign="center"
                   fill={false}
@@ -126,13 +127,14 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(({
                   <Title responsive={false} level="6" id={titleId}>{title}</Title>
                   {onClose && <IconButton onClick={onClose} className={styles.CloseButton} icon="xmark" kind="flat" />}
                 </Stack>
-              )}
-              <AutoFocusInside>
-                {children}
-              </AutoFocusInside>
-            </div>
-          </Elevator>
-        </motion.div>
+                )}
+                <AutoFocusInside>
+                  {children}
+                </AutoFocusInside>
+              </div>
+            </Elevator>
+          </m.div>
+        </LazyMotion>
       </FocusOn>
     </div>
   )

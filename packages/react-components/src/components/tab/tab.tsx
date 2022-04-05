@@ -1,119 +1,91 @@
+import * as TabsPrimitive from '@radix-ui/react-tabs'
+import { domMax, LazyMotion, m } from 'framer-motion'
 import {
-  useEffect,
-  useState,
-  forwardRef,
-  ReactNode,
-  Children,
-  cloneElement,
-  isValidElement
+  Children, isValidElement, PropsWithChildren, useCallback, useState
 } from 'react'
-import clsx from 'clsx'
-import { useUIDSeed } from 'react-uid'
-import { TabItem } from './tab-item'
-import { TabList, TabListProps } from './tab-list'
-import { TabPanel, TabPanelProps } from './tab-panel'
-import { Tabs as TabsWrapper } from './primitive-tab'
-import { Polymorphic } from '@/components'
+
+import { Button } from '@/components'
 
 import styles from './tab.module.css'
+import { TabPanel } from './tabs-panel'
+import { useUIDSeed } from 'react-uid'
 
-/* -------------------------------------------------------------------------- */
-/*                                  Tab.Root                                  */
-/* -------------------------------------------------------------------------- */
-
-/**
- * Tab.Root
- * Public api
- */
-export type TabProps = PropsWithClass & {
+export type TabProps = PropsWithChildren<PropsWithClass> & {
   /**
-   * Pass the children Tab.Panel components.
+   * The value for the selected tab, if controlled
    */
-  children: ReactNode;
+  value?: TabsPrimitive.TabsProps['value'];
   /**
-   * Set the index of the tab to be selected.
+   * The value of the tab to select by default, if uncontrolled
    */
-  state?: [number, React.Dispatch<React.SetStateAction<number>>];
+  defaultValue?: TabsPrimitive.TabsProps['defaultValue'];
   /**
-   * Callback function called when the selected tab changes.
+   * A function called when a new tab is selected
    */
-  onChange?(index: number): void;
-}
+  onValueChange?: TabsPrimitive.TabsProps['onValueChange'];
+  /**
+   * The direction of navigation between toolbar items.
+   * @defaultValue ltr
+   */
+  dir?: TabsPrimitive.TabsProps['dir'];
+  /**
+   * When `automatic`, tabs are activated when receiving focus.
+   * When `manual`, tabs are activated when clicked.
+   */
+  activationMode?: TabsPrimitive.TabsProps['activationMode'];
+  /**
+   * When true, keyboard navigation will loop from last tab to first, and vice versa.
+   * @defaultValue true
+   */
+  loop?: TabsPrimitive.TabsListProps['loop'];
+};
 
-type TabComponent = React.ForwardRefExoticComponent<TabProps> & {
-  Panel: React.ForwardRefExoticComponent<TabPanelProps>;
-  Item: React.ForwardRefExoticComponent<Polymorphic.OwnProps<typeof TabItem>>;
-  List: React.ForwardRefExoticComponent<TabListProps>;
-}
-
-/**
- * Tab.Root
- * Component
- */
-export const Tab = forwardRef<HTMLDivElement, TabProps>(({
-  children,
+export const Tab = ({
   className,
-  state,
-  onChange,
+  children,
+  onValueChange,
+  defaultValue,
+  loop,
   ...otherProps
-}, forwardedRef) => {
-  const innerState = useState(0)
-  const tabState = state || innerState
-  const [currentTab] = tabState
-  const seedID = useUIDSeed()
-
-  useEffect(() => {
-    if (typeof onChange === 'function') {
-      onChange(currentTab)
-    }
-  }, [currentTab, onChange])
+}: TabProps) => {
+  const [activeItem, setActiveItem] = useState<string>(defaultValue ?? '')
+  const uid = useUIDSeed()
+  const handleOnVlaueChange = useCallback(
+    (value: string) => {
+      onValueChange?.(value)
+      setActiveItem(value)
+    },
+    [onValueChange]
+  )
 
   return (
-    <div
-      ref={forwardedRef}
-      className={clsx(styles.Tab, className)}
+    <TabsPrimitive.Root
+      defaultValue={defaultValue}
+      onValueChange={handleOnVlaueChange}
       {...otherProps}
     >
-      <TabsWrapper state={tabState}>
-
-        {/**
-         * Auto generate the list of triggers based on
-         * children. Assign required ARIA attributes and ID's
-         */}
-        <TabList>
-          {Children.map(children, (child, index) => isValidElement(child) && (
-            <TabItem
-              id={seedID('tab-item')}
-              aria-controls={seedID('tab-panel')}
-              icon={child.props.icon}
+      <LazyMotion features={domMax} strict>
+        <TabsPrimitive.List className={styles.List} loop={loop}>
+          {Children.map(children, child => isValidElement(child) && (
+            <TabsPrimitive.Trigger
+              value={child.props.value}
+              disabled={child.props.disabled}
+              className={styles.Trigger}
+              asChild
             >
-              {child.props.label}
-            </TabItem>
+              <Button kind="flat" icon={child.props.icon}>
+                {child.props.label}
+                {(child.props.value === activeItem) && 'active' && (
+                  <m.span className={styles.Highlight} layoutId={uid('tab-highlight')} />
+                )}
+              </Button>
+            </TabsPrimitive.Trigger>
           ))}
-        </TabList>
-
-        {/**
-         * Loop children to assign required ARIA attributes and ID's
-         */}
-        {Children.map(children, (child, index) => isValidElement(child) && cloneElement(
-          child,
-          {
-            id: seedID('tab-panel'),
-            'aria-labelledby': seedID('tab-item')
-          }
-        ))}
-
-      </TabsWrapper>
-    </div>
+        </TabsPrimitive.List>
+      </LazyMotion>
+      {children}
+    </TabsPrimitive.Root>
   )
-}) as TabComponent
-
-Tab.displayName = 'Tab'
-
-/* -------------------------------------------------------------------------- */
-/*                                   Export                                   */
-/* -------------------------------------------------------------------------- */
+}
 
 Tab.Panel = TabPanel
-Tab.Item = TabItem
-Tab.List = TabList
