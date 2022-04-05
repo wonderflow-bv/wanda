@@ -1,5 +1,32 @@
 # docs
 
+## 8.0.0
+
+### Major Changes
+
+- 67aed15: Refactoring Tab component and remove obsolete code
+- 67aed15: Refactoring Table component to improve performances and features:
+
+  - Various rendering improvements
+  - `hideFromList` column's prop is renamed into `isToggable`.
+  - `activePageIndex` prop is renamed into `initialPageIndex`.
+  - `onDataUpdate` prop is renamed into `onPaginationChange`.
+  - Chanded types for `selectedLabel`.
+  - `selectedActions` is now a function that returns a react node and pass `selectedRowIds` as parameter.
+  - `onSelectionChange` prop has been removed.
+  - `actionsRowComponent` prop has been removed.
+
+### Minor Changes
+
+- 67aed15: Add new Container `medium` size. The old `medium` dimension is now 'small'.
+
+### Patch Changes
+
+- Updated dependencies [67aed15]
+- Updated dependencies [67aed15]
+- Updated dependencies [67aed15]
+  - @wonderflow/react-components@8.0.0
+
 ## 7.0.0
 
 ### Major Changes
