@@ -1030,7 +1030,6 @@ Pagination.args = {
 }
 
 const RowActionsTemplate: ComponentStory<typeof Table> = ({
-  dataWithIds,
   columns,
   ...args
 }) => {
