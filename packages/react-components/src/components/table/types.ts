@@ -5,7 +5,7 @@ import {
   CustomHeaderGroup
 } from 'react-table'
 
-export type PaginationType = {
+export type PaginationPageType = {
   pageIndex: number;
   pageSize: number;
 }
@@ -13,7 +13,7 @@ export type PaginationType = {
 export type OptionalColumnTypes = {
   isCollapsed?: boolean;
   align?: 'start' | 'center' | 'end';
-  hideFromList?: boolean;
+  isToggable?: boolean;
   expander?: boolean;
 }
 

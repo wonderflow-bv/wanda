@@ -1,14 +1,15 @@
 import clsx from 'clsx'
 import { domMax, LazyMotion, m, AnimatePresence } from 'framer-motion'
 import {
-  ComponentType, CSSProperties, Fragment, ReactNode, useEffect, useMemo
+  ComponentType, CSSProperties, Fragment, ReactNode, useCallback, useMemo
 } from 'react'
 import {
-  Hooks, IdType, Row, SortingRule,
+  Hooks, IdType, Row,
   useExpanded, usePagination,
-  useRowSelect, useSortBy, useTable
+  useRowSelect, useSortBy, useTable, SortingRule
 } from 'react-table'
 import { useUIDSeed } from 'react-uid'
+import { useUpdateEffect } from 'ahooks'
 
 import {
   Skeleton, Stack, Text,
@@ -25,8 +26,7 @@ import { TablePagination, TablePaginationProps } from './table-pagination'
 import { TableRow } from './table-row'
 import {
   CellType, CustomColumnInstanceType, CustomColumnsType,
-  CustomSortingRule,
-  HeaderGroupType, OptionalDataTypes, PaginationType
+  HeaderGroupType, OptionalDataTypes, CustomSortingRule, PaginationPageType
 } from './types'
 
 export type TableProps<T extends Record<string, unknown>> = PropsWithClass & {
@@ -43,50 +43,10 @@ export type TableProps<T extends Record<string, unknown>> = PropsWithClass & {
    */
   defaultHiddenColumns?: Array<IdType<T>>;
   /**
-   * Show pagination below the table. This is recommended only for tables with a lot of rows.
-   */
-  showPagination?: boolean;
-  /**
-   * The amount of entries to show for each page.
-   */
-  itemsPerPage?: number;
-  /**
-   * The index of the page that should be set as active when the table is rendered.
-   */
-  activePageIndex?: number;
-  /**
-   * The callback that is called when the active page index and page size change.
-   * Passing this property along side `showPagination` will enable manual pagination,
-   * disabling the automatic one.
-   */
-  onDataUpdate?: ({ pageIndex, pageSize }: PaginationType) => Promise<void> | void;
-  /**
-   * Set the number of pages to show in the pagination. Used only when doing manual pagination.
-   */
-  totalRows?: number;
-  /**
-   * Set clusters of items to show in a single page. These values are used to
-   * compute the select options for the page size select.
-   */
-  pageClusters?: TablePaginationProps['clusters'];
-  /**
    * Enable row selection. This property will render an additiona column
    * at the start of the table, containing a checkbox.
    */
   selectableRows?: boolean;
-  /**
-   * Callback run when the selected rows change
-   */
-  onSelectionChange?: (selectedRows?: Array<Row<T>>, selectedRowIds?: Record<IdType<T>, boolean>) => void;
-  /**
-   * If true, disable the automatic column sorting of the table. Turn this on if you want to
-   * to control the sorting yourself.
-   */
-  isManualSorted?: boolean;
-  /**
-   * Callback run when a column is sorted
-   */
-  onSortChange?: (sorting: Array<CustomSortingRule<T>>) => void;
   /**
    * Add an alternate style to the table rows
    */
@@ -123,11 +83,11 @@ export type TableProps<T extends Record<string, unknown>> = PropsWithClass & {
   /**
    * Set the label for selected items in the table. Default to "Selected items"
    */
-  selectedLabel?: (selectedRows: Array<Row<T>>) => ReactNode;
-  /**
-  * Pass custom components to show when rows are selected.
-  */
-  selectedActions?: ReactNode;
+  selectedLabel?: (selectedRowIds: Array<IdType<T>>) => ReactNode;
+   /**
+   * Pass custom components to show when rows are selected.
+   */
+  selectedActions?: (selectedRowIds: Array<IdType<T>>) => ReactNode;
   /**
    * Set the table height after which the table will scroll.
    */
@@ -145,20 +105,50 @@ export type TableProps<T extends Record<string, unknown>> = PropsWithClass & {
    */
   expandableRowComponent?: ComponentType<T>;
   /**
-   * A react component that add custom actions to rows. If fuction is passed,
-   * the function will be called with the row data and the function must return
-   * a component.
-   */
-  actionsRowComponent?: ComponentType<Row<T>>;
-  /**
    * Custom component/empty state to show when the table has no data or
    * all columns have been toggled off.
    */
   emptyComponent?: ReactNode;
   /**
+   * Show pagination below the table. This is recommended only for tables with a lot of rows.
+   */
+  showPagination?: boolean;
+  /**
+   * The index of the page that should be set as active when the table is rendered.
+   */
+  initialPageIndex?: number;
+   /**
+    * The amount of entries to show for each page.
+    */
+  itemsPerPage?: number;
+   /**
+    * Set the number of pages to show in the pagination. Used only when doing manual pagination.
+    */
+  totalRows?: number;
+   /**
+    * Set clusters of items to show in a single page. These values are used to
+    * compute the select options for the page size select.
+    */
+  pageClusters?: TablePaginationProps['clusters'];
+   /**
+    * The callback that is called when the active page index and page size change.
+    * Passing this property will enable manual pagination,
+    * disabling the automatic one.
+    */
+  onPaginationChange?: ({ pageIndex, pageSize }: PaginationPageType) => Promise<void> | void;
+  /**
+   * If true, disable the automatic column sorting of the table. Turn this on if you want to
+   * to control the sorting yourself.
+   */
+  isManualSorted?: boolean;
+   /**
    * Set the initial sorted column and order by passing column id and order.
    */
   initialSortBy?: Array<SortingRule<T>>;
+   /**
+    * Callback run when a column is sorted
+    */
+  onSortChange?: (sorting: Array<CustomSortingRule<T>>) => void;
 }
 
 export const Table = <T extends Record<string, unknown>>({
@@ -167,7 +157,6 @@ export const Table = <T extends Record<string, unknown>>({
   columns,
   data = [],
   selectableRows,
-  onSelectionChange,
   stripes,
   showSeparators = true,
   title,
@@ -182,23 +171,34 @@ export const Table = <T extends Record<string, unknown>>({
   loading,
   background,
   expandableRowComponent,
-  actionsRowComponent: ActionsRowComponent,
   emptyComponent,
   showPagination,
   isManualSorted,
-  onDataUpdate,
-  onSortChange,
   itemsPerPage = 10,
   totalRows,
-  activePageIndex = 0,
+  initialPageIndex = 0,
+  onPaginationChange,
+  onSortChange,
   pageClusters,
   initialSortBy = [],
   ...otherProps
 }: TableProps<T>) => {
   const uid = useUIDSeed()
   const hasSomeExpandableRows = useMemo(() => data.some(d => d.subRows), [data])
-  const isManualPaginated = useMemo(() => Boolean(onDataUpdate && showPagination && totalRows),
-    [onDataUpdate, showPagination, totalRows])
+  const isManualPaginated = useMemo(() => Boolean(showPagination && onPaginationChange && totalRows), [showPagination, totalRows, onPaginationChange])
+  const manualPaginationPageCount = useMemo(() => (isManualPaginated && totalRows) ? Math.ceil(totalRows / itemsPerPage) : -1, [isManualPaginated, totalRows, itemsPerPage])
+
+  const getHiddenColumns = useCallback(() => {
+    const hiddenColumns = defaultHiddenColumns ? [...defaultHiddenColumns] : []
+    if (!selectableRows) hiddenColumns.push('selection')
+    if (!hasSomeExpandableRows) hiddenColumns.push('expander')
+
+    return hiddenColumns
+  }, [defaultHiddenColumns, selectableRows, hasSomeExpandableRows])
+
+  const getRowId = useCallback((originalRow, relativeIndex, parent) =>
+    originalRow?._id || (parent && [parent.id, relativeIndex].join('.')) || relativeIndex.toString()
+  , [])
 
   const {
     getTableProps,
@@ -221,14 +221,16 @@ export const Table = <T extends Record<string, unknown>>({
     {
       columns,
       data,
+      getRowId,
+      expandSubRows: Boolean(!expandableRowComponent),
+      manualPagination: isManualPaginated,
+      pageCount: manualPaginationPageCount,
       manualSortBy: isManualSorted,
       disableMultiSort: true,
-      expandSubRows: Boolean(!expandableRowComponent),
       autoResetHiddenColumns: false,
       autoResetPage: false,
-      manualPagination: isManualPaginated,
+      autoResetSortBy: false,
       autoResetSelectedRows: false,
-      pageCount: (isManualPaginated && totalRows) ? Math.ceil(totalRows / itemsPerPage) : 10,
       /**
        * This `paginateExpandedRows` prop prevent expanded rows to
        * be placed in the next page. But it breaks row selection
@@ -236,9 +238,9 @@ export const Table = <T extends Record<string, unknown>>({
        */
       initialState: {
         sortBy: initialSortBy,
-        pageIndex: activePageIndex,
-        pageSize: showPagination ? itemsPerPage : undefined,
-        hiddenColumns: ['selection', 'expander']
+        pageIndex: initialPageIndex,
+        pageSize: showPagination ? itemsPerPage : data.length,
+        hiddenColumns: getHiddenColumns()
       }
     },
     useSortBy,
@@ -249,16 +251,16 @@ export const Table = <T extends Record<string, unknown>>({
       const checkboxColumn: CustomColumnsType<T> = [{
         id: 'selection',
         isCollapsed: true,
-        hideFromList: true,
-        Header: ({ getToggleAllRowsSelectedProps }) => (
-          !loading ? <TableCheckbox {...getToggleAllRowsSelectedProps()} /> : null
+        isToggable: true,
+        Header: ({ getToggleAllPageRowsSelectedProps }) => (
+          !loading ? <TableCheckbox {...getToggleAllPageRowsSelectedProps()} /> : null
         ),
         Cell: ({ row }: {row: Row<T>}) => <TableCheckbox {...row.getToggleRowSelectedProps()} />
       }]
 
       const expanderColumn: CustomColumnsType<T> = [{
         id: 'expander',
-        hideFromList: true,
+        isToggable: true,
         expander: true,
         minWidth: 40,
         align: 'center',
@@ -280,52 +282,36 @@ export const Table = <T extends Record<string, unknown>>({
           : null)
       }]
 
-      const actionsColumn: CustomColumnsType<T> = [{
-        id: 'actions',
-        isCollapsed: true,
-        hideFromList: true,
-        Cell: ({ row }: {row: Row<T>}) => (ActionsRowComponent ? <ActionsRowComponent {...row} /> : null)
-      }]
-
       hooks.visibleColumns.push(columns => [
         ...checkboxColumn,
         ...expanderColumn,
-        ...actionsColumn,
         ...columns
       ])
     }
   )
 
-  useEffect(() => {
-    const artificialColumns = defaultHiddenColumns ?? []
-    if (!selectableRows) artificialColumns.push('selection')
-    if (!hasSomeExpandableRows) artificialColumns.push('expander')
-    if (!ActionsRowComponent) artificialColumns.push('actions')
-
-    setHiddenColumns(artificialColumns)
+  useUpdateEffect(() => {
+    const hiddenColumns = getHiddenColumns()
+    setHiddenColumns(hiddenColumns)
   }, [
-    selectableRows,
     setHiddenColumns,
-    defaultHiddenColumns,
-    hasSomeExpandableRows,
-    ActionsRowComponent
+    getHiddenColumns
   ])
 
-  useEffect(() => {
-    onSelectionChange?.(selectedFlatRows, selectedRowIds)
-  }, [onSelectionChange, selectedFlatRows, selectedRowIds])
-
-  useEffect(() => {
+  useUpdateEffect(() => {
     onSortChange?.(sortBy)
   }, [onSortChange, sortBy])
 
-  useEffect(() => {
-    onDataUpdate?.({ pageIndex, pageSize })
-  }, [onDataUpdate, pageIndex, pageSize])
+  useUpdateEffect(() => {
+    onPaginationChange?.({ pageIndex, pageSize })
+  }, [onPaginationChange, pageIndex, pageSize])
 
-  const rowEntries = useMemo(() => (showPagination ? page : rows), [page, rows, showPagination])
+  const rowEntries = useMemo(() => {
+    return (showPagination ? page : rows)
+  }, [page, rows, showPagination])
+
   const filteredVisibleColumns = useMemo(() => (
-    visibleColumns.filter((col: CustomColumnInstanceType<T>) => !col.hideFromList)
+    visibleColumns.filter((col: CustomColumnInstanceType<T>) => !col.isToggable)
   ), [visibleColumns])
 
   const expandedRows = useMemo(() => rows.filter(row => row.canExpand && row.isExpanded).map(r => r.id), [rows])
@@ -343,8 +329,8 @@ export const Table = <T extends Record<string, unknown>>({
 
       {/* CONTEXT TOAST */}
       <AnimatePresence>
-        <LazyMotion features={domMax} strict>
-          {selectedFlatRows?.length && (
+        <LazyMotion features={domMax}>
+          {!!Object.keys(selectedRowIds).length && selectableRows && (
           <Stack
             as={m.div}
             className={styles.Toast}
@@ -355,7 +341,7 @@ export const Table = <T extends Record<string, unknown>>({
             vPadding={8}
             fill={false}
             columnGap={16}
-            initial={{ y: -16, opacity: 0 }}
+            initial={{ y: '-16px', opacity: 0 }}
             animate={{
               y: 0,
               opacity: 1,
@@ -365,12 +351,12 @@ export const Table = <T extends Record<string, unknown>>({
                 damping: 30
               }
             }}
-            exit={{ y: -16, opacity: 0 }}
+            exit={{ y: '-16px', opacity: 0 }}
           >
             <Text as="span" size={14} weight="bold">
-              {selectedLabel(selectedFlatRows)}
+              {selectedLabel(Object.keys(selectedRowIds))}
             </Text>
-            {selectedActions}
+            {selectedActions?.(Object.keys(selectedRowIds))}
           </Stack>
           )}
 
@@ -503,7 +489,7 @@ export const Table = <T extends Record<string, unknown>>({
           currentPage={pageIndex}
           totalPages={pageCount}
           isManual={Boolean(isManualPaginated && totalRows)}
-          onPageSizeChange={newPageSize => setPageSize(newPageSize)}
+          onPageSizeChange={setPageSize}
           onPageClick={selected => gotoPage(selected)}
         />
       )}
