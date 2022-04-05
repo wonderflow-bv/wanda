@@ -83,11 +83,11 @@ export type TableProps<T extends Record<string, unknown>> = PropsWithClass & {
   /**
    * Set the label for selected items in the table. Default to "Selected items"
    */
-   selectedLabel?: (selectedRowIds: Array<IdType<T>>) => ReactNode;
+  selectedLabel?: (selectedRowIds: Array<IdType<T>>) => ReactNode;
    /**
    * Pass custom components to show when rows are selected.
    */
-   selectedActions?: (selectedRowIds: Array<IdType<T>>) => ReactNode;
+  selectedActions?: (selectedRowIds: Array<IdType<T>>) => ReactNode;
   /**
    * Set the table height after which the table will scroll.
    */
@@ -116,31 +116,31 @@ export type TableProps<T extends Record<string, unknown>> = PropsWithClass & {
   /**
    * The index of the page that should be set as active when the table is rendered.
    */
-   initialPageIndex?: number;
+  initialPageIndex?: number;
    /**
     * The amount of entries to show for each page.
     */
-   itemsPerPage?: number;
+  itemsPerPage?: number;
    /**
     * Set the number of pages to show in the pagination. Used only when doing manual pagination.
     */
-   totalRows?: number;
+  totalRows?: number;
    /**
     * Set clusters of items to show in a single page. These values are used to
     * compute the select options for the page size select.
     */
-   pageClusters?: TablePaginationProps['clusters'];
+  pageClusters?: TablePaginationProps['clusters'];
    /**
     * The callback that is called when the active page index and page size change.
     * Passing this property will enable manual pagination,
     * disabling the automatic one.
     */
-    onPaginationChange?: ({ pageIndex, pageSize }: PaginationPageType) => Promise<void> | void;
+  onPaginationChange?: ({ pageIndex, pageSize }: PaginationPageType) => Promise<void> | void;
   /**
    * If true, disable the automatic column sorting of the table. Turn this on if you want to
    * to control the sorting yourself.
    */
-   isManualSorted?: boolean;
+  isManualSorted?: boolean;
    /**
    * Set the initial sorted column and order by passing column id and order.
    */
@@ -148,7 +148,7 @@ export type TableProps<T extends Record<string, unknown>> = PropsWithClass & {
    /**
     * Callback run when a column is sorted
     */
-   onSortChange?: (sorting: Array<CustomSortingRule<T>>) => void;
+  onSortChange?: (sorting: Array<CustomSortingRule<T>>) => void;
 }
 
 export const Table = <T extends Record<string, unknown>>({
