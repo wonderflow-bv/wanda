@@ -13,7 +13,7 @@ export type PaginationPageType = {
 export type OptionalColumnTypes = {
   isCollapsed?: boolean;
   align?: 'start' | 'center' | 'end';
-  hideFromList?: boolean;
+  isToggable?: boolean;
   expander?: boolean;
 }
 

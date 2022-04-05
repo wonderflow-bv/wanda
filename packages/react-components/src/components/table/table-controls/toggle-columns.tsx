@@ -14,7 +14,7 @@ export const ToggleColumnsControl = <T extends Record<string, unknown>>({
   visibleColumns
 }: ToggleColumnsControlProps<T>) => {
   const someVisibleColums = useMemo(() => visibleColumns.length !== 0, [visibleColumns])
-  const filteredColumns = useMemo(() => columns.filter(col => !col.hideFromList), [columns])
+  const filteredColumns = useMemo(() => columns.filter(col => !col.isToggable), [columns])
 
   const handleToggleAll = useCallback(
     () => {
@@ -48,7 +48,7 @@ export const ToggleColumnsControl = <T extends Record<string, unknown>>({
         >
           Toggle All
         </Menu.ItemCheckbox>
-        {columns.filter(col => !col.hideFromList).map((column, i) => (
+        {columns.filter(col => !col.isToggable).map((column, i) => (
           <Menu.ItemCheckbox
             autoFocus={i === 0}
             key={column.id}

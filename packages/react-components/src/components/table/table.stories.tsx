@@ -1039,7 +1039,7 @@ const RowActionsTemplate: ComponentStory<typeof Table> = ({
       {
         id: 'actions',
         disableSortBy: true,
-        hideFromList: true,
+        isToggable: true,
         isCollapsed: true,
         accessor: row => (
           <Stack direction="row" fill={false}>

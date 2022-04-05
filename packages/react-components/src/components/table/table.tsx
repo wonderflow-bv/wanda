@@ -251,7 +251,7 @@ export const Table = <T extends Record<string, unknown>>({
       const checkboxColumn: CustomColumnsType<T> = [{
         id: 'selection',
         isCollapsed: true,
-        hideFromList: true,
+        isToggable: true,
         Header: ({ getToggleAllPageRowsSelectedProps }) => (
           !loading ? <TableCheckbox {...getToggleAllPageRowsSelectedProps()} /> : null
         ),
@@ -260,7 +260,7 @@ export const Table = <T extends Record<string, unknown>>({
 
       const expanderColumn: CustomColumnsType<T> = [{
         id: 'expander',
-        hideFromList: true,
+        isToggable: true,
         expander: true,
         minWidth: 40,
         align: 'center',
@@ -311,7 +311,7 @@ export const Table = <T extends Record<string, unknown>>({
   }, [page, rows, showPagination])
 
   const filteredVisibleColumns = useMemo(() => (
-    visibleColumns.filter((col: CustomColumnInstanceType<T>) => !col.hideFromList)
+    visibleColumns.filter((col: CustomColumnInstanceType<T>) => !col.isToggable)
   ), [visibleColumns])
 
   const expandedRows = useMemo(() => rows.filter(row => row.canExpand && row.isExpanded).map(r => r.id), [rows])
