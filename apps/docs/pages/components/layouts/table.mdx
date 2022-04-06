@@ -148,7 +148,7 @@ export const example = `<Table
   data={data}
   selectableRows
   actions={<Button kind="secondary">See more</Button>}
-  selectedActions={<Button>Delete</Button>}
+  selectedActions={() => <Button>Delete</Button>}
   showPagination
   itemsPerPage={5}
 />`;
