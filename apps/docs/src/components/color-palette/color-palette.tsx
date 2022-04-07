@@ -27,7 +27,7 @@ export const ColorPalette = ({
   ...props
 }: ColorPaletteProps) => {
   const uid = useUIDSeed()
-  const [showHex, setShowHex] = useState(false)
+  const [showHex, setShowHex] = useState(true)
   const colorArray = useMemo(() => Object.keys(colors), [colors])
 
   return (
