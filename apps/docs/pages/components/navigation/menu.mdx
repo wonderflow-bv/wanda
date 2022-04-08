@@ -10,6 +10,7 @@ export const example = `() => {
   return (
     <Menu style={{ inlineSize: '100%', maxInlineSize: 400 }}>
       <Menu.Item
+        value="1"
         autoFocus
         decoration={<Chip dimension="small">Decoration</Chip>}
         icon="user"
@@ -17,6 +18,7 @@ export const example = `() => {
       Item option 1
       </Menu.Item>
       <Menu.ItemCheckbox
+        value="2"
         onClick={() => setChecked(val => !val)}
         icon={checked ? 'check' : undefined}
         checked={checked}
@@ -25,12 +27,13 @@ export const example = `() => {
       </Menu.ItemCheckbox>
       <Separator />
       <Menu.Item
+        value="3"
         decoration={<Text size={14} sentiment="danger">Danger</Text>}
         icon="right-from-bracket"
       >
         Item option 3
       </Menu.Item>
-      <Menu.Item disabled icon="right-from-bracket">
+      <Menu.Item value="4" disabled icon="right-from-bracket">
         Disabled option 4
       </Menu.Item>
     </Menu>
@@ -92,6 +95,13 @@ export default () => {
       description: "Whether the menu item should have an icon",
     },
     {
+      name: "value",
+      type: ["string"],
+      default: '',
+      required: true,
+      description: "Assign a value to the menu option",
+    },
+    {
       name: "iconPosition",
       type: ["enum"],
       typeValue: "'left' | 'right'",
@@ -110,7 +120,7 @@ export default () => {
     {
       name: "onClick",
       type: ["function"],
-      typeValue: "(event?: Event) => void",
+      typeValue: "(event: Event, value: string) => void",
       default: "",
       required: false,
       description: "Callback function to be called when the menu item is pressed.",
