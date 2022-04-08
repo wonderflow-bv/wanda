@@ -7,11 +7,6 @@ export type AutocompleteOptionProps = PropsWithChildren<PropsWithClass> & Except
   'padding' | 'autoFocus' | 'description' | 'onClick'
 > & {
   /**
-   * Value of the option.
-   * This is the value that will be passed to the `onChange` callback.
-   */
-  value: string;
-  /**
    * Callback called when the option is clicked.
    * It passes the value and the inner text of the option as arguments.
    */
@@ -39,6 +34,7 @@ export const AutocompleteOption = forwardRef<HTMLButtonElement, AutocompleteOpti
 
   return (
     <Menu.Item
+      value={value}
       ref={forwardedRef}
       role="option"
       padding={false}

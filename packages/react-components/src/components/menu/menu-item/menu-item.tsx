@@ -25,7 +25,7 @@ export type MenuItemProps = {
   /**
    * Callback function to be called when the menu item is pressed.
    */
-  onClick?(event?: Event): void;
+  onClick?(event: Event, value: string): void;
   /**
    * Add an extra description to the menu item.
    * This uses the `<Tooltip>` component internally.
@@ -57,6 +57,10 @@ export type MenuItemProps = {
    * if `Menu.Item` is rendered as ´<button>´ (default).
    */
   decoration?: ReactNode;
+  /**
+   * Assign a string value to the menu option. This is returned when the menu item is clicked.
+   */
+  value: string;
 }
 
 type PolymorphicMenuItem = Polymorphic.ForwardRefComponent<'button', MenuItemProps>;
@@ -74,6 +78,7 @@ export const MenuItem = forwardRef(({
   disabled = false,
   autoFocus,
   decoration,
+  value,
   ...otherProps
 }, forwardedRef) => {
   const itemRef = useRef<any>(forwardedRef)
@@ -86,10 +91,10 @@ export const MenuItem = forwardRef(({
     (e) => {
       if (onClick) {
         handleClick()
-        onClick(e)
+        onClick(e, value)
       }
     },
-    [handleClick, onClick]
+    [handleClick, onClick, value]
   )
 
   const InnerContent = useMemo(() => (
