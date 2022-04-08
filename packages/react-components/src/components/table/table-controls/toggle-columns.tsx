@@ -42,6 +42,7 @@ export const ToggleColumnsControl = <T extends Record<string, unknown>>({
     >
       <Menu>
         <Menu.ItemCheckbox
+          value="toggle-all"
           onClick={() => handleToggleAll()}
           checked
           icon={visibleColumns.length === 0 ? 'check' : 'minus'}
@@ -50,6 +51,7 @@ export const ToggleColumnsControl = <T extends Record<string, unknown>>({
         </Menu.ItemCheckbox>
         {columns.filter(col => !col.isToggable).map((column, i) => (
           <Menu.ItemCheckbox
+            value={column.id}
             autoFocus={i === 0}
             key={column.id}
             checked={column.isVisible}
