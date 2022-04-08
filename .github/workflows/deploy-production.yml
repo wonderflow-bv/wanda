@@ -1,6 +1,10 @@
-name: Deploy to production
+name: production
 
 on: workflow_dispatch
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   deploy:
@@ -18,6 +22,6 @@ jobs:
         with:
           scope: wanda-ds
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-args: "--prod"
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: "--prod"

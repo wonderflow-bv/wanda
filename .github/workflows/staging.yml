@@ -1,4 +1,4 @@
-name: Release on staging
+name: staging
 
 on:
   push:
