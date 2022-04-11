@@ -17,6 +17,9 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+          with:
+            # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
+            fetch-depth: 0
 
       - name: Build on Vercel
         uses: amondnet/vercel-action@v20
