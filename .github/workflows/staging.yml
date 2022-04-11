@@ -1,6 +1,9 @@
 name: staging
 
-on: workflow_dispatch
+on:
+  push:
+    branches:
+      - main
 
 # Cancel in-progress jobs or runs for the current workflow
 concurrency:
