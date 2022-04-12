@@ -3,7 +3,7 @@ name: staging
 on:
   push:
     branches:
-      - main
+      - next
 
 # Cancel in-progress jobs or runs for the current workflow
 concurrency:
