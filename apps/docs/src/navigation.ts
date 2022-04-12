@@ -29,11 +29,7 @@ const routes: NavigationMenu = [
       {
         path: '/resources',
         label: 'Resources',
-        target: '',
-        tag: {
-          label: 'new',
-          color: 'green'
-        }
+        target: ''
       }
     ]
   },
@@ -70,10 +66,9 @@ const routes: NavigationMenu = [
             path: '/design/foundations/motion',
             label: 'Motion',
             target: '',
-            wip: true,
             tag: {
-              label: 'soon',
-              color: 'gray'
+              label: 'new',
+              color: 'green'
             }
           }
         ]
