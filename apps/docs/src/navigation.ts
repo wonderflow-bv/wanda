@@ -442,6 +442,11 @@ const routes: NavigationMenu = [
             target: ''
           },
           {
+            path: '/components/other/aspect-ratio',
+            label: 'Aspect ratio',
+            target: ''
+          },
+          {
             path: '/components/other/chip',
             label: 'Chip',
             target: ''
