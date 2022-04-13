@@ -61,15 +61,6 @@ const routes: NavigationMenu = [
             path: '/design/foundations/elevations',
             label: 'Elevations',
             target: ''
-          },
-          {
-            path: '/design/foundations/motion',
-            label: 'Motion',
-            target: '',
-            tag: {
-              label: 'new',
-              color: 'green'
-            }
           }
         ]
       },
@@ -77,6 +68,35 @@ const routes: NavigationMenu = [
         path: '/design/iconography',
         label: 'Iconography',
         target: ''
+      },
+      {
+        label: 'Motion',
+        expandable: true,
+        tag: {
+          label: 'new',
+          color: 'green'
+        },
+        items: [
+          {
+            path: '/design/motion/overview',
+            label: 'Overview',
+            target: ''
+          },
+          {
+            path: '/design/motion/animations',
+            label: 'Animations'
+          },
+          {
+            path: '/design/motion/speed',
+            label: 'Speed',
+            wip: true,
+            target: '',
+            tag: {
+              label: 'soon',
+              color: 'gray'
+            }
+          }
+        ]
       },
       {
         path: '/design/themes',
