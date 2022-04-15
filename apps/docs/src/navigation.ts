@@ -78,8 +78,8 @@ const routes: NavigationMenu = [
         },
         items: [
           {
-            path: '/design/motion/overview',
-            label: 'Overview',
+            path: '/design/motion/principles',
+            label: 'Principles',
             target: ''
           },
           {
