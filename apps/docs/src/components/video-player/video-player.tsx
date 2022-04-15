@@ -41,12 +41,12 @@ export const VideoPlayer = ({
 
   return (
     <AspectRatio ratio={aspectRatio}>
-      <button type="button" onClick={playPause} className={styles.VideoPlayer} role="presentation" {...otherProps}>
+      <button type="button" onClick={playPause} className={styles.VideoPlayer} aria-label="Play video" {...otherProps}>
         {paused && !controls
           ? (
             <div className={styles.Overlay}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 459 459">
-                <path d="M229.5 0C102.751 0 0 102.751 0 229.5S102.751 459 229.5 459 459 356.249 459 229.5 356.249 0 229.5 0zm80.792 239.651l-111.764 76.084a12.281 12.281 0 01-19.19-10.151V153.416a12.281 12.281 0 0119.19-10.151l111.764 76.084a12. 28 12.28 0 010 20.302z" />
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 32 32">
+                <g><path d="M16,0C7.178,0,0,7.178,0,16s7.178,16,16,16s16-7.178,16-16S24.822,0,16,0z M23.537,16.844l-11,7 C12.373,23.947,12.187,24,12,24c-0.165,0-0.331-0.041-0.481-0.123C11.199,23.701,11,23.365,11,23V9c0-0.365,0.199-0.701,0.519-0.877 c0.32-0.175,0.71-0.162,1.019,0.033l11,7C23.825,15.34,24,15.658,24,16S23.825,16.66,23.537,16.844z" /></g>
               </svg>
             </div>
             )
