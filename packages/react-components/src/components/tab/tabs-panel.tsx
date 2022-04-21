@@ -3,6 +3,7 @@ import { IconProps } from '@/components'
 
 import styles from './tab.module.css'
 import { PropsWithChildren } from 'react'
+import clsx from 'clsx'
 
 export type TabPanelProps = PropsWithChildren<PropsWithClass> & {
   label: string;
@@ -11,12 +12,13 @@ export type TabPanelProps = PropsWithChildren<PropsWithClass> & {
 };
 
 export const TabPanel = ({
+  className,
   children,
   label,
   ...otherProps
 }: TabPanelProps) => (
   <TabsPrimitive.Content
-    className={styles.Panel}
+    className={clsx(styles.Panel, className)}
     data-tabs-label={label}
     {...otherProps}
   >

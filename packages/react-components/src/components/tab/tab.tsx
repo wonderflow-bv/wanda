@@ -62,6 +62,7 @@ export const Tab = ({
     <TabsPrimitive.Root
       defaultValue={defaultValue}
       onValueChange={handleOnVlaueChange}
+      className={className}
       {...otherProps}
     >
       <LazyMotion features={domMax} strict>
