@@ -1,5 +1,5 @@
 
-import { Children, forwardRef, ReactNode, HTMLAttributes, ForwardRefExoticComponent } from 'react'
+import { Children, forwardRef, ReactNode, HTMLAttributes, ForwardRefExoticComponent, CSSProperties } from 'react'
 import { RovingTabIndexProvider } from 'react-roving-tabindex'
 import { MenuItem, MenuItemProps } from './menu-item/menu-item'
 import { MenuItemCheckbox, MenuItemCheckboxProps } from './menu-item/menu-item-checkbox'
@@ -12,6 +12,10 @@ export type MenuProps = HTMLAttributes<HTMLUListElement> & {
    * The items of the menu.
    */
   children: ReactNode;
+  /**
+   * Set a maximum height of the menu after which it will scroll.
+   */
+  maxHeight?: string;
 }
 
 type MenuComponent = ForwardRefExoticComponent<MenuProps> & {
@@ -28,9 +32,15 @@ type MenuComponent = ForwardRefExoticComponent<MenuProps> & {
 export const Menu = forwardRef<HTMLUListElement, MenuProps>(({
   className,
   children,
+  maxHeight,
+  style,
   ...otherProps
 }, forwardedRef) => {
   const renderedChildren = Children.toArray(children).filter(Boolean)
+
+  const computedStyle: CSSProperties = {
+    '--max-height': maxHeight
+  }
 
   return (
     <Elevator resting={2}>
@@ -38,6 +48,8 @@ export const Menu = forwardRef<HTMLUListElement, MenuProps>(({
         as="ul"
         ref={forwardedRef}
         className={clsx(styles.Menu, className)}
+        style={{ ...computedStyle, ...style }}
+        data-menu-should-scroll={Boolean(maxHeight)}
         vPadding={8}
         role="menu"
         {...otherProps}

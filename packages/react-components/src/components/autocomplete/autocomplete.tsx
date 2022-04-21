@@ -3,13 +3,14 @@ import { AutocompleteOption, AutocompleteOptionProps } from './autocomplete-opti
 import {
   Children, ForwardRefExoticComponent,
   cloneElement, forwardRef, useCallback, useMemo, useRef,
-  useState, CSSProperties, useEffect, ReactNode, isValidElement
+  useState, useEffect, ReactNode, isValidElement
 } from 'react'
 import { useDebounce, useFocusWithin, useKeyPress, useSize } from 'ahooks'
 import { Text, Menu, Textfield, TextfieldProps } from '@/components'
 import styles from './autocomplete.module.css'
 import { usePopperTooltip } from 'react-popper-tooltip'
 import { useUIDSeed } from 'react-uid'
+import { MenuProps } from '../menu'
 
 export type AutocompleteProps = TextfieldProps & {
   /**
@@ -20,7 +21,7 @@ export type AutocompleteProps = TextfieldProps & {
    * Set the maximum height of the options list after which
    * it will scroll.
    */
-  maxHeight?: string;
+  maxHeight?: MenuProps['maxHeight'];
   /**
    * Custom empty message to display when there are no options or
    * when the value does not match any of the options.
@@ -129,10 +130,6 @@ export const Autocomplete = forwardRef<HTMLDivElement, AutocompleteProps>(({
     []
   )
 
-  const dynamicStyle: CSSProperties = {
-    '--max-h': maxHeight
-  }
-
   useEffect(() => {
     value && setContent(String(value))
   }, [value])
@@ -174,7 +171,7 @@ export const Autocomplete = forwardRef<HTMLDivElement, AutocompleteProps>(({
                 role="listbox"
                 id={seedID('autocomplete-menu')}
                 className={styles.OptionsList}
-                style={dynamicStyle}
+                maxHeight={maxHeight}
                 aria-labelledby={seedID('autocomplete-trigger')}
               >
                 {filteredOptions.length === 0

@@ -22,6 +22,11 @@ const Template: ComponentStory<typeof Menu> = (args) => (
 
 export const Default = Template.bind({})
 
+export const WithMaxHeight = Template.bind({})
+WithMaxHeight.args = {
+  maxHeight: '100px'
+}
+
 const WithIconsTemplate: ComponentStory<typeof Menu> = (args) => (
   <Menu {...args}>
     <Menu.Item value="1" icon="user">List item text</Menu.Item>

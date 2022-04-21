@@ -9,4 +9,9 @@
   & hr {
     margin: 0 token(--space-8);
   }
+
+  &[data-menu-should-scroll='true'] {
+    max-height: var(--max-height);
+    overflow: auto;
+  }
 }
