@@ -89,12 +89,7 @@ const routes: NavigationMenu = [
           {
             path: '/design/motion/speed',
             label: 'Speed',
-            wip: true,
-            target: '',
-            tag: {
-              label: 'soon',
-              color: 'gray'
-            }
+            target: ''
           }
         ]
       },
