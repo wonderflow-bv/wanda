@@ -476,7 +476,7 @@ This component extends [`react-table`](https://react-table.tanstack.com/docs/ove
     {
       name: "selectedLabel",
       type: ["function"],
-      typeValue: `(selectedRowIds: IdType<T>[]) => ReactNode`,
+      typeValue: `(selectedRows: Row<T>[]) => ReactNode`,
       default: "`Selected items: ${selectedRows.length}`",
       required: false,
       description: "Set the label for selected items in the table. The function returns an array containing the selected rows objects.",
@@ -484,7 +484,7 @@ This component extends [`react-table`](https://react-table.tanstack.com/docs/ove
     {
       name: "selectedActions",
       type: ["function"],
-      typeValue: `(selectedRowIds: IdType<T>[]) => ReactNode`,
+      typeValue: `(selectedRows: Row<T>[]) => ReactNode`,
       default: "",
       required: false,
       description: "Pass custom components to show when rows are selected.",

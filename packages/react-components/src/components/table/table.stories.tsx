@@ -474,6 +474,7 @@ const story: ComponentMeta<typeof Table> = {
     dataWithIds: [
       {
         ...firstData,
+        _id: '1',
         subRows: [
           {
             _id: '1.1',
@@ -975,7 +976,27 @@ const Template: ComponentStory<typeof Table> = ({ dataWithIds, ...args }) => (
 
 export const Simple = Template.bind({})
 
-export const SelectedRows = Template.bind({})
+const SelectionTemplate: ComponentStory<typeof Table> = ({ dataWithIds, data, ...args }) => {
+  const [tableData, setTableData] = useState(dataWithIds)
+
+  const onDelete = (selectedRows) => {
+    const newTableData = tableData.filter(({ _id }) => !selectedRows.map(r => r.id).includes(_id))
+    setTableData(newTableData)
+  }
+
+  return (
+    <Table
+      data={tableData}
+      selectedActions={
+        (selectedRowIds) => <Button onClick={() => onDelete(selectedRowIds)}>Delete rows</Button>
+      }
+      emptyComponent={<CustomEmptyComponent />}
+      {...args}
+    />
+  )
+}
+
+export const SelectedRows = SelectionTemplate.bind({})
 SelectedRows.args = {
   title: 'With selectable rows',
   selectableRows: true
@@ -1019,7 +1040,7 @@ CustomExpandable.args = {
   expandableRowComponent: data => <CustomExpandableComponent data={data} />
 }
 
-export const Pagination = Template.bind({})
+export const Pagination = SelectionTemplate.bind({})
 Pagination.args = {
   columnsControl: true,
   showHeader: true,
@@ -1092,23 +1113,40 @@ NoData.args = {
 }
 
 const ManualPaginationTemplate: ComponentStory<typeof Table> = ({
+  data,
   dataWithIds,
   ...args
 }) => {
-  const [pageData, setPageData] = useState<Array<typeof firstData>>(dataWithIds.slice(0, 5))
+  const [allData, setAllData] = useState(dataWithIds)
+  const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 5 })
 
-  const fetchData = useCallback(({ pageIndex, pageSize }: { pageIndex: number; pageSize: number }) => {
+  const pageData = useMemo(() => {
+    const { pageIndex, pageSize } = pagination
     const newIndexStart = pageIndex * pageSize
     const newIndexEnd = (pageIndex * pageSize) + pageSize
-    setPageData((dataWithIds as Array<typeof firstData>).slice(newIndexStart, newIndexEnd))
-  }, [dataWithIds])
+
+    return allData.slice(newIndexStart, newIndexEnd)
+  }, [allData, pagination])
+
+  const onDelete = (selectedRows) => {
+    const newTableData = allData.filter(({ _id }) => !selectedRows.map(r => r.id).includes(_id))
+    setAllData(newTableData)
+  }
 
   return (
     <Table
       {...args}
       data={pageData}
-      onPaginationChange={fetchData}
-      totalRows={dataWithIds.length}
+      selectedActions={
+        (selectedRowIds) => <Button onClick={() => onDelete(selectedRowIds)}>Delete rows</Button>
+      }
+      onPaginationChange={(newPagination) => {
+        if (newPagination.pageIndex !== pagination.pageIndex || newPagination.pageSize !== pagination.pageSize) {
+          console.log(newPagination, pagination)
+          setPagination(newPagination)
+        }
+      }}
+      totalRows={allData.length}
       emptyComponent={<CustomEmptyComponent />}
     />
   )

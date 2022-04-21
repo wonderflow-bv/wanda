@@ -83,11 +83,11 @@ export type TableProps<T extends Record<string, unknown>> = PropsWithClass & {
   /**
    * Set the label for selected items in the table. Default to "Selected items"
    */
-  selectedLabel?: (selectedRowIds: Array<IdType<T>>) => ReactNode;
+  selectedLabel?: (selectedRowIds: Array<Row<T>>) => ReactNode;
    /**
    * Pass custom components to show when rows are selected.
    */
-  selectedActions?: (selectedRowIds: Array<IdType<T>>) => ReactNode;
+  selectedActions?: (selectedRows: Array<Row<T>>) => ReactNode;
   /**
    * Set the table height after which the table will scroll.
    */
@@ -210,12 +210,12 @@ export const Table = <T extends Record<string, unknown>>({
     gotoPage,
     allColumns,
     prepareRow,
-    selectedFlatRows,
     visibleColumns,
     setPageSize,
     setHiddenColumns,
+    selectedFlatRows,
     state: {
-      pageSize, pageIndex, selectedRowIds, sortBy
+      pageSize, pageIndex, sortBy
     }
   } = useTable(
     {
@@ -230,7 +230,6 @@ export const Table = <T extends Record<string, unknown>>({
       autoResetHiddenColumns: false,
       autoResetPage: false,
       autoResetSortBy: false,
-      autoResetSelectedRows: false,
       /**
        * This `paginateExpandedRows` prop prevent expanded rows to
        * be placed in the next page. But it breaks row selection
@@ -267,7 +266,7 @@ export const Table = <T extends Record<string, unknown>>({
         Cell: ({ row }: {row: Row<T>}) => (row.canExpand
           ? (
             <ToggleButton
-              kind="secondary"
+              kind="flat"
               dimension="small"
               restingIcon="chevron-right"
               pressedIcon="chevron-down"
@@ -330,7 +329,7 @@ export const Table = <T extends Record<string, unknown>>({
       {/* CONTEXT TOAST */}
       <AnimatePresence>
         <LazyMotion features={domMax}>
-          {!!Object.keys(selectedRowIds).length && selectableRows && (
+          {!!selectedFlatRows.length && selectableRows && (
           <Stack
             as={m.div}
             className={styles.Toast}
@@ -354,9 +353,9 @@ export const Table = <T extends Record<string, unknown>>({
             exit={{ y: '-16px', opacity: 0 }}
           >
             <Text as="span" size={14} weight="bold">
-              {selectedLabel(Object.keys(selectedRowIds))}
+              {selectedLabel(selectedFlatRows)}
             </Text>
-            {selectedActions?.(Object.keys(selectedRowIds))}
+            {selectedActions?.(selectedFlatRows)}
           </Stack>
           )}
 
@@ -364,8 +363,8 @@ export const Table = <T extends Record<string, unknown>>({
           {(showHeader || selectableRows) && (
           <m.div
             animate={{
-              y: selectedFlatRows?.length ? 20 : 0,
-              opacity: selectedFlatRows?.length ? 0 : 1,
+              y: selectedFlatRows.length ? 20 : 0,
+              opacity: selectedFlatRows.length ? 0 : 1,
               transition: {
                 type: 'spring',
                 stiffness: 700,
