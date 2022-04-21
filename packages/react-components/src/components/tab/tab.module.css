@@ -1,7 +1,9 @@
 .List {
   --separator-size: 2px;
 
-  border-bottom: var(--separator-size) solid var(--dimmed-1);
+  box-shadow: inset 0 calc(var(--separator-size) * -1) 0 var(--dimmed-1);
+  white-space: nowrap;
+  overflow: auto;
 }
 
 .Trigger {
@@ -47,7 +49,7 @@
 
 .Highlight {
   position: absolute;
-  bottom: calc(var(--separator-size) * -1);
+  bottom: 0;
   width: 100%;
   height: 4px;
   background: var(--cta-default);
