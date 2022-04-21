@@ -2,4 +2,4 @@
 "@wonderflow/react-components": minor
 ---
 
-fixed row selection for the table
+Fix row selection and change data returned by `selectedLabel` and `onSelectionChange`
