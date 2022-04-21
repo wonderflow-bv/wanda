@@ -266,7 +266,7 @@ export const Table = <T extends Record<string, unknown>>({
         Cell: ({ row }: {row: Row<T>}) => (row.canExpand
           ? (
             <ToggleButton
-              kind="secondary"
+              kind="flat"
               dimension="small"
               restingIcon="chevron-right"
               pressedIcon="chevron-down"
