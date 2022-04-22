@@ -16,7 +16,7 @@ Every animation speed is defined by two crucial adjustments, the **duration** (h
 
 ## Durations
 
-During the animation, transitions should not be discordant, too fast or too slow. The right adjustments between duration and easing produce beautiful, smooth and clear transitions.
+Transitions should not be discordant during the animation, too fast or too slow. The proper adjustments between duration and easing produce beautiful, smooth, and clear transitions.
 
 Durations should be applied based on the animation type and the distance/size of the motion. Functional transitions are significantly faster than evocative ones, and they should be defined based on the distance (traveled) or size (scaling) of the involved elements.
 
@@ -24,3 +24,14 @@ We provide a set of durations tokens:
 
 <CodeBlock className="language-json">{JSON.stringify(tkns.duration, null, 2)}</CodeBlock>
 
+## Exits / Closing
+
+When an element is **closed**, **dismissed**, or **collapsed**, a shorter time duration should be applied. In contrast, the duration of the exit transition may be faster because less attention is required than the following user's task.
+
+<VideoPlayer src="/design/motion/source/evocative.mp4" />
+
+## Sliding
+
+Sliding transitions over a small area use a short timing, while elements that must traverse large rooms have a longer duration.
+
+<VideoPlayer src="/design/motion/source/sliding.mp4" />

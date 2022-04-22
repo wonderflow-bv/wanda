@@ -1,0 +1,51 @@
+import { MdxLayout } from "@/components/layouts/mdx";
+import { VideoPlayer } from "@/components/video-player";
+import { CodeBlock } from "@/components/code-block";
+import { Bezier } from '@/components/bezier';
+import tkns from "@wonderflow/tokens/platforms/web/tokens.json";
+
+export default ({ children }) => (
+  <MdxLayout
+    title="Timing"
+    description="Animation progress over duration"
+  >
+    {children}
+  </MdxLayout>
+);
+
+Linear movements do not exist in nature, and they appear unnatural and mechanical to the human eye.
+
+UI's animated elements speed up quickly and slow down smoothly; There are many ways to define the precise amount of acceleration and deceleration of the element during the animation. The most common are the cubic-bezier easing curves, spring and tween animations.
+
+Here an example of a cubic-bezier easing curve compared to a linear (unnatural) movement.
+
+<Bezier bezier={[0, 0.55, 0.45, 1]} readOnly={false} compare  />
+
+## Easing
+
+Wanda provides 3 easing curves which you can use to define the animation's speed over the timeline.
+
+<CodeBlock className="language-json">{JSON.stringify(tkns.easing, null, 2)}</CodeBlock>
+
+### Standard easing
+
+This easing applies a cubic-bezier curve to the animation, making the element start moving smoothly with a slight acceleration and end with a slow deceleration.
+
+<Bezier bezier={[0.3, 0.07, 0.34, 1]} />
+
+### Entrance easing
+
+Incoming elements use the entrance easing, in which transitions begin with peak velocity, then slow down at the end of the animation.
+
+Use the entrance easing curve when adding elements to the view like modal or snack bars, or in response to the user's input, such as dropdowns and toggles.
+
+<Bezier bezier={[0, 0, 0.34, 1]} />
+
+### Exit easing
+
+Elements exiting a screen use the exit easing, such as closing a modal or dismissing a toast. The element speeds up as it exits from view, implying that its departure from the screen is permanent.
+
+<Bezier bezier={[0.3, 0.07, 1, 1]} />
+
+## Spring
+

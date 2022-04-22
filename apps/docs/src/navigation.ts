@@ -90,6 +90,11 @@ const routes: NavigationMenu = [
             path: '/design/motion/speed',
             label: 'Speed',
             target: ''
+          },
+          {
+            path: '/design/motion/timing',
+            label: 'Timing',
+            target: ''
           }
         ]
       },
