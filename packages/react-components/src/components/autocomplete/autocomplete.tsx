@@ -6,7 +6,7 @@ import {
   useState, useEffect, ReactNode, isValidElement
 } from 'react'
 import { useDebounce, useFocusWithin, useKeyPress, useSize } from 'ahooks'
-import { Text, Menu, Textfield, TextfieldProps } from '@/components'
+import { Text, Menu, Textfield, TextfieldProps, Skeleton, Stack } from '@/components'
 import styles from './autocomplete.module.css'
 import { usePopperTooltip } from 'react-popper-tooltip'
 import { useUIDSeed } from 'react-uid'
@@ -23,10 +23,11 @@ export type AutocompleteProps = TextfieldProps & {
    */
   maxHeight?: MenuProps['maxHeight'];
   /**
-   * Custom empty message to display when there are no options or
+   * Custom empty content to display when there are no options or
    * when the value does not match any of the options.
    */
-  emptyMessage?: ReactNode;
+  emptyContent?: ReactNode;
+  busy?: boolean;
 };
 
 type AutocompleteComponent = ForwardRefExoticComponent<AutocompleteProps> & {
@@ -58,8 +59,9 @@ export const Autocomplete = forwardRef<HTMLDivElement, AutocompleteProps>(({
   disabled,
   readOnly,
   value,
+  busy,
   maxHeight = '200px',
-  emptyMessage = 'No results found',
+  emptyContent = 'No items to show',
   ...otherProps
 }, forwardedRef) => {
   const seedID = useUIDSeed()
@@ -174,14 +176,16 @@ export const Autocomplete = forwardRef<HTMLDivElement, AutocompleteProps>(({
                 maxHeight={maxHeight}
                 aria-labelledby={seedID('autocomplete-trigger')}
               >
-                {filteredOptions.length === 0
-                  ? <Text as="div" textAlign="center" dimmed={5}>{emptyMessage}</Text>
-                  : Children.map(filteredOptions, (child) => isValidElement(child) && cloneElement(
-                    child,
-                    {
-                      onClick: handleOptionClick
-                    }
-                  ))
+                {(filteredOptions.length === 0 && !busy)
+                  ? <Text as="div" textAlign="center" dimmed={5}>{emptyContent}</Text>
+                  : busy
+                    ? <Stack hPadding={8} as="li"><Skeleton count={3} /></Stack>
+                    : Children.map(filteredOptions, (child) => isValidElement(child) && cloneElement(
+                      child,
+                      {
+                        onClick: handleOptionClick
+                      }
+                    ))
               }
               </Menu>
             </m.div>

@@ -78,12 +78,20 @@ This component extends all the properties from [Textfield](/components/inputs/te
         "Set the maximum height of the options list after which it will scroll.",
     },
     {
-      name: "emptyMessage",
+      name: "emptyContent",
       type: ["ReactNode"],
       default: "No results found",
       required: false,
       description:
-        "Custom empty message to display when there are no options or when the value does not match any of the options.",
+        "Custom empty content to display when there are no options or when the value does not match any of the options.",
+    },
+    {
+      name: "busy",
+      type: ["boolean"],
+      default: "false",
+      required: false,
+      description:
+        "Set the busy state to show skeletons while the options are being fetched.",
     },
   ]}
 />

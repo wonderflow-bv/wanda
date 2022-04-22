@@ -41,3 +41,15 @@ const Template: ComponentStory<typeof Autocomplete> = (args) => (
 )
 
 export const Default = Template.bind({})
+
+const BusyTemplate: ComponentStory<typeof Autocomplete> = (args) => (
+  <Autocomplete
+    onChange={(value) => console.log(value)}
+    style={{ maxWidth: '300px' }}
+    icon="magnifying-glass"
+    busy
+    {...args}
+  />
+)
+
+export const Busy = BusyTemplate.bind({})
