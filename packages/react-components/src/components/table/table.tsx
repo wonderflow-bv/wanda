@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { domMax, LazyMotion, m, AnimatePresence } from 'framer-motion'
 import {
-  ComponentType, CSSProperties, Fragment, ReactNode, useCallback, useMemo
+  ComponentType, CSSProperties, Fragment, ReactNode, useCallback, useEffect, useMemo
 } from 'react'
 import {
   Hooks, IdType, Row,
@@ -304,6 +304,12 @@ export const Table = <T extends Record<string, unknown>>({
   useUpdateEffect(() => {
     onPaginationChange?.({ pageIndex, pageSize })
   }, [onPaginationChange, pageIndex, pageSize])
+
+  useEffect(() => {
+    if (pageIndex >= pageCount) {
+      gotoPage(0)
+    }
+  }, [pageCount, pageIndex, gotoPage])
 
   const rowEntries = useMemo(() => {
     return (showPagination ? page : rows)
