@@ -1,5 +1,16 @@
 # @wonderflow/react-components
 
+## 8.1.0
+
+### Minor Changes
+
+- d1b2c29: Fix row selection and change data returned by `selectedLabel` and `onSelectionChange`
+- 0b0c10d: Add maxHeight property to Menu
+- f19b7e8: Tab now accepts className property
+- 101cbc3: Prevent wrapping for tab items
+- 00bd7e2: Add new `value` prop to Menu.Item
+- 8eeecea: Add new `busy` property to Autocomplete
+
 ## 8.0.0
 
 ### Major Changes
