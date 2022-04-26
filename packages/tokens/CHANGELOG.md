@@ -1,5 +1,15 @@
 # @wonderflow/tokens
 
+## 8.0.0
+
+### Major Changes
+
+- f4dec7e: Add 6 new color tokens for a total of 72 shades. Updated themes with new highlight keys.
+
+### Minor Changes
+
+- f4dec7e: Add 6 new color tokens and 72 shades
+
 ## 7.0.0
 
 ### Major Changes

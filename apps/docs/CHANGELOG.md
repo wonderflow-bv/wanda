@@ -1,5 +1,31 @@
 # docs
 
+## 9.0.0
+
+### Major Changes
+
+- f4dec7e: Add 6 new color tokens for a total of 72 shades. Updated themes with new highlight keys.
+
+### Minor Changes
+
+- f4dec7e: Add 6 new color tokens and 72 shades
+- 0b0c10d: Add maxHeight property to Menu
+- 00bd7e2: Add new `value` prop to Menu.Item
+- 8eeecea: Add new `busy` property to Autocomplete
+
+### Patch Changes
+
+- c94628f: Fix table crash
+- Updated dependencies [d1b2c29]
+- Updated dependencies [0b0c10d]
+- Updated dependencies [f19b7e8]
+- Updated dependencies [101cbc3]
+- Updated dependencies [00bd7e2]
+- Updated dependencies [8eeecea]
+- Updated dependencies [f4dec7e]
+  - @wonderflow/react-components@8.1.0
+  - @wonderflow/themes@8.0.0
+
 ## 8.0.0
 
 ### Major Changes
