@@ -3,7 +3,7 @@ import HexHslValues from './transformers/hex-hslvalues'
 import SizePxToRem from './transformers/px-rem'
 import SizePxToRootEm from './transformers/px-rootem'
 
-const StyleDictionary = require('style-dictionary').extend('src/tokens.config.json')
+const StyleDictionary = require('style-dictionary').extend('src/tokens.config.js')
 
 /**
  * Register custom transformers to process token values for

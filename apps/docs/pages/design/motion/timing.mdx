@@ -21,7 +21,7 @@ Here an example of a cubic-bezier easing curve compared to a linear (unnatural) 
 
 <Bezier bezier={[0, 0.55, 0.45, 1]} readOnly={false} compare  />
 
-## Easing
+## Easings
 
 Wanda provides 3 easing curves which you can use to define the animation's speed over the timeline.
 
@@ -45,7 +45,7 @@ Use the entrance easing curve when adding elements to the view like modal or sna
 
 Elements exiting a screen use the exit easing, such as closing a modal or dismissing a toast. The element speeds up as it exits from view, implying that its departure from the screen is permanent.
 
-<Bezier bezier={[0.3, 0.07, 1, 1]} />
+<Bezier bezier={[0.3, 0.07, 1, 1]} duration={0.3} />
 
 ## Spring
 

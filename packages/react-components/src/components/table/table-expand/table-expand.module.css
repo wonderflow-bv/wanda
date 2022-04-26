@@ -6,7 +6,7 @@
   --fade-from-y: -5px;
 
   animation: fade-in token(--duration-200);
-  animation-timing-function: token(--easing-entrance);
+  animation-timing-function: token(--easing-entrance-css);
 }
 
 @keyframes fade-in {

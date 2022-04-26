@@ -1,4 +1,4 @@
-import { Stack, Text, ToggleButton } from '@wonderflow/react-components'
+import { Icon, Stack, Text, ToggleButton } from '@wonderflow/react-components'
 import BezierEditor from 'bezier-easing-editor'
 import clsx from 'clsx'
 import { domMax, LazyMotion, m } from 'framer-motion'
@@ -91,6 +91,7 @@ export const Bezier = ({
         hAlign="center"
         fill={false}
         columnGap={104}
+        rowGap={32}
       >
         <Stack hAlign="center">
           <BezierEditor
@@ -101,11 +102,23 @@ export const Bezier = ({
             curveWidth={3}
             curveColor="var(--cta-default)"
             gridColor="var(--dimmed-1)"
-            textStyle={{ color: 'transparent' }}
+            textStyle={{ color: 'var(--dimmed-5)' }}
             onChange={setValue}
             handleColor="var(--highlight-gray-foreground)"
           />
-          <code>{value.map(ele => ele.toFixed(2)).join(', ')}</code>
+          <Stack direction="row" columnGap={24} vAlign="center">
+            <Stack direction="row" columnGap={4} vAlign="center">
+              <Icon dimension={16} fill="var(--highlight-mint-foreground)" source="wave-sine" />
+              {value.map(ele => <Text as="code" lineHeight="none" size={14} key={ele}>{ele.toFixed(2)}</Text>)}
+            </Stack>
+            <Stack direction="row" columnGap={8} vAlign="center">
+              <Icon dimension={16} fill="var(--highlight-mint-foreground)" source="clock-rotate-left" />
+              <Text as="span" size={14}>
+                {duration}
+                s
+              </Text>
+            </Stack>
+          </Stack>
         </Stack>
         <Stack
           className={styles.Preview}
