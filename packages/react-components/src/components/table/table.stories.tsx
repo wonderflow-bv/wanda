@@ -1142,7 +1142,6 @@ const ManualPaginationTemplate: ComponentStory<typeof Table> = ({
       }
       onPaginationChange={(newPagination) => {
         if (newPagination.pageIndex !== pagination.pageIndex || newPagination.pageSize !== pagination.pageSize) {
-          console.log(newPagination, pagination)
           setPagination(newPagination)
         }
       }}
@@ -1222,6 +1221,58 @@ export const ManualSorting = ManualSortingTemplate.bind({})
 ManualSorting.args = {
   isManualSorted: true,
   columnsControl: true,
+  selectableRows: true,
+  showPagination: true,
+  itemsPerPage: 5
+}
+
+const ManualPaginationFilteringTemplate: ComponentStory<typeof Table> = ({
+  data,
+  dataWithIds,
+  ...args
+}) => {
+  const [allData, setAllData] = useState(dataWithIds)
+  const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 5 })
+
+  const pageData = useMemo(() => {
+    const { pageIndex, pageSize } = pagination
+    const newIndexStart = pageIndex * pageSize
+    const newIndexEnd = (pageIndex * pageSize) + pageSize
+
+    return allData.slice(newIndexStart, newIndexEnd)
+  }, [allData, pagination])
+
+  const onDelete = (selectedRows) => {
+    const newTableData = allData.filter(({ _id }) => !selectedRows.map(r => r.id).includes(_id))
+    setAllData(newTableData)
+  }
+
+  return (
+    <Table
+      {...args}
+      data={pageData}
+      actions={
+        <Button onClick={() => setAllData(allData.filter(r => r.lastName === 'Stuffo'))}>Filter Stuffo</Button>
+      }
+      selectedActions={
+        (selectedRowIds) => <Button onClick={() => onDelete(selectedRowIds)}>Delete rows</Button>
+      }
+      onPaginationChange={(newPagination) => {
+        if (newPagination.pageIndex !== pagination.pageIndex || newPagination.pageSize !== pagination.pageSize) {
+          setPagination(newPagination)
+        }
+      }}
+      totalRows={allData.length}
+      emptyComponent={<CustomEmptyComponent />}
+    />
+  )
+}
+
+export const ManualPaginationFiltering = ManualPaginationFilteringTemplate.bind({})
+ManualPaginationFiltering.args = {
+  isManualSorted: true,
+  columnsControl: true,
+  showHeader: true,
   selectableRows: true,
   showPagination: true,
   itemsPerPage: 5
