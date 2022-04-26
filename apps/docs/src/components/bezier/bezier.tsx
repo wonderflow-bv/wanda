@@ -52,8 +52,7 @@ export const Bezier = ({
           duration: isRunning ? timing : 0,
           repeat: isRunning ? Infinity : 0,
           repeatDelay: 1,
-          ease,
-          repeatType: 'reverse'
+          ease
         }}
         {...otherProps}
       />
@@ -107,6 +106,8 @@ export const Bezier = ({
             textStyle={{ color: 'var(--dimmed-5)' }}
             onChange={setValue}
             handleColor="var(--highlight-gray-foreground)"
+            handleStroke={2}
+            handleRadius={4}
           />
           <Stack direction="row" columnGap={24} vAlign="center">
             <Stack direction="row" columnGap={4} vAlign="center">
