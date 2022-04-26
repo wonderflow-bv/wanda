@@ -1,6 +1,7 @@
 import { Icon, Stack, Text, ToggleButton } from '@wonderflow/react-components'
 import BezierEditor from 'bezier-easing-editor'
 import clsx from 'clsx'
+import { useUIDSeed } from 'react-uid'
 import { domMax, LazyMotion, m } from 'framer-motion'
 import { useCallback, useState } from 'react'
 import styles from './bezier.module.css'
@@ -31,6 +32,7 @@ export const Bezier = ({
   className,
   ...otherProps
 }: BezierProps) => {
+  const uid = useUIDSeed()
   const [value, setValue] = useState<number[]>(bezier)
   const [isRunning, setIsRunning] = useState<boolean>(false)
   const [timing, setTiming] = useState<number>(duration)
@@ -109,7 +111,7 @@ export const Bezier = ({
           <Stack direction="row" columnGap={24} vAlign="center">
             <Stack direction="row" columnGap={4} vAlign="center">
               <Icon dimension={16} fill="var(--highlight-mint-foreground)" source="wave-sine" />
-              {value.map(ele => <Text as="code" lineHeight="none" size={14} key={ele}>{ele.toFixed(2)}</Text>)}
+              {value.map((ele, i) => <code key={uid(ele + i)}>{ele.toFixed(2)}</code>)}
             </Stack>
             <Stack direction="row" columnGap={8} vAlign="center">
               <Icon dimension={16} fill="var(--highlight-mint-foreground)" source="clock-rotate-left" />
