@@ -1002,7 +1002,39 @@ SelectedRows.args = {
   selectableRows: true
 }
 
-export const HidingColumn = Template.bind({})
+const HidingColumnTemplate: ComponentStory<typeof Table> = ({ dataWithIds, columns, ...args }) => {
+  const tableColumns = [
+    ...columns,
+    {
+      id: 'birthday',
+      Header: 'Birthday',
+      accessor: row => row.birthday
+    },
+    {
+      id: 'gender',
+      Header: 'Gender',
+      accessor: row => row.gender
+    },
+    {
+      id: 'height',
+      Header: 'Height',
+      accessor: row => row.height
+    },
+    {
+      id: 'weight',
+      Header: 'Weight',
+      accessor: row => row.weight
+    }
+  ]
+  return (
+    <Table
+      emptyComponent={<CustomEmptyComponent />}
+      columns={tableColumns}
+      {...args}
+    />
+  )
+}
+export const HidingColumn = HidingColumnTemplate.bind({})
 HidingColumn.args = {
   showHeader: true,
   columnsControl: true

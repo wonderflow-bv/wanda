@@ -40,7 +40,7 @@ export const ToggleColumnsControl = <T extends Record<string, unknown>>({
       placement="bottom-start"
       trigger={<Button kind="secondary">Toggle columns</Button>}
     >
-      <Menu>
+      <Menu maxHeight="350px">
         <Menu.ItemCheckbox
           value="toggle-all"
           onClick={() => handleToggleAll()}
