@@ -40,13 +40,13 @@
     "flat": "5.0.2",
     "postcss-import": "14.1.0",
     "postcss-mixins": "9.0.2",
-    "postcss-preset-env": "7.4.3",
+    "postcss-preset-env": "7.4.4",
     "postcss-replace": "2.0.0"
   },
   "devDependencies": {
     "@types/flat": "5.0.2",
-    "@typescript-eslint/eslint-plugin": "5.18.0",
-    "@typescript-eslint/parser": "5.18.0",
+    "@typescript-eslint/eslint-plugin": "5.21.0",
+    "@typescript-eslint/parser": "5.21.0",
     "@wonderflow/eslint-config": "1.1.11",
     "tsconfig": "*",
     "typescript": "4.6.3"

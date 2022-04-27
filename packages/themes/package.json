@@ -21,7 +21,7 @@
   "devDependencies": {
     "@types/fs-extra": "9.0.13",
     "@wonderflow/tokens": "*",
-    "fs-extra": "10.0.1",
+    "fs-extra": "10.1.0",
     "style-dictionary": "3.7.0",
     "tsconfig": "*",
     "yargs": "17.4.1"
