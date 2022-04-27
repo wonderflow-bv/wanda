@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 8.3.0
+
+### Minor Changes
+
+- d2fee66: Fix table column toggle width
+
 ## 8.2.0
 
 ### Minor Changes
