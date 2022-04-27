@@ -13,5 +13,7 @@
   &[data-menu-should-scroll='true'] {
     max-height: var(--max-height);
     overflow: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
   }
 }
