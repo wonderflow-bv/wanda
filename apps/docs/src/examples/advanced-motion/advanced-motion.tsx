@@ -5,13 +5,13 @@ export const AdvancedMotion = () => {
   const x = useMotionValue(0)
   const xInput = [-100, 0, 100]
   const background = useTransform(x, xInput, [
-    'hsl(0, 100%, 3%)',
-    '#000000',
-    'hsl(141, 100%, 3%)'
+    '#ff0105',
+    'hsl(0 100% 80% / 0%)',
+    '#00d856'
   ])
   const color = useTransform(x, xInput, [
     '#e1090d',
-    '#ffffff',
+    '#2600ff',
     '#00d856'
   ])
   const tickPath = useTransform(x, [10, 100], [0, 1])
@@ -20,7 +20,8 @@ export const AdvancedMotion = () => {
 
   return (
     // @ts-expect-error
-    <motion.div className={styles.ExampleContainer} style={{ background }}>
+    <motion.div className={styles.ExampleContainer}>
+      <motion.span className={styles.Overlay} style={{ background }} />
       <motion.div
         className={styles.Box}
         style={{ x }}

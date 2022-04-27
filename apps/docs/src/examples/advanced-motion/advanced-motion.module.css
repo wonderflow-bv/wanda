@@ -4,13 +4,22 @@
   block-size: 400px;
   position: relative;
   border-radius: token(--radius-16);
+  background-color: var(--global-background);
+  overflow: hidden;
+}
+
+.Overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 6%;
+  pointer-events: none;
 }
 
 .Box {
 
   @mixin vibrancy;
 
-  background: var(--global-vibrancy-background-soft);
+  background: var(--global-vibrancy-background);
   border-radius: 30px;
   inline-size: 150px;
   block-size: 150px;
