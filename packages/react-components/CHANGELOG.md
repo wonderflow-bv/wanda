@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 8.2.0
+
+### Minor Changes
+
+- 20eb56d: Set table controls max height and menu overscroll behaviour
+
 ## 8.1.0
 
 ### Minor Changes
