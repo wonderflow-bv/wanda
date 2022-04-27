@@ -19,8 +19,8 @@ export const AdvancedMotion = () => {
   const crossPathB = useTransform(x, [-50, -100], [0, 1])
 
   return (
-    // @ts-expect-error
     <motion.div className={styles.ExampleContainer}>
+      {/* @ts-expect-error */}
       <motion.span className={styles.Overlay} style={{ background }} />
       <motion.div
         className={styles.Box}
