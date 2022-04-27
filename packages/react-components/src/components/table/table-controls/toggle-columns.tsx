@@ -39,7 +39,6 @@ export const ToggleColumnsControl = <T extends Record<string, unknown>>({
     <Popover
       placement="bottom-start"
       trigger={<Button kind="secondary">Toggle columns</Button>}
-      matchTriggerWidth
     >
       <Menu maxHeight="350px">
         <Menu.ItemCheckbox
