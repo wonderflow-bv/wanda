@@ -3,6 +3,8 @@ import { VideoPlayer } from "@/components/video-player";
 import { CodeBlock } from "@/components/code-block";
 import { Bezier } from '@/components/bezier';
 import tkns from "@wonderflow/tokens/platforms/web/tokens.json";
+import { motion } from "framer-motion"
+import { AdvancedMotion } from "@/examples/advanced-motion";
 
 export default ({ children }) => (
   <MdxLayout
@@ -51,6 +53,8 @@ Elements exiting a screen use the exit easing, such as closing a modal or dismis
 
 Spring animations are a variation of the easing curves, but instead of relying on the time over the duration, the animation is calculated based on physics parameters.
 
-There is no way to handle these animations by using only CSS. To create advanced animations using this mechanic, you must rely on advanced animation frameworks like Framer Motion (used on Wanda) or Gsap.
+There is no way to handle these animations by using only CSS. To create advanced animations using this mechanic, you must rely on advanced animation frameworks like [Framer Motion](https://www.framer.com/motion/) (used by Wanda) and [GSAP](https://greensock.com/gsap/).
 
 Such animations are more complex and physics-based. For this reason, they look more natural to the human eye.
+
+<AdvancedMotion />

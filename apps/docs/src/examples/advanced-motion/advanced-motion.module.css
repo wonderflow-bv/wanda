@@ -1,0 +1,28 @@
+@import '@wonderflow/react-components/core/utils/vibrancy.css';
+
+.ExampleContainer {
+  block-size: 400px;
+  position: relative;
+  border-radius: token(--radius-16);
+}
+
+.Box {
+
+  @mixin vibrancy;
+
+  background: var(--global-vibrancy-background-soft);
+  border-radius: 30px;
+  inline-size: 150px;
+  block-size: 150px;
+  position: absolute;
+  top: calc(50% - 150px / 2);
+  left: calc(50% - 150px / 2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ProgressIcon {
+  width: 80%;
+  height: 80%;
+}

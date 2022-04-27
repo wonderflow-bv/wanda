@@ -3,7 +3,7 @@ import BezierEditor from 'bezier-easing-editor'
 import clsx from 'clsx'
 import { useUIDSeed } from 'react-uid'
 import { domMax, LazyMotion, m } from 'framer-motion'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import styles from './bezier.module.css'
 
 export type BezierProps = PropsWithClass & {
@@ -40,6 +40,10 @@ export const Bezier = ({
   const setDuration = useCallback(() => {
     setTiming(timing !== duration ? duration : duration * 2)
   }, [duration, timing])
+
+  useEffect(() => {
+    setTiming(duration)
+  }, [duration])
 
   const Thumb = useCallback(
     ({ ease = value, className, ...otherProps }) => (
@@ -117,7 +121,7 @@ export const Bezier = ({
             <Stack direction="row" columnGap={8} vAlign="center">
               <Icon dimension={16} fill="var(--highlight-mint-foreground)" source="clock-rotate-left" />
               <Text as="span" size={14}>
-                {duration}
+                {timing === duration ? duration : duration * 2 }
                 s
               </Text>
             </Stack>
