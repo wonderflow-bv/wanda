@@ -21,6 +21,11 @@
   border-radius: token(--radius-4);
   background: none;
   grid-gap: token(--space-8);
+  transition: transform token(--duration-100) token(--easing-standard);
+
+  &:not([aria-pressed='true'], [aria-disabled='true']):active {
+    transform: scale(0.97);
+  }
 
   /* Sizes */
 
@@ -119,6 +124,7 @@
     color: var(--global-disabled-foreground);
     background-color: var(--global-disabled-background);
     cursor: not-allowed;
+    pointer-events: none;
   }
 
   &[aria-busy='true'] > :not(.SpinnerIndicator) {

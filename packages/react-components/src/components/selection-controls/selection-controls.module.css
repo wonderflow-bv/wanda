@@ -110,8 +110,8 @@
     bottom: var(--p);
     display: block;
     transition:
-      transform token(--duration-100) token(--easing-standard-css),
-      background-color token(--duration-100) token(--easing-standard-css);
+      transform token(--duration-100) token(--easing-standard),
+      background-color token(--duration-100) token(--easing-standard);
   }
 
   &:checked::after {

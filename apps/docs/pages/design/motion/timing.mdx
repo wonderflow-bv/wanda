@@ -33,7 +33,7 @@ Wanda provides 3 easing curves which you can use to define the animation's speed
 
 This easing applies a cubic-bezier curve to the animation, making the element start moving smoothly with a slight acceleration and end with a slow deceleration.
 
-<Bezier bezier={tkns.easing.standard.primitive} />
+<Bezier bezier={[0.3, 0.07, 0.34, 1]} />
 
 ### Entrance easing
 
@@ -41,13 +41,13 @@ Incoming elements use the entrance easing, in which transitions begin with peak 
 
 Use the entrance easing curve when adding elements to the view like modal or snack bars, or in response to the user's input, such as dropdowns and toggles.
 
-<Bezier bezier={tkns.easing.entrance.primitive} />
+<Bezier bezier={[0, 0, 0.34, 1]} />
 
 ### Exit easing
 
 Elements exiting a screen use the exit easing, such as closing a modal or dismissing a toast. The element speeds up as it exits from view, implying that its departure from the screen is permanent.
 
-<Bezier bezier={tkns.easing.exit.primitive} duration={0.3} />
+<Bezier bezier={[0.3, 0.07, 1, 1]} duration={0.3} />
 
 ## Spring
 

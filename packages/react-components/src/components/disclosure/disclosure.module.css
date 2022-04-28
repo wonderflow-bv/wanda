@@ -69,7 +69,7 @@
   right: calc(var(--icon-size) / 2);
   inline-size: var(--icon-size);
   block-size: var(--icon-size);
-  transition: transform token(--duration-100) token(--easing-standard-css);
+  transition: transform token(--duration-100) token(--easing-standard);
   transform-origin: 50% center;
 
   @nest .Disclosure[data-disclosure-icon-position='left'] & {
