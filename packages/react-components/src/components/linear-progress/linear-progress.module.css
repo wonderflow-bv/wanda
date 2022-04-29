@@ -27,7 +27,7 @@
 
   &::-webkit-progress-value {
     background: var(--fill-color);
-    transition: width 200ms ease-out;
+    transition: width token(--duration-200) token(--easing-entrance);
   }
 
   &::-moz-progress-bar {
@@ -59,7 +59,7 @@
 .Percentage {
   position: absolute;
   left: var(--offset);
-  transition: left 200ms ease-out;
+  transition: left token(--duration-200) token(--easing-entrance);
   transform: translateX(var(--translation));
 }
 

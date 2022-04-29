@@ -9,7 +9,6 @@ const story:ComponentMeta<typeof Drawer> = {
   args: {
     side: 'right',
     title: 'Drawer title',
-    obfuscate: true,
     closeOnClickOutside: true,
     isModal: true
   },

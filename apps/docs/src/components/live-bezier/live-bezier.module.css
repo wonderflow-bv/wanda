@@ -1,0 +1,114 @@
+.LiveBezier {
+  --thumb-size: 40px;
+
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 260px;
+}
+
+.Controls {
+  position: absolute;
+  left: 0;
+  top: token(--space-32);
+  display: flex;
+  flex-direction: column;
+
+  & > * + * {
+    margin-top: token(--space-8);
+  }
+}
+
+.Editor {
+  display: block;
+  margin: 0 auto;
+}
+
+.Preview {
+  block-size: 277px;
+  margin-top: 18px;
+  margin-bottom: token(--space-56);
+  position: relative;
+}
+
+.Thumb {
+  display: block;
+  inline-size: var(--thumb-size);
+  block-size: var(--thumb-size);
+  background-color: var(--cta-default);
+  position: absolute;
+  left: calc(35% - var(--thumb-size));
+  bottom: 0;
+  border-radius: 50%;
+  animation-name: demo-animation;
+  animation-duration: calc(var(--duration) + (var(--duration) * 80 / 100));
+  animation-timing-function: var(--easing);
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+
+  @nest [data-running='true'] & {
+    animation-play-state: running;
+  }
+  @nest [data-compare='false'] & {
+    left: 0;
+    border-radius: token(--radius-8);
+    inline-size: 100%;
+    max-inline-size: 234px;
+    background-color: var(--dimmed-6);
+  }
+
+  /*
+  &:not(.Linear)::before {
+    content: '';
+    block-size: 2px;
+    border-bottom: 2px dotted var(--highlight-cyan-foreground);
+    position: absolute;
+    inline-size: 460px;
+    right: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+
+    @nest [data-compare='false'] & {
+      inline-size: 440px;
+    }
+  } */
+
+  &.Linear {
+    background-color: var(--dimmed-4);
+    left: calc(65% - var(--thumb-size));
+    animation-timing-function: linear;
+  }
+}
+
+
+.Label {
+  position: absolute;
+  top: 100%;
+  left: 51px;
+  color: var(--dimmed-5);
+
+  &:last-child {
+    left: 121px;
+  }
+}
+
+@keyframes demo-animation {
+  0%,
+  30% {
+    opacity: 100%;
+    transform: translateY(0);
+  }
+
+  50%,
+  85%,
+  90% {
+    opacity: 100%;
+    transform: translateY(-250px);
+  }
+
+  90%,
+  100% {
+    opacity: 0%;
+    transform: translateY(-250px);
+  }
+}

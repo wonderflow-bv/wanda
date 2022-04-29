@@ -42,6 +42,7 @@
     "@wonderflow/react-components": "*",
     "@wonderflow/themes": "*",
     "ahooks": "3.3.10",
+    "bezier-easing-editor": "0.8.0",
     "clsx": "1.1.1",
     "color-contrast-checker": "2.1.0",
     "css-color-converter": "2.0.0",

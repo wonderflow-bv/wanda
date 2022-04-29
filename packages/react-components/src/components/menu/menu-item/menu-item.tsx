@@ -128,34 +128,36 @@ export const MenuItem = forwardRef(({
   ), [children, dimension, icon, isIconRight, decoration, padding])
 
   return (
-    <Wrapper
-      autoFocus={autoFocus}
-      ref={itemRef}
-      role="menuitem"
-      className={clsx(styles.MenuItem, className)}
-      onClick={disabled ? undefined : triggerClick}
-      onKeyDown={disabled ? undefined : handleKeyDown}
-      tabIndex={tabIndex}
-      aria-disabled={disabled}
-      type={Wrapper === 'button' ? 'button' : undefined}
-      data-menu-item-dimension={dimension}
-      {...otherProps}
-    >
-      {description
-        ? (
-          <Tooltip
-            fill
-            open={focused}
-            placement="right-start"
-            interactive
-            trigger={InnerContent}
-          >
-            {description}
-          </Tooltip>
-          )
-        : InnerContent
+    <Stack as="li" role="none">
+      <Wrapper
+        autoFocus={autoFocus}
+        ref={itemRef}
+        role="menuitem"
+        className={clsx(styles.MenuItem, className)}
+        onClick={disabled ? undefined : triggerClick}
+        onKeyDown={disabled ? undefined : handleKeyDown}
+        tabIndex={tabIndex}
+        aria-disabled={disabled}
+        type={Wrapper === 'button' ? 'button' : undefined}
+        data-menu-item-dimension={dimension}
+        {...otherProps}
+      >
+        {description
+          ? (
+            <Tooltip
+              fill
+              open={focused}
+              placement="right-start"
+              interactive
+              trigger={InnerContent}
+            >
+              {description}
+            </Tooltip>
+            )
+          : InnerContent
       }
-    </Wrapper>
+      </Wrapper>
+    </Stack>
   )
 }) as PolymorphicMenuItem
 

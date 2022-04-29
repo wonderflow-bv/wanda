@@ -1,7 +1,8 @@
 
-import { Children, forwardRef, ReactNode, HTMLAttributes, ForwardRefExoticComponent, CSSProperties } from 'react'
+import { forwardRef, ReactNode, HTMLAttributes, ForwardRefExoticComponent, CSSProperties } from 'react'
 import { RovingTabIndexProvider } from 'react-roving-tabindex'
 import { MenuItem, MenuItemProps } from './menu-item/menu-item'
+import { MenuSeparator } from './menu-separator/menu-separator'
 import { MenuItemCheckbox, MenuItemCheckboxProps } from './menu-item/menu-item-checkbox'
 import { Stack, Elevator, Polymorphic } from '@/components'
 import styles from './menu.module.css'
@@ -27,6 +28,7 @@ type MenuComponent = ForwardRefExoticComponent<MenuProps> & {
     Polymorphic.IntrinsicElement<typeof MenuItemCheckbox>,
     Polymorphic.OwnProps<typeof MenuItemCheckbox> & MenuItemCheckboxProps
   >;
+  Separator: typeof MenuSeparator;
 }
 
 export const Menu = forwardRef<HTMLUListElement, MenuProps>(({
@@ -36,8 +38,6 @@ export const Menu = forwardRef<HTMLUListElement, MenuProps>(({
   style,
   ...otherProps
 }, forwardedRef) => {
-  const renderedChildren = Children.toArray(children).filter(Boolean)
-
   const computedStyle: CSSProperties = {
     '--max-height': maxHeight
   }
@@ -55,11 +55,7 @@ export const Menu = forwardRef<HTMLUListElement, MenuProps>(({
         {...otherProps}
       >
         <RovingTabIndexProvider options={{ direction: 'vertical', loopAround: true }}>
-          {Children.map(renderedChildren, (child: any) => (
-            <Stack as="li" role="none" vPadding={child.type?.displayName === 'Separator' ? 8 : undefined}>
-              {child}
-            </Stack>
-          ))}
+          {children}
         </RovingTabIndexProvider>
       </Stack>
     </Elevator>
@@ -70,3 +66,4 @@ Menu.displayName = 'Menu'
 
 Menu.Item = MenuItem
 Menu.ItemCheckbox = MenuItemCheckbox
+Menu.Separator = MenuSeparator

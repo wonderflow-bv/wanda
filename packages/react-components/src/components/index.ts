@@ -1,4 +1,5 @@
 export * from './autocomplete'
+export * from './aspect-ratio'
 export * from './avatar'
 export * from './button'
 export * from './card'

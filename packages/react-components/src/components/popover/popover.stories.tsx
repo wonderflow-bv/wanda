@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { useState } from 'react'
 import { Popover } from './popover'
-import { Button, Separator, Textfield, Menu, Title } from '../..'
+import { Button, Textfield, Menu, Title } from '../..'
 
 const story: ComponentMeta<typeof Popover> = {
   title: 'Components/Dialogs/Popover',
@@ -54,7 +54,7 @@ const DefaultTemplate: ComponentStory<typeof Popover> = (args) => {
         >
           Short menu label
         </Menu.Item>
-        <Separator />
+        <Menu.Separator />
         <Menu.Item icon="arrow-down-to-bracket">Even shorter</Menu.Item>
         <Menu.Item disabled>Really?</Menu.Item>
       </Menu>

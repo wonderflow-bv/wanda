@@ -21,6 +21,7 @@
   border-radius: token(--radius-4);
   background: none;
   grid-gap: token(--space-8);
+  transition: all token(--duration-100) token(--easing-standard);
 
   /* Sizes */
 
@@ -49,7 +50,7 @@
     background: var(--cta-default);
     color: var(--cta-foreground);
 
-    &:not([aria-pressed='true'], [aria-disabled='true']):is(:active) {
+    &:not([aria-pressed='true'], [aria-disabled='true'], [aria-busy='true']):is(:active) {
       background: var(--cta-dark);
     }
 
@@ -67,7 +68,7 @@
     background-color: var(--global-vibrancy-background);
     color: var(--global-vibrancy-foreground);
 
-    &:not([aria-pressed='true'], [aria-disabled='true']):is(:active) {
+    &:not([aria-pressed='true'], [aria-disabled='true'], [aria-busy='true']):is(:active) {
       background-color: var(--global-vibrancy-background-hard);
       color: var(--global-vibrancy-foreground);
     }
@@ -82,7 +83,7 @@
   &[data-button-kind='flat'] {
     color: var(--global-vibrancy-foreground);
 
-    &:not([aria-pressed='true'], [aria-disabled='true']):is(:active) {
+    &:not([aria-pressed='true'], [aria-disabled='true'], [aria-busy='true']):is(:active) {
       background-color: var(--global-vibrancy-background-hard);
     }
 
@@ -119,10 +120,15 @@
     color: var(--global-disabled-foreground);
     background-color: var(--global-disabled-background);
     cursor: not-allowed;
+    pointer-events: none;
   }
 
-  &[aria-busy='true'] > :not(.SpinnerIndicator) {
-    visibility: hidden;
+  &[aria-busy='true'] {
+    pointer-events: none;
+
+    & > :not(.SpinnerIndicator) {
+      visibility: hidden;
+    }
   }
 }
 

@@ -29,6 +29,18 @@
       "attributes": {
         "category": "time"
       }
+    },
+    "750": {
+      "value": 750,
+      "attributes": {
+        "category": "time"
+      }
+    },
+    "1000": {
+      "value": 1000,
+      "attributes": {
+        "category": "time"
+      }
     }
   }
 }
