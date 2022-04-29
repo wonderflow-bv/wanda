@@ -5,6 +5,7 @@ import { FocusOn, AutoFocusInside } from 'react-focus-on'
 import { useKeyPress } from 'ahooks'
 import styles from './drawer.module.css'
 import { useOverlayContext, Elevator, IconButton, Stack, Title } from '@/components'
+import tkns from '@wonderflow/tokens/platforms/web/tokens.json'
 
 export type DrawerProps = PropsWithChildren<PropsWithClass> & {
   /**
@@ -61,6 +62,10 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(({
   ...otherProps
 }, forwardedRef) => {
   const { titleId, onClose } = useOverlayContext()
+  const cssEasingToArray = (cssEasing: string) => {
+    const [x1, y1, x2, y2] = cssEasing.replace(/[^0-9.,]+/g, '').split(',').map(i => parseFloat(i))
+    return [x1, y1, x2, y2]
+  }
 
   useKeyPress('esc', () => (!isModal && onClose) && onClose())
 
@@ -72,15 +77,15 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(({
     visible: {
       x: 0,
       transition: {
-        ease: [0, 0, 0.34, 1],
-        duration: 0.35
+        ease: cssEasingToArray(tkns.easing.entrance),
+        duration: parseFloat(tkns.duration[500].replace('s', ''))
       }
     },
     hidden: {
       x: side === 'right' ? '100%' : '-100%',
       transition: {
-        ease: [0.3, 0.07, 1, 1],
-        duration: 0.2
+        ease: cssEasingToArray(tkns.easing.exit),
+        duration: parseFloat(tkns.duration[500].replace('s', ''))
       }
     }
   }

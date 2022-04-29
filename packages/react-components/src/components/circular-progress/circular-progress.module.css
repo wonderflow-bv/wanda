@@ -42,8 +42,8 @@
     z-index: -1;
     background:
       conic-gradient(
-        var(--cta-default),
-        var(--cta-default) var(--progress, 0%),
+        var(--progress-color, var(--cta-default)),
+        var(--progress-color, var(--cta-default)) var(--progress, 0%),
         var(--track-bg) var(--progress, 0%) 100%
       );
     mask-image:

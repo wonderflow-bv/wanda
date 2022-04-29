@@ -16,6 +16,7 @@ import { AutoPlacement, BasePlacement, VariationPlacement, Modifier } from '@pop
 import { usePopperTooltip } from 'react-popper-tooltip'
 import { domMax, LazyMotion, m, AnimatePresence } from 'framer-motion'
 import clsx from 'clsx'
+import tkns from '@wonderflow/tokens/platforms/web/tokens.json'
 
 export type PopoverProps = PropsWithClass & {
   /**
@@ -64,12 +65,17 @@ export type PopoverProps = PropsWithClass & {
   matchTriggerWidth?: boolean;
 }
 
+const cssEasingToArray = (cssEasing: string) => {
+  const [x1, y1, x2, y2] = cssEasing.replace(/[^0-9.,]+/g, '').split(',').map(i => parseFloat(i))
+  return [x1, y1, x2, y2]
+}
+
 const PopoverAnimation = {
   visible: {
     y: 0,
     opacity: 1,
     transition: {
-      ease: [0, 0, 0.34, 1],
+      ease: cssEasingToArray(tkns.easing.entrance),
       duration: 0.1
     }
   },
@@ -77,7 +83,7 @@ const PopoverAnimation = {
     y: -5,
     opacity: 0,
     transition: {
-      ease: [0.3, 0.07, 1, 1],
+      ease: cssEasingToArray(tkns.easing.exit),
       duration: 0.1
     }
   }

@@ -11,20 +11,18 @@ export const parameters = {
     },
   },
   themes: {
-    default: 'light',
     list: [
       { name: 'auto', color: 'linear-gradient(to bottom right, lightgray 50%, black 50.1%)' },
-      { name: 'light', color: 'lightgray' },
+      { name: 'light', color: 'lightgray', default: true },
       { name: 'dark', color: 'black' },
     ],
     onChange: (theme) => {
-      const iframe = document.querySelector('#storybook-preview-iframe');
+      const iframeDocument = document.querySelector('#storybook-preview-iframe').contentDocument.documentElement;
       if (theme) {
-        iframe.contentDocument.documentElement.dataset.theme = theme.name;
+        iframeDocument.dataset.theme = theme.name;
       } else {
-        iframe.contentDocument.documentElement.dataset.theme = 'auto';
+        iframeDocument.dataset.theme = 'light';
       }
     },
-    target: 'root',
   },
 };
