@@ -124,10 +124,10 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(({
                 {(showHeader && title) && (
                 <Stack
                   vAlign="center"
-                  fill={false}
                   hAlign="space-between"
                   direction="row"
                   className={styles.Header}
+                  columnGap={24}
                 >
                   <Title responsive={false} level="6" id={titleId}>{title}</Title>
                   {onClose && <IconButton onClick={onClose} className={styles.CloseButton} icon="xmark" kind="flat" />}

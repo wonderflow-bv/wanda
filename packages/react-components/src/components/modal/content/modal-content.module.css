@@ -11,7 +11,7 @@
   justify-self: center;
   align-self: end;
 
-  @media (--from-extra-small) {
+  @media (--from-small) {
     max-inline-size: 600px;
     max-block-size: 80vh;
     border-radius: token(--radius-8);

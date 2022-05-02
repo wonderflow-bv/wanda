@@ -1,4 +1,4 @@
-import { forwardRef, PropsWithChildren } from 'react'
+import { forwardRef, PropsWithChildren, useMemo } from 'react'
 import { domMax, LazyMotion, m } from 'framer-motion'
 import clsx from 'clsx'
 import { FocusOn } from 'react-focus-on'
@@ -6,6 +6,7 @@ import { ModalContent, ModalContentProps } from './content/modal-content'
 import styles from './modal.module.css'
 import { useOverlayContext } from '@/components'
 import tkns from '@wonderflow/tokens/platforms/web/tokens.json'
+import { configResponsive, useResponsive } from 'ahooks'
 
 export type ModalProps = PropsWithChildren<PropsWithClass> & {
   /**
@@ -25,24 +26,9 @@ const cssEasingToArray = (cssEasing: string) => {
   return [x1, y1, x2, y2]
 }
 
-const ModalAnimation = {
-  visible: {
-    scale: 1,
-    opacity: 1,
-    transition: {
-      ease: cssEasingToArray(tkns.easing.entrance),
-      duration: parseFloat(tkns.duration[500].replace('s', ''))
-    }
-  },
-  hidden: {
-    scale: 0.98,
-    opacity: 0,
-    transition: {
-      ease: cssEasingToArray(tkns.easing.exit),
-      duration: parseFloat(tkns.duration[200].replace('s', ''))
-    }
-  }
-}
+configResponsive({
+  wide: 768
+})
 
 export const Modal = forwardRef<HTMLDivElement, ModalProps>(({
   children,
@@ -51,6 +37,28 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(({
   ...otherProps
 }, forwardedRef) => {
   const { titleId, onClose } = useOverlayContext()
+  const responsive = useResponsive()
+
+  const ModalAnimation = useMemo(() => ({
+    visible: {
+      scale: 1,
+      opacity: 1,
+      y: 0,
+      transition: {
+        ease: cssEasingToArray(tkns.easing.entrance),
+        duration: parseFloat(tkns.duration[750].replace('s', ''))
+      }
+    },
+    hidden: {
+      scale: responsive.wide ? 0.98 : 1,
+      opacity: 0,
+      y: responsive.wide ? 0 : '100%',
+      transition: {
+        ease: cssEasingToArray(tkns.easing.exit),
+        duration: parseFloat(tkns.duration[200].replace('s', ''))
+      }
+    }
+  }), [responsive])
 
   return (
     <div

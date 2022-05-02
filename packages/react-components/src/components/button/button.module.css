@@ -23,6 +23,11 @@
   grid-gap: token(--space-8);
   transition: all token(--duration-100) token(--easing-standard);
 
+  &:not([aria-pressed='true'], [aria-disabled='true'], [aria-busy='true']):active {
+    transform: scale(0.98);
+    transform-origin: center;
+  }
+
   /* Sizes */
 
   &[data-button-dimension='big'] {
