@@ -12,12 +12,17 @@ import { usePopperTooltip } from 'react-popper-tooltip'
 import { useUIDSeed } from 'react-uid'
 import { MenuProps } from '../menu'
 
+type ValueType = {
+  query?: string
+  value?: string
+}
+
 export type AutocompleteProps = TextfieldProps & {
   /**
    * The callback called when an option is picked from the list
    */
-  onChange?(value?: string): void;
-  /**
+  onChange?(value: ValueType): void;
+   /**
    * Set the maximum height of the options list after which
    * it will scroll.
    */
@@ -58,7 +63,7 @@ export const Autocomplete = forwardRef<HTMLDivElement, AutocompleteProps>(({
   onChange,
   disabled,
   readOnly,
-  value,
+  value: val,
   busy,
   maxHeight = '200px',
   emptyContent = 'No items to show',
@@ -67,27 +72,28 @@ export const Autocomplete = forwardRef<HTMLDivElement, AutocompleteProps>(({
   const seedID = useUIDSeed()
   const autocompleteRef = useRef<any>(forwardedRef)
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [content, setContent] = useState<AutocompleteOptionProps['value']>(value ? String(value) : '')
+  const [query, setQuery] = useState<string>('')
+  const [value, setValue] = useState<string>(val ? String(val) : '')
   const isInteractive = useMemo(() => !disabled && !readOnly, [disabled, readOnly])
 
-  const debouncedFieldContent = useDebounce(
-    content,
+  const debounceQuery = useDebounce(
+    query,
     { wait: 100 }
   )
 
   const filteredOptions = useMemo(
     () => {
       const items = Children.toArray(children)
-      return debouncedFieldContent
+      return debounceQuery
         ? items.filter(
           (o: any) => {
             const stringToMatch = typeof o.props.children === 'string' ? o.props.children : o.props.children.join('')
-            return stringToMatch?.toLowerCase().includes(debouncedFieldContent.toLowerCase())
+            return stringToMatch?.toLowerCase().includes(debounceQuery.toLowerCase())
           }
         )
         : items
     },
-    [debouncedFieldContent, children]
+    [debounceQuery, children]
   )
 
   const isFocusWithin = useFocusWithin(autocompleteRef, {
@@ -118,23 +124,26 @@ export const Autocomplete = forwardRef<HTMLDivElement, AutocompleteProps>(({
 
   const handleOptionClick = useCallback(
     (optionValue, optionContent) => {
-      setContent(optionContent)
+      setQuery(optionContent)
+      setValue(optionValue)
       setIsOpen(false)
-      onChange && onChange(optionValue)
+      onChange && onChange({ query: optionContent, value: optionValue })
     },
     [onChange]
   )
 
   const handleFilter = useCallback(
     ({ currentTarget }) => {
-      setContent(currentTarget.value)
+      setQuery(currentTarget.value)
+      setValue(currentTarget.value)
+      onChange && onChange({ query: currentTarget.value, value: currentTarget.value })
     },
-    []
+    [onChange]
   )
 
   useEffect(() => {
-    value && setContent(String(value))
-  }, [value])
+    val && setValue(String(val))
+  }, [val])
 
   return (
     <div
@@ -150,7 +159,8 @@ export const Autocomplete = forwardRef<HTMLDivElement, AutocompleteProps>(({
         aria-controls={seedID('autocomplete-menu')}
         aria-expanded={isOpen}
         onChange={handleFilter}
-        value={content}
+        data-current-value={value}
+        value={query}
         autoComplete="off"
         disabled={disabled}
         readOnly={readOnly}
