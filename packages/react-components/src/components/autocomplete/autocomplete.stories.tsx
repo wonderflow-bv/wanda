@@ -23,13 +23,13 @@ const Template: ComponentStory<typeof Autocomplete> = (args) => (
       {[...Array(10)].map((_, i) => (
         <Autocomplete.Option
           icon="compass"
-          value={`${i}`}
+          value={`${i + 1}`}
           key={`key-${Date.now() + i}`}
           decoration={(i === 4) && <Chip dimension="small">Decoration</Chip>}
         >
           Option
           {' '}
-          {`${i}`}
+          {`${i + 1}`}
         </Autocomplete.Option>
       ))}
     </Autocomplete>
