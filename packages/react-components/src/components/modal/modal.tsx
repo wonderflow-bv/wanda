@@ -46,16 +46,16 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(({
       y: 0,
       transition: {
         ease: cssEasingToArray(tkns.easing.entrance),
-        duration: parseFloat(tkns.duration[750].replace('s', ''))
+        duration: parseFloat(tkns.duration[300].replace('s', ''))
       }
     },
     hidden: {
       scale: responsive.wide ? 0.98 : 1,
-      opacity: 0,
+      opacity: responsive.wide ? 0 : 1,
       y: responsive.wide ? 0 : '100%',
       transition: {
         ease: cssEasingToArray(tkns.easing.exit),
-        duration: parseFloat(tkns.duration[200].replace('s', ''))
+        duration: responsive.wide ? parseFloat(tkns.duration[200].replace('s', '')) : parseFloat(tkns.duration[500].replace('s', ''))
       }
     }
   }), [responsive])
