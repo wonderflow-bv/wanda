@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 8.6.0
+
+### Minor Changes
+
+- d645d7a: Fix autocomplete returned value
+
 ## 8.5.0
 
 ### Minor Changes
