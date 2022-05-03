@@ -143,14 +143,17 @@ export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
       setValue(currentTarget.value)
       onChange?.({
         query: currentTarget.value,
-        value: optionsValues.includes(currentTarget.value) ? currentTarget.value : ''
+        value: optionsValues.includes(currentTarget.value.toLowerCase()) ? currentTarget.value : ''
       })
     },
     [onChange, optionsValues]
   )
 
   useEffect(() => {
-    const currentValues = Children.map(filteredOptions, (o: any) => o.props.value)
+    const currentValues = Children.map(filteredOptions, (o: any) => {
+      return typeof o.props.children === 'string' ? o.props.children.toLowerCase() : o.props.children.join('').toLowerCase()
+    })
+
     val && setValue(String(val))
     setOptionValues(currentValues)
   }, [filteredOptions, val])

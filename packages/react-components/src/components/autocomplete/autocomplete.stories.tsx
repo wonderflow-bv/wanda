@@ -28,18 +28,18 @@ const Template: ComponentStory<typeof Autocomplete> = (args) => {
         icon="magnifying-glass"
         {...args}
       >
-        {[...Array(10)].map((_, i) => (
-          <Autocomplete.Option
-            icon="compass"
-            value={`${i + 1}`}
-            key={`key-${Date.now() + i}`}
-            decoration={(i === 4) && <Chip dimension="small">Decoration</Chip>}
-          >
-            Option
-            {' '}
-            {`${i + 1}`}
-          </Autocomplete.Option>
-        ))}
+        <Autocomplete.Option value="apple">
+          Apple
+        </Autocomplete.Option>
+        <Autocomplete.Option
+          value="banana"
+          decoration={<Chip dimension="small" color="green">110 Cal</Chip>}
+        >
+          Banana
+        </Autocomplete.Option>
+        <Autocomplete.Option value="cherry">
+          Cherry
+        </Autocomplete.Option>
       </Autocomplete>
       <List>
         <List.Li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus non laboriosam facere? </List.Li>
