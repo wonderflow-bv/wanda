@@ -1,5 +1,12 @@
 # @wonderflow/react-components
 
+## 8.5.0
+
+### Minor Changes
+
+- 0472ada: Fix autocomplete markup related to busy state
+- 425ca61: Fix autocomplete controlled value
+
 ## 8.4.0
 
 ### Minor Changes
