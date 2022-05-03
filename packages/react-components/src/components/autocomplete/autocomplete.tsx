@@ -1,5 +1,6 @@
 import { domMax, LazyMotion, m, AnimatePresence } from 'framer-motion'
 import { AutocompleteOption, AutocompleteOptionProps } from './autocomplete-option'
+import mergeRefs from 'react-merge-refs'
 import {
   Children, ForwardRefExoticComponent,
   cloneElement, forwardRef, useCallback, useMemo, useRef,
@@ -32,6 +33,9 @@ export type AutocompleteProps = TextfieldProps & {
    * when the value does not match any of the options.
    */
   emptyContent?: ReactNode;
+  /**
+   * Show skeletons while loading options.
+   */
   busy?: boolean;
 };
 
@@ -58,7 +62,7 @@ const AutocompleteAnimation = {
   }
 }
 
-export const Autocomplete = forwardRef<HTMLDivElement, AutocompleteProps>(({
+export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
   children,
   onChange,
   disabled,
@@ -70,10 +74,11 @@ export const Autocomplete = forwardRef<HTMLDivElement, AutocompleteProps>(({
   ...otherProps
 }, forwardedRef) => {
   const seedID = useUIDSeed()
-  const autocompleteRef = useRef<any>(forwardedRef)
+  const autocompleteRef = useRef<HTMLDivElement>(null)
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [query, setQuery] = useState<string>('')
   const [value, setValue] = useState<string>(val ? String(val) : '')
+  const [optionsValues, setOptionValues] = useState<string[]>([])
   const isInteractive = useMemo(() => !disabled && !readOnly, [disabled, readOnly])
 
   const debounceQuery = useDebounce(
@@ -126,8 +131,8 @@ export const Autocomplete = forwardRef<HTMLDivElement, AutocompleteProps>(({
     (optionValue, optionContent) => {
       setQuery(optionContent)
       setValue(optionValue)
+      onChange?.({ query: optionContent, value: optionValue })
       setIsOpen(false)
-      onChange && onChange({ query: optionContent, value: optionValue })
     },
     [onChange]
   )
@@ -136,14 +141,19 @@ export const Autocomplete = forwardRef<HTMLDivElement, AutocompleteProps>(({
     ({ currentTarget }) => {
       setQuery(currentTarget.value)
       setValue(currentTarget.value)
-      onChange && onChange({ query: currentTarget.value, value: currentTarget.value })
+      onChange?.({
+        query: currentTarget.value,
+        value: optionsValues.includes(currentTarget.value) ? currentTarget.value : ''
+      })
     },
-    [onChange]
+    [onChange, optionsValues]
   )
 
   useEffect(() => {
+    const currentValues = Children.map(filteredOptions, (o: any) => o.props.value)
     val && setValue(String(val))
-  }, [val])
+    setOptionValues(currentValues)
+  }, [filteredOptions, val])
 
   return (
     <div
@@ -152,7 +162,7 @@ export const Autocomplete = forwardRef<HTMLDivElement, AutocompleteProps>(({
       data-focus-within={isFocusWithin}
     >
       <Textfield
-        ref={setTriggerRef}
+        ref={mergeRefs([setTriggerRef, forwardedRef])}
         id={seedID('autocomplete-trigger')}
         key={seedID('autocomplete-trigger')}
         aria-haspopup="true"
