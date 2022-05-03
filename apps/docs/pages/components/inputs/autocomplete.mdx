@@ -63,11 +63,11 @@ This component extends all the properties from [Textfield](/components/inputs/te
     {
       name: "onChange",
       type: ["function"],
-      typeValue: "(value?: string) => void",
+      typeValue: "({ query: string; value: string }) => void",
       default: "",
       required: false,
       description:
-        "The callback called when an option is picked from the list.",
+        "The callback called when an option is picked from the list or when user types into the textfield.",
     },
     {
       name: "maxHeight",

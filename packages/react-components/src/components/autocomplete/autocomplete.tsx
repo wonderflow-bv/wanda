@@ -14,8 +14,8 @@ import { useUIDSeed } from 'react-uid'
 import { MenuProps } from '../menu'
 
 type ValueType = {
-  query?: string
-  value?: string
+  query: string
+  value: string
 }
 
 export type AutocompleteProps = TextfieldProps & {
