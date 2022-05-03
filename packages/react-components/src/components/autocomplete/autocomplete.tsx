@@ -199,7 +199,7 @@ export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
                 {(filteredOptions.length === 0 && !busy)
                   ? <Text as="div" textAlign="center" dimmed={5}>{emptyContent}</Text>
                   : busy
-                    ? <Stack hPadding={8} as="li"><Skeleton count={3} /></Stack>
+                    ? <Stack hPadding={8} as="span"><Skeleton count={3} /></Stack>
                     : Children.map(filteredOptions, (child) => isValidElement(child) && cloneElement(
                       child,
                       {
