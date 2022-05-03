@@ -1,5 +1,12 @@
 # @wonderflow/react-components
 
+## 8.4.0
+
+### Minor Changes
+
+- e768c37: Fix autocomplete returned values
+- abd6769: Update Autocomplete returned values and onChange function
+
 ## 8.3.0
 
 ### Minor Changes
