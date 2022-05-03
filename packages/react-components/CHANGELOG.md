@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 8.7.0
+
+### Minor Changes
+
+- 23dbade: Fix autocomplete option values
+
 ## 8.6.0
 
 ### Minor Changes
