@@ -76,7 +76,7 @@ export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
   const seedID = useUIDSeed()
   const autocompleteRef = useRef<HTMLDivElement>(null)
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [query, setQuery] = useState<string>('')
+  const [query, setQuery] = useState<string>(val ? String(val) : '')
   const [value, setValue] = useState<string>(val ? String(val) : '')
   const [optionsValues, setOptionValues] = useState<string[]>([])
   const isInteractive = useMemo(() => !disabled && !readOnly, [disabled, readOnly])

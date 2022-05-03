@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Autocomplete } from './autocomplete'
 import { Chip, List } from '../..'
-import { useEffect, useRef } from 'react'
+// import { useEffect, useRef } from 'react'
 
 const story: ComponentMeta<typeof Autocomplete> = {
   title: 'Components/Inputs/Autocomplete',
@@ -14,16 +14,15 @@ const story: ComponentMeta<typeof Autocomplete> = {
 export default story
 
 const Template: ComponentStory<typeof Autocomplete> = (args) => {
-  const ref = useRef(null)
+  // const ref = useRef(null)
 
-  useEffect(() => {
-    console.log(ref.current.focus())
-  }, [])
+  // useEffect(() => {
+  //   console.log(ref.current.focus())
+  // }, [])
 
   return (
     <>
       <Autocomplete
-        ref={ref}
         onChange={(value) => console.log(value)}
         style={{ maxWidth: '300px' }}
         icon="magnifying-glass"
@@ -63,3 +62,8 @@ const BusyTemplate: ComponentStory<typeof Autocomplete> = (args) => (
 )
 
 export const Busy = BusyTemplate.bind({})
+
+export const WithValue = Template.bind({})
+WithValue.args = {
+  value: 1
+}
