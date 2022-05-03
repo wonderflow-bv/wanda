@@ -139,11 +139,12 @@ export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
 
   const handleFilter = useCallback(
     ({ currentTarget }) => {
+      const targetValue = currentTarget.value.toLowerCase()
       setQuery(currentTarget.value)
       setValue(currentTarget.value)
       onChange?.({
         query: currentTarget.value,
-        value: optionsValues.includes(currentTarget.value.toLowerCase()) ? currentTarget.value : ''
+        value: optionsValues.includes(targetValue) ? optionsValues[optionsValues.indexOf(targetValue)] : ''
       })
     },
     [onChange, optionsValues]
