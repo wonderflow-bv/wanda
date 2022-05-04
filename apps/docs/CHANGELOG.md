@@ -1,5 +1,18 @@
 # docs
 
+## 10.0.0
+
+### Major Changes
+
+- 897705d: Add AspectRatio component
+
+### Patch Changes
+
+- Updated dependencies [897705d]
+- Updated dependencies [897705d]
+- Updated dependencies [897705d]
+  - @wonderflow/react-components@9.0.0
+
 ## 9.0.0
 
 ### Major Changes
