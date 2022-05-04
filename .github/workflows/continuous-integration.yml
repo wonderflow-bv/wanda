@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - main
+      - next
 
 # Cancel in-progress jobs or runs for the current workflow
 concurrency:

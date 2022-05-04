@@ -47,14 +47,11 @@
   border-bottom: 1px solid var(--dimmed-1);
   padding:
     token(--space-16)
-    token(--space-80)
     token(--space-16)
+    token(--space-24)
     token(--space-24);
 }
 
 .CloseButton.CloseButton {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: token(--space-8);
+  flex-grow: 0;
 }

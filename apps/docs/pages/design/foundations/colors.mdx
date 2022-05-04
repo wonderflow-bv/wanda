@@ -3,7 +3,6 @@ import { ColorPalette } from "@/components/color-palette";
 import { Zoomer } from "@/components/zoomer";
 import { ContrastCalc } from "@/components/contrast-calc";
 import { Stack, Snackbar } from "@wonderflow/react-components";
-import { ThemedImg } from "@/components/themed-img";
 import tkns from "@wonderflow/tokens/platforms/web/tokens.json";
 
 export default ({ children }) => (
@@ -17,15 +16,9 @@ export default ({ children }) => (
 
 Our color system was designed to establish a flexible range of colors that support our brand, comms, and product teams. Wonderflow products relies on a full ranged color palette which includes ten shades for each color.
 
-## Palettes
-
 Wanda provides a full-featured color collection as tokens. Each color is carefully defined to match the contrast criteria.
 
-<Zoomer>
-  <ThemedImg src="/design/colors/colors.png" />
-</Zoomer>
-
-### Support
+## Support
 
 The support palette is meant to include all the secondary colors which are commonly used across the design but without being part of a color scale.
 
@@ -33,7 +26,7 @@ The support palette is meant to include all the secondary colors which are commo
   <ColorPalette colors={tkns.color.support} id="support" />
 </Stack>
 
-### Primary
+## Primary
 
 The primary palette includes the main and the most used color across the brand and digital products. These colors are ofter combined with the `support-brand` color which is used as accent.
 
@@ -41,7 +34,7 @@ The primary palette includes the main and the most used color across the brand a
   <ColorPalette colors={tkns.color.primary} id="primary" />
 </Stack>
 
-### Literal colors
+## Literal colors
 
 These basic color tokens can be used for multiple purposes and they don't have a specific meaning.
 
