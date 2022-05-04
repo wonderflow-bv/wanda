@@ -1,5 +1,16 @@
 # @wonderflow/react-components
 
+## 9.0.0
+
+### Major Changes
+
+- 897705d: Add AspectRatio component
+
+### Minor Changes
+
+- 897705d: Add Menu.Separator element
+- 897705d: Fix InputGroup outline position
+
 ## 8.7.0
 
 ### Minor Changes
