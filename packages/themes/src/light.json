@@ -66,6 +66,12 @@
     },
     "7": {
       "value": "hsl({color.primary.70})"
+    },
+    "8": {
+      "value": "hsl({color.primary.80})"
+    },
+    "9": {
+      "value": "hsl({color.primary.90})"
     }
   },
   "highlight": {

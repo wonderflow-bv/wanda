@@ -6,7 +6,7 @@
 
     display: block;
     line-height: token(--font-lh-small);
-    color: var(--heading-foreground);
+    color: var(--heading-foreground, var(--dimmed-9));
     min-block-size: 0.01vh;
     font-size: var(--fs-max);
     max-inline-size: var(--max-w, initial);
