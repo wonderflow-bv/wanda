@@ -49,7 +49,11 @@ export type TextfieldProps = BaseFieldProps & {
   /**
    * The callback function that is called when the input value changes.
    */
-  onChange?: (event: ChangeEvent<PrimitiveInputType>) => void
+  onChange?: (event: ChangeEvent<PrimitiveInputType>) => void;
+  /**
+   * Make the textfield full width, filling the available space.
+   */
+  fullWidth?: boolean;
 }
 
 export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
@@ -67,6 +71,7 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
   type,
   style,
   onChange,
+  fullWidth,
   ...otherProps
 }: TextfieldProps, forwardedRef) => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false)
@@ -109,6 +114,7 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
       data-textfield-icon-position={iconPosition}
       data-textfield-dimension={dimension}
       data-textfield-invalid={invalid}
+      data-textfield-fullwidth={fullWidth}
       aria-disabled={disabled}
       hAlign="stretch"
       vAlign="start"

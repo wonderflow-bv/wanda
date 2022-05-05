@@ -20,6 +20,10 @@
     --field-padding: token(--space-16);
     --font-size: token(--font-size-18);
   }
+
+  &[data-textfield-fullwidth='true'] {
+    inline-size: 100%;
+  }
 }
 
 .FieldContainer {
