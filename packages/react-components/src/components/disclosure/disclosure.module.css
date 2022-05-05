@@ -27,11 +27,6 @@
     --icon-size: token(--icon-size-24);
     --icon-padding: token(--space-16);
   }
-
-  /*
-  @nest .Details:not([open]) > :not(.Summary) {
-    display: none;
-  } */
 }
 
 .Summary {
@@ -41,6 +36,7 @@
   padding: token(--space-2) 0;
   outline-offset: -2px;
   user-select: none;
+  color: var(--dimmed-9);
 
   @nest .Disclosure[data-disclosure-icon-position='right'][data-disclosure-expandable='true'] & {
     padding-inline-end: var(--padding);
