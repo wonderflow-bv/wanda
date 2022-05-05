@@ -1,5 +1,12 @@
 # @wonderflow/react-components
 
+## 9.1.0
+
+### Minor Changes
+
+- 2900059: Add 2 new 8 and 9 dimmed colors to themes.
+- 7d1d15c: Add new fullWidth prop to textfield
+
 ## 9.0.0
 
 ### Major Changes
