@@ -84,7 +84,7 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
     },
     regular: {
       summary: 18,
-      icon: 16
+      icon: 18
     },
     big: {
       summary: 22,

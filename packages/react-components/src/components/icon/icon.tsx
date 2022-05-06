@@ -42,7 +42,7 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(({
   fill,
   ...otherProps
 }: IconProps, forwardedRef) => {
-  const computedStyle = useMemo(() => dimension < 16 ? 'solid' : weight, [weight, dimension])
+  const computedStyle = useMemo(() => dimension < 18 ? 'solid' : weight, [weight, dimension])
 
   return (typeof source === 'string')
     ? (

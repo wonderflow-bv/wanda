@@ -81,7 +81,7 @@ export const Button = forwardRef((
   )
 
   const iconSize = {
-    big: 16,
+    big: 18,
     regular: 16,
     small: 12
   }
