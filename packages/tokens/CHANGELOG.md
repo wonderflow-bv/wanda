@@ -1,5 +1,11 @@
 # @wonderflow/tokens
 
+## 9.2.0
+
+### Minor Changes
+
+- 62c7fdc: Add new icon size and update icons size across components
+
 ## 8.0.0
 
 ### Major Changes

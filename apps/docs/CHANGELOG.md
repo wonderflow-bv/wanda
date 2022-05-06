@@ -1,5 +1,16 @@
 # docs
 
+## 10.2.0
+
+### Minor Changes
+
+- 62c7fdc: Add new icon size and update icons size across components
+
+### Patch Changes
+
+- Updated dependencies [62c7fdc]
+  - @wonderflow/react-components@9.2.0
+
 ## 10.1.0
 
 ### Minor Changes
