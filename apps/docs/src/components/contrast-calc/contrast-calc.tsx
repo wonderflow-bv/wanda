@@ -65,7 +65,7 @@ export const ContrastCalc = () => {
 
   const dynamicStyle: CSSProperties = {
     '--bg': bgColor,
-    '--fg': fgColor
+    '--heading-foreground': fgColor
   }
 
   const isAA = useMemo(() => ccc.isLevelAA(bgColor, fgColor, fs), [fs, ccc, bgColor, fgColor])
@@ -94,7 +94,9 @@ export const ContrastCalc = () => {
         fill={false}
         className={Preview}
       >
-        <Title as="span" level="1"><Text size={fs as TokensTypes['font']['size']}>Preview</Text></Title>
+        <Title as="div" level="1">
+          <Text as="span" style={{ display: 'block' }} lineHeight="none" size={fs as TokensTypes['font']['size']}>Preview</Text>
+        </Title>
       </Stack>
       <Stack rowGap={32}>
         <Stack direction="row" columnGap={8} rowGap={8} wrap vAlign="start">
