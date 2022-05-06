@@ -1,5 +1,18 @@
 # docs
 
+## 10.1.0
+
+### Minor Changes
+
+- 7d1d15c: Add new fullWidth prop to textfield
+
+### Patch Changes
+
+- Updated dependencies [2900059]
+- Updated dependencies [7d1d15c]
+  - @wonderflow/react-components@9.1.0
+  - @wonderflow/themes@8.1.0
+
 ## 10.0.0
 
 ### Major Changes
