@@ -31,7 +31,7 @@ export const Markdown: React.FC<MarkdownProps> = ({
           ol: { component: Components.List, props: { as: 'ol', hideMarker: hideMarkers } },
           li: { component: Components.List.Li, props: { markerColor: 'var(--dimmed-5)' } },
           a: { component: CustomLink },
-          pre: CodeBlock,
+          pre: { component: CodeBlock },
           h1: { component: Components.Title, props: { level: '1', as: 'h1' } },
           h2: { component: Components.Title, props: { level: '2', as: 'h2' } },
           h3: { component: Components.Title, props: { level: '3', as: 'h3' } },

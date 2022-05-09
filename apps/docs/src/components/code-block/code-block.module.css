@@ -173,7 +173,7 @@
     }
   }
 
-  &[data-code-block-has-highlight='true'] pre[class*='language-'] > *:not(.refractor-marker) {
+  &[data-code-block-has-highlight='true'] code[class*='language-'] > *:not(:global(.refractor-marker)) {
     opacity: 50%;
     filter: saturate(0);
   }
