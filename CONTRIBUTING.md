@@ -79,8 +79,6 @@ We rely on [Changeset][changeset] to generate changelogs and release notes acros
 npx changeset
 ```
 
-Register a change which will be included inside changelog and release notes. If you run this command before commiting yout changes it will commit both at the same time. Useful if you want to bind a commit to a specific changeset.
-
 #### Start prerelease
 
 ```sh
