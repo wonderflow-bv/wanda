@@ -11,26 +11,31 @@
   }
 
   &[data-snackbar-kind='neutral'] {
+    --heading-foreground: var(--highlight-gray-foreground);
     --snackbar-bg: var(--highlight-gray-background);
     --snackbar-fg: var(--highlight-gray-foreground);
   }
 
   &[data-snackbar-kind='positive'] {
+    --heading-foreground: var(--highlight-green-foreground);
     --snackbar-bg: var(--highlight-green-background);
     --snackbar-fg: var(--highlight-green-foreground);
   }
 
   &[data-snackbar-kind='warning'] {
+    --heading-foreground: var(--highlight-yellow-foreground);
     --snackbar-bg: var(--highlight-yellow-background);
     --snackbar-fg: var(--highlight-yellow-foreground);
   }
 
   &[data-snackbar-kind='info'] {
+    --heading-foreground: var(--highlight-blue-foreground);
     --snackbar-bg: var(--highlight-blue-background);
     --snackbar-fg: var(--highlight-blue-foreground);
   }
 
   &[data-snackbar-kind='danger'] {
+    --heading-foreground: var(--highlight-red-foreground);
     --snackbar-bg: var(--highlight-red-background);
     --snackbar-fg: var(--highlight-red-foreground);
   }
