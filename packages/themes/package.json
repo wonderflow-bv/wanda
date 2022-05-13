@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "@types/fs-extra": "9.0.13",
+    "@types/yargs": "17.0.10",
     "@wonderflow/tokens": "*",
     "fs-extra": "10.1.0",
     "style-dictionary": "3.7.0",

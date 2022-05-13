@@ -9,16 +9,16 @@ module.exports = {
         {
           format: 'css/variables',
           destination: 'tokens.css',
-          filter: (token) => !token.name.endsWith('-primitive')
+          filter: token => !token.name.endsWith('-primitive'),
         },
         {
           format: 'json/nested',
-          destination: 'tokens.json'
-        }
+          destination: 'tokens.json',
+        },
       ],
       options: {
-        showFileHeader: true
-      }
-    }
-  }
-}
+        showFileHeader: true,
+      },
+    },
+  },
+};

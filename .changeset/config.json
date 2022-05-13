@@ -1,5 +1,5 @@
 {
-  "$schema": "https://unpkg.com/@changesets/config@1.6.4/schema.json",
+  "$schema": "https://unpkg.com/@changesets/config@2.0.0/schema.json",
   "changelog": ["@changesets/cli/changelog", { "repo": "wonderflow-bv/wanda" }],
   "commit": false,
   "linked": [],
