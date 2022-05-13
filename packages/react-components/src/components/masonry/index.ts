@@ -1,2 +1,2 @@
-export { Masonry } from './masonry'
-export type { MasonryProps } from './masonry'
+export type { MasonryProps } from './masonry';
+export { Masonry } from './masonry';

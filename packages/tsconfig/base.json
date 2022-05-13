@@ -14,12 +14,12 @@
     "noImplicitAny": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "noUnusedParameters": true,
     "preserveWatchOutput": true,
     "skipLibCheck": true,
     "strictNullChecks": true,
-    "strict": false,
+    "strict": true,
     "baseUrl": "../..",
     "plugins": [
       {

@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires, global-require */
-
+/* eslint-disable @typescript-eslint/no-var-requires, no-console, import/no-extraneous-dependencies */
 const StyleDictionary = require('style-dictionary').extend('src/themes.config.js');
 
 /**
