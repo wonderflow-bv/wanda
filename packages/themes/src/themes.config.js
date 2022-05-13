@@ -1,5 +1,6 @@
-/* eslint-disable @typescript-eslint/no-var-requires, global-require */
-
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable import/no-extraneous-dependencies */
 const yargs = require('yargs/yargs');
 const { hideBin } = require('yargs/helpers');
 
@@ -7,7 +8,7 @@ const { argv } = yargs(hideBin(process.argv));
 const tkns = require('@wonderflow/tokens/platforms/web/tokens.json');
 
 module.exports = {
-  source: [`./src/${argv.name as string || 'light'}.json`],
+  source: [`./src/templates/${argv.name}.json`],
   tokens: {
     ...tkns,
   },
@@ -18,11 +19,11 @@ module.exports = {
       files: [
         {
           format: 'css/variables',
-          destination: `${argv.name as string || 'light'}.css`,
+          destination: `${argv.name}.css`,
         },
         {
           format: 'json/flat',
-          destination: `${argv.name as string || 'light'}.json`,
+          destination: `${argv.name}.json`,
         },
       ],
       options: {
