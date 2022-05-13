@@ -1,15 +1,15 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import fs from 'fs-extra'
-import path from 'path'
+import fs from 'fs-extra';
+import path from 'path';
 
 const formatTheme = (path: string) => {
-  const theme = fs.readFileSync(path, 'utf8')
-  return theme.replace(':root {', '').replace('}', '')
-}
+  const theme = fs.readFileSync(path, 'utf8');
+  return theme.replace(':root {', '').replace('}', '');
+};
 
 const run = () => {
-  const lightTheme = formatTheme(path.join('dist', 'themes', 'light.css'))
-  const darkTheme = formatTheme(path.join('dist', 'themes', 'dark.css'))
+  const lightTheme = formatTheme(path.join('dist', 'themes', 'light.css'));
+  const darkTheme = formatTheme(path.join('dist', 'themes', 'dark.css'));
 
   const template = `
   :root,
@@ -30,17 +30,17 @@ const run = () => {
     color: var(--global-foreground);
     ${darkTheme}
   }
-  `
+  `;
 
-  fs.writeFileSync(path.join('dist', 'themes.css'), template)
-}
+  fs.writeFileSync(path.join('dist', 'themes.css'), template);
+};
 
 try {
-  run()
-  process.exit(0)
+  run();
+  process.exit(0);
 } catch (error) {
-  console.log('————————————————————————————————————————————————————————————————————————————————————— \n')
-  console.error('⚠️  Something went wrong:', error)
-  console.log('\n————————————————————————————————————————————————————————————————————————————————————— \n\n')
-  process.exit(1)
+  console.log('————————————————————————————————————————————————————————————————————————————————————— \n');
+  console.error('⚠️  Something went wrong:', error);
+  console.log('\n————————————————————————————————————————————————————————————————————————————————————— \n\n');
+  process.exit(1);
 }

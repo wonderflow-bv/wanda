@@ -1,7 +1,7 @@
 module.exports = {
   multipass: true,
   js2svg: {
-    pretty: false
+    pretty: false,
   },
   plugins: [
     {
@@ -9,19 +9,19 @@ module.exports = {
       params: {
         overrides: {
           cleanupIDs: {
-            minify: true
+            minify: true,
           },
           cleanupNumericValues: {
-            floatPrecision: 2
+            floatPrecision: 2,
           },
           convertColors: {
             names2hex: true,
-            rgb2hex: true
+            rgb2hex: true,
           },
           removeViewBox: false,
-          removeMetadata: false
-        }
-      }
+          removeMetadata: false,
+        },
+      },
     },
     'removeStyleElement',
     {
@@ -31,9 +31,9 @@ module.exports = {
           '*:fill:#000000',
           '*:fill:black',
           '*:fill:#000',
-          '*:fill:none'
-        ]
-      }
-    }
-  ]
-}
+          '*:fill:none',
+        ],
+      },
+    },
+  ],
+};

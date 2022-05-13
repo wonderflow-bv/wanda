@@ -1,39 +1,39 @@
-import jsonTokens from '@wonderflow/tokens/platforms/web/tokens.json'
-import postcssMixins from 'postcss-mixins'
-import flatten from 'flat'
+import jsonTokens from '@wonderflow/tokens/platforms/web/tokens.json';
+import flatten from 'flat';
+import postcssMixins from 'postcss-mixins';
 
 /**
  * Prepare env variables from tokens
  * to be assigned to postcss-preset-env
  */
 const flatTokens: Record<string, any> = flatten(jsonTokens, {
-  delimiter: '-'
-})
+  delimiter: '-',
+});
 
 const prepareTokens = () => Object.keys(flatTokens).reduce<Record<string, string>>((acc, key) => {
-  const newKey = key
-  acc[newKey] = `${flatTokens[key]}`
-  return acc
-}, {})
+  const newKey = key;
+  acc[newKey] = `${flatTokens[key]}`;
+  return acc;
+}, {});
 
 export const postcssConfig = {
   plugins: {
     'postcss-import': {},
     'postcss-replace': {
       pattern: /token\(.*?--([^\s]+?)\)/gi,
-      data: prepareTokens()
+      data: prepareTokens(),
     },
     'postcss-preset-env': {
       stage: 0,
       features: {
         'logical-properties-and-values': false,
         'prefers-color-scheme-query': false,
-        'gap-properties': false
+        'gap-properties': false,
       },
       insertAfter: {
-        'custom-media-queries': postcssMixins
+        'custom-media-queries': postcssMixins,
       },
-      enableClientSidePolyfills: false
+      enableClientSidePolyfills: false,
     },
     'postcss-mixins': {},
     cssnano: {
@@ -41,10 +41,10 @@ export const postcssConfig = {
         'default',
         {
           discardComments: {
-            removeAll: true
-          }
-        }
-      ]
-    }
-  }
-}
+            removeAll: true,
+          },
+        },
+      ],
+    },
+  },
+};
