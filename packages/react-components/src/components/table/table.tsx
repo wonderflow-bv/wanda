@@ -224,7 +224,7 @@ export const Table = <T extends Record<string, unknown>>({
     setPageSize,
     setHiddenColumns,
     state: {
-      pageSize, pageIndex, sortBy, selectedRowIds: sel
+      pageSize, pageIndex, sortBy, selectedRowIds: selectedRowIdsState
     }
   } = useTable(
     {
@@ -314,9 +314,9 @@ export const Table = <T extends Record<string, unknown>>({
   ])
 
   useUpdateEffect(() => {
-    onSelectedRowsChange(Object.keys(sel))
+    onSelectedRowsChange(Object.keys(selectedRowIdsState))
   }, [
-    sel,
+    selectedRowIdsState,
     onSelectedRowsChange
   ])
 
@@ -358,7 +358,7 @@ export const Table = <T extends Record<string, unknown>>({
       {/* CONTEXT TOAST */}
       <AnimatePresence>
         <LazyMotion features={domMax}>
-          {!!Object.keys(sel).length && selectableRows && (
+          {!!Object.keys(selectedRowIdsState).length && selectableRows && (
           <Stack
             as={m.div}
             className={styles.Toast}
@@ -382,9 +382,9 @@ export const Table = <T extends Record<string, unknown>>({
             exit={{ y: '-16px', opacity: 0 }}
           >
             <Text as="span" size={14} weight="bold">
-              {selectedLabel(Object.keys(sel))}
+              {selectedLabel(Object.keys(selectedRowIdsState))}
             </Text>
-            {selectedActions?.(Object.keys(sel))}
+            {selectedActions?.(Object.keys(selectedRowIdsState))}
           </Stack>
           )}
 
@@ -392,8 +392,8 @@ export const Table = <T extends Record<string, unknown>>({
           {(showHeader || selectableRows) && (
           <m.div
             animate={{
-              y: Object.keys(sel).length ? 20 : 0,
-              opacity: Object.keys(sel).length ? 0 : 1,
+              y: Object.keys(selectedRowIdsState).length ? 20 : 0,
+              opacity: Object.keys(selectedRowIdsState).length ? 0 : 1,
               transition: {
                 type: 'spring',
                 stiffness: 700,
