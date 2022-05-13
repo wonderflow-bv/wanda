@@ -255,7 +255,12 @@ export const Table = <T extends Record<string, unknown>>({
             ...acc,
             [curr]: true
           }
-        }, {} as Record<IdType<string>, boolean>)
+selectedRowIds: selectedRowIds.reduce<Record<IdType<string>, boolean>>((acc, curr) => {
+          return {
+            ...acc,
+            [curr]: true
+          }
+        }, {})
       }
     },
     useSortBy,
