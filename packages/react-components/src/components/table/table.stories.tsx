@@ -978,15 +978,19 @@ export const Simple = Template.bind({})
 
 const SelectionTemplate: ComponentStory<typeof Table> = ({ dataWithIds, data, ...args }) => {
   const [tableData, setTableData] = useState(dataWithIds)
+  const [selectedRowIds, setSelectedRowIds] = useState([])
 
-  const onDelete = (selectedRows) => {
-    const newTableData = tableData.filter(({ _id }) => !selectedRows.map(r => r.id).includes(_id))
+  const onDelete = (selectedRowIds) => {
+    const newTableData = tableData.filter(({ _id }) => !selectedRowIds.includes(_id))
+    setSelectedRowIds([])
     setTableData(newTableData)
   }
 
   return (
     <Table
       data={tableData}
+      selectedRowIds={selectedRowIds}
+      onSelectedRowsChange={setSelectedRowIds}
       selectedActions={
         (selectedRowIds) => <Button onClick={() => onDelete(selectedRowIds)}>Delete rows</Button>
       }
@@ -999,7 +1003,8 @@ const SelectionTemplate: ComponentStory<typeof Table> = ({ dataWithIds, data, ..
 export const SelectedRows = SelectionTemplate.bind({})
 SelectedRows.args = {
   title: 'With selectable rows',
-  selectableRows: true
+  selectableRows: true,
+  showPagination: true
 }
 
 const HidingColumnTemplate: ComponentStory<typeof Table> = ({ dataWithIds, columns, ...args }) => {
@@ -1152,6 +1157,8 @@ const ManualPaginationTemplate: ComponentStory<typeof Table> = ({
   const [allData, setAllData] = useState(dataWithIds)
   const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 5 })
 
+  const [selectedRowIds, setSelectedRowIds] = useState(['4', '9', '12'])
+
   const pageData = useMemo(() => {
     const { pageIndex, pageSize } = pagination
     const newIndexStart = pageIndex * pageSize
@@ -1159,9 +1166,10 @@ const ManualPaginationTemplate: ComponentStory<typeof Table> = ({
 
     return allData.slice(newIndexStart, newIndexEnd)
   }, [allData, pagination])
-
-  const onDelete = (selectedRows) => {
-    const newTableData = allData.filter(({ _id }) => !selectedRows.map(r => r.id).includes(_id))
+  console.log(selectedRowIds)
+  const onDelete = (selectedRowIds) => {
+    const newTableData = allData.filter(({ _id }) => !selectedRowIds.includes(_id))
+    setSelectedRowIds([])
     setAllData(newTableData)
   }
 
@@ -1169,8 +1177,10 @@ const ManualPaginationTemplate: ComponentStory<typeof Table> = ({
     <Table
       {...args}
       data={pageData}
+      onSelectedRowsChange={setSelectedRowIds}
+      selectedRowIds={selectedRowIds}
       selectedActions={
-        (selectedRowIds) => <Button onClick={() => onDelete(selectedRowIds)}>Delete rows</Button>
+        () => <Button onClick={() => onDelete(selectedRowIds)}>Delete rows</Button>
       }
       onPaginationChange={(newPagination) => {
         if (newPagination.pageIndex !== pagination.pageIndex || newPagination.pageSize !== pagination.pageSize) {
@@ -1308,4 +1318,32 @@ ManualPaginationFiltering.args = {
   selectableRows: true,
   showPagination: true,
   itemsPerPage: 5
+}
+
+const PreselectedRowsTemplate: ComponentStory<typeof Table> = ({ dataWithIds, data, ...args }) => {
+  const [tableData, setTableData] = useState(dataWithIds)
+
+  const onDelete = (selectedRows) => {
+    const newTableData = tableData.filter(({ _id }) => !selectedRows.map(r => r.id).includes(_id))
+    setTableData(newTableData)
+  }
+
+  return (
+    <Table
+      data={tableData}
+      selectedActions={
+        (selectedRowIds) => <Button onClick={() => onDelete(selectedRowIds)}>Delete rows</Button>
+      }
+      emptyComponent={<CustomEmptyComponent />}
+      {...args}
+    />
+  )
+}
+
+export const PreselectedRows = PreselectedRowsTemplate.bind({})
+PreselectedRows.args = {
+  title: 'With selectable rows',
+  selectableRows: true,
+  selectedRowIds: ['2', '4', '9', '12'],
+  showPagination: true
 }

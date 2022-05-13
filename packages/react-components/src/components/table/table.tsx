@@ -48,6 +48,14 @@ export type TableProps<T extends Record<string, unknown>> = PropsWithClass & {
    */
   selectableRows?: boolean;
   /**
+   * The ids of the rows which are selected
+   */
+  selectedRowIds?: Array<IdType<T>>;
+  /**
+   * A function to trigger every time a row changes its selection status
+   */
+   onSelectedRowsChange?: (selectedRowIds: Array<IdType<T>>) => void;
+  /**
    * Add an alternate style to the table rows
    */
   stripes?: boolean;
@@ -83,11 +91,11 @@ export type TableProps<T extends Record<string, unknown>> = PropsWithClass & {
   /**
    * Set the label for selected items in the table. Default to "Selected items"
    */
-  selectedLabel?: (selectedRowIds: Array<Row<T>>) => ReactNode;
+  selectedLabel?: (selectedRowIds: Array<IdType<T>>) => ReactNode;
    /**
    * Pass custom components to show when rows are selected.
    */
-  selectedActions?: (selectedRows: Array<Row<T>>) => ReactNode;
+  selectedActions?: (selectedRowIds: Array<IdType<T>>) => ReactNode;
   /**
    * Set the table height after which the table will scroll.
    */
@@ -157,12 +165,14 @@ export const Table = <T extends Record<string, unknown>>({
   columns,
   data = [],
   selectableRows,
+  selectedRowIds = [],
+  onSelectedRowsChange = () => {},
   stripes,
   showSeparators = true,
   title,
   actions,
   selectedActions,
-  selectedLabel = selectedRows => `Selected items: ${selectedRows.length}`,
+  selectedLabel = selectedRowIds => `Selected items: ${selectedRowIds.length}`,
   showHeader = false,
   showTableHead = true,
   columnsControl = false,
@@ -213,9 +223,8 @@ export const Table = <T extends Record<string, unknown>>({
     visibleColumns,
     setPageSize,
     setHiddenColumns,
-    selectedFlatRows,
     state: {
-      pageSize, pageIndex, sortBy
+      pageSize, pageIndex, sortBy, selectedRowIds: sel
     }
   } = useTable(
     {
@@ -235,11 +244,18 @@ export const Table = <T extends Record<string, unknown>>({
        * be placed in the next page. But it breaks row selection
        * paginateExpandedRows: !showPagination,
        */
+      paginateExpandedRows: !isManualPaginated,
       initialState: {
         sortBy: initialSortBy,
         pageIndex: initialPageIndex,
         pageSize: showPagination ? itemsPerPage : data.length,
-        hiddenColumns: getHiddenColumns()
+        hiddenColumns: getHiddenColumns(),
+        selectedRowIds: selectedRowIds.reduce((acc, curr) => {
+          return {
+            ...acc,
+            [curr]: true
+          }
+        }, {} as Record<IdType<string>, boolean>)
       }
     },
     useSortBy,
@@ -298,6 +314,13 @@ export const Table = <T extends Record<string, unknown>>({
   ])
 
   useUpdateEffect(() => {
+    onSelectedRowsChange(Object.keys(sel))
+  }, [
+    sel,
+    onSelectedRowsChange
+  ])
+
+  useUpdateEffect(() => {
     onSortChange?.(sortBy)
   }, [onSortChange, sortBy])
 
@@ -335,7 +358,7 @@ export const Table = <T extends Record<string, unknown>>({
       {/* CONTEXT TOAST */}
       <AnimatePresence>
         <LazyMotion features={domMax}>
-          {!!selectedFlatRows.length && selectableRows && (
+          {!!Object.keys(sel).length && selectableRows && (
           <Stack
             as={m.div}
             className={styles.Toast}
@@ -359,9 +382,9 @@ export const Table = <T extends Record<string, unknown>>({
             exit={{ y: '-16px', opacity: 0 }}
           >
             <Text as="span" size={14} weight="bold">
-              {selectedLabel(selectedFlatRows)}
+              {selectedLabel(Object.keys(sel))}
             </Text>
-            {selectedActions?.(selectedFlatRows)}
+            {selectedActions?.(Object.keys(sel))}
           </Stack>
           )}
 
@@ -369,8 +392,8 @@ export const Table = <T extends Record<string, unknown>>({
           {(showHeader || selectableRows) && (
           <m.div
             animate={{
-              y: selectedFlatRows.length ? 20 : 0,
-              opacity: selectedFlatRows.length ? 0 : 1,
+              y: Object.keys(sel).length ? 20 : 0,
+              opacity: Object.keys(sel).length ? 0 : 1,
               transition: {
                 type: 'spring',
                 stiffness: 700,
