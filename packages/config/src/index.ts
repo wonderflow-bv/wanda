@@ -1,1 +1,1 @@
-export { postcssConfig } from './postcss/config'
+export { postcssConfig } from './postcss/config';

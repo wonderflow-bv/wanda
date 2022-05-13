@@ -1,0 +1,45 @@
+{
+  "extends": "tsconfig/base.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "dist",
+    "target": "es2020",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "noEmit": true,
+    "module": "esnext",
+    "jsx": "preserve",
+    "incremental": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "paths": {
+      "@/styles/*": [
+        "src/styles/*"
+      ],
+      "@/examples/*": [
+        "src/examples/*"
+      ],
+      "@/components/*": [
+        "src/components/*"
+      ],
+      "@/services/*": [
+        "src/services/*"
+      ],
+      "@/utils/*": [
+        "src/utils/*"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "*.mdx"
+  ],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ]
+}

@@ -1,12 +1,7 @@
 {
-  "extends": [
-    "@wonderflow/stylelint-config"
-  ],
+  "extends": ["@wonderflow/stylelint-config"],
   "rules": {
-    "designtokens/check": [
-      true,
-      "@wonderflow/tokens/platforms/web/tokens.json"
-    ]
+    "designtokens/check": [true, "@wonderflow/tokens/platforms/web/tokens.json"]
   },
   "ignoreFiles": [
     "!**/*.css",

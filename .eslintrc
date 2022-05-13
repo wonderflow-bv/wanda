@@ -1,9 +1,18 @@
 {
-  "extends": ["@wonderflow/eslint-config", "plugin:json/recommended"],
+  "extends": [
+    "@lasalefamine/eslint-config",
+    "@lasalefamine/eslint-config/hooks",
+    "@lasalefamine/eslint-config/a11y",
+    "plugin:json/recommended"
+  ],
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint"],
   "parserOptions": {
     "extraFileExtensions": [".mjs"],
     "project": "./tsconfig.eslint.json"
+  },
+  "rules": {
+    "@next/next/no-img-element": 0,
+    "import/no-extraneous-dependencies": "off"
   }
 }

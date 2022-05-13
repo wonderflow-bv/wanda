@@ -88,7 +88,6 @@
     "@types/wcag-contrast": "3.0.0",
     "@wonderflow/config": "*",
     "@wonderflow/eslint-config": "1.1.11",
-    "@wonderflow/stylelint-config": "1.1.4",
     "cz-conventional-changelog": "3.3.0",
     "eslint": "7.32.0",
     "eslint-config-next": "12.1.5",
