@@ -250,12 +250,7 @@ export const Table = <T extends Record<string, unknown>>({
         pageIndex: initialPageIndex,
         pageSize: showPagination ? itemsPerPage : data.length,
         hiddenColumns: getHiddenColumns(),
-        selectedRowIds: selectedRowIds.reduce((acc, curr) => {
-          return {
-            ...acc,
-            [curr]: true
-          }
-selectedRowIds: selectedRowIds.reduce<Record<IdType<string>, boolean>>((acc, curr) => {
+        selectedRowIds: selectedRowIds.reduce<Record<IdType<string>, boolean>>((acc, curr) => {
           return {
             ...acc,
             [curr]: true
