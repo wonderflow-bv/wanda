@@ -1,5 +1,17 @@
 # @wonderflow/react-components
 
+## 9.3.0
+
+### Minor Changes
+
+- 5f8abc6: Fix tab style
+- 3e59214: Fixed multi page selection
+- 8d0c988: Fix snackbar title color
+
+### Patch Changes
+
+- d601751: Standardized chip paddings.
+
 ## 9.2.0
 
 ### Minor Changes
