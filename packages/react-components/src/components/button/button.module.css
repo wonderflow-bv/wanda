@@ -1,6 +1,6 @@
 @import '../../core/utils/vibrancy.css';
 
-.Button {
+:where(.Button) {
   box-sizing: border-box;
   user-select: none;
   -webkit-touch-callout: none;

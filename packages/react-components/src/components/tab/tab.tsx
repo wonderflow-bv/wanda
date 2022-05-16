@@ -74,7 +74,7 @@ export const Tab = ({
               className={styles.Trigger}
               asChild
             >
-              <Button kind="flat" icon={child.props.icon}>
+              <Button kind="flat" dimension='big' icon={child.props.icon}>
                 {child.props.label}
                 {(child.props.value === activeItem) && 'active' && (
                   <m.span className={styles.Highlight} layoutId={uid('tab-highlight')} />

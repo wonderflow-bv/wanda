@@ -12,7 +12,7 @@
   border-radius: 0;
   backdrop-filter: none;
   background: none;
-  font-weight: token(--font-weight-semi-bold);
+  font-weight: 400;
   outline-offset: calc(var(--separator-size) * -1);
   color: var(--dimmed-6);
   appearance: none;
@@ -21,9 +21,12 @@
   border: 0;
   background-color: transparent;
   font-family: inherit;
-  font-size: inherit;
   white-space: nowrap;
   flex-shrink: 0;
+
+  &:active {
+    transform: none;
+  }
 
   &:not([aria-disabled='true']) {
     color: var(--dimmed-5);
@@ -39,6 +42,7 @@
   &.Trigger[aria-disabled='true'] {
     background: none;
     backdrop-filter: none;
+    color: var(--global-disabled-foreground);
   }
 
   &[data-state='active'] {
