@@ -1,5 +1,19 @@
 # docs
 
+## 10.3.0
+
+### Minor Changes
+
+- 3e59214: Fixed multi page selection
+
+### Patch Changes
+
+- Updated dependencies [5f8abc6]
+- Updated dependencies [3e59214]
+- Updated dependencies [8d0c988]
+- Updated dependencies [d601751]
+  - @wonderflow/react-components@9.3.0
+
 ## 10.2.0
 
 ### Minor Changes
