@@ -1,14 +1,14 @@
-import * as TabsPrimitive from '@radix-ui/react-tabs'
-import { domMax, LazyMotion, m } from 'framer-motion'
+import * as TabsPrimitive from '@radix-ui/react-tabs';
+import { domMax, LazyMotion, m } from 'framer-motion';
 import {
-  Children, isValidElement, PropsWithChildren, useCallback, useState
-} from 'react'
+  Children, isValidElement, PropsWithChildren, useCallback, useState,
+} from 'react';
+import { useUIDSeed } from 'react-uid';
 
-import { Button } from '@/components'
+import { Button } from '@/components';
 
-import styles from './tab.module.css'
-import { TabPanel } from './tabs-panel'
-import { useUIDSeed } from 'react-uid'
+import styles from './tab.module.css';
+import { TabPanel } from './tabs-panel';
 
 export type TabProps = PropsWithChildren<PropsWithClass> & {
   /**
@@ -48,15 +48,15 @@ export const Tab = ({
   loop,
   ...otherProps
 }: TabProps) => {
-  const [activeItem, setActiveItem] = useState<string>(defaultValue ?? '')
-  const uid = useUIDSeed()
+  const [activeItem, setActiveItem] = useState<string>(defaultValue ?? '');
+  const uid = useUIDSeed();
   const handleOnVlaueChange = useCallback(
     (value: string) => {
-      onValueChange?.(value)
-      setActiveItem(value)
+      onValueChange?.(value);
+      setActiveItem(value);
     },
-    [onValueChange]
-  )
+    [onValueChange],
+  );
 
   return (
     <TabsPrimitive.Root
@@ -74,7 +74,7 @@ export const Tab = ({
               className={styles.Trigger}
               asChild
             >
-              <Button kind="flat" dimension='big' icon={child.props.icon}>
+              <Button kind="flat" dimension="big" icon={child.props.icon}>
                 {child.props.label}
                 {(child.props.value === activeItem) && 'active' && (
                   <m.span className={styles.Highlight} layoutId={uid('tab-highlight')} />
@@ -86,7 +86,7 @@ export const Tab = ({
       </LazyMotion>
       {children}
     </TabsPrimitive.Root>
-  )
-}
+  );
+};
 
-Tab.Panel = TabPanel
+Tab.Panel = TabPanel;

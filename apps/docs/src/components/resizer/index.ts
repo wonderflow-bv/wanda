@@ -1,1 +1,0 @@
-export { Resizer } from './resizer'
