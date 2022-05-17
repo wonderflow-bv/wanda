@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { useTheme } from 'next-themes';
 import React from 'react';
 
 export type MetaProps = {
@@ -20,14 +21,17 @@ export const Meta: React.FC<MetaProps> = ({
   url = process.env.NEXT_PUBLIC_DOMAIN,
   canonical,
   children,
-}) => (
-  <>
+}) => {
+  const { theme } = useTheme();
+
+  return (
     <Head>
       <title>{title}</title>
       <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
       { keywords && <meta name="keywords" content={keywords.join()} />}
       <link rel="icon" href="/favicon.svg" />
       <link rel="apple-touch-icon" href="/touch-icon.png" />
+      <meta name="theme-color" content={theme === 'dark' ? '#000000' : '#ffffff'} />
 
       {canonical && <link rel="canonical" href={canonical} /> }
       <meta property="og:site_name" content={title} />
@@ -47,7 +51,6 @@ export const Meta: React.FC<MetaProps> = ({
       <meta name="twitter:image" content={image} />
       <meta property="og:image:alt" content={`Page image for ${title}`} />
       <meta name="twitter:image:alt" content={`Page image for ${title}`} />
-
       <meta name="twitter:creator" content="wonderflow" />
       {url && (
         <>
@@ -57,5 +60,5 @@ export const Meta: React.FC<MetaProps> = ({
       )}
       {children}
     </Head>
-  </>
-);
+  );
+};

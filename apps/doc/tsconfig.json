@@ -19,9 +19,6 @@
       "@/styles/*": [
         "src/styles/*"
       ],
-      "@/examples/*": [
-        "src/examples/*"
-      ],
       "@/components/*": [
         "src/components/*"
       ],
