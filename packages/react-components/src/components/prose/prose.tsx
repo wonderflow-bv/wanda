@@ -7,7 +7,8 @@ import styles from './prose.module.css';
 
 export type ProseProps = Record<string, unknown>
 
-type PolymorphicProse = Polymorphic.ForwardRefComponent<'div'>;
+// eslint-disable-next-line
+type PolymorphicProse = Polymorphic.ForwardRefComponent<'div', {}>;
 
 export const Prose = forwardRef(({
   children,
