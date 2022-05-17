@@ -1,8 +1,0 @@
-{
-  "parser": "@typescript-eslint/parser",
-  "extends": ["@wonderflow/eslint-config", "next"],
-  "plugins": ["@typescript-eslint"],
-  "rules": {
-    "@next/next/no-img-element": 0
-  }
-}

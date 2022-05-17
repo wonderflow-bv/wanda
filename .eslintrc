@@ -3,6 +3,7 @@
     "@lasalefamine/eslint-config",
     "@lasalefamine/eslint-config/hooks",
     "@lasalefamine/eslint-config/a11y",
+    "plugin:@next/next/recommended",
     "plugin:json/recommended"
   ],
   "parser": "@typescript-eslint/parser",
@@ -13,6 +14,7 @@
   },
   "rules": {
     "@next/next/no-img-element": 0,
-    "import/no-extraneous-dependencies": "off"
+    "import/no-extraneous-dependencies": "off",
+    "@next/next/no-html-link-for-pages": ["error", "apps/doc/"]
   }
 }
