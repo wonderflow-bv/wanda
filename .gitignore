@@ -3,6 +3,7 @@
 core
 core.css
 /docs
+!/apps/docs
 
 
 # dependencies
