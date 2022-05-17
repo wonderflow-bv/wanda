@@ -1,5 +1,6 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { IconButton } from './icon-button'
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+
+import { IconButton } from './icon-button';
 
 const story: ComponentMeta<typeof IconButton> = {
   title: 'Components/Actions/IconButton',
@@ -8,30 +9,30 @@ const story: ComponentMeta<typeof IconButton> = {
     dimension: 'regular',
     kind: 'primary',
     icon: 'bell',
-    busy: false
+    busy: false,
   },
   argTypes: {
     onClick: { action: 'clicked' },
     dimension: {
       options: ['small', 'regular', 'big'],
-      control: { type: 'radio' }
+      control: { type: 'radio' },
     },
     busy: {
       options: [true, false],
-      control: { type: 'inline-radio' }
+      control: { type: 'inline-radio' },
     },
     kind: {
       options: ['primary', 'secondary', 'flat'],
-      control: { type: 'radio' }
-    }
-  }
-}
+      control: { type: 'radio' },
+    },
+  },
+};
 
-export default story
+export default story;
 
-const Template: ComponentStory<typeof IconButton> = (args) => <IconButton {...args} />
+const Template: ComponentStory<typeof IconButton> = args => <IconButton {...args} />;
 
-export const Default = Template.bind({})
+export const Default = Template.bind({});
 Default.args = {
-  disabled: false
-}
+  disabled: false,
+};

@@ -1,23 +1,24 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Avatar } from './avatar'
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+
+import { Avatar } from './avatar';
 
 const story: ComponentMeta<typeof Avatar> = {
   title: 'Components/Widgets/Avatar',
   component: Avatar,
   args: {
     dimension: 'regular',
-    src: 'https://api.lorem.space/image/face?w=150&h=150'
+    src: 'https://api.lorem.space/image/face?w=150&h=150',
   },
   argTypes: {
     dimension: {
       options: ['small', 'regular', 'big'],
-      control: { type: 'radio' }
-    }
-  }
-}
+      control: { type: 'radio' },
+    },
+  },
+};
 
-export default story
+export default story;
 
-const Template: ComponentStory<typeof Avatar> = (args) => <Avatar {...args} />
+const Template: ComponentStory<typeof Avatar> = args => <Avatar {...args} />;
 
-export const Default = Template.bind({})
+export const Default = Template.bind({});

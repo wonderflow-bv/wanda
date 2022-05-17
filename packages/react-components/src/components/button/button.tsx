@@ -1,7 +1,13 @@
-import clsx from 'clsx'
-import { FC, Children, cloneElement, forwardRef, MouseEvent, useCallback, isValidElement } from 'react'
-import { Icon, IconProps, Polymorphic, Spinner } from '@/components'
-import styles from './button.module.css'
+import clsx from 'clsx';
+import {
+  Children, cloneElement, forwardRef, isValidElement, MouseEvent, useCallback,
+} from 'react';
+
+import {
+  Icon, IconProps, Polymorphic, Spinner,
+} from '@/components';
+
+import styles from './button.module.css';
 
 export type ButtonProps = {
   /**
@@ -49,7 +55,7 @@ export type ButtonProps = {
   /**
    * Callback function to be called when the button is pressed.
    */
-  onClick?(event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>): void;
+  onClick?: (event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void;
 }
 
 type PolymorphicButton = Polymorphic.ForwardRefComponent<'button', ButtonProps>;
@@ -71,20 +77,21 @@ export const Button = forwardRef((
     busy,
     as: Wrapper = 'button',
     ...otherProps
-  }, forwardedRef) => {
+  }, forwardedRef,
+) => {
   const handleClick = useCallback(
     () => (event: any) => {
-      if (!disabled && onClick) onClick(event)
-      if (disabled) event.preventDefault()
+      if (!disabled && onClick) onClick(event);
+      if (disabled) event.preventDefault();
     },
-    [disabled, onClick]
-  )
+    [disabled, onClick],
+  );
 
   const iconSize = {
     big: 18,
     regular: 16,
-    small: 12
-  }
+    small: 12,
+  };
 
   return (
     <Wrapper
@@ -117,24 +124,24 @@ export const Button = forwardRef((
         </span>
       )}
     </Wrapper>
-  )
-}) as PolymorphicButton
+  );
+}) as PolymorphicButton;
 
 export type ButtonsGroupProps = PropsWithClass & Pick<ButtonProps, 'dimension' | 'kind'>
 
-export const ButtonsGroup: FC<ButtonsGroupProps> = ({
+export const ButtonsGroup: FCChildren<ButtonsGroupProps> = ({
   children,
   className,
   kind,
-  dimension = 'regular'
+  dimension = 'regular',
 }) => (
   <div className={clsx(styles.ButtonsGroup, className)}>
-    {Children.map(children, (child) => isValidElement(child) && cloneElement(
+    {Children.map(children, child => isValidElement(child) && cloneElement(
       child,
       {
         kind,
-        dimension
-      }
+        dimension,
+      },
     ))}
   </div>
-)
+);

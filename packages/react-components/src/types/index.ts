@@ -1,1 +1,1 @@
-export * as Polymorphic from './polymorphic'
+export * as Polymorphic from './polymorphic';

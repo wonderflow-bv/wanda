@@ -1,12 +1,16 @@
-import { FC, Children, cloneElement, CSSProperties, ReactNode, useState, useRef, isValidElement } from 'react'
-import { useUIDSeed } from 'react-uid'
-import { useKeyPress, useFocusWithin } from 'ahooks'
-import { Elevator } from '@/components'
-import styles from './tooltip.module.css'
-import { AutoPlacement, BasePlacement, VariationPlacement } from '@popperjs/core/lib'
-import { usePopperTooltip } from 'react-popper-tooltip'
+import { AutoPlacement, BasePlacement, VariationPlacement } from '@popperjs/core/lib';
+import { useFocusWithin, useKeyPress } from 'ahooks';
+import {
+  Children, cloneElement, CSSProperties, isValidElement, ReactNode, useRef, useState,
+} from 'react';
+import { usePopperTooltip } from 'react-popper-tooltip';
+import { useUIDSeed } from 'react-uid';
 
-export type TooltipProps = PropsWithClass & {
+import { Elevator } from '@/components';
+
+import styles from './tooltip.module.css';
+
+export type TooltipProps = {
   /**
    * Pass the content of the tooltip. It can be any valid React node.
    */
@@ -48,7 +52,7 @@ export type TooltipProps = PropsWithClass & {
   fill?: boolean;
 }
 
-export const Tooltip: FC<TooltipProps> = ({
+export const Tooltip: FCChildrenClass<TooltipProps> = ({
   children,
   trigger,
   placement = 'bottom-start',
@@ -57,45 +61,45 @@ export const Tooltip: FC<TooltipProps> = ({
   maxWidth = '40ch',
   fill = false,
   interactive = false,
-  delay = 500
+  delay = 500,
 }) => {
-  const seedID = useUIDSeed()
-  const [isOpen, setIsOpen] = useState(false)
-  const tooltipContainerRef = useRef<HTMLDivElement>(null)
-  useKeyPress('esc', () => setIsOpen(false))
+  const seedID = useUIDSeed();
+  const [isOpen, setIsOpen] = useState(false);
+  const tooltipContainerRef = useRef<HTMLDivElement>(null);
+  useKeyPress('esc', () => setIsOpen(false));
 
   const {
     getArrowProps,
     getTooltipProps,
     setTooltipRef,
     setTriggerRef,
-    visible
+    visible,
   } = usePopperTooltip({
     delayShow: delay,
     delayHide: 300,
     trigger: ['hover'],
-    visible: open || isOpen,
+    visible: open ?? isOpen,
     closeOnTriggerHidden: true,
-    interactive: interactive,
+    interactive,
     onVisibleChange: setIsOpen,
-    placement: placement,
-    offset: [0, 16]
+    placement,
+    offset: [0, 16],
   }, {
-    strategy: 'fixed'
-  })
+    strategy: 'fixed',
+  });
 
   const isFocusWithin = useFocusWithin(tooltipContainerRef, {
     onFocus: () => {
-      setIsOpen(true)
+      setIsOpen(true);
     },
     onBlur: (e: any) => {
-      if (e.currentTarget?.parentElement !== tooltipContainerRef.current) setIsOpen(false)
-    }
-  })
+      if (e.currentTarget?.parentElement !== tooltipContainerRef.current) setIsOpen(false);
+    },
+  });
 
   const dynamycStyle: CSSProperties = {
-    '--max-w': maxWidth
-  }
+    '--max-w': maxWidth,
+  };
 
   return (
     <div
@@ -105,13 +109,13 @@ export const Tooltip: FC<TooltipProps> = ({
       data-tooltip-has-focus-within={isFocusWithin}
       style={{ ...style }}
     >
-      {Children.map(trigger, (child) => isValidElement(child) && cloneElement(
+      {Children.map(trigger, child => isValidElement(child) && cloneElement(
         child,
         {
           ref: setTriggerRef,
           tabIndex: 0,
-          'aria-describedby': seedID('tooltip-content')
-        }
+          'aria-describedby': seedID('tooltip-content'),
+        },
       ))}
       {visible && (
         <Elevator resting={1}>
@@ -128,5 +132,5 @@ export const Tooltip: FC<TooltipProps> = ({
         </Elevator>
       )}
     </div>
-  )
-}
+  );
+};

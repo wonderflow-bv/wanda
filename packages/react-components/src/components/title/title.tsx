@@ -1,7 +1,9 @@
-import styles from './title.module.css'
-import { CSSProperties, forwardRef } from 'react'
-import { Polymorphic } from '@/components'
-import clsx from 'clsx'
+import clsx from 'clsx';
+import { CSSProperties, forwardRef } from 'react';
+
+import { Polymorphic } from '@/components';
+
+import styles from './title.module.css';
 
 export type TitleProps = {
   /**
@@ -45,12 +47,12 @@ export const Title = forwardRef(({
   style,
   ...otherProps
 }, forwardedRef) => {
-  const computedLevel = level.match(/\d/g) ? `H${level}` : level.charAt(0).toUpperCase() + level.slice(1)
+  const computedLevel = level.match(/\d/g) ? `H${level}` : level.charAt(0).toUpperCase() + level.slice(1);
 
   const dynamicStyle: CSSProperties = {
     '--max-w': maxWidth,
-    '--t-align': textAlign
-  }
+    '--t-align': textAlign,
+  };
 
   return (
     <Wrapper
@@ -63,5 +65,5 @@ export const Title = forwardRef(({
     >
       {children}
     </Wrapper>
-  )
-}) as PolymorphicTitle
+  );
+}) as PolymorphicTitle;

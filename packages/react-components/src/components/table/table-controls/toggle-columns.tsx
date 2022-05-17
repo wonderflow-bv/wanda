@@ -1,8 +1,8 @@
-import { useCallback, useMemo } from 'react'
+import { useCallback, useMemo } from 'react';
 
-import { Button, Menu, Popover } from '@/components'
+import { Button, Menu, Popover } from '@/components';
 
-import { CustomColumnInstanceType } from '../types'
+import { CustomColumnInstanceType } from '../types';
 
 type ToggleColumnsControlProps<T extends Record<string, unknown>> = {
   columns: Array<CustomColumnInstanceType<T>>;
@@ -11,10 +11,10 @@ type ToggleColumnsControlProps<T extends Record<string, unknown>> = {
 
 export const ToggleColumnsControl = <T extends Record<string, unknown>>({
   columns,
-  visibleColumns
+  visibleColumns,
 }: ToggleColumnsControlProps<T>) => {
-  const someVisibleColums = useMemo(() => visibleColumns.length !== 0, [visibleColumns])
-  const filteredColumns = useMemo(() => columns.filter(col => !col.isToggable), [columns])
+  const someVisibleColums = useMemo(() => visibleColumns.length !== 0, [visibleColumns]);
+  const filteredColumns = useMemo(() => columns.filter(col => !col.isToggable), [columns]);
 
   const handleToggleAll = useCallback(
     () => {
@@ -23,17 +23,17 @@ export const ToggleColumnsControl = <T extends Record<string, unknown>>({
        * hide them all by calling `toggleHidden(true)` for each column
        */
       if (someVisibleColums) {
-        visibleColumns.forEach(col => col.toggleHidden(true))
-        return
+        visibleColumns.forEach(col => col.toggleHidden(true));
+        return;
       }
       /**
        * If there are no visible columns (excluding artificial ones), call
        * toggleHidden(false) for each column
        */
-      filteredColumns.forEach(col => col.toggleHidden(false))
+      filteredColumns.forEach(col => col.toggleHidden(false));
     },
-    [someVisibleColums, filteredColumns, visibleColumns]
-  )
+    [someVisibleColums, filteredColumns, visibleColumns],
+  );
 
   return (
     <Popover
@@ -63,5 +63,5 @@ export const ToggleColumnsControl = <T extends Record<string, unknown>>({
         ))}
       </Menu>
     </Popover>
-  )
-}
+  );
+};

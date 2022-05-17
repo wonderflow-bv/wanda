@@ -1,5 +1,6 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Toggle } from './toggle'
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+
+import { Toggle } from './toggle';
 
 const story: ComponentMeta<typeof Toggle> = {
   title: 'Components/Inputs/Toggle',
@@ -8,18 +9,18 @@ const story: ComponentMeta<typeof Toggle> = {
     onChange: {
       action: 'changed',
       table: {
-        disable: true
-      }
+        disable: true,
+      },
     },
     disabled: {
       options: [true, false],
-      control: { type: 'inline-radio' }
-    }
-  }
-}
+      control: { type: 'inline-radio' },
+    },
+  },
+};
 
-export default story
+export default story;
 
-export const Default: ComponentStory<typeof Toggle> = (args) => <Toggle {...args} />
-export const Checked: ComponentStory<typeof Toggle> = (args) => <Toggle defaultChecked {...args} />
-export const DisabledChecked: ComponentStory<typeof Toggle> = (args) => <Toggle defaultChecked disabled {...args} />
+export const Default: ComponentStory<typeof Toggle> = args => <Toggle {...args} />;
+export const Checked: ComponentStory<typeof Toggle> = args => <Toggle defaultChecked {...args} />;
+export const DisabledChecked: ComponentStory<typeof Toggle> = args => <Toggle defaultChecked disabled {...args} />;

@@ -1,1 +1,1 @@
-export { TableCheckbox } from './table-checkbox'
+export { TableCheckbox } from './table-checkbox';

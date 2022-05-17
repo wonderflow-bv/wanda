@@ -1,8 +1,9 @@
-import { CSSProperties, forwardRef, PropsWithChildren } from 'react'
-import clsx from 'clsx'
-import styles from './grid-item.module.css'
+import clsx from 'clsx';
+import { CSSProperties, forwardRef } from 'react';
 
-export type GridItemProps = PropsWithChildren<PropsWithClass> & {
+import styles from './grid-item.module.css';
+
+export type GridItemProps = {
   /**
    * Make the item span the entire row.
    */
@@ -23,7 +24,7 @@ export type GridItemProps = PropsWithChildren<PropsWithClass> & {
   row?: string;
 }
 
-export const GridItem = forwardRef<HTMLLIElement, GridItemProps>(({
+export const GridItem = forwardRef<HTMLLIElement, PropsWithClass<GridItemProps>>(({
   children,
   style,
   className,
@@ -34,8 +35,8 @@ export const GridItem = forwardRef<HTMLLIElement, GridItemProps>(({
 }, forwardedRef) => {
   const dynamicStyle: CSSProperties = {
     '--column': column,
-    '--row': row
-  }
+    '--row': row,
+  };
 
   return (
     <li
@@ -47,7 +48,7 @@ export const GridItem = forwardRef<HTMLLIElement, GridItemProps>(({
     >
       {children}
     </li>
-  )
-})
+  );
+});
 
-GridItem.displayName = 'Grid.Item'
+GridItem.displayName = 'Grid.Item';

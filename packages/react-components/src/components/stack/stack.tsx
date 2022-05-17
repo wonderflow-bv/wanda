@@ -1,9 +1,11 @@
-import { CSSProperties, forwardRef } from 'react'
-import tkns from '@wonderflow/tokens/platforms/web/tokens.json'
-import { TokensTypes } from '@wonderflow/tokens/platforms/web'
-import { Polymorphic } from '@/components'
-import styles from './stack.module.css'
-import clsx from 'clsx'
+import { TokensTypes } from '@wonderflow/tokens/platforms/web';
+import tkns from '@wonderflow/tokens/platforms/web/tokens.json';
+import clsx from 'clsx';
+import { CSSProperties, forwardRef } from 'react';
+
+import { Polymorphic } from '@/components';
+
+import styles from './stack.module.css';
 
 export type StackProps = {
   /**
@@ -73,10 +75,10 @@ export const Stack = forwardRef(({
 }, forwardedRef) => {
   const alignmentTemplate = (prop: string) => {
     if (prop.includes('start') || prop.includes('end')) {
-      return `flex-${prop}`
+      return `flex-${prop}`;
     }
-    return prop
-  }
+    return prop;
+  };
 
   const computedStyle: CSSProperties = {
     '--rGap': rowGap ? tkns.space[rowGap] : 0,
@@ -84,8 +86,8 @@ export const Stack = forwardRef(({
     '--vAlign': vAlign && alignmentTemplate(vAlign),
     '--hAlign': hAlign && alignmentTemplate(hAlign),
     '--vPadding': vPadding ? tkns.space[vPadding] : 0,
-    '--hPadding': hPadding ? tkns.space[hPadding] : 0
-  }
+    '--hPadding': hPadding ? tkns.space[hPadding] : 0,
+  };
 
   return (
     <Wrapper
@@ -95,11 +97,11 @@ export const Stack = forwardRef(({
       data-stack-wrap={wrap}
       data-stack-direction={direction}
       data-stack-fill={fill}
-      data-stack-has-padding={Boolean(hPadding || vPadding)}
+      data-stack-has-padding={Boolean(hPadding ?? vPadding)}
       className={clsx(styles.Stack, styles.StackWrapper, className)}
       {...otherProps}
     >
       {children}
     </Wrapper>
-  )
-}) as PolymorphicStack
+  );
+}) as PolymorphicStack;

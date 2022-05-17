@@ -1,11 +1,12 @@
-import { CSSProperties, ReactNode, forwardRef } from 'react'
-import clsx from 'clsx'
-import tkns from '@wonderflow/tokens/platforms/web/tokens.json'
-import { TokensTypes } from '@wonderflow/tokens/platforms/web'
-import { GridItem, GridItemProps } from './item/grid-item'
-import styles from './grid.module.css'
+import { TokensTypes } from '@wonderflow/tokens/platforms/web';
+import tkns from '@wonderflow/tokens/platforms/web/tokens.json';
+import clsx from 'clsx';
+import { CSSProperties, forwardRef, ReactNode } from 'react';
 
-export type GridProps = PropsWithClass & {
+import styles from './grid.module.css';
+import { GridItem, GridItemProps } from './item/grid-item';
+
+export type GridProps = {
   /**
    * The children to be rendered in the grid.
    * Even though this component doesn't block you to use any elements as children,
@@ -50,7 +51,7 @@ type GridComponent = React.ForwardRefExoticComponent<GridProps> & {
   Item: React.ForwardRefExoticComponent<GridItemProps>;
 }
 
-export const Grid = forwardRef<HTMLUListElement, GridProps>(({
+export const Grid = forwardRef<HTMLUListElement, PropsWithClass<GridProps>>(({
   className,
   children,
   columns,
@@ -69,8 +70,8 @@ export const Grid = forwardRef<HTMLUListElement, GridProps>(({
     '--columns': columns,
     '--column-min-w': colMinWidth,
     '--rows': rows,
-    '--row-min-h': rowMinHeight
-  }
+    '--row-min-h': rowMinHeight,
+  };
 
   return (
     <ul
@@ -82,8 +83,8 @@ export const Grid = forwardRef<HTMLUListElement, GridProps>(({
     >
       {children}
     </ul>
-  )
-}) as GridComponent
+  );
+}) as GridComponent;
 
-Grid.displayName = 'Grid'
-Grid.Item = GridItem
+Grid.displayName = 'Grid';
+Grid.Item = GridItem;

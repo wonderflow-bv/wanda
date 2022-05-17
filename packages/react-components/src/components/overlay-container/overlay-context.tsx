@@ -1,42 +1,44 @@
-import { createContext, useContext, PropsWithChildren } from 'react'
-import { useUIDSeed } from 'react-uid'
-import { OverlayContainerProps } from './overlay-container'
+/* eslint-disable @typescript-eslint/no-empty-function */
+import { createContext, PropsWithChildren, useContext } from 'react';
+import { useUIDSeed } from 'react-uid';
+
+import { OverlayContainerProps } from './overlay-container';
 
 type OverlayContextProps = Partial<OverlayContainerProps> & {
-  titleId?: string
+  titleId?: string;
 }
 
 export const OverlayContext = createContext<OverlayContextProps>({
   titleId: '',
-  onClose: () => {}
-})
+  onClose: () => {},
+});
 
-OverlayContext.displayName = 'OverlayContext'
+OverlayContext.displayName = 'OverlayContext';
 
 export const OverlayProvider = (props: PropsWithChildren<OverlayContextProps>) => {
-  const seedID = useUIDSeed()
+  const seedID = useUIDSeed();
   const {
     children,
-    titleId = seedID('overlay-title'), onClose
-  } = props
+    titleId = seedID('overlay-title'), onClose,
+  } = props;
 
   return (
     <OverlayContext.Provider value={{
       titleId,
-      onClose
+      onClose,
     }}
     >
       {children}
     </OverlayContext.Provider>
-  )
-}
+  );
+};
 
 export const useOverlayContext = () => {
-  const context = useContext(OverlayContext)
+  const context = useContext(OverlayContext);
   if (!context) {
     throw new Error(
-      'OverlayContainer component must be used inside OverlayContext to access context data.'
-    )
+      'OverlayContainer component must be used inside OverlayContext to access context data.',
+    );
   }
-  return context
-}
+  return context;
+};

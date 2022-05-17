@@ -1,8 +1,10 @@
-import { CSSProperties, forwardRef } from 'react'
-import { Polymorphic } from '@/components'
-import styles from './text.module.css'
-import clsx from 'clsx'
-import { TokensTypes } from '@wonderflow/tokens/platforms/web'
+import { TokensTypes } from '@wonderflow/tokens/platforms/web';
+import clsx from 'clsx';
+import { CSSProperties, forwardRef } from 'react';
+
+import { Polymorphic } from '@/components';
+
+import styles from './text.module.css';
 
 export type TextProps = {
   /**
@@ -64,8 +66,8 @@ export const Text = forwardRef(({
 }, forwardedRef) => {
   const dynamicStyle: CSSProperties = {
     '--max-w': maxWidth,
-    '--t-align': textAlign
-  }
+    '--t-align': textAlign,
+  };
 
   return (
     <Wrapper
@@ -82,5 +84,5 @@ export const Text = forwardRef(({
     >
       {children}
     </Wrapper>
-  )
-}) as PolymorphicText
+  );
+}) as PolymorphicText;

@@ -1,19 +1,19 @@
-import { Children, cloneElement, Fragment, isValidElement, PropsWithChildren } from 'react'
+import {
+  Children, cloneElement, isValidElement,
+} from 'react';
 
-export type AspectRatioProps = PropsWithChildren<PropsWithClass> & {
+export type AspectRatioProps = {
   ratio: string;
 }
 
-export const AspectRatio = ({
+export const AspectRatio: FCChildrenClass<AspectRatioProps> = ({
   children,
-  ratio
-}: AspectRatioProps) => {
-  return (
-    <Fragment>
-      {Children.map(children, (child) => isValidElement(child) && cloneElement(
-        child,
-        { style: { ...child.props.style, aspectRatio: ratio } }
-      ))}
-    </Fragment>
-  )
-}
+  ratio,
+}) => (
+  <>
+    {Children.map(children, child => isValidElement(child) && cloneElement(
+      child,
+      { style: { ...child.props.style, aspectRatio: ratio } },
+    ))}
+  </>
+);

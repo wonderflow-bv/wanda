@@ -1,2 +1,2 @@
-export { Disclosure } from './disclosure'
-export type { DisclosureProps } from './disclosure'
+export type { DisclosureProps } from './disclosure';
+export { Disclosure } from './disclosure';

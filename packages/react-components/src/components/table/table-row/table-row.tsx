@@ -1,14 +1,14 @@
-import clsx from 'clsx'
-import { PropsWithChildren, useMemo } from 'react'
-import { IdType, Row } from 'react-table'
+import clsx from 'clsx';
+import { PropsWithChildren, useMemo } from 'react';
+import { IdType, Row } from 'react-table';
 
-import styles from './table-row.module.css'
+import styles from './table-row.module.css';
 
-type TableRowProps<T extends Record<string, unknown>> = PropsWithChildren<PropsWithClass> & {
+type TableRowProps<T extends Record<string, unknown>> = PropsWithChildren<PropsWithClass<{
   expanded?: boolean;
   rowData?: Row<T>;
   expandedRows?: Array<IdType<T>>;
-}
+}>>
 
 export const TableRow = <T extends Record<string, unknown>>({
   children,
@@ -19,14 +19,14 @@ export const TableRow = <T extends Record<string, unknown>>({
   ...otherProps
 }: TableRowProps<T>) => {
   const highlightRow = useMemo(() => {
-    const [currentParentRowId] = rowData?.id.match(/.*(?=\.)/) ?? []
+    const [currentParentRowId] = rowData?.id.match(/.*(?=\.)/) ?? [];
     const isHighlight = expandedRows?.includes(currentParentRowId) && expandedRows.every((rowId) => {
-      const [parentRowMatch] = rowId.match(/.*(?=\.)/) ?? []
-      return parentRowMatch !== currentParentRowId
-    })
+      const [parentRowMatch] = rowId.match(/.*(?=\.)/) ?? [];
+      return parentRowMatch !== currentParentRowId;
+    });
 
-    return Boolean(isHighlight)
-  }, [expandedRows, rowData])
+    return Boolean(isHighlight);
+  }, [expandedRows, rowData]);
 
   return (
     <tr
@@ -37,5 +37,5 @@ export const TableRow = <T extends Record<string, unknown>>({
     >
       {children}
     </tr>
-  )
-}
+  );
+};

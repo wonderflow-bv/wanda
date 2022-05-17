@@ -52,8 +52,8 @@
   },
   "homepage": "https://github.com/wonderflow-bv/wanda",
   "peerDependencies": {
-    "react": "^17.0",
-    "react-dom": "^17.0"
+    "react": ">=17.0",
+    "react-dom": ">=17.0"
   },
   "devDependencies": {
     "@babel/core": "7.17.9",

@@ -1,24 +1,29 @@
 import {
-  ReactNode,
-  useState,
+  AutoPlacement, BasePlacement, Modifier, VariationPlacement,
+} from '@popperjs/core';
+import tkns from '@wonderflow/tokens/platforms/web/tokens.json';
+import { useFocusWithin, useKeyPress } from 'ahooks';
+import clsx from 'clsx';
+import {
+  AnimatePresence, domMax, LazyMotion, m,
+} from 'framer-motion';
+import {
   Children,
   cloneElement,
-  useRef,
   forwardRef,
   isValidElement,
+  ReactNode,
   useEffect,
-  useMemo
-} from 'react'
-import { useKeyPress, useFocusWithin } from 'ahooks'
-import styles from './popover.module.css'
-import { useUIDSeed } from 'react-uid'
-import { AutoPlacement, BasePlacement, VariationPlacement, Modifier } from '@popperjs/core'
-import { usePopperTooltip } from 'react-popper-tooltip'
-import { domMax, LazyMotion, m, AnimatePresence } from 'framer-motion'
-import clsx from 'clsx'
-import tkns from '@wonderflow/tokens/platforms/web/tokens.json'
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import { usePopperTooltip } from 'react-popper-tooltip';
+import { useUIDSeed } from 'react-uid';
 
-export type PopoverProps = PropsWithClass & {
+import styles from './popover.module.css';
+
+export type PopoverProps = {
   /**
    * The content of the popover to display when the popover is open.
    */
@@ -30,7 +35,7 @@ export type PopoverProps = PropsWithClass & {
   /**
    * The distance from the trigger to the popover.
    */
-  offset?: number,
+  offset?: number;
   /**
    * The placement of the popover. This is automatically handled based on
    * scroll and viewport edges. By default the popover is anchored at
@@ -66,9 +71,9 @@ export type PopoverProps = PropsWithClass & {
 }
 
 const cssEasingToArray = (cssEasing: string) => {
-  const [x1, y1, x2, y2] = cssEasing.replace(/[^0-9.,]+/g, '').split(',').map(i => parseFloat(i))
-  return [x1, y1, x2, y2]
-}
+  const [x1, y1, x2, y2] = cssEasing.replace(/[^0-9.,]+/g, '').split(',').map(i => parseFloat(i));
+  return [x1, y1, x2, y2];
+};
 
 const PopoverAnimation = {
   visible: {
@@ -76,20 +81,20 @@ const PopoverAnimation = {
     opacity: 1,
     transition: {
       ease: cssEasingToArray(tkns.easing.entrance),
-      duration: 0.1
-    }
+      duration: 0.1,
+    },
   },
   hidden: {
     y: -5,
     opacity: 0,
     transition: {
       ease: cssEasingToArray(tkns.easing.exit),
-      duration: 0.1
-    }
-  }
-}
+      duration: 0.1,
+    },
+  },
+};
 
-export const Popover = forwardRef<HTMLDivElement, PopoverProps>(({
+export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(({
   children,
   trigger,
   offset = 8,
@@ -102,29 +107,31 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(({
   onOpenChange,
   ...otherProps
 }, forwardedRef) => {
-  const seedID = useUIDSeed()
-  const popoverRef = useRef<any>(forwardedRef)
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const seedID = useUIDSeed();
+  const popoverRef = useRef<any>(forwardedRef);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const sameWidth = useMemo<Modifier<string, {}>>(() => ({
+  const sameWidth = useMemo<Modifier<string, Record<string, unknown>>>(() => ({
     name: 'sameWidth',
     enabled: true,
     phase: 'beforeWrite',
     requires: ['computeStyles'],
     fn: ({ state }) => {
-      if (matchTriggerWidth) state.styles.popper.width = `${state.rects.reference.width}px`
+      const s = state;
+      if (matchTriggerWidth) s.styles.popper.width = `${s.rects.reference.width}px`;
     },
     effect: ({ state }) => {
-      const referenceElement: Partial<HTMLElement> = state.elements.reference
-      if (matchTriggerWidth) state.elements.popper.style.width = `${referenceElement.offsetWidth}px`
-    }
-  }), [matchTriggerWidth])
+      const s = state;
+      const referenceElement: Partial<HTMLElement> = s.elements.reference;
+      if (matchTriggerWidth) s.elements.popper.style.width = `${referenceElement.offsetWidth ?? 0}px`;
+    },
+  }), [matchTriggerWidth]);
 
   const {
     getTooltipProps,
     setTooltipRef,
     setTriggerRef,
-    visible
+    visible,
   } = usePopperTooltip({
     delayShow: 0,
     delayHide: 0,
@@ -132,10 +139,10 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(({
     visible: isOpen,
     closeOnTriggerHidden: true,
     closeOnOutsideClick,
-    onVisibleChange: state => {
-      onOpenChange?.(state)
-      setIsOpen(state)
-    }
+    onVisibleChange: (state) => {
+      onOpenChange?.(state);
+      setIsOpen(state);
+    },
   }, {
     placement,
     modifiers: [
@@ -143,25 +150,25 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(({
       {
         name: 'offset',
         options: {
-          offset: [0, offset]
-        }
-      }
-    ]
-  })
+          offset: [0, offset],
+        },
+      },
+    ],
+  });
 
   const isFocusWithin = useFocusWithin(popoverRef, {
     onBlur: (e) => {
       if (e.relatedTarget && visible) {
-        setIsOpen(false)
+        setIsOpen(false);
       }
-    }
-  })
+    },
+  });
 
-  useKeyPress('esc', () => setIsOpen(false))
+  useKeyPress('esc', () => setIsOpen(false));
 
   useEffect(() => {
-    open !== undefined && setIsOpen(open)
-  }, [open])
+    if (open !== undefined) setIsOpen(open);
+  }, [open]);
 
   return (
     <div
@@ -169,7 +176,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(({
       className={clsx(styles.Popover, className)}
       data-popover-has-focus={isFocusWithin}
     >
-      {Children.map(trigger, (child) => isValidElement(child) && cloneElement(
+      {Children.map(trigger, child => isValidElement(child) && cloneElement(
         child,
         {
           ref: setTriggerRef,
@@ -178,8 +185,8 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(({
           'aria-haspopup': 'true',
           'aria-controls': seedID('popover-dialog'),
           'aria-expanded': isOpen,
-          ...otherProps
-        }
+          ...otherProps,
+        },
       ))}
       <AnimatePresence>
         {visible && (
@@ -198,12 +205,12 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(({
                 exit="hidden"
               >
 
-                {Children.map(children, (child) => isValidElement(child) && cloneElement(
+                {Children.map(children, child => isValidElement(child) && cloneElement(
                   child,
                   {
                     id: seedID('popover-dialog'),
-                    'aria-labelledby': seedID('popover-trigger')
-                  }
+                    'aria-labelledby': seedID('popover-trigger'),
+                  },
                 ))}
               </m.div>
             </LazyMotion>
@@ -211,7 +218,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(({
         )}
       </AnimatePresence>
     </div>
-  )
-})
+  );
+});
 
-Popover.displayName = 'Popover'
+Popover.displayName = 'Popover';

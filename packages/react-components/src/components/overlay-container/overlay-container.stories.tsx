@@ -1,20 +1,21 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { useState } from 'react'
-import { OverlayContainer } from './overlay-container'
-import { Button, Stack } from '../..'
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { useState } from 'react';
+
+import { Button, Stack } from '../..';
+import { OverlayContainer } from './overlay-container';
 
 const story: ComponentMeta<typeof OverlayContainer> = {
   title: 'Layouts/Overlay container',
   component: OverlayContainer,
   args: {
-    obfuscate: true
-  }
-}
+    obfuscate: true,
+  },
+};
 
-export default story
+export default story;
 
 const Template: ComponentStory<typeof OverlayContainer> = ({ children, ...otherProps }) => {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(false);
   return (
     <>
       <Button onClick={() => setVisible(true)}>Open Overlay</Button>
@@ -36,7 +37,7 @@ const Template: ComponentStory<typeof OverlayContainer> = ({ children, ...otherP
         )}
       </OverlayContainer>
     </>
-  )
-}
+  );
+};
 
-export const Default = Template.bind({})
+export const Default = Template.bind({});

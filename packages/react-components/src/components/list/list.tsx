@@ -1,8 +1,12 @@
-import { Children, cloneElement, forwardRef, isValidElement, useMemo } from 'react'
-import styles from './list.module.css'
-import clsx from 'clsx'
-import { Polymorphic } from '@/components'
-import { ListItem, ListItemProps } from './list-item'
+import clsx from 'clsx';
+import {
+  Children, cloneElement, forwardRef, isValidElement, useMemo,
+} from 'react';
+
+import { Polymorphic } from '@/components';
+
+import styles from './list.module.css';
+import { ListItem, ListItemProps } from './list-item';
 
 export type ListProps = {
   /**
@@ -27,7 +31,7 @@ export const List = forwardRef(({
   hideMarker = false,
   ...otherProps
 }, forwardedRef) => {
-  const isUnordered = useMemo(() => Wrapper === 'ul', [Wrapper])
+  const isUnordered = useMemo(() => Wrapper === 'ul', [Wrapper]);
 
   return (
     <Wrapper
@@ -38,15 +42,15 @@ export const List = forwardRef(({
       data-list-no-marker={hideMarker}
       {...otherProps}
     >
-      {Children.map(children, (child) => isValidElement(child) && cloneElement(
+      {Children.map(children, child => isValidElement(child) && cloneElement(
         child,
         {
           hideMarker: !isUnordered && !hideMarker,
-          dimension
-        }
+          dimension,
+        },
       ))}
     </Wrapper>
-  )
-}) as PolymorphicList
+  );
+}) as PolymorphicList;
 
-List.Li = ListItem
+List.Li = ListItem;

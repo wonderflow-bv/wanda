@@ -1,8 +1,9 @@
-import { CSSProperties, forwardRef, ReactNode } from 'react'
-import { Polymorphic } from '@/components'
-import clsx from 'clsx'
+import clsx from 'clsx';
+import { CSSProperties, forwardRef, ReactNode } from 'react';
 
-import styles from './clamp-text.module.css'
+import { Polymorphic } from '@/components';
+
+import styles from './clamp-text.module.css';
 
 export type ClampTextProps = {
   /**
@@ -26,8 +27,8 @@ export const ClampText = forwardRef(({
   ...otherProps
 }, forwardedRef) => {
   const dynamicStyle: CSSProperties = {
-    '--r': rows
-  }
+    '--r': rows,
+  };
 
   return (
     <Wrapper
@@ -38,5 +39,5 @@ export const ClampText = forwardRef(({
     >
       {children}
     </Wrapper>
-  )
-}) as PolymorphicClampText
+  );
+}) as PolymorphicClampText;

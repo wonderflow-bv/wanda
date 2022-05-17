@@ -1,9 +1,15 @@
-import { forwardRef, useCallback, useEffect, useState } from 'react'
-import styles from './toggle-button.module.css'
-import { IconButton, IconButtonProps, Polymorphic, Icon, IconProps } from '@/components'
-import clsx from 'clsx'
-import { Except } from 'type-fest'
-import { domMax, LazyMotion, m } from 'framer-motion'
+import clsx from 'clsx';
+import { domMax, LazyMotion, m } from 'framer-motion';
+import {
+  forwardRef, useCallback, useEffect, useState,
+} from 'react';
+import { Except } from 'type-fest';
+
+import {
+  Icon, IconButton, IconButtonProps, IconProps, Polymorphic,
+} from '@/components';
+
+import styles from './toggle-button.module.css';
 
 export type ToggleButtonProps = Except<IconButtonProps, 'icon'> & {
   /**
@@ -22,8 +28,8 @@ export type ToggleButtonProps = Except<IconButtonProps, 'icon'> & {
 }
 
 type PolymorphicToggleButton = Polymorphic.ForwardRefComponent<
-  Polymorphic.IntrinsicElement<typeof IconButton>,
-  Polymorphic.OwnProps<typeof IconButton> & ToggleButtonProps
+Polymorphic.IntrinsicElement<typeof IconButton>,
+Polymorphic.OwnProps<typeof IconButton> & ToggleButtonProps
 >;
 
 const scaleAnimation = {
@@ -32,18 +38,18 @@ const scaleAnimation = {
     transition: {
       duration: 0.2,
       ease: [0, 0, 0.34, 1],
-      delay: 0
-    }
+      delay: 0,
+    },
   },
   scaleOut: {
     scale: 0,
     transition: {
       duration: 0.2,
       ease: [0.3, 0.07, 1, 1],
-      delay: 0
-    }
-  }
-}
+      delay: 0,
+    },
+  },
+};
 
 export const ToggleButton = forwardRef(({
   className,
@@ -57,33 +63,33 @@ export const ToggleButton = forwardRef(({
   onClick,
   ...otherProps
 }, forwardedRef) => {
-  const [isPressed, setIsPressed] = useState<boolean>(pressed)
-  const [firstRender, setFirstRender] = useState(true)
+  const [isPressed, setIsPressed] = useState<boolean>(pressed);
+  const [firstRender, setFirstRender] = useState(true);
 
   useEffect(() => {
-    setFirstRender(false)
-  }, [pressed])
+    setFirstRender(false);
+  }, [pressed]);
 
   const handleClick = useCallback(
     (event) => {
-      setIsPressed(!isPressed)
-      onClick && onClick(event)
+      setIsPressed(!isPressed);
+      onClick?.(event);
     },
-    [onClick, isPressed]
-  )
+    [onClick, isPressed],
+  );
 
   const renderIcon = useCallback(
     (icon, dimension) => {
       const iconSize: Record<string, IconProps['dimension']> = {
         big: 24,
         regular: 16,
-        small: 12
-      }
+        small: 12,
+      };
 
-      return (<Icon source={icon} dimension={iconSize[dimension]} />)
+      return (<Icon source={icon} dimension={iconSize[dimension]} />);
     },
-    []
-  )
+    [],
+  );
 
   return (
     <IconButton
@@ -108,7 +114,7 @@ export const ToggleButton = forwardRef(({
             >
               {renderIcon(pressedIcon, dimension)}
             </m.span>
-            )
+          )
           : restingIcon && (
           <m.span
             key="restingIcon"
@@ -122,5 +128,5 @@ export const ToggleButton = forwardRef(({
       }
       </LazyMotion>
     </IconButton>
-  )
-}) as PolymorphicToggleButton
+  );
+}) as PolymorphicToggleButton;

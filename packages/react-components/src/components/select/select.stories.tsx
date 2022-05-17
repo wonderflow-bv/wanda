@@ -1,5 +1,6 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Select } from './select'
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+
+import { Select } from './select';
 
 const story: ComponentMeta<typeof Select> = {
   title: 'Components/Inputs/Select',
@@ -8,30 +9,30 @@ const story: ComponentMeta<typeof Select> = {
     onChange: {
       action: 'changed',
       table: {
-        disable: true
-      }
+        disable: true,
+      },
     },
     kind: {
       options: ['single', 'multiple'],
-      control: { type: 'radio' }
+      control: { type: 'radio' },
     },
     dimension: {
       options: ['small', 'regular', 'big'],
-      control: { type: 'radio' }
+      control: { type: 'radio' },
     },
     disabled: {
       options: [true, false],
-      control: { type: 'inline-radio' }
-    }
+      control: { type: 'inline-radio' },
+    },
   },
   args: {
-    dimension: 'regular'
-  }
-}
+    dimension: 'regular',
+  },
+};
 
-export default story
+export default story;
 
-const SingleTemplate: ComponentStory<typeof Select> = (args) => (
+const SingleTemplate: ComponentStory<typeof Select> = args => (
   <Select defaultValue="placeholder" {...args}>
     <option value="placeholder" hidden disabled>Pick an option</option>
     <optgroup label="Option Group One">
@@ -44,9 +45,9 @@ const SingleTemplate: ComponentStory<typeof Select> = (args) => (
       <option value="5">Option 3</option>
     </optgroup>
   </Select>
-)
+);
 
-const MultipleTemplate: ComponentStory<typeof Select> = (args) => (
+const MultipleTemplate: ComponentStory<typeof Select> = args => (
   <Select {...args} kind="multiple">
     <optgroup label="Option Group">
       <option>Option 1</option>
@@ -59,22 +60,22 @@ const MultipleTemplate: ComponentStory<typeof Select> = (args) => (
       <option>Option 6</option>
     </optgroup>
   </Select>
-)
+);
 
-export const Single = SingleTemplate.bind({})
+export const Single = SingleTemplate.bind({});
 Single.args = {
   disabled: false,
-  kind: 'single'
-}
+  kind: 'single',
+};
 
-export const WithLabel = SingleTemplate.bind({})
+export const WithLabel = SingleTemplate.bind({});
 WithLabel.args = {
   disabled: false,
   kind: 'single',
-  label: 'Label'
-}
+  label: 'Label',
+};
 
-export const Multiple = MultipleTemplate.bind({})
+export const Multiple = MultipleTemplate.bind({});
 Multiple.args = {
-  kind: 'multiple'
-}
+  kind: 'multiple',
+};

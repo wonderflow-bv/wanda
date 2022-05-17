@@ -1,5 +1,6 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Container } from './container'
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+
+import { Container } from './container';
 
 const story: ComponentMeta<typeof Container> = {
   title: 'Layouts/Container',
@@ -7,50 +8,50 @@ const story: ComponentMeta<typeof Container> = {
   argTypes: {
     padding: {
       options: [true, false],
-      control: { type: 'inline-radio' }
+      control: { type: 'inline-radio' },
     },
     className: {
       table: {
-        disable: true
-      }
+        disable: true,
+      },
     },
     dimension: {
-      options: ['full', 'medium', 'large']
-    }
+      options: ['full', 'medium', 'large'],
+    },
   },
   args: {
-    dimension: 'full'
-  }
-}
+    dimension: 'full',
+  },
+};
 
-export default story
+export default story;
 
-const Template: ComponentStory<typeof Container> = (args) => <Container {...args} />
+const Template: ComponentStory<typeof Container> = args => <Container {...args} />;
 
-export const Medium = Template.bind({})
+export const Medium = Template.bind({});
 Medium.args = {
   dimension: 'medium',
-  className: 'ContainerEx'
-}
+  className: 'ContainerEx',
+};
 
-export const Large = Template.bind({})
+export const Large = Template.bind({});
 Large.args = {
   dimension: 'large',
-  className: 'ContainerEx'
-}
+  className: 'ContainerEx',
+};
 
-export const FullWidth = Template.bind({})
+export const FullWidth = Template.bind({});
 FullWidth.args = {
-  className: 'ContainerEx'
-}
+  className: 'ContainerEx',
+};
 
-export const NoPadding = Template.bind({})
+export const NoPadding = Template.bind({});
 NoPadding.args = {
   padding: false,
-  className: 'ContainerEx'
-}
+  className: 'ContainerEx',
+};
 
-export const AsSection = Template.bind({})
+export const AsSection = Template.bind({});
 AsSection.args = {
-  className: 'ContainerEx'
-}
+  className: 'ContainerEx',
+};

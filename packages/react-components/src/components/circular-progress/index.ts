@@ -1,2 +1,2 @@
-export { CircularProgress } from './circular-progress'
-export type { CircularProgressProps } from './circular-progress'
+export type { CircularProgressProps } from './circular-progress';
+export { CircularProgress } from './circular-progress';

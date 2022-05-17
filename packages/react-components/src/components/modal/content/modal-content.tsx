@@ -1,10 +1,14 @@
-import clsx from 'clsx'
-import { forwardRef, PropsWithChildren, ReactNode } from 'react'
-import { AutoFocusInside } from 'react-focus-on'
-import styles from './modal-content.module.css'
-import { Title, Elevator, IconButton, Stack, useOverlayContext } from '@/components'
+import clsx from 'clsx';
+import { forwardRef, ReactNode } from 'react';
+import { AutoFocusInside } from 'react-focus-on';
 
-export type ModalContentProps = PropsWithChildren<PropsWithClass> & {
+import {
+  Elevator, IconButton, Stack, Title, useOverlayContext,
+} from '@/components';
+
+import styles from './modal-content.module.css';
+
+export type ModalContentProps = {
   /**
    * Set the accessible title of the modal. This is used by screen readers to
    * announce the title of the modal when opened.
@@ -17,14 +21,14 @@ export type ModalContentProps = PropsWithChildren<PropsWithClass> & {
   theme?: 'dark' | 'light' | 'auto';
 }
 
-export const ModalContent = forwardRef<HTMLDivElement, ModalContentProps>(({
+export const ModalContent = forwardRef<HTMLDivElement, PropsWithClass<ModalContentProps>>(({
   children,
   className,
   title,
   theme = 'light',
   ...otherProps
 }, forwardedRef) => {
-  const { onClose, titleId } = useOverlayContext()
+  const { onClose, titleId } = useOverlayContext();
 
   return (
     <Elevator resting={4}>
@@ -43,7 +47,7 @@ export const ModalContent = forwardRef<HTMLDivElement, ModalContentProps>(({
         </AutoFocusInside>
       </div>
     </Elevator>
-  )
-})
+  );
+});
 
-ModalContent.displayName = 'Modal.Content'
+ModalContent.displayName = 'Modal.Content';

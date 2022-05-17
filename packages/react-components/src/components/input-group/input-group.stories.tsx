@@ -1,18 +1,21 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { InputGroup } from './input-group'
-import { Stack, Button, Select, Textfield } from '../..'
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+
+import {
+  Button, Select, Stack, Textfield,
+} from '../..';
+import { InputGroup } from './input-group';
 
 const story: ComponentMeta<typeof InputGroup> = {
   title: 'Components/Inputs/Input group',
   component: InputGroup,
   args: {
-    input: <Textfield type="text" defaultValue="sample" />
-  }
-}
+    input: <Textfield type="text" defaultValue="sample" />,
+  },
+};
 
-export default story
+export default story;
 
-const Default: ComponentStory<typeof InputGroup> = (args) => (
+const Default: ComponentStory<typeof InputGroup> = args => (
   <Stack inline fill={false} hAlign="start" rowGap={32}>
     <InputGroup
       end={<Button>Confirm</Button>}
@@ -38,6 +41,6 @@ const Default: ComponentStory<typeof InputGroup> = (args) => (
       {...args}
     />
   </Stack>
-)
+);
 
-export const Single = Default.bind({})
+export const Single = Default.bind({});
