@@ -35,9 +35,12 @@
     "@wonderflow/icons": "*",
     "@wonderflow/react-components": "*",
     "@wonderflow/themes": "*",
+    "framer-motion": "6.3.3",
     "next": "12.1.5",
     "next-compose-plugins": "2.2.1",
     "next-images": "1.8.4",
+    "next-progress": "2.2.0",
+    "next-themes": "0.2.0",
     "next-transpile-modules": "9.0.0",
     "react": "17.0.2",
     "react-dom": "17.0.2"
