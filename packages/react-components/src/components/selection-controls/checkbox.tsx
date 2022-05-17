@@ -1,7 +1,10 @@
-import clsx from 'clsx'
-import { ChangeEvent, forwardRef, InputHTMLAttributes, useEffect, useRef } from 'react'
-import styles from './selection-controls.module.css'
-import { domAnimation, LazyMotion, m } from 'framer-motion'
+import clsx from 'clsx';
+import { domAnimation, LazyMotion, m } from 'framer-motion';
+import {
+  ChangeEvent, forwardRef, InputHTMLAttributes, useEffect, useRef,
+} from 'react';
+
+import styles from './selection-controls.module.css';
 
 export type CheckboxProps = InputHTMLAttributes<HTMLInputElement> & {
   /**
@@ -16,12 +19,12 @@ export type CheckboxProps = InputHTMLAttributes<HTMLInputElement> & {
   /**
    * Set the size of the toggle.
    */
-  dimension?: 'regular' | 'small',
+  dimension?: 'regular' | 'small';
   /**
    * Callback function to be called when is toggled.
    * A parameter `ChangeEvent<HTMLInputElement>` is passed with the event details
    */
-  onChange?(event: ChangeEvent<HTMLInputElement>): void;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({
@@ -32,13 +35,13 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({
   indeterminate,
   ...otherProps
 }, forwardedRef) => {
-  const ref = useRef<any>(forwardedRef)
+  const ref = useRef<any>(forwardedRef);
 
   useEffect(() => {
     if (ref.current) {
-      ref.current.indeterminate = indeterminate
+      ref.current.indeterminate = indeterminate;
     }
-  }, [indeterminate])
+  }, [indeterminate]);
 
   return (
     <LazyMotion features={domAnimation} strict>
@@ -59,7 +62,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({
         />
       </m.span>
     </LazyMotion>
-  )
-})
+  );
+});
 
-Checkbox.displayName = 'Checkbox'
+Checkbox.displayName = 'Checkbox';

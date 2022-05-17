@@ -1,6 +1,9 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Card } from './card'
-import { Text, Title, Icon, Stack } from '../..'
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+
+import {
+  Icon, Stack, Text, Title,
+} from '../..';
+import { Card } from './card';
 
 const story: ComponentMeta<typeof Card> = {
   title: 'Layouts/Card',
@@ -9,31 +12,31 @@ const story: ComponentMeta<typeof Card> = {
     bordered: false,
     vibrant: false,
     highlightOnHover: true,
-    dimmed: 1
+    dimmed: 1,
   },
   argTypes: {
     children: {
       table: {
-        disable: true
-      }
-    }
-  }
-}
+        disable: true,
+      },
+    },
+  },
+};
 
-export default story
+export default story;
 
-const Template: ComponentStory<typeof Card> = (args) => <Card {...args} />
+const Template: ComponentStory<typeof Card> = args => <Card {...args} />;
 
-export const Default = Template.bind({})
+export const Default = Template.bind({});
 Default.args = {
   children: (
     <>
       <Title level="3">Card title</Title>
       <Text>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</Text>
     </>
-  )
-}
-export const Vibrant = Template.bind({})
+  ),
+};
+export const Vibrant = Template.bind({});
 Vibrant.args = {
   vibrant: true,
   children: (
@@ -41,10 +44,10 @@ Vibrant.args = {
       <Title level="3">Card title</Title>
       <Text>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</Text>
     </>
-  )
-}
+  ),
+};
 
-export const WithLeft = Template.bind({})
+export const WithLeft = Template.bind({});
 WithLeft.args = {
   left: <Icon source="bell" dimension={32} />,
   children: (
@@ -52,10 +55,10 @@ WithLeft.args = {
       <Title level="5">Title</Title>
       <Text>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</Text>
     </Stack>
-  )
-}
+  ),
+};
 
-export const WithRight = Template.bind({})
+export const WithRight = Template.bind({});
 WithRight.args = {
   right: <Icon source="bell" dimension={32} />,
   children: (
@@ -63,10 +66,10 @@ WithRight.args = {
       <Title level="5">Title</Title>
       <Text>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</Text>
     </Stack>
-  )
-}
+  ),
+};
 
-export const WithLeftAndRight = Template.bind({})
+export const WithLeftAndRight = Template.bind({});
 WithLeftAndRight.args = {
   left: <Icon source="bell" dimension={32} />,
   children: (
@@ -75,5 +78,5 @@ WithLeftAndRight.args = {
       <Text>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</Text>
     </Stack>
   ),
-  right: <Icon source="calendar" dimension={32} />
-}
+  right: <Icon source="calendar" dimension={32} />,
+};

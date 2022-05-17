@@ -1,12 +1,14 @@
-import { FC, HTMLAttributes } from 'react'
-import { Polymorphic, Stack, Title } from '@/components'
-import styles from './table-header.module.css'
+import { HTMLAttributes } from 'react';
+
+import { Polymorphic, Stack, Title } from '@/components';
+
+import styles from './table-header.module.css';
 
 export type TableHeaderProps = HTMLAttributes<HTMLElement> & {
   title?: string | Polymorphic.IntrinsicElement<typeof Title>;
 }
 
-export const TableHeader: FC<TableHeaderProps> = ({
+export const TableHeader: FCChildren<TableHeaderProps> = ({
   children,
   title,
   id,
@@ -29,4 +31,4 @@ export const TableHeader: FC<TableHeaderProps> = ({
       {children}
     </Stack>
   </Stack>
-)
+);

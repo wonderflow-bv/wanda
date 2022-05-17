@@ -1,5 +1,6 @@
-import { Checkbox } from '@/components'
-import styles from './table-checkbox.module.css'
+import { Checkbox } from '@/components';
+
+import styles from './table-checkbox.module.css';
 
 export const TableCheckbox = ({ ...otherProps }) => (
   <Checkbox
@@ -7,4 +8,4 @@ export const TableCheckbox = ({ ...otherProps }) => (
     dimension="small"
     {...otherProps}
   />
-)
+);

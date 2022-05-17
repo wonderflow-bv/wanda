@@ -1,29 +1,38 @@
-import { domMax, LazyMotion, m, AnimatePresence } from 'framer-motion'
-import { AutocompleteOption, AutocompleteOptionProps } from './autocomplete-option'
-import mergeRefs from 'react-merge-refs'
 import {
-  Children, ForwardRefExoticComponent,
-  cloneElement, forwardRef, useCallback, useMemo, useRef,
-  useState, useEffect, ReactNode, isValidElement
-} from 'react'
-import { useDebounce, useFocusWithin, useKeyPress, useSize } from 'ahooks'
-import { Text, Menu, Textfield, TextfieldProps, Skeleton, Stack } from '@/components'
-import styles from './autocomplete.module.css'
-import { usePopperTooltip } from 'react-popper-tooltip'
-import { useUIDSeed } from 'react-uid'
-import { MenuProps } from '../menu'
+  useDebounce, useFocusWithin, useKeyPress, useSize,
+} from 'ahooks';
+import {
+  AnimatePresence, domMax, LazyMotion, m,
+} from 'framer-motion';
+import {
+  Children, cloneElement, forwardRef, ForwardRefExoticComponent,
+  isValidElement,
+  ReactNode, useCallback, useEffect, useMemo, useRef,
+  useState,
+} from 'react';
+import mergeRefs from 'react-merge-refs';
+import { usePopperTooltip } from 'react-popper-tooltip';
+import { useUIDSeed } from 'react-uid';
+
+import {
+  Menu, Skeleton, Stack, Text, Textfield, TextfieldProps,
+} from '@/components';
+
+import { MenuProps } from '../menu';
+import styles from './autocomplete.module.css';
+import { AutocompleteOption, AutocompleteOptionProps } from './autocomplete-option';
 
 type ValueType = {
-  query: string
-  value: string
+  query: string;
+  value: string;
 }
 
 export type AutocompleteProps = TextfieldProps & {
   /**
    * The callback called when an option is picked from the list
    */
-  onChange?(value: ValueType): void;
-   /**
+  onChange?: (value: ValueType) => void;
+  /**
    * Set the maximum height of the options list after which
    * it will scroll.
    */
@@ -49,20 +58,20 @@ const AutocompleteAnimation = {
     opacity: 1,
     transition: {
       ease: [0, 0, 0.34, 1],
-      duration: 0.1
-    }
+      duration: 0.1,
+    },
   },
   hidden: {
     y: -5,
     opacity: 0,
     transition: {
       ease: [0.3, 0.07, 1, 1],
-      duration: 0.1
-    }
-  }
-}
+      duration: 0.1,
+    },
+  },
+};
 
-export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
+export const Autocomplete = forwardRef<HTMLElement, PropsWithClass<AutocompleteProps>>(({
   children,
   onChange,
   disabled,
@@ -73,48 +82,52 @@ export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
   emptyContent = 'No items to show',
   ...otherProps
 }, forwardedRef) => {
-  const seedID = useUIDSeed()
-  const autocompleteRef = useRef<HTMLDivElement>(null)
-  const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [query, setQuery] = useState<string>(val ? String(val) : '')
-  const [value, setValue] = useState<string>(val ? String(val) : '')
-  const [optionsValues, setOptionValues] = useState<string[]>([])
-  const isInteractive = useMemo(() => !disabled && !readOnly, [disabled, readOnly])
+  const seedID = useUIDSeed();
+  const autocompleteRef = useRef<HTMLDivElement>(null);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [query, setQuery] = useState<string>(val ? String(val) : '');
+  const [value, setValue] = useState<string>(val ? String(val) : '');
+  const [optionsValues, setOptionValues] = useState<string[]>([]);
+  const isInteractive = useMemo(() => !disabled && !readOnly, [disabled, readOnly]);
 
   const debounceQuery = useDebounce(
     query,
-    { wait: 100 }
-  )
+    { wait: 100 },
+  );
 
   const filteredOptions = useMemo(
     () => {
-      const items = Children.toArray(children)
+      const items = Children.toArray(children);
       return debounceQuery
         ? items.filter(
           (o: any) => {
-            const stringToMatch = typeof o.props.children === 'string' ? o.props.children : o.props.children.join('')
-            return stringToMatch?.toLowerCase().includes(debounceQuery.toLowerCase())
-          }
+            const stringToMatch = typeof o.props.children === 'string' ? o.props.children : o.props.children.join('');
+            return stringToMatch?.toLowerCase().includes(debounceQuery.toLowerCase());
+          },
         )
-        : items
+        : items;
     },
-    [debounceQuery, children]
-  )
+    [debounceQuery, children],
+  );
 
   const isFocusWithin = useFocusWithin(autocompleteRef, {
     onChange: (isFocusWithin) => {
-      isFocusWithin ? setIsOpen(true) : setIsOpen(false)
-    }
-  })
+      if (isFocusWithin) {
+        setIsOpen(true);
+      } else {
+        setIsOpen(false);
+      }
+    },
+  });
 
-  useKeyPress('esc', () => setIsOpen(false))
+  useKeyPress('esc', () => setIsOpen(false));
 
   const {
     getTooltipProps,
     setTooltipRef,
     setTriggerRef,
     triggerRef,
-    visible
+    visible,
   } = usePopperTooltip({
     delayShow: 0,
     delayHide: 0,
@@ -122,42 +135,40 @@ export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
     visible: isInteractive ? isOpen : false,
     closeOnTriggerHidden: true,
     placement: 'bottom-start',
-    offset: [0, 8]
-  })
+    offset: [0, 8],
+  });
 
-  const triggerSize = useSize(triggerRef)
+  const triggerSize = useSize(triggerRef);
 
   const handleOptionClick = useCallback(
     (optionValue, optionContent) => {
-      setQuery(optionContent)
-      setValue(optionValue)
-      onChange?.({ query: optionContent, value: optionValue })
-      setIsOpen(false)
+      setQuery(optionContent);
+      setValue(optionValue);
+      onChange?.({ query: optionContent, value: optionValue });
+      setIsOpen(false);
     },
-    [onChange]
-  )
+    [onChange],
+  );
 
   const handleFilter = useCallback(
     ({ currentTarget }) => {
-      const targetValue = currentTarget.value.toLowerCase()
-      setQuery(currentTarget.value)
-      setValue(currentTarget.value)
+      const targetValue = currentTarget.value.toLowerCase();
+      setQuery(currentTarget.value);
+      setValue(currentTarget.value);
       onChange?.({
         query: currentTarget.value,
-        value: optionsValues.includes(targetValue) ? optionsValues[optionsValues.indexOf(targetValue)] : ''
-      })
+        value: optionsValues.includes(targetValue) ? optionsValues[optionsValues.indexOf(targetValue)] : '',
+      });
     },
-    [onChange, optionsValues]
-  )
+    [onChange, optionsValues],
+  );
 
   useEffect(() => {
-    const currentValues = Children.map(filteredOptions, (o: any) => {
-      return typeof o.props.children === 'string' ? o.props.children.toLowerCase() : o.props.children.join('').toLowerCase()
-    })
+    const currentValues = Children.map(filteredOptions, (o: any) => (typeof o.props.children === 'string' ? o.props.children.toLowerCase() : o.props.children.join('').toLowerCase()));
 
-    val && setValue(String(val))
-    setOptionValues(currentValues)
-  }, [filteredOptions, val])
+    if (val) setValue(String(val));
+    setOptionValues(currentValues);
+  }, [filteredOptions, val]);
 
   return (
     <div
@@ -200,16 +211,15 @@ export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
                 maxHeight={maxHeight}
                 aria-labelledby={seedID('autocomplete-trigger')}
               >
-                {(filteredOptions.length === 0 && !busy)
-                  ? <Text as="div" textAlign="center" dimmed={5}>{emptyContent}</Text>
-                  : busy
-                    ? <Stack hPadding={8} as="span"><Skeleton count={3} /></Stack>
-                    : Children.map(filteredOptions, (child) => isValidElement(child) && cloneElement(
-                      child,
-                      {
-                        onClick: handleOptionClick
-                      }
-                    ))
+                {(filteredOptions.length === 0 && !busy) && <Text as="div" textAlign="center" dimmed={5}>{emptyContent}</Text>}
+                {busy
+                  ? <Stack hPadding={8} as="span"><Skeleton count={3} /></Stack>
+                  : Children.map(filteredOptions, child => isValidElement(child) && cloneElement(
+                    child,
+                    {
+                      onClick: handleOptionClick,
+                    },
+                  ))
               }
               </Menu>
             </m.div>
@@ -218,8 +228,8 @@ export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
         )}
       </AnimatePresence>
     </div>
-  )
-}) as AutocompleteComponent
+  );
+}) as AutocompleteComponent;
 
-Autocomplete.Option = AutocompleteOption
-Autocomplete.displayName = 'Autocomplete'
+Autocomplete.Option = AutocompleteOption;
+Autocomplete.displayName = 'Autocomplete';

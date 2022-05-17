@@ -1,16 +1,18 @@
-import { IconNames } from '@wonderflow/icons'
+import { IconNames } from '@wonderflow/icons';
+// eslint-disable-next-line import/extensions
+import sprite from '@wonderflow/icons/sprite.svg';
+import { TokensTypes } from '@wonderflow/tokens/platforms/web';
+import clsx from 'clsx';
 import {
   Children,
   cloneElement,
   forwardRef,
   ReactElement,
   SVGAttributes,
-  useMemo
-} from 'react'
-import sprite from '@wonderflow/icons/sprite.svg'
-import { TokensTypes } from '@wonderflow/tokens/platforms/web'
-import clsx from 'clsx'
-import styles from './icon.module.css'
+  useMemo,
+} from 'react';
+
+import styles from './icon.module.css';
 
 export type IconProps = SVGAttributes<SVGElement | SVGSVGElement> & {
   /**
@@ -42,7 +44,7 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(({
   fill,
   ...otherProps
 }: IconProps, forwardedRef) => {
-  const computedStyle = useMemo(() => dimension < 18 ? 'solid' : weight, [weight, dimension])
+  const computedStyle = useMemo(() => (dimension < 18 ? 'solid' : weight), [weight, dimension]);
 
   return (typeof source === 'string')
     ? (
@@ -57,7 +59,7 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(({
       >
         <use href={`${sprite}#${computedStyle}/${source}`} />
       </svg>
-      )
+    )
     : (
       <>
         {Children.map(source, (child: ReactElement) => cloneElement(
@@ -66,11 +68,11 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(({
             className,
             'aria-hidden': 'true',
             width: dimension,
-            height: dimension
-          }
+            height: dimension,
+          },
         ))}
       </>
-      )
-})
+    );
+});
 
-Icon.displayName = 'Icon'
+Icon.displayName = 'Icon';

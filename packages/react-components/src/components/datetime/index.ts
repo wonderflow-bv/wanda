@@ -1,2 +1,2 @@
-export { Datetime } from './datetime'
-export type { DatetimeProps } from './datetime'
+export type { DatetimeProps } from './datetime';
+export { Datetime } from './datetime';

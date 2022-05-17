@@ -1,8 +1,14 @@
-import { Icon, Polymorphic, Stack, Tooltip, IconProps } from '@/components'
-import styles from './menu-item.module.css'
-import { ReactNode, forwardRef, useCallback, useMemo, useRef } from 'react'
-import { useFocusEffect, useRovingTabIndex } from 'react-roving-tabindex'
-import clsx from 'clsx'
+import clsx from 'clsx';
+import {
+  forwardRef, ReactNode, useCallback, useMemo, useRef,
+} from 'react';
+import { useFocusEffect, useRovingTabIndex } from 'react-roving-tabindex';
+
+import {
+  Icon, IconProps, Polymorphic, Stack, Tooltip,
+} from '@/components';
+
+import styles from './menu-item.module.css';
 
 export type MenuItemProps = {
   /**
@@ -21,11 +27,11 @@ export type MenuItemProps = {
    * Set the size of the menu item.
    * Font size and icon style will be adjusted to match the size.
    */
-  dimension?: 'small' | 'regular'
+  dimension?: 'small' | 'regular';
   /**
    * Callback function to be called when the menu item is pressed.
    */
-  onClick?(event: Event, value: string): void;
+  onClick?: (event: Event, value: string) => void;
   /**
    * Add an extra description to the menu item.
    * This uses the `<Tooltip>` component internally.
@@ -81,21 +87,21 @@ export const MenuItem = forwardRef(({
   value,
   ...otherProps
 }, forwardedRef) => {
-  const itemRef = useRef<any>(forwardedRef)
-  const [tabIndex, focused, handleKeyDown, handleClick] = useRovingTabIndex(itemRef, disabled)
-  const isIconRight = iconPosition === 'right'
+  const itemRef = useRef<any>(forwardedRef);
+  const [tabIndex, focused, handleKeyDown, handleClick] = useRovingTabIndex(itemRef, disabled);
+  const isIconRight = iconPosition === 'right';
 
-  useFocusEffect(focused, itemRef)
+  useFocusEffect(focused, itemRef);
 
   const triggerClick = useCallback(
     (e) => {
       if (onClick) {
-        handleClick()
-        onClick(e, value)
+        handleClick();
+        onClick(e, value);
       }
     },
-    [handleClick, onClick, value]
-  )
+    [handleClick, onClick, value],
+  );
 
   const InnerContent = useMemo(() => (
     <Stack
@@ -125,7 +131,7 @@ export const MenuItem = forwardRef(({
         {decoration}
       </Stack>
     </Stack>
-  ), [children, dimension, icon, isIconRight, decoration, padding])
+  ), [children, dimension, icon, isIconRight, decoration, padding]);
 
   return (
     <Stack as="li" role="none">
@@ -153,12 +159,12 @@ export const MenuItem = forwardRef(({
             >
               {description}
             </Tooltip>
-            )
+          )
           : InnerContent
       }
       </Wrapper>
     </Stack>
-  )
-}) as PolymorphicMenuItem
+  );
+}) as PolymorphicMenuItem;
 
-MenuItem.displayName = 'Menu.Item'
+MenuItem.displayName = 'Menu.Item';

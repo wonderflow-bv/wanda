@@ -1,5 +1,6 @@
-import { forwardRef } from 'react'
-import { MenuItem, MenuItemProps, Polymorphic } from '@/components'
+import { forwardRef } from 'react';
+
+import { MenuItem, MenuItemProps, Polymorphic } from '@/components';
 
 export type MenuItemCheckboxProps = MenuItemProps & {
   /**
@@ -9,8 +10,8 @@ export type MenuItemCheckboxProps = MenuItemProps & {
 }
 
 type MenuItemCheckboxComponent = Polymorphic.ForwardRefComponent<
-  Polymorphic.IntrinsicElement<typeof MenuItem>,
-  Polymorphic.OwnProps<typeof MenuItem> & MenuItemCheckboxProps
+Polymorphic.IntrinsicElement<typeof MenuItem>,
+Polymorphic.OwnProps<typeof MenuItem> & MenuItemCheckboxProps
 >;
 
 export const MenuItemCheckbox = forwardRef(({
@@ -26,7 +27,6 @@ export const MenuItemCheckbox = forwardRef(({
   >
     {children}
   </MenuItem>
-)
-) as MenuItemCheckboxComponent
+)) as MenuItemCheckboxComponent;
 
-MenuItemCheckbox.displayName = 'Menu.ItemCheckbox'
+MenuItemCheckbox.displayName = 'Menu.ItemCheckbox';

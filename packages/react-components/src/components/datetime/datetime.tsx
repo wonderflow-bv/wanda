@@ -1,4 +1,4 @@
-import { HTMLAttributes, useEffect, useState } from 'react'
+import { HTMLAttributes, useEffect, useState } from 'react';
 
 export type DatetimeProps = HTMLAttributes<HTMLTimeElement> & {
   /**
@@ -23,19 +23,19 @@ export const Datetime = ({
   options,
   ...otherProps
 }: DatetimeProps) => {
-  const [datetime, setDateTime] = useState<string>('')
+  const [datetime, setDateTime] = useState<string>('');
 
   useEffect(() => {
-    const timeDate: Date = new Date(date)
+    const timeDate: Date = new Date(date);
     const humanDate = new Intl.DateTimeFormat(locale, {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
-      ...options
-    }).format(timeDate)
+      ...options,
+    }).format(timeDate);
 
-    setDateTime(humanDate)
-  }, [date, locale, options])
+    setDateTime(humanDate);
+  }, [date, locale, options]);
 
   return (
     <time
@@ -44,5 +44,5 @@ export const Datetime = ({
     >
       {datetime}
     </time>
-  )
-}
+  );
+};

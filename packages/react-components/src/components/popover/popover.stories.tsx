@@ -1,29 +1,32 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { useState } from 'react'
-import { Popover } from './popover'
-import { Button, Textfield, Menu, Title } from '../..'
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { useState } from 'react';
+
+import {
+  Button, Menu, Textfield, Title,
+} from '../..';
+import { Popover } from './popover';
 
 const story: ComponentMeta<typeof Popover> = {
   title: 'Components/Dialogs/Popover',
   component: Popover,
   args: {
     placement: 'auto-start',
-    trigger: <Button>Open Popover</Button>
+    trigger: <Button>Open Popover</Button>,
   },
   argTypes: {
     onClick: {
       action: 'clicked',
       table: {
-        disable: true
-      }
-    }
-  }
-}
+        disable: true,
+      },
+    },
+  },
+};
 
-export default story
+export default story;
 
 const DefaultTemplate: ComponentStory<typeof Popover> = (args) => {
-  const [checked, setChecked] = useState<boolean>(false)
+  const [checked, setChecked] = useState<boolean>(false);
 
   return (
     <Popover {...args}>
@@ -48,7 +51,7 @@ const DefaultTemplate: ComponentStory<typeof Popover> = (args) => {
             <>
               <Title as="h2" level="5">Sample H2 Title longlonglonglonglonglonglonglonglonglonglong</Title>
               <p>long text content placeholder to test wrapping and sizes</p>
-              <img style={{ width: '100%' }} src="https://images.unsplash.com/photo-1593963171957-d87a6279226d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" />
+              <img style={{ width: '100%' }} alt="" src="https://images.unsplash.com/photo-1593963171957-d87a6279226d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" />
             </>
           )}
         >
@@ -59,57 +62,66 @@ const DefaultTemplate: ComponentStory<typeof Popover> = (args) => {
         <Menu.Item disabled>Really?</Menu.Item>
       </Menu>
     </Popover>
-  )
-}
+  );
+};
 
-export const Default = DefaultTemplate.bind({})
+export const Default = DefaultTemplate.bind({});
 
-const CustomTemplate: ComponentStory<typeof Popover> = (args) => (
+const CustomTemplate: ComponentStory<typeof Popover> = args => (
   <>
     <Popover {...args}>
-      <div style={{ background: 'var(--global-vibrancy-background)', backdropFilter: 'blur(10px)', border: '2px solid black', padding: 24 }}>
+      <div style={{
+        background: 'var(--global-vibrancy-background)', backdropFilter: 'blur(10px)', border: '2px solid black', padding: 24,
+      }}
+      >
         Lorem.
       </div>
     </Popover>
     <Popover {...args}>
-      <div style={{ background: 'var(--global-vibrancy-background)', backdropFilter: 'blur(10px)', border: '2px solid black', padding: 24 }}>
+      <div style={{
+        background: 'var(--global-vibrancy-background)', backdropFilter: 'blur(10px)', border: '2px solid black', padding: 24,
+      }}
+      >
         Lorem ipsum dolor, sit amet consectetur adipisicing elit.
         Magni error unde sapiente beatae! Nostrum praesentium similique
         veniam non ut nulla, incidunt velit et, placeat cupiditate, aliquid saepe. Atque, provident perferendis?
       </div>
     </Popover>
   </>
-)
+);
 
-export const CustomElement = CustomTemplate.bind({})
+export const CustomElement = CustomTemplate.bind({});
 CustomElement.args = {
   matchTriggerWidth: true,
-  placement: 'bottom-start'
-}
+  placement: 'bottom-start',
+};
 
-const WithFieldTemplate: ComponentStory<typeof Popover> = (args) => (
+const WithFieldTemplate: ComponentStory<typeof Popover> = args => (
   <>
     <Popover
       {...args}
     >
-      <div style={{ background: 'var(--global-vibrancy-background)', backdropFilter: 'blur(10px)', border: '2px solid black', padding: 24 }}>
+      <div style={{
+        background: 'var(--global-vibrancy-background)', backdropFilter: 'blur(10px)', border: '2px solid black', padding: 24,
+      }}
+      >
         Lorem ipsum dolor, sit amet consectetur adipisicing elit.
         Magni error unde sapiente beatae! Nostrum praesentium similique
         veniam non ut nulla, incidunt velit et, placeat cupiditate, aliquid saepe. Atque, provident perferendis?
       </div>
     </Popover>
   </>
-)
+);
 
-export const WithField = WithFieldTemplate.bind({})
+export const WithField = WithFieldTemplate.bind({});
 WithField.args = {
   trigger: <Textfield type="search" icon="magnifying-glass" />,
   matchTriggerWidth: true,
-  placement: 'bottom-start'
-}
+  placement: 'bottom-start',
+};
 
 const ControlledTemplate: ComponentStory<typeof Popover> = (args) => {
-  const [open, setOpen] = useState<boolean>(false)
+  const [open, setOpen] = useState<boolean>(false);
 
   return (
     <Popover
@@ -119,10 +131,13 @@ const ControlledTemplate: ComponentStory<typeof Popover> = (args) => {
           {`${open ? 'Close' : 'Open'} Popover`}
         </Button>
       )}
-      onOpenChange={(state) => setOpen(state)}
+      onOpenChange={state => setOpen(state)}
       open={open}
     >
-      <div style={{ background: 'var(--global-vibrancy-background)', backdropFilter: 'blur(10px)', border: '2px solid black', padding: 24 }}>
+      <div style={{
+        background: 'var(--global-vibrancy-background)', backdropFilter: 'blur(10px)', border: '2px solid black', padding: 24,
+      }}
+      >
         Lorem ipsum dolor, sit amet consectetur adipisicing elit.
         Magni error unde sapiente beatae! Nostrum praesentium similique
         veniam non ut nulla, incidunt velit et, placeat cupiditate, aliquid saepe. Atque, provident perferendis?
@@ -131,9 +146,9 @@ const ControlledTemplate: ComponentStory<typeof Popover> = (args) => {
         </button>
       </div>
     </Popover>
-  )
-}
+  );
+};
 
-export const Controlled = ControlledTemplate.bind({})
+export const Controlled = ControlledTemplate.bind({});
 Controlled.args = {
-}
+};

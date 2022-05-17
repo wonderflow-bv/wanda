@@ -1,56 +1,58 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { InfoState } from './info-state'
-import { Button } from '../..'
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+
+import { Button } from '../..';
+import { InfoState } from './info-state';
 
 const story: ComponentMeta<typeof InfoState> = {
   title: 'Components/Dialogs/InfoState',
   component: InfoState,
   args: {
-    title: 'Sample very long title'
+    title: 'Sample very long title',
   },
   argTypes: {
     iconColor: {
       options: ['gray', 'cyan', 'green', 'purple', 'yellow', 'red', 'blue'],
-      control: { type: 'select' }
-    }
-  }
-}
+      control: { type: 'select' },
+    },
+  },
+};
 
-export default story
+export default story;
 
-const Template: ComponentStory<typeof InfoState> = (args) => (
+const Template: ComponentStory<typeof InfoState> = args => (
   <InfoState {...args}>
-    Cras ultricies, elit sit amet cursus consectetur, risus felis ullamcorper nulla, ut scelerisque sapien lorem non sem.
+    Cras ultricies, elit sit amet cursus consectetur, risus felis ullamcorper nulla,
+    ut scelerisque sapien lorem non sem.
   </InfoState>
-)
+);
 
-export const Default = Template.bind({})
+export const Default = Template.bind({});
 Default.args = {
-  icon: 'compass'
-}
+  icon: 'compass',
+};
 
-export const Horizontal = Template.bind({})
+export const Horizontal = Template.bind({});
 Horizontal.args = {
   direction: 'row',
-  icon: 'compass'
-}
+  icon: 'compass',
+};
 
-export const WithImage = Template.bind({})
+export const WithImage = Template.bind({});
 WithImage.args = {
-  image: 'https://svgshare.com/i/b5f.svg'
-}
+  image: 'https://svgshare.com/i/b5f.svg',
+};
 
-export const WithImageHorizontal = Template.bind({})
+export const WithImageHorizontal = Template.bind({});
 WithImageHorizontal.args = {
   direction: 'row',
-  image: 'https://svgshare.com/i/b5f.svg'
-}
+  image: 'https://svgshare.com/i/b5f.svg',
+};
 
-export const WithActions = Template.bind({})
+export const WithActions = Template.bind({});
 WithActions.args = {
   actions:
   <>
     <Button>Primary</Button>
     <Button kind="flat">Secondary</Button>
-  </>
-}
+  </>,
+};

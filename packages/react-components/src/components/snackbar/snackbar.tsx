@@ -1,7 +1,11 @@
-import { forwardRef, ReactNode } from 'react'
-import styles from './snackbar.module.css'
-import clsx from 'clsx'
-import { Title, Stack, Icon, IconProps, Polymorphic, Button } from '@/components'
+import clsx from 'clsx';
+import { forwardRef, ReactNode } from 'react';
+
+import {
+  Button, Icon, IconProps, Polymorphic, Stack, Title,
+} from '@/components';
+
+import styles from './snackbar.module.css';
 
 export type SnackbarProps = {
   /**
@@ -36,7 +40,7 @@ export type SnackbarProps = {
   /**
    * Callback function to be called when the dismiss button is clicked.
    */
-  onDismiss?(): void;
+  onDismiss?: () => void;
 }
 
 type PolymorphicSnackbar = Polymorphic.ForwardRefComponent<'output', SnackbarProps>;
@@ -58,8 +62,8 @@ export const Snackbar = forwardRef(({
     warning: 'triangle-exclamation',
     neutral: 'compass',
     positive: 'check',
-    danger: 'circle-x'
-  }
+    danger: 'circle-x',
+  };
 
   return (
     <Wrapper
@@ -70,7 +74,7 @@ export const Snackbar = forwardRef(({
       {...otherProps}
     >
       <Stack vAlign="start" hAlign="start" direction="row" columnGap={16} fill={false}>
-        <Icon className={styles.Icon} weight="duotone" source={icon || defaultIcons[kind]} dimension={24} />
+        <Icon className={styles.Icon} weight="duotone" source={icon ?? defaultIcons[kind]} dimension={24} />
         <Stack rowGap={16}>
           <Stack rowGap={8}>
             {title && <Title level="5">{title}</Title>}
@@ -84,5 +88,5 @@ export const Snackbar = forwardRef(({
         </Stack>
       </Stack>
     </Wrapper>
-  )
-}) as PolymorphicSnackbar
+  );
+}) as PolymorphicSnackbar;

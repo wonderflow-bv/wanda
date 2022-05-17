@@ -1,15 +1,16 @@
-import { CSSProperties, forwardRef, ReactNode } from 'react'
-import tkns from '@wonderflow/tokens/platforms/web/tokens.json'
-import { Stack, StackProps, Polymorphic } from '@/components'
-import clsx from 'clsx'
+import { TokensTypes } from '@wonderflow/tokens/platforms/web';
+import tkns from '@wonderflow/tokens/platforms/web/tokens.json';
+import clsx from 'clsx';
+import { CSSProperties, forwardRef, ReactNode } from 'react';
 
-import styles from './card.module.css'
-import { TokensTypes } from '@wonderflow/tokens/platforms/web'
+import { Polymorphic, Stack, StackProps } from '@/components';
+
+import styles from './card.module.css';
 
 export type CardProps = Pick<
 StackProps,
-  'wrap' | 'columnGap' | 'rowGap' | 'vAlign' | 'hAlign'>
-  & {
+'wrap' | 'columnGap' | 'rowGap' | 'vAlign' | 'hAlign'>
+& {
   /**
    * Set the padding on each side of the card.
    */
@@ -25,7 +26,7 @@ StackProps,
   /**
    * Add a border to the card to increase its visual weight and contrast.
    */
-  bordered?: boolean
+  bordered?: boolean;
   /**
    * Define the edge radius of the card.
    */
@@ -68,8 +69,8 @@ export const Card = forwardRef(({
 }, forwardedRef) => {
   const dynamicStyle: CSSProperties = {
     '--padding': padding && tkns.space[padding],
-    '--radius': radius && tkns.radius[radius]
-  }
+    '--radius': radius && tkns.radius[radius],
+  };
 
   return (
     <Wrapper
@@ -106,5 +107,5 @@ export const Card = forwardRef(({
         )}
       </Stack>
     </Wrapper>
-  )
-}) as PolymorphicCard
+  );
+}) as PolymorphicCard;

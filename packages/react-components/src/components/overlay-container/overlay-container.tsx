@@ -1,9 +1,12 @@
-import { domMax, LazyMotion, m, AnimatePresence } from 'framer-motion'
-import { ReactNode, useEffect } from 'react'
-import { createPortal } from 'react-dom'
-import { useUIDSeed } from 'react-uid'
-import { OverlayProvider } from './overlay-context'
-import styles from './overlay-container.module.css'
+import {
+  AnimatePresence, domMax, LazyMotion, m,
+} from 'framer-motion';
+import { ReactNode, useEffect } from 'react';
+import { createPortal } from 'react-dom';
+import { useUIDSeed } from 'react-uid';
+
+import styles from './overlay-container.module.css';
+import { OverlayProvider } from './overlay-context';
 
 export type OverlayContainerProps = {
   /**
@@ -11,11 +14,11 @@ export type OverlayContainerProps = {
    * will be rendered in a React `portal`, which means that it will be
    * rendered outside of the DOM hierarchy of the parent component.
    */
-  children: ReactNode
+  children: ReactNode;
   /**
    * Set the root element to render the overlay container into.
    */
-  root?: HTMLElement
+  root?: HTMLElement;
   /**
    * Set the css `z-index` of the overlay container. This must be used only
    * if necessary.
@@ -30,7 +33,7 @@ export type OverlayContainerProps = {
   /**
    * The callback function that is called when the overlay is closed.
    */
-  onClose?(): void;
+  onClose?: () => void;
   /**
    * Set the overlay to be obscuring the page content behind it.
    */
@@ -43,15 +46,15 @@ export const OverlayContainer: React.FC<OverlayContainerProps> = ({
   overlayColor = 'dark',
   index = 4,
   obfuscate = true,
-  onClose
+  onClose,
 }) => {
-  const seedID = useUIDSeed()
+  const seedID = useUIDSeed();
 
   useEffect(() => {
     if (root.closest('[data-overlay-container]')) {
-      throw new Error('An OverlayContainer must not be inside another container. Please change the root prop.')
+      throw new Error('An OverlayContainer must not be inside another container. Please change the root prop.');
     }
-  }, [root])
+  }, [root]);
 
   const content = (
     <OverlayProvider onClose={onClose}>
@@ -81,6 +84,6 @@ export const OverlayContainer: React.FC<OverlayContainerProps> = ({
         )}
       </AnimatePresence>
     </OverlayProvider>
-  )
-  return createPortal(content, root)
-}
+  );
+  return createPortal(content, root);
+};

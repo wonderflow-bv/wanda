@@ -1,7 +1,13 @@
-import { forwardRef, InputHTMLAttributes, useCallback, useState } from 'react'
-import { Stack, Text, Icon, IconProps, Textfield } from '@/components'
-import styles from './slider.module.css'
-import clsx from 'clsx'
+import clsx from 'clsx';
+import {
+  forwardRef, InputHTMLAttributes, useCallback, useState,
+} from 'react';
+
+import {
+  Icon, IconProps, Stack, Text, Textfield,
+} from '@/components';
+
+import styles from './slider.module.css';
 
 export type SliderProps = InputHTMLAttributes<HTMLInputElement> & {
   /**
@@ -21,7 +27,7 @@ export type SliderProps = InputHTMLAttributes<HTMLInputElement> & {
    * Callback function to be called when the value is changed.
    * A parameter `number` is passed to get the new value.
    */
-  onInput?(value: number): void;
+  onInput?: (value: number) => void;
   /**
    * Set the initial value of the slider.
    */
@@ -59,15 +65,15 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>(({
   iconMax,
   ...otherProps
 }, forwardedRef) => {
-  const [value, setValue] = useState<number>(defaultValue)
-  const isSmall = dimension === 'small'
+  const [value, setValue] = useState<number>(defaultValue);
+  const isSmall = dimension === 'small';
   const handleInput = useCallback(
     ({ currentTarget }) => {
-      onInput && onInput(currentTarget.valueAsNumber)
-      setValue(currentTarget.valueAsNumber)
+      onInput?.(currentTarget.valueAsNumber);
+      setValue(currentTarget.valueAsNumber);
     },
-    [onInput]
-  )
+    [onInput],
+  );
 
   return (
     <Stack
@@ -99,7 +105,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>(({
       {showValues && <Textfield readOnly dimension="small" size={String(max).length} value={value} className={styles.CurrentValue} />}
       {(iconMax && !showValues) && <Icon source={iconMax} dimension={isSmall ? 16 : 24} />}
     </Stack>
-  )
-})
+  );
+});
 
-Slider.displayName = 'Slider'
+Slider.displayName = 'Slider';

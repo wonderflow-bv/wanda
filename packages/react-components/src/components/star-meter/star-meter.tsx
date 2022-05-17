@@ -1,9 +1,14 @@
-import { forwardRef, ReactNode, useCallback, useMemo } from 'react'
-import clsx from 'clsx'
-import { useUIDSeed } from 'react-uid'
-import { Text, TextProps, Stack, Icon, Polymorphic, IconProps } from '@/components'
+import clsx from 'clsx';
+import {
+  forwardRef, ReactNode, useCallback, useMemo,
+} from 'react';
+import { useUIDSeed } from 'react-uid';
 
-import styles from './star-meter.module.css'
+import {
+  Icon, IconProps, Polymorphic, Stack, Text, TextProps,
+} from '@/components';
+
+import styles from './star-meter.module.css';
 
 export type StarMeterProps = {
   /**
@@ -38,8 +43,8 @@ export type StarMeterProps = {
 }
 
 type PolymorphicStarMeter = Polymorphic.ForwardRefComponent<
-  Polymorphic.IntrinsicElement<typeof Stack>,
-  Polymorphic.OwnProps<typeof Stack> & StarMeterProps
+Polymorphic.IntrinsicElement<typeof Stack>,
+Polymorphic.OwnProps<typeof Stack> & StarMeterProps
 >;
 
 export const StarMeter = forwardRef(({
@@ -51,56 +56,56 @@ export const StarMeter = forwardRef(({
   hideLabel = false,
   ...otherProps
 }, forwardedRef) => {
-  const seedID = useUIDSeed()
+  const seedID = useUIDSeed();
 
   const properties = useMemo(() => ({
     small: {
       labelSize: 14,
-      iconSize: 12
+      iconSize: 12,
     },
     regular: {
       labelSize: 16,
-      iconSize: 16
+      iconSize: 16,
     },
     big: {
       labelSize: 18,
-      iconSize: 24
-    }
-  }), [])
+      iconSize: 24,
+    },
+  }), []);
 
-  const clamp = useMemo(() => (num: number, min: number, max: number) => Math.min(Math.max(num, min), max), [])
+  const clamp = useMemo(() => (num: number, min: number, max: number) => Math.min(Math.max(num, min), max), []);
 
   const roundValue = useCallback((value: number) => {
-    const integer = parseInt(String(value), 10)
-    const fraction = value - integer
+    const integer = parseInt(String(value), 10);
+    const fraction = value - integer;
 
     if (fraction >= 0.75) {
-      return Math.ceil(value)
+      return Math.ceil(value);
     }
 
     if (fraction < 0.25) {
-      return Math.floor(value)
+      return Math.floor(value);
     }
 
     if (fraction >= 0.25 && fraction < 0.75) {
-      return integer + 0.5
+      return integer + 0.5;
     }
 
-    return 0
-  }, [])
+    return 0;
+  }, []);
 
   const starType = useCallback((maxStars: number, value: number) => {
-    const roundedValue = roundValue(value)
+    const roundedValue = roundValue(value);
     return new Array(maxStars).fill(0).map((_, index) => {
-      const starIndex = index + 1
-      let fillType = 'var(--star-dimmed-color)'
+      const starIndex = index + 1;
+      let fillType = 'var(--star-dimmed-color)';
 
       if (roundedValue >= starIndex) {
-        fillType = 'var(--star-color)'
+        fillType = 'var(--star-color)';
       }
 
       if (roundedValue < starIndex && roundedValue > starIndex - 1) {
-        fillType = 'url(#HalfStar)'
+        fillType = 'url(#HalfStar)';
       }
 
       return (
@@ -112,9 +117,9 @@ export const StarMeter = forwardRef(({
           fill={fillType}
           key={starIndex}
         />
-      )
-    })
-  }, [dimension, properties, roundValue])
+      );
+    });
+  }, [dimension, properties, roundValue]);
 
   return (
     <Stack
@@ -147,8 +152,8 @@ export const StarMeter = forwardRef(({
         {starType(starCount, value)}
       </Stack>
       <Text dimmed={6} id={seedID('star-meter')} size={properties[dimension].labelSize as TextProps['size']} weight="bold">
-        {!hideLabel && <>{label || value.toString()}</>}
+        {!hideLabel && <>{label ?? value.toString()}</>}
       </Text>
     </Stack>
-  )
-}) as PolymorphicStarMeter
+  );
+}) as PolymorphicStarMeter;
