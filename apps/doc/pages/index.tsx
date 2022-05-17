@@ -10,7 +10,7 @@ const Home: NextPage = () => (
     </Head>
 
     <main>
-
+      {process.env.SLACK_RELEASE_CHANNEL}
       <h1>
         Welcome to
         {' '}

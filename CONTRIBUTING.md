@@ -11,6 +11,7 @@ To work on this project you have to know how a monorepo works and how to use the
   - [Workspaces](#workspaces)
   - [How to contribute](#how-to-contribute)
     - [Installation](#installation)
+    - [Dependencies](#dependencies)
     - [Running the project](#running-the-project)
     - [Building the project](#building-the-project)
     - [Running tests](#running-tests)
@@ -40,6 +41,8 @@ In this project there are 2 defined workspaces:
 ## How to contribute
 
 ### Installation
+
+### Dependencies
 
 After you cloned the repository, run `npm i` from the project root. You'will install all the required dependencies.
 

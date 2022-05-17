@@ -1,1 +1,0 @@
-export { MdxLayout } from './mdx'
