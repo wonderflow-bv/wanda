@@ -24,7 +24,7 @@ jobs:
       - name: Build pull request on Vercel
         uses: amondnet/vercel-action@v20
         with:
-          scope: wanda-ds
+          scope: wonderflow-design
           vercel-args: "-f"
           github-token: ${{ secrets.GITHUB_TOKEN }}
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
