@@ -16,7 +16,7 @@
   "rules": {
     "@next/next/no-img-element": "off",
     "import/no-extraneous-dependencies": "off",
-    "@next/next/no-html-link-for-pages": ["error", "apps/doc/"],
+    "@next/next/no-html-link-for-pages": ["error", "apps/docs/"],
     "react/require-default-props": "off"
   }
 }
