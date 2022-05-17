@@ -1,9 +1,9 @@
-import { ReactNode } from 'react'
+import { ReactNode } from 'react';
 import {
   Column, ColumnInstance,
   CustomCell,
-  CustomHeaderGroup
-} from 'react-table'
+  CustomHeaderGroup,
+} from 'react-table';
 
 export type PaginationPageType = {
   pageIndex: number;

@@ -1,1 +1,1 @@
-export { ToggleColumnsControl } from './toggle-columns'
+export { ToggleColumnsControl } from './toggle-columns';

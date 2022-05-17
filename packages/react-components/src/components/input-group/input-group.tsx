@@ -1,10 +1,14 @@
-import clsx from 'clsx'
-import { Children, cloneElement, forwardRef, isValidElement, ReactNode } from 'react'
-import { Stack, Text } from '@/components'
-import { useUIDSeed } from 'react-uid'
-import styles from './input-group.module.css'
+import clsx from 'clsx';
+import {
+  Children, cloneElement, forwardRef, isValidElement, ReactNode,
+} from 'react';
+import { useUIDSeed } from 'react-uid';
 
-export type InputGroupProps = PropsWithClass & {
+import { Stack, Text } from '@/components';
+
+import styles from './input-group.module.css';
+
+export type InputGroupProps = {
   /**
    * Pas the input element to decorate
    */
@@ -27,7 +31,7 @@ export type InputGroupProps = PropsWithClass & {
   dimension?: 'small' | 'big' | 'regular';
 }
 
-export const InputGroup = forwardRef<HTMLFieldSetElement, InputGroupProps>(({
+export const InputGroup = forwardRef<HTMLFieldSetElement, PropsWithClass<InputGroupProps>>(({
   className,
   input,
   end,
@@ -36,7 +40,7 @@ export const InputGroup = forwardRef<HTMLFieldSetElement, InputGroupProps>(({
   dimension = 'regular',
   ...otherProps
 }, forwardedRef) => {
-  const seedID = useUIDSeed()
+  const seedID = useUIDSeed();
 
   return (
     <Stack
@@ -60,33 +64,33 @@ export const InputGroup = forwardRef<HTMLFieldSetElement, InputGroupProps>(({
         {...otherProps}
       >
         <div className={styles.Start}>
-          {Children.map(start, (child) => isValidElement(child) && cloneElement(
+          {Children.map(start, child => isValidElement(child) && cloneElement(
             child,
             {
-              dimension
-            }
+              dimension,
+            },
           ))}
         </div>
         <div className={styles.InputField}>
-          {Children.map(input, (child) => isValidElement(child) && cloneElement(
+          {Children.map(input, child => isValidElement(child) && cloneElement(
             child,
             {
               id: seedID('field'),
-              dimension
-            }
+              dimension,
+            },
           ))}
         </div>
         <div className={styles.End}>
-          {Children.map(end, (child) => isValidElement(child) && cloneElement(
+          {Children.map(end, child => isValidElement(child) && cloneElement(
             child,
             {
-              dimension
-            }
+              dimension,
+            },
           ))}
         </div>
       </Stack>
     </Stack>
-  )
-})
+  );
+});
 
-InputGroup.displayName = 'InputGroup'
+InputGroup.displayName = 'InputGroup';

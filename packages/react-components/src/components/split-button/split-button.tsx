@@ -1,8 +1,12 @@
-import clsx from 'clsx'
-import { forwardRef } from 'react'
-import { Button, Popover, PopoverProps, Stack, Polymorphic } from '@/components'
-import styles from './split-button.module.css'
-import { Except } from 'type-fest'
+import clsx from 'clsx';
+import { forwardRef } from 'react';
+import { Except } from 'type-fest';
+
+import {
+  Button, Polymorphic, Popover, PopoverProps, Stack,
+} from '@/components';
+
+import styles from './split-button.module.css';
 
 export type SplitButtonProps = Pick<PopoverProps, 'placement' | 'offset'> & {
   /**
@@ -12,8 +16,8 @@ export type SplitButtonProps = Pick<PopoverProps, 'placement' | 'offset'> & {
 }
 
 type PolymorphicSplitButton = Polymorphic.ForwardRefComponent<
-  Polymorphic.IntrinsicElement<typeof Button>,
-  Except<Polymorphic.OwnProps<typeof Button>, 'iconPosition' | 'iconColor' | 'pressed'> & SplitButtonProps
+Polymorphic.IntrinsicElement<typeof Button>,
+Except<Polymorphic.OwnProps<typeof Button>, 'iconPosition' | 'iconColor' | 'pressed'> & SplitButtonProps
 >;
 
 export const SplitButton = forwardRef(({
@@ -34,8 +38,8 @@ export const SplitButton = forwardRef(({
   const commonProps = {
     kind,
     dimension,
-    disabled
-  }
+    disabled,
+  };
 
   return (
     <Stack
@@ -62,5 +66,5 @@ export const SplitButton = forwardRef(({
         {children}
       </Popover>
     </Stack>
-  )
-}) as PolymorphicSplitButton
+  );
+}) as PolymorphicSplitButton;

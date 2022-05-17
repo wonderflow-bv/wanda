@@ -1,5 +1,6 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Checkbox } from './checkbox'
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+
+import { Checkbox } from './checkbox';
 
 const story: ComponentMeta<typeof Checkbox> = {
   title: 'Components/Inputs/Checkbox',
@@ -8,36 +9,36 @@ const story: ComponentMeta<typeof Checkbox> = {
     onChange: {
       action: 'changed',
       table: {
-        disable: true
-      }
+        disable: true,
+      },
     },
     disabled: {
       options: [true, false],
-      control: { type: 'inline-radio' }
-    }
-  }
-}
+      control: { type: 'inline-radio' },
+    },
+  },
+};
 
-export default story
+export default story;
 
-const Template: ComponentStory<typeof Checkbox> = (args) => (
+const Template: ComponentStory<typeof Checkbox> = args => (
   <Checkbox {...args} />
-)
+);
 
-export const Default = Template.bind({})
+export const Default = Template.bind({});
 
-export const Checked = Template.bind({})
+export const Checked = Template.bind({});
 Checked.args = {
-  defaultChecked: true
-}
+  defaultChecked: true,
+};
 
-export const DisabledChecked = Template.bind({})
+export const DisabledChecked = Template.bind({});
 DisabledChecked.args = {
   defaultChecked: true,
-  disabled: true
-}
+  disabled: true,
+};
 
-export const Indeterminate = Template.bind({})
+export const Indeterminate = Template.bind({});
 Indeterminate.args = {
-  indeterminate: true
-}
+  indeterminate: true,
+};

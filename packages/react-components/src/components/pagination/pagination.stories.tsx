@@ -1,16 +1,17 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { useEffect, useMemo, useState } from 'react'
-import { Pagination } from './pagination'
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { useEffect, useMemo, useState } from 'react';
+
+import { Pagination } from './pagination';
 
 const story: ComponentMeta<typeof Pagination> = {
   title: 'Components/Navigation/Pagination',
   component: Pagination,
   args: {
-    itemsPerPage: 3
-  }
-}
+    itemsPerPage: 3,
+  },
+};
 
-export default story
+export default story;
 
 export const Default: ComponentStory<typeof Pagination> = ({
   itemsPerPage,
@@ -24,7 +25,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'ok',
       browser: 'Mozilla Firefox',
       position: 'Dana',
-      application: 'Contactdata'
+      application: 'Contactdata',
     },
     {
       ip: '213.177.67.223',
@@ -33,7 +34,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'ok',
       browser: 'Google Chrome 56',
       position: 'Crawfordsville',
-      application: 'Engagement marketing'
+      application: 'Engagement marketing',
     },
     {
       ip: '134.208.149.245',
@@ -42,7 +43,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'ok',
       browser: 'Internet Explorer 11',
       position: 'Summerset',
-      application: 'Engagement marketing'
+      application: 'Engagement marketing',
     },
     {
       ip: '39.235.115.34',
@@ -51,7 +52,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'error',
       browser: 'Google Chrome 56',
       position: 'Ribera',
-      application: 'Contacthub'
+      application: 'Contacthub',
     },
     {
       ip: '20.48.229.177',
@@ -60,7 +61,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'ok',
       browser: 'Mozilla Firefox',
       position: 'Dragoon',
-      application: 'Contacthub'
+      application: 'Contacthub',
     },
     {
       ip: '159.121.81.234',
@@ -69,7 +70,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'ok',
       browser: 'Google Chrome 56',
       position: 'Manila',
-      application: 'Contacthub'
+      application: 'Contacthub',
     },
     {
       ip: '219.133.21.227',
@@ -78,7 +79,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'ok',
       browser: 'Mozilla Firefox',
       position: 'Nogal',
-      application: 'Contactdata'
+      application: 'Contactdata',
     },
     {
       ip: '30.93.233.36',
@@ -87,7 +88,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'error',
       browser: 'Mozilla Firefox',
       position: 'Trexlertown',
-      application: 'Engagement marketing'
+      application: 'Engagement marketing',
     },
     {
       ip: '241.144.240.107',
@@ -96,7 +97,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'ok',
       browser: 'Microsoft Edge',
       position: 'Yettem',
-      application: 'Contacthub'
+      application: 'Contacthub',
     },
     {
       ip: '186.8.3.194',
@@ -105,7 +106,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'error',
       browser: 'Microsoft Edge',
       position: 'Collins',
-      application: 'Contacthub'
+      application: 'Contacthub',
     },
     {
       ip: '187.75.121.92',
@@ -114,7 +115,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'error',
       browser: 'Microsoft Edge',
       position: 'Bascom',
-      application: 'Contactsend'
+      application: 'Contactsend',
     },
     {
       ip: '161.197.46.151',
@@ -123,7 +124,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'ok',
       browser: 'Internet Explorer 11',
       position: 'Manchester',
-      application: 'Contactsend'
+      application: 'Contactsend',
     },
     {
       ip: '131.151.132.175',
@@ -132,7 +133,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'error',
       browser: 'Google Chrome 56',
       position: 'Silkworth',
-      application: 'Engagement marketing'
+      application: 'Engagement marketing',
     },
     {
       ip: '58.255.154.169',
@@ -141,7 +142,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'ok',
       browser: 'Google Chrome 56',
       position: 'Mansfield',
-      application: 'Engagement marketing'
+      application: 'Engagement marketing',
     },
     {
       ip: '203.10.238.46',
@@ -150,7 +151,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'error',
       browser: 'Microsoft Edge',
       position: 'Barstow',
-      application: 'Engagement marketing'
+      application: 'Engagement marketing',
     },
     {
       ip: '135.247.125.72',
@@ -159,7 +160,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'error',
       browser: 'Google Chrome 56',
       position: 'Titanic',
-      application: 'Contactdata'
+      application: 'Contactdata',
     },
     {
       ip: '5.112.149.5',
@@ -168,7 +169,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'ok',
       browser: 'Google Chrome 56',
       position: 'Bagtown',
-      application: 'Contactplan'
+      application: 'Contactplan',
     },
     {
       ip: '122.200.149.137',
@@ -177,7 +178,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'ok',
       browser: 'Mozilla Firefox',
       position: 'Fivepointville',
-      application: 'Contacthub'
+      application: 'Contacthub',
     },
     {
       ip: '212.5.90.2',
@@ -186,7 +187,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'ok',
       browser: 'Mozilla Firefox',
       position: 'Dana',
-      application: 'Contactdata'
+      application: 'Contactdata',
     },
     {
       ip: '213.177.67.223',
@@ -195,7 +196,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'ok',
       browser: 'Google Chrome 56',
       position: 'Crawfordsville',
-      application: 'Engagement marketing'
+      application: 'Engagement marketing',
     },
     {
       ip: '134.208.149.245',
@@ -204,7 +205,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'ok',
       browser: 'Internet Explorer 11',
       position: 'Summerset',
-      application: 'Engagement marketing'
+      application: 'Engagement marketing',
     },
     {
       ip: '39.235.115.34',
@@ -213,7 +214,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'error',
       browser: 'Google Chrome 56',
       position: 'Ribera',
-      application: 'Contacthub'
+      application: 'Contacthub',
     },
     {
       ip: '20.48.229.177',
@@ -222,7 +223,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'ok',
       browser: 'Mozilla Firefox',
       position: 'Dragoon',
-      application: 'Contacthub'
+      application: 'Contacthub',
     },
     {
       ip: '159.121.81.234',
@@ -231,7 +232,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'ok',
       browser: 'Google Chrome 56',
       position: 'Manila',
-      application: 'Contacthub'
+      application: 'Contacthub',
     },
     {
       ip: '219.133.21.227',
@@ -240,7 +241,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'ok',
       browser: 'Mozilla Firefox',
       position: 'Nogal',
-      application: 'Contactdata'
+      application: 'Contactdata',
     },
     {
       ip: '30.93.233.36',
@@ -249,7 +250,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'error',
       browser: 'Mozilla Firefox',
       position: 'Trexlertown',
-      application: 'Engagement marketing'
+      application: 'Engagement marketing',
     },
     {
       ip: '241.144.240.107',
@@ -258,7 +259,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'ok',
       browser: 'Microsoft Edge',
       position: 'Yettem',
-      application: 'Contacthub'
+      application: 'Contacthub',
     },
     {
       ip: '186.8.3.194',
@@ -267,7 +268,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'error',
       browser: 'Microsoft Edge',
       position: 'Collins',
-      application: 'Contacthub'
+      application: 'Contacthub',
     },
     {
       ip: '187.75.121.92',
@@ -276,7 +277,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'error',
       browser: 'Microsoft Edge',
       position: 'Bascom',
-      application: 'Contactsend'
+      application: 'Contactsend',
     },
     {
       ip: '161.197.46.151',
@@ -285,7 +286,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'ok',
       browser: 'Internet Explorer 11',
       position: 'Manchester',
-      application: 'Contactsend'
+      application: 'Contactsend',
     },
     {
       ip: '131.151.132.175',
@@ -294,7 +295,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'error',
       browser: 'Google Chrome 56',
       position: 'Silkworth',
-      application: 'Engagement marketing'
+      application: 'Engagement marketing',
     },
     {
       ip: '58.255.154.169',
@@ -303,7 +304,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'ok',
       browser: 'Google Chrome 56',
       position: 'Mansfield',
-      application: 'Engagement marketing'
+      application: 'Engagement marketing',
     },
     {
       ip: '203.10.238.46',
@@ -312,7 +313,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'error',
       browser: 'Microsoft Edge',
       position: 'Barstow',
-      application: 'Engagement marketing'
+      application: 'Engagement marketing',
     },
     {
       ip: '135.247.125.72',
@@ -321,7 +322,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'error',
       browser: 'Google Chrome 56',
       position: 'Titanic',
-      application: 'Contactdata'
+      application: 'Contactdata',
     },
     {
       ip: '5.112.149.5',
@@ -330,7 +331,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'ok',
       browser: 'Google Chrome 56',
       position: 'Bagtown',
-      application: 'Contactplan'
+      application: 'Contactplan',
     },
     {
       ip: '122.200.149.137',
@@ -339,7 +340,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'ok',
       browser: 'Mozilla Firefox',
       position: 'Fivepointville',
-      application: 'Contacthub'
+      application: 'Contacthub',
     },
     {
       ip: '213.177.67.223',
@@ -348,7 +349,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'ok',
       browser: 'Google Chrome 56',
       position: 'Crawfordsville',
-      application: 'Engagement marketing'
+      application: 'Engagement marketing',
     },
     {
       ip: '134.208.149.245',
@@ -357,7 +358,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'ok',
       browser: 'Internet Explorer 11',
       position: 'Summerset',
-      application: 'Engagement marketing'
+      application: 'Engagement marketing',
     },
     {
       ip: '39.235.115.34',
@@ -366,7 +367,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'error',
       browser: 'Google Chrome 56',
       position: 'Ribera',
-      application: 'Contacthub'
+      application: 'Contacthub',
     },
     {
       ip: '20.48.229.177',
@@ -375,7 +376,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'ok',
       browser: 'Mozilla Firefox',
       position: 'Dragoon',
-      application: 'Contacthub'
+      application: 'Contacthub',
     },
     {
       ip: '159.121.81.234',
@@ -384,7 +385,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'ok',
       browser: 'Google Chrome 56',
       position: 'Manila',
-      application: 'Contacthub'
+      application: 'Contacthub',
     },
     {
       ip: '219.133.21.227',
@@ -393,7 +394,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'ok',
       browser: 'Mozilla Firefox',
       position: 'Nogal',
-      application: 'Contactdata'
+      application: 'Contactdata',
     },
     {
       ip: '30.93.233.36',
@@ -402,7 +403,7 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'error',
       browser: 'Mozilla Firefox',
       position: 'Trexlertown',
-      application: 'Engagement marketing'
+      application: 'Engagement marketing',
     },
     {
       ip: '241.144.240.107',
@@ -411,25 +412,25 @@ export const Default: ComponentStory<typeof Pagination> = ({
       status: 'ok',
       browser: 'Microsoft Edge',
       position: 'Yettem',
-      application: 'Contacthub'
-    }
-  ], [])
+      application: 'Contacthub',
+    },
+  ], []);
 
-  const [currentItems, setCurrentItems] = useState<any>(null)
-  const [itemOffset, setItemOffset] = useState(0)
+  const [currentItems, setCurrentItems] = useState<any>(null);
+  const [itemOffset, setItemOffset] = useState(0);
 
   useEffect(() => {
-    const endOffset = itemOffset + (itemsPerPage || 10)
-    setCurrentItems(items.slice(itemOffset, endOffset))
-  }, [itemOffset, items, itemsPerPage])
+    const endOffset = itemOffset + (itemsPerPage ?? 10);
+    setCurrentItems(items.slice(itemOffset, endOffset));
+  }, [itemOffset, items, itemsPerPage]);
 
   const handlePageClick = (data: any) => {
-    setItemOffset(data.offset)
-  }
+    setItemOffset(data.offset);
+  };
 
   return (
     <>
-      {currentItems && currentItems.map((item: any) => (
+      {currentItems?.map((item: any) => (
         <h3 key={item.ip}>
           {item.ip}
         </h3>
@@ -437,8 +438,8 @@ export const Default: ComponentStory<typeof Pagination> = ({
       <Pagination
         {...args}
         itemsCount={items.length}
-        onPageClick={(data) => handlePageClick(data)}
+        onPageClick={data => handlePageClick(data)}
       />
     </>
-  )
-}
+  );
+};

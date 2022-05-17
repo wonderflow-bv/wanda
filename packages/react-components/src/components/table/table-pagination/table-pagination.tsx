@@ -1,9 +1,9 @@
-import { FC, useMemo } from 'react'
-import { useUIDSeed } from 'react-uid'
+import { useMemo } from 'react';
+import { useUIDSeed } from 'react-uid';
 
 import {
-  Pagination, Select, Stack, Text
-} from '@/components'
+  Pagination, Select, Stack, Text,
+} from '@/components';
 
 export type TablePaginationProps = PropsWithClass & {
   clusters?: number[];
@@ -16,7 +16,7 @@ export type TablePaginationProps = PropsWithClass & {
   isManual?: boolean;
 }
 
-export const TablePagination: FC<TablePaginationProps> = ({
+export const TablePagination: FCChildren<TablePaginationProps> = ({
   children,
   pageSize,
   onPageSizeChange,
@@ -28,15 +28,15 @@ export const TablePagination: FC<TablePaginationProps> = ({
   onPageClick,
   ...otherProps
 }) => {
-  const uid = useUIDSeed()
+  const uid = useUIDSeed();
   const computedPageCount = useMemo(() => (
     isManual ? Math.ceil(totalItems / pageSize) : totalPages
-  ), [isManual, pageSize, totalItems, totalPages])
+  ), [isManual, pageSize, totalItems, totalPages]);
   const computedItemsInPageStart = useMemo(
     () => (currentPage && pageSize) && currentPage * pageSize,
-    [currentPage, pageSize]
-  )
-  const computedItemsInPageEnd = useMemo(() => currentPage * pageSize + pageSize, [currentPage, pageSize])
+    [currentPage, pageSize],
+  );
+  const computedItemsInPageEnd = useMemo(() => currentPage * pageSize + pageSize, [currentPage, pageSize]);
 
   return (
     <Stack
@@ -55,7 +55,7 @@ export const TablePagination: FC<TablePaginationProps> = ({
           dimension="small"
           id={uid('table-i-per-page')}
           onChange={({ currentTarget }) => {
-            onPageSizeChange?.(Number(currentTarget.value))
+            onPageSizeChange?.(Number(currentTarget.value));
           }}
         >
           {clusters.map(cluster => (
@@ -75,5 +75,5 @@ export const TablePagination: FC<TablePaginationProps> = ({
         forcePage={currentPage}
       />
     </Stack>
-  )
-}
+  );
+};

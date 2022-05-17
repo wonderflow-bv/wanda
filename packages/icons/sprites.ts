@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import dt from 'directory-tree';
 import fs from 'fs-extra';
 import { createSpinner } from 'nanospinner';

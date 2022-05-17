@@ -1,8 +1,11 @@
-import { CSSProperties, forwardRef, useCallback, useMemo } from 'react'
-import clsx from 'clsx'
-import styles from './circular-progress.module.css'
+import clsx from 'clsx';
+import {
+  CSSProperties, forwardRef, useCallback, useMemo,
+} from 'react';
 
-export type CircularProgressProps = PropsWithClass & {
+import styles from './circular-progress.module.css';
+
+export type CircularProgressProps = {
   /**
    * Set the current progress of the progress bar.
    * This value should be between 0 and 'max'. The percentage is
@@ -24,7 +27,7 @@ export type CircularProgressProps = PropsWithClass & {
   showProgress?: boolean;
 }
 
-export const CircularProgress = forwardRef<HTMLDivElement, CircularProgressProps>(({
+export const CircularProgress = forwardRef<HTMLDivElement, PropsWithClass<CircularProgressProps>>(({
   className,
   value,
   max = 100,
@@ -34,15 +37,15 @@ export const CircularProgress = forwardRef<HTMLDivElement, CircularProgressProps
   ...otherProps
 }, forwardedRef) => {
   const getPercentage = useCallback(
-    () => value ? Math.round((100 * value) / max) : 0,
-    [max, value]
-  )
+    () => (value ? Math.round((100 * value) / max) : 0),
+    [max, value],
+  );
 
-  const clamp = useMemo(() => (num: number, min: number, max: number) => Math.min(Math.max(num, min), max), [])
+  const clamp = useMemo(() => (num: number, min: number, max: number) => Math.min(Math.max(num, min), max), []);
 
   const dynamicStyle: CSSProperties = {
-    '--progress': `${getPercentage()}%`
-  }
+    '--progress': `${getPercentage()}%`,
+  };
 
   return (
     <div
@@ -58,7 +61,7 @@ export const CircularProgress = forwardRef<HTMLDivElement, CircularProgressProps
       style={{ ...dynamicStyle, ...style }}
       {...otherProps}
     />
-  )
-})
+  );
+});
 
-CircularProgress.displayName = 'CircularProgress'
+CircularProgress.displayName = 'CircularProgress';

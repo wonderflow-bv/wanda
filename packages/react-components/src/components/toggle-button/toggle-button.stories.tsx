@@ -1,5 +1,6 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { ToggleButton } from './toggle-button'
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+
+import { ToggleButton } from './toggle-button';
 
 const story: ComponentMeta<typeof ToggleButton> = {
   title: 'Components/Actions/Toggle button',
@@ -7,28 +8,28 @@ const story: ComponentMeta<typeof ToggleButton> = {
   args: {
     dimension: 'regular',
     kind: 'primary',
-    restingIcon: 'play'
+    restingIcon: 'play',
   },
   argTypes: {
     onClick: { action: 'clicked' },
     dimension: {
       options: ['small', 'regular', 'big'],
-      control: { type: 'radio' }
+      control: { type: 'radio' },
     },
     kind: {
       options: ['primary', 'secondary', 'flat'],
-      control: { type: 'radio' }
-    }
-  }
-}
+      control: { type: 'radio' },
+    },
+  },
+};
 
-export default story
+export default story;
 
-const Template: ComponentStory<typeof ToggleButton> = (args) => <ToggleButton {...args} />
+const Template: ComponentStory<typeof ToggleButton> = args => <ToggleButton {...args} />;
 
-export const Default = Template.bind({})
+export const Default = Template.bind({});
 
-export const MultipleIcons = Template.bind({})
+export const MultipleIcons = Template.bind({});
 MultipleIcons.args = {
-  pressedIcon: 'pause'
-}
+  pressedIcon: 'pause',
+};

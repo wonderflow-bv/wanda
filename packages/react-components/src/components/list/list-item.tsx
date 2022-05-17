@@ -1,10 +1,14 @@
-import { Stack, Icon, Text, IconProps, TextProps } from '@/components'
-import styles from './list.module.css'
-import clsx from 'clsx'
-import { forwardRef, PropsWithChildren } from 'react'
-import { ListProps } from './list'
+import clsx from 'clsx';
+import { forwardRef } from 'react';
 
-export type ListItemProps = PropsWithChildren<PropsWithClass> & Pick<ListProps, 'dimension' | 'hideMarker'> & {
+import {
+  Icon, IconProps, Stack, Text, TextProps,
+} from '@/components';
+
+import { ListProps } from './list';
+import styles from './list.module.css';
+
+export type ListItemProps = Pick<ListProps, 'dimension' | 'hideMarker'> & {
   /**
    * Set the marker style. You can use any icon from the iconography as marker
    * by passing its name.
@@ -16,7 +20,7 @@ export type ListItemProps = PropsWithChildren<PropsWithClass> & Pick<ListProps, 
   markerColor?: string;
 }
 
-export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(({
+export const ListItem = forwardRef<HTMLLIElement, PropsWithClass<ListItemProps>>(({
   className,
   hideMarker,
   marker = 'circle',
@@ -30,24 +34,24 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(({
       text: 16,
       icon: {
         size: 16,
-        weight: 'solid'
-      }
+        weight: 'solid',
+      },
     },
     regular: {
       text: 18,
       icon: {
         size: 16,
-        weight: 'outline'
-      }
+        weight: 'outline',
+      },
     },
     big: {
       text: 22,
       icon: {
         size: 24,
-        weight: 'duotone'
-      }
-    }
-  }
+        weight: 'duotone',
+      },
+    },
+  };
 
   return (
     <Stack
@@ -74,5 +78,5 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(({
         {children}
       </Text>
     </Stack>
-  )
-})
+  );
+});

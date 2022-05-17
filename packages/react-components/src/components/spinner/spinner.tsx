@@ -1,6 +1,6 @@
-import { forwardRef, SVGAttributes } from 'react'
-import clsx from 'clsx'
-import { domMax, LazyMotion, m } from 'framer-motion'
+import clsx from 'clsx';
+import { domMax, LazyMotion, m } from 'framer-motion';
+import { forwardRef, SVGAttributes } from 'react';
 
 export type SpinnerProps = SVGAttributes<SVGElement> & {
   /**
@@ -17,19 +17,19 @@ export const Spinner = forwardRef<SVGSVGElement, SpinnerProps>(({
   className,
   style,
   color,
-  dimension = 'big'
+  dimension = 'big',
 }, forwardedRef) => {
   const attributes = {
     small: {
-      size: 14
+      size: 14,
     },
     regular: {
-      size: 22
+      size: 22,
     },
     big: {
-      size: 30
-    }
-  }
+      size: 30,
+    },
+  };
 
   return (
     <LazyMotion features={domMax} strict>
@@ -40,13 +40,13 @@ export const Spinner = forwardRef<SVGSVGElement, SpinnerProps>(({
         transition={{
           duration: 2,
           repeat: Infinity,
-          repeatDelay: 2
+          repeatDelay: 2,
         }}
         style={{ ...style, originX: '50%', originY: '50%' }}
         width={attributes[dimension].size}
         height={attributes[dimension].size}
         viewBox="0 0 38 38"
-        stroke={color || 'currentColor'}
+        stroke={color ?? 'currentColor'}
         xmlns="http://www.w3.org/2000/svg"
         strokeLinecap="round"
       >
@@ -70,7 +70,7 @@ export const Spinner = forwardRef<SVGSVGElement, SpinnerProps>(({
         </g>
       </m.svg>
     </LazyMotion>
-  )
-})
+  );
+});
 
-Spinner.displayName = 'Spinner'
+Spinner.displayName = 'Spinner';

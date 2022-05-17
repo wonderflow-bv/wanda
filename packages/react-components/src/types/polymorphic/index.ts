@@ -1,20 +1,21 @@
+/* eslint-disable @typescript-eslint/ban-types */
 /**
  * Polymorphic types aretaken from https://github.com/radix-ui/primitives/blob/main/packages/react/polymorphic/src/polymorphic.ts
  * Due the deprecation, we decided to include these types inside Wanda's react-components.
  *
  * All the references and liceses are own by the team Radix
  */
-import * as React from 'react'
+import * as React from 'react';
 
 /* -------------------------------------------------------------------------------------------------
  * Utility types
  * ----------------------------------------------------------------------------------------------- */
-type Merge<P1 = {}, P2 = {}> = Omit<P1, keyof P2> & P2;
+type Merge<P1 = Record<string, unknown>, P2 = Record<string, unknown>> = Omit<P1, keyof P2> & P2;
 
 /**
  * Infers the OwnProps if E is a ForwardRefExoticComponentWithAs
  */
-type OwnProps<E> = E extends ForwardRefComponent<any, infer P> ? P : {};
+type OwnProps<E> = E extends ForwardRefComponent<any, infer P> ? P : Record<string, unknown>;
 
 /**
  * Infers the JSX.IntrinsicElement if E is a ForwardRefExoticComponentWithAs
@@ -22,7 +23,7 @@ type OwnProps<E> = E extends ForwardRefComponent<any, infer P> ? P : {};
 type IntrinsicElement<E> = E extends ForwardRefComponent<infer I, any> ? I : never;
 
 type ForwardRefExoticComponent<E, OwnProps> = React.ForwardRefExoticComponent<
-  Merge<E extends React.ElementType ? React.ComponentPropsWithRef<E> : never, OwnProps & { as?: E }>
+Merge<E extends React.ElementType ? React.ComponentPropsWithRef<E> : never, OwnProps & { as?: E }>
 >;
 
 /* -------------------------------------------------------------------------------------------------
@@ -31,7 +32,7 @@ type ForwardRefExoticComponent<E, OwnProps> = React.ForwardRefExoticComponent<
 
 interface ForwardRefComponent<
   IntrinsicElementString,
-  OwnProps = {}
+  OwnProps = Record<string, unknown>
   /**
    * Extends original type to ensure built in React types play nice
    * with polymorphic components still e.g. `React.ElementRef` etc.
@@ -49,11 +50,13 @@ interface ForwardRefComponent<
     props: As extends ''
       ? { as: keyof JSX.IntrinsicElements }
       : As extends React.ComponentType<infer P>
-      ? Merge<P, OwnProps & { as: As }>
-      : As extends keyof JSX.IntrinsicElements
-      ? Merge<JSX.IntrinsicElements[As], OwnProps & { as: As }>
-      : never
+        ? Merge<P, OwnProps & { as: As }>
+        : As extends keyof JSX.IntrinsicElements
+          ? Merge<JSX.IntrinsicElements[As], OwnProps & { as: As }>
+          : never
   ): React.ReactElement | null;
 }
 
-export type { ForwardRefComponent, OwnProps, IntrinsicElement, Merge }
+export type {
+  ForwardRefComponent, IntrinsicElement, Merge, OwnProps,
+};

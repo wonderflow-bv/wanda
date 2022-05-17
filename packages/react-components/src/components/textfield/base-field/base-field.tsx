@@ -1,7 +1,8 @@
-import { InputHTMLAttributes, forwardRef } from 'react'
-import styles from './base-field.module.css'
-import { Polymorphic } from '../../..'
-import clsx from 'clsx'
+import clsx from 'clsx';
+import { forwardRef, InputHTMLAttributes } from 'react';
+
+import { Polymorphic } from '../../..';
+import styles from './base-field.module.css';
 
 /**
  * @internal
@@ -25,15 +26,13 @@ export const BaseField = forwardRef(({
   invalid,
   className,
   ...otherProps
-}, forwardedRef) => {
-  return (
-    <Wrapper
-      ref={forwardedRef}
-      data-basefield-invalid={invalid}
-      className={clsx(styles.BaseField, className)}
-      {...otherProps}
-    />
-  )
-}) as PolymorphicBaseField
+}, forwardedRef) => (
+  <Wrapper
+    ref={forwardedRef}
+    data-basefield-invalid={invalid}
+    className={clsx(styles.BaseField, className)}
+    {...otherProps}
+  />
+)) as PolymorphicBaseField;
 
-BaseField.displayName = 'BaseField'
+BaseField.displayName = 'BaseField';

@@ -1,5 +1,6 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Stack } from './stack'
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+
+import { Stack } from './stack';
 
 const story: ComponentMeta<typeof Stack> = {
   title: 'Layouts/Stack',
@@ -7,20 +8,20 @@ const story: ComponentMeta<typeof Stack> = {
   argTypes: {
     inline: {
       options: [true, false],
-      control: { type: 'inline-radio' }
+      control: { type: 'inline-radio' },
     },
     wrap: {
       options: [true, false],
-      control: { type: 'inline-radio' }
+      control: { type: 'inline-radio' },
     },
     fill: {
       options: [true, false],
-      control: { type: 'inline-radio' }
+      control: { type: 'inline-radio' },
     },
     direction: {
       options: ['row', 'column'],
-      control: { type: 'inline-radio' }
-    }
+      control: { type: 'inline-radio' },
+    },
   },
   args: {
     direction: 'row',
@@ -29,13 +30,13 @@ const story: ComponentMeta<typeof Stack> = {
     columnGap: 16,
     rowGap: 80,
     wrap: true,
-    as: 'div'
-  }
-}
+    as: 'div',
+  },
+};
 
-export default story
+export default story;
 
-const Template: ComponentStory<typeof Stack> = (args) => (
+const Template: ComponentStory<typeof Stack> = args => (
   <Stack {...args}>
     <div className="DivEx">01</div>
     <div className="DivEx">02</div>
@@ -47,10 +48,10 @@ const Template: ComponentStory<typeof Stack> = (args) => (
     <div className="DivEx">08</div>
     <div className="DivEx">09</div>
   </Stack>
-)
+);
 
-export const Default = Template.bind({})
+export const Default = Template.bind({});
 Default.args = {
   hAlign: 'start',
-  vAlign: 'start'
-}
+  vAlign: 'start',
+};

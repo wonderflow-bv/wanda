@@ -1,9 +1,11 @@
-import clsx from 'clsx'
-import { forwardRef, PropsWithChildren } from 'react'
-import { Icon, IconProps, Stack } from '@/components'
-import styles from './chip.module.css'
+import clsx from 'clsx';
+import { forwardRef } from 'react';
 
-export type ChipProps = PropsWithChildren<PropsWithClass> & {
+import { Icon, IconProps, Stack } from '@/components';
+
+import styles from './chip.module.css';
+
+export type ChipProps = {
   /**
    * Set the dimension of the component.
    */
@@ -19,10 +21,10 @@ export type ChipProps = PropsWithChildren<PropsWithClass> & {
   /**
    * Callback function to be called when the dismiss button is pressed.
    */
-  onDismissClick?(): void;
+  onDismissClick?: () => void;
 }
 
-export const Chip = forwardRef<HTMLSpanElement, ChipProps>(({
+export const Chip = forwardRef<HTMLSpanElement, PropsWithClass<ChipProps>>(({
   children,
   className,
   dimension = 'regular',
@@ -34,17 +36,17 @@ export const Chip = forwardRef<HTMLSpanElement, ChipProps>(({
   const properties = {
     small: {
       iconSize: 12,
-      style: 'solid'
+      style: 'solid',
     },
     regular: {
       iconSize: 12,
-      style: 'solid'
+      style: 'solid',
     },
     big: {
       iconSize: 16,
-      style: 'outline'
-    }
-  }
+      style: 'outline',
+    },
+  };
 
   return (
     <Stack
@@ -70,7 +72,7 @@ export const Chip = forwardRef<HTMLSpanElement, ChipProps>(({
         </button>
       )}
     </Stack>
-  )
-})
+  );
+});
 
-Chip.displayName = 'Chip'
+Chip.displayName = 'Chip';

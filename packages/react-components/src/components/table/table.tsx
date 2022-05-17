@@ -1,33 +1,36 @@
-import clsx from 'clsx'
-import { domMax, LazyMotion, m, AnimatePresence } from 'framer-motion'
+import { useUpdateEffect } from 'ahooks';
+import clsx from 'clsx';
 import {
-  ComponentType, CSSProperties, Fragment, ReactNode, useCallback, useEffect, useMemo
-} from 'react'
+  AnimatePresence, domMax, LazyMotion, m,
+} from 'framer-motion';
+import {
+  ComponentType, CSSProperties, Fragment, ReactNode, useCallback, useEffect, useMemo,
+} from 'react';
 import {
   Hooks, IdType, Row,
+  SortingRule,
   useExpanded, usePagination,
-  useRowSelect, useSortBy, useTable, SortingRule
-} from 'react-table'
-import { useUIDSeed } from 'react-uid'
-import { useUpdateEffect } from 'ahooks'
+  useRowSelect, useSortBy, useTable,
+} from 'react-table';
+import { useUIDSeed } from 'react-uid';
 
 import {
   Skeleton, Stack, Text,
-  ToggleButton
-} from '@/components'
+  ToggleButton,
+} from '@/components';
 
-import styles from './table.module.css'
-import { TableCell } from './table-cell'
-import { TableCheckbox } from './table-checkbox'
-import { ToggleColumnsControl } from './table-controls'
-import { TableExpand } from './table-expand'
-import { TableHeader, TableHeaderProps } from './table-header'
-import { TablePagination, TablePaginationProps } from './table-pagination'
-import { TableRow } from './table-row'
+import styles from './table.module.css';
+import { TableCell } from './table-cell';
+import { TableCheckbox } from './table-checkbox';
+import { ToggleColumnsControl } from './table-controls';
+import { TableExpand } from './table-expand';
+import { TableHeader, TableHeaderProps } from './table-header';
+import { TablePagination, TablePaginationProps } from './table-pagination';
+import { TableRow } from './table-row';
 import {
   CellType, CustomColumnInstanceType, CustomColumnsType,
-  HeaderGroupType, OptionalDataTypes, CustomSortingRule, PaginationPageType
-} from './types'
+  CustomSortingRule, HeaderGroupType, OptionalDataTypes, PaginationPageType,
+} from './types';
 
 export type TableProps<T extends Record<string, unknown>> = PropsWithClass & {
   /**
@@ -54,7 +57,7 @@ export type TableProps<T extends Record<string, unknown>> = PropsWithClass & {
   /**
    * A function to trigger every time a row changes its selection status
    */
-   onSelectedRowsChange?: (selectedRowIds: Array<IdType<T>>) => void;
+  onSelectedRowsChange?: (selectedRowIds: Array<IdType<T>>) => void;
   /**
    * Add an alternate style to the table rows
    */
@@ -92,7 +95,7 @@ export type TableProps<T extends Record<string, unknown>> = PropsWithClass & {
    * Set the label for selected items in the table. Default to "Selected items"
    */
   selectedLabel?: (selectedRowIds: Array<IdType<T>>) => ReactNode;
-   /**
+  /**
    * Pass custom components to show when rows are selected.
    */
   selectedActions?: (selectedRowIds: Array<IdType<T>>) => ReactNode;
@@ -125,20 +128,20 @@ export type TableProps<T extends Record<string, unknown>> = PropsWithClass & {
    * The index of the page that should be set as active when the table is rendered.
    */
   initialPageIndex?: number;
-   /**
+  /**
     * The amount of entries to show for each page.
     */
   itemsPerPage?: number;
-   /**
+  /**
     * Set the number of pages to show in the pagination. Used only when doing manual pagination.
     */
   totalRows?: number;
-   /**
+  /**
     * Set clusters of items to show in a single page. These values are used to
     * compute the select options for the page size select.
     */
   pageClusters?: TablePaginationProps['clusters'];
-   /**
+  /**
     * The callback that is called when the active page index and page size change.
     * Passing this property will enable manual pagination,
     * disabling the automatic one.
@@ -149,11 +152,11 @@ export type TableProps<T extends Record<string, unknown>> = PropsWithClass & {
    * to control the sorting yourself.
    */
   isManualSorted?: boolean;
-   /**
+  /**
    * Set the initial sorted column and order by passing column id and order.
    */
   initialSortBy?: Array<SortingRule<T>>;
-   /**
+  /**
     * Callback run when a column is sorted
     */
   onSortChange?: (sorting: Array<CustomSortingRule<T>>) => void;
@@ -166,7 +169,7 @@ export const Table = <T extends Record<string, unknown>>({
   data = [],
   selectableRows,
   selectedRowIds = [],
-  onSelectedRowsChange = () => {},
+  onSelectedRowsChange,
   stripes,
   showSeparators = true,
   title,
@@ -193,22 +196,27 @@ export const Table = <T extends Record<string, unknown>>({
   initialSortBy = [],
   ...otherProps
 }: TableProps<T>) => {
-  const uid = useUIDSeed()
-  const hasSomeExpandableRows = useMemo(() => data.some(d => d.subRows), [data])
-  const isManualPaginated = useMemo(() => Boolean(showPagination && onPaginationChange && totalRows), [showPagination, totalRows, onPaginationChange])
-  const manualPaginationPageCount = useMemo(() => (isManualPaginated && totalRows) ? Math.ceil(totalRows / itemsPerPage) : -1, [isManualPaginated, totalRows, itemsPerPage])
+  const uid = useUIDSeed();
+  const hasSomeExpandableRows = useMemo(() => data.some(d => d.subRows), [data]);
+  const isManualPaginated = useMemo(
+    () => Boolean(showPagination && onPaginationChange && totalRows),
+    [showPagination, totalRows, onPaginationChange],
+  );
+  const manualPaginationPageCount = useMemo(
+    () => ((isManualPaginated && totalRows) ? Math.ceil(totalRows / itemsPerPage) : -1),
+    [isManualPaginated, totalRows, itemsPerPage],
+  );
 
   const getHiddenColumns = useCallback(() => {
-    const hiddenColumns = defaultHiddenColumns ? [...defaultHiddenColumns] : []
-    if (!selectableRows) hiddenColumns.push('selection')
-    if (!hasSomeExpandableRows) hiddenColumns.push('expander')
+    const hiddenColumns = defaultHiddenColumns ? [...defaultHiddenColumns] : [];
+    if (!selectableRows) hiddenColumns.push('selection');
+    if (!hasSomeExpandableRows) hiddenColumns.push('expander');
 
-    return hiddenColumns
-  }, [defaultHiddenColumns, selectableRows, hasSomeExpandableRows])
+    return hiddenColumns;
+  }, [defaultHiddenColumns, selectableRows, hasSomeExpandableRows]);
 
-  const getRowId = useCallback((originalRow, relativeIndex, parent) =>
-    originalRow?._id || (parent && [parent.id, relativeIndex].join('.')) || relativeIndex.toString()
-  , [])
+  const getRowId = useCallback((originalRow, relativeIndex, parent) => originalRow?._id || (parent && [parent.id, relativeIndex].join('.')) || relativeIndex.toString(),
+    []);
 
   const {
     getTableProps,
@@ -224,8 +232,8 @@ export const Table = <T extends Record<string, unknown>>({
     setPageSize,
     setHiddenColumns,
     state: {
-      pageSize, pageIndex, sortBy, selectedRowIds: selectedRowIdsState
-    }
+      pageSize, pageIndex, sortBy, selectedRowIds: selectedRowIdsState,
+    },
   } = useTable(
     {
       columns,
@@ -249,13 +257,11 @@ export const Table = <T extends Record<string, unknown>>({
         pageIndex: initialPageIndex,
         pageSize: showPagination ? itemsPerPage : data.length,
         hiddenColumns: getHiddenColumns(),
-        selectedRowIds: selectedRowIds.reduce<Record<IdType<string>, boolean>>((acc, curr) => {
-          return {
-            ...acc,
-            [curr]: true
-          }
-        }, {})
-      }
+        selectedRowIds: selectedRowIds.reduce<Record<IdType<string>, boolean>>((acc, curr) => ({
+          ...acc,
+          [curr]: true,
+        }), {}),
+      },
     },
     useSortBy,
     useExpanded,
@@ -269,8 +275,8 @@ export const Table = <T extends Record<string, unknown>>({
         Header: ({ getToggleAllPageRowsSelectedProps }) => (
           !loading ? <TableCheckbox {...getToggleAllPageRowsSelectedProps()} /> : null
         ),
-        Cell: ({ row }: {row: Row<T>}) => <TableCheckbox {...row.getToggleRowSelectedProps()} />
-      }]
+        Cell: ({ row }: {row: Row<T>}) => <TableCheckbox {...row.getToggleRowSelectedProps()} />,
+      }];
 
       const expanderColumn: CustomColumnsType<T> = [{
         id: 'expander',
@@ -287,66 +293,64 @@ export const Table = <T extends Record<string, unknown>>({
               pressedIcon="chevron-down"
               {...row.getToggleRowExpandedProps()}
               onClick={() => {
-                const subRowsExpanded = row.subRows.filter(r => r.isExpanded)
-                subRowsExpanded.forEach(r => r.toggleRowExpanded(!r.isExpanded))
-                row.toggleRowExpanded(!row.isExpanded)
+                const subRowsExpanded = row.subRows.filter(r => r.isExpanded);
+                subRowsExpanded.forEach(r => r.toggleRowExpanded(!r.isExpanded));
+                row.toggleRowExpanded(!row.isExpanded);
               }}
             />
-            )
-          : null)
-      }]
+          )
+          : null),
+      }];
 
       hooks.visibleColumns.push(columns => [
         ...checkboxColumn,
         ...expanderColumn,
-        ...columns
-      ])
-    }
-  )
+        ...columns,
+      ]);
+    },
+  );
 
   useUpdateEffect(() => {
-    const hiddenColumns = getHiddenColumns()
-    setHiddenColumns(hiddenColumns)
+    const hiddenColumns = getHiddenColumns();
+    setHiddenColumns(hiddenColumns);
   }, [
     setHiddenColumns,
-    getHiddenColumns
-  ])
+    getHiddenColumns,
+  ]);
 
   useUpdateEffect(() => {
-    onSelectedRowsChange(Object.keys(selectedRowIdsState))
+    onSelectedRowsChange?.(Object.keys(selectedRowIdsState));
   }, [
     selectedRowIdsState,
-    onSelectedRowsChange
-  ])
+    onSelectedRowsChange,
+  ]);
 
   useUpdateEffect(() => {
-    onSortChange?.(sortBy)
-  }, [onSortChange, sortBy])
+    onSortChange?.(sortBy);
+  }, [onSortChange, sortBy]);
 
   useUpdateEffect(() => {
-    onPaginationChange?.({ pageIndex, pageSize })
-  }, [onPaginationChange, pageIndex, pageSize])
+    void onPaginationChange?.({ pageIndex, pageSize });
+  }, [onPaginationChange, pageIndex, pageSize]);
 
   useEffect(() => {
     if (pageIndex >= pageCount) {
-      gotoPage(0)
+      gotoPage(0);
     }
-  }, [pageCount, pageIndex, gotoPage])
+  }, [pageCount, pageIndex, gotoPage]);
 
-  const rowEntries = useMemo(() => {
-    return (showPagination ? page : rows)
-  }, [page, rows, showPagination])
+  const rowEntries = useMemo(() => (showPagination ? page : rows), [page, rows, showPagination]);
 
   const filteredVisibleColumns = useMemo(() => (
     visibleColumns.filter((col: CustomColumnInstanceType<T>) => !col.isToggable)
-  ), [visibleColumns])
+  ), [visibleColumns]);
 
-  const expandedRows = useMemo(() => rows.filter(row => row.canExpand && row.isExpanded).map(r => r.id), [rows])
+  const expandedRows = useMemo(() => rows.filter(row => row.canExpand && row.isExpanded).map(r => r.id), [rows]);
 
   const dynamicStyle: CSSProperties = {
     '--table-height': height,
-    '--table-background': background
-  }
+    '--table-background': background,
+  };
 
   return (
     <div
@@ -375,8 +379,8 @@ export const Table = <T extends Record<string, unknown>>({
               transition: {
                 type: 'spring',
                 stiffness: 700,
-                damping: 30
-              }
+                damping: 30,
+              },
             }}
             exit={{ y: '-16px', opacity: 0 }}
           >
@@ -396,8 +400,8 @@ export const Table = <T extends Record<string, unknown>>({
               transition: {
                 type: 'spring',
                 stiffness: 700,
-                damping: 30
-              }
+                damping: 30,
+              },
             }}
           >
             <TableHeader title={title}>
@@ -407,7 +411,7 @@ export const Table = <T extends Record<string, unknown>>({
                     columns={allColumns}
                     visibleColumns={filteredVisibleColumns}
                   />
-                  )
+                )
                 : null}
               {actions}
             </TableHeader>
@@ -432,7 +436,7 @@ export const Table = <T extends Record<string, unknown>>({
 
               {/* THEAD */}
               {showTableHead && (
-                <thead role="rowgroup" className={styles.THead}>
+                <thead className={styles.THead}>
                   {headerGroups.map(headerGroup => (
                     <TableRow {...headerGroup.getHeaderGroupProps()}>
                       {headerGroup.headers.map((column: HeaderGroupType<T>) => (
@@ -454,7 +458,7 @@ export const Table = <T extends Record<string, unknown>>({
               )}
 
               {/* TBODY */}
-              <tbody role="rowgroup" className={styles.TBody} {...getTableBodyProps()}>
+              <tbody className={styles.TBody} {...getTableBodyProps()}>
                 {loading
                   ? (
                     <TableRow>
@@ -462,9 +466,9 @@ export const Table = <T extends Record<string, unknown>>({
                         <Skeleton gap={16} height={24} count={10} />
                       </TableCell>
                     </TableRow>
-                    )
+                  )
                   : rowEntries.map((row) => {
-                    prepareRow(row)
+                    prepareRow(row);
                     return (
                       <Fragment key={row.id}>
                         <TableRow
@@ -494,17 +498,17 @@ export const Table = <T extends Record<string, unknown>>({
                           </TableRow>
                         ))}
                       </Fragment>
-                    )
+                    );
                   })}
               </tbody>
             </table>
           </div>
-          )
+        )
         : (
           <Stack vAlign="center" hAlign="center">
             {emptyComponent ?? 'No data'}
           </Stack>
-          )
+        )
       }
 
       {/* PAGINATION */}
@@ -521,5 +525,5 @@ export const Table = <T extends Record<string, unknown>>({
         />
       )}
     </div>
-  )
-}
+  );
+};

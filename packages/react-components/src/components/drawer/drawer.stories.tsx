@@ -1,29 +1,33 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { useState } from 'react'
-import { Drawer } from './drawer'
-import { useOverlayContext, OverlayContainer, Button, Stack } from '../..'
+/* eslint-disable max-len */
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { useState } from 'react';
 
-const story:ComponentMeta<typeof Drawer> = {
+import {
+  Button, OverlayContainer, Stack, useOverlayContext,
+} from '../..';
+import { Drawer } from './drawer';
+
+const story: ComponentMeta<typeof Drawer> = {
   title: 'Components/Dialogs/Drawer',
   component: Drawer,
   args: {
     side: 'right',
     title: 'Drawer title',
     closeOnClickOutside: true,
-    isModal: true
+    isModal: true,
   },
   argTypes: {
     side: {
       options: ['left', 'right'],
-      control: { type: 'inline-radio' }
-    }
-  }
-}
+      control: { type: 'inline-radio' },
+    },
+  },
+};
 
-export default story
+export default story;
 
 const DrawerShell: ComponentStory<typeof Drawer> = ({ children, ...args }) => {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(false);
 
   return (
     <>
@@ -86,11 +90,11 @@ const DrawerShell: ComponentStory<typeof Drawer> = ({ children, ...args }) => {
         )}
       </OverlayContainer>
     </>
-  )
-}
+  );
+};
 
 const CustomContentDrawer: ComponentStory<typeof Drawer> = () => {
-  const { onClose } = useOverlayContext()
+  const { onClose } = useOverlayContext();
 
   return (
     <Stack
@@ -103,22 +107,20 @@ const CustomContentDrawer: ComponentStory<typeof Drawer> = () => {
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus et magnam distinctio qui quod ducimus libero magni earum perspiciatis.
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus et magnam distinctio qui quod ducimus libero magni earum perspiciatis.
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus et magnam distinctio qui quod ducimus libero magni earum perspiciatis.
-      <img width="100%" height="auto" src="https://images.unsplash.com/photo-1579332649290-10b7da0cd111?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=cover&w=1600&q=80" />
+      <img width="100%" alt="" height="auto" src="https://images.unsplash.com/photo-1579332649290-10b7da0cd111?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=cover&w=1600&q=80" />
       <Button onClick={onClose}>Close drawer</Button>
     </Stack>
-  )
-}
+  );
+};
 
-const DefaultTemplate: ComponentStory<typeof Drawer> = (args) => {
-  return (
-    <DrawerShell {...args}>
-      <CustomContentDrawer />
-    </DrawerShell>
-  )
-}
-export const Default = DefaultTemplate.bind({})
-export const NonModal = DefaultTemplate.bind({})
+const DefaultTemplate: ComponentStory<typeof Drawer> = args => (
+  <DrawerShell {...args}>
+    <CustomContentDrawer />
+  </DrawerShell>
+);
+export const Default = DefaultTemplate.bind({});
+export const NonModal = DefaultTemplate.bind({});
 NonModal.args = {
   closeOnClickOutside: false,
-  isModal: false
-}
+  isModal: false,
+};
