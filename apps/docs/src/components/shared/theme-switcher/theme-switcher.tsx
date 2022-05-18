@@ -14,12 +14,12 @@ export const ThemeSwitcher = () => {
 
   return (
     <Popover
-      placement="bottom-end"
+      placement="bottom-start"
       offset={4}
       trigger={(
         <IconButton
           aria-label="Change color scheme"
-          kind="flat"
+          kind="secondary"
           icon={currentTheme === 'system' ? icon.system : icon[currentTheme]}
         />
     )}
