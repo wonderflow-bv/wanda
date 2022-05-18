@@ -244,7 +244,6 @@ export const Table = <T extends Record<string, unknown>>({
        * be placed in the next page. But it breaks row selection
        * paginateExpandedRows: !showPagination,
        */
-      paginateExpandedRows: !isManualPaginated,
       initialState: {
         sortBy: initialSortBy,
         pageIndex: initialPageIndex,
