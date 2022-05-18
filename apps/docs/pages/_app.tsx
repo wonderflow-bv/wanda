@@ -13,6 +13,7 @@ import { useEffect } from 'react';
 
 import { BlankLayout } from '@/components/layouts/blank-layout';
 import { DocLayout } from '@/components/layouts/doc-layout';
+import { ResponsiveProvider } from '@/context/responsive';
 
 const LAYOUTS = {
   blank: BlankLayout,
@@ -21,9 +22,11 @@ const LAYOUTS = {
 
 const Providers: FCChildren = ({ children }) => (
   <ThemeProvider defaultTheme="system" disableTransitionOnChange>
-    <IdProvider>
-      {children}
-    </IdProvider>
+    <ResponsiveProvider>
+      <IdProvider>
+        {children}
+      </IdProvider>
+    </ResponsiveProvider>
   </ThemeProvider>
 );
 
