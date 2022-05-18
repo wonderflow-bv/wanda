@@ -29,7 +29,7 @@ export const Meta: React.FC<MetaProps> = ({
       <title>{title}</title>
       <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
       { keywords && <meta name="keywords" content={keywords.join()} />}
-      <link rel="icon" href="/favicon.svg" />
+      <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       <link rel="apple-touch-icon" href="/touch-icon.png" />
       <meta name="theme-color" content={theme === 'dark' ? '#000000' : '#ffffff'} />
 
