@@ -1,0 +1,5 @@
+html {
+  &[data-html-smooth='true'] {
+    scroll-behavior: smooth;
+  }
+}
