@@ -41,7 +41,7 @@ export const Header = () => {
           {matches.medium && <MainNav />}
           <Stack direction="row" vAlign="center" fill={false} columnGap={8}>
             {!matches.medium && (
-              <Popover trigger={<IconButton icon="bars" kind="flat" iconPosition="right" />}>
+              <Popover trigger={<IconButton icon="bars" kind="flat" iconPosition="right" aria-label="Show main menu" />}>
                 <Elevator resting={2}>
                   <Card bordered padding={8}>
                     <MainNav direction="column" />

@@ -48,6 +48,10 @@
   --docsearch-footer-shadow: none;
 }
 
+.DocSearch-Button {
+  margin-left: 0;
+}
+
 .DocSearch-Input:focus-visible {
   outline: none;
 }
