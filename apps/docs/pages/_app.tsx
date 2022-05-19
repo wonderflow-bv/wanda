@@ -23,7 +23,7 @@ const LAYOUTS = {
 };
 
 const Providers: FCChildren = ({ children }) => (
-  <ThemeProvider defaultTheme="system" disableTransitionOnChange>
+  <ThemeProvider defaultTheme="dark" disableTransitionOnChange>
     <ResponsiveProvider>
       <IdProvider>
         {children}
