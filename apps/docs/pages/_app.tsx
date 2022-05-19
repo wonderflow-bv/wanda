@@ -1,6 +1,8 @@
+import '@docsearch/css';
 import '@wonderflow/themes';
 import '@wonderflow/react-components/core.css';
 import '@/styles/app.css';
+import '@/styles/docsearch.css';
 
 import { IdProvider } from '@wonderflow/react-components';
 import { AnimatePresence } from 'framer-motion';

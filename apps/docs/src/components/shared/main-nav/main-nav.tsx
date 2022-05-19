@@ -7,6 +7,10 @@ import { useCallback } from 'react';
 
 import styles from './main-nav.module.css';
 
+type MainNavProps = {
+  direction?: 'row' | 'column';
+}
+
 const MENU = [
   {
     label: 'Documentation',
@@ -22,7 +26,9 @@ const MENU = [
   },
 ];
 
-export const MainNav = () => {
+export const MainNav: FCClass<MainNavProps> = ({
+  direction = 'row',
+}) => {
   const router = useRouter();
 
   const includesPath = useCallback(
@@ -31,7 +37,7 @@ export const MainNav = () => {
   );
 
   return (
-    <Stack as="nav" direction="row" columnGap={8}>
+    <Stack as="nav" direction={direction} columnGap={8}>
       {MENU.map(item => (
         <Link href={item.url} key={item.label}>
           <a
@@ -43,6 +49,9 @@ export const MainNav = () => {
           </a>
         </Link>
       ))}
+      <a href="https://wonderflow.ai" target="_blank" rel="noopener noreferrer" className={styles.Link}>
+        Company
+      </a>
     </Stack>
   );
 };
