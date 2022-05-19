@@ -1,0 +1,17 @@
+/* stylelint-disable property-no-vendor-prefix */
+.GradientText {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  &::selection {
+    background-color: var(--dimmed-7);
+    -webkit-text-fill-color: var(--dimmed-0);
+    color: var(--dimmed-0);
+    text-shadow: none;
+  }
+
+
+  &[data-gradient-text='rainbow'] {
+    background-image: linear-gradient(92deg, #6a68d9 10%, #da6cae 60%, #f5a957 100%);
+  }
+}

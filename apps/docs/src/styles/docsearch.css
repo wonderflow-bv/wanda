@@ -9,13 +9,13 @@
   --docsearch-icon-stroke-width: 1.4;
   --docsearch-highlight-color: var(--global-vibrancy-foreground);
   --docsearch-muted-color: var(--dimmed-7);
-  --docsearch-container-background: hsl(token(--color-primary-100) / 95%);
+  --docsearch-container-background: hsl(0deg 0% 0% / 30%);
   --docsearch-logo-color: var(--dimmed-4);
 
   /* Modal props */
   --docsearch-modal-width: 560px;
   --docsearch-modal-height: 600px;
-  --docsearch-modal-background: var(--global-background);
+  --docsearch-modal-background: var(--dimmed-0);
   --docsearch-modal-shadow:
     0 33px 78px hsl(0deg 0% 0% / 11%),
     0 12.04px 28.47px hsl(0deg 0% 0% / 7.59%),
@@ -25,15 +25,15 @@
 
   /* Searchbox props */
   --docsearch-searchbox-height: 56px;
-  --docsearch-searchbox-background: var(--global-vibrancy-background);
-  --docsearch-searchbox-focus-background: var(--global-vibrancy-background-hard);
+  --docsearch-searchbox-background: transparent;
+  --docsearch-searchbox-focus-background: var(--global-vibrancy-background);
   --docsearch-searchbox-shadow: none;
 
   /* Hit props */
   --docsearch-hit-height: 56px;
   --docsearch-hit-color: var(--global-foreground);
   --docsearch-hit-active-color: var(--global-background);
-  --docsearch-hit-background: var(--dimmed-0);
+  --docsearch-hit-background: var(--global-background);
   --docsearch-hit-shadow: none;
 
   /* Keys props */
@@ -50,6 +50,9 @@
 
 .DocSearch-Button {
   margin-left: 0;
+  height: 40px;
+  width: 40px;
+  justify-content: center;
 }
 
 .DocSearch-Input:focus-visible {
@@ -63,4 +66,11 @@
 .DocSearch-Button-Keys,
 .DocSearch-Button-Placeholder {
   display: none;
+}
+
+.DocSearch-Container {
+
+  @mixin vibrancy;
+
+  backdrop-filter: saturate(180%) blur(8px);
 }

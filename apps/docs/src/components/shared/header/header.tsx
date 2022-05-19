@@ -23,11 +23,14 @@ const DynThemeSwitcher = dynamic<Record<string, any>>(
   },
 );
 
-export const Header = () => {
+export const Header: FCClass = ({
+  className,
+  ...otherProps
+}) => {
   const { matches } = useResponsiveContext();
 
   return (
-    <header>
+    <header className={className} {...otherProps}>
       <Container dimension="large">
         <Stack
           fill={false}

@@ -19,7 +19,7 @@ export const ThemeSwitcher = () => {
       trigger={(
         <IconButton
           aria-label="Change color scheme"
-          kind="secondary"
+          kind="flat"
           icon={currentTheme === 'system' ? icon.system : icon[currentTheme]}
         />
     )}
