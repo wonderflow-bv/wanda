@@ -27,10 +27,7 @@ type PropsWithClass<T = Record<string, unknown>> = {
   className?: string;
 } & T
 
-type FCClass<T = Record<string, unknown>> = React.FC<{
-  style?: Record<string, any>;
-  className?: string;
-} & T>
+type FCClass<T = Record<string, unknown>> = React.FC<PropsWithClass<T>>
 
 type FCChildren<T = Record<string, unknown>> = React.FC<React.PropsWithChildren<T>>
 
