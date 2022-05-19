@@ -1,13 +1,20 @@
-import { HTMLAttributes, PropsWithChildren } from 'react';
+import clsx from 'clsx';
 
 import { BaseLayout } from '@/components/layouts/base-layout';
 import { Header } from '@/components/shared/header';
 
-export interface IPropsBlankLayout extends PropsWithChildren<HTMLAttributes<HTMLElement>> {}
+import styles from './blank-layout.module.css';
 
-export const BlankLayout: FCChildren<IPropsBlankLayout> = ({ children }) => (
+export interface IPropsBlankLayout {
+  absoluteHeader?: boolean;
+}
+
+export const BlankLayout: FCChildren<IPropsBlankLayout> = ({
+  children,
+  absoluteHeader,
+}) => (
   <BaseLayout>
-    <Header />
+    <Header className={clsx(absoluteHeader && styles.Header)} />
     <main>{children}</main>
   </BaseLayout>
 );

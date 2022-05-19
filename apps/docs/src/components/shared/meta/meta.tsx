@@ -32,6 +32,7 @@ export const Meta: React.FC<MetaProps> = ({
       <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       <link rel="apple-touch-icon" href="/touch-icon.png" />
       <meta name="theme-color" content={theme === 'dark' ? '#000000' : '#ffffff'} />
+      {theme === 'system' && <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />}
 
       {canonical && <link rel="canonical" href={canonical} /> }
       <meta property="og:site_name" content={title} />
