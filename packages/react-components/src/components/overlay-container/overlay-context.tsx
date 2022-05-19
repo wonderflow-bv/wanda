@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { createContext, PropsWithChildren, useContext } from 'react';
+import { createContext, useContext } from 'react';
 import { useUIDSeed } from 'react-uid';
 
 import { OverlayContainerProps } from './overlay-container';
@@ -15,11 +15,12 @@ export const OverlayContext = createContext<OverlayContextProps>({
 
 OverlayContext.displayName = 'OverlayContext';
 
-export const OverlayProvider = (props: PropsWithChildren<OverlayContextProps>) => {
+export const OverlayProvider: FCChildren<OverlayContextProps> = (props) => {
   const seedID = useUIDSeed();
   const {
     children,
-    titleId = seedID('overlay-title'), onClose,
+    titleId = seedID('overlay-title'),
+    onClose,
   } = props;
 
   return (
