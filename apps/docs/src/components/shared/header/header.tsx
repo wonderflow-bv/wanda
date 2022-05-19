@@ -1,10 +1,16 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Container, Skeleton, Stack } from '@wonderflow/react-components';
+import {
+  Card,
+  Container, Elevator, IconButton,
+  Popover, Skeleton,
+  Stack,
+} from '@wonderflow/react-components';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
 import { Logo } from '@/components/shared/logo';
 import { MainNav } from '@/components/shared/main-nav';
+import { Search } from '@/components/shared/search';
 import { useResponsiveContext } from '@/context/responsive';
 
 import styles from './header.module.css';
@@ -32,8 +38,18 @@ export const Header = () => {
           columnGap={24}
         >
           <Link href="/"><a className={styles.LogoLink}><Logo /></a></Link>
-          {matches.small && <MainNav />}
-          <Stack>
+          {matches.medium && <MainNav />}
+          <Stack direction="row" vAlign="center" fill={false} columnGap={8}>
+            {!matches.medium && (
+              <Popover trigger={<IconButton icon="bars" kind="flat" iconPosition="right" />}>
+                <Elevator resting={2}>
+                  <Card bordered padding={8}>
+                    <MainNav direction="column" />
+                  </Card>
+                </Elevator>
+              </Popover>
+            )}
+            <Search />
             <DynThemeSwitcher />
           </Stack>
         </Stack>
