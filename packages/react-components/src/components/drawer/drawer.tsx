@@ -3,7 +3,7 @@ import { useKeyPress } from 'ahooks';
 import clsx from 'clsx';
 import { domMax, LazyMotion, m } from 'framer-motion';
 import {
-  CSSProperties, forwardRef, ReactNode,
+  CSSProperties, forwardRef, ReactNode, Ref,
 } from 'react';
 import { AutoFocusInside, FocusOn } from 'react-focus-on';
 
@@ -55,7 +55,7 @@ export type DrawerProps = {
   isModal?: boolean;
 }
 
-export const Drawer = forwardRef<HTMLDivElement, PropsWithClass<DrawerProps>>(({
+export const Drawer: FCChildrenClass<DrawerProps> = forwardRef(({
   children,
   className,
   closeOnClickOutside = true,
@@ -66,7 +66,7 @@ export const Drawer = forwardRef<HTMLDivElement, PropsWithClass<DrawerProps>>(({
   isModal = true,
   title,
   ...otherProps
-}, forwardedRef) => {
+}, forwardedRef: Ref<HTMLDivElement>) => {
   const { titleId, onClose } = useOverlayContext();
   const cssEasingToArray = (cssEasing: string) => {
     const [x1, y1, x2, y2] = cssEasing.replace(/[^0-9.,]+/g, '').split(',').map(i => parseFloat(i));

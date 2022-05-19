@@ -40,7 +40,7 @@ export type OverlayContainerProps = {
   obfuscate?: boolean;
 }
 
-export const OverlayContainer: React.FC<OverlayContainerProps> = ({
+export const OverlayContainer: FCChildren<OverlayContainerProps> = ({
   children,
   root = document.body,
   overlayColor = 'dark',
