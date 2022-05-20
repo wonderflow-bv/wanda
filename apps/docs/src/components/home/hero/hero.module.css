@@ -6,6 +6,7 @@
   position: relative;
   z-index: 0;
   background: var(--dimmed-0);
+  mask-image: radial-gradient(45rem 7% at center bottom, rgb(0 0 0 / 80%), red);
 
   &::after {
     --computed-dot-size: calc(var(--dots-size) / 2);

@@ -1,10 +1,12 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import {
   Card,
   Container, Elevator, IconButton,
   Popover, Skeleton,
   Stack,
 } from '@wonderflow/react-components';
+import { useScroll } from 'ahooks';
+import clsx from 'clsx';
+import { m } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
@@ -15,6 +17,10 @@ import { useResponsiveContext } from '@/context/responsive';
 
 import styles from './header.module.css';
 
+export type HeaderProps = {
+  fixed?: boolean;
+}
+
 const DynThemeSwitcher = dynamic<Record<string, any>>(
   async () => import('@/components/shared/theme-switcher').then(mod => mod.ThemeSwitcher),
   {
@@ -23,14 +29,21 @@ const DynThemeSwitcher = dynamic<Record<string, any>>(
   },
 );
 
-export const Header: FCClass = ({
+export const Header: FCClass<HeaderProps> = ({
   className,
+  fixed,
   ...otherProps
 }) => {
   const { matches } = useResponsiveContext();
+  const scroll = useScroll(document, val => val.top > 0 && val.top < 200);
 
   return (
-    <header className={className} {...otherProps}>
+    <m.header
+      layout
+      data-header-fixed={fixed}
+      className={clsx(styles.Header, className)}
+      {...otherProps}
+    >
       <Container dimension="large">
         <Stack
           fill={false}
@@ -44,19 +57,20 @@ export const Header: FCClass = ({
           {matches.medium && <MainNav />}
           <Stack direction="row" vAlign="center" fill={false} columnGap={8}>
             {!matches.medium && (
-              <Popover trigger={<IconButton icon="bars" kind="flat" iconPosition="right" aria-label="Show main menu" />}>
-                <Elevator resting={2}>
-                  <Card bordered padding={8}>
-                    <MainNav direction="column" />
-                  </Card>
-                </Elevator>
-              </Popover>
+            <Popover trigger={<IconButton icon="bars" kind="flat" iconPosition="right" aria-label="Show main menu" />}>
+              <Elevator resting={2}>
+                <Card bordered padding={8}>
+                  <MainNav direction="column" />
+                </Card>
+              </Elevator>
+            </Popover>
             )}
             <Search />
             <DynThemeSwitcher />
+            {scroll?.top}
           </Stack>
         </Stack>
       </Container>
-    </header>
+    </m.header>
   );
 };
