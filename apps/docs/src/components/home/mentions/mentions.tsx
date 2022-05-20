@@ -1,11 +1,11 @@
 import { Skeleton, Stack, Title } from '@wonderflow/react-components';
 import clsx from 'clsx';
 import dynamic from 'next/dynamic';
-import mentions from 'src/data/mentions';
 
 import { Carousel } from '@/components/shared/carousel';
 import { MentionCardProps } from '@/components/shared/mention-card';
 import { Section } from '@/components/shared/section';
+import mentions from '@/data/mentions';
 
 import styles from './mentions.module.css';
 
