@@ -35,42 +35,44 @@ export const Header: FCClass<HeaderProps> = ({
   ...otherProps
 }) => {
   const { matches } = useResponsiveContext();
-  const scroll = useScroll(document, val => val.top > 0 && val.top < 200);
+  const scroll = useScroll(document, val => val.top >= 0 && val.top < 600);
 
   return (
     <m.header
       layout
       data-header-fixed={fixed}
       className={clsx(styles.Header, className)}
+      style={{ '--blur': `${Math.min(Math.max(scroll?.top ?? 0, 0), 24)}px` }}
       {...otherProps}
     >
-      <Container dimension="large">
-        <Stack
-          fill={false}
-          direction="row"
-          hAlign="space-between"
-          vAlign="center"
-          vPadding={16}
-          columnGap={24}
-        >
-          <Link href="/"><a className={styles.LogoLink}><Logo /></a></Link>
-          {matches.medium && <MainNav />}
-          <Stack direction="row" vAlign="center" fill={false} columnGap={8}>
-            {!matches.medium && (
-            <Popover trigger={<IconButton icon="bars" kind="flat" iconPosition="right" aria-label="Show main menu" />}>
-              <Elevator resting={2}>
-                <Card bordered padding={8}>
-                  <MainNav direction="column" />
-                </Card>
-              </Elevator>
-            </Popover>
-            )}
-            <Search />
-            <DynThemeSwitcher />
-            {scroll?.top}
+      <div className={styles.BgContainer} style={{ '--bg-opacity': `${Math.min(Math.max(scroll?.top ?? 0, 0), 100)}%` }}>
+        <Container dimension="large">
+          <Stack
+            fill={false}
+            direction="row"
+            hAlign="space-between"
+            vAlign="center"
+            vPadding={16}
+            columnGap={24}
+          >
+            <Link href="/"><a className={styles.LogoLink}><Logo /></a></Link>
+            <Stack direction="row" vAlign="center" fill={false} columnGap={8}>
+              {matches.medium && <MainNav />}
+              {!matches.medium && (
+                <Popover trigger={<IconButton icon="bars" kind="flat" iconPosition="right" aria-label="Show main menu" />}>
+                  <Elevator resting={2}>
+                    <Card bordered padding={8}>
+                      <MainNav direction="column" />
+                    </Card>
+                  </Elevator>
+                </Popover>
+              )}
+              <Search />
+              <DynThemeSwitcher />
+            </Stack>
           </Stack>
-        </Stack>
-      </Container>
+        </Container>
+      </div>
     </m.header>
   );
 };
