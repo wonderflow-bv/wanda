@@ -5,7 +5,7 @@ import { BaseLayout } from '@/components/layouts/base-layout';
 import { HeaderProps } from '@/components/shared/header';
 
 export interface IPropsBlankLayout {
-  fixedHeader?: boolean;
+  headerPosition?: HeaderProps['position'];
 }
 
 const DynHeader = dynamic<HeaderProps>(
@@ -17,10 +17,10 @@ const DynHeader = dynamic<HeaderProps>(
 
 export const BlankLayout: FCChildren<IPropsBlankLayout> = ({
   children,
-  fixedHeader,
+  headerPosition,
 }) => (
   <BaseLayout>
-    <DynHeader fixed={fixedHeader} />
+    <DynHeader position={headerPosition} />
     <main>{children}</main>
   </BaseLayout>
 );
