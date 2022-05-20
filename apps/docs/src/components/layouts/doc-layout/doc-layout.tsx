@@ -15,7 +15,7 @@ const DynHeader = dynamic<HeaderProps>(
 
 export const DocLayout: FCChildren<IPropsDocLayout> = ({ children }) => (
   <BaseLayout>
-    <DynHeader />
+    <DynHeader position="sticky" />
     <div>SIDEBAR</div>
     <main>{children}</main>
   </BaseLayout>

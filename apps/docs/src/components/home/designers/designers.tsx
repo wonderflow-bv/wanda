@@ -3,18 +3,22 @@ import {
   Container, Stack, Tab, Text, Title,
 } from '@wonderflow/react-components';
 import clsx from 'clsx';
+import { AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import { useState } from 'react';
 
 import { GradientText } from '@/components/shared/gradient-text';
 import { Section } from '@/components/shared/section';
 import { useResponsiveContext } from '@/context/responsive';
 
 import styles from './designers.module.css';
+import { Foundation } from './foundation';
 
 export const Designers: FCClass = ({
   className,
 }) => {
   const { matches } = useResponsiveContext();
+  const [activeTab, setActiveTab] = useState('foundation');
 
   return (
     <Section className={clsx(styles.Designers, className)} minHeight={!matches.medium ? '60vh' : '72vh'} vPadding={192}>
@@ -27,7 +31,7 @@ export const Designers: FCClass = ({
               <Title as="h2" level="2" maxWidth="16ch">Everything you need. When you need it. </Title>
             </Stack>
 
-            <Tab className={styles.Tab} defaultValue="foundation">
+            <Tab className={styles.Tab} defaultValue="foundation" onValueChange={setActiveTab}>
               <Tab.Panel label="Foundation" icon={matches.large ? 'layer-group' : undefined} value="foundation">
                 <Stack rowGap={32} vPadding={56} hAlign="start">
                   <Text size={22} dimmed={6}>
@@ -41,14 +45,34 @@ export const Designers: FCClass = ({
               </Tab.Panel>
 
               <Tab.Panel label="Icons" icon={matches.large ? 'grip-vertical' : undefined} value="icons">
-                ciao
+                <Stack rowGap={32} vPadding={56} hAlign="start">
+                  <Text size={22} dimmed={6}>
+                    Colors, typography, iconography, themes, and much more,
+                    everything a designer needs, Wanda provides it.
+                  </Text>
+                  <Link href="/design/foundation/colors" passHref>
+                    <Button as="a" kind="secondary" dimension="big">Read More</Button>
+                  </Link>
+                </Stack>
               </Tab.Panel>
 
               <Tab.Panel label="Motions" icon={matches.large ? 'signal-stream' : undefined} value="motions">
-                ciao
+                <Stack rowGap={32} vPadding={56} hAlign="start">
+                  <Text size={22} dimmed={6}>
+                    Colors, typography, iconography, themes, and much more,
+                    everything a designer needs, Wanda provides it.
+                  </Text>
+                  <Link href="/design/foundation/colors" passHref>
+                    <Button as="a" kind="secondary" dimension="big">Read More</Button>
+                  </Link>
+                </Stack>
               </Tab.Panel>
-
             </Tab>
+          </Stack>
+          <Stack className={styles.Media} hAlign="center" vAlign="start" fill={false}>
+            <AnimatePresence exitBeforeEnter>
+              {activeTab === 'foundation' && <Foundation />}
+            </AnimatePresence>
           </Stack>
         </Stack>
       </Container>

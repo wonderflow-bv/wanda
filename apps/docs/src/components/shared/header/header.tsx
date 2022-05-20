@@ -18,7 +18,7 @@ import { useResponsiveContext } from '@/context/responsive';
 import styles from './header.module.css';
 
 export type HeaderProps = {
-  fixed?: boolean;
+  position?: 'fixed' | 'absolute' | 'sticky';
 }
 
 const DynThemeSwitcher = dynamic<Record<string, any>>(
@@ -31,7 +31,7 @@ const DynThemeSwitcher = dynamic<Record<string, any>>(
 
 export const Header: FCClass<HeaderProps> = ({
   className,
-  fixed,
+  position,
   ...otherProps
 }) => {
   const { matches } = useResponsiveContext();
@@ -40,7 +40,7 @@ export const Header: FCClass<HeaderProps> = ({
   return (
     <m.header
       layout
-      data-header-fixed={fixed}
+      data-header-position={position}
       className={clsx(styles.Header, className)}
       style={{ '--blur': `${Math.min(Math.max(scroll?.top ?? 0, 0), 24)}px` }}
       {...otherProps}
