@@ -1,3 +1,18 @@
+@import '@wonderflow/react-components/core/utils/vibrancy.css';
+
+.Header {
+
+  /* @mixin vibrancy; */
+
+  &[data-header-fixed='true'] {
+    position: fixed;
+    inline-size: 100%;
+    z-index: 3;
+    backdrop-filter: blur(var(--blur));
+  }
+}
+
+
 .LogoLink {
   background: none;
 }

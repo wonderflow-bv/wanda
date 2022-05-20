@@ -20,6 +20,6 @@ export default Home;
 export const getStaticProps = getPageStaticProps({
   layout: 'blank',
   layoutProps: {
-    absoluteHeader: true,
+    fixedHeader: true,
   },
 });

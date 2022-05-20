@@ -17,6 +17,7 @@
     "@next/next/no-img-element": "off",
     "import/no-extraneous-dependencies": "off",
     "@next/next/no-html-link-for-pages": ["error", "apps/docs/"],
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "jsx-a11y/anchor-is-valid": "off"
   }
 }

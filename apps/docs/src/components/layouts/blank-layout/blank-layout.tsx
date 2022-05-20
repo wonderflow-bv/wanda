@@ -1,20 +1,26 @@
-import clsx from 'clsx';
+
+import dynamic from 'next/dynamic';
 
 import { BaseLayout } from '@/components/layouts/base-layout';
-import { Header } from '@/components/shared/header';
-
-import styles from './blank-layout.module.css';
+import { HeaderProps } from '@/components/shared/header';
 
 export interface IPropsBlankLayout {
-  absoluteHeader?: boolean;
+  fixedHeader?: boolean;
 }
+
+const DynHeader = dynamic<HeaderProps>(
+  async () => import('@/components/shared/header').then(mod => mod.Header),
+  {
+    ssr: false,
+  },
+);
 
 export const BlankLayout: FCChildren<IPropsBlankLayout> = ({
   children,
-  absoluteHeader,
+  fixedHeader,
 }) => (
   <BaseLayout>
-    <Header className={clsx(absoluteHeader && styles.Header)} />
+    <DynHeader fixed={fixedHeader} />
     <main>{children}</main>
   </BaseLayout>
 );
