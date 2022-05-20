@@ -20,6 +20,7 @@ const Home: NextPage = () => (
       <Carousel>
         {mentions.map(m => (
           <MentionCard
+            key={m.name}
             image={m.image}
             name={m.name}
             handle={m.handle}
