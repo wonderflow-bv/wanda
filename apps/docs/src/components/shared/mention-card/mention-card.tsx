@@ -1,6 +1,6 @@
 import { Avatar, Card, Text } from '@wonderflow/react-components';
 
-type MentionCardProps = {
+export type MentionCardProps = {
   image?: string;
   handle?: string;
   name: string;
@@ -26,7 +26,7 @@ export const MentionCard: FCClass<MentionCardProps> = ({
     )}
     {...otherProps}
   >
-    <Text size={16} weight="bold"><b>{name}</b></Text>
+    <Text color="var(--global-vibrancy-foreground)" size={16} weight="bold"><strong>{name}</strong></Text>
     <Text lineHeight="none" size={14} dimmed={5}>
       @
       {handle}

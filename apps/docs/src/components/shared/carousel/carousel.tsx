@@ -15,7 +15,12 @@ export const Carousel: FCChildrenClass<CarouselProps> = ({
   const { matches } = useResponsiveContext();
 
   return (
-    <Container className={styles.Carousel} data-carousel-fade={matches.extraLarge} dimension={matches.extraLarge ? 'large' : 'full'} padding={!matches.extraLarge ? false : undefined}>
+    <Container
+      className={styles.Carousel}
+      data-carousel-fade={matches.extraLarge}
+      dimension={matches.extraLarge ? 'large' : 'full'}
+      padding={!matches.extraLarge ? false : undefined}
+    >
       <Marquee gradient={false} className={styles.Slider} {...otherProps}>
         {children}
       </Marquee>
