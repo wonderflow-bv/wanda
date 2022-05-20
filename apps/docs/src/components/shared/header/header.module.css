@@ -1,9 +1,4 @@
-@import '@wonderflow/react-components/core/utils/vibrancy.css';
-
 .Header {
-
-  /* @mixin vibrancy; */
-
   &[data-header-fixed='true'] {
     position: fixed;
     inline-size: 100%;
@@ -12,6 +7,18 @@
   }
 }
 
+.BgContainer {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--global-vibrancy-background-soft);
+    opacity: var(--bg-opacity, 100%);
+    z-index: -1;
+  }
+}
 
 .LogoLink {
   background: none;

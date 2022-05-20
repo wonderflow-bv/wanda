@@ -4,7 +4,7 @@
 
   /* Common props */
   --docsearch-primary-color: var(--dimmed-2);
-  --docsearch-text-color: var(--global-foreground);
+  --docsearch-text-color: var(--global-vibrancy-foreground);
   --docsearch-spacing: 16px;
   --docsearch-icon-stroke-width: 1.4;
   --docsearch-highlight-color: var(--global-vibrancy-foreground);
