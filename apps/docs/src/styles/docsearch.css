@@ -9,7 +9,7 @@
   --docsearch-icon-stroke-width: 1.4;
   --docsearch-highlight-color: var(--global-vibrancy-foreground);
   --docsearch-muted-color: var(--dimmed-7);
-  --docsearch-container-background: hsl(0deg 0% 0% / 30%);
+  --docsearch-container-background: hsl(0deg 0% 0% / 70%);
   --docsearch-logo-color: var(--dimmed-4);
 
   /* Modal props */

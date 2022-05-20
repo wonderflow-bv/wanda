@@ -44,7 +44,7 @@ export const MainNav: FCClass<MainNavProps> = ({
             className={styles.Link}
             aria-current={includesPath(item.url) ? 'page' : undefined}
           >
-            {includesPath(item.url) && <m.span initial={{ scale: 1.4 }} animate={{ scale: 1 }} layoutId="mainNav" className={styles.Highlight} />}
+            {includesPath(item.url) && <m.span layoutId="mainNav" className={styles.Highlight} />}
             {item.label}
           </a>
         </Link>
