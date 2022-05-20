@@ -8,7 +8,7 @@
 
 .Content {
 
-  @media (--from-medium) {
+  @media (--from-large) {
     max-width: 50%;
   }
 }
@@ -25,5 +25,12 @@
     width: 100vw;
     right: 100%;
     background: var(--dimmed-1);
+  }
+}
+
+.Media {
+
+  @media (--from-large) {
+    width: 47%;
   }
 }

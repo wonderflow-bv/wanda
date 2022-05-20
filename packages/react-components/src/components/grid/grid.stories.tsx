@@ -1,5 +1,6 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Grid } from './grid'
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+
+import { Grid } from './grid';
 
 const story: ComponentMeta<typeof Grid> = {
   title: 'Layouts/Grid',
@@ -7,12 +8,12 @@ const story: ComponentMeta<typeof Grid> = {
   args: {
   },
   argTypes: {
-  }
-}
+  },
+};
 
-export default story
+export default story;
 
-const Template: ComponentStory<typeof Grid> = (args) => (
+const Template: ComponentStory<typeof Grid> = args => (
   <Grid {...args}>
     <Grid.Item style={{ background: 'var(--dimmed-2)', padding: 24 }}>1</Grid.Item>
     <Grid.Item style={{ background: 'var(--dimmed-2)', padding: 24 }}>2</Grid.Item>
@@ -40,6 +41,6 @@ const Template: ComponentStory<typeof Grid> = (args) => (
     <Grid.Item style={{ background: 'var(--dimmed-2)', padding: 24 }}>19</Grid.Item>
     <Grid.Item style={{ background: 'var(--dimmed-2)', padding: 24 }}>20</Grid.Item>
   </Grid>
-)
+);
 
-export const Default = Template.bind({})
+export const Default = Template.bind({});

@@ -1,16 +1,31 @@
 .Header {
-  &[data-header-fixed='true'] {
+  &[data-header-position='fixed'] {
     position: fixed;
     inline-size: 100%;
     z-index: 3;
     backdrop-filter: blur(var(--blur));
+  }
+
+  &[data-header-position='sticky'] {
+    position: sticky;
+    inline-size: 100%;
+    z-index: 3;
+    top: 0;
+    backdrop-filter: blur(var(--blur));
+  }
+
+  &[data-header-position='absolute'] {
+    position: absolute;
+    inline-size: 100%;
+    z-index: 3;
   }
 }
 
 .BgContainer {
   position: relative;
 
-  &::before {
+  @nest .Header[data-header-position='sticky'] &::before,
+  .Header[data-header-position='fixed'] &::before {
     content: '';
     position: absolute;
     inset: 0;
