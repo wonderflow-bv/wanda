@@ -1,0 +1,1 @@
+export { Foundation } from './foundation';
