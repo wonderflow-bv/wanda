@@ -41,7 +41,7 @@ export const Foundation: FCClass = ({
       <Grid.Item>
         <Stack rowGap={16} columnGap={48}>
           {[...Array(5)].map((_, i) => (
-            <Stack direction="row" hAlign="start" vAlign="center" columnGap={8} fill={false} inline>
+            <Stack key={tkns.color.indigo[`${i + 1}0`]} direction="row" hAlign="start" vAlign="center" columnGap={8} fill={false} inline>
               <span style={{
                 borderRadius: '100%', background: `hsl(${tkns.color.indigo[`${i + 1}0`]})`, width: 24, height: 24,
               }}
@@ -57,7 +57,7 @@ export const Foundation: FCClass = ({
       <Grid.Item>
         <Stack rowGap={16}>
           {[...Array(5)].map((_, i) => (
-            <Stack direction="row" hAlign="start" vAlign="center" columnGap={8} fill={false} inline>
+            <Stack key={tkns.color.mint[`${i + 1}0`]} direction="row" hAlign="start" vAlign="center" columnGap={8} fill={false} inline>
               <span style={{
                 borderRadius: '100%', background: `hsl(${tkns.color.mint[`${i + 1}0`]})`, width: 24, height: 24,
               }}
@@ -73,7 +73,7 @@ export const Foundation: FCClass = ({
       <Grid.Item>
         <Stack rowGap={16} columnGap={48}>
           {[...Array(5)].map((_, i) => (
-            <Stack direction="row" hAlign="start" vAlign="center" columnGap={8} fill={false} inline>
+            <Stack key={tkns.color.yellow[`${i + 1}0`]} direction="row" hAlign="start" vAlign="center" columnGap={8} fill={false} inline>
               <span style={{
                 borderRadius: '100%', background: `hsl(${tkns.color.yellow[`${i + 1}0`]})`, width: 24, height: 24,
               }}
@@ -89,7 +89,7 @@ export const Foundation: FCClass = ({
       <Grid.Item>
         <Stack rowGap={16}>
           {[...Array(5)].map((_, i) => (
-            <Stack direction="row" hAlign="start" vAlign="center" columnGap={8} fill={false} inline>
+            <Stack key={tkns.color.magenta[`${i + 1}0`]} direction="row" hAlign="start" vAlign="center" columnGap={8} fill={false} inline>
               <span style={{
                 borderRadius: '100%', background: `hsl(${tkns.color.magenta[`${i + 1}0`]})`, width: 24, height: 24,
               }}
