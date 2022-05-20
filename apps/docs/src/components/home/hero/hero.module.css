@@ -15,7 +15,7 @@
     inset: 0;
     z-index: -1;
     pointer-events: none;
-    mask-image: linear-gradient(226.44deg, #000 0%, rgb(0 0 0 / 0%) 77.08%);
+    mask-image: linear-gradient(0.54turn, #000 0%, rgb(0 0 0 / 0%) 77.08%);
     background-image:
       radial-gradient(
         var(--dots-color) var(--computed-dot-size),
