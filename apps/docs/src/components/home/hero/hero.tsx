@@ -22,7 +22,7 @@ export const Hero: FCClass = ({
 }) => {
   const { matches } = useResponsiveContext();
   const { scrollYProgress } = useViewportScroll();
-  const xInput = [0, 0.6];
+  const xInput = [0, 1];
   const background = useTransform(scrollYProgress, xInput, [
     `radial-gradient(circle at 30% -20%, rgba(44, 191, 111, 0.08) 0%, rgba(44, 191, 111, 0) 30%),
     radial-gradient(circle at 100% 0%, rgba(255, 235, 168, 0.14) 0%, rgba(255, 235, 168, 0) 40%),
@@ -52,7 +52,7 @@ export const Hero: FCClass = ({
           <Title maxWidth="20ch" textAlign="center" as="h1" level={matches.extraLarge ? '1' : '2'}>
             Full-featured
             {' '}
-            <GradientText>design sytem</GradientText>
+            <GradientText>design system</GradientText>
             {' '}
             for digital experiences
           </Title>
