@@ -13,12 +13,13 @@ import { useResponsiveContext } from '@/context/responsive';
 
 import styles from './designers.module.css';
 import { Foundation } from './foundation';
+import { Icons } from './icons';
 
 export const Designers: FCClass = ({
   className,
 }) => {
   const { matches } = useResponsiveContext();
-  const [activeTab, setActiveTab] = useState('foundation');
+  const [activeTab, setActiveTab] = useState('icons');
 
   return (
     <Section className={clsx(styles.Designers, className)} minHeight={!matches.medium ? '60vh' : '72vh'} vPadding={192}>
@@ -47,8 +48,8 @@ export const Designers: FCClass = ({
               <Tab.Panel label="Icons" icon={matches.large ? 'grip-vertical' : undefined} value="icons">
                 <Stack rowGap={32} vPadding={56} hAlign="start">
                   <Text size={22} dimmed={6}>
-                    Colors, typography, iconography, themes, and much more,
-                    everything a designer needs, Wanda provides it.
+                    Wanda offers over 114 ready-to-use SVG icons and three solid,
+                    outline, and duotone styles for over 342 icons.
                   </Text>
                   <Link href="/design/foundation/colors" passHref>
                     <Button as="a" kind="secondary" dimension="big">Read More</Button>
@@ -72,6 +73,7 @@ export const Designers: FCClass = ({
           <Stack className={styles.Media} hAlign="center" vAlign="start" fill={false}>
             <AnimatePresence exitBeforeEnter>
               {activeTab === 'foundation' && <Foundation />}
+              {activeTab === 'icons' && <Icons />}
             </AnimatePresence>
           </Stack>
         </Stack>
