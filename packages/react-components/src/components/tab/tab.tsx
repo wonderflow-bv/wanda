@@ -45,10 +45,11 @@ export const Tab = ({
   children,
   onValueChange,
   defaultValue,
+  value,
   loop,
   ...otherProps
 }: TabProps) => {
-  const [activeItem, setActiveItem] = useState<string>(defaultValue ?? '');
+  const [activeItem, setActiveItem] = useState<string>(defaultValue ?? value ?? '');
   const uid = useUIDSeed();
   const handleOnVlaueChange = useCallback(
     (value: string) => {
@@ -63,6 +64,7 @@ export const Tab = ({
       defaultValue={defaultValue}
       onValueChange={handleOnVlaueChange}
       className={className}
+      value={value}
       {...otherProps}
     >
       <LazyMotion features={domMax} strict>
@@ -76,7 +78,7 @@ export const Tab = ({
             >
               <Button kind="flat" dimension="big" icon={child.props.icon}>
                 {child.props.label}
-                {(child.props.value === activeItem) && 'active' && (
+                {(child.props.value === activeItem) && (
                   <m.span className={styles.Highlight} layoutId={uid('tab-highlight')} />
                 )}
               </Button>
