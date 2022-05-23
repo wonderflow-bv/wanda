@@ -19,7 +19,7 @@ export const Designers: FCClass = ({
   className,
 }) => {
   const { matches } = useResponsiveContext();
-  const [activeTab, setActiveTab] = useState('icons');
+  const [activeTab, setActiveTab] = useState('foundation');
 
   return (
     <Section className={clsx(styles.Designers, className)} minHeight={!matches.medium ? '60vh' : '72vh'} vPadding={192}>

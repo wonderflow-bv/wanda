@@ -3,7 +3,7 @@ import {
   Grid, Icon, IconProps, Stack, Text,
 } from '@wonderflow/react-components';
 import tkns from '@wonderflow/tokens/platforms/web/tokens.json';
-import { m, motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { FC } from 'react';
 
 import styles from './foundation.module.css';
@@ -13,21 +13,25 @@ const ICONS: IconNames[] = ['house', 'lock', 'crown', 'message', 'moon'];
 
 const COLOR_ANIMATION = {
   hidden: {
-    x: 70,
-    y: 20,
+    x: 100,
     opacity: 0,
     transition: {
-      duration: 0.1,
+      type: 'spring',
+      stiffness: 300,
+      damping: 20,
     },
   },
   visible: {
-    y: 0,
+    x: 70,
     opacity: 1,
     transition: {
       duration: 0.5,
       delayChildren: 0.1,
       staggerChildren: 0.05,
       staggerDirection: 1,
+      type: 'spring',
+      stiffness: 300,
+      damping: 20,
     },
   },
 };
@@ -37,6 +41,9 @@ const ICONS_ANIMATION = {
     opacity: 0,
     transition: {
       duration: 0.1,
+      type: 'spring',
+      stiffness: 300,
+      damping: 20,
     },
   },
   visible: {
@@ -45,10 +52,12 @@ const ICONS_ANIMATION = {
     opacity: 1,
     transition: {
       delay: 1,
-      duration: 0.5,
       delayChildren: 0.05,
       staggerChildren: 0.05,
       staggerDirection: 1,
+      type: 'spring',
+      stiffness: 300,
+      damping: 20,
     },
   },
 };
@@ -84,7 +93,7 @@ const ListItem: FC<ListItemProps> = ({
   iconWeight,
 }) => (
   <Stack
-    as={motion.div}
+    as={m.div}
     variants={ITEM_ANIMATION}
     key={color}
     direction="row"

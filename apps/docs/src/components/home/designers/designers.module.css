@@ -1,6 +1,7 @@
 @import '@wonderflow/react-components/core/utils/media.css';
 
 .Designers {
+  overflow: hidden;
   background:
     radial-gradient(100vmin 100vmin at 60.59% 100%, rgb(104 210 217 / 8%) 0%, rgb(104 210 217 / 0%) 100%),
     radial-gradient(100vmin 100vmin at 79.05% 150%, rgb(123 97 255 / 18%) 0%, rgb(123 97 255 / 0%) 100%);
