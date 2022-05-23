@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { forwardRef } from 'react';
+import { forwardRef, Ref } from 'react';
 
 import { Icon, IconProps, Stack } from '@/components';
 
@@ -24,7 +24,7 @@ export type ChipProps = {
   onDismissClick?: () => void;
 }
 
-export const Chip = forwardRef<HTMLSpanElement, PropsWithClass<ChipProps>>(({
+export const Chip: FCChildrenClass<ChipProps> = forwardRef(({
   children,
   className,
   dimension = 'regular',
@@ -32,7 +32,7 @@ export const Chip = forwardRef<HTMLSpanElement, PropsWithClass<ChipProps>>(({
   interactive,
   onDismissClick,
   ...otherProps
-}, forwardedRef) => {
+}, forwardedRef: Ref<HTMLSpanElement>) => {
   const properties = {
     small: {
       iconSize: 12,
