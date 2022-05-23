@@ -43,10 +43,14 @@ export const Foundation: FCClass = ({
           {[...Array(5)].map((_, i) => (
             <Stack key={tkns.color.indigo[`${i + 1}0`]} direction="row" hAlign="start" vAlign="center" columnGap={8} fill={false} inline>
               <span style={{
-                borderRadius: '100%', background: `hsl(${tkns.color.indigo[`${i + 1}0`]})`, width: 24, height: 24,
+                borderRadius: '100%',
+                flexShrink: 0,
+                background: `hsl(${tkns.color.indigo[`${i + 1}0`]})`,
+                width: 24,
+                height: 24,
               }}
               />
-              <Text weight="bold">
+              <Text weight="bold" size={16}>
                 indigo-
                 {`${i + 1}0`}
               </Text>
@@ -59,10 +63,14 @@ export const Foundation: FCClass = ({
           {[...Array(5)].map((_, i) => (
             <Stack key={tkns.color.mint[`${i + 1}0`]} direction="row" hAlign="start" vAlign="center" columnGap={8} fill={false} inline>
               <span style={{
-                borderRadius: '100%', background: `hsl(${tkns.color.mint[`${i + 1}0`]})`, width: 24, height: 24,
+                borderRadius: '100%',
+                flexShrink: 0,
+                background: `hsl(${tkns.color.mint[`${i + 1}0`]})`,
+                width: 24,
+                height: 24,
               }}
               />
-              <Text weight="bold">
+              <Text weight="bold" size={16}>
                 mint-
                 {`${i + 1}0`}
               </Text>
@@ -75,10 +83,14 @@ export const Foundation: FCClass = ({
           {[...Array(5)].map((_, i) => (
             <Stack key={tkns.color.yellow[`${i + 1}0`]} direction="row" hAlign="start" vAlign="center" columnGap={8} fill={false} inline>
               <span style={{
-                borderRadius: '100%', background: `hsl(${tkns.color.yellow[`${i + 1}0`]})`, width: 24, height: 24,
+                borderRadius: '100%',
+                flexShrink: 0,
+                background: `hsl(${tkns.color.yellow[`${i + 1}0`]})`,
+                width: 24,
+                height: 24,
               }}
               />
-              <Text weight="bold">
+              <Text weight="bold" size={16}>
                 yellow-
                 {`${i + 1}0`}
               </Text>
@@ -91,10 +103,14 @@ export const Foundation: FCClass = ({
           {[...Array(5)].map((_, i) => (
             <Stack key={tkns.color.magenta[`${i + 1}0`]} direction="row" hAlign="start" vAlign="center" columnGap={8} fill={false} inline>
               <span style={{
-                borderRadius: '100%', background: `hsl(${tkns.color.magenta[`${i + 1}0`]})`, width: 24, height: 24,
+                borderRadius: '100%',
+                flexShrink: 0,
+                background: `hsl(${tkns.color.magenta[`${i + 1}0`]})`,
+                width: 24,
+                height: 24,
               }}
               />
-              <Text weight="bold">
+              <Text weight="bold" size={16}>
                 magenta-
                 {`${i + 1}0`}
               </Text>
