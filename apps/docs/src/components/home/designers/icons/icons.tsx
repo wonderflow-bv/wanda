@@ -6,7 +6,7 @@ import { FC } from 'react';
 
 import styles from './icons.module.css';
 
-const ICONS = structure as IconNames[];
+const ICONS = [...structure, ...structure] as IconNames[];
 
 const GRID_ANIMATION = {
   hidden: {
@@ -61,8 +61,8 @@ export const Icons: FC = () => (
     direction="row"
     fill={false}
     wrap
-    rowGap={8}
-    columnGap={8}
+    rowGap={4}
+    columnGap={4}
   >
     {ICONS.map(icon => (
       <Stack
@@ -77,44 +77,10 @@ export const Icons: FC = () => (
         className={styles.Item}
         hAlign="center"
         vAlign="center"
+        hPadding={8}
+        vPadding={4}
       >
-        <Icon source={icon} fill="var(--highlight-mint-foreground)" dimension={18} weight="duotone" />
-      </Stack>
-    ))}
-
-    {ICONS.map(icon => (
-      <Stack
-        key={icon}
-        as={m.div}
-        transition={{
-          type: 'spring',
-          stiffness: 700,
-          damping: 20,
-        }}
-        variants={ITEM_ANIMATION}
-        className={styles.Item}
-        hAlign="center"
-        vAlign="center"
-      >
-        <Icon source={icon} fill="var(--highlight-magenta-foreground)" dimension={18} weight="duotone" />
-      </Stack>
-    ))}
-
-    {ICONS.map(icon => (
-      <Stack
-        key={icon}
-        as={m.div}
-        transition={{
-          type: 'spring',
-          stiffness: 700,
-          damping: 20,
-        }}
-        variants={ITEM_ANIMATION}
-        className={styles.Item}
-        hAlign="center"
-        vAlign="center"
-      >
-        <Icon source={icon} fill="var(--highlight-indigo-foreground)" dimension={18} weight="duotone" />
+        <Icon source={icon} dimension={18} weight="duotone" />
       </Stack>
     ))}
   </Stack>
