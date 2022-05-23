@@ -75,6 +75,9 @@ const ITEM_ANIMATION = {
     opacity: 1,
     transition: {
       duration: 0.2,
+      type: 'spring',
+      stiffness: 700,
+      damping: 20,
     },
   },
 };
