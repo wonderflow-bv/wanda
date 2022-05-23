@@ -27,7 +27,7 @@ export const MentionCard: FCClass<MentionCardProps> = ({
     {...otherProps}
   >
     <Text color="var(--global-vibrancy-foreground)" size={16} weight="bold"><strong>{name}</strong></Text>
-    <Text lineHeight="none" size={14} dimmed={6}>
+    <Text as="span" lineHeight="none" size={14} dimmed={6}>
       @
       {handle}
     </Text>
