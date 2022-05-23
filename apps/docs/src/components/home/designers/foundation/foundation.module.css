@@ -10,6 +10,10 @@
   width: 100%;
   max-width: 400px;
   background:
-    radial-gradient(circle at left top, rgb(104 210 217 / 8%) 0%, rgb(104 210 217 / 0%) 100%),
-    radial-gradient(circle at 80% 90%, rgb(123 97 255 / 10%) 0%, rgb(123 97 255 / 0%) 100%);
+    radial-gradient(circle at left top, rgb(104 210 217 / 4%) 0%, rgb(104 210 217 / 0%) 100%),
+    radial-gradient(circle at 80% 90%, rgb(123 97 255 / 6%) 0%, rgb(123 97 255 / 0%) 100%);
+
+  &:first-child {
+    position: absolute;
+  }
 }
