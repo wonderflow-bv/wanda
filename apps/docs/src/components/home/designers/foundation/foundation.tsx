@@ -3,7 +3,6 @@ import {
   Grid, Icon, IconProps, Stack, Text,
 } from '@wonderflow/react-components';
 import tkns from '@wonderflow/tokens/platforms/web/tokens.json';
-import clsx from 'clsx';
 import { m, motion } from 'framer-motion';
 import { FC } from 'react';
 
@@ -153,7 +152,7 @@ export const Foundation: FCClass = ({
       exit="hidden"
       whileInView="visible"
       viewport={{ once: true }}
-      className={clsx(styles.Card, className)}
+      className={styles.Card}
       {...otherProps}
     >
       <Grid columns={2} rows={2} colMinWidth="50%" rowGap={32}>
