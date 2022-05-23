@@ -12,7 +12,7 @@ export type MetaProps = {
   keywords?: string[];
 }
 
-export const Meta: React.FC<MetaProps> = ({
+export const Meta: FCChildren<MetaProps> = ({
   description = 'Wanda is Wonderflow\'s design system',
   title = 'Wanda Design System',
   siteName = 'Wanda Design System',

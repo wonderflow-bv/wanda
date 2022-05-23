@@ -1,0 +1,8 @@
+.Icons {
+  mask-image:
+    radial-gradient(
+      circle at center,
+      red,
+      rgb(0 0 0 / 20%) 90%
+    );
+}
