@@ -31,7 +31,7 @@ export const Designers: FCClass = ({
               <Title as="h2" level="2" maxWidth="16ch">Everything you need. When you need it. </Title>
             </Stack>
 
-            <Tab className={styles.Tab} defaultValue="foundation" onValueChange={setActiveTab}>
+            <Tab className={styles.Tab} defaultValue={activeTab} onValueChange={setActiveTab}>
               <Tab.Panel label="Foundation" icon={matches.large ? 'layer-group' : undefined} value="foundation">
                 <Stack rowGap={32} vPadding={56} hAlign="start">
                   <Text size={22} dimmed={6}>
