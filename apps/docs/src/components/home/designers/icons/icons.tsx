@@ -6,23 +6,21 @@ import { FC } from 'react';
 
 import styles from './icons.module.css';
 
-const ICONS = [...structure, ...structure] as IconNames[];
+const ICONS = [...structure, ...structure.slice(0, 90)] as IconNames[];
 
 const GRID_ANIMATION = {
   hidden: {
-    x: -30,
     opacity: 0,
     transition: {
       duration: 0.25,
     },
   },
   visible: {
-    x: 0,
     opacity: 1,
     transition: {
       duration: 0.5,
       delayChildren: 0.05,
-      staggerChildren: 0.01,
+      staggerChildren: 0.005,
       staggerDirection: 1,
     },
   },

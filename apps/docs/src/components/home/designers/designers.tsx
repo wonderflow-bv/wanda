@@ -24,7 +24,7 @@ export const Designers: FCClass = ({
   return (
     <Section className={clsx(styles.Designers, className)} minHeight={!matches.medium ? '60vh' : '72vh'} vPadding={192}>
       <Container dimension="large">
-        <Stack direction={matches.large ? 'row' : 'column'} columnGap={32} wrap>
+        <Stack direction={matches.medium ? 'row' : 'column'} columnGap={48}>
           <Stack rowGap={56} className={styles.Content}>
 
             <Stack rowGap={4}>
@@ -39,7 +39,7 @@ export const Designers: FCClass = ({
                     Colors, typography, iconography, themes, and much more,
                     everything a designer needs, Wanda provides it.
                   </Text>
-                  <Link href="/design/foundation/colors" passHref>
+                  <Link href="/documentation/design/foundation/colors" passHref>
                     <Button as="a" kind="secondary" dimension="big">Read More</Button>
                   </Link>
                 </Stack>
@@ -51,13 +51,13 @@ export const Designers: FCClass = ({
                     Wanda offers over 114 ready-to-use SVG icons and three solid,
                     outline, and duotone styles for over 342 icons.
                   </Text>
-                  <Link href="/design/foundation/colors" passHref>
+                  <Link href="/documentation/design/iconography" passHref>
                     <Button as="a" kind="secondary" dimension="big">Read More</Button>
                   </Link>
                 </Stack>
               </Tab.Panel>
 
-              <Tab.Panel label="Motions" icon={matches.large ? 'signal-stream' : undefined} value="motions">
+              <Tab.Panel label="Motion" icon={matches.large ? 'signal-stream' : undefined} value="motion">
                 <Stack rowGap={32} vPadding={56} hAlign="start">
                   <Text size={22} dimmed={6}>
                     Colors, typography, iconography, themes, and much more,
@@ -70,7 +70,7 @@ export const Designers: FCClass = ({
               </Tab.Panel>
             </Tab>
           </Stack>
-          <Stack className={styles.Media} hAlign="center" vAlign="start" fill={false}>
+          <Stack className={styles.Media} hAlign="center" vAlign="center" fill={false}>
             <AnimatePresence exitBeforeEnter>
               {activeTab === 'foundation' && <Foundation />}
               {activeTab === 'icons' && <Icons />}
