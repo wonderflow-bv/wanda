@@ -6,10 +6,13 @@ import { useResponsiveContext } from '@/context/responsive';
 
 import styles from './carousel.module.css';
 
-type CarouselProps = Record<string, unknown>
+type CarouselProps = {
+  speed?: number;
+}
 
 export const Carousel: FCChildrenClass<CarouselProps> = ({
   children,
+  speed,
   ...otherProps
 }) => {
   const { matches } = useResponsiveContext();
@@ -21,7 +24,7 @@ export const Carousel: FCChildrenClass<CarouselProps> = ({
       dimension={matches.extraLarge ? 'large' : 'full'}
       padding={!matches.extraLarge ? false : undefined}
     >
-      <Marquee gradient={false} className={styles.Slider} {...otherProps}>
+      <Marquee speed={speed} gradient={false} className={styles.Slider} {...otherProps}>
         {children}
       </Marquee>
     </Container>

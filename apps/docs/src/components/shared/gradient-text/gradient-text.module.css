@@ -15,6 +15,10 @@
   }
 
   &[data-gradient-text='indigo'] {
-    background-image: linear-gradient(91deg, #9a9adf 0%, #4e4bd2 100%);
+    background-image: linear-gradient(92deg, #9a9adf 0%, #4e4bd2 100%);
+  }
+
+  &[data-gradient-text='orange'] {
+    background-image: linear-gradient(92deg, #f5a957 0%, #e07452 104.37%);
   }
 }

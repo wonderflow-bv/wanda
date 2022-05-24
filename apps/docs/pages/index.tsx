@@ -10,6 +10,10 @@ const DynDesigners = dynamic<Record<string, any>>(
   async () => import('@/components/home/designers').then(mod => mod.Designers),
   { ssr: false },
 );
+const DynDevelopers = dynamic<Record<string, any>>(
+  async () => import('@/components/home/developers').then(mod => mod.Developers),
+  { ssr: false },
+);
 
 const Home: NextPage = () => (
   <>
@@ -17,6 +21,7 @@ const Home: NextPage = () => (
     <Hero />
     <Mentions />
     <DynDesigners />
+    <DynDevelopers />
   </>
 );
 

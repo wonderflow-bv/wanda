@@ -37,6 +37,7 @@
     "@wonderflow/react-components": "*",
     "@wonderflow/themes": "*",
     "ahooks": "3.3.12",
+    "bezier-easing-editor": "0.8.0",
     "clsx": "1.1.1",
     "framer-motion": "6.3.3",
     "next": "12.1.5",
