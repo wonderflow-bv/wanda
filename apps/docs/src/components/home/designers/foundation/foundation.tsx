@@ -11,6 +11,11 @@ import styles from './foundation.module.css';
 const COLORS = ['blue', 'violet', 'dipsy', 'red', 'indigo', 'mint', 'yellow', 'magenta'];
 const ICONS: IconNames[] = ['house', 'lock', 'crown', 'message', 'moon'];
 
+const cssEasingToArray = (cssEasing: string) => {
+  const [x1, y1, x2, y2] = cssEasing.replace(/[^0-9.,]+/g, '').split(',').map(i => parseFloat(i));
+  return [x1, y1, x2, y2];
+};
+
 const COLOR_ANIMATION = {
   hidden: {
     x: 100,
@@ -25,13 +30,11 @@ const COLOR_ANIMATION = {
     x: 70,
     opacity: 1,
     transition: {
-      duration: 0.5,
       delayChildren: 0.1,
-      staggerChildren: 0.05,
+      staggerChildren: 0.01,
       staggerDirection: 1,
       type: 'spring',
-      stiffness: 300,
-      damping: 20,
+      duration: 1.2,
     },
   },
 };
@@ -51,13 +54,12 @@ const ICONS_ANIMATION = {
     x: -30,
     opacity: 1,
     transition: {
-      delay: 1,
+      delay: 0.3,
       delayChildren: 0.05,
       staggerChildren: 0.05,
       staggerDirection: 1,
       type: 'spring',
-      stiffness: 300,
-      damping: 20,
+      duration: 1,
     },
   },
 };
@@ -75,9 +77,7 @@ const ITEM_ANIMATION = {
     opacity: 1,
     transition: {
       duration: 0.2,
-      type: 'spring',
-      stiffness: 700,
-      damping: 20,
+      ease: cssEasingToArray(tkns.easing.entrance),
     },
   },
 };
