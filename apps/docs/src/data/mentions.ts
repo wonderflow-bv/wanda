@@ -33,7 +33,7 @@ const mentions: MentionsType = [
     handle: 'backlight_dev',
   },
   {
-    image: 'https://pbs.twimg.com/profile_images/1494276590464872449/D_IvNUef_400x400.jpg',
+    image: 'https://pbs.twimg.com/profile_images/1528289955218333696/LpOlqtB4_400x400.jpg',
     name: 'Silvia Bormüller',
     handle: 'svorklab',
   },

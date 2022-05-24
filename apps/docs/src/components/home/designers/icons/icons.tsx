@@ -6,21 +6,25 @@ import { FC } from 'react';
 
 import styles from './icons.module.css';
 
-const ICONS = [...structure, ...structure.slice(0, 90)] as IconNames[];
+const ICONS = structure as IconNames[];
 
 const GRID_ANIMATION = {
   hidden: {
+    y: -10,
     opacity: 0,
     transition: {
       duration: 0.25,
     },
   },
   visible: {
+    y: 0,
     opacity: 1,
     transition: {
-      duration: 0.5,
-      delayChildren: 0.05,
-      staggerChildren: 0.005,
+      type: 'spring',
+      stiffness: 700,
+      damping: 20,
+      delayChildren: 0.03,
+      staggerChildren: 0.002,
       staggerDirection: 1,
     },
   },
@@ -29,16 +33,15 @@ const GRID_ANIMATION = {
 const ITEM_ANIMATION = {
   hidden: {
     y: 5,
-    opacity: 0,
+    scale: 0,
     transition: {
       duration: 0,
     },
   },
   visible: {
     y: 0,
-    opacity: 1,
+    scale: 1,
     transition: {
-      duration: 0.02,
       type: 'spring',
       stiffness: 700,
       damping: 20,
@@ -50,21 +53,19 @@ export const Icons: FC = () => (
   <Stack
     as={m.div}
     variants={GRID_ANIMATION}
+    className={styles.Icons}
     initial="hidden"
     exit="hidden"
     whileInView="visible"
     viewport={{ once: true }}
-    className={styles.Icons}
-    hPadding={32}
+    hPadding={16}
     direction="row"
     fill={false}
     wrap
-    rowGap={4}
-    columnGap={4}
   >
     {ICONS.map(icon => (
       <Stack
-        key={icon}
+        key={`${icon}-duo`}
         as={m.div}
         transition={{
           type: 'spring',
@@ -72,13 +73,30 @@ export const Icons: FC = () => (
           damping: 20,
         }}
         variants={ITEM_ANIMATION}
-        className={styles.Item}
         hAlign="center"
         vAlign="center"
         hPadding={8}
-        vPadding={4}
+        vPadding={8}
       >
         <Icon source={icon} dimension={18} weight="duotone" />
+      </Stack>
+    ))}
+    {ICONS.map(icon => (
+      <Stack
+        key={`${icon}-solid`}
+        as={m.div}
+        transition={{
+          type: 'spring',
+          stiffness: 700,
+          damping: 20,
+        }}
+        variants={ITEM_ANIMATION}
+        hAlign="center"
+        vAlign="center"
+        hPadding={8}
+        vPadding={8}
+      >
+        <Icon source={icon} dimension={18} weight="outline" />
       </Stack>
     ))}
   </Stack>
