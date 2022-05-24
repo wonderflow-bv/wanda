@@ -16,4 +16,8 @@
   &:first-child {
     position: absolute;
   }
+
+  @supports not (backdrop-filter: blur(0)) {
+    background-color: var(--dimmed-0);
+  }
 }
