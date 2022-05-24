@@ -136,6 +136,8 @@ export const Foundation: FCClass = ({
       whileInView="visible"
       viewport={{ once: true }}
       className={styles.Card}
+      hPadding={48}
+      vPadding={40}
       {...otherProps}
     >
       <Grid columns={2} rows={2} colMinWidth="50%" rowGap={32}>
@@ -165,6 +167,8 @@ export const Foundation: FCClass = ({
       whileInView="visible"
       viewport={{ once: true }}
       className={styles.Card}
+      hPadding={48}
+      vPadding={40}
       {...otherProps}
     >
       <Grid columns={2} rows={2} colMinWidth="50%" rowGap={32}>

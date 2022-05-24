@@ -5,13 +5,12 @@
   @mixin vibrancy;
 
   border: 1px solid var(--dimmed-0);
-  padding: token(--space-40) token(--space-48);
   border-radius: token(--radius-24);
-  width: 100%;
-  max-width: 400px;
   background:
     radial-gradient(circle at left top, rgb(104 210 217 / 4%) 0%, rgb(104 210 217 / 0%) 100%),
     radial-gradient(circle at 80% 90%, rgb(123 97 255 / 6%) 0%, rgb(123 97 255 / 0%) 100%);
+  width: 100%;
+  max-width: 400px;
 
   &:first-child {
     position: absolute;

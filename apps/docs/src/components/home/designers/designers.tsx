@@ -14,6 +14,7 @@ import { useResponsiveContext } from '@/context/responsive';
 import styles from './designers.module.css';
 import { Foundation } from './foundation';
 import { Icons } from './icons';
+import { Motion } from './motion';
 
 export const Designers: FCClass = ({
   className,
@@ -60,8 +61,8 @@ export const Designers: FCClass = ({
               <Tab.Panel label="Motion" icon={matches.large ? 'signal-stream' : undefined} value="motion">
                 <Stack rowGap={32} vPadding={56} hAlign="start">
                   <Text size={22} dimmed={6}>
-                    Colors, typography, iconography, themes, and much more,
-                    everything a designer needs, Wanda provides it.
+                    Motion is part of the life. Starting from cells.
+                    They bring life to your interfaces and provide a great feeling of control.
                   </Text>
                   <Link href="/design/foundation/colors" passHref>
                     <Button as="a" kind="secondary" dimension="big">Read More</Button>
@@ -70,10 +71,11 @@ export const Designers: FCClass = ({
               </Tab.Panel>
             </Tab>
           </Stack>
-          <Stack className={styles.Media} hAlign="center" vAlign="center" fill={false}>
+          <Stack className={styles.Media} hAlign="center" vAlign="center" fill={false} aria-hidden="true">
             <AnimatePresence exitBeforeEnter>
               {activeTab === 'foundation' && <Foundation />}
               {activeTab === 'icons' && <Icons />}
+              {activeTab === 'motion' && <Motion />}
             </AnimatePresence>
           </Stack>
         </Stack>

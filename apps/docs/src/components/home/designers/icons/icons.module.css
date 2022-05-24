@@ -7,9 +7,8 @@
   mask-size: 94%;
   mask-position: 8% -10%;
   inline-size: clamp(27.77rem, 100%, 33.33rem);
-}
-
-.Item {
-  background: var(--dimmed-1);
-  border-radius: token(--radius-8);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at left top, rgb(104 210 217 / 14%) 0%, rgb(104 210 217 / 0%) 100%),
+    radial-gradient(circle at 80% 90%, rgb(123 97 255 / 16%) 0%, rgb(123 97 255 / 0%) 100%);
 }
