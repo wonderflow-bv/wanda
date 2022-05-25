@@ -11,10 +11,8 @@ import { GradientText } from '@/components/shared/gradient-text';
 import { Section } from '@/components/shared/section';
 import { useResponsiveContext } from '@/context/responsive';
 
+import { Components } from './components';
 import styles from './developers.module.css';
-import { Foundation } from './foundation';
-import { Icons } from './icons';
-import { Motion } from './motion';
 
 export const Developers: FCClass = ({
   className,
@@ -25,7 +23,7 @@ export const Developers: FCClass = ({
   return (
     <Section className={clsx(styles.Developers, className)} minHeight={!matches.medium ? '60vh' : '72vh'} vPadding={192}>
       <Container dimension="large">
-        <Stack direction={matches.medium ? 'row-reverse' : 'column'} columnGap={48}>
+        <Stack direction={matches.medium ? 'row-reverse' : 'column'} columnGap={72}>
           <Stack rowGap={56} className={styles.Content}>
 
             <Stack rowGap={4}>
@@ -37,10 +35,9 @@ export const Developers: FCClass = ({
               <Tab.Panel label="Components" icon={matches.large ? 'grid' : undefined} value="components">
                 <Stack rowGap={32} vPadding={56} hAlign="start">
                   <Text size={22} dimmed={6}>
-                    Colors, typography, iconography, themes, and much more,
-                    everything a designer needs, Wanda provides it.
+                    A full set of highly customizable React components and styles ready to use inside applications.
                   </Text>
-                  <Link href="/documentation/design/foundation/colors" passHref>
+                  <Link href="/documentation/components/actions/button" passHref>
                     <Button as="a" kind="secondary" dimension="big">Read More</Button>
                   </Link>
                 </Stack>
@@ -73,9 +70,7 @@ export const Developers: FCClass = ({
           </Stack>
           <Stack className={styles.Media} hAlign="center" vAlign="center" fill={false} aria-hidden="true">
             <AnimatePresence exitBeforeEnter>
-              {activeTab === 'components' && <Foundation />}
-              {activeTab === 'design-tokens' && <Icons />}
-              {activeTab === 'themes' && <Motion />}
+              {activeTab === 'components' && <Components />}
             </AnimatePresence>
           </Stack>
         </Stack>

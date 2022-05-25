@@ -1,11 +1,12 @@
 @import '@wonderflow/react-components/core/utils/vibrancy.css';
 
 .Motion {
-  --dots-size: 2px;
-  --dots-gap: 24px;
-  --dots-color: var(--dimmed-6);
+  --dots-size: 1px;
+  --dots-gap: 8px;
+  --dots-color: var(--dimmed-2);
 
   position: relative;
+  contain: style;
 
   &::after {
     --computed-dot-size: calc(var(--dots-size) / 2);
@@ -18,7 +19,7 @@
     z-index: -1;
     pointer-events: none;
     transform: scale(2);
-    mask-image: radial-gradient(circle at center, #000 0%, rgb(0 0 0 / 0%) 77.08%);
+    mask-image: radial-gradient(circle at center, #000 50%, rgb(0 0 0 / 0%) 70%);
     background-image:
       radial-gradient(
         var(--dots-color) var(--computed-dot-size),
@@ -66,8 +67,9 @@
   object-fit: cover;
   transition: opacity 0.2s ease-in-out;
   mix-blend-mode: color-dodge;
-  filter: hue-rotate(283deg);
+  filter: hue-rotate(283deg) contrast(1.2);
   mask-image: radial-gradient(circle at center, #000 0%, rgb(0 0 0 / 0%) 60%);
+  animation: rotate 30s linear infinite both;
 }
 
 .Pulse {
@@ -117,5 +119,10 @@
 
   50% {
     transform: translateY(10%) rotateY(10deg);
+  }
+}
+@keyframes rotate {
+  to {
+    transform: rotate(1turn);
   }
 }
