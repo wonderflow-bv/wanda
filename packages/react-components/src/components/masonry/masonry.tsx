@@ -8,11 +8,16 @@ import MasonryLayout from 'react-masonry-css';
 
 import styles from './masonry.module.css';
 
-type ColumnsName = 'default' | 'extraSmall' | 'small' | 'medium' | 'large' | 'extraLarge';
+type Columns = {
+  default: number;
+  extraSmall?: number;
+  small?: number;
+  medium?: number;
+  large?: number;
+  extraLarge?: number;
+}
 
-type Columns = Record<ColumnsName, number>
-
-export type MasonryProps = PropsWithClass & {
+export type MasonryProps = {
   /**
    * Set the space between items. This is applied on both vertical
    * and horizontal axis.
@@ -39,7 +44,7 @@ export type MasonryProps = PropsWithClass & {
   columns?: number | Columns;
 }
 
-export const Masonry: FCChildren<MasonryProps> = ({
+export const Masonry: FCChildrenClass<MasonryProps> = ({
   className,
   children,
   columns = 3,

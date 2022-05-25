@@ -1,0 +1,189 @@
+/* stylelint-disable selector-pseudo-class-no-unknown */
+
+/* stylelint-disable selector-class-pattern */
+
+@import '@wonderflow/react-components/core/utils/media.css';
+
+:where(.Code) {
+  position: relative;
+  margin: token(--space-32) 0;
+  display: grid;
+
+  & code[class*='language-'],
+  & pre[class*='language-'] {
+    overflow: auto;
+    border-radius: token(--radius-8);
+    color: var(--global-foreground);
+    background: none;
+    font-family: token(--font-family-mono);
+    font-size: 1.1em;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+    tab-size: 4;
+    hyphens: none;
+  }
+
+  & *::selection {
+    background-color: var(--dimmed-3);
+    color: inherit;
+    text-shadow: none;
+  }
+
+  /* Code blocks */
+  & pre[class*='language-'] {
+    margin: 0;
+    overflow: auto;
+    border: 1px solid var(--dimmed-1);
+    padding: token(--space-24);
+
+    @nest [data-code-block-has-toolbar='true'] & {
+      padding-top: token(--space-48);
+    }
+  }
+
+  & code[class*='language-'] {
+    padding-left: 0;
+  }
+
+  & :not(pre) > code[class*='language-'],
+  & pre[class*='language-'] {
+    background: var(--code-bg);
+  }
+
+  /* Inline code */
+  & :not(pre) > code[class*='language-'] {
+    padding: 0.1em;
+    border-radius: 0.3em;
+    white-space: normal;
+  }
+
+  & :global {
+    & .token:is(.changed) {
+      color: var(--highlight-blue-foreground);
+      font-style: italic;
+    }
+
+    & .token:is(.deleted) {
+      color: var(--highlight-red-foreground);
+      background-color: var(--highlight-red-background);
+      font-style: italic;
+    }
+
+    & .token:is(.attr-name) {
+      color: var(--global-foreground);
+      font-style: italic;
+    }
+
+    & .token:is(.inserted) {
+      color: var(--highlight-green-foreground);
+      background-color: var(--highlight-green-background);
+      font-style: italic;
+    }
+
+    & .token:is(.comment, .block-comment, .prolog, .cdata) {
+      color: var(--dimmed-5);
+    }
+
+    & .token:is(.string, .attr-value, .regex, .variable, .url) {
+      color: var(--highlight-green-foreground);
+    }
+
+    & .token:is(.variable) {
+      color: var(--global-foreground);
+    }
+
+    & .token:is(.number, .symbol) {
+      color: var(--highlight-yellow-foreground);
+    }
+
+    & .token:is(.entity) {
+      color: var(--highlight-cyan-foreground);
+    }
+
+    & .token:is(.punctuation) {
+      color: var(--highlight-gray-foreground);
+    }
+
+    & .token:is(.operator) {
+      color: var(--highlight-purple-foreground);
+    }
+
+    & .token:is(.script-punctuation) {
+      color: var(--highlight-cyan-foreground);
+    }
+
+    & .token:is(.builtin, .char) {
+      color: var(--highlight-cyan-foreground);
+    }
+
+    & .token:is(.function) {
+      color: var(--highlight-yellow-foreground);
+    }
+
+    & .token:is(.function-name, .constant) {
+      color: var(--highlight-blue-foreground);
+    }
+
+    & .token:is(.selector, .doctype) {
+      color: var(--global-foreground);
+    }
+
+    & .token:is(.class-name) {
+      color: var(--highlight-cyan-foreground);
+    }
+
+    & .token:is(.tag) {
+      color: var(--highlight-green-foreground);
+    }
+
+    & .token:is(.namespace) {
+      color: var(--dimmed-8);
+    }
+
+    & .token:is(.boolean, .important) {
+      color: var(--highlight-purple-foreground);
+    }
+
+    & .token:is(.property) {
+      color: var(--highlight-cyan-foreground);
+    }
+
+    & .token:is(.keyword, .atrule) {
+      color: var(--highlight-blue-foreground);
+    }
+
+    & .token:is(.rule) {
+      color: var(--highlight-red-foreground);
+    }
+
+    & .token:is(.important, .bold) {
+      font-weight: bold;
+    }
+
+    & .token.italic {
+      font-style: italic;
+    }
+
+    & .token.entity {
+      cursor: help;
+    }
+  }
+
+  &[data-code-block-has-highlight='true'] code[class*='language-'] > *:not(:global(.refractor-marker)) {
+    opacity: 50%;
+    filter: saturate(0);
+  }
+}
+
+.Toolbar {
+  position: absolute;
+  top: token(--space-8);
+  left: 0;
+  right: 0;
+  padding: token(--space-8) token(--space-8) token(--space-8) token(--space-16);
+  border-radius: token(--radius-8) token(--radius-8) 0 0;
+}

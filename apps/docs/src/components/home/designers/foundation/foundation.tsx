@@ -43,7 +43,6 @@ const ICONS_ANIMATION = {
   hidden: {
     opacity: 0,
     transition: {
-      duration: 0.1,
       type: 'spring',
       stiffness: 300,
       damping: 20,

@@ -16,6 +16,7 @@ export const Section: FCChildrenClass<SectionProps> = ({
   const dynamicStyle: CSSProperties = {
     position,
     minHeight,
+    contain: 'style',
   };
 
   return (
