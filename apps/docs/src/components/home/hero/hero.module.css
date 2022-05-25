@@ -4,6 +4,7 @@
   --dots-color: var(--dimmed-3);
 
   position: relative;
+  contain: style;
   z-index: 0;
   background: var(--dimmed-0);
   mask-image: radial-gradient(45rem 7% at center bottom, rgb(0 0 0 / 80%), red);

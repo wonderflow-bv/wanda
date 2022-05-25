@@ -64,7 +64,7 @@ export const Designers: FCClass = ({
                     Motion is part of the life. Starting from cells.
                     They bring life to your interfaces and provide a great feeling of control.
                   </Text>
-                  <Link href="/design/foundation/colors" passHref>
+                  <Link href="/documentation/design/motion/principles" passHref>
                     <Button as="a" kind="secondary" dimension="big">Read More</Button>
                   </Link>
                 </Stack>
