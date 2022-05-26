@@ -7,12 +7,12 @@ import { AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { useState } from 'react';
 
-import { Code } from '@/components/shared/code';
 import { GradientText } from '@/components/shared/gradient-text';
 import { Section } from '@/components/shared/section';
 import { useResponsiveContext } from '@/context/responsive';
 
 import { Components } from './components';
+import { DesignTokens } from './design-tokens';
 import styles from './developers.module.css';
 
 export const Developers: FCClass = ({
@@ -69,18 +69,10 @@ export const Developers: FCClass = ({
               </Tab.Panel>
             </Tab>
           </Stack>
-          <Stack className={styles.Media} hAlign="center" vAlign="center" fill={false} aria-hidden="true">
+          <Stack direction="row" className={styles.Media} hAlign="center" vAlign="center" aria-hidden="true">
             <AnimatePresence exitBeforeEnter>
               {activeTab === 'components' && <Components />}
-              {activeTab === 'design-tokens' && (
-              <Code language="html">
-                {`
-                  <div>
-                    ciao
-                  </div>
-                `}
-              </Code>
-              )}
+              {activeTab === 'design-tokens' && <DesignTokens />}
             </AnimatePresence>
           </Stack>
         </Stack>

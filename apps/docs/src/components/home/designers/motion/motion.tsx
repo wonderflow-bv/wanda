@@ -24,11 +24,12 @@ export const Motion = () => {
             type: 'spring',
             stiffness: 600,
             damping: 30,
+            delay: 0.2,
           },
         }}
       >
         <m.span
-          initial={{ scale: 0.8, opacity: 0.8 }}
+          initial={{ scale: 0.95, opacity: 0.8 }}
           animate={{ scale: 2, opacity: 0, filter: 'blur(30px)' }}
           transition={{
             duration: 1,
