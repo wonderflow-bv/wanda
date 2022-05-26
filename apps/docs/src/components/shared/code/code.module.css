@@ -6,7 +6,6 @@
 
 :where(.Code) {
   position: relative;
-  margin: token(--space-32) 0;
   display: grid;
 
   & code[class*='language-'],
