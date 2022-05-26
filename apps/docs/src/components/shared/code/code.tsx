@@ -1,12 +1,14 @@
 /* eslint-disable react/no-array-index-key */
-import { Button, Stack, Text } from '@wonderflow/react-components';
+import { outdent } from '@mvasilkov/outdent';
+import {
+  IconButton, Stack, Text,
+} from '@wonderflow/react-components';
 import clsx from 'clsx';
-// import outdent from 'outdent';
 import rangeParser from 'parse-numeric-range';
 import React, {
   CSSProperties, ReactNode, useCallback,
 } from 'react';
-import Refractor from 'react-refractor';
+import Refractor, { Props } from 'react-refractor';
 import bash from 'refractor/lang/bash';
 import css from 'refractor/lang/css';
 import diff from 'refractor/lang/diff';
@@ -31,63 +33,67 @@ Refractor.registerLanguage(diff);
 Refractor.registerLanguage(html);
 
 type CodeProps = {
-  children: string;
-  highlight?: string;
+  source: string;
+  lines?: string;
+  markers?: Props['markers'];
   hideCopy?: boolean;
   language?: string;
-  showLanguage?: boolean;
   actions?: ReactNode;
-  background?: string;
-} & PropsWithClass
+  maxHeight?: string;
+}
 
-export const Code: FCChildrenClass<CodeProps> = ({
-  children,
-  highlight,
+export const Code: FCClass<CodeProps> = ({
+  source,
+  lines,
+  markers,
   hideCopy = false,
   language,
   className,
   actions,
-  background = 'transparent',
-  showLanguage = true,
+  maxHeight,
+  ...otherProps
 }) => {
   const hasLanguage = language ?? 'bash';
+  const formattedChildren = outdent(source);
+
   const copyContent = useCallback(
-    () => () => {
-      void navigator.clipboard.writeText(children);
+    () => {
+      void navigator.clipboard.writeText(formattedChildren);
     },
-    [children],
+    [formattedChildren],
   );
 
   const dynamicStyle: CSSProperties = {
-    '--code-bg': background,
+    '--max-height': maxHeight,
   };
 
   return (
     <div
       className={clsx(styles.Code, className)}
-      data-code-block-has-highlight={Boolean(highlight)}
+      data-code-block-has-highlight={Boolean(lines)}
       data-code-block-has-toolbar={Boolean(hasLanguage) ?? Boolean(actions) ?? hideCopy}
       style={dynamicStyle}
+      {...otherProps}
     >
       <Refractor
         language={hasLanguage}
-        value={children.trim()}
-        markers={highlight ? rangeParser(highlight) : undefined}
+        value={formattedChildren}
+        markers={lines ? rangeParser(lines) : markers}
       />
 
       <Stack direction="row" fill={false} hAlign="space-between" vAlign="center" className={styles.Toolbar}>
-        {(showLanguage) && <Text responsive={false} size={14} dimmed={5}>{language ?? ''}</Text>}
+        <Text responsive={false} size={14} dimmed={5}>{language ?? ''}</Text>
 
         <Stack direction="row" rowGap={8}>
           {!hideCopy && (
-            <Button
+            <IconButton
               className={styles.Action}
+              aria-label="Copy code"
               dimension="small"
               kind="flat"
-              onClick={copyContent()}
-            >
-              Copy
-            </Button>
+              onClick={() => copyContent()}
+              icon="todo"
+            />
           )}
           {actions}
         </Stack>

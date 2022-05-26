@@ -38,14 +38,10 @@
     inset 10px 0 40px var(--highlight-blue-foreground),
     inset -10px 0 20px var(--highlight-purple-foreground);
 
-  @mixin vibrancy;
-
+  backdrop-filter: blur(1.5px);
   overflow: hidden;
   inline-size: 25rem;
   block-size: 25rem;
-  background:
-    radial-gradient(circle at left top, rgb(104 210 217 / 4%) 0%, rgb(104 210 217 / 0%) 100%),
-    radial-gradient(circle at 80% 90%, rgb(123 97 255 / 6%) 0%, rgb(123 97 255 / 0%) 100%);
   box-shadow: var(--shades);
   background-size: 1600% 1600%;
   transform-origin: 50% 50%;

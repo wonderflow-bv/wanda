@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "@docsearch/react": "3.1.0",
+    "@mvasilkov/outdent": "1.0.5",
     "@wonderflow/icons": "*",
     "@wonderflow/react-components": "*",
     "@wonderflow/themes": "*",
@@ -46,12 +47,12 @@
     "next-progress": "2.2.0",
     "next-themes": "0.2.0",
     "next-transpile-modules": "9.0.0",
-    "outdent": "0.8.0",
     "parse-numeric-range": "1.3.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-fast-marquee": "1.3.2",
-    "react-refractor": "2.1.7"
+    "react-refractor": "2.1.7",
+    "refractor": "4.7.0"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "12.1.5",
