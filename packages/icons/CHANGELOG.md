@@ -1,5 +1,11 @@
 # @wonderflow/icons
 
+## 9.2.0
+
+### Minor Changes
+
+- 3bfa86c: Add new heart-suite and todo icons
+
 ## 6.2.0
 
 ### Minor Changes
