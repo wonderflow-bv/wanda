@@ -7,6 +7,7 @@ import { AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { useState } from 'react';
 
+import { Code } from '@/components/shared/code';
 import { GradientText } from '@/components/shared/gradient-text';
 import { Section } from '@/components/shared/section';
 import { useResponsiveContext } from '@/context/responsive';
@@ -18,7 +19,7 @@ export const Developers: FCClass = ({
   className,
 }) => {
   const { matches } = useResponsiveContext();
-  const [activeTab, setActiveTab] = useState('components');
+  const [activeTab, setActiveTab] = useState('design-tokens');
 
   return (
     <Section className={clsx(styles.Developers, className)} minHeight={!matches.medium ? '60vh' : '72vh'} vPadding={192}>
@@ -71,6 +72,15 @@ export const Developers: FCClass = ({
           <Stack className={styles.Media} hAlign="center" vAlign="center" fill={false} aria-hidden="true">
             <AnimatePresence exitBeforeEnter>
               {activeTab === 'components' && <Components />}
+              {activeTab === 'design-tokens' && (
+              <Code language="html">
+                {`
+                  <div>
+                    ciao
+                  </div>
+                `}
+              </Code>
+              )}
             </AnimatePresence>
           </Stack>
         </Stack>
