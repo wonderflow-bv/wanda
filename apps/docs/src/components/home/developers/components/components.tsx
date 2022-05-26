@@ -89,7 +89,7 @@ export const Components = () => (
         </Stack>
       </Stack>
       <Stack as={m.div} variants={ITEM_ANIMATION} className={styles.Card} vPadding={24} hPadding={24} hAlign="center" vAlign="center">
-        <Slider defaultValue={50} dimension="small" iconMin="moon" iconMax="sun-bright" />
+        <Slider defaultValue={80} dimension="small" iconMin="moon" iconMax="sun-bright" />
       </Stack>
       <Stack as={m.div} variants={ITEM_ANIMATION} direction="row" wrap rowGap={8} columnGap={8}>
         <Stack as={m.div} variants={ITEM_ANIMATION} className={styles.Card} vPadding={24} hPadding={24} hAlign="center" vAlign="center">
@@ -104,7 +104,7 @@ export const Components = () => (
       </Stack>
       <Stack as={m.div} variants={ITEM_ANIMATION} className={styles.Card} vPadding={24} hPadding={24} hAlign="center" vAlign="center">
         <div style={{ width: '100%' }}>
-          <LinearProgress value={50} dimension="big" />
+          <LinearProgress value={35} dimension="big" />
         </div>
       </Stack>
       <Stack as={m.div} variants={ITEM_ANIMATION} direction="row" wrap className={styles.Card} vPadding={24} hPadding={24} hAlign="center" vAlign="center">
@@ -122,7 +122,7 @@ export const Components = () => (
         <Chip color="cyan" dimension="small">#system</Chip>
       </Stack>
       <Stack as={m.div} variants={ITEM_ANIMATION} className={styles.Card} vPadding={24} hPadding={24} hAlign="center" vAlign="center">
-        <CircularProgress value={50} showProgress />
+        <CircularProgress value={30} showProgress />
       </Stack>
       <Stack as={m.div} variants={ITEM_ANIMATION} className={styles.Card} vPadding={24} hPadding={24} hAlign="center" vAlign="center">
         <Pagination itemsCount={100} itemsPerPage={30} />
