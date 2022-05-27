@@ -14,7 +14,7 @@
   & pre[class*='language-'] {
     overflow: auto;
     overscroll-behavior: contain;
-    border-radius: token(--radius-8);
+    border-radius: token(--radius-16);
     color: var(--global-foreground);
     background: none;
     font-family: token(--font-family-mono);
