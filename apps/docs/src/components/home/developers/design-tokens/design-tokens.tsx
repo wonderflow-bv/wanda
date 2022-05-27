@@ -27,6 +27,9 @@ const ANIMATION = {
       type: 'spring',
       stiffness: 700,
       damping: 20,
+      delayChildren: 0.1,
+      staggerChildren: 0.01,
+      staggerDirection: 1,
     },
   },
 };
@@ -61,16 +64,38 @@ export const DesignTokens = () => {
       exit="hidden"
       whileInView="visible"
       viewport={{ once: true }}
+      className={styles.DesignTokens}
     >
-      <Elevator resting={4}>
-        <Code
-          hideCopy
-          language="json"
-          maxHeight="25rem"
-          source={JSON.stringify(tkns.color, null, 3)}
-          markers={arrayOfLines}
-        />
-      </Elevator>
+      <m.div>
+        <Elevator resting={4}>
+          <Code
+            className={styles.Code}
+            hideCopy
+            language="json"
+            maxHeight="25rem"
+            source={JSON.stringify(tkns.color, null, 3)}
+            markers={arrayOfLines}
+          />
+        </Elevator>
+      </m.div>
+
+      <m.div
+        variants={ANIMATION}
+        className={styles.Code}
+      >
+        <Elevator resting={4}>
+          <Code
+            hideCopy
+            language="css"
+            maxHeight="25rem"
+            source={`.Usage {
+            color: hsl(
+              token(--color-blue-50) / 20%
+            );
+          }`}
+          />
+        </Elevator>
+      </m.div>
     </m.div>
   );
 };

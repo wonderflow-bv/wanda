@@ -1,3 +1,13 @@
+.DesignTokens {
+  position: relative;
+}
+
+.Code:nth-child(2) {
+  position: absolute;
+  right: calc(token(--space-24) * -1);
+  bottom: calc(token(--space-24) * -1);
+}
+
 .Row {
   position: relative;
 }
