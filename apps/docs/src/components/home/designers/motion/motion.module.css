@@ -38,6 +38,7 @@
     inset 10px 0 40px var(--highlight-blue-foreground),
     inset -10px 0 20px var(--highlight-purple-foreground);
 
+  will-change: transform border-radius;
   backdrop-filter: blur(1.5px);
   overflow: hidden;
   inline-size: 25rem;

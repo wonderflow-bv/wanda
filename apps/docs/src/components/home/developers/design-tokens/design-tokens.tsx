@@ -1,5 +1,6 @@
 import { Elevator } from '@wonderflow/react-components';
 import tkns from '@wonderflow/tokens/platforms/web/tokens.json';
+import { m } from 'framer-motion';
 import {
   useEffect, useMemo, useRef,
 } from 'react';
@@ -9,14 +10,33 @@ import { Code } from '@/components/shared/code';
 
 import styles from './design-tokens.module.css';
 
-const skipGroup = 3;
+const SKIP_GROUP = 3;
+
+const ANIMATION = {
+  hidden: {
+    x: -10,
+    opacity: 0,
+    transition: {
+      duration: 0,
+    },
+  },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      type: 'spring',
+      stiffness: 700,
+      damping: 20,
+    },
+  },
+};
 
 export const DesignTokens = () => {
   const startLine = useRef(2);
 
   const arrayOfLines = useMemo(() => Object.keys(tkns.color).map(
     (color, index) => Object.keys(tkns.color[color]).map((colorKey, indexKey) => {
-      const addLine = index > 0 && indexKey === 0 ? skipGroup : 1;
+      const addLine = index > 0 && indexKey === 0 ? SKIP_GROUP : 1;
       startLine.current += addLine;
       return ({
         line: startLine.current,
@@ -35,15 +55,22 @@ export const DesignTokens = () => {
   }, [arrayOfLines]);
 
   return (
-    <div>
+    <m.div
+      variants={ANIMATION}
+      initial="hidden"
+      exit="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+    >
       <Elevator resting={4}>
         <Code
+          hideCopy
           language="json"
           maxHeight="25rem"
           source={JSON.stringify(tkns.color, null, 3)}
           markers={arrayOfLines}
         />
       </Elevator>
-    </div>
+    </m.div>
   );
 };
