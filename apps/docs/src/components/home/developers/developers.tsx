@@ -14,18 +14,19 @@ import { useResponsiveContext } from '@/context/responsive';
 import { Components } from './components';
 import { DesignTokens } from './design-tokens';
 import styles from './developers.module.css';
+import { Themes } from './themes';
 
 export const Developers: FCClass = ({
   className,
 }) => {
   const { matches } = useResponsiveContext();
-  const [activeTab, setActiveTab] = useState('components');
+  const [activeTab, setActiveTab] = useState('themes');
 
   return (
     <Section className={clsx(styles.Developers, className)} minHeight={!matches.medium ? '60vh' : '72vh'} vPadding={192}>
       <Container dimension="large">
         <Stack direction={matches.medium ? 'row-reverse' : 'column'} columnGap={72}>
-          <Stack rowGap={56} className={styles.Content}>
+          <Stack rowGap={56} fill={false} className={styles.Content}>
 
             <Stack rowGap={4}>
               <Text weight="bold"><GradientText color="orange">For developers</GradientText></Text>
@@ -47,10 +48,10 @@ export const Developers: FCClass = ({
               <Tab.Panel label="Design Tokens" icon={matches.large ? 'more-vert' : undefined} value="design-tokens">
                 <Stack rowGap={32} vPadding={56} hAlign="start">
                   <Text size={22} dimmed={6}>
-                    Wanda offers over 114 ready-to-use SVG icons and three solid,
-                    outline, and duotone styles for over 342 icons.
+                    Color, spaces, font, icons size.. every basic and commont property is available as design token.
+                    The foundamentals of consistency across platforms.
                   </Text>
-                  <Link href="/documentation/design/iconography" passHref>
+                  <Link href="/documentation/develop/design-tokens" passHref>
                     <Button as="a" kind="secondary" dimension="big">Read More</Button>
                   </Link>
                 </Stack>
@@ -62,7 +63,7 @@ export const Developers: FCClass = ({
                     Motion is part of the life. Starting from cells.
                     They bring life to your interfaces and provide a great feeling of control.
                   </Text>
-                  <Link href="/design/foundation/colors" passHref>
+                  <Link href="/documentation/develop/themes" passHref>
                     <Button as="a" kind="secondary" dimension="big">Read More</Button>
                   </Link>
                 </Stack>
@@ -73,6 +74,7 @@ export const Developers: FCClass = ({
             <AnimatePresence exitBeforeEnter>
               {activeTab === 'components' && <Components />}
               {activeTab === 'design-tokens' && <DesignTokens />}
+              {activeTab === 'themes' && <Themes />}
             </AnimatePresence>
           </Stack>
         </Stack>

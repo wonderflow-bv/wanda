@@ -13,4 +13,8 @@
   border-radius: token(--radius-16);
   min-width: 5rem;
   position: relative;
+
+  @supports not (backdrop-filter: blur(0)) {
+    background-color: var(--dimmed-0);
+  }
 }
