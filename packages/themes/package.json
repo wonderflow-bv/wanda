@@ -40,10 +40,10 @@
   },
   "devDependencies": {
     "@wonderflow/tokens": "*",
-    "fs-extra": "10.0.1",
+    "fs-extra": "10.1.0",
     "style-dictionary": "3.7.0",
     "tsconfig": "*",
     "uvu": "0.5.3",
-    "yargs": "17.4.1"
+    "yargs": "17.5.1"
   }
 }

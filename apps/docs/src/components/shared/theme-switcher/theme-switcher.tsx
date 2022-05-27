@@ -1,8 +1,16 @@
 import { IconNames } from '@wonderflow/icons';
-import { IconButton, Menu, Popover } from '@wonderflow/react-components';
+import {
+  ButtonProps, IconButton, Menu, Popover,
+} from '@wonderflow/react-components';
 import { useTheme } from 'next-themes';
 
-export const ThemeSwitcher = () => {
+export type ThemeSwitcherProps = {
+  dimension?: ButtonProps['dimension'];
+}
+
+export const ThemeSwitcher: FCClass<ThemeSwitcherProps> = ({
+  dimension,
+}) => {
   const { theme, setTheme } = useTheme();
   const currentTheme = theme ?? 'system';
 
@@ -19,6 +27,7 @@ export const ThemeSwitcher = () => {
       trigger={(
         <IconButton
           aria-label="Change color scheme"
+          dimension={dimension}
           kind="flat"
           icon={currentTheme === 'system' ? icon.system : icon[currentTheme]}
         />
