@@ -1,0 +1,44 @@
+.Window {
+  background: var(--global-background);
+  border-radius: token(--radius-16);
+}
+
+.Toolbar {
+  display: grid;
+  grid-template-columns: 6rem 1fr 6rem;
+  align-items: center;
+  padding: token(--space-8) token(--space-16);
+  column-gap: token(--space-8);
+}
+
+.TrafficLight span {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 100%;
+  flex-shrink: 0;
+
+  &:nth-child(1) {
+    background: hsl(token(--color-red-30));
+  }
+
+  &:nth-child(2) {
+    background: hsl(token(--color-yellow-20));
+  }
+
+  &:nth-child(3) {
+    background: hsl(token(--color-green-30));
+  }
+}
+
+.Address {
+  border-radius: token(--radius-4);
+  background: var(--dimmed-0);
+  border: 1px solid var(--dimmed-1);
+}
+
+.Viewport {
+  height: 100%;
+  overflow: auto;
+  aspect-ratio: 16/10;
+  border-radius: 0 0 token(--radius-16) token(--radius-16);
+}

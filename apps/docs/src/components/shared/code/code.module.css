@@ -1,14 +1,18 @@
-/* stylelint-disable selector-pseudo-class-no-unknown */
+/* stylelint-disable selector-pseudo-class-no-unknown, selector-class-pattern */
 
-/* stylelint-disable selector-class-pattern */
-
-@import '@wonderflow/react-components/core/utils/media.css';
 @import '@wonderflow/react-components/core/utils/vibrancy.css';
 
 :where(.Code) {
+
+  @mixin vibrancy;
+
   position: relative;
   display: grid;
   border-radius: token(--radius-8);
+  background:
+    radial-gradient(50% 80% at 6% 106%, rgb(139 255 227 / 8%) 0%, rgb(139 255 227 / 0%) 100%),
+    radial-gradient(100% 100% at 17% 80%, rgb(194 154 246 / 10%) 0%, rgb(194 154 246 / 0%) 100%),
+    var(--global-vibrancy-background-soft);
 
   & code[class*='language-'],
   & pre[class*='language-'] {
@@ -43,7 +47,8 @@
     max-height: var(--max-height);
 
     @nest [data-code-block-has-toolbar='true'] & {
-      padding-top: token(--space-48);
+      padding-top: token(--space-16);
+      margin-top: token(--space-40);
     }
   }
 
@@ -51,7 +56,7 @@
     padding-left: 0;
   }
 
-  & :not(pre) > code[class*='language-'],
+  /* & :not(pre) > code[class*='language-'],
   & pre[class*='language-'] {
 
     @mixin vibrancy;
@@ -60,7 +65,7 @@
       radial-gradient(50% 80% at 6% 106%, rgb(139 255 227 / 8%) 0%, rgb(139 255 227 / 0%) 100%),
       radial-gradient(100% 100% at 17% 80%, rgb(194 154 246 / 10%) 0%, rgb(194 154 246 / 0%) 100%),
       var(--global-vibrancy-background-soft);
-  }
+  } */
 
   /* Inline code */
   & :not(pre) > code[class*='language-'] {
