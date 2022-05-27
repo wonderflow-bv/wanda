@@ -27,7 +27,7 @@ const ANIMATION = {
       type: 'spring',
       stiffness: 700,
       damping: 20,
-      delayChildren: 0.1,
+      delayChildren: 0.2,
       staggerChildren: 0.01,
       staggerDirection: 1,
     },

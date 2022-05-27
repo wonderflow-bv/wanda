@@ -6,7 +6,7 @@ import { getPageStaticProps } from '@/core/get-page-props';
 const ButtonPage: NextPage = () => (
   <div>
 
-    <Prose className="dio">
+    <Prose>
       <Title as="h2">ciao</Title>
       <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
       <Title as="h2">ciao</Title>

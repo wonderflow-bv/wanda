@@ -48,7 +48,7 @@ export const Developers: FCClass = ({
               <Tab.Panel label="Design Tokens" icon={matches.large ? 'more-vert' : undefined} value="design-tokens">
                 <Stack rowGap={32} vPadding={56} hAlign="start">
                   <Text size={22} dimmed={6}>
-                    Color, spaces, font, icons size.. every basic and commont property is available as design token.
+                    Color, spaces, font, icons size... every basic and common property is available as design token.
                     The foundamentals of consistency across platforms.
                   </Text>
                   <Link href="/documentation/develop/design-tokens" passHref>
