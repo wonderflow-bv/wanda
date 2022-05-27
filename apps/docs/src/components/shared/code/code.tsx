@@ -32,7 +32,7 @@ Refractor.registerLanguage(bash);
 Refractor.registerLanguage(diff);
 Refractor.registerLanguage(html);
 
-type CodeProps = {
+export type CodeProps = {
   source: string;
   lines?: string;
   markers?: Props['markers'];
