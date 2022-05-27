@@ -1,14 +1,24 @@
+@import '@wonderflow/react-components/core/utils/vibrancy.css';
+
 .Window {
-  background: var(--global-background);
-  border-radius: token(--radius-16);
+  border-radius: token(--radius-8);
+  max-height: var(--max-height);
+  overflow: auto;
 }
 
 .Toolbar {
+
+  @mixin vibrancy;
+
+  color: var(--global-vibrancy-foreground);
   display: grid;
   grid-template-columns: 6rem 1fr 6rem;
   align-items: center;
   padding: token(--space-8) token(--space-16);
   column-gap: token(--space-8);
+  position: sticky;
+  background: var(--global-vibrancy-background-soft);
+  top: 0;
 }
 
 .TrafficLight span {
@@ -32,13 +42,12 @@
 
 .Address {
   border-radius: token(--radius-4);
-  background: var(--dimmed-0);
-  border: 1px solid var(--dimmed-1);
+  background: hsl(token(--color-support-black) / 15%);
 }
 
 .Viewport {
   height: 100%;
-  overflow: auto;
-  aspect-ratio: 16/10;
-  border-radius: 0 0 token(--radius-16) token(--radius-16);
+  aspect-ratio: var(--ratio);
+  background: var(--global-background);
+  border-radius: 0 0 token(--radius-8) token(--radius-8);
 }
