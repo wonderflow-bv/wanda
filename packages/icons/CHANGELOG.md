@@ -1,5 +1,11 @@
 # @wonderflow/icons
 
+## 9.3.0
+
+### Minor Changes
+
+- dd1ff4f: Add new icons
+
 ## 9.2.0
 
 ### Minor Changes
