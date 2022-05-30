@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { forwardRef } from 'react';
+import { forwardRef, PropsWithChildren } from 'react';
 
 import {
   Icon, IconProps, Stack, Text, TextProps,
@@ -8,7 +8,7 @@ import {
 import { ListProps } from './list';
 import styles from './list.module.css';
 
-export type ListItemProps = Pick<ListProps, 'dimension' | 'hideMarker'> & {
+export type ListItemProps = PropsWithChildren<PropsWithClass> & Pick<ListProps, 'dimension' | 'hideMarker'> & {
   /**
    * Set the marker style. You can use any icon from the iconography as marker
    * by passing its name.
@@ -20,7 +20,7 @@ export type ListItemProps = Pick<ListProps, 'dimension' | 'hideMarker'> & {
   markerColor?: string;
 }
 
-export const ListItem = forwardRef<HTMLLIElement, PropsWithClass<ListItemProps>>(({
+export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(({
   className,
   hideMarker,
   marker = 'circle',

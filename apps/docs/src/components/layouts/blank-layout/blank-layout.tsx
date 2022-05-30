@@ -2,6 +2,7 @@
 import dynamic from 'next/dynamic';
 
 import { BaseLayout } from '@/components/layouts/base-layout';
+import { Footer } from '@/components/shared/footer';
 import { HeaderProps } from '@/components/shared/header';
 
 export interface IPropsBlankLayout {
@@ -22,6 +23,7 @@ export const BlankLayout: FCChildren<IPropsBlankLayout> = ({
   <BaseLayout>
     <DynHeader position={headerPosition} />
     <main>{children}</main>
+    <Footer />
   </BaseLayout>
 );
 

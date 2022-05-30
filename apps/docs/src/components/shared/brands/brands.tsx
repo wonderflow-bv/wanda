@@ -1,5 +1,5 @@
 import {
-  Container, Icon, Stack, Title,
+  Container, Stack, Title,
 } from '@wonderflow/react-components';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { Section } from '@/components/shared/section';
 import { brands } from '@/data/brands';
 
+import { GradientText } from '../gradient-text';
 import styles from './brands.module.css';
 
 type ImageLoaderType = {
@@ -74,8 +75,9 @@ export const Brands = ({
             target="_blank"
             rel="noopener noreferrer"
           >
-            <b>Read success stories</b>
-            <Icon source="arrow-right" weight="duotone" dimension={18} />
+            <GradientText color="rainbow">
+              <b>Read success stories</b>
+            </GradientText>
           </Stack>
           {mounted && brands.map(b => (
             <Image
