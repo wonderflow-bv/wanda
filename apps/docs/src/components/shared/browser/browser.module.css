@@ -4,6 +4,7 @@
   border-radius: token(--radius-8);
   max-height: var(--max-height);
   overflow: auto;
+  z-index: 0;
 }
 
 .Toolbar {
@@ -19,6 +20,7 @@
   position: sticky;
   background: var(--global-vibrancy-background-soft);
   top: 0;
+  z-index: 1;
 }
 
 .TrafficLight span {
