@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic';
 
 import { Hero } from '@/components/home/hero';
 import { Mentions } from '@/components/home/mentions';
+import { Brands } from '@/components/shared/brands';
 import { Meta } from '@/components/shared/meta';
 import { getLayoutProps } from '@/core/get-page-props';
 
@@ -22,6 +23,7 @@ const Home: NextPage = () => (
     <Mentions />
     <DynDesigners />
     <DynDevelopers />
+    <Brands />
   </>
 );
 
