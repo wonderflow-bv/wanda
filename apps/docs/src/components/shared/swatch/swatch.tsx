@@ -47,7 +47,14 @@ export const Swatch: React.FC<SwatchProps> = ({
   };
 
   return (
-    <Stack rowGap={8} className={styles.Swatch} style={dynamicStyle} {...otherProps}>
+    <Stack
+      className={styles.Swatch}
+      rowGap={8}
+      style={dynamicStyle}
+      vPadding={8}
+      hPadding={8}
+      {...otherProps}
+    >
       <Stack
         direction="row"
         columnGap={16}
@@ -63,10 +70,11 @@ export const Swatch: React.FC<SwatchProps> = ({
         vAlign="center"
         hAlign="start"
         fill={false}
+        hPadding={8}
       >
-        {name && <Text size={16} weight="bold">{name}</Text>}
+        {name && <Text size={14} weight="bold">{name}</Text>}
         <Stack className={styles.Values} columnGap={4}>
-          <Text size={14}>
+          <Text size={14} lineHeight="small">
             {hslColor}
             {showCopy && (
             <IconButton
@@ -79,7 +87,7 @@ export const Swatch: React.FC<SwatchProps> = ({
             />
             )}
           </Text>
-          <Text size={14}>
+          <Text size={14} lineHeight="small">
             {hexColor}
             {showCopy && (
             <IconButton
