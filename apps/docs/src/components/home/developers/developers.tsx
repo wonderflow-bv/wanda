@@ -23,7 +23,13 @@ export const Developers: FCClass = ({
   const [activeTab, setActiveTab] = useState('components');
 
   return (
-    <Section className={clsx(styles.Developers, className)} minHeight={!matches.medium ? '60vh' : '72vh'} vPadding={192}>
+    <Section
+      className={clsx(styles.Developers, className)}
+      minHeight={!matches.medium ? '60vh' : '82vh'}
+      vPadding={192}
+      fill={false}
+      vAlign="center"
+    >
       <Container dimension="large">
         <Stack direction={matches.medium ? 'row-reverse' : 'column'} columnGap={72}>
           <Stack rowGap={56} fill={false} className={styles.Content}>
