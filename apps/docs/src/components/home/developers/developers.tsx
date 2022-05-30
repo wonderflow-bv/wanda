@@ -40,7 +40,7 @@ export const Developers: FCClass = ({
                     A full set of highly customizable React components and styles ready to use inside applications.
                   </Text>
                   <Link href="/documentation/components/actions/button" passHref>
-                    <Button as="a" kind="secondary" dimension="big">Read More</Button>
+                    <Button as="a" kind="secondary" dimension="big">Read more</Button>
                   </Link>
                 </Stack>
               </Tab.Panel>
@@ -52,7 +52,7 @@ export const Developers: FCClass = ({
                     The foundamentals of consistency across platforms.
                   </Text>
                   <Link href="/documentation/develop/design-tokens" passHref>
-                    <Button as="a" kind="secondary" dimension="big">Read More</Button>
+                    <Button as="a" kind="secondary" dimension="big">Read more</Button>
                   </Link>
                 </Stack>
               </Tab.Panel>
@@ -64,7 +64,7 @@ export const Developers: FCClass = ({
                     They bring life to your interfaces and provide a great feeling of control.
                   </Text>
                   <Link href="/documentation/develop/themes" passHref>
-                    <Button as="a" kind="secondary" dimension="big">Read More</Button>
+                    <Button as="a" kind="secondary" dimension="big">Read more</Button>
                   </Link>
                 </Stack>
               </Tab.Panel>

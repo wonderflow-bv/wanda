@@ -41,7 +41,7 @@ export const Designers: FCClass = ({
                     everything a designer needs, Wanda provides it.
                   </Text>
                   <Link href="/documentation/design/foundation/colors" passHref>
-                    <Button as="a" kind="secondary" dimension="big">Read More</Button>
+                    <Button as="a" kind="secondary" dimension="big">Read more</Button>
                   </Link>
                 </Stack>
               </Tab.Panel>
@@ -53,7 +53,7 @@ export const Designers: FCClass = ({
                     outline, and duotone styles for over 342 icons.
                   </Text>
                   <Link href="/documentation/design/iconography" passHref>
-                    <Button as="a" kind="secondary" dimension="big">Read More</Button>
+                    <Button as="a" kind="secondary" dimension="big">Read more</Button>
                   </Link>
                 </Stack>
               </Tab.Panel>
@@ -65,7 +65,7 @@ export const Designers: FCClass = ({
                     They bring life to your interfaces and provide a great feeling of control.
                   </Text>
                   <Link href="/documentation/design/motion/principles" passHref>
-                    <Button as="a" kind="secondary" dimension="big">Read More</Button>
+                    <Button as="a" kind="secondary" dimension="big">Read more</Button>
                   </Link>
                 </Stack>
               </Tab.Panel>
