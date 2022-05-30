@@ -14,6 +14,10 @@
     radial-gradient(100% 100% at 17% 80%, rgb(194 154 246 / 10%) 0%, rgb(194 154 246 / 0%) 100%),
     var(--global-vibrancy-background-soft);
 
+  @supports not (backdrop-filter: blur(0)) {
+    background-color: var(--dimmed-0);
+  }
+
   & code[class*='language-'],
   & pre[class*='language-'] {
     overflow: auto;
