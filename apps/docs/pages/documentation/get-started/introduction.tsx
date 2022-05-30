@@ -1,11 +1,11 @@
 import { NextPage } from 'next';
 
-import { getPageStaticProps } from '@/core/get-page-props';
+import { getLayoutProps } from '@/core/get-page-props';
 
 const IntroductionPage: NextPage = () => (<div>ciao</div>);
 
 export default IntroductionPage;
 
-export const getStaticProps = getPageStaticProps({
+export const getStaticProps = () => getLayoutProps({
   layout: 'doc',
 });
