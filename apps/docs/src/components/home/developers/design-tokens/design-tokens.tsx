@@ -74,7 +74,7 @@ export const DesignTokens = () => {
             language="json"
             maxHeight="25rem"
             source={JSON.stringify(tkns.color, null, 3)}
-            markers={arrayOfLines}
+            // markers={arrayOfLines}
           />
         </Elevator>
       </m.div>
