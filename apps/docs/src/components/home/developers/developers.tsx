@@ -66,8 +66,8 @@ export const Developers: FCClass = ({
               <Tab.Panel label="Themes" icon={matches.large ? 'style' : undefined} value="themes">
                 <Stack rowGap={32} vPadding={56} hAlign="start">
                   <Text size={22} dimmed={6}>
-                    Motion is part of the life. Starting from cells.
-                    They bring life to your interfaces and provide a great feeling of control.
+                    Easily handle light/dark themes via JS or CSS, by using the provided
+                    collections of custom properties and JSON values.
                   </Text>
                   <Link href="/documentation/develop/themes" passHref>
                     <Button as="a" kind="secondary" dimension="big">Read more</Button>
