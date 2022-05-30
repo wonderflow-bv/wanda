@@ -23,8 +23,8 @@
     transition: all token(--duration-500) token(--easing-standard);
   }
 
-  &:hover,
-  &:focus-within {
+  @nest .Brands:hover &,
+  .Brands:focus-within & {
     gap: 0 token(--space-16);
 
     & img {
@@ -43,8 +43,8 @@
   text-shadow: 0 0 20px var(--global-background);
   transition: all token(--duration-500) token(--easing-standard);
 
-  @nest .Logos:hover &,
-  .Logos:focus-within & {
+  @nest .Brands:hover &,
+  .Brands:focus-within & {
     transform: none;
     opacity: 100%;
   }

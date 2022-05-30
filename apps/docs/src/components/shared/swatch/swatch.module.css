@@ -1,5 +1,8 @@
 .Swatch {
   position: relative;
+  border-radius: token(--radius-16);
+  background: var(--global-background);
+  overflow: hidden;
 }
 
 
@@ -7,8 +10,9 @@
   block-size: 90px;
   min-block-size: 90px;
   max-block-size: 90px;
-  border-radius: token(--radius-4);
+  overflow: hidden;
   color: hsl(token(--color-support-white));
+  border-radius: token(--radius-8);
   background:
     var(--dimmed-0)
     repeating-conic-gradient(

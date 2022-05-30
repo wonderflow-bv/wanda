@@ -50,6 +50,6 @@
 .Viewport {
   height: 100%;
   aspect-ratio: var(--ratio);
-  background: var(--global-background);
+  background: var(--global-vibrancy-background-soft);
   border-radius: 0 0 token(--radius-8) token(--radius-8);
 }
