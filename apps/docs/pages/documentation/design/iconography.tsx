@@ -1,11 +1,11 @@
 import { NextPage } from 'next';
 
-import { getPageStaticProps } from '@/core/get-page-props';
+import { getLayoutProps } from '@/core/get-page-props';
 
 const IconographyPage: NextPage = () => (<div>Iconography</div>);
 
 export default IconographyPage;
 
-export const getStaticProps = getPageStaticProps({
+export const getStaticProps = () => getLayoutProps({
   layout: 'doc',
 });

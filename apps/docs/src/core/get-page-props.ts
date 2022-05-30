@@ -13,10 +13,10 @@ export type PagePropsType<T extends LayoutTypes> = {
   layoutProps?: LayoutProps[T];
 } & Record<string, unknown>
 
-type GetPageStaticPropsFn = <T extends LayoutTypes>(props?: PagePropsType<T>) =>
+type getLayoutPropsFn = <T extends LayoutTypes>(props?: PagePropsType<T>) =>
 PagePropsType<T> | Record<string, unknown>;
 
-// export const getPageStaticProps: GetPageStaticPropsFn = (props) => {
+// export const getLayoutProps: getLayoutPropsFn = (props) => {
 //   if (!props) {
 //     return {};
 //   }
@@ -27,7 +27,7 @@ PagePropsType<T> | Record<string, unknown>;
 //   };
 // };
 
-export const getLayoutProps: GetPageStaticPropsFn = props => ({
+export const getLayoutProps: getLayoutPropsFn = props => ({
   props: {
     ...props,
     layout: props?.layout ?? null,
