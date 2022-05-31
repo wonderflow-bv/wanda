@@ -8,7 +8,6 @@ import { IdProvider } from '@wonderflow/react-components';
 import { AnimatePresence } from 'framer-motion';
 import type { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
-import NextScript from 'next/script';
 import NextProgress from 'next-progress';
 import { ThemeProvider } from 'next-themes';
 import { useEffect } from 'react';
@@ -59,11 +58,6 @@ const App = ({ Component, pageProps }: AppProps) => {
 
   return (
     <Providers>
-      <NextScript
-        id="docsearch-core"
-        src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"
-        strategy="beforeInteractive"
-      />
       <NextProgress delay={300} color="var(--cta-default)" options={{ showSpinner: false, minimum: 0.3 }} />
       <AnimatePresence exitBeforeEnter initial={false}>
         <Layout {...layoutProps}>

@@ -18,7 +18,11 @@ export const MainNav: FCClass<MainNavProps> = ({
   const router = useRouter();
 
   const includesPath = useCallback(
-    (path: NextRouter['asPath']) => router.asPath === path,
+    // (path: NextRouter['asPath']) => router.asPath === path,
+    (path: NextRouter['asPath']) => {
+      const matchURL = router.asPath.split('/')[1] === path.split('/')[1];
+      return matchURL && router.asPath.split('/')[1].length > 0;
+    },
     [router.asPath],
   );
 

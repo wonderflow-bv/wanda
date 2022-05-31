@@ -45,7 +45,12 @@ export const Header: FCClass<HeaderProps> = ({
       style={{ '--blur': `${Math.min(Math.max(scroll?.top ?? 0, 0), 24)}px` }}
       {...otherProps}
     >
-      <div className={styles.BgContainer} style={{ '--bg-opacity': `${Math.min(Math.max(scroll?.top ?? 0, 0), 100)}%` }}>
+      <div
+        className={styles.BgContainer}
+        style={{
+          '--bg-opacity': `${Math.min(Math.max(scroll?.top ?? 0, 0), 100)}%`,
+        }}
+      >
         <Container dimension="large">
           <Stack
             fill={false}
