@@ -10,7 +10,6 @@
   padding: token(--space-24) 0;
 
   @media (--from-large) {
-    background: red;
     overflow: auto;
     padding-top: token(--space-56);
     border: 0;
@@ -28,5 +27,30 @@
 
   @media (--from-large) {
     display: block;
+  }
+}
+
+.NavItem {
+  color: var(--global-foreground);
+
+  &[aria-current='true'] {
+    color: var(--fg);
+  }
+}
+
+.IconWrapper {
+  width: token(--space-24);
+  height: token(--space-24);
+  background: var(--global-vibrancy-background);
+  border-radius: token(--radius-4);
+
+  @nest .NavItem[aria-current='true'] & {
+    background: var(--fg);
+    color: var(--bg);
+  }
+
+  & svg {
+    width: token(--space-16);
+    height: token(--space-16);
   }
 }
