@@ -49,7 +49,10 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({ children }) => {
                     <Stack
                       as="a"
                       className={styles.NavItem}
-                      style={{ '--bg': `var(--highlight-${link.color}-background)`, '--fg': `var(--highlight-${link.color}-foreground)` }}
+                      style={{
+                        '--bg': `var(--highlight-${link.color ?? 'gray'}-background)`,
+                        '--fg': `var(--highlight-${link.color ?? 'gray'}-foreground)`,
+                      }}
                       direction="row"
                       columnGap={8}
                       hAlign="start"
