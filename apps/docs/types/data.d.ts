@@ -1,3 +1,5 @@
+import { IconNames } from '@wonderflow/icons';
+
 type MentionType = {
   image?: string;
   name: string;
@@ -13,3 +15,13 @@ type NavItemType = {
 }
 
 export type NavType = NavItemType[]
+
+type DocNavItemType = {
+  label: string;
+  url: string;
+  icon: IconNames;
+  color?: string;
+  blank?: boolean;
+}
+
+export type DocNavType = DocNavItemType[]
