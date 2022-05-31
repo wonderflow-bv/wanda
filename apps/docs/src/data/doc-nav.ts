@@ -1,4 +1,4 @@
-import { DocNavType } from 'types/data';
+import type { DocNavType } from 'types/data';
 
 const DocNav: DocNavType = [
   {
