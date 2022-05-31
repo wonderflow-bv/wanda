@@ -1,0 +1,32 @@
+@import '@wonderflow/react-components/core/utils/media.css';
+
+.Content {
+  padding-top: token(--space-56);
+}
+
+.Sidebar {
+  flex: 1 0 0;
+  border-bottom: 1px solid var(--dimmed-1);
+  padding: token(--space-24) 0;
+
+  @media (--from-large) {
+    background: red;
+    overflow: auto;
+    padding-top: token(--space-56);
+    border: 0;
+    height: calc(100vh - 76px);
+    max-width: 14.63rem;
+    min-width: 14.63rem;
+    position: sticky;
+    top: 75px;
+  }
+}
+
+
+.Toc {
+  display: none;
+
+  @media (--from-large) {
+    display: block;
+  }
+}
