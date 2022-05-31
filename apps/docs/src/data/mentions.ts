@@ -1,4 +1,4 @@
-import { MentionsType } from 'types/data';
+import type { MentionsType } from 'types/data';
 
 const mentions: MentionsType = [
   {
