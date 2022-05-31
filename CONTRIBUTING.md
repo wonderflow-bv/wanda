@@ -19,6 +19,7 @@ To work on this project you have to know how a monorepo works and how to use the
       - [Add a change](#add-a-change)
       - [Start prerelease](#start-prerelease)
       - [Close prerelease](#close-prerelease)
+  - [Releasing](#releasing)
 
 ---
 
@@ -100,3 +101,9 @@ Exit from the current prerelease channel and make all future changes released in
 
 [changeset]: https://github.com/changesets/changesets
 [turborepo]: https://turborepo.org/
+
+## Releasing
+
+To release the packages the only thing to do is to merge the PR opened by changeset workflow, generated after pushing `changes` to the `main` branch.
+
+To release the documentation website you can either use the Github CLI or [trigger the workflow from GithHub](https://github.com/wonderflow-bv/wanda/actions/workflows/production.yml)
