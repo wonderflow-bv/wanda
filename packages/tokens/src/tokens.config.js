@@ -2,7 +2,7 @@ module.exports = {
   source: ['src/configs/**/*.json'],
   platforms: {
     web: {
-      basePxFontSize: 18,
+      basePxFontSize: 16,
       buildPath: 'platforms/web/',
       transformGroup: 'custom-web',
       files: [
