@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 9.4.0
+
+### Minor Changes
+
+- 38ba5e1: Fix Card dimmed values
+
 ## 9.3.0
 
 ### Minor Changes
