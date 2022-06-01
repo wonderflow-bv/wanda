@@ -13,7 +13,7 @@ import Link from 'next/link';
 import { Logo } from '@/components/shared/logo';
 import { MainNav } from '@/components/shared/main-nav';
 import { Search } from '@/components/shared/search';
-import { useResponsiveContext } from '@/context/responsive';
+import { useResponsive } from '@/context/responsive';
 
 import styles from './header.module.css';
 
@@ -34,7 +34,7 @@ export const Header: FCClass<HeaderProps> = ({
   position,
   ...otherProps
 }) => {
-  const { matches } = useResponsiveContext();
+  const { matches } = useResponsive();
   const scroll = useScroll(document, val => val.top >= 0 && val.top < 600);
 
   return (

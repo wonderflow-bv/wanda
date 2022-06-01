@@ -1,20 +1,22 @@
 import {
-  Container, Icon, Stack, Text,
+  Container, Stack,
 } from '@wonderflow/react-components';
 import clsx from 'clsx';
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
-import { NextRouter, useRouter } from 'next/router';
-import { HTMLAttributes, PropsWithChildren, useCallback } from 'react';
+import { useRouter } from 'next/router';
+import { CSSProperties, useMemo } from 'react';
 
+import { DocHeader, DocHeaderProps } from '@/components/doc/doc-header';
+import { DocNav } from '@/components/doc-nav';
 import { BaseLayout } from '@/components/layouts/base-layout';
 import { HeaderProps } from '@/components/shared/header';
-import { useResponsiveContext } from '@/context/responsive';
-import DocNav from '@/data/doc-nav';
+import { useResponsive } from '@/context/responsive';
 
 import styles from './doc-layout.module.css';
 
-export interface IPropsDocLayout extends PropsWithChildren<HTMLAttributes<HTMLElement>> {}
+export interface IPropsDocLayout extends Pick<DocHeaderProps, 'title' | 'subtitle'> {
+  color?: 'mint' | 'blue' | 'salmon' | 'indigo';
+}
 
 const DynHeader = dynamic<HeaderProps>(
   async () => import('@/components/shared/header').then(mod => mod.Header),
@@ -23,55 +25,39 @@ const DynHeader = dynamic<HeaderProps>(
   },
 );
 
-export const DocLayout: FCChildren<IPropsDocLayout> = ({ children }) => {
-  const { matches } = useResponsiveContext();
+export const DocLayout: FCChildren<IPropsDocLayout> = ({
+  children,
+  color,
+  title,
+  subtitle,
+}) => {
+  const { matches } = useResponsive();
   const router = useRouter();
+  const getPretitle = useMemo(() => {
+    const pretitle = (router.asPath.split('/')[3] || router.asPath.split('/')[2]).replace(/-/g, ' ');
+    const isDifferentFromTitle = pretitle.replace('-', ' ') !== title?.toLowerCase();
+    return pretitle && isDifferentFromTitle ? pretitle : undefined;
+  }, [router, title]);
 
-  const includesPath = useCallback(
-    (path: NextRouter['asPath']) => {
-      const matchURL = router.asPath.split('/')[1] === path;
-      return matchURL && router.asPath.split('/')[1].length > 0;
-    },
-    [router.asPath],
-  );
+  const dynamicStyle: CSSProperties = {
+    '--layout-color-fg': `var(--highlight-${color ?? 'gray'}-foreground)`,
+    '--layout-color-bg': `var(--highlight-${color ?? 'gray'}-background)`,
+  };
 
   return (
     <BaseLayout>
       <DynHeader position="sticky" />
-      <Container dimension="large">
+      <Container dimension="large" style={dynamicStyle}>
         <Stack direction={matches.large ? 'row' : undefined} columnGap={56}>
 
           <div className={styles.Sidebar}>
             <Stack rowGap={40}>
-              <Stack rowGap={8}>
-                {DocNav.map(link => (
-                  <Link href={link.url} passHref>
-                    <Stack
-                      as="a"
-                      className={styles.NavItem}
-                      style={{
-                        '--bg': `var(--highlight-${link.color ?? 'gray'}-background)`,
-                        '--fg': `var(--highlight-${link.color ?? 'gray'}-foreground)`,
-                      }}
-                      direction="row"
-                      columnGap={8}
-                      hAlign="start"
-                      vAlign="center"
-                      fill={false}
-                      aria-current={includesPath(link.url.split('/')[1]) ? 'true' : undefined}
-                    >
-                      <Stack as="span" hAlign="center" vAlign="center" className={styles.IconWrapper}>
-                        <Icon source={link.icon} dimension={18} weight="duotone" />
-                      </Stack>
-                      <Text as="span" weight="bold" size={16}>{link.label}</Text>
-                    </Stack>
-                  </Link>
-                ))}
-              </Stack>
+              <DocNav />
             </Stack>
           </div>
 
           <main className={styles.Content}>
+            <DocHeader preTitle={getPretitle} title={title} subtitle={subtitle} />
             {children}
           </main>
 

@@ -8,4 +8,9 @@ export default IntroductionPage;
 
 export const getStaticProps = () => getLayoutProps({
   layout: 'doc',
+  layoutProps: {
+    title: 'Introduction',
+    color: 'mint',
+    subtitle: 'Wanda is Wonderflow’s open-source design system built for products and digital experiences.',
+  },
 });

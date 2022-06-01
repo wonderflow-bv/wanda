@@ -67,19 +67,19 @@ export const Footer = () => (
             <Title level="5">Designers</Title>
             <List hideMarker>
               <List.Li>
-                <Link href="/documentation/design/brand"><a>Brand</a></Link>
+                <Link href="/documentation/usage/design/brand"><a>Brand</a></Link>
               </List.Li>
               <List.Li>
-                <Link href="/documentation/design/foundation/colors"><a>Foundation</a></Link>
+                <Link href="/documentation/usage/design/foundation/colors"><a>Foundation</a></Link>
               </List.Li>
               <List.Li>
-                <Link href="/documentation/design/iconography"><a>Iconography</a></Link>
+                <Link href="/documentation/usage/design/iconography"><a>Iconography</a></Link>
               </List.Li>
               <List.Li>
-                <Link href="/documentation/design/motion/principles"><a>Motion</a></Link>
+                <Link href="/documentation/usage/design/motion/principles"><a>Motion</a></Link>
               </List.Li>
               <List.Li>
-                <Link href="/documentation/design/themes"><a>Themes</a></Link>
+                <Link href="/documentation/usage/design/themes"><a>Themes</a></Link>
               </List.Li>
             </List>
           </Stack>
@@ -87,19 +87,19 @@ export const Footer = () => (
             <Title level="5">Developers</Title>
             <List hideMarker>
               <List.Li>
-                <Link href="/documentation/develop/installation"><a>Installation</a></Link>
+                <Link href="/documentation/usage/develop/installation"><a>Installation</a></Link>
               </List.Li>
               <List.Li>
-                <Link href="/documentation/develop/design-tokens"><a>Design tokens</a></Link>
+                <Link href="/documentation/usage/develop/design-tokens"><a>Design tokens</a></Link>
               </List.Li>
               <List.Li>
-                <Link href="/documentation/develop/global-styles"><a>Global styles</a></Link>
+                <Link href="/documentation/usage/develop/global-styles"><a>Global styles</a></Link>
               </List.Li>
               <List.Li>
-                <Link href="/documentation/develop/themes"><a>Using themes</a></Link>
+                <Link href="/documentation/usage/develop/themes"><a>Using themes</a></Link>
               </List.Li>
               <List.Li>
-                <Link href="/documentation/develop/ssr"><a>SSR</a></Link>
+                <Link href="/documentation/usage/develop/ssr"><a>SSR</a></Link>
               </List.Li>
             </List>
           </Stack>
