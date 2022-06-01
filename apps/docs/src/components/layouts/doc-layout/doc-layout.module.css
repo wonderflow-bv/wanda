@@ -29,28 +29,3 @@
     display: block;
   }
 }
-
-.NavItem {
-  color: var(--global-foreground);
-
-  &[aria-current='true'] {
-    color: var(--fg);
-  }
-}
-
-.IconWrapper {
-  width: token(--space-24);
-  height: token(--space-24);
-  background: var(--global-vibrancy-background);
-  border-radius: token(--radius-4);
-
-  @nest .NavItem[aria-current='true'] & {
-    background: var(--fg);
-    color: var(--bg);
-  }
-
-  & svg {
-    width: token(--space-16);
-    height: token(--space-16);
-  }
-}

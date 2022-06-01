@@ -1,0 +1,14 @@
+.Pretitle {
+  color: var(--layout-color-fg);
+
+  &::first-letter {
+    text-transform: capitalize;
+  }
+}
+
+.Separator {
+  inline-size: token(--space-72);
+  height: token(--space-4);
+  background: var(--layout-color-fg);
+  border-radius: 1e5px;
+}

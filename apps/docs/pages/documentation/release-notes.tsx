@@ -8,4 +8,8 @@ export default ReleaseNotesPage;
 
 export const getStaticProps = () => getLayoutProps({
   layout: 'doc',
+  layoutProps: {
+    title: 'Release notes',
+    color: 'blue',
+  },
 });

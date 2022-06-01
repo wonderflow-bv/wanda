@@ -9,7 +9,7 @@ import { useState } from 'react';
 
 import { GradientText } from '@/components/shared/gradient-text';
 import { Section } from '@/components/shared/section';
-import { useResponsiveContext } from '@/context/responsive';
+import { useResponsive } from '@/context/responsive';
 
 import styles from './designers.module.css';
 import { Foundation } from './foundation';
@@ -19,7 +19,7 @@ import { Motion } from './motion';
 export const Designers: FCClass = ({
   className,
 }) => {
-  const { matches } = useResponsiveContext();
+  const { matches } = useResponsive();
   const [activeTab, setActiveTab] = useState('foundation');
 
   return (
@@ -46,7 +46,7 @@ export const Designers: FCClass = ({
                     Colors, typography, iconography, themes, and much more,
                     everything a designer needs, Wanda provides it.
                   </Text>
-                  <Link href="/documentation/design/foundation/colors" passHref>
+                  <Link href="/documentation/usage/design/foundation/colors" passHref>
                     <Button as="a" kind="secondary" dimension="big">Read more</Button>
                   </Link>
                 </Stack>
@@ -58,7 +58,7 @@ export const Designers: FCClass = ({
                     Wanda offers over 114 ready-to-use SVG icons and three solid,
                     outline, and duotone styles for over 342 icons.
                   </Text>
-                  <Link href="/documentation/design/iconography" passHref>
+                  <Link href="/documentation/usage/design/iconography" passHref>
                     <Button as="a" kind="secondary" dimension="big">Read more</Button>
                   </Link>
                 </Stack>
@@ -70,7 +70,7 @@ export const Designers: FCClass = ({
                     Motion is part of the life. Starting from cells.
                     They bring life to your interfaces and provide a great feeling of control.
                   </Text>
-                  <Link href="/documentation/design/motion/principles" passHref>
+                  <Link href="/documentation/usage/design/motion/principles" passHref>
                     <Button as="a" kind="secondary" dimension="big">Read more</Button>
                   </Link>
                 </Stack>

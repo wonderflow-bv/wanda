@@ -1,4 +1,4 @@
-import { configResponsive, useResponsive } from 'ahooks';
+import { configResponsive, useResponsive as responsiveAhook } from 'ahooks';
 import {
   createContext, useContext, useEffect, useState,
 } from 'react';
@@ -51,7 +51,7 @@ export const ResponsiveProvider: FCChildren<ResponsiveProviderProps> = ({
 }) => {
   configResponsive(breakpoints);
 
-  const responsive = useResponsive();
+  const responsiveHook = responsiveAhook();
   const [matching, setMatching] = useState<ResponsiveContextProps['matches']>({
     extraSmall: false,
     small: false,
@@ -61,8 +61,8 @@ export const ResponsiveProvider: FCChildren<ResponsiveProviderProps> = ({
   });
 
   useEffect(() => {
-    setMatching(responsive);
-  }, [responsive]);
+    setMatching(responsiveHook);
+  }, [responsiveHook]);
 
   return (
     <ResponsiveContext.Provider value={{ breakpoints, matches: matching }}>
@@ -71,11 +71,11 @@ export const ResponsiveProvider: FCChildren<ResponsiveProviderProps> = ({
   );
 };
 
-export const useResponsiveContext = () => {
+export const useResponsive = () => {
   const context = useContext(ResponsiveContext);
   if (!context) {
     throw new Error(
-      'useResponsiveContext hook must be used inside ResponsiveProvider to access context data.',
+      'useResponsive hook must be used inside ResponsiveProvider to access context data.',
     );
   }
   return context;

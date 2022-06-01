@@ -3,7 +3,7 @@ import { NavType } from 'types/data';
 const Nav: NavType = [
   {
     label: 'Documentation',
-    url: '/documentation/get-started/introduction',
+    url: '/documentation/usage/get-started/introduction',
   },
   // {
   //   label: 'Learn',

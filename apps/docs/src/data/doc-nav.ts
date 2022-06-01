@@ -5,7 +5,7 @@ const DocNav: DocNavType = [
     label: 'Usage',
     icon: 'book-bookmark',
     color: 'mint',
-    url: '/documentation/get-started/introduction',
+    url: '/documentation/usage/get-started/introduction',
   },
   {
     label: 'Components',

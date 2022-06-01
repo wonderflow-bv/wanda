@@ -9,7 +9,7 @@ import { useState } from 'react';
 
 import { GradientText } from '@/components/shared/gradient-text';
 import { Section } from '@/components/shared/section';
-import { useResponsiveContext } from '@/context/responsive';
+import { useResponsive } from '@/context/responsive';
 
 import { Components } from './components';
 import { DesignTokens } from './design-tokens';
@@ -19,7 +19,7 @@ import { Themes } from './themes';
 export const Developers: FCClass = ({
   className,
 }) => {
-  const { matches } = useResponsiveContext();
+  const { matches } = useResponsive();
   const [activeTab, setActiveTab] = useState('components');
 
   return (
@@ -57,7 +57,7 @@ export const Developers: FCClass = ({
                     Color, spaces, font... every basic and common property is available as design token.
                     The foundamentals of consistency across platforms.
                   </Text>
-                  <Link href="/documentation/develop/design-tokens" passHref>
+                  <Link href="/documentation/usage/develop/design-tokens" passHref>
                     <Button as="a" kind="secondary" dimension="big">Read more</Button>
                   </Link>
                 </Stack>
@@ -69,7 +69,7 @@ export const Developers: FCClass = ({
                     Easily handle light/dark themes via JS or CSS, by using the provided
                     collections of custom properties and JSON values.
                   </Text>
-                  <Link href="/documentation/develop/themes" passHref>
+                  <Link href="/documentation/usage/develop/themes" passHref>
                     <Button as="a" kind="secondary" dimension="big">Read more</Button>
                   </Link>
                 </Stack>
