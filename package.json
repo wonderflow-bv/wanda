@@ -16,7 +16,8 @@
     "test": "turbo run test",
     "release": "changeset publish",
     "prepare": "is-ci || husky install",
-    "update:deps": "npx npm-upgrade-monorepo"
+    "update:deps": "npx npm-upgrade-monorepo",
+    "change": "changeset"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": "eslint",

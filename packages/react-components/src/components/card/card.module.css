@@ -10,7 +10,7 @@
     background-color: var(--dimmed-0);
   }
 
-  &[data-card-dimmed='1'] {
+  &[data-card-dimmed='0'] {
     background-color: var(--dimmed-0);
 
     &[data-card-highlight-hover='true']:is(:hover, :focus-visible) {
@@ -18,7 +18,7 @@
     }
   }
 
-  &[data-card-dimmed='2'] {
+  &[data-card-dimmed='1'] {
     background-color: var(--dimmed-1);
 
     &[data-card-highlight-hover='true']:is(:hover, :focus-visible) {
@@ -26,7 +26,7 @@
     }
   }
 
-  &[data-card-dimmed='3'] {
+  &[data-card-dimmed='2'] {
     background-color: var(--dimmed-2);
 
     &[data-card-highlight-hover='true']:is(:hover, :focus-visible) {

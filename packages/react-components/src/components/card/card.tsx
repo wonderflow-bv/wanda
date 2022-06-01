@@ -33,7 +33,7 @@ StackProps,
   /**
    * Change the background color of the card.
    */
-  dimmed?: 1 | 2 | 3;
+  dimmed?: 0 | 1 | 2;
   /**
    * Make the card vibrant. Add tranlucent background.
    */
