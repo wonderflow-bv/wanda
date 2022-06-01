@@ -13,11 +13,11 @@ const DocNav: DocNavType = [
     color: 'indigo',
     url: '/documentation/components/actions/button',
   },
-  {
-    label: 'Playground',
-    icon: 'code',
-    url: '/documentation/playground',
-  },
+  // {
+  //   label: 'Playground',
+  //   icon: 'code',
+  //   url: '/documentation/playground',
+  // },
   {
     label: 'Resources',
     icon: 'arrow-down-to-bracket',

@@ -5,10 +5,10 @@ const Nav: NavType = [
     label: 'Documentation',
     url: '/documentation/usage/get-started/introduction',
   },
-  // {
-  //   label: 'Learn',
-  //   url: '/learn',
-  // },
+  {
+    label: 'Playground',
+    url: '/playground',
+  },
   {
     label: 'Company',
     url: 'https://wonderflow.ai',
