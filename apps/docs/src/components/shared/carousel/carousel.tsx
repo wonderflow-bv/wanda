@@ -2,7 +2,7 @@ import { Container } from '@wonderflow/react-components';
 import React from 'react';
 import Marquee from 'react-fast-marquee';
 
-import { useResponsiveContext } from '@/context/responsive';
+import { useResponsive } from '@/context/responsive';
 
 import styles from './carousel.module.css';
 
@@ -15,7 +15,7 @@ export const Carousel: FCChildrenClass<CarouselProps> = ({
   speed,
   ...otherProps
 }) => {
-  const { matches } = useResponsiveContext();
+  const { matches } = useResponsive();
 
   return (
     <Container

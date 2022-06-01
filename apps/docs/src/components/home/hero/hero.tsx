@@ -12,7 +12,7 @@ import Link from 'next/link';
 
 import { GradientText } from '@/components/shared/gradient-text';
 import { Section } from '@/components/shared/section';
-import { useResponsiveContext } from '@/context/responsive';
+import { useResponsive } from '@/context/responsive';
 
 import styles from './hero.module.css';
 
@@ -20,7 +20,7 @@ export const Hero: FCClass = ({
   className,
   ...otherProps
 }) => {
-  const { matches } = useResponsiveContext();
+  const { matches } = useResponsive();
   const { scrollYProgress } = useViewportScroll();
   const yOutput = [0, 0.4];
   const background = useTransform(scrollYProgress, yOutput, [
@@ -62,7 +62,7 @@ export const Hero: FCClass = ({
           </Text>
         </Stack>
         <Stack direction="row" columnGap={24} rowGap={16} inline wrap>
-          <Link href="/documentation/get-started/introduction" passHref>
+          <Link href="/documentation/usage/get-started/introduction" passHref>
             <Button as="a" icon="book-bookmark" dimension="big">Documentation</Button>
           </Link>
           <Link href="/documentation/components/actions/button" passHref>
