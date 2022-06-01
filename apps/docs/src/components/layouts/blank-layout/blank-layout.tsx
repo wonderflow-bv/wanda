@@ -1,4 +1,5 @@
 
+import { Skeleton } from '@wonderflow/react-components';
 import dynamic from 'next/dynamic';
 
 import { BaseLayout } from '@/components/layouts/base-layout';
@@ -13,6 +14,7 @@ const DynHeader = dynamic<HeaderProps>(
   async () => import('@/components/shared/header').then(mod => mod.Header),
   {
     ssr: false,
+    loading: () => <Skeleton height={75} width={1376} />,
   },
 );
 
