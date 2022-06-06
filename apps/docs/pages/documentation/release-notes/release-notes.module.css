@@ -27,6 +27,9 @@
   }
 
   &:first-of-type {
+    --tag-opacity-1: 16%;
+    --tag-opacity-2: 42%;
+
     &::before {
       background: linear-gradient(to bottom, var(--highlight-blue-foreground) 0, var(--timeline-color) 350px);
     }
@@ -48,8 +51,8 @@
   border-radius: 100%;
   color: var(--highlight-blue-foreground);
   background:
-    radial-gradient(circle at 94% 85%, rgb(40 255 216 / 6%) 0%, rgb(40 255 216 / 0%) 100%),
-    radial-gradient(circle at 88% 0%, rgb(97 160 255 / 12%) 0%, rgb(97 160 255 / 0%) 100%)
+    radial-gradient(circle at 94% 85%, rgb(40 255 216 / var(--tag-opacity-1, 6%)) 0%, rgb(40 255 216 / 0%) 100%),
+    radial-gradient(circle at 88% 0%, rgb(97 160 255 / var(--tag-opacity-2, 12%)) 0%, rgb(97 160 255 / 0%) 100%)
     var(--global-vibrancy-background-soft);
   display: none;
 
