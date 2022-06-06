@@ -12,7 +12,7 @@
     "build": "turbo run build",
     "build:nocache": "turbo run build --force",
     "build:apps": "turbo run build:next",
-    "start": "graphql-codegen --config codegen.yml && turbo run start --parallel",
+    "start": "run-s codegen && turbo run start --parallel",
     "lint": "turbo run lint",
     "test": "turbo run test",
     "release": "changeset publish",

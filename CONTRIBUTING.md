@@ -57,6 +57,8 @@ Running this command from the project root will execute all the `start` scripts 
 
 Once you run the command both `react-components` and `docs` should start in development mode.
 
+If you're working with `graphql` queries you may need to run `codegen:watch` in a separated terminal to watch and rebuild queries on file changes.
+
 ### Building the project
 
 ```sh
