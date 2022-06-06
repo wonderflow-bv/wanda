@@ -31,7 +31,7 @@ const ReleaseNotesPage: NextPage = () => {
             columnGap={24}
           >
             <Stack vAlign="center" hAlign="center" fill={false} className={styles.Tag}>
-              <Text as="span" weight="bold" size={14} textAlign="center">{note.tag || '📣'}</Text>
+              <Text as="span" weight="bold" size={14} textAlign="center">{note.tag ?? '📣'}</Text>
             </Stack>
 
             <Stack>
