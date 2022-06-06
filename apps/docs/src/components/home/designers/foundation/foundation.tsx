@@ -4,7 +4,6 @@ import {
 } from '@wonderflow/react-components';
 import tkns from '@wonderflow/tokens/platforms/web/tokens.json';
 import { m } from 'framer-motion';
-import { FC } from 'react';
 
 import styles from './foundation.module.css';
 
@@ -88,7 +87,7 @@ type ListItemProps = {
   iconWeight?: IconProps['weight'];
 }
 
-const ListItem: FC<ListItemProps> = ({
+const ListItem: React.FC<ListItemProps> = ({
   label,
   color,
   icon,

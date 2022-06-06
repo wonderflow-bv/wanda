@@ -8,4 +8,8 @@ export default IconographyPage;
 
 export const getStaticProps = () => getLayoutProps({
   layout: 'doc',
+  layoutProps: {
+    title: 'Iconography',
+    color: 'mint',
+  },
 });

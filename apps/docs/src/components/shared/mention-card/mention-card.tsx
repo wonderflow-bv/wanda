@@ -21,7 +21,7 @@ export const MentionCard: FCClass<MentionCardProps> = ({
       <Avatar
         dimension="big"
         src={image}
-        alt={name}
+        aria-hidden="true"
       />
     )}
     {...otherProps}
