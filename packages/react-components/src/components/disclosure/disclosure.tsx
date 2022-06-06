@@ -55,6 +55,7 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
   iconPosition = 'left',
   expandable = true,
   style,
+  onToggle,
   ...otherProps
 }, forwardedRef) => {
   const ref = useRef<any>(forwardedRef)
@@ -68,9 +69,10 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
 
   const handleOpen = useCallback(
     () => () => {
-      (ref.current && expandable) && setIsOpen(ref.current.open)
+      if (ref.current && expandable) setIsOpen(ref.current.open)
+      expandable && onToggle?.(ref.current.open)
     },
-    [expandable]
+    [expandable, onToggle]
   )
 
   const dynamicStyle: CSSProperties = {
@@ -100,7 +102,7 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
           data-disclosure-padding={padding}
           data-disclosure-height={Boolean(contentMaxHeight)}
           animate={isOpen ? { y: 5, opacity: 1 } : { y: 0, opacity: 0 }}
-          transition={{ ease: 'easeOut', duration: 0.1 }}
+          transition={{ ease: 'easeOut', duration: 0.1, delay: 0.1 }}
           initial={false}
         >
           {children}
@@ -120,6 +122,7 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
       onToggle={handleOpen()}
       aria-expanded={isOpen ? 'true' : 'false'}
       ref={ref}
+      open={isOpen}
       {...otherProps}
     >
       <Text
