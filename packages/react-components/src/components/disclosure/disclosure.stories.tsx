@@ -1,6 +1,5 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { useState } from 'react'
-import { Disclosure } from './disclosure'
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { useState } from 'react';
 
 import { Disclosure } from './disclosure';
 
@@ -59,7 +58,7 @@ const NestedTemplate: ComponentStory<typeof Disclosure> = args => (
 export const Nested = NestedTemplate.bind({});
 
 const AccordionTemplate: ComponentStory<typeof Disclosure> = (args) => {
-  const [expandedItem, setExpandedItem] = useState<number>(0)
+  const [expandedItem, setExpandedItem] = useState<number>(0);
 
   return (
     <>
@@ -106,7 +105,7 @@ const AccordionTemplate: ComponentStory<typeof Disclosure> = (args) => {
         sint adipisci at asperiores quia ex voluptatum veniam! Quos rerum natus eos excepturi atque!
       </Disclosure>
     </>
-  )
-}
+  );
+};
 
-export const Accordion = AccordionTemplate.bind({})
+export const Accordion = AccordionTemplate.bind({});

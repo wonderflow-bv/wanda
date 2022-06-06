@@ -8,6 +8,7 @@ export const Logo: FCClass<LogoProps> = ({
   width = 116,
   height = 36,
   fill = 'var(--global-vibrancy-foreground)',
+  style,
   ...otherProps
 }) => (
   <svg
@@ -15,6 +16,7 @@ export const Logo: FCClass<LogoProps> = ({
     height={height}
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    style={{ display: 'block', ...style }}
     {...otherProps}
   >
     <path
