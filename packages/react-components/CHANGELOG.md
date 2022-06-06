@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 9.5.0
+
+### Minor Changes
+
+- e052a3c: Add `onToggle` callback to Disclosure
+
 ## 9.4.0
 
 ### Minor Changes
