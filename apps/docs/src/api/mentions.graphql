@@ -6,7 +6,10 @@ query Mentions {
       handle
       image {
         url(
-          transformation: { image: {}, document: { output: { format: webp } } }
+          transformation: {
+            image: { resize: { height: 96, width: 96 } }
+            document: { output: { format: webp } }
+          }
         )
       }
     }
