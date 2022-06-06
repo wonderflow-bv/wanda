@@ -21,6 +21,10 @@
   background: var(--global-vibrancy-background-soft);
   top: 0;
   z-index: 1;
+
+  @supports not (backdrop-filter: blur(0)) {
+    background-color: var(--dimmed-0);
+  }
 }
 
 .TrafficLight span {

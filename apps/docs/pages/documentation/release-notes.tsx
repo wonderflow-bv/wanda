@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 
-import { getLayoutProps } from '@/core/get-page-props';
+import { getLayoutProps } from '@/core/get-layout-props';
 
 const ReleaseNotesPage: NextPage = () => (<div>Release notes</div>);
 
