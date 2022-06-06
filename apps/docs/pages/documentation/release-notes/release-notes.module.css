@@ -10,7 +10,6 @@
 
   &::before {
     content: '';
-    display: block;
     position: absolute;
     width: 2px;
     height: 100%;
@@ -20,15 +19,20 @@
     transform: translateX(-50%);
     background: var(--timeline-color);
     z-index: -1;
-  }
+    display: none;
 
-  &:first-child {
-    &::before {
-      background: linear-gradient(to bottom, transparent 20px, var(--timeline-color) 60px);
+    @media (--from-medium) {
+      display: block;
     }
   }
 
-  &:last-child {
+  &:first-of-type {
+    &::before {
+      background: linear-gradient(to bottom, var(--highlight-blue-foreground) 0, var(--timeline-color) 350px);
+    }
+  }
+
+  &:last-of-type {
     &::before {
       background: linear-gradient(to bottom, var(--timeline-color), transparent);
     }
