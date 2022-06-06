@@ -43,7 +43,6 @@
   },
   "exclude": [
     "node_modules",
-    "src/generated",
     "*.mdx"
   ],
   "include": [
