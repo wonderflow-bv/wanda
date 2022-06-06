@@ -8,4 +8,8 @@ export default ColorsPage;
 
 export const getStaticProps = () => getLayoutProps({
   layout: 'doc',
+  layoutProps: {
+    title: 'Colors',
+    color: 'mint',
+  },
 });

@@ -1,0 +1,11 @@
+query releaseNotes {
+  releaseNotes(stage: PUBLISHED, orderBy: releaseDate_DESC, first: 10) {
+    content
+    new
+    breaking
+    fixes
+    id
+    tag
+    releaseDate
+  }
+}

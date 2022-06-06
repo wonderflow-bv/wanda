@@ -47,6 +47,7 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
   return (
     <BaseLayout>
       <DynHeader position="sticky" />
+      <span className={styles.Glow} />
       <Container dimension="large" style={dynamicStyle}>
         <Stack direction={matches.large ? 'row' : undefined} columnGap={56}>
 

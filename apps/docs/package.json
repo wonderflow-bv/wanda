@@ -44,6 +44,7 @@
     "css-color-converter": "2.0.0",
     "framer-motion": "6.3.4",
     "graphql": "16.5.0",
+    "markdown-to-jsx": "7.1.7",
     "next": "12.1.6",
     "next-compose-plugins": "2.2.1",
     "next-images": "1.8.4",

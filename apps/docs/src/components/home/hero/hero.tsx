@@ -24,7 +24,7 @@ export const Hero: FCClass = ({
   const { scrollYProgress } = useViewportScroll();
   const yOutput = [0, 0.4];
   const background = useTransform(scrollYProgress, yOutput, [
-    `radial-gradient(circle at 30% -20%, rgba(44, 191, 111, 0.08) 0%, rgba(44, 191, 111, 0) 30%),
+    `radial-gradient(circle at 30% -20%, rgba(44, 191, 111, 0.13) 0%, rgba(44, 191, 111, 0) 30%),
     radial-gradient(circle at 100% 0%, rgba(255, 235, 168, 0.14) 0%, rgba(255, 235, 168, 0) 40%),
     radial-gradient(circle at 68% 3%, rgba(78, 75, 210, 0.07) 0%, rgba(78, 75, 210, 0) 40%),
     radial-gradient(circle at 84% 6%, rgba(238, 0, 0, 0.05) 0%, rgba(238, 0, 0, 0) 40%)`,

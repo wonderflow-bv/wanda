@@ -8,4 +8,8 @@ export default MotionPrinciplesPage;
 
 export const getStaticProps = () => getLayoutProps({
   layout: 'doc',
+  layoutProps: {
+    title: 'Motion',
+    color: 'mint',
+  },
 });
