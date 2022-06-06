@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 
-import { getLayoutProps } from '@/core/get-layout-props';
+import { getLayoutProps } from '@/utils/get-layout-props';
 
 const ColorsPage: NextPage = () => (<div>Color</div>);
 

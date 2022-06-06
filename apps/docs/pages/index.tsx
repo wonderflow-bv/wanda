@@ -5,7 +5,7 @@ import { Hero } from '@/components/home/hero';
 import { Mentions } from '@/components/home/mentions';
 import { Brands } from '@/components/shared/brands';
 import { Meta } from '@/components/shared/meta';
-import { getLayoutProps } from '@/core/get-layout-props';
+import { getLayoutProps } from '@/utils/get-layout-props';
 
 const DynDesigners = dynamic<Record<string, any>>(
   async () => import('@/components/home/designers').then(mod => mod.Designers),
@@ -29,7 +29,7 @@ const Home: NextPage = () => (
 
 export default Home;
 
-export const getStaticProps = () => getLayoutProps({
+export const getStaticProps = async () => getLayoutProps({
   layout: 'blank',
   layoutProps: {
     headerPosition: 'absolute',
