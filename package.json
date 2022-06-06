@@ -8,18 +8,19 @@
   ],
   "packageManager": "npm@8.3.1",
   "scripts": {
-    "prebuild": "graphql-codegen --config codegen.yml",
+    "prebuild:apps": "graphql-codegen --config codegen.yml",
     "build": "turbo run build",
     "build:nocache": "turbo run build --force",
     "build:apps": "turbo run build:next",
-    "start": "turbo run start --parallel",
+    "start": "graphql-codegen --config codegen.yml && turbo run start --parallel",
     "lint": "turbo run lint",
     "test": "turbo run test",
     "release": "changeset publish",
     "prepare": "is-ci || husky install",
     "update:deps": "npx npm-upgrade-monorepo",
     "change": "changeset",
-    "codegen": "graphql-codegen --config codegen.yml"
+    "codegen": "graphql-codegen --config codegen.yml",
+    "codegen:watch": "graphql-codegen --watch --config codegen.yml"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": "eslint",
