@@ -19,7 +19,7 @@ const ReleaseNotesPage: NextPage = () => {
       {data?.releaseNotes.map(note => (
         <Stack
           as="section"
-          vPadding={80}
+          vPadding={40}
           rowGap={32}
           hAlign="start"
           key={note.id}
