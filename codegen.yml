@@ -1,6 +1,5 @@
 overwrite: true
 schema: "https://api-eu-central-1.graphcms.com/v2/ckwca7cae474g01xq38wt2o6q/master"
-watch: true
 watchConfig:
   usePolling: true
   interval: 1000

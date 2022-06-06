@@ -1,6 +1,5 @@
 import { Skeleton, Stack, Title } from '@wonderflow/react-components';
 import clsx from 'clsx';
-import { useUIDSeed } from 'react-uid';
 import { useMentionsQuery } from 'src/generated/graphql';
 
 import { Carousel } from '@/components/shared/carousel';
@@ -14,7 +13,6 @@ export const Mentions: FCClass = ({
   ...otherProps
 }) => {
   const { data, loading } = useMentionsQuery();
-  const uid = useUIDSeed();
 
   return (
     <Section className={clsx(styles.Mentions)} vAlign="start" rowGap={24} fill={false} vPadding={32} {...otherProps}>
@@ -23,7 +21,7 @@ export const Mentions: FCClass = ({
       </Stack>
       <Carousel>
         {loading
-          ? [...Array(10)].map((_, i) => <Skeleton key={uid(`mention-${i}`)} height={96} width={215} borderRadius={16} />)
+          ? [...Array(10).keys()].map(n => <Skeleton key={n} height={96} width={215} borderRadius={16} />)
           : data?.mentions.map(m => (
             <MentionCard
               key={m.author.name}
