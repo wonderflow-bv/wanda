@@ -5,7 +5,7 @@ import { Hero } from '@/components/home/hero';
 import { Mentions } from '@/components/home/mentions';
 import { Brands } from '@/components/shared/brands';
 import { Meta } from '@/components/shared/meta';
-import { getLayoutProps } from '@/core/get-page-props';
+import { getLayoutProps } from '@/core/get-layout-props';
 
 const DynDesigners = dynamic<Record<string, any>>(
   async () => import('@/components/home/designers').then(mod => mod.Designers),

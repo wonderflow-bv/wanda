@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 
-import { getLayoutProps } from '@/core/get-page-props';
+import { getLayoutProps } from '@/core/get-layout-props';
 
 const ThemesPage: NextPage = () => (<div>Themes</div>);
 
