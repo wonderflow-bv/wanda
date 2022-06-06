@@ -1,15 +1,16 @@
 @import '@wonderflow/react-components/core/utils/media.css';
 
 .Glow {
-  position: absolute;
+  position: fixed;
   inset: 0;
   z-index: -1;
   filter: saturate(2);
   background:
-    radial-gradient(circle at 30% -20%, rgb(44 191 111 / 13%) 0%, rgb(44 191 111 / 0%) 30%),
+    radial-gradient(circle at 30% -5%, rgb(44 191 111 / 10%) 0%, rgb(44 191 111 / 0%) 30%),
     radial-gradient(circle at 100% 0%, rgb(255 235 168 / 14%) 0%, rgb(255 235 168 / 0%) 40%),
     radial-gradient(circle at 68% 3%, rgb(78 75 210 / 7%) 0%, rgb(78 75 210 / 0%) 40%),
     radial-gradient(circle at 84% 6%, rgb(238 0 0 / 5%) 0%, rgb(238 0 0 / 0%) 40%);
+  background-attachment: fixed;
 }
 
 .Content {
