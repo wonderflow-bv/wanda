@@ -4,6 +4,7 @@ import '@wonderflow/react-components/core.css';
 import '@/styles/app.css';
 import '@/styles/docsearch.css';
 
+import { ApolloProvider } from '@apollo/client';
 import { IdProvider } from '@wonderflow/react-components';
 import { AnimatePresence } from 'framer-motion';
 import type { AppProps } from 'next/app';
@@ -15,6 +16,7 @@ import { useEffect } from 'react';
 import { BlankLayout } from '@/components/layouts/blank-layout';
 import { DocLayout } from '@/components/layouts/doc-layout';
 import { ResponsiveProvider } from '@/context/responsive';
+import client from '@/utils/apollo-client';
 
 const LAYOUTS = {
   blank: BlankLayout,
@@ -22,13 +24,15 @@ const LAYOUTS = {
 };
 
 const Providers: FCChildren = ({ children }) => (
-  <ThemeProvider defaultTheme="dark" disableTransitionOnChange>
-    <ResponsiveProvider>
-      <IdProvider>
-        {children}
-      </IdProvider>
-    </ResponsiveProvider>
-  </ThemeProvider>
+  <ApolloProvider client={client}>
+    <ThemeProvider defaultTheme="dark" disableTransitionOnChange>
+      <ResponsiveProvider>
+        <IdProvider>
+          {children}
+        </IdProvider>
+      </ResponsiveProvider>
+    </ThemeProvider>
+  </ApolloProvider>
 );
 
 const App = ({ Component, pageProps }: AppProps) => {

@@ -1,13 +1,5 @@
 import { IconNames } from '@wonderflow/icons';
 
-type MentionType = {
-  image?: string;
-  name: string;
-  handle?: string;
-}
-
-export type MentionsType = MentionType[]
-
 type NavItemType = {
   label: string;
   url: string;
