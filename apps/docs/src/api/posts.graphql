@@ -1,0 +1,34 @@
+query publishedPosts($avatarWidth: Int, $avatarHeight: Int) {
+  posts(stage: PUBLISHED, orderBy: updatedAt_DESC) {
+    id
+    updatedAt
+    publishedAt
+    createdAt
+    title
+    slug
+    externalUrl
+    topics
+    excerpt
+    content
+    authors {
+      id
+      fullName
+      role
+      favouriteColor {
+        rgba {
+          r
+          g
+          b
+        }
+      }
+      avatar {
+        url(
+          transformation: {
+            document: { output: { format: webp } }
+            image: { resize: { height: $avatarHeight, width: $avatarWidth } }
+          }
+        )
+      }
+    }
+  }
+}

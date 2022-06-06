@@ -2,6 +2,7 @@
   "extends": "./tsconfig.json",
   "exclude": [
     "node_modules",
+    "src/generated",
     "next-env.d.ts",
   ],
   "include": [

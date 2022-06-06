@@ -1,16 +1,12 @@
 import { Stack } from '@wonderflow/react-components';
 import { m, useReducedMotion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+
+import { ClientOnly } from '@/components/shared/client-only';
 
 import styles from './motion.module.css';
 
 export const Motion = () => {
   const shouldReduceMotion = useReducedMotion();
-  const [mounted, setMounted] = useState<boolean>(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   return (
     <Stack className={styles.Motion}>
@@ -40,7 +36,7 @@ export const Motion = () => {
         />
 
         <div className={styles.Shape}>
-          {(mounted) && (
+          <ClientOnly>
             <video
               className={styles.Video}
               src="/hero-video-dark.mp4"
@@ -51,7 +47,7 @@ export const Motion = () => {
               height="220"
               width="390"
             />
-          )}
+          </ClientOnly>
         </div>
       </Stack>
     </Stack>
