@@ -97,6 +97,7 @@
     "react-roving-tabindex": "3.2.0",
     "react-table": "7.8.0",
     "react-uid": "2.3.2",
+    "slugify": "1.6.5",
     "type-fest": "2.13.0"
   }
 }
