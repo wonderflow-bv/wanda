@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { CSSProperties, forwardRef } from 'react';
+import { useUIDSeed } from 'react-uid';
 import slugify from 'slugify';
 
 import { Polymorphic } from '@/components';
@@ -50,6 +51,7 @@ export const Title = forwardRef(({
   ...otherProps
 }, forwardedRef) => {
   const computedLevel = level.match(/\d/g) ? `H${level}` : `${level.charAt(0).toUpperCase()}${level.slice(1)}`;
+  const uid = useUIDSeed();
 
   const dynamicStyle: CSSProperties = {
     '--max-w': maxWidth,
@@ -63,7 +65,7 @@ export const Title = forwardRef(({
       data-title-responsive={responsive}
       className={clsx(styles.Title, styles[computedLevel], className)}
       style={{ ...dynamicStyle, ...style }}
-      id={slugify(String(id ?? children), { lower: true })}
+      id={slugify(String(id ?? uid('title-section')), { lower: true })}
       {...otherProps}
     >
       {children}
