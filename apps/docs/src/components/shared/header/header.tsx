@@ -40,7 +40,6 @@ export const Header: FCClass<HeaderProps> = ({
   return (
     <LazyMotion features={domMax}>
       <m.header
-        layout
         data-header-position={position}
         className={clsx(styles.Header, className)}
         style={{ '--blur': `${Math.min(Math.max(scroll?.top ?? 0, 0), 24)}px` }}
@@ -49,7 +48,7 @@ export const Header: FCClass<HeaderProps> = ({
         <div
           className={styles.BgContainer}
           style={{
-            '--bg-opacity': `${Math.min(Math.max(scroll?.top ?? 0, 0), 100)}%`,
+            '--bg-opacity': `${Math.min(Math.max(scroll?.top ?? 0, 0), 70)}%`,
           }}
         >
           <Container dimension="large">

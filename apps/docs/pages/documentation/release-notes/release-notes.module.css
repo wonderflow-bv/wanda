@@ -50,6 +50,7 @@
   min-block-size: var(--timeline-width);
   border-radius: 100%;
   position: relative;
+  border: 1px solid var(--dimmed-1);
   color: var(--highlight-blue-foreground);
   background:
     radial-gradient(circle at 94% 85%, rgb(40 255 216 / var(--tag-opacity-1, 0)) 0%, rgb(40 255 216 / 0%) 100%),

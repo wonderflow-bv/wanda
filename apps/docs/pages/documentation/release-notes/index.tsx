@@ -36,7 +36,7 @@ const ReleaseNotesPage: NextPage = () => {
               <Text as="span" dimmed={i !== 0 ? 6 : undefined} weight="bold" size={14} textAlign="center">{note.tag ?? '📣'}</Text>
               {i === 0 && (
                 <m.span
-                  initial={{ scale: 0.9, opacity: 0.5 }}
+                  initial={{ scale: 1, opacity: 0.5 }}
                   animate={{ scale: 1.5, opacity: 0 }}
                   transition={{ duration: 1, repeat: Infinity, repeatDelay: 1 }}
                   className={styles.Pulse}
@@ -95,5 +95,6 @@ export const getStaticProps = () => getLayoutProps({
     title: 'Release notes',
     subtitle: 'Latest changes and improvements across all the design system elements.',
     color: 'blue',
+    showToc: false,
   },
 });
