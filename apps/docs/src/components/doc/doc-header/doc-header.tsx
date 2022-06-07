@@ -18,7 +18,7 @@ export const DocHeader: FCClass<DocHeaderProps> = ({
     <Stack rowGap={8}>
       {preTitle && <Text className={styles.Pretitle} weight="bold" size={18}>{preTitle}</Text>}
       {title && <Title as="h1" level="2">{title}</Title>}
-      {subtitle && <Text size={22}>{subtitle}</Text>}
+      {subtitle && <Text size={28}>{subtitle}</Text>}
     </Stack>
     <span className={styles.Separator} />
   </Stack>

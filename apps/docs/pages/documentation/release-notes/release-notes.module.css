@@ -27,11 +27,11 @@
   }
 
   &:first-of-type {
-    --tag-opacity-1: 16%;
-    --tag-opacity-2: 42%;
+    --tag-opacity-1: 12%;
+    --tag-opacity-2: 22%;
 
     &::before {
-      background: linear-gradient(to bottom, var(--highlight-blue-foreground) 0, var(--timeline-color) 350px);
+      background: linear-gradient(to bottom, var(--layout-color-fg) 0, var(--timeline-color) 95%);
     }
   }
 
@@ -49,19 +49,43 @@
   min-inline-size: var(--timeline-width);
   min-block-size: var(--timeline-width);
   border-radius: 100%;
+  position: relative;
   color: var(--highlight-blue-foreground);
   background:
-    radial-gradient(circle at 94% 85%, rgb(40 255 216 / var(--tag-opacity-1, 6%)) 0%, rgb(40 255 216 / 0%) 100%),
-    radial-gradient(circle at 88% 0%, rgb(97 160 255 / var(--tag-opacity-2, 12%)) 0%, rgb(97 160 255 / 0%) 100%)
+    radial-gradient(circle at 94% 85%, rgb(40 255 216 / var(--tag-opacity-1, 0)) 0%, rgb(40 255 216 / 0%) 100%),
+    radial-gradient(circle at 88% 0%, rgb(97 160 255 / var(--tag-opacity-2, 0)) 0%, rgb(97 160 255 / 0%) 100%)
     var(--global-vibrancy-background-soft);
   display: none;
 
   @media (--from-medium) {
     display: flex;
   }
+
+  @supports not (backdrop-filter: blur(0)) {
+    background-color: var(--dimmed-0);
+  }
+}
+
+.Pulse {
+  position: absolute;
+  border: 2px solid var(--layout-color-fg);
+  border-radius: 100%;
+  display: block;
+  inset: 0;
 }
 
 .Changes.Changes {
+
+  @mixin vibrancy;
+
+  background: var(--global-vibrancy-background-soft);
+  margin-top: token(--space-24);
+  color: var(--dimmed-6);
+
+  @supports not (backdrop-filter: blur(0)) {
+    background-color: var(--dimmed-0);
+  }
+
   & li {
     position: relative;
     margin-top: token(--space-8);
