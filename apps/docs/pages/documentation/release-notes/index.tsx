@@ -1,6 +1,8 @@
 import {
-  Datetime, Stack, Text, Title,
+  Card,
+  Datetime, Elevator, Stack, Text, Title,
 } from '@wonderflow/react-components';
+import { m } from 'framer-motion';
 import { NextPage } from 'next';
 import { useReleaseNotesQuery } from 'src/generated/graphql';
 
@@ -16,7 +18,7 @@ const ReleaseNotesPage: NextPage = () => {
   return (
     <>
       <Meta title="Release notes - Wanda Design System" description="List of improvements, fixes and new features" />
-      {data?.releaseNotes.map(note => (
+      {data?.releaseNotes.map((note, i) => (
         <Stack
           as="section"
           vPadding={40}
@@ -31,7 +33,15 @@ const ReleaseNotesPage: NextPage = () => {
             columnGap={24}
           >
             <Stack vAlign="center" hAlign="center" fill={false} className={styles.Tag}>
-              <Text as="span" weight="bold" size={14} textAlign="center">{note.tag ?? '📣'}</Text>
+              <Text as="span" dimmed={i !== 0 ? 6 : undefined} weight="bold" size={14} textAlign="center">{note.tag ?? '📣'}</Text>
+              {i === 0 && (
+                <m.span
+                  initial={{ scale: 0.9, opacity: 0.5 }}
+                  animate={{ scale: 1.5, opacity: 0 }}
+                  transition={{ duration: 1, repeat: Infinity, repeatDelay: 1 }}
+                  className={styles.Pulse}
+                />
+              )}
             </Stack>
 
             <Stack>
@@ -50,23 +60,25 @@ const ReleaseNotesPage: NextPage = () => {
               </Markdown>
               )}
 
-              <Stack hAlign="start" vPadding={24} className={styles.Changes}>
-                {note.breaking && (
+              <Elevator resting={2}>
+                <Card hAlign="start" padding={24} radius={16} className={styles.Changes}>
+                  {note.breaking && (
                   <div data-note-type="breaking">
                     <Markdown hideMarkers>{note.breaking}</Markdown>
                   </div>
-                )}
-                {note.new && (
+                  )}
+                  {note.new && (
                   <div data-note-type="new">
                     <Markdown hideMarkers>{note.new}</Markdown>
                   </div>
-                )}
-                {note.fixes && (
+                  )}
+                  {note.fixes && (
                   <div data-note-type="fixes">
                     <Markdown hideMarkers>{note.fixes}</Markdown>
                   </div>
-                )}
-              </Stack>
+                  )}
+                </Card>
+              </Elevator>
             </Stack>
           </Stack>
         </Stack>
@@ -81,6 +93,7 @@ export const getStaticProps = () => getLayoutProps({
   layout: 'doc',
   layoutProps: {
     title: 'Release notes',
+    subtitle: 'Latest changes and improvements across all the design system elements.',
     color: 'blue',
   },
 });

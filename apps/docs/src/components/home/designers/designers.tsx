@@ -9,6 +9,7 @@ import { useState } from 'react';
 
 import { GradientText } from '@/components/shared/gradient-text';
 import { Section } from '@/components/shared/section';
+import { TextReveal } from '@/components/shared/text-reveal';
 import { useResponsive } from '@/context/responsive';
 
 import styles from './designers.module.css';
@@ -35,8 +36,12 @@ export const Designers: FCClass = ({
           <Stack rowGap={56} className={styles.Content}>
 
             <Stack rowGap={4}>
-              <Text weight="bold"><GradientText color="indigo">For designers</GradientText></Text>
-              <Title as="h2" level="2" maxWidth="16ch">Everything you need. When you need it. </Title>
+              <Text weight="bold">
+                <GradientText color="indigo">For designers</GradientText>
+              </Text>
+              <Title as="h2" level="2" maxWidth="16ch">
+                <TextReveal>Everything you need. When you need it.</TextReveal>
+              </Title>
             </Stack>
 
             <Tab className={styles.Tab} defaultValue={activeTab} onValueChange={setActiveTab}>
