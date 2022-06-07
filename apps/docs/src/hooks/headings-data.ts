@@ -30,7 +30,7 @@ const getNestedHeadings = (headingElements: Headings) => {
 
 export const useHeadingsData = () => {
   const [nestedHeadings, setNestedHeadings] = useState<HeadingType[]>([]);
-  const { asPath } = useRouter();
+  const router = useRouter();
 
   useEffect(() => {
     const headingElements: Headings = Array.from(
@@ -43,7 +43,7 @@ export const useHeadingsData = () => {
     return () => {
       setNestedHeadings([]);
     };
-  }, [asPath]);
+  }, [router]);
 
   return { nestedHeadings };
 };
