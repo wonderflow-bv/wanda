@@ -6,7 +6,7 @@ import {
 } from '@wonderflow/react-components';
 import { useScroll } from 'ahooks';
 import clsx from 'clsx';
-import { m } from 'framer-motion';
+import { domMax, LazyMotion, m } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
@@ -35,35 +35,36 @@ export const Header: FCClass<HeaderProps> = ({
   ...otherProps
 }) => {
   const { matches } = useResponsive();
-  const scroll = useScroll(document, val => val.top >= 0 && val.top < 600);
+  const scroll = useScroll(document, val => val.top >= 0 && val.top < 1000);
 
   return (
-    <m.header
-      layout
-      data-header-position={position}
-      className={clsx(styles.Header, className)}
-      style={{ '--blur': `${Math.min(Math.max(scroll?.top ?? 0, 0), 24)}px` }}
-      {...otherProps}
-    >
-      <div
-        className={styles.BgContainer}
-        style={{
-          '--bg-opacity': `${Math.min(Math.max(scroll?.top ?? 0, 0), 100)}%`,
-        }}
+    <LazyMotion features={domMax}>
+      <m.header
+        layout
+        data-header-position={position}
+        className={clsx(styles.Header, className)}
+        style={{ '--blur': `${Math.min(Math.max(scroll?.top ?? 0, 0), 24)}px` }}
+        {...otherProps}
       >
-        <Container dimension="large">
-          <Stack
-            fill={false}
-            direction="row"
-            hAlign="space-between"
-            vAlign="center"
-            vPadding={16}
-            columnGap={24}
-          >
-            <Link href="/"><a className={styles.LogoLink}><Logo /></a></Link>
-            <Stack direction="row" vAlign="center" fill={false} columnGap={8}>
-              {matches.medium && <MainNav />}
-              {!matches.medium && (
+        <div
+          className={styles.BgContainer}
+          style={{
+            '--bg-opacity': `${Math.min(Math.max(scroll?.top ?? 0, 0), 100)}%`,
+          }}
+        >
+          <Container dimension="large">
+            <Stack
+              fill={false}
+              direction="row"
+              hAlign="space-between"
+              vAlign="center"
+              vPadding={16}
+              columnGap={24}
+            >
+              <Link href="/"><a className={styles.LogoLink}><Logo /></a></Link>
+              <Stack direction="row" vAlign="center" fill={false} columnGap={8}>
+                {matches.medium && <MainNav />}
+                {!matches.medium && (
                 <Popover trigger={<IconButton icon="bars" kind="flat" iconPosition="right" aria-label="Show main menu" />}>
                   <Elevator resting={2}>
                     <Card bordered padding={8}>
@@ -71,13 +72,14 @@ export const Header: FCClass<HeaderProps> = ({
                     </Card>
                   </Elevator>
                 </Popover>
-              )}
-              <Search />
-              <DynThemeSwitcher />
+                )}
+                <Search />
+                <DynThemeSwitcher />
+              </Stack>
             </Stack>
-          </Stack>
-        </Container>
-      </div>
-    </m.header>
+          </Container>
+        </div>
+      </m.header>
+    </LazyMotion>
   );
 };

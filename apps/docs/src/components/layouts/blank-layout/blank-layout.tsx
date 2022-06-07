@@ -1,5 +1,6 @@
 
 import { Skeleton } from '@wonderflow/react-components';
+import { domMax, LazyMotion } from 'framer-motion';
 import dynamic from 'next/dynamic';
 
 import { BaseLayout } from '@/components/layouts/base-layout';
@@ -24,8 +25,10 @@ export const BlankLayout: FCChildren<IPropsBlankLayout> = ({
 }) => (
   <BaseLayout>
     <DynHeader position={headerPosition} />
-    <main>{children}</main>
-    <Footer />
+    <LazyMotion features={domMax}>
+      <main>{children}</main>
+      <Footer />
+    </LazyMotion>
   </BaseLayout>
 );
 
