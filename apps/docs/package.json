@@ -5,6 +5,7 @@
   "private": true,
   "author": "Wonderflow",
   "license": "MIT",
+  "main": "postcss.config.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wonderflow-bv/wanda.git"
@@ -72,6 +73,5 @@
     "stylelint-design-tokens-plugin": "0.0.14",
     "typescript": "4.7.2",
     "typescript-plugin-css-modules": "3.4.0"
-  },
-  "main": "postcss.config.js"
+  }
 }

@@ -1,5 +1,5 @@
 import {
-  Container, Stack,
+  Container, Separator, Stack, Text,
 } from '@wonderflow/react-components';
 import clsx from 'clsx';
 import { domMax, LazyMotion } from 'framer-motion';
@@ -13,6 +13,7 @@ import { DocHeader, DocHeaderProps } from '@/components/doc/doc-header';
 import { Toc } from '@/components/doc/toc';
 import { DocNav } from '@/components/doc-nav';
 import { BaseLayout } from '@/components/layouts/base-layout';
+import { GradientText } from '@/components/shared/gradient-text';
 import { HeaderProps } from '@/components/shared/header';
 import { useResponsive } from '@/context/responsive';
 import { useHeadingsData } from '@/hooks/headings-data';
@@ -70,6 +71,25 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
             <main className={styles.Content}>
               <DocHeader preTitle={getPretitle} title={title} subtitle={subtitle} />
               {children}
+              <Separator />
+
+              <Stack fill={false} vPadding={24}>
+
+                <Stack rowGap={24}>
+
+                  <Stack rowGap={8}>
+                    <Text size={16} dimmed={6} lineHeight="none">
+                      Created and maintained by
+                      <GradientText color="rainbow"> Wonderflow.</GradientText>
+                    </Text>
+                    <Text size={16} dimmed={6} lineHeight="none">
+                      &copy; Wonderflow
+                      {' '}
+                      {new Date().getFullYear()}
+                    </Text>
+                  </Stack>
+                </Stack>
+              </Stack>
             </main>
 
             {(showToc && nestedHeadings.length > 0) && (
