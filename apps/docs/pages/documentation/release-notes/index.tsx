@@ -1,6 +1,6 @@
 import {
   Card,
-  Datetime, Elevator, Stack, Text, Title,
+  Datetime, Elevator, Skeleton, Stack, Text, Title,
 } from '@wonderflow/react-components';
 import { m } from 'framer-motion';
 import { NextPage } from 'next';
@@ -13,12 +13,22 @@ import { getLayoutProps } from '@/utils/get-layout-props';
 import styles from './release-notes.module.css';
 
 const ReleaseNotesPage: NextPage = () => {
-  const { data } = useReleaseNotesQuery();
+  const { data, loading } = useReleaseNotesQuery();
 
   return (
     <>
       <Meta title="Release notes - Wanda Design System" description="List of improvements, fixes and new features" />
-      {data?.releaseNotes.map((note, i) => (
+      {loading ? (
+        <Stack rowGap={24} vPadding={16}>
+          {[...Array(5).keys()].map(() => (
+            <>
+              <Skeleton width="30%" height={32} />
+              <br />
+              <Skeleton count={6} />
+            </>
+          ))}
+        </Stack>
+      ) : data?.releaseNotes.map((note, i) => (
         <Stack
           as="section"
           vPadding={40}
@@ -35,12 +45,12 @@ const ReleaseNotesPage: NextPage = () => {
             <Stack vAlign="center" hAlign="center" fill={false} className={styles.Tag}>
               <Text as="span" dimmed={i !== 0 ? 6 : undefined} weight="bold" size={14} textAlign="center">{note.tag ?? '📣'}</Text>
               {i === 0 && (
-                <m.span
-                  initial={{ scale: 1, opacity: 0.5 }}
-                  animate={{ scale: 1.5, opacity: 0 }}
-                  transition={{ duration: 1, repeat: Infinity, repeatDelay: 1 }}
-                  className={styles.Pulse}
-                />
+              <m.span
+                initial={{ scale: 1, opacity: 0.5 }}
+                animate={{ scale: 1.5, opacity: 0 }}
+                transition={{ duration: 1, repeat: Infinity, repeatDelay: 1 }}
+                className={styles.Pulse}
+              />
               )}
             </Stack>
 
