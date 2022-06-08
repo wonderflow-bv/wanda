@@ -6,7 +6,6 @@ import {
 } from '@wonderflow/react-components';
 import { useScroll } from 'ahooks';
 import clsx from 'clsx';
-import { domMax, LazyMotion, m } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
@@ -25,7 +24,7 @@ const DynThemeSwitcher = dynamic<Record<string, any>>(
   async () => import('@/components/shared/theme-switcher').then(mod => mod.ThemeSwitcher),
   {
     ssr: false,
-    loading: () => <Skeleton height={40} width={40} circle />,
+    loading: () => <Skeleton height={32} width={32} circle />,
   },
 );
 
@@ -35,35 +34,34 @@ export const Header: FCClass<HeaderProps> = ({
   ...otherProps
 }) => {
   const { matches } = useResponsive();
-  const scroll = useScroll(document, val => val.top >= 0 && val.top < 1000);
+  const scroll = useScroll(() => document, val => val.top >= 0 && val.top < 1000);
 
   return (
-    <LazyMotion features={domMax}>
-      <m.header
-        data-header-position={position}
-        className={clsx(styles.Header, className)}
-        style={{ '--blur': `${Math.min(Math.max(scroll?.top ?? 0, 0), 24)}px` }}
-        {...otherProps}
+    <header
+      data-header-position={position}
+      className={clsx(styles.Header, className)}
+      style={{ '--blur': `${Math.min(Math.max(scroll?.top ?? 0, 0), 24)}px` }}
+      {...otherProps}
+    >
+      <div
+        className={styles.BgContainer}
+        style={{
+          '--bg-opacity': `${Math.min(Math.max(scroll?.top ?? 0, 0), 70)}%`,
+        }}
       >
-        <div
-          className={styles.BgContainer}
-          style={{
-            '--bg-opacity': `${Math.min(Math.max(scroll?.top ?? 0, 0), 70)}%`,
-          }}
-        >
-          <Container dimension="large">
-            <Stack
-              fill={false}
-              direction="row"
-              hAlign="space-between"
-              vAlign="center"
-              vPadding={16}
-              columnGap={24}
-            >
-              <Link href="/"><a className={styles.LogoLink}><Logo /></a></Link>
-              <Stack direction="row" vAlign="center" fill={false} columnGap={8}>
-                {matches.medium && <MainNav />}
-                {!matches.medium && (
+        <Container dimension="large">
+          <Stack
+            fill={false}
+            direction="row"
+            hAlign="space-between"
+            vAlign="center"
+            vPadding={16}
+            columnGap={24}
+          >
+            <Link href="/"><a className={styles.LogoLink}><Logo /></a></Link>
+            <Stack direction="row" vAlign="center" fill={false} columnGap={8}>
+              {matches.medium && <MainNav />}
+              {!matches.medium && (
                 <Popover trigger={<IconButton icon="bars" kind="flat" iconPosition="right" aria-label="Show main menu" />}>
                   <Elevator resting={2}>
                     <Card bordered padding={8}>
@@ -71,14 +69,13 @@ export const Header: FCClass<HeaderProps> = ({
                     </Card>
                   </Elevator>
                 </Popover>
-                )}
-                <Search />
-                <DynThemeSwitcher />
-              </Stack>
+              )}
+              <Search />
+              <DynThemeSwitcher />
             </Stack>
-          </Container>
-        </div>
-      </m.header>
-    </LazyMotion>
+          </Stack>
+        </Container>
+      </div>
+    </header>
   );
 };

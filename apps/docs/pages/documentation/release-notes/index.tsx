@@ -23,7 +23,7 @@ const ReleaseNotesPage: NextPage = () => {
           as="section"
           vPadding={40}
           rowGap={32}
-          hAlign="start"
+          hAlign="stretch"
           key={note.id}
           className={styles.Notes}
         >
