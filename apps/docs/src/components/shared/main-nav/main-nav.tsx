@@ -1,5 +1,7 @@
 import { Stack } from '@wonderflow/react-components';
-import { m } from 'framer-motion';
+import {
+  domMax, LazyMotion, m,
+} from 'framer-motion';
 import Link from 'next/link';
 import { NextRouter, useRouter } from 'next/router';
 import { useCallback } from 'react';
@@ -15,32 +17,34 @@ type MainNavProps = {
 export const MainNav: FCClass<MainNavProps> = ({
   direction = 'row',
 }) => {
-  const router = useRouter();
+  const { asPath } = useRouter();
 
   const includesPath = useCallback(
     // (path: NextRouter['asPath']) => router.asPath === path,
-    (path: NextRouter['asPath']) => {
-      const matchURL = router.asPath.split('/')[1] === path.split('/')[1];
-      return matchURL && router.asPath.split('/')[1].length > 0;
+    (pageUrl: NextRouter['asPath']) => {
+      const matchURL = asPath.split('/')[1] === pageUrl.split('/')[1];
+      return matchURL && asPath.split('/')[1].length > 0;
     },
-    [router.asPath],
+    [asPath],
   );
 
   return (
-    <Stack as="nav" direction={direction} columnGap={8}>
-      {Nav.map(item => (
-        <Link href={item.url} key={item.label}>
-          <a
-            className={styles.Link}
-            target={item.blank ? '_blank' : undefined}
-            rel={item.blank ? 'noopener noreferrer' : undefined}
-            aria-current={includesPath(item.url) ? 'page' : undefined}
-          >
-            {includesPath(item.url) && <m.span layoutId="mainNav" className={styles.Highlight} />}
-            {item.label}
-          </a>
-        </Link>
-      ))}
-    </Stack>
+    <LazyMotion features={domMax}>
+      <Stack as="nav" direction={direction} columnGap={8}>
+        {Nav.map(item => (
+          <Link href={item.url} key={item.label}>
+            <a
+              className={styles.Link}
+              target={item.blank ? '_blank' : undefined}
+              rel={item.blank ? 'noopener noreferrer' : undefined}
+              aria-current={includesPath(item.url) ? 'page' : undefined}
+            >
+              {includesPath(item.url) && <m.span layoutId="mainNav" layoutDependency={item.url} className={styles.Highlight} />}
+              {item.label}
+            </a>
+          </Link>
+        ))}
+      </Stack>
+    </LazyMotion>
   );
 };
