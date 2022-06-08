@@ -7,7 +7,7 @@ const DynDocSearch = dynamic<DocSearchProps>(
   async () => import('@docsearch/react').then(m => m.DocSearch),
   {
     ssr: false,
-    loading: () => <Skeleton height={40} width={40} circle />,
+    loading: () => <Skeleton height={32} width={32} circle />,
   },
 );
 

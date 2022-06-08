@@ -28,7 +28,7 @@
     gap: 0 token(--space-16);
 
     & img {
-      opacity: 50%;
+      opacity: 20%;
       filter: blur(8px);
     }
   }

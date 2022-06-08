@@ -46,6 +46,7 @@
 
   @mixin vibrancy;
 
+  flex-grow: 0;
   min-inline-size: var(--timeline-width);
   min-block-size: var(--timeline-width);
   border-radius: 100%;
