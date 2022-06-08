@@ -70,13 +70,12 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
 
             <main className={styles.Content}>
               <DocHeader preTitle={getPretitle} title={title} subtitle={subtitle} />
+
               {children}
-              <Separator />
 
-              <Stack fill={false} vPadding={24}>
-
+              <Stack fill={false} vPadding={24} rowGap={24}>
+                <Separator />
                 <Stack rowGap={24}>
-
                   <Stack rowGap={8}>
                     <Text size={16} dimmed={6} lineHeight="none">
                       Created and maintained by
