@@ -7,6 +7,7 @@
 }
 
 .Iframe {
+  background: transparent;
   width: 100%;
   height: calc(100vh - token(--space-72) - 2px);
   margin-bottom: -15px;
