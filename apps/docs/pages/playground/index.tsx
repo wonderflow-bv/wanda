@@ -11,7 +11,7 @@ const PlaygroundPage: NextPage = () => (
     <iframe
       className={styles.Iframe}
       title="Playground"
-      src="https://stackblitz.com/edit/wanda?embed=1&file=src/App.tsx&hideNavigation=1"
+      src="https://stackblitz.com/edit/wanda?embed=1&file=src/app.tsx&hideNavigation=1&hideFileExplorer=0"
     />
   </>
 );
