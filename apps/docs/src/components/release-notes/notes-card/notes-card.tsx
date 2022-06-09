@@ -43,7 +43,7 @@ export const NotesCard = ({
       </Stack>
 
       <Stack>
-        <Stack rowGap={4} vPadding={24}>
+        <Stack rowGap={4} vPadding={32}>
           <Title as="h2" level="4"><Datetime date={release.releaseDate as string} /></Title>
         </Stack>
 
@@ -58,32 +58,36 @@ export const NotesCard = ({
           </Markdown>
         )}
 
-        {release.notes.length > 0 && release.notes.map(note => (
-          <Stack vPadding={24} key={note.id}>
-            <Title as="h3" level="5" lineHeight="none">
-              <GradientText color="rainbow">{`${note.scope[0].toUpperCase()}${note.scope.slice(1)}`}</GradientText>
-            </Title>
-            <Elevator resting={2}>
-              <Card hAlign="start" padding={24} radius={16} className={styles.Card}>
-                {note.breaking && (
-                <div data-note-type="breaking">
-                  <Markdown hideMarkers>{note.breaking}</Markdown>
-                </div>
-                )}
-                {note.new && (
-                <div data-note-type="new">
-                  <Markdown hideMarkers>{note.new}</Markdown>
-                </div>
-                )}
-                {note.fixes && (
-                <div data-note-type="fixes">
-                  <Markdown hideMarkers>{note.fixes}</Markdown>
-                </div>
-                )}
-              </Card>
-            </Elevator>
-          </Stack>
-        ))}
+        {release.notes.length > 0 && (
+        <Stack rowGap={32} vPadding={24}>
+          {release.notes.map(note => (
+            <Stack key={note.id}>
+              <Title as="h3" level="5" lineHeight="none">
+                <GradientText color="rainbow">{`${note.scope[0].toUpperCase()}${note.scope.slice(1)}`}</GradientText>
+              </Title>
+              <Elevator resting={2}>
+                <Card hAlign="start" padding={24} radius={16} className={styles.Card}>
+                  {note.breaking && (
+                  <div data-note-type="breaking">
+                    <Markdown hideMarkers>{note.breaking}</Markdown>
+                  </div>
+                  )}
+                  {note.new && (
+                  <div data-note-type="new">
+                    <Markdown hideMarkers>{note.new}</Markdown>
+                  </div>
+                  )}
+                  {note.fixes && (
+                  <div data-note-type="fixes">
+                    <Markdown hideMarkers>{note.fixes}</Markdown>
+                  </div>
+                  )}
+                </Card>
+              </Elevator>
+            </Stack>
+          ))}
+        </Stack>
+        )}
       </Stack>
     </Stack>
   </Stack>
