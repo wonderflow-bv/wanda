@@ -1,5 +1,15 @@
 # @wonderflow/react-components
 
+## 10.0.0-next.0
+
+### Major Changes
+
+- 01f34e9: Rename iconography to Symbols. IconNames type is now SymbolNames. `<Icon />` component is not `<Symbol />`.
+- 2be339b: Update deps
+- 8ac30a5: Add new highlight colors to Chip
+- 748ca0d: Fix tab active state
+- 01b15ff: Add auto id generator for titles
+
 ## 9.5.0
 
 ### Minor Changes
