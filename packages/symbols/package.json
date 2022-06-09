@@ -1,5 +1,5 @@
 {
-  "name": "@wonderflow/icons",
+  "name": "@wonderflow/symbols",
   "description": "Wanda's symbols",
   "version": "9.3.0",
   "author": "Wonderflow",
@@ -43,7 +43,8 @@
     "wonderflow",
     "components",
     "react",
-    "icons"
+    "icons",
+    "symbols"
   ],
   "devDependencies": {
     "cpy-cli": "3.1.1",

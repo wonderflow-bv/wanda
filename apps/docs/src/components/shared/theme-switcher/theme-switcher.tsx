@@ -1,7 +1,7 @@
-import { SymbolNames } from '@wonderflow/icons';
 import {
   ButtonProps, IconButton, Menu, Popover,
 } from '@wonderflow/react-components';
+import { SymbolNames } from '@wonderflow/symbols';
 import { useTheme } from 'next-themes';
 
 export type ThemeSwitcherProps = {

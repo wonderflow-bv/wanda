@@ -1,5 +1,5 @@
 ---
-"@wonderflow/icons": major
+"@wonderflow/symbols": major
 "@wonderflow/react-components": major
 ---
 
