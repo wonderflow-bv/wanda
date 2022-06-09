@@ -39,7 +39,13 @@ export const MainNav: FCClass<MainNavProps> = ({
               rel={item.blank ? 'noopener noreferrer' : undefined}
               aria-current={includesPath(item.url) ? 'page' : undefined}
             >
-              {includesPath(item.url) && <m.span layoutId="mainNav" layoutDependency={item.url} className={styles.Highlight} />}
+              {includesPath(item.url) && (
+              <m.span
+                layoutId="mainNav"
+                layoutDependency={item.url}
+                className={styles.Highlight}
+              />
+              )}
               {item.label}
             </a>
           </Link>
