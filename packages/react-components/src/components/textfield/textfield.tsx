@@ -5,7 +5,7 @@ import {
 import { useUIDSeed } from 'react-uid';
 
 import {
-  Icon, IconButton, IconButtonProps, IconProps, Stack, Text,
+  IconButton, IconButtonProps, Stack, Symbol, SymbolProps, Text,
 } from '@/components';
 
 import { BaseField, BaseFieldProps, PrimitiveInputType } from './base-field';
@@ -15,7 +15,7 @@ export type TextfieldProps = BaseFieldProps & {
   /**
    * Set the icon to show on the left or right side of the input.
    */
-  icon?: IconProps['source'];
+  icon?: SymbolProps['source'];
   /**
    * Set in which side of the field the icon should be displayed.
    */
@@ -163,10 +163,10 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
         )}
 
         { !textarea && icon && !isPassword && (
-          <Icon
+          <Symbol
             className={styles.Icon}
             source={icon}
-            dimension={iconSizes[dimension] as IconProps['dimension']}
+            dimension={iconSizes[dimension] as SymbolProps['dimension']}
           />
         )}
       </div>

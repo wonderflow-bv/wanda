@@ -5,7 +5,7 @@ import {
 import { useFocusEffect, useRovingTabIndex } from 'react-roving-tabindex';
 
 import {
-  Icon, IconProps, Polymorphic, Stack, Tooltip,
+  Polymorphic, Stack, Symbol, SymbolProps, Tooltip,
 } from '@/components';
 
 import styles from './menu-item.module.css';
@@ -18,7 +18,7 @@ export type MenuItemProps = {
   /**
    * Whether the menu item should have an icon
    */
-  icon?: IconProps['source'];
+  icon?: SymbolProps['source'];
   /**
    * Set the position of the icon. Used only when icon is defined.
    */
@@ -120,7 +120,7 @@ export const MenuItem = forwardRef(({
       style={{ inlineSize: '100%' }}
     >
       {icon && (
-        <Icon
+        <Symbol
           className={styles.IconClass}
           source={icon}
           dimension={dimension === 'small' ? 12 : 16}

@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { forwardRef, Ref } from 'react';
 
-import { Icon, IconProps, Stack } from '@/components';
+import { Stack, Symbol, SymbolProps } from '@/components';
 
 import styles from './chip.module.css';
 
@@ -64,10 +64,10 @@ export const Chip: FCChildrenClass<ChipProps> = forwardRef(({
       <b>{children}</b>
       {interactive && (
         <button onClick={interactive && onDismissClick} className={styles.Action} type="button">
-          <Icon
+          <Symbol
             source="xmark"
-            weight={properties[dimension].style as IconProps['weight']}
-            dimension={properties[dimension].iconSize as IconProps['dimension']}
+            weight={properties[dimension].style as SymbolProps['weight']}
+            dimension={properties[dimension].iconSize as SymbolProps['dimension']}
           />
         </button>
       )}

@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { forwardRef, ReactNode } from 'react';
 
 import {
-  Button, Icon, IconProps, Polymorphic, Stack, Title,
+  Button, Polymorphic, Stack, Symbol, SymbolProps, Title,
 } from '@/components';
 
 import styles from './snackbar.module.css';
@@ -17,7 +17,7 @@ export type SnackbarProps = {
    * Set the icon to be displaye alongside the title.
    * This icon have to enforce the message in a not misleading way.
    */
-  icon?: IconProps['source'];
+  icon?: SymbolProps['source'];
   /**
    * Set the title of the snackbar. This must concisely describe the message.
    */
@@ -57,7 +57,7 @@ export const Snackbar = forwardRef(({
   onDismiss,
   ...otherProps
 }, forwardedRef) => {
-  const defaultIcons: Record<string, IconProps['source']> = {
+  const defaultIcons: Record<string, SymbolProps['source']> = {
     info: 'circle-info',
     warning: 'triangle-exclamation',
     neutral: 'compass',
@@ -74,7 +74,7 @@ export const Snackbar = forwardRef(({
       {...otherProps}
     >
       <Stack vAlign="start" hAlign="start" direction="row" columnGap={16} fill={false}>
-        <Icon className={styles.Icon} weight="duotone" source={icon ?? defaultIcons[kind]} dimension={24} />
+        <Symbol className={styles.Icon} weight="duotone" source={icon ?? defaultIcons[kind]} dimension={24} />
         <Stack rowGap={16}>
           <Stack rowGap={8}>
             {title && <Title level="5">{title}</Title>}

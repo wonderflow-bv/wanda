@@ -4,7 +4,7 @@ import {
 } from 'react';
 
 import {
-  Icon, IconProps, Stack, Text, Textfield,
+  Stack, Symbol, SymbolProps, Text, Textfield,
 } from '@/components';
 
 import styles from './slider.module.css';
@@ -40,12 +40,12 @@ export type SliderProps = InputHTMLAttributes<HTMLInputElement> & {
    * Add an icon representing the minimum value.
    * This is only available when `showValues` is `false`.
    */
-  iconMin?: IconProps['source'];
+  iconMin?: SymbolProps['source'];
   /**
    * Add an icon representing the maximum value.
    * This is only available when `showValues` is `false`.
    */
-  iconMax?: IconProps['source'];
+  iconMax?: SymbolProps['source'];
   /**
    * Set the size of the slider.
    */
@@ -84,7 +84,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>(({
       data-slider-dimension={dimension}
     >
       {showValues && <Text as="span" size={isSmall ? 14 : 16} weight="bold" textAlign="end" className={styles.Value}>{min}</Text>}
-      {(iconMin && !showValues) && <Icon source={iconMin} dimension={isSmall ? 16 : 24} />}
+      {(iconMin && !showValues) && <Symbol source={iconMin} dimension={isSmall ? 16 : 24} />}
 
       <input
         ref={forwardedRef}
@@ -103,7 +103,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>(({
 
       {showValues && <Text as="span" size={isSmall ? 14 : 16} weight="bold" className={styles.Value}>{max}</Text>}
       {showValues && <Textfield readOnly dimension="small" size={String(max).length} value={value} className={styles.CurrentValue} />}
-      {(iconMax && !showValues) && <Icon source={iconMax} dimension={isSmall ? 16 : 24} />}
+      {(iconMax && !showValues) && <Symbol source={iconMax} dimension={isSmall ? 16 : 24} />}
     </Stack>
   );
 });

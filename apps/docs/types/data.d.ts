@@ -1,4 +1,4 @@
-import { IconNames } from '@wonderflow/icons';
+import { SymbolNames } from '@wonderflow/icons';
 
 type NavItemType = {
   label: string;
@@ -11,7 +11,7 @@ export type NavType = NavItemType[]
 type DocNavItemType = {
   label: string;
   url: string;
-  icon: IconNames;
+  icon: SymbolNames;
   color?: string;
   blank?: boolean;
 }

@@ -2,7 +2,7 @@ import { domMax, LazyMotion, m } from 'framer-motion';
 import { forwardRef, ReactNode } from 'react';
 
 import {
-  Icon, IconProps, Stack, StackProps, Text, Title,
+  Stack, StackProps, Symbol, SymbolProps, Text, Title,
 } from '@/components';
 
 import styles from './info-state.module.css';
@@ -17,7 +17,7 @@ export type InfoStateProps = {
    * The icon to display. This is used to enforce the message of the info state.
    * This is not displayed if `image` is set.
    */
-  icon?: IconProps['source'];
+  icon?: SymbolProps['source'];
   /**
    * Set the icon color. Please use the correct color based on the type of the message.
    * Eg. Don't use `green` for negative informations.
@@ -80,7 +80,7 @@ export const InfoState = forwardRef<HTMLDivElement, PropsWithClass<InfoStateProp
             type: 'spring',
           }}
         >
-          <Icon source={icon} dimension={48} />
+          <Symbol source={icon} dimension={48} />
         </m.span>
         )}
 

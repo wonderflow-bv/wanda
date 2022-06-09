@@ -1,11 +1,11 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { SVGAttributes } from 'react';
 
-import { Icon } from './icon';
+import { Symbol } from './symbol';
 
-const story: ComponentMeta<typeof Icon> = {
-  title: 'Components/Widgets/Icon',
-  component: Icon,
+const story: ComponentMeta<typeof Symbol> = {
+  title: 'Components/Widgets/Symbol',
+  component: Symbol,
   args: {
     weight: 'outline',
     dimension: 24,
@@ -23,7 +23,7 @@ const story: ComponentMeta<typeof Icon> = {
 
 export default story;
 
-const Template: ComponentStory<typeof Icon> = args => <Icon {...args} />;
+const Template: ComponentStory<typeof Symbol> = args => <Symbol {...args} />;
 
 const CustomReactIcon = ({ ...props }: SVGAttributes<SVGElement | SVGSVGElement>) => (
   <svg
@@ -42,7 +42,7 @@ Default.args = {
   source: 'comment',
 };
 
-export const CustomIcon = Template.bind({});
-CustomIcon.args = {
+export const CustomSymbol = Template.bind({});
+CustomSymbol.args = {
   source: <CustomReactIcon />,
 };

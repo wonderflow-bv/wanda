@@ -1,6 +1,6 @@
-import { IconNames } from '@wonderflow/icons';
+import { SymbolNames } from '@wonderflow/icons';
 import {
-  Grid, Icon, IconProps, Stack, Text,
+  Grid, Stack, Symbol, SymbolProps, Text,
 } from '@wonderflow/react-components';
 import tkns from '@wonderflow/tokens/platforms/web/tokens.json';
 import { m } from 'framer-motion';
@@ -8,7 +8,7 @@ import { m } from 'framer-motion';
 import styles from './foundation.module.css';
 
 const COLORS = ['blue', 'violet', 'dipsy', 'red', 'indigo', 'mint', 'yellow', 'magenta'];
-const ICONS: IconNames[] = ['house', 'lock', 'crown', 'message', 'moon'];
+const ICONS: SymbolNames[] = ['house', 'lock', 'crown', 'message', 'moon'];
 
 const cssEasingToArray = (cssEasing: string) => {
   const [x1, y1, x2, y2] = cssEasing.replace(/[^0-9.,]+/g, '').split(',').map(i => parseFloat(i));
@@ -83,8 +83,8 @@ const ITEM_ANIMATION = {
 type ListItemProps = {
   label: string;
   color: string;
-  icon?: IconNames;
-  iconWeight?: IconProps['weight'];
+  icon?: SymbolNames;
+  iconWeight?: SymbolProps['weight'];
 }
 
 const ListItem: React.FC<ListItemProps> = ({
@@ -105,7 +105,7 @@ const ListItem: React.FC<ListItemProps> = ({
     inline
   >
     {icon
-      ? <Icon source={icon} dimension={24} fill={`hsl(${color})`} weight={iconWeight} />
+      ? <Symbol source={icon} dimension={24} fill={`hsl(${color})`} weight={iconWeight} />
       : (
         <span style={{
           borderRadius: '100%',

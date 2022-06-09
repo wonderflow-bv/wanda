@@ -1,4 +1,4 @@
-import { Icon, Stack, Text } from '@wonderflow/react-components';
+import { Stack, Symbol, Text } from '@wonderflow/react-components';
 import Link from 'next/link';
 import { NextRouter, useRouter } from 'next/router';
 import { useCallback } from 'react';
@@ -38,7 +38,7 @@ export const DocNav = () => {
             }}
           >
             <Stack as="span" hAlign="center" vAlign="center" className={styles.IconWrapper}>
-              <Icon source={link.icon} dimension={18} weight="duotone" />
+              <Symbol source={link.icon} dimension={18} weight="duotone" />
             </Stack>
             <Text as="span" weight="bold" size={16}>{link.label}</Text>
           </Stack>
