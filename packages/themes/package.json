@@ -41,7 +41,7 @@
   "devDependencies": {
     "@wonderflow/tokens": "*",
     "fs-extra": "10.1.0",
-    "style-dictionary": "3.7.0",
+    "style-dictionary": "3.7.1",
     "tsconfig": "*",
     "uvu": "0.5.3",
     "yargs": "17.5.1"

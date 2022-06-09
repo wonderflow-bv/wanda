@@ -4,8 +4,6 @@ import {
 import Link from 'next/link';
 import React from 'react';
 
-import { GradientText } from '../gradient-text';
-
 export const Footer = () => (
   <footer>
     <Separator aria-hidden="true" />
@@ -73,7 +71,7 @@ export const Footer = () => (
                 <Link href="/documentation/usage/design/foundation/colors"><a>Foundation</a></Link>
               </List.Li>
               <List.Li>
-                <Link href="/documentation/usage/design/iconography"><a>Iconography</a></Link>
+                <Link href="/documentation/usage/design/symbols"><a>Symbols</a></Link>
               </List.Li>
               <List.Li>
                 <Link href="/documentation/usage/design/motion/principles"><a>Motion</a></Link>
@@ -110,8 +108,7 @@ export const Footer = () => (
         <Stack rowGap={24}>
           <Stack rowGap={8}>
             <Text size={16} dimmed={6} lineHeight="none">
-              Created and maintained by
-              <GradientText color="rainbow"> Wonderflow.</GradientText>
+              Created and maintained by Wonderflow.
             </Text>
             <Text size={16} dimmed={6} lineHeight="none">
               &copy; Wonderflow

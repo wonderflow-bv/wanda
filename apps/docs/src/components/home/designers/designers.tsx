@@ -48,7 +48,7 @@ export const Designers: FCClass = ({
               <Tab.Panel label="Foundation" icon={matches.large ? 'layer-group' : undefined} value="foundation">
                 <Stack rowGap={32} vPadding={56} hAlign="start">
                   <Text size={22} dimmed={6}>
-                    Colors, typography, iconography, themes, and much more,
+                    Colors, typography, symbols, themes, and much more,
                     everything a designer needs, Wanda provides it.
                   </Text>
                   <Link href="/documentation/usage/design/foundation/colors" passHref>
@@ -63,7 +63,7 @@ export const Designers: FCClass = ({
                     Wanda offers over 114 ready-to-use SVG icons and three solid,
                     outline, and duotone styles for over 342 icons.
                   </Text>
-                  <Link href="/documentation/usage/design/iconography" passHref>
+                  <Link href="/documentation/usage/design/symbols" passHref>
                     <Button as="a" kind="secondary" dimension="big">Read more</Button>
                   </Link>
                 </Stack>
