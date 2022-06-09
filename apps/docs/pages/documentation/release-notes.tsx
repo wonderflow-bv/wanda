@@ -15,7 +15,7 @@ const ReleaseNotesPage: NextPage = () => {
       <Meta title="Release notes - Wanda Design System" description="List of improvements, fixes and new features" />
       {loading ? (
         <Stack rowGap={24} vPadding={16}>
-          {[...Array(5).keys()].map(n => (
+          {[...Array(4).keys()].map(n => (
             <Fragment key={n}>
               <Skeleton width="30%" height={32} />
               <br />
