@@ -1,7 +1,7 @@
 @import '@wonderflow/react-components/core/utils/media.css';
 @import '@wonderflow/react-components/core/utils/vibrancy.css';
 
-.Notes {
+.Note {
   --timeline-color: var(--dimmed-1);
   --timeline-width: token(--space-72);
 
@@ -76,12 +76,12 @@
   inset: 0;
 }
 
-.Changes.Changes {
+.Card.Card {
 
   @mixin vibrancy;
 
   background: var(--global-vibrancy-background-soft);
-  margin-top: token(--space-24);
+  margin-top: token(--space-16);
   color: var(--dimmed-6);
 
   @supports not (backdrop-filter: blur(0)) {
