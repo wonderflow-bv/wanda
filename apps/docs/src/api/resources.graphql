@@ -1,0 +1,18 @@
+query resources {
+  resourceGroups {
+    id
+    groupName
+    groupSymbol
+    groupColor
+    resources {
+      ... on Tile {
+        id
+        title
+        description
+        symbol
+        symbolColor
+        url
+      }
+    }
+  }
+}
