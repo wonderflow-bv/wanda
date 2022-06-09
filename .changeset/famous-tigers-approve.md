@@ -1,5 +1,5 @@
 ---
-"@wonderflow/tokens": minor
+"@wonderflow/tokens": major
 ---
 
 Fix default rem size
