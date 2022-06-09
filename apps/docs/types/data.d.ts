@@ -1,4 +1,4 @@
-import { SymbolNames } from '@wonderflow/icons';
+import { SymbolNames } from '@wonderflow/symbols';
 
 type NavItemType = {
   label: string;

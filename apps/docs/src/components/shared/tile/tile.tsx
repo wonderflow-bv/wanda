@@ -1,7 +1,7 @@
-import { SymbolNames } from '@wonderflow/icons';
 import {
   Card, Stack, Symbol, Text, Title,
 } from '@wonderflow/react-components';
+import { SymbolNames } from '@wonderflow/symbols';
 import clsx from 'clsx';
 import React from 'react';
 

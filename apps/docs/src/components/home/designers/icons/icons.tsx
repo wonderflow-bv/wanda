@@ -1,6 +1,6 @@
-import { SymbolNames } from '@wonderflow/icons';
-import structure from '@wonderflow/icons/structure';
 import { Stack, Symbol } from '@wonderflow/react-components';
+import { SymbolNames } from '@wonderflow/symbols';
+import structure from '@wonderflow/symbols/structure';
 import { m } from 'framer-motion';
 import { FC } from 'react';
 

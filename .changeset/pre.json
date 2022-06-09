@@ -4,7 +4,7 @@
   "initialVersions": {
     "docs": "10.0.0",
     "@wonderflow/config": "7.0.0",
-    "@wonderflow/icons": "9.3.0",
+    "@wonderflow/symbols": "9.3.0",
     "@wonderflow/react-components": "9.5.0",
     "@wonderflow/themes": "9.1.0",
     "@wonderflow/tokens": "9.2.0",

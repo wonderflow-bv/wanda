@@ -1,6 +1,6 @@
-import { SymbolNames } from '@wonderflow/icons';
+import { SymbolNames } from '@wonderflow/symbols';
 // eslint-disable-next-line import/extensions
-import sprite from '@wonderflow/icons/sprite.svg';
+import sprite from '@wonderflow/symbols/sprite.svg';
 import { TokensTypes } from '@wonderflow/tokens/platforms/web';
 import clsx from 'clsx';
 import {

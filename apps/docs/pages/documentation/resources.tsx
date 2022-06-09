@@ -1,5 +1,5 @@
-import { SymbolNames } from '@wonderflow/icons';
 import { Grid, Stack, Title } from '@wonderflow/react-components';
+import { SymbolNames } from '@wonderflow/symbols';
 import { NextPage } from 'next';
 import { useResourcesQuery } from 'src/generated/graphql';
 
