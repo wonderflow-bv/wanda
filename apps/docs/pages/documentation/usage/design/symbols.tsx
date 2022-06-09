@@ -2,14 +2,14 @@ import { NextPage } from 'next';
 
 import { getLayoutProps } from '@/utils/get-layout-props';
 
-const IconographyPage: NextPage = () => (<div>Iconography</div>);
+const SymbolsPage: NextPage = () => (<div>Symbols</div>);
 
-export default IconographyPage;
+export default SymbolsPage;
 
 export const getStaticProps = () => getLayoutProps({
   layout: 'doc',
   layoutProps: {
-    title: 'Iconography',
+    title: 'Symbols',
     color: 'mint',
   },
 });

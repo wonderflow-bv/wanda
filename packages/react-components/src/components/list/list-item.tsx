@@ -10,7 +10,7 @@ import styles from './list.module.css';
 
 export type ListItemProps = PropsWithChildren<PropsWithClass> & Pick<ListProps, 'dimension' | 'hideMarker'> & {
   /**
-   * Set the marker style. You can use any icon from the iconography as marker
+   * Set the marker style. You can use any icon from the symbols as marker
    * by passing its name.
    */
   marker?: IconProps['source'];

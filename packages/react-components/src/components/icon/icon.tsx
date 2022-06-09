@@ -17,9 +17,9 @@ import styles from './icon.module.css';
 export type IconProps = SVGAttributes<SVGElement | SVGSVGElement> & {
   /**
    * Set the icon name to display. Icon names are defined in
-   * the `IconNames` enum and are part of Wanda's iconography system.
+   * the `IconNames` enum and are part of Wanda's symbols system.
    *
-   * Available icons: https://design.wonderflow.ai/design/iconography/
+   * Available icons: https://design.wonderflow.ai/design/symbols/
    */
   source: IconNames | ReactElement<HTMLOrSVGElement>;
   /**

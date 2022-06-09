@@ -35,21 +35,21 @@
   },
   "dependencies": {
     "@wonderflow/tokens": "*",
-    "cssnano": "5.1.9",
-    "cssnano-preset-default": "5.2.9",
+    "cssnano": "5.1.11",
+    "cssnano-preset-default": "5.2.11",
     "flat": "5.0.2",
     "postcss-import": "14.1.0",
     "postcss-mixins": "9.0.2",
-    "postcss-preset-env": "7.6.0",
+    "postcss-preset-env": "7.7.1",
     "postcss-replace": "2.0.0"
   },
   "devDependencies": {
     "@types/flat": "5.0.2",
-    "@typescript-eslint/eslint-plugin": "5.26.0",
-    "@typescript-eslint/parser": "5.26.0",
+    "@typescript-eslint/eslint-plugin": "5.27.1",
+    "@typescript-eslint/parser": "5.27.1",
     "@wonderflow/eslint-config": "1.1.11",
     "tsconfig": "*",
-    "typescript": "4.7.2"
+    "typescript": "4.7.3"
   },
   "types": "./dist/index.d.ts"
 }

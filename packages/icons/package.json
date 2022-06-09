@@ -1,7 +1,7 @@
 {
   "name": "@wonderflow/icons",
-  "description": "Wanda's iconography",
-  "version": "9.4.0",
+  "description": "Wanda's symbols",
+  "version": "9.3.0",
   "author": "Wonderflow",
   "license": "MIT",
   "main": "dist/index",
