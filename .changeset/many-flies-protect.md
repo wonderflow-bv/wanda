@@ -1,7 +1,7 @@
 ---
 "docs": minor
 "@wonderflow/config": minor
-"@wonderflow/icons": minor
+"@wonderflow/symbols": minor
 "@wonderflow/react-components": minor
 "@wonderflow/themes": minor
 "@wonderflow/tokens": minor

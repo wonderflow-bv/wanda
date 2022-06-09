@@ -1,7 +1,7 @@
-import { SymbolNames } from '@wonderflow/icons';
 import {
   Grid, Stack, Symbol, SymbolProps, Text,
 } from '@wonderflow/react-components';
+import { SymbolNames } from '@wonderflow/symbols';
 import tkns from '@wonderflow/tokens/platforms/web/tokens.json';
 import { m } from 'framer-motion';
 

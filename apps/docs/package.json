@@ -36,7 +36,7 @@
     "@apollo/client": "3.6.6",
     "@docsearch/react": "3.1.0",
     "@mvasilkov/outdent": "1.0.5",
-    "@wonderflow/icons": "*",
+    "@wonderflow/symbols": "*",
     "@wonderflow/react-components": "*",
     "@wonderflow/themes": "*",
     "ahooks": "3.4.1",

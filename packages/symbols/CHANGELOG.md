@@ -1,4 +1,4 @@
-# @wonderflow/icons
+# @wonderflow/symbols
 
 ## 9.3.0
 

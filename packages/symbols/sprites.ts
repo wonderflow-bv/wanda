@@ -43,7 +43,7 @@ const run = () => {
   });
   fs.writeFileSync(path.join('dist', 'sprite.svg'), sprite.toString());
   fs.writeFileSync(path.join('dist', 'sprite.d.ts'), `
-declare module "@wonderflow/icons/sprite" {
+declare module "@wonderflow/symbols/sprite" {
   const svgUrl: string
   const svgComponent: React.StatelessComponent<React.SVGAttributes<SVGElement>>
   export default svgUrl
