@@ -24,7 +24,7 @@ const ReleaseNotesPage: NextPage = () => {
           ))}
         </Stack>
       ) : data?.releaseNotes.map((release, i) => (
-        <NotesCard release={release} index={i} />
+        <NotesCard key={release.id} release={release} index={i} />
       ))}
     </>
   );

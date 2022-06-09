@@ -3,17 +3,16 @@ import {
 } from '@wonderflow/react-components';
 import clsx from 'clsx';
 import { domMax, LazyMotion } from 'framer-motion';
-import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import {
   CSSProperties, useMemo,
 } from 'react';
 
 import { DocHeader, DocHeaderProps } from '@/components/doc/doc-header';
+import { DocNav } from '@/components/doc/doc-nav';
 import { Toc } from '@/components/doc/toc';
-import { DocNav } from '@/components/doc-nav';
 import { BaseLayout } from '@/components/layouts/base-layout';
-import { HeaderProps } from '@/components/shared/header';
+import { Header } from '@/components/shared/header';
 import { useResponsive } from '@/context/responsive';
 import { useHeadingsData } from '@/hooks/headings-data';
 
@@ -23,13 +22,6 @@ export interface IPropsDocLayout extends Pick<DocHeaderProps, 'title' | 'subtitl
   color?: 'mint' | 'blue' | 'salmon' | 'indigo';
   showToc?: boolean;
 }
-
-const DynHeader = dynamic<HeaderProps>(
-  async () => import('@/components/shared/header').then(mod => mod.Header),
-  {
-    ssr: false,
-  },
-);
 
 export const DocLayout: FCChildren<IPropsDocLayout> = ({
   children,
@@ -55,7 +47,7 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
 
   return (
     <BaseLayout>
-      <DynHeader position="sticky" />
+      <Header position="sticky" />
       <span className={styles.Glow} />
       <LazyMotion features={domMax}>
         <Container dimension="large" style={dynamicStyle}>
