@@ -48,5 +48,6 @@ export const getStaticProps = () => getLayoutProps({
     title: 'Resources',
     color: 'salmon',
     subtitle: 'Useful assets to design at Wonderflow',
+    showToc: false,
   },
 });
