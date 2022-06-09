@@ -13,7 +13,7 @@ export type ChipProps = {
   /**
    * Set a color from one of the provided values.
    */
-  color?: 'gray' | 'cyan' | 'green' | 'purple' | 'yellow' | 'red' | 'blue';
+  color?: 'gray' | 'cyan' | 'green' | 'purple' | 'yellow' | 'red' | 'blue' | 'magenta' | 'violet' | 'indigo' | 'mint' | 'dipsy' | 'salmon';
   /**
    * Make the chip dismissable. When `true` adds a close button on the side.
    */

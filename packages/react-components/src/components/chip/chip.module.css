@@ -45,6 +45,36 @@
     background-color: var(--highlight-blue-background);
     color: var(--highlight-blue-foreground);
   }
+
+  &[data-chip-color='magenta'] {
+    background-color: var(--highlight-magenta-background);
+    color: var(--highlight-magenta-foreground);
+  }
+
+  &[data-chip-color='violet'] {
+    background-color: var(--highlight-violet-background);
+    color: var(--highlight-violet-foreground);
+  }
+
+  &[data-chip-color='indigo'] {
+    background-color: var(--highlight-indigo-background);
+    color: var(--highlight-indigo-foreground);
+  }
+
+  &[data-chip-color='mint'] {
+    background-color: var(--highlight-mint-background);
+    color: var(--highlight-mint-foreground);
+  }
+
+  &[data-chip-color='dipsy'] {
+    background-color: var(--highlight-dipsy-background);
+    color: var(--highlight-dipsy-foreground);
+  }
+
+  &[data-chip-color='salmon'] {
+    background-color: var(--highlight-salmon-background);
+    color: var(--highlight-salmon-foreground);
+  }
 }
 
 .Action {
