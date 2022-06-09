@@ -5,7 +5,7 @@ import {
 import { useUIDSeed } from 'react-uid';
 
 import {
-  Icon, IconProps, Stack, Text,
+  Stack, Symbol, SymbolProps, Text,
 } from '@/components';
 
 import styles from './select.module.css';
@@ -18,7 +18,7 @@ export type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
   /**
    * Change the default icon displayed on the side of the select.
    */
-  icon?: IconProps['source'];
+  icon?: SymbolProps['source'];
   /**
    * Set the accessible label for the select.
    */
@@ -89,10 +89,10 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(({
         </select>
 
         { kind === 'single' && (
-          <Icon
+          <Symbol
             className={styles.Icon}
             source={icon}
-            dimension={iconSizes[dimension] as IconProps['dimension']}
+            dimension={iconSizes[dimension] as SymbolProps['dimension']}
           />
         ) }
       </div>

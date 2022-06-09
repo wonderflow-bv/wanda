@@ -7,7 +7,7 @@ import {
 } from 'react';
 
 import {
-  Icon, IconProps, Text, TextProps,
+  Symbol, SymbolProps, Text, TextProps,
 } from '@/components';
 
 import styles from './disclosure.module.css';
@@ -73,11 +73,11 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
 
   const handleOpen = useCallback(
     () => () => {
-      if (ref.current && expandable) setIsOpen(ref.current.open)
-      expandable && onToggle?.(ref.current.open)
+      if (ref.current && expandable) setIsOpen(ref.current.open);
+      if (expandable) onToggle?.(ref.current.open);
     },
-    [expandable, onToggle]
-  )
+    [expandable, onToggle],
+  );
 
   const dynamicStyle: CSSProperties = {
     '--max-height': contentMaxHeight,
@@ -138,10 +138,10 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
       >
         {summary}
         {expandable && (
-          <Icon
+          <Symbol
             className={styles.ExpandIcon}
             source="chevron-right"
-            dimension={sizes[dimension].icon as IconProps['dimension']}
+            dimension={sizes[dimension].icon as SymbolProps['dimension']}
           />
         )}
       </Text>

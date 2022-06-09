@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { CSSProperties, forwardRef } from 'react';
 
-import { Icon, Polymorphic } from '@/components';
+import { Polymorphic, Symbol } from '@/components';
 
 import { OptionalColumnTypes } from '../types';
 import styles from './table-cell.module.css';
@@ -54,7 +54,7 @@ export const TableCell = forwardRef(({
     >
       {children}
       {isSorted && (
-        <Icon
+        <Symbol
           dimension={12}
           className={styles.HeadCellIcon}
           fill="var(--highlight-red-foreground)"

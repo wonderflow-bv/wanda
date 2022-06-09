@@ -8,7 +8,7 @@ import colors from 'picocolors';
 import svgstore from 'svgstore';
 
 const generateTypes = (jsonStructure: { iconNames: string[]; iconStyles: string[] }) => `
-export type IconNames = '${jsonStructure.iconNames.join('\' |\n\'')}';
+export type SymbolNames = '${jsonStructure.iconNames.join('\' |\n\'')}';
 export type IconStyles = '${jsonStructure.iconStyles.join('\' |\n\'')}';
 `;
 

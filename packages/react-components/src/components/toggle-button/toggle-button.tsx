@@ -6,7 +6,8 @@ import {
 import { Except } from 'type-fest';
 
 import {
-  Icon, IconButton, IconButtonProps, IconProps, Polymorphic,
+  IconButton, IconButtonProps, Polymorphic,
+  Symbol, SymbolProps,
 } from '@/components';
 
 import styles from './toggle-button.module.css';
@@ -80,13 +81,13 @@ export const ToggleButton = forwardRef(({
 
   const renderIcon = useCallback(
     (icon, dimension) => {
-      const iconSize: Record<string, IconProps['dimension']> = {
+      const iconSize: Record<string, SymbolProps['dimension']> = {
         big: 24,
         regular: 16,
         small: 12,
       };
 
-      return (<Icon source={icon} dimension={iconSize[dimension]} />);
+      return (<Symbol source={icon} dimension={iconSize[dimension]} />);
     },
     [],
   );

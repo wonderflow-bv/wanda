@@ -1,9 +1,9 @@
 import {
   Avatar,
-  Button, Checkbox, Chip, CircularProgress, Icon,
-  LinearProgress, Masonry, Pagination, Select, Slider,
+  Button, Checkbox, Chip, CircularProgress, LinearProgress, Masonry, Pagination, Select, Slider,
   Spinner, Stack,
-  StarMeter, Toggle, ToggleButton,
+  StarMeter, Symbol,
+  Toggle, ToggleButton,
 } from '@wonderflow/react-components';
 import { m } from 'framer-motion';
 
@@ -108,10 +108,10 @@ export const Components = () => (
         </div>
       </Stack>
       <Stack as={m.div} variants={ITEM_ANIMATION} direction="row" wrap className={styles.Card} vPadding={24} hPadding={24} hAlign="center" vAlign="center">
-        <Icon source="message" dimension={24} weight="duotone" />
-        <Icon source="bell" dimension={24} weight="duotone" />
-        <Icon source="book-bookmark" dimension={24} weight="duotone" />
-        <Icon source="gear" dimension={24} weight="duotone" />
+        <Symbol source="message" dimension={24} weight="duotone" />
+        <Symbol source="bell" dimension={24} weight="duotone" />
+        <Symbol source="book-bookmark" dimension={24} weight="duotone" />
+        <Symbol source="gear" dimension={24} weight="duotone" />
       </Stack>
       <Stack as={m.div} variants={ITEM_ANIMATION} className={styles.Card} vPadding={24} hPadding={24} hAlign="center" vAlign="center">
         <StarMeter value={3} dimension="big" />
