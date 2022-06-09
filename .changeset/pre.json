@@ -2,8 +2,8 @@
   "mode": "pre",
   "tag": "next",
   "initialVersions": {
-    "docs": "10.0.0",
-    "@wonderflow/config": "7.0.0",
+    "docs": "9.0.0",
+    "@wonderflow/config": "9.0.0",
     "@wonderflow/symbols": "9.3.0",
     "@wonderflow/react-components": "9.5.0",
     "@wonderflow/themes": "9.1.0",
