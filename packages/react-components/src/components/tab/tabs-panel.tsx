@@ -1,13 +1,13 @@
 import * as TabsPrimitive from '@radix-ui/react-tabs';
 import clsx from 'clsx';
 
-import { IconProps } from '@/components';
+import { SymbolProps } from '@/components';
 
 import styles from './tab.module.css';
 
 export type TabPanelProps = {
   label: string;
-  icon?: IconProps['source'];
+  icon?: SymbolProps['source'];
   value: TabsPrimitive.TabsContentProps['value'];
 };
 

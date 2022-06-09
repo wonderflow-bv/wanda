@@ -1,4 +1,4 @@
-import { IconNames } from '@wonderflow/icons';
+import { SymbolNames } from '@wonderflow/icons';
 import {
   ButtonProps, IconButton, Menu, Popover,
 } from '@wonderflow/react-components';
@@ -15,9 +15,9 @@ export const ThemeSwitcher: FCClass<ThemeSwitcherProps> = ({
   const currentTheme = theme ?? 'system';
 
   const icon = {
-    light: 'sun-bright' as IconNames,
-    system: 'pc' as IconNames,
-    dark: 'moon' as IconNames,
+    light: 'sun-bright' as SymbolNames,
+    system: 'pc' as SymbolNames,
+    dark: 'moon' as SymbolNames,
   };
 
   return (

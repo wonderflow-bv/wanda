@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import ReactPaginate, { ReactPaginateProps } from 'react-paginate';
 import { Except } from 'type-fest';
 
-import { Icon } from '@/components';
+import { Symbol } from '@/components';
 
 import styles from './pagination.module.css';
 
@@ -63,8 +63,8 @@ export const Pagination = ({
     <ReactPaginate
       containerClassName={clsx(styles.Pagination, className)}
       breakLabel="..."
-      nextLabel={<Icon dimension={16} source="chevron-right" />}
-      previousLabel={<Icon dimension={16} source="chevron-left" />}
+      nextLabel={<Symbol dimension={16} source="chevron-right" />}
+      previousLabel={<Symbol dimension={16} source="chevron-left" />}
       onPageChange={handlePageClick}
       pageRangeDisplayed={pageRangeDisplayed}
       pageCount={pageCount ?? computedPageCount}

@@ -1,6 +1,6 @@
-import { IconNames } from '@wonderflow/icons';
+import { SymbolNames } from '@wonderflow/icons';
 import {
-  Card, Icon, Stack, Text, Title,
+  Card, Stack, Symbol, Text, Title,
 } from '@wonderflow/react-components';
 import clsx from 'clsx';
 import React from 'react';
@@ -8,7 +8,7 @@ import React from 'react';
 import styles from './tile.module.css';
 
 type TileProps = {
-  symbol?: IconNames;
+  symbol?: SymbolNames;
   symbolColor?: 'gray' | 'cyan' | 'green' | 'purple' | 'yellow' | 'red' | 'blue' | 'magenta' | 'violet' | 'indigo' | 'mint' | 'dipsy' | 'salmon';
   title: string;
   description?: string;
@@ -40,7 +40,7 @@ export const Tile: FCClass<TileProps> = ({
         className={styles.IconBullet}
         style={{ backgroundColor: `var(--highlight-${symbolColor}-background)` }}
       >
-        <Icon
+        <Symbol
           source={symbol}
           weight="duotone"
           fill={`var(--highlight-${symbolColor}-foreground)`}

@@ -1,5 +1,5 @@
 import {
-  ClampText, Icon, Stack, Text,
+  ClampText, Stack, Symbol, Text,
 } from '@wonderflow/react-components';
 import clsx from 'clsx';
 import dynamic from 'next/dynamic';
@@ -57,8 +57,8 @@ export const Browser: FCChildrenClass<BrowserProps> = ({
             <span />
           </Stack>
           <Stack direction="row" columnGap={8}>
-            <Icon source="chevron-left" dimension={12} />
-            <Icon source="chevron-right" dimension={12} />
+            <Symbol source="chevron-left" dimension={12} />
+            <Symbol source="chevron-right" dimension={12} />
           </Stack>
         </Stack>
 
@@ -72,7 +72,7 @@ export const Browser: FCChildrenClass<BrowserProps> = ({
           fill={false}
           columnGap={8}
         >
-          <Icon source="lock" dimension={12} />
+          <Symbol source="lock" dimension={12} />
           <Text size={14} lineHeight="none">
             <ClampText rows={1}>{url}</ClampText>
           </Text>

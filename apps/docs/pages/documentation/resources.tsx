@@ -1,4 +1,4 @@
-import { IconNames } from '@wonderflow/icons';
+import { SymbolNames } from '@wonderflow/icons';
 import { Grid, Stack, Title } from '@wonderflow/react-components';
 import { NextPage } from 'next';
 import { useResourcesQuery } from 'src/generated/graphql';
@@ -27,7 +27,7 @@ const ResourcesPage: NextPage = () => {
                   <Tile
                     title={res.title}
                     description={res.description}
-                    symbol={group.groupSymbol as IconNames}
+                    symbol={group.groupSymbol as SymbolNames}
                     symbolColor={group.groupColor}
                     url={res.url}
                   />

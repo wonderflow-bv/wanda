@@ -1,10 +1,10 @@
 .Icon {
   & *[fill] {
-    fill: currentColor;
+    fill: currentcolor;
   }
 
   & *[fill='none'][stroke] {
     fill: none;
-    stroke: currentColor;
+    stroke: currentcolor;
   }
 }

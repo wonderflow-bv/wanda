@@ -4,7 +4,8 @@ import {
 } from 'react';
 
 import {
-  Icon, IconProps, Polymorphic, Spinner,
+  Polymorphic, Spinner,
+  Symbol, SymbolProps,
 } from '@/components';
 
 import styles from './button.module.css';
@@ -26,7 +27,7 @@ export type ButtonProps = {
   /**
    * Define the icon to use.
    */
-  icon?: IconProps['source'];
+  icon?: SymbolProps['source'];
   /**
    * Set the position of the icon. Used only when icon is defined.
    */
@@ -110,11 +111,11 @@ export const Button = forwardRef((
       {...otherProps}
     >
       {icon && (
-        <Icon
+        <Symbol
           source={icon}
           fill={iconColor}
           weight="solid"
-          dimension={iconSize[dimension] as IconProps['dimension']}
+          dimension={iconSize[dimension] as SymbolProps['dimension']}
         />
       )}
       {(children && busy) ? <span>{children}</span> : children}

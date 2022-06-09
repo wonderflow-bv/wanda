@@ -5,7 +5,7 @@ import {
 import { useUIDSeed } from 'react-uid';
 
 import {
-  Icon, IconProps, Polymorphic, Stack, Text, TextProps,
+  Polymorphic, Stack, Symbol, SymbolProps, Text, TextProps,
 } from '@/components';
 
 import styles from './star-meter.module.css';
@@ -109,11 +109,11 @@ export const StarMeter = forwardRef(({
       }
 
       return (
-        <Icon
+        <Symbol
           source="star"
           weight="solid"
           className={styles.Icon}
-          dimension={properties[dimension].iconSize as IconProps['dimension']}
+          dimension={properties[dimension].iconSize as SymbolProps['dimension']}
           fill={fillType}
           key={starIndex}
         />

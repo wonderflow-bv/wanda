@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import {
-  Icon, Stack, Text, Title,
+  Stack, Symbol, Text, Title,
 } from '../..';
 import { Card } from './card';
 
@@ -49,7 +49,7 @@ Vibrant.args = {
 
 export const WithLeft = Template.bind({});
 WithLeft.args = {
-  left: <Icon source="bell" dimension={32} />,
+  left: <Symbol source="bell" dimension={32} />,
   children: (
     <Stack>
       <Title level="5">Title</Title>
@@ -60,7 +60,7 @@ WithLeft.args = {
 
 export const WithRight = Template.bind({});
 WithRight.args = {
-  right: <Icon source="bell" dimension={32} />,
+  right: <Symbol source="bell" dimension={32} />,
   children: (
     <Stack>
       <Title level="5">Title</Title>
@@ -71,12 +71,12 @@ WithRight.args = {
 
 export const WithLeftAndRight = Template.bind({});
 WithLeftAndRight.args = {
-  left: <Icon source="bell" dimension={32} />,
+  left: <Symbol source="bell" dimension={32} />,
   children: (
     <Stack>
       <Title level="5">Title</Title>
       <Text>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</Text>
     </Stack>
   ),
-  right: <Icon source="calendar" dimension={32} />,
+  right: <Symbol source="calendar" dimension={32} />,
 };

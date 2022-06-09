@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { forwardRef, PropsWithChildren } from 'react';
 
 import {
-  Icon, IconProps, Stack, Text, TextProps,
+  Stack, Symbol, SymbolProps, Text, TextProps,
 } from '@/components';
 
 import { ListProps } from './list';
@@ -13,7 +13,7 @@ export type ListItemProps = PropsWithChildren<PropsWithClass> & Pick<ListProps, 
    * Set the marker style. You can use any icon from the symbols as marker
    * by passing its name.
    */
-  marker?: IconProps['source'];
+  marker?: SymbolProps['source'];
   /**
    * Set the color of the marker.
    */
@@ -65,13 +65,13 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(({
       {...otherProps}
     >
       {!hideMarker && (
-        <Icon
+        <Symbol
           source={marker}
           className={styles.Marker}
           fill={markerColor}
           data-list-default-marker={marker === 'circle'}
-          weight={marker === 'circle' ? 'solid' : sizes[dimension].icon.weight as IconProps['weight']}
-          dimension={marker !== 'circle' ? sizes[dimension].icon.size as IconProps['dimension'] : 16}
+          weight={marker === 'circle' ? 'solid' : sizes[dimension].icon.weight as SymbolProps['weight']}
+          dimension={marker !== 'circle' ? sizes[dimension].icon.size as SymbolProps['dimension'] : 16}
         />
       )}
       <Text as="span" size={sizes[dimension].text as TextProps['size']}>

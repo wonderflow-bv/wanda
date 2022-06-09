@@ -1,12 +1,12 @@
-import { IconNames } from '@wonderflow/icons';
+import { SymbolNames } from '@wonderflow/icons';
 import structure from '@wonderflow/icons/structure';
-import { Icon, Stack } from '@wonderflow/react-components';
+import { Stack, Symbol } from '@wonderflow/react-components';
 import { m } from 'framer-motion';
 import { FC } from 'react';
 
 import styles from './icons.module.css';
 
-const ICONS = structure as IconNames[];
+const ICONS = structure as SymbolNames[];
 
 const GRID_ANIMATION = {
   hidden: {
@@ -78,7 +78,7 @@ export const Icons: FC = () => (
         hPadding={8}
         vPadding={8}
       >
-        <Icon source={icon} dimension={18} weight="duotone" />
+        <Symbol source={icon} dimension={18} weight="duotone" />
       </Stack>
     ))}
     {ICONS.map(icon => (
@@ -96,7 +96,7 @@ export const Icons: FC = () => (
         hPadding={8}
         vPadding={8}
       >
-        <Icon source={icon} dimension={18} weight="outline" />
+        <Symbol source={icon} dimension={18} weight="outline" />
       </Stack>
     ))}
   </Stack>
