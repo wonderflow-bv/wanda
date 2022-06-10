@@ -39,6 +39,6 @@
     "fs-extra": "10.1.0",
     "style-dictionary": "3.7.1",
     "tinycolor2": "1.4.2",
-    "tsconfig": "1.0.0-next.0"
+    "tsconfig": "*"
   }
 }

@@ -54,7 +54,7 @@
     "picocolors": "1.0.0",
     "svgo": "2.8.0",
     "svgstore": "3.0.1",
-    "tsconfig": "1.0.0-next.0"
+    "tsconfig": "*"
   },
   "bugs": {
     "url": "https://github.com/wonderflow-bv/wanda/issues"
