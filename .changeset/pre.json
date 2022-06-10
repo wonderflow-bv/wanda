@@ -10,5 +10,14 @@
     "@wonderflow/tokens": "9.2.0",
     "tsconfig": "0.1.0"
   },
-  "changesets": []
+  "changesets": [
+    "afraid-cups-care",
+    "calm-buttons-kick",
+    "famous-tigers-approve",
+    "many-flies-protect",
+    "nine-elephants-share",
+    "slimy-zebras-wonder",
+    "tidy-fans-develop",
+    "warm-impalas-sell"
+  ]
 }

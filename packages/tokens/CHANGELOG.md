@@ -1,5 +1,12 @@
 # @wonderflow/tokens
 
+## 10.0.0-next.0
+
+### Major Changes
+
+- 10593e6: Fix default rem size
+- 2be339b: Update deps
+
 ## 9.2.0
 
 ### Minor Changes

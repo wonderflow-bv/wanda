@@ -1,5 +1,11 @@
 # @wonderflow/themes
 
+## 10.0.0-next.0
+
+### Major Changes
+
+- 2be339b: Update deps
+
 ## 8.1.0
 
 ### Minor Changes

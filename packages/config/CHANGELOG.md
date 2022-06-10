@@ -1,5 +1,17 @@
 # @wonderflow/config
 
+## 10.0.0-next.0
+
+### Major Changes
+
+- 2be339b: Update deps
+
+### Patch Changes
+
+- Updated dependencies [10593e6]
+- Updated dependencies [2be339b]
+  - @wonderflow/tokens@10.0.0-next.0
+
 ## 7.0.0
 
 ### Major Changes
