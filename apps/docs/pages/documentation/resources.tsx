@@ -42,8 +42,6 @@ export const getStaticProps = async () => {
     query: ResourcesDocument,
   });
 
-  console.log(data);
-
   return getLayoutProps({
     ...data,
     layout: 'doc',
