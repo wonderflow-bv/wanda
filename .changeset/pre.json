@@ -7,8 +7,7 @@
     "@wonderflow/symbols": "9.3.0",
     "@wonderflow/react-components": "9.5.0",
     "@wonderflow/themes": "9.1.0",
-    "@wonderflow/tokens": "9.2.0",
-    "tsconfig": "0.1.0"
+    "@wonderflow/tokens": "9.2.0"
   },
   "changesets": [
     "afraid-cups-care",

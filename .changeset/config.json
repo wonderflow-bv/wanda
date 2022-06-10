@@ -7,7 +7,6 @@
       "@wonderflow/react-components",
       "@wonderflow/symbols",
       "@wonderflow/themes",
-      "@wonderflow/config",
       "@wonderflow/tokens"
     ]
   ],
