@@ -76,6 +76,14 @@
   inset: 0;
 }
 
+.ScopeTitle {
+  margin-bottom: -26px;
+  position: relative;
+  z-index: 1;
+  margin-left: token(--space-24);
+}
+
+
 .Card.Card {
 
   @mixin vibrancy;
