@@ -38,7 +38,7 @@ const ResourcesPage: NextPage<ResourcesQuery> = ({ resourceGroups }) => (
 export default ResourcesPage;
 
 export const getStaticProps = async () => {
-  const { data } = await client.query({
+  const { data } = await client.query<ResourcesQuery>({
     query: ResourcesDocument,
   });
 
@@ -51,5 +51,8 @@ export const getStaticProps = async () => {
       subtitle: 'Useful assets to design at Wonderflow',
       showToc: false,
     },
+  },
+  {
+    revalidate: 60,
   });
 };

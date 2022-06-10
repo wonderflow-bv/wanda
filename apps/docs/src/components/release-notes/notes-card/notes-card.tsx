@@ -59,10 +59,10 @@ export const NotesCard = ({
         )}
 
         {release.notes.length > 0 && (
-        <Stack rowGap={32} vPadding={24}>
+        <Stack rowGap={48} vPadding={24}>
           {release.notes.map(note => (
             <Stack key={note.id}>
-              <Title as="h3" level="5" lineHeight="none">
+              <Title as="h3" level="5" lineHeight="none" className={styles.ScopeTitle}>
                 <GradientText color="rainbow">{`${note.scope[0].toUpperCase()}${note.scope.slice(1)}`}</GradientText>
               </Title>
               <Elevator resting={2}>
