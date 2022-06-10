@@ -1,5 +1,11 @@
 # @wonderflow/tokens
 
+## 10.0.0-next.2
+
+### Minor Changes
+
+- ed181f9: ALign versions and deps
+
 ## 10.0.0-next.0
 
 ### Major Changes
