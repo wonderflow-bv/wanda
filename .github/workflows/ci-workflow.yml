@@ -9,6 +9,8 @@ on:
     secrets:
       WF_TOKEN:
         required: true
+      NODE_TOKEN:
+        required: false
       NPM_TOKEN:
         required: false
       VERCEL_TOKEN:
@@ -75,3 +77,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.WF_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_TOKEN }}
