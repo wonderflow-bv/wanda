@@ -13,5 +13,5 @@
   "access": "restricted",
   "baseBranch": "next",
   "updateInternalDependencies": "patch",
-  "ignore": []
+  "ignore": ["tsconfig"]
 }
