@@ -16,13 +16,11 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 14
+          node-version: 16
           scope: "@wonderflow"
 
-      - run: npm i -g npm@8
-
+      # - run: NODE_AUTH_TOKEN=${{ secrets.WONDERFLOW_NPM_TOKEN }} npx @favware/npm-deprecate --name "9" --package "@wonderflow/icons" --message "This package has been renamed into @wonderflow/symbols and is now deprecated."
       - name: Run deprecation command
-        run: npm deprecate @wonderflow/icons "This package has been renamed into @wonderflow/symbols and is now deprecated."
+        run: npm deprecate @wonderflow/icons@9 "This package has been renamed into @wonderflow/symbols and is now deprecated."
         env:
-          GITHUB_TOKEN: ${{ secrets.WF_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.WONDERFLOW_NPM_TOKEN }}
