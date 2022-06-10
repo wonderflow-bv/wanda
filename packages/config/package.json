@@ -34,7 +34,7 @@
     "postcss": ">=8.x"
   },
   "dependencies": {
-    "@wonderflow/tokens": "10.0.0-next.0",
+    "@wonderflow/tokens": "*",
     "cssnano": "5.1.11",
     "cssnano-preset-default": "5.2.11",
     "flat": "5.0.2",
