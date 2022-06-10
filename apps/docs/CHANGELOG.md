@@ -1,5 +1,18 @@
 # docs
 
+## 10.0.0-next.2
+
+### Minor Changes
+
+- ed181f9: ALign versions and deps
+
+### Patch Changes
+
+- Updated dependencies [ed181f9]
+  - @wonderflow/react-components@10.0.0-next.2
+  - @wonderflow/symbols@10.0.0-next.2
+  - @wonderflow/themes@10.0.0-next.2
+
 ## 10.0.0-next.1
 
 ### Patch Changes
