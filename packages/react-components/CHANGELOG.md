@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 10.0.0-next.1
+
+### Minor Changes
+
+- 22d0757: Update versions
+
 ## 10.0.0-next.0
 
 ### Major Changes

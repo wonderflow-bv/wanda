@@ -1,5 +1,13 @@
 # docs
 
+## 10.0.0-next.1
+
+### Patch Changes
+
+- Updated dependencies [22d0757]
+  - @wonderflow/react-components@10.0.0-next.1
+  - @wonderflow/themes@10.0.0-next.1
+
 ## 10.0.0-next.0
 
 ### Major Changes
