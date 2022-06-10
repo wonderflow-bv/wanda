@@ -13,9 +13,11 @@ concurrency:
 
 jobs:
   ci:
-    uses: wonderflow-bv/wanda/.github/workflows/ci-workflow.yml@main
+    # TODO change branch from next to main after publishing
+    uses: wonderflow-bv/wanda/.github/workflows/ci-workflow.yml@next
     secrets:
       WF_TOKEN: ${{ secrets.WONDERFLOW_WORKFLOW_TOKEN }}
       NPM_TOKEN: ${{ secrets.WONDERFLOW_NPM_TOKEN }}
+      NODE_TOKEN: ${{ secrets.WONDERFLOW_NPM_TOKEN }}
     with:
       release: true
