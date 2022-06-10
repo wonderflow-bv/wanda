@@ -1,5 +1,16 @@
 # @wonderflow/config
 
+## 10.0.0-next.2
+
+### Minor Changes
+
+- ed181f9: ALign versions and deps
+
+### Patch Changes
+
+- Updated dependencies [ed181f9]
+  - @wonderflow/tokens@10.0.0-next.2
+
 ## 10.0.0-next.1
 
 ### Minor Changes
