@@ -1,5 +1,16 @@
 # @wonderflow/config
 
+## 10.0.0-next.3
+
+### Minor Changes
+
+- 03bb99f: Dafuck
+
+### Patch Changes
+
+- Updated dependencies [03bb99f]
+  - @wonderflow/tokens@10.0.0-next.3
+
 ## 10.0.0-next.2
 
 ### Minor Changes

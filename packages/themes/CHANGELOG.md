@@ -1,5 +1,11 @@
 # @wonderflow/themes
 
+## 10.0.0-next.3
+
+### Minor Changes
+
+- 03bb99f: Dafuck
+
 ## 10.0.0-next.2
 
 ### Minor Changes
