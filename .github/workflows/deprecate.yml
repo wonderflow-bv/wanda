@@ -1,0 +1,20 @@
+name: deprecate
+
+on: workflow_dispatch
+
+jobs:
+  deprecation:
+    name: Deprecate package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
+          fetch-depth: 0
+
+      - name: Run deprecation command
+        run: npm deprecate @wonderflow/icons "This package has been renamed into @wonderflow/symbols and is now deprecated."
+        env:
+          GITHUB_TOKEN: ${{ secrets.WF_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
