@@ -43,7 +43,7 @@ export const NotesCard = ({
       </Stack>
 
       <Stack>
-        <Stack rowGap={4} vPadding={32}>
+        <Stack rowGap={4} vPadding={24}>
           <Title as="h2" level="4"><Datetime date={release.releaseDate as string} /></Title>
         </Stack>
 
@@ -59,7 +59,7 @@ export const NotesCard = ({
         )}
 
         {release.notes.length > 0 && (
-        <Stack rowGap={48} vPadding={24}>
+        <Stack rowGap={48} vPadding={32}>
           {release.notes.map(note => (
             <Stack key={note.id}>
               <Title as="h3" level="5" lineHeight="none" className={styles.ScopeTitle}>
