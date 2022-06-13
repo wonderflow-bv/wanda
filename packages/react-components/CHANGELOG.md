@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 10.0.0-next.4
+
+### Minor Changes
+
+- d6fe41d: Update Title auto id generation
+
 ## 10.0.0-next.3
 
 ### Minor Changes
