@@ -16,6 +16,7 @@ import { useEffect } from 'react';
 import { BlankLayout } from '@/components/layouts/blank-layout';
 import { DocLayout } from '@/components/layouts/doc-layout';
 import { ResponsiveProvider } from '@/context/responsive';
+import { TocProvider } from '@/hooks/table-of-content';
 import client from '@/utils/apollo-client';
 
 const LAYOUTS = {
@@ -28,7 +29,9 @@ const Providers: FCChildren = ({ children }) => (
     <ThemeProvider defaultTheme="dark" disableTransitionOnChange>
       <ResponsiveProvider>
         <IdProvider>
-          {children}
+          <TocProvider>
+            {children}
+          </TocProvider>
         </IdProvider>
       </ResponsiveProvider>
     </ThemeProvider>
