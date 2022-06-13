@@ -14,7 +14,7 @@ import { Toc } from '@/components/doc/toc';
 import { BaseLayout } from '@/components/layouts/base-layout';
 import { Header } from '@/components/shared/header';
 import { useResponsive } from '@/context/responsive';
-import { useHeadingsData } from '@/hooks/headings-data';
+import { useToc } from '@/hooks/table-of-content';
 
 import styles from './doc-layout.module.css';
 
@@ -32,10 +32,11 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
 }) => {
   const { matches } = useResponsive();
   const router = useRouter();
-  const { nestedHeadings } = useHeadingsData();
+  const headings = useToc();
 
   const getPretitle = useMemo(() => {
-    const pretitle = (router.asPath.split('/')[3] || router.asPath.split('/')[2]).replace(/-/g, ' ');
+    const url = new URL(process.env.NEXT_PUBLIC_DOMAIN + router.asPath);
+    const pretitle = (url.pathname.split('/')[3] || url.pathname.split('/')[2]).replace(/-/g, ' ');
     const isDifferentFromTitle = pretitle.replace('-', ' ') !== title?.toLowerCase();
     return pretitle && isDifferentFromTitle ? pretitle : 'documentation';
   }, [router, title]);
@@ -81,10 +82,10 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
               </Stack>
             </main>
 
-            {(showToc && nestedHeadings.length > 0) && (
-              <div className={clsx(styles.Sidebar, styles.Toc)}>
-                <Toc headings={nestedHeadings} />
-              </div>
+            {(showToc && headings.length > 0) && (
+            <div className={clsx(styles.Sidebar, styles.Toc)}>
+              <Toc headings={headings} />
+            </div>
             )}
           </Stack>
         </Container>
