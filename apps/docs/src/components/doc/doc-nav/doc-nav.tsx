@@ -12,8 +12,10 @@ export const DocNav = () => {
 
   const includesPath = useCallback(
     (path: NextRouter['asPath']) => {
-      const matchURL = router.asPath.split('/')[2] === path.split('/')[2];
-      return matchURL && router.asPath.split('/')[2].length > 0;
+      const url = new URL(process.env.NEXT_PUBLIC_DOMAIN + router.asPath);
+
+      const matchURL = url.pathname.split('/')[2] === path.split('/')[2];
+      return matchURL && url.pathname.split('/')[2].length > 0;
     },
     [router.asPath],
   );
@@ -31,7 +33,7 @@ export const DocNav = () => {
             vAlign="center"
             vPadding={4}
             fill={false}
-            aria-current={includesPath(link.url) ? 'true' : undefined}
+            aria-current={includesPath(link.url) ? 'true' : false}
             style={{
               '--bg': `var(--highlight-${link.color ?? 'gray'}-background)`,
               '--fg': `var(--highlight-${link.color ?? 'gray'}-foreground)`,

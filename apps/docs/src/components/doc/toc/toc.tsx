@@ -1,4 +1,4 @@
-import { Stack, Title } from '@wonderflow/react-components';
+import { List, Stack, Title } from '@wonderflow/react-components';
 
 import { HeadingType } from '@/hooks/headings-data';
 
@@ -11,9 +11,9 @@ export const Toc = ({
 }: TocProps) => (
   <Stack as="nav" rowGap={16}>
     <Title level="6">On this page</Title>
-    <ul>
+    <List dimension="small">
       {headings.map(heading => (
-        <li key={heading.id}>
+        <List.Li key={heading.id} marker="turn-down-right" markerColor="var(--dimmed-5)">
           <a href={`#${heading.id}`}>{heading.title}</a>
           {(heading.items && heading.items.length > 0) && (
             <ul>
@@ -24,8 +24,8 @@ export const Toc = ({
               ))}
             </ul>
           )}
-        </li>
+        </List.Li>
       ))}
-    </ul>
+    </List>
   </Stack>
 );
