@@ -23,8 +23,10 @@ const useTableOfContent: useTableOfContentFc = ({
   return { headings, updateHeadings };
 };
 
-export const [TocProvider, useToc, useHeadings] = constate(
+export const [TocProvider, useToc] = constate(
   useTableOfContent,
-  value => value.headings,
-  value => value.updateHeadings,
+  value => ({
+    headings: value.headings,
+    updateHeadings: value.updateHeadings,
+  }),
 );

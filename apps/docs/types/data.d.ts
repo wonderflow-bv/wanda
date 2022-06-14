@@ -17,3 +17,24 @@ type DocNavItemType = {
 }
 
 export type DocNavType = DocNavItemType[]
+
+export type NavigationItem = {
+  path?: string;
+  label: string;
+  target?: string;
+  expandable?: boolean;
+  items?: NavigationItem[];
+  wip?: boolean;
+  tag?: {
+    label: string;
+    color?: ChipProps['color'];
+  };
+}
+
+export type NavigationGroup = {
+  title?: string;
+  icon?: SymbolNames;
+  items: NavigationItem[];
+}
+
+export type NavigationMenu = NavigationGroup[]

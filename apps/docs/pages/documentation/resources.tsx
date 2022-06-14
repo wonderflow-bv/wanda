@@ -8,12 +8,12 @@ import {
 } from 'src/generated/graphql';
 
 import { Tile } from '@/components/shared/tile';
-import { useHeadings } from '@/hooks/table-of-content';
+import { useToc } from '@/hooks/table-of-content';
 import client from '@/utils/apollo-client';
 import { getLayoutProps } from '@/utils/get-layout-props';
 
 const ResourcesPage: NextPage<ResourcesQuery> = ({ resourceGroups }) => {
-  const updateHeadings = useHeadings();
+  const { updateHeadings } = useToc();
 
   useEffect(() => {
     updateHeadings(

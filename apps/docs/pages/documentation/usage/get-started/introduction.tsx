@@ -1,6 +1,7 @@
 import { Title } from '@wonderflow/react-components';
 import { NextPage } from 'next';
 
+import UsageNav from '@/data/usage-nav';
 import { getLayoutProps } from '@/utils/get-layout-props';
 
 const IntroductionPage: NextPage = () => (
@@ -20,5 +21,6 @@ export const getStaticProps = () => getLayoutProps({
     title: 'Introduction',
     color: 'mint',
     subtitle: 'Wanda is Wonderflow’s open-source design system built for products and digital experiences.',
+    navigation: UsageNav,
   },
 });

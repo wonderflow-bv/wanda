@@ -7,12 +7,14 @@ import { useRouter } from 'next/router';
 import {
   CSSProperties, useMemo,
 } from 'react';
+import { NavigationMenu } from 'types/data';
 
 import { DocHeader, DocHeaderProps } from '@/components/doc/doc-header';
 import { DocNav } from '@/components/doc/doc-nav';
 import { Toc } from '@/components/doc/toc';
 import { BaseLayout } from '@/components/layouts/base-layout';
 import { Header } from '@/components/shared/header';
+import { Navigation } from '@/components/shared/navigation';
 import { useResponsive } from '@/context/responsive';
 import { useToc } from '@/hooks/table-of-content';
 
@@ -21,6 +23,7 @@ import styles from './doc-layout.module.css';
 export interface IPropsDocLayout extends Pick<DocHeaderProps, 'title' | 'subtitle'> {
   color?: 'mint' | 'blue' | 'salmon' | 'indigo';
   showToc?: boolean;
+  navigation?: NavigationMenu;
 }
 
 export const DocLayout: FCChildren<IPropsDocLayout> = ({
@@ -28,11 +31,12 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
   color,
   title,
   subtitle,
+  navigation,
   showToc = true,
 }) => {
   const { matches } = useResponsive();
   const router = useRouter();
-  const headings = useToc();
+  const { headings } = useToc();
 
   const getPretitle = useMemo(() => {
     const url = new URL(process.env.NEXT_PUBLIC_DOMAIN + router.asPath);
@@ -57,6 +61,7 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
             <div className={styles.Sidebar}>
               <Stack rowGap={40}>
                 <DocNav />
+                {navigation && <Navigation data={navigation} />}
               </Stack>
             </div>
 

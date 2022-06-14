@@ -1,0 +1,40 @@
+@import '@wonderflow/react-components/core/utils/media.css';
+
+.LiveArea {
+  border-radius: token(--radius-8);
+  min-block-size: var(--min-height);
+  max-block-size: var(--max-height);
+  padding: token(--space-16) token(--space-40);
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  block-size: 100%;
+  position: relative;
+  z-index: 1;
+
+  @media (--from-medium) {
+    padding: token(--space-40) token(--space-64) token(--space-40);
+  }
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-image:
+      radial-gradient(
+        circle at center,
+        var(--dimmed-1) 60%,
+        var(--dimmed-0)
+      );
+    mask-image:
+      radial-gradient(
+        black 0.9px,
+        transparent 0.9px
+      );
+    mask-size: 18px 18px;
+  }
+}
