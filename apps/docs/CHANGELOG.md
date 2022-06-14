@@ -1,5 +1,12 @@
 # docs
 
+## 10.0.0-next.4
+
+### Patch Changes
+
+- Updated dependencies [d6fe41d]
+  - @wonderflow/react-components@10.0.0-next.4
+
 ## 10.0.0-next.3
 
 ### Minor Changes
