@@ -3,30 +3,29 @@ import { NavigationMenu } from 'types/data';
 const UsageNav: NavigationMenu = [
   {
     title: 'Get started',
-    icon: 'compass',
     items: [
       {
-        path: '/get-started/introduction',
+        path: '/documentation/usage/get-started/introduction',
         label: 'Introduction',
         target: '',
       },
       {
-        path: '/get-started/accessibility',
+        path: '/documentation/usage/get-started/accessibility',
         label: 'Accessibility',
         target: '',
       },
       {
-        path: '/learn',
+        path: '/documentation/usage/learn',
         label: 'Learn',
         target: '',
       },
       {
-        path: '/release-notes',
+        path: '/documentation/usage/release-notes',
         label: 'Release notes',
         target: '',
       },
       {
-        path: '/resources',
+        path: '/documentation/usage/resources',
         label: 'Resources',
         target: '',
       },
@@ -34,10 +33,9 @@ const UsageNav: NavigationMenu = [
   },
   {
     title: 'Design',
-    icon: 'pc',
     items: [
       {
-        path: '/design/brand',
+        path: '/documentation/usage/design/brand',
         label: 'Brand',
         target: '',
       },
@@ -46,24 +44,24 @@ const UsageNav: NavigationMenu = [
         expandable: true,
         items: [
           {
-            path: '/design/foundations/colors',
+            path: '/documentation/usage/design/foundations/colors',
             label: 'Colors',
             target: '',
           },
           {
-            path: '/design/foundations/typography',
+            path: '/documentation/usage/design/foundations/typography',
             label: 'Typography',
             target: '',
           },
           {
-            path: '/design/foundations/elevations',
+            path: '/documentation/usage/design/foundations/elevations',
             label: 'Elevations',
             target: '',
           },
         ],
       },
       {
-        path: '/design/iconography',
+        path: '/documentation/usage/design/iconography',
         label: 'Iconography',
         target: '',
       },
@@ -76,28 +74,28 @@ const UsageNav: NavigationMenu = [
         },
         items: [
           {
-            path: '/design/motion/principles',
+            path: '/documentation/usage/design/motion/principles',
             label: 'Principles',
             target: '',
           },
           {
-            path: '/design/motion/animations',
+            path: '/documentation/usage/design/motion/animations',
             label: 'Animations',
           },
           {
-            path: '/design/motion/speed',
+            path: '/documentation/usage/design/motion/speed',
             label: 'Speed',
             target: '',
           },
           {
-            path: '/design/motion/timing',
+            path: '/documentation/usage/design/motion/timing',
             label: 'Timing',
             target: '',
           },
         ],
       },
       {
-        path: '/design/themes',
+        path: '/documentation/usage/design/themes',
         label: 'Themes',
         target: '',
       },
@@ -106,37 +104,37 @@ const UsageNav: NavigationMenu = [
         expandable: true,
         items: [
           {
-            path: '/design/recipes/buttons',
+            path: '/documentation/usage/design/recipes/buttons',
             label: 'Buttons',
             target: '',
           },
           {
-            path: '/design/recipes/popover',
+            path: '/documentation/usage/design/recipes/popover',
             label: 'Popover',
             target: '',
           },
           {
-            path: '/design/recipes/forms',
+            path: '/documentation/usage/design/recipes/forms',
             label: 'Forms',
             target: '',
           },
           {
-            path: '/design/recipes/info-states',
+            path: '/documentation/usage/design/recipes/info-states',
             label: 'Info states',
             target: '',
           },
           {
-            path: '/design/recipes/loading',
+            path: '/documentation/usage/design/recipes/loading',
             label: 'Loading',
             target: '',
           },
           {
-            path: '/design/recipes/modals',
+            path: '/documentation/usage/design/recipes/modals',
             label: 'Modals',
             target: '',
           },
           {
-            path: '/design/recipes/notifications',
+            path: '/documentation/usage/design/recipes/notifications',
             label: 'Notifications',
             target: '',
           },
@@ -146,30 +144,29 @@ const UsageNav: NavigationMenu = [
   },
   {
     title: 'Develop',
-    icon: 'code',
     items: [
       {
-        path: '/develop/installation',
+        path: '/documentation/usage/develop/installation',
         label: 'Installation',
         target: '',
       },
       {
-        path: '/develop/design-tokens',
+        path: '/documentation/usage/develop/design-tokens',
         label: 'Design tokens',
         target: '',
       },
       {
-        path: '/develop/global-styles',
+        path: '/documentation/usage/develop/global-styles',
         label: 'Global styles',
         target: '',
       },
       {
-        path: '/develop/ssr',
+        path: '/documentation/usage/develop/ssr',
         label: 'Server side rendering',
         target: '',
       },
       {
-        path: '/develop/using-themes',
+        path: '/documentation/usage/develop/using-themes',
         label: 'Using themes',
         target: '',
       },
@@ -178,12 +175,12 @@ const UsageNav: NavigationMenu = [
         expandable: true,
         items: [
           {
-            path: '/develop/utilities/id-provider',
+            path: '/documentation/usage/develop/utilities/id-provider',
             label: 'Id Provider',
             target: '',
           },
           {
-            path: '/develop/utilities/polymorphic',
+            path: '/documentation/usage/develop/utilities/polymorphic',
             label: 'Polymorphic',
             target: '',
           },

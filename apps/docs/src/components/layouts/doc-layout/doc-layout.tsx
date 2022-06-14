@@ -13,6 +13,7 @@ import { DocHeader, DocHeaderProps } from '@/components/doc/doc-header';
 import { DocNav } from '@/components/doc/doc-nav';
 import { Toc } from '@/components/doc/toc';
 import { BaseLayout } from '@/components/layouts/base-layout';
+import { ClientOnly } from '@/components/shared/client-only';
 import { Header } from '@/components/shared/header';
 import { Navigation } from '@/components/shared/navigation';
 import { useResponsive } from '@/context/responsive';
@@ -61,7 +62,7 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
             <div className={styles.Sidebar}>
               <Stack rowGap={40}>
                 <DocNav />
-                {navigation && <Navigation data={navigation} />}
+                <ClientOnly>{navigation && <Navigation data={navigation} />}</ClientOnly>
               </Stack>
             </div>
 

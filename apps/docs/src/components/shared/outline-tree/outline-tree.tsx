@@ -1,5 +1,5 @@
 import {
-  Disclosure, List, Stack, Symbol, Text,
+  Disclosure, Stack, Symbol, Text,
 } from '@wonderflow/react-components';
 import { SymbolNames } from '@wonderflow/symbols';
 import React, { ReactNode } from 'react';
@@ -22,32 +22,38 @@ export const OutlineTree: {
   Menu: React.FC<MenuProps>;
   Li: React.FC;
 } = {
+  // First level group and menu
   Group: ({
-    children, title, icon, ...props
+    children, title, icon, ...otherProps
   }) => (
-    <Stack rowGap={16} vAlign="start" className={styles.OutlineTree} {...props}>
+    <Stack rowGap={16} vAlign="start" className={styles.OutlineTree} {...otherProps}>
       {title && (
-      <Text
-        size={14}
-        responsive={false}
-        className={styles.Title}
-        dimmed={5}
-        weight="bold"
-      >
-        <Stack as="span" vAlign="center" columnGap={8} direction="row" inline>
+        <Stack
+          as={Text}
+          vAlign="center"
+          hAlign="start"
+          columnGap={8}
+          direction="row"
+          fill={false}
+          size={14}
+          responsive={false}
+          className={styles.Title}
+          dimmed={5}
+          weight="bold"
+        >
           {icon && <Symbol source={icon} />}
           {title}
         </Stack>
-      </Text>
       )}
-      <List>
+      <Stack as="ul" rowGap={8}>
         {children}
-      </List>
+      </Stack>
     </Stack>
   ),
 
+  // Nested Menu
   Menu: ({
-    children, summary, open = false, expandable = false, ...props
+    children, summary, open = false, expandable = false, ...otherProps
   }) => (expandable
     ? (
       <OutlineTree.Li>
@@ -57,19 +63,15 @@ export const OutlineTree: {
           iconPosition="right"
           dimension="small"
           summary={summary}
-          {...props}
+          {...otherProps}
         >
-          <List>
+          <Stack as="ul" rowGap={4}>
             {children}
-          </List>
+          </Stack>
         </Disclosure>
       </OutlineTree.Li>
     )
-    : <>{children}</>),
+    : <OutlineTree.Li>{children}</OutlineTree.Li>),
 
-  Li: ({ children, ...props }) => <List.Li className={styles.Li} {...props}>{children}</List.Li>,
+  Li: ({ children, ...otherProps }) => <li className={styles.Li} {...otherProps}>{children}</li>,
 };
-
-OutlineTree.Group.displayName = 'OutlineTree.Group';
-OutlineTree.Menu.displayName = 'OutlineTree.Menu';
-OutlineTree.Li.displayName = 'OutlineTree.Li';
