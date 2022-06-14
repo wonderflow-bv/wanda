@@ -1,5 +1,6 @@
 .NavItem {
   color: var(--global-foreground);
+  outline-offset: -2px;
 
   &:hover {
     color: var(--global-vibrancy-foreground);
