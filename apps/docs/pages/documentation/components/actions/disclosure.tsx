@@ -3,20 +3,20 @@ import { NextPage } from 'next';
 import ComponentsNav from '@/data/components-nav';
 import { getLayoutProps } from '@/utils/get-layout-props';
 
-const ButtonPage: NextPage = () => (
+const DisclosurePage: NextPage = () => (
   <div>
-    Button
+    Disclosure
   </div>
 );
 
-export default ButtonPage;
+export default DisclosurePage;
 
 export const getStaticProps = () => getLayoutProps({
   layout: 'doc',
   layoutProps: {
-    title: 'Button',
+    title: 'Disclosure',
     color: 'indigo',
-    subtitle: 'A button is a box area or text that communicates and triggers user actions when clicked.',
+    subtitle: 'Interactive element to control the visiblity of content.',
     navigation: ComponentsNav,
   },
 });

@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { NextRouter, useRouter } from 'next/router';
 import { useCallback } from 'react';
 
-import Nav from '@/data/nav';
+import Nav from '@/data/main-nav';
 
 import styles from './main-nav.module.css';
 
