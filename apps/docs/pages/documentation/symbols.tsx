@@ -10,6 +10,6 @@ export const getStaticProps = () => getLayoutProps({
   layout: 'doc',
   layoutProps: {
     title: 'Symbols',
-    color: 'mint',
+    color: 'dipsy',
   },
 });

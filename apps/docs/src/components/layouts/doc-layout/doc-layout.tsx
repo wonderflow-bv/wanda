@@ -23,7 +23,7 @@ import { useToc } from '@/hooks/table-of-content';
 import styles from './doc-layout.module.css';
 
 export interface IPropsDocLayout extends Pick<DocHeaderProps, 'title' | 'subtitle'> {
-  color?: 'mint' | 'blue' | 'salmon' | 'indigo';
+  color?: 'gray' | 'cyan' | 'green' | 'purple' | 'yellow' | 'red' | 'blue' | 'magenta' | 'violet' | 'indigo' | 'mint' | 'dipsy' | 'salmon';
   showToc?: boolean;
   navigation?: NavigationMenu;
 }
