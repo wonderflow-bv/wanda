@@ -18,7 +18,7 @@
 
 .SubMenu.SubMenu {
   margin-block-end: token(--space-24);
-  border-left: 1px dashed var(--layout-color-fg);
+  border-left: 2px dashed var(--layout-color-fg);
   border-radius: 0 0 0 token(--radius-16);
   padding-left: token(--space-16);
   margin-left: token(--space-8);

@@ -25,7 +25,6 @@
   position: relative;
 
   @nest .Header[data-header-position='sticky'] & {
-    border-bottom: 1px solid var(--global-vibrancy-background);
 
     @supports not (backdrop-filter: blur(0)) {
       background-color: var(--global-background);

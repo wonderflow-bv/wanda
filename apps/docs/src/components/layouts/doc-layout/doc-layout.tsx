@@ -124,7 +124,7 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
             obfuscate={false}
           >
             {isMenuOpen && (
-            <Drawer title="Drawer title" maxWidth="100vw" theme="auto">
+            <Drawer title="Navigation" maxWidth="100vw" theme="auto">
               <Stack rowGap={40} hPadding={24} vPadding={32}>
                 <DocNav />
                 {navigation && (
