@@ -61,11 +61,6 @@ const UsageNav: NavigationMenu = [
         ],
       },
       {
-        path: '/documentation/usage/design/iconography',
-        label: 'Iconography',
-        target: '',
-      },
-      {
         label: 'Motion',
         expandable: true,
         tag: {
