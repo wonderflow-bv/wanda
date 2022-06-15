@@ -24,6 +24,7 @@
   @media (--from-large) {
     overflow: auto;
     padding-top: token(--space-56);
+    padding-right: token(--space-24);
     border: 0;
     height: calc(100vh - 76px);
     max-width: 14.63rem;
