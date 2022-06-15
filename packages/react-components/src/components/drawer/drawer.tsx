@@ -68,10 +68,6 @@ export const Drawer: FCChildrenClass<DrawerProps> = forwardRef(({
   ...otherProps
 }, forwardedRef: Ref<HTMLDivElement>) => {
   const { titleId, onClose } = useOverlayContext();
-  const cssEasingToArray = (cssEasing: string) => {
-    const [x1, y1, x2, y2] = cssEasing.replace(/[^0-9.,]+/g, '').split(',').map(i => parseFloat(i));
-    return [x1, y1, x2, y2];
-  };
 
   useKeyPress('esc', () => (!isModal && onClose) && onClose());
 
@@ -83,14 +79,16 @@ export const Drawer: FCChildrenClass<DrawerProps> = forwardRef(({
     visible: {
       x: 0,
       transition: {
-        ease: cssEasingToArray(tkns.easing.entrance),
+        type: 'spring',
+        bounce: 0,
         duration: parseFloat(tkns.duration[500].replace('s', '')),
       },
     },
     hidden: {
       x: side === 'right' ? '100%' : '-100%',
       transition: {
-        ease: cssEasingToArray(tkns.easing.exit),
+        type: 'spring',
+        bounce: 0,
         duration: parseFloat(tkns.duration[500].replace('s', '')),
       },
     },

@@ -34,7 +34,7 @@
 .Content {
   background-color: var(--global-background);
   overscroll-behavior: contain;
-  inline-size: 100%;
+  inline-size: 100vw;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   max-inline-size: var(--max-w);
