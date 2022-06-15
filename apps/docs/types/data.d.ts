@@ -12,7 +12,7 @@ type DocNavItemType = {
   label: string;
   url: string;
   icon: SymbolNames;
-  color?: string;
+  color?: 'gray' | 'cyan' | 'green' | 'purple' | 'yellow' | 'red' | 'blue' | 'magenta' | 'violet' | 'indigo' | 'mint' | 'dipsy' | 'salmon';
   blank?: boolean;
 }
 

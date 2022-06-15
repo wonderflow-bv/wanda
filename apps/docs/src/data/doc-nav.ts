@@ -14,6 +14,12 @@ const DocNav: DocNavType = [
     url: '/documentation/components/actions/button',
   },
   {
+    label: 'Symbols',
+    icon: 'grip-vertical',
+    color: 'dipsy',
+    url: '/documentation/symbols',
+  },
+  {
     label: 'Resources',
     icon: 'arrow-down-to-bracket',
     color: 'salmon',
