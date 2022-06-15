@@ -1,5 +1,5 @@
 import {
-  Chip, Stack, Text,
+  Chip, Stack, Text, useOverlayContext,
 } from '@wonderflow/react-components';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -16,11 +16,20 @@ type NavigationProps = {
 
 export const Navigation = ({ data }: NavigationProps) => {
   const router = useRouter();
+  const { onClose } = useOverlayContext();
 
   const includesPath = useCallback(
     path => router.asPath === path,
     [router.asPath],
   );
+
+  const handleOverlays = useCallback(() => {
+    router.events.on('routeChangeStart', () => onClose?.());
+
+    return () => {
+      router.events.off('routeChangeStart', () => onClose?.());
+    };
+  }, [router, onClose]);
 
   const navigationLink = useCallback(
     (
@@ -36,6 +45,7 @@ export const Navigation = ({ data }: NavigationProps) => {
         vAlign="end"
         columnGap={8}
         fill={false}
+        onClick={handleOverlays}
         aria-current={includesPath(url) ? 'page' : undefined}
       >
         {wip && !url
@@ -45,7 +55,7 @@ export const Navigation = ({ data }: NavigationProps) => {
         {tag && <Chip color={tag.color || 'gray'} dimension="small">{tag.label}</Chip>}
       </Stack>
     ),
-    [includesPath],
+    [includesPath, handleOverlays],
   );
 
   const renderSubMenu = useCallback(

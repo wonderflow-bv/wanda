@@ -42,11 +42,10 @@
       inset: 0 -8px;
       z-index: -1;
       border-radius: token(--radius-8);
-      transition: all token(--duration-100) token(--easing-standard);
     }
 
-    &:not([aria-current='page']):hover::before {
-      background: var(--dimmed-1);
+    &:not([aria-current='page']):hover {
+      color: var(--layout-color-fg);
     }
   }
 
