@@ -45,7 +45,7 @@ export const OutlineTree: {
           {title}
         </Stack>
       )}
-      <Stack as="ul" rowGap={8}>
+      <Stack as="ul">
         {children}
       </Stack>
     </Stack>

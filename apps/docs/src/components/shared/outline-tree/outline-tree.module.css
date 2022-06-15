@@ -17,17 +17,37 @@
 }
 
 .SubMenu.SubMenu {
-  margin-block-end: token(--space-32);
+  margin-block-end: token(--space-24);
   border-left: 1px dashed var(--layout-color-fg);
+  border-radius: 0 0 0 16px;
   padding-left: token(--space-16);
   margin-left: token(--space-8);
+  padding-bottom: token(--space-8);
 }
 
 .Li {
-  & > :is(a, span, div) {
+  & :is(a, summary) {
     color: var(--dimmed-9);
     outline-offset: -2px;
     font-weight: 600;
+    border-radius: token(--radius-8);
+    position: relative;
+    padding-top: token(--space-4);
+    padding-bottom: token(--space-4);
+
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      inset: 0 -8px;
+      z-index: -1;
+      border-radius: token(--radius-8);
+      transition: all token(--duration-100) token(--easing-standard);
+    }
+
+    &:not([aria-current='page']):hover::before {
+      background: var(--dimmed-1);
+    }
   }
 
   @nest details & > :is(a, span, div) {
@@ -37,38 +57,11 @@
     outline-offset: -2px;
   }
 
-  /*
-
-  & > :is(details) {
-    font-size: token(--font-size-16);
-  } */
-
-  /*
-  & > :is(a),
-  & details > summary {
-    cursor: pointer;
-
-    &:hover:not([aria-current='page']) {
-      color: var(--dimmed-6);
-    }
-  } */
-
-  /* @nest details & :is(a, span) {
-    font-weight: 400;
-  } */
-
   & > *[aria-current='page'] {
     color: var(--layout-color-fg);
-    position: relative;
 
     &::before {
-      content: '';
-      display: block;
-      position: absolute;
-      inset: -2px -8px;
       background: var(--layout-color-bg);
-      z-index: -1;
-      border-radius: token(--radius-8);
     }
   }
 
@@ -76,10 +69,8 @@
    * https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns
    */
 
-  /* &::before {
+  &::before {
     position: absolute;
     content: '\200B';
   }
-}
-*/
 }

@@ -27,6 +27,7 @@
     border: 0;
     height: calc(100vh - 76px);
     max-width: 14.63rem;
+    scrollbar-gutter: stable;
     min-width: 14.63rem;
     position: sticky;
     top: 75px;
