@@ -31,7 +31,6 @@
     color: var(--dimmed-6);
     padding: token(--space-2) token(--space-8);
     outline-offset: -2px;
-    font-weight: 600;
   }
 
 

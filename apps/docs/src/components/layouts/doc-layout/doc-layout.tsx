@@ -15,6 +15,7 @@ import { Toc } from '@/components/doc/toc';
 import { BaseLayout } from '@/components/layouts/base-layout';
 import { ClientOnly } from '@/components/shared/client-only';
 import { Header } from '@/components/shared/header';
+import { Meta } from '@/components/shared/meta';
 import { Navigation } from '@/components/shared/navigation';
 import { useResponsive } from '@/context/responsive';
 import { useToc } from '@/hooks/table-of-content';
@@ -53,6 +54,7 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
 
   return (
     <BaseLayout>
+      <Meta title={title} description={subtitle} />
       <Header position="sticky" />
       <span className={styles.Glow} />
       <LazyMotion features={domMax}>
