@@ -63,7 +63,7 @@ export const Designers: FCClass = ({
                     Wanda offers over 114 ready-to-use SVG icons and three solid,
                     outline, and duotone styles for over 342 icons.
                   </Text>
-                  <Link href="/documentation/usage/design/symbols" passHref>
+                  <Link href="/documentation/symbols" passHref>
                     <Button as="a" kind="secondary" dimension="big">Read more</Button>
                   </Link>
                 </Stack>
