@@ -1,5 +1,6 @@
 import { NextPage } from 'next';
 
+import UsageNav from '@/data/usage-nav';
 import { getLayoutProps } from '@/utils/get-layout-props';
 
 const ColorsPage: NextPage = () => (<div>Color</div>);
@@ -11,5 +12,6 @@ export const getStaticProps = () => getLayoutProps({
   layoutProps: {
     title: 'Colors',
     color: 'mint',
+    navigation: UsageNav,
   },
 });

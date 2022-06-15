@@ -45,7 +45,7 @@ export const OutlineTree: {
           {title}
         </Stack>
       )}
-      <Stack as="ul" rowGap={8}>
+      <Stack as="ul" rowGap={4}>
         {children}
       </Stack>
     </Stack>
@@ -65,7 +65,7 @@ export const OutlineTree: {
           summary={summary}
           {...otherProps}
         >
-          <Stack as="ul" rowGap={4}>
+          <Stack as="ul" rowGap={4} className={styles.SubMenu}>
             {children}
           </Stack>
         </Disclosure>

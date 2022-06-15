@@ -44,17 +44,17 @@ const UsageNav: NavigationMenu = [
         expandable: true,
         items: [
           {
-            path: '/documentation/usage/design/foundations/colors',
+            path: '/documentation/usage/design/foundation/colors',
             label: 'Colors',
             target: '',
           },
           {
-            path: '/documentation/usage/design/foundations/typography',
+            path: '/documentation/usage/design/foundation/typography',
             label: 'Typography',
             target: '',
           },
           {
-            path: '/documentation/usage/design/foundations/elevations',
+            path: '/documentation/usage/design/foundation/elevations',
             label: 'Elevations',
             target: '',
           },

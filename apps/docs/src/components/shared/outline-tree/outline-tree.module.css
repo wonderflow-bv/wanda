@@ -16,8 +16,11 @@
   text-transform: uppercase;
 }
 
-.SubMenu {
-  margin-bottom: token(--space-32);
+.SubMenu.SubMenu {
+  margin-block-end: token(--space-32);
+  border-left: 1px dashed var(--layout-color-fg);
+  padding-left: token(--space-16);
+  margin-left: token(--space-8);
 }
 
 .Li {
@@ -29,14 +32,16 @@
 
   @nest details & > :is(a, span, div) {
     color: var(--dimmed-6);
-    padding: token(--space-2) token(--space-8);
+    padding: 0 token(--space-8);
+    font-weight: unset;
     outline-offset: -2px;
   }
 
+  /*
 
   & > :is(details) {
     font-size: token(--font-size-16);
-  }
+  } */
 
   /*
   & > :is(a),
@@ -53,7 +58,18 @@
   } */
 
   & > *[aria-current='page'] {
-    color: var(--cta-default);
+    color: var(--layout-color-fg);
+    position: relative;
+
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      inset: -2px -8px;
+      background: var(--layout-color-bg);
+      z-index: -1;
+      border-radius: token(--radius-8);
+    }
   }
 
   /* Stupid Safari fix
