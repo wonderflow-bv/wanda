@@ -1,11 +1,12 @@
 import {
-  Container, Separator, Stack, Text,
+  Button,
+  Container, Drawer, OverlayContainer, Separator, Stack, Text,
 } from '@wonderflow/react-components';
 import clsx from 'clsx';
 import { domMax, LazyMotion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import {
-  CSSProperties, useMemo,
+  CSSProperties, useMemo, useRef, useState,
 } from 'react';
 import { NavigationMenu } from 'types/data';
 
@@ -36,9 +37,11 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
   navigation,
   showToc = true,
 }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { matches } = useResponsive();
   const router = useRouter();
   const { headings } = useToc();
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const getPretitle = useMemo(() => {
     const url = new URL(process.env.NEXT_PUBLIC_DOMAIN + router.asPath);
@@ -58,20 +61,28 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
       <Header position="sticky" />
       <span className={styles.Glow} />
       <LazyMotion features={domMax}>
-        <Container dimension="large" style={dynamicStyle}>
+        <Container ref={containerRef} dimension="large" style={dynamicStyle}>
           <Stack direction={matches.large ? 'row' : undefined} columnGap={56}>
 
             <div className={styles.Sidebar}>
               <Stack rowGap={40}>
-                <DocNav />
-                <ClientOnly>
-                  {navigation && (
-                    <>
-                      <Separator />
-                      <Navigation data={navigation} />
-                    </>
-                  )}
-                </ClientOnly>
+                {matches.large ? (
+                  <>
+                    <DocNav />
+                    <ClientOnly>
+                      {navigation && (
+                        <>
+                          <Separator />
+                          <Navigation data={navigation} />
+                        </>
+                      )}
+                    </ClientOnly>
+                  </>
+                ) : (
+                  <>
+                    {navigation && <Button kind="secondary" onClick={() => setIsMenuOpen(true)}>Navigation</Button>}
+                  </>
+                )}
               </Stack>
             </div>
 
@@ -105,6 +116,29 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
           </Stack>
         </Container>
       </LazyMotion>
+      {containerRef?.current && (
+        <ClientOnly>
+          <OverlayContainer
+            root={containerRef?.current}
+            onClose={() => setIsMenuOpen(false)}
+            obfuscate={false}
+          >
+            {isMenuOpen && (
+            <Drawer title="Drawer title" maxWidth="100vw" theme="auto">
+              <Stack rowGap={40} hPadding={24} vPadding={32}>
+                <DocNav />
+                {navigation && (
+                  <>
+                    <Separator />
+                    <Navigation data={navigation} />
+                  </>
+                )}
+              </Stack>
+            </Drawer>
+            )}
+          </OverlayContainer>
+        </ClientOnly>
+      )}
     </BaseLayout>
   );
 };
