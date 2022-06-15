@@ -64,7 +64,14 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
             <div className={styles.Sidebar}>
               <Stack rowGap={40}>
                 <DocNav />
-                <ClientOnly>{navigation && <Navigation data={navigation} />}</ClientOnly>
+                <ClientOnly>
+                  {navigation && (
+                    <>
+                      <Separator />
+                      <Navigation data={navigation} />
+                    </>
+                  )}
+                </ClientOnly>
               </Stack>
             </div>
 
