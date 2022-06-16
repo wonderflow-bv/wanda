@@ -1,0 +1,52 @@
+.SearchSymbol {
+  position: relative;
+  z-index: 0;
+}
+
+.ToolBar {
+  position: sticky;
+  top: token(--space-56);
+  padding: token(--space-24) token(--space-4) token(--space-48);
+  z-index: 1;
+  mask-image: linear-gradient(to bottom, var(--dimmed-0) 60%, transparent);
+}
+
+.SymbolTile {
+  --bg: var(--global-vibrancy-background-soft);
+
+  position: relative;
+  background-color: var(--bg);
+  padding: token(--space-16) token(--space-24);
+  aspect-ratio: 1/1;
+  text-align: center;
+  width: 100%;
+
+  &[data-icon-tile-copied='true'] {
+    animation: positive-feedback 2s 1;
+  }
+
+  &:hover,
+  &:focus-visible {
+    --bg: var(--global-vibrancy-background);
+  }
+}
+
+.SymbolPreview + * {
+  position: absolute;
+  top: 55%;
+  padding: 0 token(--space-16);
+}
+
+@keyframes positive-feedback {
+  0% {
+    background-color: var(--layout-color-bg);
+    color: var(--layout-color-fg);
+    box-shadow: inset 0 0 0 2px var(--layout-color-fg);
+  }
+
+  100% {
+    background-color: var(--bg);
+    color: revert;
+    box-shadow: inset 0 0 0 2px transparent;
+  }
+}
