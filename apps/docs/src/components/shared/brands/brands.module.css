@@ -5,6 +5,7 @@
   --dots-color: var(--dimmed-2);
   --computed-dot-size: calc(var(--dots-size) / 2);
 
+  overflow: hidden;
   background-image:
     radial-gradient(
       var(--dots-color) var(--computed-dot-size),
@@ -28,7 +29,7 @@
     gap: 0 token(--space-16);
 
     & img {
-      opacity: 20%;
+      opacity: 40%;
       filter: blur(8px);
     }
   }
