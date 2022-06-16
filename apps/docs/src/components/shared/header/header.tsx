@@ -72,7 +72,15 @@ export const Header: FCClass<HeaderProps> = ({
               )}
               <Search />
               <DynThemeSwitcher />
-              <IconButton icon="github" kind="flat" />
+              <IconButton
+                as="a"
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://github.com/wonderflow-bv/wanda"
+                kind="flat"
+                icon="github"
+                aria-label="Wanda on GitHub"
+              />
             </Stack>
           </Stack>
         </Container>
