@@ -79,9 +79,7 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
                     </ClientOnly>
                   </>
                 ) : (
-                  <>
-                    {navigation && <Button kind="secondary" onClick={() => setIsMenuOpen(true)}>Navigation</Button>}
-                  </>
+                  <Button kind="secondary" onClick={() => setIsMenuOpen(true)}>Navigation</Button>
                 )}
               </Stack>
             </div>
@@ -123,14 +121,14 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
             onClose={() => setIsMenuOpen(false)}
             obfuscate={false}
           >
-            {isMenuOpen && (
+            {(isMenuOpen && !matches.large) && (
             <Drawer title="Navigation" maxWidth="100vw" theme="auto">
               <Stack rowGap={40} hPadding={24} vPadding={32}>
                 <DocNav />
                 {navigation && (
                   <>
                     <Separator />
-                    <Navigation data={navigation} />
+                    {navigation && <Navigation data={navigation} />}
                   </>
                 )}
               </Stack>

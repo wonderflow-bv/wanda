@@ -72,6 +72,7 @@ export const Header: FCClass<HeaderProps> = ({
               )}
               <Search />
               <DynThemeSwitcher />
+              <IconButton icon="github" kind="flat" />
             </Stack>
           </Stack>
         </Container>

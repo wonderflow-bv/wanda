@@ -1,4 +1,6 @@
-import { Stack, Symbol, Text } from '@wonderflow/react-components';
+import {
+  Stack, Symbol, Text, useOverlayContext,
+} from '@wonderflow/react-components';
 import Link from 'next/link';
 import { NextRouter, useRouter } from 'next/router';
 import { useCallback } from 'react';
@@ -9,6 +11,7 @@ import styles from './doc-nav.module.css';
 
 export const DocNav = () => {
   const router = useRouter();
+  const { onClose } = useOverlayContext();
 
   const includesPath = useCallback(
     (path: NextRouter['asPath']) => {
@@ -19,6 +22,14 @@ export const DocNav = () => {
     },
     [router.asPath],
   );
+
+  const handleOverlays = useCallback(() => {
+    router.events.on('routeChangeStart', () => onClose?.());
+
+    return () => {
+      router.events.off('routeChangeStart', () => onClose?.());
+    };
+  }, [router, onClose]);
 
   return (
     <Stack rowGap={8}>
@@ -33,6 +44,7 @@ export const DocNav = () => {
             vAlign="center"
             vPadding={4}
             fill={false}
+            onClick={handleOverlays}
             aria-current={includesPath(link.url) ? 'true' : false}
             style={{
               '--bg': `var(--highlight-${link.color ?? 'gray'}-background)`,
