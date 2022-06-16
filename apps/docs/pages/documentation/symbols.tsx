@@ -16,7 +16,7 @@ export const getStaticProps = () => getLayoutProps({
   layout: 'doc',
   layoutProps: {
     title: 'Symbols',
-    subtitle: 'Over 120 SVG symbols ready to use in any project',
+    subtitle: 'Over 360 vector symbols ready to use in any project',
     color: 'dipsy',
   },
 });
