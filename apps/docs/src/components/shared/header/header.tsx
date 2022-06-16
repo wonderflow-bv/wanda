@@ -71,7 +71,6 @@ export const Header: FCClass<HeaderProps> = ({
                 </Popover>
               )}
               <Search />
-              <DynThemeSwitcher />
               <IconButton
                 as="a"
                 target="_blank"
@@ -81,6 +80,7 @@ export const Header: FCClass<HeaderProps> = ({
                 icon="github"
                 aria-label="Wanda on GitHub"
               />
+              <DynThemeSwitcher />
             </Stack>
           </Stack>
         </Container>
