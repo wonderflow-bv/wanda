@@ -1,5 +1,5 @@
 import { domMax, LazyMotion, m } from 'framer-motion';
-import { forwardRef, ReactNode } from 'react';
+import { forwardRef, PropsWithChildren, ReactNode } from 'react';
 
 import {
   Stack, StackProps, Symbol, SymbolProps, Text, Title,
@@ -7,7 +7,7 @@ import {
 
 import styles from './info-state.module.css';
 
-export type InfoStateProps = {
+export type InfoStateProps = PropsWithClass<{
   /**
    * Set the main tagline of the info state. This should be catchy and short
    * as much as possible.
@@ -36,9 +36,9 @@ export type InfoStateProps = {
    * as many elements as you want, we suggest to add no more than two actions.
    */
   actions?: ReactNode;
-}
+}>
 
-export const InfoState = forwardRef<HTMLDivElement, PropsWithClass<InfoStateProps>>(({
+export const InfoState = forwardRef<HTMLDivElement, PropsWithChildren<InfoStateProps>>(({
   className,
   children,
   title,
