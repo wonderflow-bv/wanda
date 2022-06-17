@@ -21,7 +21,6 @@
 
   @media (--from-medium) {
     margin: unset;
-    margin-top: token(--space-32);
     top: token(--space-96);
     max-width: 30ch;
   }
@@ -30,13 +29,24 @@
 .RadioButton {
   border-radius: token(--radius-8);
   background: var(--dimmed-0);
-
+  position: relative;
 
   &[data-checked='true'] {
     color: var(--layout-color-fg);
     border-color: var(--layout-color-bg);
     background: var(--layout-color-bg);
   }
+
+  &:focus-within {
+    outline: 5px auto Highlight;
+    outline: 5px auto -webkit-focus-ring-color;
+  }
+}
+
+.Input {
+  position: absolute;
+  inset: 0;
+  opacity: 0%;
 }
 
 .SymbolTile {
