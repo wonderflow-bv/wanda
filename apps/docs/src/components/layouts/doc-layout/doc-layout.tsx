@@ -1,6 +1,6 @@
 import {
   Button,
-  Container, Drawer, OverlayContainer, Separator, Stack, Text,
+  Container, Drawer, OverlayContainer, Separator, Stack,
 } from '@wonderflow/react-components';
 import clsx from 'clsx';
 import { domMax, LazyMotion } from 'framer-motion';
@@ -15,6 +15,7 @@ import { DocNav } from '@/components/doc/doc-nav';
 import { Toc } from '@/components/doc/toc';
 import { BaseLayout } from '@/components/layouts/base-layout';
 import { ClientOnly } from '@/components/shared/client-only';
+import { Footer } from '@/components/shared/footer';
 import { Header } from '@/components/shared/header';
 import { Meta } from '@/components/shared/meta';
 import { Navigation } from '@/components/shared/navigation';
@@ -90,19 +91,7 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
               {children}
 
               <Stack fill={false} vPadding={24} rowGap={24}>
-                <Separator />
-                <Stack rowGap={24}>
-                  <Stack rowGap={8}>
-                    <Text size={16} dimmed={6} lineHeight="none">
-                      Created and maintained by Wonderflow.
-                    </Text>
-                    <Text size={16} dimmed={6} lineHeight="none">
-                      &copy; Wonderflow
-                      {' '}
-                      {new Date().getFullYear()}
-                    </Text>
-                  </Stack>
-                </Stack>
+                <Footer compact />
               </Stack>
             </main>
 

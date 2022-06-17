@@ -4,9 +4,9 @@ import structure from '@wonderflow/symbols/structure';
 import { m } from 'framer-motion';
 import { FC } from 'react';
 
-import styles from './icons.module.css';
+import styles from './symbols.module.css';
 
-const ICONS = structure as SymbolNames[];
+const SYMBOLS = structure as SymbolNames[];
 
 const GRID_ANIMATION = {
   hidden: {
@@ -49,11 +49,11 @@ const ITEM_ANIMATION = {
   },
 };
 
-export const Icons: FC = () => (
+export const Symbols: FC = () => (
   <Stack
     as={m.div}
     variants={GRID_ANIMATION}
-    className={styles.Icons}
+    className={styles.Symbols}
     initial="hidden"
     exit="hidden"
     whileInView="visible"
@@ -63,9 +63,9 @@ export const Icons: FC = () => (
     fill={false}
     wrap
   >
-    {ICONS.map(icon => (
+    {[...SYMBOLS, ...SYMBOLS].map(symbol => (
       <Stack
-        key={`${icon}-duo`}
+        key={`${symbol}-duo`}
         as={m.div}
         transition={{
           type: 'spring',
@@ -78,25 +78,7 @@ export const Icons: FC = () => (
         hPadding={8}
         vPadding={8}
       >
-        <Symbol source={icon} dimension={18} weight="duotone" />
-      </Stack>
-    ))}
-    {ICONS.map(icon => (
-      <Stack
-        key={`${icon}-solid`}
-        as={m.div}
-        transition={{
-          type: 'spring',
-          stiffness: 700,
-          damping: 20,
-        }}
-        variants={ITEM_ANIMATION}
-        hAlign="center"
-        vAlign="center"
-        hPadding={8}
-        vPadding={8}
-      >
-        <Symbol source={icon} dimension={18} weight="outline" />
+        <Symbol source={symbol} dimension={18} weight="duotone" />
       </Stack>
     ))}
   </Stack>
