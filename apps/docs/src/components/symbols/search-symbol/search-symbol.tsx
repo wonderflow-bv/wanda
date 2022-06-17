@@ -2,7 +2,7 @@ import {
   Card,
   Elevator,
   Grid,
-  InfoState, Radio, Stack, Symbol, SymbolProps, Text, Textfield,
+  InfoState, Stack, SymbolProps, Textfield,
 } from '@wonderflow/react-components';
 import { SymbolNames } from '@wonderflow/symbols';
 import IconsList from '@wonderflow/symbols/structure';
@@ -11,43 +11,11 @@ import React, {
   useCallback, useEffect, useMemo, useRef, useState,
 } from 'react';
 
-import { BlankButton } from '@/components/shared/blank-button';
 import { useResponsive } from '@/context/responsive';
 
+import { RadioButton } from './radio-button';
 import styles from './search-symbol.module.css';
-
-const SymbolTile: React.FC<SymbolProps> = ({ source, weight, ...args }) => {
-  const [copied, setCopied] = useState<boolean>(false);
-
-  const handleCopy = useCallback(
-    (icon: any) => () => {
-      navigator.clipboard.writeText(icon).then(() => {
-        setCopied(true);
-      }, () => {
-        setCopied(false);
-      });
-      setTimeout(() => setCopied(false), 1000);
-    },
-    [],
-  );
-
-  return (
-    <Stack
-      as={BlankButton}
-      onClick={handleCopy(source)}
-      className={styles.SymbolTile}
-      data-icon-style={weight}
-      hAlign="center"
-      data-icon-tile-copied={copied}
-      vAlign="center"
-      rowGap={24}
-    >
-      <Stack as="span" hAlign="center" vAlign="center" rowGap={16} fill={false}>
-        <Symbol weight={weight} source={source} {...args} />
-      </Stack>
-    </Stack>
-  );
-};
+import { SymbolTile } from './symbol-tile';
 
 export const SearchSymbol = () => {
   const { matches } = useResponsive();
@@ -55,6 +23,8 @@ export const SearchSymbol = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [iconSize] = useState<SymbolProps['dimension']>(24);
   const [iconStyle, setIconStyle] = useState<SymbolProps['weight']>('duotone');
+
+  const WEIGHTS = ['solid', 'outline', 'duotone'] as Array<SymbolProps['weight']>;
 
   const debouncedSearchTerm = useDebounce(
     searchTerm,
@@ -105,97 +75,60 @@ export const SearchSymbol = () => {
               dimension="big"
               autoFocus
             />
-            <Stack fill={false} columnGap={24} rowGap={8}>
-              <Stack
-                as="label"
-                fill={false}
-                htmlFor="SolidStyle"
-                className={styles.RadioButton}
-                data-checked={iconStyle === 'solid'}
-                vAlign="center"
-                direction="row"
-                columnGap={16}
-                vPadding={16}
-                hPadding={16}
-              >
-                <Radio
-                  onChange={() => handleStyle('solid')}
-                  dimension="small"
-                  id="SolidStyle"
-                  name="iconstyle"
-                  value="solid"
-                  defaultChecked={iconStyle === 'solid'}
-                />
-                <b>Solid</b>
-              </Stack>
-              <Stack
-                as="label"
-                fill={false}
-                htmlFor="OutlineStyle"
-                className={styles.RadioButton}
-                data-checked={iconStyle === 'outline'}
-                vAlign="center"
-                direction="row"
-                columnGap={16}
-                vPadding={16}
-                hPadding={16}
-              >
-                <Radio
-                  onChange={() => handleStyle('outline')}
-                  dimension="small"
-                  id="OutlineStyle"
-                  name="iconstyle"
-                  value="outline"
-                  defaultChecked={iconStyle === 'outline'}
-                />
-                <b>Outline</b>
-              </Stack>
-              <Stack
-                as="label"
-                fill={false}
-                htmlFor="DuotoneStyle"
-                className={styles.RadioButton}
-                data-checked={iconStyle === 'duotone'}
-                vAlign="center"
-                hAlign="start"
-                direction="row"
-                columnGap={16}
-                vPadding={16}
-                hPadding={16}
-              >
-                <Radio
-                  onChange={() => handleStyle('duotone')}
-                  dimension="small"
-                  id="DuotoneStyle"
-                  name="iconstyle"
-                  value="duotone"
-                  defaultChecked={iconStyle === 'duotone'}
-                />
-                <b>Duotone</b>
-              </Stack>
+            <Stack direction="row" columnGap={8} rowGap={8}>
+
+              {WEIGHTS?.map(w => (
+                <RadioButton
+                  key={w}
+                  onClick={() => handleStyle(w)}
+                  weight={w}
+                  checked={iconStyle === w}
+                >
+                  <>
+                    {w === 'solid' && (
+                      <svg width={32} height={32} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M12 1a11 11 0 1 0 11 11A11.012 11.012 0 0 0 12 1Z" />
+                      </svg>
+                    )}
+
+                    {w === 'outline' && (
+                      <svg width={32} height={32} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" fill="none" stroke="currentColor" />
+                      </svg>
+                    )}
+
+                    {w === 'duotone' && (
+                      <svg width={32} height={32} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <g strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" fill="none" stroke="currentColor">
+                          <path d="M19.778 4.222 4.222 19.778A11 11 0 0 0 19.778 4.222Z" opacity=".5" fill="currentColor" stroke="none" />
+                          <path d="M19.778 4.222 4.222 19.778" />
+                          <circle cx="12" cy="12" r="11" />
+                        </g>
+                      </svg>
+                    )}
+                  </>
+                </RadioButton>
+              ))}
             </Stack>
           </Stack>
         </Card>
       </Elevator>
-      <Stack rowGap={8}>
-        <Text textAlign="center" dimmed={6} size={14}>Click on the symbol to copy the name</Text>
-        { filteredIcons.length === 0
-          ? (
-            <InfoState title="Nothing to show" icon="frown">
-              Make sure you entered the correct name.
-            </InfoState>
-          )
-          : (
-            <Grid columnGap={2} rowGap={2} colMinWidth="6rem">
-              {filteredIcons.map(icon => (
-                <Grid.Item key={icon}>
-                  <SymbolTile key={`${icon}16`} source={icon} weight={iconStyle} dimension={iconSize} />
-                </Grid.Item>
-              ))}
-            </Grid>
-          )
-          }
-      </Stack>
+
+      { filteredIcons.length === 0
+        ? (
+          <InfoState title="Nothing to show" icon="frown">
+            Make sure you entered the correct name.
+          </InfoState>
+        )
+        : (
+          <Grid columnGap={2} rowGap={2} colMinWidth="6rem">
+            {filteredIcons.map(icon => (
+              <Grid.Item key={icon}>
+                <SymbolTile key={`${icon}16`} source={icon} weight={iconStyle} dimension={iconSize} />
+              </Grid.Item>
+            ))}
+          </Grid>
+        )}
     </Stack>
   );
 };
