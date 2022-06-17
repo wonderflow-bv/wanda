@@ -25,13 +25,15 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(({
   disabled,
   dimension = 'regular',
   onChange,
+  hidden,
   ...otherProps
 }, forwardedRef) => (
   <LazyMotion features={domAnimation} strict>
     <m.span
-      className={styles.InputWrapper}
+      className={clsx(styles.InputWrapper, className)}
       whileTap={{ scale: 1.15 }}
       transition={{ duration: 0.3, ease: 'backOut' }}
+      data-radio-control={hidden}
     >
       <input
         type="radio"
@@ -39,8 +41,9 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(({
         aria-disabled={disabled}
         data-control-dimension={dimension}
         onChange={onChange}
-        className={clsx(styles.RadioInput, className)}
+        className={styles.RadioInput}
         ref={forwardedRef}
+        hidden={hidden}
         {...otherProps}
       />
     </m.span>
