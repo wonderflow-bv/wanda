@@ -1,7 +1,7 @@
 .Hero {
   --dots-size: 2px;
   --dots-gap: 24px;
-  --dots-color: var(--dimmed-3);
+  --dots-color: var(--dimmed-2);
 
   position: relative;
   contain: style;

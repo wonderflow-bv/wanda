@@ -14,8 +14,8 @@ import { useResponsive } from '@/context/responsive';
 
 import styles from './designers.module.css';
 import { Foundation } from './foundation';
-import { Icons } from './icons';
 import { Motion } from './motion';
+import { Symbols } from './symbols';
 
 export const Designers: FCClass = ({
   className,
@@ -57,7 +57,7 @@ export const Designers: FCClass = ({
                 </Stack>
               </Tab.Panel>
 
-              <Tab.Panel label="Icons" icon={matches.large ? 'grip-vertical' : undefined} value="icons">
+              <Tab.Panel label="Symbols" icon={matches.large ? 'grip-vertical' : undefined} value="symbols">
                 <Stack rowGap={32} vPadding={56} hAlign="start">
                   <Text size={22} dimmed={6}>
                     Wanda offers over 114 ready-to-use SVG icons and three solid,
@@ -85,7 +85,7 @@ export const Designers: FCClass = ({
           <Stack className={styles.Media} hAlign="center" vAlign="center" fill={false} aria-hidden="true">
             <AnimatePresence exitBeforeEnter>
               {activeTab === 'foundation' && <Foundation />}
-              {activeTab === 'icons' && <Icons />}
+              {activeTab === 'symbols' && <Symbols />}
               {activeTab === 'motion' && <Motion />}
             </AnimatePresence>
           </Stack>

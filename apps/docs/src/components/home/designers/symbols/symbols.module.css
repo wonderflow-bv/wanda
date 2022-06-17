@@ -1,6 +1,6 @@
 @import '@wonderflow/react-components/core/utils/media.css';
 
-.Icons {
+.Symbols {
   contain: style;
   color: var(--highlight-gray-foreground);
   mask-repeat: no-repeat;

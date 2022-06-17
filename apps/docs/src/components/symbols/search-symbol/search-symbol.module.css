@@ -1,21 +1,49 @@
+@import '@wonderflow/react-components/core/utils/vibrancy.css';
+@import '@wonderflow/react-components/core/utils/media.css';
+
 .SearchSymbol {
   position: relative;
   z-index: 0;
 }
 
-.ToolBar {
+.Tools {
+
+  @mixin vibrancy;
+
   position: sticky;
   top: token(--space-56);
-  padding: token(--space-24) token(--space-4) token(--space-48);
+  margin: 0 calc(token(--space-16) * -1);
   z-index: 1;
-  mask-image: linear-gradient(to bottom, var(--dimmed-0) 60%, transparent);
+
+  @supports not (backdrop-filter: blur(0)) {
+    background-color: var(--global-background);
+  }
+
+  @media (--from-medium) {
+    margin: unset;
+    margin-top: token(--space-32);
+    top: token(--space-96);
+    max-width: 30ch;
+  }
+}
+
+.RadioButton {
+  border-radius: token(--radius-8);
+  background: var(--dimmed-0);
+
+
+  &[data-checked='true'] {
+    color: var(--layout-color-fg);
+    border-color: var(--layout-color-bg);
+    background: var(--layout-color-bg);
+  }
 }
 
 .SymbolTile {
-  --bg: var(--global-vibrancy-background-soft);
+  --bg: var(--dimmed-0);
 
   position: relative;
-  background-color: var(--bg);
+  background: var(--bg);
   padding: token(--space-16) token(--space-24);
   aspect-ratio: 1/1;
   text-align: center;
@@ -29,12 +57,6 @@
   &:focus-visible {
     --bg: var(--global-vibrancy-background);
   }
-}
-
-.SymbolPreview + * {
-  position: absolute;
-  top: 55%;
-  padding: 0 token(--space-16);
 }
 
 @keyframes positive-feedback {
