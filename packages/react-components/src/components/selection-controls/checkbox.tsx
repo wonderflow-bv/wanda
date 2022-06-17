@@ -33,6 +33,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({
   dimension = 'regular',
   onChange,
   indeterminate,
+  hidden,
   ...otherProps
 }, forwardedRef) => {
   const ref = useRef<any>(forwardedRef);
@@ -46,9 +47,10 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({
   return (
     <LazyMotion features={domAnimation} strict>
       <m.span
-        className={styles.InputWrapper}
+        className={clsx(styles.InputWrapper, className)}
         whileTap={{ scale: 1.15 }}
         transition={{ duration: 0.3, ease: 'backOut' }}
+        data-radio-control={hidden}
       >
         <input
           type="checkbox"
@@ -56,8 +58,9 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({
           aria-disabled={disabled}
           data-control-dimension={dimension}
           onChange={onChange}
-          className={clsx(styles.CheckboxInput, className)}
+          className={styles.CheckboxInput}
           ref={ref}
+          hidden={hidden}
           {...otherProps}
         />
       </m.span>
