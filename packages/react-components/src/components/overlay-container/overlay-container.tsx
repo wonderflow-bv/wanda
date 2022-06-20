@@ -5,8 +5,9 @@ import { ReactNode, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useUIDSeed } from 'react-uid';
 
+import { OverlayProvider } from '@/components';
+
 import styles from './overlay-container.module.css';
-import { OverlayProvider } from './overlay-context';
 
 export type OverlayContainerProps = {
   /**

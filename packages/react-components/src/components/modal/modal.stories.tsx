@@ -2,7 +2,8 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useState } from 'react';
 
 import {
-  Button, IconButton, OverlayContainer, Stack, Title, useOverlayContext,
+  Button, IconButton, OverlayContainer, ResponsiveProvider,
+  Stack, Title, useOverlayContext,
 } from '../..';
 import { Modal } from './modal';
 
@@ -21,7 +22,7 @@ const ModalShell: ComponentStory<typeof Modal> = ({ children, ...otherProps }) =
   const [visible, setVisible] = useState(false);
 
   return (
-    <>
+    <ResponsiveProvider>
       <Button onClick={() => setVisible(true)}>Show Modal</Button>
       <OverlayContainer onClose={() => setVisible(false)}>
         {visible && (
@@ -33,7 +34,7 @@ const ModalShell: ComponentStory<typeof Modal> = ({ children, ...otherProps }) =
           </Modal>
         )}
       </OverlayContainer>
-    </>
+    </ResponsiveProvider>
   );
 };
 

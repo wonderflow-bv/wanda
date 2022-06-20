@@ -2,7 +2,7 @@
 import { createContext, useContext } from 'react';
 import { useUIDSeed } from 'react-uid';
 
-import { OverlayContainerProps } from './overlay-container';
+import { OverlayContainerProps } from '../components/overlay-container/overlay-container';
 
 type OverlayContextProps = Partial<OverlayContainerProps> & {
   titleId?: string;
