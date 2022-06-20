@@ -29,7 +29,9 @@ export const SymbolDetail: FC<SymbolDetailProps> = ({
       });
     };
 
-    fetchData().catch(console.error);
+    fetchData().catch((err) => {
+      throw new Error(err);
+    });
 
     return () => {
       setIconDetail({});
@@ -43,7 +45,7 @@ export const SymbolDetail: FC<SymbolDetailProps> = ({
         ? <Code source={iconDetail.content} language="html" /> : (
           <Skeleton
             height={318}
-            width={552}
+            width="100%"
           />
         )}
       ciao
