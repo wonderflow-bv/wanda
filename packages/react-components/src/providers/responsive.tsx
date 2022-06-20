@@ -50,7 +50,6 @@ export const ResponsiveProvider: FCChildren<ResponsiveProviderProps> = ({
   breakpoints = DEFAULT_BREAKPOINTS,
 }) => {
   configResponsive(breakpoints);
-
   const responsiveHook = responsiveAhook();
   const [matching, setMatching] = useState<ResponsiveContextProps['matches']>({
     extraSmall: false,
@@ -62,7 +61,7 @@ export const ResponsiveProvider: FCChildren<ResponsiveProviderProps> = ({
 
   useEffect(() => {
     setMatching(responsiveHook);
-  }, [responsiveHook]);
+  }, [breakpoints, responsiveHook]);
 
   return (
     <ResponsiveContext.Provider value={{ breakpoints, matches: matching }}>
@@ -71,11 +70,11 @@ export const ResponsiveProvider: FCChildren<ResponsiveProviderProps> = ({
   );
 };
 
-export const useResponsive = () => {
+export const useResponsiveContext = () => {
   const context = useContext(ResponsiveContext);
   if (!context) {
     throw new Error(
-      'useResponsive hook must be used inside ResponsiveProvider to access context data.',
+      'useResponsiveContext hook must be used inside ResponsiveProvider to access context data.',
     );
   }
   return context;
