@@ -1,0 +1,12 @@
+.Banner {
+  color: var(--global-foreground);
+  background-image: url('/banner-bg.svg');
+  background-position: right top;
+  background-repeat: no-repeat;
+  background-size: 160%;
+}
+
+.Icon {
+  inline-size: token(--space-24);
+  block-size: token(--space-24);
+}
