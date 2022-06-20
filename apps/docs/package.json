@@ -42,6 +42,7 @@
     "ahooks": "3.4.1",
     "bezier-easing-editor": "0.8.0",
     "clsx": "1.1.1",
+    "cobe": "0.5.0",
     "constate": "3.3.2",
     "css-color-converter": "2.0.0",
     "framer-motion": "6.3.11",
