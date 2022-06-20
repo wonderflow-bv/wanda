@@ -1,7 +1,7 @@
 import {
   Card,
   Grid,
-  InfoState, Stack, SymbolProps, Textfield,
+  InfoState, Stack, SymbolProps, Text, Textfield, Title,
 } from '@wonderflow/react-components';
 import { SymbolNames } from '@wonderflow/symbols';
 import IconsList from '@wonderflow/symbols/structure';
@@ -10,6 +10,7 @@ import React, {
   useCallback, useEffect, useMemo, useRef, useState,
 } from 'react';
 
+import { Banner } from '@/components/shared/banner';
 import { useResponsive } from '@/context/responsive';
 
 import { RadioButton } from './radio-button';
@@ -76,7 +77,6 @@ export const SearchSymbol = () => {
             autoFocus
           />
           <Stack direction="row" columnGap={8} rowGap={8}>
-
             {WEIGHTS?.map(w => (
               <RadioButton
                 key={w}
@@ -110,6 +110,16 @@ export const SearchSymbol = () => {
               </RadioButton>
             ))}
           </Stack>
+          <Banner
+            as="a"
+            href="https://github.com/wonderflow-bv/wanda/issues/new?assignees=equinusocio&labels=feature&template=new_icons.yml&title=New+icons+request"
+            target="_blank"
+            rel="noopener noreferrer"
+            icon="circle-question"
+          >
+            <Title as="h2" level="6">Didn&apos;t find the icon?</Title>
+            <Text size={16} dimmed={6}>Ask for new icons on GitHub.</Text>
+          </Banner>
         </Stack>
       </Card>
 
