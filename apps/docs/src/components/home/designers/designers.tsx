@@ -1,6 +1,6 @@
 import {
   Button,
-  Container, Stack, Tab, Text, Title,
+  Container, Stack, Tab, Text, Title, useResponsiveContext,
 } from '@wonderflow/react-components';
 import clsx from 'clsx';
 import { AnimatePresence } from 'framer-motion';
@@ -10,7 +10,6 @@ import { useState } from 'react';
 import { GradientText } from '@/components/shared/gradient-text';
 import { Section } from '@/components/shared/section';
 import { TextReveal } from '@/components/shared/text-reveal';
-import { useResponsive } from '@/context/responsive';
 
 import styles from './designers.module.css';
 import { Foundation } from './foundation';
@@ -20,7 +19,7 @@ import { Symbols } from './symbols';
 export const Designers: FCClass = ({
   className,
 }) => {
-  const { matches } = useResponsive();
+  const { matches } = useResponsiveContext();
   const [activeTab, setActiveTab] = useState('foundation');
 
   return (

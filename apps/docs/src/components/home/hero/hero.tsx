@@ -1,6 +1,6 @@
 import {
   Button,
-  Container, Stack, Text, Title,
+  Container, Stack, Text, Title, useResponsiveContext,
 } from '@wonderflow/react-components';
 import clsx from 'clsx';
 import {
@@ -12,7 +12,6 @@ import Link from 'next/link';
 
 import { GradientText } from '@/components/shared/gradient-text';
 import { Section } from '@/components/shared/section';
-import { useResponsive } from '@/context/responsive';
 
 import styles from './hero.module.css';
 
@@ -20,7 +19,7 @@ export const Hero: FCClass = ({
   className,
   ...otherProps
 }) => {
-  const { matches } = useResponsive();
+  const { matches } = useResponsiveContext();
   const { scrollYProgress } = useViewportScroll();
   const yOutput = [0, 0.4];
   const background = useTransform(scrollYProgress, yOutput, [
