@@ -1,30 +1,32 @@
 import {
   Card,
   Grid,
-  InfoState, Stack, SymbolProps, Text, Textfield, Title,
+  InfoState, Modal, OverlayContainer, Stack, SymbolProps, Text, Textfield, Title,
 } from '@wonderflow/react-components';
 import { SymbolNames } from '@wonderflow/symbols';
-import IconsList from '@wonderflow/symbols/structure';
+import SymbolsList from '@wonderflow/symbols/structure';
 import { useDebounce } from 'ahooks';
 import React, {
   useCallback, useEffect, useMemo, useRef, useState,
 } from 'react';
 
 import { Banner } from '@/components/shared/banner';
+import { ClientOnly } from '@/components/shared/client-only';
 import { useResponsive } from '@/context/responsive';
 
 import { RadioButton } from './radio-button';
 import styles from './search-symbol.module.css';
 import { SymbolTile } from './symbol-tile';
 
+const WEIGHTS = ['solid', 'outline', 'duotone'] as Array<SymbolProps['weight']>;
+
 export const SearchSymbol = () => {
   const { matches } = useResponsive();
   const fieldRef = useRef<HTMLInputElement>(null);
-  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
   const [iconSize] = useState<SymbolProps['dimension']>(24);
   const [iconStyle, setIconStyle] = useState<SymbolProps['weight']>('duotone');
-
-  const WEIGHTS = ['solid', 'outline', 'duotone'] as Array<SymbolProps['weight']>;
 
   const debouncedSearchTerm = useDebounce(
     searchTerm,
@@ -32,7 +34,9 @@ export const SearchSymbol = () => {
   );
 
   const filteredIcons: SymbolNames[] = useMemo(
-    () => IconsList.filter(iconName => iconName.includes(debouncedSearchTerm)) as SymbolNames[], [debouncedSearchTerm],
+    () => SymbolsList.filter(
+      iconName => iconName.includes(debouncedSearchTerm),
+    ) as SymbolNames[], [debouncedSearchTerm],
   );
 
   const handleSearch = useCallback(
@@ -133,11 +137,31 @@ export const SearchSymbol = () => {
           <Grid columnGap={2} rowGap={2} colMinWidth="6rem">
             {filteredIcons.map(icon => (
               <Grid.Item key={icon}>
-                <SymbolTile key={`${icon}16`} source={icon} weight={iconStyle} dimension={iconSize} />
+                <SymbolTile
+                  key={`${icon}16`}
+                  source={icon}
+                  weight={iconStyle}
+                  dimension={iconSize}
+                  onClick={() => setIsModalOpen(true)}
+                />
               </Grid.Item>
             ))}
           </Grid>
         )}
+
+      <ClientOnly>
+        <OverlayContainer
+          onClose={() => setIsModalOpen(false)}
+        >
+          {isModalOpen && (
+            <Modal>
+              <Modal.Content title="Icon information">
+                ciao
+              </Modal.Content>
+            </Modal>
+          )}
+        </OverlayContainer>
+      </ClientOnly>
     </Stack>
   );
 };
