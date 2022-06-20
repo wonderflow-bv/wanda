@@ -19,6 +19,7 @@ declare namespace NodeJS {
     NEXT_PUBLIC_CMS_ENDPOINT: string;
     NEXT_PUBLIC_DOMAIN: string;
     NEXT_PUBLIC_ALGOLIA_API_KEY: string;
+    NEXT_PUBLIC_GITHUB_DESIGN_TOKEN: string;
   }
 }
 

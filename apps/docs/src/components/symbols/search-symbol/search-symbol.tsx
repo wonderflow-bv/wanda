@@ -13,6 +13,7 @@ import React, {
 import { Banner } from '@/components/shared/banner';
 import { ClientOnly } from '@/components/shared/client-only';
 
+import { SymbolDetail } from '../symbol-detail';
 import { RadioButton } from './radio-button';
 import styles from './search-symbol.module.css';
 import { SymbolTile } from './symbol-tile';
@@ -23,6 +24,7 @@ export const SearchSymbol = () => {
   const { matches } = useResponsiveContext();
   const fieldRef = useRef<HTMLInputElement>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [iconDetail, setIconDetail] = useState<SymbolNames>();
   const [searchTerm, setSearchTerm] = useState('');
   const [iconSize] = useState<SymbolProps['dimension']>(24);
   const [iconStyle, setIconStyle] = useState<SymbolProps['weight']>('duotone');
@@ -48,6 +50,14 @@ export const SearchSymbol = () => {
   const handleStyle = useCallback(
     (style) => {
       setIconStyle(style);
+    },
+    [],
+  );
+
+  const handleModal = useCallback(
+    (icon) => {
+      setIsModalOpen(true);
+      setIconDetail(icon);
     },
     [],
   );
@@ -144,7 +154,7 @@ export const SearchSymbol = () => {
                   source={icon}
                   weight={iconStyle}
                   dimension={iconSize}
-                  onClick={() => setIsModalOpen(true)}
+                  onClick={() => handleModal(icon)}
                 />
               </Grid.Item>
             ))}
@@ -157,8 +167,8 @@ export const SearchSymbol = () => {
         >
           {isModalOpen && (
           <Modal>
-            <Modal.Content title="Icon information">
-              ciao
+            <Modal.Content theme="auto" title="Icon information">
+              {iconDetail && <SymbolDetail name={iconDetail} />}
             </Modal.Content>
           </Modal>
           )}

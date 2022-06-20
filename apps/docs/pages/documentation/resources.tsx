@@ -9,7 +9,7 @@ import {
 
 import { Tile } from '@/components/shared/tile';
 import { useToc } from '@/hooks/table-of-content';
-import client from '@/utils/apollo-client';
+import cmsClient from '@/utils/apollo-client';
 import { getLayoutProps } from '@/utils/get-layout-props';
 
 const ResourcesPage: NextPage<ResourcesQuery> = ({ resourceGroups }) => {
@@ -60,7 +60,7 @@ const ResourcesPage: NextPage<ResourcesQuery> = ({ resourceGroups }) => {
 export default ResourcesPage;
 
 export const getStaticProps = async () => {
-  const { data } = await client.query<ResourcesQuery>({
+  const { data } = await cmsClient.query<ResourcesQuery>({
     query: ResourcesDocument,
   });
 
