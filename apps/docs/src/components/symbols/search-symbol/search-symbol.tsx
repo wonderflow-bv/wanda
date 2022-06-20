@@ -1,7 +1,7 @@
 import {
   Card,
-  Grid,
-  InfoState, Modal, OverlayContainer, Separator, Stack, SymbolProps, Text, Textfield, Title, useResponsiveContext,
+  Drawer, Grid,
+  InfoState, OverlayContainer, Separator, Stack, SymbolProps, Text, Textfield, Title, useResponsiveContext,
 } from '@wonderflow/react-components';
 import { SymbolNames } from '@wonderflow/symbols';
 import SymbolsList from '@wonderflow/symbols/structure';
@@ -166,11 +166,13 @@ export const SearchSymbol = () => {
           onClose={() => setIsModalOpen(false)}
         >
           {isModalOpen && (
-          <Modal>
-            <Modal.Content theme="auto" title="Icon information">
-              {iconDetail && <SymbolDetail name={iconDetail} />}
-            </Modal.Content>
-          </Modal>
+          <Drawer
+            theme="auto"
+            title="Icon information"
+            maxWidth="50ch"
+          >
+            {iconDetail && <SymbolDetail name={iconDetail} />}
+          </Drawer>
           )}
         </OverlayContainer>
       </ClientOnly>
