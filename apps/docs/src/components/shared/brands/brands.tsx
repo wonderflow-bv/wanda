@@ -41,9 +41,10 @@ export const Brands = ({
   }, [theme]);
 
   useEffect(() => {
-    const darkFlag = theme === 'dark' ? 1 : 0;
+    const darkGlobe = theme === 'dark' ? 1 : 0;
+    const systemDarkGlobe = (theme === 'system' && isDark) ? 1 : 0;
     const darkGlobeBg: [number, number, number] = theme === 'dark' ? [0.3, 0.3, 0.3] : [1, 1, 1];
-    const globeBackground: [number, number, number] = (theme === 'system' && isDark) ? [0.3, 0.3, 0.3] : [1, 1, 1];
+    const systemGlobeBg: [number, number, number] = (theme === 'system' && isDark) ? [0.3, 0.3, 0.3] : [1, 1, 1];
 
     let rotation = 0;
     let globe: any = null;
@@ -55,11 +56,11 @@ export const Brands = ({
         height: 1000 * 2,
         phi: 0,
         theta: 0,
-        dark: darkFlag,
+        dark: theme === 'system' ? systemDarkGlobe : darkGlobe,
         diffuse: 1.2,
         mapSamples: 26000,
         mapBrightness: 3,
-        baseColor: theme === 'system' ? globeBackground : darkGlobeBg,
+        baseColor: theme === 'system' ? systemGlobeBg : darkGlobeBg,
         markerColor: [0.933, 0.0, 0.0],
         glowColor: [1, 1, 1],
         scale: 1,
