@@ -1,4 +1,4 @@
-import { useResponsive } from '@/context/responsive';
+import { useResponsiveContext } from '@wonderflow/react-components';
 
 export type LogoProps = {
   width?: number;
@@ -12,7 +12,7 @@ export const Logo: FCClass<LogoProps> = ({
   fill = 'var(--global-vibrancy-foreground)',
   ...otherProps
 }) => {
-  const { matches } = useResponsive();
+  const { matches } = useResponsiveContext();
 
   return (
     <svg

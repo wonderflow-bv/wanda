@@ -1,8 +1,8 @@
 import {
   Card,
   Container, Elevator, IconButton,
-  Popover, Skeleton,
-  Stack,
+  Popover, Skeleton, Stack,
+  useResponsiveContext,
 } from '@wonderflow/react-components';
 import { useScroll } from 'ahooks';
 import clsx from 'clsx';
@@ -12,7 +12,6 @@ import Link from 'next/link';
 import { Logo } from '@/components/shared/logo';
 import { MainNav } from '@/components/shared/main-nav';
 import { Search } from '@/components/shared/search';
-import { useResponsive } from '@/context/responsive';
 
 import styles from './header.module.css';
 
@@ -33,7 +32,7 @@ export const Header: FCClass<HeaderProps> = ({
   position,
   ...otherProps
 }) => {
-  const { matches } = useResponsive();
+  const { matches } = useResponsiveContext();
   const scroll = useScroll(() => document, val => val.top >= 0 && val.top < 1000);
 
   return (

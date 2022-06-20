@@ -1,12 +1,12 @@
 import {
   Button,
-  Container, Drawer, OverlayContainer, Separator, Stack,
+  Container, Drawer, OverlayContainer, Separator, Stack, useResponsiveContext,
 } from '@wonderflow/react-components';
 import clsx from 'clsx';
 import { domMax, LazyMotion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import {
-  CSSProperties, useMemo, useRef, useState,
+  CSSProperties, useMemo, useState,
 } from 'react';
 import { NavigationMenu } from 'types/data';
 
@@ -19,7 +19,6 @@ import { Footer } from '@/components/shared/footer';
 import { Header } from '@/components/shared/header';
 import { Meta } from '@/components/shared/meta';
 import { Navigation } from '@/components/shared/navigation';
-import { useResponsive } from '@/context/responsive';
 import { useToc } from '@/hooks/table-of-content';
 
 import styles from './doc-layout.module.css';
@@ -39,10 +38,9 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
   showToc = true,
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { matches } = useResponsive();
+  const { matches } = useResponsiveContext();
   const router = useRouter();
   const { headings } = useToc();
-  const containerRef = useRef<HTMLDivElement>(null);
 
   const getPretitle = useMemo(() => {
     const url = new URL(process.env.NEXT_PUBLIC_DOMAIN + router.asPath);
@@ -62,7 +60,7 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
       <Header position="sticky" />
       <span className={styles.Glow} />
       <LazyMotion features={domMax}>
-        <Container ref={containerRef} dimension="large" style={dynamicStyle}>
+        <Container dimension="large" style={dynamicStyle}>
           <Stack direction={matches.large ? 'row' : undefined} columnGap={56}>
 
             <div className={styles.Sidebar}>
@@ -103,14 +101,12 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
           </Stack>
         </Container>
       </LazyMotion>
-      {containerRef?.current && (
-        <ClientOnly>
-          <OverlayContainer
-            root={containerRef?.current}
-            onClose={() => setIsMenuOpen(false)}
-            obfuscate={false}
-          >
-            {(isMenuOpen && !matches.large) && (
+      <ClientOnly>
+        <OverlayContainer
+          onClose={() => setIsMenuOpen(false)}
+          obfuscate={false}
+        >
+          {(isMenuOpen && !matches.large) && (
             <Drawer title="Navigation" maxWidth="100vw" theme="auto">
               <Stack rowGap={40} hPadding={24} vPadding={32}>
                 <DocNav />
@@ -122,10 +118,9 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
                 )}
               </Stack>
             </Drawer>
-            )}
-          </OverlayContainer>
-        </ClientOnly>
-      )}
+          )}
+        </OverlayContainer>
+      </ClientOnly>
     </BaseLayout>
   );
 };

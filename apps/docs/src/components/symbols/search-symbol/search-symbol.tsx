@@ -1,7 +1,7 @@
 import {
   Card,
   Grid,
-  InfoState, Modal, OverlayContainer, Stack, SymbolProps, Text, Textfield, Title,
+  InfoState, Modal, OverlayContainer, Separator, Stack, SymbolProps, Text, Textfield, Title, useResponsiveContext,
 } from '@wonderflow/react-components';
 import { SymbolNames } from '@wonderflow/symbols';
 import SymbolsList from '@wonderflow/symbols/structure';
@@ -12,7 +12,6 @@ import React, {
 
 import { Banner } from '@/components/shared/banner';
 import { ClientOnly } from '@/components/shared/client-only';
-import { useResponsive } from '@/context/responsive';
 
 import { RadioButton } from './radio-button';
 import styles from './search-symbol.module.css';
@@ -21,7 +20,7 @@ import { SymbolTile } from './symbol-tile';
 const WEIGHTS = ['solid', 'outline', 'duotone'] as Array<SymbolProps['weight']>;
 
 export const SearchSymbol = () => {
-  const { matches } = useResponsive();
+  const { matches } = useResponsiveContext();
   const fieldRef = useRef<HTMLInputElement>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
@@ -70,16 +69,18 @@ export const SearchSymbol = () => {
       >
         <Stack vAlign="start" wrap columnGap={24} rowGap={16}>
           <Textfield
+            label="Search for a symbol"
             ref={fieldRef}
             type="search"
             onChange={handleSearch}
             icon="magnifying-glass"
             iconPosition="left"
             data-search-icons-searched={!!debouncedSearchTerm}
-            placeholder="Search icon names"
+            placeholder="Enter symbol name"
             dimension="big"
             autoFocus
           />
+          <Text size={16}>Change style</Text>
           <Stack direction="row" columnGap={8} rowGap={8}>
             {WEIGHTS?.map(w => (
               <RadioButton
@@ -114,6 +115,7 @@ export const SearchSymbol = () => {
               </RadioButton>
             ))}
           </Stack>
+          <Separator />
           <Banner
             as="a"
             href="https://github.com/wonderflow-bv/wanda/issues/new?assignees=equinusocio&labels=feature&template=new_icons.yml&title=New+icons+request"
@@ -122,7 +124,7 @@ export const SearchSymbol = () => {
             icon="circle-question"
           >
             <Title as="h2" level="6">Didn&apos;t find the icon?</Title>
-            <Text size={16} dimmed={6}>Ask for new icons on GitHub.</Text>
+            <Text size={14} dimmed={6}>Ask for new icons on GitHub.</Text>
           </Banner>
         </Stack>
       </Card>
@@ -154,11 +156,11 @@ export const SearchSymbol = () => {
           onClose={() => setIsModalOpen(false)}
         >
           {isModalOpen && (
-            <Modal>
-              <Modal.Content title="Icon information">
-                ciao
-              </Modal.Content>
-            </Modal>
+          <Modal>
+            <Modal.Content title="Icon information">
+              ciao
+            </Modal.Content>
+          </Modal>
           )}
         </OverlayContainer>
       </ClientOnly>

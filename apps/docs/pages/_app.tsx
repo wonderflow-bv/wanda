@@ -5,7 +5,7 @@ import '@/styles/app.css';
 import '@/styles/docsearch.css';
 
 import { ApolloProvider } from '@apollo/client';
-import { IdProvider } from '@wonderflow/react-components';
+import { IdProvider, ResponsiveProvider } from '@wonderflow/react-components';
 import { AnimatePresence } from 'framer-motion';
 import type { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
@@ -15,7 +15,6 @@ import { useEffect } from 'react';
 
 import { BlankLayout } from '@/components/layouts/blank-layout';
 import { DocLayout } from '@/components/layouts/doc-layout';
-import { ResponsiveProvider } from '@/context/responsive';
 import { TocProvider } from '@/hooks/table-of-content';
 import client from '@/utils/apollo-client';
 
