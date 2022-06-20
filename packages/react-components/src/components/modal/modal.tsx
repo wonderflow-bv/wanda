@@ -10,14 +10,14 @@ import { useOverlayContext } from '@/components';
 import { ModalContent, ModalContentProps } from './content/modal-content';
 import styles from './modal.module.css';
 
-export type ModalProps = PropsWithClass<{
+export type ModalProps = PropsWithChildren<PropsWithClass<{
   /**
    * This enable the modal to be closed by clicking on the overlay.
    * Even if this can be set to `false` we strongly recommend to leave
    * it to `true` as it ensures the accessibility of the modal.
    */
   closeOnClickOutside?: boolean;
-}>
+}>>
 
 type ModalComponent = React.ForwardRefExoticComponent<ModalProps> & {
   Content: React.ForwardRefExoticComponent<ModalContentProps>;
@@ -32,7 +32,7 @@ configResponsive({
   wide: 768,
 });
 
-export const Modal = forwardRef<HTMLDivElement, PropsWithChildren<ModalProps>>(({
+export const Modal = forwardRef<HTMLDivElement, ModalProps>(({
   children,
   className,
   closeOnClickOutside = true,
