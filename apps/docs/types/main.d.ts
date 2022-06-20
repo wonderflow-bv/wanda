@@ -1,8 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 
-import React from 'react';
-
 /**
  * Default CSS definition for typescript
  */
