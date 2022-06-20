@@ -2,7 +2,7 @@ import tkns from '@wonderflow/tokens/platforms/web/tokens.json';
 import { configResponsive, useResponsive } from 'ahooks';
 import clsx from 'clsx';
 import { domMax, LazyMotion, m } from 'framer-motion';
-import { forwardRef, useMemo } from 'react';
+import { forwardRef, PropsWithChildren, useMemo } from 'react';
 import { FocusOn } from 'react-focus-on';
 
 import { useOverlayContext } from '@/components';
@@ -10,14 +10,14 @@ import { useOverlayContext } from '@/components';
 import { ModalContent, ModalContentProps } from './content/modal-content';
 import styles from './modal.module.css';
 
-export type ModalProps = {
+export type ModalProps = PropsWithClass<{
   /**
    * This enable the modal to be closed by clicking on the overlay.
    * Even if this can be set to `false` we strongly recommend to leave
    * it to `true` as it ensures the accessibility of the modal.
    */
   closeOnClickOutside?: boolean;
-}
+}>
 
 type ModalComponent = React.ForwardRefExoticComponent<ModalProps> & {
   Content: React.ForwardRefExoticComponent<ModalContentProps>;
@@ -32,7 +32,7 @@ configResponsive({
   wide: 768,
 });
 
-export const Modal = forwardRef<HTMLDivElement, PropsWithClass<ModalProps>>(({
+export const Modal = forwardRef<HTMLDivElement, PropsWithChildren<ModalProps>>(({
   children,
   className,
   closeOnClickOutside = true,
