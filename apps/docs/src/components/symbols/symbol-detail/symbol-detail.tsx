@@ -1,9 +1,12 @@
 import { Skeleton, Stack } from '@wonderflow/react-components';
 import { SymbolNames } from '@wonderflow/symbols';
+import prettify from 'html-prettify';
 import { FC, useEffect, useState } from 'react';
 
 import { Code } from '@/components/shared/code';
 import { getRepoContent } from '@/utils/github-client';
+
+import styles from './symbol-detail.module.css';
 
 type SymbolDetailProps = {
   name: SymbolNames;
@@ -25,7 +28,7 @@ export const SymbolDetail: FC<SymbolDetailProps> = ({
 
       setIconDetail({
         name: data.name,
-        content: window.atob(data.content),
+        content: prettify(window.atob(data.content)),
       });
     };
 
@@ -40,9 +43,9 @@ export const SymbolDetail: FC<SymbolDetailProps> = ({
   [name]);
 
   return (
-    <Stack hPadding={24} vPadding={24}>
+    <Stack>
       {iconDetail?.content
-        ? <Code source={iconDetail.content} language="html" /> : (
+        ? <Code className={styles.Code} source={iconDetail.content} language="html" /> : (
           <Skeleton
             height={318}
             width="100%"

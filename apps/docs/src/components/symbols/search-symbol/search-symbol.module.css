@@ -58,6 +58,7 @@
   aspect-ratio: 1/1;
   text-align: center;
   width: 100%;
+  color: var(--dimmed-6);
 
   &[data-icon-tile-copied='true'] {
     animation: positive-feedback 2s 1;

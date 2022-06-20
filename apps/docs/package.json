@@ -46,6 +46,7 @@
     "css-color-converter": "2.0.0",
     "framer-motion": "6.3.11",
     "graphql": "16.5.0",
+    "html-prettify": "1.0.7",
     "markdown-to-jsx": "7.1.7",
     "next": "12.1.6",
     "next-compose-plugins": "2.2.1",
