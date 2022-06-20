@@ -169,7 +169,7 @@ export const SearchSymbol = () => {
           {(isModalOpen && iconDetail) && (
           <Drawer
             theme="auto"
-            title={`Details of ${iconDetail} icon`}
+            title="Icon detail"
             maxWidth="50ch"
           >
             <SymbolDetail name={iconDetail} />
