@@ -28,7 +28,7 @@
 
 .RadioButton {
   border-radius: token(--radius-8);
-  background: var(--dimmed-0);
+  background: var(--global-vibrancy-background);
   position: relative;
 
   &[data-checked='true'] {

@@ -72,7 +72,7 @@ export const SearchSymbol = () => {
       <Card
         vibrant
         bordered
-        dimmed={1}
+        dimmed={0}
         radius={matches.medium ? 16 : undefined}
         padding={24}
         className={styles.Tools}
@@ -163,15 +163,16 @@ export const SearchSymbol = () => {
 
       <ClientOnly>
         <OverlayContainer
+          overlayColor="auto"
           onClose={() => setIsModalOpen(false)}
         >
-          {isModalOpen && (
+          {(isModalOpen && iconDetail) && (
           <Drawer
             theme="auto"
-            title="Icon information"
+            title={`Details of ${iconDetail} icon`}
             maxWidth="50ch"
           >
-            {iconDetail && <SymbolDetail name={iconDetail} />}
+            <SymbolDetail name={iconDetail} />
           </Drawer>
           )}
         </OverlayContainer>
