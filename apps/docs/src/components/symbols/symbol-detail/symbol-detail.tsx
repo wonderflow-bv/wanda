@@ -4,7 +4,6 @@ import {
   Skeleton, Stack, Symbol, SymbolProps, Text, Title,
 } from '@wonderflow/react-components';
 import { SymbolNames } from '@wonderflow/symbols';
-import prettify from 'html-prettify';
 import { useRouter } from 'next/router';
 import {
   FC, useCallback, useEffect, useState,
@@ -51,7 +50,7 @@ export const SymbolDetail: FC<SymbolDetailProps> = ({
     const fetchData = async () => {
       const data: any = await getRepoContent(`packages/symbols/svgs/${weight}/${name}-${weight}.svg`);
 
-      setIconDetail(prettify(window.atob(data.content)));
+      setIconDetail(window.atob(data.content));
     };
 
     fetchData().catch((err) => {
