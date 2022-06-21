@@ -69,7 +69,7 @@
   max-width: 100%;
   position: absolute;
   left: 50%;
-  top: 500px;
+  top: 550px;
   transform: translate(-50%, -50%);
   z-index: -1;
 }

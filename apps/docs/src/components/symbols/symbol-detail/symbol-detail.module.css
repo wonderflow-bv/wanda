@@ -6,8 +6,10 @@
 
   display: block;
   position: relative;
-  width: token(--space-160);
-  height: token(--space-160);
+  width: 100%;
+  aspect-ratio: 1;
+  max-width: token(--space-160);
+  max-height: token(--space-160);
   background: url('/grid.svg') no-repeat;
   background-size: cover;
 
