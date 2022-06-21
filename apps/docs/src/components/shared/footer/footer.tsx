@@ -13,7 +13,7 @@ export const Footer: FC<FooterProps> = ({
 }) => (
   <footer>
     {!compact && <Separator aria-hidden="true" />}
-    <Container dimension="large" padding={compact && false}>
+    <Container dimension="large" padding={compact ? false : undefined}>
       <Stack rowGap={40} vPadding={104}>
         {!compact && (
           <Stack direction="row" columnGap={32} rowGap={88} wrap>
