@@ -1,13 +1,1 @@
-<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_619_2730)">
-<path d="M1 13H15C15.552 13 16 13.448 16 14C16 14.552 15.552 15 15 15H1C0.448 15 9.65147e-08 14.552 0 14C-9.65148e-08 13.448 0.448 13 1 13Z" fill="black"/>
-<path d="M13 9H3C2.448 9 2 9.448 2 10C2 10.552 2.448 11 3 11H13C13.552 11 14 10.552 14 10C14 9.448 13.552 9 13 9Z" fill="black"/>
-<path d="M5 5H11C11.552 5 12 5.448 12 6C12 6.552 11.552 7 11 7H5C4.448 7 4 6.552 4 6C4 5.448 4.448 5 5 5Z" fill="black"/>
-<path d="M7 1L9 1C9.552 1 10 1.448 10 2C10 2.552 9.552 3 9 3L7 3C6.448 3 6 2.552 6 2C6 1.448 6.448 1 7 1Z" fill="black"/>
-</g>
-<defs>
-<clipPath id="clip0_619_2730">
-<rect width="16" height="16" fill="white"/>
-</clipPath>
-</defs>
-</svg>
+<svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#a)"><path d="M1 13h14a1 1 0 0 1 0 2H1a1 1 0 0 1 0-2Zm12-4H3a1 1 0 0 0 0 2h10a1 1 0 0 0 0-2ZM5 5h6a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Zm2-4h2a1 1 0 0 1 0 2H7a1 1 0 0 1 0-2Z"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h16v16H0z"/></clipPath></defs></svg>

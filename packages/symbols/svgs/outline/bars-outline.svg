@@ -1,12 +1,1 @@
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_1150_5591)">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M0 12C0 11.4477 0.447715 11 1 11H23C23.5523 11 24 11.4477 24 12C24 12.5523 23.5523 13 23 13H1C0.447715 13 0 12.5523 0 12Z" fill="black"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M0 5C0 4.44772 0.447715 4 1 4H23C23.5523 4 24 4.44772 24 5C24 5.55228 23.5523 6 23 6H1C0.447715 6 0 5.55228 0 5Z" fill="black"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M0 19C0 18.4477 0.447715 18 1 18H23C23.5523 18 24 18.4477 24 19C24 19.5523 23.5523 20 23 20H1C0.447715 20 0 19.5523 0 19Z" fill="black"/>
-</g>
-<defs>
-<clipPath id="clip0_1150_5591">
-<rect width="24" height="24" fill="white"/>
-</clipPath>
-</defs>
-</svg>
+<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#a)" fill-rule="evenodd" clip-rule="evenodd"><path d="M0 12a1 1 0 0 1 1-1h22a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1Zm0-7a1 1 0 0 1 1-1h22a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1Zm0 14a1 1 0 0 1 1-1h22a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1Z"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h24v24H0z"/></clipPath></defs></svg>
