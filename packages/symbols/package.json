@@ -28,8 +28,7 @@
   },
   "scripts": {
     "prebuild": "rimraf dist",
-    "build": "run-s build:optimize build:copy build:sprite build:clean",
-    "build:copy": "cpy '**/*.svg' '../dist/svgs' --parents --cwd=svgs",
+    "build": "run-s build:optimize build:sprite build:clean",
     "build:optimize": "svgo ./svgs/**/* --config=svgo.config.js --quiet",
     "build:sprite": "ts-node ./sprites",
     "build:clean": "rimraf dist/svgs"
@@ -47,7 +46,6 @@
     "symbols"
   ],
   "devDependencies": {
-    "cpy-cli": "3.1.1",
     "directory-tree": "3.3.0",
     "fs-extra": "10.1.0",
     "nanospinner": "1.1.0",
