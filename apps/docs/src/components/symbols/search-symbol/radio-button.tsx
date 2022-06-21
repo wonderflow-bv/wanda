@@ -1,20 +1,21 @@
 import { Stack, Symbol, SymbolProps } from '@wonderflow/react-components';
-import { ReactElement } from 'react';
+import { InputHTMLAttributes, ReactElement } from 'react';
 
 import styles from './search-symbol.module.css';
 
-type RadioButtonProps = {
+type RadioButtonProps = InputHTMLAttributes<HTMLInputElement> & {
   children: ReactElement<HTMLOrSVGElement>;
   weight: SymbolProps['weight'];
   checked?: boolean;
-  onClick: () => void;
+  onChange: () => void;
 }
 
 export const RadioButton = ({
   children,
   weight,
   checked,
-  onClick,
+  onChange,
+  ...otherProps
 }: RadioButtonProps) => (
   <Stack
     as="label"
@@ -31,12 +32,12 @@ export const RadioButton = ({
   >
     <input
       type="radio"
-      onChange={onClick}
+      onChange={onChange}
       id={`${weight ?? 'No'}Style`}
-      name="iconstyle"
       value="solid"
       defaultChecked={checked}
       className={styles.Input}
+      {...otherProps}
     />
     <Symbol
       source={children ?? 'disc'}

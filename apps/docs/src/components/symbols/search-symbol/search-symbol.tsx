@@ -1,7 +1,7 @@
 import {
   Card,
-  Drawer, Grid,
-  InfoState, OverlayContainer, Separator, Stack, SymbolProps, Text, Textfield, Title, useResponsiveContext,
+  Grid,
+  InfoState, Modal, OverlayContainer, Separator, Stack, SymbolProps, Text, Textfield, Title, useResponsiveContext,
 } from '@wonderflow/react-components';
 import { SymbolNames } from '@wonderflow/symbols';
 import SymbolsList from '@wonderflow/symbols/structure';
@@ -18,7 +18,7 @@ import { RadioButton } from './radio-button';
 import styles from './search-symbol.module.css';
 import { SymbolTile } from './symbol-tile';
 
-const WEIGHTS = ['solid', 'outline', 'duotone'] as Array<SymbolProps['weight']>;
+export const WEIGHTS = ['solid', 'outline', 'duotone'] as Array<SymbolProps['weight']>;
 
 export const SearchSymbol = () => {
   const { matches } = useResponsiveContext();
@@ -95,9 +95,10 @@ export const SearchSymbol = () => {
             {WEIGHTS?.map(w => (
               <RadioButton
                 key={w}
-                onClick={() => handleStyle(w)}
+                onChange={() => handleStyle(w)}
                 weight={w}
                 checked={iconStyle === w}
+                name="pageSymboStyle"
               >
                 <>
                   {w === 'solid' && (
@@ -167,13 +168,14 @@ export const SearchSymbol = () => {
           onClose={() => setIsModalOpen(false)}
         >
           {(isModalOpen && iconDetail) && (
-          <Drawer
-            theme="auto"
-            title="Icon detail"
-            maxWidth="50ch"
-          >
-            <SymbolDetail name={iconDetail} />
-          </Drawer>
+          <Modal>
+            <Modal.Content
+              theme="auto"
+              title="Icon detail"
+            >
+              <SymbolDetail name={iconDetail} weight={iconStyle} />
+            </Modal.Content>
+          </Modal>
           )}
         </OverlayContainer>
       </ClientOnly>

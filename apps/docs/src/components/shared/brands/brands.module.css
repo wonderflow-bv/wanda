@@ -15,8 +15,8 @@
     inset: token(--space-24) 0 0 0;
     z-index: -1;
     pointer-events: none;
-    mask-image: radial-gradient(circle at center bottom, rgb(0 0 0 / 0%) 0, #000 77%);
     overflow: hidden;
+    mask-image: radial-gradient(circle at center bottom, rgb(0 0 0 / 0%) 0, #000 77%);
     background-image:
       radial-gradient(
         var(--dots-color) var(--computed-dot-size),
