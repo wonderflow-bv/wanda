@@ -28,9 +28,9 @@
   },
   "scripts": {
     "prebuild": "rimraf dist",
-    "build": "run-s build:copy build:optimize build:sprite build:clean",
+    "build": "run-s build:optimize build:copy build:sprite build:clean",
     "build:copy": "cpy '**/*.svg' '../dist/svgs' --parents --cwd=svgs",
-    "build:optimize": "svgo ./dist/svgs/**/* --config=svgo.config.js --quiet",
+    "build:optimize": "svgo ./svgs/**/* --config=svgo.config.js --quiet",
     "build:sprite": "ts-node ./sprites",
     "build:clean": "rimraf dist/svgs"
   },
