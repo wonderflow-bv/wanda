@@ -1,9 +1,11 @@
 import {
+  Button,
   IconButton,
   Skeleton, Stack, Symbol, SymbolProps, Text, Title,
 } from '@wonderflow/react-components';
 import { SymbolNames } from '@wonderflow/symbols';
 import prettify from 'html-prettify';
+import { useRouter } from 'next/router';
 import {
   FC, useCallback, useEffect, useState,
 } from 'react';
@@ -24,6 +26,14 @@ export const SymbolDetail: FC<SymbolDetailProps> = ({
 }) => {
   const [iconDetail, setIconDetail] = useState('');
   const [copied, setCopied] = useState(false);
+  const router = useRouter();
+
+  const handleShare = useCallback(
+    () => () => {
+      void navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_DOMAIN}${router.pathname}#${name.toLowerCase()}`);
+      setTimeout(() => setCopied(false), 1000);
+    }, [router, name],
+  );
 
   const handleCopy = useCallback(
     (name: SymbolNames) => () => {
@@ -69,15 +79,25 @@ export const SymbolDetail: FC<SymbolDetailProps> = ({
           <Symbol source={name} dimension={24} weight={weight} />
         </span>
 
-        <Stack rowGap={24}>
+        <Stack rowGap={24} fill={false} hAlign="start">
+
           <Stack>
             <Text dimmed={6} size={16}>Name</Text>
             <Stack direction="row" columnGap={8} inline vAlign="center">
-              <Title level="5">{name}</Title>
+              <Title level="4">{name}</Title>
               <IconButton icon="todo" dimension="small" onClick={handleCopy(name)} />
               {copied && <Symbol source="check" fill="var(--highlight-green-foreground)" dimension={12} />}
             </Stack>
           </Stack>
+
+          <Button
+            onClick={handleShare()}
+            kind="secondary"
+            dimension="small"
+            icon="share-from-square"
+          >
+            Copy URL
+          </Button>
         </Stack>
       </Stack>
 

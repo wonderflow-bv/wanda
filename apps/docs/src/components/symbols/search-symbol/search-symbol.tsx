@@ -6,6 +6,7 @@ import {
 import { SymbolNames } from '@wonderflow/symbols';
 import SymbolsList from '@wonderflow/symbols/structure';
 import { useDebounce } from 'ahooks';
+import { useRouter } from 'next/router';
 import React, {
   useCallback, useEffect, useMemo, useRef, useState,
 } from 'react';
@@ -23,11 +24,11 @@ export const WEIGHTS = ['solid', 'outline', 'duotone'] as Array<SymbolProps['wei
 export const SearchSymbol = () => {
   const { matches } = useResponsiveContext();
   const fieldRef = useRef<HTMLInputElement>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [iconDetail, setIconDetail] = useState<SymbolNames>();
+  const [iconDetail, setIconDetail] = useState<SymbolNames | ''>('');
   const [searchTerm, setSearchTerm] = useState('');
   const [iconSize] = useState<SymbolProps['dimension']>(24);
   const [iconStyle, setIconStyle] = useState<SymbolProps['weight']>('duotone');
+  const router = useRouter();
 
   const debouncedSearchTerm = useDebounce(
     searchTerm,
@@ -56,7 +57,6 @@ export const SearchSymbol = () => {
 
   const handleModal = useCallback(
     (icon) => {
-      setIsModalOpen(true);
       setIconDetail(icon);
     },
     [],
@@ -66,6 +66,11 @@ export const SearchSymbol = () => {
     const currentValue = fieldRef?.current?.value;
     if (currentValue) setSearchTerm(currentValue);
   }, []);
+
+  useEffect(() => {
+    const url = new URL(`${process.env.NEXT_PUBLIC_DOMAIN}${router.asPath}`);
+    if (url.hash) setIconDetail(url.hash.slice(1) as SymbolNames);
+  }, [router]);
 
   return (
     <Stack direction={matches.medium ? 'row-reverse' : 'column'} columnGap={24} rowGap={24} vAlign="start" className={styles.SearchSymbol}>
@@ -165,9 +170,9 @@ export const SearchSymbol = () => {
       <ClientOnly>
         <OverlayContainer
           overlayColor="auto"
-          onClose={() => setIsModalOpen(false)}
+          onClose={() => setIconDetail('')}
         >
-          {(isModalOpen && iconDetail) && (
+          {iconDetail && (
           <Modal>
             <Modal.Content
               theme="auto"
