@@ -1,5 +1,14 @@
 # @wonderflow/react-components
 
+## 10.0.0-next.5
+
+### Minor Changes
+
+- b8c784b: Fix Drawer max width and animation
+- 3275e5a: Fix selection control space when hidden
+- 048c866: Update design of Snackbar component
+- 79ab157: Add Responsive hook, provider and context
+
 ## 10.0.0-next.4
 
 ### Minor Changes

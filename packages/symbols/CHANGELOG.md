@@ -1,5 +1,11 @@
 # @wonderflow/symbols
 
+## 10.0.0-next.5
+
+### Minor Changes
+
+- 32e0061: Add new icons
+
 ## 10.0.0-next.3
 
 ### Minor Changes
