@@ -1,5 +1,17 @@
 # docs
 
+## 10.0.0-next.5
+
+### Patch Changes
+
+- Updated dependencies [b8c784b]
+- Updated dependencies [3275e5a]
+- Updated dependencies [048c866]
+- Updated dependencies [32e0061]
+- Updated dependencies [79ab157]
+  - @wonderflow/react-components@10.0.0-next.5
+  - @wonderflow/symbols@10.0.0-next.5
+
 ## 10.0.0-next.4
 
 ### Patch Changes
