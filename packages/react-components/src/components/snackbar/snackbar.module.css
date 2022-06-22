@@ -1,10 +1,10 @@
 .Snackbar {
   display: block;
-  padding: token(--space-16) token(--space-24);
-  background: linear-gradient(to right, var(--snackbar-fg) 4px, var(--snackbar-bg) 4px);
-  color: var(--snackbar-fg);
-  border-radius: token(--radius-4);
+  padding: token(--space-8) token(--space-16);
+  background: var(--global-background);
+  border-radius: token(--radius-8);
   overflow: hidden;
+  border: 1px solid var(--global-vibrancy-background);
 
   & p {
     font-size: token(--font-size-16);
@@ -45,6 +45,10 @@
 .Icon {
   flex-shrink: 0;
   flex-grow: 0;
+  width: token(--space-16);
+  height: token(--space-16);
+  color: var(--snackbar-fg);
+  margin-top: token(--space-8);
 }
 
 .Action:is(.Action.Action) {
