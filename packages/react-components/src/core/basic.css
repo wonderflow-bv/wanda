@@ -13,11 +13,14 @@ html {
   margin: 0;
   box-sizing: inherit;
   -webkit-tap-highlight-color: hsl(token(--color-support-brand) / 20%);
+  outline-offset: 5px;
+  transition: outline-offset 200ms ease-out;
 }
 
 *:focus-visible {
   outline: 5px auto Highlight;
   outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: 2px;
 }
 
 body {
