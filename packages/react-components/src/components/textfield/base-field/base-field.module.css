@@ -18,7 +18,6 @@
   padding: 0 var(--field-padding);
   display: flex;
   caret-color: var(--cta-default);
-  outline-offset: 2px;
 
   @nest [data-textfield-has-icon='true'] &::-webkit-calendar-picker-indicator {
     opacity: 0%;
@@ -73,6 +72,7 @@
     }
   }
 
+  /* stylelint-disable-next-line no-descending-specificity */
   &:is(:invalid, [data-basefield-invalid='true'], :out-of-range),
   &:is(:invalid, [data-basefield-invalid='true'], :out-of-range):focus-visible {
     border-color: var(--highlight-red-foreground);
