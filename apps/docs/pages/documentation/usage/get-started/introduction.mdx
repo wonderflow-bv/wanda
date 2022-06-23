@@ -1,22 +1,18 @@
 import { Title } from '@wonderflow/react-components';
-import { NextPage } from 'next';
-
 import UsageNav from '@/data/usage-nav';
+import { Markdown } from '@/components/shared/markdown';
 import { getLayoutProps } from '@/utils/get-layout-props';
 
-const IntroductionPage: NextPage = () => (
-  <div>
-    <Title as="h2" level="2">H2 title</Title>
-    ciao 2
-    <Title as="h3" level="3">H3 title</Title>
-    ciao 3
-  </div>
-);
+## H2 title
 
-export default IntroductionPage;
+ciao 2
+
+### H3 Title
+ciao 3
+
 
 export const getStaticProps = () => getLayoutProps({
-  layout: 'doc',
+  layout: 'mdx',
   layoutProps: {
     title: 'Introduction',
     color: 'mint',

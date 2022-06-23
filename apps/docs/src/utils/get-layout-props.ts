@@ -2,12 +2,14 @@ import { GetStaticPropsResult } from 'next';
 
 import { IPropsBlankLayout } from '@/components/layouts/blank-layout';
 import { IPropsDocLayout } from '@/components/layouts/doc-layout';
+import { IPropsMDXLayout } from '@/components/layouts/mdx-layout';
 
 type LayoutTypes = 'blank' | 'doc'
 
 type LayoutProps = {
   blank: IPropsBlankLayout;
   doc: IPropsDocLayout;
+  mdx: IPropsMDXLayout;
 }
 
 export type PagePropsType<T extends LayoutTypes> = {

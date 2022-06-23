@@ -15,12 +15,14 @@ import { useEffect } from 'react';
 
 import { BlankLayout } from '@/components/layouts/blank-layout';
 import { DocLayout } from '@/components/layouts/doc-layout';
+import { MDXLayout } from '@/components/layouts/mdx-layout';
 import { TocProvider } from '@/hooks/table-of-content';
 import client from '@/utils/apollo-client';
 
 const LAYOUTS = {
   blank: BlankLayout,
   doc: DocLayout,
+  mdx: MDXLayout,
 };
 
 const Providers: FCChildren = ({ children }) => (

@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import {
-  Children, cloneElement, forwardRef, isValidElement, useMemo,
+  Children, cloneElement, forwardRef, isValidElement, PropsWithChildren, useMemo,
 } from 'react';
 
 import { Polymorphic } from '@/components';
@@ -8,7 +8,7 @@ import { Polymorphic } from '@/components';
 import styles from './list.module.css';
 import { ListItem, ListItemProps } from './list-item';
 
-export type ListProps = {
+export type ListProps = PropsWithChildren<{
   /**
    * Set the dimension of the items in the list. This affects also the marker size.
    */
@@ -17,7 +17,7 @@ export type ListProps = {
    * Set to show or hide the marker indicator beside each item in the list.
    */
   hideMarker?: boolean;
-}
+}>
 
 type PolymorphicList = Polymorphic.ForwardRefComponent<'ul', ListProps> & {
   Li: React.ForwardRefExoticComponent<ListItemProps>;
