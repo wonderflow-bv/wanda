@@ -1,6 +1,6 @@
 import { List, Stack, Title } from '@wonderflow/react-components';
 
-import { HeadingType } from '@/hooks/headings-data';
+import { HeadingType } from '@/hooks/table-of-content';
 
 type TocProps = {
   headings: HeadingType[];

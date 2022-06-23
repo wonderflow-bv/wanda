@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import { domMax, LazyMotion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import {
-  CSSProperties, useMemo, useState,
+  CSSProperties, useEffect, useMemo, useState,
 } from 'react';
 import { NavigationMenu } from 'types/data';
 
@@ -19,7 +19,7 @@ import { Footer } from '@/components/shared/footer';
 import { Header } from '@/components/shared/header';
 import { Meta } from '@/components/shared/meta';
 import { Navigation } from '@/components/shared/navigation';
-import { useToc } from '@/hooks/table-of-content';
+import { Headings, HeadingType, useToc } from '@/hooks/table-of-content';
 
 import styles from './doc-layout.module.css';
 
@@ -37,10 +37,11 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
   navigation,
   showToc = true,
 }) => {
+  const [staticHeadings, setStaticHeadings] = useState<HeadingType[]>([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { matches } = useResponsiveContext();
   const router = useRouter();
-  const { headings } = useToc();
+  const { headings, getNestedHeadings } = useToc();
 
   const getPretitle = useMemo(() => {
     const url = new URL(process.env.NEXT_PUBLIC_DOMAIN + router.asPath);
@@ -53,6 +54,14 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
     '--layout-color-fg': `var(--highlight-${color ?? 'gray'}-foreground)`,
     '--layout-color-bg': `var(--highlight-${color ?? 'gray'}-background)`,
   };
+
+  useEffect(() => {
+    const headingElements: Headings = Array.from(
+      document.querySelectorAll('h2, h3'),
+    );
+
+    setStaticHeadings(getNestedHeadings(headingElements));
+  }, [getNestedHeadings, headings]);
 
   return (
     <BaseLayout>
@@ -78,7 +87,9 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
                     </ClientOnly>
                   </>
                 ) : (
-                  <Button kind="secondary" onClick={() => setIsMenuOpen(true)}>Navigation</Button>
+                  <Button kind="secondary" onClick={() => setIsMenuOpen(true)}>
+                    Navigation
+                  </Button>
                 )}
               </Stack>
             </div>
@@ -93,10 +104,10 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
               </Stack>
             </main>
 
-            {(showToc && headings.length > 0) && (
-            <div className={clsx(styles.Sidebar, styles.Toc)}>
-              <Toc headings={headings} />
-            </div>
+            {(showToc && (headings.length > 0 || staticHeadings.length > 0)) && (
+              <div className={clsx(styles.Sidebar, styles.Toc)}>
+                <Toc headings={headings.length === 0 ? staticHeadings : headings} />
+              </div>
             )}
           </Stack>
         </Container>

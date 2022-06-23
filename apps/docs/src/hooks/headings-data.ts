@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-type Headings = HTMLHeadingElement[]
+export type Headings = HTMLHeadingElement[]
 
 export type HeadingType = {
   id: string;
