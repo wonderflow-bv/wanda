@@ -24,6 +24,13 @@ const COMPONENTS = {
   ol: (props: ListProps) => <Components.List as="ol" {...props}>{props.children}</Components.List>,
   li: (props: ListItemProps) => <Components.List.Li markerColor="var(--dimmed-5)" {...props}>{props.children}</Components.List.Li>,
   hr: (props: SeparatorProps) => <Components.Separator {...props} />,
+  ...Object.keys(Components).reduce((acc, name) => ({
+    ...acc,
+    [name]: (props: any) => {
+      const Component = Components[name];
+      return <Component {...props} />;
+    },
+  }), {}),
 };
 
 export const MDXLayout: FCChildren<IPropsMDXLayout> = ({
@@ -32,7 +39,11 @@ export const MDXLayout: FCChildren<IPropsMDXLayout> = ({
 }) => (
   <MDXProvider components={COMPONENTS}>
     <DocLayout {...props}>
-      {children}
+      <Components.Stack vPadding={56}>
+        <Components.Prose>
+          {children}
+        </Components.Prose>
+      </Components.Stack>
     </DocLayout>
   </MDXProvider>
 );

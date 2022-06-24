@@ -3,3 +3,39 @@ html {
     scroll-behavior: smooth;
   }
 }
+
+:is(h2, h3, h4)[id] {
+  & > a {
+    display: inline-flex;
+    margin-left: token(--space-16);
+    background-image: none;
+  }
+
+  & .HeadingAnchor {
+    font-size: token(--font-size-16);
+    inline-size: 24px;
+    block-size: 24px;
+    visibility: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    border-radius: token(--radius-8);
+    background-color: var(--layout-color-bg);
+    color: var(--layout-color-fg);
+    padding-bottom: 1px;
+    trasnform: translateY(-4px);
+
+    &::before {
+      content: '#';
+      display: inline-block;
+    }
+  }
+
+  &:hover,
+  &:focus-within {
+    & .HeadingAnchor {
+      visibility: visible;
+    }
+  }
+}

@@ -4,7 +4,7 @@ import { IPropsBlankLayout } from '@/components/layouts/blank-layout';
 import { IPropsDocLayout } from '@/components/layouts/doc-layout';
 import { IPropsMDXLayout } from '@/components/layouts/mdx-layout';
 
-type LayoutTypes = 'blank' | 'doc'
+type LayoutTypes = 'blank' | 'doc' | 'mdx'
 
 type LayoutProps = {
   blank: IPropsBlankLayout;
