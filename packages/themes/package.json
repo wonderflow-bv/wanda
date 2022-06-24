@@ -46,7 +46,7 @@
     "fs-extra": "10.1.0",
     "style-dictionary": "3.7.1",
     "tsconfig": "1.0.0-next.0",
-    "uvu": "0.5.3",
+    "uvu": "0.5.4",
     "yargs": "17.5.1"
   }
 }

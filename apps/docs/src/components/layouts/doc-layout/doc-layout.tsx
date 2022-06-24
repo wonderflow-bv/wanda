@@ -51,6 +51,7 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
   }, [router, title]);
 
   const dynamicStyle: CSSProperties = {
+    paddingTop: 72,
     '--layout-color-fg': `var(--highlight-${color ?? 'gray'}-foreground)`,
     '--layout-color-bg': `var(--highlight-${color ?? 'gray'}-background)`,
   };
@@ -68,7 +69,7 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
   return (
     <BaseLayout>
       <Meta title={title} description={subtitle} />
-      <Header position="sticky" />
+      <Header position="fixed" />
       <span className={styles.Glow} />
       <LazyMotion features={domMax}>
         <Container dimension="large" style={dynamicStyle}>

@@ -30,6 +30,12 @@
       background-color: var(--global-background);
     }
   }
+  @nest .Header[data-header-position='fixed'] & {
+
+    @supports not (backdrop-filter: blur(0)) {
+      background-color: var(--global-background);
+    }
+  }
   @nest .Header[data-header-position='sticky'] &::before,
   .Header[data-header-position='fixed'] &::before {
     content: '';

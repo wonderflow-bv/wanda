@@ -10,7 +10,7 @@ import {
   ReactNode, useCallback, useEffect, useMemo, useRef,
   useState,
 } from 'react';
-import mergeRefs from 'react-merge-refs';
+import { mergeRefs } from 'react-merge-refs';
 import { usePopperTooltip } from 'react-popper-tooltip';
 import { useUIDSeed } from 'react-uid';
 
