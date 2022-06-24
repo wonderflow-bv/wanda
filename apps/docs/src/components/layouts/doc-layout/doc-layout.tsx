@@ -56,11 +56,13 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
   };
 
   useEffect(() => {
-    const headingElements: Headings = Array.from(
-      document.querySelectorAll('h2, h3'),
-    );
+    if (headings.length === 0) {
+      const headingElements: Headings = Array.from(
+        document.querySelectorAll('h2, h3'),
+      );
 
-    setStaticHeadings(getNestedHeadings(headingElements));
+      setStaticHeadings(getNestedHeadings(headingElements));
+    }
   }, [getNestedHeadings, headings]);
 
   return (
@@ -106,7 +108,8 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
 
             {(showToc && (headings.length > 0 || staticHeadings.length > 0)) && (
               <div className={clsx(styles.Sidebar, styles.Toc)}>
-                <Toc headings={headings.length === 0 ? staticHeadings : headings} />
+                {headings.length === 0 && <Toc headings={staticHeadings} />}
+                {headings.length > 0 && <Toc headings={headings} />}
               </div>
             )}
           </Stack>
