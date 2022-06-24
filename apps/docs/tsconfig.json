@@ -45,8 +45,7 @@
     }
   },
   "exclude": [
-    "node_modules",
-    "*.mdx"
+    "node_modules"
   ],
   "include": [
     "next-env.d.ts",

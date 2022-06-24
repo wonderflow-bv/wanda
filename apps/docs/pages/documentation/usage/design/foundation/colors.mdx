@@ -1,26 +1,14 @@
 import UsageNav from "@/data/usage-nav";
+import { Markdown } from "@/components/shared/markdown";
 import { getLayoutProps } from "@/utils/get-layout-props";
 
 export const getStaticProps = () =>
   getLayoutProps({
     layout: "mdx",
     layoutProps: {
-      title: "Introduction",
+      title: "Colors",
       color: "mint",
-      subtitle:
-        "Wanda is Wonderflow’s open-source design system built for products and digital experiences.",
+      subtitle: "Description",
       navigation: UsageNav
     }
   });
-
-## H2 title
-
-ciao 2
-
-### H3 Title
-
-ciao 3
-
-### H3 Title
-
-ciao 3

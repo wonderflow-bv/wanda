@@ -4,7 +4,8 @@
     "@lasalefamine/eslint-config/hooks",
     "@lasalefamine/eslint-config/a11y",
     "plugin:@next/next/recommended",
-    "plugin:json/recommended"
+    "plugin:json/recommended",
+    "plugin:mdx/recommended"
   ],
   "ignorePatterns": ["next-env.d.ts"],
   "parser": "@typescript-eslint/parser",
@@ -12,6 +13,9 @@
   "parserOptions": {
     "extraFileExtensions": [".mjs"],
     "project": "./tsconfig.eslint.json"
+  },
+  "settings": {
+    "mdx/code-blocks": true
   },
   "rules": {
     "@next/next/no-img-element": "off",

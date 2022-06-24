@@ -4,7 +4,7 @@
   "extends": "./packages/tsconfig/base.json",
   "exclude": [
     "node_modules",
-    "next-env.d.ts",
+    "next-env.d.ts"
   ],
   "include": [
     "**/.eslintrc.js",
