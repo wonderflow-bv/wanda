@@ -8,6 +8,7 @@ import { PropsWithChildren } from 'react';
 
 import { DocLayout, IPropsDocLayout } from '@/components/layouts/doc-layout';
 import { Code, CodeProps } from '@/components/shared/code';
+import { LiveArea } from '@/components/shared/live-area';
 
 export interface IPropsMDXLayout extends IPropsDocLayout {}
 
@@ -23,6 +24,7 @@ const COMPONENTS = {
   ol: (props: ListProps) => <Components.List as="ol" {...props}>{props.children}</Components.List>,
   li: (props: ListItemProps) => <Components.List.Li markerColor="var(--dimmed-5)" {...props}>{props.children}</Components.List.Li>,
   hr: (props: SeparatorProps) => <Components.Separator {...props} />,
+  LiveArea: (props: SeparatorProps) => <LiveArea {...props} />,
   ...Object.keys(Components).reduce((acc, name) => ({
     ...acc,
     [name]: (props: any) => {

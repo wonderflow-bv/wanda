@@ -131,7 +131,7 @@
 
 .Anchor {
   display: inline-flex;
-  margin-left: 0.25em;
+  margin-left: 0.2em;
   background-image: none;
   inline-size: max(16px, 0.6em);
   block-size: max(16px, 0.6em);
