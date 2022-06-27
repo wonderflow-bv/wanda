@@ -33,34 +33,39 @@ Refractor.registerLanguage(diff);
 Refractor.registerLanguage(html);
 
 export type CodeProps = {
-  source: string;
+  children: any;
   lines?: string;
   markers?: Props['markers'];
   hideCopy?: boolean;
   language?: string;
+  showLanguage?: boolean;
   actions?: ReactNode;
   maxHeight?: string;
 }
 
-export const Code: FCClass<CodeProps> = ({
-  source,
+export const Code: FCChildrenClass<CodeProps> = ({
+  children,
   lines,
   markers,
   hideCopy = false,
   language,
+  showLanguage = true,
   className,
   actions,
   maxHeight,
   ...otherProps
 }) => {
-  const hasLanguage = language ?? 'bash';
-  const formattedChildren = outdent(source);
+  const cleanedClassname = children?.props?.className?.replace('language-', '');
+  const hasLanguage = language ?? cleanedClassname;
+  const isNotString = typeof children !== 'string';
+  const getChildren = isNotString ? children.props.children.trim() : children.trim();
+  const formattedSource = outdent(getChildren);
 
   const copyContent = useCallback(
     () => {
-      void navigator.clipboard.writeText(formattedChildren);
+      void navigator.clipboard.writeText(formattedSource);
     },
-    [formattedChildren],
+    [formattedSource],
   );
 
   const dynamicStyle: CSSProperties = {
@@ -71,33 +76,35 @@ export const Code: FCClass<CodeProps> = ({
     <div
       className={clsx(styles.Code, className)}
       data-code-block-has-highlight={Boolean(lines)}
-      data-code-block-has-toolbar={Boolean(hasLanguage) ?? Boolean(actions) ?? hideCopy}
+      data-code-block-has-toolbar={showLanguage ?? Boolean(actions) ?? hideCopy}
       style={dynamicStyle}
       {...otherProps}
     >
       <Refractor
         language={hasLanguage}
-        value={formattedChildren}
+        value={formattedSource}
         markers={lines ? rangeParser(lines) : markers}
       />
 
+      {showLanguage && (
       <Stack direction="row" fill={false} hAlign="space-between" vAlign="center" className={styles.Toolbar}>
         <Text responsive={false} size={14} dimmed={5}>{language ?? ''}</Text>
 
         <Stack direction="row" rowGap={8}>
           {!hideCopy && (
-            <IconButton
-              className={styles.Action}
-              aria-label="Copy code"
-              dimension="small"
-              kind="flat"
-              onClick={() => copyContent()}
-              icon="todo"
-            />
+          <IconButton
+            className={styles.Action}
+            aria-label="Copy code"
+            dimension="small"
+            kind="flat"
+            onClick={() => copyContent()}
+            icon="todo"
+          />
           )}
           {actions}
         </Stack>
       </Stack>
+      )}
     </div>
   );
 };

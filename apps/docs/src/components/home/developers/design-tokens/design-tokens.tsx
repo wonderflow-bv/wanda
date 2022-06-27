@@ -89,12 +89,13 @@ export const DesignTokens = () => {
             hideCopy
             language="css"
             maxHeight="25rem"
-            source={`.Usage {
-            color: hsl(
-              token(--color-blue-50) / 20%
-            );
-          }`}
-          />
+          >
+            {`.Usage {
+              color: hsl(
+                token(--color-blue-50) / 20%
+              );
+            }`}
+          </Code>
         </Elevator>
       </m.div>
     </m.div>

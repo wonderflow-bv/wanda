@@ -2,6 +2,18 @@ import ComponentsNav from "@/data/components-nav";
 import { PropsTable } from "@/components/doc/props-table";
 import { getLayoutProps } from "@/utils/get-layout-props";
 
+export const getStaticProps = () =>
+  getLayoutProps({
+    layout: "mdx",
+    layoutProps: {
+      title: "Title",
+      color: "indigo",
+      showToc: false,
+      subtitle: "Dynamic and responsive titles with control",
+      navigation: ComponentsNav
+    }
+  });
+
 
 ## Anatomy
 
@@ -75,14 +87,3 @@ export default () => {
 The `Title` component is rendered as `span` by default. Make sure to define the correct heading tag when semantic is required to make the content navigable and accessible with AT.
 
 Read more about how to [manage headings and accessibility](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements#accessibility_concerns).
-
-export const getStaticProps = () =>
-  getLayoutProps({
-    layout: "mdx",
-    layoutProps: {
-      title: "Title",
-      color: "indigo",
-      subtitle: "Dynamic and responsive titles with control",
-      navigation: ComponentsNav
-    }
-  });
