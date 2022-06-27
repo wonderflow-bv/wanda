@@ -4,8 +4,6 @@ import mdx from '@next/mdx';
 import withPlugins from 'next-compose-plugins';
 import withImages from 'next-images';
 import withTranspileModules from 'next-transpile-modules';
-import mdxLink from 'rehype-autolink-headings';
-import mdxSlug from 'rehype-slug';
 import { remarkMdxCodeMeta } from 'remark-mdx-code-meta';
 
 const withBundleAnalyzer = bundleAnalyzer({
@@ -18,18 +16,6 @@ const withMDX = mdx({
     providerImportSource: '@mdx-js/react',
     remarkPlugins: [
       remarkMdxCodeMeta,
-    ],
-    rehypePlugins: [
-      mdxSlug,
-      [mdxLink, {
-        behavior: 'append',
-        content: {
-          type: 'element',
-          tagName: 'span',
-          properties: { className: ['HeadingAnchor'] },
-          children: [{ type: 'text', value: '' }],
-        },
-      }],
     ],
   },
 });
