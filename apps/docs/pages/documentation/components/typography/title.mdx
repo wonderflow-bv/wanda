@@ -8,7 +8,6 @@ export const getStaticProps = () =>
     layoutProps: {
       title: "Title",
       color: "indigo",
-      showToc: false,
       subtitle: "Dynamic and responsive titles with control",
       navigation: ComponentsNav
     }
@@ -17,7 +16,7 @@ export const getStaticProps = () =>
 
 ## Anatomy
 
-```tsx
+```tsx lines="1,4"
 import { Title } from "@wonderflow/react-components";
 
 export default () => {

@@ -51,7 +51,7 @@
     max-height: var(--max-height);
 
     @nest [data-code-block-has-toolbar='true'] & {
-      padding-top: token(--space-16);
+      padding-top: 0;
       margin-top: token(--space-40);
     }
   }
@@ -197,16 +197,15 @@
 }
 
 .Toolbar {
-
-  @mixin vibrancy;
-
   position: absolute;
   left: 0;
   right: 0;
   padding: token(--space-8) token(--space-8) token(--space-8) token(--space-16);
   border-radius: token(--radius-8) token(--radius-8) 0 0;
+  opacity: 0%;
+  transition: opacity token(--duration-100) token(--easing-entrance);
 
-  @supports not (backdrop-filter: blur(0)) {
-    background-color: var(--dimmed-0);
+  @nest .Code:hover & {
+    opacity: 100%;
   }
 }

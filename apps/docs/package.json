@@ -64,6 +64,7 @@
     "refractor": "4.7.0",
     "rehype-autolink-headings": "6.1.1",
     "rehype-slug": "5.0.1",
+    "remark-mdx-code-meta": "1.0.0",
     "slugify": "1.6.5"
   },
   "devDependencies": {

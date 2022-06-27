@@ -22,12 +22,6 @@ export const PropsTableRow = ({
   const [copied, setCopied] = useState<boolean>(false);
   const router = useRouter();
 
-  const toMDCode = useCallback(value => (
-    <Markdown options={{ wrapper: Fragment }}>
-      {`\`${value}\``}
-    </Markdown>
-  ), []);
-
   const handleCopyLink = useCallback(
     (propName: string) => () => {
       navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_DOMAIN}${router.asPath}#prop-${propName.toLowerCase()}`).then(() => {
@@ -81,7 +75,7 @@ export const PropsTableRow = ({
             </Elevator>
           </Dropdown>
         )}
-        {toMDCode(name)}
+        <Text as="code" size={14}>{name}</Text>
         {required && <Text as="span" sentiment="warning" size={14}>*</Text>}
       </div>
       )}
@@ -91,11 +85,9 @@ export const PropsTableRow = ({
       <div role="cell" className={styles.Cell}>
         {Array.isArray(type)
           ? type.map(type => (
-            <Fragment key={type}>
-              {toMDCode(type)}
-            </Fragment>
+            <Text key={type} as="code" size={14}>{type}</Text>
           ))
-          : toMDCode(type)}
+          : <Text as="code" size={14}>{type}</Text>}
         {typeValue && (
           <Dropdown
             placement="top"
@@ -136,7 +128,7 @@ export const PropsTableRow = ({
 
       {/* Prop DEFAULT VALUE */}
       <div role="cell" data-content-align="right" className={styles.Cell}>
-        {defaultValue ? toMDCode(defaultValue) : ''}
+        {defaultValue && <Text as="code" size={14}>{defaultValue}</Text>}
       </div>
     </Stack>
   );
