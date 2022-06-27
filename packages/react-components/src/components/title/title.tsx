@@ -4,7 +4,7 @@ import {
 } from 'react';
 import slugify from 'slugify';
 
-import { Polymorphic } from '@/components';
+import { Polymorphic, Symbol } from '@/components';
 
 import styles from './title.module.css';
 
@@ -34,6 +34,14 @@ export type TitleProps = {
    * the text will be always the same size across all breakpoints.
    */
   responsive?: boolean;
+  /**
+   * Auto generate anchor link inside the heading. This should be
+   * used only when the title define a new content section and has
+   * a semantic tag.
+   *
+   * @default: `false`
+   */
+  anchor?: boolean;
 }
 
 type PolymorphicTitle = Polymorphic.ForwardRefComponent<'span', TitleProps>;
@@ -48,11 +56,11 @@ export const Title = forwardRef(({
   maxWidth,
   responsive = true,
   style,
+  anchor,
   id,
   ...otherProps
 }, forwardedRef) => {
   const computedLevel = level.match(/\d/g) ? `H${level}` : `${level.charAt(0).toUpperCase()}${level.slice(1)}`;
-
   const getTextFromChildren = useCallback(() => {
     let label = '';
 
@@ -64,6 +72,8 @@ export const Title = forwardRef(({
 
     return label;
   }, [children]);
+
+  const generatedID = slugify(String(id ?? getTextFromChildren()), { lower: true });
 
   const dynamicStyle: CSSProperties = {
     '--max-w': maxWidth,
@@ -77,10 +87,15 @@ export const Title = forwardRef(({
       data-title-responsive={responsive}
       className={clsx(styles.Title, styles[computedLevel], className)}
       style={{ ...dynamicStyle, ...style }}
-      id={slugify(String(id ?? getTextFromChildren()), { lower: true })}
+      id={generatedID}
       {...otherProps}
     >
       {children}
+      {anchor && (
+        <a href={`#${generatedID}`} className={styles.Anchor}>
+          <Symbol source="link" weight="duotone" dimension={24} />
+        </a>
+      )}
     </Wrapper>
   );
 }) as PolymorphicTitle;
