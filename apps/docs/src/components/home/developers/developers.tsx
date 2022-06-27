@@ -42,7 +42,7 @@ export const Developers: FCClass = ({
             </Stack>
 
             <Tab className={styles.Tab} defaultValue={activeTab} onValueChange={setActiveTab}>
-              <Tab.Panel label="Components" icon={matches.large ? 'grid' : undefined} value="components">
+              <Tab.Panel label="Components" symbol={matches.large ? 'grid' : undefined} value="components">
                 <Stack rowGap={32} vPadding={56} hAlign="start">
                   <Text size={22} dimmed={6}>
                     A full set of highly customizable React components and styles ready to use inside applications.
@@ -53,7 +53,7 @@ export const Developers: FCClass = ({
                 </Stack>
               </Tab.Panel>
 
-              <Tab.Panel label="Design Tokens" icon={matches.large ? 'more-vert' : undefined} value="design-tokens">
+              <Tab.Panel label="Design Tokens" symbol={matches.large ? 'more-vert' : undefined} value="design-tokens">
                 <Stack rowGap={32} vPadding={56} hAlign="start">
                   <Text size={22} dimmed={6}>
                     Color, spaces, font... every basic and common property is available as design token.
@@ -65,7 +65,7 @@ export const Developers: FCClass = ({
                 </Stack>
               </Tab.Panel>
 
-              <Tab.Panel label="Themes" icon={matches.large ? 'style' : undefined} value="themes">
+              <Tab.Panel label="Themes" symbol={matches.large ? 'style' : undefined} value="themes">
                 <Stack rowGap={32} vPadding={56} hAlign="start">
                   <Text size={22} dimmed={6}>
                     Easily handle light/dark themes via JS or CSS, by using the provided

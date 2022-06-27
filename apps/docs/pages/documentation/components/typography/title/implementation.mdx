@@ -1,18 +1,4 @@
-import ComponentsNav from "@/data/components-nav";
 import { PropsTable } from "@/components/doc/props-table";
-import { getLayoutProps } from "@/utils/get-layout-props";
-
-export const getStaticProps = () =>
-  getLayoutProps({
-    layout: "mdx",
-    layoutProps: {
-      title: "Title",
-      color: "indigo",
-      subtitle: "Dynamic and responsive titles with control",
-      navigation: ComponentsNav
-    }
-  });
-
 
 ## Anatomy
 
@@ -68,6 +54,14 @@ export default () => {
       required: false,
       description:
         "Enable or disable the responsiveness of the text. If disabled, the text will be always the same size across all breakpoints.",
+    },
+    {
+      name: "anchor",
+      type: ["boolean"],
+      default: "false",
+      required: false,
+      description:
+        "Auto generate anchor link inside the heading. This should be used only when the title define a new content section and has a semantic tag.",
     },
     {
       name: "as",

@@ -44,7 +44,7 @@ export const Designers: FCClass = ({
             </Stack>
 
             <Tab className={styles.Tab} defaultValue={activeTab} onValueChange={setActiveTab}>
-              <Tab.Panel label="Foundation" icon={matches.large ? 'layer-group' : undefined} value="foundation">
+              <Tab.Panel label="Foundation" symbol={matches.large ? 'layer-group' : undefined} value="foundation">
                 <Stack rowGap={32} vPadding={56} hAlign="start">
                   <Text size={22} dimmed={6}>
                     Colors, typography, symbols, themes, and much more,
@@ -56,7 +56,7 @@ export const Designers: FCClass = ({
                 </Stack>
               </Tab.Panel>
 
-              <Tab.Panel label="Symbols" icon={matches.large ? 'grip-vertical' : undefined} value="symbols">
+              <Tab.Panel label="Symbols" symbol={matches.large ? 'grip-vertical' : undefined} value="symbols">
                 <Stack rowGap={32} vPadding={56} hAlign="start">
                   <Text size={22} dimmed={6}>
                     Wanda offers over 114 ready-to-use SVG icons and three solid,
@@ -68,7 +68,7 @@ export const Designers: FCClass = ({
                 </Stack>
               </Tab.Panel>
 
-              <Tab.Panel label="Motion" icon={matches.large ? 'signal-stream' : undefined} value="motion">
+              <Tab.Panel label="Motion" symbol={matches.large ? 'signal-stream' : undefined} value="motion">
                 <Stack rowGap={32} vPadding={56} hAlign="start">
                   <Text size={22} dimmed={6}>
                     Motion is part of the life. Starting from cells.

@@ -13,10 +13,10 @@ export interface IPropsMDXLayout extends IPropsDocLayout {}
 
 const COMPONENTS = {
   pre: (props: CodeProps) => <Code {...props} />,
-  h1: (props: TitleProps) => <Components.Title as="h1" level="1" {...props} />,
-  h2: (props: TitleProps) => <Components.Title as="h2" level="2" {...props} />,
-  h3: (props: TitleProps) => <Components.Title as="h3" level="3" {...props} />,
-  h4: (props: TitleProps) => <Components.Title as="h4" level="4" {...props} />,
+  h1: (props: TitleProps) => <Components.Title as="h1" level="2" anchor {...props} />,
+  h2: (props: TitleProps) => <Components.Title as="h2" level="3" anchor {...props} />,
+  h3: (props: TitleProps) => <Components.Title as="h3" level="4" anchor {...props} />,
+  h4: (props: TitleProps) => <Components.Title as="h4" level="5" anchor {...props} />,
   p: (props: TextProps) => <Components.Text size={22} {...props} />,
   a: (props: PropsWithChildren<LinkProps>) => <Link {...props}><a>{props.children}</a></Link>,
   ul: (props: ListProps) => <Components.List {...props}>{props.children}</Components.List>,

@@ -71,7 +71,7 @@ export const getStaticProps = async () => {
       title: 'Resources',
       color: 'salmon',
       subtitle: 'Useful assets to design at Wonderflow',
-      showToc: true,
+      showToc: false,
     },
   },
   {

@@ -14,6 +14,7 @@ import { ThemeProvider } from 'next-themes';
 import { useEffect } from 'react';
 
 import { BlankLayout } from '@/components/layouts/blank-layout';
+import { ComponentLayout } from '@/components/layouts/component-layout';
 import { DocLayout } from '@/components/layouts/doc-layout';
 import { MDXLayout } from '@/components/layouts/mdx-layout';
 import { TocProvider } from '@/hooks/table-of-content';
@@ -23,6 +24,7 @@ const LAYOUTS = {
   blank: BlankLayout,
   doc: DocLayout,
   mdx: MDXLayout,
+  component: ComponentLayout,
 };
 
 const Providers: FCChildren = ({ children }) => (

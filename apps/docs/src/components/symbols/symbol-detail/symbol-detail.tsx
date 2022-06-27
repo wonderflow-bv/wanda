@@ -103,7 +103,7 @@ export const SymbolDetail: FC<SymbolDetailProps> = ({
       {iconDetail
         ? <Code className={styles.Code} language="html">{iconDetail}</Code> : (
           <Skeleton
-            height={100}
+            height={86}
             width={600}
           />
         )}

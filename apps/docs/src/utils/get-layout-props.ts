@@ -1,6 +1,7 @@
 import { GetStaticPropsResult } from 'next';
 
 import { IPropsBlankLayout } from '@/components/layouts/blank-layout';
+import { IPropsComponentLayout } from '@/components/layouts/component-layout';
 import { IPropsDocLayout } from '@/components/layouts/doc-layout';
 import { IPropsMDXLayout } from '@/components/layouts/mdx-layout';
 
@@ -10,6 +11,7 @@ type LayoutProps = {
   blank: IPropsBlankLayout;
   doc: IPropsDocLayout;
   mdx: IPropsMDXLayout;
+  component: IPropsComponentLayout;
 }
 
 export type PagePropsType<T extends LayoutTypes> = {

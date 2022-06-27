@@ -25,8 +25,9 @@
     border-radius: token(--radius-16);
     color: var(--global-foreground);
     background: none;
+    letter-spacing: 0.7px;
     font-family: token(--font-family-mono);
-    font-size: 0.9em;
+    font-size: 0.95em;
     text-align: left;
     white-space: pre;
     word-spacing: normal;
@@ -170,7 +171,7 @@
     }
 
     & .token:is(.keyword, .atrule) {
-      color: var(--highlight-blue-foreground);
+      color: hsl(token(--color-indigo-40));
     }
 
     & .token:is(.rule) {
