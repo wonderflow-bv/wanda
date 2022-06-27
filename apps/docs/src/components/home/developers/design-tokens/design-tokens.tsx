@@ -73,9 +73,10 @@ export const DesignTokens = () => {
             hideCopy
             language="json"
             maxHeight="25rem"
-            source={JSON.stringify(tkns.color, null, 3)}
             // markers={arrayOfLines}
-          />
+          >
+            {JSON.stringify(tkns.color, null, 3)}
+          </Code>
         </Elevator>
       </m.div>
 

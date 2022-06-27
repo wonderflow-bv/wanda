@@ -12,8 +12,7 @@ import { Code, CodeProps } from '@/components/shared/code';
 export interface IPropsMDXLayout extends IPropsDocLayout {}
 
 const COMPONENTS = {
-  pre: (props: any) => <div {...props} />,
-  code: (props: CodeProps) => <Code {...props} />,
+  pre: (props: CodeProps) => <Code {...props} />,
   h1: (props: TitleProps) => <Components.Title as="h1" level="1" {...props} />,
   h2: (props: TitleProps) => <Components.Title as="h2" level="2" {...props} />,
   h3: (props: TitleProps) => <Components.Title as="h3" level="3" {...props} />,

@@ -1,0 +1,82 @@
+.TableProps {
+  inline-size: 100%;
+}
+
+.Row {
+  border: 1px solid var(--dimmed-1);
+  border-radius: token(--radius-8);
+  transition: background-color 0.2s ease-out;
+  line-height: initial;
+
+  &[data-props-table-link-copied='true'] {
+    animation: positive-feedback 2s 1;
+  }
+
+  &:target {
+    background-color: var(--highlight-cyan-background);
+    border-color: var(--highlight-cyan-foreground);
+
+    & > * > code {
+      background-color: var(--highlight-cyan-foreground);
+      color: var(--highlight-cyan-background);
+    }
+  }
+}
+
+.Cell {
+  inline-size: 1%;
+  padding: token(--space-4) token(--space-8);
+  justify-content: flex-start;
+  display: flex;
+  align-items: center;
+  flex-basis: 100%;
+  grid-gap: token(--space-4);
+  flex-wrap: wrap;
+
+  &:nth-child(2) {
+    min-width: 25ch;
+  }
+
+  &:first-child {
+    flex-basis: 5%;
+    visibility: hidden;
+
+    @nest .Row:hover & {
+      visibility: visible;
+    }
+  }
+
+  &[data-content-align='right'] {
+    justify-content: flex-end;
+  }
+}
+
+.Dropdown {
+  max-inline-size: min(60ch, 100vw);
+}
+
+.CodeBlock {
+  margin: 0;
+  max-block-size: 300px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  & pre {
+    margin: 0;
+    border: 0;
+  }
+}
+
+@keyframes positive-feedback {
+  0% {
+    background-color: var(--highlight-cyan-background);
+    color: var(--highlight-cyan-foreground);
+    box-shadow: inset 0 0 0 2px var(--highlight-cyan-foreground);
+  }
+
+  100% {
+    background-color: var(--bg);
+    color: revert;
+    box-shadow: inset 0 0 0 2px transparent;
+  }
+}
