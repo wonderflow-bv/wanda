@@ -9,10 +9,11 @@ import { PropsWithChildren } from 'react';
 import { DocLayout, IPropsDocLayout } from '@/components/layouts/doc-layout';
 import { Code, CodeProps } from '@/components/shared/code';
 import { LiveArea } from '@/components/shared/live-area';
+import { LiveAreaProps } from '@/components/shared/live-area/live-area';
 
 export interface IPropsMDXLayout extends IPropsDocLayout {}
 
-const COMPONENTS = {
+export const MDX_COMPONENTS = {
   pre: (props: CodeProps) => <Code {...props} />,
   h1: (props: TitleProps) => <Components.Title as="h1" level="2" anchor {...props} />,
   h2: (props: TitleProps) => <Components.Title as="h2" level="3" anchor {...props} />,
@@ -24,7 +25,7 @@ const COMPONENTS = {
   ol: (props: ListProps) => <Components.List as="ol" {...props}>{props.children}</Components.List>,
   li: (props: ListItemProps) => <Components.List.Li markerColor="var(--dimmed-5)" {...props}>{props.children}</Components.List.Li>,
   hr: (props: SeparatorProps) => <Components.Separator {...props} />,
-  LiveArea: (props: SeparatorProps) => <LiveArea {...props} />,
+  LiveArea: (props: LiveAreaProps) => <LiveArea {...props} />,
   ...Object.keys(Components).reduce((acc, name) => ({
     ...acc,
     [name]: (props: any) => {
@@ -38,13 +39,13 @@ export const MDXLayout: FCChildren<IPropsMDXLayout> = ({
   children,
   ...props
 }) => (
-  <MDXProvider components={COMPONENTS}>
-    <DocLayout {...props}>
+  <DocLayout {...props}>
+    <MDXProvider components={MDX_COMPONENTS}>
       <Components.Stack vPadding={56}>
         <Components.Prose>
           {children}
         </Components.Prose>
       </Components.Stack>
-    </DocLayout>
-  </MDXProvider>
+    </MDXProvider>
+  </DocLayout>
 );

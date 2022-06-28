@@ -27,7 +27,7 @@
     background-image:
       radial-gradient(
         circle at center,
-        var(--dimmed-1) 60%,
+        var(--dimmed-2) 60%,
         var(--dimmed-0)
       );
     mask-image:

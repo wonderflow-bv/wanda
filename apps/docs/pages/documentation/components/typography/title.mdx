@@ -4,12 +4,19 @@ import { PropsTable } from "@/components/doc/props-table";
 
 export const getStaticProps = () =>
   getLayoutProps({
-    layout: "mdx",
+    layout: "component",
     layoutProps: {
       title: "Title",
       color: "indigo",
       subtitle: "Dynamic and responsive titles with control",
-      navigation: ComponentsNav
+      navigation: ComponentsNav,
+      features: [
+        "Dynamic HTML tag",
+        "Fully customizzable",
+        "Responsive text",
+        "Decoupled size and semantic",
+        "Themes ready",
+      ]
     }
   });
 
