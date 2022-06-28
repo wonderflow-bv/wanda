@@ -21,11 +21,11 @@ const routes: NavigationMenu = [
         label: 'Learn',
         target: ''
       },
-      {
-        path: '/release-notes',
-        label: 'Release notes',
-        target: ''
-      },
+      // {
+      //   path: '/release-notes',
+      //   label: 'Release notes',
+      //   target: ''
+      // },
       {
         path: '/resources',
         label: 'Resources',
