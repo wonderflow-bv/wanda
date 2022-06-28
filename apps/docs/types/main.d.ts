@@ -14,7 +14,7 @@
 
 declare namespace NodeJS {
   export interface ProcessEnv {
-    CMS_ENDPOINT: string;
+    NEXT_PUBLIC_CMS_ENDPOINT: string;
     SLACK_RELEASE_CHANNEL: string;
     SLACK_TOKEN: string;
     NEXT_PUBLIC_DOMAIN: string;
