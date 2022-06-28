@@ -1,0 +1,102 @@
+import ComponentsNav from "@/data/components-nav";
+import { getLayoutProps } from "@/utils/get-layout-props";
+import { PropsTable } from "@/components/doc/props-table";
+import {List} from '@wonderflow/react-components'
+
+export const {Li} = List
+
+export const getStaticProps = () =>
+  getLayoutProps({
+    layout: "component",
+    layoutProps: {
+      title: "Prose",
+      color: "indigo",
+      subtitle: "Vertical rhythm for text content",
+      navigation: ComponentsNav,
+      features: [
+        "Auto space titles and text content",
+        "Useful for pages with many text elements",
+      ]
+    }
+  });
+
+<LiveArea>
+  <List>
+    <Li marker="check" markerColor="var(--highlight-green-foreground)">Lorem ipsum dolor</Li>
+    <Li marker="triangle-exclamation" markerColor="var(--highlight-yellow-foreground)">Sit amen consectur</Li>
+    <Li marker="xmark" markerColor="var(--highlight-red-foreground)">Adipiscing lorem</Li>
+  </List>
+</LiveArea>
+
+## Anatomy
+
+```tsx lines="1,5-9"
+import { List } from "@wonderflow/react-components";
+
+export default () => {
+  return (
+    <List>
+      <List.Li>Lorem ipsum dolor</List.Li>
+      <List.Li>Sit amen consectur</List.Li>
+      <List.Li>Adipiscing lorem</List.Li>
+    </List>
+  );
+};
+```
+
+## API Reference
+
+### List
+
+<PropsTable
+  properties={[
+    {
+      name: "dimension",
+      type: ['enum'],
+      typeValue: "'small' | 'regular' | 'big'",
+      default: 'regular',
+      required: false,
+      description: "Set the dimension of the items in the list. This affects also the marker size.",
+    },
+    {
+      name: "hideMarker",
+      type: ["boolean"],
+      default: "false",
+      required: false,
+      description: "Set to show or hide the marker indicator beside each item in the list.",
+    },
+    {
+      name: "as",
+      type: ["enum"],
+      typeValue: "keyof JSX.IntrinsicElements | React.ComponentType<any>",
+      default: 'ul',
+      required: false,
+      description:
+        "Set the component to a different HTML tag or custom component",
+    }
+  ]}
+/>
+
+
+### List.Li
+
+<PropsTable
+  properties={[
+    {
+      name: "marker",
+      type: ["enum"],
+      typeValue: "IconProps['source']",
+      typeLink: "/components/other/icon#prop-source",
+      default: "circle",
+      required: false,
+      description: "Set the marker style. You can use any icon from the iconography as marker by passing its name.",
+    },
+    {
+      name: "markerColor",
+      type: ["string"],
+      default: "",
+      required: false,
+      description: "Set the color of the marker",
+    }
+  ]}
+/>

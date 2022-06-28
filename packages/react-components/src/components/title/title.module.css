@@ -129,7 +129,7 @@
   }
 }
 
-.Anchor {
+.Anchor:is(.Anchor) {
   display: inline-flex;
   margin-left: 0.2em;
   background-image: none;
@@ -142,7 +142,7 @@
   line-height: 1;
   border-radius: token(--radius-8);
   background-color: var(--highlight-cyan-background);
-  color: inherit;
+  color: var(--heading-foreground, var(--dimmed-9));
 
   @nest .Title:hover &, .Title:focus-within & {
     visibility: visible;

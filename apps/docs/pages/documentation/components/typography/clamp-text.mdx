@@ -1,0 +1,66 @@
+import ComponentsNav from "@/data/components-nav";
+import { getLayoutProps } from "@/utils/get-layout-props";
+import { PropsTable } from "@/components/doc/props-table";
+
+export const getStaticProps = () =>
+  getLayoutProps({
+    layout: "component",
+    layoutProps: {
+      title: "Clamp text",
+      color: "indigo",
+      subtitle: "Multiline text truncation",
+      navigation: ComponentsNav,
+      features: [
+        "Multiple line truncation",
+        "Text is fully selectable",
+        "Content length indipendent",
+        "Text is readable by AT",
+      ]
+    }
+  });
+
+<LiveArea>
+  <ClampText rows={3}>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis autem
+    quis qui nam excepturi libero laudantium rerum earum illo illum,
+    quisquam iure aperiam ipsam corporis inventore voluptas dignissimos
+    obcaecati modi! Voluptate nesciunt quibusdam sit? Nobis possimus harum
+    laboriosam iste facilis quas. Minus quod corporis recusandae assumenda
+    nobis architecto deleniti obcaecati ad, ipsam pariatur facere odit
+    possimus voluptatibus nostrum? Magnam, eum.
+  </ClampText>
+</LiveArea>
+
+
+## Anatomy
+
+```tsx lines="1,4"
+import { ClampText } from "@wonderflow/react-components";
+
+export default () => {
+  return <ClampText>...</ClampText>;
+};
+```
+
+## API Reference
+
+<PropsTable
+  properties={[
+    {
+      name: "rows",
+      type: ["number"],
+      default: "1",
+      required: false,
+      description: "Define how many lines the text should be clamped to.",
+    },
+    {
+      name: "as",
+      type: ["enum"],
+      typeValue: "keyof JSX.IntrinsicElements | React.ComponentType<any>",
+      default: 'span',
+      required: false,
+      description:
+        "Set the component to a different HTML tag or custom component",
+    }
+  ]}
+/>

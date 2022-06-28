@@ -63,7 +63,7 @@ export const PropsTableRow = ({
               <IconButton
                 kind="flat"
                 icon="circle-info"
-                iconColor="var(--highlight-cyan-foreground)"
+                iconColor="var(--layout-color-fg)"
                 aria-label="Show property description"
               />
             )}
@@ -95,7 +95,7 @@ export const PropsTableRow = ({
               <IconButton
                 kind="flat"
                 icon="circle-info"
-                iconColor="var(--highlight-cyan-foreground)"
+                iconColor="var(--layout-color-fg)"
                 aria-label="Show extra type information"
               />
             )}
