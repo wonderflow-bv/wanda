@@ -147,10 +147,6 @@ const ComponentsNav: NavigationMenu = [
         path: '/documentation/components/layouts/table',
         label: 'Table',
         target: '',
-        tag: {
-          label: 'beta',
-          color: 'blue',
-        },
       },
     ],
   },

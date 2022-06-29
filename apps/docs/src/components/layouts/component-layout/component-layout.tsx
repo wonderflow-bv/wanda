@@ -1,5 +1,7 @@
 import { MDXProvider } from '@mdx-js/react';
 import {
+  Chip,
+  ChipProps,
   List, Prose, Stack, Symbol, Title,
 } from '@wonderflow/react-components';
 import Markdown from 'markdown-to-jsx';
@@ -12,6 +14,7 @@ export interface IPropsComponentLayout extends IPropsMDXLayout {
   features?: string[];
   showMeta?: boolean;
   links?: Array<Record<string, string>>;
+  tags?: Array<{ label: string; color: ChipProps['color']}>;
 }
 
 export const ComponentLayout: FCChildren<IPropsComponentLayout> = ({
@@ -19,6 +22,7 @@ export const ComponentLayout: FCChildren<IPropsComponentLayout> = ({
   features,
   links,
   title,
+  tags,
   showMeta = true,
   ...otherProps
 }) => {
@@ -26,6 +30,11 @@ export const ComponentLayout: FCChildren<IPropsComponentLayout> = ({
 
   return (
     <DocLayout title={title} {...otherProps}>
+      {tags && (
+        <Stack direction="row" rowGap={16} columnGap={8} fill={false} vPadding={16} wrap>
+          {tags?.map(t => <Chip color={t.color}>{t.label}</Chip>)}
+        </Stack>
+      )}
       {showMeta && (
       <Stack
         direction="row"
