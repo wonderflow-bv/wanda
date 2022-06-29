@@ -76,7 +76,7 @@ export const Code: FCChildrenClass<CodeProps> = ({
     <div
       className={clsx(styles.Code, className)}
       data-code-block-has-highlight={Boolean(lines)}
-      data-code-block-has-toolbar={showLanguage ?? Boolean(actions) ?? hideCopy}
+      data-code-block-has-toolbar={showLanguage || Boolean(actions) || !hideCopy}
       style={dynamicStyle}
       {...otherProps}
     >
@@ -86,7 +86,7 @@ export const Code: FCChildrenClass<CodeProps> = ({
         markers={lines ? rangeParser(lines) : markers}
       />
 
-      {showLanguage && (
+      {(showLanguage || actions) && (
       <Stack direction="row" fill={false} hAlign="space-between" vAlign="center" className={styles.Toolbar}>
         <Text responsive={false} size={14} dimmed={5}>{hasLanguage}</Text>
 

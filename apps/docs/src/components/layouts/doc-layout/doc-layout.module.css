@@ -14,10 +14,6 @@
 
 .Content {
   padding-top: token(--space-56);
-
-  & a {
-    color: var(--layout-color-fg);
-  }
 }
 
 .Sidebar {
