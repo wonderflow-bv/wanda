@@ -55,7 +55,7 @@
   max-inline-size: min(60ch, 100vw);
 }
 
-.CodeBlock {
+.Code {
   margin: 0;
   max-block-size: 300px;
   overflow-y: auto;

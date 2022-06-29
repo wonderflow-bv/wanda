@@ -258,8 +258,8 @@ const ComponentsNav: NavigationMenu = [
         target: '',
       },
       {
-        path: '/documentation/components/other/icon',
-        label: 'Icon',
+        path: '/documentation/components/other/symbol',
+        label: 'Symbol',
         target: '',
       },
       {
