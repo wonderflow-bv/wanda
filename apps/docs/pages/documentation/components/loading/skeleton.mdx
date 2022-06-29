@@ -1,0 +1,101 @@
+import ComponentsNav from "@/data/components-nav";
+import { getLayoutProps } from "@/utils/get-layout-props";
+import { PropsTable } from "@/components/doc/props-table";
+import tkns from "@wonderflow/tokens/platforms/web/tokens.json";
+
+export const getStaticProps = () =>
+  getLayoutProps({
+    layout: "component",
+    layoutProps: {
+      title: "Skeleton",
+      color: "indigo",
+      subtitle: "Optimistic UI made easy",
+      navigation: ComponentsNav,
+      features: [
+        "Highly customizable",
+        "Can be inline or block",
+        "Themes ready"
+      ],
+    }
+  });
+
+<LiveArea fill={true}>
+  <Card dimmed={0} left={<Skeleton width={48} height={48} circle />}>
+    <Skeleton count={3} />
+  </Card>
+</LiveArea>
+
+## Anatomy
+
+```tsx lines="1,4"
+import { Skeleton } from "@wonderflow/react-components";
+
+export default () => {
+  return <Skeleton />;
+};
+```
+
+## API Reference
+
+<PropsTable
+  properties={[
+    {
+      name: "borderRadius",
+      type: ["enum"],
+   typeValue: `${Object.keys(tkns.radius).map(name => `${name}`).join(" | ")}`,
+      default: "4",
+      required: false,
+      description: "Set the edge radius of each skeleton block. This value must be one of the available `radius` tokens",
+    },
+    {
+      name: "gap",
+      type: ["enum"],
+   typeValue: `${Object.keys(tkns.space).map(name => `${name}`).join(" | ")}`,
+      default: "",
+      required: false,
+      description: "Set the gap between stacked skeleton items.",
+    },
+    {
+      name: "circle",
+      type: ["boolean"],
+      default: "false",
+      required: false,
+      description: "Set the block to be a circle, ignoring the `borderRadius` property.",
+    },
+    {
+      name: "count",
+      type: ["number"],
+      default: "1",
+      required: false,
+      description: "Set how many skeleton blocks to display.",
+    },
+    {
+      name: "width",
+      type: ["string", "number"],
+      default: '100%',
+      required: false,
+      description: "Set the width of each skeleton block.",
+    },
+   {
+      name: "height",
+      type: ["string","number"],
+      default: "inherit from font-size",
+      required: false,
+      description: "Set the height of each skeleton block.",
+    },
+    {
+      name: "inline",
+      type: ["booelan"],
+      default: "false",
+      required: false,
+      description: "Renders every block on their own line or in a single line.Note: By default, if a width is not specified, every items will fill the available space",
+    },
+    {
+      name: "enableAnimation",
+      type: ["booelan"],
+      default: "true",
+      required: false,
+      description: "Enable the shim animation and the announcement of the loading state.",
+    },
+  ]}
+/>
