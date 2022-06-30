@@ -1,6 +1,7 @@
 /* stylelint-disable selector-pseudo-class-no-unknown, selector-class-pattern */
 
 @import '@wonderflow/react-components/core/utils/vibrancy.css';
+@import '@wonderflow/react-components/core/utils/media.css';
 
 :where(.Code) {
 
@@ -27,15 +28,19 @@
     background: none;
     letter-spacing: 0.7px;
     font-family: token(--font-family-mono);
-    font-size: 1em;
     text-align: left;
     white-space: pre;
+    font-size: 0.9em;
     word-spacing: normal;
     word-break: normal;
     word-wrap: normal;
     line-height: 1.5;
     tab-size: 4;
     hyphens: none;
+
+    @media (--from-medium) {
+      font-size: 1em;
+    }
   }
 
   & *::selection {

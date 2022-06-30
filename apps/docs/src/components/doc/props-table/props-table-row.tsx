@@ -85,10 +85,10 @@ export const PropsTableRow = ({
       <div role="cell" className={styles.Cell}>
         {Array.isArray(type)
           ? type.map((type, i) => (
-            <>
+            <Fragment key={type}>
               {i !== 0 && '|'}
               <Text key={type} as="code" size={14}>{type}</Text>
-            </>
+            </Fragment>
           ))
           : <Text as="code" size={14}>{type}</Text>}
         {typeValue && (
