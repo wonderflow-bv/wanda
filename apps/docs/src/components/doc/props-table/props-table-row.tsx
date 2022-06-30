@@ -84,8 +84,11 @@ export const PropsTableRow = ({
       {type && (
       <div role="cell" className={styles.Cell}>
         {Array.isArray(type)
-          ? type.map(type => (
-            <Text key={type} as="code" size={14}>{type}</Text>
+          ? type.map((type, i) => (
+            <>
+              {i !== 0 && '|'}
+              <Text key={type} as="code" size={14}>{type}</Text>
+            </>
           ))
           : <Text as="code" size={14}>{type}</Text>}
         {typeValue && (
