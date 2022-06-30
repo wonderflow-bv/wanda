@@ -167,3 +167,19 @@ Adheres to the [`list` role requirements](https://www.w3.org/TR/wai-aria-1.2/#li
 It's important to keep in mind that if you put interactive and focusable elements inside the grid, you may create inconsistencies with keyboard navigation if you change the natural order of the items.
 
 Taking the example above, where we change the order of the items, the grid will be read as a list, but the order of the items will be different. If you you put focusable elements inside like buttons, you create an inconsistency between the visual order and the navigation order.
+
+
+<LiveArea fill={true} columns={4} >
+  <Grid rowGap={4} columnGap={4} colMinWidth="5rem">
+    <Grid.Item {...style}>1</Grid.Item>
+    <Grid.Item {...style}>2</Grid.Item>
+    <Grid.Item {...style}>3 <Button dimension="small">button</Button></Grid.Item>
+    <Grid.Item {...style}>4</Grid.Item>
+    <Grid.Item {...style}>5 <Button dimension="small">button</Button></Grid.Item>
+    <Grid.Item {...style}>6 <Button dimension="small">button</Button></Grid.Item>
+    <Grid.Item {...style}>7</Grid.Item>
+    <Grid.Item {...style}>8</Grid.Item>
+    <Grid.Item {...style}>9 <Button dimension="small">button</Button></Grid.Item>
+    <Grid.Item column="5 / span 2" row="1 / span 2" {...style}>10 <Button dimension="small">button</Button></Grid.Item>
+  </Grid>
+</LiveArea>
