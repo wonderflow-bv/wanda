@@ -16,7 +16,7 @@ export type InputGroupProps = {
   /**
    * Add a decoration element after the input.
    */
-  start?: ReactNode;
+  prefix?: ReactNode;
   /**
    * Add a decoration element before the input.
    */
@@ -24,18 +24,22 @@ export type InputGroupProps = {
   /**
    * Add an accessible label to the componsed input group
    */
-  label?: ReactNode;
+  suffix?: ReactNode;
   /**
    * Pass the dimension down to the imput element.
    */
   dimension?: 'small' | 'big' | 'regular';
+  /**
+   * Assign a label to the center field.
+   */
+  label?: string;
 }
 
 export const InputGroup = forwardRef<HTMLFieldSetElement, PropsWithClass<InputGroupProps>>(({
   className,
   input,
-  end,
-  start,
+  suffix,
+  prefix,
   label,
   dimension = 'regular',
   ...otherProps
@@ -59,12 +63,12 @@ export const InputGroup = forwardRef<HTMLFieldSetElement, PropsWithClass<InputGr
         inline
         ref={forwardedRef}
         className={clsx(styles.InputGroup, className)}
-        data-input-group-has-end={Boolean(end)}
-        data-input-group-has-start={!!start}
+        data-input-group-has-end={Boolean(suffix)}
+        data-input-group-has-start={!!prefix}
         {...otherProps}
       >
         <div className={styles.Start}>
-          {Children.map(start, child => isValidElement(child) && cloneElement(
+          {Children.map(prefix, child => isValidElement(child) && cloneElement(
             child,
             {
               dimension,
@@ -81,7 +85,7 @@ export const InputGroup = forwardRef<HTMLFieldSetElement, PropsWithClass<InputGr
           ))}
         </div>
         <div className={styles.End}>
-          {Children.map(end, child => isValidElement(child) && cloneElement(
+          {Children.map(suffix, child => isValidElement(child) && cloneElement(
             child,
             {
               dimension,

@@ -18,18 +18,18 @@ export default story;
 const Default: ComponentStory<typeof InputGroup> = args => (
   <Stack inline fill={false} hAlign="start" rowGap={32}>
     <InputGroup
-      end={<Button>Confirm</Button>}
+      suffix={<Button>Confirm</Button>}
       {...args}
     />
     <InputGroup
-      end={<Textfield disabled size={9} placeholder="@mail.com" />}
+      suffix={<Textfield disabled size={9} placeholder="@mail.com" />}
       {...args}
     />
     <InputGroup
       dimension="big"
       label="Sample label"
-      start={<Textfield readOnly size={6} defaultValue="https://" />}
-      end={(
+      prefix={<Textfield readOnly size={6} defaultValue="https://" />}
+      suffix={(
         <Select defaultValue={1}>
           <option value="1">.com</option>
           <option value="2">.it</option>

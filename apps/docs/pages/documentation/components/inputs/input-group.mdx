@@ -1,0 +1,105 @@
+import ComponentsNav from "@/data/components-nav";
+import { getLayoutProps } from "@/utils/get-layout-props";
+import { PropsTable } from "@/components/doc/props-table";
+import { KeyTable } from "@/components/shared/key-table";
+import tkns from "@wonderflow/tokens/platforms/web/tokens.json";
+
+export const getStaticProps = () =>
+  getLayoutProps({
+    layout: "component",
+    layoutProps: {
+      title: "Input group",
+      color: "indigo",
+      subtitle: "Decorate inputs with other elements to create a single field",
+      navigation: ComponentsNav,
+      features: [
+        "Keyboard accessible",
+        "Works with any inputs and buttons",
+        "Themes ready",
+      ]
+    }
+  });
+
+<LiveArea>
+  <InputGroup
+    label="Sample label"
+    prefix={<Textfield readOnly size={6} defaultValue="https://" />}
+    input={<Textfield type="text" defaultValue="sample-domain" />}
+    suffix={(
+      <Select defaultValue={1}>
+        <option value="1">.com</option>
+        <option value="2">.it</option>
+        <option value="3">.org</option>
+        <option value="4">.dev</option>
+        <option value="5">.io</option>
+      </Select>
+    )}
+  />
+</LiveArea>
+
+## Anatomy
+
+```tsx lines="1,4"
+import { InputGroup } from "@wonderflow/react-components";
+
+export default () => {
+  return <InputGroup prefix="" input="" suffix="" />;
+};
+```
+
+## API Reference
+
+<PropsTable
+  properties={[
+    {
+      name: "input",
+      type: ["ReactNode"],
+      default: "",
+      required: false,
+      description: "Pas the input element to decorate",
+    },
+    {
+      name: "prefix",
+      type: ["ReactNode"],
+      default: "",
+      required: false,
+      description: "Add a decoration element after the input.",
+    },
+    {
+      name: "suffix",
+      type: ["ReactNode"],
+      default: "",
+      required: false,
+      description: "Add a decoration element before the input.",
+    },
+    {
+      name: "label",
+      type: ["ReactNode"],
+      default: "",
+      required: false,
+      description: "Add an accessible label to the componsed input group",
+    },
+    {
+      name: "dimension",
+      type: ['enum'],
+      typeValue: "'small' | 'big' | 'regular'",
+      default: '"regular"',
+      required: false,
+      description:
+        "Pass the dimension down to the imput element.",
+    },
+  ]}
+/>
+
+## Accessibility
+
+### Keyboard interactions
+
+<KeyTable
+  data={[
+    {
+      name: "tab",
+      description: "Move focus on the elements inside the composition",
+    },
+  ]}
+/>
