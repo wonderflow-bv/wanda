@@ -52,6 +52,10 @@ export type StackProps = {
    * More info: https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction
    */
   direction?: 'row' | 'column' | 'row-reverse' | 'column-reverse';
+  /**
+   * Set a max width for the stack container.
+   */
+  maxWidth?: string;
 }
 
 type PolymorphicStack = Polymorphic.ForwardRefComponent<'div', StackProps>;
@@ -71,6 +75,7 @@ export const Stack = forwardRef(({
   hPadding,
   vPadding,
   style,
+  maxWidth,
   ...otherProps
 }, forwardedRef) => {
   const alignmentTemplate = (prop: string) => {
@@ -81,12 +86,13 @@ export const Stack = forwardRef(({
   };
 
   const computedStyle: CSSProperties = {
-    '--rGap': rowGap ? tkns.space[rowGap] : 0,
-    '--cGap': columnGap ? tkns.space[columnGap] : 0,
-    '--vAlign': vAlign && alignmentTemplate(vAlign),
-    '--hAlign': hAlign && alignmentTemplate(hAlign),
-    '--vPadding': vPadding ? tkns.space[vPadding] : 0,
-    '--hPadding': hPadding ? tkns.space[hPadding] : 0,
+    '--r-gap': rowGap ? tkns.space[rowGap] : 0,
+    '--c-gap': columnGap ? tkns.space[columnGap] : 0,
+    '--v-align': vAlign && alignmentTemplate(vAlign),
+    '--h-align': hAlign && alignmentTemplate(hAlign),
+    '--v-padding': vPadding ? tkns.space[vPadding] : 0,
+    '--h-padding': hPadding ? tkns.space[hPadding] : 0,
+    '--max-w': maxWidth,
   };
 
   return (
