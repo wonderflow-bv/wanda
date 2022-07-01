@@ -64,7 +64,7 @@ export const ComponentLayout: FCChildren<IPropsComponentLayout> = ({
           <Title level="5">
             Links
           </Title>
-          <Stack hAlign="start" rowGap={8} style={{ maxInlineSize: '12.11rem' }}>
+          <Stack hAlign="start" rowGap={8} style={{ maxInlineSize: '14.11rem' }}>
             <a
               href={`https://github.com/wonderflow-bv/wanda/tree/main/packages/react-components/src/components/${slugName}`}
               target="_blank"
