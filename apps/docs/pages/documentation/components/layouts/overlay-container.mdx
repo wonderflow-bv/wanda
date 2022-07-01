@@ -3,8 +3,8 @@ import { getLayoutProps } from "@/utils/get-layout-props";
 import { PropsTable } from "@/components/doc/props-table";
 import { KeyTable } from "@/components/shared/key-table";
 import { useState } from "react";
-import dynamic from "next/dynamic";
 import { useOverlayContext } from "@wonderflow/react-components"
+import dynamic from "next/dynamic";
 
 export const DynOverlayContainer = dynamic(
   import("@wonderflow/react-components").then((m) => m.OverlayContainer),

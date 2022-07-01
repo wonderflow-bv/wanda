@@ -3,6 +3,10 @@
     "tsconfig": {
       "versions": "*",
       "reason": "internal"
+    },
+    "ahooks": {
+      "versions": "*",
+      "reason": "internal"
     }
   }
 }

@@ -1,4 +1,4 @@
-import { Table, TableProps } from '@wonderflow/react-components';
+import { Table } from '@wonderflow/react-components';
 import { FC, useMemo } from 'react';
 
 import { Markdown } from '@/components/shared/markdown';
@@ -8,14 +8,18 @@ type KeyType = {
   description: string;
 }
 
-export const KeyTable: FC<TableProps<KeyType>> = ({
+type KeyTableProps = {
+  data: KeyType[];
+}
+
+export const KeyTable: FC<KeyTableProps> = ({
   data,
 }) => {
   const COLUMNS = useMemo(() => [
     {
       id: 'name',
       Header: 'Name',
-      accessor: (row: KeyType) => <Markdown>{`\`${row.name}\``}</Markdown>,
+      accessor: (row: KeyType) => <Markdown>{`<kbd>${row.name}</kbd>`}</Markdown>,
     },
     {
       id: 'description',

@@ -18,6 +18,7 @@ import {
   useRef,
   useState,
 } from 'react';
+import { mergeRefs } from 'react-merge-refs';
 import { usePopperTooltip } from 'react-popper-tooltip';
 import { useUIDSeed } from 'react-uid';
 
@@ -108,7 +109,7 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
   ...otherProps
 }, forwardedRef) => {
   const seedID = useUIDSeed();
-  const popoverRef = useRef<any>(forwardedRef);
+  const popoverRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const sameWidth = useMemo<Modifier<string, Record<string, unknown>>>(() => ({
@@ -172,7 +173,7 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
 
   return (
     <div
-      ref={popoverRef}
+      ref={mergeRefs([popoverRef, forwardedRef])}
       className={clsx(styles.Popover, className)}
       data-popover-has-focus={isFocusWithin}
     >
