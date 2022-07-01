@@ -3,8 +3,7 @@ import { getLayoutProps } from "@/utils/get-layout-props";
 import { PropsTable } from "@/components/doc/props-table";
 import { KeyTable } from "@/components/shared/key-table";
 import { useState } from "react";
-import { Menu } from "@wonderflow/react-components"
-import dynamic from "next/dynamic";
+import { Example, ControlledExample, CustomExample } from './examples.tsx'
 
 export const getStaticProps = () =>
   getLayoutProps({
@@ -33,6 +32,10 @@ export const getStaticProps = () =>
   });
 
 
+<LiveArea>
+  <Example />
+</LiveArea>
+
 ## Anatomy
 
 ```tsx lines="1,5-11"
@@ -55,33 +58,9 @@ export default () => {
 
 The `Popover` component can be controlled from the outside by using the `open` property. If set to `true`, the popover will be open once rendered, while passing `false` when it's open, it will force close.
 
-export const ControlledPopover = () => {
-  const [open, setOpen] = useState(false)
-  return (
-    <Popover
-      open={open}
-      placement="bottom"
-      onOpenChange={(state) => setOpen(state)}
-      trigger={
-        <Button onClick={() => setOpen(open => !open)}>
-          {`${open ? 'Close' : 'Open'} popover`}
-        </Button>
-      }
-    >
-      <div style={{ background: 'var(--global-vibrancy-background-hard)', backdropFilter: 'blur(10px)', border: '2px solid black', maxInlineSize: '30ch', padding: 24 }}>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-        Magni error unde sapiente beatae! Nostrum praesentium similique
-        veniam non ut nulla, incidunt velit et, placeat cupiditate, aliquid saepe. Atque, provident perferendis? <br /><br />
-        <Button kind="secondary" dimension="small" onClick={() => setOpen(val => !val)}>
-          Close popover
-        </Button>
-      </div>
-    </Popover>
-  );
-};
 
 <LiveArea>
-  <ControlledPopover />
+  <ControlledExample />
 </LiveArea>
 
 ```tsx lines="4,7-12,15-17"
@@ -182,7 +161,9 @@ The `Popover` component accepts custom elements as children. This means that you
 
 ### Example
 
-
+<LiveArea minHeight="400px">
+  <CustomExample />
+</LiveArea>
 
 ### Keyboard interactions
 

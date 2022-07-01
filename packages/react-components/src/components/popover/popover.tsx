@@ -109,8 +109,8 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
   ...otherProps
 }, forwardedRef) => {
   const seedID = useUIDSeed();
-  const popoverRef = useRef<HTMLDivElement>(null);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const popoverContainerRef = useRef<HTMLDivElement>(null);
 
   const sameWidth = useMemo<Modifier<string, Record<string, unknown>>>(() => ({
     name: 'sameWidth',
@@ -146,6 +146,7 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
     },
   }, {
     placement,
+    strategy: 'fixed',
     modifiers: [
       sameWidth,
       {
@@ -157,7 +158,7 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
     ],
   });
 
-  const isFocusWithin = useFocusWithin(popoverRef, {
+  const isFocusWithin = useFocusWithin(popoverContainerRef, {
     onBlur: (e) => {
       if (e.relatedTarget && visible) {
         setIsOpen(false);
@@ -173,7 +174,7 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
 
   return (
     <div
-      ref={mergeRefs([popoverRef, forwardedRef])}
+      ref={mergeRefs([popoverContainerRef, forwardedRef])}
       className={clsx(styles.Popover, className)}
       data-popover-has-focus={isFocusWithin}
     >
