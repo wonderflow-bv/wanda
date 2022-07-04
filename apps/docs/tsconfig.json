@@ -21,6 +21,9 @@
       }
     ],
     "paths": {
+      "@/src/*": [
+        "src/*"
+      ],
       "@/styles/*": [
         "src/styles/*"
       ],

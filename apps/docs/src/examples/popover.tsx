@@ -62,7 +62,7 @@ export const ControlledExample = () => {
 };
 
 export const CustomExample = () => (
-  <Popover trigger={<Button>Open popover</Button>}>
+  <Popover trigger={<Button>Open popover</Button>} placement="bottom">
     <>
       <p>Custom element</p>
       <Button autoFocus dimension="small" kind="flat">
