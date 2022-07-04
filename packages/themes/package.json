@@ -42,10 +42,10 @@
     "url": "https://github.com/wonderflow-bv/wanda/issues"
   },
   "devDependencies": {
-    "@wonderflow/tokens": "10.0.0-next.3",
+    "@wonderflow/tokens": "*",
     "fs-extra": "10.1.0",
     "style-dictionary": "3.7.1",
-    "tsconfig": "1.0.0-next.0",
+    "tsconfig": "*",
     "uvu": "0.5.4",
     "yargs": "17.5.1"
   }
