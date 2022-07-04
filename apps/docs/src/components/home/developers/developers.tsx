@@ -41,7 +41,7 @@ export const Developers: FCClass = ({
               </Title>
             </Stack>
 
-            <Tab className={styles.Tab} defaultValue={activeTab} onValueChange={setActiveTab}>
+            <Tab dimension="big" className={styles.Tab} defaultValue={activeTab} onValueChange={setActiveTab}>
               <Tab.Panel label="Components" symbol={matches.large ? 'grid' : undefined} value="components">
                 <Stack rowGap={32} vPadding={56} hAlign="start">
                   <Text size={22} dimmed={6}>
