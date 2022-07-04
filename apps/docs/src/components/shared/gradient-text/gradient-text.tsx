@@ -2,8 +2,8 @@ import clsx from 'clsx';
 
 import styles from './gradient-text.module.css';
 
-type GradientTextProps = {
-  color?: 'rainbow' | 'indigo' | 'orange';
+export type GradientTextProps = {
+  color?: 'gray' | 'cyan' | 'green' | 'purple' | 'yellow' | 'red' | 'blue' | 'magenta' | 'violet' | 'indigo' | 'mint' | 'dipsy' | 'salmon';
 }
 
 export const GradientText: FCChildrenClass<GradientTextProps> = ({

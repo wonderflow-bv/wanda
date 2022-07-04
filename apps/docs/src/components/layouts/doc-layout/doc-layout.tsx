@@ -98,7 +98,7 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
             </div>
 
             <main className={styles.Content}>
-              <DocHeader preTitle={getPretitle} title={title} subtitle={subtitle} />
+              <DocHeader preTitle={getPretitle} title={title} subtitle={subtitle} color={color} />
 
               {children}
 

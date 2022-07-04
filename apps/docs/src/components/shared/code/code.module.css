@@ -58,7 +58,7 @@
 
     @nest [data-code-block-has-toolbar='true'] & {
       padding-top: 0;
-      margin-top: token(--space-40);
+      margin-top: calc(token(--space-32) + token(--space-4));
     }
   }
 
