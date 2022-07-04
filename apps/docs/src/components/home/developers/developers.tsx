@@ -35,7 +35,7 @@ export const Developers: FCClass = ({
           <Stack rowGap={56} fill={false} className={styles.Content}>
 
             <Stack rowGap={4}>
-              <Text weight="bold"><GradientText color="orange">For developers</GradientText></Text>
+              <Text weight="bold"><GradientText color="yellow">For developers</GradientText></Text>
               <Title as="h2" level="2" maxWidth="16ch">
                 <TextReveal>Full toolchain to build digital experiences.</TextReveal>
               </Title>
