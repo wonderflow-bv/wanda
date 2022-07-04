@@ -10,6 +10,7 @@ const story: ComponentMeta<typeof Tab> = {
   component: Tab,
   args: {
     defaultValue: '1',
+    dimension: 'regular',
   },
 };
 export default story;

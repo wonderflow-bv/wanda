@@ -5,7 +5,7 @@ import {
 } from 'react';
 import { useUIDSeed } from 'react-uid';
 
-import { Button } from '@/components';
+import { Button, Symbol } from '@/components';
 
 import styles from './tab.module.css';
 import { TabPanel } from './tabs-panel';
@@ -25,7 +25,7 @@ export type TabProps = PropsWithChildren<PropsWithClass> & {
   onValueChange?: TabsPrimitive.TabsProps['onValueChange'];
   /**
    * The direction of navigation between toolbar items.
-   * @defaultValue ltr
+   * @default ltr
    */
   dir?: TabsPrimitive.TabsProps['dir'];
   /**
@@ -35,9 +35,15 @@ export type TabProps = PropsWithChildren<PropsWithClass> & {
   activationMode?: TabsPrimitive.TabsProps['activationMode'];
   /**
    * When true, keyboard navigation will loop from last tab to first, and vice versa.
-   * @defaultValue true
+   * @default true
    */
   loop?: TabsPrimitive.TabsListProps['loop'];
+  /**
+   * Set the tabs sizes
+   *
+   * @default "regular"
+   */
+  dimension?: 'regular' | 'big';
 };
 
 export const Tab = ({
@@ -47,6 +53,7 @@ export const Tab = ({
   defaultValue,
   value,
   loop,
+  dimension = 'regular',
   ...otherProps
 }: TabProps) => {
   const [activeItem, setActiveItem] = useState<string>(defaultValue ?? value ?? '');
@@ -74,9 +81,11 @@ export const Tab = ({
               value={child.props.value}
               disabled={child.props.disabled}
               className={styles.Trigger}
+              data-tab-dimension={dimension}
               asChild
             >
-              <Button kind="flat" dimension="big" icon={child.props.symbol}>
+              <Button kind="flat" dimension="big">
+                <Symbol source={child.props.symbol} dimension={dimension === 'big' ? 24 : 16} weight={dimension === 'big' ? 'duotone' : 'solid'} />
                 {child.props.label}
                 {(child.props.value === activeItem) && (
                   <m.span className={styles.Highlight} layoutId={uid('tab-highlight')} />
