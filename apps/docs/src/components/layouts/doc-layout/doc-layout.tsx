@@ -1,6 +1,6 @@
 import {
   Button,
-  Container, Drawer, OverlayContainer, Separator, Stack, useResponsiveContext,
+  Container, ContainerProps, Drawer, OverlayContainer, Separator, Stack, useResponsiveContext,
 } from '@wonderflow/react-components';
 import clsx from 'clsx';
 import { domMax, LazyMotion } from 'framer-motion';
@@ -27,6 +27,7 @@ export interface IPropsDocLayout extends Pick<DocHeaderProps, 'title' | 'subtitl
   color?: 'gray' | 'cyan' | 'green' | 'purple' | 'yellow' | 'red' | 'blue' | 'magenta' | 'violet' | 'indigo' | 'mint' | 'dipsy' | 'salmon';
   showToc?: boolean;
   navigation?: NavigationMenu;
+  contentSize?: ContainerProps['dimension'];
 }
 
 export const DocLayout: FCChildren<IPropsDocLayout> = ({
@@ -36,6 +37,7 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
   subtitle,
   navigation,
   showToc = true,
+  contentSize = 'medium',
 }) => {
   const [staticHeadings, setStaticHeadings] = useState<HeadingType[]>([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -72,7 +74,7 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
       <Header position="fixed" />
       <span className={styles.Glow} />
       <LazyMotion features={domMax}>
-        <Container dimension="large" style={dynamicStyle}>
+        <Container style={dynamicStyle}>
           <Stack direction={matches.large ? 'row' : undefined} columnGap={56}>
 
             <div className={styles.Sidebar}>
@@ -97,7 +99,7 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
               </Stack>
             </div>
 
-            <main className={styles.Content}>
+            <Container as="main" dimension={contentSize} className={styles.Content}>
               <DocHeader preTitle={getPretitle} title={title} subtitle={subtitle} color={color} />
 
               {children}
@@ -105,14 +107,16 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
               <Stack fill={false} vPadding={24} rowGap={24}>
                 <Footer compact />
               </Stack>
-            </main>
+            </Container>
 
-            {(showToc && (headings.length > 0 || staticHeadings.length > 0)) && (
-              <div className={clsx(styles.Sidebar, styles.Toc)}>
-                {headings.length === 0 && <Toc headings={staticHeadings} />}
-                {headings.length > 0 && <Toc headings={headings} />}
-              </div>
-            )}
+            <div className={clsx(styles.Sidebar, styles.Toc)}>
+              {(showToc && (headings.length > 0 || staticHeadings.length > 0)) && (
+                <>
+                  {headings.length === 0 && <Toc headings={staticHeadings} />}
+                  {headings.length > 0 && <Toc headings={headings} />}
+                </>
+              )}
+            </div>
           </Stack>
         </Container>
       </LazyMotion>

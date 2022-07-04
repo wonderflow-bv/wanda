@@ -12,7 +12,7 @@
     radial-gradient(circle at 84% 6%, rgb(238 0 0 / 5%) 0%, rgb(238 0 0 / 0%) 40%);
 }
 
-.Content {
+.Content.Content {
   padding-top: token(--space-56);
 }
 

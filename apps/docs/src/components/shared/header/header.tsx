@@ -48,7 +48,7 @@ export const Header: FCClass<HeaderProps> = ({
           '--bg-opacity': `${Math.min(Math.max(scroll?.top ?? 0, 0), 70)}%`,
         }}
       >
-        <Container dimension="large">
+        <Container>
           <Stack
             fill={false}
             direction="row"

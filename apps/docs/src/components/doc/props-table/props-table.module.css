@@ -1,9 +1,14 @@
+@import '@wonderflow/react-components/core/utils/vibrancy.css';
+
 .TableProps {
   inline-size: 100%;
 }
 
 .Row {
-  border: 1px solid var(--dimmed-1);
+
+  @mixin vibrancy;
+
+  background: var(--global-vibrancy-background-soft);
   border-radius: token(--radius-8);
   transition: background-color 0.2s ease-out;
   line-height: initial;

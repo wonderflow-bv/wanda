@@ -10,6 +10,7 @@
   block-size: 100%;
   position: relative;
   z-index: 1;
+  border: 1px dashed var(--dimmed-2);
 
   @media (--from-medium) {
     padding: token(--space-40) token(--space-64) token(--space-40);
