@@ -33,7 +33,7 @@ export const Header: FCClass<HeaderProps> = ({
   ...otherProps
 }) => {
   const { matches } = useResponsiveContext();
-  const scroll = useScroll(() => document, val => val.top >= 0 && val.top < 1000);
+  const scroll = useScroll(() => document, val => val.top >= 0 && val.top < 500);
 
   return (
     <header
