@@ -1,6 +1,7 @@
 import { MDXProvider } from '@mdx-js/react';
 import type {
-  ListItemProps, ListProps, SeparatorProps, TextProps, TitleProps,
+  GridItemProps,
+  ListItemProps, ListProps, MenuItemCheckboxProps, MenuItemProps, SeparatorProps, TextProps, TitleProps,
 } from '@wonderflow/react-components';
 import * as Components from '@wonderflow/react-components';
 import Link, { LinkProps } from 'next/link';
@@ -25,6 +26,10 @@ export const MDX_COMPONENTS = {
   ol: ({ children, ...props }: ListProps) => <Components.List as="ol" {...props} />,
   li: ({ children, ...props }: ListItemProps) => <Components.List.Li markerColor="var(--dimmed-5)" {...props} />,
   hr: (props: SeparatorProps) => <Components.Separator {...props} />,
+  GridItem: (props: GridItemProps) => <Components.Grid.Item {...props} />,
+  MenuItem: (props: MenuItemProps) => <Components.Menu.Item {...props} />,
+  MenuItemCheckbox: (props: MenuItemCheckboxProps) => <Components.Menu.ItemCheckbox {...props} />,
+  MenuSeparator: (props: Record<string, unknown>) => <Components.Menu.Separator {...props} />,
   LiveArea: (props: LiveAreaProps) => <LiveArea {...props} />,
   ...Object.keys(Components).reduce((acc, name) => ({
     ...acc,

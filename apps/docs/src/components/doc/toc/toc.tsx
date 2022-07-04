@@ -4,6 +4,8 @@ import {
 
 import { HeadingType } from '@/hooks/table-of-content';
 
+import styles from './toc.module.css';
+
 type TocProps = {
   headings: HeadingType[];
 }
@@ -18,12 +20,12 @@ export const Toc = ({
         <List dimension="small" hideMarker>
           {headings.map(heading => (
             <Stack as={List.Li} key={heading.id} vPadding={4}>
-              <Text as="a" href={`#${heading.id}`} dimmed={6} weight="bold">{heading.title}</Text>
+              <Text as="a" className={styles.Link} href={`#${heading.id}`} dimmed={6} weight="bold">{heading.title}</Text>
               {(heading.items && heading.items.length > 0) && (
               <List dimension="small">
                 {heading.items?.map(child => (
                   <List.Li key={child.id} marker="chevron-right" markerColor="var(--dimmed-5)">
-                    <Text as="a" href={`#${child.id}`} dimmed={6}>{child.title}</Text>
+                    <Text as="a" className={styles.Link} href={`#${child.id}`} dimmed={6}>{child.title}</Text>
                   </List.Li>
                 ))}
               </List>

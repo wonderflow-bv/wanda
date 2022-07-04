@@ -2,7 +2,6 @@ import ComponentsNav from "@/data/components-nav";
 import { getLayoutProps } from "@/utils/get-layout-props";
 import { PropsTable } from "@/components/doc/props-table";
 import { KeyTable } from "@/components/shared/key-table";
-import { Menu } from '@wonderflow/react-components'
 import { useState } from 'react'
 
 export const getStaticProps = () =>
@@ -26,33 +25,33 @@ export const Example = () => {
   const [checked, setChecked] = useState(false);
   return (
     <Menu style={{ inlineSize: '100%', maxInlineSize: 400 }}>
-      <Menu.Item
+      <MenuItem
         value="1"
         autoFocus
         decoration={<Chip dimension="small">Decoration</Chip>}
         icon="user"
       >
       Item option 1
-      </Menu.Item>
-      <Menu.ItemCheckbox
+      </MenuItem>
+      <MenuItemCheckbox
         value="2"
         onClick={() => setChecked(val => !val)}
         icon={checked ? 'check' : undefined}
         checked={checked}
       >
         Checkable option 2
-      </Menu.ItemCheckbox>
-      <Menu.Separator />
-      <Menu.Item
+      </MenuItemCheckbox>
+      <MenuSeparator />
+      <MenuItem
         value="3"
         decoration={<Text size={14} sentiment="danger">Danger</Text>}
         icon="right-from-bracket"
       >
         Item option 3
-      </Menu.Item>
-      <Menu.Item value="4" disabled icon="right-from-bracket">
+      </MenuItem>
+      <MenuItem value="4" disabled icon="right-from-bracket">
         Disabled option 4
-      </Menu.Item>
+      </MenuItem>
     </Menu>
   )
 };

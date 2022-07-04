@@ -14,21 +14,11 @@ const UsageNav: NavigationMenu = [
         label: 'Accessibility',
         target: '',
       },
-      {
-        path: '/documentation/usage/learn',
-        label: 'Learn',
-        target: '',
-      },
-      {
-        path: '/documentation/usage/release-notes',
-        label: 'Release notes',
-        target: '',
-      },
-      {
-        path: '/documentation/usage/resources',
-        label: 'Resources',
-        target: '',
-      },
+      // {
+      //   path: '/documentation/usage/learn',
+      //   label: 'Learn',
+      //   target: '',
+      // }
     ],
   },
   {
