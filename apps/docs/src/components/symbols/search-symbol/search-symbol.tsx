@@ -73,12 +73,12 @@ export const SearchSymbol = () => {
   }, [router]);
 
   return (
-    <Stack direction={matches.medium ? 'row-reverse' : 'column'} columnGap={24} rowGap={24} vAlign="start" className={styles.SearchSymbol}>
+    <Stack direction={matches.extraLarge ? 'row-reverse' : 'column'} columnGap={24} rowGap={24} vAlign="start" className={styles.SearchSymbol}>
       <Card
         vibrant
         bordered
         dimmed={0}
-        radius={matches.medium ? 16 : undefined}
+        radius={matches.extraLarge ? 16 : undefined}
         padding={24}
         className={styles.Tools}
       >

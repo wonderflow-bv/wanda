@@ -1,0 +1,48 @@
+.ColorPalette {
+  position: relative;
+
+  & ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-radius: token(--radius-4);
+    z-index: 0;
+  }
+}
+
+.Drop {
+  block-size: token(--space-64);
+  padding: token(--space-8) token(--space-16);
+  color: hsl(token(--color-support-black));
+  transform-origin: 100% 50%;
+  transition: transform 700ms token(--easing-standard);
+
+  &:first-of-type {
+    border-radius: token(--radius-4) token(--radius-4) 0 0;
+  }
+
+  &:last-of-type {
+    border-radius: 0 0 token(--radius-4) token(--radius-4);
+  }
+
+  &.White {
+    color: hsl(token(--color-support-white));
+  }
+
+  &:hover {
+    transform: scale(1.02);
+    z-index: 1;
+    transition: transform token(--duration-100) token(--easing-standard);
+  }
+}
+
+.ColorValue {
+  opacity: 0%;
+  transition: opacity 50ms token(--easing-standard);
+  min-inline-size: 130px;
+  text-align: right;
+
+  @nest .Drop:hover & {
+    opacity: 100%;
+  }
+}

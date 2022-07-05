@@ -19,7 +19,7 @@
     background-color: var(--global-background);
   }
 
-  @media (--from-medium) {
+  @media (--from-extra-large) {
     margin: unset;
     top: token(--space-96);
     max-width: 30ch;

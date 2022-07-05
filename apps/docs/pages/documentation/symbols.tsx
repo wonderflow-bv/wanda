@@ -19,6 +19,5 @@ export const getStaticProps = () => getLayoutProps({
     subtitle: 'Over 360 vector symbols ready to use in any project',
     color: 'dipsy',
     showToc: false,
-    contentSize: 'large',
   },
 });
