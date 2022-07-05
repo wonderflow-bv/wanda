@@ -5,7 +5,7 @@ import type {
 } from '@wonderflow/react-components';
 import * as Components from '@wonderflow/react-components';
 import Link, { LinkProps } from 'next/link';
-import { PropsWithChildren } from 'react';
+import { ImgHTMLAttributes, PropsWithChildren } from 'react';
 
 import { DocLayout, IPropsDocLayout } from '@/components/layouts/doc-layout';
 import { Code, CodeProps } from '@/components/shared/code';
@@ -16,6 +16,7 @@ export interface IPropsMDXLayout extends IPropsDocLayout {}
 
 export const MDX_COMPONENTS = {
   pre: (props: CodeProps) => <Code {...props} />,
+  img: (props: ImgHTMLAttributes<HTMLImageElement>) => <img alt={props.alt ?? ''} loading="lazy" decoding="async" {...props} />,
   h1: (props: TitleProps) => <Components.Title as="h1" level="2" anchor {...props} />,
   h2: (props: TitleProps) => <Components.Title as="h2" level="3" anchor {...props} />,
   h3: (props: TitleProps) => <Components.Title as="h3" level="4" anchor {...props} />,
