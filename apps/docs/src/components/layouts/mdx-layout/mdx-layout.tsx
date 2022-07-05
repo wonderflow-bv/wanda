@@ -29,6 +29,7 @@ export const MDX_COMPONENTS = {
   hr: (props: SeparatorProps) => <Components.Separator {...props} />,
   GridItem: (props: GridItemProps) => <Components.Grid.Item {...props} />,
   MenuItem: (props: MenuItemProps) => <Components.Menu.Item {...props} />,
+  ListLi: (props: ListItemProps) => <Components.List.Li {...props} />,
   MenuItemCheckbox: (props: MenuItemCheckboxProps) => <Components.Menu.ItemCheckbox {...props} />,
   MenuSeparator: (props: Record<string, unknown>) => <Components.Menu.Separator {...props} />,
   LiveArea: (props: LiveAreaProps) => <LiveArea {...props} />,
