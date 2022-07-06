@@ -1,0 +1,69 @@
+import UsageNav from "@/data/usage-nav";
+import { getLayoutProps } from "@/utils/get-layout-props";
+
+export const getStaticProps = () =>
+  getLayoutProps({
+    layout: "mdx",
+    layoutProps: {
+      title: "Brand",
+      color: "mint",
+      subtitle:
+        "Wonderflow's digital identity",
+      navigation: UsageNav
+    }
+  });
+
+Wanda relies on the Wonderflow's design language and principles and it helps designers and developers to keep brand consistency across projects and design assets. There are many resources shared across the teams like company logos, assets and icons. Here you can find everything related to the Wonderflow brand.
+
+## Anatomy
+
+Optical kerning, refined weight and defined clear space, as well as delineated placement in relation to other content help to make it as instantly recognizable as possible at all sizes and in all contexts.
+
+![](https://figmage.com/images/Www9i7pBGaNY-DJ_Euv61.png)
+
+
+<Grid columnGap={24} rowGap={24} filling="fit">
+  <GridItem>
+    ![](https://figmage.com/images/6TYNZmGDnhTKIoK93305s.png)
+  </GridItem>
+
+  <GridItem>
+    ![](https://figmage.com/images/uDKjHWHRqkNJxMYHTesNp.png)
+  </GridItem>
+
+  <GridItem>
+    ![](https://figmage.com/images/fhRt7xUOVGrgjwF6ITPcm.png)
+  </GridItem>
+</Grid>
+
+## Logo formats
+
+At Wonderflow we use three different version of the company logo based on the situation.
+
+### Full
+
+The full logo is used when the brand communication is strong and prominent. It needs a big white space area around in order to keep the information readable.
+
+![](https://figmage.com/images/8TEmPoQNz7U9b47cEDI7T.png)
+
+### Mark
+
+The mark logo is often used when the brand identity should not be so prominent and when the is not enought room for the full logo.
+
+<Stack direction="row" columnGap={24}>
+  ![](https://figmage.com/images/LCY9eIA73muv30iuDZ7K8.png)
+</Stack>
+
+### Icons
+
+Icons are versions of the mark logo. The stroke is thicker in order to keep readability on really small sizes. They are used as tab icon inside web pages.
+
+<Stack direction="row" columnGap={24}>
+  ![](https://figmage.com/images/WLqpiNFCScBcb-WmZdFKO.png)
+</Stack>
+
+## Resources
+
+Check the [resource page][resources] to download all the Wonderflow's assets.
+
+[resources]: /get-started/resources

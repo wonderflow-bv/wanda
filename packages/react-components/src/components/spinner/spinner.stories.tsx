@@ -1,23 +1,24 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Spinner } from './spinner'
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+
+import { Spinner } from './spinner';
 
 const story: ComponentMeta<typeof Spinner> = {
   title: 'Components/Loading/Spinner',
   component: Spinner,
   args: {
-    dimension: 'big'
+    dimension: 'big',
   },
   argTypes: {
     onClick: { action: 'clicked' },
     dimension: {
       options: ['small', 'regular', 'big'],
-      control: { type: 'radio' }
-    }
-  }
-}
+      control: { type: 'radio' },
+    },
+  },
+};
 
-export default story
+export default story;
 
-const Template: ComponentStory<typeof Spinner> = (args) => <Spinner {...args} />
+const Template: ComponentStory<typeof Spinner> = args => <Spinner {...args} />;
 
-export const Default = Template.bind({})
+export const Default = Template.bind({});

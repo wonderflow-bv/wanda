@@ -1,0 +1,139 @@
+import ComponentsNav from "@/data/components-nav";
+import { getLayoutProps } from "@/utils/get-layout-props";
+import { PropsTable } from "@/components/doc/props-table";
+import { KeyTable } from "@/components/shared/key-table";
+import { Autocomplete } from "@wonderflow/react-components";
+
+export const getStaticProps = () =>
+  getLayoutProps({
+    layout: "component",
+    layoutProps: {
+      title: "Selection controls",
+      color: "indigo",
+      subtitle: "Content selection and toggles",
+      navigation: ComponentsNav,
+      features: [
+        "Keyboard accessible",
+        "Multiple sizes",
+        "Themes ready"
+      ],
+      links: [
+        {
+          label: "ARIA checkbox design",
+          url: "https://www.w3.org/TR/wai-aria-1.2/#checkbox",
+        },
+        {
+          label: "ARIA radio design",
+          url: "https://www.w3.org/TR/wai-aria-1.2/#radio",
+        },
+        {
+          label: "ARIA checkbox auth.",
+          url: "https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/",
+        },
+        {
+          label: "ARIA radio auth.",
+          url: "https://www.w3.org/WAI/ARIA/apg/patterns/radiobutton/",
+        },
+      ]
+    }
+  });
+
+<LiveArea direction="row">
+  <>
+    <Checkbox defaultChecked />
+    <Radio defaultChecked />
+    <Toggle defaultChecked />
+  </>
+</LiveArea>
+
+
+## Anatomy
+
+```tsx lines="1,6-8"
+import { Checkbox, Radio, Toggle } from "@wonderflow/react-components";
+
+export default () => {
+  return (
+    <>
+      <Checkbox />
+      <Radio />
+      <Toggle />
+    </>
+  );
+};
+```
+
+## API Reference
+
+<PropsTable
+  properties={[
+    {
+      name: "disabled",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      description: "Set disabled state. The component is not interactive and grayed out.",
+    },
+    {
+      name: "indeterminate",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      description: "Set the indeterminate state. This state is used to indicate that the checkbox is partially checked. Is used when a subset of the options are selected but not all of them.",
+    },
+    {
+      name: "dimension",
+      type: ['enum'],
+      typeValue: "'regular' | 'small'",
+      default: 'big',
+      required: false,
+      description: "Set the size of the element.",
+    },
+    {
+      name: "onChange",
+      type: ["enum"],
+      typeValue: "(event: ChangeEvent<HTMLInputElement>) => void",
+      default: "",
+      required: false,
+      description: "Callback function to be called when is toggled. A parameter `ChangeEvent<HTMLInputElement>` is passed with the event details",
+    },
+  ]}
+/>
+
+## Accessibility
+
+`<Checkbox />` adheres to the [`checkbox` role requirements](https://www.w3.org/TR/wai-aria-1.2/#checkbox).
+`<Radio />` adheres to the [`radio` role requirements](https://www.w3.org/TR/wai-aria-1.2/#radio).
+
+Both components require an associated `label` element and `id` to describes the field.
+
+### Keyboard interactions
+
+<KeyTable
+  data={[
+    {
+      name: "tab",
+      description: "Move focus on the element or outside",
+    },
+    {
+      name: "space",
+      description: "Activate or deactivate the element",
+    },
+    {
+      name: "arrowDown",
+      description: "Inside radio groups, moves focus on the next element",
+    },
+    {
+      name: "arrowUp",
+      description: "Inside radio groups, moves focus on the previous element",
+    },
+    {
+      name: "arrowLeft",
+      description: "Inside radio groups, moves focus on the previous element",
+    },
+    {
+      name: "arrowRight",
+      description: "Inside radio groups, moves focus on the next element",
+    },
+  ]}
+/>

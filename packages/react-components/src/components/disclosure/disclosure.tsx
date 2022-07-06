@@ -1,12 +1,16 @@
+import clsx from 'clsx';
+import { domMax, LazyMotion, m } from 'framer-motion';
 import {
   CSSProperties,
   DetailsHTMLAttributes, forwardRef,
-  ReactNode, useCallback, useEffect, useRef, useState
-} from 'react'
-import clsx from 'clsx'
-import styles from './disclosure.module.css'
-import { Text, TextProps, Icon, IconProps } from '@/components'
-import { domMax, LazyMotion, m } from 'framer-motion'
+  ReactNode, useCallback, useEffect, useRef, useState,
+} from 'react';
+
+import {
+  Symbol, SymbolProps, Text, TextProps,
+} from '@/components';
+
+import styles from './disclosure.module.css';
 
 export type DisclosureProps = DetailsHTMLAttributes<HTMLDetailsElement> & {
   /**
@@ -58,41 +62,41 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
   onToggle,
   ...otherProps
 }, forwardedRef) => {
-  const ref = useRef<any>(forwardedRef)
-  const [isOpen, setIsOpen] = useState<boolean>(open)
+  const ref = useRef<any>(forwardedRef);
+  const [isOpen, setIsOpen] = useState<boolean>(open);
 
   useEffect(() => {
     if (ref.current) {
-      ref.current.open = open
+      ref.current.open = open;
     }
-  }, [expandable, open])
+  }, [expandable, open]);
 
   const handleOpen = useCallback(
     () => () => {
-      if (ref.current && expandable) setIsOpen(ref.current.open)
-      expandable && onToggle?.(ref.current.open)
+      if (ref.current && expandable) setIsOpen(ref.current.open);
+      if (expandable) onToggle?.(ref.current.open);
     },
-    [expandable, onToggle]
-  )
+    [expandable, onToggle],
+  );
 
   const dynamicStyle: CSSProperties = {
-    '--max-height': contentMaxHeight
-  }
+    '--max-height': contentMaxHeight,
+  };
 
   const sizes = {
     small: {
       summary: 16,
-      icon: 12
+      icon: 12,
     },
     regular: {
       summary: 18,
-      icon: 18
+      icon: 18,
     },
     big: {
       summary: 22,
-      icon: 24
-    }
-  }
+      icon: 24,
+    },
+  };
 
   const renderContent = useCallback(
     () => (
@@ -109,8 +113,8 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
         </m.div>
       </LazyMotion>
     ),
-    [children, contentMaxHeight, padding, isOpen]
-  )
+    [children, contentMaxHeight, padding, isOpen],
+  );
 
   return (
     <details
@@ -120,7 +124,6 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
       data-disclosure-dimension={dimension}
       data-disclosure-expandable={expandable}
       onToggle={handleOpen()}
-      aria-expanded={isOpen ? 'true' : 'false'}
       ref={ref}
       open={isOpen}
       {...otherProps}
@@ -129,23 +132,22 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
         as="summary"
         responsive={false}
         className={styles.Summary}
-        aria-expanded={isOpen}
         tabIndex={!expandable ? -1 : 0}
         size={dimension ? sizes[dimension].summary as TextProps['size'] : undefined}
         weight="bold"
       >
         {summary}
         {expandable && (
-          <Icon
+          <Symbol
             className={styles.ExpandIcon}
             source="chevron-right"
-            dimension={sizes[dimension].icon as IconProps['dimension']}
+            dimension={sizes[dimension].icon as SymbolProps['dimension']}
           />
         )}
       </Text>
       {renderContent()}
     </details>
-  )
-})
+  );
+});
 
-Disclosure.displayName = 'Disclosure'
+Disclosure.displayName = 'Disclosure';

@@ -1,0 +1,15 @@
+.Spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+.Iframe {
+  background: transparent;
+  width: 100%;
+  height: calc(100vh - token(--space-72) - 2px);
+  margin-bottom: -15px;
+  border: 0;
+}

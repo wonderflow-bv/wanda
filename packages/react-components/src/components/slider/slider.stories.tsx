@@ -1,5 +1,6 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Slider } from './slider'
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+
+import { Slider } from './slider';
 
 const story: ComponentMeta<typeof Slider> = {
   title: 'Components/Inputs/Slider',
@@ -11,27 +12,27 @@ const story: ComponentMeta<typeof Slider> = {
     defaultValue: 0,
     showValues: false,
     dimension: 'regular',
-    disabled: false
+    disabled: false,
   },
   argTypes: {
     showValues: {
       options: [true, false],
-      control: { type: 'inline-radio' }
-    }
-  }
-}
+      control: { type: 'inline-radio' },
+    },
+  },
+};
 
-export default story
+export default story;
 
-const Template: ComponentStory<typeof Slider> = (args) => <Slider {...args} />
+const Template: ComponentStory<typeof Slider> = args => <Slider {...args} />;
 
-export const Default = Template.bind({})
-export const WithValues = Template.bind({})
+export const Default = Template.bind({});
+export const WithValues = Template.bind({});
 WithValues.args = {
-  showValues: true
-}
-export const WithIcons = Template.bind({})
+  showValues: true,
+};
+export const WithIcons = Template.bind({});
 WithIcons.args = {
   iconMin: 'moon',
-  iconMax: 'sun-bright'
-}
+  iconMax: 'sun-bright',
+};

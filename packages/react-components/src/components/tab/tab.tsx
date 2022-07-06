@@ -1,14 +1,14 @@
-import * as TabsPrimitive from '@radix-ui/react-tabs'
-import { domMax, LazyMotion, m } from 'framer-motion'
+import * as TabsPrimitive from '@radix-ui/react-tabs';
+import { domMax, LazyMotion, m } from 'framer-motion';
 import {
-  Children, isValidElement, PropsWithChildren, useCallback, useState
-} from 'react'
+  Children, isValidElement, PropsWithChildren, useCallback, useState,
+} from 'react';
+import { useUIDSeed } from 'react-uid';
 
-import { Button } from '@/components'
+import { Button, Symbol } from '@/components';
 
-import styles from './tab.module.css'
-import { TabPanel } from './tabs-panel'
-import { useUIDSeed } from 'react-uid'
+import styles from './tab.module.css';
+import { TabPanel } from './tabs-panel';
 
 export type TabProps = PropsWithChildren<PropsWithClass> & {
   /**
@@ -25,7 +25,7 @@ export type TabProps = PropsWithChildren<PropsWithClass> & {
   onValueChange?: TabsPrimitive.TabsProps['onValueChange'];
   /**
    * The direction of navigation between toolbar items.
-   * @defaultValue ltr
+   * @default ltr
    */
   dir?: TabsPrimitive.TabsProps['dir'];
   /**
@@ -35,9 +35,15 @@ export type TabProps = PropsWithChildren<PropsWithClass> & {
   activationMode?: TabsPrimitive.TabsProps['activationMode'];
   /**
    * When true, keyboard navigation will loop from last tab to first, and vice versa.
-   * @defaultValue true
+   * @default true
    */
   loop?: TabsPrimitive.TabsListProps['loop'];
+  /**
+   * Set the tabs sizes
+   *
+   * @default "regular"
+   */
+  dimension?: 'regular' | 'big';
 };
 
 export const Tab = ({
@@ -45,24 +51,27 @@ export const Tab = ({
   children,
   onValueChange,
   defaultValue,
+  value,
   loop,
+  dimension = 'regular',
   ...otherProps
 }: TabProps) => {
-  const [activeItem, setActiveItem] = useState<string>(defaultValue ?? '')
-  const uid = useUIDSeed()
+  const [activeItem, setActiveItem] = useState<string>(defaultValue ?? value ?? '');
+  const uid = useUIDSeed();
   const handleOnVlaueChange = useCallback(
     (value: string) => {
-      onValueChange?.(value)
-      setActiveItem(value)
+      onValueChange?.(value);
+      setActiveItem(value);
     },
-    [onValueChange]
-  )
+    [onValueChange],
+  );
 
   return (
     <TabsPrimitive.Root
       defaultValue={defaultValue}
       onValueChange={handleOnVlaueChange}
       className={className}
+      value={value}
       {...otherProps}
     >
       <LazyMotion features={domMax} strict>
@@ -72,11 +81,13 @@ export const Tab = ({
               value={child.props.value}
               disabled={child.props.disabled}
               className={styles.Trigger}
+              data-tab-dimension={dimension}
               asChild
             >
-              <Button kind="flat" dimension='big' icon={child.props.icon}>
+              <Button kind="flat" dimension="big">
+                <Symbol source={child.props.symbol} dimension={dimension === 'big' ? 24 : 16} weight={dimension === 'big' ? 'duotone' : 'solid'} />
                 {child.props.label}
-                {(child.props.value === activeItem) && 'active' && (
+                {(child.props.value === activeItem) && (
                   <m.span className={styles.Highlight} layoutId={uid('tab-highlight')} />
                 )}
               </Button>
@@ -86,7 +97,7 @@ export const Tab = ({
       </LazyMotion>
       {children}
     </TabsPrimitive.Root>
-  )
-}
+  );
+};
 
-Tab.Panel = TabPanel
+Tab.Panel = TabPanel;

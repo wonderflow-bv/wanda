@@ -11,42 +11,46 @@
     ],
     "allowJs": true,
     "noEmit": true,
-    "module": "commonjs",
-    "isolatedModules": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "suppressImplicitAnyIndexErrors": true,
+    "module": "esnext",
     "jsx": "preserve",
     "incremental": true,
+    "suppressImplicitAnyIndexErrors": true,
     "plugins": [
       {
         "name": "typescript-plugin-css-modules"
       }
     ],
     "paths": {
+      "@/src/*": [
+        "src/*"
+      ],
       "@/styles/*": [
         "src/styles/*"
-      ],
-      "@/examples/*": [
-        "src/examples/*"
       ],
       "@/components/*": [
         "src/components/*"
       ],
+      "@/context/*": [
+        "src/context/*"
+      ],
+      "@/hooks/*": [
+        "src/hooks/*"
+      ],
       "@/services/*": [
         "src/services/*"
+      ],
+      "@/data/*": [
+        "src/data/*"
       ],
       "@/utils/*": [
         "src/utils/*"
       ]
-    },
+    }
   },
   "exclude": [
-    "node_modules",
-    "*.mdx"
+    "node_modules"
   ],
   "include": [
-    "types/*",
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"

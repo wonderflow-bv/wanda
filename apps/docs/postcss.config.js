@@ -1,3 +1,5 @@
-const { postcssConfig } = require('@wonderflow/config')
+/* eslint-disable @typescript-eslint/no-var-requires, import/no-extraneous-dependencies */
 
-module.exports = postcssConfig
+const { postcssConfig } = require('@wonderflow/config');
+
+module.exports = postcssConfig;

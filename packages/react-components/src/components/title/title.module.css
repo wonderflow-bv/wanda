@@ -128,3 +128,28 @@
     }
   }
 }
+
+.Anchor:is(.Anchor) {
+  display: inline-flex;
+  margin-left: 0.2em;
+  background-image: none;
+  inline-size: max(16px, 0.6em);
+  block-size: max(16px, 0.6em);
+  padding: 0.1em;
+  visibility: hidden;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  border-radius: token(--radius-8);
+  background-color: var(--highlight-cyan-background);
+  color: var(--heading-foreground, var(--dimmed-9));
+
+  @nest .Title:hover &, .Title:focus-within & {
+    visibility: visible;
+  }
+
+  & svg {
+    width: 100%;
+    height: 100%;
+  }
+}

@@ -1,0 +1,59 @@
+import UsageNav from "@/data/usage-nav";
+import { getLayoutProps } from "@/utils/get-layout-props";
+
+export const getStaticProps = () =>
+  getLayoutProps({
+    layout: "mdx",
+    layoutProps: {
+      title: "Introduction",
+      color: "mint",
+      subtitle:
+        "Wanda is Wonderflow’s open-source design system built for products and digital experiences.",
+      navigation: UsageNav
+    }
+  });
+
+## Overview
+
+A Design System is the single source of truth which groups all the elements that will allow teams to build digital products.
+
+We, as diverse humans, have our own unique way to think about problems and we walk different roads to find solutions. Usually, that is celebrated, but when cooperating to build products, that could lead to an uncoordinated user experience. Wanda aims to provide a solid guidance for designers and developers, to reduce the risks of divergence.
+
+## Principles
+
+<Stack rowGap={80}>
+  <Stack direction="row" fill={false} columnGap={40} rowGap={40} wrap>
+    ![](/principles/accessibility.svg)
+    <Stack rowGap={32} style={{maxWidth: '43ch'}}>
+      <Title level="3">Accessibility</Title>
+
+      In 2016 the UN declared Internet access as a human right. We, as builder
+      of web technologies, have a responsibility to [create products that are
+      accessible](/get-started/accessibility/) to the highest number of people,
+      just like an architect tries to eliminate architectural barrier when
+      designing public building.
+    </Stack>
+  </Stack>
+
+  <Stack direction="row" fill={false} columnGap={40} rowGap={40} wrap>
+    ![](/principles/form-function.svg)
+    <Stack rowGap={32} style={{maxWidth: '43ch'}}>
+      ### Form follows function
+
+      When time or resources are limited, what design trade-offs would least
+      harm the design’s success? Wanda approach aims to serve human needs while
+      carefully considering human behaviour. Our Design Language aspire to
+      create beauty as a byproduct of functionality, rather than mere
+      decoration.
+    </Stack>
+  </Stack>
+
+  <Stack direction="row" fill={false} columnGap={40} rowGap={40} wrap>
+    ![](/principles/progress-over-perfection.svg)
+    <Stack rowGap={32} style={{maxWidth: '43ch'}}>
+      ### Progress over perfections
+
+      Wanda is a constantly evolving product that represent our best shot at a Design system yet. We're sure that our future selves will have a lot to disagree about decision that we took today — and that's perfectly ok: done is better than perfect.
+    </Stack>
+  </Stack>
+</Stack>

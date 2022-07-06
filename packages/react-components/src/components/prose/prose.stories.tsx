@@ -1,18 +1,21 @@
-import { ComponentStory, Meta } from '@storybook/react'
-import { Prose } from './prose'
-import { Container, Separator, Text, Title } from '../..'
+import { ComponentStory, Meta } from '@storybook/react';
+
+import {
+  Container, Separator, Text, Title,
+} from '../..';
+import { Prose } from './prose';
 
 const story: Meta<typeof Prose> = {
   title: 'Components/Typography/Prose',
   component: Prose,
   args: {
-    as: 'section'
-  }
-}
+    as: 'section',
+  },
+};
 
-export default story
+export default story;
 
-export const Default: ComponentStory<typeof Prose> = (args) => (
+export const Default: ComponentStory<typeof Prose> = args => (
   <Container dimension="medium">
     <Prose {...args}>
       <Title as="h1" level="display">Title</Title>
@@ -21,7 +24,7 @@ export const Default: ComponentStory<typeof Prose> = (args) => (
         tempore quas labore officiis praesentium.
       </Text>
       <Title as="h2" level="2">Sample H2 Title</Title>
-      <img style={{ width: '100%' }} src="https://images.unsplash.com/photo-1593963171957-d87a6279226d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" />
+      <img style={{ width: '100%' }} alt="" src="https://images.unsplash.com/photo-1593963171957-d87a6279226d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" />
       <Text>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius dolores,
         tempore quas labore officiis praesentium. Porro sed dolorem, numquam temporibus
@@ -36,7 +39,7 @@ export const Default: ComponentStory<typeof Prose> = (args) => (
         tempore quas labore officiis praesentium. Porro sed dolorem, numquam temporibus
         consequuntur quam doloremque ducimus error tempora illo aliquam nesciunt nostrum!
       </Text>
-      <img style={{ width: '100%' }} src="https://images.unsplash.com/photo-1593963171957-d87a6279226d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" />
+      <img style={{ width: '100%' }} alt="" src="https://images.unsplash.com/photo-1593963171957-d87a6279226d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" />
       <Text>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius dolores,
         tempore quas labore officiis praesentium. Porro sed dolorem, numquam temporibus
@@ -61,4 +64,4 @@ export const Default: ComponentStory<typeof Prose> = (args) => (
       </Text>
     </Prose>
   </Container>
-)
+);

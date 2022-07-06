@@ -1,6 +1,7 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { useState } from 'react'
-import { Disclosure } from './disclosure'
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { useState } from 'react';
+
+import { Disclosure } from './disclosure';
 
 const story: ComponentMeta<typeof Disclosure> = {
   title: 'Components/Actions/Disclosure',
@@ -10,37 +11,37 @@ const story: ComponentMeta<typeof Disclosure> = {
     expandable: true,
     dimension: 'regular',
     summary: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-    open: false
+    open: false,
   },
   argTypes: {
     expandable: {
       options: [true, false],
-      control: { type: 'inline-radio' }
+      control: { type: 'inline-radio' },
     },
     padding: {
       options: [true, false],
-      control: { type: 'inline-radio' }
+      control: { type: 'inline-radio' },
     },
     dimension: {
       options: ['small', 'regular', 'big'],
-      control: { type: 'inline-radio' }
-    }
-  }
-}
+      control: { type: 'inline-radio' },
+    },
+  },
+};
 
-export default story
+export default story;
 
-const Template: ComponentStory<typeof Disclosure> = (args) => (
+const Template: ComponentStory<typeof Disclosure> = args => (
   <Disclosure {...args}>
     Lorem ipsum dolor sit amet consectetur adipisicing elit.
     Doloribus corporis nobis ipsum natus laudantium dolorem sapiente,
     sint adipisci at asperiores quia ex voluptatum veniam! Quos rerum natus eos excepturi atque!
   </Disclosure>
-)
+);
 
-export const Default = Template.bind({})
+export const Default = Template.bind({});
 
-const NestedTemplate: ComponentStory<typeof Disclosure> = (args) => (
+const NestedTemplate: ComponentStory<typeof Disclosure> = args => (
   <Disclosure {...args}>
     Lorem ipsum dolor sit amet consectetur adipisicing elit.
     Doloribus corporis nobis ipsum natus laudantium dolorem sapiente,
@@ -52,12 +53,12 @@ const NestedTemplate: ComponentStory<typeof Disclosure> = (args) => (
       sint adipisci at asperiores quia ex voluptatum veniam! Quos rerum natus eos excepturi atque!
     </Disclosure>
   </Disclosure>
-)
+);
 
-export const Nested = NestedTemplate.bind({})
+export const Nested = NestedTemplate.bind({});
 
 const AccordionTemplate: ComponentStory<typeof Disclosure> = (args) => {
-  const [expandedItem, setExpandedItem] = useState<number>(0)
+  const [expandedItem, setExpandedItem] = useState<number>(0);
 
   return (
     <>
@@ -104,7 +105,7 @@ const AccordionTemplate: ComponentStory<typeof Disclosure> = (args) => {
         sint adipisci at asperiores quia ex voluptatum veniam! Quos rerum natus eos excepturi atque!
       </Disclosure>
     </>
-  )
-}
+  );
+};
 
-export const Accordion = AccordionTemplate.bind({})
+export const Accordion = AccordionTemplate.bind({});

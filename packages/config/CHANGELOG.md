@@ -1,5 +1,45 @@
 # @wonderflow/config
 
+## 10.0.0-next.3
+
+### Minor Changes
+
+- 03bb99f: Dafuck
+
+### Patch Changes
+
+- Updated dependencies [03bb99f]
+  - @wonderflow/tokens@10.0.0-next.3
+
+## 10.0.0-next.2
+
+### Minor Changes
+
+- ed181f9: ALign versions and deps
+
+### Patch Changes
+
+- Updated dependencies [ed181f9]
+  - @wonderflow/tokens@10.0.0-next.2
+
+## 10.0.0-next.1
+
+### Minor Changes
+
+- 22d0757: Update versions
+
+## 10.0.0-next.0
+
+### Major Changes
+
+- 2be339b: Update deps
+
+### Patch Changes
+
+- Updated dependencies [10593e6]
+- Updated dependencies [2be339b]
+  - @wonderflow/tokens@10.0.0-next.0
+
 ## 7.0.0
 
 ### Major Changes

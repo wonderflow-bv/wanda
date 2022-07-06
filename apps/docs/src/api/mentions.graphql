@@ -1,0 +1,17 @@
+query Mentions {
+  mentions(stage: PUBLISHED, orderBy: updatedAt_DESC) {
+    id
+    author {
+      name
+      handle
+      image {
+        url(
+          transformation: {
+            image: { resize: { height: 96, width: 96 } }
+            document: { output: { format: webp } }
+          }
+        )
+      }
+    }
+  }
+}

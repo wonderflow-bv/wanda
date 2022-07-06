@@ -1,0 +1,45 @@
+@import '@wonderflow/react-components/core/utils/media.css';
+
+.Glow {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  filter: saturate(1.3);
+  background:
+    radial-gradient(circle at 30% -20%, rgb(44 191 111 / 13%) 0%, rgb(44 191 111 / 0%) 30%),
+    radial-gradient(circle at 100% 0%, rgb(255 235 168 / 14%) 0%, rgb(255 235 168 / 0%) 40%),
+    radial-gradient(circle at 68% 3%, rgb(78 75 210 / 7%) 0%, rgb(78 75 210 / 0%) 40%),
+    radial-gradient(circle at 84% 6%, rgb(238 0 0 / 5%) 0%, rgb(238 0 0 / 0%) 40%);
+}
+
+.Content.Content {
+  padding-top: token(--space-56);
+}
+
+.Sidebar {
+  flex: 1 0 0;
+  border-bottom: 1px solid var(--dimmed-1);
+  padding: token(--space-24) token(--space-8);
+
+  @media (--from-large) {
+    overflow: auto;
+    padding-top: token(--space-56);
+    padding-right: token(--space-24);
+    border: 0;
+    height: calc(100vh - 76px);
+    max-width: 14.63rem;
+    scrollbar-gutter: stable;
+    min-width: 14.63rem;
+    position: sticky;
+    top: 75px;
+  }
+}
+
+
+.Toc {
+  display: none;
+
+  @media (--from-large) {
+    display: block;
+  }
+}

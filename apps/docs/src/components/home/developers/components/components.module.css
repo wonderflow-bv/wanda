@@ -1,0 +1,20 @@
+@import '@wonderflow/react-components/core/utils/vibrancy.css';
+
+.Components {
+  width: 100%;
+}
+
+.Card {
+
+  @mixin vibrancy;
+
+  border: 1px solid var(--dimmed-0);
+  background: var(--global-vibrancy-background-soft);
+  border-radius: token(--radius-16);
+  min-width: 5rem;
+  position: relative;
+
+  @supports not (backdrop-filter: blur(0)) {
+    background-color: var(--dimmed-0);
+  }
+}

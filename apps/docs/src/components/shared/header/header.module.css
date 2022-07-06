@@ -1,0 +1,52 @@
+.Header {
+  &[data-header-position='fixed'] {
+    position: fixed;
+    inline-size: 100%;
+    z-index: 3;
+    backdrop-filter: blur(var(--blur));
+  }
+
+  &[data-header-position='sticky'] {
+    position: sticky;
+    inline-size: 100%;
+    z-index: 3;
+    top: 0;
+    backdrop-filter: blur(var(--blur));
+  }
+
+  &[data-header-position='absolute'] {
+    position: absolute;
+    inline-size: 100%;
+    z-index: 3;
+  }
+}
+
+.BgContainer {
+  position: relative;
+
+  @nest .Header[data-header-position='sticky'] & {
+
+    @supports not (backdrop-filter: blur(0)) {
+      background-color: var(--global-background);
+    }
+  }
+  @nest .Header[data-header-position='fixed'] & {
+
+    @supports not (backdrop-filter: blur(0)) {
+      background-color: var(--global-background);
+    }
+  }
+  @nest .Header[data-header-position='sticky'] &::before,
+  .Header[data-header-position='fixed'] &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--global-vibrancy-background-soft);
+    opacity: var(--bg-opacity, 100%);
+    z-index: -1;
+  }
+}
+
+.LogoLink {
+  background: none;
+}

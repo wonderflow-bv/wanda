@@ -1,7 +1,12 @@
-import { forwardRef, ReactNode } from 'react'
-import styles from './snackbar.module.css'
-import clsx from 'clsx'
-import { Title, Stack, Icon, IconProps, Polymorphic, Button } from '@/components'
+import clsx from 'clsx';
+import { forwardRef, ReactNode } from 'react';
+
+import {
+  Button, Polymorphic, Stack, Symbol, SymbolProps, Text,
+  Title,
+} from '@/components';
+
+import styles from './snackbar.module.css';
 
 export type SnackbarProps = {
   /**
@@ -13,7 +18,7 @@ export type SnackbarProps = {
    * Set the icon to be displaye alongside the title.
    * This icon have to enforce the message in a not misleading way.
    */
-  icon?: IconProps['source'];
+  icon?: SymbolProps['source'];
   /**
    * Set the title of the snackbar. This must concisely describe the message.
    */
@@ -36,7 +41,7 @@ export type SnackbarProps = {
   /**
    * Callback function to be called when the dismiss button is clicked.
    */
-  onDismiss?(): void;
+  onDismiss?: () => void;
 }
 
 type PolymorphicSnackbar = Polymorphic.ForwardRefComponent<'output', SnackbarProps>;
@@ -53,13 +58,13 @@ export const Snackbar = forwardRef(({
   onDismiss,
   ...otherProps
 }, forwardedRef) => {
-  const defaultIcons: Record<string, IconProps['source']> = {
+  const defaultIcons: Record<string, SymbolProps['source']> = {
     info: 'circle-info',
-    warning: 'triangle-exclamation',
+    warning: 'circle-exclamation',
     neutral: 'compass',
-    positive: 'check',
-    danger: 'circle-x'
-  }
+    positive: 'circle-check',
+    danger: 'circle-x',
+  };
 
   return (
     <Wrapper
@@ -69,20 +74,22 @@ export const Snackbar = forwardRef(({
       role="status"
       {...otherProps}
     >
-      <Stack vAlign="start" hAlign="start" direction="row" columnGap={16} fill={false}>
-        <Icon className={styles.Icon} weight="duotone" source={icon || defaultIcons[kind]} dimension={24} />
-        <Stack rowGap={16}>
+      <Stack vAlign="start" hAlign="start" direction="row" columnGap={16}>
+        <Symbol className={styles.Icon} weight="duotone" source={icon ?? defaultIcons[kind]} dimension={24} />
+
+        <Stack rowGap={16} vPadding={4}>
           <Stack rowGap={8}>
-            {title && <Title level="5">{title}</Title>}
-            <p>{children}</p>
+            {title && <Title level="6" responsive={false}>{title}</Title>}
+            <Text size={14} lineHeight="small">{children}</Text>
           </Stack>
           {dismissable && (
             <Stack hAlign="end">
-              <Button onClick={onDismiss} className={styles.Action}>{dismissLabel}</Button>
+              <Button onClick={onDismiss} className={styles.Action} dimension="small">{dismissLabel}</Button>
             </Stack>
           )}
         </Stack>
+
       </Stack>
     </Wrapper>
-  )
-}) as PolymorphicSnackbar
+  );
+}) as PolymorphicSnackbar;

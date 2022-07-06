@@ -1,15 +1,19 @@
-import { Stack, Icon, Text, IconProps, TextProps } from '@/components'
-import styles from './list.module.css'
-import clsx from 'clsx'
-import { forwardRef, PropsWithChildren } from 'react'
-import { ListProps } from './list'
+import clsx from 'clsx';
+import { forwardRef, PropsWithChildren } from 'react';
+
+import {
+  Stack, Symbol, SymbolProps, Text, TextProps,
+} from '@/components';
+
+import { ListProps } from './list';
+import styles from './list.module.css';
 
 export type ListItemProps = PropsWithChildren<PropsWithClass> & Pick<ListProps, 'dimension' | 'hideMarker'> & {
   /**
-   * Set the marker style. You can use any icon from the iconography as marker
+   * Set the marker style. You can use any icon from the symbols as marker
    * by passing its name.
    */
-  marker?: IconProps['source'];
+  marker?: SymbolProps['source'];
   /**
    * Set the color of the marker.
    */
@@ -30,24 +34,24 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(({
       text: 16,
       icon: {
         size: 16,
-        weight: 'solid'
-      }
+        weight: 'solid',
+      },
     },
     regular: {
       text: 18,
       icon: {
         size: 16,
-        weight: 'outline'
-      }
+        weight: 'outline',
+      },
     },
     big: {
       text: 22,
       icon: {
         size: 24,
-        weight: 'duotone'
-      }
-    }
-  }
+        weight: 'duotone',
+      },
+    },
+  };
 
   return (
     <Stack
@@ -61,18 +65,18 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(({
       {...otherProps}
     >
       {!hideMarker && (
-        <Icon
+        <Symbol
           source={marker}
           className={styles.Marker}
           fill={markerColor}
           data-list-default-marker={marker === 'circle'}
-          weight={marker === 'circle' ? 'solid' : sizes[dimension].icon.weight as IconProps['weight']}
-          dimension={marker !== 'circle' ? sizes[dimension].icon.size as IconProps['dimension'] : 16}
+          weight={marker === 'circle' ? 'solid' : sizes[dimension].icon.weight as SymbolProps['weight']}
+          dimension={marker !== 'circle' ? sizes[dimension].icon.size as SymbolProps['dimension'] : 16}
         />
       )}
       <Text as="span" size={sizes[dimension].text as TextProps['size']}>
         {children}
       </Text>
     </Stack>
-  )
-})
+  );
+});

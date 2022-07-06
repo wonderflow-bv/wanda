@@ -1,9 +1,11 @@
-import clsx from 'clsx'
-import { forwardRef, PropsWithChildren } from 'react'
-import { Icon, IconProps, Stack } from '@/components'
-import styles from './chip.module.css'
+import clsx from 'clsx';
+import { forwardRef, Ref } from 'react';
 
-export type ChipProps = PropsWithChildren<PropsWithClass> & {
+import { Stack, Symbol, SymbolProps } from '@/components';
+
+import styles from './chip.module.css';
+
+export type ChipProps = {
   /**
    * Set the dimension of the component.
    */
@@ -11,7 +13,7 @@ export type ChipProps = PropsWithChildren<PropsWithClass> & {
   /**
    * Set a color from one of the provided values.
    */
-  color?: 'gray' | 'cyan' | 'green' | 'purple' | 'yellow' | 'red' | 'blue';
+  color?: 'gray' | 'cyan' | 'green' | 'purple' | 'yellow' | 'red' | 'blue' | 'magenta' | 'violet' | 'indigo' | 'mint' | 'dipsy' | 'salmon';
   /**
    * Make the chip dismissable. When `true` adds a close button on the side.
    */
@@ -19,10 +21,10 @@ export type ChipProps = PropsWithChildren<PropsWithClass> & {
   /**
    * Callback function to be called when the dismiss button is pressed.
    */
-  onDismissClick?(): void;
+  onDismissClick?: () => void;
 }
 
-export const Chip = forwardRef<HTMLSpanElement, ChipProps>(({
+export const Chip: FCChildrenClass<ChipProps> = forwardRef(({
   children,
   className,
   dimension = 'regular',
@@ -30,21 +32,21 @@ export const Chip = forwardRef<HTMLSpanElement, ChipProps>(({
   interactive,
   onDismissClick,
   ...otherProps
-}, forwardedRef) => {
+}, forwardedRef: Ref<HTMLSpanElement>) => {
   const properties = {
     small: {
       iconSize: 12,
-      style: 'solid'
+      style: 'solid',
     },
     regular: {
       iconSize: 12,
-      style: 'solid'
+      style: 'solid',
     },
     big: {
       iconSize: 16,
-      style: 'outline'
-    }
-  }
+      style: 'outline',
+    },
+  };
 
   return (
     <Stack
@@ -62,15 +64,15 @@ export const Chip = forwardRef<HTMLSpanElement, ChipProps>(({
       <b>{children}</b>
       {interactive && (
         <button onClick={interactive && onDismissClick} className={styles.Action} type="button">
-          <Icon
+          <Symbol
             source="xmark"
-            weight={properties[dimension].style as IconProps['weight']}
-            dimension={properties[dimension].iconSize as IconProps['dimension']}
+            weight={properties[dimension].style as SymbolProps['weight']}
+            dimension={properties[dimension].iconSize as SymbolProps['dimension']}
           />
         </button>
       )}
     </Stack>
-  )
-})
+  );
+});
 
-Chip.displayName = 'Chip'
+Chip.displayName = 'Chip';

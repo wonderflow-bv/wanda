@@ -1,32 +1,35 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { InputGroup } from './input-group'
-import { Stack, Button, Select, Textfield } from '../..'
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+
+import {
+  Button, Select, Stack, Textfield,
+} from '../..';
+import { InputGroup } from './input-group';
 
 const story: ComponentMeta<typeof InputGroup> = {
   title: 'Components/Inputs/Input group',
   component: InputGroup,
   args: {
-    input: <Textfield type="text" defaultValue="sample" />
-  }
-}
+    input: <Textfield type="text" defaultValue="sample" />,
+  },
+};
 
-export default story
+export default story;
 
-const Default: ComponentStory<typeof InputGroup> = (args) => (
+const Default: ComponentStory<typeof InputGroup> = args => (
   <Stack inline fill={false} hAlign="start" rowGap={32}>
     <InputGroup
-      end={<Button>Confirm</Button>}
+      suffix={<Button>Confirm</Button>}
       {...args}
     />
     <InputGroup
-      end={<Textfield disabled size={9} placeholder="@mail.com" />}
+      suffix={<Textfield disabled size={9} placeholder="@mail.com" />}
       {...args}
     />
     <InputGroup
       dimension="big"
       label="Sample label"
-      start={<Textfield readOnly size={6} defaultValue="https://" />}
-      end={(
+      prefix={<Textfield readOnly size={6} defaultValue="https://" />}
+      suffix={(
         <Select defaultValue={1}>
           <option value="1">.com</option>
           <option value="2">.it</option>
@@ -38,6 +41,6 @@ const Default: ComponentStory<typeof InputGroup> = (args) => (
       {...args}
     />
   </Stack>
-)
+);
 
-export const Single = Default.bind({})
+export const Single = Default.bind({});

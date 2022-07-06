@@ -1,0 +1,17 @@
+.Slider {
+  --fade-size: token(--space-88);
+
+  @nest .Carousel[data-carousel-fade='true'] & {
+    mask-image:
+      linear-gradient(
+        to right,
+        transparent 0%,
+        red var(--fade-size) calc(100% - var(--fade-size)),
+        transparent 100%
+      );
+  }
+
+  & > div > * {
+    margin: 0 token(--space-8);
+  }
+}

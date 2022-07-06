@@ -1,0 +1,24 @@
+.DesignTokens {
+  position: relative;
+}
+
+.Code:nth-child(2) {
+  position: absolute;
+  right: calc(token(--space-24) * -1);
+  bottom: calc(token(--space-24) * -1);
+}
+
+.Row {
+  position: relative;
+}
+
+.ColorPreview {
+  border-radius: token(--radius-4);
+  border: 1px solid var(--dimmed-2);
+  display: block;
+  position: absolute;
+  left: token(--space-48);
+  top: 2px;
+  width: 0.8em;
+  height: 0.8em;
+}

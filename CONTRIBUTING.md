@@ -11,6 +11,7 @@ To work on this project you have to know how a monorepo works and how to use the
   - [Workspaces](#workspaces)
   - [How to contribute](#how-to-contribute)
     - [Installation](#installation)
+    - [Dependencies](#dependencies)
     - [Running the project](#running-the-project)
     - [Building the project](#building-the-project)
     - [Running tests](#running-tests)
@@ -18,6 +19,7 @@ To work on this project you have to know how a monorepo works and how to use the
       - [Add a change](#add-a-change)
       - [Start prerelease](#start-prerelease)
       - [Close prerelease](#close-prerelease)
+  - [Releasing](#releasing)
 
 ---
 
@@ -41,6 +43,8 @@ In this project there are 2 defined workspaces:
 
 ### Installation
 
+### Dependencies
+
 After you cloned the repository, run `npm i` from the project root. You'will install all the required dependencies.
 
 ### Running the project
@@ -52,6 +56,8 @@ npm run start
 Running this command from the project root will execute all the `start` scripts inside workspaces. Currently only **react-components** and **docs** packages have a `start` script.
 
 Once you run the command both `react-components` and `docs` should start in development mode.
+
+If you're working with `graphql` queries you may need to run `codegen:watch` in a separated terminal to watch and rebuild queries on file changes.
 
 ### Building the project
 
@@ -97,3 +103,9 @@ Exit from the current prerelease channel and make all future changes released in
 
 [changeset]: https://github.com/changesets/changesets
 [turborepo]: https://turborepo.org/
+
+## Releasing
+
+To release the packages the only thing to do is to merge the PR opened by changeset workflow, generated after pushing `changes` to the `main` branch.
+
+To release the documentation website you can either use the Github CLI or [trigger the workflow from GithHub](https://github.com/wonderflow-bv/wanda/actions/workflows/production.yml)

@@ -1,0 +1,8 @@
+{
+  "ignore": {
+    "@lasalefamine/eslint-config": {
+      "versions": ">=1",
+      "reason": "Breaking"
+    }
+  }
+}

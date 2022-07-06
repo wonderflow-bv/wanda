@@ -3,7 +3,8 @@
   "display": "ESlint",
   "extends": "./packages/tsconfig/base.json",
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "next-env.d.ts"
   ],
   "include": [
     "**/.eslintrc.js",

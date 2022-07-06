@@ -1,5 +1,6 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { LinearProgress } from './linear-progress'
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+
+import { LinearProgress } from './linear-progress';
 
 const story: ComponentMeta<typeof LinearProgress> = {
   title: 'Components/Loading/Linear progress',
@@ -7,25 +8,25 @@ const story: ComponentMeta<typeof LinearProgress> = {
   args: {
     max: 100,
     showProgress: true,
-    dimension: 'regular'
+    dimension: 'regular',
   },
   argTypes: {
     value: {
-      control: { type: 'range' }
+      control: { type: 'range' },
     },
     dimension: {
       options: ['regular', 'big'],
-      control: { type: 'radio' }
-    }
-  }
-}
+      control: { type: 'radio' },
+    },
+  },
+};
 
-export default story
+export default story;
 
-const Template: ComponentStory<typeof LinearProgress> = (args) => <LinearProgress {...args} />
+const Template: ComponentStory<typeof LinearProgress> = args => <LinearProgress {...args} />;
 
-export const Determinate = Template.bind({})
+export const Determinate = Template.bind({});
 Determinate.args = {
-  value: 40
-}
-export const Indeterminate = Template.bind({})
+  value: 40,
+};
+export const Indeterminate = Template.bind({});

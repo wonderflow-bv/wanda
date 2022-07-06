@@ -1,11 +1,23 @@
-import clsx from 'clsx'
-import { FC, Children, cloneElement, CSSProperties, isValidElement } from 'react'
-import MasonryLayout from 'react-masonry-css'
-import tkns from '@wonderflow/tokens/platforms/web/tokens.json'
-import { TokensTypes } from '@wonderflow/tokens/platforms/web'
-import styles from './masonry.module.css'
+import { TokensTypes } from '@wonderflow/tokens/platforms/web';
+import tkns from '@wonderflow/tokens/platforms/web/tokens.json';
+import clsx from 'clsx';
+import {
+  Children, cloneElement, CSSProperties, isValidElement,
+} from 'react';
+import MasonryLayout from 'react-masonry-css';
 
-export type MasonryProps = PropsWithClass & {
+import styles from './masonry.module.css';
+
+type Columns = {
+  default: number;
+  extraSmall?: number;
+  small?: number;
+  medium?: number;
+  large?: number;
+  extraLarge?: number;
+}
+
+export type MasonryProps = {
   /**
    * Set the space between items. This is applied on both vertical
    * and horizontal axis.
@@ -29,19 +41,10 @@ export type MasonryProps = PropsWithClass & {
    *  extraSmall: 1
    *}
    */
-  columns?: number | Columns
+  columns?: number | Columns;
 }
 
-type Columns = {
-  default: number,
-  extraSmall?: number,
-  small?: number,
-  medium?: number,
-  large?: number,
-  extraLarge?: number
-}
-
-export const Masonry: FC<MasonryProps> = ({
+export const Masonry: FCChildrenClass<MasonryProps> = ({
   className,
   children,
   columns = 3,
@@ -54,19 +57,20 @@ export const Masonry: FC<MasonryProps> = ({
     small: 768,
     medium: 960,
     large: 1280,
-    'extra-large': 1600
-  }
+    'extra-large': 1600,
+  };
 
   const dynamicStyle: CSSProperties = {
-    '--gutter': gutter && tkns.space[gutter]
-  }
+    '--gutter': gutter && tkns.space[gutter],
+  };
 
   const computedColumns = typeof columns === 'object' && Object.keys(columns).reduce(
-    (prev, current: keyof Columns) => current !== 'default' && ({
+    (prev, current) => current !== 'default' && ({
       ...prev,
       default: columns.default,
-      [breakpoints[current]]: columns[current]
-    }), {})
+      [breakpoints[current]]: columns[current as keyof Columns],
+    }), {},
+  );
 
   return (
     <MasonryLayout
@@ -77,12 +81,12 @@ export const Masonry: FC<MasonryProps> = ({
       style={{ ...dynamicStyle, ...style }}
       {...otherProps}
     >
-      {Children.map(children, (child) => isValidElement(child) && cloneElement(
+      {Children.map(children, child => isValidElement(child) && cloneElement(
         child,
         {
-          role: 'listitem'
-        }
+          role: 'listitem',
+        },
       ))}
     </MasonryLayout>
-  )
-}
+  );
+};

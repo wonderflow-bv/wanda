@@ -1,32 +1,24 @@
-import withTranspileModules from 'next-transpile-modules'
-import bundleAnalyzer from '@next/bundle-analyzer'
-import withImages from 'next-images'
-import withPlugins from 'next-compose-plugins'
-import mdxSlug from 'rehype-slug'
-import mdxLink from 'rehype-autolink-headings'
-import redirects from './redirects.js'
-import mdx from '@next/mdx'
+import bundleAnalyzer from '@next/bundle-analyzer';
+// import redirects from './redirects.js'
+import mdx from '@next/mdx';
+import withPlugins from 'next-compose-plugins';
+import withImages from 'next-images';
+import withTranspileModules from 'next-transpile-modules';
+import { remarkMdxCodeMeta } from 'remark-mdx-code-meta';
 
 const withBundleAnalyzer = bundleAnalyzer({
-  enabled: process.env.ANALYZE === 'true'
-})
-const withTm = withTranspileModules(['@wonderflow/react-components'])
+  enabled: process.env.ANALYZE === 'true',
+});
+const withTm = withTranspileModules(['@wonderflow/react-components']);
+
 const withMDX = mdx({
   options: {
-    rehypePlugins: [
-      mdxSlug,
-      [mdxLink, {
-        behavior: 'append',
-        content: {
-          type: 'element',
-          tagName: 'span',
-          properties: { className: ['HeadingAnchor'] },
-          children: [{ type: 'text', value: '' }]
-        }
-      }]
-    ]
-  }
-})
+    providerImportSource: '@mdx-js/react',
+    remarkPlugins: [
+      remarkMdxCodeMeta,
+    ],
+  },
+});
 
 const nextConfig = withPlugins([
   [withBundleAnalyzer],
@@ -34,31 +26,17 @@ const nextConfig = withPlugins([
   [
     withMDX,
     {
-      extension: /\.mdx?$/
-    }
+      extension: /\.mdx?$/,
+    },
   ],
-  [withTm]
+  [withTm],
 ], {
-  async redirects () {
-    return redirects
-  },
-  async rewrites () {
-    return [
-      {
-        destination: '/components/buttons/:path*',
-        source: '/components/actions/:path*'
-      }
-    ]
-  },
   trailingSlash: false,
   pageExtensions: ['js', 'jsx', 'tsx', 'md', 'mdx', 'ts'],
   swcMinify: true,
   images: {
-    domains: ['media.graphcms.com', 'media.graphassets.com']
+    domains: ['media.graphcms.com', 'media.graphassets.com'],
   },
-  experimental: {
-    esmExternals: false
-  }
-})
+});
 
-export default nextConfig
+export default nextConfig;

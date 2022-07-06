@@ -15,15 +15,17 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "noUnusedLocals": false,
-    "noUnusedParameters": false,
+    "noUnusedParameters": true,
     "preserveWatchOutput": true,
     "skipLibCheck": true,
     "strictNullChecks": true,
-    "strict": false,
+    "strict": true,
     "baseUrl": "../..",
-    "paths": {
-      "@/components": ["packages/react-components/src"]
-    }
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ]
   },
   "exclude": ["node_modules"]
 }

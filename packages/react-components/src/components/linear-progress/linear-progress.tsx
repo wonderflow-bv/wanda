@@ -1,8 +1,9 @@
-import { forwardRef, ProgressHTMLAttributes, useCallback } from 'react'
-import { Text } from '@/components'
-import clsx from 'clsx'
+import clsx from 'clsx';
+import { forwardRef, ProgressHTMLAttributes, useCallback } from 'react';
 
-import styles from './linear-progress.module.css'
+import { Text } from '@/components';
+
+import styles from './linear-progress.module.css';
 
 export type LinearProgressProps = ProgressHTMLAttributes<HTMLProgressElement> & {
   /**
@@ -35,18 +36,17 @@ export const LinearProgress = forwardRef<HTMLProgressElement, LinearProgressProp
   ...otherProps
 }, forwardedRef) => {
   const getPercentage = useCallback(
-    () => value ? Math.round((100 * value) / max) : 0,
-    [max, value]
-  )
+    () => (value ? Math.round((100 * value) / max) : 0),
+    [max, value],
+  );
 
-  const clamp = (num: number, min: number, max: number) => Math.min(Math.max(num, min), max)
+  const clamp = (num: number, min: number, max: number) => Math.min(Math.max(num, min), max);
 
   return (
     <div
       className={clsx(styles.LinearProgress, className)}
     >
       <progress
-        role="progressbar"
         ref={forwardedRef}
         className={styles.Progress}
         data-progress-dimension={dimension}
@@ -63,7 +63,7 @@ export const LinearProgress = forwardRef<HTMLProgressElement, LinearProgressProp
           className={styles.Percentage}
           style={{
             '--offset': `${getPercentage()}%`,
-            '--translation': value !== 0 ? '-100%' : '-50%'
+            '--translation': value !== 0 ? '-100%' : '-50%',
           }}
           weight="bold"
           size={dimension === 'regular' ? 16 : 18}
@@ -72,7 +72,7 @@ export const LinearProgress = forwardRef<HTMLProgressElement, LinearProgressProp
         </Text>
       )}
     </div>
-  )
-})
+  );
+});
 
-LinearProgress.displayName = 'LinearProgress'
+LinearProgress.displayName = 'LinearProgress';

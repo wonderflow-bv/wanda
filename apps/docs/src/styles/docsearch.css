@@ -4,18 +4,18 @@
 
   /* Common props */
   --docsearch-primary-color: var(--dimmed-2);
-  --docsearch-text-color: var(--global-foreground);
+  --docsearch-text-color: var(--global-vibrancy-foreground);
   --docsearch-spacing: 16px;
   --docsearch-icon-stroke-width: 1.4;
-  --docsearch-highlight-color: var(--highlight-cyan-foreground);
+  --docsearch-highlight-color: var(--global-vibrancy-foreground);
   --docsearch-muted-color: var(--dimmed-7);
-  --docsearch-container-background: hsl(token(--color-primary-100) / 95%);
+  --docsearch-container-background: hsl(0deg 0% 0% / 70%);
   --docsearch-logo-color: var(--dimmed-4);
 
   /* Modal props */
   --docsearch-modal-width: 560px;
   --docsearch-modal-height: 600px;
-  --docsearch-modal-background: var(--global-background);
+  --docsearch-modal-background: var(--dimmed-0);
   --docsearch-modal-shadow:
     0 33px 78px hsl(0deg 0% 0% / 11%),
     0 12.04px 28.47px hsl(0deg 0% 0% / 7.59%),
@@ -26,14 +26,14 @@
   /* Searchbox props */
   --docsearch-searchbox-height: 56px;
   --docsearch-searchbox-background: transparent;
-  --docsearch-searchbox-focus-background: transparent;
-  --docsearch-searchbox-shadow: inset 0 0 0 2px var(--docsearch-primary-color);
+  --docsearch-searchbox-focus-background: var(--global-vibrancy-background);
+  --docsearch-searchbox-shadow: none;
 
   /* Hit props */
   --docsearch-hit-height: 56px;
   --docsearch-hit-color: var(--global-foreground);
   --docsearch-hit-active-color: var(--global-background);
-  --docsearch-hit-background: var(--dimmed-0);
+  --docsearch-hit-background: var(--global-background);
   --docsearch-hit-shadow: none;
 
   /* Keys props */
@@ -48,6 +48,29 @@
   --docsearch-footer-shadow: none;
 }
 
+.DocSearch-Button {
+  margin-left: 0;
+  height: 40px;
+  width: 40px;
+  justify-content: center;
+}
+
 .DocSearch-Input:focus-visible {
   outline: none;
+}
+
+.DocSearch-Modal {
+  border-radius: token(--radius-16);
+}
+
+.DocSearch-Button-Keys,
+.DocSearch-Button-Placeholder {
+  display: none;
+}
+
+.DocSearch-Container {
+
+  @mixin vibrancy;
+
+  backdrop-filter: saturate(180%) blur(8px);
 }

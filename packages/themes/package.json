@@ -1,10 +1,16 @@
 {
   "name": "@wonderflow/themes",
   "description": "Wanda design system themes",
-  "version": "9.1.0",
+  "version": "10.0.0-next.3",
   "author": "Wonderflow",
   "main": "dist/themes.css",
   "style": "dist/themes.css",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "exports": {
     ".": "./dist/themes.css",
     "./dark.css": "./dist/themes/dark.css",
@@ -12,23 +18,9 @@
     "./dark.json": "./dist/themes/dark.json",
     "./light.json": "./dist/themes/light.json"
   },
-  "files": [
-    "dist"
-  ],
-  "publishConfig": {
-    "access": "public"
-  },
-  "devDependencies": {
-    "@types/fs-extra": "9.0.13",
-    "@wonderflow/tokens": "*",
-    "fs-extra": "10.1.0",
-    "style-dictionary": "3.7.0",
-    "tsconfig": "*",
-    "yargs": "17.4.1"
-  },
   "scripts": {
-    "build": "run-s build:prepare && run-s build:light build:dark && run-s build:combine",
-    "build:prepare": "rimraf dist",
+    "prebuild": "rimraf dist",
+    "build": "run-s build:light build:dark build:combine",
     "build:combine": "ts-node src/combine",
     "build:light": "ts-node src/index --name light",
     "build:dark": "ts-node src/index --name dark",
@@ -48,5 +40,13 @@
   ],
   "bugs": {
     "url": "https://github.com/wonderflow-bv/wanda/issues"
+  },
+  "devDependencies": {
+    "@wonderflow/tokens": "10.0.0-next.3",
+    "fs-extra": "10.1.0",
+    "style-dictionary": "3.7.1",
+    "tsconfig": "1.0.0-next.0",
+    "uvu": "0.5.4",
+    "yargs": "17.5.1"
   }
 }

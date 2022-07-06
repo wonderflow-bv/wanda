@@ -34,7 +34,7 @@
 .Content {
   background-color: var(--global-background);
   overscroll-behavior: contain;
-  inline-size: 100%;
+  inline-size: 100vw;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   max-inline-size: var(--max-w);
@@ -43,6 +43,7 @@
 .Header {
   position: sticky;
   top: 0;
+  z-index: 1;
   background-color: inherit;
   border-bottom: 1px solid var(--dimmed-1);
   padding:

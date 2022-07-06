@@ -1,0 +1,38 @@
+import UsageNav from "@/data/usage-nav";
+import { getLayoutProps } from "@/utils/get-layout-props";
+import { VideoPlayer } from "@/components/shared/video-player";
+
+export const getStaticProps = () =>
+  getLayoutProps({
+    layout: "mdx",
+    layoutProps: {
+      title: "Animations",
+      color: "mint",
+      subtitle: "Motion provides meaning.",
+      navigation: UsageNav
+    }
+  });
+
+
+Although [our four motion principles](/get-started/documentation/design/motion/principles) are always valid, it is appropriate to make a distinction between two different styles of animations:
+
+- a functional animation designed to provide a sense of efficiency subtly
+- an evocative animation whose aim is to draw attention to itself showily
+
+Both functional and evocative approaches are essential to the experience. An optimal interface uses fluid and subtle functional motions and rarely draws the user's attention to crucial feedback using evocative animations.
+
+## Functional animations
+
+Functional motions aim to generate a sense of productivity and responsiveness within the flow of the experience, always remaining subtle and invisible.
+
+These animations focus on helping the users orientate inside the app, understand the behavior of the interface, and complete their tasks. The most suitable functional styles are button states, dropdowns, revealing additional info, rendering data tables, etc.
+
+<VideoPlayer src="/design/motion/source/functional.mp4" />
+
+## Evocative animations
+
+Evocative motions aim to capture the users' attention, voluntarily distracting them from what they are doing. For this reason, you should design these animations to be vibrant and highly visible.
+
+The best occasions in which you can use them are when, for example, users open a new page, click a primary button, or may need a rhythmic break from their tasks. These motions are also particularly useful every time the movement itself conveys meaning, as in the case of system alerts or notifications.
+
+<VideoPlayer src="/design/motion/source/evocative.mp4" />

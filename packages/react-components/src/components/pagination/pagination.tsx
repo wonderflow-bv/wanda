@@ -1,10 +1,11 @@
-import clsx from 'clsx'
-import { useEffect, useState } from 'react'
-import ReactPaginate, { ReactPaginateProps } from 'react-paginate'
-import { Except } from 'type-fest'
-import { Icon } from '@/components'
+import clsx from 'clsx';
+import { useEffect, useState } from 'react';
+import ReactPaginate, { ReactPaginateProps } from 'react-paginate';
+import { Except } from 'type-fest';
 
-import styles from './pagination.module.css'
+import { Symbol } from '@/components';
+
+import styles from './pagination.module.css';
 
 export type PaginationProps = Except<ReactPaginateProps, 'pageCount'> & {
   /**
@@ -26,7 +27,7 @@ export type PaginationProps = Except<ReactPaginateProps, 'pageCount'> & {
    * - `selected`: The index of the selected page.
    * - `offset`: The offset of the selected page.
    */
-  onPageClick?(data: Record<string, number>): void;
+  onPageClick?: (data: Record<string, number>) => void;
   /**
    * Set how many pages to show in the visible page range (between the "..." break)
    */
@@ -47,28 +48,28 @@ export const Pagination = ({
   marginPagesDisplayed = 1,
   ...otherProps
 }: PaginationProps) => {
-  const [computedPageCount, setComputedPageCount] = useState(0)
+  const [computedPageCount, setComputedPageCount] = useState(0);
 
   useEffect(() => {
-    itemsCount && setComputedPageCount(Math.ceil(itemsCount / itemsPerPage))
-  }, [itemsCount, itemsPerPage])
+    if (itemsCount) setComputedPageCount(Math.ceil(itemsCount / itemsPerPage));
+  }, [itemsCount, itemsPerPage]);
 
   const handlePageClick = (event: Record<string, any>) => {
-    const newOffset = (event.selected * itemsPerPage) % itemsCount
-    onPageClick && onPageClick({ ...event, offset: newOffset })
-  }
+    const newOffset = (event.selected * itemsPerPage) % itemsCount;
+    onPageClick?.({ ...event, offset: newOffset });
+  };
 
   return (
     <ReactPaginate
       containerClassName={clsx(styles.Pagination, className)}
       breakLabel="..."
-      nextLabel={<Icon dimension={16} source="chevron-right" />}
-      previousLabel={<Icon dimension={16} source="chevron-left" />}
+      nextLabel={<Symbol dimension={16} source="chevron-right" />}
+      previousLabel={<Symbol dimension={16} source="chevron-left" />}
       onPageChange={handlePageClick}
       pageRangeDisplayed={pageRangeDisplayed}
-      pageCount={pageCount || computedPageCount}
+      pageCount={pageCount ?? computedPageCount}
       marginPagesDisplayed={marginPagesDisplayed}
       {...otherProps}
     />
-  )
-}
+  );
+};

@@ -1,19 +1,25 @@
-import { BaseField, BaseFieldProps, PrimitiveInputType } from './base-field'
-import { ChangeEvent, Ref, forwardRef, useCallback, useState, useMemo } from 'react'
-import styles from './textfield.module.css'
-import { Icon, IconButton, IconButtonProps, IconProps, Stack, Text } from '@/components'
-import clsx from 'clsx'
-import { useUIDSeed } from 'react-uid'
+import clsx from 'clsx';
+import {
+  ChangeEvent, forwardRef, Ref, useCallback, useMemo, useState,
+} from 'react';
+import { useUIDSeed } from 'react-uid';
+
+import {
+  IconButton, IconButtonProps, Stack, Symbol, SymbolProps, Text,
+} from '@/components';
+
+import { BaseField, BaseFieldProps, PrimitiveInputType } from './base-field';
+import styles from './textfield.module.css';
 
 export type TextfieldProps = BaseFieldProps & {
   /**
    * Set the icon to show on the left or right side of the input.
    */
-  icon?: IconProps['source'];
+  icon?: SymbolProps['source'];
   /**
    * Set in which side of the field the icon should be displayed.
    */
-   iconPosition?: 'left' | 'right';
+  iconPosition?: 'left' | 'right';
   /**
    * Define the accessible label of the input. While this is not
    * mandatory, an input should always have a label. If not using this property
@@ -74,36 +80,36 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
   fullWidth,
   ...otherProps
 }: TextfieldProps, forwardedRef) => {
-  const [passwordVisible, setPasswordVisible] = useState<boolean>(false)
-  const seedID = useUIDSeed()
-  const isPassword = type === 'password'
-  const fieldID = useMemo(() => id || seedID('field'), [id, seedID])
+  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+  const seedID = useUIDSeed();
+  const isPassword = type === 'password';
+  const fieldID = useMemo(() => id ?? seedID('field'), [id, seedID]);
 
   const handlePasswordVisibility = useCallback(
     () => {
-      setPasswordVisible(visibility => !visibility)
+      setPasswordVisible(visibility => !visibility);
     },
-    []
-  )
+    [],
+  );
 
   const iconSizes = {
     small: 12,
     regular: 16,
-    big: 24
-  }
+    big: 24,
+  };
 
   const actionSizes = {
     small: 'small',
     regular: 'regular',
-    big: 'big'
-  }
+    big: 'big',
+  };
 
   const commonProps = {
     readOnly,
     invalid,
     disabled,
-    onChange
-  }
+    onChange,
+  };
 
   return (
     <Stack
@@ -132,7 +138,7 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
               {...commonProps}
               {...otherProps}
             />
-            )
+          )
           : (
             <BaseField
               className={styles.InputField}
@@ -143,7 +149,7 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
               {...commonProps}
               {...otherProps}
             />
-            )
+          )
           }
         {isPassword && (
           <IconButton
@@ -157,15 +163,15 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
         )}
 
         { !textarea && icon && !isPassword && (
-          <Icon
+          <Symbol
             className={styles.Icon}
             source={icon}
-            dimension={iconSizes[dimension] as IconProps['dimension']}
+            dimension={iconSizes[dimension] as SymbolProps['dimension']}
           />
         )}
       </div>
     </Stack>
-  )
-})
+  );
+});
 
-Textfield.displayName = 'Textfield'
+Textfield.displayName = 'Textfield';

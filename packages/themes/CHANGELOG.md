@@ -1,5 +1,29 @@
 # @wonderflow/themes
 
+## 10.0.0-next.3
+
+### Minor Changes
+
+- 03bb99f: Dafuck
+
+## 10.0.0-next.2
+
+### Minor Changes
+
+- ed181f9: ALign versions and deps
+
+## 10.0.0-next.1
+
+### Minor Changes
+
+- 22d0757: Update versions
+
+## 10.0.0-next.0
+
+### Major Changes
+
+- 2be339b: Update deps
+
 ## 8.1.0
 
 ### Minor Changes

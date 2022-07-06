@@ -1,0 +1,27 @@
+overwrite: true
+schema: "https://api-eu-central-1.graphcms.com/v2/ckwca7cae474g01xq38wt2o6q/master"
+watchConfig:
+  usePolling: true
+  interval: 1000
+documents:
+  - "apps/docs/src/**/*.graphql"
+  - "!apps/docs/src/generated"
+generates:
+  apps/docs/src/generated/graphql.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+    config:
+      namingConvention:
+        typeNames: pascal-case#pascalCase
+        enumValues: keep
+      skipTypeNameForRoot: true
+      constEnum: true
+      enumAsConst: true
+      defaultScalarType: unknown
+      maybeValue: T | undefined
+config:
+  scalars:
+    timestamptz: string
+    numeric: number

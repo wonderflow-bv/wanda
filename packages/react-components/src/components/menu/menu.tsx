@@ -1,12 +1,16 @@
 
-import { forwardRef, ReactNode, HTMLAttributes, ForwardRefExoticComponent, CSSProperties } from 'react'
-import { RovingTabIndexProvider } from 'react-roving-tabindex'
-import { MenuItem, MenuItemProps } from './menu-item/menu-item'
-import { MenuSeparator } from './menu-separator/menu-separator'
-import { MenuItemCheckbox, MenuItemCheckboxProps } from './menu-item/menu-item-checkbox'
-import { Stack, Elevator, Polymorphic } from '@/components'
-import styles from './menu.module.css'
-import clsx from 'clsx'
+import clsx from 'clsx';
+import {
+  CSSProperties, forwardRef, ForwardRefExoticComponent, HTMLAttributes, ReactNode,
+} from 'react';
+import { RovingTabIndexProvider } from 'react-roving-tabindex';
+
+import { Elevator, Polymorphic, Stack } from '@/components';
+
+import styles from './menu.module.css';
+import { MenuItem, MenuItemProps } from './menu-item/menu-item';
+import { MenuItemCheckbox, MenuItemCheckboxProps } from './menu-item/menu-item-checkbox';
+import { MenuSeparator } from './menu-separator/menu-separator';
 
 export type MenuProps = HTMLAttributes<HTMLUListElement> & {
   /**
@@ -21,12 +25,12 @@ export type MenuProps = HTMLAttributes<HTMLUListElement> & {
 
 type MenuComponent = ForwardRefExoticComponent<MenuProps> & {
   Item: Polymorphic.ForwardRefComponent<
-    Polymorphic.IntrinsicElement<typeof MenuItem>,
-    Polymorphic.OwnProps<typeof MenuItem> & MenuItemProps
+  Polymorphic.IntrinsicElement<typeof MenuItem>,
+  Polymorphic.OwnProps<typeof MenuItem> & MenuItemProps
   >;
   ItemCheckbox: Polymorphic.ForwardRefComponent<
-    Polymorphic.IntrinsicElement<typeof MenuItemCheckbox>,
-    Polymorphic.OwnProps<typeof MenuItemCheckbox> & MenuItemCheckboxProps
+  Polymorphic.IntrinsicElement<typeof MenuItemCheckbox>,
+  Polymorphic.OwnProps<typeof MenuItemCheckbox> & MenuItemCheckboxProps
   >;
   Separator: typeof MenuSeparator;
 }
@@ -39,8 +43,8 @@ export const Menu = forwardRef<HTMLUListElement, MenuProps>(({
   ...otherProps
 }, forwardedRef) => {
   const computedStyle: CSSProperties = {
-    '--max-height': maxHeight
-  }
+    '--max-height': maxHeight,
+  };
 
   return (
     <Elevator resting={2}>
@@ -59,11 +63,11 @@ export const Menu = forwardRef<HTMLUListElement, MenuProps>(({
         </RovingTabIndexProvider>
       </Stack>
     </Elevator>
-  )
-}) as MenuComponent
+  );
+}) as MenuComponent;
 
-Menu.displayName = 'Menu'
+Menu.displayName = 'Menu';
 
-Menu.Item = MenuItem
-Menu.ItemCheckbox = MenuItemCheckbox
-Menu.Separator = MenuSeparator
+Menu.Item = MenuItem;
+Menu.ItemCheckbox = MenuItemCheckbox;
+Menu.Separator = MenuSeparator;

@@ -1,9 +1,24 @@
 {
-  "extends": ["@wonderflow/eslint-config", "plugin:json/recommended"],
+  "extends": [
+    "@lasalefamine/eslint-config",
+    "@lasalefamine/eslint-config/hooks",
+    "@lasalefamine/eslint-config/a11y",
+    "plugin:@next/next/recommended",
+    "plugin:json/recommended"
+  ],
+  "ignorePatterns": ["next-env.d.ts"],
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint"],
   "parserOptions": {
     "extraFileExtensions": [".mjs"],
     "project": "./tsconfig.eslint.json"
+  },
+  "rules": {
+    "@next/next/no-img-element": "off",
+    "import/no-extraneous-dependencies": "off",
+    "@next/next/no-html-link-for-pages": ["error", "apps/docs/pages"],
+    "react/require-default-props": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "jsx-a11y/media-has-caption": "off"
   }
 }

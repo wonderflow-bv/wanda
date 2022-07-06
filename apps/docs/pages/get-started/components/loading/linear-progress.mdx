@@ -1,0 +1,80 @@
+import ComponentsNav from "@/data/components-nav";
+import { getLayoutProps } from "@/utils/get-layout-props";
+import { PropsTable } from "@/components/doc/props-table";
+
+export const getStaticProps = () =>
+  getLayoutProps({
+    layout: "component",
+    layoutProps: {
+      title: "Linear progress",
+      color: "indigo",
+      subtitle: "Indicates determinate and indeterminate loading status",
+      navigation: ComponentsNav,
+      features: [
+        "Multiple sizes",
+        "Supports determinate and indeterminate states",
+        "Themes ready",
+      ],
+      links: [
+        {
+          label: "ARIA design",
+          url: "https://www.w3.org/TR/wai-aria-1.2/#progressbar",
+        },
+      ]
+    }
+  });
+
+<LiveArea>
+  <LinearProgress showProgress value={30} />
+</LiveArea>
+
+## Anatomy
+
+```tsx lines="1,4"
+import { LinearProgress } from "@wonderflow/react-components";
+
+export default () => {
+  return <LinearProgress />;
+};
+```
+
+## API Reference
+
+<PropsTable
+  properties={[
+    {
+      name: "value",
+      type: ["number"],
+      default: "",
+      required: false,
+      description:
+        "Set the current progress of the progress bar. This value should be between 0 and 'max'. The percentage is automatically computed.",
+    },
+    {
+      name: "max",
+      type: ["number"],
+      default: "100",
+      required: false,
+      description: "Set the max value of the progress bar. This determines the computed percentage.",
+    },
+    {
+      name: "dimension",
+      type: ['enum'],
+      typeValue: "'regular' | 'big'",
+      default: 'regular',
+      required: false,
+      description: "Set the dimension of the progress bar.",
+    },
+    {
+      name: "showProgress",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      description: "Show or hide the progress value.",
+    },
+  ]}
+/>
+
+## Accessibility
+
+Adheres to the [`progressbar` role requirements](https://www.w3.org/TR/wai-aria-1.2/#progressbar).

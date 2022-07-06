@@ -1,0 +1,12 @@
+{
+  "ignore": {
+    "tsconfig": {
+      "versions": "*",
+      "reason": "Internal"
+    },
+    "@typescript-eslint/eslint-plugin": {
+      "versions": "*",
+      "reason": "internal"
+    }
+  }
+}

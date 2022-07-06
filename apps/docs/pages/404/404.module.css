@@ -1,0 +1,32 @@
+.Page {
+  --dots-size: 2px;
+  --dots-gap: 24px;
+  --dots-color: var(--dimmed-3);
+  --computed-dot-size: calc(var(--dots-size) / 2);
+
+  height: 100vh;
+  background:
+    radial-gradient(circle at 30% -20%, rgb(44 191 111 / 13%) 0%, rgb(44 191 111 / 0%) 30%),
+    radial-gradient(circle at 100% 0%, rgb(255 235 168 / 14%) 0%, rgb(255 235 168 / 0%) 40%),
+    radial-gradient(circle at 68% 3%, rgb(78 75 210 / 7%) 0%, rgb(78 75 210 / 0%) 40%),
+    radial-gradient(circle at 84% 6%, rgb(238 0 0 / 5%) 0%, rgb(238 0 0 / 0%) 40%);
+
+  &::after {
+    --computed-dot-size: calc(var(--dots-size) / 2);
+
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    mask-image: linear-gradient(0.54turn, #000 0%, rgb(0 0 0 / 0%) 77.08%);
+    background-image:
+      radial-gradient(
+        var(--dots-color) var(--computed-dot-size),
+        transparent var(--computed-dot-size)
+      );
+    background-size:
+      calc(var(--dots-gap) + var(--dots-size))
+      calc(var(--dots-gap) + var(--dots-size));
+  }
+}

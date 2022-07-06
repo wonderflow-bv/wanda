@@ -1,0 +1,37 @@
+@import '@wonderflow/react-components/core/utils/media.css';
+
+.Designers {
+  overflow: hidden;
+  background:
+    radial-gradient(100vmin 100vmin at 60.59% 100%, rgb(104 210 217 / 8%) 0%, rgb(104 210 217 / 0%) 100%),
+    radial-gradient(100vmin 100vmin at 79.05% 150%, rgb(123 97 255 / 18%) 0%, rgb(123 97 255 / 0%) 100%);
+}
+
+.Content {
+
+  @media (--from-medium) {
+    max-width: 50%;
+  }
+}
+
+.Tab {
+  position: relative;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: calc(token(--space-48) + 4px);
+    height: 2px;
+    width: 100vw;
+    right: 100%;
+    background: var(--dimmed-1);
+  }
+}
+
+.Media {
+
+  @media (--from-medium) {
+    width: 47%;
+  }
+}

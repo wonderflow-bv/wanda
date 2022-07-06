@@ -3,6 +3,10 @@
 .InputWrapper {
   display: inline-block;
   line-height: 0;
+
+  &[data-radio-control='true'] {
+    position: absolute;
+  }
 }
 
 .CheckboxInput {

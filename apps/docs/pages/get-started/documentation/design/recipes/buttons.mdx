@@ -1,0 +1,128 @@
+import UsageNav from "@/data/usage-nav";
+import { getLayoutProps } from "@/utils/get-layout-props";
+import { HintCard } from "@/components/shared/hint-card";
+
+export const getStaticProps = () =>
+  getLayoutProps({
+    layout: "mdx",
+    layoutProps: {
+      title: "Buttons",
+      color: "mint",
+      subtitle: "Allow users to take actions.",
+      navigation: UsageNav
+    }
+  });
+
+Providing buttons inside an interface is the most straightforward way to offer the user the ability to interact with the product. For this reason, users should be able to find buttons at a glance among other elements. Each button should state its action and the following result clearly, to avoid any undesired misinterpretation.
+
+## Identifying buttons
+
+Currently, the Wanda provides two main categories of buttons, each of them with several variants:
+
+<List as="ol">
+  <ListLi>Button</ListLi>
+  <ListLi>Icon Button</ListLi>
+</List>
+
+In some cases, the same action can be adequately represented by more than one type of button. In other cases, however, it is advisable to use the button designed explicitly for the purpose.
+
+Below, we propose a taxonomy, based on the visual hierarchy and relevance, the buttons should have within the same context:
+
+![](https://figmage.com/images/TaJZ18bTfqKoc9e9EcFUX.png)
+
+## High relevance
+
+High importance buttons represent the main actions the user can take in a particular page or screen.
+
+Although a view may contain several actions that fall into the high importance category, it is advisable not to load the page or screen with too many primary actions. Always try to find a balance that makes the hierarchy and scale of importance of these actions clear.
+
+### Primary buttons
+
+![](https://figmage.com/images/t_HCGmFOwntGWEFLpKxq8.png)
+
+Primary buttons are the more impactful call-to-action on any interface. For this reason, there should be no more than one primary button on a given view. However, be aware that not every interface requires a primary button.
+
+In the event of an action that leads to destructive actions, like the removal or deletion of data, it is always advisable to use the primary button.
+
+<Snackbar title="Note" kind="warning">Any view or screen must have only a single `primary` button.</Snackbar>
+
+## Medium relevance
+
+Buttons that fall into the medium importance category are more subtle than high importance ones. There may be medium importance buttons on a page either with or without high importance buttons.
+
+### Secondary buttons
+
+![](https://figmage.com/images/DQjWveK2p2aefgl3gKkmN.png)
+
+Secondary buttons are the perfect companions for primary ones. Often you have two actions beside each other but only one is the most relevant. The less relevant action can be presented then with the secondary button style or with a even less relevance style, like flat buttons.
+
+## Low relevance
+
+Low importance buttons are typically used in contexts where you want the user to focus on the content. An example is the "Read more..." text buttons used inside cards.
+
+### Flat buttons
+
+![](https://figmage.com/images/O6YiNXtSoo6S2f3RzRh8e.png)
+
+Flat buttons are the least intrusive actions you can use. They pair well with both secondary and primary actions.
+
+There can be many flat buttons inside the view, but considering their low visual impact we suggest to limit the size of the context in which they are placed. For example a good usage of these buttons is inside well defined areas, like cards or snackabars.
+
+## Usage
+
+### Icons
+
+The button component can display an icon on the left or right side of the inner text. Using an icon helps to draw more attention to the action and to convey its meaning even to people who may have difficulty with the language used in the interface. Always choose icons that match and enhance the meaning of the action and its label, if the button has one.
+
+<Stack direction="row" columnGap={24}>
+  <HintCard isBad image="https://figmage.com/images/_g0FpihvTyCulB0Fooeaz.png" />
+  <HintCard image="https://figmage.com/images/WK1W9BZSXW-QnmsTbvxEu.png" />
+</Stack>
+
+### Content
+
+The label describes verbally the action that will occur if the user triggers the button.
+
+Ensure that button labels are short and concise. Avoid using more than three words and keep the label on a single line for maximum legibility. Punctuation is accepted only where it's needed for clarity sake.
+
+<Stack direction="row" columnGap={24}>
+  <HintCard isBad image="https://figmage.com/images/JQE971SNu1rAAaD5mQqBE.png" />
+  <HintCard image="https://figmage.com/images/bQzc_FANakfejkxa7ONha.png" />
+</Stack>
+
+Use **active** verbs or **nouns** with sentence-style capitalization. Generally, using the verb only is acceptable, but only if the action remains clear to the user. Choose words that don't sound too generic or misleading.
+
+<Stack direction="row" columnGap={24}>
+  <HintCard isBad image="https://figmage.com/images/702VNOybwdORMi7sgE0HN.png" />
+  <HintCard image="https://figmage.com/images/USeX-mnP9xQmwbfnLjEEi.png" />
+</Stack>
+
+### Button vs Links
+
+When designing, a recurrent question which pops up is: _'Should I use a link or a button component? Is it the same?'_
+
+There are two aspect to considering when working with buttons and links. The first one is the "appearance" of the element, the second one is the action associated with the element (use cases). These two factors can help while choosing between buttons and links.
+
+If you need to add a link that navigates to another page, then you should use a textual link or a link that looks like a button.
+
+If you need to trigger an action inside the current page, like a javascript action or to update the user interface, then you must use the button appearance plus the HTML `button` element.
+
+When an Assistive Technology (AT) encounters a link, the AT announces where the link leads. When an AT encounters a button, it just say that it's a button.
+
+Even if the button appearance can be applied to links between pages, we recommend to use textual link whenever possible, and rely on the button style if the text link doesn't fit the requirements.
+
+![A table which sums up the different use case when to use link vs button](https://figmage.com/images/d87IRqT8i-_EyrMo2997c.png)
+
+
+```jsx
+// Triggers action on the same page
+<Button>Click</Button>;
+
+// Navigate to another page
+<Button as="a" href="...">
+  Go to...
+</Button>;
+
+// Navigate to another page
+<a href="...">Go to...</a>;
+```

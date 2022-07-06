@@ -1,1 +1,0 @@
-export { Bezier } from './bezier'

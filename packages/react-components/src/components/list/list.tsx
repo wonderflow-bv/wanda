@@ -1,10 +1,14 @@
-import { Children, cloneElement, forwardRef, isValidElement, useMemo } from 'react'
-import styles from './list.module.css'
-import clsx from 'clsx'
-import { Polymorphic } from '@/components'
-import { ListItem, ListItemProps } from './list-item'
+import clsx from 'clsx';
+import {
+  Children, cloneElement, forwardRef, isValidElement, PropsWithChildren, useMemo,
+} from 'react';
 
-export type ListProps = {
+import { Polymorphic } from '@/components';
+
+import styles from './list.module.css';
+import { ListItem, ListItemProps } from './list-item';
+
+export type ListProps = PropsWithChildren<{
   /**
    * Set the dimension of the items in the list. This affects also the marker size.
    */
@@ -13,7 +17,7 @@ export type ListProps = {
    * Set to show or hide the marker indicator beside each item in the list.
    */
   hideMarker?: boolean;
-}
+}>
 
 type PolymorphicList = Polymorphic.ForwardRefComponent<'ul', ListProps> & {
   Li: React.ForwardRefExoticComponent<ListItemProps>;
@@ -27,7 +31,7 @@ export const List = forwardRef(({
   hideMarker = false,
   ...otherProps
 }, forwardedRef) => {
-  const isUnordered = useMemo(() => Wrapper === 'ul', [Wrapper])
+  const isUnordered = useMemo(() => Wrapper === 'ul', [Wrapper]);
 
   return (
     <Wrapper
@@ -38,15 +42,15 @@ export const List = forwardRef(({
       data-list-no-marker={hideMarker}
       {...otherProps}
     >
-      {Children.map(children, (child) => isValidElement(child) && cloneElement(
+      {Children.map(children, child => isValidElement(child) && cloneElement(
         child,
         {
           hideMarker: !isUnordered && !hideMarker,
-          dimension
-        }
+          dimension,
+        },
       ))}
     </Wrapper>
-  )
-}) as PolymorphicList
+  );
+}) as PolymorphicList;
 
-List.Li = ListItem
+List.Li = ListItem;

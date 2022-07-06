@@ -1,8 +1,14 @@
-import { ChangeEvent, forwardRef, SelectHTMLAttributes, ReactNode } from 'react'
-import { Text, Stack, Icon, IconProps } from '@/components'
-import styles from './select.module.css'
-import clsx from 'clsx'
-import { useUIDSeed } from 'react-uid'
+import clsx from 'clsx';
+import {
+  ChangeEvent, forwardRef, ReactNode, SelectHTMLAttributes,
+} from 'react';
+import { useUIDSeed } from 'react-uid';
+
+import {
+  Stack, Symbol, SymbolProps, Text,
+} from '@/components';
+
+import styles from './select.module.css';
 
 export type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
   /**
@@ -12,7 +18,7 @@ export type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
   /**
    * Change the default icon displayed on the side of the select.
    */
-  icon?: IconProps['source'];
+  icon?: SymbolProps['source'];
   /**
    * Set the accessible label for the select.
    */
@@ -32,7 +38,7 @@ export type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
   /**
    * Callback function to be called when a new value is selected.
    */
-  onChange?(event: ChangeEvent<HTMLSelectElement>): void
+  onChange?: (event: ChangeEvent<HTMLSelectElement>) => void;
 }
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(({
@@ -46,13 +52,13 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(({
   onChange,
   ...otherProps
 }, forwardedRef) => {
-  const seedID = useUIDSeed()
+  const seedID = useUIDSeed();
 
   const iconSizes = {
     small: 12,
     regular: 16,
-    big: 24
-  }
+    big: 24,
+  };
 
   return (
     <Stack
@@ -83,15 +89,15 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(({
         </select>
 
         { kind === 'single' && (
-          <Icon
+          <Symbol
             className={styles.Icon}
             source={icon}
-            dimension={iconSizes[dimension] as IconProps['dimension']}
+            dimension={iconSizes[dimension] as SymbolProps['dimension']}
           />
         ) }
       </div>
     </Stack>
-  )
-})
+  );
+});
 
-Select.displayName = 'Select'
+Select.displayName = 'Select';

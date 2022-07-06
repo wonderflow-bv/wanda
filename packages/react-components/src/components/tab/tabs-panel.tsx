@@ -1,22 +1,22 @@
-import * as TabsPrimitive from '@radix-ui/react-tabs'
-import { IconProps } from '@/components'
+import * as TabsPrimitive from '@radix-ui/react-tabs';
+import clsx from 'clsx';
 
-import styles from './tab.module.css'
-import { PropsWithChildren } from 'react'
-import clsx from 'clsx'
+import { SymbolProps } from '@/components';
 
-export type TabPanelProps = PropsWithChildren<PropsWithClass> & {
+import styles from './tab.module.css';
+
+export type TabPanelProps = {
   label: string;
-  icon?: IconProps['source'];
+  symbol?: SymbolProps['source'];
   value: TabsPrimitive.TabsContentProps['value'];
 };
 
-export const TabPanel = ({
+export const TabPanel: FCChildrenClass<TabPanelProps> = ({
   className,
   children,
   label,
   ...otherProps
-}: TabPanelProps) => (
+}) => (
   <TabsPrimitive.Content
     className={clsx(styles.Panel, className)}
     data-tabs-label={label}
@@ -24,4 +24,4 @@ export const TabPanel = ({
   >
     {children}
   </TabsPrimitive.Content>
-)
+);

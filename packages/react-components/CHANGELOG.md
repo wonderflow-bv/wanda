@@ -1,5 +1,48 @@
 # @wonderflow/react-components
 
+## 10.0.0-next.5
+
+### Minor Changes
+
+- b8c784b: Fix Drawer max width and animation
+- 3275e5a: Fix selection control space when hidden
+- 048c866: Update design of Snackbar component
+- 79ab157: Add Responsive hook, provider and context
+
+## 10.0.0-next.4
+
+### Minor Changes
+
+- d6fe41d: Update Title auto id generation
+
+## 10.0.0-next.3
+
+### Minor Changes
+
+- 03bb99f: Dafuck
+
+## 10.0.0-next.2
+
+### Minor Changes
+
+- ed181f9: ALign versions and deps
+
+## 10.0.0-next.1
+
+### Minor Changes
+
+- 22d0757: Update versions
+
+## 10.0.0-next.0
+
+### Major Changes
+
+- 01f34e9: Rename iconography to Symbols. IconNames type is now SymbolNames. `<Icon />` component is not `<Symbol />`.
+- 2be339b: Update deps
+- 8ac30a5: Add new highlight colors to Chip
+- 748ca0d: Fix tab active state
+- 01b15ff: Add auto id generator for titles
+
 ## 9.5.0
 
 ### Minor Changes
@@ -229,7 +272,7 @@
 
 ### Major Changes
 
-- [#45](https://github.com/wonderflow-bv/wanda/pull/45) [`a37a9c8`](https://github.com/wonderflow-bv/wanda/commit/a37a9c83b231410bdaee3f4127635f9b12329542) Thanks [@equinusocio](https://github.com/equinusocio)! - Iconography has been completely refactored and a new Duotone style is now live.
+- [#45](https://github.com/wonderflow-bv/wanda/pull/45) [`a37a9c8`](https://github.com/wonderflow-bv/wanda/commit/a37a9c83b231410bdaee3f4127635f9b12329542) Thanks [@equinusocio](https://github.com/equinusocio)! - Symbols has been completely refactored and a new Duotone style is now live.
 
 * [#47](https://github.com/wonderflow-bv/wanda/pull/47) [`676c15d`](https://github.com/wonderflow-bv/wanda/commit/676c15dbe5c03855a6316da6c1af6ce054dccfa6) Thanks [@equinusocio](https://github.com/equinusocio)! - Rename SkeletonBlock into Skeleton and drop related dependencies
 
@@ -261,7 +304,7 @@
 
 ### Major Changes
 
-- [#45](https://github.com/wonderflow-bv/wanda/pull/45) [`a37a9c8`](https://github.com/wonderflow-bv/wanda/commit/a37a9c83b231410bdaee3f4127635f9b12329542) Thanks [@equinusocio](https://github.com/equinusocio)! - Iconography has been completely refactored and a new Duotone style is now live.
+- [#45](https://github.com/wonderflow-bv/wanda/pull/45) [`a37a9c8`](https://github.com/wonderflow-bv/wanda/commit/a37a9c83b231410bdaee3f4127635f9b12329542) Thanks [@equinusocio](https://github.com/equinusocio)! - Symbols has been completely refactored and a new Duotone style is now live.
 
 ### Minor Changes
 
@@ -312,21 +355,21 @@
 ### Patch Changes
 
 - Updated dependencies [[`5d6fda0`](https://github.com/wonderflow-bv/wanda/commit/5d6fda0a920f5915741a6b4f0c6bd9ac5903388d), [`23dcabe`](https://github.com/wonderflow-bv/wanda/commit/23dcabe148c3420b286d78e06abc82e627dfe083), [`4a4464b`](https://github.com/wonderflow-bv/wanda/commit/4a4464b034dbf18fc75ed355454ba7bbdd4b67b4)]:
-  - @wonderflow/icons@1.0.3
+  - @wonderflow/symbols@1.0.3
 
 ## 3.1.5
 
 ### Patch Changes
 
 - Updated dependencies [[`891d4ad`](https://github.com/wonderflow-bv/wanda/commit/891d4ade6b9aada229112d3be189cfed049aab87)]:
-  - @wonderflow/icons@1.0.2
+  - @wonderflow/symbols@1.0.2
 
 ## 3.1.4
 
 ### Patch Changes
 
 - Updated dependencies [aa91e4d]
-  - @wonderflow/icons@1.0.1
+  - @wonderflow/symbols@1.0.1
 
 ## 3.1.3
 
@@ -334,4 +377,4 @@
 
 - Updated dependencies [820149e]
 - Updated dependencies [af81a6b]
-  - @wonderflow/icons@3.1.3
+  - @wonderflow/symbols@3.1.3

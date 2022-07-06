@@ -1,10 +1,14 @@
-import clsx from 'clsx'
-import { Children, cloneElement, forwardRef, isValidElement, ReactNode } from 'react'
-import { Stack, Text } from '@/components'
-import { useUIDSeed } from 'react-uid'
-import styles from './input-group.module.css'
+import clsx from 'clsx';
+import {
+  Children, cloneElement, forwardRef, isValidElement, ReactNode,
+} from 'react';
+import { useUIDSeed } from 'react-uid';
 
-export type InputGroupProps = PropsWithClass & {
+import { Stack, Text } from '@/components';
+
+import styles from './input-group.module.css';
+
+export type InputGroupProps = {
   /**
    * Pas the input element to decorate
    */
@@ -12,7 +16,7 @@ export type InputGroupProps = PropsWithClass & {
   /**
    * Add a decoration element after the input.
    */
-  start?: ReactNode;
+  prefix?: ReactNode;
   /**
    * Add a decoration element before the input.
    */
@@ -20,23 +24,27 @@ export type InputGroupProps = PropsWithClass & {
   /**
    * Add an accessible label to the componsed input group
    */
-  label?: ReactNode;
+  suffix?: ReactNode;
   /**
    * Pass the dimension down to the imput element.
    */
   dimension?: 'small' | 'big' | 'regular';
+  /**
+   * Assign a label to the center field.
+   */
+  label?: string;
 }
 
-export const InputGroup = forwardRef<HTMLFieldSetElement, InputGroupProps>(({
+export const InputGroup = forwardRef<HTMLFieldSetElement, PropsWithClass<InputGroupProps>>(({
   className,
   input,
-  end,
-  start,
+  suffix,
+  prefix,
   label,
   dimension = 'regular',
   ...otherProps
 }, forwardedRef) => {
-  const seedID = useUIDSeed()
+  const seedID = useUIDSeed();
 
   return (
     <Stack
@@ -55,38 +63,38 @@ export const InputGroup = forwardRef<HTMLFieldSetElement, InputGroupProps>(({
         inline
         ref={forwardedRef}
         className={clsx(styles.InputGroup, className)}
-        data-input-group-has-end={Boolean(end)}
-        data-input-group-has-start={!!start}
+        data-input-group-has-end={Boolean(suffix)}
+        data-input-group-has-start={!!prefix}
         {...otherProps}
       >
         <div className={styles.Start}>
-          {Children.map(start, (child) => isValidElement(child) && cloneElement(
+          {Children.map(prefix, child => isValidElement(child) && cloneElement(
             child,
             {
-              dimension
-            }
+              dimension,
+            },
           ))}
         </div>
         <div className={styles.InputField}>
-          {Children.map(input, (child) => isValidElement(child) && cloneElement(
+          {Children.map(input, child => isValidElement(child) && cloneElement(
             child,
             {
               id: seedID('field'),
-              dimension
-            }
+              dimension,
+            },
           ))}
         </div>
         <div className={styles.End}>
-          {Children.map(end, (child) => isValidElement(child) && cloneElement(
+          {Children.map(suffix, child => isValidElement(child) && cloneElement(
             child,
             {
-              dimension
-            }
+              dimension,
+            },
           ))}
         </div>
       </Stack>
     </Stack>
-  )
-})
+  );
+});
 
-InputGroup.displayName = 'InputGroup'
+InputGroup.displayName = 'InputGroup';

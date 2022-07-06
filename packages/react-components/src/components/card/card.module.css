@@ -45,6 +45,30 @@
     }
   }
 
+  &[data-card-vibrant='true'][data-card-dimmed='0'] {
+    background-color: var(--global-vibrancy-background-soft);
+
+    &[data-card-highlight-hover='true']:is(:hover, :focus-visible) {
+      background-color: var(--global-background);
+    }
+  }
+
+  &[data-card-vibrant='true'][data-card-dimmed='1'] {
+    background-color: var(--global-vibrancy-background);
+
+    &[data-card-highlight-hover='true']:is(:hover, :focus-visible) {
+      background-color: var(--global-vibrancy-background-soft);
+    }
+  }
+
+  &[data-card-vibrant='true'][data-card-dimmed='2'] {
+    background-color: var(--global-vibrancy-background-hard);
+
+    &[data-card-highlight-hover='true']:is(:hover, :focus-visible) {
+      background-color: var(--global-vibrancy-background);
+    }
+  }
+
   &[data-card-bordered='true'] {
     border: solid 1px var(--dimmed-1);
   }

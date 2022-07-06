@@ -6,7 +6,7 @@
   overflow: auto;
 }
 
-.Trigger {
+.Trigger.Trigger {
   position: relative;
   overflow: unset;
   border-radius: 0;
@@ -23,6 +23,11 @@
   font-family: inherit;
   white-space: nowrap;
   flex-shrink: 0;
+
+  &[data-tab-dimension='big'] {
+    font-size: token(--font-size-22);
+    height: calc(token(--space-56) - var(--separator-size));
+  }
 
   &:active {
     transform: none;

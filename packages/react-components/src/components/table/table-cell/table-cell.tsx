@@ -1,12 +1,12 @@
-import clsx from 'clsx'
-import { CSSProperties, forwardRef } from 'react'
+import clsx from 'clsx';
+import { CSSProperties, forwardRef } from 'react';
 
-import { Icon, Polymorphic } from '@/components'
+import { Polymorphic, Symbol } from '@/components';
 
-import { OptionalColumnTypes } from '../types'
-import styles from './table-cell.module.css'
+import { OptionalColumnTypes } from '../types';
+import styles from './table-cell.module.css';
 
-type TableCellProps = PropsWithClass & {
+type TableCellProps = {
   collapsed?: OptionalColumnTypes['isCollapsed'];
   isSorted?: boolean;
   isSortedDesc?: boolean;
@@ -30,13 +30,13 @@ export const TableCell = forwardRef(({
   width,
   ...otherProps
 }, forwardedRef) => {
-  const isWidthString = typeof width === 'string'
-  const computedWidthNumber = typeof width === 'number' ? `${width}px` : undefined
+  const isWidthString = typeof width === 'string';
+  const computedWidthNumber = typeof width === 'number' ? `${width}px` : undefined;
 
   const dynamicStyle: CSSProperties = {
     '--width': isWidthString ? width : computedWidthNumber,
-    '--text-align': align
-  }
+    '--text-align': align,
+  };
 
   return (
     <Wrapper
@@ -48,13 +48,13 @@ export const TableCell = forwardRef(({
       style={{
         ...dynamicStyle,
         ...style,
-        userSelect: Wrapper === 'td' ? undefined : 'none'
+        userSelect: Wrapper === 'td' ? undefined : 'none',
       }}
       {...otherProps}
     >
       {children}
       {isSorted && (
-        <Icon
+        <Symbol
           dimension={12}
           className={styles.HeadCellIcon}
           fill="var(--highlight-red-foreground)"
@@ -62,5 +62,5 @@ export const TableCell = forwardRef(({
         />
       )}
     </Wrapper>
-  )
-}) as PolymorphicCell
+  );
+}) as PolymorphicCell;

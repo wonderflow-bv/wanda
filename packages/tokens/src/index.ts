@@ -1,18 +1,20 @@
-import CssBezier from './transformers/css-bezier'
-import HexHslValues from './transformers/hex-hslvalues'
-import SizePxToRem from './transformers/px-rem'
-import SizePxToRootEm from './transformers/px-rootem'
+/* eslint-disable @typescript-eslint/no-var-requires */
 
-const StyleDictionary = require('style-dictionary').extend('src/tokens.config.js')
+import CssBezier from './transformers/css-bezier';
+import HexHslValues from './transformers/hex-hslvalues';
+import SizePxToRem from './transformers/px-rem';
+import SizePxToRootEm from './transformers/px-rootem';
+
+const StyleDictionary = require('style-dictionary').extend('src/tokens.config.js');
 
 /**
  * Register custom transformers to process token values for
  * the web platform
  */
-StyleDictionary.registerTransform(HexHslValues)
-StyleDictionary.registerTransform(SizePxToRem)
-StyleDictionary.registerTransform(SizePxToRootEm)
-StyleDictionary.registerTransform(CssBezier)
+StyleDictionary.registerTransform(HexHslValues);
+StyleDictionary.registerTransform(SizePxToRem);
+StyleDictionary.registerTransform(SizePxToRootEm);
+StyleDictionary.registerTransform(CssBezier);
 
 /**
  * Add the custom transformers to a new transformGroup `custom-web`
@@ -28,11 +30,11 @@ StyleDictionary.registerTransformGroup({
     'size/px-rootem',
     'size/px-rem',
     'color/hslvalue',
-    'easing/cubic-bezier'
-  ]
-})
+    'easing/cubic-bezier',
+  ],
+});
 
 /**
  * Manually run StyleDictionary for all the configured platforms
  */
-StyleDictionary.buildAllPlatforms()
+StyleDictionary.buildAllPlatforms();

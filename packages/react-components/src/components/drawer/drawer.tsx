@@ -1,13 +1,19 @@
-import { CSSProperties, forwardRef, PropsWithChildren, ReactNode } from 'react'
-import { domMax, LazyMotion, m } from 'framer-motion'
-import clsx from 'clsx'
-import { FocusOn, AutoFocusInside } from 'react-focus-on'
-import { useKeyPress } from 'ahooks'
-import styles from './drawer.module.css'
-import { useOverlayContext, Elevator, IconButton, Stack, Title } from '@/components'
-import tkns from '@wonderflow/tokens/platforms/web/tokens.json'
+import tkns from '@wonderflow/tokens/platforms/web/tokens.json';
+import { useKeyPress } from 'ahooks';
+import clsx from 'clsx';
+import { domMax, LazyMotion, m } from 'framer-motion';
+import {
+  CSSProperties, forwardRef, ReactNode, Ref,
+} from 'react';
+import { AutoFocusInside, FocusOn } from 'react-focus-on';
 
-export type DrawerProps = PropsWithChildren<PropsWithClass> & {
+import {
+  Elevator, IconButton, Stack, Title, useOverlayContext,
+} from '@/components';
+
+import styles from './drawer.module.css';
+
+export type DrawerProps = {
   /**
    * This enable the drawer to be closed by clicking on the overlay.
    * Even if this can be set to `false` we strongly recommend to leave
@@ -49,7 +55,7 @@ export type DrawerProps = PropsWithChildren<PropsWithClass> & {
   isModal?: boolean;
 }
 
-export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(({
+export const Drawer: FCChildrenClass<DrawerProps> = forwardRef(({
   children,
   className,
   closeOnClickOutside = true,
@@ -60,35 +66,33 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(({
   isModal = true,
   title,
   ...otherProps
-}, forwardedRef) => {
-  const { titleId, onClose } = useOverlayContext()
-  const cssEasingToArray = (cssEasing: string) => {
-    const [x1, y1, x2, y2] = cssEasing.replace(/[^0-9.,]+/g, '').split(',').map(i => parseFloat(i))
-    return [x1, y1, x2, y2]
-  }
+}, forwardedRef: Ref<HTMLDivElement>) => {
+  const { titleId, onClose } = useOverlayContext();
 
-  useKeyPress('esc', () => (!isModal && onClose) && onClose())
+  useKeyPress('esc', () => (!isModal && onClose) && onClose());
 
   const dynamicStyle: CSSProperties = {
-    '--max-w': maxWidth
-  }
+    '--max-w': maxWidth,
+  };
 
   const DrawerAnimation = {
     visible: {
       x: 0,
       transition: {
-        ease: cssEasingToArray(tkns.easing.entrance),
-        duration: parseFloat(tkns.duration[500].replace('s', ''))
-      }
+        type: 'spring',
+        bounce: 0,
+        duration: parseFloat(tkns.duration[500].replace('s', '')),
+      },
     },
     hidden: {
       x: side === 'right' ? '100%' : '-100%',
       transition: {
-        ease: cssEasingToArray(tkns.easing.exit),
-        duration: parseFloat(tkns.duration[500].replace('s', ''))
-      }
-    }
-  }
+        type: 'spring',
+        bounce: 0,
+        duration: parseFloat(tkns.duration[500].replace('s', '')),
+      },
+    },
+  };
 
   return (
     <div
@@ -142,7 +146,7 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(({
         </LazyMotion>
       </FocusOn>
     </div>
-  )
-})
+  );
+});
 
-Drawer.displayName = 'Drawer'
+Drawer.displayName = 'Drawer';

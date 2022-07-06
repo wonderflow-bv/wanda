@@ -1,48 +1,49 @@
-import { TokensTypes } from '@wonderflow/tokens/platforms/web'
-import tkns from '@wonderflow/tokens/platforms/web/tokens.json'
-import { CSSProperties, Fragment, useCallback } from 'react'
-import { useUIDSeed } from 'react-uid'
-import styles from './skeleton.module.css'
+import { TokensTypes } from '@wonderflow/tokens/platforms/web';
+import tkns from '@wonderflow/tokens/platforms/web/tokens.json';
+import { CSSProperties, Fragment, useCallback } from 'react';
+import { useUIDSeed } from 'react-uid';
 
-export type SkeletonProps = PropsWithClass & {
+import styles from './skeleton.module.css';
+
+export type SkeletonProps = {
   /**
    * Set the edge radius of each skeleton block.
    * This value must be one of the available `radius` tokens
    */
-  borderRadius?: TokensTypes['radius'],
+  borderRadius?: TokensTypes['radius'];
   /**
    * Set the block to be a circle, ignoring the `borderRadius` property.
    */
-  circle?: boolean,
+  circle?: boolean;
   /**
    * Set how many skeleton blocks to display.
    */
-  count?: number,
+  count?: number;
   /**
    * Set the width of each skeleton block.
    */
-  width?: string | number,
+  width?: string | number;
   /**
    * Set the height of each skeleton block.
    */
-  height?: string | number,
+  height?: string | number;
   /**
    * Renders every block on their own line or in a single line.
    *
    * Note: By default, if a width is not specified, every items will fill the available space
    */
-  inline?: boolean,
+  inline?: boolean;
   /**
    * Enable the shim animation and the announcement of the loading state.
    */
-  enableAnimation?: boolean,
+  enableAnimation?: boolean;
   /**
    * Set the gap between stacked skeleton items.
    */
-  gap?: TokensTypes['space'],
+  gap?: TokensTypes['space'];
 }
 
-export const Skeleton = ({
+export const Skeleton: FCChildrenClass<SkeletonProps> = ({
   className,
   borderRadius = 4,
   style,
@@ -54,18 +55,18 @@ export const Skeleton = ({
   inline,
   circle,
   ...otherProps
-}: SkeletonProps) => {
-  const uid = useUIDSeed()
-  const computedWidth = typeof width === 'number' ? `${width}px` : width
-  const computedHeight = typeof height === 'number' ? `${height}px` : height
+}) => {
+  const uid = useUIDSeed();
+  const computedWidth = typeof width === 'number' ? `${width}px` : width;
+  const computedHeight = typeof height === 'number' ? `${height}px` : height;
 
   const SkeletonItem = useCallback(() => {
     const dynamicStyle: CSSProperties = {
       '--radius': borderRadius && tkns.radius[borderRadius],
       '--width': width && computedWidth,
       '--height': height && computedHeight,
-      '--gap': gap ? tkns.space[gap] : undefined
-    }
+      '--gap': gap ? tkns.space[gap] : undefined,
+    };
 
     return (
       <span
@@ -76,8 +77,8 @@ export const Skeleton = ({
       >
         &zwnj;
       </span>
-    )
-  }, [borderRadius, width, computedWidth, height, computedHeight, gap, circle, enableAnimation, style])
+    );
+  }, [borderRadius, width, computedWidth, height, computedHeight, gap, circle, enableAnimation, style]);
 
   return (
     <span
@@ -87,16 +88,14 @@ export const Skeleton = ({
       {...otherProps}
     >
       {
-        Array.from({ length: count }).map((_, i) => {
-          return inline
-            ? <SkeletonItem key={uid(i)} />
-            : (
-              <Fragment key={uid(i)}>
-                <SkeletonItem />
-                <br />
-              </Fragment>
-              )
-        })}
+        Array.from({ length: count }).map((_, i) => (inline
+          ? <SkeletonItem key={uid(i)} />
+          : (
+            <Fragment key={uid(i)}>
+              <SkeletonItem />
+              <br />
+            </Fragment>
+          )))}
     </span>
-  )
-}
+  );
+};
