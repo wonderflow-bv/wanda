@@ -28,6 +28,7 @@ export const MDX_COMPONENTS = {
   li: ({ children, ...props }: ListItemProps) => <Components.List.Li markerColor="var(--dimmed-5)" {...props} />,
   hr: (props: SeparatorProps) => <Components.Separator {...props} />,
   GridItem: (props: GridItemProps) => <Components.Grid.Item {...props} />,
+  Code: (props: CodeProps) => <Code {...props} />,
   MenuItem: (props: MenuItemProps) => <Components.Menu.Item {...props} />,
   ListLi: (props: ListItemProps) => <Components.List.Li {...props} />,
   MenuItemCheckbox: (props: MenuItemCheckboxProps) => <Components.Menu.ItemCheckbox {...props} />,
