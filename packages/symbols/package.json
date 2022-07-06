@@ -1,7 +1,7 @@
 {
   "name": "@wonderflow/symbols",
   "description": "Wanda's symbols",
-  "version": "10.0.0-beta.0",
+  "version": "10.0.0",
   "author": "Wonderflow",
   "license": "MIT",
   "main": "dist/index",
@@ -52,7 +52,7 @@
     "picocolors": "1.0.0",
     "svgo": "2.8.0",
     "svgstore": "3.0.1",
-    "tsconfig": "10.0.0-beta.0"
+    "tsconfig": "10.0.0"
   },
   "bugs": {
     "url": "https://github.com/wonderflow-bv/wanda/issues"

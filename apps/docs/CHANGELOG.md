@@ -1,5 +1,47 @@
 # docs
 
+## 10.0.0
+
+### Major Changes
+
+- a42f78d: Changes
+
+### Minor Changes
+
+- 42b4a64: Changes
+
+### Patch Changes
+
+- Updated dependencies [a42f78d]
+- Updated dependencies [a42f78d]
+- Updated dependencies [a42f78d]
+- Updated dependencies [a42f78d]
+- Updated dependencies [a42f78d]
+- Updated dependencies [a42f78d]
+- Updated dependencies [a42f78d]
+- Updated dependencies [42b4a64]
+- Updated dependencies [a42f78d]
+- Updated dependencies [a42f78d]
+- Updated dependencies [a42f78d]
+- Updated dependencies [a42f78d]
+- Updated dependencies [a42f78d]
+- Updated dependencies [a42f78d]
+- Updated dependencies [a42f78d]
+- Updated dependencies [a42f78d]
+- Updated dependencies [a42f78d]
+- Updated dependencies [a42f78d]
+- Updated dependencies [a42f78d]
+- Updated dependencies [a42f78d]
+- Updated dependencies [a42f78d]
+- Updated dependencies [a42f78d]
+- Updated dependencies [a42f78d]
+- Updated dependencies [a42f78d]
+- Updated dependencies [a42f78d]
+- Updated dependencies [a42f78d]
+  - @wonderflow/symbols@10.0.0
+  - @wonderflow/react-components@10.0.0
+  - @wonderflow/themes@10.0.0
+
 ## 10.0.0-beta.0
 
 ### Major Changes
