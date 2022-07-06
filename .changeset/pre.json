@@ -10,5 +10,33 @@
     "@wonderflow/tokens": "9.100.0",
     "tsconfig": "9.100.0"
   },
-  "changesets": []
+  "changesets": [
+    "large-apes-accept",
+    "afraid-cups-care",
+    "beige-mails-push",
+    "calm-buttons-kick",
+    "fair-hounds-poke",
+    "chatty-chairs-draw",
+    "dirty-pans-shop",
+    "famous-tigers-approve",
+    "many-flies-protect",
+    "mighty-buckets-lie",
+    "nasty-radios-switch",
+    "nine-elephants-share",
+    "old-lizards-work",
+    "olive-gorillas-bake",
+    "olive-rockets-cover",
+    "popular-students-smoke",
+    "red-taxis-tie",
+    "seven-queens-peel",
+    "six-buttons-obey",
+    "sharp-cups-listen",
+    "slimy-queens-study",
+    "slimy-zebras-wonder",
+    "tame-moose-divide",
+    "tender-crabs-confess",
+    "tidy-fans-develop",
+    "tiny-dingos-kiss",
+    "warm-impalas-sell"
+  ]
 }
