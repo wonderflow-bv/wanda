@@ -1,5 +1,4 @@
 ---
-"docs": minor
 "@wonderflow/react-components": minor
 ---
 

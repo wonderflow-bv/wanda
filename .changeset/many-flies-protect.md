@@ -1,5 +1,4 @@
 ---
-"docs": major
 "@wonderflow/config": major
 "@wonderflow/symbols": major
 "@wonderflow/react-components": major
