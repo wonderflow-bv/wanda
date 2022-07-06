@@ -1,5 +1,11 @@
 # tsconfig
 
+## 10.0.0-beta.0
+
+### Major Changes
+
+- a42f78d: Changes
+
 ## 1.0.0-next.0
 
 ### Major Changes

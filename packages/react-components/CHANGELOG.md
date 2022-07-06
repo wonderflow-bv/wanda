@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 10.0.0-beta.0
+
+### Major Changes
+
+- a42f78d: Changes
+
 ## 9.5.1
 
 ### Patch Changes
