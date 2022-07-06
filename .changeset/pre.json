@@ -1,14 +1,14 @@
 {
-  "mode": "exit",
+  "mode": "pre",
   "tag": "beta",
   "initialVersions": {
-    "docs": "9.100.0",
-    "@wonderflow/config": "9.100.0",
-    "@wonderflow/react-components": "9.100.0",
-    "@wonderflow/symbols": "9.100.0",
-    "@wonderflow/themes": "9.100.0",
-    "@wonderflow/tokens": "9.100.0",
-    "tsconfig": "9.100.0"
+    "docs": "10.0.0-beta.0",
+    "@wonderflow/config": "10.0.0-beta.0",
+    "@wonderflow/react-components": "10.0.0-beta.0",
+    "@wonderflow/symbols": "10.0.0-beta.0",
+    "@wonderflow/themes": "10.0.0-beta.0",
+    "@wonderflow/tokens": "10.0.0-beta.0",
+    "tsconfig": "10.0.0-beta.0"
   },
   "changesets": [
     "afraid-cups-care",
