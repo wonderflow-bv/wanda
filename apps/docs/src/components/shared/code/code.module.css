@@ -9,6 +9,7 @@
 
   position: relative;
   display: grid;
+  margin: token(--space-32) 0;
   border-radius: token(--radius-8);
   background:
     radial-gradient(50% 80% at 6% 106%, rgb(139 255 227 / 8%) 0%, rgb(139 255 227 / 0%) 100%),
