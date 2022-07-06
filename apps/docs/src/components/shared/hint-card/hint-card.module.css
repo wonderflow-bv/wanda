@@ -1,0 +1,21 @@
+.HintCard {
+  --accent: var(--highlight-green-foreground);
+
+  &[data-isbad='true'] {
+    --accent: var(--highlight-red-foreground);
+  }
+}
+
+.ImageContainer {
+  overflow: hidden;
+  position: relative;
+}
+
+.Separator {
+  height: token(--space-4);
+  background-color: var(--accent);
+}
+
+.Title.Title {
+  color: var(--accent);
+}

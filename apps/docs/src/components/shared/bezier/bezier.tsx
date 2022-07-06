@@ -129,7 +129,7 @@ export const Bezier = ({
                   duration: isRunning ? timing : 0,
                   repeat: isRunning ? Infinity : 0,
                   repeatDelay: 1,
-                  value,
+                  ease: value,
                 }}
               />
               <Text size={14}>Easing</Text>

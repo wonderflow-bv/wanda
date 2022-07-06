@@ -98,31 +98,31 @@ const UsageNav: NavigationMenu = [
             label: 'Popover',
             target: '',
           },
-          {
-            path: '/documentation/usage/design/recipes/forms',
-            label: 'Forms',
-            target: '',
-          },
-          {
-            path: '/documentation/usage/design/recipes/info-states',
-            label: 'Info states',
-            target: '',
-          },
-          {
-            path: '/documentation/usage/design/recipes/loading',
-            label: 'Loading',
-            target: '',
-          },
-          {
-            path: '/documentation/usage/design/recipes/modals',
-            label: 'Modals',
-            target: '',
-          },
-          {
-            path: '/documentation/usage/design/recipes/notifications',
-            label: 'Notifications',
-            target: '',
-          },
+          // {
+          //   path: '/documentation/usage/design/recipes/forms',
+          //   label: 'Forms',
+          //   target: '',
+          // },
+          // {
+          //   path: '/documentation/usage/design/recipes/info-states',
+          //   label: 'Info states',
+          //   target: '',
+          // },
+          // {
+          //   path: '/documentation/usage/design/recipes/loading',
+          //   label: 'Loading',
+          //   target: '',
+          // },
+          // {
+          //   path: '/documentation/usage/design/recipes/modals',
+          //   label: 'Modals',
+          //   target: '',
+          // },
+          // {
+          //   path: '/documentation/usage/design/recipes/notifications',
+          //   label: 'Notifications',
+          //   target: '',
+          // },
         ],
       },
     ],

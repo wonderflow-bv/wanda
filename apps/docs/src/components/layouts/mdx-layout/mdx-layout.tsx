@@ -4,6 +4,7 @@ import type {
   ListItemProps, ListProps, MenuItemCheckboxProps, MenuItemProps, SeparatorProps, TextProps, TitleProps,
 } from '@wonderflow/react-components';
 import * as Components from '@wonderflow/react-components';
+import { TabPanelProps } from '@wonderflow/react-components/dist/components/tab/tabs-panel';
 import Link, { LinkProps } from 'next/link';
 import { ImgHTMLAttributes, PropsWithChildren } from 'react';
 
@@ -30,6 +31,7 @@ export const MDX_COMPONENTS = {
   GridItem: (props: GridItemProps) => <Components.Grid.Item {...props} />,
   Code: (props: CodeProps) => <Code {...props} />,
   MenuItem: (props: MenuItemProps) => <Components.Menu.Item {...props} />,
+  TabPanel: (props: TabPanelProps) => <Components.Tab.Panel {...props} />,
   ListLi: (props: ListItemProps) => <Components.List.Li {...props} />,
   MenuItemCheckbox: (props: MenuItemCheckboxProps) => <Components.Menu.ItemCheckbox {...props} />,
   MenuSeparator: (props: Record<string, unknown>) => <Components.Menu.Separator {...props} />,
