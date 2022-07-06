@@ -1,7 +1,7 @@
 {
   "name": "docs",
   "description": "The Wonderflow Design System website",
-  "version": "*",
+  "version": "9.5.0",
   "private": true,
   "author": "Wonderflow",
   "license": "MIT",

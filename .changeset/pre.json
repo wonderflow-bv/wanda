@@ -1,0 +1,41 @@
+{
+  "mode": "pre",
+  "tag": "beta",
+  "initialVersions": {
+    "docs": "9.5.0",
+    "@wonderflow/config": "9.5.1",
+    "@wonderflow/react-components": "9.5.1",
+    "@wonderflow/symbols": "9.5.1",
+    "@wonderflow/themes": "9.5.1",
+    "@wonderflow/tokens": "9.5.1",
+    "tsconfig": "1.0.0-next.0"
+  },
+  "changesets": [
+    "afraid-cups-care",
+    "beige-mails-push",
+    "calm-buttons-kick",
+    "fair-hounds-poke",
+    "chatty-chairs-draw",
+    "dirty-pans-shop",
+    "famous-tigers-approve",
+    "many-flies-protect",
+    "mighty-buckets-lie",
+    "nasty-radios-switch",
+    "nine-elephants-share",
+    "old-lizards-work",
+    "olive-gorillas-bake",
+    "olive-rockets-cover",
+    "popular-students-smoke",
+    "red-taxis-tie",
+    "seven-queens-peel",
+    "six-buttons-obey",
+    "sharp-cups-listen",
+    "slimy-queens-study",
+    "slimy-zebras-wonder",
+    "tame-moose-divide",
+    "tender-crabs-confess",
+    "tidy-fans-develop",
+    "tiny-dingos-kiss",
+    "warm-impalas-sell"
+  ]
+}
