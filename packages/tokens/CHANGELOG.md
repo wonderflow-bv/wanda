@@ -1,5 +1,11 @@
 # @wonderflow/tokens
 
+## 9.5.1
+
+### Patch Changes
+
+- 8fed3a4: Minor fixes
+
 ## 10.0.0-next.3
 
 ### Minor Changes
