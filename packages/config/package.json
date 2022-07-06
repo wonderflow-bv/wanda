@@ -1,7 +1,7 @@
 {
   "name": "@wonderflow/config",
   "description": "Wanda design system shared configurations ",
-  "version": "9.5.1",
+  "version": "10.0.0-beta.0",
   "author": "Wonderflow",
   "license": "MIT",
   "main": "dist/index",
@@ -34,7 +34,7 @@
     "postcss": ">=8.x"
   },
   "dependencies": {
-    "@wonderflow/tokens": "*",
+    "@wonderflow/tokens": "10.0.0-beta.0",
     "cssnano": "5.1.12",
     "cssnano-preset-default": "5.2.12",
     "flat": "5.0.2",
@@ -48,7 +48,7 @@
     "@typescript-eslint/eslint-plugin": "5.29.0",
     "@typescript-eslint/parser": "5.30.4",
     "@wonderflow/eslint-config": "1.1.11",
-    "tsconfig": "1.0.0-next.0",
+    "tsconfig": "10.0.0-beta.0",
     "typescript": "4.7.4"
   },
   "types": "./dist/index.d.ts"
