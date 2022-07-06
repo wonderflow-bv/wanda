@@ -47,7 +47,7 @@ export const Developers: FCClass = ({
                   <Text size={22} dimmed={6}>
                     A full set of highly customizable React components and styles ready to use inside applications.
                   </Text>
-                  <Link href="/documentation/components/actions/button" passHref>
+                  <Link href="/get-started/components/actions/button" passHref>
                     <Button as="a" kind="secondary" dimension="big">Read more</Button>
                   </Link>
                 </Stack>
@@ -59,7 +59,7 @@ export const Developers: FCClass = ({
                     Color, spaces, font... every basic and common property is available as design token.
                     The foundamentals of consistency across platforms.
                   </Text>
-                  <Link href="/documentation/usage/develop/design-tokens" passHref>
+                  <Link href="/get-started/documentation/develop/design-tokens" passHref>
                     <Button as="a" kind="secondary" dimension="big">Read more</Button>
                   </Link>
                 </Stack>
@@ -71,7 +71,7 @@ export const Developers: FCClass = ({
                     Easily handle light/dark themes via JS or CSS, by using the provided
                     collections of custom properties and JSON values.
                   </Text>
-                  <Link href="/documentation/usage/develop/themes" passHref>
+                  <Link href="/get-started/documentation/develop/themes" passHref>
                     <Button as="a" kind="secondary" dimension="big">Read more</Button>
                   </Link>
                 </Stack>

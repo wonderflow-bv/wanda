@@ -5,27 +5,27 @@ const ComponentsNav: NavigationMenu = [
     title: 'Actions',
     items: [
       {
-        path: '/documentation/components/actions/button',
+        path: '/get-started/components/actions/button',
         label: 'Button',
         target: '',
       },
       {
-        path: '/documentation/components/actions/disclosure',
+        path: '/get-started/components/actions/disclosure',
         label: 'Disclosure',
         target: '',
       },
       {
-        path: '/documentation/components/actions/icon-button',
+        path: '/get-started/components/actions/icon-button',
         label: 'Icon button',
         target: '',
       },
       {
-        path: '/documentation/components/actions/split-button',
+        path: '/get-started/components/actions/split-button',
         label: 'Split button',
         target: '',
       },
       {
-        path: '/documentation/components/actions/toggle-button',
+        path: '/get-started/components/actions/toggle-button',
         label: 'Toggle button',
         target: '',
       },
@@ -35,32 +35,32 @@ const ComponentsNav: NavigationMenu = [
     title: 'Dialogs',
     items: [
       {
-        path: '/documentation/components/dialogs/drawer',
+        path: '/get-started/components/dialogs/drawer',
         label: 'Drawer',
         target: '',
       },
       {
-        path: '/documentation/components/dialogs/popover',
+        path: '/get-started/components/dialogs/popover',
         label: 'Popover',
         target: '',
       },
       {
-        path: '/documentation/components/dialogs/info-state',
+        path: '/get-started/components/dialogs/info-state',
         label: 'Info state',
         target: '',
       },
       {
-        path: '/documentation/components/dialogs/modal',
+        path: '/get-started/components/dialogs/modal',
         label: 'Modal',
         target: '',
       },
       {
-        path: '/documentation/components/dialogs/snackbar',
+        path: '/get-started/components/dialogs/snackbar',
         label: 'Snackbar',
         target: '',
       },
       {
-        path: '/documentation/components/dialogs/tooltip',
+        path: '/get-started/components/dialogs/tooltip',
         label: 'Tooltip',
         target: '',
       },
@@ -70,7 +70,7 @@ const ComponentsNav: NavigationMenu = [
     title: 'Inputs',
     items: [
       {
-        path: '/documentation/components/inputs/autocomplete',
+        path: '/get-started/components/inputs/autocomplete',
         label: 'Autocomplete',
         target: '',
         tag: {
@@ -79,27 +79,27 @@ const ComponentsNav: NavigationMenu = [
         },
       },
       {
-        path: '/documentation/components/inputs/select',
+        path: '/get-started/components/inputs/select',
         label: 'Select',
         target: '',
       },
       {
-        path: '/documentation/components/inputs/selection-controls',
+        path: '/get-started/components/inputs/selection-controls',
         label: 'Selection controls',
         target: '',
       },
       {
-        path: '/documentation/components/inputs/slider',
+        path: '/get-started/components/inputs/slider',
         label: 'Slider',
         target: '',
       },
       {
-        path: '/documentation/components/inputs/textfield',
+        path: '/get-started/components/inputs/textfield',
         label: 'Textfield',
         target: '',
       },
       {
-        path: '/documentation/components/inputs/input-group',
+        path: '/get-started/components/inputs/input-group',
         label: 'Input group',
         target: '',
       },
@@ -109,42 +109,42 @@ const ComponentsNav: NavigationMenu = [
     title: 'Layouts',
     items: [
       {
-        path: '/documentation/components/layouts/card',
+        path: '/get-started/components/layouts/card',
         label: 'Card',
         target: '',
       },
       {
-        path: '/documentation/components/layouts/container',
+        path: '/get-started/components/layouts/container',
         label: 'Container',
         target: '',
       },
       {
-        path: '/documentation/components/layouts/grid',
+        path: '/get-started/components/layouts/grid',
         label: 'Grid',
         target: '',
       },
       {
-        path: '/documentation/components/layouts/masonry',
+        path: '/get-started/components/layouts/masonry',
         label: 'Masonry',
         target: '',
       },
       {
-        path: '/documentation/components/layouts/overlay-container',
+        path: '/get-started/components/layouts/overlay-container',
         label: 'Overlay container',
         target: '',
       },
       {
-        path: '/documentation/components/layouts/separator',
+        path: '/get-started/components/layouts/separator',
         label: 'Separator',
         target: '',
       },
       {
-        path: '/documentation/components/layouts/stack',
+        path: '/get-started/components/layouts/stack',
         label: 'Stack',
         target: '',
       },
       {
-        path: '/documentation/components/layouts/table',
+        path: '/get-started/components/layouts/table',
         label: 'Table',
         target: '',
       },
@@ -154,22 +154,22 @@ const ComponentsNav: NavigationMenu = [
     title: 'Loading',
     items: [
       {
-        path: '/documentation/components/loading/circular-progress',
+        path: '/get-started/components/loading/circular-progress',
         label: 'Circular progress',
         target: '',
       },
       {
-        path: '/documentation/components/loading/linear-progress',
+        path: '/get-started/components/loading/linear-progress',
         label: 'Linear progress',
         target: '',
       },
       {
-        path: '/documentation/components/loading/skeleton',
+        path: '/get-started/components/loading/skeleton',
         label: 'Skeleton',
         target: '',
       },
       {
-        path: '/documentation/components/loading/spinner',
+        path: '/get-started/components/loading/spinner',
         label: 'Spinner',
         target: '',
       },
@@ -179,17 +179,17 @@ const ComponentsNav: NavigationMenu = [
     title: 'Navigation',
     items: [
       {
-        path: '/documentation/components/navigation/menu',
+        path: '/get-started/components/navigation/menu',
         label: 'Menu',
         target: '',
       },
       {
-        path: '/documentation/components/navigation/tab',
+        path: '/get-started/components/navigation/tab',
         label: 'Tab',
         target: '',
       },
       {
-        path: '/documentation/components/navigation/pagination',
+        path: '/get-started/components/navigation/pagination',
         label: 'Pagination',
         target: '',
       },
@@ -199,27 +199,27 @@ const ComponentsNav: NavigationMenu = [
     title: 'Typography',
     items: [
       {
-        path: '/documentation/components/typography/clamp-text',
+        path: '/get-started/components/typography/clamp-text',
         label: 'Clamp text',
         target: '',
       },
       {
-        path: '/documentation/components/typography/list',
+        path: '/get-started/components/typography/list',
         label: 'List',
         target: '',
       },
       {
-        path: '/documentation/components/typography/prose',
+        path: '/get-started/components/typography/prose',
         label: 'Prose',
         target: '',
       },
       {
-        path: '/documentation/components/typography/text',
+        path: '/get-started/components/typography/text',
         label: 'Text',
         target: '',
       },
       {
-        path: '/documentation/components/typography/title',
+        path: '/get-started/components/typography/title',
         label: 'Title',
         target: '',
       },
@@ -229,37 +229,37 @@ const ComponentsNav: NavigationMenu = [
     title: 'Other',
     items: [
       {
-        path: '/documentation/components/other/avatar',
+        path: '/get-started/components/other/avatar',
         label: 'Avatar',
         target: '',
       },
       {
-        path: '/documentation/components/other/aspect-ratio',
+        path: '/get-started/components/other/aspect-ratio',
         label: 'Aspect ratio',
         target: '',
       },
       {
-        path: '/documentation/components/other/chip',
+        path: '/get-started/components/other/chip',
         label: 'Chip',
         target: '',
       },
       {
-        path: '/documentation/components/other/datetime',
+        path: '/get-started/components/other/datetime',
         label: 'Datetime',
         target: '',
       },
       {
-        path: '/documentation/components/other/elevator',
+        path: '/get-started/components/other/elevator',
         label: 'Elevator',
         target: '',
       },
       {
-        path: '/documentation/components/other/symbol',
+        path: '/get-started/components/other/symbol',
         label: 'Symbol',
         target: '',
       },
       {
-        path: '/documentation/components/other/star-meter',
+        path: '/get-started/components/other/star-meter',
         label: 'Star meter',
         target: '',
       },

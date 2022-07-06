@@ -2,8 +2,8 @@ import { NavType } from 'types/data';
 
 const Nav: NavType = [
   {
-    label: 'Documentation',
-    url: '/documentation/usage/get-started/introduction',
+    label: 'Get started',
+    url: '/get-started/documentation/get-started/introduction',
   },
   {
     label: 'Playground',

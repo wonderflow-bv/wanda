@@ -2,34 +2,34 @@ import type { DocNavType } from 'types/data';
 
 const DocNav: DocNavType = [
   {
-    label: 'Usage',
+    label: 'Documentation',
     icon: 'book-bookmark',
     color: 'mint',
-    url: '/documentation/usage/get-started/introduction',
+    url: '/get-started/documentation/get-started/introduction',
   },
   {
     label: 'Components',
     icon: 'grid',
     color: 'indigo',
-    url: '/documentation/components/actions/button',
+    url: '/get-started/components/actions/button',
   },
   {
     label: 'Symbols',
     icon: 'grip-vertical',
     color: 'dipsy',
-    url: '/documentation/symbols',
+    url: '/get-started/symbols',
   },
   {
     label: 'Resources',
     icon: 'arrow-down-to-bracket',
     color: 'salmon',
-    url: '/documentation/resources',
+    url: '/get-started/resources',
   },
   {
     label: 'What’s new',
     icon: 'compass',
     color: 'blue',
-    url: '/documentation/release-notes',
+    url: '/get-started/release-notes',
   },
 ];
 

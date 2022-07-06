@@ -5,17 +5,17 @@ const UsageNav: NavigationMenu = [
     title: 'Get started',
     items: [
       {
-        path: '/documentation/usage/get-started/introduction',
+        path: '/get-started/documentation/get-started/introduction',
         label: 'Introduction',
         target: '',
       },
       {
-        path: '/documentation/usage/get-started/accessibility',
+        path: '/get-started/documentation/get-started/accessibility',
         label: 'Accessibility',
         target: '',
       },
       // {
-      //   path: '/documentation/usage/learn',
+      //   path: '/get-started/documentation/learn',
       //   label: 'Learn',
       //   target: '',
       // }
@@ -25,7 +25,7 @@ const UsageNav: NavigationMenu = [
     title: 'Design',
     items: [
       {
-        path: '/documentation/usage/design/brand',
+        path: '/get-started/documentation/design/brand',
         label: 'Brand',
         target: '',
       },
@@ -34,17 +34,17 @@ const UsageNav: NavigationMenu = [
         expandable: true,
         items: [
           {
-            path: '/documentation/usage/design/foundation/colors',
+            path: '/get-started/documentation/design/foundation/colors',
             label: 'Colors',
             target: '',
           },
           {
-            path: '/documentation/usage/design/foundation/typography',
+            path: '/get-started/documentation/design/foundation/typography',
             label: 'Typography',
             target: '',
           },
           {
-            path: '/documentation/usage/design/foundation/elevations',
+            path: '/get-started/documentation/design/foundation/elevations',
             label: 'Elevations',
             target: '',
           },
@@ -59,28 +59,28 @@ const UsageNav: NavigationMenu = [
         },
         items: [
           {
-            path: '/documentation/usage/design/motion/principles',
+            path: '/get-started/documentation/design/motion/principles',
             label: 'Principles',
             target: '',
           },
           {
-            path: '/documentation/usage/design/motion/animations',
+            path: '/get-started/documentation/design/motion/animations',
             label: 'Animations',
           },
           {
-            path: '/documentation/usage/design/motion/speed',
+            path: '/get-started/documentation/design/motion/speed',
             label: 'Speed',
             target: '',
           },
           {
-            path: '/documentation/usage/design/motion/timing',
+            path: '/get-started/documentation/design/motion/timing',
             label: 'Timing',
             target: '',
           },
         ],
       },
       {
-        path: '/documentation/usage/design/themes',
+        path: '/get-started/documentation/design/themes',
         label: 'Themes',
         target: '',
       },
@@ -89,37 +89,37 @@ const UsageNav: NavigationMenu = [
         expandable: true,
         items: [
           {
-            path: '/documentation/usage/design/recipes/buttons',
+            path: '/get-started/documentation/design/recipes/buttons',
             label: 'Buttons',
             target: '',
           },
           {
-            path: '/documentation/usage/design/recipes/popover',
+            path: '/get-started/documentation/design/recipes/popover',
             label: 'Popover',
             target: '',
           },
           // {
-          //   path: '/documentation/usage/design/recipes/forms',
+          //   path: '/get-started/documentation/design/recipes/forms',
           //   label: 'Forms',
           //   target: '',
           // },
           // {
-          //   path: '/documentation/usage/design/recipes/info-states',
+          //   path: '/get-started/documentation/design/recipes/info-states',
           //   label: 'Info states',
           //   target: '',
           // },
           // {
-          //   path: '/documentation/usage/design/recipes/loading',
+          //   path: '/get-started/documentation/design/recipes/loading',
           //   label: 'Loading',
           //   target: '',
           // },
           // {
-          //   path: '/documentation/usage/design/recipes/modals',
+          //   path: '/get-started/documentation/design/recipes/modals',
           //   label: 'Modals',
           //   target: '',
           // },
           // {
-          //   path: '/documentation/usage/design/recipes/notifications',
+          //   path: '/get-started/documentation/design/recipes/notifications',
           //   label: 'Notifications',
           //   target: '',
           // },
@@ -131,27 +131,27 @@ const UsageNav: NavigationMenu = [
     title: 'Develop',
     items: [
       {
-        path: '/documentation/usage/develop/installation',
+        path: '/get-started/documentation/develop/installation',
         label: 'Installation',
         target: '',
       },
       {
-        path: '/documentation/usage/develop/design-tokens',
+        path: '/get-started/documentation/develop/design-tokens',
         label: 'Design tokens',
         target: '',
       },
       {
-        path: '/documentation/usage/develop/global-styles',
+        path: '/get-started/documentation/develop/global-styles',
         label: 'Global styles',
         target: '',
       },
       {
-        path: '/documentation/usage/develop/ssr',
+        path: '/get-started/documentation/develop/ssr',
         label: 'Server side rendering',
         target: '',
       },
       {
-        path: '/documentation/usage/develop/using-themes',
+        path: '/get-started/documentation/develop/using-themes',
         label: 'Using themes',
         target: '',
       },
@@ -160,12 +160,12 @@ const UsageNav: NavigationMenu = [
         expandable: true,
         items: [
           {
-            path: '/documentation/usage/develop/utilities/id-provider',
+            path: '/get-started/documentation/develop/utilities/id-provider',
             label: 'Id Provider',
             target: '',
           },
           {
-            path: '/documentation/usage/develop/utilities/polymorphic',
+            path: '/get-started/documentation/develop/utilities/polymorphic',
             label: 'Polymorphic',
             target: '',
           },

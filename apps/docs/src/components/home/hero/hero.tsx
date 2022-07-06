@@ -61,10 +61,10 @@ export const Hero: FCClass = ({
           </Text>
         </Stack>
         <Stack direction="row" columnGap={24} rowGap={16} inline wrap>
-          <Link href="/documentation/usage/get-started/introduction" passHref>
-            <Button as="a" icon="book-bookmark" dimension="big">Documentation</Button>
+          <Link href="/get-started/documentation/get-started/introduction" passHref>
+            <Button as="a" icon="book-bookmark" dimension="big">Get started</Button>
           </Link>
-          <Link href="/documentation/components/actions/button" passHref>
+          <Link href="/get-started/components/actions/button" passHref>
             <Button as="a" icon="grid" dimension="big" kind="secondary">Components</Button>
           </Link>
         </Stack>

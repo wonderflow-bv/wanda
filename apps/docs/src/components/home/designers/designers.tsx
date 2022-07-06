@@ -50,7 +50,7 @@ export const Designers: FCClass = ({
                     Colors, typography, symbols, themes, and much more,
                     everything a designer needs, Wanda provides it.
                   </Text>
-                  <Link href="/documentation/usage/design/foundation/colors" passHref>
+                  <Link href="/get-started/documentation/design/foundation/colors" passHref>
                     <Button as="a" kind="secondary" dimension="big">Read more</Button>
                   </Link>
                 </Stack>
@@ -62,7 +62,7 @@ export const Designers: FCClass = ({
                     Wanda offers over 114 ready-to-use SVG icons and three solid,
                     outline, and duotone styles for over 342 icons.
                   </Text>
-                  <Link href="/documentation/symbols" passHref>
+                  <Link href="/get-started/symbols" passHref>
                     <Button as="a" kind="secondary" dimension="big">Read more</Button>
                   </Link>
                 </Stack>
@@ -74,7 +74,7 @@ export const Designers: FCClass = ({
                     Motion is part of the life. Starting from cells.
                     They bring life to your interfaces and provide a great feeling of control.
                   </Text>
-                  <Link href="/documentation/usage/design/motion/principles" passHref>
+                  <Link href="/get-started/documentation/design/motion/principles" passHref>
                     <Button as="a" kind="secondary" dimension="big">Read more</Button>
                   </Link>
                 </Stack>
