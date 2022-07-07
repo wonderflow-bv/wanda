@@ -1,5 +1,37 @@
 # @wonderflow/config
 
+## 10.0.0
+
+### Major Changes
+
+- 40dd1ee: Changes
+- 40dd1ee: Update deps
+- 40dd1ee: Various core configuration updates
+
+### Minor Changes
+
+- 40dd1ee: Changes
+- 40dd1ee: Minor fixes
+- 40dd1ee: ALign versions and deps
+- 40dd1ee: Minor fixes
+- 40dd1ee: Minor fixes
+- 40dd1ee: Dafuck
+- 40dd1ee: Update versions
+
+### Patch Changes
+
+- Updated dependencies [40dd1ee]
+- Updated dependencies [40dd1ee]
+- Updated dependencies [40dd1ee]
+- Updated dependencies [40dd1ee]
+- Updated dependencies [40dd1ee]
+- Updated dependencies [40dd1ee]
+- Updated dependencies [40dd1ee]
+- Updated dependencies [40dd1ee]
+- Updated dependencies [40dd1ee]
+- Updated dependencies [40dd1ee]
+  - @wonderflow/tokens@10.0.0
+
 ## 10.0.0-beta.2
 
 ### Patch Changes

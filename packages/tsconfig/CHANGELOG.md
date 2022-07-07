@@ -1,5 +1,15 @@
 # tsconfig
 
+## 10.0.0
+
+### Major Changes
+
+- 40dd1ee: Changes
+
+### Minor Changes
+
+- 40dd1ee: Changes
+
 ## 10.0.0-beta.0
 
 ### Major Changes

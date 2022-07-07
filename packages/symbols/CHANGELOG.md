@@ -1,5 +1,25 @@
 # @wonderflow/symbols
 
+## 10.0.0
+
+### Major Changes
+
+- 40dd1ee: Rename iconography to Symbols. IconNames type is now SymbolNames. `<Icon />` component is not `<Symbol />`.
+- 40dd1ee: Add new heart-suite and todo icons
+- 40dd1ee: Changes
+- 40dd1ee: Update deps
+- 40dd1ee: Add new icons
+- 40dd1ee: Various core configuration updates
+
+### Minor Changes
+
+- 40dd1ee: Changes
+- 40dd1ee: Minor fixes
+- 40dd1ee: ALign versions and deps
+- 40dd1ee: Minor fixes
+- 40dd1ee: Minor fixes
+- 40dd1ee: Dafuck
+
 ## 10.0.0-beta.2
 
 ## 10.0.0-beta.1

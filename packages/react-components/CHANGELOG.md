@@ -1,5 +1,39 @@
 # @wonderflow/react-components
 
+## 10.0.0
+
+### Major Changes
+
+- 40dd1ee: Rename iconography to Symbols. IconNames type is now SymbolNames. `<Icon />` component is not `<Symbol />`.
+- 40dd1ee: Changes
+- 40dd1ee: Update deps
+- 40dd1ee: Change start and end into prefix and suffix for Input Group component
+- 40dd1ee: Add new highlight colors to Chip
+- 40dd1ee: Various core configuration updates
+- 40dd1ee: Fix tab active state
+- 40dd1ee: Add auto id generator for titles
+
+### Minor Changes
+
+- 40dd1ee: Fix Drawer max width and animation
+- 40dd1ee: Add new `maxWidth` property to Stack component
+- 7c94309: Add `expandOnHover` prop to ClampText
+- 40dd1ee: Fix selection control space when hidden
+- 40dd1ee: Changes
+- 40dd1ee: Add new `anchor` property to Title to add anchor trigger
+- 7c94309: Fix Table expand row button on page change
+- 40dd1ee: Minor fixes
+- 40dd1ee: ALign versions and deps
+- 40dd1ee: Minor fixes
+- 40dd1ee: Update Title auto id generation
+- 40dd1ee: Add new `dimension` property to tabs
+- 40dd1ee: Update design of Snackbar component
+- 40dd1ee: Minor fixes
+- 40dd1ee: Dafuck
+- 40dd1ee: Add Responsive hook, provider and context
+- 40dd1ee: Update versions
+- 7c94309: Fix pageSize when data length is 0
+
 ## 10.0.0-beta.2
 
 ### Minor Changes

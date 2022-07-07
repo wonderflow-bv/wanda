@@ -1,5 +1,50 @@
 # docs
 
+## 10.0.0
+
+### Major Changes
+
+- 40dd1ee: Changes
+
+### Minor Changes
+
+- 40dd1ee: Changes
+
+### Patch Changes
+
+- Updated dependencies [40dd1ee]
+- Updated dependencies [40dd1ee]
+- Updated dependencies [40dd1ee]
+- Updated dependencies [40dd1ee]
+- Updated dependencies [40dd1ee]
+- Updated dependencies [7c94309]
+- Updated dependencies [40dd1ee]
+- Updated dependencies [40dd1ee]
+- Updated dependencies [40dd1ee]
+- Updated dependencies [40dd1ee]
+- Updated dependencies [40dd1ee]
+- Updated dependencies [40dd1ee]
+- Updated dependencies [40dd1ee]
+- Updated dependencies [7c94309]
+- Updated dependencies [40dd1ee]
+- Updated dependencies [40dd1ee]
+- Updated dependencies [40dd1ee]
+- Updated dependencies [40dd1ee]
+- Updated dependencies [40dd1ee]
+- Updated dependencies [40dd1ee]
+- Updated dependencies [40dd1ee]
+- Updated dependencies [40dd1ee]
+- Updated dependencies [40dd1ee]
+- Updated dependencies [40dd1ee]
+- Updated dependencies [40dd1ee]
+- Updated dependencies [40dd1ee]
+- Updated dependencies [40dd1ee]
+- Updated dependencies [7c94309]
+- Updated dependencies [40dd1ee]
+  - @wonderflow/symbols@10.0.0
+  - @wonderflow/react-components@10.0.0
+  - @wonderflow/themes@10.0.0
+
 ## 10.0.0-beta.2
 
 ### Patch Changes

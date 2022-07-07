@@ -1,5 +1,24 @@
 # @wonderflow/themes
 
+## 10.0.0
+
+### Major Changes
+
+- 40dd1ee: Changes
+- 40dd1ee: Update deps
+- 40dd1ee: Various core configuration updates
+
+### Minor Changes
+
+- 40dd1ee: Update dark theme global foreground color
+- 40dd1ee: Changes
+- 40dd1ee: Minor fixes
+- 40dd1ee: ALign versions and deps
+- 40dd1ee: Minor fixes
+- 40dd1ee: Minor fixes
+- 40dd1ee: Dafuck
+- 40dd1ee: Update versions
+
 ## 10.0.0-beta.2
 
 ## 10.0.0-beta.1
