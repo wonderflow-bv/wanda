@@ -1,6 +1,6 @@
 {
   "name": "@wonderflow/tokens",
-  "version": "10.0.0-beta.2",
+  "version": "10.0.0",
   "description": "Design tokens from Wonderflow design language",
   "main": "platforms/web/index",
   "files": [
@@ -39,6 +39,6 @@
     "fs-extra": "10.1.0",
     "style-dictionary": "3.7.1",
     "tinycolor2": "1.4.2",
-    "tsconfig": "10.0.0-beta.0"
+    "tsconfig": "10.0.0"
   }
 }

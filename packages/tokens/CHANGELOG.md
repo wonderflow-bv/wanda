@@ -1,5 +1,23 @@
 # @wonderflow/tokens
 
+## 10.0.0
+
+### Major Changes
+
+- 40dd1ee: Changes
+- 40dd1ee: Fix default rem size
+- 40dd1ee: Update deps
+- 40dd1ee: Various core configuration updates
+
+### Minor Changes
+
+- 40dd1ee: Changes
+- 40dd1ee: Minor fixes
+- 40dd1ee: ALign versions and deps
+- 40dd1ee: Minor fixes
+- 40dd1ee: Minor fixes
+- 40dd1ee: Dafuck
+
 ## 10.0.0-beta.2
 
 ## 10.0.0-beta.1
