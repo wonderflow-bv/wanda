@@ -6,6 +6,9 @@ import { ClampText } from './clamp-text';
 const story: ComponentMeta<typeof ClampText> = {
   title: 'Components/Typography/Clamp Text',
   component: ClampText,
+  args: {
+    expandOnHover: false,
+  },
   argTypes: {
     rows: {
       control: { type: 'number' },

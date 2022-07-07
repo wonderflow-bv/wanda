@@ -1,7 +1,12 @@
-/* stylelint-disable */
 .ClampText {
+
+  /* stylelint-disable-next-line value-no-vendor-prefix */
   display: -webkit-box;
   -webkit-line-clamp: var(--r, 1);
   -webkit-box-orient: vertical;
   overflow: hidden;
+
+  &[data-clamp-text-expand='true']:hover {
+    -webkit-line-clamp: unset;
+  }
 }

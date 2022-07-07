@@ -14,6 +14,10 @@ export type ClampTextProps = {
    * Define how many lines the text should be clamped to.
    */
   rows?: number;
+  /**
+   * Show the full text when element is hovered with pointer.
+   */
+  expandOnHover?: boolean;
 }
 
 type PolymorphicClampText = Polymorphic.ForwardRefComponent<'span', ClampTextProps>;
@@ -23,6 +27,7 @@ export const ClampText = forwardRef(({
   children,
   rows = 1,
   style,
+  expandOnHover,
   as: Wrapper = 'span',
   ...otherProps
 }, forwardedRef) => {
@@ -35,6 +40,7 @@ export const ClampText = forwardRef(({
       ref={forwardedRef}
       style={{ ...dynamicStyle, ...style }}
       className={clsx(styles.ClampText, className)}
+      data-clamp-text-expand={expandOnHover}
       {...otherProps}
     >
       {children}
