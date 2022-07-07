@@ -45,13 +45,10 @@ export const MyComponent = () => {
    */
 
   return (
-    <span>
-      {Object.keys(matches).map((key) => (
-        <p key={key}>
-          {key} {matches[key] ? '✔' : '✘'}
-        </p>
-      ))}
-    </span>
+    <Stack direction={matches.medium ? 'row' : 'column-reverse'}>
+      <>A<>
+      <>B<>
+    </Stack>
 )}
 ```
 
