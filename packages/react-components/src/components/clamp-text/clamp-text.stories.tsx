@@ -7,7 +7,7 @@ const story: ComponentMeta<typeof ClampText> = {
   title: 'Components/Typography/Clamp Text',
   component: ClampText,
   args: {
-    expandOnHover: false,
+    expandable: false,
   },
   argTypes: {
     rows: {

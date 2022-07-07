@@ -1,7 +1,9 @@
 import clsx from 'clsx';
-import { CSSProperties, forwardRef, ReactNode } from 'react';
+import {
+  CSSProperties, forwardRef, ReactNode, useState,
+} from 'react';
 
-import { Polymorphic } from '@/components';
+import { Polymorphic, ToggleButton } from '@/components';
 
 import styles from './clamp-text.module.css';
 
@@ -17,20 +19,22 @@ export type ClampTextProps = {
   /**
    * Show the full text when element is hovered with pointer.
    */
-  expandOnHover?: boolean;
+  expandable?: boolean;
 }
 
-type PolymorphicClampText = Polymorphic.ForwardRefComponent<'span', ClampTextProps>;
+type PolymorphicClampText = Polymorphic.ForwardRefComponent<'div', ClampTextProps>;
 
 export const ClampText = forwardRef(({
   className,
   children,
   rows = 1,
   style,
-  expandOnHover,
-  as: Wrapper = 'span',
+  expandable,
+  as: Wrapper = 'div',
   ...otherProps
 }, forwardedRef) => {
+  const [isExpanded, setIsExpandend] = useState(false);
+
   const dynamicStyle: CSSProperties = {
     '--r': rows,
   };
@@ -38,12 +42,27 @@ export const ClampText = forwardRef(({
   return (
     <Wrapper
       ref={forwardedRef}
-      style={{ ...dynamicStyle, ...style }}
       className={clsx(styles.ClampText, className)}
-      data-clamp-text-expand={expandOnHover}
       {...otherProps}
     >
-      {children}
+      <span
+        className={styles.Content}
+        data-clamp-text-expanded={isExpanded}
+        style={{ ...dynamicStyle, ...style }}
+      >
+        {children}
+      </span>
+      {expandable && (
+        <ToggleButton
+          className={styles.Trigger}
+          pressed={isExpanded}
+          onClick={() => setIsExpandend(state => !state)}
+          restingIcon="plus"
+          pressedIcon="minus"
+          dimension="small"
+          kind="secondary"
+        />
+      )}
     </Wrapper>
   );
 }) as PolymorphicClampText;
