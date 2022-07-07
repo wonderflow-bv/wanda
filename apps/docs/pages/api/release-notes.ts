@@ -7,7 +7,7 @@ import { slackClient } from '@/utils/slack-client';
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { body } = req;
   const releaseData: ReleaseNote = body.data;
-  const hasChanges = releaseData.breaking || releaseData.new || releaseData.fixes;
+  const hasChanges = releaseData.breaking ?? releaseData.new ?? releaseData.fixes;
 
   const changesTemplate = `This release includes:\n\n
   ${releaseData.breaking ? '✓ BREAKING CHANGES' : ''}
@@ -20,7 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       type: 'header',
       text: {
         type: 'plain_text',
-        text: `✨ New release ${releaseData.tag || ''} ✨`,
+        text: `✨ New release ${releaseData.tag ?? ''} ✨`,
         emoji: true,
       },
     },
@@ -28,7 +28,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       type: 'section',
       text: {
         type: 'mrkdwn',
-        text: `@here\n${slackifyMarkdown(releaseData.content || '') || ' '}`,
+        text: `@here\n${slackifyMarkdown(releaseData.content ?? '') ?? ' '}`,
       },
     },
     {
