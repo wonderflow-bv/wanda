@@ -1,5 +1,14 @@
 # docs
 
+## 10.0.0-beta.2
+
+### Patch Changes
+
+- Updated dependencies [4e0da88]
+  - @wonderflow/react-components@10.0.0-beta.2
+  - @wonderflow/symbols@10.0.0-beta.2
+  - @wonderflow/themes@10.0.0-beta.2
+
 ## 10.0.0-beta.1
 
 ### Patch Changes

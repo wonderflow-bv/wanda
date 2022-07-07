@@ -1,5 +1,11 @@
 # @wonderflow/config
 
+## 10.0.0-beta.2
+
+### Patch Changes
+
+- @wonderflow/tokens@10.0.0-beta.2
+
 ## 10.0.0-beta.1
 
 ### Patch Changes
