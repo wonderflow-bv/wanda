@@ -7,12 +7,12 @@ import { slackClient } from '@/utils/slack-client';
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { body } = req;
   const releaseData: ReleaseNote = body.data;
-  const hasChanges = releaseData.breaking ?? releaseData.new ?? releaseData.fixes;
+  const hasChanges = releaseData.notes[0].breaking ?? releaseData.notes[0].new ?? releaseData.notes[0].fixes;
 
   const changesTemplate = `This release includes:\n\n
-  ${releaseData.breaking ? '✓ BREAKING CHANGES' : ''}
-  ${releaseData.new ? '✓ NEW FEATURES' : ''}
-  ${releaseData.fixes ? '✓ FIXES' : ''}
+  ${releaseData.notes[0].breaking ? '✓ BREAKING CHANGES' : ''}
+  ${releaseData.notes[0].new ? '✓ NEW FEATURES' : ''}
+  ${releaseData.notes[0].fixes ? '✓ FIXES' : ''}
 `;
 
   const slackMessage = [

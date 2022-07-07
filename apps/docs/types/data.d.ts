@@ -42,11 +42,15 @@ export type NavigationMenu = NavigationGroup[]
 type ReleaseNote = {
   id: string;
   releaseDate: string;
-  content?: string;
-  new?: string;
-  breaking?: string;
-  fixes?: string;
   tag?: string;
+  content?: string;
+  notes: Array<{
+    id: string;
+    scope: string;
+    breaking?: string;
+    fixes?: string;
+    new?: string;
+  }>;
 }
 
 type ReleaseNotes = ReleaseNote[]
