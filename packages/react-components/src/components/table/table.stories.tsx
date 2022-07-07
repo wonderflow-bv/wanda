@@ -1,5 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { useCallback, useMemo, useState } from 'react';
+import {
+  useCallback, useEffect, useMemo, useState,
+} from 'react';
 
 import {
   Button, IconButton, Menu, Popover, Separator, Stack, Title,
@@ -1347,4 +1349,37 @@ PreselectedRows.args = {
   title: 'With selectable rows',
   selectableRows: true,
   showPagination: true,
+};
+
+const AsyncDataTemplate: ComponentStory<typeof Table> = ({ data, columns }) => {
+  const [innerData, setInnerData] = useState<any>([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const loadingTimeout = setTimeout(() => setLoading(true), 0);
+    const dataTimeout = setTimeout(() => {
+      setInnerData(data);
+      setLoading(false);
+    }, 2500);
+
+    return () => {
+      clearTimeout(loadingTimeout);
+      clearTimeout(dataTimeout);
+    };
+  }, [data]);
+
+  return (
+    <Table
+      title="Alphabet"
+      columns={columns}
+      data={innerData}
+      loading={loading}
+      showHeader
+    />
+  );
+};
+
+export const AsyncData = AsyncDataTemplate.bind({});
+AsyncData.args = {
+  title: 'With selectable rows',
 };

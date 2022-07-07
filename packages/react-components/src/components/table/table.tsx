@@ -218,6 +218,11 @@ export const Table = <T extends Record<string, unknown>>({
   const getRowId = useCallback((originalRow, relativeIndex, parent) => originalRow?._id || (parent && [parent.id, relativeIndex].join('.')) || relativeIndex.toString(),
     []);
 
+  const computePageSize = useCallback(
+    () => ((data.length > 0) ? data.length : 9999),
+    [data],
+  );
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -255,7 +260,7 @@ export const Table = <T extends Record<string, unknown>>({
       initialState: {
         sortBy: initialSortBy,
         pageIndex: initialPageIndex,
-        pageSize: showPagination ? itemsPerPage : data.length,
+        pageSize: showPagination ? itemsPerPage : computePageSize(),
         hiddenColumns: getHiddenColumns(),
         selectedRowIds: selectedRowIds.reduce<Record<IdType<string>, boolean>>((acc, curr) => ({
           ...acc,
