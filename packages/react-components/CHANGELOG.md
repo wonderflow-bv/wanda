@@ -1,5 +1,12 @@
 # @wonderflow/react-components
 
+## 10.0.0-beta.1
+
+### Minor Changes
+
+- c8a28d1: Fix Table expand row button on page change
+- b557d07: Fix pageSize when data length is 0
+
 ## 10.0.0-beta.0
 
 ### Major Changes
