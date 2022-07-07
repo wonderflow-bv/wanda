@@ -160,6 +160,11 @@ const UsageNav: NavigationMenu = [
         expandable: true,
         items: [
           {
+            path: '/get-started/documentation/develop/utilities/responsive-provider',
+            label: 'Responsive provider',
+            target: '',
+          },
+          {
             path: '/get-started/documentation/develop/utilities/id-provider',
             label: 'Id Provider',
             target: '',

@@ -1,0 +1,103 @@
+import UsageNav from "@/data/usage-nav";
+import { getLayoutProps } from "@/utils/get-layout-props";
+import { useResponsiveContext } from '@wonderflow/react-components'
+import { PropsTable } from "@/components/doc/props-table";
+
+export const getStaticProps = () =>
+  getLayoutProps({
+    layout: "mdx",
+    layoutProps: {
+      title: "Responsive provider",
+      color: "mint",
+      subtitle: "Programmatic usage of media queries",
+      navigation: UsageNav
+    }
+  });
+
+Wanda provides a full and centrilized way to use media queries inside react templates by using the `ResponsiveProvider`.
+
+## Anatomy
+
+```tsx lines="1,4,6"
+import { ResponsiveProvider } from "@wonderflow/react-components";
+
+export default () => (
+  <ResponsiveProvider>
+    <App />
+  </ResponsiveProvider>
+);
+```
+
+## Usage
+
+```tsx
+export const MyComponent = () => {
+  const { matches, breakpoints } = useResponsiveContext();
+
+  console.log(breakpoints)
+  /** {
+   *   extraSmall: 480,
+   *   small: 768,
+   *   medium: 960,
+   *   large: 1280,
+   *   extraLarge: 1600,
+   * }
+   */
+
+  return (
+    <span>
+      {Object.keys(matches).map((key) => (
+        <p key={key}>
+          {key} {matches[key] ? '✔' : '✘'}
+        </p>
+      ))}
+    </span>
+)}
+```
+
+export const ResponsiveExample = () => {
+  const { matches } = useResponsiveContext();
+
+  return (
+    <span>
+      Try to resize the window. <br /><br />
+      <List>
+       {Object.keys(matches).map((key) => (
+          <ListLi
+            key={key}
+            marker={matches[key] ? 'check' : 'xmark'}
+            markerColor={matches[key] ? 'var(--highlight-green-foreground)' : 'var(--highlight-red-foreground)'}
+            >
+            {key}
+          </ListLi>
+        ))}
+      </List>
+    </span>
+)}
+
+<LiveArea>
+  <ResponsiveExample />
+</LiveArea>
+
+
+## API Reference
+
+### ResponsiveProvider
+
+<PropsTable
+  properties={[
+    {
+      name: "breakpoints",
+      type: ["object"],
+      default: "",
+      typeValue: "{\n  extraSmall: number;\n  small: number;\n  medium: number;\n  large: number;\n  extraLarge: number;\n}",
+      required: false,
+      dangerous: false,
+      description:
+        "Set custom values to each specific breakpoint.",
+    },
+  ]}
+/>
+
+
+
