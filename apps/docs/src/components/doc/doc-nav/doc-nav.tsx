@@ -54,7 +54,7 @@ export const DocNav = () => {
             <Stack as="span" hAlign="center" vAlign="center" className={styles.IconWrapper}>
               <Symbol source={link.icon} dimension={18} weight="duotone" />
             </Stack>
-            <Text as="span" weight="bold" size={16}>{link.label}</Text>
+            <Text as="span" weight="bold" size={16} responsive={false}>{link.label}</Text>
           </Stack>
         </Link>
       ))}
