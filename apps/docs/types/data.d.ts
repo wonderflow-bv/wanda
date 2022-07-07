@@ -38,3 +38,15 @@ export type NavigationGroup = {
 }
 
 export type NavigationMenu = NavigationGroup[]
+
+type ReleaseNote = {
+  id: string;
+  releaseDate: string;
+  content?: string;
+  new?: string;
+  breaking?: string;
+  fixes?: string;
+  tag?: string;
+}
+
+type ReleaseNotes = ReleaseNote[]
