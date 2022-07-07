@@ -292,6 +292,7 @@ export const Table = <T extends Record<string, unknown>>({
               restingIcon="chevron-right"
               pressedIcon="chevron-down"
               {...row.getToggleRowExpandedProps()}
+              pressed={row.isExpanded}
               onClick={() => {
                 const subRowsExpanded = row.subRows.filter(r => r.isExpanded);
                 subRowsExpanded.forEach(r => r.toggleRowExpanded(!r.isExpanded));
