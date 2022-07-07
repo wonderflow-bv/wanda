@@ -3,7 +3,7 @@ import {
   CSSProperties, forwardRef, ReactNode, useState,
 } from 'react';
 
-import { Polymorphic, ToggleButton } from '@/components';
+import { Polymorphic, ToggleButton, Tooltip } from '@/components';
 
 import styles from './clamp-text.module.css';
 
@@ -53,15 +53,22 @@ export const ClampText = forwardRef(({
         {children}
       </span>
       {expandable && (
-        <ToggleButton
-          className={styles.Trigger}
-          pressed={isExpanded}
-          onClick={() => setIsExpandend(state => !state)}
-          restingIcon="plus"
-          pressedIcon="minus"
-          dimension="small"
-          kind="secondary"
-        />
+        <Tooltip trigger={(
+          <ToggleButton
+            className={styles.Trigger}
+            pressed={isExpanded}
+            onClick={() => setIsExpandend(state => !state)}
+            restingIcon="plus"
+            pressedIcon="minus"
+            dimension="small"
+            kind="secondary"
+          />
+        )}
+        >
+          {`${isExpanded ? 'Collapse' : 'Expand'} text`}
+          {' '}
+          text
+        </Tooltip>
       )}
     </Wrapper>
   );
