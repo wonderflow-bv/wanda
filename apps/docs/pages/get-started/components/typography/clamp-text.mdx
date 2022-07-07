@@ -54,6 +54,13 @@ export default () => {
       description: "Define how many lines the text should be clamped to.",
     },
     {
+      name: "expandable",
+      type: ["boolean"],
+      default: "false",
+      required: false,
+      description: "Enable the expand action to show full text.",
+    },
+    {
       name: "as",
       type: ["enum"],
       typeValue: "keyof JSX.IntrinsicElements | React.ComponentType<any>",

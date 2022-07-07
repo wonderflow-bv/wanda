@@ -1,5 +1,9 @@
 # @wonderflow/symbols
 
+## 10.0.0-beta.2
+
+## 10.0.0-beta.1
+
 ## 10.0.0-beta.0
 
 ### Major Changes

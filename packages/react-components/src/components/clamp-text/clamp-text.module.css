@@ -1,7 +1,25 @@
-/* stylelint-disable */
 .ClampText {
+  position: relative;
+  display: inline-block;
+}
+
+.Content {
+
+  /* stylelint-disable-next-line value-no-vendor-prefix */
   display: -webkit-box;
   -webkit-line-clamp: var(--r, 1);
   -webkit-box-orient: vertical;
   overflow: hidden;
+  padding-right: calc(token(--space-24) + token(--space-4));
+
+
+  &[data-clamp-text-expanded='true'] {
+    -webkit-line-clamp: unset;
+  }
+}
+
+.Trigger {
+  position: absolute;
+  right: 0;
+  top: token(--space-4);
 }

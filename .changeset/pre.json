@@ -1,14 +1,14 @@
 {
-  "mode": "pre",
+  "mode": "exit",
   "tag": "beta",
   "initialVersions": {
-    "docs": "9.100.0",
-    "@wonderflow/config": "9.100.0",
-    "@wonderflow/react-components": "9.100.0",
-    "@wonderflow/symbols": "9.100.0",
-    "@wonderflow/themes": "9.100.0",
-    "@wonderflow/tokens": "9.100.0",
-    "tsconfig": "9.100.0"
+    "docs": "10.0.0-beta.0",
+    "@wonderflow/config": "10.0.0-beta.0",
+    "@wonderflow/react-components": "10.0.0-beta.0",
+    "@wonderflow/symbols": "10.0.0-beta.0",
+    "@wonderflow/themes": "10.0.0-beta.0",
+    "@wonderflow/tokens": "10.0.0-beta.0",
+    "tsconfig": "10.0.0-beta.0"
   },
   "changesets": [
     "afraid-cups-care",
@@ -16,6 +16,7 @@
     "calm-buttons-kick",
     "chatty-chairs-draw",
     "dirty-pans-shop",
+    "dirty-worms-sneeze",
     "fair-hounds-poke",
     "famous-dots-smell",
     "famous-tigers-approve",
@@ -24,6 +25,7 @@
     "mighty-buckets-lie",
     "nasty-radios-switch",
     "nine-elephants-share",
+    "ninety-eagles-thank",
     "old-lizards-work",
     "olive-gorillas-bake",
     "olive-rockets-cover",
@@ -37,6 +39,7 @@
     "tender-crabs-confess",
     "tidy-fans-develop",
     "tiny-dingos-kiss",
+    "twenty-sloths-poke",
     "warm-impalas-sell"
   ]
 }
