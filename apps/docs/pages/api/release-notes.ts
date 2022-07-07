@@ -55,7 +55,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         },
         {
           type: 'mrkdwn',
-          text: '<https://design.wonderflow.ai/release-notes|Full release notes>',
+          text: '<https://design.wonderflow.ai/get-started/release-notes|Full release notes>',
         },
       ],
     },
