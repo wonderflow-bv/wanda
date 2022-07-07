@@ -72,19 +72,19 @@ export const Footer: FC<FooterProps> = ({
               <Title level="5">Designers</Title>
               <List hideMarker>
                 <List.Li>
-                  <Link href="/documentation/usage/design/brand"><a>Brand</a></Link>
+                  <Link href="/get-started/documentation/design/brand"><a>Brand</a></Link>
                 </List.Li>
                 <List.Li>
-                  <Link href="/documentation/usage/design/foundation/colors"><a>Foundation</a></Link>
+                  <Link href="/get-started/documentation/design/foundation/colors"><a>Foundation</a></Link>
                 </List.Li>
                 <List.Li>
-                  <Link href="/documentation/usage/design/symbols"><a>Symbols</a></Link>
+                  <Link href="/get-started/documentation/design/symbols"><a>Symbols</a></Link>
                 </List.Li>
                 <List.Li>
-                  <Link href="/documentation/usage/design/motion/principles"><a>Motion</a></Link>
+                  <Link href="/get-started/documentation/design/motion/principles"><a>Motion</a></Link>
                 </List.Li>
                 <List.Li>
-                  <Link href="/documentation/usage/design/themes"><a>Themes</a></Link>
+                  <Link href="/get-started/documentation/design/themes"><a>Themes</a></Link>
                 </List.Li>
               </List>
             </Stack>
@@ -92,19 +92,19 @@ export const Footer: FC<FooterProps> = ({
               <Title level="5">Developers</Title>
               <List hideMarker>
                 <List.Li>
-                  <Link href="/documentation/usage/develop/installation"><a>Installation</a></Link>
+                  <Link href="/get-started/documentation/develop/installation"><a>Installation</a></Link>
                 </List.Li>
                 <List.Li>
-                  <Link href="/documentation/usage/develop/design-tokens"><a>Design tokens</a></Link>
+                  <Link href="/get-started/documentation/develop/design-tokens"><a>Design tokens</a></Link>
                 </List.Li>
                 <List.Li>
-                  <Link href="/documentation/usage/develop/global-styles"><a>Global styles</a></Link>
+                  <Link href="/get-started/documentation/develop/global-styles"><a>Global styles</a></Link>
                 </List.Li>
                 <List.Li>
-                  <Link href="/documentation/usage/develop/themes"><a>Using themes</a></Link>
+                  <Link href="/get-started/documentation/develop/themes"><a>Using themes</a></Link>
                 </List.Li>
                 <List.Li>
-                  <Link href="/documentation/usage/develop/ssr"><a>SSR</a></Link>
+                  <Link href="/get-started/documentation/develop/ssr"><a>SSR</a></Link>
                 </List.Li>
               </List>
             </Stack>
