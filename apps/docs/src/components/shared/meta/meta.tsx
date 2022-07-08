@@ -16,7 +16,7 @@ export const Meta: FCChildren<MetaProps> = ({
   description = 'Wanda is Wonderflow\'s design system',
   title = 'Wanda Design System',
   siteName = 'Wanda Design System',
-  image = `${process.env.NEXT_PUBLIC_DOMAIN}/cover.jpg`,
+  image = `${process.env.NEXT_PUBLIC_DOMAIN}/cover.jpg?10`,
   keywords,
   url = process.env.NEXT_PUBLIC_DOMAIN,
   canonical,
