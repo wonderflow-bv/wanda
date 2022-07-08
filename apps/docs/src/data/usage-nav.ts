@@ -98,11 +98,11 @@ const UsageNav: NavigationMenu = [
             label: 'Popover',
             target: '',
           },
-          // {
-          //   path: '/get-started/documentation/design/recipes/forms',
-          //   label: 'Forms',
-          //   target: '',
-          // },
+          {
+            path: '/get-started/documentation/design/recipes/forms',
+            label: 'Forms',
+            target: '',
+          },
           // {
           //   path: '/get-started/documentation/design/recipes/info-states',
           //   label: 'Info states',
