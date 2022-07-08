@@ -8,7 +8,7 @@ export const getRepoContent = async (path: string) => {
   const { data } = await octokit.request('GET /repos/{owner}/{repo}/contents/{path}', {
     owner: 'wonderflow-bv',
     repo: 'wanda',
-    ref: 'next',
+    ref: 'main',
     path,
   });
 
