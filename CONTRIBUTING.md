@@ -20,6 +20,7 @@ To work on this project you have to know how a monorepo works and how to use the
       - [Start prerelease](#start-prerelease)
       - [Close prerelease](#close-prerelease)
   - [Releasing](#releasing)
+    - [Documentation website](#documentation-website)
 
 ---
 
@@ -109,3 +110,9 @@ Exit from the current prerelease channel and make all future changes released in
 To release the packages the only thing to do is to merge the PR opened by changeset workflow, generated after pushing `changes` to the `main` branch.
 
 To release the documentation website you can either use the Github CLI or [trigger the workflow from GithHub](https://github.com/wonderflow-bv/wanda/actions/workflows/production.yml)
+
+### Documentation website
+
+The production release of the website can be done by manually triggering the `production` workflow from the Actions page on Github.
+
+If you have the [`github-cli`](https://cli.github.com/) installed you can just run this command `gh workflow run "production"`
