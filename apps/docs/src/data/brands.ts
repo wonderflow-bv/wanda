@@ -4,6 +4,6 @@ export const brands = [
   'philips',
   'delonghi',
   'electrolux',
-  'nespresso',
-  'uber',
+  'motorola',
+  'panasonic',
 ];
