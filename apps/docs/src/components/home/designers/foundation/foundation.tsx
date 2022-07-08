@@ -173,7 +173,7 @@ export const Foundation: FCClass = ({
         {COLORS.slice(4, 8).map(color => (
           <Grid.Item key={color}>
             <Stack rowGap={16} columnGap={48}>
-              {[...Array(5)].map((_, i) => (
+              {[...Array(6)].map((_, i) => (
                 <ListItem
                   label={`${color}-${i + 1}0`}
                   color={tkns.color[color][`${i + 1}0`]}

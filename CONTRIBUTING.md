@@ -91,7 +91,7 @@ npx changeset
 npx changeset pre enter next
 ```
 
-Start a new prerelease channel called `next`. All `changeset version` commands run after this will be released as `package-name@next`.
+Start a new prerelease channel called `next`. All `npm run change` commands run after this will be released as `package-name@version-next`.
 
 #### Close prerelease
 
