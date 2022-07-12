@@ -1,5 +1,13 @@
 # @wonderflow/react-components
 
+## 10.1.0
+
+### Minor Changes
+
+- 6b898ba: Add `onRowExpandChange` property to Table
+- ecff4ad: Remove deprecated Dropdown component.
+- 82d5fd2: Restore pointer-events on elements inside overlay container.
+
 ## 10.0.0
 
 ### Major Changes

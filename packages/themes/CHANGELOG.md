@@ -1,5 +1,7 @@
 # @wonderflow/themes
 
+## 10.1.0
+
 ## 10.0.0
 
 ### Major Changes

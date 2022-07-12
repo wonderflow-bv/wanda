@@ -1,5 +1,11 @@
 # @wonderflow/symbols
 
+## 10.1.0
+
+### Minor Changes
+
+- 1d00eff: Add new symbols
+
 ## 10.0.0
 
 ### Major Changes
