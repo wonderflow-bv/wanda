@@ -1,5 +1,5 @@
 import {
-  Card, Dropdown, Elevator, IconButton, Stack, Text,
+  Card, Elevator, IconButton, Popover, Stack, Text,
 } from '@wonderflow/react-components';
 import { useRouter } from 'next/router';
 import { Fragment, useCallback, useState } from 'react';
@@ -57,7 +57,7 @@ export const PropsTableRow = ({
       {name && (
       <div role="cell" className={styles.Cell}>
         {description && (
-          <Dropdown
+          <Popover
             placement="top-start"
             trigger={(
               <IconButton
@@ -73,7 +73,7 @@ export const PropsTableRow = ({
                 <Markdown options={{ wrapper: Fragment }}>{description}</Markdown>
               </Card>
             </Elevator>
-          </Dropdown>
+          </Popover>
         )}
         <Text as="code" size={14}>{name}</Text>
         {required && <Text as="span" sentiment="warning" size={14}>*</Text>}
@@ -92,7 +92,7 @@ export const PropsTableRow = ({
           ))
           : <Text as="code" size={14}>{type}</Text>}
         {typeValue && (
-          <Dropdown
+          <Popover
             placement="top"
             trigger={(
               <IconButton
@@ -124,7 +124,7 @@ export const PropsTableRow = ({
                 </Code>
               </Card>
             </Elevator>
-          </Dropdown>
+          </Popover>
         )}
       </div>
       )}
