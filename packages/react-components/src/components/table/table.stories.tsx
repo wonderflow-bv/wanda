@@ -972,6 +972,7 @@ const CustomEmptyComponent = () => (
 const Template: ComponentStory<typeof Table> = ({ dataWithIds, ...args }) => (
   <Table
     emptyComponent={<CustomEmptyComponent />}
+    onRowExpandChange={rows => console.log(rows)}
     {...args}
   />
 );

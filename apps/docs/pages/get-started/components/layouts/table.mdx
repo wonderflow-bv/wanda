@@ -537,5 +537,13 @@ This component extends [`react-table`](https://react-table.tanstack.com/docs/ove
       required: false,
       description: "Set the initial sorted column and order by passing column id and order.",
     },
+    {
+      name: "onRowExpandChange",
+      type: ["function"],
+      typeValue: `(row: Row<T>) => void`,
+      default: "",
+      required: false,
+      description: "Callback run on row expansion. Returns the expanded row data.",
+    },
   ]}
 />

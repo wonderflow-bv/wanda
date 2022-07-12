@@ -160,6 +160,10 @@ export type TableProps<T extends Record<string, unknown>> = PropsWithClass & {
     * Callback run when a column is sorted
     */
   onSortChange?: (sorting: Array<CustomSortingRule<T>>) => void;
+  /**
+   * Callback run on row expansion. Returns the expanded row data.
+   */
+  onRowExpandChange?: (row: Row<T>) => void;
 }
 
 export const Table = <T extends Record<string, unknown>>({
@@ -194,6 +198,7 @@ export const Table = <T extends Record<string, unknown>>({
   onSortChange,
   pageClusters,
   initialSortBy = [],
+  onRowExpandChange,
   ...otherProps
 }: TableProps<T>) => {
   const uid = useUIDSeed();
@@ -237,7 +242,10 @@ export const Table = <T extends Record<string, unknown>>({
     setPageSize,
     setHiddenColumns,
     state: {
-      pageSize, pageIndex, sortBy, selectedRowIds: selectedRowIdsState,
+      pageSize,
+      pageIndex,
+      sortBy,
+      selectedRowIds: selectedRowIdsState,
     },
   } = useTable(
     {
@@ -302,6 +310,8 @@ export const Table = <T extends Record<string, unknown>>({
                 const subRowsExpanded = row.subRows.filter(r => r.isExpanded);
                 subRowsExpanded.forEach(r => r.toggleRowExpanded(!r.isExpanded));
                 row.toggleRowExpanded(!row.isExpanded);
+
+                onRowExpandChange?.(row);
               }}
             />
           )
