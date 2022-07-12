@@ -9,6 +9,10 @@
   &[data-overlay-container-obfuscate='false'] {
     pointer-events: none;
   }
+
+  &[data-overlay-container-obfuscate='false'] > * {
+    pointer-events: auto;
+  }
 }
 
 .Backdrop {
