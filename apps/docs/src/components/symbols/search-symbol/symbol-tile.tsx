@@ -16,28 +16,12 @@ export const SymbolTile: FC<SymbolTileProps> = ({
   onClick,
   ...otherProps
 }) => (
-// const [copied, setCopied] = useState<boolean>(false);
-
-  // const handleCopy = useCallback(
-  //   (icon: any) => () => {
-  //     navigator.clipboard.writeText(icon).then(() => {
-  //       setCopied(true);
-  //     }, () => {
-  //       setCopied(false);
-  //     });
-  //     setTimeout(() => setCopied(false), 1000);
-  //   },
-  //   [],
-  // );
-
   <Stack
     as={BlankButton}
-      // onClick={handleCopy(source)}
     onClick={onClick}
     className={styles.SymbolTile}
     data-icon-style={weight}
     hAlign="center"
-      // data-icon-tile-copied={copied}
     vAlign="center"
     rowGap={24}
   >
