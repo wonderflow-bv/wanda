@@ -1167,7 +1167,7 @@ const ManualPaginationTemplate: ComponentStory<typeof Table> = ({
 
     return allData.slice(newIndexStart, newIndexEnd);
   }, [allData, pagination]);
-  console.log(selectedRowIds);
+
   const onDelete = (selectedRowIds) => {
     const newTableData = allData.filter(({ _id }) => !selectedRowIds.includes(_id));
     setSelectedRowIds([]);

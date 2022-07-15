@@ -286,7 +286,7 @@ export const Table = <T extends Record<string, unknown>>({
         isCollapsed: true,
         isToggable: true,
         Header: ({ getToggleAllPageRowsSelectedProps }) => (
-          !loading ? <TableCheckbox {...getToggleAllPageRowsSelectedProps()} /> : null
+          <TableCheckbox {...getToggleAllPageRowsSelectedProps()} />
         ),
         Cell: ({ row }: {row: Row<T>}) => <TableCheckbox {...row.getToggleRowSelectedProps()} />,
       }];
