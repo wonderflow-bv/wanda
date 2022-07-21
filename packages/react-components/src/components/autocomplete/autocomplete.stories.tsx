@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import React from 'react';
 
 import { Chip, List } from '../..';
 import { Autocomplete } from './autocomplete';

@@ -1,4 +1,5 @@
 import { ComponentStory, Meta } from '@storybook/react';
+import React from 'react';
 
 import {
   Container, Separator, Text, Title,

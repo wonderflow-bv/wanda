@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import { Button } from '../..';
 import { Tab } from './tab';

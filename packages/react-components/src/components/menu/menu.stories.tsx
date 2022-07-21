@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import { Chip, Text, Title } from '../..';
 import { Menu } from './menu';
