@@ -11,7 +11,8 @@ To work on this project you have to know how a monorepo works and how to use the
   - [Workspaces](#workspaces)
   - [How to contribute](#how-to-contribute)
     - [Installation](#installation)
-    - [Dependencies](#dependencies)
+      - [Dependencies](#dependencies)
+      - [Environment variables](#environment-variables)
     - [Running the project](#running-the-project)
     - [Building the project](#building-the-project)
     - [Running tests](#running-tests)
@@ -44,9 +45,21 @@ In this project there are 2 defined workspaces:
 
 ### Installation
 
-### Dependencies
+To being able to start the project you have to follow the following steps and install all the required tools.
+
+#### Dependencies
 
 After you cloned the repository, run `npm i` from the project root. You'will install all the required dependencies.
+
+#### Environment variables
+
+Environment variables are handled by [Doppler](https://docs.doppler.com/docs). Proceed as follow to configure and get env variables:
+
+1. Install Doppler CLI and `gnupg` by following [the doc](https://docs.doppler.com/docs/install-cli#installation)
+2. Login to Doppler website by using the shared `design` credential.
+3. Login to doppler cli from terminal, by running `doppler login`. [More info](https://docs.doppler.com/docs/install-cli#local-development)
+4. From the project root, go inside `/apps/docs` and run `doppler setup`, on requested, select the `dev` environment of `wanda` project.
+5. Go back to the project root and follow the next section.
 
 ### Running the project
 
