@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useState } from 'react';
 
-import { Chip } from '../..';
+import { Chip, Text, Title } from '../..';
 import { Menu } from './menu';
 
 const story: ComponentMeta<typeof Menu> = {
@@ -18,6 +18,12 @@ const Template: ComponentStory<typeof Menu> = args => (
     <Menu.Item value="3" padding={false}>List item text List item textList item textList item textList item text</Menu.Item>
     <Menu.Separator />
     <Menu.Item value="4" padding={false}>List item text</Menu.Item>
+    <Menu.Item value="5" padding={false}>
+      <span>
+        <Title level="6">Cutom item</Title>
+        <Text size={14} dimmed={5}>Sub text example</Text>
+      </span>
+    </Menu.Item>
   </Menu>
 );
 
