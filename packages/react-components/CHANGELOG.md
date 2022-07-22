@@ -1,5 +1,13 @@
 # @wonderflow/react-components
 
+## 10.2.0
+
+### Minor Changes
+
+- 61e06bf: Minor fixes
+- d4e5646: Fix disappearing table select all rows checkbox while loading.
+- 83af6ce: Add new elevation mixins
+
 ## 10.1.0
 
 ### Minor Changes
