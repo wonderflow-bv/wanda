@@ -2,4 +2,4 @@
 "@wonderflow/react-components": minor
 ---
 
-fix table selectAll on header
+Fix disappearing table select all rows checkbox while loading.
