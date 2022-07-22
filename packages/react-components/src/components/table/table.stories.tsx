@@ -1354,17 +1354,16 @@ PreselectedRows.args = {
 
 const AsyncDataTemplate: ComponentStory<typeof Table> = ({ data, columns }) => {
   const [innerData, setInnerData] = useState<any>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const loadingTimeout = setTimeout(() => setLoading(true), 0);
+    setLoading(true);
     const dataTimeout = setTimeout(() => {
       setInnerData(data);
       setLoading(false);
     }, 2500);
 
     return () => {
-      clearTimeout(loadingTimeout);
       clearTimeout(dataTimeout);
     };
   }, [data]);
@@ -1376,6 +1375,7 @@ const AsyncDataTemplate: ComponentStory<typeof Table> = ({ data, columns }) => {
       data={innerData}
       loading={loading}
       showHeader
+      selectableRows
     />
   );
 };
