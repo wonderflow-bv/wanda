@@ -1,26 +1,28 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Datetime } from './datetime'
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import React from 'react';
+
+import { Datetime } from './datetime';
 
 const story: ComponentMeta<typeof Datetime> = {
   title: 'Components/Widgets/Datetime',
   component: Datetime,
   argTypes: {
-    locale: { type: 'string' }
+    locale: { type: 'string' },
   },
   args: {
     locale: 'it-IT',
-    date: '2021-12-15T16:00:32.507981+00:00'
-  }
-}
+    date: '2021-12-15T16:00:32.507981+00:00',
+  },
+};
 
-export default story
+export default story;
 
-const Template: ComponentStory<typeof Datetime> = (args) => <Datetime {...args} />
+const Template: ComponentStory<typeof Datetime> = args => <Datetime {...args} />;
 
-export const Default = Template.bind({})
+export const Default = Template.bind({});
 Default.args = {
   date: '2021-12-15T16:00:32.507981+00:00',
   options: {
-    year: '2-digit'
-  }
-}
+    year: '2-digit',
+  },
+};

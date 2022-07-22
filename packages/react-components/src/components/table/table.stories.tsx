@@ -1,5 +1,6 @@
+/* eslint-disable no-console */
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import {
+import React, {
   useCallback, useEffect, useMemo, useState,
 } from 'react';
 

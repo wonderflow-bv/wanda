@@ -149,3 +149,25 @@ Add a vibrancy effect to any element. You can use it to add blur effect and filt
   @mixin vibrancy;
 }
 ```
+
+
+#### Elevation
+
+Add design system shadow based on the defined elevation level. This mixin accepts an hex-values only `color` parameter to customize the shadow color.
+
+```css
+@import "@wonderflow/react-components/core/utils/elevation.css";
+
+.MyElevatedElement {
+  @mixin elevation-1;
+
+  &:hover {
+    @mixin elevation-2;
+  }
+}
+
+.WithCustomShadowColor {
+  --custom-color: 100deg 50% 50%;
+  @mixin elevation-1 var(--custom-color);
+}
+```

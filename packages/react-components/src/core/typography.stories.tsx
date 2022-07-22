@@ -1,12 +1,16 @@
-import { Meta } from '@storybook/react'
-import { Container } from '../components/container'
+import { Meta } from '@storybook/react';
+import React from 'react';
 
-export default {
+import { Container } from '../components/container';
+
+const story: Meta = {
   title: 'Core/Typograhy',
   parameters: {
-    controls: { hideNoControlsWarning: true }
-  }
-} as Meta
+    controls: { hideNoControlsWarning: true },
+  },
+};
+
+export default story;
 
 export const Basic = () => (
   <Container dimension="medium">
@@ -111,7 +115,7 @@ export const Basic = () => (
       indicates a highlight.
     </p>
   </Container>
-)
+);
 
 export const List = () => (
   <Container dimension="medium">
@@ -150,7 +154,7 @@ export const List = () => (
       <li>Item 20</li>
     </ol>
   </Container>
-)
+);
 
 export const Code = () => (
   <Container dimension="medium">
@@ -169,4 +173,4 @@ export const Code = () => (
     </p>
     <p><samp>This is sample output from a computer program.</samp></p>
   </Container>
-)
+);

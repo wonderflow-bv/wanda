@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { SVGAttributes } from 'react';
+import React, { SVGAttributes } from 'react';
 
 import { Button, ButtonsGroup } from './button';
 
