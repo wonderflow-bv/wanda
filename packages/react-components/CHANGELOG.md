@@ -1,5 +1,12 @@
 # @wonderflow/react-components
 
+## 10.3.0
+
+### Minor Changes
+
+- b22f991: Fix Popover positioning
+- f245d86: Update html tag for info state to allow flow content inside.
+
 ## 10.2.0
 
 ### Minor Changes
