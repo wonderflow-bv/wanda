@@ -93,7 +93,7 @@ export const InfoState = forwardRef<HTMLDivElement, PropsWithChildren<InfoStateP
           fill={false}
         >
           <Title maxWidth="20ch" textAlign={isHorizontal ? 'start' : 'center'} level="4">{title}</Title>
-          <Text maxWidth="60ch" dimmed={6} textAlign={isHorizontal ? 'start' : 'center'}>{children}</Text>
+          <Text as="div" maxWidth="60ch" dimmed={6} textAlign={isHorizontal ? 'start' : 'center'}>{children}</Text>
           {actions && (
             <Stack vPadding={16} inline direction="row" columnGap={16} rowGap={16} wrap>
               {actions}

@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import { Button } from '../..';
+import { Button, List, Stack } from '../..';
 import { InfoState } from './info-state';
 
 const story: ComponentMeta<typeof InfoState> = {
@@ -22,8 +22,15 @@ export default story;
 
 const Template: ComponentStory<typeof InfoState> = args => (
   <InfoState {...args}>
-    Cras ultricies, elit sit amet cursus consectetur, risus felis ullamcorper nulla,
-    ut scelerisque sapien lorem non sem.
+    <Stack hAlign="center" fill={false}>
+      Cras ultricies, elit sit amet cursus consectetur, risus felis ullamcorper nulla,
+      ut scelerisque sapien lorem non sem.
+
+      <List>
+        <List.Li>ciao</List.Li>
+        <List.Li>ciao</List.Li>
+      </List>
+    </Stack>
   </InfoState>
 );
 
