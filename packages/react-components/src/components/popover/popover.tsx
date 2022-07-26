@@ -12,6 +12,7 @@ import {
   cloneElement,
   forwardRef,
   isValidElement,
+  ReactElement,
   ReactNode,
   useEffect,
   useMemo,
@@ -29,6 +30,7 @@ export type PopoverProps = {
    * The content of the popover to display when the popover is open.
    */
   children: ReactNode;
+  /**
   /**
    * The element to use as the trigger for the popover.
    */
@@ -146,7 +148,6 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
     },
   }, {
     placement,
-    strategy: 'fixed',
     modifiers: [
       sameWidth,
       {
@@ -178,8 +179,8 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
       className={clsx(styles.Popover, className)}
       data-popover-has-focus={isFocusWithin}
     >
-      {Children.map(trigger, child => isValidElement(child) && cloneElement(
-        child,
+      {isValidElement(trigger) && cloneElement(
+        trigger as ReactElement,
         {
           ref: setTriggerRef,
           id: seedID('popover-trigger'),
@@ -189,7 +190,7 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
           'aria-expanded': isOpen,
           ...otherProps,
         },
-      ))}
+      )}
       <AnimatePresence>
         {visible && (
           <div
@@ -208,7 +209,7 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
               >
 
                 {Children.map(children, child => isValidElement(child) && cloneElement(
-                  child,
+                  child as ReactElement,
                   {
                     id: seedID('popover-dialog'),
                     'aria-labelledby': seedID('popover-trigger'),
