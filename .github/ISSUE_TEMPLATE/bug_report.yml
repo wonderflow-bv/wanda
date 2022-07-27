@@ -49,10 +49,18 @@ body:
       description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
       render: shell
   - type: checkboxes
-    id: terms
+    id: coc
     attributes:
       label: Code of Conduct
       description: By submitting this issue, you confirm that you read the [documentation](https://design.wonderflow.ai)
       options:
         - label: I've searched across open and closed issues for similiar bug reports
           required: true
+  - type: checkboxes
+    id: project_assign
+    attributes:
+      label: Project assignment
+      description: You confirm that you assigned this issues to Wanda project. Issues without project assignment will NOT be considered.
+      options:
+        - label: I've assigned Wanda Design System project from the sidebar on the right.
+          required: true          
