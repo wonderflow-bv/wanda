@@ -55,14 +55,14 @@
     background: var(--cta-default);
     color: var(--cta-foreground);
 
-    &:not([aria-pressed='true'], [aria-disabled='true'], [aria-busy='true']):is(:active) {
-      background: var(--cta-dark);
-    }
-
     &:where([aria-pressed='true']),
-    &:where([aria-pressed='true']:active) {
+    &:where([aria-pressed='true']:hover) {
       background: hsl(token(--color-red-50));
       color: hsl(token(--color-support-white));
+    }
+
+    &:not([aria-pressed='true'], [aria-disabled='true'], [aria-busy='true']):is(:hover) {
+      background: var(--cta-dark);
     }
   }
 
@@ -73,23 +73,25 @@
     background-color: var(--global-vibrancy-background);
     color: var(--global-vibrancy-foreground);
 
-    &:not([aria-pressed='true'], [aria-disabled='true'], [aria-busy='true']):is(:active) {
-      background-color: var(--global-vibrancy-background-hard);
-      color: var(--global-vibrancy-foreground);
-    }
-
     &:where([aria-pressed='true']),
-    &:where([aria-pressed='true']:active) {
+    &:where([aria-pressed='true']:hover) {
       color: var(--dimmed-0);
       background: var(--dimmed-7);
+    }
+
+    &:not([aria-pressed='true'], [aria-disabled='true'], [aria-busy='true']):is(:hover) {
+      background-color: var(--global-vibrancy-background-hard);
+      color: var(--global-vibrancy-foreground);
     }
   }
 
   &[data-button-kind='flat'] {
     color: var(--global-vibrancy-foreground);
 
-    &:not([aria-pressed='true'], [aria-disabled='true'], [aria-busy='true']):is(:active) {
-      background-color: var(--global-vibrancy-background-hard);
+    &:where([aria-pressed='true']),
+    &:where([aria-pressed='true']:is(:active, :focus)) {
+      color: var(--dimmed-0);
+      background: var(--dimmed-7);
     }
 
     &:is(:hover, :focus) {
@@ -100,10 +102,8 @@
       color: var(--global-vibrancy-foreground);
     }
 
-    &:where([aria-pressed='true']),
-    &:where([aria-pressed='true']:is(:active, :focus)) {
-      color: var(--dimmed-0);
-      background: var(--dimmed-7);
+    &:not([aria-pressed='true'], [aria-disabled='true'], [aria-busy='true']):is(:hover) {
+      background-color: var(--global-vibrancy-background);
     }
   }
 
