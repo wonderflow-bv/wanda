@@ -1,5 +1,12 @@
 # @wonderflow/react-components
 
+## 10.4.0
+
+### Minor Changes
+
+- 500fb22: Fix Card bordered style
+- 77fc711: Align Button interaction styles
+
 ## 10.3.0
 
 ### Minor Changes
