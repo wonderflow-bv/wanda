@@ -16,6 +16,10 @@
     &[data-card-highlight-hover='true']:is(:hover, :focus-visible) {
       background-color: var(--global-background);
     }
+
+    &[data-card-bordered='true'] {
+      border: solid 1px var(--dimmed-1);
+    }
   }
 
   &[data-card-dimmed='1'] {
@@ -24,6 +28,10 @@
     &[data-card-highlight-hover='true']:is(:hover, :focus-visible) {
       background-color: var(--dimmed-0);
     }
+
+    &[data-card-bordered='true'] {
+      border: solid 1px var(--dimmed-2);
+    }
   }
 
   &[data-card-dimmed='2'] {
@@ -31,6 +39,10 @@
 
     &[data-card-highlight-hover='true']:is(:hover, :focus-visible) {
       background-color: var(--dimmed-1);
+    }
+
+    &[data-card-bordered='true'] {
+      border: solid 1px var(--dimmed-3);
     }
   }
 
@@ -67,10 +79,6 @@
     &[data-card-highlight-hover='true']:is(:hover, :focus-visible) {
       background-color: var(--global-vibrancy-background);
     }
-  }
-
-  &[data-card-bordered='true'] {
-    border: solid 1px var(--dimmed-1);
   }
 }
 
