@@ -22,10 +22,6 @@
     justify-content: flex-start;
   }
 
-  @media (--from-extra-small) {
-    overflow: auto;
-  }
-
   & > * {
     pointer-events: auto;
   }
