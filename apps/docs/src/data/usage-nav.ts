@@ -89,11 +89,6 @@ const UsageNav: NavigationMenu = [
         expandable: true,
         items: [
           {
-            path: '/get-started/documentation/design/recipes/buttons',
-            label: 'Buttons',
-            target: '',
-          },
-          {
             path: '/get-started/documentation/design/recipes/popover',
             label: 'Popover',
             target: '',

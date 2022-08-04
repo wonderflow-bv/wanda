@@ -1,14 +1,5 @@
 import ComponentsNav from "@/data/components-nav";
 import { getLayoutProps } from "@/utils/get-layout-props";
-import { PropsTable } from "@/components/doc/props-table";
-import { KeyTable } from "@/components/shared/key-table";
-import { useState } from "react";
-import dynamic from "next/dynamic";
-
-export const DynOverlayContainer = dynamic(
-  import("@wonderflow/react-components").then((m) => m.OverlayContainer),
-  { ssr: false }
-);
 
 export const getStaticProps = () =>
   getLayoutProps({
@@ -37,14 +28,12 @@ export const getStaticProps = () =>
     }
   });
 
-## Specs
-
 This section contains component attributes, elements, and default values for quick reference or building your own design files and implementations.
 
-### Menu
+## Anatomy
 
-![](https://figmage.com/images/uQY8btc_hDFvHrAno7fAl.png)
+![](https://figmage.com/images/k6AcdzSh588nGwkPBzC-v.png)
 
-1. Container
-2. Menu item
-3. Separator
+1. Tap area
+2. Icon
+3. Label
