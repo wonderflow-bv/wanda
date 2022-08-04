@@ -2,6 +2,13 @@ import ComponentsNav from "@/data/components-nav";
 import { getLayoutProps } from "@/utils/get-layout-props";
 import { PropsTable } from "@/components/doc/props-table";
 import { KeyTable } from "@/components/shared/key-table";
+import { useState } from "react";
+import dynamic from "next/dynamic";
+
+export const DynOverlayContainer = dynamic(
+  import("@wonderflow/react-components").then((m) => m.OverlayContainer),
+  { ssr: false }
+);
 
 export const getStaticProps = () =>
   getLayoutProps({
@@ -57,6 +64,7 @@ Sometimes you need to group buttons together to create a single visual context o
     <Button>Action 3</Button>
   </ButtonsGroup>
 </LiveArea>
+
 
 ## API Reference
 

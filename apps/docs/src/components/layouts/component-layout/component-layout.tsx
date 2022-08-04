@@ -1,10 +1,15 @@
 import { MDXProvider } from '@mdx-js/react';
 import {
+  Button,
+  ButtonsGroup,
   Chip,
   ChipProps,
-  List, Prose, Stack, Symbol, Title,
+  List, Prose, Stack, Symbol, Title, useResponsiveContext,
 } from '@wonderflow/react-components';
 import Markdown from 'markdown-to-jsx';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useMemo } from 'react';
 import slugify from 'slugify';
 
 import { DocLayout } from '@/components/layouts/doc-layout';
@@ -27,6 +32,9 @@ export const ComponentLayout: FCChildren<IPropsComponentLayout> = ({
   ...otherProps
 }) => {
   const slugName = slugify(title, { lower: true });
+  const router = useRouter();
+  const isSubPage = useMemo(() => router.asPath.split('/').pop() !== slugName, [router, slugName]);
+  const { matches } = useResponsiveContext();
 
   return (
     <DocLayout title={title} {...otherProps}>
@@ -99,6 +107,63 @@ export const ComponentLayout: FCChildren<IPropsComponentLayout> = ({
         </Stack>
       </Stack>
       )}
+
+      <Stack vAlign="center" vPadding={40}>
+        <ButtonsGroup>
+          <Link href={isSubPage ? './' : `${slugName}`} passHref>
+            <Button
+              as="a"
+              fullWidth
+              dimension={matches.medium ? 'big' : 'regular'}
+              kind="secondary"
+              icon={matches.medium ? 'circle-info' : undefined}
+              pressed={router.asPath.split('/').pop() === slugName}
+            >
+              Overview
+            </Button>
+          </Link>
+
+          <Link href={isSubPage ? 'specs' : `${slugName}/specs`}>
+            <Button
+              as="a"
+              fullWidth
+              dimension={matches.medium ? 'big' : 'regular'}
+              kind="secondary"
+              icon={matches.medium ? 'style' : undefined}
+              pressed={router.asPath.split('/').pop() === 'specs'}
+            >
+              Specs
+            </Button>
+          </Link>
+
+          {/* <Link href={isSubPage ? 'guidelines' : `${slugName}/guidelines`}>
+            <Button
+              as="a"
+              fullWidth
+              dimension={matches.medium ? 'big' : 'regular'}
+              kind="secondary"
+              icon={matches.medium ? 'todo' : undefined}
+              pressed={router.asPath.split('/').pop() === 'guidelines'}
+            >
+              Guidelines
+            </Button>
+          </Link> */}
+
+          <Link href={isSubPage ? 'implementation' : `${slugName}/implementation`}>
+            <Button
+              as="a"
+              fullWidth
+              dimension={matches.medium ? 'big' : 'regular'}
+              kind="secondary"
+              icon={matches.medium ? 'code' : undefined}
+              pressed={router.asPath.split('/').pop() === 'implementation'}
+            >
+              Implementation
+            </Button>
+          </Link>
+        </ButtonsGroup>
+      </Stack>
+
       <MDXProvider components={MDX_COMPONENTS}>
         <Prose>
           {children}
