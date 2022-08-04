@@ -6,6 +6,7 @@ export const getStaticProps = () =>
   getLayoutProps({
     layout: "component",
     layoutProps: {
+      newLayout: true,
       title: "Button",
       color: "indigo",
       subtitle: "A button is a box area or text that communicates and triggers user actions when clicked.",
@@ -30,7 +31,7 @@ export const getStaticProps = () =>
   });
 
 
-### Icons
+## Icons
 
 The button component can display an icon on the left or right side of the inner text. Using an icon helps to draw more attention to the action and to convey its meaning even to people who may have difficulty with the language used in the interface. Always choose icons that match and enhance the meaning of the action and its label, if the button has one.
 
@@ -39,7 +40,7 @@ The button component can display an icon on the left or right side of the inner 
   <HintCard image="https://figmage.com/images/WK1W9BZSXW-QnmsTbvxEu.png" />
 </Stack>
 
-### Content
+## Label
 
 The label describes verbally the action that will occur if the user triggers the button.
 
@@ -57,7 +58,7 @@ Use **active** verbs or **nouns** with sentence-style capitalization. Generally,
   <HintCard image="https://figmage.com/images/USeX-mnP9xQmwbfnLjEEi.png" />
 </Stack>
 
-### Button vs Links
+## Button vs Links
 
 When designing, a recurrent question which pops up is: _'Should I use a link or a button component? Is it the same?'_
 

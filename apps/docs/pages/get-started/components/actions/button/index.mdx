@@ -5,6 +5,7 @@ export const getStaticProps = () =>
   getLayoutProps({
     layout: "component",
     layoutProps: {
+      newLayout: true,
       title: "Button",
       color: "indigo",
       subtitle: "A button is a box area or text that communicates and triggers user actions when clicked.",
@@ -34,10 +35,10 @@ Providing buttons inside an interface is the most straightforward way to offer t
 
 Currently, the Wanda provides two main categories of buttons, each of them with several variants:
 
-<List as="ol">
-  <ListLi>Button</ListLi>
-  <ListLi>Icon Button</ListLi>
-</List>
+1. Button
+2. Icon Button
+2. Toggle Button
+2. Split Button
 
 In some cases, the same action can be adequately represented by more than one type of button. In other cases, however, it is advisable to use the button designed explicitly for the purpose.
 
