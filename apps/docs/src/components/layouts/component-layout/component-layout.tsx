@@ -47,7 +47,7 @@ export const ComponentLayout: FCChildren<IPropsComponentLayout> = ({
       >
         {features && (
         <Stack rowGap={24} hAlign="start" fill={false}>
-          <Title level="5">
+          <Title as="h2" level="5">
             Features
           </Title>
           <List>
@@ -61,7 +61,7 @@ export const ComponentLayout: FCChildren<IPropsComponentLayout> = ({
         )}
 
         <Stack rowGap={24} hAlign="start" fill={false}>
-          <Title level="5">
+          <Title as="h2" level="5">
             Links
           </Title>
           <Stack hAlign="start" rowGap={8} style={{ maxInlineSize: '14.11rem' }}>
