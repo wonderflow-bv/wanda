@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 10.5.0
+
+### Minor Changes
+
+- 5f772fe: Fix Drawer overflow on small resolutions
+
 ## 10.4.0
 
 ### Minor Changes

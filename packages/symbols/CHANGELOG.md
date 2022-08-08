@@ -1,5 +1,11 @@
 # @wonderflow/symbols
 
+## 10.5.0
+
+### Minor Changes
+
+- 6dc37fe: Add new folder icon
+
 ## 10.4.0
 
 ## 10.3.0
