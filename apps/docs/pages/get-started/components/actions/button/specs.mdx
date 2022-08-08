@@ -33,8 +33,123 @@ This section contains component attributes, elements, and default values for qui
 
 ## Anatomy
 
-![](https://figmage.com/images/k6AcdzSh588nGwkPBzC-v.png)
+![](https://figmage.com/images/NSMzUvcgF6C6ffFQJb7qD.png)
 
 1. Tap area
-2. Icon
+2. Solid symbol
 3. Label
+
+## Layout
+
+![](https://figmage.com/images/xhduTa4Pubuj_pNyqHzrT.png)
+
+### Small
+
+<Table
+  columns={[
+    {
+      id: 'attribute',
+      Header: 'Attribute name',
+      accessor: row => row.attribute,
+      disableSortBy: true,
+    },
+    {
+      id: 'value',
+      Header: 'Attribute value',
+      accessor: row => row.value,
+      disableSortBy: true
+    }
+  ]}
+  data={[
+    {
+      attribute: 'Height',
+      value: 24,
+    },
+    {
+      attribute: 'Horizontal padding',
+      value: 8,
+    },
+    {
+      attribute: 'Symbol size',
+      value: 12,
+    },
+    {
+      attribute: 'Symtol style',
+      value: 'solid',
+    }
+  ]}
+/>
+
+### Regular
+
+<Table
+  columns={[
+    {
+      id: 'attribute',
+      Header: 'Attribute name',
+      accessor: row => row.attribute,
+      disableSortBy: true
+    },
+    {
+      id: 'value',
+      Header: 'Attribute value',
+      accessor: row => row.value,
+      disableSortBy: true
+    },
+  ]}
+  data={[
+    {
+      attribute: 'Height',
+      value: 40,
+    },
+    {
+      attribute: 'Horizontal padding',
+      value: 16,
+    },
+    {
+      attribute: 'Symbol size',
+      value: 16,
+    },
+    {
+      attribute: 'Symtol style',
+      value: 'solid',
+    }
+  ]}
+/>
+
+### Big
+
+<Table
+  columns={[
+    {
+      id: 'attribute',
+      Header: 'Attribute name',
+      accessor: row => row.attribute,
+      disableSortBy: true
+    },
+    {
+      id: 'value',
+      Header: 'Attribute value',
+      accessor: row => row.value,
+      disableSortBy: true
+    },
+  ]}
+  data={[
+    {
+      attribute: 'Height',
+      value: 48,
+    },
+    {
+      attribute: 'Horizontal padding',
+      value: 24,
+    },
+    {
+      attribute: 'Symbol size',
+      value: 18,
+    },
+    {
+      attribute: 'Symtol style',
+      value: 'solid',
+    }
+  ]}
+/>
