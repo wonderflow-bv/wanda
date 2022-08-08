@@ -1,0 +1,75 @@
+import ComponentsNav from "@/data/components-nav";
+import { getLayoutProps } from "@/utils/get-layout-props";
+import { HintCard } from "@/components/shared/hint-card";
+
+export const getStaticProps = () =>
+  getLayoutProps({
+    layout: "component",
+    layoutProps: {
+      newLayout: true,
+      title: "Button",
+      color: "indigo",
+      subtitle: "A button is a box area or text that communicates and triggers user actions when clicked.",
+      navigation: ComponentsNav,
+      features: [
+        "Keyboard accessible",
+        "Customizable icon",
+        "Multiple styles and sizes",
+        "Themes ready",
+      ],
+      links: [
+        {
+          label: "ARIA design",
+          url: "https://www.w3.org/TR/wai-aria-1.2/#button",
+        },
+        {
+          label: "ARIA authoring",
+          url: "https://www.w3.org/WAI/ARIA/apg/patterns/button/",
+        },
+      ]
+    }
+  });
+
+
+## Icons
+
+The button component can display an icon on the left or right side of the inner text. Using an icon helps to draw more attention to the action and to convey its meaning even to people who may have difficulty with the language used in the interface. Always choose icons that match and enhance the meaning of the action and its label, if the button has one.
+
+<Stack direction="row" columnGap={24}>
+  <HintCard isBad image="https://figmage.com/images/_g0FpihvTyCulB0Fooeaz.png" />
+  <HintCard image="https://figmage.com/images/WK1W9BZSXW-QnmsTbvxEu.png" />
+</Stack>
+
+## Label
+
+The label describes verbally the action that will occur if the user triggers the button.
+
+Ensure that button labels are short and concise. Avoid using more than three words and keep the label on a single line for maximum legibility. Punctuation is accepted only where it's needed for clarity sake.
+
+<Stack direction="row" columnGap={24}>
+  <HintCard isBad image="https://figmage.com/images/JQE971SNu1rAAaD5mQqBE.png" />
+  <HintCard image="https://figmage.com/images/bQzc_FANakfejkxa7ONha.png" />
+</Stack>
+
+Use **active** verbs or **nouns** with sentence-style capitalization. Generally, using the verb only is acceptable, but only if the action remains clear to the user. Choose words that don't sound too generic or misleading.
+
+<Stack direction="row" columnGap={24}>
+  <HintCard isBad image="https://figmage.com/images/702VNOybwdORMi7sgE0HN.png" />
+  <HintCard image="https://figmage.com/images/USeX-mnP9xQmwbfnLjEEi.png" />
+</Stack>
+
+## Button vs Links
+
+When designing, a recurrent question which pops up is: _'Should I use a link or a button component? Is it the same?'_
+
+There are two aspect to considering when working with buttons and links. The first one is the "appearance" of the element, the second one is the action associated with the element (use cases). These two factors can help while choosing between buttons and links.
+
+If you need to add a link that navigates to another page, then you should use a textual link or a link that looks like a button.
+
+If you need to trigger an action inside the current page, like a javascript action or to update the user interface, then you must use the button appearance plus the HTML `button` element.
+
+When an Assistive Technology (AT) encounters a link, the AT announces where the link leads. When an AT encounters a button, it just say that it's a button.
+
+Even if the button appearance can be applied to links between pages, we recommend to use textual link whenever possible, and rely on the button style if the text link doesn't fit the requirements.
+
+![A table which sums up the different use case when to use link vs button](https://figmage.com/images/d87IRqT8i-_EyrMo2997c.png)

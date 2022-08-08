@@ -43,7 +43,7 @@ export const Example = () => {
   return (
     <>
       <Button onClick={() => setVisible(true)}>Open drawer</Button>
-        <DynOverlayContainer onClose={() => setVisible(false)}>
+      <DynOverlayContainer onClose={() => setVisible(false)}>
         {visible && (
           <Drawer title="Account deletion">
             <Stack

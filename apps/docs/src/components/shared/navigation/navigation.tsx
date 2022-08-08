@@ -19,7 +19,7 @@ export const Navigation = ({ data }: NavigationProps) => {
   const { onClose } = useOverlayContext();
 
   const includesPath = useCallback(
-    path => router.asPath === path,
+    path => router.asPath.startsWith(path),
     [router.asPath],
   );
 
@@ -48,10 +48,7 @@ export const Navigation = ({ data }: NavigationProps) => {
         onClick={handleOverlays}
         aria-current={includesPath(url) ? 'page' : undefined}
       >
-        {wip && !url
-          ? <Text as="span" size={16} dimmed={5} responsive={false}>{children}</Text>
-          : <Text as="span" size={16} responsive={false}>{children}</Text>
-          }
+        <Text as="span" size={16} dimmed={wip && !url ? 5 : undefined} responsive={false}>{children}</Text>
         {tag && <Chip color={tag.color || 'gray'} dimension="small">{tag.label}</Chip>}
       </Stack>
     ),

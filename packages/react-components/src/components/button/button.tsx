@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import {
-  Children, cloneElement, forwardRef, isValidElement, MouseEvent, useCallback,
+  Children, cloneElement, forwardRef, isValidElement, MouseEvent, ReactElement, useCallback,
 } from 'react';
 
 import {
@@ -105,7 +105,7 @@ export const Button = forwardRef((
       data-button-fullwidth={fullWidth}
       aria-disabled={disabled}
       aria-busy={busy}
-      aria-pressed={Wrapper === 'button' ? pressed : undefined}
+      aria-pressed={pressed}
       aria-live={busy ? 'polite' : undefined}
       onClick={handleClick()}
       {...otherProps}
@@ -138,7 +138,7 @@ export const ButtonsGroup: FCChildren<ButtonsGroupProps> = ({
 }) => (
   <div className={clsx(styles.ButtonsGroup, className)}>
     {Children.map(children, child => isValidElement(child) && cloneElement(
-      child,
+      child as ReactElement,
       {
         kind,
         dimension,

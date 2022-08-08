@@ -1,20 +1,28 @@
 import { MDXProvider } from '@mdx-js/react';
 import {
+  Button,
+  ButtonsGroup,
   Chip,
   ChipProps,
-  List, Prose, Stack, Symbol, Title,
+  List, Prose, Stack, Symbol, Title, useResponsiveContext,
 } from '@wonderflow/react-components';
 import Markdown from 'markdown-to-jsx';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useMemo } from 'react';
 import slugify from 'slugify';
 
 import { DocLayout } from '@/components/layouts/doc-layout';
 import { IPropsMDXLayout, MDX_COMPONENTS } from '@/components/layouts/mdx-layout';
+
+import { ClientOnly } from '../../shared/client-only';
 
 export interface IPropsComponentLayout extends IPropsMDXLayout {
   features?: string[];
   showMeta?: boolean;
   links?: Array<Record<string, string>>;
   tags?: Array<{ label: string; color: ChipProps['color']}>;
+  newLayout?: boolean;
 }
 
 export const ComponentLayout: FCChildren<IPropsComponentLayout> = ({
@@ -24,9 +32,14 @@ export const ComponentLayout: FCChildren<IPropsComponentLayout> = ({
   title,
   tags,
   showMeta = true,
+  newLayout = false,
   ...otherProps
 }) => {
   const slugName = slugify(title, { lower: true });
+  const router = useRouter();
+  const pageURL = new URL(process.env.NEXT_PUBLIC_DOMAIN + router.asPath);
+  const isSubPage = useMemo(() => pageURL.pathname.split('/').pop() !== slugName, [pageURL.pathname, slugName]);
+  const { matches } = useResponsiveContext();
 
   return (
     <DocLayout title={title} {...otherProps}>
@@ -99,6 +112,67 @@ export const ComponentLayout: FCChildren<IPropsComponentLayout> = ({
         </Stack>
       </Stack>
       )}
+
+      {newLayout && (
+        <ClientOnly>
+          <Stack vAlign="center" vPadding={40}>
+            <ButtonsGroup>
+              <Link href={isSubPage ? './' : `${slugName}`} passHref>
+                <Button
+                  as="a"
+                  fullWidth
+                  dimension={matches.medium ? 'big' : 'regular'}
+                  kind="secondary"
+                  icon={matches.medium ? 'circle-info' : undefined}
+                  pressed={pageURL.pathname.split('/').pop() === slugName}
+                >
+                  Overview
+                </Button>
+              </Link>
+
+              <Link href={isSubPage ? 'specs' : `${slugName}/specs`}>
+                <Button
+                  as="a"
+                  fullWidth
+                  dimension={matches.medium ? 'big' : 'regular'}
+                  kind="secondary"
+                  icon={matches.medium ? 'style' : undefined}
+                  pressed={pageURL.pathname.split('/').pop() === 'specs'}
+                >
+                  Specs
+                </Button>
+              </Link>
+
+              <Link href={isSubPage ? 'guidelines' : `${slugName}/guidelines`}>
+                <Button
+                  as="a"
+                  fullWidth
+                  dimension={matches.medium ? 'big' : 'regular'}
+                  kind="secondary"
+                  icon={matches.medium ? 'todo' : undefined}
+                  pressed={pageURL.pathname.split('/').pop() === 'guidelines'}
+                >
+                  Guidelines
+                </Button>
+              </Link>
+
+              <Link href={isSubPage ? 'implementation' : `${slugName}/implementation`}>
+                <Button
+                  as="a"
+                  fullWidth
+                  dimension={matches.medium ? 'big' : 'regular'}
+                  kind="secondary"
+                  icon={matches.medium ? 'code' : undefined}
+                  pressed={pageURL.pathname.split('/').pop() === 'implementation'}
+                >
+                  Implementation
+                </Button>
+              </Link>
+            </ButtonsGroup>
+          </Stack>
+        </ClientOnly>
+      )}
+
       <MDXProvider components={MDX_COMPONENTS}>
         <Prose>
           {children}
