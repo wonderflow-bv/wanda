@@ -14,6 +14,7 @@ import slugify from 'slugify';
 
 import { DocLayout } from '@/components/layouts/doc-layout';
 import { IPropsMDXLayout, MDX_COMPONENTS } from '@/components/layouts/mdx-layout';
+import { usePlaygroundContext } from '@/src/contexts/playground';
 
 import { ClientOnly } from '../../shared/client-only';
 
@@ -40,6 +41,7 @@ export const ComponentLayout: FCChildren<IPropsComponentLayout> = ({
   const pageURL = new URL(process.env.NEXT_PUBLIC_DOMAIN + router.asPath);
   const isSubPage = useMemo(() => pageURL.pathname.split('/').pop() !== slugName, [pageURL.pathname, slugName]);
   const { matches } = useResponsiveContext();
+  const { setComponent } = usePlaygroundContext();
 
   return (
     <DocLayout title={title} {...otherProps}>
@@ -108,6 +110,9 @@ export const ComponentLayout: FCChildren<IPropsComponentLayout> = ({
                 <Symbol source="arrow-up-right" dimension={12} />
               </a>
             ))}
+            <Link href="/playground" passHref>
+              <Button as="a" onClick={() => setComponent(slugName)}>Open in playground</Button>
+            </Link>
           </Stack>
         </Stack>
       </Stack>
