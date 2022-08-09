@@ -1,11 +1,19 @@
 import ComponentsNav from "@/data/components-nav";
 import { getLayoutProps } from "@/utils/get-layout-props";
+import { PropsTable } from "@/components/doc/props-table";
+import { KeyTable } from "@/components/shared/key-table";
+import { useState } from "react";
+import dynamic from "next/dynamic";
+
+export const DynOverlayContainer = dynamic(
+  import("@wonderflow/react-components").then((m) => m.OverlayContainer),
+  { ssr: false }
+);
 
 export const getStaticProps = () =>
   getLayoutProps({
     layout: "component",
     layoutProps: {
-      newLayout: true,
       title: "Button",
       color: "indigo",
       subtitle: "A button is a box area or text that communicates and triggers user actions when clicked.",
@@ -29,58 +37,171 @@ export const getStaticProps = () =>
     }
   });
 
-Providing buttons inside an interface is the most straightforward way to offer the user the ability to interact with the product. For this reason, users should be able to find buttons at a glance among other elements. Each button should state its action and the following result clearly, to avoid any undesired misinterpretation.
+<LiveArea direction="row">
+  <Button icon="check">Button</Button>
+</LiveArea>
 
-## Identifying buttons
 
-Currently, the Wanda provides two main categories of buttons, each of them with several variants:
+## Anatomy
 
-1. Button
-2. Icon Button
-2. Toggle Button
-2. Split Button
+```tsx lines="1,4"
+import { Button } from "@wonderflow/react-components";
 
-In some cases, the same action can be adequately represented by more than one type of button. In other cases, however, it is advisable to use the button designed explicitly for the purpose.
+export default () => {
+  return <Button>Click</Button>;
+};
+```
 
-Below, we propose a taxonomy, based on the visual hierarchy and relevance, the buttons should have within the same context:
+## Grouping buttons
 
-![](https://figmage.com/images/TaJZ18bTfqKoc9e9EcFUX.png)
+Sometimes you need to group buttons together to create a single visual context or to create a set of related actions. To group buttons, you can use the `ButtonsGroup` component.
 
-## High relevance
 
-High importance buttons represent the main actions the user can take in a particular page or screen.
+<LiveArea>
+  <ButtonsGroup dimension="big" kind="secondary">
+    <Button>Action 1</Button>
+    <Button>Action 2</Button>
+    <Button>Action 3</Button>
+  </ButtonsGroup>
+</LiveArea>
 
-Although a view may contain several actions that fall into the high importance category, it is advisable not to load the page or screen with too many primary actions. Always try to find a balance that makes the hierarchy and scale of importance of these actions clear.
 
-### Primary buttons
+## API Reference
 
-![](https://figmage.com/images/t_HCGmFOwntGWEFLpKxq8.png)
+### Button
 
-Primary buttons are the more impactful call-to-action on any interface. For this reason, there should be no more than one primary button on a given view. However, be aware that not every interface requires a primary button.
+<PropsTable
+  properties={[
+    {
+      name: "kind",
+      type: ['enum'],
+      typeValue: "'primary' | 'secondary' | 'flat'",
+      default: 'primary',
+      required: false,
+      description: "Set the style of the button. When the button is `disabled` this property is ignored.",
+    },
+    {
+      name: "dimension",
+      type: ['enum'],
+      typeValue: "'small' | 'regular' | 'big'",
+      default: 'regular',
+      required: false,
+      description: "Set the size of the button.",
+    },
+    {
+      name: "fullWidth",
+      type: ["boolean"],
+      default: "false",
+      required: false,
+      description: "Make the button full width, filling the available space.",
+    },
+    {
+      name: "icon",
+      type: ["enum"],
+      typeValue: "IconProps['source']",
+      typeLink: "/components/other/icon#prop-source",
+      default: "",
+      required: false,
+      description: "Define the icon to use",
+    },
+    {
+      name: "iconPosition",
+      type: ['enum'],
+      typeValue: "'left' | 'right'",
+      default: 'left',
+      required: false,
+      description: "Set the icon position",
+    },
+    {
+      name: "iconColor",
+      type: ["string"],
+      default: "",
+      required: false,
+      description: "Override the color of the icon. Used only when icon is defined.",
+    },
+    {
+      name: "disabled",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      description: "Set disabled state. The button is not interactive and grayed out.",
+    },
+    {
+      name: "busy",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      description: "Set the loading state and show a spinner.",
+    },
+    {
+      name: "pressed",
+      type: ["boolean"],
+      default: "false",
+      required: false,
+      description: "Set the pressed state and add required aria attributes.",
+    },
+    {
+      name: "onClick",
+      type: ["function"],
+      typeValue: `(MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void`,
+      default: "",
+      required: false,
+      description: "Callback function to be called when the button is pressed.",
+    },
+    {
+      name: "as",
+      type: ["enum"],
+      typeValue: "keyof JSX.IntrinsicElements | React.ComponentType<any>",
+      default: 'button',
+      required: false,
+      description:
+        "Set the component to a different HTML tag or custom component",
+    }
+  ]}
+/>
 
-In the event of an action that leads to destructive actions, like the removal or deletion of data, it is always advisable to use the primary button.
+### ButtonsGroup
 
-<Snackbar title="Note" kind="warning">Any view or screen must have only a single `primary` button.</Snackbar>
+<PropsTable
+  properties={[
+    {
+      name: "kind",
+      type: ['enum'],
+      typeValue: "'primary' | 'secondary' | 'flat'",
+      default: 'primary',
+      required: false,
+      description: "Set the style of the button. When the button is `disabled` this property is ignored.",
+    },
+    {
+      name: "dimension",
+      type: ['enum'],
+      typeValue: "'small' | 'regular' | 'big'",
+      default: 'regular',
+      required: false,
+      description: "Set the size of the button.",
+    },
+  ]}
+/>
 
-## Medium relevance
+## Accessibility
 
-Buttons that fall into the medium importance category are more subtle than high importance ones. There may be medium importance buttons on a page either with or without high importance buttons.
+Adheres to the [`button` role requirements](https://www.w3.org/TR/wai-aria-1.2/#button).
 
-### Secondary buttons
+### Keyboard interactions
 
-![](https://figmage.com/images/DQjWveK2p2aefgl3gKkmN.png)
-
-Secondary buttons are the perfect companions for primary ones. Often you have two actions beside each other but only one is the most relevant. The less relevant action can be presented then with the secondary button style or with a even less relevance style, like flat buttons.
-
-## Low relevance
-
-Low importance buttons are typically used in contexts where you want the user to focus on the content. An example is the "Read more..." text buttons used inside cards.
-
-### Flat buttons
-
-![](https://figmage.com/images/O6YiNXtSoo6S2f3RzRh8e.png)
-
-Flat buttons are the least intrusive actions you can use. They pair well with both secondary and primary actions.
-
-There can be many flat buttons inside the view, but considering their low visual impact we suggest to limit the size of the context in which they are placed. For example a good usage of these buttons is inside well defined areas, like cards or snackabars.
-
+<KeyTable
+  data={[
+    {
+      name: "tab",
+      description: "Move focus on the element or outside",
+    },
+    {
+      name: "enter",
+      description: "Trigger the component action",
+    },
+    {
+      name: "space",
+      description: "Trigger the component action",
+    },
+  ]}
+/>
