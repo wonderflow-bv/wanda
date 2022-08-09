@@ -1,7 +1,6 @@
 import UsageNav from "@/data/usage-nav";
 import { getLayoutProps } from "@/utils/get-layout-props";
 import { useResponsiveContext } from '@wonderflow/react-components'
-import { PropsTable } from "@/components/doc/props-table";
 
 export const getStaticProps = () =>
   getLayoutProps({
@@ -76,25 +75,6 @@ export const ResponsiveExample = () => {
   <ResponsiveExample />
 </LiveArea>
 
-
-## API Reference
-
-### ResponsiveProvider
-
-<PropsTable
-  properties={[
-    {
-      name: "breakpoints",
-      type: ["object"],
-      default: "",
-      typeValue: "{\n  extraSmall: number;\n  small: number;\n  medium: number;\n  large: number;\n  extraLarge: number;\n}",
-      required: false,
-      dangerous: false,
-      description:
-        "Set custom values to each specific breakpoint.",
-    },
-  ]}
-/>
 
 
 
