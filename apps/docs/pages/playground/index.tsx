@@ -1,46 +1,25 @@
-import { Spinner } from '@wonderflow/react-components';
 import { NextPage } from 'next';
-import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
+import { ClientOnly } from '@/src/components/shared/client-only';
+import { Stackblitz } from '@/src/components/shared/stackblitz';
+import { usePlaygroundContext } from '@/src/contexts/playground';
 import { getLayoutProps } from '@/utils/get-layout-props';
 
-import styles from './playground.module.css';
-
 const PlaygroundPage: NextPage = () => {
-  const [isDark, setIsDark] = useState<boolean>(false);
-  const { theme } = useTheme();
-
-  const mediaMatches = (matches: boolean) => {
-    setIsDark(matches);
-  };
+  const { component } = usePlaygroundContext();
+  const { setComponent } = usePlaygroundContext();
+  const router = useRouter();
 
   useEffect(() => {
-    setIsDark(window.matchMedia('(prefers-color-scheme: dark)').matches);
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ({ matches }) => mediaMatches(matches));
-
-    return () => {
-      window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', ({ matches }) => mediaMatches(matches));
-    };
-  }, [theme]);
-
-  const computeSrc = () => {
-    const currentTheme = theme === 'dark' ? 'dark' : 'light';
-    const computedTheme = (theme === 'system' && isDark) ? 'dark' : 'light';
-
-    return `https://stackblitz.com/edit/wanda?embed=1&file=src/app.tsx&hideNavigation=1&hideFileExplorer=0&theme=${theme === 'system' ? computedTheme : currentTheme}`;
-  };
+    router.events.on('routeChangeStart', () => setComponent('app'));
+  }, [router, setComponent]);
 
   return (
-    <>
-      <Spinner className={styles.Spinner} />
-      <iframe
-        loading="lazy"
-        className={styles.Iframe}
-        title="Playground"
-        src={computeSrc()}
-      />
-    </>
+    <ClientOnly>
+      <Stackblitz component={component} />
+    </ClientOnly>
   );
 };
 
