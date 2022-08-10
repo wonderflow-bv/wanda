@@ -30,14 +30,14 @@ export const Stackblitz: FC<StackblitzProps> = ({
   const computeSrc = () => {
     const currentTheme = theme === 'dark' ? 'dark' : 'light';
     const computedTheme = (theme === 'system' && isDark) ? 'dark' : 'light';
-    const src = new URL(`https://stackblitz.com/edit/wanda?embed=1&file=src/routes/${component}.tsx`);
+    const src = new URL(`https://stackblitz.com/edit/wanda?embed=1&file=src/routes/${component}.tsx&initialPath=${component === 'app' ? '/' : component}`);
     const params = new URLSearchParams(src.search);
 
     params.set('hideNavigation', '0');
     params.set('hideFileExplorer', '0');
     params.set('theme', theme === 'system' ? computedTheme : currentTheme);
 
-    return src;
+    return src.toString();
   };
 
   return (

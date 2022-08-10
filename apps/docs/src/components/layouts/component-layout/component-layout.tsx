@@ -80,6 +80,14 @@ export const ComponentLayout: FCChildren<IPropsComponentLayout> = ({
             Links
           </Title>
           <Stack hAlign="start" rowGap={8} style={{ maxInlineSize: '14.11rem' }}>
+            <Link href="/playground">
+              {/* eslint-disable-next-line */}
+              <a onClick={() => setComponent(slugName)}>
+                Open in playground
+                {' '}
+                <Symbol source="arrow-up-right" dimension={12} />
+              </a>
+            </Link>
             <a
               href={`https://github.com/wonderflow-bv/wanda/tree/main/packages/react-components/src/components/${slugName}`}
               target="_blank"
@@ -110,9 +118,6 @@ export const ComponentLayout: FCChildren<IPropsComponentLayout> = ({
                 <Symbol source="arrow-up-right" dimension={12} />
               </a>
             ))}
-            <Link href="/playground" passHref>
-              <Button as="a" onClick={() => setComponent(slugName)}>Open in playground</Button>
-            </Link>
           </Stack>
         </Stack>
       </Stack>
