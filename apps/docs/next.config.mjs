@@ -1,3 +1,7 @@
+/**
+ * @type {import('next').NextConfig}
+ */
+
 import bundleAnalyzer from '@next/bundle-analyzer';
 // import redirects from './redirects.js'
 import mdx from '@next/mdx';
@@ -33,7 +37,7 @@ const nextConfig = withPlugins([
 ], {
   trailingSlash: false,
   pageExtensions: ['js', 'jsx', 'tsx', 'md', 'mdx', 'ts'],
-  swcMinify: true,
+  swcMinify: false,
   images: {
     domains: ['media.graphcms.com', 'media.graphassets.com'],
   },
