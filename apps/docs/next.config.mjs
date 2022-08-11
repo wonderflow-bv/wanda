@@ -37,7 +37,7 @@ const nextConfig = withPlugins([
 ], {
   trailingSlash: false,
   pageExtensions: ['js', 'jsx', 'tsx', 'md', 'mdx', 'ts'],
-  swcMinify: false,
+  swcMinify: true,
   images: {
     domains: ['media.graphcms.com', 'media.graphassets.com'],
   },
