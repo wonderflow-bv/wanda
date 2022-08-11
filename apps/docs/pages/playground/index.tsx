@@ -1,5 +1,4 @@
 import { NextPage } from 'next';
-import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { ClientOnly } from '@/src/components/shared/client-only';
@@ -8,13 +7,11 @@ import { usePlaygroundContext } from '@/src/contexts/playground';
 import { getLayoutProps } from '@/utils/get-layout-props';
 
 const PlaygroundPage: NextPage = () => {
-  const { component } = usePlaygroundContext();
-  const { setComponent } = usePlaygroundContext();
-  const router = useRouter();
+  const { component, setComponent } = usePlaygroundContext();
 
   useEffect(() => {
-    router.events.on('routeChangeStart', () => setComponent('app'));
-  }, [router, setComponent]);
+    if (component === 'app') setComponent('app');
+  }, [component, setComponent]);
 
   return (
     <ClientOnly>
