@@ -56,17 +56,17 @@
     "react-dom": ">=17.0"
   },
   "devDependencies": {
-    "@babel/core": "7.18.9",
+    "@babel/core": "7.18.10",
     "@babel/preset-typescript": "7.18.6",
-    "@storybook/addon-actions": "6.5.9",
-    "@storybook/addon-essentials": "6.5.9",
-    "@storybook/addon-links": "6.5.9",
+    "@storybook/addon-actions": "6.5.10",
+    "@storybook/addon-essentials": "6.5.10",
+    "@storybook/addon-links": "6.5.10",
     "@storybook/addon-postcss": "2.0.0",
-    "@storybook/addons": "6.5.9",
-    "@storybook/builder-webpack5": "6.5.9",
-    "@storybook/manager-webpack5": "6.5.9",
-    "@storybook/react": "6.5.9",
-    "@storybook/theming": "6.5.9",
+    "@storybook/addons": "6.5.10",
+    "@storybook/builder-webpack5": "6.5.10",
+    "@storybook/manager-webpack5": "6.5.10",
+    "@storybook/react": "6.5.10",
+    "@storybook/theming": "6.5.10",
     "@types/react": "17.0.43",
     "@types/react-dom": "17.0.14",
     "@types/react-table": "7.7.12",
@@ -74,7 +74,7 @@
     "@wonderflow/tokens": "10.5.0",
     "babel-loader": "8.2.5",
     "cpy-cli": "3.1.1",
-    "postcss": "8.4.14",
+    "postcss": "8.4.16",
     "postcss-cli": "10.0.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
@@ -88,7 +88,7 @@
     "@radix-ui/react-tabs": "1.0.0",
     "ahooks": "3.5.0",
     "clsx": "1.2.1",
-    "framer-motion": "6.5.1",
+    "framer-motion": "7.0.1",
     "react-focus-on": "3.6.0",
     "react-masonry-css": "1.0.16",
     "react-merge-refs": "2.0.1",
@@ -98,6 +98,6 @@
     "react-table": "7.8.0",
     "react-uid": "2.3.2",
     "slugify": "1.6.5",
-    "type-fest": "2.17.0"
+    "type-fest": "2.18.0"
   }
 }

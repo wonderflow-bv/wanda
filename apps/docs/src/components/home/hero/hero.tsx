@@ -5,8 +5,8 @@ import {
 import clsx from 'clsx';
 import {
   m,
+  useScroll,
   useTransform,
-  useViewportScroll,
 } from 'framer-motion';
 import Link from 'next/link';
 
@@ -20,7 +20,7 @@ export const Hero: FCClass = ({
   ...otherProps
 }) => {
   const { matches } = useResponsiveContext();
-  const { scrollYProgress } = useViewportScroll();
+  const { scrollYProgress } = useScroll();
   const yOutput = [0, 0.4];
   const background = useTransform(scrollYProgress, yOutput, [
     `radial-gradient(circle at 30% -20%, rgba(44, 191, 111, 0.13) 0%, rgba(44, 191, 111, 0) 30%),
