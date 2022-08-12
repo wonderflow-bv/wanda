@@ -95,7 +95,7 @@ export const ComponentLayout: FCChildren<IPropsComponentLayout> = ({
               {' '}
               <Symbol source="arrow-up-right" dimension={12} />
             </a>
-            <a
+            {/* <a
               href="https://github.com/wonderflow-bv/wanda/issues/new/choose"
               target="_blank"
               rel="noopener noreferrer"
@@ -103,7 +103,7 @@ export const ComponentLayout: FCChildren<IPropsComponentLayout> = ({
               Report an issue
               {' '}
               <Symbol source="arrow-up-right" dimension={12} />
-            </a>
+            </a> */}
             {links?.map(link => (
               <a
                 key={link.url}

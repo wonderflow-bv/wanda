@@ -19,7 +19,8 @@ export const Navigation = ({ data }: NavigationProps) => {
   const { onClose } = useOverlayContext();
 
   const includesPath = useCallback(
-    path => router.asPath.startsWith(path),
+    path => router.asPath === path,
+    // path => router.asPath.startsWith(path),
     [router.asPath],
   );
 
