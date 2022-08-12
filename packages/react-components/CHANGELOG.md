@@ -1,5 +1,13 @@
 # @wonderflow/react-components
 
+## 10.6.0
+
+### Minor Changes
+
+- d667561: Refactoring ResponsiveContext and provider
+- 49ab7ab: Fix List item marker sizes
+- c18667f: Revert Responsive context changes due to SSR issues
+
 ## 10.5.0
 
 ### Minor Changes

@@ -1,5 +1,11 @@
 # @wonderflow/symbols
 
+## 10.6.0
+
+### Minor Changes
+
+- 68077ab: Add new `bullet` symbol
+
 ## 10.5.0
 
 ### Minor Changes
