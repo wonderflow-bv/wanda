@@ -1,17 +1,24 @@
 import { NextPage } from 'next';
-import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 import { ClientOnly } from '@/src/components/shared/client-only';
 import { Stackblitz } from '@/src/components/shared/stackblitz';
-import { usePlaygroundContext } from '@/src/contexts/playground';
 import { getLayoutProps } from '@/utils/get-layout-props';
 
 const PlaygroundPage: NextPage = () => {
-  const { component, setComponent } = usePlaygroundContext();
+  const [component, setComponent] = useState('');
+  const router = useRouter();
+  const pageURL = new URL(process.env.NEXT_PUBLIC_DOMAIN + router.asPath);
+  const pageHash = pageURL.hash.slice(1);
 
   useEffect(() => {
-    if (component === 'app') setComponent('app');
-  }, [component, setComponent]);
+    setComponent(pageHash || 'app');
+
+    return () => {
+      setComponent('app');
+    };
+  }, [pageHash]);
 
   return (
     <ClientOnly>
