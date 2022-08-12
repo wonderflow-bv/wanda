@@ -46,7 +46,7 @@
   font-family: inherit;
   appearance: none;
   display: block;
-  inline-size: 100%;
+  min-inline-size: 100%;
   box-sizing: border-box;
   overflow: hidden;
   color: inherit;
@@ -93,9 +93,11 @@
     }
 
     & option:checked {
-      color: var(--dimmed-0);
-      background: var(--dimmed-4) linear-gradient(to bottom, var(--dimmed-4) 0%, var(--dimmed-4) 100%);
-      background-color: var(--dimmed-4);
+      color: var(--global-background);
+      background:
+        hsl(token(--color-primary-30))
+        linear-gradient(to bottom, hsl(token(--color-primary-30)) 0%, hsl(token(--color-primary-30)) 100%);
+      background-color: hsl(token(--color-primary-30));
     }
 
     & optgroup {
