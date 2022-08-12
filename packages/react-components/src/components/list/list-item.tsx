@@ -23,7 +23,7 @@ export type ListItemProps = PropsWithChildren<PropsWithClass> & Pick<ListProps, 
 export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(({
   className,
   hideMarker,
-  marker = 'circle',
+  marker = 'bullet',
   markerColor,
   children,
   dimension = 'regular',
@@ -41,14 +41,14 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(({
       text: 18,
       icon: {
         size: 16,
-        weight: 'outline',
+        weight: 'solid',
       },
     },
     big: {
       text: 22,
       icon: {
-        size: 24,
-        weight: 'duotone',
+        size: 18,
+        weight: 'solid',
       },
     },
   };
@@ -69,9 +69,9 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(({
           source={marker}
           className={styles.Marker}
           fill={markerColor}
-          data-list-default-marker={marker === 'circle'}
-          weight={marker === 'circle' ? 'solid' : sizes[dimension].icon.weight as SymbolProps['weight']}
-          dimension={marker !== 'circle' ? sizes[dimension].icon.size as SymbolProps['dimension'] : 16}
+          data-list-default-marker={marker === 'bullet'}
+          weight={marker === 'bullet' ? 'solid' : sizes[dimension].icon.weight as SymbolProps['weight']}
+          dimension={marker !== 'bullet' ? sizes[dimension].icon.size as SymbolProps['dimension'] : 16}
         />
       )}
       <Text as="span" size={sizes[dimension].text as TextProps['size']}>

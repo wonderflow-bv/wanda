@@ -1,5 +1,5 @@
 .List {
-  --marker-size: token(--space-16);
+  --marker-size: token(--icon-size-16);
   --marker-gap: token(--space-8);
 
   &[data-list-ordered='false'] {
@@ -8,12 +8,12 @@
   }
 
   &[data-list-size='small'] {
-    --marker-size: 0.77rem;
+    --marker-size: token(--icon-size-12);
     --marker-gap: token(--space-8);
   }
 
   &[data-list-size='big'] {
-    --marker-size: 1.11rem;
+    --marker-size: token(--icon-size-18);
     --marker-gap: token(--space-16);
   }
 
@@ -45,13 +45,7 @@
   block-size: var(--marker-size);
   margin-block-start: calc(var(--marker-size) / 2.5);
 
-
-  &[data-list-default-marker='true'] {
-    transform: scale(0.7);
-    margin-block-start: calc(var(--marker-size) / 3);
-  }
-
   @nest .List[data-list-size='big'] & {
-    margin-block-start: calc(var(--marker-size) / 3);
+    margin-block-start: calc(var(--marker-size) / 2.8);
   }
 }
