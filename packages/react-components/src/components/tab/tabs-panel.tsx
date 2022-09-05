@@ -7,7 +7,7 @@ import styles from './tab.module.css';
 
 export type TabPanelProps = {
   label: string;
-  symbol?: SymbolProps['source'];
+  icon?: SymbolProps['source'];
   value: TabsPrimitive.TabsContentProps['value'];
 };
 

@@ -87,11 +87,11 @@ export const DisabledTab: ComponentStory<typeof Tab> = args => (
 
 export const WithIcons: ComponentStory<typeof Tab> = args => (
   <Tab defaultValue="1" {...args}>
-    <Tab.Panel symbol="star" value="1" label="Tab 1">Panel 1</Tab.Panel>
-    <Tab.Panel symbol="eye" value="2" label="Tab mid long 2">Panel 2</Tab.Panel>
-    <Tab.Panel symbol="sun-bright" value="3" label="Tab short 3">Panel 3</Tab.Panel>
-    <Tab.Panel symbol="moon" disabled value="4" label="Tab veryy long 4">Panel 4</Tab.Panel>
-    <Tab.Panel symbol="magnifying-glass" value="5" label="Tab 5">Panel 5</Tab.Panel>
-    <Tab.Panel symbol="check" value="6" label="Tab 6">Panel 6</Tab.Panel>
+    <Tab.Panel icon="star" value="1" label="Tab 1">Panel 1</Tab.Panel>
+    <Tab.Panel icon="eye" value="2" label="Tab mid long 2">Panel 2</Tab.Panel>
+    <Tab.Panel icon="sun-bright" value="3" label="Tab short 3">Panel 3</Tab.Panel>
+    <Tab.Panel icon="moon" disabled value="4" label="Tab veryy long 4">Panel 4</Tab.Panel>
+    <Tab.Panel icon="magnifying-glass" value="5" label="Tab 5">Panel 5</Tab.Panel>
+    <Tab.Panel icon="check" value="6" label="Tab 6">Panel 6</Tab.Panel>
   </Tab>
 );

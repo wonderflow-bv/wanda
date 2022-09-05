@@ -85,7 +85,7 @@ export const Tab = ({
               asChild
             >
               <Button kind="flat" dimension="big">
-                <Symbol source={child.props.symbol} dimension={dimension === 'big' ? 24 : 16} weight={dimension === 'big' ? 'duotone' : 'solid'} />
+                <Symbol source={child.props.icon} dimension={dimension === 'big' ? 24 : 16} weight={dimension === 'big' ? 'duotone' : 'solid'} />
                 {child.props.label}
                 {(child.props.value === activeItem) && (
                   <m.span className={styles.Highlight} layoutId={uid('tab-highlight')} />
