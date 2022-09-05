@@ -11,7 +11,7 @@
   @mixin vibrancy;
 
   position: sticky;
-  top: token(--space-56);
+  top: token(--space-72);
   margin: 0 calc(token(--space-16) * -1);
   z-index: 1;
 

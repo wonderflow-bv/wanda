@@ -23,10 +23,10 @@ export const Banner = forwardRef(({
   <Card
     ref={forwardedRef}
     className={styles.Banner}
-    bordered
     padding={24}
     highlightOnHover
     columnGap={16}
+    dimmed={0}
     left={icon && <Symbol className={styles.Icon} dimension={32} weight="duotone" source={icon} />}
     {...props}
   >
