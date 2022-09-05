@@ -35,12 +35,12 @@
   },
   "dependencies": {
     "@wonderflow/tokens": "10.6.0",
-    "cssnano": "5.1.12",
+    "cssnano": "5.1.13",
     "cssnano-preset-default": "5.2.12",
     "flat": "5.0.2",
-    "postcss-import": "14.1.0",
-    "postcss-mixins": "9.0.3",
-    "postcss-preset-env": "7.7.2",
+    "postcss-import": "15.0.0",
+    "postcss-mixins": "9.0.4",
+    "postcss-preset-env": "7.8.0",
     "postcss-replace": "2.0.0"
   },
   "devDependencies": {
