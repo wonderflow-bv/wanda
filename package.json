@@ -27,7 +27,7 @@
     "*.{css}": "stylelint"
   },
   "devDependencies": {
-    "@changesets/cli": "2.22.0",
+    "@changesets/cli": "2.24.4",
     "@graphql-codegen/cli": "2.11.5",
     "@graphql-codegen/typescript": "2.7.3",
     "@graphql-codegen/typescript-operations": "2.5.3",
