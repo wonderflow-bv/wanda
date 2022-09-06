@@ -44,3 +44,8 @@ export const Default = Template.bind({});
 Default.args = {
   rows: 3,
 };
+
+export const Expandable = Template.bind({});
+Expandable.args = {
+  expandable: true,
+};

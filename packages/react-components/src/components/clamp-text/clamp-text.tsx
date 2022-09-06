@@ -37,6 +37,7 @@ export const ClampText = forwardRef(({
 
   const dynamicStyle: CSSProperties = {
     '--r': rows,
+    '--padding': expandable && '2rem',
   };
 
   return (
