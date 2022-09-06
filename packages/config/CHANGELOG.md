@@ -1,5 +1,11 @@
 # @wonderflow/config
 
+## 10.7.1
+
+### Patch Changes
+
+- @wonderflow/tokens@10.7.1
+
 ## 10.7.0
 
 ### Patch Changes

@@ -1,5 +1,7 @@
 # @wonderflow/react-components
 
+## 10.7.1
+
 ## 10.7.0
 
 ### Minor Changes
