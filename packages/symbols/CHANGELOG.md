@@ -1,5 +1,12 @@
 # @wonderflow/symbols
 
+## 10.7.0
+
+### Minor Changes
+
+- fb88a05: Add new `exclamation-mark` icon
+- 09f1cb6: Rename tab `symbol` prop to `icon` to keep consistency.
+
 ## 10.6.0
 
 ### Minor Changes

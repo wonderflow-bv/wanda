@@ -1,5 +1,12 @@
 # @wonderflow/react-components
 
+## 10.7.0
+
+### Minor Changes
+
+- 09f1cb6: Rename tab `symbol` prop to `icon` to keep consistency.
+- 8249998: Fix select size when fullwidth
+
 ## 10.6.0
 
 ### Minor Changes

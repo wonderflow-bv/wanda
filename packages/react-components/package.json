@@ -1,6 +1,6 @@
 {
   "name": "@wonderflow/react-components",
-  "version": "10.6.0",
+  "version": "10.7.0",
   "description": "UI components from Wonderflow's Wanda design system",
   "author": "Wonderflow",
   "license": "MIT",
@@ -70,8 +70,8 @@
     "@types/react": "17.0.43",
     "@types/react-dom": "17.0.14",
     "@types/react-table": "7.7.12",
-    "@wonderflow/config": "10.6.0",
-    "@wonderflow/tokens": "10.6.0",
+    "@wonderflow/config": "10.7.0",
+    "@wonderflow/tokens": "10.7.0",
     "babel-loader": "8.2.5",
     "cpy-cli": "3.1.1",
     "postcss": "8.4.16",
