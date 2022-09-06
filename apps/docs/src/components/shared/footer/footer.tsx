@@ -78,7 +78,7 @@ export const Footer: FC<FooterProps> = ({
                   <Link href="/get-started/documentation/design/foundation/colors"><a>Foundation</a></Link>
                 </List.Li>
                 <List.Li>
-                  <Link href="/get-started/documentation/design/symbols"><a>Symbols</a></Link>
+                  <Link href="/get-started/symbols"><a>Symbols</a></Link>
                 </List.Li>
                 <List.Li>
                   <Link href="/get-started/documentation/design/motion/principles"><a>Motion</a></Link>
@@ -101,7 +101,7 @@ export const Footer: FC<FooterProps> = ({
                   <Link href="/get-started/documentation/develop/global-styles"><a>Global styles</a></Link>
                 </List.Li>
                 <List.Li>
-                  <Link href="/get-started/documentation/develop/themes"><a>Using themes</a></Link>
+                  <Link href="/get-started/documentation/develop/using-themes"><a>Using themes</a></Link>
                 </List.Li>
                 <List.Li>
                   <Link href="/get-started/documentation/develop/ssr"><a>SSR</a></Link>
