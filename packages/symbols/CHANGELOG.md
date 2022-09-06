@@ -1,5 +1,11 @@
 # @wonderflow/symbols
 
+## 10.7.1
+
+### Patch Changes
+
+- 3aaf949: Fix exclamation-mark icon color
+
 ## 10.7.0
 
 ### Minor Changes
