@@ -8,7 +8,7 @@ import mdx from '@next/mdx';
 import withPlugins from 'next-compose-plugins';
 import withImages from 'next-images';
 import withTranspileModules from 'next-transpile-modules';
-import { remarkMdxCodeMeta } from 'remark-mdx-code-meta';
+import remarkMdxCodeMeta from 'remark-mdx-code-meta';
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
