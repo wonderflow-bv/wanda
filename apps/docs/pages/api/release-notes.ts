@@ -10,9 +10,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const hasChanges = releaseData.notes[0].breaking ?? releaseData.notes[0].new ?? releaseData.notes[0].fixes;
 
   const changesTemplate = `This release includes:\n\n
-  ${releaseData.notes[0].breaking ? '✓ BREAKING CHANGES' : ''}
-  ${releaseData.notes[0].new ? '✓ NEW FEATURES' : ''}
-  ${releaseData.notes[0].fixes ? '✓ FIXES' : ''}
+  ${releaseData.notes.some(e => e.breaking?.length) ? '✓ BREAKING CHANGES' : ''}
+  ${releaseData.notes.some(e => e.new?.length) ? '✓ NEW FEATURES' : ''}
+  ${releaseData.notes.some(e => e.fixes?.length) ? '✓ FIXES' : ''}
 `;
 
   const slackMessage = [
