@@ -3,7 +3,7 @@ import { forwardRef, Ref } from 'react';
 
 import { Stack, Symbol, SymbolProps } from '@/components';
 
-import styles from './chip.module.css';
+import * as styles from './chip.module.css';
 
 export type ChipProps = {
   /**

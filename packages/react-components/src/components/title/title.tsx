@@ -6,7 +6,7 @@ import slugify from 'slugify';
 
 import { Polymorphic, Symbol } from '@/components';
 
-import styles from './title.module.css';
+import * as styles from './title.module.css';
 
 export type TitleProps = {
   /**

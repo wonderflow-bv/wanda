@@ -5,7 +5,7 @@ import {
 
 import { Polymorphic, ToggleButton, Tooltip } from '@/components';
 
-import styles from './clamp-text.module.css';
+import * as styles from './clamp-text.module.css';
 
 export type ClampTextProps = {
   /**

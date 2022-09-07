@@ -7,7 +7,7 @@ import { RovingTabIndexProvider } from 'react-roving-tabindex';
 
 import { Elevator, Polymorphic, Stack } from '@/components';
 
-import styles from './menu.module.css';
+import * as styles from './menu.module.css';
 import { MenuItem, MenuItemProps } from './menu-item/menu-item';
 import { MenuItemCheckbox, MenuItemCheckboxProps } from './menu-item/menu-item-checkbox';
 import { MenuSeparator } from './menu-separator/menu-separator';

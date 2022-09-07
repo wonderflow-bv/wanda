@@ -11,7 +11,7 @@ import {
   Elevator, IconButton, Stack, Title, useOverlayContext,
 } from '@/components';
 
-import styles from './drawer.module.css';
+import * as styles from './drawer.module.css';
 
 export type DrawerProps = {
   /**

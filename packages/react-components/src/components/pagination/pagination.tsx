@@ -5,7 +5,7 @@ import { Except } from 'type-fest';
 
 import { Symbol } from '@/components';
 
-import styles from './pagination.module.css';
+import * as styles from './pagination.module.css';
 
 export type PaginationProps = Except<ReactPaginateProps, 'pageCount'> & {
   /**

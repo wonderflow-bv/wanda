@@ -8,7 +8,7 @@ import {
   Polymorphic, Stack, Symbol, SymbolProps, Text, TextProps,
 } from '@/components';
 
-import styles from './star-meter.module.css';
+import * as styles from './star-meter.module.css';
 
 export type StarMeterProps = {
   /**

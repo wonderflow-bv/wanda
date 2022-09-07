@@ -2,7 +2,7 @@ import { HTMLAttributes } from 'react';
 
 import { Polymorphic, Stack, Title } from '@/components';
 
-import styles from './table-header.module.css';
+import * as styles from './table-header.module.css';
 
 export type TableHeaderProps = HTMLAttributes<HTMLElement> & {
   title?: string | Polymorphic.IntrinsicElement<typeof Title>;

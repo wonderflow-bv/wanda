@@ -3,7 +3,7 @@ import tkns from '@wonderflow/tokens/platforms/web/tokens.json';
 import { CSSProperties, Fragment, useCallback } from 'react';
 import { useUIDSeed } from 'react-uid';
 
-import styles from './skeleton.module.css';
+import * as styles from './skeleton.module.css';
 
 export type SkeletonProps = {
   /**

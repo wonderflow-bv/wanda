@@ -4,7 +4,7 @@ import { CSSProperties, forwardRef } from 'react';
 
 import { Polymorphic } from '@/components';
 
-import styles from './text.module.css';
+import * as styles from './text.module.css';
 
 export type TextProps = {
   /**

@@ -8,7 +8,7 @@ import {
   Stack, Symbol, SymbolProps, Text,
 } from '@/components';
 
-import styles from './select.module.css';
+import * as styles from './select.module.css';
 
 export type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
   /**

@@ -12,7 +12,7 @@ import {
   useMemo,
 } from 'react';
 
-import styles from './symbol.module.css';
+import * as styles from './symbol.module.css';
 
 export type SymbolProps = SVGAttributes<SVGElement | SVGSVGElement> & {
   /**

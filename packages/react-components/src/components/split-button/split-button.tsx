@@ -6,7 +6,7 @@ import {
   Button, Polymorphic, Popover, PopoverProps, Stack,
 } from '@/components';
 
-import styles from './split-button.module.css';
+import * as styles from './split-button.module.css';
 
 export type SplitButtonProps = Pick<PopoverProps, 'placement' | 'offset'> & {
   /**

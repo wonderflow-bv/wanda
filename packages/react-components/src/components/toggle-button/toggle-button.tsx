@@ -10,7 +10,7 @@ import {
   Symbol, SymbolProps,
 } from '@/components';
 
-import styles from './toggle-button.module.css';
+import * as styles from './toggle-button.module.css';
 
 export type ToggleButtonProps = Except<IconButtonProps, 'icon'> & {
   /**

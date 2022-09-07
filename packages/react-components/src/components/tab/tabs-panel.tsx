@@ -3,7 +3,7 @@ import clsx from 'clsx';
 
 import { SymbolProps } from '@/components';
 
-import styles from './tab.module.css';
+import * as styles from './tab.module.css';
 
 export type TabPanelProps = {
   label: string;

@@ -5,7 +5,7 @@ import {
 
 import { Polymorphic } from '@/components';
 
-import styles from './list.module.css';
+import * as styles from './list.module.css';
 import { ListItem, ListItemProps } from './list-item';
 
 export type ListProps = PropsWithChildren<{

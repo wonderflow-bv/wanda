@@ -1,6 +1,6 @@
 import { ComponentType } from 'react';
 
-import styles from './table-expand.module.css';
+import * as styles from './table-expand.module.css';
 
 export type TableExpandProps<T> = {
   data: T;

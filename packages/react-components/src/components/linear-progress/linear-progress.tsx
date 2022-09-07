@@ -3,7 +3,7 @@ import { forwardRef, ProgressHTMLAttributes, useCallback } from 'react';
 
 import { Text } from '@/components';
 
-import styles from './linear-progress.module.css';
+import * as styles from './linear-progress.module.css';
 
 export type LinearProgressProps = ProgressHTMLAttributes<HTMLProgressElement> & {
   /**

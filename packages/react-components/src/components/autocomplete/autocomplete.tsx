@@ -19,7 +19,7 @@ import {
 } from '@/components';
 
 import { MenuProps } from '../menu';
-import styles from './autocomplete.module.css';
+import * as styles from './autocomplete.module.css';
 import { AutocompleteOption, AutocompleteOptionProps } from './autocomplete-option';
 
 type ValueType = {
