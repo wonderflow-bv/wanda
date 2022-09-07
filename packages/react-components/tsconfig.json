@@ -2,7 +2,11 @@
   "extends": "tsconfig/react-library.json",
   "compilerOptions": {
     "outDir": "dist",
-    "plugins": [{ "name": "typescript-plugin-css-modules" }]
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ]
   },
   "exclude": ["dist", "build", "src/core", "src/components/**/*.stories.tsx"],
   "include": ["src", "types"]
