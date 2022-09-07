@@ -1,5 +1,7 @@
 # @wonderflow/tokens
 
+## 10.8.0-beta.0
+
 ## 10.7.1
 
 ## 10.7.0
