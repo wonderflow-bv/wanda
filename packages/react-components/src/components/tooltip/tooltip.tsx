@@ -104,7 +104,7 @@ export const Tooltip: FCChildrenClass<TooltipProps> = ({
   return (
     <div
       data-tooltip-fill={fill}
-      className={styles.TooltipClass}
+      className={styles.Tooltip}
       ref={tooltipContainerRef}
       data-tooltip-has-focus-within={isFocusWithin}
       style={{ ...style }}

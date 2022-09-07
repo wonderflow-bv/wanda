@@ -474,7 +474,7 @@ export const Table = <T extends Record<string, unknown>>({
               )}
 
               {/* TBODY */}
-              <tbody className={styles.TBody} {...getTableBodyProps()}>
+              <tbody {...getTableBodyProps()}>
                 {loading
                   ? (
                     <TableRow>

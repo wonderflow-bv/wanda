@@ -104,7 +104,7 @@ export const Stack = forwardRef(({
       data-stack-direction={direction}
       data-stack-fill={fill}
       data-stack-has-padding={Boolean(hPadding ?? vPadding)}
-      className={clsx(styles.Stack, styles.StackWrapper, className)}
+      className={clsx(styles.Stack, className)}
       {...otherProps}
     >
       {children}
