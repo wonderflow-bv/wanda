@@ -21,7 +21,7 @@ import { Meta } from '@/components/shared/meta';
 import { Navigation } from '@/components/shared/navigation';
 import { Headings, HeadingType, useToc } from '@/hooks/table-of-content';
 
-import styles from './doc-layout.module.css';
+import * as styles from './doc-layout.module.css';
 
 export interface IPropsDocLayout extends Pick<DocHeaderProps, 'title' | 'subtitle'> {
   color?: 'gray' | 'cyan' | 'green' | 'purple' | 'yellow' | 'red' | 'blue' | 'magenta' | 'violet' | 'indigo' | 'mint' | 'dipsy' | 'salmon';
