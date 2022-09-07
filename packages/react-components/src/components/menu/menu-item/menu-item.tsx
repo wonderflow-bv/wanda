@@ -121,7 +121,7 @@ export const MenuItem = forwardRef(({
     >
       {icon && (
         <Symbol
-          className={styles.IconClass}
+          className={styles.Icon}
           source={icon}
           dimension={dimension === 'small' ? 12 : 16}
         />
