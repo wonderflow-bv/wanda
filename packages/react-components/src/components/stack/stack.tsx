@@ -5,7 +5,7 @@ import { CSSProperties, forwardRef } from 'react';
 
 import { Polymorphic } from '@/components';
 
-import styles from './stack.module.css';
+import * as styles from './stack.module.css';
 
 export type StackProps = {
   /**

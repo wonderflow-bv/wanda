@@ -6,7 +6,7 @@
     "plugin:@next/next/recommended",
     "plugin:json/recommended"
   ],
-  "ignorePatterns": ["next-env.d.ts", "apps/docs/src/generated/*.ts"],
+  "ignorePatterns": ["next-env.d.ts", "*.d.ts", "apps/docs/src/generated/*.ts"],
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint"],
   "parserOptions": {

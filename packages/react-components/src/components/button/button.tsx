@@ -8,7 +8,7 @@ import {
   Symbol, SymbolProps,
 } from '@/components';
 
-import styles from './button.module.css';
+import * as styles from './button.module.css';
 
 export type ButtonProps = {
   /**

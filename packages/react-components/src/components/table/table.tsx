@@ -19,7 +19,7 @@ import {
   ToggleButton,
 } from '@/components';
 
-import styles from './table.module.css';
+import * as styles from './table.module.css';
 import { TableCell } from './table-cell';
 import { TableCheckbox } from './table-checkbox';
 import { ToggleColumnsControl } from './table-controls';

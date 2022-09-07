@@ -85,6 +85,7 @@ export const Title = forwardRef(({
       ref={forwardedRef}
       data-title-line-height={lineHeight}
       data-title-responsive={responsive}
+      // @ts-expect-error
       className={clsx(styles.Title, styles[computedLevel], className)}
       style={{ ...dynamicStyle, ...style }}
       id={generatedID}

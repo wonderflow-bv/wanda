@@ -1,6 +1,6 @@
 @import '../../core/utils/vibrancy.css';
 
-:where(.Card) {
+.Card {
   background-color: var(--global-background);
   padding: var(--padding);
   border-radius: var(--radius);
