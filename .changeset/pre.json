@@ -1,0 +1,14 @@
+{
+  "mode": "pre",
+  "tag": "beta",
+  "initialVersions": {
+    "docs": "10.0.0",
+    "@wonderflow/config": "10.7.1",
+    "@wonderflow/react-components": "10.7.1",
+    "@wonderflow/symbols": "10.7.1",
+    "@wonderflow/themes": "10.7.1",
+    "@wonderflow/tokens": "10.7.1",
+    "tsconfig": "10.0.0"
+  },
+  "changesets": []
+}
