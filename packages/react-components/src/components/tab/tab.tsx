@@ -7,7 +7,7 @@ import { useUIDSeed } from 'react-uid';
 
 import { Button, Symbol } from '@/components';
 
-import styles from './tab.module.css';
+import * as styles from './tab.module.css';
 import { TabPanel } from './tabs-panel';
 
 export type TabProps = PropsWithChildren<PropsWithClass> & {

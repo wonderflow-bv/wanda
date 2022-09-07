@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "start-storybook --quiet -p 6006",
-    "prebuild": "rimraf dist core core.css",
+    "prebuild": "run-s clean build:csstypes",
     "build": "run-s build:ts build:css",
     "postbuild": "rimraf dist/**/_mixins.css",
     "build:ts": "tsc && tsc-alias",
@@ -29,7 +29,9 @@
     "lint": "run-s lint:styles",
     "lint:styles": "stylelint ./src/**/*.css",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "clean": "rimraf dist core core.css",
+    "build:csstypes": "tcm -p '**/*.module.css' src"
   },
   "repository": {
     "type": "git",
@@ -81,6 +83,7 @@
     "storybook-addon-themes": "6.1.0",
     "storybook-css-modules-preset": "1.1.1",
     "tsconfig": "10.0.0",
+    "typed-css-modules": "0.7.2",
     "typescript": "4.7.4",
     "typescript-plugin-css-modules": "3.4.0"
   },

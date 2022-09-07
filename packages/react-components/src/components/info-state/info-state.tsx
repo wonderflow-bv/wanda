@@ -5,7 +5,7 @@ import {
   Stack, StackProps, Symbol, SymbolProps, Text, Title,
 } from '@/components';
 
-import styles from './info-state.module.css';
+import * as styles from './info-state.module.css';
 
 export type InfoStateProps = PropsWithClass<{
   /**

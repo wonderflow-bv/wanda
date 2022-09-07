@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { domAnimation, LazyMotion, m } from 'framer-motion';
 import { ChangeEvent, forwardRef, InputHTMLAttributes } from 'react';
 
-import styles from './selection-controls.module.css';
+import * as styles from './selection-controls.module.css';
 
 export type RadioProps = InputHTMLAttributes<HTMLInputElement> & {
   /**

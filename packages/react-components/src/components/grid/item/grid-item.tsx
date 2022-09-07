@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { CSSProperties, forwardRef, PropsWithChildren } from 'react';
 
-import styles from './grid-item.module.css';
+import * as styles from './grid-item.module.css';
 
 export type GridItemProps = PropsWithChildren<PropsWithClass<{
   /**

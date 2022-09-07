@@ -4,7 +4,7 @@ import {
   ChangeEvent, forwardRef, InputHTMLAttributes, useEffect, useRef,
 } from 'react';
 
-import styles from './selection-controls.module.css';
+import * as styles from './selection-controls.module.css';
 
 export type CheckboxProps = InputHTMLAttributes<HTMLInputElement> & {
   /**

@@ -10,7 +10,7 @@ import {
   Symbol, SymbolProps, Text, TextProps,
 } from '@/components';
 
-import styles from './disclosure.module.css';
+import * as styles from './disclosure.module.css';
 
 export type DisclosureProps = DetailsHTMLAttributes<HTMLDetailsElement> & {
   /**

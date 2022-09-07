@@ -6,7 +6,7 @@ import {
 } from 'react';
 import MasonryLayout from 'react-masonry-css';
 
-import styles from './masonry.module.css';
+import * as styles from './masonry.module.css';
 
 type Columns = {
   default: number;

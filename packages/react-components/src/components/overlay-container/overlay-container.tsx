@@ -7,7 +7,7 @@ import { useUIDSeed } from 'react-uid';
 
 import { OverlayProvider } from '@/components';
 
-import styles from './overlay-container.module.css';
+import * as styles from './overlay-container.module.css';
 
 export type OverlayContainerProps = {
   /**

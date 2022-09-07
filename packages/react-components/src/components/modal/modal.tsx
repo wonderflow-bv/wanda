@@ -7,7 +7,7 @@ import { FocusOn } from 'react-focus-on';
 import { useOverlayContext, useResponsiveContext } from '@/components';
 
 import { ModalContent, ModalContentProps } from './content/modal-content';
-import styles from './modal.module.css';
+import * as styles from './modal.module.css';
 
 export type ModalProps = PropsWithChildren<PropsWithClass<{
   /**

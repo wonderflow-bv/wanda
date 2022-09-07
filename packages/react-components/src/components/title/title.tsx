@@ -6,7 +6,7 @@ import slugify from 'slugify';
 
 import { Polymorphic, Symbol } from '@/components';
 
-import styles from './title.module.css';
+import * as styles from './title.module.css';
 
 export type TitleProps = {
   /**
@@ -85,6 +85,7 @@ export const Title = forwardRef(({
       ref={forwardedRef}
       data-title-line-height={lineHeight}
       data-title-responsive={responsive}
+      // @ts-expect-error
       className={clsx(styles.Title, styles[computedLevel], className)}
       style={{ ...dynamicStyle, ...style }}
       id={generatedID}

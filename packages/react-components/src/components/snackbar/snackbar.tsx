@@ -6,7 +6,7 @@ import {
   Title,
 } from '@/components';
 
-import styles from './snackbar.module.css';
+import * as styles from './snackbar.module.css';
 
 export type SnackbarProps = {
   /**

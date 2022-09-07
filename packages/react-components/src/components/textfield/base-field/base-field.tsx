@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { forwardRef, InputHTMLAttributes } from 'react';
 
 import { Polymorphic } from '../../..';
-import styles from './base-field.module.css';
+import * as styles from './base-field.module.css';
 
 /**
  * @internal

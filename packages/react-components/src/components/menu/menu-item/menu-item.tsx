@@ -8,7 +8,7 @@ import {
   Polymorphic, Stack, Symbol, SymbolProps, Tooltip,
 } from '@/components';
 
-import styles from './menu-item.module.css';
+import * as styles from './menu-item.module.css';
 
 export type MenuItemProps = {
   /**

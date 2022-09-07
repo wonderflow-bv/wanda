@@ -6,7 +6,7 @@ import { useUIDSeed } from 'react-uid';
 
 import { Stack, Text } from '@/components';
 
-import styles from './input-group.module.css';
+import * as styles from './input-group.module.css';
 
 export type InputGroupProps = {
   /**

@@ -23,7 +23,7 @@ import { mergeRefs } from 'react-merge-refs';
 import { usePopperTooltip } from 'react-popper-tooltip';
 import { useUIDSeed } from 'react-uid';
 
-import styles from './popover.module.css';
+import * as styles from './popover.module.css';
 
 export type PopoverProps = {
   /**

@@ -8,7 +8,7 @@ import { useUIDSeed } from 'react-uid';
 
 import { Elevator } from '@/components';
 
-import styles from './tooltip.module.css';
+import * as styles from './tooltip.module.css';
 
 export type TooltipProps = {
   /**

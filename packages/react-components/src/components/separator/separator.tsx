@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { forwardRef, HTMLAttributes } from 'react';
 
-import styles from './separator.module.css';
+import * as styles from './separator.module.css';
 
 export type SeparatorProps = HTMLAttributes<HTMLHRElement>
 

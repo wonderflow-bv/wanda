@@ -3,7 +3,7 @@ import {
   CSSProperties, forwardRef, useCallback, useMemo,
 } from 'react';
 
-import styles from './circular-progress.module.css';
+import * as styles from './circular-progress.module.css';
 
 export type CircularProgressProps = {
   /**

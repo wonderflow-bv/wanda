@@ -6,7 +6,7 @@ import {
   Elevator, IconButton, Stack, Title, useOverlayContext,
 } from '@/components';
 
-import styles from './modal-content.module.css';
+import * as styles from './modal-content.module.css';
 
 export type ModalContentProps = PropsWithChildren<PropsWithClass<{
   /**

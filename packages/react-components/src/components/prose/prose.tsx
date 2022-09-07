@@ -3,7 +3,7 @@ import { forwardRef } from 'react';
 
 import { Polymorphic } from '@/components';
 
-import styles from './prose.module.css';
+import * as styles from './prose.module.css';
 
 export type ProseProps = Record<string, unknown>
 

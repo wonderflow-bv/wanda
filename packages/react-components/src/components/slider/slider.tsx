@@ -7,7 +7,7 @@ import {
   Stack, Symbol, SymbolProps, Text, Textfield,
 } from '@/components';
 
-import styles from './slider.module.css';
+import * as styles from './slider.module.css';
 
 export type SliderProps = InputHTMLAttributes<HTMLInputElement> & {
   /**

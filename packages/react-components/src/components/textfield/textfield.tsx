@@ -9,7 +9,7 @@ import {
 } from '@/components';
 
 import { BaseField, BaseFieldProps, PrimitiveInputType } from './base-field';
-import styles from './textfield.module.css';
+import * as styles from './textfield.module.css';
 
 export type TextfieldProps = BaseFieldProps & {
   /**

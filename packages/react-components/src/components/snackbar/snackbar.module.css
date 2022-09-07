@@ -56,7 +56,7 @@
   color: var(--snackbar-bg);
   background-color: var(--snackbar-fg);
 
-  &:active {
+  &:is(:active, :hover) {
     color: var(--snackbar-bg);
     background-color: var(--snackbar-fg);
     opacity: 80%;

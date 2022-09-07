@@ -3,7 +3,7 @@ import { forwardRef } from 'react';
 
 import { Button, ButtonProps, Polymorphic } from '@/components';
 
-import styles from './icon-button.module.css';
+import * as styles from './icon-button.module.css';
 
 export type IconButtonProps = Pick<
 ButtonProps,
