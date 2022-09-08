@@ -1,5 +1,12 @@
 # @wonderflow/react-components
 
+## 10.8.0
+
+### Minor Changes
+
+- 7220c12: Change the way CSS modules are imported to cover a wide use cases.
+- fd85d2c: Fix clamp-text padding when not expandable
+
 ## 10.8.0-beta.0
 
 ### Minor Changes
