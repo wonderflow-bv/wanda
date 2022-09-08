@@ -7,7 +7,7 @@ import {
 } from '@wonderflow/react-components';
 import { m } from 'framer-motion';
 
-import * as styles from './components.module.css';
+import styles from './components.module.css';
 
 const WRAPPER_ANIMATION = {
   hidden: {

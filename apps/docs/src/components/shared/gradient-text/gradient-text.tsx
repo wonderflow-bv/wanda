@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import * as styles from './gradient-text.module.css';
+import styles from './gradient-text.module.css';
 
 export type GradientTextProps = {
   color?: 'rainbow' | 'gray' | 'cyan' | 'green' | 'purple' | 'yellow' | 'red' | 'blue' | 'magenta' | 'violet' | 'indigo' | 'mint' | 'dipsy' | 'salmon';

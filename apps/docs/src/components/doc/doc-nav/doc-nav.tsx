@@ -7,7 +7,7 @@ import { useCallback } from 'react';
 
 import DocSubNav from '@/data/doc-nav';
 
-import * as styles from './doc-nav.module.css';
+import styles from './doc-nav.module.css';
 
 export const DocNav = () => {
   const router = useRouter();

@@ -2,7 +2,7 @@ import { Container } from '@wonderflow/react-components';
 import React from 'react';
 import Marquee from 'react-fast-marquee';
 
-import * as styles from './carousel.module.css';
+import styles from './carousel.module.css';
 
 type CarouselProps = {
   speed?: number;

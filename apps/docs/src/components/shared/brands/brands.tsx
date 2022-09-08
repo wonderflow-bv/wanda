@@ -11,7 +11,7 @@ import { GradientText } from '@/components/shared/gradient-text';
 import { Section } from '@/components/shared/section';
 import { brands } from '@/data/brands';
 
-import * as styles from './brands.module.css';
+import styles from './brands.module.css';
 
 type ImageLoaderType = {
   src: string;

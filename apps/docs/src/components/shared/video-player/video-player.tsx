@@ -1,7 +1,7 @@
 import { AspectRatio } from '@wonderflow/react-components';
 import React, { createRef, useCallback, useState } from 'react';
 
-import * as styles from './video-player.module.css';
+import styles from './video-player.module.css';
 
 type VideoPlayerProps = PropsWithClass & {
   src: string;

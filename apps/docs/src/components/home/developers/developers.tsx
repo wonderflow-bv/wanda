@@ -13,7 +13,7 @@ import { TextReveal } from '@/components/shared/text-reveal';
 
 import { Components } from './components';
 import { DesignTokens } from './design-tokens';
-import * as styles from './developers.module.css';
+import styles from './developers.module.css';
 import { Themes } from './themes';
 
 export const Developers: FCClass = ({

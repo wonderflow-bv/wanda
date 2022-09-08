@@ -8,7 +8,7 @@ import { Code } from '@/components/shared/code';
 import { Markdown } from '@/components/shared/markdown';
 
 import { Prop } from './props-table';
-import * as styles from './props-table.module.css';
+import styles from './props-table.module.css';
 
 export const PropsTableRow = ({
   name,

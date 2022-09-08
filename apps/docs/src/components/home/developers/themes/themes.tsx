@@ -13,7 +13,7 @@ import { Browser } from '@/components/shared/browser';
 import { ClientOnly } from '@/components/shared/client-only';
 import { ThemeList } from '@/components/shared/theme-list';
 
-import * as styles from './themes.module.css';
+import styles from './themes.module.css';
 
 const THEMES = {
   dark: darkTheme,

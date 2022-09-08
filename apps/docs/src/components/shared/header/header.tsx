@@ -13,7 +13,7 @@ import { Logo } from '@/components/shared/logo';
 import { MainNav } from '@/components/shared/main-nav';
 import { Search } from '@/components/shared/search';
 
-import * as styles from './header.module.css';
+import styles from './header.module.css';
 
 export type HeaderProps = {
   position?: 'fixed' | 'absolute' | 'sticky';

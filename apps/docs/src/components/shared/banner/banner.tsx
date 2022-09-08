@@ -4,7 +4,7 @@ import {
 } from '@wonderflow/react-components';
 import { forwardRef } from 'react';
 
-import * as styles from './banner.module.css';
+import styles from './banner.module.css';
 
 type BannerProps = {
   icon?: SymbolProps['source'];

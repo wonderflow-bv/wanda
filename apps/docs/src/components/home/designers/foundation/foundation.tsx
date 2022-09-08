@@ -5,7 +5,7 @@ import { SymbolNames } from '@wonderflow/symbols';
 import tkns from '@wonderflow/tokens/platforms/web/tokens.json';
 import { m } from 'framer-motion';
 
-import * as styles from './foundation.module.css';
+import styles from './foundation.module.css';
 
 const COLORS = ['blue', 'violet', 'dipsy', 'red', 'indigo', 'mint', 'yellow', 'magenta'];
 const ICONS: SymbolNames[] = ['house', 'lock', 'crown', 'message', 'moon'];

@@ -2,7 +2,7 @@ import { Spinner } from '@wonderflow/react-components';
 import { useTheme } from 'next-themes';
 import { FC, useEffect, useState } from 'react';
 
-import * as styles from './stackblitz.module.css';
+import styles from './stackblitz.module.css';
 
 type StackblitzProps = {
   component?: string;

@@ -4,7 +4,7 @@ import {
 
 import { HeadingType } from '@/hooks/table-of-content';
 
-import * as styles from './toc.module.css';
+import styles from './toc.module.css';
 
 type TocProps = {
   headings: HeadingType[];

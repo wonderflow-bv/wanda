@@ -3,7 +3,7 @@ import {
   CSSProperties, useRef,
 } from 'react';
 
-import * as styles from './text-reveal.module.css';
+import styles from './text-reveal.module.css';
 
 export type TextRevealProps = {
   xOffset?: string;

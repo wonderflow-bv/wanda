@@ -11,7 +11,7 @@ import { GradientText } from '@/components/shared/gradient-text';
 import { Section } from '@/components/shared/section';
 import { TextReveal } from '@/components/shared/text-reveal';
 
-import * as styles from './designers.module.css';
+import styles from './designers.module.css';
 import { Foundation } from './foundation';
 import { Motion } from './motion';
 import { Symbols } from './symbols';

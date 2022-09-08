@@ -7,7 +7,7 @@ import { domMax, LazyMotion, m } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useUIDSeed } from 'react-uid';
 
-import * as styles from './bezier.module.css';
+import styles from './bezier.module.css';
 
 export type BezierProps = PropsWithClass & {
   bezier: number[];

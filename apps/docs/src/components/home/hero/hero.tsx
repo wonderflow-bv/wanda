@@ -13,7 +13,7 @@ import Link from 'next/link';
 import { GradientText } from '@/components/shared/gradient-text';
 import { Section } from '@/components/shared/section';
 
-import * as styles from './hero.module.css';
+import styles from './hero.module.css';
 
 export const Hero: FCClass = ({
   className,

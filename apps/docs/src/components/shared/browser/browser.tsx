@@ -7,7 +7,7 @@ import { CSSProperties } from 'react';
 
 import { ThemeSwitcherProps } from '@/components/shared/theme-switcher';
 
-import * as styles from './browser.module.css';
+import styles from './browser.module.css';
 
 type BrowserProps = {
   url?: string;

@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import { getLayoutProps } from '@/utils/get-layout-props';
 
-import * as styles from './404.module.css';
+import styles from './404.module.css';
 
 const Custom404: NextPage = () => (
   <Stack hAlign="center" vAlign="center" fill={false} className={styles.Page}>

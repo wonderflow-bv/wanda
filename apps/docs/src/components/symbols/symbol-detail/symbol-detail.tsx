@@ -12,7 +12,7 @@ import {
 import { Code } from '@/components/shared/code';
 import { getRepoContent } from '@/utils/github-client';
 
-import * as styles from './symbol-detail.module.css';
+import styles from './symbol-detail.module.css';
 
 type SymbolDetailProps = {
   name: SymbolNames;

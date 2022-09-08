@@ -4,7 +4,7 @@ import structure from '@wonderflow/symbols/structure';
 import { m } from 'framer-motion';
 import { FC } from 'react';
 
-import * as styles from './symbols.module.css';
+import styles from './symbols.module.css';
 
 const SYMBOLS = structure as SymbolNames[];
 

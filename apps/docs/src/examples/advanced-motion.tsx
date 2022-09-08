@@ -1,6 +1,6 @@
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 
-import * as styles from './advanced-motion.module.css';
+import styles from './advanced-motion.module.css';
 
 export const AdvancedMotion = () => {
   const x = useMotionValue(0);

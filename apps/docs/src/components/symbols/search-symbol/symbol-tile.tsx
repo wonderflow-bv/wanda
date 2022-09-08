@@ -3,7 +3,7 @@ import { FC } from 'react';
 
 import { BlankButton } from '@/components/shared/blank-button';
 
-import * as styles from './search-symbol.module.css';
+import styles from './search-symbol.module.css';
 
 type SymbolTileProps = SymbolProps & {
   onClick: () => void;
