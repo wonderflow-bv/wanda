@@ -1,7 +1,7 @@
 import { Stack, Title } from '@wonderflow/react-components';
 import React from 'react';
 
-import styles from './hint-card.module.css';
+import * as styles from './hint-card.module.css';
 
 export type HintCardProps = PropsWithClass & {
   isBad?: boolean;

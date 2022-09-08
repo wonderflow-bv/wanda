@@ -7,7 +7,7 @@ import { ReleaseNoteFragment } from 'src/generated/graphql';
 import { GradientText } from '@/components/shared/gradient-text';
 import { Markdown } from '@/components/shared/markdown';
 
-import styles from './notes-card.module.css';
+import * as styles from './notes-card.module.css';
 
 type NotesCardProps = {
   release: ReleaseNoteFragment;

@@ -5,7 +5,7 @@ import { SymbolNames } from '@wonderflow/symbols';
 import clsx from 'clsx';
 import React from 'react';
 
-import styles from './tile.module.css';
+import * as styles from './tile.module.css';
 
 type TileProps = {
   symbol?: SymbolNames;

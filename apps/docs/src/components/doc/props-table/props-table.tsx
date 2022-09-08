@@ -1,7 +1,7 @@
 import { Stack, Text } from '@wonderflow/react-components';
 import clsx from 'clsx';
 
-import styles from './props-table.module.css';
+import * as styles from './props-table.module.css';
 import { PropsTableRow } from './props-table-row';
 
 export type Prop = {

@@ -20,7 +20,7 @@ import html from 'refractor/lang/markup';
 import tsx from 'refractor/lang/tsx';
 import typescript from 'refractor/lang/typescript';
 
-import styles from './code.module.css';
+import * as styles from './code.module.css';
 
 Refractor.registerLanguage(js);
 Refractor.registerLanguage(css);

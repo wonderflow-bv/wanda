@@ -2,7 +2,7 @@ import { Stack, StackProps } from '@wonderflow/react-components';
 import clsx from 'clsx';
 import React, { CSSProperties } from 'react';
 
-import styles from './live-area.module.css';
+import * as styles from './live-area.module.css';
 
 export type LiveAreaProps = StackProps & {
   minHeight?: string;

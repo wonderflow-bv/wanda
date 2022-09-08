@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import React, { ButtonHTMLAttributes } from 'react';
 
-import styles from './blank-button.module.css';
+import * as styles from './blank-button.module.css';
 
 type BlankButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   onClick?: () => void;

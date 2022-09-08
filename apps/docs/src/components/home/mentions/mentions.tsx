@@ -6,7 +6,7 @@ import { Carousel } from '@/components/shared/carousel';
 import { MentionCard } from '@/components/shared/mention-card';
 import { Section } from '@/components/shared/section';
 
-import styles from './mentions.module.css';
+import * as styles from './mentions.module.css';
 
 export const Mentions: FCClass = ({
   className,

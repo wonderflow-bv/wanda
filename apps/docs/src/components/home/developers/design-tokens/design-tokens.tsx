@@ -8,7 +8,7 @@ import { MarkerProps } from 'react-refractor';
 
 import { Code } from '@/components/shared/code';
 
-import styles from './design-tokens.module.css';
+import * as styles from './design-tokens.module.css';
 
 const SKIP_GROUP = 3;
 

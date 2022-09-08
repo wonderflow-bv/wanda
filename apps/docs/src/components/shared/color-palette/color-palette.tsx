@@ -6,7 +6,7 @@ import { fromString } from 'css-color-converter';
 import React, { useMemo, useState } from 'react';
 import { useUIDSeed } from 'react-uid';
 
-import styles from './color-palette.module.css';
+import * as styles from './color-palette.module.css';
 
 type ColorPaletteProps = {
   colors: Record<string, any>;

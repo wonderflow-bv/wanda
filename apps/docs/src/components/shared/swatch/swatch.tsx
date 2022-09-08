@@ -7,7 +7,7 @@ import React, {
   useCallback, useState,
 } from 'react';
 
-import styles from './swatch.module.css';
+import * as styles from './swatch.module.css';
 
 type SwatchProps = {
   color: string;

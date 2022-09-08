@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import React, { CSSProperties } from 'react';
 
-import styles from './bleed.module.css';
+import * as styles from './bleed.module.css';
 
 type BleedProps = {
   maxWidth?: string;

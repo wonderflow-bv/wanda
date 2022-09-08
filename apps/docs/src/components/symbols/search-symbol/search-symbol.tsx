@@ -17,7 +17,7 @@ import { ClientOnly } from '@/components/shared/client-only';
 
 import { SymbolDetail } from '../symbol-detail';
 import { RadioButton } from './radio-button';
-import styles from './search-symbol.module.css';
+import * as styles from './search-symbol.module.css';
 import { SymbolTile } from './symbol-tile';
 
 export const WEIGHTS = ['solid', 'outline', 'duotone'] as Array<SymbolProps['weight']>;

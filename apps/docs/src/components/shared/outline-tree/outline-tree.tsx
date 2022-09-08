@@ -4,7 +4,7 @@ import {
 import { SymbolNames } from '@wonderflow/symbols';
 import React, { ReactNode } from 'react';
 
-import styles from './outline-tree.module.css';
+import * as styles from './outline-tree.module.css';
 
 type TreeGroupProps = {
   title?: ReactNode;

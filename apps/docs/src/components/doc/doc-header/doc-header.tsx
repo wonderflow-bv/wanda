@@ -2,7 +2,7 @@ import { Stack, Text, Title } from '@wonderflow/react-components';
 
 import { GradientText, GradientTextProps } from '@/components/shared/gradient-text';
 
-import styles from './doc-header.module.css';
+import * as styles from './doc-header.module.css';
 
 export type DocHeaderProps = {
   preTitle?: string;

@@ -1,7 +1,7 @@
 import { Stack, Symbol, SymbolProps } from '@wonderflow/react-components';
 import { InputHTMLAttributes, ReactElement } from 'react';
 
-import styles from './search-symbol.module.css';
+import * as styles from './search-symbol.module.css';
 
 type RadioButtonProps = InputHTMLAttributes<HTMLInputElement> & {
   children: ReactElement<HTMLOrSVGElement>;

@@ -8,7 +8,7 @@ import { useCallback } from 'react';
 
 import Nav from '@/data/main-nav';
 
-import styles from './main-nav.module.css';
+import * as styles from './main-nav.module.css';
 
 type MainNavProps = {
   direction?: 'row' | 'column';

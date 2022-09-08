@@ -3,7 +3,7 @@ import { m, useReducedMotion } from 'framer-motion';
 
 import { ClientOnly } from '@/components/shared/client-only';
 
-import styles from './motion.module.css';
+import * as styles from './motion.module.css';
 
 export const Motion = () => {
   const shouldReduceMotion = useReducedMotion();
