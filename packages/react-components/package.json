@@ -19,7 +19,7 @@
     "npm": ">=8.x"
   },
   "scripts": {
-    "start": "start-storybook --quiet -p 6006",
+    "start": "run-p storybook watch:csstypes",
     "prebuild": "run-s clean build:csstypes",
     "build": "run-s build:ts build:css",
     "postbuild": "rimraf dist/**/_mixins.css",
@@ -28,9 +28,10 @@
     "postbuild:css": "mv dist/core.css ./core.css && mv dist/core ./core",
     "lint": "run-s lint:styles",
     "lint:styles": "stylelint ./src/**/*.css",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook --quiet -p 6006",
     "build-storybook": "build-storybook",
     "clean": "rimraf dist core core.css",
+    "watch:csstypes": "tcm -w -p '**/*.module.css' src",
     "build:csstypes": "tcm -p '**/*.module.css' src"
   },
   "repository": {
