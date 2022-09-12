@@ -31,10 +31,7 @@ export const AccordionItem: FCChildrenClass<AccordionItemProps> = ({
 
   return (
     <Disclosure
-      onClick={() => {
-        // console.log(openItem);
-        setOpen(value);
-      }}
+      onClick={() => setOpen(value)}
       open={value === openItem}
       summary={summary}
       {...otherProps}

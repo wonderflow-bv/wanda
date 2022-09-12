@@ -10,11 +10,11 @@ const story: ComponentMeta<typeof Accordion> = {
 export default story;
 
 const Template: ComponentStory<typeof Accordion> = args => (
-  <Accordion {...args} defaultOpen="1">
-    <Accordion.Item open value="1" summary="Item 1">
+  <Accordion {...args}>
+    <Accordion.Item value="1" summary="Item 1">
       Item 1
     </Accordion.Item>
-    <Accordion.Item value="2" summary="Item 2">
+    <Accordion.Item open value="2" summary="Item 2">
       Item 2
     </Accordion.Item>
     <Accordion.Item value="3" summary="Item 3">

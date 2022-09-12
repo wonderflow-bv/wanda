@@ -1,6 +1,7 @@
 import {
   forwardRef, ForwardRefExoticComponent, PropsWithChildren,
 } from 'react';
+import { RovingTabIndexProvider } from 'react-roving-tabindex';
 
 import { AccordionItem, Stack } from '@/components';
 
@@ -17,7 +18,9 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(({
 }, forwardedRef) => (
   <AccordionContextProvider>
     <Stack rowGap={8} ref={forwardedRef} className={className}>
-      {children}
+      <RovingTabIndexProvider options={{ direction: 'vertical', loopAround: true }}>
+        {children}
+      </RovingTabIndexProvider>
     </Stack>
   </AccordionContextProvider>
 )) as AccordionComponent;
