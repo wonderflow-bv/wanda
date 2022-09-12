@@ -36,10 +36,10 @@ export const WithBreakPoints = Template.bind({});
 WithBreakPoints.args = {
   columns: {
     default: 6,
-    'extra-large': 5,
+    extraLarge: 5,
     large: 4,
     medium: 3,
     small: 2,
-    'extra-small': 1,
+    extraSmall: 1,
   },
 };

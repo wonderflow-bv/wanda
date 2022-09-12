@@ -7,7 +7,7 @@ const story: ComponentMeta<typeof Skeleton> = {
   title: 'Components/Loading/Skeleton',
   component: Skeleton,
   args: {
-    radius: 8,
+    borderRadius: 8,
     gap: 8,
     enableAnimation: true,
     inline: false,
