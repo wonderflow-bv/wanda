@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Disclosure } from './disclosure';
 
@@ -56,56 +56,3 @@ const NestedTemplate: ComponentStory<typeof Disclosure> = args => (
 );
 
 export const Nested = NestedTemplate.bind({});
-
-const AccordionTemplate: ComponentStory<typeof Disclosure> = (args) => {
-  const [expandedItem, setExpandedItem] = useState<number>(0);
-
-  return (
-    <>
-      <Disclosure
-        {...args}
-        open={expandedItem === 0}
-        onToggle={t => t && setExpandedItem(0)}
-      >
-        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Doloribus corporis nobis ipsum natus laudantium dolorem sapiente,
-        sint adipisci at asperiores quia ex voluptatum veniam! Quos rerum natus eos excepturi atque!
-      </Disclosure>
-
-      <Disclosure
-        {...args}
-        summary="second"
-        open={expandedItem === 1}
-        onToggle={t => t && setExpandedItem(1)}
-      >
-        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Doloribus corporis nobis ipsum natus laudantium dolorem sapiente,
-        sint adipisci at asperiores quia ex voluptatum veniam! Quos rerum natus eos excepturi atque!
-      </Disclosure>
-
-      <Disclosure
-        {...args}
-        summary="third"
-        open={expandedItem === 2}
-        onToggle={t => t && setExpandedItem(2)}
-      >
-        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Doloribus corporis nobis ipsum natus laudantium dolorem sapiente,
-        sint adipisci at asperiores quia ex voluptatum veniam! Quos rerum natus eos excepturi atque!
-      </Disclosure>
-
-      <Disclosure
-        {...args}
-        summary="fourth"
-        open={expandedItem === 3}
-        onToggle={t => t && setExpandedItem(3)}
-      >
-        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Doloribus corporis nobis ipsum natus laudantium dolorem sapiente,
-        sint adipisci at asperiores quia ex voluptatum veniam! Quos rerum natus eos excepturi atque!
-      </Disclosure>
-    </>
-  );
-};
-
-export const Accordion = AccordionTemplate.bind({});
