@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import {
-  AnimatePresence, domMax, LazyMotion, m,
+  domMax, LazyMotion, m,
 } from 'framer-motion';
 import {
   CSSProperties,
@@ -159,20 +159,18 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
         )}
       </Text>
       <LazyMotion features={domMax}>
-        <AnimatePresence exitBeforeEnter>
-          <m.div
-            className={styles.Content}
-            data-disclosure-padding={padding}
-            data-disclosure-height={Boolean(contentMaxHeight)}
-            animate={isOpen ? { y: 5, opacity: 1, height: 'auto' } : { y: 0, opacity: 0, height: 0 }}
-            transition={{ ease: 'easeOut', duration: 0.2, delay: 0 }}
-            initial={false}
-            role="region"
-            aria-labelledby={seedID('disclosure')}
-          >
-            {children}
-          </m.div>
-        </AnimatePresence>
+        <m.div
+          className={styles.Content}
+          data-disclosure-padding={padding}
+          data-disclosure-height={Boolean(contentMaxHeight)}
+          animate={isOpen ? { y: 5, opacity: 1, height: 'auto' } : { y: 0, opacity: 0, height: 0 }}
+          transition={{ ease: 'easeOut', duration: 0.2, delay: 0 }}
+          initial={false}
+          role="region"
+          aria-labelledby={seedID('disclosure')}
+        >
+          {children}
+        </m.div>
       </LazyMotion>
     </details>
   );
