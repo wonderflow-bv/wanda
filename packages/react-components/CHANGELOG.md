@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 10.9.0
+
+### Minor Changes
+
+- 52626c3: Add Accordion component
+
 ## 10.8.0
 
 ### Minor Changes
