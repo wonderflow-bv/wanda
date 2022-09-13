@@ -2,7 +2,6 @@ import clsx from 'clsx';
 import {
   forwardRef, ForwardRefExoticComponent, PropsWithChildren,
 } from 'react';
-import { RovingTabIndexProvider } from 'react-roving-tabindex';
 
 import { AccordionItem, AccordionItemProps, Stack } from '@/components';
 
@@ -36,9 +35,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(({
       data-accordion-separators={showSeparators}
       className={clsx(styles.Accordion, className)}
     >
-      <RovingTabIndexProvider options={{ direction: 'vertical', loopAround: true }}>
-        {children}
-      </RovingTabIndexProvider>
+      {children}
     </Stack>
   </AccordionContextProvider>
 )) as AccordionComponent;

@@ -7,7 +7,6 @@ import {
   DetailsHTMLAttributes, forwardRef,
   ReactNode, useCallback, useEffect, useRef, useState,
 } from 'react';
-import { useFocusEffect, useRovingTabIndex } from 'react-roving-tabindex';
 import { useUIDSeed } from 'react-uid';
 
 import {
@@ -66,13 +65,9 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
   onToggle,
   ...otherProps
 }, forwardedRef) => {
-  const summaryRef = useRef<any>(null);
   const ref = useRef<any>(forwardedRef);
   const [isOpen, setIsOpen] = useState<boolean>(open);
-  const [tabIndex, focused, handleKeyDown, handleClick] = useRovingTabIndex(summaryRef, false);
   const seedID = useUIDSeed();
-
-  useFocusEffect(focused, summaryRef);
 
   useEffect(() => {
     if (ref.current) {
@@ -123,10 +118,6 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
         as="summary"
         responsive={false}
         className={styles.Summary}
-        onKeyDown={handleKeyDown}
-        onClick={handleClick}
-        tabIndex={!expandable ? -1 : tabIndex}
-        ref={summaryRef}
         id={seedID('disclosure')}
         size={dimension ? sizes[dimension].summary as TextProps['size'] : undefined}
         weight="bold"
