@@ -1,0 +1,161 @@
+import ComponentsNav from "@/data/components-nav";
+import { getLayoutProps } from "@/utils/get-layout-props";
+import { PropsTable } from "@/components/doc/props-table";
+import { KeyTable } from "@/components/shared/key-table";
+
+export const getStaticProps = () =>
+  getLayoutProps({
+    layout: "component",
+    layoutProps: {
+      title: "Accordion",
+      color: "indigo",
+      subtitle: "A vertically stacked set of interactive disclosures that each reveal an associated section of content.",
+      navigation: ComponentsNav,
+      features: [
+        "Keyboard accessible",
+        "Customizable",
+        "Multiple sizes",
+        "Themes ready",
+      ],
+      links: [
+        {
+          label: "ARIA authoring",
+          url: "https://www.w3.org/WAI/ARIA/apg/patterns/accordion/",
+        },
+      ]
+    }
+  });
+
+<LiveArea>
+  <Accordion showSeparators style={{width: '100%'}}>
+    <AccordionItem value="1" summary="Are competitor reviews included?">
+      <Text size={16}>
+        Yes, they are. Wonderflow extracts insights from your competitors' public data too. If a competitor's public feedback is not currently in our Feedback data lake you can request it and it will be added.
+      </Text>
+    </AccordionItem>
+    <AccordionItem value="2" summary="What is so special about your NLP analysis?">
+      <Text size={16}>
+        Well, it is our specialty. We have the most granular and performing ontologies for your industry, ready to be used, without any manual configuration needed on your side. On average, our VoC analysis covers 100 to 150 topics for each product category (3X more granular than any other platform) organized in a multilevel hierarchy, so that you can explore them from most generic ones to more specifics. For each topic, our artificial intelligence can determine its sentiment on a 3-level scale: positive, negative, neutral (used when a topic appears in a question, say coming from a customer support ticket).
+      </Text>
+    </AccordionItem>
+    <AccordionItem value="3" summary="Does Wonderflow integrate with other solutions?">
+      <Text size={16}>
+        By design, Wonderflow can integrate all pre-existing feedback solutions (like Medallia, Sprinklr, Salesforce, Bazaarvoice, etc.) that your company uses to manage customer feedback. Wonderflow can eventually setup custom integration (both in and out) using API.
+      </Text>
+    </AccordionItem>
+  </Accordion>
+</LiveArea>
+
+
+## Anatomy
+
+```tsx lines="1,4-15"
+import { Accordion } from "@wonderflow/react-components";
+
+export default () => {
+  return (
+    <Accordion defaultOpen="1" showSeparators>
+      <Accordion.Item value="1" summary="Item 1">
+        <p>Content 1</p>
+      </Accordion.Item>
+      <Accordion.Item value="2" summary="Item 2">
+        <p>Content 2</p>
+      </Accordion.Item>
+      <Accordion.Item value="3" summary="Item 3">
+        <p>Content 3</p>
+      </Accordion.Item>
+    </Accordion>
+  );
+};
+```
+
+## API Reference
+
+### Accordion
+
+<PropsTable
+  properties={[
+    {
+      name: "defaultOpen",
+      type: ["string"],
+      default: "",
+      required: false,
+      description: "Set the item to open by default when the accordion is rendered.",
+    },
+    {
+      name: "showSeparators",
+      type: ["boolean"],
+      default: "false",
+      required: false,
+      description: "how visual separator between accordion items",
+    },
+  ]}
+/>
+
+### Accordion.Item
+
+<PropsTable
+  properties={[
+    {
+      name: "value",
+      type: ["string"],
+      default: "",
+      required: true,
+      description: "Assign a value to the single accordion item. This is used to define the default opened item on mount.",
+    },
+{
+      name: "summary",
+      type: ["ReactNode"],
+      default: "",
+      required: true,
+      description: "Define the text to be displayed as the summary of the disclosure. This should generally be a short sentenc and related to the content",
+    },
+    {
+      name: "padding",
+      type: ["boolean"],
+      default: "true",
+      required: false,
+      description: "Remove or add a padding to align the content with the icon indicator. This is useful when the content inside starts with text and you want to align it summary to improve readability.",
+    },
+    {
+      name: "contentMaxHeight",
+      type: ["string"],
+      default: "",
+      required: false,
+      description: "Set the max height of the content after which the scrollbar will appear.",
+    },
+    {
+      name: "dimension",
+      type: ['enum'],
+      typeValue: "'small' | 'regular' | 'big'",
+      default: '"regular"',
+      required: false,
+      description: "Set the dimension of the summary toggle",
+    },
+    {
+      name: "iconPosition",
+      type: ['enum'],
+      typeValue: "'left' | 'right'",
+      default: '"left"',
+      required: false,
+      description: "Set the position of the icon indicator. The content padding is automatically applied based on the icon position.",
+    },
+  ]}
+/>
+
+## Accessibility
+
+Adheres to the [`disclosure` role requirements](https://www.w3.org/TR/wai-aria-practices-1.2/#disclosure).
+
+<KeyTable
+  data={[
+    {
+      name: "tab",
+      description: "Move focus on the next element or outside the component",
+    },
+    {
+      name: "enter",
+      description: "Expand or collapse the selected item",
+    },
+  ]}
+/>

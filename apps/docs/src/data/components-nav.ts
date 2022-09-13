@@ -15,6 +15,11 @@ const ComponentsNav: NavigationMenu = [
         target: '',
       },
       {
+        path: '/get-started/components/actions/accordion',
+        label: 'Accordion',
+        target: '',
+      },
+      {
         path: '/get-started/components/actions/icon-button',
         label: 'Icon button',
         target: '',

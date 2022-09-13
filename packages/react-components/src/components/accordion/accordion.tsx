@@ -27,6 +27,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(({
   defaultOpen,
   showSeparators = true,
   children,
+  style,
 }, forwardedRef) => (
   <AccordionContextProvider defaultOpen={defaultOpen}>
     <Stack
@@ -34,6 +35,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(({
       ref={forwardedRef}
       data-accordion-separators={showSeparators}
       className={clsx(styles.Accordion, className)}
+      style={style}
     >
       {children}
     </Stack>

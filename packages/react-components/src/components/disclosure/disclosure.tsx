@@ -77,10 +77,10 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
 
   const handleOpen = useCallback(
     () => () => {
-      if (ref.current && expandable) setIsOpen(ref.current.open);
-      if (expandable) onToggle?.(ref.current.open);
+      if (ref.current && expandable) setIsOpen(open || ref.current.open);
+      if (expandable && open === undefined) onToggle?.(open || ref.current.open);
     },
-    [expandable, onToggle],
+    [expandable, onToggle, open],
   );
 
   const dynamicStyle: CSSProperties = {
