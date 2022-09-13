@@ -7,8 +7,14 @@ import { AccordionItemProps } from './accordion-item';
 
 type AccProps = AccordionItemProps
 
-const useAccordion = () => {
-  const [openItem, setOpenItem] = useState<string>('');
+type AccordionContextProps = {
+  defaultOpen?: AccordionItemProps['value'];
+}
+
+const useAccordion = ({
+  defaultOpen = '',
+}: AccordionContextProps) => {
+  const [openItem, setOpenItem] = useState(defaultOpen);
 
   const setOpen = useCallback((value: AccProps['value']) => {
     setOpenItem(value);

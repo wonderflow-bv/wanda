@@ -107,24 +107,6 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
     },
   };
 
-  // const renderContent = useCallback(
-  //   () => (
-  //     <m.div
-  //       className={styles.Content}
-  //       data-disclosure-padding={padding}
-  //       data-disclosure-height={Boolean(contentMaxHeight)}
-  //       animate={isOpen ? { y: 5, opacity: 1 } : { y: 0, opacity: 0 }}
-  //       transition={{ ease: 'easeOut', duration: 0.1, delay: isOpen ? 0.1 : 0 }}
-  //       initial={false}
-  //       role="region"
-  //       aria-labelledby={seedID('disclosure')}
-  //     >
-  //       {children}
-  //     </m.div>
-  //   ),
-  //   [children, contentMaxHeight, padding, isOpen, seedID],
-  // );
-
   return (
     <details
       style={{ ...dynamicStyle, ...style }}

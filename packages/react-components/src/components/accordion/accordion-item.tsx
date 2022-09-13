@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import { Disclosure, DisclosureProps } from '@/components';
 
 import { useAccordionContext } from './accordion-context';
@@ -9,10 +7,13 @@ DisclosureProps,
 'summary'
 |'dimension'
 |'padding'
-|'open'
 |'iconPosition'
 |'contentMaxHeight'
 > & {
+  /**
+   * Assign a value to the single accordion item. This is used to define
+   * the default opened item on mount.
+   */
   value: string;
 }
 
@@ -20,14 +21,9 @@ export const AccordionItem: FCChildrenClass<AccordionItemProps> = ({
   summary,
   children,
   value,
-  open,
   ...otherProps
 }) => {
   const { openItem, setOpen } = useAccordionContext();
-
-  useEffect(() => {
-    if (open) setOpen(value);
-  }, [open, setOpen, value]);
 
   return (
     <Disclosure
