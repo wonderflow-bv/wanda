@@ -2,11 +2,12 @@ import { ComponentStory, Meta } from '@storybook/react';
 import React from 'react';
 
 import {
-  Container, Separator, Text, Title,
+  Container, Polymorphic,
+  Separator, Text, Title,
 } from '../..';
 import { Prose } from './prose';
 
-const story: Meta<typeof Prose> = {
+const story: Meta<Polymorphic.OwnProps<typeof Prose>> = {
   title: 'Components/Typography/Prose',
   component: Prose,
   args: {

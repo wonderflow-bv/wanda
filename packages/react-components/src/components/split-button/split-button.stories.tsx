@@ -13,7 +13,7 @@ const story: ComponentMeta<typeof SplitButton> = {
     label: 'Click me',
     fullWidth: false,
     disabled: true,
-    loading: false,
+    busy: false,
     placement: 'auto-start',
     offset: 8,
   },
@@ -40,8 +40,8 @@ export default story;
 const Template: ComponentStory<typeof SplitButton> = args => (
   <SplitButton {...args}>
     <Menu>
-      <Menu.Item padding={false}>Option 1</Menu.Item>
-      <Menu.Item padding={false}>Option 2</Menu.Item>
+      <Menu.Item value="1" padding={false}>Option 1</Menu.Item>
+      <Menu.Item value="2" padding={false}>Option 2</Menu.Item>
     </Menu>
   </SplitButton>
 );

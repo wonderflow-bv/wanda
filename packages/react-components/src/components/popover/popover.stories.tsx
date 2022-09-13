@@ -13,14 +13,6 @@ const story: ComponentMeta<typeof Popover> = {
     placement: 'auto-start',
     trigger: <Button>Open Popover</Button>,
   },
-  argTypes: {
-    onClick: {
-      action: 'clicked',
-      table: {
-        disable: true,
-      },
-    },
-  },
 };
 
 export default story;
@@ -35,6 +27,7 @@ const DefaultTemplate: ComponentStory<typeof Popover> = (args) => {
           autoFocus
           icon="arrow-right"
           description={<>Description for this item</>}
+          value="1"
         >
           Sample long menu item
         </Menu.Item>
@@ -42,11 +35,13 @@ const DefaultTemplate: ComponentStory<typeof Popover> = (args) => {
           onClick={() => setChecked(val => !val)}
           checked={checked}
           icon={checked ? 'check' : undefined}
+          value="2"
         >
           Checkbox item
         </Menu.ItemCheckbox>
         <Menu.Item
           icon="user"
+          value="3"
           description={(
             <>
               <Title as="h2" level="5">Sample H2 Title longlonglonglonglonglonglonglonglonglonglong</Title>
@@ -58,8 +53,8 @@ const DefaultTemplate: ComponentStory<typeof Popover> = (args) => {
           Short menu label
         </Menu.Item>
         <Menu.Separator />
-        <Menu.Item icon="arrow-down-to-bracket">Even shorter</Menu.Item>
-        <Menu.Item disabled>Really?</Menu.Item>
+        <Menu.Item value="4" icon="arrow-down-to-bracket">Even shorter</Menu.Item>
+        <Menu.Item value="5" disabled>Really?</Menu.Item>
       </Menu>
     </Popover>
   );

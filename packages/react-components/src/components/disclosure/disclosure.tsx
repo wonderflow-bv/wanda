@@ -1,10 +1,13 @@
 import clsx from 'clsx';
-import { domMax, LazyMotion, m } from 'framer-motion';
+import {
+  domMax, LazyMotion, m,
+} from 'framer-motion';
 import {
   CSSProperties,
   DetailsHTMLAttributes, forwardRef,
   ReactNode, useCallback, useEffect, useRef, useState,
 } from 'react';
+import { useUIDSeed } from 'react-uid';
 
 import {
   Symbol, SymbolProps, Text, TextProps,
@@ -64,6 +67,7 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
 }, forwardedRef) => {
   const ref = useRef<any>(forwardedRef);
   const [isOpen, setIsOpen] = useState<boolean>(open);
+  const seedID = useUIDSeed();
 
   useEffect(() => {
     if (ref.current) {
@@ -73,10 +77,10 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
 
   const handleOpen = useCallback(
     () => () => {
-      if (ref.current && expandable) setIsOpen(ref.current.open);
-      if (expandable) onToggle?.(ref.current.open);
+      if (ref.current && expandable) setIsOpen(open || ref.current.open);
+      if (expandable && open === undefined) onToggle?.(open || ref.current.open);
     },
-    [expandable, onToggle],
+    [expandable, onToggle, open],
   );
 
   const dynamicStyle: CSSProperties = {
@@ -98,24 +102,6 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
     },
   };
 
-  const renderContent = useCallback(
-    () => (
-      <LazyMotion features={domMax}>
-        <m.div
-          className={styles.Content}
-          data-disclosure-padding={padding}
-          data-disclosure-height={Boolean(contentMaxHeight)}
-          animate={isOpen ? { y: 5, opacity: 1 } : { y: 0, opacity: 0 }}
-          transition={{ ease: 'easeOut', duration: 0.1, delay: 0.1 }}
-          initial={false}
-        >
-          {children}
-        </m.div>
-      </LazyMotion>
-    ),
-    [children, contentMaxHeight, padding, isOpen],
-  );
-
   return (
     <details
       style={{ ...dynamicStyle, ...style }}
@@ -132,7 +118,7 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
         as="summary"
         responsive={false}
         className={styles.Summary}
-        tabIndex={!expandable ? -1 : 0}
+        id={seedID('disclosure')}
         size={dimension ? sizes[dimension].summary as TextProps['size'] : undefined}
         weight="bold"
       >
@@ -145,7 +131,20 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
           />
         )}
       </Text>
-      {renderContent()}
+      <LazyMotion features={domMax}>
+        <m.div
+          className={styles.Content}
+          data-disclosure-padding={padding}
+          data-disclosure-height={Boolean(contentMaxHeight)}
+          animate={isOpen ? { y: 5, opacity: 1, height: 'auto' } : { y: 0, opacity: 0, height: 0 }}
+          transition={{ ease: 'easeOut', duration: 0.2, delay: 0 }}
+          initial={false}
+          role="region"
+          aria-labelledby={seedID('disclosure')}
+        >
+          {children}
+        </m.div>
+      </LazyMotion>
     </details>
   );
 });

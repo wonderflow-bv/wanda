@@ -3,6 +3,6 @@
   "compilerOptions": {
     "outDir": "dist",
   },
-  "exclude": ["dist", "build", "src/core", "src/components/**/*.stories.tsx"],
+  "exclude": ["dist", "build", "src/core"],
   "include": ["src", "types"]
 }

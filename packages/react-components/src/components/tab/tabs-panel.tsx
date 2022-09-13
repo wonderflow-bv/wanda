@@ -9,6 +9,7 @@ export type TabPanelProps = {
   label: string;
   icon?: SymbolProps['source'];
   value: TabsPrimitive.TabsContentProps['value'];
+  disabled?: boolean;
 };
 
 export const TabPanel: FCChildrenClass<TabPanelProps> = ({
