@@ -1,5 +1,8 @@
+import clsx from 'clsx';
+
 import { Disclosure, DisclosureProps } from '@/components';
 
+import * as styles from './accordion.module.css';
 import { useAccordionContext } from './accordion-context';
 
 export type AccordionItemProps = Pick<
@@ -21,6 +24,7 @@ export const AccordionItem: FCChildrenClass<AccordionItemProps> = ({
   summary,
   children,
   value,
+  className,
   ...otherProps
 }) => {
   const { openItem, setOpen } = useAccordionContext();
@@ -29,6 +33,7 @@ export const AccordionItem: FCChildrenClass<AccordionItemProps> = ({
     <Disclosure
       onClick={() => setOpen(value)}
       open={value === openItem}
+      className={clsx(styles.Item, className)}
       summary={summary}
       {...otherProps}
     >

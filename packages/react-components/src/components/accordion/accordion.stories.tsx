@@ -26,4 +26,5 @@ const Template: ComponentStory<typeof Accordion> = args => (
 export const Default = Template.bind({});
 Default.args = {
   ratio: '1',
+  showSeparators: false,
 };
