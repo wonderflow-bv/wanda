@@ -27,7 +27,7 @@
   ],
   "scripts": {
     "start": "doppler run -- next dev",
-    "build:next": "next build",
+    "build:next": "doppler run -- next build",
     "lint": "npm run lint:styles",
     "lint:styles": "stylelint src/**/*.css pages/**/*.css",
     "update:cssdb": "npx browserslist@latest --update-db"
@@ -69,6 +69,7 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "12.2.5",
+    "@next/eslint-plugin-next": "12.3.0",
     "@types/mdx-js__react": "1.5.5",
     "@types/node": "18.7.18",
     "@types/react": "17.0.43",
@@ -76,7 +77,6 @@
     "@types/refractor": "3.0.2",
     "@wonderflow/config": "10.9.0",
     "eslint": "8.23.1",
-    "eslint-config-next": "12.2.5",
     "postcss": "8.4.16",
     "stylelint": "14.11.0",
     "stylelint-design-tokens-plugin": "0.0.14",

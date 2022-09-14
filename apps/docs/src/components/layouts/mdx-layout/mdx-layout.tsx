@@ -1,6 +1,5 @@
 import { MDXProvider } from '@mdx-js/react';
 import type {
-  AccordionItemProps,
   GridItemProps,
   ListItemProps, ListProps, MenuItemCheckboxProps, MenuItemProps, SeparatorProps, TextProps, TitleProps,
 } from '@wonderflow/react-components';
@@ -35,7 +34,6 @@ export const MDX_COMPONENTS = {
   TabPanel: (props: TabPanelProps) => <Components.Tab.Panel {...props} />,
   ListLi: (props: ListItemProps) => <Components.List.Li {...props} />,
   MenuItemCheckbox: (props: MenuItemCheckboxProps) => <Components.Menu.ItemCheckbox {...props} />,
-  AccordionItem: (props: AccordionItemProps) => <Components.Accordion.Item {...props} />,
   MenuSeparator: (props: Record<string, unknown>) => <Components.Menu.Separator {...props} />,
   LiveArea: (props: LiveAreaProps) => <LiveArea {...props} />,
   ...Object.keys(Components).reduce((acc, name) => ({

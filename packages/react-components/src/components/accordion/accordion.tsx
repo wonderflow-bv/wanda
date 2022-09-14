@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import {
-  forwardRef, ForwardRefExoticComponent, PropsWithChildren,
+  forwardRef, PropsWithChildren,
 } from 'react';
 
-import { AccordionItem, AccordionItemProps, Stack } from '@/components';
+import { AccordionItemProps, Stack } from '@/components';
 
 import * as styles from './accordion.module.css';
 import { AccordionContextProvider } from './accordion-context';
@@ -17,9 +17,6 @@ export type AccordionProps = PropsWithChildren<PropsWithClass> & {
    * Show visual separator between accordion items
    */
   showSeparators?: boolean;
-}
-type AccordionComponent = ForwardRefExoticComponent<AccordionProps> & {
-  Item: typeof AccordionItem;
 }
 
 export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(({
@@ -40,6 +37,4 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(({
       {children}
     </Stack>
   </AccordionContextProvider>
-)) as AccordionComponent;
-
-Accordion.Item = AccordionItem;
+));
