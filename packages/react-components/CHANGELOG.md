@@ -1,5 +1,12 @@
 # @wonderflow/react-components
 
+## 10.9.1
+
+### Patch Changes
+
+- bb40f82: Fix accordion overflow
+- 673dd4a: Fix Accordion namespace
+
 ## 10.9.0
 
 ### Minor Changes
