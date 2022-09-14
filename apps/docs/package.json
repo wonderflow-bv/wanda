@@ -27,7 +27,7 @@
   ],
   "scripts": {
     "start": "doppler run -- next dev",
-    "build:next": "doppler run -- next build",
+    "build:next": "next build",
     "lint": "npm run lint:styles",
     "lint:styles": "stylelint src/**/*.css pages/**/*.css",
     "update:cssdb": "npx browserslist@latest --update-db"
