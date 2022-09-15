@@ -2,7 +2,7 @@ import { TokensTypes } from '@wonderflow/tokens/platforms/web';
 import tkns from '@wonderflow/tokens/platforms/web/tokens.json';
 import clsx from 'clsx';
 import {
-  Children, cloneElement, CSSProperties, isValidElement,
+  Children, cloneElement, CSSProperties, isValidElement, ReactElement,
 } from 'react';
 import MasonryLayout from 'react-masonry-css';
 
@@ -82,7 +82,7 @@ export const Masonry: FCChildrenClass<MasonryProps> = ({
       {...otherProps}
     >
       {Children.map(children, child => isValidElement(child) && cloneElement(
-        child,
+        child as ReactElement,
         {
           role: 'listitem',
         },

@@ -1,5 +1,5 @@
 import {
-  Children, cloneElement, isValidElement,
+  Children, cloneElement, isValidElement, ReactElement,
 } from 'react';
 
 export type AspectRatioProps = {
@@ -12,7 +12,7 @@ export const AspectRatio: FCChildrenClass<AspectRatioProps> = ({
 }) => (
   <>
     {Children.map(children, child => isValidElement(child) && cloneElement(
-      child,
+      child as ReactElement,
       { style: { ...child.props.style, aspectRatio: ratio } },
     ))}
   </>

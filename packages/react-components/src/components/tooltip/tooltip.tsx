@@ -1,7 +1,7 @@
 import { AutoPlacement, BasePlacement, VariationPlacement } from '@popperjs/core/lib';
 import { useFocusWithin, useKeyPress } from 'ahooks';
 import {
-  Children, cloneElement, CSSProperties, isValidElement, ReactNode, useRef, useState,
+  Children, cloneElement, CSSProperties, isValidElement, ReactElement, ReactNode, useRef, useState,
 } from 'react';
 import { usePopperTooltip } from 'react-popper-tooltip';
 import { useUIDSeed } from 'react-uid';
@@ -110,7 +110,7 @@ export const Tooltip: FCChildrenClass<TooltipProps> = ({
       style={{ ...style }}
     >
       {Children.map(trigger, child => isValidElement(child) && cloneElement(
-        child,
+        child as ReactElement,
         {
           ref: setTriggerRef,
           tabIndex: 0,

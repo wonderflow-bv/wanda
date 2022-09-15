@@ -2,7 +2,9 @@ import {
   Disclosure, Stack, Symbol, Text,
 } from '@wonderflow/react-components';
 import { SymbolNames } from '@wonderflow/symbols';
-import React, { ReactNode } from 'react';
+import React, { CSSProperties, ReactNode } from 'react';
+
+import { useDocLayoutContext } from '@/src/hooks/doc-colors';
 
 import styles from './outline-tree.module.css';
 
@@ -18,16 +20,30 @@ type MenuProps = {
 }
 
 export const OutlineTree: {
-  Group: React.FC<TreeGroupProps>;
+  Group: FCChildrenClass<TreeGroupProps>;
   Menu: React.FC<MenuProps>;
   Li: React.FC;
 } = {
   // First level group and menu
   Group: ({
-    children, title, icon, ...otherProps
-  }) => (
-    <Stack rowGap={16} vAlign="start" className={styles.OutlineTree} {...otherProps}>
-      {title && (
+    children, title, icon, style, ...otherProps
+  }) => {
+    const { layoutColor } = useDocLayoutContext();
+
+    const dynamicStyle: CSSProperties = {
+      '--layout-color-fg': `var(--highlight-${layoutColor}-foreground)`,
+      '--layout-color-bg': `var(--highlight-${layoutColor}-background)`,
+    };
+
+    return (
+      <Stack
+        rowGap={16}
+        vAlign="start"
+        className={styles.OutlineTree}
+        style={{ ...dynamicStyle, ...style }}
+        {...otherProps}
+      >
+        {title && (
         <Stack
           as={Text}
           vAlign="center"
@@ -44,12 +60,13 @@ export const OutlineTree: {
           {icon && <Symbol source={icon} />}
           {title}
         </Stack>
-      )}
-      <Stack as="ul">
-        {children}
+        )}
+        <Stack as="ul">
+          {children}
+        </Stack>
       </Stack>
-    </Stack>
-  ),
+    );
+  },
 
   // Nested Menu
   Menu: ({

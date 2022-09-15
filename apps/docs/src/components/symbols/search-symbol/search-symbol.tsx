@@ -9,11 +9,13 @@ import SymbolsList from '@wonderflow/symbols/structure';
 import { useDebounce } from 'ahooks';
 import { useRouter } from 'next/router';
 import React, {
+  CSSProperties,
   useCallback, useEffect, useMemo, useRef, useState,
 } from 'react';
 
 import { Banner } from '@/components/shared/banner';
 import { ClientOnly } from '@/components/shared/client-only';
+import { useDocLayoutContext } from '@/src/hooks/doc-colors';
 
 import { SymbolDetail } from '../symbol-detail';
 import { RadioButton } from './radio-button';
@@ -30,6 +32,12 @@ export const SearchSymbol = () => {
   const [iconSize] = useState<SymbolProps['dimension']>(24);
   const [iconStyle, setIconStyle] = useState<SymbolProps['weight']>('duotone');
   const router = useRouter();
+  const { layoutColor } = useDocLayoutContext();
+
+  const dynamicStyle: CSSProperties = {
+    '--layout-color-fg': `var(--highlight-${layoutColor}-foreground)`,
+    '--layout-color-bg': `var(--highlight-${layoutColor}-background)`,
+  };
 
   const debouncedSearchTerm = useDebounce(
     searchTerm,
@@ -74,7 +82,14 @@ export const SearchSymbol = () => {
   }, [router]);
 
   return (
-    <Stack direction={matches.extraLarge ? 'row-reverse' : 'column'} columnGap={24} rowGap={24} vAlign="start" className={styles.SearchSymbol}>
+    <Stack
+      direction={matches.extraLarge ? 'row-reverse' : 'column'}
+      columnGap={24}
+      rowGap={24}
+      vAlign="start"
+      className={styles.SearchSymbol}
+      style={{ ...dynamicStyle }}
+    >
       <Elevator resting={4}>
         <Card
           vibrant

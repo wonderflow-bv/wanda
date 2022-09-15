@@ -18,6 +18,7 @@ import { ComponentLayout } from '@/components/layouts/component-layout';
 import { DocLayout } from '@/components/layouts/doc-layout';
 import { MDXLayout } from '@/components/layouts/mdx-layout';
 import { TocProvider } from '@/hooks/table-of-content';
+import { DocLayoutContextProvider } from '@/src/hooks/doc-colors';
 import client from '@/utils/apollo-client';
 
 const LAYOUTS = {
@@ -31,11 +32,13 @@ const Providers: FCChildren = ({ children }) => (
   <ApolloProvider client={client}>
     <ThemeProvider defaultTheme="dark" disableTransitionOnChange>
       <ResponsiveProvider>
-        <IdProvider>
-          <TocProvider>
-            {children}
-          </TocProvider>
-        </IdProvider>
+        <DocLayoutContextProvider>
+          <IdProvider>
+            <TocProvider>
+              {children}
+            </TocProvider>
+          </IdProvider>
+        </DocLayoutContextProvider>
       </ResponsiveProvider>
     </ThemeProvider>
   </ApolloProvider>

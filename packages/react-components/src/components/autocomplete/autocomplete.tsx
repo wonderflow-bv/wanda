@@ -7,6 +7,7 @@ import {
 import {
   Children, cloneElement, forwardRef, ForwardRefExoticComponent,
   isValidElement,
+  ReactElement,
   ReactNode, useCallback, useEffect, useMemo, useRef,
   useState,
 } from 'react';
@@ -18,7 +19,7 @@ import {
   Menu, Skeleton, Stack, Text, Textfield, TextfieldProps,
 } from '@/components';
 
-import { MenuProps } from '../menu';
+import { MenuItemProps, MenuProps } from '../menu';
 import * as styles from './autocomplete.module.css';
 import { AutocompleteOption, AutocompleteOptionProps } from './autocomplete-option';
 
@@ -215,7 +216,7 @@ export const Autocomplete = forwardRef<HTMLElement, PropsWithClass<AutocompleteP
                 {busy
                   ? <Stack hPadding={8} as="span"><Skeleton count={3} /></Stack>
                   : Children.map(filteredOptions, child => isValidElement(child) && cloneElement(
-                    child,
+                    child as ReactElement<MenuItemProps>,
                     {
                       onClick: handleOptionClick,
                     },

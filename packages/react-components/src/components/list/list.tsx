@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import {
-  Children, cloneElement, forwardRef, isValidElement, PropsWithChildren, useMemo,
+  Children, cloneElement, forwardRef, isValidElement, PropsWithChildren, ReactElement, useMemo,
 } from 'react';
 
 import { Polymorphic } from '@/components';
@@ -43,7 +43,7 @@ export const List = forwardRef(({
       {...otherProps}
     >
       {Children.map(children, child => isValidElement(child) && cloneElement(
-        child,
+        child as ReactElement<ListItemProps>,
         {
           hideMarker: !isUnordered && !hideMarker,
           dimension,

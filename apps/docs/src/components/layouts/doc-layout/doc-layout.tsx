@@ -20,11 +20,12 @@ import { Header } from '@/components/shared/header';
 import { Meta } from '@/components/shared/meta';
 import { Navigation } from '@/components/shared/navigation';
 import { Headings, HeadingType, useToc } from '@/hooks/table-of-content';
+import { AccordionContextProps, useDocLayoutContext } from '@/src/hooks/doc-colors';
 
 import styles from './doc-layout.module.css';
 
 export interface IPropsDocLayout extends Pick<DocHeaderProps, 'title' | 'subtitle'> {
-  color?: 'gray' | 'cyan' | 'green' | 'purple' | 'yellow' | 'red' | 'blue' | 'magenta' | 'violet' | 'indigo' | 'mint' | 'dipsy' | 'salmon';
+  color?: AccordionContextProps['color'];
   showToc?: boolean;
   navigation?: NavigationMenu;
   contentSize?: ContainerProps['dimension'];
@@ -44,6 +45,7 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
   const { matches } = useResponsiveContext();
   const router = useRouter();
   const { headings, getNestedHeadings } = useToc();
+  const { setColor } = useDocLayoutContext();
 
   const getPretitle = useMemo(() => {
     const url = new URL(process.env.NEXT_PUBLIC_DOMAIN + router.asPath);
@@ -54,9 +56,15 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
 
   const dynamicStyle: CSSProperties = {
     paddingTop: 72,
-    '--layout-color-fg': `var(--highlight-${color ?? 'gray'}-foreground)`,
-    '--layout-color-bg': `var(--highlight-${color ?? 'gray'}-background)`,
   };
+
+  useEffect(() => {
+    if (color) setColor(color);
+
+    return () => {
+      setColor('gray');
+    };
+  }, [color, setColor]);
 
   useEffect(() => {
     if (headings.length === 0) {
@@ -112,8 +120,8 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
             <div className={clsx(styles.Sidebar, styles.Toc)}>
               {(showToc && (headings.length > 0 || staticHeadings.length > 0)) && (
                 <>
-                  {headings.length === 0 && <Toc headings={staticHeadings} />}
-                  {headings.length > 0 && <Toc headings={headings} />}
+                    {headings.length === 0 && <Toc headings={staticHeadings} />}
+                    {headings.length > 0 && <Toc headings={headings} />}
                 </>
               )}
             </div>

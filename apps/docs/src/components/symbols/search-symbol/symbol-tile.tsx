@@ -21,6 +21,7 @@ export const SymbolTile: FC<SymbolTileProps> = ({
     onClick={onClick}
     className={styles.SymbolTile}
     data-icon-style={weight}
+    aria-label={typeof source === 'string' ? `Show ${source} detail` : undefined}
     hAlign="center"
     vAlign="center"
     rowGap={24}

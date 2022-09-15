@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import {
-  Children, cloneElement, forwardRef, isValidElement, ReactNode,
+  Children, cloneElement, forwardRef, isValidElement, ReactElement, ReactNode,
 } from 'react';
 import { useUIDSeed } from 'react-uid';
 
@@ -69,7 +69,7 @@ export const InputGroup = forwardRef<HTMLFieldSetElement, PropsWithClass<InputGr
       >
         <div className={styles.Start}>
           {Children.map(prefix, child => isValidElement(child) && cloneElement(
-            child,
+            child as ReactElement,
             {
               dimension,
             },
@@ -77,7 +77,7 @@ export const InputGroup = forwardRef<HTMLFieldSetElement, PropsWithClass<InputGr
         </div>
         <div className={styles.InputField}>
           {Children.map(input, child => isValidElement(child) && cloneElement(
-            child,
+            child as ReactElement,
             {
               id: seedID('field'),
               dimension,
@@ -86,7 +86,7 @@ export const InputGroup = forwardRef<HTMLFieldSetElement, PropsWithClass<InputGr
         </div>
         <div className={styles.End}>
           {Children.map(suffix, child => isValidElement(child) && cloneElement(
-            child,
+            child as ReactElement,
             {
               dimension,
             },
