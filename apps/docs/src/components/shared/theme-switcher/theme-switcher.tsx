@@ -31,7 +31,7 @@ export const ThemeSwitcher: FCClass<ThemeSwitcherProps> = ({
           kind="flat"
           icon={currentTheme === 'system' ? icon.system : icon[currentTheme]}
         />
-    )}
+      )}
     >
       <Menu>
         <Menu.ItemCheckbox value="light" autoFocus onClick={() => setTheme('light')} checked={currentTheme === 'light'} icon="sun-bright">Light</Menu.ItemCheckbox>

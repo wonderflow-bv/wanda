@@ -30,7 +30,7 @@ export const ColorPalette = ({
   ...props
 }: ColorPaletteProps) => {
   const uid = useUIDSeed();
-  const [showHex, setShowHex] = useState(true);
+  const [isShowHex, setIsShowHex] = useState(true);
   const colorArray = useMemo(() => Object.keys(colors), [colors]);
 
   return (
@@ -38,8 +38,8 @@ export const ColorPalette = ({
       <Stack direction="row" fill={false} vAlign="center" hAlign="space-between">
         <Title as="span" level="5">{title}</Title>
         <Stack direction="row" fill={false} columnGap={8} vAlign="center">
-          <Text as="label" htmlFor={uid('palette-color-format')} weight="bold" size={14}>{showHex ? 'HEX' : 'HSL'}</Text>
-          <Toggle id={uid('palette-color-format')} onClick={() => setShowHex(!showHex)} dimension="small" />
+          <Text as="label" htmlFor={uid('palette-color-format')} weight="bold" size={14}>{isShowHex ? 'HEX' : 'HSL'}</Text>
+          <Toggle id={uid('palette-color-format')} onClick={() => setIsShowHex(!isShowHex)} dimension="small" />
         </Stack>
       </Stack>
 
@@ -65,7 +65,7 @@ export const ColorPalette = ({
             <Text weight="bold">{item}</Text>
             <Text size={14} className={styles.ColorValue}>
               {
-              showHex ? HexColor(`hsl(${colors[item]})`) : `hsl(${colors[item]})`
+              isShowHex ? HexColor(`hsl(${colors[item]})`) : `hsl(${colors[item]})`
               }
             </Text>
           </Stack>

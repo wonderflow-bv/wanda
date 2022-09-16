@@ -44,12 +44,12 @@ export const Avatar = forwardRef<HTMLImageElement, AvatarProps>(({
     </svg>
 
     {src && (
-    <img
-      ref={forwardedRef}
-      alt=""
-      src={src}
-      {...otherProps}
-    />
+      <img
+        ref={forwardedRef}
+        alt=""
+        src={src}
+        {...otherProps}
+      />
     )}
   </picture>
 ));

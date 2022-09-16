@@ -1,9 +1,9 @@
 import {
   Elevator, Stack,
 } from '@wonderflow/react-components';
-// @ts-expect-error
+// @ts-expect-error missing JSON module declaration
 import darkTheme from '@wonderflow/themes/dark.json';
-// @ts-expect-error
+// @ts-expect-error missing JSON module declaration
 import lightTheme from '@wonderflow/themes/light.json';
 import { m } from 'framer-motion';
 import { useTheme } from 'next-themes';

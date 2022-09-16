@@ -21,9 +21,9 @@ export const DocHeader: FCClass<DocHeaderProps> = ({
   <Stack rowGap={48} {...otherProps}>
     <Stack rowGap={8}>
       {preTitle && (
-      <Text className={styles.Pretitle} weight="bold" size={18}>
-        <GradientText color={color}>{preTitle}</GradientText>
-      </Text>
+        <Text className={styles.Pretitle} weight="bold" size={18}>
+          <GradientText color={color}>{preTitle}</GradientText>
+        </Text>
       )}
       {title && <Title as="h1" level="1">{title}</Title>}
       {subtitle && <Text size={28}>{subtitle}</Text>}

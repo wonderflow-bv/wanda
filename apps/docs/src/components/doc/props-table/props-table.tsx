@@ -52,7 +52,7 @@ export const PropsTable = ({
 
     <Stack rowGap={8} role="rowgroup">
       {properties.map(item => item.name && (
-      <PropsTableRow key={item.name} {...item} />
+        <PropsTableRow key={item.name} {...item} />
       ))}
     </Stack>
   </Stack>

@@ -87,23 +87,22 @@ export const Code: FCChildrenClass<CodeProps> = ({
       />
 
       {(showLanguage || actions) && (
-      <Stack direction="row" fill={false} hAlign="space-between" vAlign="center" className={styles.Toolbar}>
-        <Text responsive={false} size={14} dimmed={5}>{hasLanguage}</Text>
+        <Stack direction="row" fill={false} hAlign="space-between" vAlign="center" className={styles.Toolbar}>
+          <Text responsive={false} size={14} dimmed={5}>{hasLanguage}</Text>
 
-        <Stack direction="row" rowGap={8}>
-          {!hideCopy && (
-          <IconButton
-            className={styles.Action}
-            aria-label="Copy code"
-            dimension="small"
-            kind="flat"
-            onClick={() => copyContent()}
-            icon="todo"
-          />
-          )}
-          {actions}
+          <Stack direction="row" rowGap={8}>
+            {!hideCopy && (
+              <IconButton
+                aria-label="Copy code"
+                dimension="small"
+                kind="flat"
+                onClick={() => copyContent()}
+                icon="todo"
+              />
+            )}
+            {actions}
+          </Stack>
         </Stack>
-      </Stack>
       )}
     </div>
   );

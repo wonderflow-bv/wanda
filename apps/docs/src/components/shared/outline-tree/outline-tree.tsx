@@ -44,22 +44,22 @@ export const OutlineTree: {
         {...otherProps}
       >
         {title && (
-        <Stack
-          as={Text}
-          vAlign="center"
-          hAlign="start"
-          columnGap={8}
-          direction="row"
-          fill={false}
-          size={14}
-          responsive={false}
-          className={styles.Title}
-          dimmed={5}
-          weight="bold"
-        >
-          {icon && <Symbol source={icon} />}
-          {title}
-        </Stack>
+          <Stack
+            as={Text}
+            vAlign="center"
+            hAlign="start"
+            columnGap={8}
+            direction="row"
+            fill={false}
+            size={14}
+            responsive={false}
+            className={styles.Title}
+            dimmed={5}
+            weight="bold"
+          >
+            {icon && <Symbol source={icon} />}
+            {title}
+          </Stack>
         )}
         <Stack as="ul">
           {children}

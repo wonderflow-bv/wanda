@@ -19,12 +19,12 @@ export type PagePropsType<T extends LayoutTypes> = {
   layoutProps?: LayoutProps[T] | null;
 } & Record<string, unknown>
 
-type getLayoutPropsFn = <T extends LayoutTypes>(
+type GetLayoutPropsFn = <T extends LayoutTypes>(
   customProps?: PagePropsType<T>,
   config?: Record<string, unknown>
 ) => GetStaticPropsResult<PagePropsType<T>>;
 
-export const getLayoutProps: getLayoutPropsFn = (customProps, config) => ({
+export const getLayoutProps: GetLayoutPropsFn = (customProps, config) => ({
   props: {
     ...customProps,
     layout: customProps?.layout ?? null,

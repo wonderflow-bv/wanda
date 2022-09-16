@@ -25,6 +25,7 @@ export const ThemeList: React.FC<ThemeListProps> = ({
     if (!hasGroup) {
       groups[group] = {};
     }
+
     // Add the current entry to the result
     groups[group][currKey] = theme[currKey];
     return groups;

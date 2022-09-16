@@ -65,5 +65,5 @@ export const Busy = BusyTemplate.bind({});
 
 export const WithValue = Template.bind({});
 WithValue.args = {
-  value: 1,
+  value: '1',
 };

@@ -119,7 +119,7 @@ export const Bezier = ({
           wrap
         >
           <LazyMotion features={domMax}>
-            <Stack className={styles.PreviewItem} rowGap={8} vAlign="end" hAlign="center" fill={false}>
+            <Stack rowGap={8} vAlign="end" hAlign="center" fill={false}>
               <m.span
                 variants={thumbAnimation}
                 className={clsx(styles.Thumb, className)}
@@ -136,22 +136,22 @@ export const Bezier = ({
             </Stack>
 
             {compare && (
-            <Stack className={styles.PreviewItem} rowGap={8} vAlign="end" hAlign="center" fill={false}>
-              <m.span
-                variants={thumbAnimation}
-                className={clsx(styles.Thumb, styles.ComparisonThumb)}
-                initial="start"
-                animate={isRunning ? 'end' : 'start'}
-                transition={{
-                  duration: isRunning ? timing : 0,
-                  repeat: isRunning ? Infinity : 0,
-                  repeatDelay: 1,
-                  ease: 'linear',
-                }}
-                {...otherProps}
-              />
-              <Text size={14}>No easing</Text>
-            </Stack>
+              <Stack rowGap={8} vAlign="end" hAlign="center" fill={false}>
+                <m.span
+                  variants={thumbAnimation}
+                  className={clsx(styles.Thumb, styles.ComparisonThumb)}
+                  initial="start"
+                  animate={isRunning ? 'end' : 'start'}
+                  transition={{
+                    duration: isRunning ? timing : 0,
+                    repeat: isRunning ? Infinity : 0,
+                    repeatDelay: 1,
+                    ease: 'linear',
+                  }}
+                  {...otherProps}
+                />
+                <Text size={14}>No easing</Text>
+              </Stack>
             )}
           </LazyMotion>
         </Stack>

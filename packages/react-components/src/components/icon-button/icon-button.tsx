@@ -5,14 +5,14 @@ import { Button, ButtonProps, Polymorphic } from '@/components';
 
 import * as styles from './icon-button.module.css';
 
-export type IconButtonProps = Pick<
+export type IconButtonProps<T = Record<string, unknown>> = Pick<
 ButtonProps,
 'kind' | 'dimension' | 'icon' | 'disabled' | 'onClick' | 'busy'
->
+> & T
 
 type PolymorphicIconButton = Polymorphic.ForwardRefComponent<
 Polymorphic.IntrinsicElement<typeof Button>,
-Polymorphic.OwnProps<typeof Button> & IconButtonProps
+IconButtonProps<Polymorphic.OwnProps<typeof Button>>
 >;
 
 export const IconButton = forwardRef(({

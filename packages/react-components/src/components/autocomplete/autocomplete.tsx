@@ -28,7 +28,7 @@ type ValueType = {
   value: string;
 }
 
-export type AutocompleteProps = TextfieldProps & {
+export type AutocompleteProps = PropsWithClass<TextfieldProps<{
   /**
    * The callback called when an option is picked from the list
    */
@@ -47,7 +47,7 @@ export type AutocompleteProps = TextfieldProps & {
    * Show skeletons while loading options.
    */
   busy?: boolean;
-};
+}>>;
 
 type AutocompleteComponent = ForwardRefExoticComponent<AutocompleteProps> & {
   Option: ForwardRefExoticComponent<AutocompleteOptionProps>;
@@ -72,7 +72,7 @@ const AutocompleteAnimation = {
   },
 };
 
-export const Autocomplete = forwardRef<HTMLElement, PropsWithClass<AutocompleteProps>>(({
+export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
   children,
   onChange,
   disabled,
@@ -101,8 +101,9 @@ export const Autocomplete = forwardRef<HTMLElement, PropsWithClass<AutocompleteP
       const items = Children.toArray(children);
       return debounceQuery
         ? items.filter(
-          (o: any) => {
-            const stringToMatch = typeof o.props.children === 'string' ? o.props.children : o.props.children.join('');
+          (o) => {
+            const props = isValidElement(o) && o.props.children;
+            const stringToMatch = typeof props === 'string' ? props : props.join('');
             return stringToMatch?.toLowerCase().includes(debounceQuery.toLowerCase());
           },
         )
@@ -128,6 +129,7 @@ export const Autocomplete = forwardRef<HTMLElement, PropsWithClass<AutocompleteP
     setTooltipRef,
     setTriggerRef,
     triggerRef,
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     visible,
   } = usePopperTooltip({
     delayShow: 0,
@@ -165,7 +167,10 @@ export const Autocomplete = forwardRef<HTMLElement, PropsWithClass<AutocompleteP
   );
 
   useEffect(() => {
-    const currentValues = Children.map(filteredOptions, (o: any) => (typeof o.props.children === 'string' ? o.props.children.toLowerCase() : o.props.children.join('').toLowerCase()));
+    const currentValues = Children.map(
+      filteredOptions as any,
+      (o: ReactElement) => (typeof o.props.children === 'string' ? o.props.children.toLowerCase() : o.props.children.join('').toLowerCase()),
+    );
 
     if (val) setValue(String(val));
     setOptionValues(currentValues);
@@ -194,38 +199,38 @@ export const Autocomplete = forwardRef<HTMLElement, PropsWithClass<AutocompleteP
       />
       <AnimatePresence>
         {visible && (
-        <div
-          ref={setTooltipRef}
-          {...getTooltipProps({ className: styles.PopUp, style: { minInlineSize: triggerSize ? (triggerSize.width + 2) : 'auto' } })}
-        >
-          <LazyMotion features={domMax} strict>
-            <m.div
-              variants={AutocompleteAnimation}
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-            >
-              <Menu
-                role="listbox"
-                id={seedID('autocomplete-menu')}
-                className={styles.OptionsList}
-                maxHeight={maxHeight}
-                aria-labelledby={seedID('autocomplete-trigger')}
+          <div
+            ref={setTooltipRef}
+            {...getTooltipProps({ className: styles.PopUp, style: { minInlineSize: triggerSize ? (triggerSize.width + 2) : 'auto' } })}
+          >
+            <LazyMotion features={domMax} strict>
+              <m.div
+                variants={AutocompleteAnimation}
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
               >
-                {(filteredOptions.length === 0 && !busy) && <Text as="div" textAlign="center" dimmed={5}>{emptyContent}</Text>}
-                {busy
-                  ? <Stack hPadding={8} as="span"><Skeleton count={3} /></Stack>
-                  : Children.map(filteredOptions, child => isValidElement(child) && cloneElement(
-                    child as ReactElement<MenuItemProps>,
-                    {
-                      onClick: handleOptionClick,
-                    },
-                  ))
+                <Menu
+                  role="listbox"
+                  id={seedID('autocomplete-menu')}
+                  className={styles.OptionsList}
+                  maxHeight={maxHeight}
+                  aria-labelledby={seedID('autocomplete-trigger')}
+                >
+                  {(filteredOptions.length === 0 && !busy) && <Text as="div" textAlign="center" dimmed={5}>{emptyContent}</Text>}
+                  {busy
+                    ? <Stack hPadding={8} as="span"><Skeleton count={3} /></Stack>
+                    : Children.map(filteredOptions, child => isValidElement(child) && cloneElement(
+                      child as ReactElement<MenuItemProps>,
+                      {
+                        onClick: handleOptionClick,
+                      },
+                    ))
               }
-              </Menu>
-            </m.div>
-          </LazyMotion>
-        </div>
+                </Menu>
+              </m.div>
+            </LazyMotion>
+          </div>
         )}
       </AnimatePresence>
     </div>

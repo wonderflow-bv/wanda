@@ -12,7 +12,9 @@ import {
 
 import * as styles from './toggle-button.module.css';
 
-export type ToggleButtonProps = Except<IconButtonProps, 'icon'> & {
+type OmitIcon<T = Record<string, unknown>> = T extends IconButtonProps ? Except<T, 'icon'> : never;
+
+export type ToggleButtonProps<T = Record<string, unknown>> = OmitIcon & PropsWithClass<{
   /**
    * Set the icon to show when the button is resting.
    */
@@ -26,11 +28,11 @@ export type ToggleButtonProps = Except<IconButtonProps, 'icon'> & {
    * the icon will be shown instead of the resting icon.
    */
   pressed?: boolean;
-}
+}> & T
 
 type PolymorphicToggleButton = Polymorphic.ForwardRefComponent<
 Polymorphic.IntrinsicElement<typeof IconButton>,
-Polymorphic.OwnProps<typeof IconButton> & ToggleButtonProps
+ToggleButtonProps<Polymorphic.OwnProps<typeof IconButton>>
 >;
 
 const scaleAnimation = {
@@ -65,10 +67,10 @@ export const ToggleButton = forwardRef(({
   ...otherProps
 }, forwardedRef) => {
   const [isPressed, setIsPressed] = useState<boolean>(pressed);
-  const [firstRender, setFirstRender] = useState(true);
+  const [isFirstRender, setIsFirstRender] = useState(true);
 
   useEffect(() => {
-    setFirstRender(false);
+    setIsFirstRender(false);
   }, [pressed]);
 
   const handleClick = useCallback(
@@ -95,7 +97,7 @@ export const ToggleButton = forwardRef(({
   return (
     <IconButton
       as="button"
-      ref={forwardedRef}
+      ref={forwardedRef as any}
       dimension={dimension}
       aria-pressed={isPressed}
       kind={kind}
@@ -110,21 +112,21 @@ export const ToggleButton = forwardRef(({
             <m.span
               key="pressedIcon"
               variants={scaleAnimation}
-              initial={firstRender && isPressed ? false : 'scaleOut'}
+              initial={isFirstRender && isPressed ? false : 'scaleOut'}
               animate="scaleIn"
             >
               {renderIcon(pressedIcon, dimension)}
             </m.span>
           )
           : restingIcon && (
-          <m.span
-            key="restingIcon"
-            variants={scaleAnimation}
-            initial={firstRender && !isPressed ? false : 'scaleOut'}
-            animate="scaleIn"
-          >
-            {renderIcon(restingIcon, dimension)}
-          </m.span>
+            <m.span
+              key="restingIcon"
+              variants={scaleAnimation}
+              initial={isFirstRender && !isPressed ? false : 'scaleOut'}
+              animate="scaleIn"
+            >
+              {renderIcon(restingIcon, dimension)}
+            </m.span>
           )
       }
       </LazyMotion>

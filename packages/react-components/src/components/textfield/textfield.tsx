@@ -11,7 +11,7 @@ import {
 import { BaseField, BaseFieldProps, PrimitiveInputType } from './base-field';
 import * as styles from './textfield.module.css';
 
-export type TextfieldProps = BaseFieldProps & {
+export type TextfieldProps<T = Record<string, unknown>> = BaseFieldProps<{
   /**
    * Set the icon to show on the left or right side of the input.
    */
@@ -60,7 +60,7 @@ export type TextfieldProps = BaseFieldProps & {
    * Make the textfield full width, filling the available space.
    */
   fullWidth?: boolean;
-}
+}> & T
 
 export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
   children,
@@ -80,7 +80,7 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
   fullWidth,
   ...otherProps
 }: TextfieldProps, forwardedRef) => {
-  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+  const [isPasswordVisible, setPasswordVisible] = useState<boolean>(false);
   const seedID = useUIDSeed();
   const isPassword = type === 'password';
   const fieldID = useMemo(() => id ?? seedID('field'), [id, seedID]);
@@ -144,7 +144,7 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
               className={styles.InputField}
               id={fieldID}
               ref={forwardedRef as Ref<HTMLInputElement>}
-              type={passwordVisible ? 'text' : type}
+              type={isPasswordVisible ? 'text' : type}
               spellCheck={isPassword ? false : undefined}
               {...commonProps}
               {...otherProps}
@@ -158,7 +158,7 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
             onClick={handlePasswordVisibility}
             kind="flat"
             aria-label="Reveal password"
-            icon={passwordVisible ? 'eye-slash' : 'eye'}
+            icon={isPasswordVisible ? 'eye-slash' : 'eye'}
           />
         )}
 

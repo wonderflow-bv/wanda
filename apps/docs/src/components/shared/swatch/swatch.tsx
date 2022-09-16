@@ -77,27 +77,27 @@ export const Swatch: React.FC<SwatchProps> = ({
           <Text size={14} lineHeight="small">
             {hslColor}
             {showCopy && (
-            <IconButton
-              aria-label="Copy HSL color code"
-              dimension="small"
-              kind="flat"
-              onClick={copyToClipboard(hexColor)}
-              iconColor="var(--highlight-cyan-foreground)"
-              icon="document-copy"
-            />
+              <IconButton
+                aria-label="Copy HSL color code"
+                dimension="small"
+                kind="flat"
+                onClick={copyToClipboard(hexColor)}
+                iconColor="var(--highlight-cyan-foreground)"
+                icon="document-copy"
+              />
             )}
           </Text>
           <Text size={14} lineHeight="small">
             {hexColor}
             {showCopy && (
-            <IconButton
-              aria-label="Copy HEX color code"
-              dimension="small"
-              kind="flat"
-              onClick={copyToClipboard(hexColor)}
-              iconColor="var(--highlight-cyan-foreground)"
-              icon="document-copy"
-            />
+              <IconButton
+                aria-label="Copy HEX color code"
+                dimension="small"
+                kind="flat"
+                onClick={copyToClipboard(hexColor)}
+                iconColor="var(--highlight-cyan-foreground)"
+                icon="document-copy"
+              />
             )}
           </Text>
         </Stack>

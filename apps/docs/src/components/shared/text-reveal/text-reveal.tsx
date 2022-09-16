@@ -17,7 +17,7 @@ export const TextReveal: FCChildrenClass<TextRevealProps> = ({
   ...otherProps
 }) => {
   const ref = useRef<HTMLSpanElement>(null);
-  const [inViewport] = useInViewport(ref, {
+  const [isInViewport] = useInViewport(ref, {
     threshold: [0, 0.5],
   });
 
@@ -29,7 +29,7 @@ export const TextReveal: FCChildrenClass<TextRevealProps> = ({
     <span
       ref={ref}
       className={styles.TextReveal}
-      data-text-reveal-is-running={inViewport}
+      data-text-reveal-is-running={isInViewport}
       style={{ ...dynamicStyle, ...style }}
       {...otherProps}
     >

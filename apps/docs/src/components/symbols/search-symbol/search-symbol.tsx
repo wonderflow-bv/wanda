@@ -124,25 +124,25 @@ export const SearchSymbol = () => {
                 >
                   <>
                     {w === 'solid' && (
-                    <svg width={matches.extraLarge ? 32 : 18} height={matches.extraLarge ? 32 : 18} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <path d="M12 1a11 11 0 1 0 11 11A11.012 11.012 0 0 0 12 1Z" />
-                    </svg>
+                      <svg width={matches.extraLarge ? 32 : 18} height={matches.extraLarge ? 32 : 18} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M12 1a11 11 0 1 0 11 11A11.012 11.012 0 0 0 12 1Z" />
+                      </svg>
                     )}
 
                     {w === 'outline' && (
-                    <svg width={matches.extraLarge ? 32 : 18} height={matches.extraLarge ? 32 : 18} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <circle cx="12" cy="12" r="10" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" fill="none" stroke="currentColor" />
-                    </svg>
+                      <svg width={matches.extraLarge ? 32 : 18} height={matches.extraLarge ? 32 : 18} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" fill="none" stroke="currentColor" />
+                      </svg>
                     )}
 
                     {w === 'duotone' && (
-                    <svg width={matches.extraLarge ? 32 : 18} height={matches.extraLarge ? 32 : 18} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <g strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" fill="none" stroke="currentColor">
-                        <path d="M19.778 4.222 4.222 19.778A11 11 0 0 0 19.778 4.222Z" opacity=".5" fill="currentColor" stroke="none" />
-                        <path d="M19.778 4.222 4.222 19.778" />
-                        <circle cx="12" cy="12" r="11" />
-                      </g>
-                    </svg>
+                      <svg width={matches.extraLarge ? 32 : 18} height={matches.extraLarge ? 32 : 18} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <g strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" fill="none" stroke="currentColor">
+                          <path d="M19.778 4.222 4.222 19.778A11 11 0 0 0 19.778 4.222Z" opacity=".5" fill="currentColor" stroke="none" />
+                          <path d="M19.778 4.222 4.222 19.778" />
+                          <circle cx="12" cy="12" r="11" />
+                        </g>
+                      </svg>
                     )}
                   </>
                 </RadioButton>
@@ -193,14 +193,14 @@ export const SearchSymbol = () => {
           onClose={() => setIconDetail('')}
         >
           {iconDetail && (
-          <Modal>
-            <Modal.Content
-              theme="auto"
-              title="Icon detail"
-            >
-              <SymbolDetail name={iconDetail} weight={iconStyle} />
-            </Modal.Content>
-          </Modal>
+            <Modal>
+              <Modal.Content
+                theme="auto"
+                title="Icon detail"
+              >
+                <SymbolDetail name={iconDetail} weight={iconStyle} />
+              </Modal.Content>
+            </Modal>
           )}
         </OverlayContainer>
       </ClientOnly>

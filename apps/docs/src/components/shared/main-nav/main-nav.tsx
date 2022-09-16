@@ -22,8 +22,8 @@ export const MainNav: FCClass<MainNavProps> = ({
   const includesPath = useCallback(
     // (path: NextRouter['asPath']) => router.asPath === path,
     (pageUrl: NextRouter['asPath']) => {
-      const matchURL = asPath.split('/')[1] === pageUrl.split('/')[1];
-      return matchURL && asPath.split('/')[1].length > 0;
+      const isMatchingUrl = asPath.split('/')[1] === pageUrl.split('/')[1];
+      return isMatchingUrl && asPath.split('/')[1].length > 0;
     },
     [asPath],
   );
@@ -40,11 +40,11 @@ export const MainNav: FCClass<MainNavProps> = ({
               aria-current={includesPath(item.url) ? 'page' : undefined}
             >
               {includesPath(item.url) && (
-              <m.span
-                layoutId="mainNav"
-                layoutDependency={item.url}
-                className={styles.Highlight}
-              />
+                <m.span
+                  layoutId="mainNav"
+                  layoutDependency={item.url}
+                  className={styles.Highlight}
+                />
               )}
               {item.label}
             </a>

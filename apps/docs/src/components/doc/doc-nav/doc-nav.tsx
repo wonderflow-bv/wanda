@@ -17,8 +17,8 @@ export const DocNav = () => {
     (path: NextRouter['asPath']) => {
       const url = new URL(process.env.NEXT_PUBLIC_DOMAIN + router.asPath);
 
-      const matchURL = url.pathname.split('/')[2] === path.split('/')[2];
-      return matchURL && url.pathname.split('/')[2].length > 0;
+      const isMatchingUrl = url.pathname.split('/')[2] === path.split('/')[2];
+      return isMatchingUrl && url.pathname.split('/')[2].length > 0;
     },
     [router.asPath],
   );

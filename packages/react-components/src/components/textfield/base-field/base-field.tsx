@@ -1,5 +1,7 @@
 import clsx from 'clsx';
-import { forwardRef, InputHTMLAttributes } from 'react';
+import {
+  forwardRef, InputHTMLAttributes,
+} from 'react';
 
 import { Polymorphic } from '../../..';
 import * as styles from './base-field.module.css';
@@ -12,9 +14,9 @@ export type PrimitiveInputType = HTMLInputElement | HTMLTextAreaElement
 /**
  * @internal
  */
-export type BaseFieldProps = InputHTMLAttributes<PrimitiveInputType> & {
+export type BaseFieldProps<T = Record<string, unknown>> = InputHTMLAttributes<PrimitiveInputType> & {
   invalid?: boolean;
-}
+} & T
 
 /**
  * @internal
@@ -28,7 +30,7 @@ export const BaseField = forwardRef(({
   ...otherProps
 }, forwardedRef) => (
   <Wrapper
-    ref={forwardedRef}
+    ref={forwardedRef as any}
     data-basefield-invalid={invalid}
     className={clsx(styles.BaseField, className)}
     {...otherProps}

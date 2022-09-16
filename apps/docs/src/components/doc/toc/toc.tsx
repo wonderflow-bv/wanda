@@ -22,13 +22,13 @@ export const Toc = ({
             <Stack as={List.Li} key={heading.id} vPadding={4}>
               <Text as="a" className={styles.Link} href={`#${heading.id}`} dimmed={6} weight="bold">{heading.title}</Text>
               {(heading.items && heading.items.length > 0) && (
-              <List dimension="small">
-                {heading.items?.map(child => (
-                  <List.Li key={child.id} marker="chevron-right" markerColor="var(--dimmed-5)">
-                    <Text as="a" className={styles.Link} href={`#${child.id}`} dimmed={6}>{child.title}</Text>
-                  </List.Li>
-                ))}
-              </List>
+                <List dimension="small">
+                  {heading.items?.map(child => (
+                    <List.Li key={child.id} marker="chevron-right" markerColor="var(--dimmed-5)">
+                      <Text as="a" className={styles.Link} href={`#${child.id}`} dimmed={6}>{child.title}</Text>
+                    </List.Li>
+                  ))}
+                </List>
               )}
             </Stack>
           ))}

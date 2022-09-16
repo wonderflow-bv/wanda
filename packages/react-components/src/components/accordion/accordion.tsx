@@ -8,7 +8,7 @@ import { AccordionItemProps, Stack } from '@/components';
 import * as styles from './accordion.module.css';
 import { AccordionContextProvider } from './accordion-context';
 
-export type AccordionProps = PropsWithChildren<PropsWithClass> & {
+export type AccordionProps = PropsWithChildren<PropsWithClass<{
   /**
    * Set the item to open by default when the accordion is rendered.
    */
@@ -17,7 +17,7 @@ export type AccordionProps = PropsWithChildren<PropsWithClass> & {
    * Show visual separator between accordion items
    */
   showSeparators?: boolean;
-}
+}>>
 
 export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(({
   className,

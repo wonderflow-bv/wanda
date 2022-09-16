@@ -9,7 +9,7 @@ export type HeadingType = {
   items?: HeadingType[];
 }
 
-type useTableOfContentFc = (initialHeadings: {
+type UseTableOfContentFc = (initialHeadings: {
   initialHeadings?: HeadingType[];
 }) => {
   headings: HeadingType[];
@@ -17,7 +17,7 @@ type useTableOfContentFc = (initialHeadings: {
   getNestedHeadings: (headingElements: Headings) => HeadingType[];
 }
 
-const useTableOfContent: useTableOfContentFc = ({
+const useTableOfContent: UseTableOfContentFc = ({
   initialHeadings = [],
 }) => {
   const [headings, setHeadings] = useState<HeadingType[]>(initialHeadings);

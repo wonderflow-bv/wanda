@@ -12,7 +12,7 @@ type AccordionContextProps = {
 }
 
 const useAccordion = ({
-  defaultOpen = '',
+  defaultOpen,
 }: AccordionContextProps) => {
   const [openItem, setOpenItem] = useState(defaultOpen);
 

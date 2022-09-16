@@ -134,6 +134,7 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
     getTooltipProps,
     setTooltipRef,
     setTriggerRef,
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     visible,
   } = usePopperTooltip({
     delayShow: 0,

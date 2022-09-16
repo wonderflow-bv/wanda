@@ -120,8 +120,8 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
             <div className={clsx(styles.Sidebar, styles.Toc)}>
               {(showToc && (headings.length > 0 || staticHeadings.length > 0)) && (
                 <>
-                    {headings.length === 0 && <Toc headings={staticHeadings} />}
-                    {headings.length > 0 && <Toc headings={headings} />}
+                  {headings.length === 0 && <Toc headings={staticHeadings} />}
+                  {headings.length > 0 && <Toc headings={headings} />}
                 </>
               )}
             </div>

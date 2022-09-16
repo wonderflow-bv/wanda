@@ -2,7 +2,7 @@ import { Button, Menu, Popover } from '@wonderflow/react-components';
 import { useState } from 'react';
 
 export const Example = () => {
-  const [checked, setChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
   return (
     <Popover
       placement="bottom-start"
@@ -12,9 +12,9 @@ export const Example = () => {
         <Menu.Item value="1" autoFocus icon="user">Item option 1</Menu.Item>
         <Menu.ItemCheckbox
           value="2"
-          onClick={() => setChecked(val => !val)}
-          icon={checked ? 'check' : undefined}
-          checked={checked}
+          onClick={() => setIsChecked(val => !val)}
+          icon={isChecked ? 'check' : undefined}
+          checked={isChecked}
         >
           Checkable option 2
         </Menu.ItemCheckbox>
@@ -31,15 +31,15 @@ export const Example = () => {
 };
 
 export const ControlledExample = () => {
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <Popover
-      open={open}
+      open={isOpen}
       placement="bottom"
-      onOpenChange={state => setOpen(state)}
+      onOpenChange={state => setIsOpen(state)}
       trigger={(
-        <Button onClick={() => setOpen(open => !open)}>
-          {`${open ? 'Close' : 'Open'} popover`}
+        <Button onClick={() => setIsOpen(open => !open)}>
+          {`${isOpen ? 'Close' : 'Open'} popover`}
         </Button>
       )}
     >
@@ -53,7 +53,7 @@ export const ControlledExample = () => {
         {' '}
         <br />
         <br />
-        <Button kind="secondary" dimension="small" onClick={() => setOpen(val => !val)}>
+        <Button kind="secondary" dimension="small" onClick={() => setIsOpen(val => !val)}>
           Close popover
         </Button>
       </div>

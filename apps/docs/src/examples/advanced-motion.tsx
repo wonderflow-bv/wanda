@@ -21,7 +21,7 @@ export const AdvancedMotion = () => {
 
   return (
     <motion.div className={styles.ExampleContainer}>
-      {/* @ts-expect-error */}
+      {/* @ts-expect-error framer-motion bug on style */}
       <motion.span className={styles.Overlay} style={{ background }} />
       <motion.div
         className={styles.Box}

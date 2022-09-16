@@ -33,12 +33,12 @@ export const NotesCard = ({
       <Stack vAlign="center" hAlign="center" fill={false} className={styles.Tag}>
         <Text as="span" dimmed={index !== 0 ? 6 : undefined} weight="bold" size={14} textAlign="center">{release.tag ?? '📣'}</Text>
         {index === 0 && (
-        <m.span
-          initial={{ scale: 1, opacity: 0.5 }}
-          animate={{ scale: 1.5, opacity: 0 }}
-          transition={{ duration: 1, repeat: Infinity, repeatDelay: 1 }}
-          className={styles.Pulse}
-        />
+          <m.span
+            initial={{ scale: 1, opacity: 0.5 }}
+            animate={{ scale: 1.5, opacity: 0 }}
+            transition={{ duration: 1, repeat: Infinity, repeatDelay: 1 }}
+            className={styles.Pulse}
+          />
         )}
       </Stack>
 
@@ -59,34 +59,34 @@ export const NotesCard = ({
         )}
 
         {release.notes.length > 0 && (
-        <Stack rowGap={48} vPadding={32}>
-          {release.notes.map(note => (
-            <Stack key={note.id}>
-              <Title as="h3" level="5" lineHeight="none" className={styles.ScopeTitle}>
-                <GradientText color="rainbow">{`${note.scope[0].toUpperCase()}${note.scope.slice(1)}`}</GradientText>
-              </Title>
-              <Elevator resting={2}>
-                <Card hAlign="start" padding={24} radius={16} className={styles.Card}>
-                  {note.breaking && (
-                  <div data-note-type="breaking">
-                    <Markdown hideMarkers>{note.breaking}</Markdown>
-                  </div>
-                  )}
-                  {note.new && (
-                  <div data-note-type="new">
-                    <Markdown hideMarkers>{note.new}</Markdown>
-                  </div>
-                  )}
-                  {note.fixes && (
-                  <div data-note-type="fixes">
-                    <Markdown hideMarkers>{note.fixes}</Markdown>
-                  </div>
-                  )}
-                </Card>
-              </Elevator>
-            </Stack>
-          ))}
-        </Stack>
+          <Stack rowGap={48} vPadding={32}>
+            {release.notes.map(note => (
+              <Stack key={note.id}>
+                <Title as="h3" level="5" lineHeight="none" className={styles.ScopeTitle}>
+                  <GradientText color="rainbow">{`${note.scope[0].toUpperCase()}${note.scope.slice(1)}`}</GradientText>
+                </Title>
+                <Elevator resting={2}>
+                  <Card hAlign="start" padding={24} radius={16} className={styles.Card}>
+                    {note.breaking && (
+                      <div data-note-type="breaking">
+                        <Markdown hideMarkers>{note.breaking}</Markdown>
+                      </div>
+                    )}
+                    {note.new && (
+                      <div data-note-type="new">
+                        <Markdown hideMarkers>{note.new}</Markdown>
+                      </div>
+                    )}
+                    {note.fixes && (
+                      <div data-note-type="fixes">
+                        <Markdown hideMarkers>{note.fixes}</Markdown>
+                      </div>
+                    )}
+                  </Card>
+                </Elevator>
+              </Stack>
+            ))}
+          </Stack>
         )}
       </Stack>
     </Stack>

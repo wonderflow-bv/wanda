@@ -44,7 +44,7 @@ export const Hero: FCClass = ({
       fill={false}
       {...otherProps}
     >
-      {/* @ts-expect-error */}
+      {/* @ts-expect-error framer-motion bug */}
       <m.span className={styles.Glow} style={{ background }} />
       <Container as={Stack} dimension="large" hAlign="center" vAlign="center" rowGap={80}>
         <Stack rowGap={40} hAlign="center">

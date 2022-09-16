@@ -24,24 +24,24 @@ export const SymbolDetail: FC<SymbolDetailProps> = ({
   weight = 'duotone',
 }) => {
   const [iconDetail, setIconDetail] = useState('');
-  const [copied, setCopied] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
   const router = useRouter();
 
   const handleShare = useCallback(
     () => () => {
       void navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_DOMAIN}${router.pathname}#${name.toLowerCase()}`);
-      setTimeout(() => setCopied(false), 1000);
+      setTimeout(() => setIsCopied(false), 1000);
     }, [router, name],
   );
 
   const handleCopy = useCallback(
     (name: SymbolNames) => () => {
       navigator.clipboard.writeText(name).then(() => {
-        setCopied(true);
+        setIsCopied(true);
       }, () => {
-        setCopied(false);
+        setIsCopied(false);
       });
-      setTimeout(() => setCopied(false), 1000);
+      setTimeout(() => setIsCopied(false), 1000);
     },
     [],
   );
@@ -85,7 +85,7 @@ export const SymbolDetail: FC<SymbolDetailProps> = ({
             <Stack direction="row" columnGap={8} inline vAlign="center">
               <Title level="4">{name}</Title>
               <IconButton icon="todo" dimension="small" onClick={handleCopy(name)} />
-              {copied && <Symbol source="check" fill="var(--highlight-green-foreground)" dimension={12} />}
+              {isCopied && <Symbol source="check" fill="var(--highlight-green-foreground)" dimension={12} />}
             </Stack>
           </Stack>
 

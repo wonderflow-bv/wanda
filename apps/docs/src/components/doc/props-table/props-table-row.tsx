@@ -19,17 +19,17 @@ export const PropsTableRow = ({
   default: defaultValue,
   required,
 }: Prop) => {
-  const [copied, setCopied] = useState<boolean>(false);
+  const [isCopied, setIsCopied] = useState<boolean>(false);
   const router = useRouter();
 
   const handleCopyLink = useCallback(
     (propName: string) => () => {
       navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_DOMAIN}${router.asPath}#prop-${propName.toLowerCase()}`).then(() => {
-        setCopied(true);
+        setIsCopied(true);
       }, () => {
-        setCopied(false);
+        setIsCopied(false);
       });
-      setTimeout(() => setCopied(false), 1000);
+      setTimeout(() => setIsCopied(false), 1000);
     }, [router.asPath],
   );
   return (
@@ -42,7 +42,7 @@ export const PropsTableRow = ({
       fill={false}
       key={name}
       id={`prop-${name.toLowerCase()}`}
-      data-props-table-link-copied={copied}
+      data-props-table-link-copied={isCopied}
     >
       <div role="cell" className={styles.Cell}>
         <IconButton
@@ -55,78 +55,78 @@ export const PropsTableRow = ({
 
       {/* Prop NAME and DESCRIPTION */}
       {name && (
-      <div role="cell" className={styles.Cell}>
-        {description && (
-          <Popover
-            placement="top-start"
-            trigger={(
-              <IconButton
-                kind="flat"
-                icon="circle-info"
-                iconColor="var(--layout-color-fg)"
-                aria-label="Show property description"
-              />
-            )}
-          >
-            <Elevator resting={2}>
-              <Card dimmed={0} bordered className={styles.Dropdown}>
-                <Markdown options={{ wrapper: Fragment }}>{description}</Markdown>
-              </Card>
-            </Elevator>
-          </Popover>
-        )}
-        <Text as="code" size={14}>{name}</Text>
-        {required && <Text as="span" sentiment="warning" size={14}>*</Text>}
-      </div>
+        <div role="cell" className={styles.Cell}>
+          {description && (
+            <Popover
+              placement="top-start"
+              trigger={(
+                <IconButton
+                  kind="flat"
+                  icon="circle-info"
+                  iconColor="var(--layout-color-fg)"
+                  aria-label="Show property description"
+                />
+              )}
+            >
+              <Elevator resting={2}>
+                <Card dimmed={0} bordered className={styles.Dropdown}>
+                  <Markdown options={{ wrapper: Fragment }}>{description}</Markdown>
+                </Card>
+              </Elevator>
+            </Popover>
+          )}
+          <Text as="code" size={14}>{name}</Text>
+          {required && <Text as="span" sentiment="warning" size={14}>*</Text>}
+        </div>
       )}
 
       {/* Prop TYPE and TYPEVALUE */}
       {type && (
-      <div role="cell" className={styles.Cell}>
-        {Array.isArray(type)
-          ? type.map((type, i) => (
-            <Fragment key={type}>
-              {i !== 0 && '|'}
-              <Text key={type} as="code" size={14}>{type}</Text>
-            </Fragment>
-          ))
-          : <Text as="code" size={14}>{type}</Text>}
-        {typeValue && (
-          <Popover
-            placement="top"
-            trigger={(
-              <IconButton
-                kind="flat"
-                icon="circle-info"
-                iconColor="var(--layout-color-fg)"
-                aria-label="Show extra type information"
-              />
-            )}
-          >
-            <Elevator resting={2}>
-              <Card bordered padding={false} className={styles.Dropdown}>
-                <Code
-                  className={styles.Code}
-                  language="typescript"
-                  hideCopy
-                  showLanguage={false}
-                  actions={typeLink && (
-                    <IconButton
-                      as="a"
-                      href={typeLink}
-                      dimension="small"
-                      kind="secondary"
-                      icon="link"
-                    />
-                  )}
-                >
-                  {typeValue}
-                </Code>
-              </Card>
-            </Elevator>
-          </Popover>
-        )}
-      </div>
+        <div role="cell" className={styles.Cell}>
+          {Array.isArray(type)
+            ? type.map((type, i) => (
+              <Fragment key={type}>
+                {i !== 0 && '|'}
+                <Text key={type} as="code" size={14}>{type}</Text>
+              </Fragment>
+            ))
+            : <Text as="code" size={14}>{type}</Text>}
+          {typeValue && (
+            <Popover
+              placement="top"
+              trigger={(
+                <IconButton
+                  kind="flat"
+                  icon="circle-info"
+                  iconColor="var(--layout-color-fg)"
+                  aria-label="Show extra type information"
+                />
+              )}
+            >
+              <Elevator resting={2}>
+                <Card bordered padding={false} className={styles.Dropdown}>
+                  <Code
+                    className={styles.Code}
+                    language="typescript"
+                    hideCopy
+                    showLanguage={false}
+                    actions={typeLink && (
+                      <IconButton
+                        as="a"
+                        href={typeLink}
+                        dimension="small"
+                        kind="secondary"
+                        icon="link"
+                      />
+                    )}
+                  >
+                    {typeValue}
+                  </Code>
+                </Card>
+              </Elevator>
+            </Popover>
+          )}
+        </div>
       )}
 
       {/* Prop DEFAULT VALUE */}
