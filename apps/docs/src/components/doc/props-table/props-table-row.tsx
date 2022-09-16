@@ -6,6 +6,7 @@ import { Fragment, useCallback, useState } from 'react';
 
 import { Code } from '@/components/shared/code';
 import { Markdown } from '@/components/shared/markdown';
+import { useDocLayoutContext } from '@/src/hooks/doc-colors';
 
 import { Prop } from './props-table';
 import styles from './props-table.module.css';
@@ -21,6 +22,7 @@ export const PropsTableRow = ({
 }: Prop) => {
   const [isCopied, setIsCopied] = useState<boolean>(false);
   const router = useRouter();
+  const { layoutColor } = useDocLayoutContext();
 
   const handleCopyLink = useCallback(
     (propName: string) => () => {
@@ -63,7 +65,7 @@ export const PropsTableRow = ({
                 <IconButton
                   kind="flat"
                   icon="circle-info"
-                  iconColor="var(--layout-color-fg)"
+                  iconColor={`var(--highlight-${layoutColor}-foreground)`}
                   aria-label="Show property description"
                 />
               )}
@@ -98,7 +100,7 @@ export const PropsTableRow = ({
                 <IconButton
                   kind="flat"
                   icon="circle-info"
-                  iconColor="var(--layout-color-fg)"
+                  iconColor={`var(--highlight-${layoutColor}-foreground)`}
                   aria-label="Show extra type information"
                 />
               )}
