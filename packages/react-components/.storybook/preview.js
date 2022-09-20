@@ -13,8 +13,8 @@ export const parameters = {
   themes: {
     list: [
       { name: 'auto', color: 'linear-gradient(to bottom right, lightgray 50%, black 50.1%)' },
-      { name: 'light', color: 'lightgray', default: true },
-      { name: 'dark', color: 'black' },
+      { name: 'light', color: 'lightgray' },
+      { name: 'dark', color: 'black', default: true },
     ],
     onChange: (theme) => {
       const iframeDocument = document.querySelector('#storybook-preview-iframe').contentDocument.documentElement;

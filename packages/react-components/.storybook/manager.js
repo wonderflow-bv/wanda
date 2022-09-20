@@ -1,8 +1,9 @@
 import { addons } from '@storybook/addons';
-import wondertheme from './wonderflow-theme';
+import { themes } from '@storybook/theming';
+import wonderflowThemeDark from './wonderflow-theme-dark';
 
 addons.setConfig({
-  theme: wondertheme,
+  theme: {...themes.dark, ...wonderflowThemeDark},
   sidebar: {
     showRoots: true,
   },
