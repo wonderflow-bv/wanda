@@ -5,7 +5,7 @@ import { Chip, Text } from '../..';
 import { Menu } from '..';
 
 const story: ComponentMeta<typeof Menu.Item> = {
-  title: 'Components/Navigation/Menu/Menu Item',
+  title: 'Navigation/Menu/Menu Item',
   component: Menu.Item,
   args: {
     dimension: 'regular',

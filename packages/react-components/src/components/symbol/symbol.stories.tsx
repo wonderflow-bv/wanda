@@ -4,7 +4,7 @@ import React, { SVGAttributes } from 'react';
 import { Symbol } from './symbol';
 
 const story: ComponentMeta<typeof Symbol> = {
-  title: 'Components/Widgets/Symbol',
+  title: 'Widgets/Symbol',
   component: Symbol,
   args: {
     weight: 'outline',

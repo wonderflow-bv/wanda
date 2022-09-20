@@ -5,7 +5,7 @@ import { Menu } from '../..';
 import { SplitButton } from './split-button';
 
 const story: ComponentMeta<typeof SplitButton> = {
-  title: 'Components/Actions/Split button',
+  title: 'Actions/Split button',
   component: SplitButton,
   args: {
     dimension: 'regular',

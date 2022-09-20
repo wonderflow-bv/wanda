@@ -4,7 +4,7 @@ import React from 'react';
 import { Select } from './select';
 
 const story: ComponentMeta<typeof Select> = {
-  title: 'Components/Inputs/Select',
+  title: 'Inputs/Select',
   component: Select,
   argTypes: {
     onChange: {

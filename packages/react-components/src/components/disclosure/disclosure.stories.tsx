@@ -4,7 +4,7 @@ import React from 'react';
 import { Disclosure } from './disclosure';
 
 const story: ComponentMeta<typeof Disclosure> = {
-  title: 'Components/Actions/Disclosure',
+  title: 'Actions/Disclosure',
   component: Disclosure,
   args: {
     padding: true,

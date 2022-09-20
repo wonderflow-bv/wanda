@@ -8,7 +8,7 @@ import {
 import { Modal } from './modal';
 
 const story: ComponentMeta<typeof Modal> = {
-  title: 'Components/Dialogs/Modal',
+  title: 'Dialogs/Modal',
   component: Modal,
   argTypes: {
   },
@@ -19,13 +19,13 @@ const story: ComponentMeta<typeof Modal> = {
 export default story;
 
 const ModalShell: ComponentStory<typeof Modal> = ({ children, ...otherProps }) => {
-  const [visible, setVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   return (
     <ResponsiveProvider>
-      <Button onClick={() => setVisible(true)}>Show Modal</Button>
-      <OverlayContainer onClose={() => setVisible(false)}>
-        {visible && (
+      <Button onClick={() => setIsVisible(true)}>Show Modal</Button>
+      <OverlayContainer onClose={() => setIsVisible(false)}>
+        {isVisible && (
           <Modal
             key="dynamic-modal"
             {...otherProps}

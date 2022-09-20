@@ -4,7 +4,7 @@ import React from 'react';
 import { Snackbar } from './snackbar';
 
 const story: ComponentMeta<typeof Snackbar> = {
-  title: 'Components/Dialogs/Snackbar',
+  title: 'Dialogs/Snackbar',
   component: Snackbar,
   argTypes: {
     kind: {

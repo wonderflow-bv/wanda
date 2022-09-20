@@ -4,7 +4,7 @@ import React from 'react';
 import { Skeleton } from './skeleton';
 
 const story: ComponentMeta<typeof Skeleton> = {
-  title: 'Components/Loading/Skeleton',
+  title: 'Loading/Skeleton',
   component: Skeleton,
   args: {
     borderRadius: 8,

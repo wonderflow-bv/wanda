@@ -4,7 +4,7 @@ import React from 'react';
 import { List } from './list';
 
 const story: ComponentMeta<typeof List> = {
-  title: 'Components/Typography/List',
+  title: 'Typography/List',
   component: List,
   args: {
     hideMarker: false,

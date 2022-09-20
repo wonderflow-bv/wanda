@@ -8,7 +8,7 @@ import {
 import { Prose } from './prose';
 
 const story: Meta<Polymorphic.OwnProps<typeof Prose>> = {
-  title: 'Components/Typography/Prose',
+  title: 'Typography/Prose',
   component: Prose,
   args: {
     as: 'section',

@@ -4,7 +4,7 @@ import React from 'react';
 import { LinearProgress } from './linear-progress';
 
 const story: ComponentMeta<typeof LinearProgress> = {
-  title: 'Components/Loading/Linear progress',
+  title: 'Loading/Linear progress',
   component: LinearProgress,
   args: {
     max: 100,

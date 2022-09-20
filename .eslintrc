@@ -18,6 +18,7 @@
     "@typescript-eslint/no-unsafe-assignment": "off",
     "@typescript-eslint/no-unsafe-return": "off",
     "import/no-extraneous-dependencies": "off",
+    "@typescript-eslint/no-redundant-type-constituents": "off",
     "@next/next/no-html-link-for-pages": ["error", "apps/docs/pages"],
     "react/require-default-props": "off",
     "jsx-a11y/anchor-is-valid": "off",

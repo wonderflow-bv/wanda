@@ -7,7 +7,7 @@ import {
 import { InputGroup } from './input-group';
 
 const story: ComponentMeta<typeof InputGroup> = {
-  title: 'Components/Inputs/Input group',
+  title: 'Inputs/Input group',
   component: InputGroup,
   args: {
     input: <Textfield type="text" defaultValue="sample" />,
@@ -38,7 +38,7 @@ const Default: ComponentStory<typeof InputGroup> = args => (
           <option value="4">.dev</option>
           <option value="5">.io</option>
         </Select>
-)}
+      )}
       {...args}
     />
   </Stack>

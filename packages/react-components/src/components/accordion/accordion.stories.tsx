@@ -4,7 +4,7 @@ import { Accordion } from './accordion';
 import { AccordionItem } from './accordion-item';
 
 const story: ComponentMeta<typeof Accordion> = {
-  title: 'Components/Actions/Accordion',
+  title: 'Actions/Accordion',
   component: Accordion,
 };
 

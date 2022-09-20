@@ -4,7 +4,7 @@ import React from 'react';
 import { Datetime } from './datetime';
 
 const story: ComponentMeta<typeof Datetime> = {
-  title: 'Components/Widgets/Datetime',
+  title: 'Widgets/Datetime',
   component: Datetime,
   argTypes: {
     locale: { type: 'string' },

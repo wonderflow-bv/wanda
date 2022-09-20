@@ -5,7 +5,7 @@ import { Container } from '../..';
 import { Title } from './title';
 
 const story: ComponentMeta<typeof Title> = {
-  title: 'Components/Typography/Title',
+  title: 'Typography/Title',
   component: Title,
   parameters: {
     controls: { hideNoControlsWarning: true },

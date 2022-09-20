@@ -4,7 +4,7 @@ import React from 'react';
 import { AspectRatio } from './aspect-ratio';
 
 const story: ComponentMeta<typeof AspectRatio> = {
-  title: 'Components/Widgets/Aspect ratio',
+  title: 'Widgets/Aspect ratio',
   component: AspectRatio,
 };
 

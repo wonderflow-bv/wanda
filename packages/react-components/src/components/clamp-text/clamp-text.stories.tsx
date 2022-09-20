@@ -5,7 +5,7 @@ import { Container } from '../..';
 import { ClampText } from './clamp-text';
 
 const story: ComponentMeta<typeof ClampText> = {
-  title: 'Components/Typography/Clamp Text',
+  title: 'Typography/Clamp Text',
   component: ClampText,
   args: {
     expandable: false,
