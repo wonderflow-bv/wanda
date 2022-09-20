@@ -4,7 +4,7 @@ import React from 'react';
 import { Checkbox } from './checkbox';
 
 const story: ComponentMeta<typeof Checkbox> = {
-  title: 'Components/Inputs/Checkbox',
+  title: 'Inputs/Checkbox',
   component: Checkbox,
   argTypes: {
     onChange: {

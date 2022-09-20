@@ -5,7 +5,7 @@ import { Stack } from '../..';
 import { Textfield } from './textfield';
 
 const story: ComponentMeta<typeof Textfield> = {
-  title: 'Components/Inputs/Textfield',
+  title: 'Inputs/Textfield',
   component: Textfield,
   args: {
     dimension: 'regular',

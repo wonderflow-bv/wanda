@@ -4,7 +4,7 @@ import React from 'react';
 import { CircularProgress } from './circular-progress';
 
 const story: ComponentMeta<typeof CircularProgress> = {
-  title: 'Components/Loading/Circular progress',
+  title: 'Loading/Circular progress',
   component: CircularProgress,
   args: {
     max: 100,

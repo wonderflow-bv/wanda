@@ -5,7 +5,7 @@ import { Button, Text } from '../..';
 import { Tooltip } from './tooltip';
 
 const story: ComponentMeta<typeof Tooltip> = {
-  title: 'Components/Dialogs/Tooltip',
+  title: 'Dialogs/Tooltip',
   component: Tooltip,
   args: {
     trigger: <Text as="span">HTML</Text>,

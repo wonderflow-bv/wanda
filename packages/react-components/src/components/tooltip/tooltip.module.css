@@ -1,66 +1,67 @@
-.Tooltip {
-  display: contents;
-}
-
-
-.Balloon {
-  position: relative;
-  padding: token(--space-8) token(--space-16);
-  border-radius: token(--radius-4);
-  background-color: hsl(token(--color-primary-80));
-  font-size: token(--font-size-16);
-  max-inline-size: var(--max-w);
-  word-wrap: break-word;
-  z-index: 2;
-
-  &[data-popper-reference-hidden='true'] {
-    visibility: hidden;
-    pointer-events: none;
+@layer components {
+  .Tooltip {
+    display: contents;
   }
-}
 
-.Arrow {
-  &::before {
-    content: '';
-    position: absolute;
-    inline-size: 12px;
-    block-size: 12px;
+  .Balloon {
+    position: relative;
+    padding: token(--space-8) token(--space-16);
+    border-radius: token(--radius-4);
     background-color: hsl(token(--color-primary-80));
-    visibility: visible;
-    transform: rotate(45deg);
-  }
+    font-size: token(--font-size-16);
+    max-inline-size: var(--max-w);
+    word-wrap: break-word;
+    z-index: 2;
 
-  @nest .Balloon[data-popper-reference-hidden='true'] & {
-    visibility: hidden;
-    pointer-events: none;
-  }
-  @nest .Balloon[data-popper-placement^='top'] & {
-    bottom: 6px;
-
-
-    &::before {
-      transform: translateX(-50%) rotate(45deg);
+    &[data-popper-reference-hidden='true'] {
+      visibility: hidden;
+      pointer-events: none;
     }
   }
-  @nest .Balloon[data-popper-placement^='left'] & {
-    right: 6px;
 
+  .Arrow {
     &::before {
-      transform: translateY(-50%) rotate(45deg);
+      content: '';
+      position: absolute;
+      inline-size: 12px;
+      block-size: 12px;
+      background-color: hsl(token(--color-primary-80));
+      visibility: visible;
+      transform: rotate(45deg);
     }
-  }
-  @nest .Balloon[data-popper-placement^='bottom'] & {
-    top: -6px;
 
-    &::before {
-      transform: translateX(-50%) rotate(45deg);
+    @nest .Balloon[data-popper-reference-hidden='true'] & {
+      visibility: hidden;
+      pointer-events: none;
     }
-  }
-  @nest .Balloon[data-popper-placement^='right'] & {
-    left: -6px;
+    @nest .Balloon[data-popper-placement^='top'] & {
+      bottom: 6px;
 
-    &::before {
-      transform: translateY(-50%) rotate(45deg);
+
+      &::before {
+        transform: translateX(-50%) rotate(45deg);
+      }
+    }
+    @nest .Balloon[data-popper-placement^='left'] & {
+      right: 6px;
+
+      &::before {
+        transform: translateY(-50%) rotate(45deg);
+      }
+    }
+    @nest .Balloon[data-popper-placement^='bottom'] & {
+      top: -6px;
+
+      &::before {
+        transform: translateX(-50%) rotate(45deg);
+      }
+    }
+    @nest .Balloon[data-popper-placement^='right'] & {
+      left: -6px;
+
+      &::before {
+        transform: translateY(-50%) rotate(45deg);
+      }
     }
   }
 }

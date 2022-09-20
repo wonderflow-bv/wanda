@@ -7,7 +7,7 @@ import {
 import { Popover } from './popover';
 
 const story: ComponentMeta<typeof Popover> = {
-  title: 'Components/Dialogs/Popover',
+  title: 'Dialogs/Popover',
   component: Popover,
   args: {
     placement: 'auto-start',
@@ -18,7 +18,7 @@ const story: ComponentMeta<typeof Popover> = {
 export default story;
 
 const DefaultTemplate: ComponentStory<typeof Popover> = (args) => {
-  const [checked, setChecked] = useState<boolean>(false);
+  const [isChecked, setIsChecked] = useState<boolean>(false);
 
   return (
     <Popover {...args}>
@@ -32,9 +32,9 @@ const DefaultTemplate: ComponentStory<typeof Popover> = (args) => {
           Sample long menu item
         </Menu.Item>
         <Menu.ItemCheckbox
-          onClick={() => setChecked(val => !val)}
-          checked={checked}
-          icon={checked ? 'check' : undefined}
+          onClick={() => setIsChecked(val => !val)}
+          checked={isChecked}
+          icon={isChecked ? 'check' : undefined}
           value="2"
         >
           Checkbox item
@@ -116,18 +116,18 @@ WithField.args = {
 };
 
 const ControlledTemplate: ComponentStory<typeof Popover> = (args) => {
-  const [open, setOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
     <Popover
       {...args}
       trigger={(
-        <Button onClick={() => setOpen(val => !val)}>
-          {`${open ? 'Close' : 'Open'} Popover`}
+        <Button onClick={() => setIsOpen(val => !val)}>
+          {`${isOpen ? 'Close' : 'Open'} Popover`}
         </Button>
       )}
-      onOpenChange={state => setOpen(state)}
-      open={open}
+      onOpenChange={state => setIsOpen(state)}
+      open={isOpen}
     >
       <div style={{
         background: 'var(--global-vibrancy-background)', backdropFilter: 'blur(10px)', border: '2px solid black', padding: 24,
@@ -136,7 +136,7 @@ const ControlledTemplate: ComponentStory<typeof Popover> = (args) => {
         Lorem ipsum dolor, sit amet consectetur adipisicing elit.
         Magni error unde sapiente beatae! Nostrum praesentium similique
         veniam non ut nulla, incidunt velit et, placeat cupiditate, aliquid saepe. Atque, provident perferendis?
-        <button type="button" onClick={() => setOpen(val => !val)}>
+        <button type="button" onClick={() => setIsOpen(val => !val)}>
           Close popover
         </button>
       </div>

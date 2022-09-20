@@ -5,7 +5,7 @@ import { Stack } from '../..';
 import { StarMeter } from './star-meter';
 
 const story: ComponentMeta<typeof StarMeter> = {
-  title: 'Components/Widgets/Star meter',
+  title: 'Widgets/Star meter',
   component: StarMeter,
   args: {
     dimension: 'regular',

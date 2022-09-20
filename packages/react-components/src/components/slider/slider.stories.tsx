@@ -4,7 +4,7 @@ import React from 'react';
 import { Slider } from './slider';
 
 const story: ComponentMeta<typeof Slider> = {
-  title: 'Components/Inputs/Slider',
+  title: 'Inputs/Slider',
   component: Slider,
   args: {
     min: 0,

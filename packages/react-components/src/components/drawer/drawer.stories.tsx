@@ -8,7 +8,7 @@ import {
 import { Drawer } from './drawer';
 
 const story: ComponentMeta<typeof Drawer> = {
-  title: 'Components/Dialogs/Drawer',
+  title: 'Dialogs/Drawer',
   component: Drawer,
   args: {
     side: 'right',
@@ -27,11 +27,11 @@ const story: ComponentMeta<typeof Drawer> = {
 export default story;
 
 const DrawerShell: ComponentStory<typeof Drawer> = ({ children, ...args }) => {
-  const [visible, setVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   return (
     <>
-      <Button onClick={() => setVisible(true)}>Show Drawer</Button>
+      <Button onClick={() => setIsVisible(true)}>Show Drawer</Button>
       Lorem ipsum dolor sit, amet consectetur adipisicing elit. Animi mollitia consequuntur in corrupti debitis, quidem, cupiditate omnis consectetur ratione saepe necessitatibus voluptatibus ex illo magnam totam voluptas eos at eaque?
       Earum obcaecati aliquid, illum illo commodi, eius impedit fuga ratione itaque consectetur officia iure eveniet. Odit enim minima numquam vitae dolores voluptatum illo quae, voluptatibus, ducimus, provident tenetur quaerat accusantium.
       Deserunt distinctio in eum possimus reprehenderit iure et quis porro ipsa error magnam numquam, autem alias odit totam fuga minima neque, ducimus placeat? Voluptatum eos eaque delectus. Natus, consectetur repudiandae.
@@ -82,8 +82,8 @@ const DrawerShell: ComponentStory<typeof Drawer> = ({ children, ...args }) => {
       Quibusdam aliquam ipsam praesentium? Eaque officiis officia ad nobis aspernatur iste nam enim, eius veritatis non excepturi aliquam sed deserunt qui nihil eveniet facilis! Necessitatibus asperiores ut repellendus repudiandae in?
       Ipsum odio minima excepturi eaque laboriosam cupiditate repudiandae dolorem, magnam architecto sint perferendis optio, voluptas eligendi doloribus dignissimos illo quis. Voluptatem odio alias, nesciunt architecto voluptatibus delectus aspernatur suscipit sequi?
       Similique dolore esse tempore eligendi. Quo accusamus veniam similique odio necessitatibus nostrum perspiciatis at corporis autem rem aliquid atque veritatis ducimus praesentium tenetur, doloremque perferendis? Dolorum fugiat tenetur cupiditate cum!
-      <OverlayContainer obfuscate={args.isModal} onClose={() => setVisible(false)}>
-        {visible && (
+      <OverlayContainer obfuscate={args.isModal} onClose={() => setIsVisible(false)}>
+        {isVisible && (
           <Drawer {...args}>
             {children}
           </Drawer>

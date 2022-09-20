@@ -5,7 +5,7 @@ import { Container } from '../..';
 import { Title } from './title';
 
 const story: ComponentMeta<typeof Title> = {
-  title: 'Components/Typography/Title',
+  title: 'Typography/Title',
   component: Title,
   parameters: {
     controls: { hideNoControlsWarning: true },
@@ -56,4 +56,13 @@ Single.args = {
   level: '1',
   maxWidth: 'auto',
   textAlign: 'center',
+};
+export const WithAnchor = Template.bind({});
+WithAnchor.args = {
+  as: 'span',
+  lineHeight: 'small',
+  level: '1',
+  maxWidth: 'auto',
+  textAlign: 'center',
+  anchor: true,
 };

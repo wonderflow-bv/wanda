@@ -4,7 +4,7 @@ import React from 'react';
 import { Toggle } from './toggle';
 
 const story: ComponentMeta<typeof Toggle> = {
-  title: 'Components/Inputs/Toggle',
+  title: 'Inputs/Toggle',
   component: Toggle,
   argTypes: {
     onChange: {

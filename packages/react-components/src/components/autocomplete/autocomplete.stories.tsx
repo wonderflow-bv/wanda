@@ -6,7 +6,7 @@ import { Chip, List } from '../..';
 import { Autocomplete } from './autocomplete';
 
 const story: ComponentMeta<typeof Autocomplete> = {
-  title: 'Components/Inputs/Autocomplete',
+  title: 'Inputs/Autocomplete',
   component: Autocomplete,
   args: {
     invalid: false,

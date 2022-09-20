@@ -6,7 +6,7 @@ import { Button } from '../..';
 import { Tab } from './tab';
 
 const story: ComponentMeta<typeof Tab> = {
-  title: 'Components/Navigation/Tab',
+  title: 'Navigation/Tab',
   component: Tab,
   args: {
     defaultValue: '1',

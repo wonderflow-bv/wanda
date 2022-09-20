@@ -4,7 +4,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Pagination } from './pagination';
 
 const story: ComponentMeta<typeof Pagination> = {
-  title: 'Components/Navigation/Pagination',
+  title: 'Navigation/Pagination',
   component: Pagination,
   args: {
     itemsPerPage: 3,

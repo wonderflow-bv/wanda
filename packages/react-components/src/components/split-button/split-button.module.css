@@ -1,28 +1,30 @@
-.SplitButton {
-  & > :nth-child(1) {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+@layer components {
+  .SplitButton {
+    & > :nth-child(1) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
 
-    &[data-button-dimension='big'] {
-      padding-left: token(--space-16);
-      padding-right: token(--space-16);
-    }
-  }
-
-  & > * > button {
-    --separator-color: hsl(0deg 0% 40% / 40%);
-
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    box-shadow: inset 1px 0 0 0 var(--separator-color);
-
-    &[data-button-kind='primary'] {
-      --separator-color: hsl(0deg 0% 100% / 30%);
+      &[data-button-dimension='big'] {
+        padding-left: token(--space-16);
+        padding-right: token(--space-16);
+      }
     }
 
-    &:is([data-button-dimension='big'], [data-button-dimension='regular']) {
-      padding-left: token(--space-8);
-      padding-right: token(--space-8);
+    & > * > button {
+      --separator-color: hsl(0deg 0% 40% / 40%);
+
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      box-shadow: inset 1px 0 0 0 var(--separator-color);
+
+      &[data-button-kind='primary'] {
+        --separator-color: hsl(0deg 0% 100% / 30%);
+      }
+
+      &:is([data-button-dimension='big'], [data-button-dimension='regular']) {
+        padding-left: token(--space-8);
+        padding-right: token(--space-8);
+      }
     }
   }
 }

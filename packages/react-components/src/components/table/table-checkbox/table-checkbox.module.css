@@ -1,3 +1,5 @@
-.TableCheckbox {
-  display: block;
+@layer components {
+  .TableCheckbox {
+    display: block;
+  }
 }

@@ -3,21 +3,23 @@
   hgroup, ul, ol, dd, p, figure,
   img, pre, table, fieldset, blockquote, picture;
 
-.Prose {
-  & > :--headings:is(:--headings) {
-    margin-block-end: 0;
-  }
+@layer components {
+  .Prose {
+    & > :--headings:is(:--headings) {
+      margin-block-end: 0;
+    }
 
-  & > :--blocks:where(:not(:first-child)) {
-    margin-block-start: 2em;
-    margin-block-end: 2em;
-  }
+    & > :--blocks:where(:not(:first-child)) {
+      margin-block-start: 2em;
+      margin-block-end: 2em;
+    }
 
-  & > :--headings:first-child {
-    margin-block-start: 0;
-  }
+    & > :--headings:first-child {
+      margin-block-start: 0;
+    }
 
-  & > :--headings + * {
-    margin-block-start: 1.3em;
+    & > :--headings + * {
+      margin-block-start: 1.3em;
+    }
   }
 }

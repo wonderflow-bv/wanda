@@ -1,12 +1,14 @@
-.TableExpand {
-  overflow: hidden;
-}
+@layer components {
+  .TableExpand {
+    overflow: hidden;
+  }
 
-.ExpandContent {
-  --fade-from-y: -5px;
+  .ExpandContent {
+    --fade-from-y: -5px;
 
-  animation: fade-in token(--duration-200);
-  animation-timing-function: token(--easing-entrance);
+    animation: fade-in token(--duration-200);
+    animation-timing-function: token(--easing-entrance);
+  }
 }
 
 @keyframes fade-in {

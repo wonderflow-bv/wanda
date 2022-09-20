@@ -1,35 +1,37 @@
-.Avatar {
-  --size: token(--space-24);
+@layer components {
+  .Avatar {
+    --size: token(--space-24);
 
-  position: relative;
-  inline-size: var(--size);
-  aspect-ratio: 1 / 1;
-  border-radius: 100%;
-  overflow: hidden;
-  background-color: var(--highlight-blue-background);
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
+    position: relative;
+    inline-size: var(--size);
+    aspect-ratio: 1 / 1;
+    border-radius: 100%;
+    overflow: hidden;
+    background-color: var(--highlight-blue-background);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
 
-  &[data-avatar-dimension='regular'] {
-    --size: token(--space-40);
+    &[data-avatar-dimension='regular'] {
+      --size: token(--space-40);
+    }
+
+    &[data-avatar-dimension='big'] {
+      --size: token(--space-48);
+    }
+
+    & img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      object-fit: cover;
+      max-width: 100%;
+    }
   }
 
-  &[data-avatar-dimension='big'] {
-    --size: token(--space-48);
+  .Placeholder {
+    height: calc(var(--size) - 25%);
   }
-
-  & img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    object-fit: cover;
-    max-width: 100%;
-  }
-}
-
-.Placeholder {
-  height: calc(var(--size) - 25%);
 }

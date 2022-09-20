@@ -1,34 +1,36 @@
-.OverlayContainer {
-  display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+@layer components {
+  .OverlayContainer {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 
-  &[data-overlay-container-obfuscate='false'] {
-    pointer-events: none;
+    &[data-overlay-container-obfuscate='false'] {
+      pointer-events: none;
+    }
+
+    &[data-overlay-container-obfuscate='false'] > * {
+      pointer-events: auto;
+    }
   }
 
-  &[data-overlay-container-obfuscate='false'] > * {
-    pointer-events: auto;
-  }
-}
+  .Backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: var(--dimmed-0);
 
-.Backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  background-color: var(--dimmed-0);
+    &[data-overlay-color='light'] {
+      background-color: hsl(token(--color-primary-0));
+    }
 
-  &[data-overlay-color='light'] {
-    background-color: hsl(token(--color-primary-0));
-  }
-
-  &[data-overlay-color='dark'] {
-    background-color: hsl(token(--color-primary-90));
+    &[data-overlay-color='dark'] {
+      background-color: hsl(token(--color-primary-90));
+    }
   }
 }

@@ -1,9 +1,11 @@
-.Accordion {
-  &[data-accordion-separators='true'] > * + * {
-    border-top: 1px solid var(--dimmed-1);
+@layer components {
+  .Accordion {
+    &[data-accordion-separators='true'] > * + * {
+      border-top: 1px solid var(--dimmed-1);
+    }
   }
-}
 
-.Item {
-  padding-top: token(--space-8);
+  .Item {
+    padding-top: token(--space-8);
+  }
 }

@@ -1,8 +1,10 @@
-.Popover {
-  display: contents;
-}
+@layer components {
+  .Popover {
+    display: contents;
+  }
 
-.PopUp {
-  inline-size: max-content;
-  z-index: 2;
+  .PopUp {
+    inline-size: max-content;
+    z-index: 2;
+  }
 }

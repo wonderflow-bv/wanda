@@ -32,7 +32,7 @@ Merge<E extends React.ElementType ? React.ComponentPropsWithRef<E> : never, OwnP
 
 interface ForwardRefComponent<
   IntrinsicElementString,
-  OwnProps = Record<string, unknown>
+  OwnProps = Record<string, unknown>,
   /**
    * Extends original type to ensure built in React types play nice
    * with polymorphic components still e.g. `React.ElementRef` etc.
