@@ -1,24 +1,26 @@
-.ClampText {
-  position: relative;
-  display: inline-block;
-}
-
-.Content {
-
-  /* stylelint-disable-next-line value-no-vendor-prefix */
-  display: -webkit-box;
-  -webkit-line-clamp: var(--r, 1);
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  padding-right: var(--padding);
-
-  &[data-clamp-text-expanded='true'] {
-    -webkit-line-clamp: unset;
+@layer components {
+  .ClampText {
+    position: relative;
+    display: inline-block;
   }
-}
 
-.Trigger {
-  position: absolute;
-  right: 0;
-  top: token(--space-4);
+  .Content {
+
+    /* stylelint-disable-next-line value-no-vendor-prefix */
+    display: -webkit-box;
+    -webkit-line-clamp: var(--r, 1);
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    padding-right: var(--padding);
+
+    &[data-clamp-text-expanded='true'] {
+      -webkit-line-clamp: unset;
+    }
+  }
+
+  .Trigger {
+    position: absolute;
+    right: 0;
+    top: token(--space-4);
+  }
 }

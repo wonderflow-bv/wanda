@@ -57,3 +57,12 @@ Single.args = {
   maxWidth: 'auto',
   textAlign: 'center',
 };
+export const WithAnchor = Template.bind({});
+WithAnchor.args = {
+  as: 'span',
+  lineHeight: 'small',
+  level: '1',
+  maxWidth: 'auto',
+  textAlign: 'center',
+  anchor: true,
+};

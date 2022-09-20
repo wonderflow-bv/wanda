@@ -1,7 +1,7 @@
 declare const styles: {
   readonly "List": string;
-  readonly "ListItem": string;
   readonly "Marker": string;
+  readonly "ListItem": string;
 };
 export = styles;
 

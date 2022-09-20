@@ -1,43 +1,45 @@
 @import '../../core/utils/media.css';
 
-.Container {
-  padding: 0 token(--space-16);
-  margin: 0 auto;
-  inline-size: 100%;
+@layer components {
+  .Container {
+    padding: 0 token(--space-16);
+    margin: 0 auto;
+    inline-size: 100%;
 
-  &[data-container-dimension='small'] {
-    max-inline-size: token(--container-small);
+    &[data-container-dimension='small'] {
+      max-inline-size: token(--container-small);
 
-    @media (--from-small) {
-      padding: 0 token(--space-32);
+      @media (--from-small) {
+        padding: 0 token(--space-32);
+      }
     }
-  }
 
-  &[data-container-dimension='medium'] {
-    max-inline-size: token(--container-medium);
+    &[data-container-dimension='medium'] {
+      max-inline-size: token(--container-medium);
 
-    @media (--from-small) {
-      padding: 0 token(--space-32);
+      @media (--from-small) {
+        padding: 0 token(--space-32);
+      }
     }
-  }
 
-  &[data-container-dimension='large'] {
-    max-inline-size: token(--container-large);
+    &[data-container-dimension='large'] {
+      max-inline-size: token(--container-large);
 
-    @media (--from-small) {
-      padding: 0 token(--space-32);
+      @media (--from-small) {
+        padding: 0 token(--space-32);
+      }
     }
-  }
 
-  &[data-container-dimension='full'] {
-    max-inline-size: 100%;
+    &[data-container-dimension='full'] {
+      max-inline-size: 100%;
 
-    @media (--from-small) {
-      padding: 0 token(--space-32);
+      @media (--from-small) {
+        padding: 0 token(--space-32);
+      }
     }
-  }
 
-  &[data-container-padding='false'] {
-    padding: 0;
+    &[data-container-padding='false'] {
+      padding: 0;
+    }
   }
 }

@@ -29,6 +29,7 @@ export const postcssConfig = {
         'logical-properties-and-values': false,
         'prefers-color-scheme-query': false,
         'gap-properties': false,
+        'cascade-layers': false,
       },
       insertAfter: {
         'custom-media-queries': postcssMixins,

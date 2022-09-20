@@ -1,51 +1,53 @@
-.SkeletonItem {
-  --base-color: var(--dimmed-1);
-  --highlight-color: var(--dimmed-0);
-  --animation-duration: 1.5s;
-  --animation-direction: normal;
+@layer components {
+  .SkeletonItem {
+    --base-color: var(--dimmed-1);
+    --highlight-color: var(--dimmed-0);
+    --animation-duration: 1.5s;
+    --animation-direction: normal;
 
-  background-color: var(--base-color);
-  width: var(--width, 100%);
-  height: var(--height);
-  border-radius: var(--radius, token(--radius-32));
-  display: inline-flex;
-  line-height: 1;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
+    background-color: var(--base-color);
+    width: var(--width, 100%);
+    height: var(--height);
+    border-radius: var(--radius, token(--radius-32));
+    display: inline-flex;
+    line-height: 1;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
 
-  & + br + & {
-    margin-top: var(--gap, 0);
-  }
+    & + br + & {
+      margin-top: var(--gap, 0);
+    }
 
-  &::after {
-    content: ' ';
-    display: block;
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 100%;
-    background-repeat: no-repeat;
-    background-image:
-      linear-gradient(
-        to right,
-        var(--base-color),
-        var(--highlight-color),
-        var(--base-color)
-      );
-    transform: translateX(-100%);
-  }
+    &::after {
+      content: ' ';
+      display: block;
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 100%;
+      background-repeat: no-repeat;
+      background-image:
+        linear-gradient(
+          to right,
+          var(--base-color),
+          var(--highlight-color),
+          var(--base-color)
+        );
+      transform: translateX(-100%);
+    }
 
-  &[data-skeleton-animated='true']::after {
-    animation-name: skeleton-shimmer;
-    animation-direction: normal;
-    animation-duration: 1.5s;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
-  }
+    &[data-skeleton-animated='true']::after {
+      animation-name: skeleton-shimmer;
+      animation-direction: normal;
+      animation-duration: 1.5s;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+    }
 
-  &[data-skeleton-circle='true'] {
-    border-radius: 100%;
+    &[data-skeleton-circle='true'] {
+      border-radius: 100%;
+    }
   }
 }
 
