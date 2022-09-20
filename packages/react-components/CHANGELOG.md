@@ -1,5 +1,15 @@
 # @wonderflow/react-components
 
+## 10.10.0
+
+### Minor Changes
+
+- 23862b2: Add support for CSS layers.
+
+### Patch Changes
+
+- 0fe92eb: Update types and clean code
+
 ## 10.9.1
 
 ### Patch Changes

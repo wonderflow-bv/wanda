@@ -1,5 +1,15 @@
 # @wonderflow/config
 
+## 10.10.0
+
+### Minor Changes
+
+- 23862b2: Add support for CSS layers.
+
+### Patch Changes
+
+- @wonderflow/tokens@10.10.0
+
 ## 10.9.1
 
 ### Patch Changes
