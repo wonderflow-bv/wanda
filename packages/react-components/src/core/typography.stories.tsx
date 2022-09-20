@@ -4,7 +4,7 @@ import React from 'react';
 import { Container } from '../components/container';
 
 const story: Meta = {
-  title: 'Core/Typograhy',
+  title: 'Core Styles/Typograhy',
   parameters: {
     controls: { hideNoControlsWarning: true },
   },

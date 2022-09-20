@@ -4,7 +4,7 @@ import React from 'react';
 import { IconButton } from './icon-button';
 
 const story: ComponentMeta<typeof IconButton> = {
-  title: 'Actions/IconButton',
+  title: 'Actions/Icon Button',
   component: IconButton,
   args: {
     dimension: 'regular',

@@ -4,7 +4,7 @@ import { Container } from '../components/container';
 import { Stack } from '../components/stack';
 
 const story = {
-  title: 'Core/Elevations',
+  title: 'Core Styles/Elevations',
   parameters: {
     controls: { hideNoControlsWarning: true },
   },
