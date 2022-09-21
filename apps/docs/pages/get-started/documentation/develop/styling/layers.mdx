@@ -1,0 +1,75 @@
+import UsageNav from "@/data/usage-nav";
+import { getLayoutProps } from "@/utils/get-layout-props";
+
+export const getStaticProps = () =>
+  getLayoutProps({
+    layout: "mdx",
+    layoutProps: {
+      title: "Layers",
+      color: "mint",
+      subtitle: "CSS layer to tame specificity.",
+      navigation: UsageNav
+    }
+  });
+
+
+CSS recently introduced a new feature called `layers` to the [cascade specification](https://www.w3.org/TR/css-cascade-5/#layering).
+
+This important feature introduce more granularity and control over css specificity and overrides when we talk about share libraries and design systems.
+
+Layers allows author and Wanda consumers to define specficity layers, indipendently from order and appearance in the page.
+
+Here a quick example, if we remove the `@layer reset` declaration the `p` element will be `blue`, but since the CSS placed outside any layers (implicit) are parsed after all the layers, the `p` will be `red` even if `p[data-blue]` has higher specificity.
+
+```css
+p {
+  /* specificity of 0,0,1 - implicit (final) layer */
+  color: red;
+}
+
+@layer reset {
+  p[data-blue] {
+    /* specificity of 0,1,1 - explicit "reset" layer */
+    color: blue;
+  }
+}
+```
+
+## Wanda layers
+
+Wanda defines 4 css layers, referenced internally inside the packages that compose the design systems:
+
+```css
+@layer core, utilities, components, overrides;
+```
+
+Let's see a real examples. The `Button` component declares their styles inside the `components` layer:
+
+```css
+@layer components {
+  .Button {⋯}
+}
+```
+
+Now, the `Snackbar` needs to overrides some properties of the button, but [we cannot use](https://s3.memeshappen.com/memes/i-will-find-you-then-you-will-pay-for-that-meme-8720.jpg) `!import`. Layers come to the rescue, by allwing us to sectioning the cascade in different layers of specificity. Now let's see what the `Snackbar` can do to solve this issue.
+
+```css
+@layer overrides {
+  .Action {
+    color: var(--snackbar-bg);
+    background-color: var(--snackbar-fg);
+
+    &:is(:active, :hover) {
+      color: var(--snackbar-bg);
+      background-color: var(--snackbar-fg);
+      opacity: 80%;
+    }
+  }
+}
+```
+
+Since we declared the `overrides` scope after components, it has higher precendence in the cascade and specificity computing. This way the styles declared inside the layer `overrides` will win over the ones declared inside the layer `coomponents`.
+
+## Advantes for consumers
+
+When consumers need to write down their styles and overvrite some properties, any CSS define by the consumer in their projects will always wins over the styles coming the design systems unless they are declared inside a specific layer. This is the final killer for `!important`.
