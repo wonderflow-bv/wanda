@@ -3,6 +3,6 @@
 @import './core/basic.css' layer(core);
 @import './core/elevations.css' layer(core);
 @import './core/typography.css' layer(core);
-@import './core/utils/media.css' layer(utilities);
-@import './core/utils/vibrancy.css' layer(utilities);
-@import './core/utils/elevation.css' layer(utilities);
+@import './core/utils/media.css';
+@import './core/utils/vibrancy.css';
+@import './core/utils/elevation.css';
