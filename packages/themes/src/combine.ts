@@ -12,6 +12,7 @@ const run = () => {
   const darkTheme = formatTheme(path.join('dist', 'themes', 'dark.css'));
 
   const template = `
+@layer themes {
   :root,
   [data-theme='light'] {
     color: var(--global-foreground);
@@ -28,6 +29,7 @@ const run = () => {
     color: var(--global-foreground);
     ${darkTheme}
   }
+}
   `;
 
   fs.writeFileSync(path.join('dist', 'themes.css'), template);
@@ -36,7 +38,7 @@ const run = () => {
 try {
   run();
   process.exit(0);
-} catch (error) {
+} catch (error: unknown) {
   console.log('————————————————————————————————————————————————————————————————————————————————————— \n');
   console.error('⚠️  Something went wrong:', error);
   console.log('\n————————————————————————————————————————————————————————————————————————————————————— \n\n');

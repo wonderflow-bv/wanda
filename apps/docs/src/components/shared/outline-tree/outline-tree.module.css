@@ -1,22 +1,18 @@
 .OutlineTree {
-  & ul {
+  & ul:not(.SubMenu) {
     margin: 0;
     padding: 0;
     list-style-type: none;
   }
-
-  /*
-  & details ul {
-    padding-left: token(--space-24);
-    margin: 0 0 token(--space-24);
-  } */
 }
 
 .Title {
   text-transform: uppercase;
 }
 
-.SubMenu.SubMenu {
+
+.SubMenu {
+  list-style-type: none;
   margin-block-end: token(--space-24);
   border-left: 2px dashed var(--layout-color-fg);
   border-radius: 0 0 0 token(--radius-16);
@@ -24,6 +20,7 @@
   margin-left: token(--space-8);
   padding-bottom: token(--space-8);
 }
+
 
 .Li {
   & :is(a, summary) {

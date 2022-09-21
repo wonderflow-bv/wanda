@@ -136,9 +136,19 @@ const UsageNav: NavigationMenu = [
         target: '',
       },
       {
-        path: '/get-started/documentation/develop/global-styles',
-        label: 'Global styles',
-        target: '',
+        label: 'Styling',
+        items: [
+          {
+            path: '/get-started/documentation/develop/styling/layers',
+            label: 'Layers',
+            target: '',
+          },
+          {
+            path: '/get-started/documentation/develop/styling/utilities',
+            label: 'Utilities',
+            target: '',
+          },
+        ],
       },
       {
         path: '/get-started/documentation/develop/ssr',
