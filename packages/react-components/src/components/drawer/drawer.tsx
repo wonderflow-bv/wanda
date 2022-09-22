@@ -1,3 +1,19 @@
+/*
+ * Copyright 2022 Wonderflow
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import tkns from '@wonderflow/tokens/platforms/web/tokens.json';
 import { useKeyPress } from 'ahooks';
 import clsx from 'clsx';
@@ -126,16 +142,16 @@ export const Drawer: FCChildrenClass<DrawerProps> = forwardRef(({
                 {...otherProps}
               >
                 {(showHeader && title) && (
-                <Stack
-                  vAlign="center"
-                  hAlign="space-between"
-                  direction="row"
-                  className={styles.Header}
-                  columnGap={24}
-                >
-                  <Title responsive={false} level="6" id={titleId}>{title}</Title>
-                  {onClose && <IconButton onClick={onClose} className={styles.CloseButton} icon="xmark" kind="flat" />}
-                </Stack>
+                  <Stack
+                    vAlign="center"
+                    hAlign="space-between"
+                    direction="row"
+                    className={styles.Header}
+                    columnGap={24}
+                  >
+                    <Title responsive={false} level="6" id={titleId}>{title}</Title>
+                    {onClose && <IconButton onClick={onClose} className={styles.CloseButton} icon="xmark" kind="flat" />}
+                  </Stack>
                 )}
                 <AutoFocusInside>
                   {children}

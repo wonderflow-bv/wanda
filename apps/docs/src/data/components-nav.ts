@@ -18,6 +18,10 @@ const ComponentsNav: NavigationMenu = [
       {
         path: '/get-started/components/actions/accordion',
         label: 'Accordion',
+        tag: {
+          color: 'blue',
+          label: 'beta',
+        },
         target: '',
       },
       {

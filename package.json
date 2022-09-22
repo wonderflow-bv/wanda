@@ -9,6 +9,7 @@
   ],
   "packageManager": "npm@8.3.1",
   "scripts": {
+    "prebuild": "copyright-header --fix --copyrightHolder \"Wonderflow\" --include \"src\" --exclude \"apps/docs,.storybook,.d.ts,.stories.tsx\" --templateId \"apache\"",
     "prebuild:apps": "graphql-codegen --config codegen.yml",
     "build": "turbo run build",
     "build:nocache": "turbo run build --force",
@@ -37,6 +38,7 @@
     "@typescript-eslint/eslint-plugin": "5.37.0",
     "@typescript-eslint/parser": "5.37.0",
     "@wonderflow/stylelint-config": "1.2.1",
+    "copyright-header": "0.4.6",
     "eslint": "8.23.1",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-json": "3.1.0",

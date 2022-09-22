@@ -1,3 +1,19 @@
+/*
+ * Copyright 2022 Wonderflow
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import clsx from 'clsx';
 import {
   forwardRef, ReactNode, useCallback, useMemo, useRef,
@@ -88,10 +104,10 @@ export const MenuItem = forwardRef(({
   ...otherProps
 }, forwardedRef) => {
   const itemRef = useRef<any>(forwardedRef);
-  const [tabIndex, focused, handleKeyDown, handleClick] = useRovingTabIndex(itemRef, disabled);
+  const [tabIndex, isFocused, handleKeyDown, handleClick] = useRovingTabIndex(itemRef, disabled);
   const isIconRight = iconPosition === 'right';
 
-  useFocusEffect(focused, itemRef);
+  useFocusEffect(isFocused, itemRef);
 
   const triggerClick = useCallback(
     (e) => {
@@ -152,7 +168,7 @@ export const MenuItem = forwardRef(({
           ? (
             <Tooltip
               fill
-              open={focused}
+              open={isFocused}
               placement="right-start"
               interactive
               trigger={InnerContent}

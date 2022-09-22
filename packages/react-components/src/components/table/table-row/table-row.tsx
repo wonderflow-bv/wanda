@@ -1,3 +1,19 @@
+/*
+ * Copyright 2022 Wonderflow
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import clsx from 'clsx';
 import { PropsWithChildren, useMemo } from 'react';
 import { IdType, Row } from 'react-table';
@@ -18,7 +34,7 @@ export const TableRow = <T extends Record<string, unknown>>({
   expandedRows,
   ...otherProps
 }: TableRowProps<T>) => {
-  const highlightRow = useMemo(() => {
+  const shouldHighlightRow = useMemo(() => {
     const [currentParentRowId] = rowData?.id.match(/.*(?=\.)/) ?? [];
     const isHighlight = expandedRows?.includes(currentParentRowId) && expandedRows.every((rowId) => {
       const [parentRowMatch] = rowId.match(/.*(?=\.)/) ?? [];
@@ -32,7 +48,7 @@ export const TableRow = <T extends Record<string, unknown>>({
     <tr
       className={clsx(styles.TableRow, className)}
       data-table-row-expanded={expanded}
-      data-table-row-highlight={highlightRow || undefined}
+      data-table-row-highlight={shouldHighlightRow || undefined}
       {...otherProps}
     >
       {children}
