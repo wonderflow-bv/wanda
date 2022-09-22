@@ -31,7 +31,7 @@
     "url": "git+https://github.com/wonderflow-bv/wanda.git"
   },
   "homepage": "https://github.com/wonderflow-bv/wanda",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "keywords": [
     "design-system",
     "wonderflow",

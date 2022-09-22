@@ -4,7 +4,7 @@
   "version": "10.0.0",
   "private": true,
   "author": "Wonderflow",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "main": "postcss.config.js",
   "repository": {
     "type": "git",

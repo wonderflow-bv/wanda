@@ -28,7 +28,7 @@
     "wonderflow"
   ],
   "author": "Wonderflow",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/wonderflow-bv/wanda/issues"
   },

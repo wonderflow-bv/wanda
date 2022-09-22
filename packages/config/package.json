@@ -3,7 +3,7 @@
   "description": "Wanda design system shared configurations ",
   "version": "10.10.0",
   "author": "Wonderflow",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "main": "dist/index",
   "files": [
     "dist"

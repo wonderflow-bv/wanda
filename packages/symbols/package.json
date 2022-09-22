@@ -3,7 +3,7 @@
   "description": "Wanda's symbols",
   "version": "10.10.0",
   "author": "Wonderflow",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "main": "dist/index",
   "exports": {
     "./sprite.svg": "./dist/sprite.svg",
