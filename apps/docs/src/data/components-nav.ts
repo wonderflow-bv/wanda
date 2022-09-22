@@ -3,6 +3,7 @@ import { NavigationMenu } from 'types/data';
 const ComponentsNav: NavigationMenu = [
   {
     title: 'Actions',
+    icon: 'hand-pointer',
     items: [
       {
         path: '/get-started/components/actions/button',
@@ -38,6 +39,7 @@ const ComponentsNav: NavigationMenu = [
   },
   {
     title: 'Dialogs',
+    icon: 'message',
     items: [
       {
         path: '/get-started/components/dialogs/drawer',
@@ -73,6 +75,7 @@ const ComponentsNav: NavigationMenu = [
   },
   {
     title: 'Inputs',
+    icon: 'news',
     items: [
       {
         path: '/get-started/components/inputs/autocomplete',
@@ -112,6 +115,7 @@ const ComponentsNav: NavigationMenu = [
   },
   {
     title: 'Layouts',
+    icon: 'layer-group',
     items: [
       {
         path: '/get-started/components/layouts/card',
@@ -157,6 +161,7 @@ const ComponentsNav: NavigationMenu = [
   },
   {
     title: 'Loading',
+    icon: 'arrow-rotate-right',
     items: [
       {
         path: '/get-started/components/loading/circular-progress',
@@ -182,6 +187,7 @@ const ComponentsNav: NavigationMenu = [
   },
   {
     title: 'Navigation',
+    icon: 'compass',
     items: [
       {
         path: '/get-started/components/navigation/menu',
@@ -202,6 +208,7 @@ const ComponentsNav: NavigationMenu = [
   },
   {
     title: 'Typography',
+    icon: 'text',
     items: [
       {
         path: '/get-started/components/typography/clamp-text',
@@ -232,6 +239,7 @@ const ComponentsNav: NavigationMenu = [
   },
   {
     title: 'Other',
+    icon: 'grid',
     items: [
       {
         path: '/get-started/components/other/avatar',

@@ -37,7 +37,7 @@ export const OutlineTree: {
 
     return (
       <Stack
-        rowGap={16}
+        rowGap={8}
         vAlign="start"
         className={styles.OutlineTree}
         style={{ ...dynamicStyle, ...style }}
@@ -57,7 +57,7 @@ export const OutlineTree: {
             dimmed={5}
             weight="bold"
           >
-            {icon && <Symbol source={icon} />}
+            {icon && <Symbol source={icon} dimension={18} />}
             {title}
           </Stack>
         )}

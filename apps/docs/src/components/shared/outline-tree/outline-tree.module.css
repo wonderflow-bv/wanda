@@ -2,6 +2,7 @@
   & ul:not(.SubMenu) {
     margin: 0;
     padding: 0;
+    padding-left: token(--space-24);
     list-style-type: none;
   }
 }
@@ -9,7 +10,6 @@
 .Title {
   text-transform: uppercase;
 }
-
 
 .SubMenu {
   list-style-type: none;

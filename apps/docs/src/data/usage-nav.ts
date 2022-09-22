@@ -3,6 +3,7 @@ import { NavigationMenu } from 'types/data';
 const UsageNav: NavigationMenu = [
   {
     title: 'Get started',
+    icon: 'bulb',
     items: [
       {
         path: '/get-started/documentation/get-started/introduction',
@@ -23,6 +24,7 @@ const UsageNav: NavigationMenu = [
   },
   {
     title: 'Design',
+    icon: 'style',
     items: [
       {
         path: '/get-started/documentation/design/brand',
@@ -124,6 +126,7 @@ const UsageNav: NavigationMenu = [
   },
   {
     title: 'Develop',
+    icon: 'code',
     items: [
       {
         path: '/get-started/documentation/develop/installation',
