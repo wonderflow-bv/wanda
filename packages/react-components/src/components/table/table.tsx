@@ -288,7 +288,7 @@ export const Table = <T extends Record<string, unknown>>({
         Header: ({ getToggleAllPageRowsSelectedProps }) => (
           <TableCheckbox {...getToggleAllPageRowsSelectedProps()} />
         ),
-        Cell: ({ row }: {row: Row<T>}) => <TableCheckbox {...row.getToggleRowSelectedProps()} />,
+        Cell: ({ row }: { row: Row<T> }) => <TableCheckbox {...row.getToggleRowSelectedProps()} />,
       }];
 
       const expanderColumn: CustomColumnsType<T> = [{
@@ -297,7 +297,7 @@ export const Table = <T extends Record<string, unknown>>({
         expander: true,
         minWidth: 40,
         align: 'center',
-        Cell: ({ row }: {row: Row<T>}) => (row.canExpand
+        Cell: ({ row }: { row: Row<T> }) => (row.canExpand
           ? (
             <ToggleButton
               kind="flat"
@@ -378,60 +378,60 @@ export const Table = <T extends Record<string, unknown>>({
       <AnimatePresence>
         <LazyMotion features={domMax}>
           {!!Object.keys(selectedRowIdsState).length && selectableRows && (
-          <Stack
-            as={m.div}
-            className={styles.Toast}
-            direction="row"
-            hAlign="space-between"
-            vAlign="center"
-            hPadding={16}
-            vPadding={8}
-            fill={false}
-            columnGap={16}
-            initial={{ y: '-16px', opacity: 0 }}
-            animate={{
-              y: 0,
-              opacity: 1,
-              transition: {
-                type: 'spring',
-                stiffness: 700,
-                damping: 30,
-              },
-            }}
-            exit={{ y: '-16px', opacity: 0 }}
-          >
-            <Text as="span" size={14} weight="bold">
-              {selectedLabel(Object.keys(selectedRowIdsState))}
-            </Text>
-            {selectedActions?.(Object.keys(selectedRowIdsState))}
-          </Stack>
+            <Stack
+              as={m.div}
+              className={styles.Toast}
+              direction="row"
+              hAlign="space-between"
+              vAlign="center"
+              hPadding={16}
+              vPadding={8}
+              fill={false}
+              columnGap={16}
+              initial={{ y: '-16px', opacity: 0 }}
+              animate={{
+                y: 0,
+                opacity: 1,
+                transition: {
+                  type: 'spring',
+                  stiffness: 700,
+                  damping: 30,
+                },
+              }}
+              exit={{ y: '-16px', opacity: 0 }}
+            >
+              <Text as="span" size={14} weight="bold">
+                {selectedLabel(Object.keys(selectedRowIdsState))}
+              </Text>
+              {selectedActions?.(Object.keys(selectedRowIdsState))}
+            </Stack>
           )}
 
           {/* HEADER */}
           {(showHeader || selectableRows) && (
-          <m.div
-            animate={{
-              y: Object.keys(selectedRowIdsState).length ? 20 : 0,
-              opacity: Object.keys(selectedRowIdsState).length ? 0 : 1,
-              transition: {
-                type: 'spring',
-                stiffness: 700,
-                damping: 30,
-              },
-            }}
-          >
-            <TableHeader title={title}>
-              {(columnsControl && data.length)
-                ? (
-                  <ToggleColumnsControl
-                    columns={allColumns}
-                    visibleColumns={filteredVisibleColumns}
-                  />
-                )
-                : null}
-              {actions}
-            </TableHeader>
-          </m.div>
+            <m.div
+              animate={{
+                y: Object.keys(selectedRowIdsState).length ? 20 : 0,
+                opacity: Object.keys(selectedRowIdsState).length ? 0 : 1,
+                transition: {
+                  type: 'spring',
+                  stiffness: 700,
+                  damping: 30,
+                },
+              }}
+            >
+              <TableHeader title={title}>
+                {(columnsControl && data.length)
+                  ? (
+                    <ToggleColumnsControl
+                      columns={allColumns}
+                      visibleColumns={filteredVisibleColumns}
+                    />
+                  )
+                  : null}
+                {actions}
+              </TableHeader>
+            </m.div>
           )}
         </LazyMotion>
       </AnimatePresence>

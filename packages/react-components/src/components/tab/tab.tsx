@@ -8,7 +8,7 @@ import { useUIDSeed } from 'react-uid';
 import { Button, Symbol } from '@/components';
 
 import * as styles from './tab.module.css';
-import { TabPanel } from './tabs-panel';
+import { TabPanel, TabPanelProps } from './tabs-panel';
 
 export type TabProps = PropsWithChildren<PropsWithClass> & {
   /**
@@ -76,7 +76,7 @@ export const Tab = ({
     >
       <LazyMotion features={domMax} strict>
         <TabsPrimitive.List className={styles.List} loop={loop}>
-          {Children.map(children, child => isValidElement(child) && (
+          {Children.map(children, child => isValidElement<TabPanelProps>(child) && (
             <TabsPrimitive.Trigger
               value={child.props.value}
               disabled={child.props.disabled}
@@ -85,7 +85,7 @@ export const Tab = ({
               asChild
             >
               <Button kind="flat" dimension="big">
-                <Symbol source={child.props.icon} dimension={dimension === 'big' ? 24 : 16} weight={dimension === 'big' ? 'duotone' : 'solid'} />
+                {child.props.icon && <Symbol source={child.props.icon} dimension={dimension === 'big' ? 24 : 16} weight={dimension === 'big' ? 'duotone' : 'solid'} />}
                 {child.props.label}
                 {(child.props.value === activeItem) && (
                   <m.span className={styles.Highlight} layoutId={uid('tab-highlight')} />
