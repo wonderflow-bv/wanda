@@ -85,10 +85,6 @@ const ComponentsNav: NavigationMenu = [
         path: '/get-started/components/inputs/autocomplete',
         label: 'Autocomplete',
         target: '',
-        tag: {
-          label: 'beta',
-          color: 'blue',
-        },
       },
       {
         path: '/get-started/components/inputs/select',
