@@ -1,4 +1,6 @@
 .OutlineTree {
+  padding-left: calc(token(--space-4) + token(--space-2));
+
   & ul:not(.SubMenu) {
     margin: 0;
     padding: 0;
