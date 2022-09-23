@@ -37,7 +37,7 @@ export const MainNav: FCClass<MainNavProps> = ({
               className={styles.Link}
               target={item.blank ? '_blank' : undefined}
               rel={item.blank ? 'noopener noreferrer' : undefined}
-              aria-current={includesPath(item.url) ? 'page' : undefined}
+              aria-current={includesPath(item.url) ? 'true' : undefined}
             >
               {includesPath(item.url) && (
                 <m.span
