@@ -15,11 +15,12 @@ export const getStaticProps = () =>
 
 CSS recently introduced a new feature called `layers` to the [cascade specification](https://www.w3.org/TR/css-cascade-5/#layering).
 
-This important feature introduce more granularity and control over css specificity and overrides when we talk about share libraries and design systems.
+This important feature allows more granularity and control over CSS specificity and overrides, especially when discussing shared libraries and design systems.
 
-Layers allows author and Wanda consumers to define specficity layers, indipendently from order and appearance in the page.
+Layers allow authors and Wanda consumers to define specificity layers independently from when a specific style appears on the page and the parsing order.
 
-Here a quick example, if we remove the `@layer reset` declaration the `p` element will be `blue`, but since the CSS placed outside any layers (implicit) are parsed after all the layers, the `p` will be `red` even if `p[data-blue]` has higher specificity.
+Here is a quick example, in the code belove, if we remove the `@layer reset` declaration the `p` element would be `blue`.
+Still, since the browser parses the CSS placed outside any layer (implicit final layer) after all the styles coming from layers, the `p` element is `red` even if `p[data-blue]` has higher specificity.
 
 ```css
 p {
@@ -37,13 +38,13 @@ p {
 
 ## Wanda layers
 
-Wanda defines 4 css layers, referenced internally inside the packages that compose the design system:
+Wanda defines 4 CSS layers, referenced internally inside the packages that compose the design system:
 
 ```css
 @layer core, utilities, components, overrides;
 ```
 
-Let's see a real examples. The `Button` component declares their styles inside the `components` layer:
+Let's see a real example. The `Button` component declares its styles inside the `components` layer:
 
 ```css
 @layer components {
@@ -51,7 +52,7 @@ Let's see a real examples. The `Button` component declares their styles inside t
 }
 ```
 
-Now, the `Snackbar` needs to overrides some properties of the button, but [we cannot use](https://s3.memeshappen.com/memes/i-will-find-you-then-you-will-pay-for-that-meme-8720.jpg) `!import`. Layers come to the rescue, by allwing us to sectioning the cascade in different layers of specificity. Now let's see what the `Snackbar` can do to solve this issue.
+Now, the `Snackbar` needs to override some properties of the button, but [we cannot use](https://s3.memeshappen.com/memes/i-will-find-you-then-you-will-pay-for-that-meme-8720.jpg) `!import`. Layers rescue us by allowing us to section the cascade in different layers of specificity. Now let's see what the `Snackbar` can do to solve this issue.
 
 ```css
 @layer overrides {
@@ -68,8 +69,8 @@ Now, the `Snackbar` needs to overrides some properties of the button, but [we ca
 }
 ```
 
-Since we declared the `overrides` scope after components, it has higher precendence in the cascade and specificity computing. This way the styles declared inside the layer `overrides` will win over the ones declared inside the layer `coomponents`.
+Since we declared the `overrides` scope after components, it has higher precedence in the cascade and specificity computing. This way, the styles declared inside a layer `overrides` will win over the ones declared inside the layer `components`.
 
 ## Advantages for consumers
 
-When consumers need to write down their styles and overvrite some properties, any CSS define by the consumer in their projects will always wins over the styles coming the design systems unless they are declared inside a specific layer. This is the final killer for `!important`.
+When consumers need to write down their styles and overwrite some properties, any CSS defined by the consumer in their projects will always win over the styles coming from the design system unless the user declares them inside a new and local CSS layer.
