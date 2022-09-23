@@ -83,8 +83,6 @@ export const ClampText = forwardRef(({
         )}
         >
           {`${isExpanded ? 'Collapse' : 'Expand'} text`}
-          {' '}
-          text
         </Tooltip>
       )}
     </Wrapper>
