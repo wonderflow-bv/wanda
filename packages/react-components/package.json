@@ -102,6 +102,6 @@
     "react-table": "7.8.0",
     "react-uid": "2.3.2",
     "slugify": "1.6.5",
-    "type-fest": "2.19.0"
+    "type-fest": "3.0.0"
   }
 }
