@@ -121,7 +121,7 @@
       "value": "hsl({color.magenta.90})"
     },
     "magenta-foreground": {
-      "value": "hsl({color.magenta.30})"
+      "value": "hsl({color.magenta.20})"
     },
     "violet-background": {
       "value": "hsl({color.violet.90})"
