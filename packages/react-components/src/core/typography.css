@@ -1,120 +1,134 @@
-:where(p) {
-  line-height: 1.5;
-  min-block-size: 0.01vh;
-  font-size: token(--font-size-16);
-}
+@layer core {
+  p {
+    line-height: 1.5;
+    min-block-size: 0.01vh;
+    font-size: token(--font-size-16);
+  }
 
-small {
-  font-size: 0.7em;
-}
+  small {
+    font-size: 0.7em;
+  }
 
-strong,
-b {
-  font-weight: 600;
-}
+  strong,
+  b {
+    font-weight: 600;
+  }
 
-:where(a:any-link) {
-  text-decoration: none;
-  color: var(--global-interactive-text);
-  word-break: break-word;
+  a:any-link {
+    text-decoration: none;
+    color: var(--global-interactive-text);
+    word-break: break-word;
 
-  &:not([class]) {
-    background-image: linear-gradient(currentcolor, currentcolor);
-    background-position: 0% 100%;
-    background-repeat: no-repeat;
-    background-size: 0% 1px;
-    transition: background-size token(--duration-200) token(--easing-entrance);
+    &:not([class]) {
+      background-image: linear-gradient(currentcolor, currentcolor);
+      background-position: 0% 100%;
+      background-repeat: no-repeat;
+      background-size: 0% 1px;
+      transition: background-size token(--duration-200) token(--easing-entrance);
 
-    &:hover,
-    &:focus {
-      background-size: 100% 1px;
+      &:hover,
+      &:focus {
+        background-size: 100% 1px;
+      }
     }
   }
-}
 
 
-del {
-  padding: 2px 4px;
-  background-color: var(--highlight-red-background);
-  box-shadow: 0 0 0 2px var(--highlight-red-background);
-  color: var(--highlight-red-foreground);
-  border-radius: token(--radius-4);
-}
-
-ins {
-  padding: 2px 4px;
-  background-color: var(--highlight-green-background);
-  box-shadow: 0 0 0 2px var(--highlight-green-background);
-  text-decoration: none;
-  color: var(--highlight-green-foreground);
-  border-radius: token(--radius-4);
-}
-
-address {
-  font-style: normal;
-  line-height: inherit;
-}
-
-dt {
-  font-weight: 600;
-}
-
-dd {
-  margin: 0;
-  padding: 0;
-}
-
-ol,
-ul {
-  padding-left: 1rem;
-}
-
-ul {
-  & li::marker {
-    font-size: inherit;
-    text-align: right;
-    font-weight: 600;
-    min-inline-size: token(--space-32);
+  del {
+    padding: 2px 4px;
+    background-color: var(--highlight-red-background);
+    box-shadow: 0 0 0 2px var(--highlight-red-background);
+    color: var(--highlight-red-foreground);
+    border-radius: token(--radius-4);
   }
-}
 
-ol {
-  & li::marker {
-    font-size: inherit;
-    font-weight: 600;
-    min-inline-size: token(--space-32);
-    font-variant-numeric: tabular-nums;
-    white-space: nowrap;
+  ins {
+    padding: 2px 4px;
+    background-color: var(--highlight-green-background);
+    box-shadow: 0 0 0 2px var(--highlight-green-background);
+    text-decoration: none;
+    color: var(--highlight-green-foreground);
+    border-radius: token(--radius-4);
   }
-}
 
-kbd {
-  border: 1px solid var(--dimmed-1);
-  padding: 2px 4px;
-  box-shadow: 0 2px 0 var(--dimmed-1);
-  border-radius: token(--radius-4);
-  font-weight: 600;
-}
+  address {
+    font-style: normal;
+    line-height: inherit;
+  }
 
-mark {
-  background: var(--highlight-yellow-background);
-  color: var(--highlight-yellow-foreground);
-  padding: 0 2px;
-}
+  dt {
+    font-weight: 600;
+  }
 
-abbr {
-  text-decoration: underline dashed var(--cta-default);
-}
+  dd {
+    margin: 0;
+    padding: 0;
+  }
 
-label,
-legend {
-  font-size: inherit;
-}
+  ol,
+  ul {
+    padding-left: 1rem;
+  }
 
-code {
-  background-color: var(--global-vibrancy-background);
-  border-radius: token(--radius-4);
-  padding: 0 4px 3px;
-  font-size: 1em;
-  font-family: token(--font-family-mono);
+  ul {
+    & li::marker {
+      font-size: inherit;
+      text-align: right;
+      font-weight: 600;
+      min-inline-size: token(--space-32);
+    }
+  }
+
+  ol {
+    & li::marker {
+      font-size: inherit;
+      font-weight: 600;
+      min-inline-size: token(--space-32);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+  }
+
+  kbd {
+    border: 1px solid var(--dimmed-1);
+    padding: 2px 4px;
+    box-shadow: 0 2px 0 var(--dimmed-1);
+    border-radius: token(--radius-4);
+    font-weight: 600;
+  }
+
+  mark {
+    background: var(--highlight-yellow-background);
+    color: var(--highlight-yellow-foreground);
+    padding: 0 2px;
+  }
+
+  abbr {
+    text-decoration: underline dashed var(--cta-default);
+  }
+
+  label,
+  legend {
+    font-size: inherit;
+  }
+
+  code:not([class*='language-']) {
+    display: inline-block;
+    position: relative;
+    color: var(--highlight-magenta-foreground);
+    padding: 0 4px 3px;
+    font-size: 0.9em;
+    font-family: token(--font-family-mono);
+
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      inset: 0 0 2px 0;
+      opacity: 30%;
+      border-radius: token(--radius-4);
+      z-index: -1;
+      background-color: var(--highlight-magenta-background);
+    }
+  }
 }

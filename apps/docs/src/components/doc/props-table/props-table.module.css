@@ -11,11 +11,22 @@
   background: var(--global-vibrancy-background-soft);
   border-radius: token(--radius-8);
   transition: background-color 0.2s ease-out;
+  border: 1px solid var(--global-vibrancy-background);
   line-height: initial;
 
   &[data-props-table-link-copied='true'] {
     animation: positive-feedback 2s 1;
   }
+
+  /*
+  & > * > code {
+    color: var(--highlight-gray-foreground);
+    background-color: var(--highlight-gray-background);
+
+    &::before {
+      display: none;
+    }
+  } */
 
   &:target {
     background-color: var(--highlight-cyan-background);
