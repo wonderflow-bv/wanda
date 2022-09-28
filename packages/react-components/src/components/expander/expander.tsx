@@ -1,5 +1,7 @@
 import clsx from 'clsx';
-import { SymbolNames } from 'packages/symbols';
+import {
+  domMax, LazyMotion, m,
+} from 'framer-motion';
 import { CSSProperties, useCallback, useState } from 'react';
 
 import { Button, Elevator, Stack } from '@/components';
@@ -9,7 +11,6 @@ import * as styles from './expander.module.css';
 export type ExpanderProps = {
   expandLabel?: string;
   collapseLabel?: string;
-  expandIcon?: SymbolNames;
   height?: string;
   defaultOpen?: boolean;
 }
@@ -17,7 +18,6 @@ export type ExpanderProps = {
 export const Expander: FCChildrenClass<ExpanderProps> = ({
   expandLabel = 'Show more',
   collapseLabel = 'Show less',
-  expandIcon,
   height = '100px',
   defaultOpen = false,
   className,
@@ -25,7 +25,7 @@ export const Expander: FCChildrenClass<ExpanderProps> = ({
   style,
   ...otherProps
 }) => {
-  const [isCollapsed, setIsCollapsed] = useState(defaultOpen);
+  const [isCollapsed, setIsCollapsed] = useState(!defaultOpen);
 
   const dynamicStyle: CSSProperties = {
     '--height': height,
@@ -45,15 +45,23 @@ export const Expander: FCChildrenClass<ExpanderProps> = ({
       data-expander-collapsed={isCollapsed}
       {...otherProps}
     >
-      <div className={styles.Content}>
-        {children}
-      </div>
+      <LazyMotion features={domMax}>
+        <m.div
+          className={styles.Content}
+          animate={!isCollapsed ? { height: 'auto' } : {
+            height, overflow: 'hidden',
+          }}
+          transition={{ ease: 'easeOut', duration: 0.2, delay: 0 }}
+          initial={false}
+        >
+          {children}
+        </m.div>
+      </LazyMotion>
       <Stack className={styles.Action} hAlign="center" vAlign="center" fill={false}>
-        <Elevator resting={4}>
+        <Elevator resting={isCollapsed ? 4 : 0}>
           <Button
             iconPosition="right"
             onClick={handleCollapse}
-            icon={expandIcon}
           >
             {isCollapsed ? expandLabel : collapseLabel}
           </Button>

@@ -28,6 +28,7 @@ export * from './datetime';
 export * from './disclosure';
 export * from './drawer';
 export * from './elevator';
+export * from './expander';
 export * from './grid';
 export * from './icon-button';
 export * from './info-state';

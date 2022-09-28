@@ -6,7 +6,7 @@
   }
 
   .Content {
-    mask-image: linear-gradient(to bottom, red 30%, rgb(0 0 0 / 0%) 100%);
+    mask-image: linear-gradient(to bottom, red calc(100% - (var(--threshold) * 1.5)), rgb(0 0 0 / 0%) 80%);
     height: calc(var(--height) + var(--threshold));
     overflow: hidden;
 
