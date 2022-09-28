@@ -137,6 +137,10 @@ export type TableProps<T extends Record<string, unknown>> = PropsWithClass & {
    */
   emptyComponent?: ReactNode;
   /**
+   * Enable or disable the sub rows selection when the parent row is selected.
+   */
+  selectSubRows?: boolean;
+  /**
    * Show pagination below the table. This is recommended only for tables with a lot of rows.
    */
   showPagination?: boolean;
@@ -215,6 +219,7 @@ export const Table = <T extends Record<string, unknown>>({
   pageClusters,
   initialSortBy = [],
   onRowExpandChange,
+  selectSubRows = true,
   ...otherProps
 }: TableProps<T>) => {
   const uid = useUIDSeed();
@@ -276,6 +281,7 @@ export const Table = <T extends Record<string, unknown>>({
       autoResetHiddenColumns: false,
       autoResetPage: false,
       autoResetSortBy: false,
+      selectSubRows,
       /**
        * This `paginateExpandedRows` prop prevent expanded rows to
        * be placed in the next page. But it breaks row selection
