@@ -1,0 +1,27 @@
+@layer components {
+  .Expander {
+    --threshold: 3rem;
+
+    position: relative;
+  }
+
+  .Content {
+    mask-image: linear-gradient(to bottom, red 30%, rgb(0 0 0 / 0%) 100%);
+    height: calc(var(--height) + var(--threshold));
+    overflow: hidden;
+
+    @nest .Expander[data-expander-collapsed='false'] & {
+      height: auto;
+      mask-image: none;
+    }
+  }
+
+  .Action {
+    margin-top: calc(var(--threshold) * -1);
+
+    @nest .Expander[data-expander-collapsed='false'] & {
+      margin-top: token(--space-16);
+    }
+  }
+}
+
