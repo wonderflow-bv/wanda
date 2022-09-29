@@ -1,0 +1,117 @@
+import ComponentsNav from "@/data/components-nav";
+import { getLayoutProps } from "@/utils/get-layout-props";
+import { PropsTable } from "@/components/doc/props-table";
+import { KeyTable } from "@/components/shared/key-table";
+
+export const getStaticProps = () =>
+  getLayoutProps({
+    layout: "component",
+    layoutProps: {
+      title: "Expander",
+      color: "indigo",
+      subtitle: "Expand and collapse long content in a tap",
+      navigation: ComponentsNav,
+      features: [
+        "Keyboard accessible",
+        "Themes ready",
+      ],
+      links: [
+        {
+          label: "ARIA authoring",
+          url: "https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/",
+        },
+      ]
+    }
+  });
+
+<LiveArea>
+  <Expander>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    Doloribus corporis nobis ipsum natus laudantium dolorem sapiente,
+    sint adipisci at asperiores quia ex voluptatum veniam! Quos rerum natus eos excepturi atque!
+    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    Doloribus corporis nobis ipsum natus laudantium dolorem sapiente,
+    sint adipisci at asperiores quia ex voluptatum veniam! Quos rerum natus eos excepturi atque!
+    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    <img
+      alt=""
+      src="https://images.unsplash.com/photo-1527831200629-a0438d65142b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+    />
+  </Expander>
+</LiveArea>
+
+
+## Anatomy
+
+```tsx lines="1,4-15"
+import { Expander } from "@wonderflow/react-components";
+
+export default () => {
+  return (
+    <Expander>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      Doloribus corporis nobis ipsum natus laudantium dolorem sapiente,
+      sint adipisci at asperiores quia ex voluptatum veniam! Quos rerum natus eos excepturi atque!
+      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+
+      Doloribus corporis nobis ipsum natus laudantium dolorem sapiente,
+      sint adipisci at asperiores quia ex voluptatum veniam! Quos rerum natus eos excepturi atque!
+      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    </Expander>
+  );
+};
+```
+
+## API Reference
+
+### Accordion
+
+<PropsTable
+  properties={[
+    {
+      name: "expandLabel",
+      type: ["string"],
+      default: "Show more",
+      required: false,
+      description: "Set the expand button label when is collapsed.",
+    },
+    {
+      name: "collapseLabel",
+      type: ["string"],
+      default: "Show less",
+      required: false,
+      description: "Set the expand button label when is expanded",
+    },
+    {
+      name: "visibleArea",
+      type: ["string"],
+      default: "100px",
+      required: false,
+      description: "Set the area for the visible content",
+    },
+    {
+      name: "defaultExpanded",
+      type: ["boolean"],
+      default: "false",
+      required: false,
+      description: "Set the component to be expanded by default",
+    },
+  ]}
+/>
+
+## Accessibility
+
+Adheres to the [`disclosure` role requirements](https://www.w3.org/TR/wai-aria-practices-1.2/#disclosure).
+
+<KeyTable
+  data={[
+    {
+      name: "tab",
+      description: "Move focus on the summary element or outside",
+    },
+    {
+      name: "enter",
+      description: "Expand or collapse the content",
+    },
+  ]}
+/>
