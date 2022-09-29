@@ -25,6 +25,15 @@ const ComponentsNav: NavigationMenu = [
         target: '',
       },
       {
+        path: '/get-started/components/actions/expander',
+        label: 'Expander',
+        tag: {
+          color: 'green',
+          label: 'new',
+        },
+        target: '',
+      },
+      {
         path: '/get-started/components/actions/icon-button',
         label: 'Icon button',
         target: '',

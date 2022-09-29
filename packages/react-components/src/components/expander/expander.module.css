@@ -7,7 +7,6 @@
 
   .Content {
     mask-image: linear-gradient(to bottom, red calc(100% - (var(--threshold) * 1.5)), rgb(0 0 0 / 0%) 80%);
-    height: calc(var(--height) + var(--threshold));
     overflow: hidden;
 
     @nest .Expander[data-expander-collapsed='false'] & {
