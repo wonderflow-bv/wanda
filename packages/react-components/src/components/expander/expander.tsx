@@ -3,6 +3,7 @@ import {
   domMax, LazyMotion, m,
 } from 'framer-motion';
 import { CSSProperties, useCallback, useState } from 'react';
+import { useUIDSeed } from 'react-uid';
 
 import { Button, Elevator, Stack } from '@/components';
 
@@ -26,6 +27,7 @@ export const Expander: FCChildrenClass<ExpanderProps> = ({
   ...otherProps
 }) => {
   const [isCollapsed, setIsCollapsed] = useState(!defaultOpen);
+  const uid = useUIDSeed();
 
   const dynamicStyle: CSSProperties = {
     '--height': height,
@@ -48,6 +50,7 @@ export const Expander: FCChildrenClass<ExpanderProps> = ({
       <LazyMotion features={domMax}>
         <m.div
           className={styles.Content}
+          id={uid('expander-content')}
           animate={!isCollapsed ? { height: 'auto' } : {
             height, overflow: 'hidden',
           }}
@@ -61,6 +64,8 @@ export const Expander: FCChildrenClass<ExpanderProps> = ({
         <Elevator resting={isCollapsed ? 4 : 0}>
           <Button
             iconPosition="right"
+            aria-expanded={!isCollapsed}
+            aria-controls={uid('expander-content')}
             onClick={handleCollapse}
           >
             {isCollapsed ? expandLabel : collapseLabel}
