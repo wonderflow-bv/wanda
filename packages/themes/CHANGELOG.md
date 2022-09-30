@@ -1,5 +1,11 @@
 # @wonderflow/themes
 
+## 10.11.0
+
+### Minor Changes
+
+- 9230bfe: Fix `highlight-magenta-foreground` on dark theme
+
 ## 10.10.0
 
 ## 10.9.1
