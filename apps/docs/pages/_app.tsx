@@ -30,7 +30,7 @@ const LAYOUTS = {
 
 const Providers: FCChildren = ({ children }) => (
   <ApolloProvider client={client}>
-    <ThemeProvider defaultTheme="dark" disableTransitionOnChange>
+    <ThemeProvider defaultTheme="system" disableTransitionOnChange>
       <ResponsiveProvider>
         <DocLayoutContextProvider>
           <IdProvider>
