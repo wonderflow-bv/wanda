@@ -1,5 +1,16 @@
 # @wonderflow/react-components
 
+## 10.11.0
+
+### Minor Changes
+
+- 0d77a55: Fix tab rendering if icon is missing from panel
+- 44c486d: Fix ClampText expand action tooltip text
+- 05033fe: Add new `Expander` component
+- e41b912: Add new `selectSubRows` property to Table
+- 7456469: Add core styles to the inner `core` css layer to allow easier overrides
+- 2943320: Update style for inline code
+
 ## 10.10.0
 
 ### Minor Changes
