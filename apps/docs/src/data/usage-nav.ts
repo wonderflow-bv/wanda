@@ -11,7 +11,7 @@ const UsageNav: NavigationMenu = [
         target: '',
       },
       {
-        path: '/get-started/documentation/get-started/accessibility',
+        path: '/get-started/documentation/get-started/documentation/get-started/accessibility',
         label: 'Accessibility',
         target: '',
       },

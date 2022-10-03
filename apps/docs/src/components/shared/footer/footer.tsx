@@ -98,7 +98,7 @@ export const Footer: FC<FooterProps> = ({
                   <Link href="/get-started/documentation/develop/design-tokens"><a>Design tokens</a></Link>
                 </List.Li>
                 <List.Li>
-                  <Link href="/get-started/documentation/develop/global-styles"><a>Global styles</a></Link>
+                  <Link href="/get-started/documentation/develop/styling/utilities"><a>Utilities</a></Link>
                 </List.Li>
                 <List.Li>
                   <Link href="/get-started/documentation/develop/using-themes"><a>Using themes</a></Link>
