@@ -111,7 +111,7 @@ const ComponentsNav: NavigationMenu = [
         target: '',
       },
       {
-        path: '/get-started/get-started/components/inputs/textfield',
+        path: '/get-started/components/inputs/textfield',
         label: 'Textfield',
         target: '',
       },
@@ -199,7 +199,7 @@ const ComponentsNav: NavigationMenu = [
     icon: 'compass',
     items: [
       {
-        path: '/get-started/get-started/components/navigation/menu',
+        path: '/documentation/get-started/accessibility',
         label: 'Menu',
         target: '',
       },
