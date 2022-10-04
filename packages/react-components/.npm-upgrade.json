@@ -3,6 +3,10 @@
     "tsconfig": {
       "versions": "*",
       "reason": "internal"
+    },
+    "cpy-cli": {
+      "versions": "*",
+      "reason": "Broken"
     }
   }
 }

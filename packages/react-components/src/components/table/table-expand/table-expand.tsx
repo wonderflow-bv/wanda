@@ -7,8 +7,7 @@ export type TableExpandProps<T> = {
   component: ComponentType<T>;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const TableExpand = <T, _>({
+export const TableExpand = <T extends Record<string, unknown>>({
   data,
   component: Component,
 }: TableExpandProps<T>) => (
