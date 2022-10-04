@@ -41,7 +41,7 @@ export const Elevator: FCChildren<ElevatorProps> = ({
   hover,
 }) => (
   <>
-    {Children.map(children, child => isValidElement(child) && cloneElement(
+    {Children.map(children, (child: ReactElement) => isValidElement<any>(child) && cloneElement(
       child,
       {
         'data-elevation': resting,
