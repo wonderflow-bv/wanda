@@ -199,7 +199,7 @@ const ComponentsNav: NavigationMenu = [
     icon: 'compass',
     items: [
       {
-        path: '/get-started/documentation/get-started/accessibility',
+        path: '/get-started/components/navigation/menu',
         label: 'Menu',
         target: '',
       },
