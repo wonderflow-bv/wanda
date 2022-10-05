@@ -45,7 +45,7 @@
     border-bottom: 1px solid var(--dimmed-1);
     padding:
       token(--space-16)
-      token(--space-16)
+      calc(env(safe-area-inset-top) + token(--space-16))
       token(--space-24)
       token(--space-24);
   }
