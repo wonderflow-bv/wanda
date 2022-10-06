@@ -91,6 +91,9 @@ This command will run all the `test` scripts inside workspaces.
 
 ### Adding a change
 
+> **Warning**
+> Is required to [sign](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits) every commits pushed to the repo in order to merge PRs and release.
+
 We rely on [Changeset][changeset] to generate changelogs and release notes across all workspaces. You can check the whole documentation to learn how to create and ship changes. Here you can find some basic commands:
 
 #### Add a change
