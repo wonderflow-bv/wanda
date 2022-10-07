@@ -1,5 +1,11 @@
 # @wonderflow/themes
 
+## 10.12.0
+
+### Minor Changes
+
+- 4178e7b: Deprecating shared eslint-config
+
 ## 10.11.0
 
 ### Minor Changes

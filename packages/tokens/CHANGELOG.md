@@ -1,5 +1,12 @@
 # @wonderflow/tokens
 
+## 10.12.0
+
+### Minor Changes
+
+- ed86a10: Add new TokenTypes for colors and highlight colors
+- 4178e7b: Deprecating shared eslint-config
+
 ## 10.11.0
 
 ## 10.10.0
