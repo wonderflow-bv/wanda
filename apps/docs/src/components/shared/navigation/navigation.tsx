@@ -19,7 +19,11 @@ export const Navigation = ({ data }: NavigationProps) => {
   const { onClose } = useOverlayContext();
 
   const includesPath = useCallback(
-    path => router.asPath === path,
+    (path) => {
+      const pageURL = new URL(process.env.NEXT_PUBLIC_DOMAIN + router.asPath);
+
+      return pageURL.pathname === path;
+    },
     // path => router.asPath.startsWith(path),
     [router.asPath],
   );
