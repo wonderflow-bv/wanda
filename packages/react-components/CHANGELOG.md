@@ -1,5 +1,15 @@
 # @wonderflow/react-components
 
+## 10.12.0
+
+### Minor Changes
+
+- 2743611: Fix Drawer header padding to consider safe areas
+- ed86a10: Add new TokenTypes for colors and highlight colors
+- 4178e7b: Deprecating shared eslint-config
+- bfedcc0: fix `bordered` props on `Card` when not dimmed
+- c4ccb17: Add missing dependencies
+
 ## 10.11.0
 
 ### Minor Changes

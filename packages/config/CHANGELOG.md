@@ -1,5 +1,17 @@
 # @wonderflow/config
 
+## 10.12.0
+
+### Minor Changes
+
+- 4178e7b: Deprecating shared eslint-config
+
+### Patch Changes
+
+- Updated dependencies [ed86a10]
+- Updated dependencies [4178e7b]
+  - @wonderflow/tokens@10.12.0
+
 ## 10.11.0
 
 ### Patch Changes
