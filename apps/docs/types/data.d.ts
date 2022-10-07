@@ -1,4 +1,5 @@
-import { SymbolNames } from '@wonderflow/symbols';
+import type { SymbolNames } from '@wonderflow/symbols';
+import type { TokensTypes } from '@wonderflow/tokens/platforms/web';
 
 type NavItemType = {
   label: string;
@@ -12,7 +13,7 @@ type DocNavItemType = {
   label: string;
   url: string;
   icon: SymbolNames;
-  color?: 'gray' | 'cyan' | 'green' | 'purple' | 'yellow' | 'red' | 'blue' | 'magenta' | 'violet' | 'indigo' | 'mint' | 'dipsy' | 'salmon';
+  color?: TokensTypes['colors'];
   blank?: boolean;
 }
 

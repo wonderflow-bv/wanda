@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import type { TokensTypes } from '@wonderflow/tokens/platforms/web';
 import clsx from 'clsx';
 import { forwardRef, Ref } from 'react';
 
@@ -29,7 +30,7 @@ export type ChipProps = {
   /**
    * Set a color from one of the provided values.
    */
-  color?: 'gray' | 'cyan' | 'green' | 'purple' | 'yellow' | 'red' | 'blue' | 'magenta' | 'violet' | 'indigo' | 'mint' | 'dipsy' | 'salmon';
+  color?: TokensTypes['colors'];
   /**
    * Make the chip dismissable. When `true` adds a close button on the side.
    */

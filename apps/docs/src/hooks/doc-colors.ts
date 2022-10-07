@@ -1,10 +1,9 @@
+import type { TokensTypes } from '@wonderflow/tokens/platforms/web';
 import constate from 'constate';
-import {
-  useCallback, useState,
-} from 'react';
+import { useCallback, useState } from 'react';
 
 export type AccordionContextProps = {
-  color?: 'gray' | 'cyan' | 'green' | 'purple' | 'yellow' | 'red' | 'blue' | 'magenta' | 'violet' | 'indigo' | 'mint' | 'dipsy' | 'salmon';
+  color?: TokensTypes['colors'];
 }
 
 const useLayoutColor = ({

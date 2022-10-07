@@ -2,6 +2,7 @@ import {
   Card, Stack, Symbol, Text, Title,
 } from '@wonderflow/react-components';
 import { SymbolNames } from '@wonderflow/symbols';
+import type { TokensTypes } from '@wonderflow/tokens/platforms/web';
 import clsx from 'clsx';
 import React from 'react';
 
@@ -9,7 +10,7 @@ import styles from './tile.module.css';
 
 type TileProps = {
   symbol?: SymbolNames;
-  symbolColor?: 'gray' | 'cyan' | 'green' | 'purple' | 'yellow' | 'red' | 'blue' | 'magenta' | 'violet' | 'indigo' | 'mint' | 'dipsy' | 'salmon';
+  symbolColor?: TokensTypes['colors'];
   title: string;
   description?: string;
   url?: string;

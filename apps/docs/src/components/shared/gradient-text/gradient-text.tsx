@@ -1,9 +1,10 @@
+import type { TokensTypes } from '@wonderflow/tokens/platforms/web';
 import clsx from 'clsx';
 
 import styles from './gradient-text.module.css';
 
 export type GradientTextProps = {
-  color?: 'rainbow' | 'gray' | 'cyan' | 'green' | 'purple' | 'yellow' | 'red' | 'blue' | 'magenta' | 'violet' | 'indigo' | 'mint' | 'dipsy' | 'salmon';
+  color?: 'rainbow' | TokensTypes['colors'];
 }
 
 export const GradientText: FCChildrenClass<GradientTextProps> = ({
