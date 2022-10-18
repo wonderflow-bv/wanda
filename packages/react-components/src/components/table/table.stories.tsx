@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 /* eslint-disable no-console */
 import { ComponentMeta, ComponentStory } from '@storybook/react';
@@ -6,7 +7,7 @@ import React, {
 } from 'react';
 
 import {
-  Button, IconButton, Menu, Popover, Separator, Stack, Title,
+  Button, IconButton, Menu, Popover, Stack, Title,
 } from '../..';
 import { Table } from './table';
 import { CustomSortingRule } from './types';
@@ -478,10 +479,10 @@ const story: ComponentMeta<typeof Table> = {
     dataWithIds: [
       {
         ...firstData,
-        _id: '1',
+        id: '1',
         subRows: [
           {
-            _id: '1.1',
+            id: '1.1',
             firstName: 'ciao',
             lastName: 'Stuffo',
             address: 'Via Roma, 15 Monza',
@@ -489,7 +490,7 @@ const story: ComponentMeta<typeof Table> = {
             info: 12,
             subRows: [
               {
-                _id: '1.1.1',
+                id: '1.1.1',
                 firstName: '1',
                 lastName: 'Stuffo',
                 address: 'Via Roma, 15 Monza',
@@ -497,7 +498,7 @@ const story: ComponentMeta<typeof Table> = {
                 info: 12,
                 subRows: [
                   {
-                    _id: '1.1.1.1',
+                    id: '1.1.1.1',
                     firstName: '1',
                     lastName: 'Stuffo',
                     address: 'Via Roma, 15 Monza',
@@ -505,7 +506,7 @@ const story: ComponentMeta<typeof Table> = {
                     info: 12,
                     subRows: [
                       {
-                        _id: '1.1.1.1.1',
+                        id: '1.1.1.1.1',
                         firstName: '1',
                         lastName: 'Stuffo',
                         address: 'Via Roma, 15 Monza',
@@ -513,7 +514,7 @@ const story: ComponentMeta<typeof Table> = {
                         info: 12,
                         subRows: [
                           {
-                            _id: '1.1.1.1.1.1',
+                            id: '1.1.1.1.1.1',
                             firstName: '1',
                             lastName: 'Stuffo',
                             address: 'Via Roma, 15 Monza',
@@ -521,7 +522,7 @@ const story: ComponentMeta<typeof Table> = {
                             info: 12,
                             subRows: [
                               {
-                                _id: '1.1.1.1.1.1.1',
+                                id: '1.1.1.1.1.1.1',
                                 firstName: '1',
                                 lastName: 'Stuffo',
                                 address: 'Via Roma, 15 Monza',
@@ -529,7 +530,7 @@ const story: ComponentMeta<typeof Table> = {
                                 info: 12,
                                 subRows: [
                                   {
-                                    _id: '1.1.1.1.1.1.1.1',
+                                    id: '1.1.1.1.1.1.1.1',
                                     firstName: '1',
                                     lastName: 'Stuffo',
                                     address: 'Via Roma, 15 Monza',
@@ -537,7 +538,7 @@ const story: ComponentMeta<typeof Table> = {
                                     info: 12,
                                     subRows: [
                                       {
-                                        _id: '1.1.1.1.1.1.1.1.1',
+                                        id: '1.1.1.1.1.1.1.1.1',
                                         firstName: '1',
                                         lastName: 'Stuffo',
                                         address: 'Via Roma, 15 Monza',
@@ -545,7 +546,7 @@ const story: ComponentMeta<typeof Table> = {
                                         info: 12,
                                         subRows: [
                                           {
-                                            _id: '1.1.1.1.1.1.1.1.1.1',
+                                            id: '1.1.1.1.1.1.1.1.1.1',
                                             firstName: '1',
                                             lastName: 'Stuffo',
                                             address: 'Via Roma, 15 Monza',
@@ -553,7 +554,7 @@ const story: ComponentMeta<typeof Table> = {
                                             info: 12,
                                           },
                                           {
-                                            _id: '1.1.1.1.1.1.1.1.1.2',
+                                            id: '1.1.1.1.1.1.1.1.1.2',
                                             firstName: '2',
                                             lastName: 'Stuffo',
                                             address: 'Via Roma, 15 Monza',
@@ -561,7 +562,7 @@ const story: ComponentMeta<typeof Table> = {
                                             info: 12,
                                           },
                                           {
-                                            _id: '1.1.1.1.1.1.1.1.1.3',
+                                            id: '1.1.1.1.1.1.1.1.1.3',
                                             firstName: '3',
                                             lastName: 'Stuffo',
                                             address: 'Via Roma, 15 Monza',
@@ -571,7 +572,7 @@ const story: ComponentMeta<typeof Table> = {
                                         ],
                                       },
                                       {
-                                        _id: '1.1.1.1.1.1.1.1.2',
+                                        id: '1.1.1.1.1.1.1.1.2',
                                         firstName: '2',
                                         lastName: 'Stuffo',
                                         address: 'Via Roma, 15 Monza',
@@ -579,7 +580,7 @@ const story: ComponentMeta<typeof Table> = {
                                         info: 12,
                                       },
                                       {
-                                        _id: '1.1.1.1.1.1.1.1.3',
+                                        id: '1.1.1.1.1.1.1.1.3',
                                         firstName: '3',
                                         lastName: 'Stuffo',
                                         address: 'Via Roma, 15 Monza',
@@ -589,7 +590,7 @@ const story: ComponentMeta<typeof Table> = {
                                     ],
                                   },
                                   {
-                                    _id: '1.1.1.1.1.1.1.2',
+                                    id: '1.1.1.1.1.1.1.2',
                                     firstName: '2',
                                     lastName: 'Stuffo',
                                     address: 'Via Roma, 15 Monza',
@@ -597,7 +598,7 @@ const story: ComponentMeta<typeof Table> = {
                                     info: 12,
                                   },
                                   {
-                                    _id: '1.1.1.1.1.1.1.3',
+                                    id: '1.1.1.1.1.1.1.3',
                                     firstName: '3',
                                     lastName: 'Stuffo',
                                     address: 'Via Roma, 15 Monza',
@@ -607,7 +608,7 @@ const story: ComponentMeta<typeof Table> = {
                                 ],
                               },
                               {
-                                _id: '1.1.1.1.1.1.2',
+                                id: '1.1.1.1.1.1.2',
                                 firstName: '2',
                                 lastName: 'Stuffo',
                                 address: 'Via Roma, 15 Monza',
@@ -615,7 +616,7 @@ const story: ComponentMeta<typeof Table> = {
                                 info: 12,
                               },
                               {
-                                _id: '1.1.1.1.1.1.3',
+                                id: '1.1.1.1.1.1.3',
                                 firstName: '3',
                                 lastName: 'Stuffo',
                                 address: 'Via Roma, 15 Monza',
@@ -625,7 +626,7 @@ const story: ComponentMeta<typeof Table> = {
                             ],
                           },
                           {
-                            _id: '1.1.1.1.1.2',
+                            id: '1.1.1.1.1.2',
                             firstName: '2',
                             lastName: 'Stuffo',
                             address: 'Via Roma, 15 Monza',
@@ -633,7 +634,7 @@ const story: ComponentMeta<typeof Table> = {
                             info: 12,
                           },
                           {
-                            _id: '1.1.1.1.1.3',
+                            id: '1.1.1.1.1.3',
                             firstName: '3',
                             lastName: 'Stuffo',
                             address: 'Via Roma, 15 Monza',
@@ -643,7 +644,7 @@ const story: ComponentMeta<typeof Table> = {
                         ],
                       },
                       {
-                        _id: '1.1.1.1.2',
+                        id: '1.1.1.1.2',
                         firstName: '2',
                         lastName: 'Stuffo',
                         address: 'Via Roma, 15 Monza',
@@ -651,7 +652,7 @@ const story: ComponentMeta<typeof Table> = {
                         info: 12,
                       },
                       {
-                        _id: '1.1.1.1.3',
+                        id: '1.1.1.1.3',
                         firstName: '3',
                         lastName: 'Stuffo',
                         address: 'Via Roma, 15 Monza',
@@ -661,7 +662,7 @@ const story: ComponentMeta<typeof Table> = {
                     ],
                   },
                   {
-                    _id: '1.1.1.2',
+                    id: '1.1.1.2',
                     firstName: '2',
                     lastName: 'Stuffo',
                     address: 'Via Roma, 15 Monza',
@@ -669,7 +670,7 @@ const story: ComponentMeta<typeof Table> = {
                     info: 12,
                   },
                   {
-                    _id: '1.1.1.3',
+                    id: '1.1.1.3',
                     firstName: '3',
                     lastName: 'Stuffo',
                     address: 'Via Roma, 15 Monza',
@@ -679,7 +680,7 @@ const story: ComponentMeta<typeof Table> = {
                 ],
               },
               {
-                _id: '1.1.2',
+                id: '1.1.2',
                 firstName: '2',
                 lastName: 'Stuffo',
                 address: 'Via Roma, 15 Monza',
@@ -687,7 +688,7 @@ const story: ComponentMeta<typeof Table> = {
                 info: 12,
               },
               {
-                _id: '1.1.3',
+                id: '1.1.3',
                 firstName: '3',
                 lastName: 'Stuffo',
                 address: 'Via Roma, 15 Monza',
@@ -699,7 +700,7 @@ const story: ComponentMeta<typeof Table> = {
         ],
       },
       {
-        _id: '2',
+        id: '2',
         firstName: 'Simone',
         lastName: 'Lastname',
         address: 'Via Roma, 12, Bologna',
@@ -708,7 +709,7 @@ const story: ComponentMeta<typeof Table> = {
         info: 123.96,
       },
       {
-        _id: '3',
+        id: '3',
         firstName: 'Matteo',
         lastName: 'Staffone',
         address: 'Via Roma, 13, Genova',
@@ -716,7 +717,7 @@ const story: ComponentMeta<typeof Table> = {
         info: <code>23456789</code>,
         subRows: [
           {
-            _id: '3.1',
+            id: '3.1',
             firstName: '1',
             lastName: 'Stuffo',
             address: 'Via Roma, 15 Monza',
@@ -724,7 +725,7 @@ const story: ComponentMeta<typeof Table> = {
             info: 12,
           },
           {
-            _id: '3.2',
+            id: '3.2',
             firstName: '2',
             lastName: 'Stuffo',
             address: 'Via Roma, 15 Monza',
@@ -732,7 +733,7 @@ const story: ComponentMeta<typeof Table> = {
             info: 12,
             subRows: [
               {
-                _id: '3.2.1',
+                id: '3.2.1',
                 firstName: '1',
                 lastName: 'Stuffo',
                 address: 'Via Roma, 15 Monza',
@@ -740,7 +741,7 @@ const story: ComponentMeta<typeof Table> = {
                 info: 12,
                 subRows: [
                   {
-                    _id: '3.2.1.1',
+                    id: '3.2.1.1',
                     firstName: '1',
                     lastName: 'Stuffo',
                     address: 'Via Roma, 15 Monza',
@@ -748,7 +749,7 @@ const story: ComponentMeta<typeof Table> = {
                     info: 12,
                   },
                   {
-                    _id: '3.2.1.2',
+                    id: '3.2.1.2',
                     firstName: '2',
                     lastName: 'Stuffo',
                     address: 'Via Roma, 15 Monza',
@@ -756,7 +757,7 @@ const story: ComponentMeta<typeof Table> = {
                     info: 12,
                   },
                   {
-                    _id: '3.2.1.3',
+                    id: '3.2.1.3',
                     firstName: '3',
                     lastName: 'Stuffo',
                     address: 'Via Roma, 15 Monza',
@@ -766,7 +767,7 @@ const story: ComponentMeta<typeof Table> = {
                 ],
               },
               {
-                _id: '3.2.2',
+                id: '3.2.2',
                 firstName: '2',
                 lastName: 'Stuffo',
                 address: 'Via Roma, 15 Monza',
@@ -774,7 +775,7 @@ const story: ComponentMeta<typeof Table> = {
                 info: 12,
               },
               {
-                _id: '3.2.3',
+                id: '3.2.3',
                 firstName: '3',
                 lastName: 'Stuffo',
                 address: 'Via Roma, 15 Monza',
@@ -784,7 +785,7 @@ const story: ComponentMeta<typeof Table> = {
             ],
           },
           {
-            _id: '3.3',
+            id: '3.3',
             firstName: '3',
             lastName: 'Stuffo',
             address: 'Via Roma, 15 Monza',
@@ -792,7 +793,7 @@ const story: ComponentMeta<typeof Table> = {
             info: 12,
             subRows: [
               {
-                _id: '3.3.1',
+                id: '3.3.1',
                 firstName: '1',
                 lastName: 'Stuffo',
                 address: 'Via Roma, 15 Monza',
@@ -800,7 +801,7 @@ const story: ComponentMeta<typeof Table> = {
                 info: 12,
               },
               {
-                _id: '3.3.2',
+                id: '3.3.2',
                 firstName: '2',
                 lastName: 'Stuffo',
                 address: 'Via Roma, 15 Monza',
@@ -808,7 +809,7 @@ const story: ComponentMeta<typeof Table> = {
                 info: 12,
               },
               {
-                _id: '3.3.3',
+                id: '3.3.3',
                 firstName: '3',
                 lastName: 'Stuffo',
                 address: 'Via Roma, 15 Monza',
@@ -820,7 +821,7 @@ const story: ComponentMeta<typeof Table> = {
         ],
       },
       {
-        _id: '4',
+        id: '4',
         firstName: 'Emanuele',
         lastName: 'Staffo',
         address: 'Via Roma, 14, Milano',
@@ -828,7 +829,7 @@ const story: ComponentMeta<typeof Table> = {
         info: 1234,
       },
       {
-        _id: '5',
+        id: '5',
         firstName: 'Simone',
         lastName: 'Stuffo',
         address: 'Via Roma, 15 Monza',
@@ -836,7 +837,7 @@ const story: ComponentMeta<typeof Table> = {
         info: 12,
         subRows: [
           {
-            _id: '5.1',
+            id: '5.1',
             firstName: 'ciao',
             lastName: 'Stuffo',
             address: 'Via Roma, 15 Monza',
@@ -846,7 +847,7 @@ const story: ComponentMeta<typeof Table> = {
         ],
       },
       {
-        _id: '6',
+        id: '6',
         firstName: 'Luca',
         lastName: 'Morandi',
         address: 'Via Roma, 1, Treno',
@@ -854,7 +855,7 @@ const story: ComponentMeta<typeof Table> = {
         info: 123123.12,
         subRows: [
           {
-            _id: '6.1',
+            id: '6.1',
             firstName: 'ciao',
             lastName: 'Stuffo',
             address: 'Via Roma, 15 Monza',
@@ -864,7 +865,7 @@ const story: ComponentMeta<typeof Table> = {
         ],
       },
       {
-        _id: '7',
+        id: '7',
         firstName: 'Mattia',
         lastName: 'Lastname',
         address: 'Via Roma, 12, Bologna',
@@ -872,7 +873,7 @@ const story: ComponentMeta<typeof Table> = {
         info: 123.96,
       },
       {
-        _id: '8',
+        id: '8',
         firstName: 'Morfeo',
         lastName: 'Staffone',
         address: 'Via Roma, 13, Genova',
@@ -880,7 +881,7 @@ const story: ComponentMeta<typeof Table> = {
         info: 12.1213,
       },
       {
-        _id: '9',
+        id: '9',
         firstName: 'Gianluca',
         lastName: 'Staffo',
         address: 'Via Roma, 14, Milano',
@@ -888,7 +889,7 @@ const story: ComponentMeta<typeof Table> = {
         info: 1234,
       },
       {
-        _id: '10',
+        id: '10',
         firstName: 'Simone',
         lastName: 'Stuffo',
         address: 'Via Roma, 15 Monza',
@@ -896,7 +897,7 @@ const story: ComponentMeta<typeof Table> = {
         info: 12,
       },
       {
-        _id: '11',
+        id: '11',
         firstName: 'Simone',
         lastName: 'Stuffo',
         address: 'Via Roma, 15 Monza',
@@ -904,7 +905,7 @@ const story: ComponentMeta<typeof Table> = {
         info: 12,
       },
       {
-        _id: '12',
+        id: '12',
         firstName: 'Simone',
         lastName: 'Stuffo',
         address: 'Via Roma, 15 Monza',
@@ -912,7 +913,7 @@ const story: ComponentMeta<typeof Table> = {
         info: 12,
       },
       {
-        _id: '13',
+        id: '13',
         firstName: 'Simone',
         lastName: 'Stuffo',
         address: 'Via Roma, 15 Monza',
@@ -920,7 +921,7 @@ const story: ComponentMeta<typeof Table> = {
         info: 12,
       },
       {
-        _id: '14',
+        id: '14',
         firstName: 'Simone',
         lastName: 'Stuffo',
         address: 'Via Roma, 15 Monza',
@@ -928,7 +929,7 @@ const story: ComponentMeta<typeof Table> = {
         info: 12,
       },
       {
-        _id: '15',
+        id: '15',
         firstName: 'Simone',
         lastName: 'Stuffo',
         address: 'Via Roma, 15 Monza',
@@ -936,7 +937,7 @@ const story: ComponentMeta<typeof Table> = {
         info: 12,
       },
       {
-        _id: '16',
+        id: '16',
         firstName: 'Simone',
         lastName: 'Stuffo',
         address: 'Via Roma, 15 Monza',
@@ -986,7 +987,7 @@ const SelectionTemplate: ComponentStory<typeof Table> = ({ dataWithIds, data, ..
   const [selectedRowIds, setSelectedRowIds] = useState([]);
 
   const onDelete = (selectedRowIds) => {
-    const newTableData = tableData.filter(({ _id }) => !selectedRowIds.includes(_id));
+    const newTableData = tableData.filter(({ id }) => !selectedRowIds.includes(id));
     setSelectedRowIds([]);
     setTableData(newTableData);
   };
@@ -1044,6 +1045,7 @@ const HidingColumnTemplate: ComponentStory<typeof Table> = ({ dataWithIds, colum
     />
   );
 };
+
 export const HidingColumn = HidingColumnTemplate.bind({});
 HidingColumn.args = {
   showHeader: true,
@@ -1120,7 +1122,7 @@ const RowActionsTemplate: ComponentStory<typeof Table> = ({
               >
                 Short menu label
               </Menu.Item>
-              <Separator />
+              <Menu.Separator />
               <Menu.Item dimension="small" icon="view">Even shorter</Menu.Item>
               <Menu.Item dimension="small" disabled>Really?</Menu.Item>
             </Menu>
@@ -1171,7 +1173,7 @@ const ManualPaginationTemplate: ComponentStory<typeof Table> = ({
   }, [allData, pagination]);
 
   const onDelete = (selectedRowIds) => {
-    const newTableData = allData.filter(({ _id }) => !selectedRowIds.includes(_id));
+    const newTableData = allData.filter(({ id }) => !selectedRowIds.includes(id));
     setSelectedRowIds([]);
     setAllData(newTableData);
   };
@@ -1288,7 +1290,7 @@ const ManualPaginationFilteringTemplate: ComponentStory<typeof Table> = ({
   }, [allData, pagination]);
 
   const onDelete = (selectedRowIds) => {
-    const newTableData = allData.filter(({ _id }) => !selectedRowIds.includes(_id));
+    const newTableData = allData.filter(({ id }) => !selectedRowIds.includes(id));
     setAllData(newTableData);
   };
 
@@ -1328,7 +1330,7 @@ const PreselectedRowsTemplate: ComponentStory<typeof Table> = ({ dataWithIds, da
   const [selectedRowIds, setSelectedRowIds] = useState(['2', '4', '9', '12']);
 
   const onDelete = (selectedRowIds) => {
-    const newTableData = tableData.filter(({ _id }) => !selectedRowIds.includes(_id));
+    const newTableData = tableData.filter(({ id }) => !selectedRowIds.includes(id));
     setSelectedRowIds([]);
     setTableData(newTableData);
   };
