@@ -7,15 +7,12 @@
     z-index: 0;
   }
 
-  .TableWrapper {
+  .TableWrapper[data-table-scrolling='true'] {
     -webkit-overflow-scrolling: touch;
     overflow: auto;
-
-    &[data-table-scrolling='true'] {
-      max-height: var(--table-height);
-      background: var(--table-background);
-      overscroll-behavior: contain;
-    }
+    max-height: var(--table-height);
+    background: var(--table-background);
+    overscroll-behavior: contain;
   }
 
   .TableElement {
