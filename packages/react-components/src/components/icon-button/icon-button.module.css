@@ -1,7 +1,10 @@
 @layer components {
   .IconButton {
-    border-radius: 200px;
     padding: 0;
+
+    &[data-icon-button-squared='false'] {
+      border-radius: 200px;
+    }
 
     &[data-button-dimension='small'] {
       inline-size: token(--space-24);

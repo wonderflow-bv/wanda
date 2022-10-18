@@ -23,8 +23,13 @@ import * as styles from './icon-button.module.css';
 
 export type IconButtonProps<T = Record<string, unknown>> = Pick<
 ButtonProps,
-'kind' | 'dimension' | 'icon' | 'disabled' | 'onClick' | 'busy'
-> & T
+'kind' | 'dimension' | 'icon' | 'disabled' | 'onClick' | 'busy'> & {
+  /**
+   * Enable a squared shape for the button. Useful when the element is placed
+   * near another standard button.
+   */
+  squared?: boolean;
+} & T
 
 type PolymorphicIconButton = Polymorphic.ForwardRefComponent<
 Polymorphic.IntrinsicElement<typeof Button>,
@@ -38,6 +43,7 @@ export const IconButton = forwardRef(({
   kind,
   disabled,
   busy,
+  squared,
   ...otherProps
 }, forwardedRef) => (
   <Button
@@ -47,6 +53,7 @@ export const IconButton = forwardRef(({
     kind={kind}
     disabled={disabled}
     busy={busy}
+    data-icon-button-squared={squared}
     className={clsx(styles.IconButton, className)}
     {...otherProps}
   />

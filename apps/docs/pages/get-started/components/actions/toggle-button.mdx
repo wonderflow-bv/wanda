@@ -104,6 +104,13 @@ export default () => {
       description: "Set the pressed state and add required aria attributes.",
     },
     {
+      name: "squared",
+      type: ["boolean"],
+      default: "false",
+      required: false,
+      description: "Enable a squared shape for the button. Useful when the element is placed near another standard button.",
+    },
+    {
       name: "onClick",
       type: ["function"],
       typeValue: "ButtonProps['onClick']",
