@@ -1,5 +1,12 @@
 # @wonderflow/react-components
 
+## 10.13.0
+
+### Minor Changes
+
+- 2d32500: Add new buttons variants and update styles
+- 79da1ec: Fix table overflow when is not scrollable
+
 ## 10.12.0
 
 ### Minor Changes
