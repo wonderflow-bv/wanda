@@ -11,6 +11,7 @@ const story: ComponentMeta<typeof IconButton> = {
     kind: 'primary',
     icon: 'bell',
     busy: false,
+    squared: false,
   },
   argTypes: {
     onClick: { action: 'clicked' },
