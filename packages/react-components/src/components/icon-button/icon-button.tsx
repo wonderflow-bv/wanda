@@ -43,7 +43,7 @@ export const IconButton = forwardRef(({
   kind,
   disabled,
   busy,
-  squared,
+  squared = false,
   ...otherProps
 }, forwardedRef) => (
   <Button
