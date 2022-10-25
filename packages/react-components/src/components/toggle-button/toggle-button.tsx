@@ -44,11 +44,6 @@ export type ToggleButtonProps<T = Record<string, unknown>> = OmitIcon & PropsWit
    * the icon will be shown instead of the resting icon.
    */
   pressed?: boolean;
-  /**
-   * Enable a squared shape for the button. Useful when the element is placed
-   * near another standard button.
-   */
-  squared?: boolean;
 }> & T
 
 type PolymorphicToggleButton = Polymorphic.ForwardRefComponent<
@@ -84,7 +79,7 @@ export const ToggleButton = forwardRef(({
   disabled,
   iconColor,
   pressed = false,
-  squared,
+  squared = false,
   onClick,
   ...otherProps
 }, forwardedRef) => {
