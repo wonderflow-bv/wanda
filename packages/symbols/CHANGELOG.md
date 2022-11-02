@@ -1,5 +1,11 @@
 # @wonderflow/symbols
 
+## 10.14.0
+
+### Minor Changes
+
+- 1f27c25: Add new translation icon
+
 ## 10.13.0
 
 ## 10.12.0
