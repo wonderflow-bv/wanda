@@ -123,12 +123,10 @@ Exit from the current prerelease channel and make all future changes released in
 
 ## Releasing
 
-To release the packages the only thing to do is to merge the PR opened by changeset workflow, generated after pushing `changes` to the `main` branch.
-
-To release the documentation website you can either use the Github CLI or [trigger the workflow from GithHub](https://github.com/wonderflow-bv/wanda/actions/workflows/production.yml)
+To release the packages the only thing to do is to merge the **release** pull request opened by changeset workflow, created after pushing/merging `changes` on the `main` branch.
 
 ### Documentation website
 
-The production release of the website can be done by manually triggering the `production` workflow from the Actions page on Github.
+To release the documentation website you can either use the Github CLI or [trigger the workflow from GithHub](https://github.com/wonderflow-bv/wanda/actions/workflows/production.yml)
 
 If you have the [`github-cli`](https://cli.github.com/) installed you can just run this command `gh workflow run "production"`
