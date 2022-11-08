@@ -1,5 +1,13 @@
 # @wonderflow/config
 
+## 10.15.0
+
+### Patch Changes
+
+- 318bd59: Update internal deps
+- Updated dependencies [318bd59]
+  - @wonderflow/tokens@10.15.0
+
 ## 10.14.0
 
 ### Patch Changes
