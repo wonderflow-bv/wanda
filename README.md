@@ -5,7 +5,7 @@
 ---
 
 <h3 align="center">
-  📄 <a href="https://design.wonderflow.ai"><b>Documentation</b></a>
+  📄 <a href="https://design.wonderflow.ai"><b>Documentation s</b></a>
   —
   🤝 <a href="./CONTRIBUTING.md"><b>Contributing</b></a>
 </h3>
