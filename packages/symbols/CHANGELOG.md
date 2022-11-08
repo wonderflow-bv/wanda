@@ -1,5 +1,15 @@
 # @wonderflow/symbols
 
+## 10.15.0
+
+### Minor Changes
+
+- 3b08cea: Update icons
+
+### Patch Changes
+
+- 318bd59: Update internal deps
+
 ## 10.14.0
 
 ### Minor Changes

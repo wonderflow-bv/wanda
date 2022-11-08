@@ -1,5 +1,11 @@
 # @wonderflow/tokens
 
+## 10.15.0
+
+### Patch Changes
+
+- 318bd59: Update internal deps
+
 ## 10.14.0
 
 ## 10.13.0
