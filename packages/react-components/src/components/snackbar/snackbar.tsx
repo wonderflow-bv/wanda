@@ -91,7 +91,7 @@ export const Snackbar = forwardRef(({
       {...otherProps}
     >
       <Stack vAlign="start" hAlign="start" direction="row" columnGap={16}>
-        <Symbol className={styles.Icon} weight="duotone" source={icon ?? defaultIcons[kind]} dimension={24} />
+        <Symbol className={styles.Icon} weight="duotone" source={icon ?? defaultIcons[kind]} dimension={18} />
 
         <Stack rowGap={16} vPadding={4}>
           <Stack rowGap={8}>
