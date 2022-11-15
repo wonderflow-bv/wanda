@@ -35,7 +35,7 @@ export type SymbolProps = SVGAttributes<SVGElement | SVGSVGElement> & {
    * Set the icon name to display. Icon names are defined in
    * the `SymbolNames` enum and are part of Wanda's symbols system.
    *
-   * Available icons: https://design.wonderflow.ai/design/symbols/
+   * Available icons: https://design.wonderflow.ai/get-started/symbols
    */
   source: SymbolNames | ReactElement<HTMLOrSVGElement>;
   /**
