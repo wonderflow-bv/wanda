@@ -1,5 +1,12 @@
 # @wonderflow/react-components
 
+## 10.16.0
+
+### Minor Changes
+
+- 96f1b97: Fix `Snackbar` icon size to match design
+- a4ea9c3: Add new `icon` property to `Chip` component
+
 ## 10.15.0
 
 ### Patch Changes
