@@ -34,3 +34,8 @@ export default story;
 const Template: ComponentStory<typeof Chip> = args => <Chip {...args}>Chip text</Chip>;
 
 export const Default = Template.bind({});
+
+export const WithIcon = Template.bind({});
+WithIcon.args = {
+  icon: 'bell',
+};

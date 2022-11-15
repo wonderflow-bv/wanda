@@ -39,6 +39,11 @@ export type ChipProps = {
    * Callback function to be called when the dismiss button is pressed.
    */
   onDismissClick?: () => void;
+  /**
+   * Show an icon before the chip content.
+   * @important The icon is not rendered if `dismissable` is `true`
+   */
+  icon?: SymbolProps['source'];
 }
 
 export const Chip: FCChildrenClass<ChipProps> = forwardRef(({
@@ -46,6 +51,7 @@ export const Chip: FCChildrenClass<ChipProps> = forwardRef(({
   className,
   dimension = 'regular',
   color = 'gray',
+  icon,
   interactive,
   onDismissClick,
   ...otherProps
@@ -61,7 +67,7 @@ export const Chip: FCChildrenClass<ChipProps> = forwardRef(({
     },
     big: {
       iconSize: 16,
-      style: 'outline',
+      style: 'solid',
     },
   };
 
@@ -78,6 +84,14 @@ export const Chip: FCChildrenClass<ChipProps> = forwardRef(({
       ref={forwardedRef}
       {...otherProps}
     >
+      {(icon && !interactive) && (
+        <Symbol
+          source={icon}
+          weight={properties[dimension].style as SymbolProps['weight']}
+          dimension={properties[dimension].iconSize as SymbolProps['dimension']}
+        />
+      )}
+
       <b>{children}</b>
       {interactive && (
         <button onClick={interactive && onDismissClick} className={styles.Action} type="button">
