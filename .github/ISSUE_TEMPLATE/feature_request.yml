@@ -2,8 +2,6 @@ name: Feature request
 description: Suggest an idea for this project
 title: "New feature request"
 labels: ["feature", "enhancement"]
-assignees:
-  - equinusocio
 body:
   - type: markdown
     attributes:
