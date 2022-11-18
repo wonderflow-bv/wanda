@@ -2,8 +2,6 @@ name: New icons
 description: Ask for a new icons
 title: "New icons request"
 labels: ["feature"]
-assignees:
-  - equinusocio
 body:
   - type: markdown
     attributes:
