@@ -2,8 +2,6 @@ name: Bug Report
 description: File a bug about components
 title: "Bug: "
 labels: [bug]
-assignees:
-  - equinusocio
 body:
   - type: markdown
     attributes:
