@@ -2,8 +2,6 @@ name: New component
 description: Add new component to the library
 title: "New component: [COMPONENT NAME]"
 labels: [feature]
-assignees:
-  - equinusocio
 body:
   - type: markdown
     attributes:
