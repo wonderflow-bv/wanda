@@ -71,7 +71,7 @@ export const Developers: FCClass = ({
                     Easily handle light/dark themes via JS or CSS, by using the provided
                     collections of custom properties and JSON values.
                   </Text>
-                  <Link href="/get-started/documentation/develop/themes" passHref>
+                  <Link href="/get-started/documentation/design/themes" passHref>
                     <Button as="a" kind="secondary" dimension="big">Read more</Button>
                   </Link>
                 </Stack>
