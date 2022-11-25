@@ -17,8 +17,11 @@
 import clsx from 'clsx';
 import { domAnimation, LazyMotion, m } from 'framer-motion';
 import {
-  ChangeEvent, forwardRef, InputHTMLAttributes, useEffect, useRef,
+  ChangeEvent, forwardRef, InputHTMLAttributes, useEffect, useMemo, useRef,
 } from 'react';
+import { useUIDSeed } from 'react-uid';
+
+import { Stack, Text } from '@/components';
 
 import * as styles from './selection-controls.module.css';
 
@@ -32,6 +35,12 @@ export type CheckboxProps = InputHTMLAttributes<HTMLInputElement> & {
    * Is used when a subset of the options are selected but not all of them.
    */
   indeterminate?: boolean;
+  /**
+   * Define the accessible label of the input. While this is not
+   * mandatory, an input should always have a label. If not using this property
+   * you can bind a custom label to the input by using an id.
+   */
+  label?: string;
   /**
    * Set the size of the toggle.
    */
@@ -49,10 +58,14 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({
   dimension = 'regular',
   onChange,
   indeterminate,
+  id,
+  label,
   hidden,
   ...otherProps
 }, forwardedRef) => {
   const ref = useRef<any>(forwardedRef);
+  const seedID = useUIDSeed();
+  const fieldID = useMemo(() => id ?? seedID('checkbox'), [id, seedID]);
 
   useEffect(() => {
     if (ref.current) {
@@ -68,17 +81,38 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({
         transition={{ duration: 0.3, ease: 'backOut' }}
         data-radio-control={hidden}
       >
-        <input
-          type="checkbox"
-          disabled={disabled}
-          aria-disabled={disabled}
-          data-control-dimension={dimension}
-          onChange={onChange}
-          className={styles.CheckboxInput}
-          ref={ref}
-          hidden={hidden}
-          {...otherProps}
-        />
+        <Stack
+          as="span"
+          direction="row"
+          columnGap={8}
+          vAlign="center"
+          fill={false}
+          wrap
+        >
+          <input
+            type="checkbox"
+            disabled={disabled}
+            aria-disabled={disabled}
+            data-control-dimension={dimension}
+            onChange={onChange}
+            className={styles.CheckboxInput}
+            ref={ref}
+            hidden={hidden}
+            id={fieldID}
+            {...otherProps}
+          />
+          {label && (
+            <Text
+              as="label"
+              aria-disabled={disabled}
+              className={styles.Label}
+              size={dimension === 'small' ? 14 : 16}
+              htmlFor={fieldID}
+            >
+              {label}
+            </Text>
+          )}
+        </Stack>
       </m.span>
     </LazyMotion>
   );

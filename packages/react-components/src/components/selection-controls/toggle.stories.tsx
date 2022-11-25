@@ -25,3 +25,4 @@ export default story;
 export const Default: ComponentStory<typeof Toggle> = args => <Toggle {...args} />;
 export const Checked: ComponentStory<typeof Toggle> = args => <Toggle defaultChecked {...args} />;
 export const DisabledChecked: ComponentStory<typeof Toggle> = args => <Toggle defaultChecked disabled {...args} />;
+export const withLabel: ComponentStory<typeof Toggle> = args => <Toggle defaultChecked label="Label" {...args} />;

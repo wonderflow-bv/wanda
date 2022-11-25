@@ -12,11 +12,7 @@ export const getStaticProps = () =>
       color: "indigo",
       subtitle: "Content selection and toggles",
       navigation: ComponentsNav,
-      features: [
-        "Keyboard accessible",
-        "Multiple sizes",
-        "Themes ready"
-      ],
+      features: ["Keyboard accessible", "Multiple sizes", "Themes ready"],
       links: [
         {
           label: "ARIA checkbox design",
@@ -34,18 +30,17 @@ export const getStaticProps = () =>
           label: "ARIA radio auth.",
           url: "https://www.w3.org/WAI/ARIA/apg/patterns/radiobutton/",
         },
-      ]
-    }
+      ],
+    },
   });
 
 <LiveArea direction="row">
   <>
-    <Checkbox defaultChecked />
-    <Radio defaultChecked />
-    <Toggle defaultChecked />
+    <Checkbox defaultChecked label="Label 1" />
+    <Radio defaultChecked label="Label 2" />
+    <Toggle defaultChecked label="Label 3" />
   </>
 </LiveArea>
-
 
 ## Anatomy
 
@@ -55,9 +50,9 @@ import { Checkbox, Radio, Toggle } from "@wonderflow/react-components";
 export default () => {
   return (
     <>
-      <Checkbox />
-      <Radio />
-      <Toggle />
+      <Checkbox label="Label 1" />
+      <Radio label="Label 2" />
+      <Toggle label="Label 3" />
     </>
   );
 };
@@ -72,22 +67,32 @@ export default () => {
       type: ["boolean"],
       default: "",
       required: false,
-      description: "Set disabled state. The component is not interactive and grayed out.",
+      description:
+        "Set disabled state. The component is not interactive and grayed out.",
     },
     {
       name: "indeterminate",
       type: ["boolean"],
       default: "",
       required: false,
-      description: "Set the indeterminate state. This state is used to indicate that the checkbox is partially checked. Is used when a subset of the options are selected but not all of them.",
+      description:
+        "Set the indeterminate state. This state is used to indicate that the checkbox is partially checked. Is used when a subset of the options are selected but not all of them.",
     },
     {
       name: "dimension",
-      type: ['enum'],
+      type: ["enum"],
       typeValue: "'regular' | 'small'",
-      default: 'big',
+      default: "big",
       required: false,
       description: "Set the size of the element.",
+    },
+    {
+      name: "label",
+      type: ["string"],
+      default: "",
+      required: false,
+      description:
+        "Set the label of the element. the accessible label of the input. While this is not mandatory, an input should always have a label. If not using this property you can bind a custom label to the input by using an id.",
     },
     {
       name: "onChange",
@@ -95,7 +100,8 @@ export default () => {
       typeValue: "(event: ChangeEvent<HTMLInputElement>) => void",
       default: "",
       required: false,
-      description: "Callback function to be called when is toggled. A parameter `ChangeEvent<HTMLInputElement>` is passed with the event details",
+      description:
+        "Callback function to be called when is toggled. A parameter `ChangeEvent<HTMLInputElement>` is passed with the event details",
     },
   ]}
 />

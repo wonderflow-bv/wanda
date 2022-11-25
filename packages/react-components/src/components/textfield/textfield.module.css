@@ -77,6 +77,13 @@
   .InputField:invalid + .Icon {
     fill: var(--highlight-red-foreground);
   }
+
+  .Label {
+    &[aria-disabled='true'] {
+      color: var(--global-disabled-foreground);
+      cursor: not-allowed;
+    }
+  }
 }
 @layer overrides {
   .IconButton {
