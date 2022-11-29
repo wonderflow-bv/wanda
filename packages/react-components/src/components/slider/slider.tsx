@@ -16,8 +16,9 @@
 
 import clsx from 'clsx';
 import {
-  forwardRef, InputHTMLAttributes, useCallback, useState,
+  forwardRef, InputHTMLAttributes, useCallback, useMemo, useState,
 } from 'react';
+import { useUIDSeed } from 'react-uid';
 
 import {
   Stack, Symbol, SymbolProps, Text, Textfield,
@@ -66,6 +67,12 @@ export type SliderProps = InputHTMLAttributes<HTMLInputElement> & {
    * Set the size of the slider.
    */
   dimension?: 'small' | 'regular';
+  /**
+   * Define the accessible label of the input. While this is not
+   * mandatory, an input should always have a label. If not using this property
+   * you can bind a custom label to the input by using an id.
+   */
+  label?: string;
 }
 
 export const Slider = forwardRef<HTMLInputElement, SliderProps>(({
@@ -79,6 +86,9 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>(({
   showValues,
   iconMin,
   iconMax,
+  disabled,
+  label,
+  id,
   ...otherProps
 }, forwardedRef) => {
   const [value, setValue] = useState<number>(defaultValue);
@@ -91,35 +101,59 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>(({
     [onInput],
   );
 
+  const seedID = useUIDSeed();
+  const fieldID = useMemo(() => id ?? seedID('slider'), [id, seedID]);
+
   return (
-    <Stack
-      direction="row"
-      vAlign="center"
-      columnGap={8}
-      className={clsx(styles.Slider, className)}
-      data-slider-dimension={dimension}
-    >
-      {showValues && <Text as="span" size={isSmall ? 14 : 16} weight="bold" textAlign="end" className={styles.Value}>{min}</Text>}
-      {(iconMin && !showValues) && <Symbol source={iconMin} dimension={isSmall ? 16 : 24} />}
+    <Stack direction="column" rowGap={8}>
+      {label && <Text as="label" size={isSmall ? 14 : 16} className={styles.Label} aria-disabled={disabled} htmlFor={fieldID}>{label}</Text>}
 
-      <input
-        ref={forwardedRef}
-        className={styles.Input}
-        type="range"
-        min={min}
-        max={max}
-        defaultValue={value}
-        aria-valuemin={min}
-        aria-valuemax={max}
-        aria-valuenow={value}
-        step={step}
-        onInput={handleInput}
-        {...otherProps}
-      />
+      <Stack
+        direction="row"
+        vAlign="center"
+        columnGap={8}
+        className={clsx(styles.Slider, className)}
+        data-slider-dimension={dimension}
+      >
+        {showValues && <Text as="span" size={isSmall ? 14 : 16} weight="bold" textAlign="end" className={styles.Value} aria-disabled={disabled}>{min}</Text>}
+        {(iconMin && !showValues) && (
+          <Symbol
+            source={iconMin}
+            dimension={isSmall ? 16 : 24}
+            className={styles.Icon}
+            aria-disabled={disabled}
+          />
+        )}
 
-      {showValues && <Text as="span" size={isSmall ? 14 : 16} weight="bold" className={styles.Value}>{max}</Text>}
-      {showValues && <Textfield readOnly dimension="small" size={String(max).length} value={value} className={styles.CurrentValue} />}
-      {(iconMax && !showValues) && <Symbol source={iconMax} dimension={isSmall ? 16 : 24} />}
+        <input
+          ref={forwardedRef}
+          className={styles.Input}
+          type="range"
+          min={min}
+          max={max}
+          defaultValue={value}
+          aria-valuemin={min}
+          aria-valuemax={max}
+          aria-valuenow={value}
+          aria-disabled={disabled}
+          step={step}
+          onInput={handleInput}
+          disabled={disabled}
+          id={fieldID}
+          {...otherProps}
+        />
+
+        {showValues && <Text as="span" size={isSmall ? 14 : 16} weight="bold" className={styles.Value} aria-disabled={disabled}>{max}</Text>}
+        {showValues && <Textfield readOnly dimension="small" size={String(max).length} value={value} disabled={disabled} />}
+        {(iconMax && !showValues) && (
+          <Symbol
+            source={iconMax}
+            dimension={isSmall ? 16 : 24}
+            className={styles.Icon}
+            aria-disabled={disabled}
+          />
+        )}
+      </Stack>
     </Stack>
   );
 });
