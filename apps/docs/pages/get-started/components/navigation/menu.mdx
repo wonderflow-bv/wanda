@@ -98,6 +98,13 @@ export default () => {
 <PropsTable
   properties={[
     {
+      name: "value",
+      type: ["string"],
+      default: '',
+      required: true,
+      description: "Assign a value to the menu option",
+    },
+    {
       name: "icon",
       type: ["enum"],
       typeValue: "SymbolProps['source']",
@@ -107,11 +114,11 @@ export default () => {
       description: "Whether the menu item should have an icon",
     },
     {
-      name: "value",
+      name: "subtext",
       type: ["string"],
       default: '',
-      required: true,
-      description: "Assign a value to the menu option",
+      required: false,
+      description: "Whether the menu item should have a supporting text",
     },
     {
       name: "iconPosition",

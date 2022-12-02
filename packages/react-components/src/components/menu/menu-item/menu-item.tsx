@@ -21,7 +21,8 @@ import {
 import { useFocusEffect, useRovingTabIndex } from 'react-roving-tabindex';
 
 import {
-  Polymorphic, Stack, Symbol, SymbolProps, Tooltip,
+  Polymorphic, Stack, Symbol, SymbolProps, Text,
+  Tooltip,
 } from '@/components';
 
 import * as styles from './menu-item.module.css';
@@ -39,6 +40,10 @@ export type MenuItemProps = {
    * Set the position of the icon. Used only when icon is defined.
    */
   iconPosition?: 'left' | 'right';
+  /**
+   * Whether the menu item should have a supporting text
+   */
+  subtext?: string;
   /**
    * Set the size of the menu item.
    * Font size and icon style will be adjusted to match the size.
@@ -90,6 +95,7 @@ type PolymorphicMenuItem = Polymorphic.ForwardRefComponent<'button', MenuItemPro
 export const MenuItem = forwardRef(({
   className,
   children,
+  subtext,
   onClick,
   icon,
   dimension = 'regular',
@@ -143,11 +149,14 @@ export const MenuItem = forwardRef(({
         />
       )}
       <Stack className={styles.DecorationContent} columnGap={16} fill={false} direction="row" hAlign="space-between">
-        {children}
+        <Stack direction="column">
+          {children}
+          {subtext && <Text size={14} style={{ fontWeight: '400' }}>{subtext}</Text>}
+        </Stack>
         {decoration}
       </Stack>
     </Stack>
-  ), [children, dimension, icon, isIconRight, decoration, padding]);
+  ), [children, subtext, dimension, icon, isIconRight, decoration, padding]);
 
   return (
     <Stack as="li" role="none">
