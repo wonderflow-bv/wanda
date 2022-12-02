@@ -42,4 +42,5 @@ WithLabel.args = {
   iconMin: 'moon',
   iconMax: 'sun-bright',
   label: 'Label',
+  disabled: false,
 };
