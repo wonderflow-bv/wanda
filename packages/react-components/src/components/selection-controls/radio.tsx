@@ -16,7 +16,12 @@
 
 import clsx from 'clsx';
 import { domAnimation, LazyMotion, m } from 'framer-motion';
-import { ChangeEvent, forwardRef, InputHTMLAttributes } from 'react';
+import {
+  ChangeEvent, forwardRef, InputHTMLAttributes, useMemo,
+} from 'react';
+import { useUIDSeed } from 'react-uid';
+
+import { Stack, Text } from '@/components';
 
 import * as styles from './selection-controls.module.css';
 
@@ -25,6 +30,12 @@ export type RadioProps = InputHTMLAttributes<HTMLInputElement> & {
    * Set disabled state. The component is not interactive and grayed out.
    */
   disabled?: boolean;
+  /**
+   * Define the accessible label of the input. While this is not
+   * mandatory, an input should always have a label. If not using this property
+   * you can bind a custom label to the input by using an id.
+   */
+  label?: string;
   /**
    * Set the size of the toggle.
    */
@@ -39,31 +50,59 @@ export type RadioProps = InputHTMLAttributes<HTMLInputElement> & {
 export const Radio = forwardRef<HTMLInputElement, RadioProps>(({
   className,
   disabled,
+  id,
+  label,
   dimension = 'regular',
   onChange,
   hidden,
   ...otherProps
-}, forwardedRef) => (
-  <LazyMotion features={domAnimation} strict>
-    <m.span
-      className={clsx(styles.InputWrapper, className)}
-      whileTap={{ scale: 1.15 }}
-      transition={{ duration: 0.3, ease: 'backOut' }}
-      data-radio-control={hidden}
-    >
-      <input
-        type="radio"
-        disabled={disabled}
-        aria-disabled={disabled}
-        data-control-dimension={dimension}
-        onChange={onChange}
-        className={styles.RadioInput}
-        ref={forwardedRef}
-        hidden={hidden}
-        {...otherProps}
-      />
-    </m.span>
-  </LazyMotion>
-));
+}, forwardedRef) => {
+  const seedID = useUIDSeed();
+  const fieldID = useMemo(() => id ?? seedID('radio'), [id, seedID]);
+
+  return (
+    <LazyMotion features={domAnimation} strict>
+      <m.span
+        className={clsx(styles.InputWrapper, className)}
+        whileTap={{ scale: 1.15 }}
+        transition={{ duration: 0.3, ease: 'backOut' }}
+        data-radio-control={hidden}
+      >
+        <Stack
+          as="span"
+          direction="row"
+          columnGap={8}
+          vAlign="center"
+          fill={false}
+          wrap
+        >
+          <input
+            type="radio"
+            disabled={disabled}
+            aria-disabled={disabled}
+            data-control-dimension={dimension}
+            onChange={onChange}
+            className={styles.RadioInput}
+            ref={forwardedRef}
+            hidden={hidden}
+            id={fieldID}
+            {...otherProps}
+          />
+          {label && (
+            <Text
+              as="label"
+              aria-disabled={disabled}
+              className={styles.Label}
+              size={dimension === 'small' ? 14 : 16}
+              htmlFor={fieldID}
+            >
+              {label}
+            </Text>
+          )}
+        </Stack>
+      </m.span>
+    </LazyMotion>
+  );
+});
 
 Radio.displayName = 'Radio';

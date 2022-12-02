@@ -129,4 +129,11 @@
       --h: 16px;
     }
   }
+
+  .Label {
+    &[aria-disabled='true'] {
+      color: var(--global-disabled-foreground);
+      cursor: not-allowed;
+    }
+  }
 }

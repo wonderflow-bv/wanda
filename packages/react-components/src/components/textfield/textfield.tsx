@@ -127,7 +127,7 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
       tabIndex={disabled ? 0 : undefined}
       style={style}
     >
-      {label && <Text as="label" size={dimension === 'small' ? 14 : 16} htmlFor={fieldID}>{label}</Text>}
+      {label && <Text as="label" aria-disabled={disabled} className={styles.Label} size={dimension === 'small' ? 14 : 16} htmlFor={fieldID}>{label}</Text>}
       <div className={styles.FieldContainer}>
         {textarea
           ? (

@@ -99,9 +99,22 @@
 
   .Value {
     flex-shrink: 0;
+
+    &[aria-disabled='true'] {
+      color: var(--global-disabled-foreground);
+      cursor: not-allowed;
+    }
   }
 
   .CurrentValue {
     flex-shrink: 0;
+  }
+
+  .Label,
+  .Icon {
+    &[aria-disabled='true'] {
+      color: var(--global-disabled-foreground);
+      cursor: not-allowed;
+    }
   }
 }

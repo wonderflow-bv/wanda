@@ -43,3 +43,10 @@ export const Indeterminate = Template.bind({});
 Indeterminate.args = {
   indeterminate: true,
 };
+
+export const withLabel = Template.bind({});
+withLabel.args = {
+  defaultChecked: true,
+  disabled: false,
+  label: 'Label',
+};

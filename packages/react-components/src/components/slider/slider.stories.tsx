@@ -37,3 +37,10 @@ WithIcons.args = {
   iconMin: 'moon',
   iconMax: 'sun-bright',
 };
+export const WithLabel = Template.bind({});
+WithLabel.args = {
+  iconMin: 'moon',
+  iconMax: 'sun-bright',
+  label: 'Label',
+  disabled: false,
+};

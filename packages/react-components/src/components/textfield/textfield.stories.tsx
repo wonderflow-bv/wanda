@@ -46,9 +46,9 @@ export default story;
 
 const SingleTemplate: ComponentStory<typeof Textfield> = args => (
   <Stack rowGap={24}>
-    <Textfield {...args} size={4} label="Empty" placeholder="Placeholder" />
-    <Textfield {...args} size={4} label="Empty" placeholder="Placeholder" />
-    <Textfield {...args} size={4} label="Empty" placeholder="Placeholder" />
+    <Textfield {...args} size={4} placeholder="Placeholder" />
+    <Textfield {...args} size={4} placeholder="Placeholder" />
+    <Textfield {...args} size={4} placeholder="Placeholder" />
     <Textfield {...args} type="password" label="Password" defaultValue="123123klòasj" placeholder="Placeholder" />
   </Stack>
 );
@@ -73,6 +73,7 @@ const MultipleTemplate: ComponentStory<typeof Textfield> = args => (
 export const Single = SingleTemplate.bind({});
 Single.args = {
   disabled: false,
+  label: 'Empty',
 };
 Single.argTypes = {
   textarea: {

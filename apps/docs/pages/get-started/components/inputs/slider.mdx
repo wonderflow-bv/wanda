@@ -133,6 +133,21 @@ If you don't want to use numeric values you can use icons instead.
       dangerous: false,
       description: "Set the element size",
     },
+    {
+      name: "label",
+      type: ["string"],
+      default: "",
+      required: false,
+      description: "Set the label of the element. The accessible label of the input. While this is not mandatory, an input should always have a label. If not using this property you can bind a custom label to the input by using an id.",
+    },
+    {
+      name: "disabled",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      description:
+        "Set disabled state. The component is not interactive and grayed out.",
+    },
   ]}
 />
 

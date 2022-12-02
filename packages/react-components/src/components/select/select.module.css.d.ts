@@ -3,6 +3,7 @@ declare const styles: {
   readonly "FieldContainer": string;
   readonly "Field": string;
   readonly "Icon": string;
+  readonly "Label": string;
 };
 export = styles;
 
