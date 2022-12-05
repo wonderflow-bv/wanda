@@ -1,5 +1,12 @@
 # @wonderflow/react-components
 
+## 10.17.0
+
+### Minor Changes
+
+- e006ee8: Feat(inputs) add label and disable properties where missing
+- 93068ca: Feat(MenuItem): add subtext property
+
 ## 10.16.0
 
 ### Minor Changes
