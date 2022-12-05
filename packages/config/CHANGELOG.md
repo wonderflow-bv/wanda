@@ -1,5 +1,16 @@
 # @wonderflow/config
 
+## 10.17.0
+
+### Minor Changes
+
+- e006ee8: Feat(inputs) add label and disable properties where missing
+
+### Patch Changes
+
+- Updated dependencies [e006ee8]
+  - @wonderflow/tokens@10.17.0
+
 ## 10.16.0
 
 ### Patch Changes

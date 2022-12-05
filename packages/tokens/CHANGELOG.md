@@ -1,5 +1,11 @@
 # @wonderflow/tokens
 
+## 10.17.0
+
+### Minor Changes
+
+- e006ee8: Feat(inputs) add label and disable properties where missing
+
 ## 10.16.0
 
 ## 10.15.0
