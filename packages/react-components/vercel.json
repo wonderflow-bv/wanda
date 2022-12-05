@@ -4,5 +4,5 @@
   "devCommand": "npm run storybook",
   "installCommand": "npm install",
   "framework": null,
-  "outputDirectory": "./wanda-storybook"
+  "outputDirectory": "./storybook-static"
 }
