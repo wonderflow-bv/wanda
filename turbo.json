@@ -16,6 +16,9 @@
     },
     "lint": {
       "outputs": []
+    },
+    "deploy:storybook": {
+      "cache": false
     }
   }
 }
