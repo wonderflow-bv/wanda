@@ -8,6 +8,7 @@
     "packages/*"
   ],
   "packageManager": "npm@8.3.1",
+  "homepage": "http://design-wonderflow.github.io/wanda",
   "scripts": {
     "prebuild": "copyright-header --fix --copyrightHolder \"Wonderflow <authored by Mattia Astorino>\" --include \"src\" --exclude \"apps/docs,.storybook,.d.ts,.stories.tsx\" --templateId \"apache\"",
     "prebuild:apps": "graphql-codegen --config codegen.yml",
@@ -22,7 +23,8 @@
     "update:deps": "npx npm-upgrade-monorepo",
     "change": "changeset",
     "codegen": "graphql-codegen --config codegen.yml",
-    "codegen:watch": "graphql-codegen --watch --config codegen.yml"
+    "codegen:watch": "graphql-codegen --watch --config codegen.yml",
+    "deploy:storybook": "npm run deploy:storybook --workspace=@wonderflow/react-components"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": "eslint",
@@ -47,6 +49,7 @@
     "eslint-plugin-react": "7.31.10",
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-plugin-simple-import-sort": "8.0.0",
+    "gh-pages": "4.0.0",
     "husky": "8.0.2",
     "is-ci": "3.0.1",
     "lint-staged": "13.0.3",
