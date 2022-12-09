@@ -27,7 +27,9 @@ module.exports = {
           implementation: require('postcss'),
         },
       },
-    }],
+    },
+    'storybook-addon-breakpoints',
+  ],
   typescript: {
     check: false,
     checkOptions: {},

@@ -3,6 +3,16 @@ import '../src/core.css';
 import './overrides.css';
 
 export const parameters = {
+  breakpoints: {
+    breakpointNames: {
+      'extra-small': '0',
+      'small': '481',
+      'medium': '769',
+      'large': '961',
+      'extra-large': '1281'
+    },
+    debounceTimeout: 200
+  },
   actions: { argTypesRegex: '^on[A-Z].*' },
   previewTabs: {
     'storybook/docs/panel': {
@@ -29,5 +39,5 @@ export const parameters = {
         iframeDocument.dataset.theme = 'light';
       }
     },
-  },
+  }
 };
