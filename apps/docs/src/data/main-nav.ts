@@ -10,6 +10,11 @@ const Nav: NavType = [
     url: '/playground',
   },
   {
+    label: 'Storybook',
+    url: 'https://wonderflow-bv.github.io/wanda',
+    blank: true,
+  },
+  {
     label: 'Company',
     url: 'https://wonderflow.ai',
     blank: true,

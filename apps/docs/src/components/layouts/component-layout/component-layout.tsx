@@ -40,6 +40,13 @@ export const ComponentLayout: FCChildren<IPropsComponentLayout> = ({
   const pageURL = new URL(process.env.NEXT_PUBLIC_DOMAIN + router.asPath);
   const isSubPage = useMemo(() => pageURL.pathname.split('/').pop() !== slugName, [pageURL.pathname, slugName]);
   const { matches } = useResponsiveContext();
+  const endPathName = useMemo(() => router.asPath.split('/')
+    .splice(3, 2)
+    .map((e, i) => (i === 0 ? e.replace('-', '') : e))
+    .join('-')
+    .replace('selection-controls', 'checkbox')
+    .replace('info-state', 'infostate')
+    .replace('other', 'widgets'), [router]);
 
   return (
     <DocLayout title={title} {...otherProps}>
@@ -86,6 +93,15 @@ export const ComponentLayout: FCChildren<IPropsComponentLayout> = ({
                 <Symbol source="arrow-up-right" dimension={12} />
               </a>
               </Link>
+              <a
+                href={`https://wonderflow-bv.github.io/wanda/?path=/story/${endPathName}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open in Storybook
+                {' '}
+                <Symbol source="arrow-up-right" dimension={12} />
+              </a>
               <a
                 href={`https://github.com/wonderflow-bv/wanda/tree/main/packages/react-components/src/components/${slugName}`}
                 target="_blank"
