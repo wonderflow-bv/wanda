@@ -16,35 +16,35 @@ export const parameters = {
   viewport: {
     viewports: {
       xs: {
-        name: "mobile",
+        name: "extra-small",
         styles: {
           width: "480px",
           height: "100%",
         },
       },
       s: {
-        name: "tablet",
+        name: "small",
         styles: {
           width: "768px",
           height: "100%",
         },
       },
       m: {
-        name: "laptop",
+        name: "medium",
         styles: {
           width: "960px",
           height: "100%",
         },
       },
       l: {
-        name: "small screen",
+        name: "large",
         styles: {
           width: "1280px",
           height: "100%",
         },
       },
       xl: {
-        name: "large screen",
+        name: "extra-large",
         styles: {
           width: "1600px",
           height: "100%",
