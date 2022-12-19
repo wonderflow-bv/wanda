@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 10.17.1
+
+### Patch Changes
+
+- 4d557f0: Fix `button` vertical padding
+
 ## 10.17.0
 
 ### Minor Changes
