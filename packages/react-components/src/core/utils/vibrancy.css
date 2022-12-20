@@ -1,3 +1,0 @@
-@define-mixin vibrancy {
-  backdrop-filter: saturate(180%) blur(62px);
-}

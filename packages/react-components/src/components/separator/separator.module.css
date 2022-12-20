@@ -1,8 +1,0 @@
-@layer components {
-  .Separator {
-    border: 0;
-    margin: 0;
-    block-size: 1px;
-    border-bottom: 1px solid var(--dimmed-1);
-  }
-}

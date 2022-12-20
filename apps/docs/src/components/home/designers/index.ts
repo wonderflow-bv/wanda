@@ -1,1 +1,0 @@
-export { Designers } from './designers';

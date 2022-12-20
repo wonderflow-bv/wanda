@@ -1,1 +1,0 @@
-export { Developers } from './developers';
