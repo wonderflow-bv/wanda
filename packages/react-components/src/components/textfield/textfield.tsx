@@ -27,6 +27,11 @@ export type TextfieldProps<T = Record<string, unknown>> = BaseFieldProps<{
    */
   label?: string;
   /**
+   * Optional hint text field, it provides additional help or context
+   * to the user, it is often used to explain the correct format of the textfield data.
+   */
+  message?: string;
+  /**
    * Set the input type. The value can be anything that
    * is supported by the HTML input element.
    *
@@ -74,6 +79,7 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
   id,
   iconPosition = 'right',
   dimension = 'regular',
+  message,
   type,
   style,
   onChange,
@@ -127,7 +133,8 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
       tabIndex={disabled ? 0 : undefined}
       style={style}
     >
-      {label && <Text as="label" aria-disabled={disabled} className={styles.Label} size={dimension === 'small' ? 14 : 16} htmlFor={fieldID}>{label}</Text>}
+      {label && <Text as="label" lineHeight="small" aria-disabled={disabled} className={styles.Label} size={dimension === 'small' ? 14 : 16} htmlFor={fieldID}>{label}</Text>}
+
       <div className={styles.FieldContainer}>
         {textarea
           ? (
@@ -170,6 +177,9 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
           />
         )}
       </div>
+
+      {message && <Text as="label" lineHeight="small" sentiment={invalid ? 'danger' : undefined} aria-disabled={disabled} className={styles.Label} size={14}>{message}</Text>}
+
     </Stack>
   );
 });
