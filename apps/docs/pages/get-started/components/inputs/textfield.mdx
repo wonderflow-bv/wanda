@@ -32,6 +32,7 @@ export const getStaticProps = () =>
   <Textfield
     type="text"
     label="Label"
+    message="Text hint sample"
     defaultValue="Prefilled value"
   />
 </LiveArea>
@@ -44,7 +45,7 @@ import { Textfield } from "@wonderflow/react-components";
 
 export default () => {
   return (
-    <Textfield type="text" label="Filled" defaultValue="Prefilled value" />
+    <Textfield type="text" label="Filled" message="Sample hint text" defaultValue="Prefilled value" />
   );
 };
 ```
@@ -83,6 +84,13 @@ export default () => {
       default: "",
       required: false,
       description: "Set the input to be a textarea instead of a single line field. This property completely changes the rendered element from an input to a textarea.",
+    },
+    {
+      name: "message",
+      type: ["string"],
+      default: "",
+      required: false,
+      description: "Optional helper text field, it provides additional aid or context to the user, it is often used to explain the correct format of the textfield data.",
     },
     {
       name: "dimension",
