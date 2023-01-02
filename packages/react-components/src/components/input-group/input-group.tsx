@@ -69,7 +69,7 @@ export const InputGroup = forwardRef<HTMLFieldSetElement, PropsWithClass<InputGr
       vAlign="start"
       fill={false}
     >
-      {label && <Text as="label" size={dimension === 'small' ? 14 : 16} htmlFor={seedID('field')}>{label}</Text>}
+      {label && <Text as="label" size={dimension === 'small' ? 14 : 16} lineHeight="small" htmlFor={seedID('field')}>{label}</Text>}
       <Stack
         as="fieldset"
         direction="row"

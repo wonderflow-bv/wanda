@@ -32,6 +32,8 @@
   }
 
   .End {
+    line-height: 1rem;
+
     & *:is(button, input, a, select, fieldset[tabindex='0']) {
       outline-offset: -2px;
     }

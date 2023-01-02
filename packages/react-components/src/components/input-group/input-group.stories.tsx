@@ -10,7 +10,15 @@ const story: ComponentMeta<typeof InputGroup> = {
   title: 'Inputs/Input group',
   component: InputGroup,
   args: {
+    label: 'Label',
+    dimension: 'regular',
     input: <Textfield type="text" defaultValue="sample" />,
+  },
+  argTypes: {
+    dimension: {
+      options: ['small', 'regular', 'big'],
+      control: { type: 'radio' },
+    },
   },
 };
 
