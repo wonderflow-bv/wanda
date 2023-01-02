@@ -1,5 +1,15 @@
 # @wonderflow/react-components
 
+## 10.18.0
+
+### Minor Changes
+
+- 55b45da: Add hint text in 'Textfield' component
+
+### Patch Changes
+
+- 644b9d0: Fix `Input Group` wrong alignment when in small size version
+
 ## 10.17.1
 
 ### Patch Changes
