@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 10.18.1
+
+### Patch Changes
+
+- 3457238: Fix `Textfield` prevent invalid state style while disabled
+
 ## 10.18.0
 
 ### Minor Changes
