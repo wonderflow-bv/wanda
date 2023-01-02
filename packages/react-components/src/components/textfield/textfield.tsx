@@ -112,7 +112,7 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
 
   const commonProps = {
     readOnly,
-    invalid,
+    invalid: invalid && !disabled,
     disabled,
     onChange,
   };
@@ -125,7 +125,7 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
       data-textfield-has-icon={isPassword || Boolean(icon)}
       data-textfield-icon-position={iconPosition}
       data-textfield-dimension={dimension}
-      data-textfield-invalid={invalid}
+      data-textfield-invalid={invalid && !disabled}
       data-textfield-fullwidth={fullWidth}
       aria-disabled={disabled}
       hAlign="stretch"
@@ -178,7 +178,7 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
         )}
       </div>
 
-      {message && <Text as="label" lineHeight="small" sentiment={invalid ? 'danger' : undefined} aria-disabled={disabled} className={styles.Label} size={14}>{message}</Text>}
+      {message && <Text as="label" lineHeight="small" sentiment={(invalid && !disabled) ? 'danger' : undefined} aria-disabled={disabled} className={styles.Label} size={14}>{message}</Text>}
 
     </Stack>
   );

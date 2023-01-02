@@ -50,7 +50,7 @@
         );
 
       &::placeholder {
-        color: var(--dimmed-6);
+        color: var(--global-disabled-foreground);
       }
     }
 
