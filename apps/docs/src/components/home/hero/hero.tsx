@@ -56,7 +56,7 @@ export const Hero: FCClass = ({
             for digital experiences
           </Title>
           <Text size={matches.extraLarge ? 28 : 22} textAlign="center" maxWidth="48ch">
-            Wanda is a complete design system made to provide complete and enojoyable
+            Wanda is a complete design system made to provide complete and enjoyable
             experience while using Wonderflow’s digital products.
           </Text>
         </Stack>
