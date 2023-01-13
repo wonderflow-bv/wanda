@@ -29,6 +29,8 @@ module.exports = {
       },
     },
     'storybook-addon-breakpoints',
+    '@storybook/addon-a11y',
+    '@storybook/addon-coverage',
   ],
   typescript: {
     check: false,
