@@ -1,5 +1,13 @@
 # @wonderflow/react-components
 
+## 10.18.2
+
+### Patch Changes
+
+- aac8cec: Add test script
+- 7dd7bb9: Modify test script
+- 6286985: Add Accessibility and Storybook test suite
+
 ## 10.18.1
 
 ### Patch Changes
