@@ -116,11 +116,7 @@ export const Footer: FC<FooterProps> = ({
         <Stack rowGap={24}>
           <Stack rowGap={8}>
             <Text size={16} dimmed={6} lineHeight="none">
-              Created by
-              {' '}
-              <a href="https://twitter.com/equinusocio">Mattia Astorino</a>
-              {' '}
-              for Wonderflow.
+              Created by Wonderflow Design Team for Wonderflow.
             </Text>
             <Text size={16} dimmed={6} lineHeight="none">
               &copy; Wonderflow

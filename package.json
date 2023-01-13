@@ -10,7 +10,7 @@
   "packageManager": "npm@8.3.1",
   "homepage": "http://design-wonderflow.github.io/wanda",
   "scripts": {
-    "prebuild": "copyright-header --fix --copyrightHolder \"Wonderflow <authored by Mattia Astorino>\" --include \"src\" --exclude \"apps/docs,.storybook,.d.ts,.stories.tsx\" --templateId \"apache\"",
+    "prebuild": "copyright-header --fix --copyrightHolder \"Wonderflow Design Team\" --include \"src\" --exclude \"apps/docs,.storybook,.d.ts,.stories.tsx\" --templateId \"apache\"",
     "prebuild:apps": "graphql-codegen --config codegen.yml",
     "build": "turbo run build",
     "build:nocache": "turbo run build --force",
