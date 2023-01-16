@@ -32,7 +32,7 @@
     "build-storybook": "build-storybook",
     "deploy:storybook": "build-storybook && gh-pages -d storybook-static",
     "test:storybook": "test-storybook --coverage --verbose",
-    "test": "test-storybook --url https://wonderflow-bv.github.io/wanda/",
+    "test:online": "test-storybook --url https://wonderflow-bv.github.io/wanda/",
     "clean": "rimraf dist core core.css",
     "watch:csstypes": "tcm -w -p '**/*.module.css' src",
     "build:csstypes": "tcm -p '**/*.module.css' src"
