@@ -11,7 +11,7 @@
     "start": {
       "cache": false
     },
-    "test": {
+    "test:storybook": {
       "cache": false
     },
     "lint": {
