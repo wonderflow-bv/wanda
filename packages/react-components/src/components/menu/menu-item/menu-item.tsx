@@ -171,6 +171,7 @@ export const MenuItem = forwardRef(({
         aria-disabled={disabled}
         type={Wrapper === 'button' ? 'button' : undefined}
         data-menu-item-dimension={dimension}
+        data-testid="MenuItem"
         {...otherProps}
       >
         {description

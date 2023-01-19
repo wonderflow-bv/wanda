@@ -72,6 +72,7 @@ export const ClampText = forwardRef(({
       {expandable && (
         <Tooltip trigger={(
           <ToggleButton
+            data-testid="ExpandableButton"
             className={styles.Trigger}
             pressed={isExpanded}
             onClick={() => setIsExpandend(state => !state)}

@@ -115,6 +115,7 @@ export const Button = forwardRef((
       ref={forwardedRef}
       type={Wrapper === 'button' ? type : undefined}
       className={clsx(styles.Button, className)}
+      data-testid="Button"
       data-button-icon-position={iconPosition}
       data-button-dimension={dimension}
       data-button-kind={kind}

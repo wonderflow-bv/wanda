@@ -79,8 +79,8 @@ export const Pagination = ({
     <ReactPaginate
       containerClassName={clsx(styles.Pagination, className)}
       breakLabel="..."
-      nextLabel={<Symbol dimension={16} source="chevron-right" />}
-      previousLabel={<Symbol dimension={16} source="chevron-left" />}
+      nextLabel={<Symbol dimension={16} source="chevron-right" data-testid="RightChevron" />}
+      previousLabel={<Symbol dimension={16} source="chevron-left" data-testid="LeftChevron" />}
       onPageChange={handlePageClick}
       pageRangeDisplayed={pageRangeDisplayed}
       pageCount={pageCount ?? computedPageCount}

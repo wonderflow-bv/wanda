@@ -1,5 +1,5 @@
 module.exports = {
   mergeRefs() {
-    return ({});
+    return {};
   },
 };

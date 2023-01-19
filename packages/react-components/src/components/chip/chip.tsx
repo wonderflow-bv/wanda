@@ -94,7 +94,7 @@ export const Chip: FCChildrenClass<ChipProps> = forwardRef(({
 
       <b>{children}</b>
       {interactive && (
-        <button onClick={interactive && onDismissClick} className={styles.Action} type="button">
+        <button data-testid="InteractiveButton" onClick={interactive && onDismissClick} className={styles.Action} type="button">
           <Symbol
             source="xmark"
             weight={properties[dimension].style as SymbolProps['weight']}

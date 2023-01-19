@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import { Accordion } from './accordion';
 import { AccordionItem } from './accordion-item';
@@ -23,7 +23,19 @@ describe('<Accordion>', () => {
         </AccordionItem>
       </Accordion>,
     );
+    expect(container).not.toBeNull();
+  });
 
+  it('should open properly', () => {
+    const { container, getByTestId, getByText } = render(
+      <Accordion>
+        <AccordionItem value="1" summary="Item 1">
+          Inner Item
+        </AccordionItem>
+      </Accordion>,
+    );
+    fireEvent.click(getByTestId('Disclosure'));
+    expect(getByText(/Inner Item/i)).toBeDefined();
     expect(container).not.toBeNull();
   });
 });

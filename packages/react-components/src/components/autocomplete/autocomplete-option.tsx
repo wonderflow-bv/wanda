@@ -57,6 +57,7 @@ export const AutocompleteOption = forwardRef<HTMLButtonElement, AutocompleteOpti
       ref={forwardedRef}
       role="option"
       padding={false}
+      data-testid="AutocompleteOption"
       onClick={handleClick}
       {...otherProps}
     >

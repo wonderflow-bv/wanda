@@ -122,6 +122,7 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
     <details
       style={{ ...dynamicStyle, ...style }}
       className={clsx(styles.Disclosure, className)}
+      data-testid="Disclosure"
       data-disclosure-icon-position={iconPosition}
       data-disclosure-dimension={dimension}
       data-disclosure-expandable={expandable}
@@ -135,7 +136,7 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
         responsive={false}
         className={styles.Summary}
         id={seedID('disclosure')}
-        size={dimension ? sizes[dimension].summary as TextProps['size'] : undefined}
+        size={sizes[dimension].summary as TextProps['size']}
         weight="bold"
       >
         {summary}

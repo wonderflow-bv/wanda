@@ -92,6 +92,7 @@ export const Expander: FCChildrenClass<ExpanderProps> = ({
         <Elevator resting={isCollapsed ? 4 : 0}>
           <Button
             iconPosition="right"
+            data-testid="ExpanderButton"
             aria-expanded={!isCollapsed}
             aria-controls={uid('expander-content')}
             onClick={handleCollapse}

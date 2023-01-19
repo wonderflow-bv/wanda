@@ -206,6 +206,7 @@ export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
         aria-controls={seedID('autocomplete-menu')}
         aria-expanded={isOpen}
         onChange={handleFilter}
+        data-testid="Autocomplete"
         data-current-value={value}
         value={query}
         autoComplete="off"
