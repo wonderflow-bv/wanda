@@ -103,11 +103,7 @@ export const StarMeter = forwardRef(({
       return Math.floor(value);
     }
 
-    if (fraction >= 0.25 && fraction < 0.75) {
-      return integer + 0.5;
-    }
-
-    return 0;
+    return integer + 0.5;
   }, []);
 
   const starType = useCallback((maxStars: number, value: number) => {

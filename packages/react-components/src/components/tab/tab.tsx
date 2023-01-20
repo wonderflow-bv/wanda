@@ -88,6 +88,7 @@ export const Tab = ({
       onValueChange={handleOnVlaueChange}
       className={className}
       value={value}
+      data-testid="TabRoot"
       {...otherProps}
     >
       <LazyMotion features={domMax} strict>

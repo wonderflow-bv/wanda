@@ -43,7 +43,7 @@ export default () => {
       type: ["number"],
       default: "0",
       required: true,
-      description: "Set the value of the star meter. This value must be between `0` and `starCount`. This data is used to calculate the number of filled stars based on predefined thresholds of the fraction. \n\n```bash\nfraction < `0.25` = rounded to 0 (empty star) \nfraction >= `0.75` = rounded to 1 (filled star) \nfraction >= `0.25` and < 0.75 = rounded to 0.5 (half star)\n```",
+      description: "Set the value of the star meter. This value must be between `0` and `starCount`. This data is used to calculate the number of filled stars based on predefined thresholds of the fraction.",
     },
     {
       name: "starCount",
