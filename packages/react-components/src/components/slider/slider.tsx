@@ -140,6 +140,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>(({
           onInput={handleInput}
           disabled={disabled}
           id={fieldID}
+          data-testid="SliderInput"
           {...otherProps}
         />
 

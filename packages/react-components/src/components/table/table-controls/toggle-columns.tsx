@@ -63,6 +63,7 @@ export const ToggleColumnsControl = <T extends Record<string, unknown>>({
           onClick={() => handleToggleAll()}
           checked
           icon={visibleColumns.length === 0 ? 'check' : 'minus'}
+          data-testid="ColumnCheckbox"
         >
           Toggle All
         </Menu.ItemCheckbox>
@@ -74,6 +75,7 @@ export const ToggleColumnsControl = <T extends Record<string, unknown>>({
             checked={column.isVisible}
             icon={column.isVisible ? 'check' : undefined}
             onClick={() => column.toggleHidden()}
+            data-testid="ColumnCheckboxInner"
           >
             {column.render('Header')}
           </Menu.ItemCheckbox>

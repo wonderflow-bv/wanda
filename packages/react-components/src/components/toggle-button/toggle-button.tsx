@@ -122,6 +122,7 @@ export const ToggleButton = forwardRef(({
       onClick={handleClick}
       data-icon-button-squared={squared}
       className={clsx(styles.ToggleButton, className)}
+      data-testid="ToggleButton"
       {...otherProps}
     >
       <LazyMotion features={domMax} strict>

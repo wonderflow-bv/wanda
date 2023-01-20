@@ -122,6 +122,7 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
       as="fieldset"
       rowGap={4}
       className={clsx(styles.Textfield, className)}
+      data-testid="Textfield"
       data-textfield-has-icon={isPassword || Boolean(icon)}
       data-textfield-icon-position={iconPosition}
       data-textfield-dimension={dimension}
@@ -165,6 +166,7 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
             onClick={handlePasswordVisibility}
             kind="flat"
             aria-label="Reveal password"
+            data-testid="RevealIcon"
             icon={isPasswordVisible ? 'eye-slash' : 'eye'}
           />
         )}
