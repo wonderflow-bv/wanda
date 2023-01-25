@@ -15,25 +15,25 @@ const story: ComponentMeta<typeof OverlayContainer> = {
 export default story;
 
 const Template: ComponentStory<typeof OverlayContainer> = ({ children, ...otherProps }) => {
-  const [visible, setVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   return (
     <>
-      <Button onClick={() => setVisible(true)}>Open Overlay</Button>
+      <Button onClick={() => setIsVisible(true)}>Open Overlay</Button>
       <OverlayContainer {...otherProps}>
-        {visible && (
-        <Stack
-          fill={false}
-          hAlign="center"
-          vAlign="center"
-        >
-          I am over the top
-          <Button
-            kind="secondary"
-            onClick={() => setVisible(false)}
+        {isVisible && (
+          <Stack
+            fill={false}
+            hAlign="center"
+            vAlign="center"
           >
-            Close me
-          </Button>
-        </Stack>
+            I am over the top
+            <Button
+              kind="secondary"
+              onClick={() => setIsVisible(false)}
+            >
+              Close me
+            </Button>
+          </Stack>
         )}
       </OverlayContainer>
     </>

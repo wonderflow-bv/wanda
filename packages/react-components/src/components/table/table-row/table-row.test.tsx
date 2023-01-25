@@ -6,7 +6,9 @@ describe('<TableRow>', () => {
   test('it should render properly', () => {
     const { container } = render(
       <table>
-        <TableRow rowData={undefined} expandedRows={['test']} />
+        <tbody>
+          <TableRow rowData={undefined} expandedRows={['test']} />
+        </tbody>
       </table>,
     );
     expect(container).not.toBeNull();
