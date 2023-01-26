@@ -67,8 +67,6 @@ export type MenuItemProps = {
    * This space is used to keep the content aligned across items with or without icons.
    * We suggest to not remove the padding if you have items with icons in the same menu to
    * keep a good readability.
-   *
-   * Read more: https://design.wonderflow.ai/design/recipes/menu/#items-with-icons
    */
   padding?: boolean;
   /**
