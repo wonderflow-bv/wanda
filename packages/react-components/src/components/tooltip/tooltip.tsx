@@ -19,11 +19,13 @@ import { useFocusWithin, useKeyPress } from 'ahooks';
 import {
   Children, cloneElement, CSSProperties, isValidElement, ReactElement, ReactNode, useRef, useState,
 } from 'react';
+import { createPortal } from 'react-dom';
 import { usePopperTooltip } from 'react-popper-tooltip';
 import { useUIDSeed } from 'react-uid';
 
 import { Elevator } from '@/components';
 
+import { usePopUpWrapper } from '../../hooks';
 import * as styles from './tooltip.module.css';
 
 export type TooltipProps = {
@@ -79,10 +81,12 @@ export const Tooltip: FCChildrenClass<TooltipProps> = ({
   interactive = false,
   delay = 500,
 }) => {
-  const seedID = useUIDSeed();
   const [isOpen, setIsOpen] = useState(false);
+  const seedID = useUIDSeed();
+  const id = seedID('tooltip-content');
   const tooltipContainerRef = useRef<HTMLDivElement>(null);
   useKeyPress('esc', () => setIsOpen(false));
+  const { wrapper } = usePopUpWrapper('tooltip-popup-root');
 
   const {
     getArrowProps,
@@ -131,22 +135,22 @@ export const Tooltip: FCChildrenClass<TooltipProps> = ({
         {
           ref: setTriggerRef,
           tabIndex: 0,
-          'aria-describedby': seedID('tooltip-content'),
+          'aria-describedby': id,
         },
       ))}
-      {visible && (
+      {visible && createPortal(
         <Elevator resting={1}>
           <div
             ref={setTooltipRef}
             role="tooltip"
-            id={seedID('tooltip-content')}
+            id={id}
             data-theme="dark"
             {...getTooltipProps({ className: styles.Balloon, style: dynamycStyle })}
           >
             {children}
             <div {...getArrowProps({ className: styles.Arrow })} />
           </div>
-        </Elevator>
+        </Elevator>, wrapper,
       )}
     </div>
   );

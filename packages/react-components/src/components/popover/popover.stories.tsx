@@ -24,7 +24,6 @@ const DefaultTemplate: ComponentStory<typeof Popover> = (args) => {
     <Popover {...args}>
       <Menu>
         <Menu.Item
-          autoFocus
           icon="arrow-right"
           description={<>Description for this item</>}
           value="1"

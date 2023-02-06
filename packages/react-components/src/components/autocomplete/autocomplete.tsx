@@ -27,6 +27,7 @@ import {
   ReactNode, useCallback, useEffect, useMemo, useRef,
   useState,
 } from 'react';
+import { createPortal } from 'react-dom';
 import { mergeRefs } from 'react-merge-refs';
 import { usePopperTooltip } from 'react-popper-tooltip';
 import { useUIDSeed } from 'react-uid';
@@ -35,6 +36,7 @@ import {
   Menu, Skeleton, Stack, Text, Textfield, TextfieldProps,
 } from '@/components';
 
+import { usePopUpWrapper } from '../../hooks';
 import { MenuItemProps, MenuProps } from '../menu';
 import * as styles from './autocomplete.module.css';
 import { AutocompleteOption, AutocompleteOptionProps } from './autocomplete-option';
@@ -106,6 +108,7 @@ export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
   const [value, setValue] = useState<string>(val ? String(val) : '');
   const [optionsValues, setOptionValues] = useState<string[]>([]);
   const isInteractive = useMemo(() => !disabled && !readOnly, [disabled, readOnly]);
+  const { wrapper } = usePopUpWrapper('autocomplete-popup-root');
 
   const debounceQuery = useDebounce(
     query,
@@ -145,7 +148,7 @@ export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
     setTooltipRef,
     setTriggerRef,
     triggerRef,
-    // eslint-disable-next-line @typescript-eslint/naming-convention
+    // eslint-disable-next-line @typescript-eslint/naming-convention, @typescript-eslint/no-unused-vars
     visible,
   } = usePopperTooltip({
     delayShow: 0,
@@ -214,8 +217,8 @@ export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
         readOnly={readOnly}
         {...otherProps}
       />
-      <AnimatePresence>
-        {visible && (
+      {visible && createPortal(
+        <AnimatePresence>
           <div
             ref={setTooltipRef}
             {...getTooltipProps({ className: styles.PopUp, style: { minInlineSize: triggerSize ? (triggerSize.width + 2) : 'auto' } })}
@@ -248,8 +251,9 @@ export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
               </m.div>
             </LazyMotion>
           </div>
-        )}
-      </AnimatePresence>
+        </AnimatePresence>,
+        wrapper,
+      )}
     </div>
   );
 }) as AutocompleteComponent;

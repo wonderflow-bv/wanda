@@ -1,6 +1,10 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import React from 'react';
 
+import { Autocomplete } from '../autocomplete';
+import { Chip } from '../chip';
+import { IconButton } from '../icon-button';
+import { Menu, MenuItem } from '../menu';
+import { Popover } from '../popover';
 import { Disclosure } from './disclosure';
 
 const story: ComponentMeta<typeof Disclosure> = {
@@ -33,9 +37,41 @@ export default story;
 
 const Template: ComponentStory<typeof Disclosure> = args => (
   <Disclosure {...args}>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-    Doloribus corporis nobis ipsum natus laudantium dolorem sapiente,
-    sint adipisci at asperiores quia ex voluptatum veniam! Quos rerum natus eos excepturi atque!
+    <Autocomplete
+      style={{ maxWidth: '300px', padding: '0.5rem 0' }}
+      icon="magnifying-glass"
+    >
+      <Autocomplete.Option value="apple">
+        Apple
+      </Autocomplete.Option>
+      <Autocomplete.Option
+        value="banana"
+        decoration={<Chip dimension="small" color="green">110 Cal</Chip>}
+      >
+        Banana
+      </Autocomplete.Option>
+      <Autocomplete.Option value="cherry">
+        Cherry
+      </Autocomplete.Option>
+    </Autocomplete>
+
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      Doloribus corporis nobis ipsum natus laudantium dolorem sapiente,
+      sint adipisci at asperiores quia ex voluptatum veniam! Quos rerum natus eos excepturi atque!
+      {' '}
+      <Popover trigger={<IconButton icon="circle-info" dimension="small" kind="flat" />}>
+        <Menu style={{ maxWidth: '300px' }}>
+          <MenuItem value="1">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Doloribus corporis nobis ipsum natus laudantium dolorem sapiente,
+            sint adipisci at asperiores quia ex voluptatum veniam! Quos rerum natus eos excepturi atque!
+          </MenuItem>
+        </Menu>
+
+      </Popover>
+    </p>
+
   </Disclosure>
 );
 
@@ -43,6 +79,24 @@ export const Default = Template.bind({});
 
 const NestedTemplate: ComponentStory<typeof Disclosure> = args => (
   <Disclosure {...args}>
+    <Autocomplete
+      style={{ maxWidth: '300px', padding: '0.5rem 0' }}
+      icon="magnifying-glass"
+    >
+      <Autocomplete.Option value="apple">
+        Apple
+      </Autocomplete.Option>
+      <Autocomplete.Option
+        value="banana"
+        decoration={<Chip dimension="small" color="green">110 Cal</Chip>}
+      >
+        Banana
+      </Autocomplete.Option>
+      <Autocomplete.Option value="cherry">
+        Cherry
+      </Autocomplete.Option>
+    </Autocomplete>
+
     Lorem ipsum dolor sit amet consectetur adipisicing elit.
     Doloribus corporis nobis ipsum natus laudantium dolorem sapiente,
     sint adipisci at asperiores quia ex voluptatum veniam! Quos rerum natus eos excepturi atque!

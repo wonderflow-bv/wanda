@@ -35,10 +35,12 @@ import {
   useRef,
   useState,
 } from 'react';
+import { createPortal } from 'react-dom';
 import { mergeRefs } from 'react-merge-refs';
 import { usePopperTooltip } from 'react-popper-tooltip';
 import { useUIDSeed } from 'react-uid';
 
+import { usePopUpWrapper } from '../../hooks';
 import * as styles from './popover.module.css';
 
 export type PopoverProps = {
@@ -129,6 +131,7 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
   const seedID = useUIDSeed();
   const [isOpen, setIsOpen] = useState(false);
   const popoverContainerRef = useRef<HTMLDivElement>(null);
+  const { wrapper } = usePopUpWrapper('popover-popup-root');
 
   const sameWidth = useMemo<Modifier<string, Record<string, unknown>>>(() => ({
     name: 'sameWidth',
@@ -208,8 +211,8 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
           ...otherProps,
         },
       )}
-      <AnimatePresence>
-        {visible && (
+      {visible && createPortal(
+        <AnimatePresence>
           <div
             ref={setTooltipRef}
             role="tooltip"
@@ -235,8 +238,8 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
               </m.div>
             </LazyMotion>
           </div>
-        )}
-      </AnimatePresence>
+        </AnimatePresence>, wrapper,
+      )}
     </div>
   );
 });
