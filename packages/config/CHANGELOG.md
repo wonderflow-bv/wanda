@@ -1,5 +1,12 @@
 # @wonderflow/config
 
+## 10.19.0
+
+### Patch Changes
+
+- Updated dependencies [e618b68]
+  - @wonderflow/tokens@10.19.0
+
 ## 10.18.2
 
 ### Patch Changes
