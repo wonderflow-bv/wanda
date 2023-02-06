@@ -58,6 +58,7 @@
       color: var(--global-disabled-foreground);
       background-color: var(--global-disabled-background);
       cursor: not-allowed;
+      box-shadow: none;
     }
 
     &[data-control-dimension='small'] {
@@ -85,6 +86,23 @@
       inline-size: 50%;
       block-size: 50%;
       background-color: currentcolor;
+    }
+
+    &:disabled {
+      box-shadow: none;
+    }
+
+    &:indeterminate {
+      background-color: var(--global-vibrancy-background);
+      box-shadow: 0 0 0 1px var(--global-background), inset 0 0 0 1px var(--dimmed-2);
+
+      &:disabled {
+        box-shadow: none;
+      }
+
+      &::after {
+        block-size: 0%;
+      }
     }
   }
 
