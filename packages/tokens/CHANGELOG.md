@@ -1,5 +1,11 @@
 # @wonderflow/tokens
 
+## 10.19.0
+
+### Patch Changes
+
+- e618b68: Replace uvu tests with jest
+
 ## 10.18.2
 
 ## 10.18.1

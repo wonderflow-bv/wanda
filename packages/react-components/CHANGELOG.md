@@ -1,5 +1,23 @@
 # @wonderflow/react-components
 
+## 10.19.0
+
+### Minor Changes
+
+- 3515976: Render Tooltip, Popover and Autocomplete as Portals
+
+### Patch Changes
+
+- c84d2fd: Docs fix and add test
+- e618b68: Replace uvu tests with jest
+- a89af9f: Tests clean code and add lcov report
+- d87103a: Update packages
+- 1a874f7: Tests add config
+- ca5b9d7: Fix Radio style
+- adeb667: Minor fixes, add tests
+- bc5888f: Minor fixes, add tests
+- 2345ecc: Add Tests
+
 ## 10.18.2
 
 ### Patch Changes
