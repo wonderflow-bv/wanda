@@ -26,12 +26,12 @@
     &::before {
       content: '';
       position: absolute;
-      border-radius: token(--radius-4);
-      top: 0;
-      left: token(--space-8);
-      right: token(--space-8);
+      border-radius: 0;
       bottom: 0;
+      left: 0;
       opacity: 60%;
+      right: 0;
+      top: 0;
       z-index: 0;
     }
 

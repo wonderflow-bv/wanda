@@ -8,6 +8,8 @@ export const usePopUpWrapper = (id: string) => {
     if (!w) {
       w = document.createElement('div');
       w.setAttribute('id', id);
+      w.style.position = 'relative';
+      w.style.zIndex = '999';
       document.body.appendChild(w);
     }
 

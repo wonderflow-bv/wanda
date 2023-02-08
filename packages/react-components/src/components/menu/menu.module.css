@@ -8,7 +8,7 @@
     position: relative;
 
     & hr {
-      margin: 0 token(--space-8);
+      margin: 0;
     }
 
     &[data-menu-should-scroll='true'] {
