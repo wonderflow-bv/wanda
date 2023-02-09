@@ -1,5 +1,12 @@
 # @wonderflow/react-components
 
+## 10.20.0
+
+### Minor Changes
+
+- 056a55a: Fix Portal focus
+- f4ec0a9: Fix Menu Item and Separator Style in Menu according to design
+
 ## 10.19.0
 
 ### Minor Changes
