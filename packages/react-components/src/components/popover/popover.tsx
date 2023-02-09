@@ -179,7 +179,7 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
     ],
   });
 
-  const isFocusWithin = useFocusWithin(popoverContainerRef, {
+  const isFocusWithin = useFocusWithin(document.getElementById(seedID('tooltip-content')), {
     onBlur: (e) => {
       if (e.relatedTarget && visible) {
         setIsOpen(false);

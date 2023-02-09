@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React, { useState } from 'react';
 
 import {
-  Button, Menu, Textfield, Title,
+  Button, Menu, Stack, Textfield, Title,
 } from '../..';
 import { Popover } from './popover';
 
@@ -11,7 +11,16 @@ const story: ComponentMeta<typeof Popover> = {
   component: Popover,
   args: {
     placement: 'auto-start',
+    offset: 8,
+    closeOnOutsideClick: true,
+    matchTriggerWidth: false,
     trigger: <Button>Open Popover</Button>,
+  },
+  argTypes: {
+    placement: {
+      options: ['auto', 'auto-start', 'auto-end', 'top', 'bottom', 'right', 'left', 'top-start', 'top-end', 'bottom-start', 'bottom-end', 'right-start', 'right-end', 'left-start', 'left-end'],
+      control: { type: 'select' },
+    },
   },
 };
 
@@ -62,7 +71,7 @@ const DefaultTemplate: ComponentStory<typeof Popover> = (args) => {
 export const Default = DefaultTemplate.bind({});
 
 const CustomTemplate: ComponentStory<typeof Popover> = args => (
-  <>
+  <Stack direction="row" columnGap={8}>
     <Popover {...args}>
       <div style={{
         background: 'var(--global-vibrancy-background)', backdropFilter: 'blur(10px)', border: '2px solid black', padding: 24,
@@ -81,7 +90,7 @@ const CustomTemplate: ComponentStory<typeof Popover> = args => (
         veniam non ut nulla, incidunt velit et, placeat cupiditate, aliquid saepe. Atque, provident perferendis?
       </div>
     </Popover>
-  </>
+  </Stack>
 );
 
 export const CustomElement = CustomTemplate.bind({});
@@ -129,7 +138,11 @@ const ControlledTemplate: ComponentStory<typeof Popover> = (args) => {
       open={isOpen}
     >
       <div style={{
-        background: 'var(--global-vibrancy-background)', backdropFilter: 'blur(10px)', border: '2px solid black', padding: 24,
+        background: 'var(--global-vibrancy-background)',
+        backdropFilter: 'blur(10px)',
+        border: '2px solid black',
+        padding: 24,
+        maxWidth: '300px',
       }}
       >
         Lorem ipsum dolor, sit amet consectetur adipisicing elit.

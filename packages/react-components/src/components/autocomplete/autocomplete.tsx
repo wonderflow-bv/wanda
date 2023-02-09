@@ -15,6 +15,7 @@
  */
 
 import {
+  useClickAway,
   useDebounce, useFocusWithin, useKeyPress, useSize,
 } from 'ahooks';
 import {
@@ -133,13 +134,16 @@ export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
 
   const isFocusWithin = useFocusWithin(autocompleteRef, {
     onChange: (isFocusWithin) => {
-      if (isFocusWithin) {
+      const m = document.getElementById(seedID('autocomplete-menu'));
+      if (isFocusWithin || m) {
         setIsOpen(true);
       } else {
         setIsOpen(false);
       }
     },
   });
+
+  useClickAway(() => setIsOpen(false), autocompleteRef);
 
   useKeyPress('esc', () => setIsOpen(false));
 
