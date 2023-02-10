@@ -17,11 +17,13 @@ const story: ComponentMeta<typeof Container> = {
       },
     },
     dimension: {
-      options: ['full', 'medium', 'large'],
+      options: ['full', 'medium', 'large', 'auto'],
+      control: { type: 'select' },
     },
   },
   args: {
     dimension: 'full',
+    padding: true,
   },
 };
 
@@ -38,6 +40,12 @@ Medium.args = {
 export const Large = Template.bind({});
 Large.args = {
   dimension: 'large',
+  className: 'ContainerEx',
+};
+
+export const Auto = Template.bind({});
+Auto.args = {
+  dimension: 'auto',
   className: 'ContainerEx',
 };
 

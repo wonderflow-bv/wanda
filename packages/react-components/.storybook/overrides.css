@@ -63,6 +63,12 @@
   }
 }
 
+.ContainerEx[data-container-dimension='auto'] {
+  box-shadow:
+    inset token(--space-24) 0 0 hsl(token(--color-support-brand) / 60%),
+    inset calc(token(--space-24) * -1) 0 0 hsl(token(--color-support-brand) / 60%);
+}
+
 .ContainerEx[data-container-padding='false'] {
   box-shadow: none;
 }

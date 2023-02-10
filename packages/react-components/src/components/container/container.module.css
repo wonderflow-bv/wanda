@@ -38,6 +38,28 @@
       }
     }
 
+    &[data-container-dimension='auto'] {
+      max-inline-size: 432px;
+      padding: 0 token(--space-24);
+
+      @media (--from-small) {
+        max-inline-size: 712px;
+        padding: 0 token(--space-24);
+      }
+      @media (--from-medium) {
+        max-inline-size: 912px;
+        padding: 0 token(--space-24);
+      }
+      @media (--from-large) {
+        max-inline-size: 1152px;
+        padding: 0 token(--space-24);
+      }
+      @media (--from-extra-large) {
+        max-inline-size: 1440px;
+        padding: 0 token(--space-24);
+      }
+    }
+
     &[data-container-padding='false'] {
       padding: 0;
     }
