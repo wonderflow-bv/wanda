@@ -15,3 +15,4 @@
  */
 
 export { usePopUpWrapper } from './usePopupWrapper';
+export { useSSR } from './useSSR';

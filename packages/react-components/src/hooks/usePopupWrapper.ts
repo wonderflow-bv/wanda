@@ -1,8 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
 
+import { useSSR } from './useSSR';
+
 export const usePopUpWrapper = (id: string) => {
   const [wrapper, setWrapper] = useState<HTMLElement>();
-  const isBrowser = window?.document;
+  const { isBrowser } = useSSR();
 
   const createWrapper = useCallback(() => {
     if (isBrowser) {
@@ -21,7 +23,7 @@ export const usePopUpWrapper = (id: string) => {
 
   const removeWrapper = () => {
     const w = isBrowser && document.getElementById(id);
-    w?.remove();
+    if (w) w.remove();
   };
 
   useEffect(
