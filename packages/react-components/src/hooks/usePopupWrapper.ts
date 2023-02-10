@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
 export const usePopUpWrapper = (id: string) => {
-  const [wrapper, setWrapper] = useState<HTMLElement>(document.body);
+  const [wrapper, setWrapper] = useState<HTMLElement>(document?.body);
   const isBrowser = window?.document;
 
   const createWrapper = useCallback(() => {
