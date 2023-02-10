@@ -37,7 +37,8 @@ import {
   Menu, Skeleton, Stack, Text, Textfield, TextfieldProps,
 } from '@/components';
 
-import { usePopUpWrapper } from '../../hooks';
+import createWrapper from '../../hooks/createWrapper';
+// import { usePopUpWrapper } from '../../hooks';
 import { MenuItemProps, MenuProps } from '../menu';
 import * as styles from './autocomplete.module.css';
 import { AutocompleteOption, AutocompleteOptionProps } from './autocomplete-option';
@@ -109,7 +110,8 @@ export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
   const [value, setValue] = useState<string>(val ? String(val) : '');
   const [optionsValues, setOptionValues] = useState<string[]>([]);
   const isInteractive = useMemo(() => !disabled && !readOnly, [disabled, readOnly]);
-  const { wrapper } = usePopUpWrapper('autocomplete-popup-root');
+  // const { wrapper } = usePopUpWrapper('autocomplete-popup-root');
+  const wrapper = createWrapper('autocomplete-popup-root') ?? document.body;
 
   const debounceQuery = useDebounce(
     query,
@@ -256,7 +258,7 @@ export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
             </LazyMotion>
           </div>
         </AnimatePresence>,
-        wrapper ?? document?.body,
+        wrapper,
       )}
     </div>
   );
