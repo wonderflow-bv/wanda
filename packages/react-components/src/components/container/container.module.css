@@ -43,7 +43,7 @@
       padding: 0 token(--space-24);
 
       @media (--from-small) {
-        max-inline-size: 712px;
+        max-inline-size: 720px;
         padding: 0 token(--space-24);
       }
       @media (--from-medium) {
@@ -51,12 +51,12 @@
         padding: 0 token(--space-24);
       }
       @media (--from-large) {
-        max-inline-size: 1152px;
-        padding: 0 token(--space-24);
+        max-inline-size: 1216px;
+        padding: 0 token(--space-32);
       }
       @media (--from-extra-large) {
-        max-inline-size: 1440px;
-        padding: 0 token(--space-24);
+        max-inline-size: 1520px;
+        padding: 0 token(--space-32);
       }
     }
 
