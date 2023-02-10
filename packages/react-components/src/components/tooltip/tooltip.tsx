@@ -150,7 +150,7 @@ export const Tooltip: FCChildrenClass<TooltipProps> = ({
             {children}
             <div {...getArrowProps({ className: styles.Arrow })} />
           </div>
-        </Elevator>, wrapper,
+        </Elevator>, wrapper ?? document.body,
       )}
     </div>
   );

@@ -238,7 +238,7 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
               </m.div>
             </LazyMotion>
           </div>
-        </AnimatePresence>, wrapper,
+        </AnimatePresence>, wrapper ?? document.body,
       )}
     </div>
   );

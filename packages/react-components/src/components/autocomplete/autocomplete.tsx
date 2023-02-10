@@ -256,7 +256,7 @@ export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
             </LazyMotion>
           </div>
         </AnimatePresence>,
-        wrapper,
+        wrapper ?? document.body,
       )}
     </div>
   );
