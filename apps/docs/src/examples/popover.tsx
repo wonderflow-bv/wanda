@@ -9,7 +9,7 @@ export const Example = () => {
       trigger={<Button kind="flat">Open popover</Button>}
     >
       <Menu>
-        <Menu.Item value="1" autoFocus icon="user">Item option 1</Menu.Item>
+        <Menu.Item value="1" icon="user">Item option 1</Menu.Item>
         <Menu.ItemCheckbox
           value="2"
           onClick={() => setIsChecked(val => !val)}
@@ -65,7 +65,7 @@ export const CustomExample = () => (
   <Popover trigger={<Button>Open popover</Button>} placement="bottom">
     <>
       <p>Custom element</p>
-      <Button autoFocus dimension="small" kind="flat">
+      <Button dimension="small" kind="flat">
         Another button
       </Button>
     </>
