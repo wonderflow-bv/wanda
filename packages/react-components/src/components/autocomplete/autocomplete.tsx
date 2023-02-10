@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Wonderflow <authored by Wonderflow Design Team>
+ * Copyright 2022-2023 Wonderflow Design Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,8 +37,8 @@ import {
   Menu, Skeleton, Stack, Text, Textfield, TextfieldProps,
 } from '@/components';
 
-import createWrapper from '../../hooks/createWrapper';
-// import { usePopUpWrapper } from '../../hooks';
+// import createWrapper from '../../hooks/createWrapper';
+import { usePopUpWrapper } from '../../hooks';
 import { MenuItemProps, MenuProps } from '../menu';
 import * as styles from './autocomplete.module.css';
 import { AutocompleteOption, AutocompleteOptionProps } from './autocomplete-option';
@@ -110,8 +110,8 @@ export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
   const [value, setValue] = useState<string>(val ? String(val) : '');
   const [optionsValues, setOptionValues] = useState<string[]>([]);
   const isInteractive = useMemo(() => !disabled && !readOnly, [disabled, readOnly]);
-  // const { wrapper } = usePopUpWrapper('autocomplete-popup-root');
-  const wrapper = createWrapper('autocomplete-popup-root') ?? document.body;
+  const { wrapper } = usePopUpWrapper('autocomplete-popup-root');
+  // const wrapper = createWrapper('autocomplete-popup-root');
 
   const debounceQuery = useDebounce(
     query,
@@ -258,7 +258,7 @@ export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
             </LazyMotion>
           </div>
         </AnimatePresence>,
-        wrapper,
+        wrapper ?? document.body,
       )}
     </div>
   );

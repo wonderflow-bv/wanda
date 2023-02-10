@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Wonderflow <authored by Wonderflow Design Team>
+ * Copyright 2022-2023 Wonderflow Design Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,8 +40,8 @@ import { mergeRefs } from 'react-merge-refs';
 import { usePopperTooltip } from 'react-popper-tooltip';
 import { useUIDSeed } from 'react-uid';
 
-// import { usePopUpWrapper } from '../../hooks';
-import createWrapper from '../../hooks/createWrapper';
+import { usePopUpWrapper } from '../../hooks';
+// import createWrapper from '../../hooks/createWrapper';
 import * as styles from './popover.module.css';
 
 export type PopoverProps = {
@@ -132,8 +132,8 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
   const seedID = useUIDSeed();
   const [isOpen, setIsOpen] = useState(false);
   const popoverContainerRef = useRef<HTMLDivElement>(null);
-  // const { wrapper } = usePopUpWrapper('popover-popup-root');
-  const wrapper = createWrapper('popover-popup-root') ?? document.body;
+  const { wrapper } = usePopUpWrapper('popover-popup-root');
+  // const wrapper = createWrapper('popover-popup-root');
 
   const sameWidth = useMemo<Modifier<string, Record<string, unknown>>>(() => ({
     name: 'sameWidth',
@@ -155,6 +155,7 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
     getTooltipProps,
     setTooltipRef,
     setTriggerRef,
+    tooltipRef,
     // eslint-disable-next-line @typescript-eslint/naming-convention
     visible,
   } = usePopperTooltip({
@@ -181,7 +182,7 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
     ],
   });
 
-  const isFocusWithin = useFocusWithin(document.getElementById(seedID('tooltip-content')), {
+  const isFocusWithin = useFocusWithin(tooltipRef, {
     onBlur: (e) => {
       if (e.relatedTarget && visible) {
         setIsOpen(false);
@@ -240,7 +241,7 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
               </m.div>
             </LazyMotion>
           </div>
-        </AnimatePresence>, wrapper,
+        </AnimatePresence>, wrapper ?? document.body,
       )}
     </div>
   );
