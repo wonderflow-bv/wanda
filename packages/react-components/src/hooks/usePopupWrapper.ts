@@ -1,23 +1,26 @@
 import { useCallback, useEffect, useState } from 'react';
 
 export const usePopUpWrapper = (id: string) => {
-  const [wrapper, setWrapper] = useState<HTMLElement>(document.body);
+  const [wrapper, setWrapper] = useState<HTMLElement>();
+  const isBrowser = window?.document;
 
   const createWrapper = useCallback(() => {
-    let w = document.getElementById(id);
-    if (!w) {
-      w = document.createElement('div');
-      w.setAttribute('id', id);
-      w.style.position = 'relative';
-      w.style.zIndex = '999';
-      document.body.appendChild(w);
-    }
+    if (isBrowser) {
+      let w = document.getElementById(id);
+      if (!w) {
+        w = document.createElement('div');
+        w.setAttribute('id', id);
+        w.style.position = 'relative';
+        w.style.zIndex = '999';
+        document.body.appendChild(w);
+      }
 
-    setWrapper(w);
-  }, [id]);
+      setWrapper(w);
+    }
+  }, [id, isBrowser]);
 
   const removeWrapper = () => {
-    const w = document.getElementById(id);
+    const w = isBrowser && document.getElementById(id);
     if (w) w.remove();
   };
 
