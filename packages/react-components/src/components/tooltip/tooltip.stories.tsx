@@ -76,9 +76,10 @@ Open.args = {
   open: true,
 };
 
-export const WithButtons = Template.bind({});
-WithButtons.args = {
-  trigger: <Button>HTML</Button>,
+export const WithButton = Template2.bind({});
+WithButton.args = {
+  trigger: <Button>Click Me</Button>,
+  placement: 'top-end',
   interactive: true,
 };
 

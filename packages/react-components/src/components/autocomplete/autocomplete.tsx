@@ -37,7 +37,6 @@ import {
   Menu, Skeleton, Stack, Text, Textfield, TextfieldProps,
 } from '@/components';
 
-// import createWrapper from '../../hooks/createWrapper';
 import { usePopUpWrapper } from '../../hooks';
 import { MenuItemProps, MenuProps } from '../menu';
 import * as styles from './autocomplete.module.css';
@@ -110,8 +109,7 @@ export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
   const [value, setValue] = useState<string>(val ? String(val) : '');
   const [optionsValues, setOptionValues] = useState<string[]>([]);
   const isInteractive = useMemo(() => !disabled && !readOnly, [disabled, readOnly]);
-  const { wrapper } = usePopUpWrapper('autocomplete-popup-root');
-  // const wrapper = createWrapper('autocomplete-popup-root');
+  const { wrapper } = usePopUpWrapper('autocomplete-root');
 
   const debounceQuery = useDebounce(
     query,

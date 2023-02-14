@@ -18,7 +18,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { useSSR } from './useSSR';
 
-export const usePopUpWrapper = (id: string) => {
+export const usePopUpWrapper = (id = 'popup-root') => {
   const [wrapper, setWrapper] = useState<HTMLElement>();
   const { isBrowser } = useSSR();
 
@@ -28,8 +28,9 @@ export const usePopUpWrapper = (id: string) => {
       if (!w) {
         w = document.createElement('div');
         w.setAttribute('id', id);
-        w.style.position = 'relative';
-        w.style.zIndex = '999';
+        w.classList.add('popUp_root');
+        // w.style.position = 'relative';
+        // w.style.zIndex = '999';
         document.body.appendChild(w);
       }
 

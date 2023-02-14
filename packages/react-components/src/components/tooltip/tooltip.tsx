@@ -25,7 +25,6 @@ import { useUIDSeed } from 'react-uid';
 
 import { Elevator } from '@/components';
 
-// import createWrapper from '../../hooks/createWrapper';
 import { usePopUpWrapper } from '../../hooks';
 import * as styles from './tooltip.module.css';
 
@@ -87,8 +86,7 @@ export const Tooltip: FCChildrenClass<TooltipProps> = ({
   const id = seedID('tooltip-content');
   const tooltipContainerRef = useRef<HTMLDivElement>(null);
   useKeyPress('esc', () => setIsOpen(false));
-  const { wrapper } = usePopUpWrapper('tooltip-popup-root');
-  // const wrapper = createWrapper('tooltip-popup-root');
+  const { wrapper } = usePopUpWrapper('tooltip-root');
 
   const {
     getArrowProps,
