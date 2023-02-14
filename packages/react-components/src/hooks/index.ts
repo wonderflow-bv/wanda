@@ -14,5 +14,6 @@
  * limitations under the License.
  */
 
+export { useBreakpoints } from './useBreakpoints';
 export { usePopUpWrapper } from './usePopupWrapper';
 export { useSSR } from './useSSR';

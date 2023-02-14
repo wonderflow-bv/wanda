@@ -20,7 +20,7 @@ export const useSSR = () => {
     && window.document.documentElement;
 
   return {
-    isBrowser,
+    isBrowser: !!isBrowser,
     isServer: !isBrowser,
   };
 };

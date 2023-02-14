@@ -29,8 +29,6 @@ export const usePopUpWrapper = (id = 'popup-root') => {
         w = document.createElement('div');
         w.setAttribute('id', id);
         w.classList.add('popUp_root');
-        // w.style.position = 'relative';
-        // w.style.zIndex = '999';
         document.body.appendChild(w);
       }
 
