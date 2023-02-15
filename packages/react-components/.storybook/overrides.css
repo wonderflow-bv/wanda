@@ -9,11 +9,11 @@
 
 .ContainerEx[data-container-dimension='small'] {
   box-shadow:
-    inset token(--space-16) 0 0 hsl(token(--color-support-brand) / 60%),
-    inset calc(token(--space-16) * -1) 0 0 hsl(token(--color-support-brand) / 60%);
+    inset token(--space-24) 0 0 hsl(token(--color-support-brand) / 60%),
+    inset calc(token(--space-24) * -1) 0 0 hsl(token(--color-support-brand) / 60%);
 }
 
-@media (min-width: 48em) {
+@media (min-width: 80em) {
   .ContainerEx[data-container-dimension='small'] {
     box-shadow:
       inset token(--space-32) 0 0 hsl(token(--color-support-brand) / 60%),
@@ -23,11 +23,11 @@
 
 .ContainerEx[data-container-dimension='medium'] {
   box-shadow:
-    inset token(--space-16) 0 0 hsl(token(--color-support-brand) / 60%),
-    inset calc(token(--space-16) * -1) 0 0 hsl(token(--color-support-brand) / 60%);
+    inset token(--space-24) 0 0 hsl(token(--color-support-brand) / 60%),
+    inset calc(token(--space-24) * -1) 0 0 hsl(token(--color-support-brand) / 60%);
 }
 
-@media (min-width: 48em) {
+@media (min-width: 80em) {
   .ContainerEx[data-container-dimension='medium'] {
     box-shadow:
       inset token(--space-32) 0 0 hsl(token(--color-support-brand) / 60%),
@@ -37,11 +37,11 @@
 
 .ContainerEx[data-container-dimension='large'] {
   box-shadow:
-    inset token(--space-16) 0 0 hsl(token(--color-support-brand) / 60%),
-    inset calc(token(--space-16) * -1) 0 0 hsl(token(--color-support-brand) / 60%);
+    inset token(--space-24) 0 0 hsl(token(--color-support-brand) / 60%),
+    inset calc(token(--space-24) * -1) 0 0 hsl(token(--color-support-brand) / 60%);
 }
 
-@media (min-width: 48em) {
+@media (min-width: 80em) {
   .ContainerEx[data-container-dimension='large'] {
     box-shadow:
       inset token(--space-32) 0 0 hsl(token(--color-support-brand) / 60%),
@@ -51,11 +51,11 @@
 
 .ContainerEx[data-container-dimension='full'] {
   box-shadow:
-    inset token(--space-16) 0 0 hsl(token(--color-support-brand) / 60%),
-    inset calc(token(--space-16) * -1) 0 0 hsl(token(--color-support-brand) / 60%);
+    inset token(--space-24) 0 0 hsl(token(--color-support-brand) / 60%),
+    inset calc(token(--space-24) * -1) 0 0 hsl(token(--color-support-brand) / 60%);
 }
 
-@media (min-width: 48em) {
+@media (min-width: 80em) {
   .ContainerEx[data-container-dimension='full'] {
     box-shadow:
       inset token(--space-32) 0 0 hsl(token(--color-support-brand) / 60%),

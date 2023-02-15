@@ -2,14 +2,14 @@
 
 @layer components {
   .Container {
-    padding: 0 token(--space-16);
+    padding: 0 token(--space-24);
     margin: 0 auto;
     inline-size: 100%;
 
     &[data-container-dimension='small'] {
       max-inline-size: token(--container-small);
 
-      @media (--from-small) {
+      @media (--from-large) {
         padding: 0 token(--space-32);
       }
     }
@@ -17,7 +17,7 @@
     &[data-container-dimension='medium'] {
       max-inline-size: token(--container-medium);
 
-      @media (--from-small) {
+      @media (--from-large) {
         padding: 0 token(--space-32);
       }
     }
@@ -25,7 +25,7 @@
     &[data-container-dimension='large'] {
       max-inline-size: token(--container-large);
 
-      @media (--from-small) {
+      @media (--from-large) {
         padding: 0 token(--space-32);
       }
     }
@@ -33,29 +33,29 @@
     &[data-container-dimension='full'] {
       max-inline-size: 100%;
 
-      @media (--from-small) {
+      @media (--from-large) {
         padding: 0 token(--space-32);
       }
     }
 
     &[data-container-dimension='auto'] {
-      max-inline-size: 432px;
+      max-inline-size: token(--container-extra-small);
       padding: 0 token(--space-24);
 
       @media (--from-small) {
-        max-inline-size: 720px;
+        max-inline-size: token(--container-small);
         padding: 0 token(--space-24);
       }
       @media (--from-medium) {
-        max-inline-size: 912px;
+        max-inline-size: token(--container-medium);
         padding: 0 token(--space-24);
       }
       @media (--from-large) {
-        max-inline-size: 1216px;
+        max-inline-size: token(--container-large);
         padding: 0 token(--space-32);
       }
       @media (--from-extra-large) {
-        max-inline-size: 1520px;
+        max-inline-size: token(--container-extra-large);
         padding: 0 token(--space-32);
       }
     }
