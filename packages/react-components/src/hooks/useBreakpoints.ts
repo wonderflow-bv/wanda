@@ -18,23 +18,15 @@ import { useEffect, useState } from 'react';
 
 import { useSSR } from './useSSR';
 
-export type BreakpointsSettings = {
-  xs: number;
-  sm: number;
-  md: number;
-  lg: number;
-  xl: number;
-}
+export type BreakpointsNames = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
-export type BreakpointsValues = {
-  xs: boolean;
-  sm: boolean;
-  md: boolean;
-  lg: boolean;
-  xl: boolean;
-}
+export type Breakpoints<T> = Record<BreakpointsNames, T>
 
-const DEFAULT_BREAKPOINTS_SETTINGS: BreakpointsSettings = {
+export type BreakpointsSettings = Breakpoints<number>
+
+export type BreakpointsValues = Breakpoints<boolean>
+
+const DefaultBreakpointsSettings: BreakpointsSettings = {
   xs: 480,
   sm: 768,
   md: 960,
@@ -42,7 +34,7 @@ const DEFAULT_BREAKPOINTS_SETTINGS: BreakpointsSettings = {
   xl: 1600,
 };
 
-const DEFAULT_BREAKPOINTS_VALUES: BreakpointsValues = {
+const DefaultBreakpointsValues: BreakpointsValues = {
   xs: false,
   sm: false,
   md: false,
@@ -50,19 +42,25 @@ const DEFAULT_BREAKPOINTS_VALUES: BreakpointsValues = {
   xl: false,
 };
 
-export const useBreakpoints = (settings: BreakpointsSettings = DEFAULT_BREAKPOINTS_SETTINGS) => {
+export const useBreakpoints = (settings: BreakpointsSettings = DefaultBreakpointsSettings) => {
   const { isBrowser } = useSSR();
-  const [breakpoints, setBreakpoints] = useState<BreakpointsValues>(DEFAULT_BREAKPOINTS_VALUES);
+  const [breakpoints, setBreakpoints] = useState<BreakpointsValues>(DefaultBreakpointsValues);
+  const [matches, setMatches] = useState<string>('xs');
 
   const handleResize = () => {
     const w = isBrowser && window.innerWidth;
-    setBreakpoints({
+
+    const v: BreakpointsValues = {
       xs: w <= settings.xs,
       sm: w > settings.xs && w <= settings.sm,
       md: w > settings.sm && w <= settings.md,
       lg: w > settings.md && w <= settings.lg,
       xl: w > settings.lg,
-    });
+    };
+
+    const b = Object.keys(v).filter((k: string) => (v[k as keyof typeof v]))[0];
+    setMatches(b);
+    setBreakpoints(v);
   };
 
   useEffect(() => {
@@ -70,7 +68,7 @@ export const useBreakpoints = (settings: BreakpointsSettings = DEFAULT_BREAKPOIN
       handleResize();
       window.addEventListener('resize', handleResize);
     } else {
-      setBreakpoints(DEFAULT_BREAKPOINTS_VALUES);
+      setBreakpoints(DefaultBreakpointsValues);
     }
 
     return () => {
@@ -79,5 +77,5 @@ export const useBreakpoints = (settings: BreakpointsSettings = DEFAULT_BREAKPOIN
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return { breakpoints };
+  return { breakpoints, matches };
 };
