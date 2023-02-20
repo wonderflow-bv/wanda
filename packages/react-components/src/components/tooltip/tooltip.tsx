@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Wonderflow <authored by Wonderflow Design Team>
+ * Copyright 2022-2023 Wonderflow Design Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -86,7 +86,7 @@ export const Tooltip: FCChildrenClass<TooltipProps> = ({
   const id = seedID('tooltip-content');
   const tooltipContainerRef = useRef<HTMLDivElement>(null);
   useKeyPress('esc', () => setIsOpen(false));
-  const { wrapper } = usePopUpWrapper('tooltip-popup-root');
+  const { wrapper } = usePopUpWrapper('tooltip-root');
 
   const {
     getArrowProps,
@@ -150,7 +150,7 @@ export const Tooltip: FCChildrenClass<TooltipProps> = ({
             {children}
             <div {...getArrowProps({ className: styles.Arrow })} />
           </div>
-        </Elevator>, wrapper,
+        </Elevator>, wrapper ?? document.body,
       )}
     </div>
   );

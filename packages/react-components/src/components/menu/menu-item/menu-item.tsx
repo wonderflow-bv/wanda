@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { useHover } from 'ahooks';
 import clsx from 'clsx';
 import {
   forwardRef, ReactNode, useCallback, useMemo, useRef,
@@ -113,6 +114,8 @@ export const MenuItem = forwardRef(({
 
   useFocusEffect(isFocused, itemRef);
 
+  const isHovering = useHover(itemRef);
+
   const triggerClick = useCallback(
     (e) => {
       if (onClick) {
@@ -176,8 +179,8 @@ export const MenuItem = forwardRef(({
           ? (
             <Tooltip
               fill
-              open={isFocused}
-              placement="right-start"
+              open={isFocused || isHovering}
+              placement="auto"
               interactive
               trigger={InnerContent}
             >

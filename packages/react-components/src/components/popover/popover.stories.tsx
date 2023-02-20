@@ -1,8 +1,8 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import {
-  Button, Menu, Stack, Textfield, Title,
+  Button, Menu, Stack, Textfield,
 } from '../..';
 import { Popover } from './popover';
 
@@ -34,8 +34,8 @@ const DefaultTemplate: ComponentStory<typeof Popover> = (args) => {
       <Menu>
         <Menu.Item
           icon="arrow-right"
-          description={<>Description for this item</>}
           value="1"
+          description={<>this is my description</>}
         >
           Sample long menu item
         </Menu.Item>
@@ -47,18 +47,8 @@ const DefaultTemplate: ComponentStory<typeof Popover> = (args) => {
         >
           Checkbox item
         </Menu.ItemCheckbox>
-        <Menu.Item
-          icon="user"
-          value="3"
-          description={(
-            <>
-              <Title as="h2" level="5">Sample H2 Title longlonglonglonglonglonglonglonglonglonglong</Title>
-              <p>long text content placeholder to test wrapping and sizes</p>
-              <img style={{ width: '100%' }} alt="" src="https://images.unsplash.com/photo-1593963171957-d87a6279226d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" />
-            </>
-          )}
-        >
-          Short menu label
+        <Menu.Item value="3" icon="right-from-bracket">
+          Item option 3
         </Menu.Item>
         <Menu.Separator />
         <Menu.Item value="4" icon="arrow-down-to-bracket">Even shorter</Menu.Item>

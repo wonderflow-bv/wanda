@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Wonderflow <authored by Wonderflow Design Team>
+ * Copyright 2022-2023 Wonderflow Design Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -109,7 +109,7 @@ export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
   const [value, setValue] = useState<string>(val ? String(val) : '');
   const [optionsValues, setOptionValues] = useState<string[]>([]);
   const isInteractive = useMemo(() => !disabled && !readOnly, [disabled, readOnly]);
-  const { wrapper } = usePopUpWrapper('autocomplete-popup-root');
+  const { wrapper } = usePopUpWrapper('autocomplete-root');
 
   const debounceQuery = useDebounce(
     query,
@@ -256,7 +256,7 @@ export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
             </LazyMotion>
           </div>
         </AnimatePresence>,
-        wrapper,
+        wrapper ?? document.body,
       )}
     </div>
   );

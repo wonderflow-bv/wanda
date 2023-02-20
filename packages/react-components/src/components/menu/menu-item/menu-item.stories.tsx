@@ -12,6 +12,7 @@ const story: ComponentMeta<typeof Menu.Item> = {
     padding: true,
     iconPosition: 'left',
     subtext: '',
+    description: '',
   },
   argTypes: {
     dimension: {
