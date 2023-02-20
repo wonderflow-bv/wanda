@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useEffect, useState } from 'react';
 
-import { Stack, Text } from '@/components';
+import { Grid, Stack, Text } from '@/components';
 
 import { Container } from './container';
 
@@ -106,6 +106,7 @@ const TemplateTesting: ComponentStory<typeof Container> = () => {
   const [cols, setCols] = useState<number>(6);
   const [wWidth, setWWidth] = useState<number>(0);
   const [cWidth, setCWidth] = useState<number>(0);
+  const [gridNum, setGridNum] = useState<number>(0);
   const [gutter, setGutter] = useState<string>('16');
   const [colWidth, setColWidth] = useState<number>(0);
   const [isLeftOpen, setIsLeftOpen] = useState<boolean>(false);
@@ -122,6 +123,11 @@ const TemplateTesting: ComponentStory<typeof Container> = () => {
     if (c >= 960) setCols(12);
     else if (c >= 768) setCols(8);
     else setCols(4);
+
+    if (c >= 1600) setGridNum(8);
+    else if (c >= 1280) setGridNum(6);
+    else if (c >= 768) setGridNum(4);
+    else setGridNum(2);
 
     if (c >= 1600) setGutter('32');
     else if (c >= 960) setGutter('24');
@@ -161,12 +167,10 @@ const TemplateTesting: ComponentStory<typeof Container> = () => {
           }}
           >
             <div>
-              <p style={{ fontSize: '20px' }}>
+              <p style={{ fontSize: '18px' }}>
                 <b>Window: </b>
                 {wWidth}
                 px
-                {/* </p>
-              <p style={{ fontSize: '11px' }}> */}
                 <b>Container: </b>
                 {cWidth}
                 px,
@@ -178,9 +182,6 @@ const TemplateTesting: ComponentStory<typeof Container> = () => {
                 px(
                 {wWidth >= 1280 ? 64 : 48}
                 px)
-                {/* </p>
-              <p style={{ fontSize: '11px' }}> */}
-
                 <b>Columns: </b>
                 {cols}
                 {' '}
@@ -205,13 +206,24 @@ const TemplateTesting: ComponentStory<typeof Container> = () => {
           </div>
 
           <Container dimension="auto" className="ContainerEx">
-            <Stack direction="row" columnGap={gutter as any}>
-              {
-            Array(cols).fill('col').map((e, i) => (
-              <div className={`col${i}`} key={Math.random()} style={{ backgroundColor: 'grey', opacity: '.75', minHeight: 'calc(100vh - 64px)' }}>
-                {e}
-              </div>
-            ))}
+            <Stack rowGap={64}>
+
+              <Stack direction="row" columnGap={gutter as any}>
+                {Array(cols).fill('col').map((e, i) => (
+                  <div className={`col${i}`} key={Math.random()} style={{ backgroundColor: 'grey', opacity: '.75' }}>
+                    {e}
+                  </div>
+                ))}
+              </Stack>
+
+              <Grid columns={gridNum} rowGap={gutter as any} columnGap={gutter as any} filling={false}>
+                {Array(10).fill('col8-').map((e, i) => (
+                  <Grid.Item style={{ backgroundColor: 'grey', opacity: '.75', padding: '0.25rem' }}>
+                    {e}
+                    {i + 1}
+                  </Grid.Item>
+                ))}
+              </Grid>
 
             </Stack>
           </Container>
