@@ -4,26 +4,61 @@ html {
   }
 }
 
-
-.ContainerEx[data-container-dimension='extra-small'],
-.ContainerEx[data-container-dimension='small'],
-.ContainerEx[data-container-dimension='medium'],
-.ContainerEx[data-container-dimension='large'],
-.ContainerEx[data-container-dimension='extra-large'],
-.ContainerEx[data-container-dimension='fixed'],
-.ContainerEx[data-container-dimension='full'] {
-  box-shadow:
-    inset token(--space-24) 0 0 hsl(token(--color-support-brand) / 60%),
-    inset calc(token(--space-24) * -1) 0 0 hsl(token(--color-support-brand) / 60%);
+.ContainerEx {
+  background-color: hsl(token(--color-primary-50) / 20%);
+  min-block-size: token(--space-24);
 }
 
-@media (min-width: 80em) {
-  .ContainerEx[data-container-dimension='extra-small'],
-  .ContainerEx[data-container-dimension='small'],
-  .ContainerEx[data-container-dimension='medium'],
-  .ContainerEx[data-container-dimension='large'],
-  .ContainerEx[data-container-dimension='extra-large'],
-  .ContainerEx[data-container-dimension='fixed'],
+
+.ContainerEx[data-container-dimension='small'] {
+  box-shadow:
+    inset token(--space-16) 0 0 hsl(token(--color-support-brand) / 60%),
+    inset calc(token(--space-16) * -1) 0 0 hsl(token(--color-support-brand) / 60%);
+}
+
+@media (min-width: 48em) {
+  .ContainerEx[data-container-dimension='small'] {
+    box-shadow:
+      inset token(--space-32) 0 0 hsl(token(--color-support-brand) / 60%),
+      inset calc(token(--space-32) * -1) 0 0 hsl(token(--color-support-brand) / 60%);
+  }
+}
+
+.ContainerEx[data-container-dimension='medium'] {
+  box-shadow:
+    inset token(--space-16) 0 0 hsl(token(--color-support-brand) / 60%),
+    inset calc(token(--space-16) * -1) 0 0 hsl(token(--color-support-brand) / 60%);
+}
+
+@media (min-width: 48em) {
+  .ContainerEx[data-container-dimension='medium'] {
+    box-shadow:
+      inset token(--space-32) 0 0 hsl(token(--color-support-brand) / 60%),
+      inset calc(token(--space-32) * -1) 0 0 hsl(token(--color-support-brand) / 60%);
+  }
+}
+
+.ContainerEx[data-container-dimension='large'] {
+  box-shadow:
+    inset token(--space-16) 0 0 hsl(token(--color-support-brand) / 60%),
+    inset calc(token(--space-16) * -1) 0 0 hsl(token(--color-support-brand) / 60%);
+}
+
+@media (min-width: 48em) {
+  .ContainerEx[data-container-dimension='large'] {
+    box-shadow:
+      inset token(--space-32) 0 0 hsl(token(--color-support-brand) / 60%),
+      inset calc(token(--space-32) * -1) 0 0 hsl(token(--color-support-brand) / 60%);
+  }
+}
+
+.ContainerEx[data-container-dimension='full'] {
+  box-shadow:
+    inset token(--space-16) 0 0 hsl(token(--color-support-brand) / 60%),
+    inset calc(token(--space-16) * -1) 0 0 hsl(token(--color-support-brand) / 60%);
+}
+
+@media (min-width: 48em) {
   .ContainerEx[data-container-dimension='full'] {
     box-shadow:
       inset token(--space-32) 0 0 hsl(token(--color-support-brand) / 60%),
