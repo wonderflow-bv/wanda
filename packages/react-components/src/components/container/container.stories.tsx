@@ -1,7 +1,9 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useEffect, useState } from 'react';
 
-import { Grid, Stack, Text } from '@/components';
+import {
+  Grid, Stack, Text, useBreakpoints, useBreakpointsConfig,
+} from '@/components';
 
 import { Container } from './container';
 
@@ -19,7 +21,7 @@ const story: ComponentMeta<typeof Container> = {
       },
     },
     dimension: {
-      options: ['full', 'medium', 'large', 'auto'],
+      options: ['extra-small', 'small', 'medium', 'large', 'extra-large', 'fixed', 'full'],
       control: { type: 'select' },
     },
   },
@@ -36,6 +38,10 @@ const Template: ComponentStory<typeof Container> = args => <Container {...args} 
 const TemplateComparison: ComponentStory<typeof Container> = () => (
   <Stack rowGap={24}>
     <Stack rowGap={8} hAlign="center">
+      <Text size={14}>Container Extra Small</Text>
+      <Container dimension="extra-small" className="ContainerEx" />
+    </Stack>
+    <Stack rowGap={8} hAlign="center">
       <Text size={14}>Container Small</Text>
       <Container dimension="small" className="ContainerEx" />
     </Stack>
@@ -48,8 +54,12 @@ const TemplateComparison: ComponentStory<typeof Container> = () => (
       <Container dimension="large" className="ContainerEx" />
     </Stack>
     <Stack rowGap={8} hAlign="center">
-      <Text size={14}>Container Auto</Text>
-      <Container dimension="auto" className="ContainerEx" />
+      <Text size={14}>Container Extra Large</Text>
+      <Container dimension="extra-large" className="ContainerEx" />
+    </Stack>
+    <Stack rowGap={8} hAlign="center">
+      <Text size={14}>Container Fixed</Text>
+      <Container dimension="fixed" className="ContainerEx" />
     </Stack>
     <Stack rowGap={8} hAlign="center">
       <Text size={14}>Container Full</Text>
@@ -58,32 +68,10 @@ const TemplateComparison: ComponentStory<typeof Container> = () => (
   </Stack>
 );
 
-export const Small = Template.bind({});
-Small.args = {
-  dimension: 'small',
-  className: 'ContainerEx',
-};
-
-export const Medium = Template.bind({});
-Medium.args = {
-  dimension: 'medium',
-  className: 'ContainerEx',
-};
-
-export const Large = Template.bind({});
-Large.args = {
-  dimension: 'large',
-  className: 'ContainerEx',
-};
-
-export const Auto = Template.bind({});
-Auto.args = {
-  dimension: 'auto',
-  className: 'ContainerEx',
-};
-
-export const Full = Template.bind({});
-Full.args = {
+export const WithPadding = Template.bind({});
+WithPadding.args = {
+  dimension: 'full',
+  padding: true,
   className: 'ContainerEx',
 };
 
@@ -112,10 +100,20 @@ const TemplateTesting: ComponentStory<typeof Container> = () => {
   const [isLeftOpen, setIsLeftOpen] = useState<boolean>(false);
   const [isRightOpen, setIsRightOpen] = useState<boolean>(false);
 
+  const { breakpoints, matches } = useBreakpoints();
+  const { value } = useBreakpointsConfig({
+    xs: 2,
+    sm: 2,
+    md: 2,
+    lg: 4,
+    xl: 6,
+    fallback: 2,
+  });
+
   const handleResize = () => {
     const w = window.innerWidth;
     setWWidth(w);
-    const c = document?.querySelector('[data-container-dimension="auto"]')?.getBoundingClientRect().width ?? 0;
+    const c = document?.querySelector('[data-container-dimension="fixed"]')?.getBoundingClientRect().width ?? 0;
     setCWidth(c);
     const cl = document?.querySelector('.col1')?.getBoundingClientRect().width ?? 0;
     setColWidth(cl);
@@ -205,19 +203,37 @@ const TemplateTesting: ComponentStory<typeof Container> = () => {
             <button type="button" style={{ maxWidth: '48px', height: '18px', fontSize: '10px' }} onClick={() => setIsRightOpen(!isRightOpen)}>filters</button>
           </div>
 
-          <Container dimension="auto" className="ContainerEx">
+          <Container dimension="fixed" className="ContainerEx" style={{ overflow: 'auto' }}>
             <Stack rowGap={64}>
 
               <Stack direction="row" columnGap={gutter as any}>
-                {Array(cols).fill('col').map((e, i) => (
+                {Array(cols).fill('col-').map((e, i) => (
                   <div className={`col${i}`} key={Math.random()} style={{ backgroundColor: 'grey', opacity: '.75' }}>
                     {e}
+                    {i + 1}
                   </div>
                 ))}
               </Stack>
 
               <Grid columns={gridNum} rowGap={gutter as any} columnGap={gutter as any} filling={false}>
                 {Array(10).fill('col8-').map((e, i) => (
+                  <Grid.Item style={{ backgroundColor: 'grey', opacity: '.75', padding: '0.25rem' }}>
+                    {e}
+                    {i + 1}
+                  </Grid.Item>
+                ))}
+              </Grid>
+
+              <Grid columns={value as number} rowGap={gutter as any} columnGap={gutter as any} filling={false}>
+                {Array(10).fill('noFilling-').map((e, i) => (
+                  <Grid.Item style={{ backgroundColor: 'grey', opacity: '.75', padding: '0.25rem' }}>
+                    {e}
+                    {i + 1}
+                  </Grid.Item>
+                ))}
+              </Grid>
+              <Grid columns={value as number} rowGap={gutter as any} columnGap={gutter as any} filling="fit">
+                {Array(10).fill('fit/fill-').map((e, i) => (
                   <Grid.Item style={{ backgroundColor: 'grey', opacity: '.75', padding: '0.25rem' }}>
                     {e}
                     {i + 1}
@@ -238,10 +254,15 @@ const TemplateTesting: ComponentStory<typeof Container> = () => {
         }}
         >
           <div style={{
-            maxHeight: '64px', height: '64px', backgroundColor: '#e4e7ec', padding: '0.5rem',
+            maxHeight: '64px', height: '64px', backgroundColor: '#e4e7ec', padding: '0.5rem', wordBreak: 'break-all',
           }}
           >
-            Filters
+            <p>Filters</p>
+            <p>Breakpoints</p>
+            <p>
+              {`matches: ${matches}`}
+            </p>
+            <p>{JSON.stringify(breakpoints)}</p>
           </div>
         </Stack>
 

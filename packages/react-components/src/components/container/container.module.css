@@ -6,6 +6,14 @@
     margin: 0 auto;
     inline-size: 100%;
 
+    &[data-container-dimension='extra-small'] {
+      max-inline-size: token(--container-extra-small);
+
+      @media (--from-large) {
+        padding: 0 token(--space-32);
+      }
+    }
+
     &[data-container-dimension='small'] {
       max-inline-size: token(--container-small);
 
@@ -30,6 +38,14 @@
       }
     }
 
+    &[data-container-dimension='extra-large'] {
+      max-inline-size: token(--container-extra-large);
+
+      @media (--from-large) {
+        padding: 0 token(--space-32);
+      }
+    }
+
     &[data-container-dimension='full'] {
       max-inline-size: 100%;
 
@@ -38,7 +54,7 @@
       }
     }
 
-    &[data-container-dimension='auto'] {
+    &[data-container-dimension='fixed'] {
       max-inline-size: token(--container-extra-small);
       padding: 0 token(--space-24);
 
