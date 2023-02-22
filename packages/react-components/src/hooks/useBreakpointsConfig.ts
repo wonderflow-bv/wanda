@@ -2,13 +2,16 @@ import { useEffect, useState } from 'react';
 
 import { BreakpointsNames, BreakpointsSettings, useBreakpoints } from './useBreakpoints';
 
-export type BreakpointsConfig<T> = Record<Partial<BreakpointsNames>, T> & { fallback: T }
+export type BreakpointsConfig<T> = Partial<Record<BreakpointsNames, T>> & { fallback: T }
 
-export type Values = number | string
+export type BreakpointsConfigValues = number | string | Record<string, any>
 
-export const useBreakpointsConfig = (config: BreakpointsConfig<Values>, settings?: BreakpointsSettings) => {
+export const useBreakpointsConfig = (
+  config: BreakpointsConfig<BreakpointsConfigValues>,
+  settings?: BreakpointsSettings,
+) => {
   const { fallback } = config;
-  const [value, setValue] = useState<Values>(fallback);
+  const [value, setValue] = useState<BreakpointsConfigValues>(fallback);
   const { matches } = useBreakpoints(settings);
 
   useEffect(() => {
