@@ -21,8 +21,7 @@ import tkns from '@wonderflow/tokens/platforms/web/tokens.json';
 import { useFocusWithin, useKeyPress } from 'ahooks';
 import clsx from 'clsx';
 import {
-  // AnimatePresence,
-  domMax, LazyMotion, m,
+  AnimatePresence, domMax, LazyMotion, m,
 } from 'framer-motion';
 import {
   Children,
@@ -182,8 +181,14 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
   });
 
   const isFocusWithin = useFocusWithin(tooltipRef, {
-    onBlur: (e) => {
+    onFocus: (e) => {
+      console.debug(e);
       if (e.relatedTarget && visible) {
+        setIsOpen(true);
+      }
+    },
+    onBlur: (e) => {
+      if (!e.relatedTarget && visible) {
         setIsOpen(false);
       }
     },
@@ -213,35 +218,36 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
           ...otherProps,
         },
       )}
-      {/* <AnimatePresence> */}
       {visible && createPortal(
-        <div
-          ref={setTooltipRef}
-          role="tooltip"
-          id={seedID('tooltip-content')}
-          key={seedID('tooltip-content')}
-          {...getTooltipProps({ className: styles.PopUp })}
-        >
-          <LazyMotion features={domMax}>
-            <m.div
-              variants={PopoverAnimation}
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-            >
-              {Children.map(children, child => isValidElement(child) && cloneElement(
-                child as ReactElement,
-                {
-                  id: seedID('popover-dialog'),
-                  'aria-labelledby': seedID('popover-trigger'),
-                },
-              ))}
-            </m.div>
-          </LazyMotion>
-        </div>,
+        <AnimatePresence>
+          <div
+            ref={setTooltipRef}
+            role="tooltip"
+            id={seedID('tooltip-content')}
+            key={seedID('tooltip-content')}
+            {...getTooltipProps({ className: styles.PopUp })}
+          >
+            <LazyMotion features={domMax}>
+              <m.div
+                variants={PopoverAnimation}
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+              >
+                {Children.map(children, child => isValidElement(child) && cloneElement(
+                  child as ReactElement,
+                  {
+                    id: seedID('popover-dialog'),
+                    'aria-labelledby': seedID('popover-trigger'),
+                  },
+                ))}
+              </m.div>
+            </LazyMotion>
+          </div>
+        </AnimatePresence>,
         wrapper ?? document.body,
       )}
-      {/* </AnimatePresence> */}
+
     </div>
   );
 });
