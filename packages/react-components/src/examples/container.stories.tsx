@@ -32,9 +32,9 @@ const Template: ComponentStory<typeof Container> = () => {
 
   const { matches } = useBreakpoints();
   const { value } = useBreakpointsConfig({
-    lg: { open: true, col: 6 },
-    xl: 6,
-    fallback: 2,
+    lg: { gutter: 24, col: 4 },
+    xl: { gutter: 24, col: 6 },
+    fallback: { gutter: 16, col: 2 },
   });
 
   const handleResize = () => {
@@ -101,7 +101,7 @@ const Template: ComponentStory<typeof Container> = () => {
             )
             : (
               <Stack inline hAlign="center" rowGap={8}>
-                {Array(5).fill('').map((e, i) => (<IconButton key={Math.random()} disabled icon={linkIcons[i] as SymbolNames} kind="flat" />))}
+                {Array(5).fill('').map((e, i) => (<IconButton key={`${e} ${Math.random()}`} disabled icon={linkIcons[i] as SymbolNames} kind="flat" />))}
               </Stack>
             )
 
