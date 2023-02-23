@@ -30,20 +30,20 @@ const Template: ComponentStory<typeof Container> = () => {
 
   const ref = useRef<HTMLDivElement>(null);
 
-  const { matches, targetSize: w } = useBreakpoints();
+  const { matches, size } = useBreakpoints();
 
   const {
     value: containerValue,
     matches: containerMatches,
-    targetSize: containerSize,
+    size: containerSize,
   } = useBreakpointsConfig(
     {
-      sm: { gutter: 16, col: 3 },
-      md: { gutter: 24, col: 4 },
-      lg: { gutter: 24, col: 6 },
-      xl: { gutter: 24, col: 8 },
-      fallback: { gutter: 16, col: 2 },
-    } as BreakpointsConfig<{ gutter: number; col: number }>,
+      sm: { gutter: 16, col: 3, dimension: 'full' },
+      md: { gutter: 24, col: 3, dimension: 'medium' },
+      lg: { gutter: 24, col: 4, dimension: 'fixed' },
+      xl: { gutter: 24, col: 6, dimension: 'fixed' },
+      fallback: { gutter: 16, col: 2, dimension: 'full' },
+    } as BreakpointsConfig<{ gutter: number; col: number; dimension: string }>,
     ref,
   );
 
@@ -56,11 +56,6 @@ const Template: ComponentStory<typeof Container> = () => {
       };
     }, [],
   );
-
-  // useEffect(
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  //   () => setWWidth(w), [isLeftOpen, isRightOpen],
-  // );
 
   return (
     <Container dimension="full" padding={false} style={{ backgroundColor: '#f9fafb' }}>
@@ -95,9 +90,7 @@ const Template: ComponentStory<typeof Container> = () => {
               <Stack inline hAlign="center" rowGap={8}>
                 {Array(5).fill('').map((e, i) => (<IconButton key={`${e} ${Math.random()}`} disabled icon={linkIcons[i] as SymbolNames} kind="flat" />))}
               </Stack>
-            )
-
-            }
+            )}
 
         </Stack>
 
@@ -124,15 +117,15 @@ const Template: ComponentStory<typeof Container> = () => {
             </Stack>
           </Stack>
 
-          <Container ref={ref} dimension="fixed" className="ContainerEx" style={{ overflow: 'auto', height: 'calc(100vh - 64px)' }}>
+          <Container ref={ref} dimension={containerValue.dimension} className="ContainerEx" style={{ overflow: 'auto', height: 'calc(100vh - 64px)' }}>
             <Stack rowGap={32} vPadding={32}>
               <Snackbar>
                 <Title level="2">Product Card Container</Title>
-                <Text as="span">{`Window Width: ${w}px - Breakpoints Match: ${matches.toUpperCase()}`}</Text>
+                <Text as="span">{`Window Width: ${size}px - Breakpoints Match: ${matches.toUpperCase()}`}</Text>
                 <br />
                 <Text as="span">{`Container Width: ${containerSize}px - Grid Columns: ${containerValue.col} -  Grid Gutter: ${containerValue.gutter}px`}</Text>
                 <br />
-                <Text as="span">{`useBreakpointsConfig(Value): ${JSON.stringify(containerValue)}, useBreakpointsConfig(Matches): ${containerMatches.toUpperCase()}`}</Text>
+                <Text as="span">{`useBreakpointsConfig.value: ${JSON.stringify(containerValue)} - useBreakpointsConfig.matches: ${containerMatches.toUpperCase()}`}</Text>
               </Snackbar>
 
               <Grid

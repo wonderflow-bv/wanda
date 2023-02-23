@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { useSize } from 'ahooks';
 import {
   MutableRefObject, useEffect, useState,
 } from 'react';
@@ -52,24 +53,40 @@ export const useBreakpoints = (
 
   const [breakpoints, setBreakpoints] = useState<BreakpointsValues>(DefaultBreakpointsValues);
   const [matches, setMatches] = useState<string>('xs');
-  const [targetSize, setTargetSize] = useState<number>(0);
+  const [windowSize, setWindowSize] = useState<number>(0);
+
+  const size = useSize(target);
+
+  const targetBreakpoints: BreakpointsValues | undefined = size && {
+    xs: size.width <= settings.xs,
+    sm: size.width > settings.xs && size.width <= settings.sm,
+    md: size.width > settings.sm && size.width <= settings.md,
+    lg: size.width > settings.md && size.width <= settings.lg,
+    xl: size.width > settings.lg,
+  };
+
+  const targetMatches = targetBreakpoints
+  && Object.keys(targetBreakpoints)
+    .filter(k => (targetBreakpoints[k as keyof typeof targetBreakpoints]))[0];
 
   const handleResize = () => {
-    const w = isBrowser ? target?.current?.offsetWidth ?? window.innerWidth : 0;
+    if (isBrowser) {
+      const w = window.innerWidth;
 
-    const v: BreakpointsValues = {
-      xs: w <= settings.xs,
-      sm: w > settings.xs && w <= settings.sm,
-      md: w > settings.sm && w <= settings.md,
-      lg: w > settings.md && w <= settings.lg,
-      xl: w > settings.lg,
-    };
+      const v: BreakpointsValues = {
+        xs: w <= settings.xs,
+        sm: w > settings.xs && w <= settings.sm,
+        md: w > settings.sm && w <= settings.md,
+        lg: w > settings.md && w <= settings.lg,
+        xl: w > settings.lg,
+      };
 
-    const b = Object.keys(v).filter((k: string) => (v[k as keyof typeof v]))[0];
+      const b = Object.keys(v).filter(k => (v[k as keyof typeof v]))[0];
 
-    setMatches(b);
-    setBreakpoints(v);
-    setTargetSize(w);
+      setMatches(b);
+      setBreakpoints(v);
+      setWindowSize(window.innerWidth);
+    }
   };
 
   useEffect(() => {
@@ -86,5 +103,9 @@ export const useBreakpoints = (
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return { breakpoints, matches, targetSize };
+  return {
+    breakpoints: targetBreakpoints ?? breakpoints,
+    matches: targetMatches ?? matches,
+    size: size?.width ?? windowSize,
+  };
 };

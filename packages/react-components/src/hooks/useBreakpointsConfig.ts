@@ -13,7 +13,9 @@ export const useBreakpointsConfig = (
 ) => {
   const { fallback } = config;
   const [value, setValue] = useState<any>(fallback);
-  const { matches, breakpoints, targetSize } = useBreakpoints(target, settings);
+  const {
+    matches, breakpoints, size,
+  } = useBreakpoints(target, settings);
 
   useEffect(() => {
     setValue(config[matches as keyof typeof config] ?? fallback);
@@ -21,6 +23,9 @@ export const useBreakpointsConfig = (
   }, [matches]);
 
   return ({
-    value, matches, breakpoints, targetSize,
+    value,
+    matches,
+    breakpoints,
+    size,
   });
 };
