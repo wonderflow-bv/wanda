@@ -13,6 +13,8 @@ import {
   useBreakpointsConfig,
 } from '@/components';
 
+import { BreakpointsConfig } from '../hooks/useBreakpointsConfig';
+
 const story: ComponentMeta<typeof Container> = {
   title: 'Examples/Wireframe',
   component: Container,
@@ -23,59 +25,42 @@ export default story;
 const linkIcons = ['accessibility', 'astronomy', 'crown', 'megaphone', 'thumbs-up'];
 
 const Template: ComponentStory<typeof Container> = () => {
-  const [wWidth, setWWidth] = useState<number>(0);
-  const [cWidth, setCWidth] = useState<number>(0);
-  const [gridNum, setGridNum] = useState<number>(0);
-  const [gutter, setGutter] = useState<string>('16');
   const [isLeftOpen, setIsLeftOpen] = useState<boolean>(false);
   const [isRightOpen, setIsRightOpen] = useState<boolean>(false);
 
-  const ref = useRef<any>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
-  const { matches } = useBreakpoints();
+  const { matches, targetSize: w } = useBreakpoints();
 
-  const { value: containerValue, matches: containerMatches } = useBreakpointsConfig(
+  const {
+    value: containerValue,
+    matches: containerMatches,
+    targetSize: containerSize,
+  } = useBreakpointsConfig(
     {
+      sm: { gutter: 16, col: 3 },
       md: { gutter: 24, col: 4 },
       lg: { gutter: 24, col: 6 },
       xl: { gutter: 24, col: 8 },
       fallback: { gutter: 16, col: 2 },
-    },
+    } as BreakpointsConfig<{ gutter: number; col: number }>,
     ref,
   );
-
-  const handleResize = () => {
-    const w = window.innerWidth;
-    setWWidth(w);
-    const c = document?.querySelector('[data-container-dimension="fixed"]')?.getBoundingClientRect().width ?? 0;
-    setCWidth(c);
-
-    if (c >= 1600) setGridNum(8);
-    else if (c >= 1280) setGridNum(6);
-    else if (c >= 768) setGridNum(4);
-    else setGridNum(2);
-
-    if (c >= 1600) setGutter('32');
-    else if (c >= 960) setGutter('24');
-    else setGutter('16');
-  };
 
   useEffect(
     () => {
       document.body.style.padding = '0px';
-      handleResize();
-      window.addEventListener('resize', handleResize);
 
       return () => {
         document.body.style.padding = '1rem';
-        window.removeEventListener('resize', handleResize);
       };
     }, [],
   );
 
-  useEffect(
-    () => handleResize(), [isLeftOpen, isRightOpen],
-  );
+  // useEffect(
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  //   () => setWWidth(w), [isLeftOpen, isRightOpen],
+  // );
 
   return (
     <Container dimension="full" padding={false} style={{ backgroundColor: '#f9fafb' }}>
@@ -143,11 +128,11 @@ const Template: ComponentStory<typeof Container> = () => {
             <Stack rowGap={32} vPadding={32}>
               <Snackbar>
                 <Title level="2">Product Card Container</Title>
-                <Text as="span">{`Window Width: ${wWidth}px - Breakpoints Match: ${matches.toUpperCase()}`}</Text>
+                <Text as="span">{`Window Width: ${w}px - Breakpoints Match: ${matches.toUpperCase()}`}</Text>
                 <br />
-                <Text as="span">{`Container Width: ${cWidth}px - Grid Columns: ${gridNum} -  Grid Gutter: ${gutter}px`}</Text>
+                <Text as="span">{`Container Width: ${containerSize}px - Grid Columns: ${containerValue.col} -  Grid Gutter: ${containerValue.gutter}px`}</Text>
                 <br />
-                <Text as="span">{`Container Values: ${JSON.stringify(containerValue)}, Container Matches: ${containerMatches.toUpperCase()}`}</Text>
+                <Text as="span">{`useBreakpointsConfig(Value): ${JSON.stringify(containerValue)}, useBreakpointsConfig(Matches): ${containerMatches.toUpperCase()}`}</Text>
               </Snackbar>
 
               <Grid

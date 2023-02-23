@@ -52,6 +52,7 @@ export const useBreakpoints = (
 
   const [breakpoints, setBreakpoints] = useState<BreakpointsValues>(DefaultBreakpointsValues);
   const [matches, setMatches] = useState<string>('xs');
+  const [targetSize, setTargetSize] = useState<number>(0);
 
   const handleResize = () => {
     const w = isBrowser ? target?.current?.offsetWidth ?? window.innerWidth : 0;
@@ -65,8 +66,10 @@ export const useBreakpoints = (
     };
 
     const b = Object.keys(v).filter((k: string) => (v[k as keyof typeof v]))[0];
+
     setMatches(b);
     setBreakpoints(v);
+    setTargetSize(w);
   };
 
   useEffect(() => {
@@ -83,5 +86,5 @@ export const useBreakpoints = (
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return { breakpoints, matches };
+  return { breakpoints, matches, targetSize };
 };

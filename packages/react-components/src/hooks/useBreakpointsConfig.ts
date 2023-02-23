@@ -4,21 +4,23 @@ import { BreakpointsNames, BreakpointsSettings, useBreakpoints } from './useBrea
 
 export type BreakpointsConfig<T> = Partial<Record<BreakpointsNames, T>> & { fallback: T }
 
-export type BreakpointsConfigValues = number | string | Record<string, any>
+// export type BreakpointsConfigValues = number | string | boolean | Record<string, any>
 
 export const useBreakpointsConfig = (
-  config: BreakpointsConfig<BreakpointsConfigValues>,
+  config: BreakpointsConfig<any>,
   target?: MutableRefObject<HTMLElement | null>,
   settings?: BreakpointsSettings,
 ) => {
   const { fallback } = config;
-  const [value, setValue] = useState<BreakpointsConfigValues>(fallback);
-  const { matches, breakpoints } = useBreakpoints(target, settings);
+  const [value, setValue] = useState<any>(fallback);
+  const { matches, breakpoints, targetSize } = useBreakpoints(target, settings);
 
   useEffect(() => {
     setValue(config[matches as keyof typeof config] ?? fallback);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [matches]);
 
-  return ({ value, matches, breakpoints });
+  return ({
+    value, matches, breakpoints, targetSize,
+  });
 };
