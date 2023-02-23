@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-import { useEffect, useState } from 'react';
+import {
+  MutableRefObject, useEffect, useState,
+} from 'react';
 
 import { useSSR } from './useSSR';
 
@@ -42,13 +44,17 @@ const DefaultBreakpointsValues: BreakpointsValues = {
   xl: false,
 };
 
-export const useBreakpoints = (settings: BreakpointsSettings = DefaultBreakpointsSettings) => {
+export const useBreakpoints = (
+  target?: MutableRefObject<HTMLElement | null>,
+  settings: BreakpointsSettings = DefaultBreakpointsSettings,
+) => {
   const { isBrowser } = useSSR();
+
   const [breakpoints, setBreakpoints] = useState<BreakpointsValues>(DefaultBreakpointsValues);
   const [matches, setMatches] = useState<string>('xs');
 
   const handleResize = () => {
-    const w = isBrowser && window.innerWidth;
+    const w = isBrowser ? target?.current?.offsetWidth ?? window.innerWidth : 0;
 
     const v: BreakpointsValues = {
       xs: w <= settings.xs,

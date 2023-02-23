@@ -182,7 +182,6 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
 
   const isFocusWithin = useFocusWithin(tooltipRef, {
     onFocus: (e) => {
-      console.debug(e);
       if (e.relatedTarget && visible) {
         setIsOpen(true);
       }

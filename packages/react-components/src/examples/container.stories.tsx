@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { SymbolNames } from 'packages/symbols/dist';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import {
   Button,
@@ -30,12 +30,19 @@ const Template: ComponentStory<typeof Container> = () => {
   const [isLeftOpen, setIsLeftOpen] = useState<boolean>(false);
   const [isRightOpen, setIsRightOpen] = useState<boolean>(false);
 
+  const ref = useRef<any>(null);
+
   const { matches } = useBreakpoints();
-  const { value } = useBreakpointsConfig({
-    lg: { gutter: 24, col: 4 },
-    xl: { gutter: 24, col: 6 },
-    fallback: { gutter: 16, col: 2 },
-  });
+
+  const { value: containerValue, matches: containerMatches } = useBreakpointsConfig(
+    {
+      md: { gutter: 24, col: 4 },
+      lg: { gutter: 24, col: 6 },
+      xl: { gutter: 24, col: 8 },
+      fallback: { gutter: 16, col: 2 },
+    },
+    ref,
+  );
 
   const handleResize = () => {
     const w = window.innerWidth;
@@ -132,20 +139,25 @@ const Template: ComponentStory<typeof Container> = () => {
             </Stack>
           </Stack>
 
-          <Container dimension="fixed" className="ContainerEx" style={{ overflow: 'auto', height: 'calc(100vh - 64px)' }}>
+          <Container ref={ref} dimension="fixed" className="ContainerEx" style={{ overflow: 'auto', height: 'calc(100vh - 64px)' }}>
             <Stack rowGap={32} vPadding={32}>
               <Snackbar>
-                <Stack>
-                  <Title level="2">Product Card Container</Title>
-                  <Text>{`Window Width: ${wWidth}px - Breakpoints Match: ${matches.toUpperCase()}`}</Text>
-                  <Text>{`Container Width: ${cWidth}px - Grid Columns: ${gridNum} -  Grid Gutter: ${gutter}px`}</Text>
-                  <Text>{`BP Values: ${JSON.stringify(value)}`}</Text>
-                </Stack>
+                <Title level="2">Product Card Container</Title>
+                <Text as="span">{`Window Width: ${wWidth}px - Breakpoints Match: ${matches.toUpperCase()}`}</Text>
+                <br />
+                <Text as="span">{`Container Width: ${cWidth}px - Grid Columns: ${gridNum} -  Grid Gutter: ${gutter}px`}</Text>
+                <br />
+                <Text as="span">{`Container Values: ${JSON.stringify(containerValue)}, Container Matches: ${containerMatches.toUpperCase()}`}</Text>
               </Snackbar>
 
-              <Grid columns={gridNum} rowGap={gutter as any} columnGap={gutter as any} filling={false}>
+              <Grid
+                columns={containerValue.col}
+                rowGap={containerValue.gutter}
+                columnGap={containerValue.gutter}
+                filling={false}
+              >
                 {Array(12).fill('Card').map((e, i) => (
-                  <Grid.Item>
+                  <Grid.Item key={Math.random()}>
                     <Card bordered style={{ height: '500px' }}>
                       <Stack hAlign="center">
                         <Text size={14}>{`${e} ${i + 1}`}</Text>
@@ -182,7 +194,7 @@ const Template: ComponentStory<typeof Container> = () => {
 
           <div style={{ maxHeight: 'calc(100vh - 64px)', overflowY: 'scroll' }}>
             {Array(10).fill('Filter').map((e, i) => (
-              <Disclosure key={Math.random()} summary={`${e} ${String.fromCharCode(i + 65)}`} padding={false}>
+              <Disclosure key={Math.random()} summary={`${e} ${String.fromCharCode(i + 65)}`}>
                 <Menu.Item value="1" subtext="Hint Text">Menu Item 1</Menu.Item>
                 <Menu.Item value="2" subtext="Hint Text">Menu Item 2</Menu.Item>
                 <Menu.Item value="3" subtext="Hint Text">Menu Item 3</Menu.Item>

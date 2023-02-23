@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { MutableRefObject, useEffect, useState } from 'react';
 
 import { BreakpointsNames, BreakpointsSettings, useBreakpoints } from './useBreakpoints';
 
@@ -8,15 +8,17 @@ export type BreakpointsConfigValues = number | string | Record<string, any>
 
 export const useBreakpointsConfig = (
   config: BreakpointsConfig<BreakpointsConfigValues>,
+  target?: MutableRefObject<HTMLElement | null>,
   settings?: BreakpointsSettings,
 ) => {
   const { fallback } = config;
   const [value, setValue] = useState<BreakpointsConfigValues>(fallback);
-  const { matches } = useBreakpoints(settings);
+  const { matches, breakpoints } = useBreakpoints(target, settings);
 
   useEffect(() => {
     setValue(config[matches as keyof typeof config] ?? fallback);
-  }, [config, fallback, matches]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [matches]);
 
-  return ({ value });
+  return ({ value, matches, breakpoints });
 };
