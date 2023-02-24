@@ -19,8 +19,17 @@ export const getStaticProps = () =>
     }
   });
 
+## Overview
+A `Container` is the most basic layout element in a UI. There are two types of layout widths which determine how containers behave: *fixed* or *fluid*.
+
+The fluid layout container is a `full` width container, that does not have a max width (meaning it’s 100% wide all the time). Elements can stretch across the screen to fill all available space.
+
+The `fixed` container (meaning its max-width changes at each breakpoint) applies the ideal width to pages based on the elements being displayed, allowing them to be experienced at an appropriate dimension.
+
+
 <LiveArea>
   <Container dimension="large" className="ContainerEx"></Container>
+  <Container dimension="large" padding={false} className="ContainerEx"></Container>
 </LiveArea>
 
 ## Anatomy
@@ -29,9 +38,35 @@ export const getStaticProps = () =>
 import { Container } from "@wonderflow/react-components";
 
 export default () => {
-  return <Container>...</Container>;
+  return (
+    <>
+      <Container >...</Container>
+      <Container padding={false}>...</Container>
+    </>)
 };
 ```
+## Design Guidelines
+
+Use the grid system when designing any layout within your product.
+Don’t align components.
+Not all UI elements within your layout need to align with the column.
+As long as the parent element aligns to the assigned number of columns.
+Don’t modify the grid templates.
+Use the min-width media queries to jump from one breakpoint to another.
+Sometimes its okay to break the grid to allow elements to stand out.
+
+* Use to create consistent layouts across your product.
+* Use create visual hierarchy and rhythm in your layouts.
+* Use to assist you in making decisions while designing layouts with high or low densities.
+
+## Grid Anatomy
+Grids contain columns, gutters and margins. \
+`Margin`: The space to the left and right outside of the grid columns. These margins can adapt depending on the screen size. \
+`Column`: Columns are the building blocks of grids. Span the width of the content use this to align your content correctly. \
+`Gutter`: The space between columns that help separate content. Gutter widths are fixed values (16px, 24px, 32px) based on breakpoints.
+
+## 12 Column Grid
+Our grid system uses a 12 column grid. This number is the most easily divisible; it’s possible to have 12, 6, 4, 3, 2 or 1 evenly spaced columns. This gives us flexibility over a layout and allows for a multitude of design options.
 
 ## API Reference
 
@@ -40,7 +75,7 @@ export default () => {
     {
       name: "dimension",
       type: ['enum'],
-      typeValue: "'full' | 'small' | 'medium' | 'large'",
+      typeValue: "'full' | 'fixed' | 'extra-small' | 'small' | 'medium' | 'large' | 'extra-large'",
       default: 'full',
       required: false,
       description: "Set the horizontal max-width of the container.",

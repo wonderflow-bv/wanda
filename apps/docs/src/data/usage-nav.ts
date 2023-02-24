@@ -164,6 +164,27 @@ const UsageNav: NavigationMenu = [
         target: '',
       },
       {
+        label: 'Hooks',
+        expandable: true,
+        items: [
+          {
+            path: '/get-started/documentation/develop/hooks/useSSR',
+            label: 'useSSR()',
+            target: '',
+          },
+          {
+            path: '/get-started/documentation/develop/hooks/useBreakpoints',
+            label: 'useBreakpoints()',
+            target: '',
+          },
+          {
+            path: '/get-started/documentation/develop/hooks/useBreakpointsConfig',
+            label: 'useBreakpointsConfig()',
+            target: '',
+          },
+        ],
+      },
+      {
         label: 'Utilities',
         expandable: true,
         items: [

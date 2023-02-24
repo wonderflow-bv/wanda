@@ -1,0 +1,49 @@
+import UsageNav from "@/data/usage-nav";
+import { getLayoutProps } from "@/utils/get-layout-props";
+import { ValueTable } from "@/components/doc/value-table";
+
+export const getStaticProps = () =>
+  getLayoutProps({
+    layout: "mdx",
+    layoutProps: {
+      title: "useSSR",
+      color: "mint",
+      subtitle: "A custom hook to know where the code will be executed.",
+      navigation: UsageNav
+    }
+  });
+
+This hook returns whether the code is executed in the `Server` (Server-Side-Rendering) or `Client` side (Browser).
+
+## Usage
+
+```tsx lines="1,4,8,9"
+import { useSSR } from "@wonderflow/react-components";
+
+export default function Component() {
+  const { isBrowser, isServer } = useSsr();
+
+  return (
+    <div>
+      <p>{isBrowser ? 'Client' : 'Server'}</p>
+      <p>{isServer? 'SSR' : 'Browser'}</p>
+    </div>)
+}
+```
+
+## Return value
+
+<ValueTable
+  properties={[
+    {
+      name: "isBrowser",
+      type: ["boolean"],
+      description: "return True when the code runs Client side",
+    },
+    {
+      name: "isServer",
+      type: ["boolean"],
+      description: "return True when the code runs on the Server",
+    },
+  ]}
+/>

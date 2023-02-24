@@ -1,0 +1,86 @@
+import UsageNav from "@/data/usage-nav";
+import { getLayoutProps } from "@/utils/get-layout-props";
+import { ValueTable } from "@/components/doc/value-table";
+import { PropsTable } from "@/components/doc/props-table";
+
+export const getStaticProps = () =>
+  getLayoutProps({
+    layout: "mdx",
+    layoutProps: {
+      title: "useBreakpointsConfig",
+      color: "mint",
+      subtitle: "A configurable breakpoints selector.",
+      navigation: UsageNav
+    }
+  });
+
+This custom hook is built upon [useBreakpoints()](https://design.wonderflow.ai/get-started/documentation/develop/hooks/useBreakpoints) and returns the provided configuration depending on the current breakpoint. It responds to window resizing and is built to work in server-side rendering (SSR) applications.
+
+## Usage
+
+```tsx lines="1,4,8,9,10"
+import { useBreakpointsConfig } from "@wonderflow/react-components";
+
+export default function Component() {
+  const { value } = useBreakpointsConfig();
+
+  return (
+    <div>
+      <p>{`Breakpoints: ${JSON.stringify(breakpoints)}`}</p>
+      <p>{`Matches: ${matches)}`}</p>
+      <p>{`Size: ${size}`}</p>
+    </div>)
+}
+```
+## API Reference
+
+<PropsTable
+  properties={[
+    {
+      name: "config",
+      type: ['BreakpointsConfig<any>'],
+      required: true,
+      description: "Set the values to be retrieved once the breakpoint has been reached. Although it is not necessary to specify a value for any breakpoints, a fallback value is mandatory",
+    },
+    {
+      name: "target",
+      type: ['MutableRefObject<HTMLElement | null>'],
+      required: false,
+      description: "Set the reference to any HTML element instead of `Window`.",
+    },
+    {
+      name: "settings",
+      type: ["BreakpointsSettings"],
+      default: "System Breakpoints",
+      required: false,
+      description: "Set a custom breakpoints object to be evaluated against.",
+    },
+  ]}
+/>
+
+## Return value
+
+<ValueTable
+  properties={[
+    {
+      name: "value",
+      type: ["any"],
+      description: "The value expected at any breakpoint match",
+    },
+    {
+      name: "breakpoints",
+      type: ["BreakepointsValue"],
+      description: "A key/value pair object with boolean for every breakpoint",
+    },
+    {
+      name: "matches",
+      type: ["BreakpointsName"],
+      description: "xs | sm | md | lg | xl",
+    },
+    {
+      name: "size",
+      type: ["number"],
+      description: "The window or target width",
+    },
+  ]}
+/>

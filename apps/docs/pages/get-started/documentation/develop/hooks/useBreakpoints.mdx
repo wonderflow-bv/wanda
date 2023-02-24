@@ -1,0 +1,78 @@
+import UsageNav from "@/data/usage-nav";
+import { getLayoutProps } from "@/utils/get-layout-props";
+import { ValueTable } from "@/components/doc/value-table";
+import { PropsTable } from "@/components/doc/props-table";
+
+export const getStaticProps = () =>
+  getLayoutProps({
+    layout: "mdx",
+    layoutProps: {
+      title: "useBreakpoints",
+      color: "mint",
+      subtitle: "Current breakpoint, with a touch of flexibility.",
+      navigation: UsageNav
+    }
+  });
+
+By default, this hook returns the current breakpoint. It responds to window resizing and is built to work in server-side rendering (SSR) applications.
+In more detail, it provides information about the size of the **window** width or, optionally, the width of a **target element**. It also provides the ability to pass a **custom breakpoints** object setting upon which to map the target element.
+
+Unlike the [useResponsiveContext()](https://design.wonderflow.ai/get-started/documentation/develop/utilities/responsive-provider) hook, it returns a `true` value only for the breakpoint in use and does not require a context provider.
+
+## Usage
+
+```tsx lines="1,4,8,9,10"
+import { useBreakpoints } from "@wonderflow/react-components";
+
+export default function Component() {
+  const { breakpoints, matches, size } = useBreakpoints();
+
+  return (
+    <div>
+      <p>{`Breakpoints: ${JSON.stringify(breakpoints)}`}</p>
+      <p>{`Matches: ${matches)}`}</p>
+      <p>{`Size: ${size}`}</p>
+    </div>)
+}
+```
+## API Reference
+
+<PropsTable
+  properties={[
+    {
+      name: "target",
+      type: ['MutableRefObject<HTMLElement | null>'],
+      required: false,
+      description: "Set the reference to any HTML element instead of `Window`.",
+    },
+    {
+      name: "settings",
+      type: ["BreakpointsSettings"],
+      default: "System Breakpoints",
+      required: false,
+      description: "Set a custom breakpoints object to be evaluated against.",
+    },
+  ]}
+/>
+
+## Return value
+
+<ValueTable
+  properties={[
+    {
+      name: "breakpoints",
+      type: ["BreakepointsValue"],
+      description: "A key/value pair object with boolean for every breakpoint",
+    },
+    {
+      name: "matches",
+      type: ["BreakpointsName"],
+      description: "xs | sm | md | lg | xl",
+    },
+    {
+      name: "size",
+      type: ["number"],
+      description: "The window or target width",
+    },
+  ]}
+/>
