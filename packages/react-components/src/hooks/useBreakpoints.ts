@@ -52,7 +52,7 @@ export const useBreakpoints = (
   const { isBrowser } = useSSR();
 
   const [breakpoints, setBreakpoints] = useState<BreakpointsValues>(DefaultBreakpointsValues);
-  const [matches, setMatches] = useState<string>('xs');
+  const [matches, setMatches] = useState<BreakpointsNames>('xs');
   const [windowSize, setWindowSize] = useState<number>(0);
 
   const size = useSize(target);
@@ -83,7 +83,7 @@ export const useBreakpoints = (
 
       const b = Object.keys(v).filter(k => (v[k as keyof typeof v]))[0];
 
-      setMatches(b);
+      setMatches(b as BreakpointsNames);
       setBreakpoints(v);
       setWindowSize(window.innerWidth);
     }
@@ -105,7 +105,7 @@ export const useBreakpoints = (
 
   return {
     breakpoints: targetBreakpoints ?? breakpoints,
-    matches: targetMatches ?? matches,
+    matches: (targetMatches ?? matches) as BreakpointsNames,
     size: size?.width ?? windowSize,
   };
 };
