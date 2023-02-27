@@ -1,7 +1,8 @@
 import { render } from '@testing-library/react';
+import { renderHook } from '@testing-library/react-hooks';
 
-import { OverlayProvider } from './overlay';
-import { ResponsiveProvider } from './responsive';
+import { OverlayProvider, useOverlayContext } from './overlay';
+import { ResponsiveProvider, useResponsiveContext } from './responsive';
 
 describe('<Providers>', () => {
   test('OverlayProvider should render properly', () => {
@@ -30,5 +31,15 @@ describe('<Providers>', () => {
       </ResponsiveProvider>,
     );
     expect(container).not.toBeNull();
+  });
+
+  test('useResponsiveContext', () => {
+    const { result } = renderHook(() => useResponsiveContext());
+    expect(result).toBeDefined();
+  });
+
+  test('useOverlayContext', () => {
+    const { result } = renderHook(() => useOverlayContext());
+    expect(result).toBeDefined();
   });
 });

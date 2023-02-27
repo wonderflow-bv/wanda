@@ -45,6 +45,7 @@
     "@lasalefamine/eslint-config": "2.0.7",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "12.1.5",
+    "@testing-library/react-hooks": "8.0.1",
     "@testing-library/user-event": "14.4.3",
     "@types/jest": "29.2.5",
     "@typescript-eslint/eslint-plugin": "5.42.1",
