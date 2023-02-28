@@ -4,7 +4,7 @@ import { BreakpointsNames, BreakpointsSettings, useBreakpoints } from './useBrea
 
 export type BreakpointsConfig<T> = Partial<Record<BreakpointsNames, T>> & { fallback: T }
 
-export type BreakpointsConfigValue = any // number | string | boolean | Record<string, any> | any[]
+export type BreakpointsConfigValue = Record<string, any>
 
 export const useBreakpointsConfig = (
   config: BreakpointsConfig<BreakpointsConfigValue>,
