@@ -9,12 +9,12 @@ export const getStaticProps = () =>
     layoutProps: {
       title: "useBreakpointsConfig",
       color: "mint",
-      subtitle: "A configurable breakpoints selector.",
+      subtitle: "A custom breakpoints configurator.",
       navigation: UsageNav
     }
   });
 
-This custom hook is built upon [useBreakpoints()](https://design.wonderflow.ai/get-started/documentation/develop/hooks/useBreakpoints) and returns the provided configuration depending on the current breakpoint. It responds to window resizing and is built to work in server-side rendering (SSR) applications.
+This custom hook is built upon [useBreakpoints()](https://design.wonderflow.ai/get-started/documentation/develop/hooks/useBreakpoints) and returns the provided configuration depending on the current breakpoint match. It responds to window resizing and is built to work in server-side rendering (SSR) applications.
 
 ## Usage
 
@@ -22,14 +22,18 @@ This custom hook is built upon [useBreakpoints()](https://design.wonderflow.ai/g
 import { useBreakpointsConfig } from "@wonderflow/react-components";
 
 export default function Component() {
-  const { value } = useBreakpointsConfig();
+  const { matches, value } = useBreakpointsConfig({
+      md: { direction: "row", hPadding: "16", vPadding: "8" },
+      lg: { direction: "row", hPadding: "32", vPadding: "16" },
+      xl: { direction: "row", hPadding: "32", vPadding: "16" },
+      fallback: { direction: "column", hPadding: "8", vPadding: "16" },
+    });
 
   return (
-    <div>
-      <p>{`Breakpoints: ${JSON.stringify(breakpoints)}`}</p>
-      <p>{`Matches: ${matches)}`}</p>
-      <p>{`Size: ${size}`}</p>
-    </div>)
+    <Stack direction={value.direction} hPadding={value.hPadding} vPadding={value.vPadding}>
+      <p>{`Key: ${matches}`}</p>
+      <p>{`Value: ${JSON.stringify(value)}`}</p>
+    </Stack>)
 }
 ```
 ## API Reference
@@ -38,7 +42,7 @@ export default function Component() {
   properties={[
     {
       name: "config",
-      type: ['BreakpointsConfig<any>'],
+      type: ['BreakpointsConfig<BreakpointsConfigValue>'],
       required: true,
       description: "Set the values to be retrieved once the breakpoint has been reached. Although it is not necessary to specify a value for any breakpoints, a fallback value is mandatory",
     },
@@ -64,8 +68,8 @@ export default function Component() {
   properties={[
     {
       name: "value",
-      type: ["any"],
-      description: "The value expected at any breakpoint match",
+      type: ["BreakpointsConfigValue"],
+      description: "The value configured for any breakpoint match or the fallback value",
     },
     {
       name: "breakpoints",
