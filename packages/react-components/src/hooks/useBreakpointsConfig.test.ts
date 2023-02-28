@@ -18,6 +18,6 @@ describe('useBreakpointsConfig()', () => {
     expect(breakpoints).toBeDefined();
     expect(matches).toBeDefined();
     expect(size).toBe(w);
-    expect(value).toBe('42');
+    expect(value.answer).toBe('42');
   });
 });
