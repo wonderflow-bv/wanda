@@ -16,10 +16,11 @@ export const Basic = () => (
   <Container dimension="medium">
     <p>This is a standard paragraph</p>
 
-    <p><a href="https://wooo.google.com">Text link</a></p>
+    <p><a href="https://design.wonderflow.ai/get-started/documentation/design/foundation/typography" target="_blank" rel="noreferrer">Text link</a></p>
     <p>
       <a>
         This is a link without
+        {' '}
         <em>href</em>
       </a>
     </p>
@@ -30,24 +31,28 @@ export const Basic = () => (
     </p>
     <p>
       This text has added
+      {' '}
       <em>emphasis</em>
       .
     </p>
     <p>
       The
-      <b>b element</b>
+      {' '}
+      <b>{'<b> element'}</b>
       {' '}
       is stylistically different text from normal text
     </p>
     <p>
       The
-      <i>i element</i>
+      {' '}
+      <i>{'<i> element'}</i>
       {' '}
       is text that is offset from the normal text.
     </p>
     <p>
       The
-      <u>u element</u>
+      {' '}
+      <u>{'<u> element'}</u>
       {' '}
       is text with an unarticulated
     </p>
@@ -76,6 +81,7 @@ export const Basic = () => (
     </p>
     <p>
       Abbreviation:
+      {' '}
       <abbr title="HyperText Markup Language">HTML</abbr>
     </p>
     <p>
@@ -85,31 +91,41 @@ export const Basic = () => (
     </p>
     <p>
       The
-      <dfn>dfn element</dfn>
+      {' '}
+      <dfn>{'<dfn> element'}</dfn>
       {' '}
       indicates a definition.
     </p>
     <p>
       The
-      <var>variable element</var>
-      , such as
+      {' '}
+      <var>{'<var> element'}</var>
+      , indicates variables such as
+      {' '}
       <var>x</var>
       {' '}
       =
+      {' '}
       <var>y</var>
       .
     </p>
-    <address>
-      2518 W Armitage Ave
-      <br />
-      Chicago IL 60647
-    </address>
     <p>
-      The time element:
-      <time dateTime="2013-04-06T12:32+00:00">2 weeks ago</time>
+      {'The <address>2518 W Armitage Ave<br />Chicago IL 60647</address> element specifies such information as address:'}
+      <address>
+        2518 W Armitage Ave
+        <br />
+        Chicago IL 60647
+      </address>
+    </p>
+    <p>
+      This is a time element:
+      {' '}
+      <time dateTime="2013-04-06T12:32+00:00">{'<time dateTime="2013-04-06T12:32+00:00">2 weeks ago</time>'}</time>
+
     </p>
     <p>
       The
+      {' '}
       <mark>mark element</mark>
       {' '}
       indicates a highlight.

@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useState } from 'react';
 
 import {
-  Button, Menu, Stack, Textfield,
+  Button, Card, Elevator, IconButton, Menu, Stack, Textfield,
 } from '../..';
 import { Popover } from './popover';
 
@@ -149,4 +149,28 @@ const ControlledTemplate: ComponentStory<typeof Popover> = (args) => {
 
 export const Controlled = ControlledTemplate.bind({});
 Controlled.args = {
+};
+
+const WithElevatorTemplate: ComponentStory<typeof Popover> = args => (
+  <Popover {...args}>
+    <Elevator resting={2}>
+      <Card dimmed={0} bordered>
+        Lorem ipsum dolor sit.
+        {' '}
+        <a href="https://design.wonderflow.ai/get-started/components/dialogs/popover" target="_blank" rel="noreferrer">More Popover info.</a>
+      </Card>
+    </Elevator>
+  </Popover>
+);
+
+export const WithElevator = WithElevatorTemplate.bind({});
+WithElevator.args = {
+  placement: 'auto-end',
+  trigger: <IconButton
+    kind="flat"
+    icon="circle-info"
+    iconColor="var(--cta-default)"
+    dimension="big"
+    aria-label="Show property description"
+  />,
 };
