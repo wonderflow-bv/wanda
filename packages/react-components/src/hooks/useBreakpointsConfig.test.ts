@@ -6,7 +6,7 @@ import { useBreakpointsConfig } from './useBreakpointsConfig';
 describe('useBreakpointsConfig()', () => {
   test('it should return fallback value', () => {
     const v = {
-      fallback: '42',
+      fallback: { answer: '42' },
     };
     const { result } = renderHook(() => useBreakpointsConfig(v));
     const {
