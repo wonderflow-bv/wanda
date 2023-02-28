@@ -63,11 +63,11 @@
     "react-dom": ">=17.0"
   },
   "devDependencies": {
-    "@babel/core": "7.19.3",
-    "@babel/preset-typescript": "7.18.6",
+    "@babel/core": "7.21.0",
+    "@babel/preset-typescript": "7.21.0",
     "@storybook/addon-a11y": "6.5.16",
     "@storybook/addon-actions": "6.5.16",
-    "@storybook/addon-coverage": "0.0.7",
+    "@storybook/addon-coverage": "0.0.8",
     "@storybook/addon-essentials": "6.5.16",
     "@storybook/addon-links": "6.5.16",
     "@storybook/addon-postcss": "2.0.0",
@@ -85,8 +85,8 @@
     "@wonderflow/tokens": "10.20.0",
     "babel-loader": "8.2.5",
     "cpy-cli": "3.1.1",
-    "postcss": "8.4.17",
-    "postcss-cli": "10.0.0",
+    "postcss": "8.4.21",
+    "postcss-cli": "10.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "storybook-addon-breakpoints": "1.0.0",
@@ -98,20 +98,20 @@
     "typescript-plugin-css-modules": "3.4.0"
   },
   "dependencies": {
-    "@radix-ui/react-tabs": "1.0.0",
-    "ahooks": "3.7.1",
+    "@radix-ui/react-tabs": "1.0.2",
+    "ahooks": "3.7.5",
     "clsx": "1.2.1",
     "constate": "3.3.2",
     "framer-motion": "6.5.1",
-    "react-focus-on": "3.6.0",
+    "react-focus-on": "3.7.0",
     "react-masonry-css": "1.0.16",
     "react-merge-refs": "2.0.1",
-    "react-paginate": "8.1.3",
+    "react-paginate": "8.1.4",
     "react-popper-tooltip": "4.4.2",
     "react-roving-tabindex": "3.2.0",
     "react-table": "7.8.0",
     "react-uid": "2.3.2",
     "slugify": "1.6.5",
-    "type-fest": "3.0.0"
+    "type-fest": "3.6.1"
   }
 }
