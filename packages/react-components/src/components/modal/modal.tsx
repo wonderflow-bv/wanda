@@ -22,7 +22,10 @@ import { FocusOn } from 'react-focus-on';
 
 import { useOverlayContext, useResponsiveContext } from '@/components';
 
+import { ModalBody, ModalBodyProps } from './body/modal-body';
 import { ModalContent, ModalContentProps } from './content/modal-content';
+import { ModalFooter, ModalFooterProps } from './footer/modal-footer';
+import { ModalHeader, ModalHeaderProps } from './header/modal-header';
 import * as styles from './modal.module.css';
 
 export type ModalProps = PropsWithChildren<PropsWithClass<{
@@ -36,6 +39,9 @@ export type ModalProps = PropsWithChildren<PropsWithClass<{
 
 type ModalComponent = React.ForwardRefExoticComponent<ModalProps> & {
   Content: React.ForwardRefExoticComponent<ModalContentProps>;
+  Header: React.ForwardRefExoticComponent<ModalHeaderProps>;
+  Body: React.ForwardRefExoticComponent<ModalBodyProps>;
+  Footer: React.ForwardRefExoticComponent<ModalFooterProps>;
 }
 
 const cssEasingToArray = (cssEasing: string) => {
@@ -104,3 +110,6 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(({
 
 Modal.displayName = 'Modal';
 Modal.Content = ModalContent;
+Modal.Header = ModalHeader;
+Modal.Body = ModalBody;
+Modal.Footer = ModalFooter;

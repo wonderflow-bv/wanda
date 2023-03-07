@@ -3,34 +3,22 @@
 @layer components {
   .Content {
     background-color: var(--global-background);
-    overscroll-behavior: contain;
-    inline-size: 100%;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
+    border-radius: 0;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto 1fr auto;
+    inline-size: 100vw;
     max-block-size: 95vh;
-    border-radius: token(--radius-16) token(--radius-16) 0 0;
-    justify-self: center;
-    align-self: end;
+    min-height: 100vh;
+    -webkit-overflow-scrolling: touch;
+
 
     @media (--from-small) {
-      max-inline-size: 600px;
-      max-block-size: 80vh;
       border-radius: token(--radius-8);
-      justify-self: center;
-      align-self: center;
+      inline-size: 600px;
+      max-height: 90vh;
+      min-height: auto;
     }
-  }
-
-  .Header {
-    position: sticky;
-    top: 0;
-    background-color: inherit;
-    border-bottom: 1px solid var(--dimmed-1);
-    padding:
-      token(--space-16)
-      token(--space-80)
-      token(--space-16)
-      token(--space-24);
   }
 }
 @layer overrides {

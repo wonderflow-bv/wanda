@@ -15,18 +15,13 @@
  */
 
 import clsx from 'clsx';
-import {
-  forwardRef, PropsWithChildren,
-} from 'react';
+import { forwardRef, PropsWithChildren } from 'react';
 
-import {
-  Elevator,
-  // IconButton, Stack, Title, useOverlayContext,
-} from '@/components';
+import { IconButton, Stack, useOverlayContext } from '@/components';
 
-import * as styles from './modal-content.module.css';
+import * as styles from './modal-header.module.css';
 
-export type ModalContentProps = PropsWithChildren<PropsWithClass<{
+export type ModalHeaderProps = PropsWithChildren<PropsWithClass<{
   /**
    * Set the theme of the content card. To ensure contrast with the default overlay color (dark),
    * this is set to `light` by default.
@@ -34,22 +29,27 @@ export type ModalContentProps = PropsWithChildren<PropsWithClass<{
   theme?: 'dark' | 'light' | 'auto';
 }>>
 
-export const ModalContent = forwardRef<HTMLDivElement, ModalContentProps>(({
+export const ModalHeader = forwardRef<HTMLDivElement, ModalHeaderProps>(({
   children,
   className,
   theme = 'light',
   ...otherProps
-}, forwardedRef) => (
-  <Elevator resting={4}>
+}, forwardedRef) => {
+  const { onClose } = useOverlayContext();
+
+  return (
     <div
-      className={clsx(styles.Content, className)}
+      className={clsx(styles.HeaderWrapper, className)}
       ref={forwardedRef}
       data-theme={theme}
       {...otherProps}
     >
-      {children}
+      <Stack vAlign="center" fill={false} hAlign="space-between" direction="row" className={styles.Header}>
+        <div>{children}</div>
+        {onClose && <IconButton onClick={onClose} className={styles.CloseButton} icon="xmark" kind="flat" />}
+      </Stack>
     </div>
-  </Elevator>
-));
+  );
+});
 
-ModalContent.displayName = 'Modal.Content';
+ModalHeader.displayName = 'Modal.Header';

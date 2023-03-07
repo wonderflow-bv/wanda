@@ -26,6 +26,7 @@ const story: ComponentMeta<typeof Table> = {
     centered: { disable: true },
   },
   args: {
+    background: 'white',
     stripes: false,
     selectableRows: false,
     showSeparators: true,

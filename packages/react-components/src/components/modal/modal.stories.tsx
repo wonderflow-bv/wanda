@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import {
   Button, IconButton, OverlayContainer, ResponsiveProvider,
@@ -38,23 +38,23 @@ const ModalShell: ComponentStory<typeof Modal> = ({ children, ...otherProps }) =
   );
 };
 
-const DefaultTemplate: ComponentStory<typeof Modal> = args => (
-  <ModalShell {...args}>
-    <Modal.Content title="Modal title" theme="auto">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus et magnam distinctio qui
-      quod ducimus libero magni earum perspiciatis.
-      <img
-        width="100%"
-        height="400"
-        alt=""
-        src="https://images.unsplash.com/photo-1579332649290-10b7da0cd111?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=cover&w=1600&q=80"
-      />
-      <button type="button">click</button>
-    </Modal.Content>
-  </ModalShell>
-);
+// const DefaultTemplate: ComponentStory<typeof Modal> = args => (
+//   <ModalShell {...args}>
+//     <Modal.Content title="Modal title" theme="auto">
+//       Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus et magnam distinctio qui
+//       quod ducimus libero magni earum perspiciatis.
+//       <img
+//         width="100%"
+//         height="400"
+//         alt=""
+//         src="https://images.unsplash.com/photo-1579332649290-10b7da0cd111?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=cover&w=1600&q=80"
+//       />
+//       <button type="button">click</button>
+//     </Modal.Content>
+//   </ModalShell>
+// );
 
-export const Default = DefaultTemplate.bind({});
+// export const Default = DefaultTemplate.bind({});
 
 const CustomContentModal = () => {
   const { onClose, titleId } = useOverlayContext();
@@ -78,3 +78,18 @@ const CustomTemplate: ComponentStory<typeof Modal> = args => (
   </ModalShell>
 );
 export const Custom = CustomTemplate.bind({});
+
+const DevModal = () => (
+  <Modal.Content>
+    <Modal.Header>custom header here</Modal.Header>
+    <Modal.Body><div style={{ height: '1000px' }}>custom content here</div></Modal.Body>
+    <Modal.Footer>custom footer here</Modal.Footer>
+  </Modal.Content>
+);
+
+const DevTemplate: ComponentStory<typeof Modal> = args => (
+  <ModalShell {...args}>
+    <DevModal />
+  </ModalShell>
+);
+export const Dev = DevTemplate.bind({});

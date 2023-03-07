@@ -1,0 +1,15 @@
+@import '../../../core/utils/media.css';
+
+@layer components {
+  .Body {
+    background-color: var(--global-background);
+    overscroll-behavior: contain;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: token(--space-24);
+
+    @media (--from-small) {
+      min-height: auto;
+    }
+  }
+}

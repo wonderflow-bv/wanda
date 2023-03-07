@@ -1,0 +1,27 @@
+@import '../../../core/utils/media.css';
+
+@layer components {
+  .HeaderWrapper {
+    height: max-content;
+  }
+
+  .Header {
+    position: sticky;
+    top: 0;
+    background-color: inherit;
+    border-bottom: 1px solid var(--dimmed-1);
+    min-height: 56px;
+    padding:
+      token(--space-16)
+      token(--space-80)
+      token(--space-16)
+      token(--space-24);
+  }
+}
+@layer overrides {
+  .CloseButton {
+    position: absolute;
+    top: token(--space-8);
+    right: token(--space-8);
+  }
+}
