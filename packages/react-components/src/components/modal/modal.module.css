@@ -2,10 +2,6 @@
 
 @layer components {
   .Modal {
-    display: contents;
-  }
-
-  .Container {
     align-items: center;
     display: flex;
     height: 100vh;
@@ -14,6 +10,9 @@
     position: fixed;
     top: 0;
     width: 100vw;
+  }
+
+  .Container {
     z-index: 1;
 
 
