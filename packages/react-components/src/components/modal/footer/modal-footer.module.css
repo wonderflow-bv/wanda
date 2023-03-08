@@ -11,5 +11,9 @@
     padding:
       token(--space-16)
       token(--space-24);
+
+    &[data-border-hidden='true'] {
+      border-top: 0;
+    }
   }
 }

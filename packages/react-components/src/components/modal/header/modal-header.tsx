@@ -15,13 +15,22 @@
  */
 
 import clsx from 'clsx';
-import { forwardRef, PropsWithChildren } from 'react';
+import { forwardRef, PropsWithChildren, useMemo } from 'react';
 
 import { IconButton, Stack, useOverlayContext } from '@/components';
 
 import * as styles from './modal-header.module.css';
 
 export type ModalHeaderProps = PropsWithChildren<PropsWithClass<{
+  /**
+   * Display the Close icon Button.
+   */
+  hideCloseButton?: boolean;
+  /**
+   * Display the border at the bottom of the header. This will be automatically dismissed
+   * if no content is provided.
+   */
+  hideBorder?: boolean;
   /**
    * Set the theme of the content card. To ensure contrast with the default overlay color (dark),
    * this is set to `light` by default.
@@ -32,10 +41,14 @@ export type ModalHeaderProps = PropsWithChildren<PropsWithClass<{
 export const ModalHeader = forwardRef<HTMLDivElement, ModalHeaderProps>(({
   children,
   className,
+  hideCloseButton = false,
+  hideBorder = false,
   theme = 'light',
   ...otherProps
 }, forwardedRef) => {
   const { onClose } = useOverlayContext();
+
+  const isBorderHidden = useMemo(() => hideBorder || !children, [hideBorder, children]);
 
   return (
     <div
@@ -44,9 +57,9 @@ export const ModalHeader = forwardRef<HTMLDivElement, ModalHeaderProps>(({
       data-theme={theme}
       {...otherProps}
     >
-      <Stack vAlign="center" fill={false} hAlign="space-between" direction="row" className={styles.Header}>
+      <Stack vAlign="center" fill={false} hAlign="space-between" direction="row" className={styles.Header} data-border-hidden={isBorderHidden}>
         <div>{children}</div>
-        {onClose && <IconButton onClick={onClose} className={styles.CloseButton} icon="xmark" kind="flat" />}
+        {(onClose && !hideCloseButton) && <IconButton onClick={onClose} className={styles.CloseButton} icon="xmark" kind="flat" />}
       </Stack>
     </div>
   );

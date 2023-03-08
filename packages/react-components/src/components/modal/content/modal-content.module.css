@@ -10,6 +10,7 @@
     inline-size: 100vw;
     max-block-size: 95vh;
     min-height: 100vh;
+    overflow: hidden;
     -webkit-overflow-scrolling: touch;
 
 

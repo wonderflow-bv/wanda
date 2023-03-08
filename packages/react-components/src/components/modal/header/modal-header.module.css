@@ -16,6 +16,10 @@
       token(--space-80)
       token(--space-16)
       token(--space-24);
+
+    &[data-border-hidden='true'] {
+      border-bottom: 0;
+    }
   }
 }
 @layer overrides {
