@@ -1,12 +1,14 @@
 @layer components {
   .Chip {
-    padding: token(--space-4) token(--space-8);
-    border-radius: token(--radius-48);
     background-color: var(--highlight-gray-background);
+    block-size: token(--space-32);
+    border-radius: token(--radius-48);
     color: var(--highlight-gray-foreground);
     font-size: token(--font-size-16);
-    block-size: token(--space-32);
     font-weight: 600;
+    overflow: hidden;
+    padding: token(--space-4) token(--space-8);
+    white-space: nowrap;
 
     &[data-chip-dimension='small'] {
       block-size: token(--space-24);
