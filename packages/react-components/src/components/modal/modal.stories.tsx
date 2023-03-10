@@ -3,8 +3,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useState } from 'react';
 
 import {
-  Button, OverlayContainer, ResponsiveProvider, Text,
-  // Stack, Title, useOverlayContext, IconButton,
+  Button, ResponsiveProvider, Text,
 } from '../..';
 import { Modal } from './modal';
 
@@ -14,7 +13,7 @@ const longText = (
   </Text>
 );
 
-const story: ComponentMeta<typeof Modal.Content> = {
+const story: ComponentMeta<typeof Modal> = {
   title: 'Dialogs/Modal',
   component: Modal,
   argTypes: {
@@ -22,10 +21,15 @@ const story: ComponentMeta<typeof Modal.Content> = {
       options: ['light', 'dark', 'auto'],
       control: { type: 'select' },
     },
+    overlayColor: {
+      options: ['light', 'dark', 'auto'],
+      control: { type: 'select' },
+    },
   },
   args: {
     title: 'Modal Title',
     subtitle: 'Subtitle',
+    overlayColor: 'dark',
     hideCloseButton: false,
     hideHeaderBorder: false,
     hideFooterBorder: false,
@@ -35,85 +39,82 @@ const story: ComponentMeta<typeof Modal.Content> = {
     content: longText,
     primaryAction: () => alert('primary'),
     secondaryAction: () => alert('secondary'),
-    tertiaryAction: <Button kind="flat" onClick={() => alert('tertiary')}>Action 3</Button>,
+    tertiaryAction: <Button kind="flat" disabled onClick={() => alert('tertiary')}>Action 3</Button>,
   },
 };
 
 export default story;
 
-const ModalShell: ComponentStory<typeof Modal> = ({ children, ...otherProps }) => {
+// const ModalShell: ComponentStory<any> = ({ children }) => {
+//   const [isVisible, setIsVisible] = useState(false);
+
+//   return (
+//     <ResponsiveProvider>
+//       <Button onClick={() => setIsVisible(true)}>Show Modal</Button>
+
+//       <Modal
+//         overlayColor="light"
+//         isVisible={isVisible}
+//         onCloseModal={() => setIsVisible(false)}
+//       >
+//         {children}
+//       </Modal>
+
+//     </ResponsiveProvider>
+//   );
+// };
+
+const DefaultTemplate: ComponentStory<typeof Modal> = (args) => {
   const [isVisible, setIsVisible] = useState(false);
 
   return (
     <ResponsiveProvider>
       <Button onClick={() => setIsVisible(true)}>Show Modal</Button>
-      <OverlayContainer onClose={() => setIsVisible(false)}>
-        {isVisible && (
-          <Modal
-            key="dynamic-modal"
-            {...otherProps}
-          >
-            {children}
-          </Modal>
-        )}
-      </OverlayContainer>
+
+      <Modal
+        // @ts-expect-error : override props
+        isVisible={isVisible}
+        // @ts-expect-error : override props
+        onCloseModal={() => setIsVisible(false)}
+        {...args}
+      />
     </ResponsiveProvider>
   );
 };
 
-const DefaultTemplate: ComponentStory<typeof Modal> = args => (
-  <ModalShell>
-    <Modal.Content {...args} />
-  </ModalShell>
-);
-
 export const Default = DefaultTemplate.bind({});
 
-// const CustomContentModal = () => {
-//   const { onClose, titleId } = useOverlayContext();
+const CustomTemplate: ComponentStory<typeof Modal> = (args) => {
+  const [isVisible, setIsVisible] = useState(false);
 
-//   return (
-//     <Stack vAlign="center">
-//       <Stack direction="row" fill={false} vAlign="center" hAlign="space-between">
-//         <Title level="5" id={titleId}>{titleId}</Title>
-//         <IconButton onClick={() => onClose?.()} icon="xmark" kind="flat" aria-label="Close modal" />
-//       </Stack>
-//       Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus et magnam distinctio qui quod
-//       ducimus libero magni earum perspiciatis.
-//       <img width="50%" height="auto" alt="" src="https://images.unsplash.com/photo-1579332649290-10b7da0cd111?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=cover&w=1600&q=80" />
-//     </Stack>
-//   );
-// };
+  return (
+    <ResponsiveProvider>
+      <Button onClick={() => setIsVisible(true)}>Show Modal</Button>
 
-// const CustomTemplate: ComponentStory<typeof Modal> = args => (
-//   <ModalShell {...args}>
-//     <CustomContentModal />
-//   </ModalShell>
-// );
-// export const Custom = CustomTemplate.bind({});
+      <Modal
+      // @ts-expect-error : override props
+        isVisible={isVisible}
+        // @ts-expect-error : override props
+        onCloseModal={() => setIsVisible(false)}
+        {...args}
+      >
+        <Modal.Header>
+          <p>custom header content here</p>
+          <p>custom header content here</p>
+          <p>custom header content here</p>
+        </Modal.Header>
+        <Modal.Body>
+          {longText}
+        </Modal.Body>
+        <Modal.Footer>
+          <p>custom footer content here</p>
+          <p>custom footer content here</p>
+          <p>custom footer content here</p>
+        </Modal.Footer>
+      </Modal>
+    </ResponsiveProvider>
+  );
+};
 
-const CustomModal = () => (
-  <Modal.Content>
-    <Modal.Header>
-      <p>custom header content here</p>
-      <p>custom header content here</p>
-      <p>custom header content here</p>
-    </Modal.Header>
-    <Modal.Body>
-      {longText}
-    </Modal.Body>
-    <Modal.Footer>
-      <p>custom footer content here</p>
-      <p>custom footer content here</p>
-      <p>custom footer content here</p>
-    </Modal.Footer>
-  </Modal.Content>
-);
-
-const CustomTemplate: ComponentStory<typeof Modal> = () => (
-  <ModalShell>
-    <CustomModal />
-  </ModalShell>
-);
 export const Custom = CustomTemplate.bind({});
 

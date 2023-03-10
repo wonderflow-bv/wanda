@@ -6,7 +6,11 @@
     overscroll-behavior: contain;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
-    padding: token(--space-24);
+    padding:
+      token(--space-24)
+      token(--space-24)
+      token(--space-32)
+      token(--space-24);
 
     @media (--from-small) {
       min-height: auto;

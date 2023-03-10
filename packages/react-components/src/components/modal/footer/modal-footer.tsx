@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { forwardRef, PropsWithChildren } from 'react';
+import { AutoFocusInside } from 'react-focus-on';
 
 import * as styles from './modal-footer.module.css';
 
@@ -30,7 +31,9 @@ export const ModalFooter = forwardRef<HTMLDivElement, ModalFooterProps>(({
     data-border-hidden={hideBorder || !children}
     {...otherProps}
   >
-    {children}
+    <AutoFocusInside>
+      {children}
+    </AutoFocusInside>
   </div>
 ));
 

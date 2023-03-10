@@ -12,6 +12,27 @@
     width: 100vw;
   }
 
+  .Content {
+    background-color: var(--global-background);
+    border-radius: 0;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto 1fr auto;
+    inline-size: 100vw;
+    max-block-size: 95vh;
+    min-height: 100vh;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+
+
+    @media (--from-small) {
+      border-radius: token(--radius-8);
+      inline-size: 600px;
+      max-height: 90vh;
+      min-height: auto;
+    }
+  }
+
   .Container {
     z-index: 1;
 
@@ -19,5 +40,12 @@
     & > * {
       pointer-events: auto;
     }
+  }
+}
+@layer overrides {
+  .CloseButton {
+    position: absolute;
+    top: token(--space-8);
+    right: token(--space-8);
   }
 }

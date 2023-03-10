@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { forwardRef, PropsWithChildren } from 'react';
+import { AutoFocusInside } from 'react-focus-on';
 
 import * as styles from './modal-body.module.css';
 
@@ -23,7 +24,9 @@ export const ModalBody = forwardRef<HTMLDivElement, ModalBodyProps>(({
     data-theme={theme}
     {...otherProps}
   >
-    {children}
+    <AutoFocusInside>
+      {children}
+    </AutoFocusInside>
   </div>
 ));
 
