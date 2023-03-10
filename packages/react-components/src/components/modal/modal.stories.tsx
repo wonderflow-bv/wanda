@@ -1,11 +1,14 @@
-/* eslint-disable no-alert */
+
 /* eslint-disable max-len */
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useState } from 'react';
 
 import {
-  Button, ResponsiveProvider, Text,
+  Button, Checkbox, ResponsiveProvider, Stack,
+  Text, Textfield, Title,
 } from '../..';
+// @ts-expect-error image loading
+import image from './Image.png';
 import { Modal } from './modal';
 
 const longText = (
@@ -34,12 +37,14 @@ const story: ComponentMeta<typeof Modal> = {
     hideCloseButton: false,
     hideHeaderBorder: false,
     hideFooterBorder: false,
+    alignActionCenter: false,
+    alignContentCenter: false,
     theme: 'auto',
     closeOnClickOutside: true,
     content: longText,
     primaryAction: <Button onClick={() => alert('Primary Action')}>Action 1</Button>,
     secondaryAction: <Button onClick={() => alert('Secondary Action')}>Action 2</Button>,
-    // tertiaryAction: <Button kind="flat" disabled onClick={() => alert('Tertiary')}>Action 3</Button>,
+    tertiaryAction: undefined,
   },
 };
 
@@ -79,6 +84,86 @@ const DefaultTemplate: ComponentStory<typeof Modal> = (args) => {
 
 export const Default = DefaultTemplate.bind({});
 
+export const Confirmation = DefaultTemplate.bind({});
+Confirmation.args = {
+  title: 'Delete account?',
+  subtitle: undefined,
+  hideHeaderBorder: true,
+  content: <Text size={16}>Are you sure you want to delete your account? This action cannot be undone.</Text>,
+  hideFooterBorder: true,
+  primaryAction: <Button>Delete</Button>,
+  secondaryAction: <Button>Cancel</Button>,
+};
+
+export const WithAForm = DefaultTemplate.bind({});
+WithAForm.args = {
+  title: 'Enter your details',
+  subtitle: undefined,
+  content: (
+    <Stack rowGap={16} vPadding={2}>
+      <Textfield label="First name" />
+      <Textfield label="Last name" />
+    </Stack>
+  ),
+  hideFooterBorder: true,
+  primaryAction: <Button>Submit</Button>,
+  secondaryAction: <Button>Cancel</Button>,
+};
+
+export const WithThirdAction = DefaultTemplate.bind({});
+WithThirdAction.args = {
+  title: 'Enter your details',
+  subtitle: undefined,
+  content: (
+    <Stack rowGap={16} vPadding={2}>
+      <Textfield label="First name" />
+      <Textfield label="Last name" />
+    </Stack>
+  ),
+  hideFooterBorder: true,
+  primaryAction: <Button>Submit</Button>,
+  secondaryAction: <Button>Cancel</Button>,
+  tertiaryAction: <Checkbox label="Remember me" defaultChecked dimension="small" />,
+};
+
+export const WithAList = DefaultTemplate.bind({});
+WithAList.args = {
+  title: 'Modal with a list',
+  subtitle: undefined,
+  content: (
+    <Stack rowGap={16} vPadding={2}>
+      <Text size={16}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt, earum.</Text>
+      <ul>
+        <li><Text size={16}>List item content</Text></li>
+        <li><Text size={16}>List item content</Text></li>
+        <li><Text size={16}>List item content</Text></li>
+      </ul>
+    </Stack>
+  ),
+  primaryAction: <Button>Primary</Button>,
+  secondaryAction: <Button>Secondary</Button>,
+};
+
+const withImageContent = () => (
+  <Stack hAlign="center" vAlign="center" vPadding={16}>
+    <img src={image} alt="modal illustartion" width="396px" height="292px" />
+    <Title level="5">Title goes here</Title>
+    <Text size={14}>Subtitle goes here</Text>
+  </Stack>
+);
+
+export const WithImage = DefaultTemplate.bind({});
+WithImage.args = {
+  title: undefined,
+  subtitle: undefined,
+  content: withImageContent,
+  hideFooterBorder: true,
+  alignContentCenter: true,
+  alignActionCenter: true,
+  primaryAction: <Button>Primary</Button>,
+  secondaryAction: <Button>Secondary</Button>,
+};
+
 const CustomTemplate: ComponentStory<typeof Modal> = (args) => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -87,11 +172,9 @@ const CustomTemplate: ComponentStory<typeof Modal> = (args) => {
       <Button onClick={() => setIsVisible(true)}>Show Modal</Button>
 
       <Modal
-      // @ts-expect-error : override props
-        isVisible={isVisible}
-        // @ts-expect-error : override props
-        onCloseModal={() => setIsVisible(false)}
         {...args}
+        isVisible={isVisible}
+        onCloseModal={() => setIsVisible(false)}
       >
         <Modal.Header>
           <p>custom header content here</p>

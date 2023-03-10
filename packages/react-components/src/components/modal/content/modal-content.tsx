@@ -6,6 +6,10 @@ import * as styles from './modal-content.module.css';
 
 export type ModalContentProps = PropsWithChildren<PropsWithClass<{
   /**
+   * Set Modal content vertically in the center on a mobile screen.
+   */
+  alignContentCenter?: boolean;
+  /**
    * Set the theme of the content card. To ensure contrast with the default overlay color (dark),
    * this is set to `light` by default.
    */
@@ -15,6 +19,7 @@ export type ModalContentProps = PropsWithChildren<PropsWithClass<{
 export const ModalContent = forwardRef<HTMLDivElement, ModalContentProps>(({
   children,
   className,
+  alignContentCenter = false,
   theme = 'light',
   ...otherProps
 }, forwardedRef) => (
@@ -22,6 +27,7 @@ export const ModalContent = forwardRef<HTMLDivElement, ModalContentProps>(({
     className={clsx(styles.Content, className)}
     ref={forwardedRef}
     data-theme={theme}
+    data-center-vertically={alignContentCenter}
     {...otherProps}
   >
     <AutoFocusInside>

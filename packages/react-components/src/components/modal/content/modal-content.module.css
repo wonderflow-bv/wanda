@@ -5,15 +5,20 @@
     background-color: var(--global-background);
     overscroll-behavior: contain;
     overflow: auto;
-    -webkit-overflow-scrolling: touch;
     padding:
       token(--space-24)
       token(--space-24)
-      token(--space-32)
+      0
       token(--space-24);
+    -webkit-overflow-scrolling: touch;
+
+    &[data-center-vertically='true'] {
+      margin: auto;
+    }
 
     @media (--from-small) {
       min-height: auto;
+      margin: 0;
     }
   }
 }

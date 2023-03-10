@@ -81,6 +81,15 @@ export type ModalProps = PropsWithChildren<PropsWithClass<{
    */
   tertiaryAction?: React.ReactNode;
   /**
+   * Set Modal action buttons in the center on a desktop screen. On Mobile
+   * they will always be stacked vertically in a column.
+   */
+  alignActionCenter?: boolean;
+  /**
+   * Set Modal content vertically in the center on a mobile screen.
+   */
+  alignContentCenter?: boolean;
+  /**
    * Set the theme of the content card. To ensure contrast with the default overlay color (dark),
    * this is set to `light` by default.
    */
@@ -117,6 +126,8 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(({
   primaryAction,
   secondaryAction,
   tertiaryAction,
+  alignActionCenter = false,
+  alignContentCenter = false,
   isVisible = false,
   onCloseModal,
   closeOnClickOutside = true,
@@ -195,24 +206,39 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(({
                             {(title && subtitle) && <Text size={14}>{subtitle}</Text>}
                           </Modal.Header>
 
-                          {content && <Modal.Content theme={theme}>{content}</Modal.Content>}
+                          {content && (
+                            <Modal.Content theme={theme} alignContentCenter={alignContentCenter}>
+                              {content}
+                            </Modal.Content>
+                          )}
 
                           {hasActions && (
                             <Modal.Footer theme={theme} hideBorder={hideFooterBorder}>
-                              <Stack direction="row" fill={false} hAlign="space-between">
+                              <Stack
+                                direction={matches.small ? 'row' : 'column-reverse'}
+                                rowGap={matches.small ? undefined : '16'}
+                                fill={false}
+                                hAlign={(alignActionCenter && matches.small) ? 'center' : 'space-between'}
+                                vAlign="center"
+                                columnGap={16}
+                              >
                                 <Stack direction="row" fill>{tertiaryAction}</Stack>
 
-                                <Stack direction="row" columnGap={16}>
+                                <Stack
+                                  direction={matches.small ? 'row' : 'column-reverse'}
+                                  rowGap={matches.small ? undefined : '16'}
+                                  columnGap={16}
+                                >
                                   {secondaryAction
-                                  && isValidElement(secondaryAction)
-                                  && cloneElement(
-                                    secondaryAction as ReactElement,
-                                    { ...secondaryAction.props as React.ComponentPropsWithRef<typeof Button>, kind: 'secondary', dimension: 'regular' },
-                                  )}
+                                    && isValidElement(secondaryAction)
+                                    && cloneElement(
+                                      secondaryAction as ReactElement,
+                                      { ...secondaryAction.props as React.ComponentPropsWithRef<typeof Button>, kind: 'secondary', dimension: 'regular' },
+                                    )}
 
                                   {primaryAction
-                                  && isValidElement(primaryAction)
-                                  && cloneElement(primaryAction as ReactElement, { ...primaryAction.props as React.ComponentPropsWithRef<typeof Button>, kind: 'primary', dimension: 'regular' })}
+                                    && isValidElement(primaryAction)
+                                    && cloneElement(primaryAction as ReactElement, { ...primaryAction.props as React.ComponentPropsWithRef<typeof Button>, kind: 'primary', dimension: 'regular' })}
                                 </Stack>
                               </Stack>
                             </Modal.Footer>
