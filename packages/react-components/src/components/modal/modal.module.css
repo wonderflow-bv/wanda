@@ -12,7 +12,7 @@
     width: 100vw;
   }
 
-  .Content {
+  .Main {
     background-color: var(--global-background);
     border-radius: 0;
     display: grid;

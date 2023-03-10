@@ -17,15 +17,18 @@
 import tkns from '@wonderflow/tokens/platforms/web/tokens.json';
 import clsx from 'clsx';
 import { domMax, LazyMotion, m } from 'framer-motion';
-import { forwardRef, PropsWithChildren, useMemo } from 'react';
+import {
+  cloneElement, forwardRef, isValidElement, PropsWithChildren, ReactElement, useMemo,
+} from 'react';
 import { FocusOn } from 'react-focus-on';
 
 import {
-  Button, Elevator, OverlayContainer, OverlayContainerProps, Stack, Text, Title, useResponsiveContext,
+  Elevator, OverlayContainer, OverlayContainerProps, Stack, Text, Title, useResponsiveContext,
 } from '@/components';
 
+import { Button } from '../button/button';
 // import { OverlayContainer } from '../overlay-container/overlay-container.module.css';
-import { ModalBody, ModalBodyProps } from './body/modal-body';
+import { ModalContent, ModalContentProps } from './content/modal-content';
 import { ModalFooter, ModalFooterProps } from './footer/modal-footer';
 import { ModalHeader, ModalHeaderProps } from './header/modal-header';
 import * as styles from './modal.module.css';
@@ -66,21 +69,13 @@ export type ModalProps = PropsWithChildren<PropsWithClass<{
    */
   content?: React.ReactNode;
   /**
-   * Set the Primary Modal Action label.
+   * Set the Primary Button.
    */
-  primaryActionLabel?: React.ReactNode;
+  primaryAction?: React.ComponentPropsWithRef<typeof Button>;
   /**
-   * Set the Primary Modal Action behaviour.
+   * Set the Secondary Button.
    */
-  primaryAction?: () => void;
-  /**
-   * Set the Secondary Modal Action label.
-   */
-  secondaryActionLabel?: React.ReactNode;
-  /**
-   * Set the Secondary Modal Action behaviour.
-   */
-  secondaryAction?: () => void;
+  secondaryAction?: React.ComponentPropsWithRef<typeof Button>;
   /**
    * Set a Custom Modal Action element.
    */
@@ -100,7 +95,7 @@ export type ModalProps = PropsWithChildren<PropsWithClass<{
 
 type ModalComponent = React.ForwardRefExoticComponent<ModalProps> & {
   Header: React.ForwardRefExoticComponent<ModalHeaderProps>;
-  Body: React.ForwardRefExoticComponent<ModalBodyProps>;
+  Content: React.ForwardRefExoticComponent<ModalContentProps>;
   Footer: React.ForwardRefExoticComponent<ModalFooterProps>;
 }
 
@@ -119,9 +114,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(({
   hideHeaderBorder,
   hideFooterBorder,
   content,
-  primaryActionLabel,
   primaryAction,
-  secondaryActionLabel,
   secondaryAction,
   tertiaryAction,
   isVisible = false,
@@ -130,7 +123,8 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(({
   ...otherProps
 }, forwardedRef) => {
   const { matches } = useResponsiveContext();
-  const hasActions = tertiaryAction ?? secondaryActionLabel ?? primaryActionLabel;
+
+  const hasActions = tertiaryAction ?? secondaryAction ?? primaryAction;
 
   const ModalAnimation = useMemo(() => ({
     visible: {
@@ -185,7 +179,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(({
                 >
                   <Elevator resting={4}>
                     <div
-                      className={clsx(styles.Content, className)}
+                      className={clsx(styles.Main, className)}
                       ref={forwardedRef}
                       data-theme={theme}
                       {...otherProps}
@@ -201,33 +195,24 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(({
                             {(title && subtitle) && <Text size={14}>{subtitle}</Text>}
                           </Modal.Header>
 
-                          {content && <Modal.Body theme={theme}>{content}</Modal.Body>}
+                          {content && <Modal.Content theme={theme}>{content}</Modal.Content>}
 
                           {hasActions && (
                             <Modal.Footer theme={theme} hideBorder={hideFooterBorder}>
                               <Stack direction="row" fill={false} hAlign="space-between">
-                                {tertiaryAction && <div>{tertiaryAction}</div>}
+                                <Stack direction="row" fill>{tertiaryAction}</Stack>
 
                                 <Stack direction="row" columnGap={16}>
-                                  {(secondaryActionLabel && secondaryAction) && (
-                                    <Button
-                                      kind="secondary"
-                                      dimension="regular"
-                                      onClick={secondaryAction}
-                                    >
-                                      {secondaryActionLabel}
-                                    </Button>
+                                  {secondaryAction
+                                  && isValidElement(secondaryAction)
+                                  && cloneElement(
+                                    secondaryAction as ReactElement,
+                                    { ...secondaryAction.props as React.ComponentPropsWithRef<typeof Button>, kind: 'secondary', dimension: 'regular' },
                                   )}
 
-                                  {(primaryActionLabel && primaryAction) && (
-                                    <Button
-                                      kind="primary"
-                                      dimension="regular"
-                                      onClick={primaryAction}
-                                    >
-                                      {primaryActionLabel}
-                                    </Button>
-                                  )}
+                                  {primaryAction
+                                  && isValidElement(primaryAction)
+                                  && cloneElement(primaryAction as ReactElement, { ...primaryAction.props as React.ComponentPropsWithRef<typeof Button>, kind: 'primary', dimension: 'regular' })}
                                 </Stack>
                               </Stack>
                             </Modal.Footer>
@@ -248,5 +233,5 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(({
 
 Modal.displayName = 'Modal';
 Modal.Header = ModalHeader;
-Modal.Body = ModalBody;
+Modal.Content = ModalContent;
 Modal.Footer = ModalFooter;

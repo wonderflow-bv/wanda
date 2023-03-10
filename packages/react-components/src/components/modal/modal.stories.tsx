@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable max-len */
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useState } from 'react';
@@ -33,20 +34,16 @@ const story: ComponentMeta<typeof Modal> = {
     hideCloseButton: false,
     hideHeaderBorder: false,
     hideFooterBorder: false,
-    primaryActionLabel: 'Action 1',
-    secondaryActionLabel: 'Action 2',
     theme: 'auto',
+    closeOnClickOutside: true,
     content: longText,
-    primaryAction: () => alert('primary'),
-    secondaryAction: () => alert('secondary'),
-    tertiaryAction: <Button kind="flat" disabled onClick={() => alert('tertiary')}>Action 3</Button>,
+    primaryAction: <Button onClick={() => alert('Primary Action')}>Action 1</Button>,
+    secondaryAction: <Button onClick={() => alert('Secondary Action')}>Action 2</Button>,
+    // tertiaryAction: <Button kind="flat" disabled onClick={() => alert('Tertiary')}>Action 3</Button>,
   },
 };
 
 export default story;
-
-// const ModalShell: ComponentStory<any> = ({ children }) => {
-//   const [isVisible, setIsVisible] = useState(false);
 
 //   return (
 //     <ResponsiveProvider>
@@ -72,11 +69,9 @@ const DefaultTemplate: ComponentStory<typeof Modal> = (args) => {
       <Button onClick={() => setIsVisible(true)}>Show Modal</Button>
 
       <Modal
-        // @ts-expect-error : override props
-        isVisible={isVisible}
-        // @ts-expect-error : override props
-        onCloseModal={() => setIsVisible(false)}
         {...args}
+        isVisible={isVisible}
+        onCloseModal={() => setIsVisible(false)}
       />
     </ResponsiveProvider>
   );
@@ -103,9 +98,9 @@ const CustomTemplate: ComponentStory<typeof Modal> = (args) => {
           <p>custom header content here</p>
           <p>custom header content here</p>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Content>
           {longText}
-        </Modal.Body>
+        </Modal.Content>
         <Modal.Footer>
           <p>custom footer content here</p>
           <p>custom footer content here</p>

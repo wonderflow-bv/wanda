@@ -1,6 +1,6 @@
 declare const styles: {
   readonly "Modal": string;
-  readonly "Content": string;
+  readonly "Main": string;
   readonly "Container": string;
   readonly "CloseButton": string;
 };

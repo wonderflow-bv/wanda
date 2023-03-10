@@ -1,7 +1,7 @@
 @import '../../../core/utils/media.css';
 
 @layer components {
-  .Body {
+  .Content {
     background-color: var(--global-background);
     overscroll-behavior: contain;
     overflow: auto;

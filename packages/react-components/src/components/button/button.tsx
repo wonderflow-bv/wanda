@@ -75,7 +75,7 @@ export type ButtonProps = {
   onClick?: (event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void;
 }
 
-type PolymorphicButton = Polymorphic.ForwardRefComponent<'button', ButtonProps>;
+export type PolymorphicButton = Polymorphic.ForwardRefComponent<'button', ButtonProps>;
 
 export const Button = forwardRef((
   {
