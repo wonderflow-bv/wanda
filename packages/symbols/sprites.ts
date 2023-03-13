@@ -4,7 +4,7 @@ import fs from 'fs-extra';
 import { createSpinner } from 'nanospinner';
 import path from 'path';
 import colors from 'picocolors';
-// @ts-expect-error
+// @ts-expect-error no svgstore type definitions
 import svgstore from 'svgstore';
 
 const generateTypes = (jsonStructure: { iconNames: string[]; iconStyles: string[] }) => `
@@ -59,7 +59,7 @@ declare module "@wonderflow/symbols/sprite" {
 try {
   run();
   process.exit(0);
-} catch (error) {
+} catch (error: unknown) {
   console.error(colors.yellow('⚠️ Something went wrong:'), error);
   process.exit(1);
 }
