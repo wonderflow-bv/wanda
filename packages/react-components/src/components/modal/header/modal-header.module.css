@@ -3,6 +3,7 @@
 @layer components {
   .HeaderWrapper {
     height: max-content;
+    background-color: var(--global-background);
   }
 
   .Header {

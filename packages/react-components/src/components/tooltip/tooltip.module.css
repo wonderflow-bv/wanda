@@ -11,7 +11,7 @@
     font-size: token(--font-size-16);
     max-inline-size: var(--max-w);
     word-wrap: break-word;
-    z-index: 2;
+    z-index: 5;
 
     &[data-popper-reference-hidden='true'] {
       visibility: hidden;

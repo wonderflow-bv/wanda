@@ -1,11 +1,14 @@
+/* eslint-disable no-alert */
 
 /* eslint-disable max-len */
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useState } from 'react';
+import { AutoFocusInside } from 'react-focus-on';
 
 import {
-  Button, Checkbox, ResponsiveProvider, Stack,
-  Text, Textfield, Title,
+  Button, Card, Checkbox, Disclosure,
+  Elevator, Popover, ResponsiveProvider, Stack,
+  Tab, Text, Textfield, Title,
 } from '../..';
 // @ts-expect-error image loading
 import image from './Image.png';
@@ -49,22 +52,6 @@ const story: ComponentMeta<typeof Modal> = {
 };
 
 export default story;
-
-//   return (
-//     <ResponsiveProvider>
-//       <Button onClick={() => setIsVisible(true)}>Show Modal</Button>
-
-//       <Modal
-//         overlayColor="light"
-//         isVisible={isVisible}
-//         onCloseModal={() => setIsVisible(false)}
-//       >
-//         {children}
-//       </Modal>
-
-//     </ResponsiveProvider>
-//   );
-// };
 
 const DefaultTemplate: ComponentStory<typeof Modal> = (args) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -144,7 +131,7 @@ WithAList.args = {
   secondaryAction: <Button>Secondary</Button>,
 };
 
-const withImageContent = () => (
+const withImageContent = (
   <Stack hAlign="center" vAlign="center" vPadding={16}>
     <img src={image} alt="modal illustartion" width="396px" height="292px" />
     <Title level="5">Title goes here</Title>
@@ -162,6 +149,66 @@ WithImage.args = {
   alignActionCenter: true,
   primaryAction: <Button>Primary</Button>,
   secondaryAction: <Button>Secondary</Button>,
+};
+
+const complexNesting = (
+  <Stack vPadding={8}>
+    <Popover
+      placement="bottom-start"
+      trigger={(
+        <Textfield
+          type="text"
+          label="Topic"
+          placeholder="Select a Topic"
+        />
+      )}
+    >
+      <Elevator resting={1}>
+        <Card>
+          <AutoFocusInside>
+            <Tab defaultValue="1" dimension="regular">
+              <Tab.Panel value="1" label="Tab 1">
+                <Card>
+                  <Stack>
+                    <Disclosure summary="Disclosure 1">
+                      Content Tab 1
+                    </Disclosure>
+                  </Stack>
+                </Card>
+              </Tab.Panel>
+              <Tab.Panel value="2" label="Tab 2">
+                <Card>
+                  <Stack>
+                    <Disclosure summary="Disclosure 2">
+                      Content Tab 2
+                    </Disclosure>
+                  </Stack>
+                </Card>
+              </Tab.Panel>
+              <Tab.Panel value="3" label="Tab 3">
+                <Card>
+                  <Stack>
+                    <Disclosure summary="Disclosure 3">
+                      Content Tab 3
+                    </Disclosure>
+                  </Stack>
+                </Card>
+              </Tab.Panel>
+            </Tab>
+          </AutoFocusInside>
+        </Card>
+      </Elevator>
+    </Popover>
+  </Stack>
+);
+
+export const withNesting = DefaultTemplate.bind({});
+withNesting.args = {
+  title: 'With Nesting Elements',
+  subtitle: undefined,
+  content: complexNesting,
+  primaryAction: <Button>Confirm</Button>,
+  secondaryAction: <Button>Cancel</Button>,
 };
 
 const CustomTemplate: ComponentStory<typeof Modal> = (args) => {

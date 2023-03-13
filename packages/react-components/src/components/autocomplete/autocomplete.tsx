@@ -37,7 +37,6 @@ import {
   Menu, Skeleton, Stack, Text, Textfield, TextfieldProps,
 } from '@/components';
 
-import { usePopUpWrapper } from '../../hooks';
 import { MenuItemProps, MenuProps } from '../menu';
 import * as styles from './autocomplete.module.css';
 import { AutocompleteOption, AutocompleteOptionProps } from './autocomplete-option';
@@ -66,6 +65,10 @@ export type AutocompleteProps = PropsWithClass<TextfieldProps<{
    * Show skeletons while loading options.
    */
   busy?: boolean;
+  /**
+   * Set the root element to render the Autocomplete into.
+   */
+  root?: HTMLElement;
 }>>;
 
 type AutocompleteComponent = ForwardRefExoticComponent<AutocompleteProps> & {
@@ -100,6 +103,7 @@ export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
   busy,
   maxHeight = '200px',
   emptyContent = 'No items to show',
+  root = document.body,
   ...otherProps
 }, forwardedRef) => {
   const seedID = useUIDSeed();
@@ -109,7 +113,6 @@ export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
   const [value, setValue] = useState<string>(val ? String(val) : '');
   const [optionsValues, setOptionValues] = useState<string[]>([]);
   const isInteractive = useMemo(() => !disabled && !readOnly, [disabled, readOnly]);
-  const { wrapper } = usePopUpWrapper('autocomplete-root');
 
   const debounceQuery = useDebounce(
     query,
@@ -196,7 +199,7 @@ export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
     );
 
     if (val) setValue(String(val));
-    setOptionValues(currentValues);
+    setOptionValues(currentValues as any);
   }, [filteredOptions, val]);
 
   return (
@@ -255,8 +258,7 @@ export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
               </m.div>
             </LazyMotion>
           </div>
-        </AnimatePresence>,
-        wrapper ?? document.body,
+        </AnimatePresence>, root,
       )}
     </div>
   );

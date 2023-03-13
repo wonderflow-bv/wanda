@@ -2,6 +2,7 @@
 
 @layer components {
   .Footer {
+    background-color: var(--global-background);
     border-top: 1px solid var(--dimmed-1);
     position: sticky;
     bottom: 0;

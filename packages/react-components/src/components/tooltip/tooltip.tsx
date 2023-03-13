@@ -25,7 +25,6 @@ import { useUIDSeed } from 'react-uid';
 
 import { Elevator } from '@/components';
 
-import { usePopUpWrapper } from '../../hooks';
 import * as styles from './tooltip.module.css';
 
 export type TooltipProps = {
@@ -68,6 +67,10 @@ export type TooltipProps = {
    * Set the trigger container to behave like inline or block element
    */
   fill?: boolean;
+  /**
+   * Set the root element to render the Tooltip into.
+   */
+  root?: HTMLElement;
 }
 
 export const Tooltip: FCChildrenClass<TooltipProps> = ({
@@ -80,13 +83,13 @@ export const Tooltip: FCChildrenClass<TooltipProps> = ({
   fill = false,
   interactive = false,
   delay = 500,
+  root = document.body,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const seedID = useUIDSeed();
   const id = seedID('tooltip-content');
   const tooltipContainerRef = useRef<HTMLDivElement>(null);
   useKeyPress('esc', () => setIsOpen(false));
-  const { wrapper } = usePopUpWrapper('tooltip-root');
 
   const {
     getArrowProps,
@@ -150,7 +153,7 @@ export const Tooltip: FCChildrenClass<TooltipProps> = ({
             {children}
             <div {...getArrowProps({ className: styles.Arrow })} />
           </div>
-        </Elevator>, wrapper ?? document.body,
+        </Elevator>, root,
       )}
     </div>
   );

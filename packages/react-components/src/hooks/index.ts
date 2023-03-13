@@ -16,5 +16,4 @@
 
 export { useBreakpoints } from './useBreakpoints';
 export { useBreakpointsConfig } from './useBreakpointsConfig';
-export { usePopUpWrapper } from './usePopupWrapper';
 export { useSSR } from './useSSR';

@@ -40,7 +40,6 @@ import { mergeRefs } from 'react-merge-refs';
 import { usePopperTooltip } from 'react-popper-tooltip';
 import { useUIDSeed } from 'react-uid';
 
-import { usePopUpWrapper } from '../../hooks';
 import * as styles from './popover.module.css';
 
 export type PopoverProps = {
@@ -89,6 +88,10 @@ export type PopoverProps = {
    * Set the popover element the same with of the trigger element.
    */
   matchTriggerWidth?: boolean;
+  /**
+   * Set the root element to render the Popover into.
+   */
+  root?: HTMLElement;
 }
 
 const cssEasingToArray = (cssEasing: string) => {
@@ -126,12 +129,12 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
   className,
   matchTriggerWidth,
   onOpenChange,
+  root = document.body,
   ...otherProps
 }, forwardedRef) => {
   const seedID = useUIDSeed();
   const [isOpen, setIsOpen] = useState(false);
   const popoverContainerRef = useRef<HTMLDivElement>(null);
-  const { wrapper } = usePopUpWrapper('popover-root');
 
   const sameWidth = useMemo<Modifier<string, Record<string, unknown>>>(() => ({
     name: 'sameWidth',
@@ -186,11 +189,6 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
         setIsOpen(true);
       }
     },
-    onBlur: (e) => {
-      if (!e.relatedTarget && visible) {
-        setIsOpen(false);
-      }
-    },
   });
 
   useKeyPress('esc', () => setIsOpen(false));
@@ -243,8 +241,7 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
               </m.div>
             </LazyMotion>
           </div>
-        </AnimatePresence>,
-        wrapper ?? document.body,
+        </AnimatePresence>, root,
       )}
 
     </div>
