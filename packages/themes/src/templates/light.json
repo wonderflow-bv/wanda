@@ -36,7 +36,7 @@
       "value": "hsl({color.support.brand})"
     },
     "dark": {
-      "value": "hsl(0 100% 41%)"
+      "value": "hsl(0 100% 38%)"
     },
     "foreground": {
       "value": "hsl({color.support.white})"
