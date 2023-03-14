@@ -16,6 +16,8 @@ export type ModalContentProps = PropsWithChildren<PropsWithClass<{
   theme?: 'dark' | 'light' | 'auto';
 }>>
 
+export type ModalContentComponent = React.ForwardRefExoticComponent<ModalContentProps>
+
 export const ModalContent = forwardRef<HTMLDivElement, ModalContentProps>(({
   children,
   className,

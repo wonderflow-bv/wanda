@@ -17,6 +17,8 @@ export type ModalFooterProps = PropsWithChildren<PropsWithClass<{
   theme?: 'dark' | 'light' | 'auto';
 }>>
 
+export type ModalFooterComponent = React.ForwardRefExoticComponent<ModalFooterProps>
+
 export const ModalFooter = forwardRef<HTMLDivElement, ModalFooterProps>(({
   children,
   className,

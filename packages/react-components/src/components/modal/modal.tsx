@@ -27,10 +27,9 @@ import {
 } from '@/components';
 
 import { Button } from '../button/button';
-// import { OverlayContainer } from '../overlay-container/overlay-container.module.css';
-import { ModalContent, ModalContentProps } from './content/modal-content';
-import { ModalFooter, ModalFooterProps } from './footer/modal-footer';
-import { ModalHeader, ModalHeaderProps } from './header/modal-header';
+import { ModalContent, ModalContentComponent } from './content/modal-content';
+import { ModalFooter, ModalFooterComponent } from './footer/modal-footer';
+import { ModalHeader, ModalHeaderComponent } from './header/modal-header';
 import * as styles from './modal.module.css';
 
 export type ModalProps = PropsWithChildren<PropsWithClass<{
@@ -100,12 +99,12 @@ export type ModalProps = PropsWithChildren<PropsWithClass<{
    * it to `true` as it ensures the accessibility of the modal.
    */
   closeOnClickOutside?: boolean;
-}>> & OverlayContainerProps
+}>> & Pick<OverlayContainerProps, 'obfuscate' | 'overlayColor' | 'index' | 'root'>
 
 type ModalComponent = React.ForwardRefExoticComponent<ModalProps> & {
-  Header: React.ForwardRefExoticComponent<ModalHeaderProps>;
-  Content: React.ForwardRefExoticComponent<ModalContentProps>;
-  Footer: React.ForwardRefExoticComponent<ModalFooterProps>;
+  Header: ModalHeaderComponent;
+  Content: ModalContentComponent;
+  Footer: ModalFooterComponent;
 }
 
 const cssEasingToArray = (cssEasing: string) => {

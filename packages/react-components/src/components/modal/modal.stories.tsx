@@ -7,7 +7,7 @@ import { AutoFocusInside } from 'react-focus-on';
 
 import {
   Button, Card, Checkbox, Disclosure,
-  Elevator, Popover, ResponsiveProvider, Stack,
+  Elevator, Popover, ResponsiveProvider, Select, Stack,
   Tab, Text, Textfield, Title,
 } from '../..';
 // @ts-expect-error image loading
@@ -82,8 +82,8 @@ Confirmation.args = {
   secondaryAction: <Button>Cancel</Button>,
 };
 
-export const WithAForm = DefaultTemplate.bind({});
-WithAForm.args = {
+export const WithSimpleForm = DefaultTemplate.bind({});
+WithSimpleForm.args = {
   title: 'Enter your details',
   subtitle: undefined,
   content: (
@@ -93,6 +93,36 @@ WithAForm.args = {
     </Stack>
   ),
   hideFooterBorder: true,
+  primaryAction: <Button>Submit</Button>,
+  secondaryAction: <Button>Cancel</Button>,
+};
+
+export const WithComplexForm = DefaultTemplate.bind({});
+WithComplexForm.args = {
+  title: 'Tell us more about yourself',
+  subtitle: 'You may add a description here',
+  content: (
+    <Stack rowGap={16} vPadding={2}>
+      <Textfield label="Enter your full name" messag="Sample hint text" />
+      <Select placeholder="Select" label="How would you describe the interface?">
+        <optgroup label="Option Group">
+          <option>Option 1</option>
+          <option>Option 2</option>
+          <option>Option 3</option>
+        </optgroup>
+        <optgroup label="Option Group 2">
+          <option>Option 4</option>
+          <option>Option 5</option>
+          <option>Option 6</option>
+        </optgroup>
+      </Select>
+      <Textfield
+        textarea
+        label="Is there anything you'd like to add?"
+        value="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt, earum."
+      />
+    </Stack>
+  ),
   primaryAction: <Button>Submit</Button>,
   secondaryAction: <Button>Cancel</Button>,
 };
@@ -209,6 +239,27 @@ withNesting.args = {
   content: complexNesting,
   primaryAction: <Button>Confirm</Button>,
   secondaryAction: <Button>Cancel</Button>,
+};
+
+export const withDisclosure = DefaultTemplate.bind({});
+withDisclosure.args = {
+  title: 'With Disclosed Content',
+  content: (
+    <Stack rowGap={16}>
+      <Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea facilis similique ab?</Text>
+      <Disclosure dimension="small" summary="Lorem 12" iconPosition="right">
+        <Text>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam sequi laudantium quibusdam?</Text>
+      </Disclosure>
+      <Disclosure dimension="small" summary="Lorem 16" iconPosition="right">
+        <Text>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod incidunt temporibus tempora laborum quisquam, fugiat voluptas?</Text>
+      </Disclosure>
+      <Disclosure dimension="small" summary="Lorem 24" iconPosition="right">
+        <Text>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque repellat dicta molestias facere, vero possimus reiciendis odio delectus tenetur voluptatum quis. Quam, eaque quo?</Text>
+      </Disclosure>
+    </Stack>),
+  alignActionCenter: true,
+  primaryAction: <Button>OK</Button>,
+  secondaryAction: undefined,
 };
 
 const CustomTemplate: ComponentStory<typeof Modal> = (args) => {

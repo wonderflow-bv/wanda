@@ -38,6 +38,8 @@ export type ModalHeaderProps = PropsWithChildren<PropsWithClass<{
   theme?: 'dark' | 'light' | 'auto';
 }>>
 
+export type ModalHeaderComponent = React.ForwardRefExoticComponent<ModalHeaderProps>
+
 export const ModalHeader = forwardRef<HTMLDivElement, ModalHeaderProps>(({
   children,
   className,
@@ -65,6 +67,6 @@ export const ModalHeader = forwardRef<HTMLDivElement, ModalHeaderProps>(({
       </Stack>
     </div>
   );
-});
+}) as ModalHeaderComponent;
 
 ModalHeader.displayName = 'Modal.Header';
