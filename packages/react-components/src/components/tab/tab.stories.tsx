@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { Button } from '../..';
 import { Tab } from './tab';
@@ -33,24 +33,28 @@ InitialTab.args = {
   defaultValue: '3',
 };
 
-// export const ProgrammaticTab = () => {
-//   const [state, setState] = useState('1');
+export const ProgrammaticTab: ComponentStory<typeof Tab> = () => {
+  const [state, setState] = useState('1');
 
-//   return (
-//     <Tab value={state} onValueChange={val => setState(val)}>
-//       <Tab.Panel value="1" label="Tab 1">
-//         Tab panel 1
-//         <Button icon="sun-bright" onClick={() => setState('3')}>Go to tab 3</Button>
-//       </Tab.Panel>
-//       <Tab.Panel value="2" label="Tab 2">
-//         Tab panel 2
-//       </Tab.Panel>
-//       <Tab.Panel value="3" label="Tab 3">
-//         Tab panel 3
-//       </Tab.Panel>
-//     </Tab>
-//   );
-// };
+  return (
+    <Tab value={state} onValueChange={val => setState(val)}>
+      <Tab.Panel value="1" label="Tab 1">
+        <p>Tab panel 1</p>
+        <Button icon="sun-bright" dimension="small" onClick={() => setState('3')}>Go to tab 3</Button>
+      </Tab.Panel>
+
+      <Tab.Panel value="2" label="Tab 2">
+        <p>Tab panel 2</p>
+        <Button icon="sun-bright" dimension="small" onClick={() => setState('1')}>Go to tab 1</Button>
+      </Tab.Panel>
+
+      <Tab.Panel value="3" label="Tab 3">
+        <p>Tab panel 3</p>
+        <Button icon="sun-bright" dimension="small" onClick={() => setState('2')}>Go to tab 2</Button>
+      </Tab.Panel>
+    </Tab>
+  );
+};
 
 export const ChangeEvent = Template.bind({});
 
