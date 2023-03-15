@@ -7,7 +7,7 @@ import { AutoFocusInside } from 'react-focus-on';
 
 import {
   Button, Card, Checkbox, Disclosure,
-  Elevator, Popover, ResponsiveProvider, Select, Stack,
+  Elevator, Popover, ResponsiveProvider, Select, Stack, Symbol,
   Tab, Text, Textfield, Title,
 } from '../..';
 // @ts-expect-error image loading
@@ -232,9 +232,9 @@ const complexNesting = (
   </Stack>
 );
 
-export const withNesting = DefaultTemplate.bind({});
-withNesting.args = {
-  title: 'With Nesting Elements',
+export const withNestedElements = DefaultTemplate.bind({});
+withNestedElements.args = {
+  title: 'With Nested Elements',
   subtitle: undefined,
   content: complexNesting,
   primaryAction: <Button>Confirm</Button>,
@@ -260,6 +260,25 @@ withDisclosure.args = {
   alignActionCenter: true,
   primaryAction: <Button>OK</Button>,
   secondaryAction: undefined,
+};
+
+export const withHeroIcon = DefaultTemplate.bind({});
+withHeroIcon.args = {
+  title: undefined,
+  subtitle: undefined,
+  content: (
+    <Stack vAlign="center" hAlign="center" rowGap={32}>
+      <Symbol source="triangle-exclamation" dimension={40} weight="duotone" color="var(--cta-dark)" />
+      <Title level="4">Delete user?</Title>
+      <Stack hAlign="center">
+        <Text size={16}>Are you sure you want to delete this user?</Text>
+        <Text size={16}>This action cannot be undone.</Text>
+      </Stack>
+    </Stack>),
+  hideFooterBorder: true,
+  primaryAction: <Button>Delete</Button>,
+  secondaryAction: <Button>Cancel</Button>,
+  alignContentCenter: true,
 };
 
 const CustomTemplate: ComponentStory<typeof Modal> = (args) => {
