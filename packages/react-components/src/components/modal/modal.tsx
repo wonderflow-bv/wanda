@@ -94,11 +94,15 @@ export type ModalProps = PropsWithChildren<PropsWithClass<{
    */
   theme?: 'dark' | 'light' | 'auto';
   /**
+   * Set the Modal size.
+   */
+  size?: 'small' | 'medium' | 'large';
+  /**
    * This enable the modal to be closed by clicking on the overlay.
    * Even if this can be set to `false` we strongly recommend to leave
    * it to `true` as it ensures the accessibility of the modal.
    */
-  closeOnClickOutside?: boolean;
+  preventCloseOnClickOutside?: boolean;
 }>> & Pick<OverlayContainerProps, 'obfuscate' | 'overlayColor' | 'index' | 'root'>
 
 type ModalComponent = React.ForwardRefExoticComponent<ModalProps> & {
@@ -115,6 +119,7 @@ const cssEasingToArray = (cssEasing: string) => {
 export const Modal = forwardRef<HTMLDivElement, ModalProps>(({
   children,
   className,
+  size = 'medium',
   theme = 'light',
   title,
   subtitle,
@@ -129,7 +134,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(({
   alignContentCenter = false,
   isVisible = false,
   onCloseModal,
-  closeOnClickOutside = true,
+  preventCloseOnClickOutside = false,
   ...otherProps
 }, forwardedRef) => {
   const { matches } = useResponsiveContext();
@@ -175,7 +180,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(({
             {...otherProps}
           >
             <FocusOn
-              onClickOutside={closeOnClickOutside ? onCloseModal : undefined}
+              onClickOutside={preventCloseOnClickOutside ? undefined : onCloseModal}
               onEscapeKey={onCloseModal}
             >
               <LazyMotion features={domMax}>
@@ -192,6 +197,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(({
                       className={clsx(styles.Main, className)}
                       ref={forwardedRef}
                       data-theme={theme}
+                      data-size={size}
                       {...otherProps}
                     >
                       {children ?? (

@@ -8,14 +8,14 @@
     bottom: 0;
     align-self: end;
     min-height: 56px;
-    margin-top: token(--space-32);
+    margin-top: token(--space-8);
     padding:
       token(--space-16)
       token(--space-24);
 
     &[data-border-hidden='true'] {
       border-top: 0;
-      padding-top: 0;
+      padding-top: token(--space-8);
     }
   }
 }

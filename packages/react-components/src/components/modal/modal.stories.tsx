@@ -32,6 +32,10 @@ const story: ComponentMeta<typeof Modal> = {
       options: ['light', 'dark', 'auto'],
       control: { type: 'select' },
     },
+    size: {
+      options: ['small', 'medium', 'large'],
+      control: { type: 'select' },
+    },
   },
   args: {
     title: 'Modal Title',
@@ -42,8 +46,9 @@ const story: ComponentMeta<typeof Modal> = {
     hideFooterBorder: false,
     alignActionCenter: false,
     alignContentCenter: false,
+    size: 'medium',
     theme: 'auto',
-    closeOnClickOutside: true,
+    preventCloseOnClickOutside: false,
     content: longText,
     primaryAction: <Button onClick={() => alert('Primary Action')}>Action 1</Button>,
     secondaryAction: <Button onClick={() => alert('Secondary Action')}>Action 2</Button>,
@@ -87,7 +92,7 @@ WithSimpleForm.args = {
   title: 'Enter your details',
   subtitle: undefined,
   content: (
-    <Stack rowGap={16} vPadding={2}>
+    <Stack rowGap={16}>
       <Textfield label="First name" />
       <Textfield label="Last name" />
     </Stack>
@@ -102,7 +107,7 @@ WithComplexForm.args = {
   title: 'Tell us more about yourself',
   subtitle: 'You may add a description here',
   content: (
-    <Stack rowGap={16} vPadding={2}>
+    <Stack rowGap={16}>
       <Textfield label="Enter your full name" messag="Sample hint text" />
       <Select placeholder="Select" label="How would you describe the interface?">
         <optgroup label="Option Group">
@@ -132,7 +137,7 @@ WithThirdAction.args = {
   title: 'Enter your details',
   subtitle: undefined,
   content: (
-    <Stack rowGap={16} vPadding={2}>
+    <Stack rowGap={16}>
       <Textfield label="First name" />
       <Textfield label="Last name" />
     </Stack>
@@ -148,7 +153,7 @@ WithAList.args = {
   title: 'Modal with a list',
   subtitle: undefined,
   content: (
-    <Stack rowGap={16} vPadding={2}>
+    <Stack rowGap={16}>
       <Text size={16}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt, earum.</Text>
       <ul>
         <li><Text size={16}>List item content</Text></li>
@@ -312,4 +317,3 @@ const CustomTemplate: ComponentStory<typeof Modal> = (args) => {
 };
 
 export const Custom = CustomTemplate.bind({});
-

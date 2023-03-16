@@ -27,9 +27,20 @@
 
     @media (--from-small) {
       border-radius: token(--radius-8);
-      inline-size: 600px;
       max-height: 90vh;
       min-height: auto;
+
+      &[data-size='small'] {
+        inline-size: 480px;
+      }
+
+      &[data-size='medium'] {
+        inline-size: 600px;
+      }
+
+      &[data-size='large'] {
+        inline-size: 720px;
+      }
     }
   }
 

@@ -8,7 +8,7 @@
     padding:
       token(--space-24)
       token(--space-24)
-      0
+      token(--space-24)
       token(--space-24);
     -webkit-overflow-scrolling: touch;
 
