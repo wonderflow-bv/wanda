@@ -1,6 +1,7 @@
 @layer components {
   .IconWrapper {
     border-radius: token(--radius-8);
+    border: 8px solid hsl(0deg 0% 100% / 60%);
     padding: token(--space-8);
     display: block;
     position: relative;
@@ -17,8 +18,6 @@
       right: 0;
       z-index: -1;
       border-radius: inherit;
-      animation: pulse 6s ease 0.5s infinite;
-      animation-fill-mode: backwards;
     }
 
     & svg {
@@ -67,16 +66,3 @@
   }
 }
 
-@keyframes pulse {
-  0% {
-    opacity: 80%;
-    transform: scale(0.8);
-  }
-
-  30%,
-  100% {
-    opacity: 0%;
-    transform: scale(3);
-    border-radius: 50px;
-  }
-}

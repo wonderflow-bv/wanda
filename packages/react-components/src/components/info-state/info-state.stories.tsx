@@ -1,7 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import React from 'react';
 
-import { Button, List, Stack } from '../..';
+import { Button, Stack } from '../..';
 import { InfoState } from './info-state';
 
 const story: ComponentMeta<typeof InfoState> = {
@@ -25,11 +24,6 @@ const Template: ComponentStory<typeof InfoState> = args => (
     <Stack hAlign="center" fill={false}>
       Cras ultricies, elit sit amet cursus consectetur, risus felis ullamcorper nulla,
       ut scelerisque sapien lorem non sem.
-
-      <List>
-        <List.Li>ciao</List.Li>
-        <List.Li>ciao</List.Li>
-      </List>
     </Stack>
   </InfoState>
 );
@@ -47,13 +41,13 @@ Horizontal.args = {
 
 export const WithImage = Template.bind({});
 WithImage.args = {
-  image: 'https://svgshare.com/i/b5f.svg',
+  image: 'https://wonderimages.gumlet.io/placeholders/illustration.png?format=webp&q=100',
 };
 
 export const WithImageHorizontal = Template.bind({});
 WithImageHorizontal.args = {
   direction: 'row',
-  image: 'https://svgshare.com/i/b5f.svg',
+  image: 'https://wonderimages.gumlet.io/placeholders/illustration.png?format=webp&q=100',
 };
 
 export const WithActions = Template.bind({});

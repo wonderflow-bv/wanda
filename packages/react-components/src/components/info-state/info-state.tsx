@@ -85,16 +85,6 @@ export const InfoState = forwardRef<HTMLDivElement, PropsWithChildren<InfoStateP
           <m.span
             data-info-state-icon-color={iconColor}
             className={styles.IconWrapper}
-            animate={{
-              scale: [1, 0.8, 1],
-            }}
-            transition={{
-              duration: 0.8,
-              repeat: Infinity,
-              repeatDelay: 5.2,
-              repeatType: 'reverse',
-              type: 'spring',
-            }}
           >
             <Symbol source={icon} dimension={48} />
           </m.span>

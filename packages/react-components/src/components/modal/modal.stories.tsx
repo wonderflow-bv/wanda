@@ -7,11 +7,8 @@ import { AutoFocusInside } from 'react-focus-on';
 
 import {
   Button, Card, Checkbox, Disclosure,
-  Elevator, Popover, ResponsiveProvider, Select, Stack, Symbol,
-  Tab, Text, Textfield, Title,
+  Elevator, InfoState, Popover, ResponsiveProvider, Select, Stack, Tab, Text, Textfield, Title,
 } from '../..';
-// @ts-expect-error image loading
-import image from './Image.png';
 import { Modal } from './modal';
 
 const longText = (
@@ -168,7 +165,12 @@ WithAList.args = {
 
 const withImageContent = (
   <Stack hAlign="center" vAlign="center" vPadding={16}>
-    <img src={image} alt="modal illustartion" width="396px" height="292px" />
+    <img
+      src="https://wonderimages.gumlet.io/placeholders/illustration.png?format=webp&q=100"
+      alt="modal illustartion"
+      width="400px"
+      height="auto"
+    />
     <Title level="5">Title goes here</Title>
     <Text size={14}>Subtitle goes here</Text>
   </Stack>
@@ -272,14 +274,12 @@ withHeroIcon.args = {
   title: undefined,
   subtitle: undefined,
   content: (
-    <Stack vAlign="center" hAlign="center" rowGap={32}>
-      <Symbol source="triangle-exclamation" dimension={40} weight="duotone" color="var(--cta-dark)" />
-      <Title level="4">Delete user?</Title>
+    <InfoState title="Delete user?" direction="column" icon="trash-can" iconColor="red">
       <Stack hAlign="center">
         <Text size={16}>Are you sure you want to delete this user?</Text>
         <Text size={16}>This action cannot be undone.</Text>
       </Stack>
-    </Stack>),
+    </InfoState>),
   hideFooterBorder: true,
   primaryAction: <Button>Delete</Button>,
   secondaryAction: <Button>Cancel</Button>,
