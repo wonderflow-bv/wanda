@@ -20,6 +20,6 @@ export default {
   matcher: (prop: any) => prop.attributes.category === 'size',
   transformer: (token: any, options: any) => {
     const baseRootSize = options?.basePxFontSize;
-    return `${(token.value / baseRootSize).toFixed(2)}rem`;
+    return `${(token.value / baseRootSize).toFixed(3)}rem`;
   },
 };
