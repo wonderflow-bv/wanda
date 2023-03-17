@@ -3,13 +3,7 @@ import { getLayoutProps } from "@/utils/get-layout-props";
 import { PropsTable } from "@/components/doc/props-table";
 import { KeyTable } from "@/components/shared/key-table";
 import { useState } from "react";
-import { useOverlayContext, Modal } from "@wonderflow/react-components"
-import dynamic from "next/dynamic";
-
-export const DynOverlayContainer = dynamic(
-  import("@wonderflow/react-components").then((m) => m.OverlayContainer),
-  { ssr: false }
-);
+import { Modal, Button } from "@wonderflow/react-components"
 
 export const getStaticProps = () =>
   getLayoutProps({
@@ -17,7 +11,7 @@ export const getStaticProps = () =>
     layoutProps: {
       title: "Modal",
       color: "indigo",
-      subtitle: "A window overlaid on either the primary window, rendering the content underneath inert.",
+      subtitle: "A window overlaid on the primary view, rendering the underlying content inert.",
       navigation: ComponentsNav,
       features: [
         "Keyboard accessible",
@@ -38,35 +32,29 @@ export const getStaticProps = () =>
     }
   });
 
+## Overview
+A Modal is a window overlay that communicates or provides an action within the same process.
+Modals are a type of dialog that are used to provide important information or ask for user input necessary to complete a user's workflow.
+Modals should be used sparingly and only in situations where they provide clear value and enhance the user's experience. When used appropriately, a modal can be an effective way to grab the user's attention, provide important information, and guide them through a
+specific task or workflow.
+
 
 export const Example = () => {
   const [visible, setVisible] = useState(false);
   return (
     <>
-      <Button onClick={() => setVisible(true)}>Show Modal</Button>
-        <DynOverlayContainer onClose={() => setVisible(false)}>
-          {visible && (
-            <Modal key="default-modal">
-              <Modal.Content title="Account deletion">
-                <Stack
-                  fill={false}
-                  hAlign="center"
-                  rowGap={32}
-                  hPadding={24}
-                  vPadding={24}
-                >
-                  <Text>Do you really want to delete this account?</Text>
-                  <Stack direction="row" columnGap={8}>
-                    <Button onClick={() => setVisible(false)} kind="flat">
-                      No
-                    </Button>
-                    <Button onClick={() => setVisible(false)}>Confirm</Button>
-                  </Stack>
-                </Stack>
-              </Modal.Content>
-            </Modal>
-          )}
-      </DynOverlayContainer>
+      <Button onClick={() => setVisible(true)} >Show Modal</Button>
+      <Modal
+        isVisible={visible}
+        onCloseModal={() => setVisible(true)}
+        title= 'Delete account?'
+        subtitle= 'This action cannot be undone'
+        hideHeaderBorder={true}
+        content={<Text size={16}>Are you sure you want to delete your account? This action cannot be undone.</Text>}
+        hideFooterBorder={true}
+        primaryAction={<Button>Delete</Button>}
+        secondaryAction={<Button>Cancel</Button>}
+        />
     </>
   );
 };
@@ -79,61 +67,71 @@ export const Example = () => {
 ## Anatomy
 
 ```tsx lines="1,4,7-13"
-import { Modal, OverlayContainer } from "@wonderflow/react-components";
+import { Modal } from "@wonderflow/react-components";
 
 export default () => {
   const [visible, setVisible] = useState<boolean>(false);
 
-  return (
-    <OverlayContainer onClose={() => setVisible(false)}>
-      {visible && (
-        <Modal>
-          <Modal.Content title="Modal title">....</Modal.Content>
-        </Modal>
-      )}
-    </OverlayContainer>
-  );
+  return <Modal
+          isVisible={visible}
+          onCloseModal={() => setVisible(false)}
+          content={<>...</>}
+          primaryAction={<Button>Confirm</Button>}
+          secondaryAction={<Button>Cancel</Button>} />
 };
 ```
 
-### Custom content
+## Design Guidelines
 
-If you want to use the `Modal` component to show custom elements instead of the `Modal.Content` (which renders the card), you can pass an element inside it.
+### When to use
 
-export const CustomModalContent = () => {
-  const { onClose, titleId } = useOverlayContext();
-  return (
-    <Stack vAlign="center">
-      <Stack direction="row" vAlign="center" columnGap={48}>
-        <Title id={titleId} level="4">
-          My custom modal title
-        </Title>
-        <IconButton
-          onClick={onClose}
-          icon="xmark"
-          aria-label="Close modal"
-        />
-      </Stack>
-      <p>My custom content</p>
-    </Stack>
-  );
-};
+* Use to inform the user of critical information about their current workflow.
+* Use when you need to ask a confirmation from a user before proceeding.
+* Use when the user is required to take an action.
+* To provide context and guidance for a specific task or workflow, such as providing instructions for completing a form or setting up an account.
+
+### When not to use
+
+* For information that is not related or relevant to the current user flow. This can be distracting and may interfere with the user's overall experience.
+* To display non-critical or secondary information, such as help text tips, or product recommendations. In these cases, a tooltip or a popover component may be more appropriate.
+* To force the user to take an action or make a decision.
+* To display complex forms or large amounts of information.
+* For navigation.
+
+
+### Best practice
+
+Keep the content relevant: Include only the essential information and actions that are required to complete the current task. Avoid overloading the modal with unnecessary content.
+
+Use modals sparingly: Modals should only be used when it's necessary to temporarily interrupt the user's workflow to gather important information or to convey a critical message.
+
+Avoid displaying a modal over another modal. Instead, consider adding the additional information to the existing modal content or directing users to a new screen.
+
+Avoid using nested modals. If a confirmation modal is required to approve a task in the first modal, the first task should not be performed in a modal.
+
+
+### Sizes
+
+The modal is available in three sizes: 720px (large), 600px (medium),and 480px (Small).
+Use the large size for more complex workflows. Regardless of the size selected, the Modal component's height grows dynamically with the content.
+On smaller screens with a width of less than 480px pixels or using a small screen size breakpoint, the Modal component expands to the full width of the screen, and its footer and actions are fixed to the bottom.
+
+
+## Custom content
+
+In order to create custom `Modal` components, be sure to use the three sub-components `Modal.Header`, `Modal.Content`, and `Modal.Footer` to keep the Modal structure consistent and pass custom elements as children.
 
 export const CustomModal = () => {
   const [visible, setVisible] = useState(false);
   return (
-    <>
-      <Button onClick={() => setVisible(true)}>
-        Show Modal
-      </Button>
-      <DynOverlayContainer onClose={() => setVisible(false)}>
-        {visible && (
-          <Modal>
-            <CustomModalContent />
-          </Modal>
-        )}
-      </DynOverlayContainer>
-    </>
+    <Modal
+      isVisible={visible}
+      onCloseModal={() => setVisible(false)}
+    >
+      <Modal.Header>...</Modal.Header>
+      <Modal.Content>...</Modal.Content>
+      <Modal.Footer>...</Modal.Footer>
+    </Modal.Header>
   );
 };
 
@@ -141,45 +139,21 @@ export const CustomModal = () => {
   <CustomModal />
 </LiveArea>
 
-```tsx lines="1-8,11,14-21,26,29-38"
-import {
-  Modal,
-  OverlayContainer,
-  useOverlayContext,
-  Button,
-  Title,
-  Card,
-} from "@wonderflow/react-components";
+```tsx lines="1-15"
+import { Modal } from "@wonderflow/react-components";
 
-export const CustomModalContent = () => {
-  const { onClose, titleId } = useOverlayContext();
+export const CustomModal = () => {
+  const [visible, setVisible] = useState(false);
 
   return (
-    <Card>
-      <Title id={titleId} level="4">
-        My custom modal title
-      </Title>
-      <Button onClick={onClose} icon="xmark">
-        Close modal
-      </Button>
-    </Card>
-  );
-};
-
-export const PageExample = () => {
-  const [visible, setVisible] = useState<boolean>(false);
-
-  return (
-    <>
-      <Button onClick={() => setVisible(true)}>Show Modal</Button>
-      <OverlayContainer onClose={() => setVisible(false)}>
-        {visible && (
-          <Modal>
-            <CustomModalContent />
-          </Modal>
-        )}
-      </OverlayContainer>
-    </>
+    <Modal
+      isVisible={visible}
+      onCloseModal={() => setVisible(false)}
+      >
+      <Modal.Header>...</Modal.Header>
+      <Modal.Content>...</Modal.Content>
+      <Modal.Footer>...</Modal.Footer>
+    </Modal.Header>
   );
 };
 ```
@@ -191,12 +165,146 @@ export const PageExample = () => {
 <PropsTable
   properties={[
     {
-      name: "closeOnClickOutside",
+      name: "isVisible",
       type: ["boolean"],
-      default: "true",
+      default: "",
+      required: true,
+      description: "Set the visibility of the Modal.",
+    },
+    {
+      name: "onCloseModal",
+      type: ["function"],
+      default: "",
+      required: true,
+      description: "Callback function to be called when the Modal is closed.",
+    },
+    {
+      name: "title",
+      type: ["string"],
+      default: "",
+      required: false,
+      description: "Set the Modal Header title.",
+    },
+    {
+      name: "subtitle",
+      type: ["string"],
+      default: "",
+      required: false,
+      description: "Display the Close icon Button.",
+    },
+    {
+      name: "hideCloseButton",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      description: "Hide the Close icon Button.",
+    },
+    {
+      name: "hideHeaderBorder",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      description: "Hide the border at the bottom of the header. This will be automatically dismissed if no content is provided inside the Modal Header.",
+    },
+    {
+      name: "hideFooterBorder",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      description: "Hide the border at the top of the footer. This will be automatically dismissed if no actions are provided inside the Modal Footer.",
+    },
+    {
+      name: "content",
+      type: ["ReactNode"],
+      default: "",
+      required: false,
+      description: "Set the Modal body content.",
+    },
+    {
+      name: "primaryAction",
+      type: ["PolymorphicButton"],
+      default: "",
+      required: false,
+      description: "Set the Primary Button with a constrain in kind and size.",
+    },
+    {
+      name: "secondaryAction",
+      type: ["PolymorphicButton"],
+      default: "",
+      required: false,
+      description: "Set the Secondary Button with a constrain in kind and size.",
+    },
+    {
+      name: "tertiaryAction",
+      type: ["ReactNode"],
+      default: "",
+      required: false,
+      description: "Set a Custom Modal Action element.",
+    },
+    {
+      name: "alignActionCenter",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      description: "Set Modal action buttons in the center on a desktop screen. On Mobile they will always be stacked vertically in a column.",
+    },
+    {
+      name: "alignContentCenter",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      description: "Set Modal content vertically in the center on a mobile screen.",
+    },
+    {
+      name: "size",
+      type: ['small' | 'medium' | 'large'],
+      default: "medium",
+      required: false,
+      description: "Set the Modal size.",
+    },
+    {
+      name: "theme",
+      type: ['dark' | 'light' | 'auto'],
+      default: "light",
+      required: false,
+      description: "Set the theme of the content card. To ensure contrast with the default overlay color (dark), this is set to `light` by default.",
+    },
+    {
+      name: "preventCloseOnClickOutside",
+      type: ["boolean"],
+      default: "",
       required: false,
       description:
-        "This enable the modal to be closed by clicking on the overlay. Even if this can be set to `false` we strongly recommend to leave it to `true` as it ensures the accessibility of the modal.",
+        "This prevent the modal to be closed by clicking on the overlay.",
+    },
+  ]}
+/>
+
+### Modal.Header
+
+<PropsTable
+  properties={[
+    {
+      name: "hideCloseButton",
+      type: ['boolean'],
+      default: "",
+      required: false,
+      description: "Hide the Close icon Button.",
+    },
+    {
+      name: "hideBorder",
+      type: ['boolean'],
+      default: "",
+      required: false,
+      description: "Hide the border at the bottom of the header. This will be automatically dismissed if no content is provided.",
+    },
+    {
+      name: "theme",
+      type: ['enum'],
+      typeValue: "'dark' | 'light' | 'auto'",
+      default: '"light"',
+      required: false,
+      description: "Set the theme of the content card. To ensure contrast with the default overlay color (dark), this is set to `light` by default.",
     },
   ]}
 />
@@ -206,11 +314,33 @@ export const PageExample = () => {
 <PropsTable
   properties={[
     {
-      name: "title",
-      type: ['ReactNode'],
+      name: "alignContentCenter",
+      type: ['boolean'],
       default: "",
-      required: true,
-      description: "Set the accessible title of the modal. This is used by screen readers to announce the title of the modal when opened.",
+      required: false,
+      description: "Set Modal content vertically in the center on a mobile screen.",
+    },
+    {
+      name: "theme",
+      type: ['enum'],
+      typeValue: "'dark' | 'light' | 'auto'",
+      default: '"light"',
+      required: false,
+      description: "Set the theme of the content card. To ensure contrast with the default overlay color (dark), this is set to `light` by default.",
+    },
+  ]}
+/>
+
+### Modal.Footer
+
+<PropsTable
+  properties={[
+    {
+      name: "hideBorder",
+      type: ['boolean'],
+      default: "",
+      required: false,
+      description: "Hide the border at the top of the footer. This will be automatically dismissed if no actions are provided.",
     },
     {
       name: "theme",

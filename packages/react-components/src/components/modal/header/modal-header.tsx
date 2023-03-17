@@ -23,11 +23,11 @@ import * as styles from './modal-header.module.css';
 
 export type ModalHeaderProps = PropsWithChildren<PropsWithClass<{
   /**
-   * Display the Close icon Button.
+   * Hide the Close icon Button.
    */
   hideCloseButton?: boolean;
   /**
-   * Display the border at the bottom of the header. This will be automatically dismissed
+   * Hide the border at the bottom of the header. This will be automatically dismissed
    * if no content is provided.
    */
   hideBorder?: boolean;

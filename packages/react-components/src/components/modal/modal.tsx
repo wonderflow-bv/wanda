@@ -50,29 +50,29 @@ export type ModalProps = PropsWithChildren<PropsWithClass<{
    */
   subtitle?: React.ReactNode;
   /**
-   * Display the Close icon Button.
+   * Hide the Close icon Button.
    */
   hideCloseButton?: boolean;
   /**
-   * Display the border at the bottom of the header. This will be automatically dismissed
+   * Hide the border at the bottom of the header. This will be automatically dismissed
    * if no content is provided inside the Modal Header.
    */
   hideHeaderBorder?: boolean;
   /**
-   * Display the border at the top of the footer. This will be automatically dismissed
+   * Hide the border at the top of the footer. This will be automatically dismissed
    * if no actions are provided inside the Modal Footer.
    */
   hideFooterBorder?: boolean;
   /**
-   * Set the Modal Body content.
+   * Set the Modal body content.
    */
   content?: React.ReactNode;
   /**
-   * Set the Primary Button.
+   * Set the Primary Button with a constrain in kind and size.
    */
   primaryAction?: React.ComponentPropsWithRef<typeof Button>;
   /**
-   * Set the Secondary Button.
+   * Set the Secondary Button with a constrain in kind and size.
    */
   secondaryAction?: React.ComponentPropsWithRef<typeof Button>;
   /**
@@ -98,9 +98,7 @@ export type ModalProps = PropsWithChildren<PropsWithClass<{
    */
   size?: 'small' | 'medium' | 'large';
   /**
-   * This enable the modal to be closed by clicking on the overlay.
-   * Even if this can be set to `false` we strongly recommend to leave
-   * it to `true` as it ensures the accessibility of the modal.
+   * This prevent the modal to be closed by clicking on the overlay.
    */
   preventCloseOnClickOutside?: boolean;
 }>> & Pick<OverlayContainerProps, 'obfuscate' | 'overlayColor' | 'index' | 'root'>

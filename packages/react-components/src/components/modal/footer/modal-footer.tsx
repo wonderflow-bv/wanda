@@ -22,7 +22,7 @@ import * as styles from './modal-footer.module.css';
 
 export type ModalFooterProps = PropsWithChildren<PropsWithClass<{
   /**
-   * Display the border at the top of the footer. This will be automatically dismissed
+   * Hide the border at the top of the footer. This will be automatically dismissed
    * if no actions are provided.
    */
   hideBorder?: boolean;
