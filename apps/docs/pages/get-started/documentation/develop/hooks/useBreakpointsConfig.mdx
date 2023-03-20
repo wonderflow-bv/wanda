@@ -42,13 +42,14 @@ export default function Component() {
   properties={[
     {
       name: "config",
-      type: ['BreakpointsConfig<BreakpointsConfigValue>'],
+      type: ['BreakpointsConfig<T>'],
       required: true,
       description: "Set the values to be retrieved once the breakpoint has been reached. Although it is not necessary to specify a value for any breakpoints, a fallback value is mandatory",
     },
     {
       name: "target",
       type: ['MutableRefObject<HTMLElement | null>'],
+      default: "The window object",
       required: false,
       description: "Set the reference to any HTML element instead of `Window`.",
     },

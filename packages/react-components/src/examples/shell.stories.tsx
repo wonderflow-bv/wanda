@@ -13,8 +13,6 @@ import {
   useBreakpointsConfig,
 } from '@/components';
 
-import { BreakpointsConfig } from '../hooks/useBreakpointsConfig';
-
 const story: ComponentMeta<typeof Container> = {
   title: 'Examples/Wireframe',
   component: Container,
@@ -36,14 +34,14 @@ const Template: ComponentStory<typeof Container> = () => {
     value: containerValue,
     matches: containerMatches,
     size: containerSize,
-  } = useBreakpointsConfig(
+  } = useBreakpointsConfig<{ gutter: 16 | 24; col: 2 | 3 | 4 | 6; dimension: 'fixed' }>(
     {
       sm: { gutter: 16, col: 3, dimension: 'fixed' },
       md: { gutter: 24, col: 3, dimension: 'fixed' },
       lg: { gutter: 24, col: 4, dimension: 'fixed' },
       xl: { gutter: 24, col: 6, dimension: 'fixed' },
       fallback: { gutter: 16, col: 2, dimension: 'fixed' },
-    } as BreakpointsConfig<{ gutter: number; col: number; dimension: string }>,
+    },
     ref,
   );
 
@@ -117,7 +115,12 @@ const Template: ComponentStory<typeof Container> = () => {
             </Stack>
           </Stack>
 
-          <Container ref={ref} dimension={containerValue.dimension} className="ContainerEx" style={{ overflow: 'auto', height: 'calc(100vh - 64px)' }}>
+          <Container
+            ref={ref}
+            dimension={containerValue.dimension}
+            className="ContainerEx"
+            style={{ overflow: 'auto', height: 'calc(100vh - 64px)' }}
+          >
             <Stack rowGap={32} vPadding={32}>
               <Snackbar>
                 <Title level="2">Product Card Container</Title>

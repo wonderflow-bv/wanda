@@ -20,15 +20,13 @@ import { BreakpointsNames, BreakpointsSettings, useBreakpoints } from './useBrea
 
 export type BreakpointsConfig<T> = Partial<Record<BreakpointsNames, T>> & { fallback: T }
 
-export type BreakpointsConfigValue = Record<string, any>
-
-export const useBreakpointsConfig = (
-  config: BreakpointsConfig<BreakpointsConfigValue>,
+export const useBreakpointsConfig = <T>(
+  config: BreakpointsConfig<T>,
   target?: MutableRefObject<HTMLElement | null>,
   settings?: BreakpointsSettings,
 ) => {
   const { fallback } = config;
-  const [value, setValue] = useState<BreakpointsConfigValue>(fallback);
+  const [value, setValue] = useState<T>(fallback);
   const {
     matches, breakpoints, size,
   } = useBreakpoints(target, settings);
