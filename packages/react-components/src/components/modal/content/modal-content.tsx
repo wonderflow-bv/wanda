@@ -42,6 +42,7 @@ export const ModalContent = forwardRef<HTMLDivElement, ModalContentProps>(({
   ...otherProps
 }, forwardedRef) => (
   <div
+    aria-label="Content"
     className={clsx(styles.Content, className)}
     ref={forwardedRef}
     data-theme={theme}

@@ -23,7 +23,7 @@ import {
 import { FocusOn } from 'react-focus-on';
 
 import {
-  Elevator, OverlayContainer, OverlayContainerProps, Stack, Text, Title, useResponsiveContext,
+  Elevator, OverlayContainer, OverlayContainerProps, Spinner, Stack, Text, Title, useResponsiveContext,
 } from '@/components';
 
 import { Button } from '../button/button';
@@ -89,6 +89,10 @@ export type ModalProps = PropsWithChildren<PropsWithClass<{
    */
   alignContentCenter?: boolean;
   /**
+   * Set the loading state by displaying a spinner while true.
+   */
+  isLoading?: boolean;
+  /**
    * Set the theme of the content card. To ensure contrast with the default overlay color (dark),
    * this is set to `light` by default.
    */
@@ -128,11 +132,12 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(({
   primaryAction,
   secondaryAction,
   tertiaryAction,
-  alignActionCenter = false,
-  alignContentCenter = false,
-  isVisible = false,
+  alignActionCenter,
+  alignContentCenter,
+  isVisible,
+  preventCloseOnClickOutside,
+  isLoading,
   onCloseModal,
-  preventCloseOnClickOutside = false,
   ...otherProps
 }, forwardedRef) => {
   const { matches } = useResponsiveContext();
@@ -210,8 +215,17 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(({
                           </Modal.Header>
 
                           {content && (
-                            <Modal.Content theme={theme} alignContentCenter={alignContentCenter}>
-                              {content}
+                            <Modal.Content theme={theme} alignContentCenter={isLoading ?? alignContentCenter}>
+                              {isLoading
+                                ? (
+                                  <Stack fill hAlign="center" vPadding={64}>
+                                    <Stack hAlign="center" vAlign="center" rowGap={16}>
+                                      <Spinner dimension="big" />
+                                      <Text size="16" dimmed={5}>Loading...</Text>
+                                    </Stack>
+                                  </Stack>
+                                )
+                                : content}
                             </Modal.Content>
                           )}
 

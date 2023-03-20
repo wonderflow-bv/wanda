@@ -45,6 +45,7 @@ const story: ComponentMeta<typeof Modal> = {
     alignContentCenter: false,
     size: 'medium',
     theme: 'auto',
+    isLoading: false,
     preventCloseOnClickOutside: false,
     content: longText,
     primaryAction: <Button onClick={() => alert('Primary Action')}>Action 1</Button>,
@@ -72,6 +73,19 @@ const DefaultTemplate: ComponentStory<typeof Modal> = (args) => {
 };
 
 export const Default = DefaultTemplate.bind({});
+
+export const Inverse = DefaultTemplate.bind({});
+Inverse.args = {
+  theme: 'dark',
+  overlayColor: 'light',
+};
+
+export const LoadingContent = DefaultTemplate.bind({});
+LoadingContent.args = {
+  isLoading: true,
+  primaryAction: <Button onClick={() => alert('Primary Action')} disabled>Action 1</Button>,
+  secondaryAction: <Button onClick={() => alert('Secondary Action')} disabled>Action 2</Button>,
+};
 
 export const Confirmation = DefaultTemplate.bind({});
 Confirmation.args = {
@@ -186,6 +200,45 @@ WithImage.args = {
   alignActionCenter: true,
   primaryAction: <Button>Primary</Button>,
   secondaryAction: <Button>Secondary</Button>,
+};
+
+const formWithin = (
+  <Stack rowGap={24}>
+    <Stack direction="row" columnGap={24}>
+      <Textfield label="Label" placeHolder="Sample value" />
+      <Textfield label="Label" placeHolder="Sample value" />
+    </Stack>
+    <Textfield label="Label" placeHolder="Sample value" />
+  </Stack>
+);
+
+const withTabsContent = (
+  <Tab defaultValue="1" dimension="regular">
+    <Tab.Panel value="1" label="Tab 1">
+      <Card>
+        {formWithin}
+      </Card>
+    </Tab.Panel>
+    <Tab.Panel value="2" label="Tab 2">
+      <Card>
+        {formWithin}
+      </Card>
+    </Tab.Panel>
+    <Tab.Panel value="3" label="Tab 3">
+      <Card>
+        {formWithin}
+      </Card>
+    </Tab.Panel>
+  </Tab>
+);
+
+export const WithTabs = DefaultTemplate.bind({});
+WithTabs.args = {
+  title: 'Modal title',
+  subtitle: 'Subtitle',
+  content: withTabsContent,
+  primaryAction: <Button>Confirm</Button>,
+  secondaryAction: <Button>Cancel</Button>,
 };
 
 const complexNesting = (

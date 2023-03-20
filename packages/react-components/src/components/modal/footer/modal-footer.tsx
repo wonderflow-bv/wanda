@@ -43,6 +43,7 @@ export const ModalFooter = forwardRef<HTMLDivElement, ModalFooterProps>(({
   ...otherProps
 }, forwardedRef) => (
   <div
+    aria-label="Footer"
     className={clsx(styles.Footer, className)}
     ref={forwardedRef}
     data-theme={theme}
