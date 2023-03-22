@@ -1,5 +1,16 @@
 # @wonderflow/tokens
 
+## 11.0.0
+
+### Major Changes
+
+- 7e7bec90: Fix Brand color values to pass accessibility contrast test
+- 215d0a28: Add Container props and change style, add new tokens
+
+### Minor Changes
+
+- c237e7b1: Round px to rem conversion to third decimal
+
 ## 10.20.0
 
 ## 10.19.0

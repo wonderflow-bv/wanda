@@ -1,5 +1,32 @@
 # @wonderflow/react-components
 
+## 11.0.0
+
+### Major Changes
+
+- 144fb562: Fix(Modal): nested elements bahaviour, refactor and minor fix
+- 215d0a28: Add Container props and change style, add new tokens
+- 94bcf39b: Modal initial rework
+
+### Minor Changes
+
+- 347d5271: Docs(storybook): extend and fix stories
+- e501986f: Feat(useBreakPointsConfig) change typing
+- c9aa0e76: Fix Popover compatibility with autofocus
+- 9e3344e7: Imporve utility functions hooks
+- 92194ab3: Add useBreakpoints hook
+- 278e96b7: Chore()
+- 40cf60a7: Fix(tab): highlight bar now update when tab changed programmatically
+- bdcfbb6b: Refactor(useBreakpoints)
+- b7a8883a: Add useSSR & usePopupWrapper hooks, extend samples, bug fix and improvements
+- 0b95d867: Feat: add useBreakpointsConfig hook + refactor
+- 1a284774: Container clean up stories
+
+### Patch Changes
+
+- 6c75d326: Fix typing on Hooks
+- 89421226: Fix(Chip): add white space no wrap
+
 ## 10.20.0
 
 ### Minor Changes

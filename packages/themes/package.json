@@ -1,7 +1,7 @@
 {
   "name": "@wonderflow/themes",
   "description": "Wanda design system themes",
-  "version": "10.20.0",
+  "version": "11.0.0",
   "author": "Wonderflow",
   "main": "dist/themes.css",
   "style": "dist/themes.css",
@@ -41,7 +41,7 @@
     "url": "https://github.com/wonderflow-bv/wanda/issues"
   },
   "devDependencies": {
-    "@wonderflow/tokens": "10.20.0",
+    "@wonderflow/tokens": "11.0.0",
     "fs-extra": "10.1.0",
     "style-dictionary": "3.7.1",
     "tsconfig": "10.0.0",
