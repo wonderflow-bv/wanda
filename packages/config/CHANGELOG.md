@@ -1,5 +1,14 @@
 # @wonderflow/config
 
+## 11.0.0
+
+### Patch Changes
+
+- Updated dependencies [7e7bec90]
+- Updated dependencies [215d0a28]
+- Updated dependencies [c237e7b1]
+  - @wonderflow/tokens@11.0.0
+
 ## 10.20.0
 
 ### Patch Changes

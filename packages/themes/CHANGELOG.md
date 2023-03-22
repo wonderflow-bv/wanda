@@ -1,5 +1,11 @@
 # @wonderflow/themes
 
+## 11.0.0
+
+### Major Changes
+
+- 7e7bec90: Fix Brand color values to pass accessibility contrast test
+
 ## 10.20.0
 
 ## 10.19.0
