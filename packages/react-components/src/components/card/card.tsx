@@ -85,6 +85,7 @@ export const Card = forwardRef(({
     >
       <Stack
         direction="row"
+        className={clsx(styles.Row, className)}
         fill={false}
         vAlign={vAlign}
         hAlign={hAlign}

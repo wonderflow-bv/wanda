@@ -83,12 +83,17 @@
     }
   }
 
+  .Row {
+    height: 100%;
+  }
+
   .Left {
     flex-shrink: 0;
   }
 
   .Content {
     flex-grow: 1;
+    height: 100%;
   }
 
   .Right {

@@ -61,7 +61,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(({
   children,
   className,
   disabled = false,
-  icon = 'sort-alt',
+  icon = 'chevron-down',
   label,
   kind = 'single',
   dimension = 'regular',
