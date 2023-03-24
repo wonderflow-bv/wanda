@@ -3,7 +3,7 @@ import { getLayoutProps } from "@/utils/get-layout-props";
 import { PropsTable } from "@/components/doc/props-table";
 import { KeyTable } from "@/components/shared/key-table";
 import { useState } from "react";
-import { Modal, Button } from "@wonderflow/react-components"
+import { Modal, Button, ResponsiveProvider } from "@wonderflow/react-components"
 
 export const getStaticProps = () =>
   getLayoutProps({
@@ -40,44 +40,57 @@ specific task or workflow.
 
 
 export const Example = () => {
-  // const [visible, setVisible] = useState(false);
-  // return (
-  //   <>
-  //     <Button onClick={() => setVisible(true)} >Show Modal</Button>
-  //     <Modal
-  //       isVisible={visible}
-  //       onCloseModal={() => setVisible(true)}
-  //       title= 'Delete account?'
-  //       subtitle= 'This action cannot be undone'
-  //       hideHeaderBorder={true}
-  //       content={<Text size={16}>Are you sure you want to delete your account? This action cannot be undone.</Text>}
-  //       hideFooterBorder={true}
-  //       primaryAction={<Button>Delete</Button>}
-  //       secondaryAction={<Button>Cancel</Button>}
-  //       />
-  //   </>
-  // );
+  const [visible, setVisible] = useState(false);
+
+  return (
+      <ResponsiveProvider>
+        <Button onClick={() => setVisible(true)} >Show Modal</Button>
+        <Modal
+          isVisible={visible}
+          onCloseModal={() => setVisible(false)}
+          title= 'Delete account?'
+          subtitle= 'This action cannot be undone'
+          hideHeaderBorder
+          hideFooterBorder
+          content={<Text size={16}>Are you sure you want to delete your account? This action cannot be undone.</Text>}
+          primaryAction={<Button onClick={() => setVisible(false)}>Delete</Button>}
+          secondaryAction={<Button onClick={() => setVisible(false)}>Cancel</Button>}
+          />
+      </ResponsiveProvider>
+  );
 };
 
-{/* <LiveArea>
+<LiveArea>
   <Example />
-</LiveArea> */}
+</LiveArea>
 
 
 ## Anatomy
 
-```tsx lines="1,4,7-13"
+```tsx lines="1, 10-20"
 import { Modal } from "@wonderflow/react-components";
 
 export default () => {
   const [visible, setVisible] = useState<boolean>(false);
 
-  return <Modal
+  return (
+      <ResponsiveProvider>
+        <Button onClick={() => setVisible(true)} >Show Modal</Button>
+
+        <Modal
           isVisible={visible}
           onCloseModal={() => setVisible(false)}
-          content={<>...</>}
-          primaryAction={<Button>Confirm</Button>}
-          secondaryAction={<Button>Cancel</Button>} />
+          title= 'Delete account?'
+          subtitle= 'This action cannot be undone'
+          hideHeaderBorder
+          hideFooterBorder
+          content={<Text>...</Text>}
+          primaryAction={<Button>Delete</Button>}
+          secondaryAction={<Button>Cancel</Button>}
+          />
+
+      </ResponsiveProvider>
+  )
 };
 ```
 
@@ -117,43 +130,31 @@ Use the large size for more complex workflows. Regardless of the size selected, 
 On smaller screens with a width of less than 480px pixels or using a small screen size breakpoint, the Modal component expands to the full width of the screen, and its footer and actions are fixed to the bottom.
 
 
-## Custom content
+## Custom Modal
 
 In order to create custom `Modal` components, be sure to use the three sub-components `Modal.Header`, `Modal.Content`, and `Modal.Footer` to keep the Modal structure consistent and pass custom elements as children.
 
-export const CustomModal = () => {
-  // const [visible, setVisible] = useState(false);
-  // return (
-  //   <Modal
-  //     isVisible={visible}
-  //     onCloseModal={() => setVisible(false)}
-  //   >
-  //     <Modal.Header>...</Modal.Header>
-  //     <Modal.Content>...</Modal.Content>
-  //     <Modal.Footer>...</Modal.Footer>
-  //   </Modal.Header>
-  // );
-};
 
-{/* <LiveArea>
-  <CustomModal />
-</LiveArea> */}
-
-```tsx lines="1-15"
+```tsx lines="1, 10-17"
 import { Modal } from "@wonderflow/react-components";
 
 export const CustomModal = () => {
   const [visible, setVisible] = useState(false);
 
   return (
-    <Modal
-      isVisible={visible}
-      onCloseModal={() => setVisible(false)}
-      >
-      <Modal.Header>...</Modal.Header>
-      <Modal.Content>...</Modal.Content>
-      <Modal.Footer>...</Modal.Footer>
-    </Modal>
+    <ResponsiveProvider>
+      <Button onClick={() => setVisible(true)} >Show Modal</Button>
+
+      <Modal
+        isVisible={visible}
+        onCloseModal={() => setVisible(false)}
+        >
+        <Modal.Header>...</Modal.Header>
+        <Modal.Content>...</Modal.Content>
+        <Modal.Footer>...</Modal.Footer>
+      </Modal>
+
+    <ResponsiveProvider>
   );
 };
 ```
@@ -167,7 +168,7 @@ export const CustomModal = () => {
     {
       name: "isVisible",
       type: ["boolean"],
-      default: "",
+      default: "false",
       required: true,
       description: "Set the visibility of the Modal.",
     },
