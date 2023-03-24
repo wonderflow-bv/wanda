@@ -1,5 +1,12 @@
 # @wonderflow/react-components
 
+## 11.0.1
+
+### Patch Changes
+
+- b4d8cbf9: Minor changes to `Popover`, `useBreakpoints`, `useBreakpointsConfig`
+- bbf29d66: Fix internal `Card` element height and change `Select` default icon
+
 ## 11.0.0
 
 ### Major Changes
