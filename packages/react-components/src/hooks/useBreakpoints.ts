@@ -57,13 +57,13 @@ export const useBreakpoints = (
 
   const size = useSize(target);
 
-  const targetBreakpoints: BreakpointsValues | undefined = size && {
+  const targetBreakpoints: BreakpointsValues | undefined = (size?.width) ? {
     xs: size.width <= settings.xs,
     sm: size.width > settings.xs && size.width <= settings.sm,
     md: size.width > settings.sm && size.width <= settings.md,
     lg: size.width > settings.md && size.width <= settings.lg,
     xl: size.width > settings.lg,
-  };
+  } : undefined;
 
   const targetMatches = targetBreakpoints
   && Object.keys(targetBreakpoints)
@@ -109,3 +109,4 @@ export const useBreakpoints = (
     size: size?.width ?? windowSize,
   };
 };
+

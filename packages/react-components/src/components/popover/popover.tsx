@@ -129,7 +129,7 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
   className,
   matchTriggerWidth,
   onOpenChange,
-  root = document.body,
+  root,
   ...otherProps
 }, forwardedRef) => {
   const seedID = useUIDSeed();
@@ -241,7 +241,7 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
               </m.div>
             </LazyMotion>
           </div>
-        </AnimatePresence>, root,
+        </AnimatePresence>, root ?? document.body,
       )}
 
     </div>
