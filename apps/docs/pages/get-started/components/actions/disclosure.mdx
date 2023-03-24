@@ -102,6 +102,13 @@ export default () => {
       required: false,
       description: "Set or disable the interactivity of the summary toggle.Eg. If `open` is set to `true` the content can't be toggled.",
     },
+    {
+      name: "onToggle",
+      type: ["function"],
+      default: "",
+      required: false,
+      description: "Call a function when the element is opened or closed.",
+    },
   ]}
 />
 
