@@ -59,9 +59,9 @@ export const Example = () => {
   // );
 };
 
-<LiveArea>
+{/* <LiveArea>
   <Example />
-</LiveArea>
+</LiveArea> */}
 
 
 ## Anatomy
@@ -69,16 +69,16 @@ export const Example = () => {
 ```tsx lines="1,4,7-13"
 import { Modal } from "@wonderflow/react-components";
 
-// export default () => {
-//   const [visible, setVisible] = useState<boolean>(false);
+export default () => {
+  const [visible, setVisible] = useState<boolean>(false);
 
-//   return <Modal
-//           isVisible={visible}
-//           onCloseModal={() => setVisible(false)}
-//           content={<>...</>}
-//           primaryAction={<Button>Confirm</Button>}
-//           secondaryAction={<Button>Cancel</Button>} />
-// };
+  return <Modal
+          isVisible={visible}
+          onCloseModal={() => setVisible(false)}
+          content={<>...</>}
+          primaryAction={<Button>Confirm</Button>}
+          secondaryAction={<Button>Cancel</Button>} />
+};
 ```
 
 ## Design Guidelines
@@ -135,26 +135,26 @@ export const CustomModal = () => {
   // );
 };
 
-<LiveArea>
+{/* <LiveArea>
   <CustomModal />
-</LiveArea>
+</LiveArea> */}
 
 ```tsx lines="1-15"
 import { Modal } from "@wonderflow/react-components";
 
 export const CustomModal = () => {
-  // const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(false);
 
-  // return (
-  //   <Modal
-  //     isVisible={visible}
-  //     onCloseModal={() => setVisible(false)}
-  //     >
-  //     <Modal.Header>...</Modal.Header>
-  //     <Modal.Content>...</Modal.Content>
-  //     <Modal.Footer>...</Modal.Footer>
-  //   </Modal>
-  // );
+  return (
+    <Modal
+      isVisible={visible}
+      onCloseModal={() => setVisible(false)}
+      >
+      <Modal.Header>...</Modal.Header>
+      <Modal.Content>...</Modal.Content>
+      <Modal.Footer>...</Modal.Footer>
+    </Modal>
+  );
 };
 ```
 
