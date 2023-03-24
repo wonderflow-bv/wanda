@@ -2,4 +2,4 @@
 "@wonderflow/react-components": patch
 ---
 
-Minor changes to `Popover` and `useBreakponts`
+Minor changes to `Popover`, `useBreakpoints`, `useBreakpointsConfig`

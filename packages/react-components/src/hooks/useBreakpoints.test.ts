@@ -30,4 +30,14 @@ describe('useBreakpoints()', () => {
     expect(matches).toBeDefined();
     expect(size).toBe(w);
   });
+
+  test('it should return default values', () => {
+    const { result } = renderHook(() => useBreakpoints());
+    const { breakpoints, matches, size } = result.current;
+    const w = window?.innerWidth;
+
+    expect(breakpoints).toBeDefined();
+    expect(matches).toBeDefined();
+    expect(size).toBe(w);
+  });
 });
