@@ -83,7 +83,7 @@ export const Tooltip: FCChildrenClass<TooltipProps> = ({
   fill = false,
   interactive = false,
   delay = 500,
-  root = document.body,
+  root,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const seedID = useUIDSeed();
@@ -153,7 +153,7 @@ export const Tooltip: FCChildrenClass<TooltipProps> = ({
             {children}
             <div {...getArrowProps({ className: styles.Arrow })} />
           </div>
-        </Elevator>, root,
+        </Elevator>, root ?? document.body,
       )}
     </div>
   );

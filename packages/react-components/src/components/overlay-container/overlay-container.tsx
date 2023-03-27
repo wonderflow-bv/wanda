@@ -59,7 +59,7 @@ export type OverlayContainerProps = {
 
 export const OverlayContainer: FCChildren<OverlayContainerProps> = ({
   children,
-  root = document.body,
+  root,
   overlayColor = 'dark',
   index = 4,
   obfuscate = true,
@@ -68,7 +68,7 @@ export const OverlayContainer: FCChildren<OverlayContainerProps> = ({
   const seedID = useUIDSeed();
 
   useEffect(() => {
-    if (root.closest('[data-overlay-container]')) {
+    if (root?.closest('[data-overlay-container]')) {
       throw new Error('An OverlayContainer must not be inside another container. Please change the root prop.');
     }
   }, [root]);
@@ -102,5 +102,5 @@ export const OverlayContainer: FCChildren<OverlayContainerProps> = ({
       </AnimatePresence>
     </OverlayProvider>
   );
-  return createPortal(content, root);
+  return createPortal(content, root ?? document.body);
 };

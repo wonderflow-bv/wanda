@@ -103,7 +103,7 @@ export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
   busy,
   maxHeight = '200px',
   emptyContent = 'No items to show',
-  root = document.body,
+  root,
   ...otherProps
 }, forwardedRef) => {
   const seedID = useUIDSeed();
@@ -258,7 +258,7 @@ export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
               </m.div>
             </LazyMotion>
           </div>
-        </AnimatePresence>, root,
+        </AnimatePresence>, root ?? document.body,
       )}
     </div>
   );
