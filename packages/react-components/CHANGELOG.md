@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 11.0.2
+
+### Patch Changes
+
+- 24384364: Remove default root value to prevent SSR issues
+
 ## 11.0.1
 
 ### Patch Changes
