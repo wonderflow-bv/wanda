@@ -2,7 +2,7 @@ import {
   Card,
   Elevator,
   Grid,
-  InfoState, Modal, OverlayContainer, Stack, SymbolProps, Text, Textfield, Title, useResponsiveContext,
+  InfoState, Modal, Stack, SymbolProps, Text, Textfield, Title, useResponsiveContext,
 } from '@wonderflow/react-components';
 import { SymbolNames } from '@wonderflow/symbols';
 import SymbolsList from '@wonderflow/symbols/structure';
@@ -188,21 +188,12 @@ export const SearchSymbol = () => {
         )}
 
       <ClientOnly>
-        <OverlayContainer
-          overlayColor="auto"
-          onClose={() => setIconDetail('')}
-        >
-          {iconDetail && (
-            <Modal>
-              <Modal.Content
-                theme="auto"
-                title="Icon detail"
-              >
-                <SymbolDetail name={iconDetail} weight={iconStyle} />
-              </Modal.Content>
-            </Modal>
-          )}
-        </OverlayContainer>
+        <Modal
+          isVisible={!!iconDetail}
+          onCloseModal={() => setIconDetail('')}
+          title="Icon detail"
+          content={<SymbolDetail name={iconDetail as SymbolNames} weight={iconStyle} />}
+        />
       </ClientOnly>
     </Stack>
   );
