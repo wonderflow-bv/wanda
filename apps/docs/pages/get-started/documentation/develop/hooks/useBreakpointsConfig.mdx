@@ -18,11 +18,17 @@ This custom hook is built upon [useBreakpoints()](https://design.wonderflow.ai/g
 
 ## Usage
 
-```tsx lines="1,4,8,9,10"
+```tsx lines="1, 3-7, 10-15"
 import { useBreakpointsConfig } from "@wonderflow/react-components";
 
-export default function Component() {
-  const { matches, value } = useBreakpointsConfig({
+type Config = {
+  direction: "row" | "column";
+  hPadding: "8" | "16" | "32";
+  vPadding: "8" | "16";
+}
+
+export default () {
+  const { matches, value } = useBreakpointsConfig<Config>({
       md: { direction: "row", hPadding: "16", vPadding: "8" },
       lg: { direction: "row", hPadding: "32", vPadding: "16" },
       xl: { direction: "row", hPadding: "32", vPadding: "16" },
@@ -69,7 +75,7 @@ export default function Component() {
   properties={[
     {
       name: "value",
-      type: ["BreakpointsConfigValue"],
+      type: ["<T>"],
       description: "The value configured for any breakpoint match or the fallback value",
     },
     {

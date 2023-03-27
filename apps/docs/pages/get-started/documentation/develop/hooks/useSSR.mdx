@@ -17,16 +17,16 @@ This hook returns whether the code is executed in the `Server` (Server-Side-Rend
 
 ## Usage
 
-```tsx lines="1,4,8,9"
+```tsx lines="1,4,8-9"
 import { useSSR } from "@wonderflow/react-components";
 
-export default function Component() {
+export default () {
   const { isBrowser, isServer } = useSsr();
 
   return (
     <div>
       <p>{isBrowser ? 'Client' : 'Server'}</p>
-      <p>{isServer? 'SSR' : 'Browser'}</p>
+      <p>{isServer ? 'SSR' : 'Browser'}</p>
     </div>)
 }
 ```

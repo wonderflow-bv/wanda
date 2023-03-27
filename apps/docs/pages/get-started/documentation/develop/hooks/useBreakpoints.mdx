@@ -24,13 +24,13 @@ Unlike the [useResponsiveContext()](https://design.wonderflow.ai/get-started/doc
 ```tsx lines="1,4,8,9,10"
 import { useBreakpoints } from "@wonderflow/react-components";
 
-export default function Component() {
+export default () {
   const { breakpoints, matches, size } = useBreakpoints();
 
   return (
     <div>
       <p>{`Breakpoints: ${JSON.stringify(breakpoints)}`}</p>
-      <p>{`Matches: ${matches)}`}</p>
+      <p>{`Matches: ${matches}`}</p>
       <p>{`Size: ${size}`}</p>
     </div>)
 }
