@@ -1,8 +1,6 @@
 import {
-  Card,
-  Container, Elevator, IconButton,
-  Popover, Skeleton, Stack,
-  useResponsiveContext,
+  Card, Chip, Container, Elevator, IconButton,
+  Popover, Skeleton, Stack, useResponsiveContext,
 } from '@wonderflow/react-components';
 import { useScroll } from 'ahooks';
 import clsx from 'clsx';
@@ -13,6 +11,7 @@ import { Logo } from '@/components/shared/logo';
 import { MainNav } from '@/components/shared/main-nav';
 import { Search } from '@/components/shared/search';
 
+import pkg from '../../../../package.json';
 import styles from './header.module.css';
 
 export type HeaderProps = {
@@ -59,6 +58,9 @@ export const Header: FCClass<HeaderProps> = ({
           >
             <Link href="/"><a className={styles.LogoLink}><Logo /></a></Link>
             <Stack direction="row" vAlign="center" fill={false} columnGap={8}>
+              <Chip className={styles.Version} dimension="small" icon="tags" color="green">
+                {`v${pkg.dependencies['@wonderflow/react-components']}`}
+              </Chip>
               {matches.medium && <MainNav />}
               {!matches.medium && (
                 <Popover trigger={<IconButton icon="bars" kind="flat" iconPosition="right" aria-label="Show main menu" />}>
