@@ -13,7 +13,8 @@
     -webkit-overflow-scrolling: touch;
 
     &[data-center-vertically='true'] {
-      margin: auto;
+      margin-top: auto;
+      margin-bottom: auto;
     }
 
     @media (--from-small) {

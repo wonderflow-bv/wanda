@@ -203,7 +203,7 @@ WithImage.args = {
 };
 
 const formWithin = (
-  <Stack rowGap={24}>
+  <Stack rowGap={24} style={{ marginTop: '24px' }}>
     <Stack direction="row" columnGap={24}>
       <Textfield label="Label" placeHolder="Sample value" />
       <Textfield label="Label" placeHolder="Sample value" />
@@ -215,19 +215,13 @@ const formWithin = (
 const withTabsContent = (
   <Tab defaultValue="1" dimension="regular">
     <Tab.Panel value="1" label="Tab 1">
-      <Card>
-        {formWithin}
-      </Card>
+      {formWithin}
     </Tab.Panel>
     <Tab.Panel value="2" label="Tab 2">
-      <Card>
-        {formWithin}
-      </Card>
+      {formWithin}
     </Tab.Panel>
     <Tab.Panel value="3" label="Tab 3">
-      <Card>
-        {formWithin}
-      </Card>
+      {formWithin}
     </Tab.Panel>
   </Tab>
 );
