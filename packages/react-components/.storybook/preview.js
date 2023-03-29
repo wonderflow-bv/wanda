@@ -1,6 +1,7 @@
 import "@wonderflow/themes";
 import "../src/core.css";
 import "./overrides.css";
+import pkg from '../package.json'
 
 export const parameters = {
   breakpoints: {
@@ -81,6 +82,22 @@ export const parameters = {
       } else {
         iframeDocument.dataset.theme = "light";
       }
+    },
+  },
+};
+
+// .storybook/preview.js
+
+export const globalTypes = {
+  theme: {
+    name: `📦 Wanda Design System v${pkg.version}`,
+    description: '',
+    defaultValue: '',
+    toolbar: {
+      icon: '',
+      items: [],
+      showName: true,
+      dynamicTitle: false,
     },
   },
 };
