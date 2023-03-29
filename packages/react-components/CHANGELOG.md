@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 11.0.3
+
+### Patch Changes
+
+- 2fe0ad28: Fix `Modal` content vertical alignment and story
+
 ## 11.0.2
 
 ### Patch Changes
