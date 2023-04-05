@@ -1,5 +1,13 @@
 # @wonderflow/react-components
 
+## 11.0.4
+
+### Patch Changes
+
+- d75d70b2: add `Icon` send-message
+- c2906aa7: `Select` and `Slider` fix label line height to match design
+- ad85be90: `Table` fix overflow-x
+
 ## 11.0.3
 
 ### Patch Changes
