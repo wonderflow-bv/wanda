@@ -72,6 +72,10 @@ const ComponentsNav: NavigationMenu = [
       {
         path: '/get-started/components/dialogs/modal',
         label: 'Modal',
+        tag: {
+          color: 'red',
+          label: 'update',
+        },
         target: '',
       },
       {

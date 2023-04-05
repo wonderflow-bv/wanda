@@ -215,7 +215,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(({
                           </Modal.Header>
 
                           {content && (
-                            <Modal.Content theme={theme} alignContentCenter={isLoading ?? alignContentCenter}>
+                            <Modal.Content theme={theme} alignContentCenter={isLoading ? true : alignContentCenter}>
                               {isLoading
                                 ? (
                                   <Stack fill hAlign="center" vPadding={64}>

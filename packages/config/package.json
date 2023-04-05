@@ -1,7 +1,7 @@
 {
   "name": "@wonderflow/config",
   "description": "Wanda design system shared configurations ",
-  "version": "11.0.2",
+  "version": "11.0.4",
   "author": "Wonderflow",
   "license": "Apache-2.0",
   "main": "dist/index",
@@ -34,7 +34,7 @@
     "postcss": ">=8.x"
   },
   "dependencies": {
-    "@wonderflow/tokens": "11.0.2",
+    "@wonderflow/tokens": "11.0.4",
     "cssnano": "5.1.13",
     "cssnano-preset-default": "5.2.12",
     "flat": "5.0.2",

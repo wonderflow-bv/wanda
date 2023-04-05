@@ -106,7 +106,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>(({
 
   return (
     <Stack direction="column" rowGap={8}>
-      {label && <Text as="label" size={isSmall ? 14 : 16} className={styles.Label} aria-disabled={disabled} htmlFor={fieldID}>{label}</Text>}
+      {label && <Text as="label" lineHeight="small" size={isSmall ? 14 : 16} className={styles.Label} aria-disabled={disabled} htmlFor={fieldID}>{label}</Text>}
 
       <Stack
         direction="row"
