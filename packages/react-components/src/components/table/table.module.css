@@ -7,6 +7,10 @@
     z-index: 0;
   }
 
+  .TableWrapper {
+    overflow-x: auto;
+  }
+
   .TableWrapper[data-table-scrolling='true'] {
     -webkit-overflow-scrolling: touch;
     overflow: auto;
