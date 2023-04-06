@@ -1,4 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import clsx from 'clsx';
 import { SymbolNames } from 'packages/symbols/dist';
 import {
   useEffect, useMemo, useRef, useState,
@@ -16,6 +17,8 @@ import {
   useBreakpointsConfig,
   useSSR,
 } from '@/components';
+
+import * as style from './shell.module.css';
 
 const story: ComponentMeta<typeof Container> = {
   title: 'Examples/Wireframe',
@@ -72,40 +75,27 @@ const Template: ComponentStory<typeof Container> = () => {
   );
 
   return (
-    <Container dimension="full" padding={false} style={{ backgroundColor: '#f9fafb' }}>
+    <Container dimension="full" padding={false} className={style.MainContainer}>
       <Stack direction="row">
         <Stack
           id="LeftMenu"
           rowGap={16}
-          style={{
-            maxWidth: isLeftOpen ? '279px' : '63px',
-            minWidth: isLeftOpen ? '279px' : '63px',
-            backgroundColor: 'var(--global-background)',
-            borderRight: '1px solid var(--dimmed-1)',
-          }}
+          className={style.LeftMenu}
+          data-isOpen={isLeftOpen}
         >
-          <div style={{
-            maxHeight: isLeftOpen ? '250px' : '64px',
-            height: isLeftOpen ? '250px' : '64px',
-            backgroundColor: isLeftOpen ? 'var(--global-background)' : 'var(--dimmed-1)',
-            borderBottom: '1px solid var(--dimmed-1)',
-            padding: '0.5rem',
-            wordBreak: 'break-all',
-          }}
-          />
+          <div className={style.LeftMenuInner} data-isOpen={isLeftOpen} />
 
           {isLeftOpen
             ? (
               <div>
-                {Array(5).fill('Link Menu').map((e, i) => (<Menu.Item key={seed('linkMenu')} disabled value={`${i}`} icon={linkIcons[i]}>{e}</Menu.Item>))}
+                {linkIcons.map((e, i) => (<Menu.Item key={seed('linkMenu')} disabled value={`${e}`} icon={linkIcons[i]}>{e}</Menu.Item>))}
               </div>
             )
             : (
               <Stack inline hAlign="center" rowGap={8}>
-                {Array(5).fill('').map((e, i) => (<IconButton key={`${e} ${seed('icons')}`} disabled icon={linkIcons[i]} kind="flat" />))}
+                {linkIcons.map((e, i) => (<IconButton key={`${e} ${seed('icons')}`} disabled icon={linkIcons[i]} kind="flat" />))}
               </Stack>
             )}
-
         </Stack>
 
         <Stack>
@@ -115,13 +105,7 @@ const Template: ComponentStory<typeof Container> = () => {
             vAlign="center"
             hAlign="space-between"
             columnGap={16}
-            style={{
-              maxHeight: '64px',
-              height: '64px',
-              backgroundColor: 'var(--global-background)',
-              borderBottom: '1px solid var(--dimmed-1)',
-              padding: '0 2rem',
-            }}
+            className={style.MainMenu}
           >
             <Stack inline>
               <Button kind="secondary" dimension="regular" fullWidth={false} onClick={() => setIsLeftOpen(!isLeftOpen)}>Menu</Button>
@@ -134,8 +118,7 @@ const Template: ComponentStory<typeof Container> = () => {
           <Container
             ref={ref}
             dimension={containerValue.dimension}
-            className="ContainerEx"
-            style={{ overflow: 'auto', height: 'calc(100vh - 64px)' }}
+            className={clsx(style.Container, 'ContainerEx')}
           >
             <Stack rowGap={32} vPadding={32}>
               <Snackbar>
@@ -171,25 +154,12 @@ const Template: ComponentStory<typeof Container> = () => {
 
         <Stack
           id="RightMenu"
-          style={{
-            maxWidth: isRightOpen ? '299px' : '0px',
-            minWidth: isRightOpen ? '299px' : '0px',
-            backgroundColor: 'var(--global-background)',
-            borderLeft: '1px solid var(--dimmed-1)',
-            overflow: 'hidden',
-          }}
+          className={style.RightMenu}
+          data-isOpen={isRightOpen}
         >
-          <div style={{
-            maxHeight: '64px',
-            height: '64px',
-            backgroundColor: 'var(--global-background)',
-            borderBottom: '1px solid var(--dimmed-1)',
-            padding: '0.5rem',
-            wordBreak: 'break-all',
-          }}
-          />
+          <div className={style.RightMenuInner} />
 
-          <div style={{ maxHeight: 'calc(100vh - 64px)', overflowY: 'scroll' }}>
+          <div className={style.Filter}>
             {Array(10).fill('Filter').map((e, i) => (
               <Disclosure key={seed('filter')} summary={`${e} ${String.fromCharCode(i + 65)}`}>
                 <Menu.Item value="1" subtext="Hint Text">Menu Item 1</Menu.Item>
