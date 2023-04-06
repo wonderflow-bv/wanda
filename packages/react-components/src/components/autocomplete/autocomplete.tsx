@@ -209,12 +209,13 @@ export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
       data-focus-within={isFocusWithin}
     >
       <Textfield
+        aria-haspopup
+        aria-controls={seedID('autocomplete-menu')}
+        aria-expanded={isOpen}
+        role="combobox"
         ref={mergeRefs([setTriggerRef, forwardedRef])}
         id={seedID('autocomplete-trigger')}
         key={seedID('autocomplete-trigger')}
-        aria-haspopup="true"
-        aria-controls={seedID('autocomplete-menu')}
-        aria-expanded={isOpen}
         onChange={handleFilter}
         data-testid="Autocomplete"
         data-current-value={value}

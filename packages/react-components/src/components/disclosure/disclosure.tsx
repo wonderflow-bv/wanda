@@ -129,6 +129,7 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
       onToggle={handleOpen()}
       ref={ref}
       open={isOpen}
+      aria-controls={seedID('disclosure-content')}
       {...otherProps}
     >
       <Text
@@ -138,6 +139,7 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
         id={seedID('disclosure')}
         size={sizes[dimension].summary as TextProps['size']}
         weight="bold"
+        aria-expanded={isOpen}
       >
         {summary}
         {expandable && (
@@ -150,10 +152,13 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
       </Text>
       <LazyMotion features={domMax}>
         <m.div
+          id={seedID('disclosure-content')}
           className={styles.Content}
           data-disclosure-padding={padding}
           data-disclosure-height={Boolean(contentMaxHeight)}
-          animate={isOpen ? { y: 5, opacity: 1, height: 'auto' } : {
+          animate={isOpen ? {
+            y: 5, opacity: 1, height: 'auto', overflow: 'unset',
+          } : {
             y: 0, opacity: 0, height: 0, overflow: 'hidden',
           }}
           transition={{ ease: 'easeOut', duration: 0.2, delay: 0 }}

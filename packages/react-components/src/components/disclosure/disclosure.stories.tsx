@@ -40,6 +40,7 @@ const Template: ComponentStory<typeof Disclosure> = args => (
     <Autocomplete
       style={{ maxWidth: '300px', padding: '0.5rem 0' }}
       icon="magnifying-glass"
+      label="Fruits"
     >
       <Autocomplete.Option value="apple">
         Apple
@@ -82,6 +83,7 @@ const NestedTemplate: ComponentStory<typeof Disclosure> = args => (
     <Autocomplete
       style={{ maxWidth: '300px', padding: '0.5rem 0' }}
       icon="magnifying-glass"
+      label="Fruits"
     >
       <Autocomplete.Option value="apple">
         Apple
