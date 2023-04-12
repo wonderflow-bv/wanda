@@ -4,6 +4,11 @@
   .InputWrapper {
     display: inline-block;
     line-height: 0;
+    cursor: none;
+
+    &:hover {
+      cursor: pointer;
+    }
 
     &[data-radio-control='true'] {
       position: absolute;
@@ -17,15 +22,20 @@
     @mixin vibrancy;
 
     appearance: none;
-    inline-size: var(--w);
+    background-color: var(--global-vibrancy-background);
     block-size: var(--h);
+    border-radius: token(--radius-4);
+    box-shadow: 0 0 0 1px var(--global-background), inset 0 0 0 1px var(--dimmed-2);
+    color: var(--global-background);
+    cursor: none;
+    inline-size: var(--w);
     max-inline-size: var(--w);
     max-block-size: var(--h);
-    color: var(--global-background);
-    border-radius: token(--radius-4);
     position: relative;
-    background-color: var(--global-vibrancy-background);
-    box-shadow: 0 0 0 1px var(--global-background), inset 0 0 0 1px var(--dimmed-2);
+
+    &:hover {
+      cursor: pointer;
+    }
 
     &::after {
       content: '';
@@ -149,6 +159,12 @@
   }
 
   .Label {
+    cursor: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+
     &[aria-disabled='true'] {
       color: var(--global-disabled-foreground);
       cursor: not-allowed;

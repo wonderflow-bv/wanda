@@ -108,8 +108,9 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({
           as="label"
           aria-disabled={disabled}
           className={styles.Label}
-          size={dimension === 'small' ? 14 : 16}
           htmlFor={fieldID}
+          size={dimension === 'small' ? 14 : 16}
+          title={otherProps?.title}
         >
           {label}
         </Text>
