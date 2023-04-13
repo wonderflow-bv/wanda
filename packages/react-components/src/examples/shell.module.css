@@ -1,0 +1,72 @@
+@layer components {
+  .MainContainer {
+    background-color: #f9fafb;
+  }
+
+  .LeftMenu {
+    max-width: 63px;
+    min-width: 63px;
+    background-color: var(--global-background);
+    border-right: 1px solid var(--dimmed-1);
+
+    &[data-is-open='true'] {
+      max-width: 279px;
+      min-width: 279px;
+    }
+  }
+
+  .LeftMenuInner {
+    max-height: 64px;
+    height: 64px;
+    background-color: var(--dimmed-1);
+    border-bottom: 1px solid var(--dimmed-1);
+    padding: 0.5rem;
+    wordbreak: break-all;
+
+    &[data-is-open='true'] {
+      max-height: 250px;
+      height: 250px;
+      background-color: var(--global-background);
+    }
+  }
+
+  .MainMenu {
+    maxheight: 64px;
+    height: 64px;
+    background-color: var(--global-background);
+    border-bottom: 1px solid var(--dimmed-1);
+    padding: 0 2rem;
+  }
+
+  .RightMenu {
+    max-width: 0;
+    min-width: 0;
+    background-color: var(--global-background);
+    border-left: 1px solid var(--dimmed-1);
+    overflow: hidden;
+
+    &[data-is-open='true'] {
+      max-width: 299px;
+      min-width: 299px;
+    }
+  }
+
+  .RightMenuInner {
+    max-height: 4rem;
+    height: 4rem;
+    background-color: var(--global-background);
+    border-bottom: 1px solid var(--dimmed-1);
+    padding: 0.5rem;
+    wordbreak: break-all;
+  }
+
+  .Container {
+    overflow: auto;
+    height: calc(100vh - 64px);
+  }
+
+  .Filter {
+    max-height: calc(100vh - 64px);
+    overflowy: scroll;
+  }
+}

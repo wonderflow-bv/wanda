@@ -1,0 +1,180 @@
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { SymbolNames } from '@wonderflow/symbols';
+import clsx from 'clsx';
+import {
+  useEffect, useMemo, useRef, useState,
+} from 'react';
+import { useUIDSeed } from 'react-uid';
+
+import {
+  Button,
+  Card,
+  Container,
+  Disclosure,
+  Grid, IconButton, Menu, Snackbar, Stack, Text,
+  Title,
+  useBreakpoints,
+  useBreakpointsConfig,
+  useSSR,
+} from '@/components';
+
+import * as style from './shell.module.css';
+
+const story: ComponentMeta<typeof Container> = {
+  title: 'Examples/Wireframe',
+  component: Container,
+};
+
+export default story;
+
+type Config = {
+  gutter: 16 | 24;
+  col: 2 | 3 | 4 | 6;
+  dimension: 'fixed';
+}
+
+const Template: ComponentStory<typeof Container> = () => {
+  const [isLeftOpen, setIsLeftOpen] = useState<boolean>(false);
+  const [isRightOpen, setIsRightOpen] = useState<boolean>(false);
+
+  const ref = useRef<HTMLDivElement>(null);
+
+  const seed = useUIDSeed();
+  const { isBrowser } = useSSR();
+  const { matches, size } = useBreakpoints();
+
+  const linkIcons: Array<Partial<SymbolNames>> = useMemo(() => ['accessibility', 'astronomy', 'crown', 'megaphone', 'thumbs-up'], []);
+
+  const {
+    value: containerValue,
+    matches: containerMatches,
+    size: containerSize,
+  } = useBreakpointsConfig<Config>(
+    {
+      sm: { gutter: 16, col: 3, dimension: 'fixed' },
+      md: { gutter: 24, col: 3, dimension: 'fixed' },
+      lg: { gutter: 24, col: 4, dimension: 'fixed' },
+      xl: { gutter: 24, col: 6, dimension: 'fixed' },
+      fallback: { gutter: 16, col: 2, dimension: 'fixed' },
+    },
+    ref,
+  );
+
+  useEffect(
+    () => {
+      if (isBrowser) {
+        document.body.style.padding = '0px';
+
+        return () => {
+          document.body.style.padding = '1rem';
+        };
+      }
+
+      return undefined;
+    }, [isBrowser],
+  );
+
+  return (
+    <Container dimension="full" padding={false} className={style.MainContainer}>
+      <Stack direction="row">
+        <Stack
+          id="LeftMenu"
+          rowGap={16}
+          className={style.LeftMenu}
+          data-is-open={isLeftOpen}
+        >
+          <div className={style.LeftMenuInner} data-is-open={isLeftOpen} />
+
+          {isLeftOpen
+            ? (
+              <div>
+                {linkIcons.map((e, i) => (<Menu.Item key={seed(`linkMenu${i}`)} disabled value={`${e}`} icon={linkIcons[i]}>{e}</Menu.Item>))}
+              </div>
+            )
+            : (
+              <Stack inline hAlign="center" rowGap={8}>
+                {linkIcons.map((e, i) => (<IconButton key={`${e} ${seed(`icons${i}`)}`} disabled icon={linkIcons[i]} kind="flat" />))}
+              </Stack>
+            )}
+        </Stack>
+
+        <Stack>
+          <Stack
+            id="MainMenu"
+            direction="row"
+            vAlign="center"
+            hAlign="space-between"
+            columnGap={16}
+            className={style.MainMenu}
+          >
+            <Stack inline>
+              <Button kind="secondary" dimension="regular" fullWidth={false} onClick={() => setIsLeftOpen(!isLeftOpen)}>Menu</Button>
+            </Stack>
+            <Stack inline>
+              <Button kind="secondary" dimension="regular" fullWidth={false} onClick={() => setIsRightOpen(!isRightOpen)}>Filters</Button>
+            </Stack>
+          </Stack>
+
+          <Container
+            ref={ref}
+            dimension={containerValue.dimension}
+            className={clsx(style.Container, 'ContainerEx')}
+          >
+            <Stack rowGap={32} vPadding={32}>
+              <Snackbar>
+                <Title level="2">Product Card Container</Title>
+                <Text as="span">{`Window Width: ${size}px - Breakpoints Match: ${matches.toUpperCase()}`}</Text>
+                <br />
+                <Text as="span">{`Container Width: ${containerSize}px - Grid Columns: ${containerValue.col} -  Grid Gutter: ${containerValue.gutter}px`}</Text>
+                <br />
+                <Text as="span">{`useBreakpointsConfig.value: ${JSON.stringify(containerValue)} - useBreakpointsConfig.matches: ${containerMatches.toUpperCase()}`}</Text>
+              </Snackbar>
+
+              <Grid
+                columns={containerValue.col}
+                rowGap={containerValue.gutter}
+                columnGap={containerValue.gutter}
+                filling={false}
+              >
+                {Array(12).fill('Card').map((e, i) => (
+                  <Grid.Item key={seed(`cards${i}`)}>
+                    <Card bordered style={{ height: '500px' }}>
+                      <Stack hAlign="center">
+                        <Text size={14}>{`${e} ${i + 1}`}</Text>
+                      </Stack>
+                    </Card>
+                  </Grid.Item>
+                ))}
+              </Grid>
+            </Stack>
+
+          </Container>
+
+        </Stack>
+
+        <Stack
+          id="RightMenu"
+          className={style.RightMenu}
+          data-is-open={isRightOpen}
+        >
+          <div className={style.RightMenuInner} />
+
+          <div className={style.Filter}>
+            {Array(10).fill('Filter').map((e, i) => (
+              <Disclosure key={seed(`filters${i}`)} summary={`${e} ${String.fromCharCode(i + 65)}`}>
+                <Menu.Item value="1" subtext="Hint Text">Menu Item 1</Menu.Item>
+                <Menu.Item value="2" subtext="Hint Text">Menu Item 2</Menu.Item>
+                <Menu.Item value="3" subtext="Hint Text">Menu Item 3</Menu.Item>
+                <Menu.Item value="4" subtext="Hint Text">Menu Item 4</Menu.Item>
+              </Disclosure>
+            ))}
+          </div>
+
+        </Stack>
+      </Stack>
+    </Container>
+  );
+};
+
+export const Shell = Template.bind({});
+
