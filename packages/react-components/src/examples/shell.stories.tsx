@@ -88,12 +88,12 @@ const Template: ComponentStory<typeof Container> = () => {
           {isLeftOpen
             ? (
               <div>
-                {linkIcons.map((e, i) => (<Menu.Item key={seed('linkMenu')} disabled value={`${e}`} icon={linkIcons[i]}>{e}</Menu.Item>))}
+                {linkIcons.map((e, i) => (<Menu.Item key={seed(`linkMenu${i}`)} disabled value={`${e}`} icon={linkIcons[i]}>{e}</Menu.Item>))}
               </div>
             )
             : (
               <Stack inline hAlign="center" rowGap={8}>
-                {linkIcons.map((e, i) => (<IconButton key={`${e} ${seed('icons')}`} disabled icon={linkIcons[i]} kind="flat" />))}
+                {linkIcons.map((e, i) => (<IconButton key={`${e} ${seed(`icons${i}`)}`} disabled icon={linkIcons[i]} kind="flat" />))}
               </Stack>
             )}
         </Stack>
@@ -137,7 +137,7 @@ const Template: ComponentStory<typeof Container> = () => {
                 filling={false}
               >
                 {Array(12).fill('Card').map((e, i) => (
-                  <Grid.Item key={seed('card')}>
+                  <Grid.Item key={seed(`cards${i}`)}>
                     <Card bordered style={{ height: '500px' }}>
                       <Stack hAlign="center">
                         <Text size={14}>{`${e} ${i + 1}`}</Text>
@@ -161,7 +161,7 @@ const Template: ComponentStory<typeof Container> = () => {
 
           <div className={style.Filter}>
             {Array(10).fill('Filter').map((e, i) => (
-              <Disclosure key={seed('filter')} summary={`${e} ${String.fromCharCode(i + 65)}`}>
+              <Disclosure key={seed(`filters${i}`)} summary={`${e} ${String.fromCharCode(i + 65)}`}>
                 <Menu.Item value="1" subtext="Hint Text">Menu Item 1</Menu.Item>
                 <Menu.Item value="2" subtext="Hint Text">Menu Item 2</Menu.Item>
                 <Menu.Item value="3" subtext="Hint Text">Menu Item 3</Menu.Item>
