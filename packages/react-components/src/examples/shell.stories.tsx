@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { SymbolNames } from '@wonderflow/symbols';
 import clsx from 'clsx';
-import { SymbolNames } from 'packages/symbols/dist';
 import {
   useEffect, useMemo, useRef, useState,
 } from 'react';
