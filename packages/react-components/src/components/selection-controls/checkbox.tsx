@@ -74,20 +74,20 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({
   }, [indeterminate]);
 
   return (
-    <LazyMotion features={domAnimation} strict>
-      <m.span
-        className={clsx(styles.InputWrapper, className)}
-        whileTap={{ scale: 1.15 }}
-        transition={{ duration: 0.3, ease: 'backOut' }}
-        data-radio-control={hidden}
-      >
-        <Stack
-          as="span"
-          direction="row"
-          columnGap={8}
-          vAlign="center"
-          fill={false}
-          wrap
+    <Stack
+      as="span"
+      direction="row"
+      columnGap={8}
+      vAlign="center"
+      fill={false}
+      wrap
+    >
+      <LazyMotion features={domAnimation} strict>
+        <m.span
+          className={clsx(styles.InputWrapper, className)}
+          whileTap={{ scale: 1.15 }}
+          transition={{ duration: 0.3, ease: 'backOut' }}
+          data-radio-control={hidden}
         >
           <input
             type="checkbox"
@@ -101,20 +101,22 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({
             id={fieldID}
             {...otherProps}
           />
-          {label && (
-            <Text
-              as="label"
-              aria-disabled={disabled}
-              className={styles.Label}
-              size={dimension === 'small' ? 14 : 16}
-              htmlFor={fieldID}
-            >
-              {label}
-            </Text>
-          )}
-        </Stack>
-      </m.span>
-    </LazyMotion>
+        </m.span>
+      </LazyMotion>
+      {label && (
+        <Text
+          as="label"
+          aria-disabled={disabled}
+          className={styles.Label}
+          htmlFor={fieldID}
+          size={dimension === 'small' ? 14 : 16}
+          title={otherProps?.title}
+        >
+          {label}
+        </Text>
+
+      )}
+    </Stack>
   );
 });
 

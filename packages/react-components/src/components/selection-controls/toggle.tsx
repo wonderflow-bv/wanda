@@ -38,6 +38,7 @@ export type ToggleProps = InputHTMLAttributes<HTMLInputElement> & {
   /**
    * Set the size of the toggle.
    */
+
   dimension?: 'regular' | 'small';
   /**
    * Callback function to be called when is toggled.
@@ -85,11 +86,11 @@ export const Toggle = forwardRef<HTMLInputElement, ToggleProps>(({
           className={styles.Label}
           size={dimension === 'small' ? 14 : 16}
           htmlFor={fieldID}
+          title={otherProps?.title}
         >
           {label}
         </Text>
       )}
-
     </Stack>
   );
 });

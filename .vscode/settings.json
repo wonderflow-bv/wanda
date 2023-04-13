@@ -38,5 +38,9 @@
   "[graphql]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#face20",
+    "titleBar.activeForeground": "#683a01",
   }
 }

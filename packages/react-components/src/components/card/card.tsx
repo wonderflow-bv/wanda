@@ -84,8 +84,9 @@ export const Card = forwardRef(({
       {...otherProps}
     >
       <Stack
+        data-inner-element="Row"
         direction="row"
-        className={clsx(styles.Row, className)}
+        className={styles.Row}
         fill={false}
         vAlign={vAlign}
         hAlign={hAlign}
@@ -93,16 +94,16 @@ export const Card = forwardRef(({
         rowGap={rowGap}
         wrap={wrap}
       >
-        {left && <div className={styles.Left}>{left}</div>}
+        {left && <div className={styles.Left} data-inner-element="Left">{left}</div>}
 
         {children && (
-          <div className={styles.Content}>
+          <div className={styles.Content} data-inner-element="Content">
             {children}
           </div>
         )}
 
         {right && (
-          <div className={styles.Right}>
+          <div className={styles.Right} data-inner-element="Right">
             {right}
           </div>
         )}
