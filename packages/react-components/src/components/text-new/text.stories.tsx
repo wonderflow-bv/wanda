@@ -1,0 +1,43 @@
+/* eslint-disable max-len */
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import React from 'react';
+
+import { Container } from '../..';
+import { Text } from './text';
+
+const story: ComponentMeta<typeof Text> = {
+  title: 'Typography/Text-New',
+  component: Text,
+  args: {
+    // maxWidth: 'auto',
+    // children: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius dolores, tempore quas labore officiis praesentium. Porro sed dolorem, numquam temporibus consequuntur quam doloremque ducimus error tempora illo aliquam nesciunt nostrum!',
+    // textAlign: 'start',
+    // responsive: true,
+    // lineHeight: 'small',
+  },
+  argTypes: {
+    // sentiment: {
+    //   options: ['positive', 'informative', 'danger', 'warning'],
+    //   control: { type: 'select' },
+    // },
+    // dimmed: {
+    //   options: [5, 6, 7],
+    //   control: { type: 'select' },
+    // },
+    // textAlign: {
+    //   options: ['start', 'center', 'end'],
+    //   control: { type: 'inline-radio' },
+    // },
+    // lineHeight: {
+    //   options: ['none', 'small', 'large'],
+    //   control: { type: 'inline-radio' },
+    // },
+  },
+};
+
+export default story;
+
+const Template: ComponentStory<typeof Text> = args => <Container dimension="medium"><Text {...args} /></Container>;
+
+export const Default = Template.bind({});
+
