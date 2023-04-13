@@ -1,5 +1,11 @@
 # @wonderflow/symbols
 
+## 11.0.5
+
+### Patch Changes
+
+- 91b34369: Update `Symbols`, add `Selection-Controls` cursor pointer on hover
+
 ## 11.0.4
 
 ## 11.0.3
