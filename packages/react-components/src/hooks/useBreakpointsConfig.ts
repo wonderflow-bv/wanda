@@ -33,7 +33,8 @@ export const useBreakpointsConfig = <T>(
 
   useEffect(() => {
     setValue(config[matches as keyof typeof config] ?? fallback);
-  }, [matches, config, fallback]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [matches]);
 
   return ({
     value,

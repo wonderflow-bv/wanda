@@ -9,7 +9,7 @@
     background-color: var(--global-background);
     border-right: 1px solid var(--dimmed-1);
 
-    &[data-isOpen='true'] {
+    &[data-is-open='true'] {
       max-width: 279px;
       min-width: 279px;
     }
@@ -23,7 +23,7 @@
     padding: 0.5rem;
     wordbreak: break-all;
 
-    &[data-isOpen='true'] {
+    &[data-is-open='true'] {
       max-height: 250px;
       height: 250px;
       background-color: var(--global-background);
@@ -45,7 +45,7 @@
     border-left: 1px solid var(--dimmed-1);
     overflow: hidden;
 
-    &[data-isOpen='true'] {
+    &[data-is-open='true'] {
       max-width: 299px;
       min-width: 299px;
     }

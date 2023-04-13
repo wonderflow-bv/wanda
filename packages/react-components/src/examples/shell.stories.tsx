@@ -81,9 +81,9 @@ const Template: ComponentStory<typeof Container> = () => {
           id="LeftMenu"
           rowGap={16}
           className={style.LeftMenu}
-          data-isOpen={isLeftOpen}
+          data-is-open={isLeftOpen}
         >
-          <div className={style.LeftMenuInner} data-isOpen={isLeftOpen} />
+          <div className={style.LeftMenuInner} data-is-open={isLeftOpen} />
 
           {isLeftOpen
             ? (
@@ -155,7 +155,7 @@ const Template: ComponentStory<typeof Container> = () => {
         <Stack
           id="RightMenu"
           className={style.RightMenu}
-          data-isOpen={isRightOpen}
+          data-is-open={isRightOpen}
         >
           <div className={style.RightMenuInner} />
 
