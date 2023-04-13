@@ -1,5 +1,15 @@
 # @wonderflow/react-components
 
+## 11.0.5
+
+### Patch Changes
+
+- f166f7c9: `Disclosure` fix overflow and minor stories changes `Autocomplete` fix accessibility
+- d095f355: Fix `useBreakpointsConfig` useEffect dependencies
+- f5891295: `Card` minor change to CSS extensibility
+- 91b34369: Update `Symbols`, add `Selection-Controls` cursor pointer on hover
+- 4f8732a0: `Selection Controls` minor change to label position
+
 ## 11.0.4
 
 ### Patch Changes
