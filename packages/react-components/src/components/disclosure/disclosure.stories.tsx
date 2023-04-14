@@ -56,7 +56,7 @@ const Template: ComponentStory<typeof Disclosure> = args => (
       </Autocomplete.Option>
     </Autocomplete>
 
-    <p>
+    <div>
       Lorem ipsum dolor sit amet consectetur adipisicing elit.
       Doloribus corporis nobis ipsum natus laudantium dolorem sapiente,
       sint adipisci at asperiores quia ex voluptatum veniam! Quos rerum natus eos excepturi atque!
@@ -71,7 +71,7 @@ const Template: ComponentStory<typeof Disclosure> = args => (
         </Menu>
 
       </Popover>
-    </p>
+    </div>
 
   </Disclosure>
 );

@@ -94,7 +94,9 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
   const handleOpen = useCallback(
     () => () => {
       if (ref.current && expandable) setIsOpen(open || ref.current.open);
-      if (expandable && open === undefined) onToggle?.(open || ref.current.open);
+      if (expandable) {
+        onToggle?.(open || ref.current.open);
+      }
     },
     [expandable, onToggle, open],
   );
@@ -157,7 +159,7 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
           data-disclosure-padding={padding}
           data-disclosure-height={Boolean(contentMaxHeight)}
           animate={isOpen ? {
-            y: 5, opacity: 1, height: 'auto', overflow: 'unset',
+            y: 5, opacity: 1, height: 'auto', overflow: 'initial',
           } : {
             y: 0, opacity: 0, height: 0, overflow: 'hidden',
           }}
