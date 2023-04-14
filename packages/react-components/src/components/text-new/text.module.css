@@ -2,9 +2,10 @@
 
 @layer components {
   .Text {
-    min-block-size: 0.01vh;
     font-size: var(--fs-max);
+    color: var(--dimmed-7);
     max-inline-size: var(--max-w, initial);
+    min-block-size: 0.01vh;
     text-align: var(--t-align);
 
     /* Colors */
@@ -50,7 +51,7 @@
     }
 
     &[data-text-variant='display-3'] {
-      font-size: token(--wds-font-size-32);
+      font-size: token(--wds-font-size-34);
       font-weight: token(--wds-font-weight-bold);
       line-height: token(--wds-line-height-40);
     }
