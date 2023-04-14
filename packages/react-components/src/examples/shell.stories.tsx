@@ -28,9 +28,9 @@ const story: ComponentMeta<typeof Container> = {
 export default story;
 
 type Config = {
-  gutter: 16 | 24;
-  col: 2 | 3 | 4 | 6;
-  dimension: 'fixed';
+  gutter: 16 | 24 | 32;
+  col: 1 | 2 | 3 | 4 | 6;
+  dimension: 'fixed' | 'extra-large';
 }
 
 const Template: ComponentStory<typeof Container> = () => {
@@ -51,11 +51,12 @@ const Template: ComponentStory<typeof Container> = () => {
     size: containerSize,
   } = useBreakpointsConfig<Config>(
     {
-      sm: { gutter: 16, col: 3, dimension: 'fixed' },
-      md: { gutter: 24, col: 3, dimension: 'fixed' },
-      lg: { gutter: 24, col: 4, dimension: 'fixed' },
-      xl: { gutter: 24, col: 6, dimension: 'fixed' },
-      fallback: { gutter: 16, col: 2, dimension: 'fixed' },
+      xs: { gutter: 16, col: 1, dimension: 'extra-large' },
+      sm: { gutter: 16, col: 2, dimension: 'extra-large' },
+      md: { gutter: 24, col: 3, dimension: 'extra-large' },
+      lg: { gutter: 24, col: 4, dimension: 'extra-large' },
+      xl: { gutter: 32, col: 4, dimension: 'extra-large' },
+      fallback: { gutter: 16, col: 2, dimension: 'extra-large' },
     },
     ref,
   );
@@ -131,6 +132,7 @@ const Template: ComponentStory<typeof Container> = () => {
               </Snackbar>
 
               <Grid
+                colMinWidth="1rem"
                 columns={containerValue.col}
                 rowGap={containerValue.gutter}
                 columnGap={containerValue.gutter}
