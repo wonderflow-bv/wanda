@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 11.0.6
+
+### Patch Changes
+
+- 1740e15f: Fix `Disclosure` onToggle action
+
 ## 11.0.5
 
 ### Patch Changes
