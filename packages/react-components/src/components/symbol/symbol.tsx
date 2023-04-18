@@ -60,7 +60,7 @@ export const Symbol = forwardRef<SVGSVGElement, SymbolProps>(({
   fill,
   ...otherProps
 }: SymbolProps, forwardedRef) => {
-  const computedStyle = useMemo(() => (dimension < 18 ? 'solid' : weight), [weight, dimension]);
+  const computedStyle = useMemo(() => (+dimension < 18 ? 'solid' : weight), [weight, dimension]);
 
   return (typeof source === 'string')
     ? (
