@@ -30,7 +30,7 @@ export default story;
 type Config = {
   gutter: 16 | 24 | 32;
   col: 1 | 2 | 3 | 4 | 6;
-  dimension: 'fixed' | 'extra-large';
+  dimension: 'large' | 'extra-large';
 }
 
 const Template: ComponentStory<typeof Container> = () => {
@@ -51,12 +51,12 @@ const Template: ComponentStory<typeof Container> = () => {
     size: containerSize,
   } = useBreakpointsConfig<Config>(
     {
-      xs: { gutter: 16, col: 1, dimension: 'extra-large' },
-      sm: { gutter: 16, col: 2, dimension: 'extra-large' },
-      md: { gutter: 24, col: 3, dimension: 'extra-large' },
-      lg: { gutter: 24, col: 4, dimension: 'extra-large' },
-      xl: { gutter: 32, col: 4, dimension: 'extra-large' },
-      fallback: { gutter: 16, col: 2, dimension: 'extra-large' },
+      xs: { gutter: 16, col: 1, dimension: 'large' },
+      sm: { gutter: 16, col: 2, dimension: 'large' },
+      md: { gutter: 24, col: 3, dimension: 'large' },
+      lg: { gutter: 24, col: 4, dimension: 'large' },
+      xl: { gutter: 32, col: 6, dimension: 'extra-large' },
+      fallback: { gutter: 16, col: 2, dimension: 'large' },
     },
     ref,
   );
