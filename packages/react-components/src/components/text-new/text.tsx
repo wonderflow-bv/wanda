@@ -25,21 +25,17 @@ type VariantDisplay = 'display-1' | 'display-2' | 'display-3' | 'display-4';
 type VariantHeading = 'heading-1' | 'heading-2' | 'heading-3' | 'heading-4' | 'heading-5' | 'heading-6';
 type VariantSubtitle = 'subtitle-1' | 'subtitle-2';
 type VariantBody = 'body-1' | 'body-2' | 'body-3';
-export type Variants = VariantDisplay | VariantHeading | VariantSubtitle | VariantBody;
+export type TextVariants = VariantDisplay | VariantHeading | VariantSubtitle | VariantBody;
 
 export type TextProps = {
   /**
    * Apply typographic style of text
    */
-  variant?: Variants;
+  variant?: TextVariants;
   /**
    * Set the sentiment of the text.
    */
   color?: 'positive' | 'informative' | 'danger' | 'warning';
-  /**
-   * Set the maximum width of the text after which it will wrap.
-   */
-  maxWidth?: string;
   /**
    * Set the text alignment of the text. This is a logical property
    * based on the direction of the text.
@@ -50,6 +46,10 @@ export type TextProps = {
    * the text will be always the same size across all breakpoints.
    */
   responsive?: boolean;
+  /**
+   * Truncate text overflow with ellipsis.
+   */
+  truncate?: boolean;
 }
 
 type PolymorphicText = Polymorphic.ForwardRefComponent<'p', TextProps>;
@@ -59,15 +59,14 @@ export const Text = forwardRef(({
   className,
   variant = 'body-1',
   color,
-  maxWidth,
   textAlign = 'start',
   as: Wrapper = 'p',
   responsive = true,
+  truncate = false,
   style,
   ...otherProps
 }, forwardedRef) => {
   const dynamicStyle: CSSProperties = {
-    '--max-w': maxWidth,
     '--t-align': textAlign,
   };
 
@@ -77,6 +76,7 @@ export const Text = forwardRef(({
       data-text-variant={variant}
       data-text-color={color}
       data-text-responsive={responsive}
+      data-text-truncate={truncate}
       className={clsx(styles.Text, className)}
       style={{ ...dynamicStyle, ...style }}
       {...otherProps}
