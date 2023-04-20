@@ -51,12 +51,11 @@ const Template: ComponentStory<typeof Container> = () => {
     size: containerSize,
   } = useBreakpointsConfig<Config>(
     {
-      xs: { gutter: 16, col: 1, dimension: 'extra-large' },
       sm: { gutter: 16, col: 2, dimension: 'extra-large' },
       md: { gutter: 24, col: 3, dimension: 'extra-large' },
       lg: { gutter: 24, col: 4, dimension: 'extra-large' },
-      xl: { gutter: 32, col: 4, dimension: 'extra-large' },
-      fallback: { gutter: 16, col: 2, dimension: 'extra-large' },
+      xl: { gutter: 32, col: 6, dimension: 'extra-large' },
+      fallback: { gutter: 16, col: 1, dimension: 'extra-large' },
     },
     ref,
   );
