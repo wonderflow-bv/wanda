@@ -17,7 +17,7 @@
 import clsx from 'clsx';
 import { CSSProperties, forwardRef } from 'react';
 
-import { Polymorphic } from '@/components';
+import { Chip, Polymorphic, Symbol } from '@/components';
 
 import * as styles from './text.module.css';
 
@@ -42,14 +42,22 @@ export type TextProps = {
    */
   textAlign?: 'start' | 'center' | 'end' | 'justify';
   /**
-   * Enable or disable the responsiveness of the text. If disabled,
+   * Disable the responsiveness of the text. If disabled,
    * the text will be always the same size across all breakpoints.
    */
-  responsive?: boolean;
+  preventResponsive?: boolean;
   /**
    * Truncate text overflow with ellipsis.
    */
   truncate?: boolean;
+  /**
+   * Place a Decorator before the string. This is required to be a Symbol or a Chip component.
+   */
+  decoratorStart?: typeof Symbol | typeof Chip;
+  /**
+   * Place a Decorator after the string. This is required to be a Symbol or a Chip component.
+   */
+  decoratorEnd?: typeof Symbol | typeof Chip;
 }
 
 type PolymorphicText = Polymorphic.ForwardRefComponent<'p', TextProps>;
@@ -61,8 +69,10 @@ export const Text = forwardRef(({
   color,
   textAlign = 'start',
   as: Wrapper = 'p',
-  responsive = true,
+  preventResponsive = false,
   truncate = false,
+  decoratorStart,
+  decoratorEnd,
   style,
   ...otherProps
 }, forwardedRef) => {
@@ -75,13 +85,15 @@ export const Text = forwardRef(({
       ref={forwardedRef}
       data-text-variant={variant}
       data-text-color={color}
-      data-text-responsive={responsive}
+      data-text-prevent-responsive={preventResponsive}
       data-text-truncate={truncate}
       className={clsx(styles.Text, className)}
       style={{ ...dynamicStyle, ...style }}
       {...otherProps}
     >
+      {decoratorStart && <span>{decoratorStart}</span>}
       {children}
+      {decoratorEnd && <span>{decoratorEnd}</span>}
     </Wrapper>
   );
 }) as PolymorphicText;

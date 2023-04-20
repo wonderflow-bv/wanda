@@ -9,7 +9,7 @@
 
 
     /* Responsiveness */
-    &[data-text-responsive='true'] {
+    &[data-text-prevent-responsive='false'] {
       font-size: var(--fs-min);
 
       @media (--from-small) {
