@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
+import { useSize } from 'ahooks';
 import clsx from 'clsx';
 import {
-  ChangeEvent, forwardRef, InputHTMLAttributes, useMemo,
+  ChangeEvent, forwardRef, InputHTMLAttributes, useMemo, useRef,
 } from 'react';
 import { useUIDSeed } from 'react-uid';
 
@@ -38,7 +39,6 @@ export type ToggleProps = InputHTMLAttributes<HTMLInputElement> & {
   /**
    * Set the size of the toggle.
    */
-
   dimension?: 'regular' | 'small';
   /**
    * Callback function to be called when is toggled.
@@ -46,6 +46,11 @@ export type ToggleProps = InputHTMLAttributes<HTMLInputElement> & {
    */
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
+
+const inputSize = {
+  regular: 24,
+  small: 17,
+};
 
 export const Toggle = forwardRef<HTMLInputElement, ToggleProps>(({
   className,
@@ -59,14 +64,18 @@ export const Toggle = forwardRef<HTMLInputElement, ToggleProps>(({
   const seedID = useUIDSeed();
   const fieldID = useMemo(() => id ?? seedID('toggle'), [id, seedID]);
 
+  const refWrapper = useRef(null);
+  const wrapper = useSize(refWrapper);
+  const isAlignCenter = useMemo(() => wrapper?.height === inputSize[dimension], [wrapper, dimension]);
+
   return (
     <Stack
       as="span"
       direction="row"
       columnGap={8}
-      vAlign="center"
+      vAlign={isAlignCenter ? 'center' : 'start'}
       fill={false}
-      wrap
+      ref={refWrapper}
     >
       <input
         type="checkbox"
@@ -85,6 +94,7 @@ export const Toggle = forwardRef<HTMLInputElement, ToggleProps>(({
           aria-disabled={disabled}
           className={styles.Label}
           size={dimension === 'small' ? 14 : 16}
+          lineHeight={dimension === 'small' ? 'small' : 'large'}
           htmlFor={fieldID}
           title={otherProps?.title}
         >

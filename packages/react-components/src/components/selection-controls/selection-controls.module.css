@@ -121,6 +121,8 @@
     --h: 24px;
     --p: 2px;
 
+    min-width: var(--w);
+
     /* stylelint-disable-next-line value-keyword-case */
     composes: RadioInput;
     border-radius: 200px;
@@ -155,11 +157,14 @@
     &[data-control-dimension='small'] {
       --w: 28px;
       --h: 16px;
+
+      min-width: var(--w);
     }
   }
 
   .Label {
     cursor: none;
+    word-break: break-word;
 
     &:hover {
       cursor: pointer;

@@ -1,6 +1,8 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
+import { Card } from '@/components';
+
 import { Checkbox } from './checkbox';
 
 const story: ComponentMeta<typeof Checkbox> = {
@@ -49,4 +51,17 @@ withLabel.args = {
   defaultChecked: true,
   disabled: false,
   label: 'Label',
+};
+
+const ConstraintTemplate: ComponentStory<typeof Checkbox> = args => (
+  <Card dimmed={0} bordered style={{ width: '300px' }}>
+    <Checkbox {...args} />
+  </Card>
+);
+
+export const withConstraint = ConstraintTemplate.bind({});
+withConstraint.args = {
+  defaultChecked: true,
+  disabled: false,
+  label: 'MyVeryLongUsernameUnspacedString@wonderflow.ai',
 };
