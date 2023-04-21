@@ -178,15 +178,17 @@ WithAList.args = {
 };
 
 const withImageContent = (
-  <Stack hAlign="center" vAlign="center" vPadding={16}>
+  <Stack hAlign="center" vAlign="center" rowGap={24}>
     <img
       src="https://wonderimages.gumlet.io/placeholders/illustration.png?format=webp&q=100"
       alt="modal illustartion"
       width="400px"
       height="auto"
     />
-    <Title level="5">Title goes here</Title>
-    <Text size={14}>Subtitle goes here</Text>
+    <Stack hAlign="center">
+      <Title level="5">Title goes here</Title>
+      <Text size={14}>Subtitle goes here</Text>
+    </Stack>
   </Stack>
 );
 
