@@ -91,6 +91,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({
       vAlign={isAlignCenter ? 'center' : 'start'}
       fill={false}
       ref={refWrapper}
+      data-outer-element="Wrapper"
     >
       <LazyMotion features={domAnimation} strict>
         <m.span
@@ -104,6 +105,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({
             disabled={disabled}
             aria-disabled={disabled}
             data-control-dimension={dimension}
+            data-inner-element="Checkbox"
             onChange={onChange}
             className={styles.CheckboxInput}
             ref={ref}
@@ -117,6 +119,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({
         <Text
           as="label"
           aria-disabled={disabled}
+          data-inner-element="Label"
           className={styles.Label}
           lineHeight={dimension === 'small' ? 'small' : 'large'}
           htmlFor={fieldID}

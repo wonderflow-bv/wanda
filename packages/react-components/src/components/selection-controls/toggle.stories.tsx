@@ -39,5 +39,5 @@ export const withConstraint = ConstraintTemplate.bind({});
 withConstraint.args = {
   defaultChecked: true,
   disabled: false,
-  label: 'MyVeryLongUsernameUnspacedString@wonderflow.ai',
+  label: 'myVeryLongUsernameUnspacedLabel@wonderflow.ai',
 };

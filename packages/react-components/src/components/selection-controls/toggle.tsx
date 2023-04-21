@@ -76,12 +76,14 @@ export const Toggle = forwardRef<HTMLInputElement, ToggleProps>(({
       vAlign={isAlignCenter ? 'center' : 'start'}
       fill={false}
       ref={refWrapper}
+      data-outer-element="Wrapper"
     >
       <input
         type="checkbox"
         disabled={disabled}
         aria-disabled={disabled}
         data-control-dimension={dimension}
+        data-inner-element="Toggle"
         onChange={onChange}
         className={clsx(styles.Toggle, className)}
         ref={forwardedRef}
@@ -92,6 +94,7 @@ export const Toggle = forwardRef<HTMLInputElement, ToggleProps>(({
         <Text
           as="label"
           aria-disabled={disabled}
+          data-inner-element="Label"
           className={styles.Label}
           size={dimension === 'small' ? 14 : 16}
           lineHeight={dimension === 'small' ? 'small' : 'large'}

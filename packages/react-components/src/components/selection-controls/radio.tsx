@@ -78,6 +78,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(({
       vAlign={isAlignCenter ? 'center' : 'start'}
       fill={false}
       ref={refWrapper}
+      data-outer-element="Wrapper"
     >
       <LazyMotion features={domAnimation} strict>
         <m.span
@@ -91,6 +92,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(({
             disabled={disabled}
             aria-disabled={disabled}
             data-control-dimension={dimension}
+            data-inner-element="Radio"
             onChange={onChange}
             className={styles.RadioInput}
             ref={forwardedRef}
@@ -104,6 +106,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(({
         <Text
           as="label"
           aria-disabled={disabled}
+          data-inner-element="Label"
           className={styles.Label}
           size={dimension === 'small' ? 14 : 16}
           lineHeight={dimension === 'small' ? 'small' : 'large'}
