@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 11.0.7
+
+### Patch Changes
+
+- 058bc702: Fix `Selection-Controls` manage vertical alignment and long labels
+
 ## 11.0.6
 
 ### Patch Changes

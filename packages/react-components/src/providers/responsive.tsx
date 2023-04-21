@@ -13,11 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+import tkns from '@wonderflow/tokens/platforms/web/tokens.json';
 import { configResponsive, useResponsive as responsiveAhook } from 'ahooks';
 import {
   createContext, useContext, useEffect, useState,
 } from 'react';
+
+import { cssRelativeUnitsToPixel } from '../utils/conversions';
 
 type ResponsiveContextProps = {
   /**
@@ -41,11 +43,11 @@ type ResponsiveProviderProps = {
 }
 
 const DEFAULT_BREAKPOINTS = {
-  extraSmall: 480,
-  small: 768,
-  medium: 960,
-  large: 1280,
-  extraLarge: 1600,
+  extraSmall: cssRelativeUnitsToPixel(tkns.breakpoint['extra-small']),
+  small: cssRelativeUnitsToPixel(tkns.breakpoint.small),
+  medium: cssRelativeUnitsToPixel(tkns.breakpoint.medium),
+  large: cssRelativeUnitsToPixel(tkns.breakpoint.large),
+  extraLarge: cssRelativeUnitsToPixel(tkns.breakpoint['extra-large']),
 };
 
 export const ResponsiveContext = createContext<ResponsiveContextProps>({

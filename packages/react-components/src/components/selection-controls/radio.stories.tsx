@@ -1,6 +1,8 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
+import { Card } from '@/components';
+
 import { Radio } from './radio';
 
 const story: ComponentMeta<typeof Radio> = {
@@ -44,4 +46,17 @@ withLabel.args = {
   defaultChecked: true,
   disabled: false,
   label: 'Label',
+};
+
+const ConstraintTemplate: ComponentStory<typeof Radio> = args => (
+  <Card dimmed={0} bordered style={{ width: '300px' }}>
+    <Radio {...args} />
+  </Card>
+);
+
+export const withConstraint = ConstraintTemplate.bind({});
+withConstraint.args = {
+  defaultChecked: true,
+  disabled: false,
+  label: 'myVeryLongUsernameUnspacedLabel@wonderflow.ai',
 };

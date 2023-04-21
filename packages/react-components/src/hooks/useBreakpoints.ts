@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
+import tkns from '@wonderflow/tokens/platforms/web/tokens.json';
 import { useSize } from 'ahooks';
 import {
   MutableRefObject, useEffect, useState,
 } from 'react';
 
+import { cssRelativeUnitsToPixel } from '../utils/conversions';
 import { useSSR } from './useSSR';
 
 export type BreakpointsNames = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
@@ -30,11 +32,11 @@ export type BreakpointsSettings = Breakpoints<number>
 export type BreakpointsValues = Breakpoints<boolean>
 
 const DefaultBreakpointsSettings: BreakpointsSettings = {
-  xs: 480,
-  sm: 768,
-  md: 960,
-  lg: 1280,
-  xl: 1600,
+  xs: cssRelativeUnitsToPixel(tkns.breakpoint['extra-small']),
+  sm: cssRelativeUnitsToPixel(tkns.breakpoint.small),
+  md: cssRelativeUnitsToPixel(tkns.breakpoint.medium),
+  lg: cssRelativeUnitsToPixel(tkns.breakpoint.large),
+  xl: cssRelativeUnitsToPixel(tkns.breakpoint['extra-large']),
 };
 
 const DefaultBreakpointsValues: BreakpointsValues = {

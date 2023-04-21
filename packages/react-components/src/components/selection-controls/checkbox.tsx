@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { useSize } from 'ahooks';
 import clsx from 'clsx';
 import { domAnimation, LazyMotion, m } from 'framer-motion';
 import {
@@ -52,6 +53,11 @@ export type CheckboxProps = InputHTMLAttributes<HTMLInputElement> & {
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
+const inputSize = {
+  regular: 24,
+  small: 16,
+};
+
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({
   className,
   disabled,
@@ -67,6 +73,10 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({
   const seedID = useUIDSeed();
   const fieldID = useMemo(() => id ?? seedID('checkbox'), [id, seedID]);
 
+  const refWrapper = useRef(null);
+  const wrapper = useSize(refWrapper);
+  const isAlignCenter = useMemo(() => wrapper?.height === inputSize[dimension], [wrapper, dimension]);
+
   useEffect(() => {
     if (ref.current) {
       ref.current.indeterminate = indeterminate;
@@ -78,9 +88,10 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({
       as="span"
       direction="row"
       columnGap={8}
-      vAlign="center"
+      vAlign={isAlignCenter ? 'center' : 'start'}
       fill={false}
-      wrap
+      ref={refWrapper}
+      data-outer-element="Wrapper"
     >
       <LazyMotion features={domAnimation} strict>
         <m.span
@@ -94,6 +105,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({
             disabled={disabled}
             aria-disabled={disabled}
             data-control-dimension={dimension}
+            data-inner-element="Checkbox"
             onChange={onChange}
             className={styles.CheckboxInput}
             ref={ref}
@@ -107,7 +119,9 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({
         <Text
           as="label"
           aria-disabled={disabled}
+          data-inner-element="Label"
           className={styles.Label}
+          lineHeight={dimension === 'small' ? 'small' : 'large'}
           htmlFor={fieldID}
           size={dimension === 'small' ? 14 : 16}
           title={otherProps?.title}

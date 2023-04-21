@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
+import { useSize } from 'ahooks';
 import clsx from 'clsx';
 import { domAnimation, LazyMotion, m } from 'framer-motion';
 import {
-  ChangeEvent, forwardRef, InputHTMLAttributes, useMemo,
+  ChangeEvent, forwardRef, InputHTMLAttributes, useMemo, useRef,
 } from 'react';
 import { useUIDSeed } from 'react-uid';
 
@@ -47,6 +48,11 @@ export type RadioProps = InputHTMLAttributes<HTMLInputElement> & {
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
+const inputSize = {
+  regular: 24,
+  small: 16,
+};
+
 export const Radio = forwardRef<HTMLInputElement, RadioProps>(({
   className,
   disabled,
@@ -60,14 +66,19 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(({
   const seedID = useUIDSeed();
   const fieldID = useMemo(() => id ?? seedID('radio'), [id, seedID]);
 
+  const refWrapper = useRef(null);
+  const wrapper = useSize(refWrapper);
+  const isAlignCenter = useMemo(() => wrapper?.height === inputSize[dimension], [wrapper, dimension]);
+
   return (
     <Stack
       as="span"
       direction="row"
       columnGap={8}
-      vAlign="center"
+      vAlign={isAlignCenter ? 'center' : 'start'}
       fill={false}
-      wrap
+      ref={refWrapper}
+      data-outer-element="Wrapper"
     >
       <LazyMotion features={domAnimation} strict>
         <m.span
@@ -81,6 +92,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(({
             disabled={disabled}
             aria-disabled={disabled}
             data-control-dimension={dimension}
+            data-inner-element="Radio"
             onChange={onChange}
             className={styles.RadioInput}
             ref={forwardedRef}
@@ -94,8 +106,10 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(({
         <Text
           as="label"
           aria-disabled={disabled}
+          data-inner-element="Label"
           className={styles.Label}
           size={dimension === 'small' ? 14 : 16}
+          lineHeight={dimension === 'small' ? 'small' : 'large'}
           htmlFor={fieldID}
           title={otherProps?.title}
         >
