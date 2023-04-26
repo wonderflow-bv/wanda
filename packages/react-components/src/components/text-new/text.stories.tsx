@@ -2,7 +2,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import { Container } from '../..';
+import { Chip, Container, Symbol } from '../..';
 import { Text, TextVariants } from './text';
 
 const story: ComponentMeta<typeof Text> = {
@@ -78,3 +78,18 @@ const TemplateColors: ComponentStory<typeof Text> = () => {
 };
 
 export const Colors = TemplateColors.bind({});
+
+const TemplateDecorators: ComponentStory<typeof Text> = () => (
+  <Container dimension="fixed">
+    <Text
+      variant="body-1"
+      decoratorSize="small"
+      decoratorStart={<Symbol source="circle-check" weight="solid" />}
+      decoratorEnd={<Chip>info</Chip>}
+    >
+      body-1
+    </Text>
+  </Container>
+);
+
+export const withDecorators = TemplateDecorators.bind({});

@@ -7,8 +7,15 @@
     overflow: auto;
     text-align: var(--t-align);
 
+    &[data-text-decorator='true'] {
+      display: inline-flex;
+      flex-flow: row wrap;
+      align-items: center;
+      gap: 0.5rem;
+    }
 
     /* Responsiveness */
+
     &[data-text-prevent-responsive='false'] {
       font-size: var(--fs-min);
 

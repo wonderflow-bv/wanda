@@ -15,9 +15,15 @@
  */
 
 import clsx from 'clsx';
-import { CSSProperties, forwardRef } from 'react';
+import {
+  cloneElement, CSSProperties, forwardRef, isValidElement, ReactElement,
+  useMemo,
+} from 'react';
 
-import { Chip, Polymorphic, Symbol } from '@/components';
+import {
+  ChipProps, Polymorphic,
+  SymbolProps,
+} from '@/components';
 
 import * as styles from './text.module.css';
 
@@ -26,6 +32,58 @@ type VariantHeading = 'heading-1' | 'heading-2' | 'heading-3' | 'heading-4' | 'h
 type VariantSubtitle = 'subtitle-1' | 'subtitle-2';
 type VariantBody = 'body-1' | 'body-2' | 'body-3';
 export type TextVariants = VariantDisplay | VariantHeading | VariantSubtitle | VariantBody;
+
+type DecoratorSize = Record<VariantBody, {
+  chip: {
+    small: 'small' | 'regular' | 'big';
+    medium: 'small' | 'regular' | 'big';
+    big: 'small' | 'regular' | 'big';
+  };
+  icon: {
+    small: number;
+    regular: number;
+    big: number;
+  };
+}>;
+
+const decoratorSizeConfig: DecoratorSize = {
+  'body-1': {
+    chip: {
+      small: 'small',
+      medium: 'regular',
+      big: 'big',
+    },
+    icon: {
+      small: 16,
+      regular: 18,
+      big: 18,
+    },
+  },
+  'body-2': {
+    chip: {
+      small: 'small',
+      medium: 'regular',
+      big: 'big',
+    },
+    icon: {
+      small: 12,
+      regular: 16,
+      big: 18,
+    },
+  },
+  'body-3': {
+    chip: {
+      small: 'small',
+      medium: 'regular',
+      big: 'big',
+    },
+    icon: {
+      small: 12,
+      regular: 12,
+      big: 12,
+    },
+  },
+};
 
 export type TextProps = {
   /**
@@ -53,11 +111,15 @@ export type TextProps = {
   /**
    * Place a Decorator before the string. This is required to be a Symbol or a Chip component.
    */
-  decoratorStart?: typeof Symbol | typeof Chip;
+  decoratorStart?: React.ReactElement<SymbolProps> | React.ReactElement<ChipProps>;
   /**
    * Place a Decorator after the string. This is required to be a Symbol or a Chip component.
    */
-  decoratorEnd?: typeof Symbol | typeof Chip;
+  decoratorEnd?: React.ReactElement<SymbolProps> | React.ReactElement<ChipProps>;
+  /**
+   * Set the size of the decoration according to the variant.
+   */
+  decoratorSize?: 'small' | 'regular' | 'big';
 }
 
 type PolymorphicText = Polymorphic.ForwardRefComponent<'p', TextProps>;
@@ -73,12 +135,29 @@ export const Text = forwardRef(({
   truncate = false,
   decoratorStart,
   decoratorEnd,
+  decoratorSize = 'regular',
   style,
   ...otherProps
 }, forwardedRef) => {
   const dynamicStyle: CSSProperties = {
     '--t-align': textAlign,
   };
+
+  const isBodyVariant = useMemo(() => ['body-1', 'body-2', 'body-3'].some(b => b === variant), [variant]);
+  const hasStart = useMemo(() => !!(isBodyVariant && decoratorStart), [decoratorStart, isBodyVariant]);
+  const hasEnd = useMemo(() => !!(isBodyVariant && decoratorEnd), [decoratorEnd, isBodyVariant]);
+  const iconSize = useMemo(() => (isBodyVariant
+    ? decoratorSizeConfig[variant as VariantBody].icon[decoratorSize]
+    : undefined),
+  [decoratorSize, isBodyVariant, variant]);
+
+  const dec = decoratorStart;
+  console.debug(dec?.type.render.displayName);
+  const isDecoratorStartIcon = decoratorStart?.type.displayName === 'Symbol';
+  const decoratorStartDimension = isDecoratorStartIcon ? iconSize : decoratorSize;
+
+  const isDecoratorEndIcon = decoratorEnd?.type.displayName === 'Symbol';
+  const decoratorEndDimension = isDecoratorEndIcon ? iconSize : decoratorSize;
 
   return (
     <Wrapper
@@ -87,13 +166,30 @@ export const Text = forwardRef(({
       data-text-color={color}
       data-text-prevent-responsive={preventResponsive}
       data-text-truncate={truncate}
+      data-text-decorator={hasStart || hasEnd}
       className={clsx(styles.Text, className)}
       style={{ ...dynamicStyle, ...style }}
       {...otherProps}
     >
-      {decoratorStart && <span>{decoratorStart}</span>}
+      {hasStart
+          && isValidElement(decoratorStart)
+          && cloneElement(decoratorStart as ReactElement,
+            {
+              ...decoratorStart.props as React.ComponentPropsWithRef<
+              React.ElementType<SymbolProps> | React.ElementType<ChipProps>>,
+              dimension: decoratorStartDimension,
+            })}
+
       {children}
-      {decoratorEnd && <span>{decoratorEnd}</span>}
+
+      {hasEnd
+          && isValidElement(decoratorEnd)
+          && cloneElement(decoratorEnd as ReactElement,
+            {
+              ...decoratorEnd.props as React.ComponentPropsWithRef<
+              React.ElementType<SymbolProps> | React.ElementType<ChipProps>>,
+              dimension: decoratorEndDimension,
+            })}
     </Wrapper>
   );
 }) as PolymorphicText;
