@@ -3,7 +3,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
 import {
-  Chip, Container, Stack, Symbol,
+  Card, Chip, Container, Stack, Symbol,
 } from '../..';
 import { Text, TextVariants } from './text';
 
@@ -81,6 +81,20 @@ const TemplateColors: ComponentStory<typeof Text> = () => {
 };
 
 export const Colors = TemplateColors.bind({});
+
+const TemplateConstraint: ComponentStory<typeof Text> = args => (
+  <Container dimension="fixed">
+    <Card dimmed={0} bordered style={{ width: '300px', height: '200px' }}>
+      <Text {...args}>
+        {'Loremipsumdolor,sitametconsecteturadipisicingelit.Impeditautnonfugitanimiab?\nNemo,illumrepudiandaeaharumexvoluptateveritatisearumassumendasuscipit!'}
+      </Text>
+    </Card>
+  </Container>
+);
+
+export const withConstraint = TemplateConstraint.bind({
+  breakWord: true,
+});
 
 const TemplateDecorators: ComponentStory<typeof Text> = () => {
   const variants = ['body-1', 'body-2', 'body-3'] as TextVariants[];
