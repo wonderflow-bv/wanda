@@ -14,6 +14,10 @@
       gap: 0.5rem;
     }
 
+    &[data-text-break-word='true'] {
+      word-break: break-word;
+    }
+
     /* Responsiveness */
 
     &[data-text-prevent-responsive='false'] {

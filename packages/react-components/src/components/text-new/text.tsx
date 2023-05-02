@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /*
  * Copyright 2022-2023 Wonderflow Design Team
  *
@@ -36,7 +37,7 @@ export type TextVariants = VariantDisplay | VariantHeading | VariantSubtitle | V
 type DecoratorSize = Record<VariantBody, {
   chip: {
     small: 'small' | 'regular' | 'big';
-    medium: 'small' | 'regular' | 'big';
+    regular: 'small' | 'regular' | 'big';
     big: 'small' | 'regular' | 'big';
   };
   icon: {
@@ -50,19 +51,19 @@ const decoratorSizeConfig: DecoratorSize = {
   'body-1': {
     chip: {
       small: 'small',
-      medium: 'regular',
+      regular: 'regular',
       big: 'big',
     },
     icon: {
       small: 16,
-      regular: 18,
+      regular: 16,
       big: 18,
     },
   },
   'body-2': {
     chip: {
       small: 'small',
-      medium: 'regular',
+      regular: 'regular',
       big: 'big',
     },
     icon: {
@@ -74,8 +75,8 @@ const decoratorSizeConfig: DecoratorSize = {
   'body-3': {
     chip: {
       small: 'small',
-      medium: 'regular',
-      big: 'big',
+      regular: 'small',
+      big: 'small',
     },
     icon: {
       small: 12,
@@ -99,6 +100,10 @@ export type TextProps = {
    * based on the direction of the text.
    */
   textAlign?: 'start' | 'center' | 'end' | 'justify';
+  /**
+   * Prevent text from overflowing.
+   */
+  breakWord?: boolean;
   /**
    * Disable the responsiveness of the text. If disabled,
    * the text will be always the same size across all breakpoints.
@@ -133,6 +138,7 @@ export const Text = forwardRef(({
   as: Wrapper = 'p',
   preventResponsive = false,
   truncate = false,
+  breakWord = false,
   decoratorStart,
   decoratorEnd,
   decoratorSize = 'regular',
@@ -144,20 +150,32 @@ export const Text = forwardRef(({
   };
 
   const isBodyVariant = useMemo(() => ['body-1', 'body-2', 'body-3'].some(b => b === variant), [variant]);
+
   const hasStart = useMemo(() => !!(isBodyVariant && decoratorStart), [decoratorStart, isBodyVariant]);
   const hasEnd = useMemo(() => !!(isBodyVariant && decoratorEnd), [decoratorEnd, isBodyVariant]);
-  const iconSize = useMemo(() => (isBodyVariant
-    ? decoratorSizeConfig[variant as VariantBody].icon[decoratorSize]
-    : undefined),
-  [decoratorSize, isBodyVariant, variant]);
 
-  const dec = decoratorStart;
-  console.debug(dec?.type.render.displayName);
-  const isDecoratorStartIcon = decoratorStart?.type.displayName === 'Symbol';
-  const decoratorStartDimension = isDecoratorStartIcon ? iconSize : decoratorSize;
+  const isDecoratorAnIcon = (d: React.ReactElement<SymbolProps> | React.ReactElement<ChipProps>) => Object.prototype.hasOwnProperty.call(d?.props, 'source');
 
-  const isDecoratorEndIcon = decoratorEnd?.type.displayName === 'Symbol';
-  const decoratorEndDimension = isDecoratorEndIcon ? iconSize : decoratorSize;
+  const isDecoratorStartAnIcon = hasStart
+  && isDecoratorAnIcon(decoratorStart as React.ReactElement<SymbolProps> | React.ReactElement<ChipProps>);
+
+  const isDecoratorEndAnIcon = hasEnd
+  && isDecoratorAnIcon(decoratorEnd as React.ReactElement<SymbolProps> | React.ReactElement<ChipProps>);
+
+  const getDecoratorSize = (w: 'start' | 'end') => {
+    if (w === 'start') {
+      return isDecoratorStartAnIcon
+        ? decoratorSizeConfig[variant as VariantBody].icon[decoratorSize]
+        : decoratorSizeConfig[variant as VariantBody].chip[decoratorSize];
+    }
+
+    return isDecoratorEndAnIcon
+      ? decoratorSizeConfig[variant as VariantBody].icon[decoratorSize]
+      : decoratorSizeConfig[variant as VariantBody].chip[decoratorSize];
+  };
+
+  const decoratorStartDimension = hasStart ? getDecoratorSize('start') : 'regular';
+  const decoratorEndDimension = hasEnd ? getDecoratorSize('end') : 'regular';
 
   return (
     <Wrapper
@@ -167,6 +185,7 @@ export const Text = forwardRef(({
       data-text-prevent-responsive={preventResponsive}
       data-text-truncate={truncate}
       data-text-decorator={hasStart || hasEnd}
+      data-text-break-word={breakWord}
       className={clsx(styles.Text, className)}
       style={{ ...dynamicStyle, ...style }}
       {...otherProps}

@@ -2,7 +2,9 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import { Chip, Container, Symbol } from '../..';
+import {
+  Chip, Container, Stack, Symbol,
+} from '../..';
 import { Text, TextVariants } from './text';
 
 const story: ComponentMeta<typeof Text> = {
@@ -13,8 +15,9 @@ const story: ComponentMeta<typeof Text> = {
     color: undefined,
     children: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius dolores, tempore quas labore officiis praesentium. Porro sed dolorem, numquam temporibus consequuntur quam doloremque ducimus error tempora illo aliquam nesciunt nostrum!',
     textAlign: 'start',
-    preventResponsive: true,
+    breakWord: false,
     truncate: false,
+    preventResponsive: true,
   },
   argTypes: {
     variant: {
@@ -79,17 +82,46 @@ const TemplateColors: ComponentStory<typeof Text> = () => {
 
 export const Colors = TemplateColors.bind({});
 
-const TemplateDecorators: ComponentStory<typeof Text> = () => (
-  <Container dimension="fixed">
-    <Text
-      variant="body-1"
-      decoratorSize="small"
-      decoratorStart={<Symbol source="circle-check" weight="solid" />}
-      decoratorEnd={<Chip>info</Chip>}
-    >
-      body-1
-    </Text>
-  </Container>
-);
+const TemplateDecorators: ComponentStory<typeof Text> = () => {
+  const variants = ['body-1', 'body-2', 'body-3'] as TextVariants[];
+  const sizes = ['small', 'regular', 'big'] as Array<'small' | 'regular' | 'big'>;
+
+  return (
+    <Container dimension="fixed">
+      <Stack rowGap={40}>
+        {
+          variants.map(v => (
+            <Stack rowGap={8} key={v}>
+              <Text
+                variant={v}
+                decoratorSize={sizes[0]}
+                decoratorStart={<Symbol source="circle-check" weight="solid" />}
+                decoratorEnd={<Chip color="cyan">{sizes[0]}</Chip>}
+              >
+                {v}
+              </Text>
+              <Text
+                variant={v}
+                decoratorSize={sizes[1]}
+                decoratorStart={<Symbol source="circle-check" weight="solid" />}
+                decoratorEnd={<Chip color="green">{sizes[1]}</Chip>}
+              >
+                {v}
+              </Text>
+              <Text
+                variant={v}
+                decoratorSize={sizes[2]}
+                decoratorStart={<Symbol source="circle-check" weight="outline" color="red" />}
+                decoratorEnd={<Chip color="red">{sizes[2]}</Chip>}
+              >
+                {v}
+              </Text>
+            </Stack>
+          ))
+        }
+      </Stack>
+    </Container>
+  );
+};
 
 export const withDecorators = TemplateDecorators.bind({});
