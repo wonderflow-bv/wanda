@@ -2,10 +2,14 @@
 
 @layer components {
   .Text {
-    font-size: var(--fs-max);
     min-block-size: 0.01vh;
-    overflow: auto;
     text-align: var(--t-align);
+    font-size: var(--fs-min);
+    letter-spacing: 0;
+
+    @media (--from-small) {
+      font-size: var(--fs-max);
+    }
 
     &[data-text-decorator='true'] {
       display: inline-flex;
@@ -20,12 +24,8 @@
 
     /* Responsiveness */
 
-    &[data-text-prevent-responsive='false'] {
-      font-size: var(--fs-min);
-
-      @media (--from-small) {
-        font-size: var(--fs-max);
-      }
+    &[data-text-prevent-responsive='true'] {
+      font-size: var(--fs-max);
     }
 
 
@@ -111,6 +111,7 @@
       font-size: token(--wds-font-size-8);
       font-weight: token(--wds-font-weight-semibold);
       line-height: token(--wds-line-height-12);
+      letter-spacing: token(--wds-letter-spacing-8);
     }
 
     &[data-text-variant='subtitle-2'] {
@@ -118,6 +119,7 @@
       font-size: token(--wds-font-size-7);
       font-weight: token(--wds-font-weight-semibold);
       line-height: token(--wds-line-height-10);
+      letter-spacing: token(--wds-letter-spacing-12);
     }
 
 
@@ -128,6 +130,7 @@
       font-size: token(--wds-font-size-8);
       font-weight: token(--wds-font-weight-regular);
       line-height: token(--wds-line-height-12);
+      letter-spacing: token(--wds-letter-spacing-8);
     }
 
     &[data-text-variant='body-2'] {
@@ -135,6 +138,7 @@
       font-size: token(--wds-font-size-7);
       font-weight: token(--wds-font-weight-regular);
       line-height: token(--wds-line-height-10);
+      letter-spacing: token(--wds-letter-spacing-12);
     }
 
     &[data-text-variant='body-3'] {
@@ -142,6 +146,7 @@
       font-size: token(--wds-font-size-6);
       font-weight: token(--wds-font-weight-regular);
       line-height: token(--wds-line-height-8);
+      letter-spacing: token(--wds-letter-spacing-16);
     }
 
     /* Colors */

@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 /*
  * Copyright 2022-2023 Wonderflow Design Team
  *
@@ -27,6 +26,7 @@ import {
   ChipProps, Polymorphic,
   Symbol,
   SymbolProps,
+  useSSR,
 } from '@/components';
 
 import * as styles from './text.module.css';
@@ -158,6 +158,8 @@ export const Text = forwardRef(({
   id,
   ...otherProps
 }, forwardedRef) => {
+  const { isBrowser } = useSSR();
+
   const dynamicStyle: CSSProperties = {
     '--t-align': textAlign,
   };
@@ -205,6 +207,13 @@ export const Text = forwardRef(({
 
   const generatedID = slugify(String(id ?? getTextFromChildren()), { lower: true });
 
+  const saveToClipboard = async () => {
+    if (isBrowser) {
+      console.debug('***', `${window.location.href}#${generatedID}`);
+      await navigator.clipboard.writeText(`${window.location.href}#${generatedID}`);
+    }
+  };
+
   return (
     <Wrapper
       ref={forwardedRef}
@@ -230,7 +239,7 @@ export const Text = forwardRef(({
       {children}
 
       {(anchor && isTitle) && (
-        <a href={`#${generatedID}`} className={styles.Anchor}>
+        <a href={`#${generatedID}`} onClick={saveToClipboard} className={styles.Anchor} rel="noreferrer">
           <Symbol source="link" weight="duotone" dimension={24} />
         </a>
       )}

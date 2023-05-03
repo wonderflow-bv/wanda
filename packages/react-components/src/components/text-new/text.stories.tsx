@@ -89,7 +89,7 @@ const TemplateTitle: ComponentStory<typeof Text> = () => {
 
   return (
     <Container dimension="fixed">
-      {variants.map(e => <Text key={e} variant={e} anchor>{e}</Text>)}
+      {variants.map(e => <Text key={e} variant={e} id={e} anchor>{e}</Text>)}
     </Container>
   );
 };

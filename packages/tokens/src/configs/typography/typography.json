@@ -98,6 +98,19 @@
           "value": "1rem"
         }
       }
+    },
+    "letter": {
+      "spacing": {
+        "8": {
+          "value": "0.01rem"
+        },
+        "12": {
+          "value": "0.015rem"
+        },
+        "16": {
+          "value": "0.02rem"
+        }
+      }
     }
   }
 }
