@@ -6,6 +6,7 @@
     text-align: var(--t-align);
     font-size: var(--fs-min);
     letter-spacing: 0;
+    word-break: break-word;
 
     @media (--from-small) {
       font-size: var(--fs-max);
@@ -18,8 +19,8 @@
       gap: 0.5rem;
     }
 
-    &[data-text-break-word='true'] {
-      word-break: break-word;
+    &[data-text-prevent-break-word='true'] {
+      word-break: unset;
     }
 
     /* Responsiveness */

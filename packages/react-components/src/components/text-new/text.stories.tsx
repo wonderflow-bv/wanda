@@ -15,7 +15,7 @@ const story: ComponentMeta<typeof Text> = {
     color: undefined,
     children: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius dolores, tempore quas labore officiis praesentium. Porro sed dolorem, numquam temporibus consequuntur quam doloremque ducimus error tempora illo aliquam nesciunt nostrum!',
     textAlign: 'start',
-    breakWord: false,
+    preventBreakWord: false,
     truncate: false,
     preventResponsive: false,
     anchor: false,
@@ -106,7 +106,6 @@ const TemplateConstraint: ComponentStory<typeof Text> = args => (
 
 export const withConstraint = TemplateConstraint.bind({});
 withConstraint.args = {
-  breakWord: true,
   children: 'Loremipsumdolor,sitametconsecteturadipisicingelit.Impeditautnonfugitanimiab?\nNemo,illumrepudiandaeaharumexvoluptateveritatisearumassumendasuscipit!',
 };
 

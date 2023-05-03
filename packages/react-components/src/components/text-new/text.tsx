@@ -104,9 +104,9 @@ export type TextProps = {
    */
   textAlign?: 'start' | 'center' | 'end' | 'justify';
   /**
-   * Prevent text from overflowing.
+   * Allow text to overflow.
    */
-  breakWord?: boolean;
+  preventBreakWord?: boolean;
   /**
    * Disable the responsiveness of the text. If disabled,
    * the text will be always the same size across all breakpoints.
@@ -149,7 +149,7 @@ export const Text = forwardRef(({
   as: Wrapper = 'p',
   preventResponsive = false,
   truncate = false,
-  breakWord = false,
+  preventBreakWord = false,
   decoratorStart,
   decoratorEnd,
   decoratorSize = 'regular',
@@ -222,7 +222,7 @@ export const Text = forwardRef(({
       data-text-prevent-responsive={preventResponsive}
       data-text-truncate={truncate}
       data-text-decorator={hasStart || hasEnd}
-      data-text-break-word={breakWord}
+      data-text-prevent-break-word={preventBreakWord}
       className={clsx(styles.Text, className)}
       style={{ ...dynamicStyle, ...style }}
       {...otherProps}
