@@ -171,3 +171,29 @@
     }
   }
 }
+@layer overrides {
+  .Anchor {
+    align-items: center;
+    background-color: var(--highlight-cyan-background);
+    background-image: none;
+    block-size: max(16px, 0.6em);
+    border-radius: token(--radius-8);
+    color: var(--heading-foreground, var(--dimmed-9));
+    display: inline-flex;
+    inline-size: max(16px, 0.6em);
+    line-height: 1;
+    justify-content: center;
+    margin-left: 0.2em;
+    padding: 0.1em;
+    visibility: hidden;
+
+    @nest .Text:hover &, .Text:focus-within & {
+      visibility: visible;
+    }
+
+    & svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

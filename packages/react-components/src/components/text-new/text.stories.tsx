@@ -17,7 +17,8 @@ const story: ComponentMeta<typeof Text> = {
     textAlign: 'start',
     breakWord: false,
     truncate: false,
-    preventResponsive: true,
+    preventResponsive: false,
+    anchor: false,
   },
   argTypes: {
     variant: {
@@ -82,19 +83,32 @@ const TemplateColors: ComponentStory<typeof Text> = () => {
 
 export const Colors = TemplateColors.bind({});
 
+const TemplateTitle: ComponentStory<typeof Text> = () => {
+  const variants = ['display-1', 'display-2', 'display-3', 'display-4', 'heading-1', 'heading-2', 'heading-3',
+    'heading-4', 'heading-5', 'heading-6'] as TextVariants[];
+
+  return (
+    <Container dimension="fixed">
+      {variants.map(e => <Text key={e} variant={e} anchor>{e}</Text>)}
+    </Container>
+  );
+};
+
+export const Title = TemplateTitle.bind({});
+
 const TemplateConstraint: ComponentStory<typeof Text> = args => (
   <Container dimension="fixed">
     <Card dimmed={0} bordered style={{ width: '300px', height: '200px' }}>
-      <Text {...args}>
-        {'Loremipsumdolor,sitametconsecteturadipisicingelit.Impeditautnonfugitanimiab?\nNemo,illumrepudiandaeaharumexvoluptateveritatisearumassumendasuscipit!'}
-      </Text>
+      <Text {...args} />
     </Card>
   </Container>
 );
 
-export const withConstraint = TemplateConstraint.bind({
+export const withConstraint = TemplateConstraint.bind({});
+withConstraint.args = {
   breakWord: true,
-});
+  children: 'Loremipsumdolor,sitametconsecteturadipisicingelit.Impeditautnonfugitanimiab?\nNemo,illumrepudiandaeaharumexvoluptateveritatisearumassumendasuscipit!',
+};
 
 const TemplateDecorators: ComponentStory<typeof Text> = () => {
   const variants = ['body-1', 'body-2', 'body-3'] as TextVariants[];

@@ -17,12 +17,15 @@
 
 import clsx from 'clsx';
 import {
+  Children,
   cloneElement, CSSProperties, forwardRef, isValidElement, ReactElement,
-  useMemo,
+  useCallback, useMemo,
 } from 'react';
+import slugify from 'slugify';
 
 import {
   ChipProps, Polymorphic,
+  Symbol,
   SymbolProps,
 } from '@/components';
 
@@ -125,6 +128,14 @@ export type TextProps = {
    * Set the size of the decoration according to the variant.
    */
   decoratorSize?: 'small' | 'regular' | 'big';
+  /**
+   * Auto generate anchor link inside the heading. This should be
+   * used only when the title define a new content section and has
+   * a semantic tag.
+   *
+   * @default: `false`
+   */
+  anchor?: boolean;
 }
 
 type PolymorphicText = Polymorphic.ForwardRefComponent<'p', TextProps>;
@@ -142,7 +153,9 @@ export const Text = forwardRef(({
   decoratorStart,
   decoratorEnd,
   decoratorSize = 'regular',
+  anchor = false,
   style,
+  id,
   ...otherProps
 }, forwardedRef) => {
   const dynamicStyle: CSSProperties = {
@@ -150,6 +163,7 @@ export const Text = forwardRef(({
   };
 
   const isBodyVariant = useMemo(() => ['body-1', 'body-2', 'body-3'].some(b => b === variant), [variant]);
+  const isTitle = useMemo(() => !['body-1', 'body-2', 'body-3', 'subtitle-1', 'subtitle-2'].some(b => b === variant), [variant]);
 
   const hasStart = useMemo(() => !!(isBodyVariant && decoratorStart), [decoratorStart, isBodyVariant]);
   const hasEnd = useMemo(() => !!(isBodyVariant && decoratorEnd), [decoratorEnd, isBodyVariant]);
@@ -177,6 +191,20 @@ export const Text = forwardRef(({
   const decoratorStartDimension = hasStart ? getDecoratorSize('start') : 'regular';
   const decoratorEndDimension = hasEnd ? getDecoratorSize('end') : 'regular';
 
+  const getTextFromChildren = useCallback(() => {
+    let label = '';
+
+    Children.map(children, (child) => {
+      if (typeof child === 'string') {
+        label += child;
+      }
+    });
+
+    return label;
+  }, [children]);
+
+  const generatedID = slugify(String(id ?? getTextFromChildren()), { lower: true });
+
   return (
     <Wrapper
       ref={forwardedRef}
@@ -200,6 +228,12 @@ export const Text = forwardRef(({
             })}
 
       {children}
+
+      {(anchor && isTitle) && (
+        <a href={`#${generatedID}`} className={styles.Anchor}>
+          <Symbol source="link" weight="duotone" dimension={24} />
+        </a>
+      )}
 
       {hasEnd
           && isValidElement(decoratorEnd)
