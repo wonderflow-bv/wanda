@@ -188,8 +188,8 @@ export const Text = forwardRef(({
       : decoratorSizeConfig[variant as VariantBody].chip[decoratorSize];
   };
 
-  const decoratorStartDimension = hasStart ? getDecoratorSize('start') : 'regular';
-  const decoratorEndDimension = hasEnd ? getDecoratorSize('end') : 'regular';
+  const decoratorStartDimension = hasStart ? getDecoratorSize('start') : decoratorSize;
+  const decoratorEndDimension = hasEnd ? getDecoratorSize('end') : decoratorSize;
 
   const getTextFromChildren = useCallback(() => {
     let label = '';

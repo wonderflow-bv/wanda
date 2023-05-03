@@ -95,7 +95,7 @@ const TemplateTitle: ComponentStory<typeof Text> = () => {
   );
 };
 
-export const Title = TemplateTitle.bind({});
+export const TitleWithAnchor = TemplateTitle.bind({});
 
 const TemplateConstraint: ComponentStory<typeof Text> = args => (
   <Container dimension="fixed">
