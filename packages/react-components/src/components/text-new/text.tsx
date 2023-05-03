@@ -26,7 +26,6 @@ import {
   ChipProps, Polymorphic,
   Symbol,
   SymbolProps,
-  useSSR,
 } from '@/components';
 
 import * as styles from './text.module.css';
@@ -158,14 +157,13 @@ export const Text = forwardRef(({
   id,
   ...otherProps
 }, forwardedRef) => {
-  const { isBrowser } = useSSR();
-
   const dynamicStyle: CSSProperties = {
     '--t-align': textAlign,
   };
 
   const isBodyVariant = useMemo(() => ['body-1', 'body-2', 'body-3'].some(b => b === variant), [variant]);
   const isTitle = useMemo(() => !['body-1', 'body-2', 'body-3', 'subtitle-1', 'subtitle-2'].some(b => b === variant), [variant]);
+  const isDisplay = useMemo(() => ['display-1', 'display-2', 'display-3', 'display-4'].some(b => b === variant), [variant]);
 
   const hasStart = useMemo(() => !!(isBodyVariant && decoratorStart), [decoratorStart, isBodyVariant]);
   const hasEnd = useMemo(() => !!(isBodyVariant && decoratorEnd), [decoratorEnd, isBodyVariant]);
@@ -207,13 +205,6 @@ export const Text = forwardRef(({
 
   const generatedID = slugify(String(id ?? getTextFromChildren()), { lower: true });
 
-  const saveToClipboard = async () => {
-    if (isBrowser) {
-      console.debug('***', `${window.location.href}#${generatedID}`);
-      await navigator.clipboard.writeText(`${window.location.href}#${generatedID}`);
-    }
-  };
-
   return (
     <Wrapper
       ref={forwardedRef}
@@ -225,6 +216,7 @@ export const Text = forwardRef(({
       data-text-prevent-break-word={preventBreakWord}
       className={clsx(styles.Text, className)}
       style={{ ...dynamicStyle, ...style }}
+      id={id}
       {...otherProps}
     >
       {hasStart
@@ -239,8 +231,8 @@ export const Text = forwardRef(({
       {children}
 
       {(anchor && isTitle) && (
-        <a href={`#${generatedID}`} onClick={saveToClipboard} className={styles.Anchor} rel="noreferrer">
-          <Symbol source="link" weight="duotone" dimension={24} />
+        <a href={`#${generatedID}`} className={styles.Anchor} rel="noreferrer">
+          <Symbol source="link" weight="duotone" dimension={isDisplay ? 24 : 16} />
         </a>
       )}
 
