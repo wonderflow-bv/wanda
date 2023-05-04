@@ -24,9 +24,10 @@ import {
 import { AutoFocusInside, FocusOn } from 'react-focus-on';
 
 import {
-  Elevator, IconButton, Stack, Title, useOverlayContext,
+  Elevator, IconButton, Stack, useOverlayContext,
 } from '@/components';
 
+import { Text } from '../text-new';
 import * as styles from './drawer.module.css';
 
 export type DrawerProps = {
@@ -149,7 +150,7 @@ export const Drawer: FCChildrenClass<DrawerProps> = forwardRef(({
                     className={styles.Header}
                     columnGap={24}
                   >
-                    <Title responsive={false} level="6" id={titleId}>{title}</Title>
+                    <Text preventResponsive variant="heading-6" id={titleId}>{title}</Text>
                     {onClose && <IconButton onClick={onClose} className={styles.CloseButton} icon="xmark" kind="flat" />}
                   </Stack>
                 )}

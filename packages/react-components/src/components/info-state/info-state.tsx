@@ -18,9 +18,10 @@ import { domMax, LazyMotion, m } from 'framer-motion';
 import { forwardRef, PropsWithChildren, ReactNode } from 'react';
 
 import {
-  Stack, StackProps, Symbol, SymbolProps, Text, Title,
+  Stack, StackProps, Symbol, SymbolProps,
 } from '@/components';
 
+import { Text } from '../text-new';
 import * as styles from './info-state.module.css';
 
 export type InfoStateProps = PropsWithClass<{
@@ -98,8 +99,8 @@ export const InfoState = forwardRef<HTMLDivElement, PropsWithChildren<InfoStateP
           vAlign="center"
           fill={false}
         >
-          <Title maxWidth="20ch" textAlign={isHorizontal ? 'start' : 'center'} level="4">{title}</Title>
-          <Text as="div" maxWidth="60ch" dimmed={6} textAlign={isHorizontal ? 'start' : 'center'}>{children}</Text>
+          <Text style={{ maxWidth: '40ch' }} textAlign={isHorizontal ? 'start' : 'center'} variant="heading-4">{title}</Text>
+          <Text as="div" style={{ maxWidth: '60ch' }} textAlign={isHorizontal ? 'start' : 'center'}>{children}</Text>
           {actions && (
             <Stack vPadding={16} inline direction="row" columnGap={16} rowGap={16} wrap>
               {actions}

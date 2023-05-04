@@ -2,8 +2,9 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
 import {
-  Stack, Symbol, Text, Title,
+  Stack, Symbol,
 } from '../..';
+import { Text } from '../text-new';
 import { Card } from './card';
 
 const story: ComponentMeta<typeof Card> = {
@@ -32,7 +33,7 @@ export const Default = Template.bind({});
 Default.args = {
   children: (
     <>
-      <Title level="3">Card title</Title>
+      <Text variant="heading-2">Card title</Text>
       <Text>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</Text>
     </>
   ),
@@ -42,7 +43,7 @@ Vibrant.args = {
   vibrant: true,
   children: (
     <>
-      <Title level="3">Card title</Title>
+      <Text variant="heading-2">Card title</Text>
       <Text>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</Text>
     </>
   ),
@@ -53,7 +54,7 @@ WithLeft.args = {
   left: <Symbol source="bell" dimension={32} />,
   children: (
     <Stack>
-      <Title level="5">Title</Title>
+      <Text variant="heading-2">Card title</Text>
       <Text>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</Text>
     </Stack>
   ),
@@ -64,7 +65,7 @@ WithRight.args = {
   right: <Symbol source="bell" dimension={32} />,
   children: (
     <Stack>
-      <Title level="5">Title</Title>
+      <Text variant="heading-2">Card title</Text>
       <Text>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</Text>
     </Stack>
   ),
@@ -75,7 +76,7 @@ WithLeftAndRight.args = {
   left: <Symbol source="bell" dimension={32} />,
   children: (
     <Stack>
-      <Title level="5">Title</Title>
+      <Text variant="heading-2">Card title</Text>
       <Text>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</Text>
     </Stack>
   ),

@@ -5,9 +5,10 @@ import {
 import { useUIDSeed } from 'react-uid';
 
 import {
-  IconButton, IconButtonProps, Stack, Symbol, SymbolProps, Text,
+  IconButton, IconButtonProps, Stack, Symbol, SymbolProps,
 } from '@/components';
 
+import { Text } from '../text-new';
 import { BaseField, BaseFieldProps, PrimitiveInputType } from './base-field';
 import * as styles from './textfield.module.css';
 
@@ -134,7 +135,7 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
       tabIndex={disabled ? 0 : undefined}
       style={style}
     >
-      {label && <Text as="label" lineHeight="small" aria-disabled={disabled} className={styles.Label} size={dimension === 'small' ? 14 : 16} htmlFor={fieldID}>{label}</Text>}
+      {label && <Text as="label" aria-disabled={disabled} className={styles.Label} variant={dimension === 'small' ? 'body-3' : 'body-2'} htmlFor={fieldID}>{label}</Text>}
 
       <div className={styles.FieldContainer}>
         {textarea
@@ -180,7 +181,7 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
         )}
       </div>
 
-      {message && <Text as="label" lineHeight="small" sentiment={(invalid && !disabled) ? 'danger' : undefined} aria-disabled={disabled} className={styles.Label} size={14}>{message}</Text>}
+      {message && <Text as="label" color={(invalid && !disabled) ? 'danger' : undefined} aria-disabled={disabled} className={styles.Label} variant="body-3">{message}</Text>}
 
     </Stack>
   );

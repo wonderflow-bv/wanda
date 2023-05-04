@@ -26,9 +26,11 @@ import {
 import { useUIDSeed } from 'react-uid';
 
 import {
-  Symbol, SymbolProps, Text, TextProps,
+  Symbol, SymbolProps,
 } from '@/components';
 
+import { Text } from '../text-new';
+import { TextVariants } from '../text-new/text';
 import * as styles from './disclosure.module.css';
 
 export type DisclosureProps = DetailsHTMLAttributes<HTMLDetailsElement> & {
@@ -107,15 +109,15 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
 
   const sizes = {
     small: {
-      summary: 16,
+      summary: 'subtitle-1',
       icon: 12,
     },
     regular: {
-      summary: 18,
+      summary: 'heading-6',
       icon: 18,
     },
     big: {
-      summary: 22,
+      summary: 'heading-5',
       icon: 24,
     },
   };
@@ -136,11 +138,10 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
     >
       <Text
         as="summary"
-        responsive={false}
+        preventResponsive
         className={styles.Summary}
         id={seedID('disclosure')}
-        size={sizes[dimension].summary as TextProps['size']}
-        weight="bold"
+        variant={sizes[dimension].summary as TextVariants}
         aria-expanded={isOpen}
       >
         {summary}

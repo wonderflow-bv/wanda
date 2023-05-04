@@ -11,13 +11,14 @@ import {
   Card,
   Container,
   Disclosure,
-  Grid, IconButton, Menu, Snackbar, Stack, Text,
+  Grid, IconButton, Menu, Snackbar, Stack,
   Title,
   useBreakpoints,
   useBreakpointsConfig,
   useSSR,
 } from '@/components';
 
+import { Text } from '../components/text-new';
 import * as style from './shell.module.css';
 
 const story: ComponentMeta<typeof Container> = {
@@ -141,7 +142,7 @@ const Template: ComponentStory<typeof Container> = () => {
                   <Grid.Item key={seed(`cards${i}`)}>
                     <Card bordered style={{ height: '500px' }}>
                       <Stack hAlign="center">
-                        <Text size={14}>{`${e} ${i + 1}`}</Text>
+                        <Text variant="body-2">{`${e} ${i + 1}`}</Text>
                       </Stack>
                     </Card>
                   </Grid.Item>

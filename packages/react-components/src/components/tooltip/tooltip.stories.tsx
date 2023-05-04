@@ -1,7 +1,8 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import { Button, Symbol, Text } from '../..';
+import { Button, Symbol } from '../..';
+import { Text } from '../text-new';
 import { Tooltip } from './tooltip';
 
 const story: ComponentMeta<typeof Tooltip> = {

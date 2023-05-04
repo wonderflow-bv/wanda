@@ -34,10 +34,11 @@ import { usePopperTooltip } from 'react-popper-tooltip';
 import { useUIDSeed } from 'react-uid';
 
 import {
-  Menu, Skeleton, Stack, Text, Textfield, TextfieldProps,
+  Menu, Skeleton, Stack, Textfield, TextfieldProps,
 } from '@/components';
 
 import { MenuItemProps, MenuProps } from '../menu';
+import { Text } from '../text-new';
 import * as styles from './autocomplete.module.css';
 import { AutocompleteOption, AutocompleteOptionProps } from './autocomplete-option';
 
@@ -245,7 +246,7 @@ export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
                   maxHeight={maxHeight}
                   aria-labelledby={seedID('autocomplete-trigger')}
                 >
-                  {(filteredOptions.length === 0 && !busy) && <Text as="div" textAlign="center" dimmed={5}>{emptyContent}</Text>}
+                  {(filteredOptions.length === 0 && !busy) && <Text as="div" textAlign="center">{emptyContent}</Text>}
                   {busy
                     ? <Stack hPadding={8} as="span"><Skeleton count={3} /></Stack>
                     : Children.map(filteredOptions, child => isValidElement(child) && cloneElement(

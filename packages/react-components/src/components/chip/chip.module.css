@@ -4,19 +4,19 @@
     block-size: token(--space-32);
     border-radius: token(--radius-48);
     color: var(--highlight-gray-foreground);
-    font-size: token(--font-size-16);
-    font-weight: 600;
+    font-size: token(--wds-font-size-8);
+    font-weight: token(--wds-font-weight-semibold);
     overflow: hidden;
     padding: token(--space-4) token(--space-8);
     white-space: nowrap;
 
     &[data-chip-dimension='small'] {
       block-size: token(--space-24);
-      font-size: token(--font-size-14);
+      font-size: token(--wds-font-size-7);
     }
 
     &[data-chip-dimension='big'] {
-      font-size: token(--font-size-18);
+      font-size: token(--wds-font-size-10);
     }
 
     &[data-chip-color='cyan'] {

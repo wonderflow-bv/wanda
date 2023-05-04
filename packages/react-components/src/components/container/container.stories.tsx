@@ -1,7 +1,8 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import { Stack, Text } from '@/components';
+import { Stack } from '@/components';
 
+import { Text } from '../text-new';
 import { Container } from './container';
 
 const story: ComponentMeta<typeof Container> = {
@@ -35,31 +36,31 @@ const Template: ComponentStory<typeof Container> = args => <Container {...args} 
 const TemplateComparison: ComponentStory<typeof Container> = () => (
   <Stack rowGap={24}>
     <Stack rowGap={8} hAlign="center">
-      <Text size={14}>Container Extra Small</Text>
+      <Text variant="body-3">Container Extra Small</Text>
       <Container dimension="extra-small" className="ContainerEx" />
     </Stack>
     <Stack rowGap={8} hAlign="center">
-      <Text size={14}>Container Small</Text>
+      <Text variant="body-3">Container Small</Text>
       <Container dimension="small" className="ContainerEx" />
     </Stack>
     <Stack rowGap={8} hAlign="center">
-      <Text size={14}>Container Medium</Text>
+      <Text variant="body-3">Container Medium</Text>
       <Container dimension="medium" className="ContainerEx" />
     </Stack>
     <Stack rowGap={8} hAlign="center">
-      <Text size={14}>Container Large</Text>
+      <Text variant="body-3">Container Large</Text>
       <Container dimension="large" className="ContainerEx" />
     </Stack>
     <Stack rowGap={8} hAlign="center">
-      <Text size={14}>Container Extra Large</Text>
+      <Text variant="body-3">Container Extra Large</Text>
       <Container dimension="extra-large" className="ContainerEx" />
     </Stack>
     <Stack rowGap={8} hAlign="center">
-      <Text size={14}>Container Fixed</Text>
+      <Text variant="body-3">Container Fixed</Text>
       <Container dimension="fixed" className="ContainerEx" />
     </Stack>
     <Stack rowGap={8} hAlign="center">
-      <Text size={14}>Container Full</Text>
+      <Text variant="body-3">Container Full</Text>
       <Container dimension="full" className="ContainerEx" />
     </Stack>
   </Stack>

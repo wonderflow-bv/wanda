@@ -103,7 +103,7 @@
   textarea.BaseField {
     block-size: auto;
     min-block-size: token(--space-32);
-    line-height: token(--font-lh-standard);
+    line-height: token(--wds-line-height-12);
     resize: vertical;
     padding:
       calc(var(--field-padding) / 2)
