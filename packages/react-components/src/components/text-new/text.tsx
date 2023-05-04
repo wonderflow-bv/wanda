@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { TokensTypes } from '@wonderflow/tokens/platforms/web';
 import clsx from 'clsx';
 import {
   Children,
@@ -46,9 +47,9 @@ type DecoratorSize = Record<VariantBody, {
     big: 'small' | 'regular' | 'big';
   };
   icon: {
-    small: number;
-    medium: number;
-    big: number;
+    small: TokensTypes['icon']['size'];
+    medium: TokensTypes['icon']['size'];
+    big: TokensTypes['icon']['size'];
   };
 }>;
 
@@ -97,7 +98,7 @@ export type TextProps = {
    */
   variant?: TextVariants;
   /**
-   * Set the sentiment of the text.
+   * Set the color of the text.
    */
   color?: 'positive' | 'informative' | 'danger' | 'warning';
   /**
