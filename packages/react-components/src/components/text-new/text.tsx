@@ -34,17 +34,20 @@ type VariantDisplay = 'display-1' | 'display-2' | 'display-3' | 'display-4';
 type VariantHeading = 'heading-1' | 'heading-2' | 'heading-3' | 'heading-4' | 'heading-5' | 'heading-6';
 type VariantSubtitle = 'subtitle-1' | 'subtitle-2';
 type VariantBody = 'body-1' | 'body-2' | 'body-3';
+
 export type TextVariants = VariantDisplay | VariantHeading | VariantSubtitle | VariantBody;
+
+type Decorator = React.ReactElement<SymbolProps> | React.ReactElement<ChipProps>;
 
 type DecoratorSize = Record<VariantBody, {
   chip: {
     small: 'small' | 'regular' | 'big';
-    regular: 'small' | 'regular' | 'big';
+    medium: 'small' | 'regular' | 'big';
     big: 'small' | 'regular' | 'big';
   };
   icon: {
     small: number;
-    regular: number;
+    medium: number;
     big: number;
   };
 }>;
@@ -53,36 +56,36 @@ const decoratorSizeConfig: DecoratorSize = {
   'body-1': {
     chip: {
       small: 'small',
-      regular: 'regular',
+      medium: 'regular',
       big: 'big',
     },
     icon: {
       small: 16,
-      regular: 16,
+      medium: 16,
       big: 18,
     },
   },
   'body-2': {
     chip: {
       small: 'small',
-      regular: 'regular',
+      medium: 'regular',
       big: 'big',
     },
     icon: {
       small: 12,
-      regular: 16,
+      medium: 16,
       big: 18,
     },
   },
   'body-3': {
     chip: {
       small: 'small',
-      regular: 'small',
+      medium: 'small',
       big: 'small',
     },
     icon: {
       small: 12,
-      regular: 12,
+      medium: 12,
       big: 12,
     },
   },
@@ -90,7 +93,7 @@ const decoratorSizeConfig: DecoratorSize = {
 
 export type TextProps = {
   /**
-   * Apply typographic style of text
+   * Apply typographic text style.
    */
   variant?: TextVariants;
   /**
@@ -116,19 +119,19 @@ export type TextProps = {
    */
   truncate?: boolean;
   /**
-   * Place a Decorator before the string. This is required to be a Symbol or a Chip component.
+   * Place a Decorator before the string. This must be a Symbol or a Chip component.
    */
-  decoratorStart?: React.ReactElement<SymbolProps> | React.ReactElement<ChipProps>;
+  decoratorStart?: Decorator;
   /**
-   * Place a Decorator after the string. This is required to be a Symbol or a Chip component.
+   * Place a Decorator after the string. This must be a Symbol or a Chip component.
    */
-  decoratorEnd?: React.ReactElement<SymbolProps> | React.ReactElement<ChipProps>;
+  decoratorEnd?: Decorator;
   /**
-   * Set the size of the decoration according to the variant.
+   * Set the size of the decorator according to the variant.
    */
-  decoratorSize?: 'small' | 'regular' | 'big';
+  decoratorSize?: 'small' | 'medium' | 'big';
   /**
-   * Auto generate anchor link inside the heading. This should be
+   * Auto generate anchor link inside the heading and display variants. This should be
    * used only when the title define a new content section and has
    * a semantic tag.
    *
@@ -151,7 +154,7 @@ export const Text = forwardRef(({
   preventBreakWord = false,
   decoratorStart,
   decoratorEnd,
-  decoratorSize = 'regular',
+  decoratorSize = 'small',
   anchor = false,
   style,
   id,
@@ -161,20 +164,21 @@ export const Text = forwardRef(({
     '--t-align': textAlign,
   };
 
-  const isBodyVariant = useMemo(() => ['body-1', 'body-2', 'body-3'].some(b => b === variant), [variant]);
+  const isBody = useMemo(() => ['body-1', 'body-2', 'body-3'].some(b => b === variant), [variant]);
   const isTitle = useMemo(() => !['body-1', 'body-2', 'body-3', 'subtitle-1', 'subtitle-2'].some(b => b === variant), [variant]);
   const isDisplay = useMemo(() => ['display-1', 'display-2', 'display-3', 'display-4'].some(b => b === variant), [variant]);
 
-  const hasStart = useMemo(() => !!(isBodyVariant && decoratorStart), [decoratorStart, isBodyVariant]);
-  const hasEnd = useMemo(() => !!(isBodyVariant && decoratorEnd), [decoratorEnd, isBodyVariant]);
+  const hasStart = useMemo(() => !!(isBody && decoratorStart), [decoratorStart, isBody]);
+  const hasEnd = useMemo(() => !!(isBody && decoratorEnd), [decoratorEnd, isBody]);
 
-  const isDecoratorAnIcon = (d: React.ReactElement<SymbolProps> | React.ReactElement<ChipProps>) => Object.prototype.hasOwnProperty.call(d?.props, 'source');
+  const isDecoratorAnIcon = (d: Decorator) => Object.prototype.hasOwnProperty.call(d?.props, 'source');
 
-  const isDecoratorStartAnIcon = hasStart
-  && isDecoratorAnIcon(decoratorStart as React.ReactElement<SymbolProps> | React.ReactElement<ChipProps>);
-
-  const isDecoratorEndAnIcon = hasEnd
-  && isDecoratorAnIcon(decoratorEnd as React.ReactElement<SymbolProps> | React.ReactElement<ChipProps>);
+  const isDecoratorStartAnIcon = useMemo(
+    () => (hasStart && isDecoratorAnIcon(decoratorStart as Decorator)), [hasStart, decoratorStart],
+  );
+  const isDecoratorEndAnIcon = useMemo(
+    () => (hasEnd && isDecoratorAnIcon(decoratorEnd as Decorator)), [hasEnd, decoratorEnd],
+  );
 
   const getDecoratorSize = (w: 'start' | 'end') => {
     if (w === 'start') {

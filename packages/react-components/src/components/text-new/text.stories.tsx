@@ -112,7 +112,7 @@ withConstraint.args = {
 
 const TemplateDecorators: ComponentStory<typeof Text> = () => {
   const variants = ['body-1', 'body-2', 'body-3'] as TextVariants[];
-  const sizes = ['small', 'regular', 'big'] as Array<'small' | 'regular' | 'big'>;
+  const sizes = ['small', 'medium', 'big'] as Array<'small' | 'medium' | 'big'>;
 
   return (
     <Container dimension="fixed">
