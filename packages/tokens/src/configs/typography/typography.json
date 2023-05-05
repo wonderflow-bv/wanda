@@ -51,6 +51,9 @@
         }
       },
       "weight": {
+        "heavy": {
+          "value": "800"
+        },
         "bold": {
           "value": "700"
         },

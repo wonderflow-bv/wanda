@@ -31,13 +31,12 @@
   }
 
   .Summary {
-    display: list-item;
-    touch-action: manipulation;
-    position: relative;
-    padding: token(--space-2) 0;
-    outline-offset: -2px;
-    user-select: none;
     color: var(--dimmed-9);
+    display: list-item;
+    outline-offset: -2px;
+    position: relative;
+    touch-action: manipulation;
+    user-select: none;
 
     @nest .Disclosure[data-disclosure-icon-position='right'][data-disclosure-expandable='true'] & {
       padding-inline-end: var(--padding);
@@ -59,15 +58,15 @@
   }
 
   .ExpandIcon {
-    content: '';
-    transform-box: fill-box;
-    position: absolute;
-    top: var(--icon-top-offset);
-    right: calc(var(--icon-size) / 2);
-    inline-size: var(--icon-size);
     block-size: var(--icon-size);
-    transition: transform token(--duration-100) token(--easing-standard);
+    content: '';
+    inline-size: var(--icon-size);
+    position: absolute;
+    right: calc(var(--icon-size) / 2);
+    top: var(--icon-top-offset);
+    transform-box: fill-box;
     transform-origin: 50% center;
+    transition: transform token(--duration-100) token(--easing-standard);
 
     @nest .Disclosure[data-disclosure-icon-position='left'] & {
       left: calc(var(--icon-size) / 2);
@@ -75,6 +74,15 @@
     }
     @nest .Disclosure[open] > .Summary > & {
       transform: rotate(90deg);
+    }
+    @nest .Disclosure[data-disclosure-dimension='small'] & {
+      margin-top: 0;
+    }
+    @nest .Disclosure[data-disclosure-dimension='regular'] & {
+      margin-top: 3px;
+    }
+    @nest .Disclosure[data-disclosure-dimension='big'] & {
+      margin-top: 4px;
     }
   }
 
