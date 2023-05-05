@@ -1,16 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import '@testing-library/jest-dom';
 
-import { getByText, render, screen } from '@testing-library/react';
-import { renderHook } from '@testing-library/react-hooks';
+import { render, screen } from '@testing-library/react';
 import { useState } from 'react';
 
 import { Button } from '@/components';
 
-import { ResponsiveProvider, useResponsiveContext } from '../../providers';
+import { ResponsiveProvider } from '../../providers';
 import { ModalContent } from './content/modal-content';
 import { ModalFooter } from './footer/modal-footer';
-import { ModalHeader } from './header/modal-header';
 import { Modal } from './modal';
 
 const ModalTemplate = () => {

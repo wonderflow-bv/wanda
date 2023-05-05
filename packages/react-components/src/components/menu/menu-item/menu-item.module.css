@@ -5,9 +5,9 @@
     border: 0;
     background: none;
     font: inherit;
-    font-size: token(--font-size-16);
+    font-size: token(--wds-font-size-8);
     color: var(--dimmed-6);
-    font-weight: 600;
+    font-weight: token(--wds-font-weight-semibold);
     cursor: pointer;
     inline-size: 100%;
     box-sizing: border-box;
@@ -46,7 +46,7 @@
     &[data-menu-item-dimension='small'] {
       --padding: calc(token(--space-32) + token(--space-4));
 
-      font-size: token(--font-size-14);
+      font-size: token(--wds-font-size-7);
     }
 
     & > * {

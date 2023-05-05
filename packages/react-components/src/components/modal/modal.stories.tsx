@@ -7,12 +7,13 @@ import { AutoFocusInside } from 'react-focus-on';
 
 import {
   Button, Card, Checkbox, Disclosure,
-  Elevator, InfoState, Popover, ResponsiveProvider, Select, Stack, Tab, Text, Textfield, Title,
+  Elevator, InfoState, Popover, ResponsiveProvider, Select, Stack, Tab, Textfield,
 } from '../..';
+import { Text } from '../text-new';
 import { Modal } from './modal';
 
 const longText = (
-  <Text size={16}>
+  <Text variant="body-1">
     Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore cumque voluptate in ut iste reiciendis ipsa nihil accusantium illum ea ullam quasi voluptatibus, reprehenderit maxime placeat laborum, quam debitis, perferendis nemo cum cupiditate dolorem esse. Distinctio excepturi pariatur doloribus, nostrum nesciunt provident. Placeat debitis a odit nesciunt perspiciatis? Nihil aliquam obcaecati ab, quas magni aut suscipit et similique alias nulla repudiandae beatae, aliquid, saepe porro libero officiis ullam cumque quidem eius odio voluptatibus. Reiciendis, vel asperiores? Facilis, provident inventore iure ea a odit suscipit! Aspernatur quae odio neque labore? Quidem esse earum hic excepturi amet sequi porro aperiam eos iste mollitia aut a omnis praesentium sit, asperiores consequatur harum itaque in quam. Quisquam dolores sint eaque dicta quia velit repellat suscipit provident facere repellendus molestias accusantium obcaecati ratione distinctio qui nesciunt totam quas, a ipsum. Possimus exercitationem, velit quibusdam dicta, et quidem dolorum provident voluptatibus facilis quasi nisi incidunt magni quis officia obcaecati laborum perferendis aliquid consequatur itaque corrupti similique ex reprehenderit expedita suscipit. Ipsum quidem possimus doloribus ut, id debitis, officiis, totam assumenda dolore recusandae impedit in tempore neque unde? Repellat necessitatibus in tempora ipsam officiis quam cumque alias. Sed saepe iure ullam, pariatur quo incidunt vero sapiente exercitationem numquam obcaecati suscipit mollitia aspernatur iste esse quia facere magni praesentium! Alias corrupti vitae odit animi magnam ut ad, voluptates hic consequatur dolorum aliquam suscipit quidem assumenda omnis velit, modi commodi exercitationem rerum! Inventore officia, nobis sunt enim quisquam explicabo molestias suscipit esse eaque cumque fugit autem perspiciatis temporibus nisi non. Quae aut nam aliquam accusamus officiis impedit suscipit deleniti ipsa saepe, est facere iusto quam molestias in voluptate error qui porro, veritatis labore iste commodi deserunt ipsum sed? Corrupti unde animi esse deleniti eligendi distinctio, recusandae ratione earum libero sunt nisi impedit repellat aspernatur, quisquam eius iste reiciendis maxime.
   </Text>
 );
@@ -92,7 +93,7 @@ Confirmation.args = {
   title: 'Delete account?',
   subtitle: undefined,
   hideHeaderBorder: true,
-  content: <Text size={16}>Are you sure you want to delete your account? This action cannot be undone.</Text>,
+  content: <Text variant="body-1">Are you sure you want to delete your account? This action cannot be undone.</Text>,
   hideFooterBorder: true,
   primaryAction: <Button>Delete</Button>,
   secondaryAction: <Button>Cancel</Button>,
@@ -165,11 +166,11 @@ WithAList.args = {
   subtitle: undefined,
   content: (
     <Stack rowGap={16}>
-      <Text size={16}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt, earum.</Text>
+      <Text variant="body-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt, earum.</Text>
       <ul>
-        <li><Text size={16}>List item content</Text></li>
-        <li><Text size={16}>List item content</Text></li>
-        <li><Text size={16}>List item content</Text></li>
+        <li><Text variant="body-1">List item content</Text></li>
+        <li><Text variant="body-1">List item content</Text></li>
+        <li><Text variant="body-1">List item content</Text></li>
       </ul>
     </Stack>
   ),
@@ -186,8 +187,8 @@ const withImageContent = (
       height="auto"
     />
     <Stack hAlign="center">
-      <Title level="5">Title goes here</Title>
-      <Text size={14}>Subtitle goes here</Text>
+      <Text variant="heading-5">Title goes here</Text>
+      <Text variant="body-2">Subtitle goes here</Text>
     </Stack>
   </Stack>
 );
@@ -325,8 +326,8 @@ withHeroIcon.args = {
   content: (
     <InfoState title="Delete user?" direction="column" icon="trash-can" iconColor="red">
       <Stack hAlign="center">
-        <Text size={16}>Are you sure you want to delete this user?</Text>
-        <Text size={16}>This action cannot be undone.</Text>
+        <Text>Are you sure you want to delete this user?</Text>
+        <Text>This action cannot be undone.</Text>
       </Stack>
     </InfoState>),
   hideFooterBorder: true,

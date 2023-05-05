@@ -17,8 +17,7 @@
 import clsx from 'clsx';
 import { forwardRef, ProgressHTMLAttributes, useCallback } from 'react';
 
-import { Text } from '@/components';
-
+import { Text } from '../text-new';
 import * as styles from './linear-progress.module.css';
 
 export type LinearProgressProps = ProgressHTMLAttributes<HTMLProgressElement> & {
@@ -81,8 +80,7 @@ export const LinearProgress = forwardRef<HTMLProgressElement, LinearProgressProp
             '--offset': `${getPercentage()}%`,
             '--translation': value !== 0 ? '-100%' : '-50%',
           }}
-          weight="bold"
-          size={dimension === 'regular' ? 16 : 18}
+          variant={dimension === 'regular' ? 'body-2' : 'body-1'}
         >
           {value && clamp(getPercentage(), 0, 100)}
         </Text>

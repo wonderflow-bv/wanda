@@ -23,10 +23,11 @@ import {
 import { FocusOn } from 'react-focus-on';
 
 import {
-  Elevator, OverlayContainer, OverlayContainerProps, Spinner, Stack, Text, Title, useResponsiveContext,
+  Elevator, OverlayContainer, OverlayContainerProps, Spinner, Stack, useResponsiveContext,
 } from '@/components';
 
 import { Button } from '../button/button';
+import { Text } from '../text-new';
 import { ModalContent, ModalContentComponent } from './content/modal-content';
 import { ModalFooter, ModalFooterComponent } from './footer/modal-footer';
 import { ModalHeader, ModalHeaderComponent } from './header/modal-header';
@@ -210,8 +211,8 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(({
                             theme={theme}
                             hideBorder={(!title ?? !subtitle) || hideHeaderBorder}
                           >
-                            {title && <Title level="5">{title}</Title>}
-                            {(title && subtitle) && <Text size={14}>{subtitle}</Text>}
+                            {title && <Text variant="heading-5">{title}</Text>}
+                            {(title && subtitle) && <Text variant="body-3">{subtitle}</Text>}
                           </Modal.Header>
 
                           {content && (
@@ -221,7 +222,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(({
                                   <Stack fill hAlign="center" vPadding={64}>
                                     <Stack hAlign="center" vAlign="center" rowGap={16}>
                                       <Spinner dimension="big" />
-                                      <Text size="16" dimmed={5}>Loading...</Text>
+                                      <Text variant="body-1">Loading...</Text>
                                     </Stack>
                                   </Stack>
                                 )

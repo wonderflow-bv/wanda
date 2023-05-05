@@ -1,7 +1,8 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React, { useState } from 'react';
 
-import { Chip, Text, Title } from '../..';
+import { Chip } from '../..';
+import { Text } from '../text-new';
 import { Menu } from './menu';
 
 const story: ComponentMeta<typeof Menu> = {
@@ -22,8 +23,8 @@ const Template: ComponentStory<typeof Menu> = args => (
     <Menu.Separator />
     <Menu.Item value="6" padding={false}>
       <span>
-        <Title level="6">Cutom item</Title>
-        <Text size={14} dimmed={5}>Custom sub text example</Text>
+        <Text variant="heading-6">Custom item</Text>
+        <Text variant="body-3">Custom sub text example</Text>
       </span>
     </Menu.Item>
   </Menu>

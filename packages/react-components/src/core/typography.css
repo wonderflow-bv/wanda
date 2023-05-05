@@ -2,7 +2,7 @@
   p {
     line-height: 1.5;
     min-block-size: 0.01vh;
-    font-size: token(--font-size-16);
+    font-size: token(--wds-font-size-8);
   }
 
   small {
@@ -11,7 +11,7 @@
 
   strong,
   b {
-    font-weight: 600;
+    font-weight: token(--wds-font-weight-semibold);
   }
 
   a:any-link {
@@ -57,7 +57,7 @@
   }
 
   dt {
-    font-weight: 600;
+    font-weight: token(--wds-font-weight-semibold);
   }
 
   dd {
@@ -82,7 +82,7 @@
   ol {
     & li::marker {
       font-size: inherit;
-      font-weight: 600;
+      font-weight: token(--wds-font-weight-semibold);
       min-inline-size: token(--space-32);
       font-variant-numeric: tabular-nums;
       white-space: nowrap;
@@ -94,7 +94,7 @@
     padding: 2px 4px;
     box-shadow: 0 2px 0 var(--dimmed-1);
     border-radius: token(--radius-4);
-    font-weight: 600;
+    font-weight: token(--wds-font-weight-semibold);
   }
 
   mark {
@@ -118,7 +118,7 @@
     color: var(--highlight-magenta-foreground);
     padding: 0 4px 3px;
     font-size: 0.9em;
-    font-family: token(--font-family-mono);
+    font-family: token(--wds-font-family-mono);
 
     &::before {
       content: '';

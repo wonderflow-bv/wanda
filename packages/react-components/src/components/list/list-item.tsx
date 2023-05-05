@@ -17,10 +17,10 @@
 import clsx from 'clsx';
 import { forwardRef, PropsWithChildren } from 'react';
 
-import {
-  Stack, Symbol, SymbolProps, Text, TextProps,
-} from '@/components';
+import { Stack, Symbol, SymbolProps } from '@/components';
 
+import { Text } from '../text-new';
+import { TextVariants } from '../text-new/text';
 import { ListProps } from './list';
 import * as styles from './list.module.css';
 
@@ -47,21 +47,21 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(({
 }, forwardedRef) => {
   const sizes = {
     small: {
-      text: 16,
+      text: 'body-2',
       icon: {
         size: 16,
         weight: 'solid',
       },
     },
     regular: {
-      text: 18,
+      text: 'body-1',
       icon: {
         size: 16,
         weight: 'solid',
       },
     },
     big: {
-      text: 22,
+      text: 'subtitle-1',
       icon: {
         size: 18,
         weight: 'solid',
@@ -90,7 +90,7 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(({
           dimension={marker !== 'bullet' ? sizes[dimension].icon.size as SymbolProps['dimension'] : 16}
         />
       )}
-      <Text as="span" size={sizes[dimension].text as TextProps['size']}>
+      <Text as="span" variant={sizes[dimension].text as TextVariants}>
         {children}
       </Text>
     </Stack>

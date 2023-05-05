@@ -1,7 +1,8 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useState } from 'react';
 
-import { Chip, Text } from '../..';
+import { Chip } from '../..';
+import { Text } from '../../text-new';
 import { Menu } from '..';
 
 const story: ComponentMeta<typeof Menu.Item> = {
@@ -85,7 +86,7 @@ const WithDecoratorsTemplate: ComponentStory<typeof Menu.Item> = args => (
   <>
     <Menu.Item {...args} value="1" decoration={<Chip dimension="small" color="yellow">Good</Chip>} icon="user">List item text</Menu.Item>
     <Menu.Item {...args} value="2" decoration={<Chip dimension="small" color="blue">Example</Chip>} icon="message">List item text List item</Menu.Item>
-    <Menu.Item {...args} value="3" decoration={<Text size={14} sentiment="danger">Warning</Text>} icon="compass">List item text</Menu.Item>
+    <Menu.Item {...args} value="3" decoration={<Text variant="body-3" color="danger">Warning</Text>} icon="compass">List item text</Menu.Item>
     <Menu.Item {...args} value="4" decoration={<Chip dimension="small" color="purple">Decoration</Chip>} icon="bell">List item text</Menu.Item>
   </>
 );

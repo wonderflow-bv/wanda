@@ -20,8 +20,9 @@ import {
 } from 'react';
 import { useUIDSeed } from 'react-uid';
 
-import { Stack, Text } from '@/components';
+import { Stack } from '@/components';
 
+import { Text } from '../text-new';
 import * as styles from './input-group.module.css';
 
 export type InputGroupProps = {
@@ -69,7 +70,7 @@ export const InputGroup = forwardRef<HTMLFieldSetElement, PropsWithClass<InputGr
       vAlign="start"
       fill={false}
     >
-      {label && <Text as="label" size={dimension === 'small' ? 14 : 16} lineHeight="small" htmlFor={seedID('field')}>{label}</Text>}
+      {label && <Text as="label" variant={dimension === 'small' ? 'body-3' : 'body-2'} htmlFor={seedID('field')}>{label}</Text>}
       <Stack
         as="fieldset"
         direction="row"

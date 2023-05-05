@@ -21,9 +21,10 @@ import {
 import { useUIDSeed } from 'react-uid';
 
 import {
-  Stack, Symbol, SymbolProps, Text,
+  Stack, Symbol, SymbolProps,
 } from '@/components';
 
+import { Text } from '../text-new';
 import * as styles from './select.module.css';
 
 export type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
@@ -90,7 +91,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(({
       inline
       tabIndex={disabled ? 0 : undefined}
     >
-      {label && <Text as="label" lineHeight="small" aria-disabled={disabled} className={styles.Label} size={dimension === 'small' ? 14 : 16} htmlFor={seedID('select')}>{label}</Text>}
+      {label && <Text as="label" aria-disabled={disabled} className={styles.Label} variant={dimension === 'small' ? 'body-2' : 'body-1'} htmlFor={seedID('select')}>{label}</Text>}
       <div className={styles.FieldContainer}>
         <select
           disabled={disabled}

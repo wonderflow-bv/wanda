@@ -12,7 +12,6 @@ import {
   Container,
   Disclosure,
   Grid, IconButton, Menu, Snackbar, Stack,
-  Title,
   useBreakpoints,
   useBreakpointsConfig,
   useSSR,
@@ -123,7 +122,7 @@ const Template: ComponentStory<typeof Container> = () => {
           >
             <Stack rowGap={32} vPadding={32}>
               <Snackbar>
-                <Title level="2">Product Card Container</Title>
+                <Text variant="heading-2">Product Card Container</Text>
                 <Text as="span">{`Window Width: ${size}px - Breakpoints Match: ${matches.toUpperCase()}`}</Text>
                 <br />
                 <Text as="span">{`Container Width: ${containerSize}px - Grid Columns: ${containerValue.col} -  Grid Gutter: ${containerValue.gutter}px`}</Text>
