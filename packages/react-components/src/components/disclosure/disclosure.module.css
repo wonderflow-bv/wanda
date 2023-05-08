@@ -15,12 +15,12 @@
     }
 
     &[data-disclosure-dimension='small'] {
-      --icon-top-offset: calc(var(--icon-size) / 1.75);
+      --icon-top-offset: calc(var(--icon-size) / 3);
       --icon-size: token(--icon-size-12);
     }
 
     &[data-disclosure-dimension='regular'] {
-      --icon-top-offset: calc(var(--icon-size) / 3);
+      --icon-top-offset: calc(var(--icon-size) / 4);
       --icon-size: token(--icon-size-16);
     }
 

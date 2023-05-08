@@ -41,7 +41,7 @@ const story: ComponentMeta<typeof Text> = {
       control: { type: 'select' },
     },
     color: {
-      options: ['positive', 'informative', 'danger', 'warning'],
+      options: ['positive', 'informative', 'danger', 'warning', 'neutral', 'dark'],
       control: { type: 'select' },
     },
     textAlign: {
@@ -71,8 +71,8 @@ const TemplateVariants: ComponentStory<typeof Text> = () => {
 export const Variants = TemplateVariants.bind({});
 
 const TemplateColors: ComponentStory<typeof Text> = () => {
-  type TextColors = 'positive' | 'informative' | 'danger' | 'warning';
-  const colors = ['positive', 'informative', 'danger', 'warning'] as TextColors[];
+  type TextColors = 'positive' | 'informative' | 'danger' | 'warning' | 'neutral' | 'dark';
+  const colors = ['positive', 'informative', 'danger', 'warning', 'neutral', 'dark'] as TextColors[];
 
   return (
     <Container dimension="fixed">

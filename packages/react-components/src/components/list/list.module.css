@@ -31,13 +31,10 @@
     flex-shrink: 0;
     inline-size: var(--marker-size);
     block-size: var(--marker-size);
-    margin-block-start: calc(var(--marker-size) / 3);
+    margin-block-start: calc(var(--marker-size) / 4);
 
-    @nest .List[data-list-size='regular'] & {
-      margin-block-start: calc(var(--marker-size) / 4);
-    }
-    @nest .List[data-list-size='big'] & {
-      margin-block-start: calc(var(--marker-size) / 6);
+    @nest .List[data-list-size='small'] & {
+      margin-block-start: calc(var(--marker-size) / 3);
     }
   }
 }

@@ -99,7 +99,7 @@ export const InfoState = forwardRef<HTMLDivElement, PropsWithChildren<InfoStateP
           vAlign="center"
           fill={false}
         >
-          <Text style={{ maxWidth: '40ch' }} textAlign={isHorizontal ? 'start' : 'center'} variant="heading-4">{title}</Text>
+          <Text style={{ maxWidth: '40ch' }} textAlign={isHorizontal ? 'start' : 'center'} variant="heading-5">{title}</Text>
           <Text as="div" style={{ maxWidth: '60ch' }} textAlign={isHorizontal ? 'start' : 'center'}>{children}</Text>
           {actions && (
             <Stack vPadding={16} inline direction="row" columnGap={16} rowGap={16} wrap>

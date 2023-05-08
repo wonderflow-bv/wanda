@@ -109,11 +109,11 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
 
   const sizes = {
     small: {
-      summary: 'body-2',
+      summary: 'subtitle-2',
       icon: 12,
     },
     regular: {
-      summary: 'body-1',
+      summary: 'subtitle-1',
       icon: 18,
     },
     big: {
@@ -143,6 +143,7 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
         id={seedID('disclosure')}
         variant={sizes[dimension].summary as TextVariants}
         aria-expanded={isOpen}
+        color="dark"
       >
         {summary}
         {expandable && (
