@@ -7,7 +7,7 @@
     font-size: var(--font-size);
     border-radius: token(--radius-4);
     font-family: inherit;
-    line-height: 1;
+    line-height: token(--wds-line-height-8);
     appearance: none;
     inline-size: 100%;
     box-sizing: border-box;

@@ -32,7 +32,7 @@
   }
 
   .End {
-    line-height: 1rem;
+    line-height: token(--wds-line-height-8);
 
     & *:is(button, input, a, select, fieldset[tabindex='0']) {
       outline-offset: -2px;

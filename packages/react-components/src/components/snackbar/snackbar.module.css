@@ -8,7 +8,7 @@
     border: 1px solid var(--global-vibrancy-background);
 
     & p {
-      font-size: token(--font-size-16);
+      font-size: token(--wds-font-size-8);
     }
 
     &[data-snackbar-kind='neutral'] {

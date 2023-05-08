@@ -141,7 +141,7 @@
     visibility: hidden;
     align-items: center;
     justify-content: center;
-    line-height: 1;
+    line-height: token(--wds-line-height-8);
     border-radius: token(--radius-8);
     background-color: var(--highlight-cyan-background);
     color: var(--heading-foreground, var(--dimmed-9));

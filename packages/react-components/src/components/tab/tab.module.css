@@ -29,7 +29,7 @@
     border-radius: 0;
     backdrop-filter: none;
     background: none;
-    font-weight: 400;
+    font-weight: token(--wds-font-weight-regular);
     outline-offset: calc(var(--separator-size) * -1);
     color: var(--dimmed-6);
     appearance: none;
@@ -42,7 +42,7 @@
     flex-shrink: 0;
 
     &[data-tab-dimension='big'] {
-      font-size: token(--font-size-22);
+      font-size: token(--wds-font-size-10);
       height: calc(token(--space-56) - var(--separator-size));
     }
 

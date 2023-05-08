@@ -1,12 +1,12 @@
 @layer core {
   p {
-    line-height: 1.5;
+    line-height: token(--wds-line-height-12);
     min-block-size: 0.01vh;
     font-size: token(--wds-font-size-8);
   }
 
   small {
-    font-size: 0.7em;
+    font-size: token(--wds-font-size-6);
   }
 
   strong,
@@ -74,7 +74,7 @@
     & li::marker {
       font-size: inherit;
       text-align: right;
-      font-weight: 600;
+      font-weight: token(--wds-font-weight-semibold);
       min-inline-size: token(--space-32);
     }
   }
@@ -117,7 +117,7 @@
     position: relative;
     color: var(--highlight-magenta-foreground);
     padding: 0 4px 3px;
-    font-size: 0.9em;
+    font-size: token(--wds-font-size-7);
     font-family: token(--wds-font-family-mono);
 
     &::before {

@@ -22,7 +22,7 @@
   .TableElement {
     width: 100%;
     border-collapse: collapse;
-    font-size: token(--font-size-16);
+    font-size: token(--wds-font-size-8);
 
     &[data-table-loading='true'] {
       pointer-events: none;
