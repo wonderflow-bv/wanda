@@ -18,10 +18,10 @@ import clsx from 'clsx';
 import { forwardRef, ReactNode } from 'react';
 
 import {
-  Button, Polymorphic, Stack, Symbol, SymbolProps, Text,
-  Title,
+  Button, Polymorphic, Stack, Symbol, SymbolProps,
 } from '@/components';
 
+import { Text } from '../text-new';
 import * as styles from './snackbar.module.css';
 
 export type SnackbarProps = {
@@ -91,12 +91,18 @@ export const Snackbar = forwardRef(({
       {...otherProps}
     >
       <Stack vAlign="start" hAlign="start" direction="row" columnGap={16}>
-        <Symbol className={styles.Icon} weight="duotone" source={icon ?? defaultIcons[kind]} dimension={18} />
+        <Symbol
+          data-snackbar-has-title={!!title}
+          className={styles.Icon}
+          weight="duotone"
+          source={icon ?? defaultIcons[kind]}
+          dimension={18}
+        />
 
         <Stack rowGap={16} vPadding={4}>
           <Stack rowGap={8}>
-            {title && <Title level="6" responsive={false}>{title}</Title>}
-            <Text size={14} lineHeight="small">{children}</Text>
+            {title && <Text variant="heading-6" preventResponsive>{title}</Text>}
+            <Text variant="body-1">{children}</Text>
           </Stack>
           {dismissable && (
             <Stack hAlign="end">

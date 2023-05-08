@@ -74,6 +74,9 @@
     &[data-control-dimension='small'] {
       --w: 16px;
       --h: 16px;
+
+      /* stylelint-disable-next-line number-max-precision */
+      margin-top: 0.125rem;
     }
 
     &:indeterminate::after {
@@ -159,6 +162,9 @@
       --h: 16px;
 
       min-width: var(--w);
+
+      /* stylelint-disable-next-line number-max-precision */
+      margin-top: 0.125rem;
     }
   }
 

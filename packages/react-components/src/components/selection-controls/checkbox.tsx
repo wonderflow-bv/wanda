@@ -22,8 +22,9 @@ import {
 } from 'react';
 import { useUIDSeed } from 'react-uid';
 
-import { Stack, Text } from '@/components';
+import { Stack } from '@/components';
 
+import { Text } from '../text-new';
 import * as styles from './selection-controls.module.css';
 
 export type CheckboxProps = InputHTMLAttributes<HTMLInputElement> & {
@@ -121,9 +122,8 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({
           aria-disabled={disabled}
           data-inner-element="Label"
           className={styles.Label}
-          lineHeight={dimension === 'small' ? 'small' : 'large'}
           htmlFor={fieldID}
-          size={dimension === 'small' ? 14 : 16}
+          variant={dimension === 'small' ? 'body-2' : 'body-1'}
           title={otherProps?.title}
         >
           {label}

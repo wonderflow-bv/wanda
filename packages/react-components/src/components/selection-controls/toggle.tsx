@@ -21,8 +21,9 @@ import {
 } from 'react';
 import { useUIDSeed } from 'react-uid';
 
-import { Stack, Text } from '@/components';
+import { Stack } from '@/components';
 
+import { Text } from '../text-new';
 import * as styles from './selection-controls.module.css';
 
 export type ToggleProps = InputHTMLAttributes<HTMLInputElement> & {
@@ -96,8 +97,7 @@ export const Toggle = forwardRef<HTMLInputElement, ToggleProps>(({
           aria-disabled={disabled}
           data-inner-element="Label"
           className={styles.Label}
-          size={dimension === 'small' ? 14 : 16}
-          lineHeight={dimension === 'small' ? 'small' : 'large'}
+          variant={dimension === 'small' ? 'body-2' : 'body-1'}
           htmlFor={fieldID}
           title={otherProps?.title}
         >

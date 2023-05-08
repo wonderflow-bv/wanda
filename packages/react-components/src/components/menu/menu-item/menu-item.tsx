@@ -22,10 +22,11 @@ import {
 import { useFocusEffect, useRovingTabIndex } from 'react-roving-tabindex';
 
 import {
-  Polymorphic, Stack, Symbol, SymbolProps, Text,
+  Polymorphic, Stack, Symbol, SymbolProps,
   Tooltip,
 } from '@/components';
 
+import { Text } from '../../text-new';
 import * as styles from './menu-item.module.css';
 
 export type MenuItemProps = {
@@ -152,7 +153,7 @@ export const MenuItem = forwardRef(({
       <Stack className={styles.DecorationContent} columnGap={16} fill={false} direction="row" hAlign="space-between">
         <Stack direction="column">
           {children}
-          {subtext && <Text size={14} style={{ fontWeight: '400' }}>{subtext}</Text>}
+          {subtext && <Text variant="body-2">{subtext}</Text>}
         </Stack>
         {decoration}
       </Stack>

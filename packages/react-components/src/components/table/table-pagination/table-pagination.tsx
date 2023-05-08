@@ -18,8 +18,10 @@ import { useMemo } from 'react';
 import { useUIDSeed } from 'react-uid';
 
 import {
-  Pagination, Select, Stack, Text,
+  Pagination, Select, Stack,
 } from '@/components';
+
+import { Text } from '../../text-new';
 
 export type TablePaginationProps = PropsWithClass & {
   clusters?: number[];
@@ -65,7 +67,7 @@ export const TablePagination: FCChildren<TablePaginationProps> = ({
       {...otherProps}
     >
       <Stack direction="row" columnGap={4}>
-        <Text as="label" htmlFor={uid('table-i-per-page')} size={14}>Items per page:</Text>
+        <Text as="label" htmlFor={uid('table-i-per-page')} variant="body-2">Items per page:</Text>
         <Select
           value={pageSize}
           dimension="small"
@@ -79,8 +81,8 @@ export const TablePagination: FCChildren<TablePaginationProps> = ({
           ))}
         </Select>
       </Stack>
-      <Text aria-hidden="true" weight="bold" size={14}>
-        {`${computedItemsInPageStart + 1}-${computedItemsInPageEnd > totalItems ? totalItems : computedItemsInPageEnd} of ${totalItems}`}
+      <Text aria-hidden="true" variant="body-2">
+        <b>{`${computedItemsInPageStart + 1}-${computedItemsInPageEnd > totalItems ? totalItems : computedItemsInPageEnd} of ${totalItems}`}</b>
       </Text>
       <Pagination
         itemsCount={totalItems}

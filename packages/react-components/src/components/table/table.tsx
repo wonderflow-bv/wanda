@@ -31,10 +31,10 @@ import {
 import { useUIDSeed } from 'react-uid';
 
 import {
-  Skeleton, Stack, Text,
-  ToggleButton,
+  Skeleton, Stack, ToggleButton,
 } from '@/components';
 
+import { Text } from '../text-new';
 import * as styles from './table.module.css';
 import { TableCell } from './table-cell';
 import { TableCheckbox } from './table-checkbox';
@@ -422,8 +422,8 @@ export const Table = <T extends Record<string, unknown>>({
               }}
               exit={{ y: '-16px', opacity: 0 }}
             >
-              <Text as="span" size={14} weight="bold">
-                {selectedLabel(Object.keys(selectedRowIdsState))}
+              <Text as="span" variant="body-2">
+                <b>{selectedLabel(Object.keys(selectedRowIdsState))}</b>
               </Text>
               {selectedActions?.(Object.keys(selectedRowIdsState))}
             </Stack>

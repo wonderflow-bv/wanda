@@ -21,9 +21,10 @@ import {
 import { useUIDSeed } from 'react-uid';
 
 import {
-  Stack, Symbol, SymbolProps, Text, Textfield,
+  Stack, Symbol, SymbolProps, Textfield,
 } from '@/components';
 
+import { Text } from '../text-new';
 import * as styles from './slider.module.css';
 
 export type SliderProps = InputHTMLAttributes<HTMLInputElement> & {
@@ -105,8 +106,8 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>(({
   const fieldID = useMemo(() => id ?? seedID('slider'), [id, seedID]);
 
   return (
-    <Stack direction="column" rowGap={8}>
-      {label && <Text as="label" lineHeight="small" size={isSmall ? 14 : 16} className={styles.Label} aria-disabled={disabled} htmlFor={fieldID}>{label}</Text>}
+    <Stack direction="column" rowGap={isSmall ? 4 : 8}>
+      {label && <Text as="label" variant={isSmall ? 'body-2' : 'body-1'} className={styles.Label} aria-disabled={disabled} htmlFor={fieldID}>{label}</Text>}
 
       <Stack
         direction="row"
@@ -115,7 +116,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>(({
         className={clsx(styles.Slider, className)}
         data-slider-dimension={dimension}
       >
-        {showValues && <Text as="span" size={isSmall ? 14 : 16} weight="bold" textAlign="end" className={styles.Value} aria-disabled={disabled}>{min}</Text>}
+        {showValues && <Text as="span" variant={isSmall ? 'body-2' : 'body-1'} textAlign="end" className={styles.Value} aria-disabled={disabled}><b>{min}</b></Text>}
         {(iconMin && !showValues) && (
           <Symbol
             source={iconMin}
@@ -144,7 +145,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>(({
           {...otherProps}
         />
 
-        {showValues && <Text as="span" size={isSmall ? 14 : 16} weight="bold" className={styles.Value} aria-disabled={disabled}>{max}</Text>}
+        {showValues && <Text as="span" variant={isSmall ? 'body-2' : 'body-1'} className={styles.Value} aria-disabled={disabled}><b>{max}</b></Text>}
         {showValues && <Textfield readOnly dimension="small" size={String(max).length} value={value} disabled={disabled} />}
         {(iconMax && !showValues) && (
           <Symbol

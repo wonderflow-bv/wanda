@@ -21,9 +21,11 @@ import {
 import { useUIDSeed } from 'react-uid';
 
 import {
-  Polymorphic, Stack, Symbol, SymbolProps, Text, TextProps,
+  Polymorphic, Stack, Symbol, SymbolProps,
 } from '@/components';
 
+import { Text } from '../text-new';
+import { TextVariants } from '../text-new/text';
 import * as styles from './star-meter.module.css';
 
 export type StarMeterProps = {
@@ -76,15 +78,15 @@ export const StarMeter = forwardRef(({
 
   const properties = useMemo(() => ({
     small: {
-      labelSize: 14,
+      labelSize: 'body-2',
       iconSize: 12,
     },
     regular: {
-      labelSize: 16,
+      labelSize: 'body-1',
       iconSize: 16,
     },
     big: {
-      labelSize: 18,
+      labelSize: 'subtitle-1',
       iconSize: 24,
     },
   }), []);
@@ -163,8 +165,8 @@ export const StarMeter = forwardRef(({
       <Stack direction="row" columnGap={dimension === 'small' ? 2 : 4}>
         {starType(starCount, value)}
       </Stack>
-      <Text dimmed={6} id={seedID('star-meter')} size={properties[dimension].labelSize as TextProps['size']} weight="bold">
-        {!hideLabel && <>{label ?? value.toString()}</>}
+      <Text id={seedID('star-meter')} variant={properties[dimension].labelSize as TextVariants}>
+        {!hideLabel && <b>{label ?? value.toString()}</b>}
       </Text>
     </Stack>
   );
