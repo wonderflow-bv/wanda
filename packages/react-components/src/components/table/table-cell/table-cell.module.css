@@ -6,7 +6,7 @@
     margin: 0;
     max-width: var(--width);
     font-variant-numeric: tabular-nums;
-    line-height: token(--wds-line-height-10);
+    line-height: token(--wds-line-height-20);
     text-align: start;
     padding: 0;
     word-wrap: break-word;

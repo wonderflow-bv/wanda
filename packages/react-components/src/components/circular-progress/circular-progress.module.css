@@ -11,7 +11,7 @@
     place-items: center;
     position: relative;
     font-weight: token(--wds-wds-font-weight-bold);
-    font-size: token(--wds-font-size-8);
+    font-size: token(--wds-font-size-16);
 
     &[data-circular-progress-show-progress='true']::after {
       content: attr(data-circular-progress);
@@ -21,14 +21,14 @@
     &[data-circular-progress-dimension='regular'] {
       --track-size: 8px;
 
-      font-size: token(--wds-font-size-14);
+      font-size: token(--wds-font-size-28);
       inline-size: token(--space-136);
     }
 
     &[data-circular-progress-dimension='big'] {
       --track-size: 16px;
 
-      font-size: token(--wds-wds-font-size-20);
+      font-size: token(--wds-wds-font-size-40);
       inline-size: token(--space-184);
     }
 

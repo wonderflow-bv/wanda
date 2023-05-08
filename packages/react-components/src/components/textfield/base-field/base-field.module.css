@@ -7,7 +7,7 @@
     font-size: var(--font-size);
     border-radius: token(--radius-4);
     font-family: inherit;
-    line-height: token(--wds-line-height-8);
+    line-height: token(--wds-line-height-16);
     appearance: none;
     inline-size: 100%;
     box-sizing: border-box;
@@ -103,7 +103,7 @@
   textarea.BaseField {
     block-size: auto;
     min-block-size: token(--space-32);
-    line-height: token(--wds-line-height-12);
+    line-height: token(--wds-line-height-24);
     resize: vertical;
     padding:
       calc(var(--field-padding) / 2)

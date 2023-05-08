@@ -30,7 +30,7 @@
       display: inline-flex;
       flex-flow: row wrap;
       align-items: center;
-      gap: 0.5rem;
+      gap: token(--space-8);
     }
 
     &[data-text-prevent-break-word='true'] {
@@ -51,69 +51,69 @@
     &[data-text-variant='display-1'] {
       color: var(--dimmed-9);
 
-      --fs-large: token(--wds-font-size-48);
+      --fs-large: token(--wds-font-size-96);
       --fw-large: token(--wds-font-weight-heavy);
-      --lh-large: token(--wds-line-height-54);
-      --fs-medium: token(--wds-font-size-34);
+      --lh-large: token(--wds-line-height-108);
+      --fs-medium: token(--wds-font-size-68);
       --fw-medium: token(--wds-font-weight-heavy);
-      --lh-medium: token(--wds-line-height-40);
-      --fs-small: token(--wds-font-size-28);
+      --lh-medium: token(--wds-line-height-80);
+      --fs-small: token(--wds-font-size-56);
       --fw-small: token(--wds-font-weight-heavy);
-      --lh-small: token(--wds-line-height-32);
-      --fs-extra-small: token(--wds-font-size-20);
+      --lh-small: token(--wds-line-height-64);
+      --fs-extra-small: token(--wds-font-size-40);
       --fw-extra-small: token(--wds-font-weight-bold);
-      --lh-extra-small: token(--wds-line-height-24);
+      --lh-extra-small: token(--wds-line-height-48);
     }
 
     &[data-text-variant='display-2'] {
       color: var(--dimmed-9);
 
-      --fs-large: token(--wds-font-size-40);
+      --fs-large: token(--wds-font-size-80);
       --fw-large: token(--wds-font-weight-heavy);
-      --lh-large: token(--wds-line-height-48);
-      --fs-medium: token(--wds-font-size-34);
+      --lh-large: token(--wds-line-height-96);
+      --fs-medium: token(--wds-font-size-68);
       --fw-medium: token(--wds-font-weight-heavy);
-      --lh-medium: token(--wds-line-height-40);
-      --fs-small: token(--wds-font-size-28);
+      --lh-medium: token(--wds-line-height-80);
+      --fs-small: token(--wds-font-size-56);
       --fw-small: token(--wds-font-weight-heavy);
-      --lh-small: token(--wds-line-height-32);
-      --fs-extra-small: token(--wds-font-size-20);
+      --lh-small: token(--wds-line-height-64);
+      --fs-extra-small: token(--wds-font-size-40);
       --fw-extra-small: token(--wds-font-weight-bold);
-      --lh-extra-small: token(--wds-line-height-24);
+      --lh-extra-small: token(--wds-line-height-48);
     }
 
     &[data-text-variant='display-3'] {
       color: var(--dimmed-9);
 
-      --fs-large: token(--wds-font-size-34);
+      --fs-large: token(--wds-font-size-68);
       --fw-large: token(--wds-font-weight-heavy);
-      --lh-large: token(--wds-line-height-40);
-      --fs-medium: token(--wds-font-size-28);
+      --lh-large: token(--wds-line-height-80);
+      --fs-medium: token(--wds-font-size-56);
       --fw-medium: token(--wds-font-weight-heavy);
-      --lh-medium: token(--wds-line-height-32);
-      --fs-small: token(--wds-font-size-24);
+      --lh-medium: token(--wds-line-height-64);
+      --fs-small: token(--wds-font-size-48);
       --fw-small: token(--wds-font-weight-bold);
-      --lh-small: token(--wds-line-height-28);
-      --fs-extra-small: token(--wds-font-size-20);
+      --lh-small: token(--wds-line-height-56);
+      --fs-extra-small: token(--wds-font-size-40);
       --fw-extra-small: token(--wds-font-weight-bold);
-      --lh-extra-small: token(--wds-line-height-24);
+      --lh-extra-small: token(--wds-line-height-48);
     }
 
     &[data-text-variant='display-4'] {
       color: var(--dimmed-9);
 
-      --fs-large: token(--wds-font-size-28);
+      --fs-large: token(--wds-font-size-56);
       --fw-large: token(--wds-font-weight-heavy);
-      --lh-large: token(--wds-line-height-32);
-      --fs-medium: token(--wds-font-size-28);
+      --lh-large: token(--wds-line-height-64);
+      --fs-medium: token(--wds-font-size-56);
       --fw-medium: token(--wds-font-weight-heavy);
-      --lh-medium: token(--wds-line-height-32);
-      --fs-small: token(--wds-font-size-24);
+      --lh-medium: token(--wds-line-height-64);
+      --fs-small: token(--wds-font-size-48);
       --fw-small: token(--wds-font-weight-bold);
-      --lh-small: token(--wds-line-height-28);
-      --fs-extra-small: token(--wds-font-size-20);
+      --lh-small: token(--wds-line-height-56);
+      --fs-extra-small: token(--wds-font-size-40);
       --fw-extra-small: token(--wds-font-weight-bold);
-      --lh-extra-small: token(--wds-line-height-24);
+      --lh-extra-small: token(--wds-line-height-48);
     }
 
     /* Variant Heading */
@@ -121,103 +121,103 @@
     &[data-text-variant='heading-1'] {
       color: var(--dimmed-9);
 
-      --fs-large: token(--wds-font-size-24);
+      --fs-large: token(--wds-font-size-48);
       --fw-large: token(--wds-font-weight-bold);
-      --lh-large: token(--wds-line-height-28);
-      --fs-medium: token(--wds-font-size-24);
+      --lh-large: token(--wds-line-height-56);
+      --fs-medium: token(--wds-font-size-48);
       --fw-medium: token(--wds-font-weight-bold);
-      --lh-medium: token(--wds-line-height-28);
-      --fs-small: token(--wds-font-size-24);
+      --lh-medium: token(--wds-line-height-56);
+      --fs-small: token(--wds-font-size-48);
       --fw-small: token(--wds-font-weight-bold);
-      --lh-small: token(--wds-line-height-28);
-      --fs-extra-small: token(--wds-font-size-20);
+      --lh-small: token(--wds-line-height-56);
+      --fs-extra-small: token(--wds-font-size-40);
       --fw-extra-small: token(--wds-font-weight-bold);
-      --lh-extra-small: token(--wds-line-height-24);
+      --lh-extra-small: token(--wds-line-height-48);
     }
 
     &[data-text-variant='heading-2'] {
       color: var(--dimmed-9);
 
-      --fs-large: token(--wds-font-size-20);
+      --fs-large: token(--wds-font-size-40);
       --fw-large: token(--wds-font-weight-bold);
-      --lh-large: token(--wds-line-height-24);
-      --fs-medium: token(--wds-font-size-20);
+      --lh-large: token(--wds-line-height-48);
+      --fs-medium: token(--wds-font-size-40);
       --fw-medium: token(--wds-font-weight-bold);
-      --lh-medium: token(--wds-line-height-24);
-      --fs-small: token(--wds-font-size-16);
+      --lh-medium: token(--wds-line-height-48);
+      --fs-small: token(--wds-font-size-32);
       --fw-small: token(--wds-font-weight-semibold);
-      --lh-small: token(--wds-line-height-20);
-      --fs-extra-small: token(--wds-font-size-16);
+      --lh-small: token(--wds-line-height-40);
+      --fs-extra-small: token(--wds-font-size-32);
       --fw-extra-small: token(--wds-font-weight-semibold);
-      --lh-extra-small: token(--wds-line-height-20);
+      --lh-extra-small: token(--wds-line-height-40);
     }
 
     &[data-text-variant='heading-3'] {
       color: var(--dimmed-9);
 
-      --fs-large: token(--wds-font-size-16);
+      --fs-large: token(--wds-font-size-32);
       --fw-large: token(--wds-font-weight-bold);
-      --lh-large: token(--wds-line-height-20);
-      --fs-medium: token(--wds-font-size-16);
+      --lh-large: token(--wds-line-height-40);
+      --fs-medium: token(--wds-font-size-32);
       --fw-medium: token(--wds-font-weight-bold);
-      --lh-medium: token(--wds-line-height-20);
-      --fs-small: token(--wds-font-size-16);
+      --lh-medium: token(--wds-line-height-40);
+      --fs-small: token(--wds-font-size-32);
       --fw-small: token(--wds-font-weight-bold);
-      --lh-small: token(--wds-line-height-20);
-      --fs-extra-small: token(--wds-font-size-16);
+      --lh-small: token(--wds-line-height-40);
+      --fs-extra-small: token(--wds-font-size-32);
       --fw-extra-small: token(--wds-font-weight-bold);
-      --lh-extra-small: token(--wds-line-height-20);
+      --lh-extra-small: token(--wds-line-height-40);
     }
 
     &[data-text-variant='heading-4'] {
       color: var(--dimmed-9);
 
-      --fs-large: token(--wds-font-size-14);
+      --fs-large: token(--wds-font-size-28);
       --fw-large: token(--wds-font-weight-bold);
-      --lh-large: token(--wds-line-height-18);
-      --fs-medium: token(--wds-font-size-14);
+      --lh-large: token(--wds-line-height-36);
+      --fs-medium: token(--wds-font-size-28);
       --fw-medium: token(--wds-font-weight-bold);
-      --lh-medium: token(--wds-line-height-18);
-      --fs-small: token(--wds-font-size-14);
+      --lh-medium: token(--wds-line-height-36);
+      --fs-small: token(--wds-font-size-28);
       --fw-small: token(--wds-font-weight-bold);
-      --lh-small: token(--wds-line-height-18);
-      --fs-extra-small: token(--wds-font-size-14);
+      --lh-small: token(--wds-line-height-36);
+      --fs-extra-small: token(--wds-font-size-28);
       --fw-extra-small: token(--wds-font-weight-bold);
-      --lh-extra-small: token(--wds-line-height-18);
+      --lh-extra-small: token(--wds-line-height-36);
     }
 
     &[data-text-variant='heading-5'] {
       color: var(--dimmed-9);
 
-      --fs-large: token(--wds-font-size-12);
+      --fs-large: token(--wds-font-size-24);
       --fw-large: token(--wds-font-weight-semibold);
-      --lh-large: token(--wds-line-height-16);
-      --fs-medium: token(--wds-font-size-12);
+      --lh-large: token(--wds-line-height-32);
+      --fs-medium: token(--wds-font-size-24);
       --fw-medium: token(--wds-font-weight-semibold);
-      --lh-medium: token(--wds-line-height-16);
-      --fs-small: token(--wds-font-size-12);
+      --lh-medium: token(--wds-line-height-32);
+      --fs-small: token(--wds-font-size-24);
       --fw-small: token(--wds-font-weight-semibold);
-      --lh-small: token(--wds-line-height-16);
-      --fs-extra-small: token(--wds-font-size-12);
+      --lh-small: token(--wds-line-height-32);
+      --fs-extra-small: token(--wds-font-size-24);
       --fw-extra-small: token(--wds-font-weight-semibold);
-      --lh-extra-small: token(--wds-line-height-16);
+      --lh-extra-small: token(--wds-line-height-32);
     }
 
     &[data-text-variant='heading-6'] {
       color: var(--dimmed-9);
 
-      --fs-large: token(--wds-font-size-10);
+      --fs-large: token(--wds-font-size-20);
       --fw-large: token(--wds-font-weight-semibold);
-      --lh-large: token(--wds-line-height-14);
-      --fs-medium: token(--wds-font-size-10);
+      --lh-large: token(--wds-line-height-28);
+      --fs-medium: token(--wds-font-size-20);
       --fw-medium: token(--wds-font-weight-semibold);
-      --lh-medium: token(--wds-line-height-14);
-      --fs-small: token(--wds-font-size-10);
+      --lh-medium: token(--wds-line-height-28);
+      --fs-small: token(--wds-font-size-20);
       --fw-small: token(--wds-font-weight-semibold);
-      --lh-small: token(--wds-line-height-14);
-      --fs-extra-small: token(--wds-font-size-10);
+      --lh-small: token(--wds-line-height-28);
+      --fs-extra-small: token(--wds-font-size-20);
       --fw-extra-small: token(--wds-font-weight-semibold);
-      --lh-extra-small: token(--wds-line-height-14);
+      --lh-extra-small: token(--wds-line-height-28);
     }
 
 
@@ -225,38 +225,38 @@
 
     &[data-text-variant='subtitle-1'] {
       color: var(--dimmed-6);
-      letter-spacing: token(--wds-letter-spacing-8);
+      letter-spacing: token(--wds-letter-spacing-16);
 
-      --fs-large: token(--wds-font-size-8);
+      --fs-large: token(--wds-font-size-16);
       --fw-large: token(--wds-font-weight-semibold);
-      --lh-large: token(--wds-line-height-12);
-      --fs-medium: token(--wds-font-size-8);
+      --lh-large: token(--wds-line-height-24);
+      --fs-medium: token(--wds-font-size-16);
       --fw-medium: token(--wds-font-weight-semibold);
-      --lh-medium: token(--wds-line-height-12);
-      --fs-small: token(--wds-font-size-8);
+      --lh-medium: token(--wds-line-height-24);
+      --fs-small: token(--wds-font-size-16);
       --fw-small: token(--wds-font-weight-semibold);
-      --lh-small: token(--wds-line-height-12);
-      --fs-extra-small: token(--wds-font-size-8);
+      --lh-small: token(--wds-line-height-24);
+      --fs-extra-small: token(--wds-font-size-16);
       --fw-extra-small: token(--wds-font-weight-semibold);
-      --lh-extra-small: token(--wds-line-height-12);
+      --lh-extra-small: token(--wds-line-height-24);
     }
 
     &[data-text-variant='subtitle-2'] {
       color: var(--dimmed-6);
-      letter-spacing: token(--wds-letter-spacing-12);
+      letter-spacing: token(--wds-letter-spacing-24);
 
-      --fs-large: token(--wds-font-size-7);
+      --fs-large: token(--wds-font-size-14);
       --fw-large: token(--wds-font-weight-semibold);
-      --lh-large: token(--wds-line-height-12);
-      --fs-medium: token(--wds-font-size-7);
+      --lh-large: token(--wds-line-height-20);
+      --fs-medium: token(--wds-font-size-14);
       --fw-medium: token(--wds-font-weight-semibold);
-      --lh-medium: token(--wds-line-height-12);
-      --fs-small: token(--wds-font-size-7);
+      --lh-medium: token(--wds-line-height-20);
+      --fs-small: token(--wds-font-size-14);
       --fw-small: token(--wds-font-weight-semibold);
-      --lh-small: token(--wds-line-height-12);
-      --fs-extra-small: token(--wds-font-size-7);
+      --lh-small: token(--wds-line-height-20);
+      --fs-extra-small: token(--wds-font-size-14);
       --fw-extra-small: token(--wds-font-weight-semibold);
-      --lh-extra-small: token(--wds-line-height-12);
+      --lh-extra-small: token(--wds-line-height-20);
     }
 
 
@@ -264,59 +264,56 @@
 
     &[data-text-variant='body-1'] {
       color: var(--dimmed-6);
-      letter-spacing: token(--wds-letter-spacing-8);
+      letter-spacing: token(--wds-letter-spacing-16);
 
-      --fs-large: token(--wds-font-size-8);
+      --fs-large: token(--wds-font-size-16);
       --fw-large: token(--wds-font-weight-regular);
-      --lh-large: token(--wds-line-height-12);
-      --fs-medium: token(--wds-font-size-8);
+      --lh-large: token(--wds-line-height-24);
+      --fs-medium: token(--wds-font-size-16);
       --fw-medium: token(--wds-font-weight-regular);
-      --lh-medium: token(--wds-line-height-12);
-      --fs-small: token(--wds-font-size-8);
+      --lh-medium: token(--wds-line-height-24);
+      --fs-small: token(--wds-font-size-16);
       --fw-small: token(--wds-font-weight-regular);
-      --lh-small: token(--wds-line-height-12);
-      --fs-extra-small: token(--wds-font-size-8);
+      --lh-small: token(--wds-line-height-24);
+      --fs-extra-small: token(--wds-font-size-16);
       --fw-extra-small: token(--wds-font-weight-regular);
-      --lh-extra-small: token(--wds-line-height-12);
+      --lh-extra-small: token(--wds-line-height-24);
     }
 
     &[data-text-variant='body-2'] {
       color: var(--dimmed-6);
-      font-size: token(--wds-font-size-7);
-      font-weight: token(--wds-font-weight-regular);
-      line-height: token(--wds-line-height-10);
-      letter-spacing: token(--wds-letter-spacing-12);
+      letter-spacing: token(--wds-letter-spacing-14);
 
-      --fs-large: token(--wds-font-size-7);
+      --fs-large: token(--wds-font-size-14);
       --fw-large: token(--wds-font-weight-regular);
-      --lh-large: token(--wds-line-height-10);
-      --fs-medium: token(--wds-font-size-7);
+      --lh-large: token(--wds-line-height-20);
+      --fs-medium: token(--wds-font-size-14);
       --fw-medium: token(--wds-font-weight-regular);
-      --lh-medium: token(--wds-line-height-10);
-      --fs-small: token(--wds-font-size-7);
+      --lh-medium: token(--wds-line-height-20);
+      --fs-small: token(--wds-font-size-14);
       --fw-small: token(--wds-font-weight-regular);
-      --lh-small: token(--wds-line-height-10);
-      --fs-extra-small: token(--wds-font-size-7);
+      --lh-small: token(--wds-line-height-20);
+      --fs-extra-small: token(--wds-font-size-14);
       --fw-extra-small: token(--wds-font-weight-regular);
-      --lh-extra-small: token(--wds-line-height-10);
+      --lh-extra-small: token(--wds-line-height-20);
     }
 
     &[data-text-variant='body-3'] {
       color: var(--dimmed-6);
-      letter-spacing: token(--wds-letter-spacing-16);
+      letter-spacing: token(--wds-letter-spacing-32);
 
-      --fs-large: token(--wds-font-size-6);
+      --fs-large: token(--wds-font-size-12);
       --fw-large: token(--wds-font-weight-regular);
-      --lh-large: token(--wds-line-height-8);
-      --fs-medium: token(--wds-font-size-6);
+      --lh-large: token(--wds-line-height-16);
+      --fs-medium: token(--wds-font-size-12);
       --fw-medium: token(--wds-font-weight-regular);
-      --lh-medium: token(--wds-line-height-8);
-      --fs-small: token(--wds-font-size-6);
+      --lh-medium: token(--wds-line-height-16);
+      --fs-small: token(--wds-font-size-12);
       --fw-small: token(--wds-font-weight-regular);
-      --lh-small: token(--wds-line-height-8);
-      --fs-extra-small: token(--wds-font-size-6);
+      --lh-small: token(--wds-line-height-16);
+      --fs-extra-small: token(--wds-font-size-12);
       --fw-extra-small: token(--wds-font-weight-regular);
-      --lh-extra-small: token(--wds-line-height-8);
+      --lh-extra-small: token(--wds-line-height-16);
     }
 
     /* Colors */
@@ -335,6 +332,14 @@
 
     &[data-text-color='warning'] {
       color: var(--highlight-yellow-foreground);
+    }
+
+    &[data-text-color='neutral'] {
+      color: var(--dimmed-6);
+    }
+
+    &[data-text-color='dark'] {
+      color: var(--dimmed-9);
     }
 
     /* Truncate */

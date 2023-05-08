@@ -42,7 +42,7 @@
     flex-shrink: 0;
 
     &[data-tab-dimension='big'] {
-      font-size: token(--wds-font-size-10);
+      font-size: token(--wds-font-size-16);
       height: calc(token(--space-56) - var(--separator-size));
     }
 

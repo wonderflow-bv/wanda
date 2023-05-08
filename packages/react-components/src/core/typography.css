@@ -1,12 +1,12 @@
 @layer core {
   p {
-    line-height: token(--wds-line-height-12);
+    line-height: token(--wds-line-height-24);
     min-block-size: 0.01vh;
-    font-size: token(--wds-font-size-8);
+    font-size: token(--wds-font-size-16);
   }
 
   small {
-    font-size: token(--wds-font-size-6);
+    font-size: token(--wds-font-size-12);
   }
 
   strong,
@@ -117,7 +117,7 @@
     position: relative;
     color: var(--highlight-magenta-foreground);
     padding: 0 4px 3px;
-    font-size: token(--wds-font-size-7);
+    font-size: token(--wds-font-size-14);
     font-family: token(--wds-font-family-mono);
 
     &::before {

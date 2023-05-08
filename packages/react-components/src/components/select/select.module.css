@@ -9,19 +9,19 @@
     &[data-select-dimension='small'] {
       --field-height: token(--space-24);
       --field-padding: 0.33rem;
-      --font-size: token(--wds-font-size-6);
+      --font-size: token(--wds-font-size-14);
     }
 
     &[data-select-dimension='regular'] {
       --field-height: token(--space-40);
       --field-padding: token(--space-16);
-      --font-size: token(--wds-font-size-8);
+      --font-size: token(--wds-font-size-16);
     }
 
     &[data-select-dimension='big'] {
       --field-height: token(--space-48);
       --field-padding: token(--space-16);
-      --font-size: token(--wds-font-size-10);
+      --font-size: token(--wds-font-size-16);
     }
   }
 

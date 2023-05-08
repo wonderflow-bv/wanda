@@ -4,7 +4,7 @@
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
-    line-height: token(--wds-line-height-12);
+    line-height: token(--wds-line-height-24);
     background-color: var(--global-background);
   }
 
@@ -25,7 +25,7 @@
   }
 
   body {
-    font-size: token(--wds-font-size-8);
+    font-size: token(--wds-font-size-16);
     color: var(--global-foreground);
     font-family: token(--wds-font-family-sans);
     font-feature-settings: 'calt' off;

@@ -10,7 +10,7 @@
     height: var(--height);
     border-radius: var(--radius, token(--radius-32));
     display: inline-flex;
-    line-height: token(--wds-line-height-8);
+    line-height: token(--wds-line-height-16);
     position: relative;
     overflow: hidden;
     z-index: 1;

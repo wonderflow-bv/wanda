@@ -8,7 +8,7 @@
 
     & > li > a {
       border-radius: token(--radius-4);
-      line-height: token(--wds-line-height-8);
+      line-height: token(--wds-line-height-16);
       padding: 0 token(--space-8);
       cursor: pointer;
       font-weight: token(--wds-wds-font-weight-bold);
