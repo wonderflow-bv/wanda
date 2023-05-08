@@ -28,7 +28,7 @@
     color: var(--global-foreground);
     background: none;
     letter-spacing: 0.7px;
-    font-family: token(--font-family-mono);
+    font-family: token(--wds-font-family-mono);
     text-align: left;
     white-space: pre;
     font-size: 0.9em;

@@ -25,7 +25,7 @@
   }
 
   body {
-    font-size: token(--wds-font-size-10);
+    font-size: token(--wds-font-size-8);
     color: var(--global-foreground);
     font-family: token(--wds-font-family-sans);
     font-feature-settings: 'calt' off;

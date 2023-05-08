@@ -100,7 +100,7 @@ export type TextProps = {
   /**
    * Set the color of the text.
    */
-  color?: 'positive' | 'informative' | 'danger' | 'warning';
+  color?: 'positive' | 'informative' | 'danger' | 'warning' | 'neutral' | 'dark';
   /**
    * Set the text alignment of the text. This is a logical property
    * based on the direction of the text.

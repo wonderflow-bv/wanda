@@ -109,15 +109,15 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(({
 
   const sizes = {
     small: {
-      summary: 'subtitle-6',
+      summary: 'body-2',
       icon: 12,
     },
     regular: {
-      summary: 'heading-5',
+      summary: 'body-1',
       icon: 18,
     },
     big: {
-      summary: 'heading-4',
+      summary: 'heading-6',
       icon: 24,
     },
   };

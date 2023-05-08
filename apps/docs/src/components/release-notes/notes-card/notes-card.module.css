@@ -105,7 +105,7 @@
     align-items: flex-start;
     flex-wrap: wrap;
     line-height: 1.2;
-    font-size: token(--font-size-16);
+    font-size: token(--wds-font-size-8);
 
     @media (--from-small) {
       flex-wrap: nowrap;
@@ -121,7 +121,7 @@
     top: 0;
     left: calc(token(--space-32) * -1);
     display: inline-block;
-    font-size: token(--font-size-14);
+    font-size: token(--wds-font-size-7);
     border-radius: 1e5px;
     font-weight: 600;
     inline-size: token(--space-24);
