@@ -16,12 +16,13 @@
 
 import { HTMLAttributes } from 'react';
 
-import { Polymorphic, Stack, Title } from '@/components';
+import { Polymorphic, Stack } from '@/components';
 
+import { Text } from '../../text-new';
 import * as styles from './table-header.module.css';
 
 export type TableHeaderProps = HTMLAttributes<HTMLElement> & {
-  title?: string | Polymorphic.IntrinsicElement<typeof Title>;
+  title?: string | Polymorphic.IntrinsicElement<typeof Text>;
 }
 
 export const TableHeader: FCChildren<TableHeaderProps> = ({
@@ -40,7 +41,7 @@ export const TableHeader: FCChildren<TableHeaderProps> = ({
     {...otherProps}
   >
     <div>
-      {typeof title === 'string' ? <Title id={id} level="5">{title}</Title> : title}
+      {typeof title === 'string' ? <Text id={id} variant="subtitle-1" color="dark">{title}</Text> : title}
     </div>
 
     <Stack direction="row" vAlign="center" columnGap={8} inline>

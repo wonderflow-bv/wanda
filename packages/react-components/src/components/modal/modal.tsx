@@ -211,8 +211,8 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(({
                             theme={theme}
                             hideBorder={(!title ?? !subtitle) || hideHeaderBorder}
                           >
-                            {title && <Text variant="heading-5">{title}</Text>}
-                            {(title && subtitle) && <Text variant="body-3">{subtitle}</Text>}
+                            {title && <Text variant="heading-6">{title}</Text>}
+                            {(title && subtitle) && <Text variant="subtitle-2">{subtitle}</Text>}
                           </Modal.Header>
 
                           {content && (

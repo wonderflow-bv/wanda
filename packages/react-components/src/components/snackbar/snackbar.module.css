@@ -49,12 +49,14 @@
     max-width: token(--space-16);
     height: token(--space-16);
     color: var(--snackbar-fg);
-    margin-top: 0.5rem;
+
+    /* stylelint-disable-next-line number-max-precision */
+    margin-top: 0.475rem;
 
     &[data-snackbar-has-title='true'] {
 
       /* stylelint-disable-next-line number-max-precision */
-      margin-top: 0.675rem;
+      margin-top: token(--space-8);
     }
   }
 }

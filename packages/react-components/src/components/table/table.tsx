@@ -422,7 +422,7 @@ export const Table = <T extends Record<string, unknown>>({
               }}
               exit={{ y: '-16px', opacity: 0 }}
             >
-              <Text as="span" variant="body-2">
+              <Text as="span" variant="body-1">
                 <b>{selectedLabel(Object.keys(selectedRowIdsState))}</b>
               </Text>
               {selectedActions?.(Object.keys(selectedRowIdsState))}

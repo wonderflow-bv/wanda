@@ -78,15 +78,15 @@ export const StarMeter = forwardRef(({
 
   const properties = useMemo(() => ({
     small: {
-      labelSize: 'body-2',
+      labelSize: 'body-3',
       iconSize: 12,
     },
     regular: {
-      labelSize: 'body-1',
+      labelSize: 'body-2',
       iconSize: 16,
     },
     big: {
-      labelSize: 'subtitle-1',
+      labelSize: 'body-1',
       iconSize: 24,
     },
   }), []);

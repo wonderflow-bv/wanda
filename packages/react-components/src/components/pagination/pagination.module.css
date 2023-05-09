@@ -1,10 +1,11 @@
 @layer components {
   .Pagination {
+    align-items: center;
+    display: inline-flex;
     list-style: none;
     margin: 0;
     padding: 0;
-    display: inline-flex;
-    align-items: center;
+    font-size: token(--wds-font-size-14);
 
     & > li > a {
       border-radius: token(--radius-4);

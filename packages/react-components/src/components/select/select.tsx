@@ -91,7 +91,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(({
       inline
       tabIndex={disabled ? 0 : undefined}
     >
-      {label && <Text as="label" aria-disabled={disabled} className={styles.Label} variant={dimension === 'small' ? 'body-2' : 'body-1'} htmlFor={seedID('select')}>{label}</Text>}
+      {label && <Text as="label" aria-disabled={disabled} className={styles.Label} variant={dimension === 'big' ? 'body-1' : 'body-2'} htmlFor={seedID('select')}>{label}</Text>}
       <div className={styles.FieldContainer}>
         <select
           disabled={disabled}

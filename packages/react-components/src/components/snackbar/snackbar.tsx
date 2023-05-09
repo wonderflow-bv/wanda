@@ -101,8 +101,8 @@ export const Snackbar = forwardRef(({
 
         <Stack rowGap={16} vPadding={4}>
           <Stack rowGap={8}>
-            {title && <Text variant="heading-6" preventResponsive>{title}</Text>}
-            <Text variant="body-1">{children}</Text>
+            {title && <Text variant="subtitle-1" preventResponsive>{title}</Text>}
+            <Text variant="body-2">{children}</Text>
           </Stack>
           {dismissable && (
             <Stack hAlign="end">
