@@ -1,4 +1,4 @@
-import { Skeleton, Stack, Title } from '@wonderflow/react-components';
+import { Skeleton, Stack, Text } from '@wonderflow/react-components';
 import clsx from 'clsx';
 import { useMentionsQuery } from 'src/generated/graphql';
 
@@ -17,7 +17,7 @@ export const Mentions: FCClass = ({
   return (
     <Section className={clsx(styles.Mentions)} vAlign="start" rowGap={24} fill={false} vPadding={32} {...otherProps}>
       <Stack hAlign="center">
-        <Title as="h2" level="5">Mentioned and shared by</Title>
+        <Text as="h2" variant="heading-5">Mentioned and shared by</Text>
       </Stack>
       <Carousel>
         {loading

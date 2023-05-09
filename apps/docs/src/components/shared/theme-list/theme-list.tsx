@@ -1,6 +1,6 @@
 import {
   Elevator,
-  Grid, Stack, Title,
+  Grid, Stack, Text,
 } from '@wonderflow/react-components';
 import React, { Fragment } from 'react';
 
@@ -40,11 +40,11 @@ export const ThemeList: React.FC<ThemeListProps> = ({
           <Fragment key={item}>
             {/* {i !== 0 && <Separator aria-hidden="true" />} */}
             <Stack rowGap={24}>
-              <Title level="5">
+              <Text variant="heading-5">
                 {item.charAt(0).toUpperCase() + item.slice(1)}
                 {' '}
                 colors
-              </Title>
+              </Text>
               <Grid colMinWidth="15rem" columnGap={16} rowGap={24}>
                 {Object.keys(groupedData[item]).map(color => (
                   <Grid.Item key={color}>

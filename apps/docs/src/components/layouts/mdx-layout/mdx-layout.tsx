@@ -1,7 +1,7 @@
 import { MDXProvider } from '@mdx-js/react';
 import type {
   GridItemProps,
-  ListItemProps, ListProps, MenuItemCheckboxProps, MenuItemProps, SeparatorProps, TextProps, TitleProps,
+  ListItemProps, ListProps, MenuItemCheckboxProps, MenuItemProps, SeparatorProps, TextProps,
 } from '@wonderflow/react-components';
 import * as Components from '@wonderflow/react-components';
 import { TabPanelProps } from '@wonderflow/react-components/dist/components/tab/tabs-panel';
@@ -13,16 +13,18 @@ import { Code, CodeProps } from '@/components/shared/code';
 import { LiveArea } from '@/components/shared/live-area';
 import { LiveAreaProps } from '@/components/shared/live-area/live-area';
 
+import { Prose } from '../../shared/prose';
+
 export interface IPropsMDXLayout extends IPropsDocLayout {}
 
 export const MDX_COMPONENTS = {
   pre: (props: CodeProps) => <Code {...props} />,
   img: (props: ImgHTMLAttributes<HTMLImageElement>) => <img alt={props.alt ?? ''} loading="lazy" decoding="async" {...props} />,
-  h1: (props: TitleProps) => <Components.Title as="h1" level="2" anchor {...props} />,
-  h2: (props: TitleProps) => <Components.Title as="h2" level="3" anchor {...props} />,
-  h3: (props: TitleProps) => <Components.Title as="h3" level="4" anchor {...props} />,
-  h4: (props: TitleProps) => <Components.Title as="h4" level="5" anchor {...props} />,
-  p: (props: TextProps) => <Components.Text size={22} {...props} />,
+  h1: (props: TextProps) => <Components.Text as="h1" variant="heading-2" anchor {...props} />,
+  h2: (props: TextProps) => <Components.Text as="h2" variant="heading-3" anchor {...props} />,
+  h3: (props: TextProps) => <Components.Text as="h3" variant="heading-4" anchor {...props} />,
+  h4: (props: TextProps) => <Components.Text as="h4" variant="heading-5" anchor {...props} />,
+  p: (props: TextProps) => <Components.Text variant="body-1" {...props} />,
   a: ({ children, ...props }: PropsWithChildren<LinkProps>) => <Link {...props}><a>{children}</a></Link>,
   ul: ({ ...props }: ListProps) => <Components.List {...props} />,
   ol: ({ ...props }: ListProps) => <Components.List as="ol" {...props} />,
@@ -52,9 +54,9 @@ export const MDXLayout: FCChildren<IPropsMDXLayout> = ({
   <DocLayout {...props}>
     <MDXProvider components={MDX_COMPONENTS}>
       <Components.Stack vPadding={56}>
-        <Components.Prose>
+        <Prose>
           {children}
-        </Components.Prose>
+        </Prose>
       </Components.Stack>
     </MDXProvider>
   </DocLayout>

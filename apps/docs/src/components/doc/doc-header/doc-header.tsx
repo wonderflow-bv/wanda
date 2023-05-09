@@ -1,4 +1,4 @@
-import { Stack, Text, Title } from '@wonderflow/react-components';
+import { Stack, Text } from '@wonderflow/react-components';
 
 import { GradientText, GradientTextProps } from '@/components/shared/gradient-text';
 
@@ -21,12 +21,12 @@ export const DocHeader: FCClass<DocHeaderProps> = ({
   <Stack rowGap={48} {...otherProps}>
     <Stack rowGap={8}>
       {preTitle && (
-        <Text className={styles.Pretitle} weight="bold" size={18}>
+        <Text className={styles.Pretitle} variant="subtitle-1">
           <GradientText color={color}>{preTitle}</GradientText>
         </Text>
       )}
-      {title && <Title as="h1" level="1">{title}</Title>}
-      {subtitle && <Text size={28}>{subtitle}</Text>}
+      {title && <Text as="h1" variant="heading-1">{title}</Text>}
+      {subtitle && <Text variant="subtitle-1">{subtitle}</Text>}
     </Stack>
     <span className={styles.Separator} />
   </Stack>

@@ -1,5 +1,5 @@
 import {
-  Container, IconButton, List, Separator, Stack, Text, Title,
+  Container, IconButton, List, Separator, Stack, Text,
 } from '@wonderflow/react-components';
 import Link from 'next/link';
 import React, { FC } from 'react';
@@ -18,8 +18,8 @@ export const Footer: FC<FooterProps> = ({
         {!compact && (
           <Stack direction="row" columnGap={32} rowGap={88} wrap>
             <Stack rowGap={24} fill={false} hAlign="start">
-              <Title level="5">Open Source</Title>
-              <Text maxWidth="35ch">
+              <Text variant="heading-5">Open Source</Text>
+              <Text style={{ maxWidth: '35ch' }}>
                 We strongly believe in the propelling power of community-project,
                 that’s why we choose to open source Wanda on Github.
                 Contribution and feedback are welcome!
@@ -69,7 +69,7 @@ export const Footer: FC<FooterProps> = ({
             </Stack>
 
             <Stack rowGap={24} fill={false}>
-              <Title level="5">Designers</Title>
+              <Text variant="heading-5">Designers</Text>
               <List hideMarker>
                 <List.Li>
                   <Link href="/get-started/documentation/design/brand"><a>Brand</a></Link>
@@ -89,7 +89,7 @@ export const Footer: FC<FooterProps> = ({
               </List>
             </Stack>
             <Stack rowGap={24} fill={false}>
-              <Title level="5">Developers</Title>
+              <Text variant="heading-5">Developers</Text>
               <List hideMarker>
                 <List.Li>
                   <Link href="/get-started/documentation/develop/installation"><a>Installation</a></Link>
@@ -115,10 +115,10 @@ export const Footer: FC<FooterProps> = ({
 
         <Stack rowGap={24}>
           <Stack rowGap={8}>
-            <Text size={16} dimmed={6} lineHeight="none">
+            <Text>
               Created by Wonderflow Design Team for Wonderflow.
             </Text>
-            <Text size={16} dimmed={6} lineHeight="none">
+            <Text>
               &copy; Wonderflow
               {' '}
               {new Date().getFullYear()}

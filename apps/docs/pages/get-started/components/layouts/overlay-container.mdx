@@ -87,9 +87,9 @@ export const OverlayContent = () => {
         vAlign="center"
         columnGap={48}
       >
-        <Title id={titleId} level="4">
+        <Text id={titleId} level="heading-4">
           Overlay title is: {titleId}
-        </Title>
+        </Text>
         <IconButton
           onClick={onClose}
           icon="xmark"
@@ -124,7 +124,7 @@ import {
   OverlayContainer,
   useOverlayContext,
   Button,
-  Title,
+  Text,
   Card,
 } from "@wonderflow/react-components";
 
@@ -133,9 +133,9 @@ export const OverlayContent = () => {
 
   return (
     <Card>
-      <Title id={titleId} level="4">
+      <Text id={titleId} level="heading-4">
         Overlay title is: {titleId}
-      </Title>
+      </Text>
       <Button onClick={() => onClose()} icon="xmark">
         Close modal
       </Button>

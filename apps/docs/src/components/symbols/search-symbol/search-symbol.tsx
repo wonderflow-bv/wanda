@@ -2,7 +2,7 @@ import {
   Card,
   Elevator,
   Grid,
-  InfoState, Modal, Stack, SymbolProps, Text, Textfield, Title, useResponsiveContext,
+  InfoState, Modal, Stack, SymbolProps, Text, Textfield, useResponsiveContext,
 } from '@wonderflow/react-components';
 import { SymbolNames } from '@wonderflow/symbols';
 import SymbolsList from '@wonderflow/symbols/structure';
@@ -112,7 +112,7 @@ export const SearchSymbol = () => {
               dimension="big"
               autoFocus
             />
-            <Text size={16}>Change style</Text>
+            <Text>Change style</Text>
             <Stack direction="row" columnGap={8} rowGap={8}>
               {WEIGHTS?.map(w => (
                 <RadioButton
@@ -181,8 +181,8 @@ export const SearchSymbol = () => {
               rel="noopener noreferrer"
               icon="circle-question"
             >
-              <Title as="h2" level="6">Didn&apos;t find the icon?</Title>
-              <Text size={14} dimmed={6}>Ask for new icons on GitHub.</Text>
+              <Text as="h2" variant="heading-6">Didn&apos;t find the icon?</Text>
+              <Text variant="body-2">Ask for new icons on GitHub.</Text>
             </Banner>
           </Stack>
         )}

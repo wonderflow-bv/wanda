@@ -1,5 +1,5 @@
 import {
-  Card, Stack, Symbol, Text, Title,
+  Card, Stack, Symbol, Text,
 } from '@wonderflow/react-components';
 import { SymbolNames } from '@wonderflow/symbols';
 import type { TokensTypes } from '@wonderflow/tokens/platforms/web';
@@ -52,8 +52,8 @@ export const Tile: FCClass<TileProps> = ({
     {...otherProps}
   >
     <Stack rowGap={32}>
-      <Title className={styles.Title} as="h3" responsive={false} level="5">{title}</Title>
-      {description && <Text dimmed={6} responsive={false} size={16}>{description}</Text>}
+      <Text className={styles.Title} as="h3" preventResponsive variant="heading-5">{title}</Text>
+      {description && <Text preventResponsive>{description}</Text>}
     </Stack>
   </Card>
 );

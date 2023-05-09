@@ -1,5 +1,5 @@
 import {
-  Container, Stack, Title,
+  Container, Stack, Text,
 } from '@wonderflow/react-components';
 import createGlobe from 'cobe';
 import Image from 'next/image';
@@ -108,7 +108,7 @@ export const Brands = ({
     >
       <canvas ref={canvasRef} className={styles.Globe} />
       <Container as={Stack} hAlign="center" vAlign="center" dimension="large">
-        <Title level="6">Some Wonderflow’s customers enjoying Wanda</Title>
+        <Text variant="heading-6">Some Wonderflow’s customers enjoying Wanda</Text>
         <Stack className={styles.Logos} direction="row" fill={false} hAlign="center" wrap>
           <Stack
             as="a"

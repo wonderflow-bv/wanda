@@ -1,5 +1,5 @@
 import {
-  Stack, Text, Title, Toggle,
+  Stack, Text, Toggle,
 } from '@wonderflow/react-components';
 import clsx from 'clsx';
 import { fromString } from 'css-color-converter';
@@ -36,10 +36,9 @@ export const ColorPalette = ({
   return (
     <Stack rowGap={16} className={styles.ColorPalette}>
       <Stack direction="row" fill={false} vAlign="center" hAlign="space-between">
-        <Title as="span" level="5">{title}</Title>
+        <Text as="span" variant="heading-5">{title}</Text>
         <Stack direction="row" fill={false} columnGap={8} vAlign="center">
-          <Text as="label" htmlFor={uid('palette-color-format')} weight="bold" size={14}>{isShowHex ? 'HEX' : 'HSL'}</Text>
-          <Toggle id={uid('palette-color-format')} onClick={() => setIsShowHex(!isShowHex)} dimension="small" />
+          <Toggle id={uid('palette-color-format')} label={isShowHex ? 'HEX' : 'HSL'} onClick={() => setIsShowHex(!isShowHex)} dimension="small" />
         </Stack>
       </Stack>
 
@@ -62,8 +61,8 @@ export const ColorPalette = ({
             columnGap={16}
             fill={false}
           >
-            <Text weight="bold">{item}</Text>
-            <Text size={14} className={styles.ColorValue}>
+            <Text><b>{item}</b></Text>
+            <Text variant="body-2" className={styles.ColorValue}>
               {
               isShowHex ? HexColor(`hsl(${colors[item]})`) : `hsl(${colors[item]})`
               }

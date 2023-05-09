@@ -99,9 +99,9 @@ export const CustomDrawerContent = () => {
   return (
     <Stack hPadding={24} vPadding={24} rowGap={32}>
       <Stack direction="row" vAlign="center" columnGap={48}>
-        <Title id={titleId} level="4">
+        <Text id={titleId} level="heading-4">
           Custom drawer title
-        </Title>
+        </Text>
       </Stack>
       <p>
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas
@@ -144,7 +144,7 @@ import {
   OverlayContainer,
   useOverlayContext,
   Button,
-  Title,
+  Text,
 } from "@wonderflow/react-components";
 
 export const CustomDrawerContent = () => {
@@ -152,9 +152,9 @@ export const CustomDrawerContent = () => {
 
   return (
     <Stack hPadding={24} vPadding={24} rowGap={32}>
-      <Title id={titleId} level="4">
+      <Text id={titleId} variant="heading-4">
         My custom drawer title
-      </Title>
+      </Text>
       <Button onClick={onClose} icon="xmark">
         Close drawer
       </Button>

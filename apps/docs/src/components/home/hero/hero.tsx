@@ -1,6 +1,6 @@
 import {
   Button,
-  Container, Stack, Text, Title, useResponsiveContext,
+  Container, Stack, Text, useResponsiveContext,
 } from '@wonderflow/react-components';
 import clsx from 'clsx';
 import {
@@ -48,14 +48,14 @@ export const Hero: FCClass = ({
       <m.span className={styles.Glow} style={{ background }} />
       <Container as={Stack} dimension="large" hAlign="center" vAlign="center" rowGap={80}>
         <Stack rowGap={40} hAlign="center">
-          <Title maxWidth="20ch" textAlign="center" as="h1" level={matches.extraLarge ? '1' : '2'}>
+          <Text textAlign="center" as="h1" variant="heading-1">
             Full-featured
             {' '}
             <GradientText>design system</GradientText>
             {' '}
             for digital experiences
-          </Title>
-          <Text size={matches.extraLarge ? 28 : 22} textAlign="center" maxWidth="48ch">
+          </Text>
+          <Text variant="heading-4" textAlign="center">
             Wanda is a complete design system made to provide complete and enjoyable
             experience while using Wonderflow’s digital products.
           </Text>

@@ -1,6 +1,6 @@
 import {
   Button,
-  Container, Stack, Tab, Text, Title, useResponsiveContext,
+  Container, Stack, Tab, Text, useResponsiveContext,
 } from '@wonderflow/react-components';
 import clsx from 'clsx';
 import { AnimatePresence } from 'framer-motion';
@@ -35,16 +35,20 @@ export const Developers: FCClass = ({
           <Stack rowGap={56} fill={false} className={styles.Content}>
 
             <Stack rowGap={4}>
-              <Text weight="bold"><GradientText color="yellow">For developers</GradientText></Text>
-              <Title as="h2" level="2" maxWidth="16ch">
+              <Text>
+                <b>
+                  <GradientText color="yellow">For developers</GradientText>
+                </b>
+              </Text>
+              <Text as="h2" variant="heading-2">
                 <TextReveal>Full toolchain to build digital experiences.</TextReveal>
-              </Title>
+              </Text>
             </Stack>
 
             <Tab dimension="big" className={styles.Tab} defaultValue={activeTab} onValueChange={setActiveTab}>
               <Tab.Panel label="Components" icon={matches.large ? 'grid' : undefined} value="components">
                 <Stack rowGap={32} vPadding={56} hAlign="start">
-                  <Text size={22} dimmed={6}>
+                  <Text variant="heading-6">
                     A full set of highly customizable React components and styles ready to use inside applications.
                   </Text>
                   <Link href="/get-started/components/actions/button" passHref>
@@ -55,7 +59,7 @@ export const Developers: FCClass = ({
 
               <Tab.Panel label="Design Tokens" icon={matches.large ? 'more-vert' : undefined} value="design-tokens">
                 <Stack rowGap={32} vPadding={56} hAlign="start">
-                  <Text size={22} dimmed={6}>
+                  <Text variant="heading-6">
                     Color, spaces, font... every basic and common property is available as design token.
                     The foundamentals of consistency across platforms.
                   </Text>
@@ -67,7 +71,7 @@ export const Developers: FCClass = ({
 
               <Tab.Panel label="Themes" icon={matches.large ? 'style' : undefined} value="themes">
                 <Stack rowGap={32} vPadding={56} hAlign="start">
-                  <Text size={22} dimmed={6}>
+                  <Text variant="heading-6">
                     Easily handle light/dark themes via JS or CSS, by using the provided
                     collections of custom properties and JSON values.
                   </Text>

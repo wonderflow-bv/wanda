@@ -1,5 +1,5 @@
 import {
-  Card, Datetime, Elevator, Stack, Text, Title,
+  Card, Datetime, Elevator, Stack, Text,
 } from '@wonderflow/react-components';
 import { m } from 'framer-motion';
 import { CSSProperties } from 'react';
@@ -43,7 +43,11 @@ export const NotesCard: FCClass<NotesCardProps> = ({
         columnGap={24}
       >
         <Stack vAlign="center" hAlign="center" fill={false} className={styles.Tag}>
-          <Text as="span" dimmed={index !== 0 ? 6 : undefined} weight="bold" size={14} textAlign="center">{release.tag ?? '📣'}</Text>
+          <Text as="span" variant="body-2" textAlign="center">
+            <b>
+              {release.tag ?? '📣'}
+            </b>
+          </Text>
           {index === 0 && (
             <m.span
               initial={{ scale: 1, opacity: 0.5 }}
@@ -56,7 +60,7 @@ export const NotesCard: FCClass<NotesCardProps> = ({
 
         <Stack>
           <Stack rowGap={4} vPadding={24}>
-            <Title as="h2" level="4"><Datetime date={release.releaseDate as string} /></Title>
+            <Text as="h2" variant="heading-4"><Datetime date={release.releaseDate as string} /></Text>
           </Stack>
 
           {release.content && (
@@ -74,9 +78,9 @@ export const NotesCard: FCClass<NotesCardProps> = ({
             <Stack rowGap={48} vPadding={32}>
               {release.notes.map(note => (
                 <Stack key={note.id}>
-                  <Title as="h3" level="5" lineHeight="none" className={styles.ScopeTitle}>
+                  <Text as="h3" variant="heading-5" className={styles.ScopeTitle}>
                     <GradientText color="rainbow">{`${note.scope[0].toUpperCase()}${note.scope.slice(1)}`}</GradientText>
-                  </Title>
+                  </Text>
                   <Elevator resting={2}>
                     <Card hAlign="start" padding={24} radius={16} className={styles.Card}>
                       {note.breaking && (

@@ -4,7 +4,7 @@ import {
   ButtonsGroup,
   Chip,
   ChipProps,
-  List, Stack, Symbol, Title, useResponsiveContext,
+  List, Stack, Symbol, Text, useResponsiveContext,
 } from '@wonderflow/react-components';
 import Markdown from 'markdown-to-jsx';
 import Link from 'next/link';
@@ -68,9 +68,9 @@ export const ComponentLayout: FCChildren<IPropsComponentLayout> = ({
         >
           {features && (
             <Stack rowGap={24} hAlign="start" fill={false}>
-              <Title level="5">
+              <Text variant="heading-5">
                 Features
-              </Title>
+              </Text>
               <List>
                 {features.map(feat => (
                   <List.Li marker="check" markerColor="var(--highlight-green-foreground)" key={feat}>
@@ -82,9 +82,9 @@ export const ComponentLayout: FCChildren<IPropsComponentLayout> = ({
           )}
 
           <Stack rowGap={24} hAlign="start" fill={false}>
-            <Title level="5">
+            <Text variant="heading-5">
               Links
-            </Title>
+            </Text>
             <Stack hAlign="start" rowGap={8} style={{ maxInlineSize: '14.11rem' }}>
               <Link href={`/playground#${slugName}`}>
                 {/* eslint-disable-next-line */}

@@ -1,5 +1,5 @@
 import {
-  List, Stack, Text, Title,
+  List, Stack, Text,
 } from '@wonderflow/react-components';
 
 import { HeadingType } from '@/hooks/table-of-content';
@@ -16,16 +16,16 @@ export const Toc = ({
   <Stack as="nav" rowGap={16}>
     {headings.length > 0 && (
       <>
-        <Title level="6">On this page</Title>
+        <Text variant="heading-6">On this page</Text>
         <List dimension="small" hideMarker>
           {headings.map(heading => (
             <Stack as={List.Li} key={heading.id} vPadding={4}>
-              <Text as="a" className={styles.Link} href={`#${heading.id}`} dimmed={6} weight="bold">{heading.title}</Text>
+              <Text as="a" className={styles.Link} href={`#${heading.id}`}><b>{heading.title}</b></Text>
               {(heading.items && heading.items.length > 0) && (
                 <List dimension="small">
                   {heading.items?.map(child => (
                     <List.Li key={child.id} marker="chevron-right" markerColor="var(--dimmed-5)">
-                      <Text as="a" className={styles.Link} href={`#${child.id}`} dimmed={6}>{child.title}</Text>
+                      <Text as="a" className={styles.Link} href={`#${child.id}`}>{child.title}</Text>
                     </List.Li>
                   ))}
                 </List>

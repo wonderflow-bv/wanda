@@ -51,14 +51,14 @@ export const OutlineTree: {
             columnGap={8}
             direction="row"
             fill={false}
-            size={14}
-            responsive={false}
+            variant="body-2"
+            preventResponsive
             className={styles.Title}
-            dimmed={5}
-            weight="bold"
           >
             {icon && <Symbol source={icon} dimension={18} />}
-            {title}
+            <b>
+              {title}
+            </b>
           </Stack>
         )}
         <Stack as="ul">

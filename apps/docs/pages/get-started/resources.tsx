@@ -1,4 +1,4 @@
-import { Grid, Stack, Title } from '@wonderflow/react-components';
+import { Grid, Stack, Text } from '@wonderflow/react-components';
 import { SymbolNames } from '@wonderflow/symbols';
 import { NextPage } from 'next';
 import { useEffect } from 'react';
@@ -32,7 +32,7 @@ const ResourcesPage: NextPage<ResourcesQuery> = ({ resourceGroups }) => {
     <Stack rowGap={80} vPadding={56}>
       {resourceGroups?.map(group => (
         <Stack as="section" rowGap={24} key={group.id}>
-          <Title as="h2" level="5">{group.groupName}</Title>
+          <Text as="h2" variant="heading-5">{group.groupName}</Text>
           <Grid
             columns={2}
             colMinWidth="20rem"

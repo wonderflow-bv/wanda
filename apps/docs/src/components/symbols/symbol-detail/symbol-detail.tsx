@@ -1,7 +1,7 @@
 import {
   Button,
   IconButton,
-  Skeleton, Stack, Symbol, SymbolProps, Text, Title,
+  Skeleton, Stack, Symbol, SymbolProps, Text,
 } from '@wonderflow/react-components';
 import { SymbolNames } from '@wonderflow/symbols';
 import { useRouter } from 'next/router';
@@ -81,9 +81,9 @@ export const SymbolDetail: FC<SymbolDetailProps> = ({
         <Stack rowGap={24} fill={false} hAlign="start">
 
           <Stack>
-            <Text dimmed={6} size={16}>Name</Text>
+            <Text>Name</Text>
             <Stack direction="row" columnGap={8} inline vAlign="center">
-              <Title level="4">{name}</Title>
+              <Text variant="heading-4">{name}</Text>
               <IconButton icon="todo" dimension="small" onClick={handleCopy(name)} />
               {isCopied && <Symbol source="check" fill="var(--highlight-green-foreground)" dimension={12} />}
             </Stack>

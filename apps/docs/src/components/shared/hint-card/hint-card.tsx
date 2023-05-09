@@ -1,4 +1,4 @@
-import { Stack, Title } from '@wonderflow/react-components';
+import { Stack, Text } from '@wonderflow/react-components';
 import React from 'react';
 
 import styles from './hint-card.module.css';
@@ -28,7 +28,7 @@ export const HintCard: FCChildren<HintCardProps> = ({
         <img alt="" src={image} loading="lazy" decoding="async" />
       </div>
       <div className={styles.Separator} />
-      <Title level="6" className={styles.Title}>{title}</Title>
+      <Text variant="heading-6" className={styles.Title}>{title}</Text>
       {children && <figcaption>{children}</figcaption>}
     </Stack>
   );

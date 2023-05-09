@@ -30,66 +30,89 @@ In general, text elements and typography play a very important role, and represe
 
 The type scale is a combination of 11 sizes that are supported by the type system. It contains re-usable categories of text, with an intended application and meaning for each.
 
-### Headings
+### Display and Headings
 
 Headings follow a scale based on a 1.333 factor ([Perfect Fourth](https://type-scale.com/?size=18&scale=1.333&text=A%20Visual%20Type%20Scale&font=Poppins&fontweight=600&bodyfont=body_font_default&bodyfontweight=400&lineheight=1.75&backgroundcolor=%23ffffff&fontcolor=%23000000&preview=false)) **starting from the basic unit of 18px (1rem, 1em, 112.5%).**
 
 <LiveArea hAlign="start" direction="column" rowGap={32}>
   <Stack>
-    <Text style={{ color: "var(--dimmed-5)" }} weight="bold" size={16}>100px — 5.61rem</Text>
-    <Title as="h1" level="display">Display Title</Title>
+    <Stack>
+      <Text variant="subtitle-1">96px — 6rem</Text>
+      <Text variant="display-1">Display-1</Text>
+    </Stack>
+    <Stack>
+      <Text variant="subtitle-1">80px — 5rem</Text>
+      <Text variant="display-2">Display-2</Text>
+    </Stack>
+    <Stack>
+      <Text variant="subtitle-1">68px — 4rem</Text>
+      <Text variant="display-3">Display-3</Text>
+    </Stack>
+    <Stack>
+      <Text variant="subtitle-1">56px — 3.5rem</Text>
+      <Text variant="display-4">Display-4</Text>
+    </Stack>
   </Stack>
   <Stack>
-    <Text style={{ color: "var(--dimmed-5)" }} weight="bold" size={16}>75 px — 4.209rem</Text>
-    <Title as="h1" level="1">Level 1 Heading</Title>
-  </Stack>
-  <Stack>
-    <Text style={{ color: "var(--dimmed-5)" }} weight="bold" size={16}>56.83px — 3.157rem</Text>
-    <Title as="h2" level="2">Level 2 Heading</Title>
-  </Stack>
-  <Stack>
-    <Text style={{ color: "var(--dimmed-5)" }} weight="bold" size={16}>42.63px — 2.369rem</Text>
-    <Title as="h3" level="3">Level 3 Heading</Title>
-  </Stack>
-  <Stack>
-    <Text style={{ color: "var(--dimmed-5)" }} weight="bold" size={16}>31.98px — 1.777rem</Text>
-    <Title as="h4" level="4">Level 4 Heading</Title>
-  </Stack>
-  <Stack>
-    <Text style={{ color: "var(--dimmed-5)" }} weight="bold" size={16}>23.99px — 1.333rem</Text>
-    <Title as="h5" level="5">Level 5 Heading</Title>
-  </Stack>
-  <Stack>
-    <Text style={{ color: "var(--dimmed-5)" }} weight="bold" size={16}>18.00px — 1rem</Text>
-    <Title as="h6" level="6">Level 6 Heading</Title>
+    <Stack>
+      <Text variant="subtitle-1">48px — 3rem</Text>
+      <Text variant="heading-1">Heading-1</Text>
+    </Stack>
+    <Stack>
+      <Text variant="subtitle-1">40px — 2.5rem</Text>
+      <Text variant="heading-2">Heading-2</Text>
+    </Stack>
+    <Stack>
+      <Text variant="subtitle-1">32px — 2rem</Text>
+      <Text variant="heading-3">Heading-3</Text>
+    </Stack>
+    <Stack>
+      <Text variant="subtitle-1">28px — 1.75rem</Text>
+      <Text variant="heading-4">Heading-4</Text>
+    </Stack>
+    <Stack>
+    </Stack>
+      <Text variant="subtitle-1">24px — 1.5rem</Text>
+      <Text variant="heading-5">Heading-5</Text>
+    <Stack>
+    <Text variant="subtitle-1">20px — 1.25rem</Text>
+    <Text variant="heading-6">Heading-6</Text>
+    </Stack>
   </Stack>
 </LiveArea>
 
-### Content
+### Subtitle and Content
 
 Wanda's typography system provides five different sizes for text content. While we suggest to use text sized at least 16px for accessibility concern, sometimes you have to use a smaller text but you should avoid such situations as much as possible.
 
 <LiveArea hAlign="start" direction="column" rowGap={32}>
-  <Stack>
-    <Text style={{ color: "var(--dimmed-5)" }} weight="bold" size={16}>28px — 1.55rem</Text>
-    <Text size={28}>Aenean tempor sem sed lorem ultricies lacinia. Sed sit amet tortor nibh.</Text>
-  </Stack>
-  <Stack>
-    <Text style={{ color: "var(--dimmed-5)" }} weight="bold" size={16}>22px — 1.22rem</Text>
-    <Text size={22}>Aenean tempor sem sed lorem ultricies lacinia. Sed sit amet tortor nibh.</Text>
-  </Stack>
-  <Stack>
-    <Text style={{ color: "var(--dimmed-5)" }} weight="bold" size={16}>18px — 1rem</Text>
-    <Text size={18}>Aenean tempor sem sed lorem ultricies lacinia. Sed sit amet tortor nibh.</Text>
-  </Stack>
-  <Stack>
-    <Text style={{ color: "var(--dimmed-5)" }} weight="bold" size={16}>16px — 0.88rem</Text>
-    <Text size={16}>Aenean tempor sem sed lorem ultricies lacinia. Sed sit amet tortor nibh.</Text>
-  </Stack>
-  <Stack>
-    <Text style={{ color: "var(--dimmed-5)" }} weight="bold" size={16}>14px — 0.77rem</Text>
-    <Text size={14}>Aenean tempor sem sed lorem ultricies lacinia. Sed sit amet tortor nibh.</Text>
-  </Stack>
+   <Stack>
+      <Stack>
+        <Text variant="subtitle-1">16px — 1rem</Text>
+        <Text variant="subtitle-1">Subtitle-1</Text>
+      </Stack>
+      <Stack>
+        <Text variant="subtitle-1">14px — 0.875rem</Text>
+        <Text variant="subtitle-1">Subtitle-2</Text>
+      </Stack>
+    </Stack>
+    <Stack>
+      <Stack>
+        <Text variant="subtitle-1">16px — 1rem</Text>
+        <Text variant="body-1">Body-1</Text>
+        <Text variant="body-1">Aenean tempor sem sed lorem ultricies lacinia. Sed sit amet tortor nibh.</Text>
+      </Stack>
+      <Stack>
+        <Text variant="subtitle-1">14px — 0.875rem</Text>
+        <Text variant="body-2">Body-2</Text>
+        <Text variant="body-2">Aenean tempor sem sed lorem ultricies lacinia. Sed sit amet tortor nibh.</Text>
+      </Stack>
+      <Stack>
+        <Text variant="subtitle-1">12px — 0.75rem</Text>
+        <Text variant="body-3">Body-3</Text>
+        <Text variant="body-3">Aenean tempor sem sed lorem ultricies lacinia. Sed sit amet tortor nibh.</Text>
+      </Stack>
+    </Stack>
 </LiveArea>
 
 ## Responsive typography
