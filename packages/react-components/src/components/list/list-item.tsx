@@ -47,14 +47,14 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(({
 }, forwardedRef) => {
   const sizes = {
     small: {
-      text: 'subtitle-2',
+      text: 'body-2',
       icon: {
         size: 16,
         weight: 'solid',
       },
     },
     regular: {
-      text: 'subtitle-1',
+      text: 'body-1',
       icon: {
         size: 16,
         weight: 'solid',
@@ -90,7 +90,7 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(({
           dimension={marker !== 'bullet' ? sizes[dimension].icon.size as SymbolProps['dimension'] : 16}
         />
       )}
-      <Text as="span" variant={sizes[dimension].text as TextVariants} color="dark">
+      <Text as="span" variant={sizes[dimension].text as TextVariants} color="neutral">
         {children}
       </Text>
     </Stack>
