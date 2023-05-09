@@ -24,7 +24,7 @@ export const Toc = ({
               {(heading.items && heading.items.length > 0) && (
                 <List dimension="small">
                   {heading.items?.map(child => (
-                    <List.Li key={child.id} marker="chevron-right" markerColor="var(--dimmed-5)">
+                    <List.Li className={styles.Item} key={child.id} marker="chevron-right" markerColor="var(--dimmed-5)">
                       <Text as="a" className={styles.Link} href={`#${child.id}`}>{child.title}</Text>
                     </List.Li>
                   ))}

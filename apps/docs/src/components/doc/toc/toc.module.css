@@ -3,3 +3,9 @@
     color: var(--layout-color-fg);
   }
 }
+
+.Item {
+  & svg {
+    margin-block-start: calc(var(--marker-size)/2);
+  }
+}
