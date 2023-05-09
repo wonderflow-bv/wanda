@@ -37,13 +37,13 @@ export const ValueTable = ({
       >
         <div role="columnheader" className={styles.Cell} aria-hidden />
         <div role="columnheader" className={styles.Cell}>
-          <Text as="span" dimmed={6} size={14}>VALUE</Text>
+          <Text as="span" variant="subtitle-2">VALUE</Text>
         </div>
         <div role="columnheader" className={styles.Cell}>
-          <Text as="span" dimmed={6} size={14}>TYPE</Text>
+          <Text as="span" variant="subtitle-2">TYPE</Text>
         </div>
         <div role="columnheader" className={styles.Cell}>
-          <Text as="span" dimmed={6} size={14}>DESCRIPTION</Text>
+          <Text as="span" variant="subtitle-2">DESCRIPTION</Text>
         </div>
       </Stack>
     </div>

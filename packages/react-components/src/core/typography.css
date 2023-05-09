@@ -17,6 +17,7 @@
   a:any-link {
     text-decoration: none;
     color: var(--global-interactive-text);
+    font-weight: token(--wds-font-weight-regular);
     word-break: break-word;
 
     &:not([class]) {

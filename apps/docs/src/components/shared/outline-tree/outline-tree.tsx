@@ -37,7 +37,7 @@ export const OutlineTree: {
 
     return (
       <Stack
-        rowGap={8}
+        rowGap={16}
         vAlign="start"
         className={styles.OutlineTree}
         style={{ ...dynamicStyle, ...style }}
@@ -51,17 +51,15 @@ export const OutlineTree: {
             columnGap={8}
             direction="row"
             fill={false}
-            variant="body-2"
+            variant="subtitle-2"
             preventResponsive
             className={styles.Title}
           >
             {icon && <Symbol source={icon} dimension={18} />}
-            <b>
-              {title}
-            </b>
+            {title}
           </Stack>
         )}
-        <Stack as="ul">
+        <Stack as="ul" rowGap={8}>
           {children}
         </Stack>
       </Stack>
@@ -78,11 +76,11 @@ export const OutlineTree: {
           padding={false}
           open={open}
           iconPosition="right"
-          dimension="small"
+          dimension="regular"
           summary={summary}
           {...otherProps}
         >
-          <Stack as="ul" rowGap={4} className={styles.SubMenu}>
+          <Stack as="ul" rowGap={8} className={styles.SubMenu}>
             {children}
           </Stack>
         </Disclosure>

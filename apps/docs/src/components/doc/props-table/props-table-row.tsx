@@ -77,8 +77,8 @@ export const PropsTableRow = ({
               </Elevator>
             </Popover>
           )}
-          <Text as="code" size={14}>{name}</Text>
-          {required && <Text as="span" sentiment="warning" size={14}>*</Text>}
+          <Text as="code" variant="body-2">{name}</Text>
+          {required && <Text as="span" color="warning" variant="body-2">*</Text>}
         </div>
       )}
 
@@ -89,10 +89,10 @@ export const PropsTableRow = ({
             ? type.map((type, i) => (
               <Fragment key={type}>
                 {i !== 0 && '|'}
-                <Text key={type} as="code" size={14}>{type}</Text>
+                <Text key={type} as="code" variant="body-2">{type}</Text>
               </Fragment>
             ))
-            : <Text as="code" size={14}>{type}</Text>}
+            : <Text as="code" variant="body-2">{type}</Text>}
           {typeValue && (
             <Popover
               placement="top"
@@ -133,7 +133,7 @@ export const PropsTableRow = ({
 
       {/* Prop DEFAULT VALUE */}
       <div role="cell" data-content-align="right" className={styles.Cell}>
-        {defaultValue && <Text as="code" size={14}>{defaultValue}</Text>}
+        {defaultValue && <Text as="code" variant="body-2">{defaultValue}</Text>}
       </div>
     </Stack>
   );

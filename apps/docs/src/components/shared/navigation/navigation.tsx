@@ -53,7 +53,7 @@ export const Navigation = ({ data }: NavigationProps) => {
         onClick={handleOverlays}
         aria-current={includesPath(url) ? 'page' : undefined}
       >
-        <Text as="span" size={16} dimmed={wip && !url ? 5 : undefined} responsive={false}>{children}</Text>
+        <Text as="span" variant="subtitle-1" color="dark" preventResponsive>{children}</Text>
         {tag && <Chip color={tag.color || 'gray'} dimension="small">{tag.label}</Chip>}
       </Stack>
     ),

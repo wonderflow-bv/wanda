@@ -39,13 +39,13 @@ export const PropsTable = ({
       >
         <div role="columnheader" className={styles.Cell} aria-hidden />
         <div role="columnheader" className={styles.Cell}>
-          <Text as="span" dimmed={6} size={14}>PROPERTY</Text>
+          <Text as="span" variant="subtitle-2">PROPERTY</Text>
         </div>
         <div role="columnheader" className={styles.Cell}>
-          <Text as="span" dimmed={6} size={14}>TYPE</Text>
+          <Text as="span" variant="subtitle-2">TYPE</Text>
         </div>
         <div role="columnheader" className={styles.Cell} data-content-align="right">
-          <Text as="span" dimmed={6} size={14}>DEFAULT</Text>
+          <Text as="span" variant="subtitle-2">DEFAULT</Text>
         </div>
       </Stack>
     </div>

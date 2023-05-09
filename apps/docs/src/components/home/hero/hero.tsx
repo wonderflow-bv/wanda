@@ -48,14 +48,14 @@ export const Hero: FCClass = ({
       <m.span className={styles.Glow} style={{ background }} />
       <Container as={Stack} dimension="large" hAlign="center" vAlign="center" rowGap={80}>
         <Stack rowGap={40} hAlign="center">
-          <Text textAlign="center" as="h1" variant="heading-1">
+          <Text textAlign="center" as="h1" variant="display-3" style={{ maxWidth: '20ch' }}>
             Full-featured
             {' '}
             <GradientText>design system</GradientText>
             {' '}
             for digital experiences
           </Text>
-          <Text variant="heading-4" textAlign="center">
+          <Text variant="heading-6" color="neutral" textAlign="center" style={{ maxWidth: '48ch', fontWeight: '400' }}>
             Wanda is a complete design system made to provide complete and enjoyable
             experience while using Wonderflow’s digital products.
           </Text>

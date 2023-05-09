@@ -40,7 +40,7 @@ export const Developers: FCClass = ({
                   <GradientText color="yellow">For developers</GradientText>
                 </b>
               </Text>
-              <Text as="h2" variant="heading-2">
+              <Text as="h2" variant="display-4">
                 <TextReveal>Full toolchain to build digital experiences.</TextReveal>
               </Text>
             </Stack>
@@ -48,7 +48,7 @@ export const Developers: FCClass = ({
             <Tab dimension="big" className={styles.Tab} defaultValue={activeTab} onValueChange={setActiveTab}>
               <Tab.Panel label="Components" icon={matches.large ? 'grid' : undefined} value="components">
                 <Stack rowGap={32} vPadding={56} hAlign="start">
-                  <Text variant="heading-6">
+                  <Text variant="heading-6" color="neutral">
                     A full set of highly customizable React components and styles ready to use inside applications.
                   </Text>
                   <Link href="/get-started/components/actions/button" passHref>

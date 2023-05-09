@@ -40,7 +40,7 @@ export const Designers: FCClass = ({
                   <GradientText color="indigo">For designers</GradientText>
                 </b>
               </Text>
-              <Text as="h2" variant="heading-2">
+              <Text as="h2" variant="display-4">
                 <TextReveal>Everything you need. When you need it.</TextReveal>
               </Text>
             </Stack>
@@ -48,7 +48,7 @@ export const Designers: FCClass = ({
             <Tab dimension="big" className={styles.Tab} defaultValue={activeTab} onValueChange={setActiveTab}>
               <Tab.Panel label="Foundation" icon={matches.large ? 'layer-group' : undefined} value="foundation">
                 <Stack rowGap={32} vPadding={56} hAlign="start">
-                  <Text variant="heading-6">
+                  <Text variant="heading-6" color="neutral">
                     Colors, typography, symbols, themes, and much more,
                     everything a designer needs, Wanda provides it.
                   </Text>

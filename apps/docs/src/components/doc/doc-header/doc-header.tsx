@@ -18,15 +18,15 @@ export const DocHeader: FCClass<DocHeaderProps> = ({
   color,
   ...otherProps
 }) => (
-  <Stack rowGap={48} {...otherProps}>
+  <Stack rowGap={32} {...otherProps}>
     <Stack rowGap={8}>
       {preTitle && (
         <Text className={styles.Pretitle} variant="subtitle-1">
           <GradientText color={color}>{preTitle}</GradientText>
         </Text>
       )}
-      {title && <Text as="h1" variant="heading-1">{title}</Text>}
-      {subtitle && <Text variant="subtitle-1">{subtitle}</Text>}
+      {title && <Text as="h1" variant="display-3">{title}</Text>}
+      {subtitle && <Text variant="heading-5" color="neutral">{subtitle}</Text>}
     </Stack>
     <span className={styles.Separator} />
   </Stack>

@@ -17,7 +17,7 @@ export const Mentions: FCClass = ({
   return (
     <Section className={clsx(styles.Mentions)} vAlign="start" rowGap={24} fill={false} vPadding={32} {...otherProps}>
       <Stack hAlign="center">
-        <Text as="h2" variant="heading-5">Mentioned and shared by</Text>
+        <Text as="h2" variant="heading-6">Mentioned and shared by</Text>
       </Stack>
       <Carousel>
         {loading

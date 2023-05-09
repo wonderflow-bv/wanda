@@ -12,11 +12,14 @@ export const getStaticProps = () =>
     }
   });
 
-Wanda design system doesn't use custom fonts, instead it relies on the system fonts because we put performance and reactiveness ahead aesthetic. System fonts are made by awesome people around the world and they aim to solve all the issues across languages and readability, by using them our users don't have to wait until the font is downloaded and rendered.
+## Product text styles
+
+Wonderflow types styles are grouped into three categories: display, headings and body. Each category comes with a default set of
+variants, as well as a range of options that allow for flexibility within the user interface. By using a single scale for all variants our type styles can be applied seamlessly across all screen sizes, enabling a coherent and cohesive user experience.
 
 ## Typefaces
 
-System fonts grant an immersive experience with our digital products. This means the typeface changes based on the operating system, so the user will have the perception of using a native system application.
+We want our digital products to feel seamless and natural to users. That's why we use system fonts, which adapt to the operating system being used. This way, the typeface matches the look and feel of other native applications, helping our product blend in with the rest of the user's system.
 
 ![](https://figmage.com/images/_ejtJTYN6ZTw6wCJVPS_c.png)
 
@@ -24,140 +27,180 @@ System fonts grant an immersive experience with our digital products. This means
 
 ![](https://figmage.com/images/SCoWdibxuIWMNQTOav5_q.png)
 
-## Type scale
-
-In general, text elements and typography play a very important role, and represent one of the main ways of conveying information from one point to another. For this reason, typographic aspects should never be underestimated, no matter which is context. In Wanda design system, we have tried to balance the impact of text components with other interface elements.
-
-The type scale is a combination of 11 sizes that are supported by the type system. It contains re-usable categories of text, with an intended application and meaning for each.
-
-### Display and Headings
-
-Headings follow a scale based on a 1.333 factor ([Perfect Fourth](https://type-scale.com/?size=18&scale=1.333&text=A%20Visual%20Type%20Scale&font=Poppins&fontweight=600&bodyfont=body_font_default&bodyfontweight=400&lineheight=1.75&backgroundcolor=%23ffffff&fontcolor=%23000000&preview=false)) **starting from the basic unit of 18px (1rem, 1em, 112.5%).**
+## Font family
+Wonderflow’s font families are composed of two typefaces: Display, Text and Mono. Each is designed for a specific function that is core to the Wonderflow brand.
 
 <LiveArea hAlign="start" direction="column" rowGap={32}>
-  <Stack>
-    <Stack>
-      <Text variant="subtitle-1">96px — 6rem</Text>
-      <Text variant="display-1">Display-1</Text>
-    </Stack>
-    <Stack>
-      <Text variant="subtitle-1">80px — 5rem</Text>
-      <Text variant="display-2">Display-2</Text>
-    </Stack>
-    <Stack>
-      <Text variant="subtitle-1">68px — 4rem</Text>
-      <Text variant="display-3">Display-3</Text>
-    </Stack>
-    <Stack>
-      <Text variant="subtitle-1">56px — 3.5rem</Text>
-      <Text variant="display-4">Display-4</Text>
-    </Stack>
-  </Stack>
-  <Stack>
-    <Stack>
-      <Text variant="subtitle-1">48px — 3rem</Text>
-      <Text variant="heading-1">Heading-1</Text>
-    </Stack>
-    <Stack>
-      <Text variant="subtitle-1">40px — 2.5rem</Text>
-      <Text variant="heading-2">Heading-2</Text>
-    </Stack>
-    <Stack>
-      <Text variant="subtitle-1">32px — 2rem</Text>
-      <Text variant="heading-3">Heading-3</Text>
-    </Stack>
-    <Stack>
-      <Text variant="subtitle-1">28px — 1.75rem</Text>
-      <Text variant="heading-4">Heading-4</Text>
-    </Stack>
-    <Stack>
-    </Stack>
-      <Text variant="subtitle-1">24px — 1.5rem</Text>
-      <Text variant="heading-5">Heading-5</Text>
-    <Stack>
-    <Text variant="subtitle-1">20px — 1.25rem</Text>
-    <Text variant="heading-6">Heading-6</Text>
-    </Stack>
+  <Stack rowGap={8}>
+    <Text variant="display-4">SF Pro Display sans-serif is used for editorial & marketing  headlines</Text>
+    <Text variant="heading-3">SF Pro Text sans-serif is used UI text</Text>
+    <Text><pre>monospace is used code</pre></Text>
   </Stack>
 </LiveArea>
 
-### Subtitle and Content
+## Typographic scale
 
-Wanda's typography system provides five different sizes for text content. While we suggest to use text sized at least 16px for accessibility concern, sometimes you have to use a smaller text but you should avoid such situations as much as possible.
+Our font-sizes are based on the Minor third scale with a base font size of 16px. Each size is multiplied or divided by 1.2 from the previous size, starting with the base size, and rounded to a multiple of 4px.
 
-<LiveArea hAlign="start" direction="column" rowGap={32}>
-   <Stack>
-      <Stack>
-        <Text variant="subtitle-1">16px — 1rem</Text>
-        <Text variant="subtitle-1">Subtitle-1</Text>
-      </Stack>
-      <Stack>
-        <Text variant="subtitle-1">14px — 0.875rem</Text>
-        <Text variant="subtitle-1">Subtitle-2</Text>
-      </Stack>
-    </Stack>
-    <Stack>
-      <Stack>
-        <Text variant="subtitle-1">16px — 1rem</Text>
-        <Text variant="body-1">Body-1</Text>
-        <Text variant="body-1">Aenean tempor sem sed lorem ultricies lacinia. Sed sit amet tortor nibh.</Text>
-      </Stack>
-      <Stack>
-        <Text variant="subtitle-1">14px — 0.875rem</Text>
-        <Text variant="body-2">Body-2</Text>
-        <Text variant="body-2">Aenean tempor sem sed lorem ultricies lacinia. Sed sit amet tortor nibh.</Text>
-      </Stack>
-      <Stack>
-        <Text variant="subtitle-1">12px — 0.75rem</Text>
-        <Text variant="body-3">Body-3</Text>
-        <Text variant="body-3">Aenean tempor sem sed lorem ultricies lacinia. Sed sit amet tortor nibh.</Text>
-      </Stack>
-    </Stack>
+
+<LiveArea hAlign="start" direction="column" rowGap={8}>
+      <Text>body-3</Text>
+      <Text variant="body-3">Wonderflow</Text>
+      <Text>body-2</Text>
+      <Text variant="body-2">Wonderflow</Text>
+      <Text>body-1</Text>
+      <Text variant="body-1">Wonderflow</Text>
+      <Text>subtitle-2</Text>
+      <Text variant="subtitle-2">Wonderflow</Text>
+      <Text>subtitle-1</Text>
+      <Text variant="subtitle-1">Wonderflow</Text>
+      <Text>heading-6</Text>
+      <Text variant="heading-6">Wonderflow</Text>
+      <Text>heading-5</Text>
+      <Text variant="heading-5">Wonderflow</Text>
+      <Text>heading-4</Text>
+      <Text variant="heading-4">Wonderflow</Text>
+      <Text>heading-3</Text>
+      <Text variant="heading-3">Wonderflow</Text>
+      <Text>heading-2</Text>
+      <Text variant="heading-2">Wonderflow</Text>
+      <Text>heading-1</Text>
+      <Text variant="heading-1">Wonderflow</Text>
+      <Text>display-4</Text>
+      <Text variant="display-4">Wonderflow</Text>
+      <Text>display-3</Text>
+      <Text variant="display-3">Wonderflow</Text>
+      <Text>display-2</Text>
+      <Text variant="display-2">Wonderflow</Text>
+      <Text>display-1</Text>
+      <Text variant="display-1">Wonderflow</Text>
 </LiveArea>
 
-## Responsive typography
+## Font Weight
 
-The whole typography system of Wanda is built on top of a respnsive typography size which improve the readability and adapt the text size on smaller devices.
+Font weights in typography can enhance the hierarchical structure and draw attention to important content on a surface. We recommend
+using Heavy, Bold, Medium, and Regular weights to support most use cases.
 
-On smaller screens both titles and text content are resized dynamically based on the viewport size by using the following scheme. Each number refers to a specific size of the text.
+<LiveArea hAlign="start" direction="column" rowGap={32}>
+  <Grid columns="3" filling={false}>
+    <Text style={{fontWeight: '400'}}>Regular</Text>
+    <Text style={{fontWeight: '400'}}>400</Text>
+    <Text style={{fontWeight: '400'}}>Wonderflow</Text>
+
+    <Text style={{fontWeight: '600'}}>Semibold</Text>
+    <Text style={{fontWeight: '600'}}>600</Text>
+    <Text style={{fontWeight: '600'}}>Wonderflow</Text>
+
+    <Text style={{fontWeight: '700'}}>Bold</Text>
+    <Text style={{fontWeight: '700'}}>700</Text>
+    <Text style={{fontWeight: '700'}}>Wonderflow</Text>
+
+    <Text style={{fontWeight: '800'}}>Heavy</Text>
+    <Text style={{fontWeight: '800'}}>800</Text>
+    <Text style={{fontWeight: '800'}}>Wonderflow</Text>
+  </Grid>
+</LiveArea>
+
+## Text Color
+
+Our default text colour is light-dimmed-color-6. You may adjust the text colours using the recommended colour tokens that correspond to pre-defined colour values. This ensures that the text remains easily readable and has appropriate contrast against different background colours.
+
+### Light backgrounds
+When placing text on a light background, all type should use the following colour values:
+
+<LiveArea hAlign="start" direction="column" rowGap={32}>
+  <Grid columns="3" filling={false}>
+    <Text variant="heading-6" color="neutral">neutral</Text>
+    <Text variant="heading-6" color="dark">dark</Text>
+    <Text variant="heading-6" color="positive">positive</Text>
+
+    <Text variant="body-3">--light-dimmed-6</Text>
+    <Text variant="body-3">--light-dimmed-9</Text>
+    <Text variant="body-3">--highlight-green-foreground</Text>
+  </Grid>
+  <Grid columns="3" filling={false}>
+    <Text variant="heading-6" color="informative">informative</Text>
+    <Text variant="heading-6" color="danger">danger</Text>
+    <Text variant="heading-6" color="warning">warning</Text>
+
+    <Text variant="body-3">--highlight-blue-foreground</Text>
+    <Text variant="body-3">--highlight-red-foreground</Text>
+    <Text variant="body-3">--highlight-yellow-foreground</Text>
+  </Grid>
+</LiveArea>
+
+### Dark backgrounds
+When placing text on a dark background, all type should use the following colour values:
+
+<LiveArea hAlign="start" direction="column" rowGap={32}>
+  <Grid columns="3" filling={false}>
+    <Text variant="heading-6" color="neutral">neutral</Text>
+    <Text variant="heading-6" color="dark">dark</Text>
+    <Text variant="heading-6" color="positive">positive</Text>
+
+    <Text variant="body-3">--light-dimmed-6</Text>
+    <Text variant="body-3">--light-dimmed-9</Text>
+    <Text variant="body-3">--dark-highlight-green-foreground</Text>
+  </Grid>
+  <Grid columns="3" filling={false}>
+    <Text variant="heading-6" color="informative">informative</Text>
+    <Text variant="heading-6" color="danger">danger</Text>
+    <Text variant="heading-6" color="warning">warning</Text>
+
+    <Text variant="body-3">--dark-highlight-blue-foreground</Text>
+    <Text variant="body-3">--dark-highlight-red-foreground</Text>
+    <Text variant="body-3">--dark-highlight-yellow-foreground</Text>
+  </Grid>
+</LiveArea>
+
+
+## Tokens
 
 <Table
   columns={[
     {
-      Header: 'Mobile',
-      accessor: 'mobile',
+      Header: 'Font-Size',
+      accessor: 'fontSize',
       isCollapsed: true,
       align: 'center'
     },
     {
-      Header: 'Desktop',
-      accessor: 'desktop',
+      Header: 'Font-Family',
+      accessor: 'fontFamily',
+      isCollapsed: true,
+      align: 'center'
+    },
+    {
+      Header: 'Line-Height',
+      accessor: 'lineHeight',
+      isCollapsed: true,
+      align: 'center'
+    },
+    {
+      Header: 'Font-Weight',
+      accessor: 'fontWeight',
+      isCollapsed: true,
+      align: 'center'
+    },
+    {
+      Header: 'Letter-Spacing',
+      accessor: 'letterSpacing',
       isCollapsed: true,
       align: 'center'
     },
   ]}
   data={[
     {
-      mobile: 14,
-      desktop: 16
-    },
-    {
-      mobile: 16,
-      desktop: 18
-    },
-    {
-      mobile: 18,
-      desktop: 22
-    },
-    {
-      mobile: 22,
-      desktop: 28
-    },
+      fontSize: '--wds-font-size-12',
+      fontFamily: '--wds-font-family-sans',
+      lineHeight: '--wds-line-height-16',
+      fontWeight: '--wds-font-weight-regular',
+      letterSpacing: '--wds-letter-spacing-16',
+    }
   ]}
 />
 
 
-Text elements sized `18` on desktop becomes `16` on mobile, and so on. Text elements sized `14` on desktop, are the same size even on mobile to ensure a minimum readability.
 
 ## Resources
 

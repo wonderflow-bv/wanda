@@ -55,7 +55,7 @@ export const ValueTableRow = ({
       {/* Prop NAME and DESCRIPTION */}
       {name && (
         <div role="cell" className={styles.Cell}>
-          <Text as="code" size={14}>{name}</Text>
+          <Text as="code" variant="body-2">{name}</Text>
         </div>
       )}
 
@@ -66,10 +66,10 @@ export const ValueTableRow = ({
             ? type.map((type, i) => (
               <Fragment key={type}>
                 {i !== 0 && '|'}
-                <Text key={type} as="code" size={14}>{type}</Text>
+                <Text key={type} as="code" variant="body-2">{type}</Text>
               </Fragment>
             ))
-            : <Text as="code" size={14}>{type}</Text>}
+            : <Text as="code" variant="body-2">{type}</Text>}
           {typeValue && (
             <Popover
               placement="top"
@@ -111,7 +111,7 @@ export const ValueTableRow = ({
       {/* DESCRIPTION */}
       {description && (
         <div role="cell" className={styles.Cell}>
-          <Text size={14}>{description}</Text>
+          <Text variant="body-2">{description}</Text>
         </div>
       )}
     </Stack>
