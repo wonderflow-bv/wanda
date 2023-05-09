@@ -23,10 +23,10 @@ import { useFocusEffect, useRovingTabIndex } from 'react-roving-tabindex';
 
 import {
   Polymorphic, Stack, Symbol, SymbolProps,
+  Text,
   Tooltip,
 } from '@/components';
 
-import { Text } from '../../text-new';
 import * as styles from './menu-item.module.css';
 
 export type MenuItemProps = {

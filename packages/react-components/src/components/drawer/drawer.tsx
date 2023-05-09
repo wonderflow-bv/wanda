@@ -24,10 +24,10 @@ import {
 import { AutoFocusInside, FocusOn } from 'react-focus-on';
 
 import {
-  Elevator, IconButton, Stack, useOverlayContext,
+  Elevator, IconButton, Stack, Text,
+  useOverlayContext,
 } from '@/components';
 
-import { Text } from '../text-new';
 import * as styles from './drawer.module.css';
 
 export type DrawerProps = {

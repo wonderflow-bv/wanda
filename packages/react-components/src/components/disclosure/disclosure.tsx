@@ -26,11 +26,9 @@ import {
 import { useUIDSeed } from 'react-uid';
 
 import {
-  Symbol, SymbolProps,
+  Symbol, SymbolProps, Text, TextVariants,
 } from '@/components';
 
-import { Text } from '../text-new';
-import { TextVariants } from '../text-new/text';
 import * as styles from './disclosure.module.css';
 
 export type DisclosureProps = DetailsHTMLAttributes<HTMLDetailsElement> & {

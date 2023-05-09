@@ -17,10 +17,10 @@
 import clsx from 'clsx';
 import { forwardRef, PropsWithChildren } from 'react';
 
-import { Stack, Symbol, SymbolProps } from '@/components';
+import {
+  Stack, Symbol, SymbolProps, Text, TextVariants,
+} from '@/components';
 
-import { Text } from '../text-new';
-import { TextVariants } from '../text-new/text';
 import { ListProps } from './list';
 import * as styles from './list.module.css';
 

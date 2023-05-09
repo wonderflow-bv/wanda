@@ -31,10 +31,10 @@ import {
 import { useUIDSeed } from 'react-uid';
 
 import {
-  Skeleton, Stack, ToggleButton,
+  Skeleton, Stack, Text,
+  ToggleButton,
 } from '@/components';
 
-import { Text } from '../text-new';
 import * as styles from './table.module.css';
 import { TableCell } from './table-cell';
 import { TableCheckbox } from './table-checkbox';

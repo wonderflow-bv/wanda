@@ -1,8 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useState } from 'react';
 
-import { Chip } from '../..';
-import { Text } from '../../text-new';
+import { Chip, Text } from '../..';
 import { Menu } from '..';
 
 const story: ComponentMeta<typeof Menu.Item> = {

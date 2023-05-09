@@ -14,5 +14,5 @@
  * limitations under the License.
  */
 
-export type { TextProps } from './text';
+export type { TextProps, TextVariants } from './text';
 export { Text } from './text';

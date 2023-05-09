@@ -1,8 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import { Stack } from '@/components';
+import { Stack, Text } from '@/components';
 
-import { Text } from '../text-new';
 import { Container } from './container';
 
 const story: ComponentMeta<typeof Container> = {

@@ -21,10 +21,10 @@ import {
 import { useUIDSeed } from 'react-uid';
 
 import {
-  Stack, Symbol, SymbolProps, Textfield,
+  Stack, Symbol, SymbolProps, Text,
+  Textfield,
 } from '@/components';
 
-import { Text } from '../text-new';
 import * as styles from './slider.module.css';
 
 export type SliderProps = InputHTMLAttributes<HTMLInputElement> & {

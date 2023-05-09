@@ -21,11 +21,9 @@ import {
 import { useUIDSeed } from 'react-uid';
 
 import {
-  Polymorphic, Stack, Symbol, SymbolProps,
+  Polymorphic, Stack, Symbol, SymbolProps, Text, TextVariants,
 } from '@/components';
 
-import { Text } from '../text-new';
-import { TextVariants } from '../text-new/text';
 import * as styles from './star-meter.module.css';
 
 export type StarMeterProps = {

@@ -22,9 +22,8 @@ import {
 } from 'react';
 import { useUIDSeed } from 'react-uid';
 
-import { Stack } from '@/components';
+import { Stack, Text } from '@/components';
 
-import { Text } from '../text-new';
 import * as styles from './selection-controls.module.css';
 
 export type RadioProps = InputHTMLAttributes<HTMLInputElement> & {

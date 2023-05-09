@@ -12,12 +12,12 @@ import {
   Container,
   Disclosure,
   Grid, IconButton, Menu, Snackbar, Stack,
+  Text,
   useBreakpoints,
   useBreakpointsConfig,
   useSSR,
 } from '@/components';
 
-import { Text } from '../components/text-new';
 import * as style from './shell.module.css';
 
 const story: ComponentMeta<typeof Container> = {

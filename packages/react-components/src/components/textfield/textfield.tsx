@@ -5,10 +5,9 @@ import {
 import { useUIDSeed } from 'react-uid';
 
 import {
-  IconButton, IconButtonProps, Stack, Symbol, SymbolProps,
+  IconButton, IconButtonProps, Stack, Symbol, SymbolProps, Text,
 } from '@/components';
 
-import { Text } from '../text-new';
 import { BaseField, BaseFieldProps, PrimitiveInputType } from './base-field';
 import * as styles from './textfield.module.css';
 

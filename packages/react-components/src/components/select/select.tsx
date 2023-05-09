@@ -21,10 +21,9 @@ import {
 import { useUIDSeed } from 'react-uid';
 
 import {
-  Stack, Symbol, SymbolProps,
+  Stack, Symbol, SymbolProps, Text,
 } from '@/components';
 
-import { Text } from '../text-new';
 import * as styles from './select.module.css';
 
 export type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {

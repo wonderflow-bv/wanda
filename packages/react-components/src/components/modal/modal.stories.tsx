@@ -7,9 +7,9 @@ import { AutoFocusInside } from 'react-focus-on';
 
 import {
   Button, Card, Checkbox, Disclosure,
-  Elevator, InfoState, Popover, ResponsiveProvider, Select, Stack, Tab, Textfield,
+  Elevator, InfoState, Popover, ResponsiveProvider, Select, Stack, Tab, Text,
+  Textfield,
 } from '../..';
-import { Text } from '../text-new';
 import { Modal } from './modal';
 
 const longText = (

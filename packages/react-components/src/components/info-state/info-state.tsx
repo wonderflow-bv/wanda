@@ -18,10 +18,9 @@ import { domMax, LazyMotion, m } from 'framer-motion';
 import { forwardRef, PropsWithChildren, ReactNode } from 'react';
 
 import {
-  Stack, StackProps, Symbol, SymbolProps,
+  Stack, StackProps, Symbol, SymbolProps, Text,
 } from '@/components';
 
-import { Text } from '../text-new';
 import * as styles from './info-state.module.css';
 
 export type InfoStateProps = PropsWithClass<{

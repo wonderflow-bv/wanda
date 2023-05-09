@@ -18,10 +18,8 @@ import { useMemo } from 'react';
 import { useUIDSeed } from 'react-uid';
 
 import {
-  Pagination, Select, Stack,
+  Pagination, Select, Stack, Text,
 } from '@/components';
-
-import { Text } from '../../text-new';
 
 export type TablePaginationProps = PropsWithClass & {
   clusters?: number[];

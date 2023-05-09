@@ -23,11 +23,11 @@ import {
 import { FocusOn } from 'react-focus-on';
 
 import {
-  Elevator, OverlayContainer, OverlayContainerProps, Spinner, Stack, useResponsiveContext,
+  Button,
+  Elevator, OverlayContainer, OverlayContainerProps, Spinner, Stack, Text,
+  useResponsiveContext,
 } from '@/components';
 
-import { Button } from '../button/button';
-import { Text } from '../text-new';
 import { ModalContent, ModalContentComponent } from './content/modal-content';
 import { ModalFooter, ModalFooterComponent } from './footer/modal-footer';
 import { ModalHeader, ModalHeaderComponent } from './header/modal-header';

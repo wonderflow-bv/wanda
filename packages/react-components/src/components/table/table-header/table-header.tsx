@@ -16,9 +16,8 @@
 
 import { HTMLAttributes } from 'react';
 
-import { Polymorphic, Stack } from '@/components';
+import { Polymorphic, Stack, Text } from '@/components';
 
-import { Text } from '../../text-new';
 import * as styles from './table-header.module.css';
 
 export type TableHeaderProps = HTMLAttributes<HTMLElement> & {

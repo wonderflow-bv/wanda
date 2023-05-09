@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 
 import {
-  Button, IconButton, Menu, Popover, Stack, Title,
+  Button, IconButton, Menu, Popover, Stack, Text,
 } from '../..';
 import { Table } from './table';
 import { CustomSortingRule } from './types';
@@ -959,7 +959,7 @@ const CustomExpandableComponent = ({ data }: { data: any }) => (
   >
     {Object.keys(data).map((item, i) => (
       <div key={item} style={{ background: 'var(--dimmed-1)', padding: 24, minHeight: 50 * (i + 1) }}>
-        <Title level="6">{typeof data[item] === 'string' ? data[item] : null}</Title>
+        <Text variant="heading-6">{typeof data[item] === 'string' ? data[item] : null}</Text>
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Labore, nostrum minima, debitis qui magni voluptatum.
       </div>
     ))}

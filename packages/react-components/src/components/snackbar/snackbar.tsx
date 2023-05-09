@@ -18,10 +18,9 @@ import clsx from 'clsx';
 import { forwardRef, ReactNode } from 'react';
 
 import {
-  Button, Polymorphic, Stack, Symbol, SymbolProps,
+  Button, Polymorphic, Stack, Symbol, SymbolProps, Text,
 } from '@/components';
 
-import { Text } from '../text-new';
 import * as styles from './snackbar.module.css';
 
 export type SnackbarProps = {

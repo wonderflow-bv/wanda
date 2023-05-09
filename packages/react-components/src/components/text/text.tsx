@@ -16,51 +16,129 @@
 
 import { TokensTypes } from '@wonderflow/tokens/platforms/web';
 import clsx from 'clsx';
-import { CSSProperties, forwardRef } from 'react';
+import {
+  Children,
+  cloneElement, CSSProperties, forwardRef, isValidElement, ReactElement,
+  useCallback, useMemo,
+} from 'react';
+import slugify from 'slugify';
 
-import { Polymorphic } from '@/components';
+import {
+  ChipProps, Polymorphic,
+  Symbol,
+  SymbolProps,
+} from '@/components';
 
 import * as styles from './text.module.css';
 
+type VariantDisplay = 'display-1' | 'display-2' | 'display-3' | 'display-4';
+type VariantHeading = 'heading-1' | 'heading-2' | 'heading-3' | 'heading-4' | 'heading-5' | 'heading-6';
+type VariantSubtitle = 'subtitle-1' | 'subtitle-2';
+type VariantBody = 'body-1' | 'body-2' | 'body-3';
+
+export type TextVariants = VariantDisplay | VariantHeading | VariantSubtitle | VariantBody;
+
+type Decorator = React.ReactElement<SymbolProps> | React.ReactElement<ChipProps>;
+
+type DecoratorSize = Record<VariantBody, {
+  chip: {
+    small: 'small' | 'regular' | 'big';
+    medium: 'small' | 'regular' | 'big';
+    big: 'small' | 'regular' | 'big';
+  };
+  icon: {
+    small: TokensTypes['icon']['size'];
+    medium: TokensTypes['icon']['size'];
+    big: TokensTypes['icon']['size'];
+  };
+}>;
+
+const decoratorSizeConfig: DecoratorSize = {
+  'body-1': {
+    chip: {
+      small: 'small',
+      medium: 'regular',
+      big: 'big',
+    },
+    icon: {
+      small: 16,
+      medium: 16,
+      big: 18,
+    },
+  },
+  'body-2': {
+    chip: {
+      small: 'small',
+      medium: 'regular',
+      big: 'big',
+    },
+    icon: {
+      small: 12,
+      medium: 16,
+      big: 18,
+    },
+  },
+  'body-3': {
+    chip: {
+      small: 'small',
+      medium: 'small',
+      big: 'small',
+    },
+    icon: {
+      small: 12,
+      medium: 12,
+      big: 12,
+    },
+  },
+};
+
 export type TextProps = {
   /**
-   * Set the dimension of the text from one of
-   * the typography system values
+   * Apply typographic text style.
    */
-  size?: TokensTypes['font']['size'];
+  variant?: TextVariants;
   /**
-   * Set the sentiment of the text.
+   * Set the color of the text.
    */
-  sentiment?: 'positive' | 'informative' | 'danger' | 'warning';
-  /**
-   * Set the dimmed color of the text. To keep readability and contrast,
-   * you can only use dimmed colors `5`, `6`, and `7`.
-   */
-  dimmed?: 5 | 6 | 7;
-  /**
-   * Set the font weight of the text. The values are
-   * consistent with the typography system.
-   */
-  weight?: 'thin' | 'bold';
-  /**
-   * Set the maximum width of the text after which it will wrap.
-   */
-  maxWidth?: string;
+  color?: 'positive' | 'informative' | 'danger' | 'warning' | 'neutral' | 'dark';
   /**
    * Set the text alignment of the text. This is a logical property
    * based on the direction of the text.
    */
-  textAlign?: 'start' | 'center' | 'end';
+  textAlign?: 'start' | 'center' | 'end' | 'justify';
   /**
-   * Enable or disable the responsiveness of the text. If disabled,
+   * Allow text to overflow.
+   */
+  preventBreakWord?: boolean;
+  /**
+   * Disable the responsiveness of the text. If disabled,
    * the text will be always the same size across all breakpoints.
    */
-  responsive?: boolean;
+  preventResponsive?: boolean;
   /**
-   * Set the text line-height of the text. This uses
-   * the predefined tokens from the typography system.
+   * Truncate text overflow with ellipsis.
    */
-  lineHeight?: 'none' | 'small' | 'large';
+  truncate?: boolean;
+  /**
+   * Place a Decorator before the string. This must be a Symbol or a Chip component.
+   */
+  decoratorStart?: Decorator;
+  /**
+   * Place a Decorator after the string. This must be a Symbol or a Chip component.
+   */
+  decoratorEnd?: Decorator;
+  /**
+   * Set the size of the decorator according to the variant.
+   */
+  decoratorSize?: 'small' | 'medium' | 'big';
+  /**
+   * Auto generate anchor link inside the heading and display variants. This should be
+   * used only when the title define a new content section and has
+   * a semantic tag.
+   *
+   * @default: `false`
+   */
+  anchor?: boolean;
 }
 
 type PolymorphicText = Polymorphic.ForwardRefComponent<'p', TextProps>;
@@ -68,37 +146,111 @@ type PolymorphicText = Polymorphic.ForwardRefComponent<'p', TextProps>;
 export const Text = forwardRef(({
   children,
   className,
-  size,
-  sentiment,
-  dimmed,
-  weight,
-  maxWidth,
+  variant = 'body-1',
+  color,
   textAlign = 'start',
   as: Wrapper = 'p',
-  responsive = true,
-  lineHeight = 'large',
+  preventResponsive = false,
+  truncate = false,
+  preventBreakWord = false,
+  decoratorStart,
+  decoratorEnd,
+  decoratorSize = 'small',
+  anchor = false,
   style,
+  id,
   ...otherProps
 }, forwardedRef) => {
   const dynamicStyle: CSSProperties = {
-    '--max-w': maxWidth,
     '--t-align': textAlign,
   };
+
+  const isBody = useMemo(() => ['body-1', 'body-2', 'body-3'].some(b => b === variant), [variant]);
+  const isTitle = useMemo(() => !['body-1', 'body-2', 'body-3', 'subtitle-1', 'subtitle-2'].some(b => b === variant), [variant]);
+  const isDisplay = useMemo(() => ['display-1', 'display-2', 'display-3', 'display-4'].some(b => b === variant), [variant]);
+
+  const hasStart = useMemo(() => !!(isBody && decoratorStart), [decoratorStart, isBody]);
+  const hasEnd = useMemo(() => !!(isBody && decoratorEnd), [decoratorEnd, isBody]);
+
+  const isDecoratorAnIcon = (d: Decorator) => Object.prototype.hasOwnProperty.call(d?.props, 'source');
+
+  const isDecoratorStartAnIcon = useMemo(
+    () => (hasStart && isDecoratorAnIcon(decoratorStart as Decorator)), [hasStart, decoratorStart],
+  );
+  const isDecoratorEndAnIcon = useMemo(
+    () => (hasEnd && isDecoratorAnIcon(decoratorEnd as Decorator)), [hasEnd, decoratorEnd],
+  );
+
+  const getDecoratorSize = (w: 'start' | 'end') => {
+    if (w === 'start') {
+      return isDecoratorStartAnIcon
+        ? decoratorSizeConfig[variant as VariantBody].icon[decoratorSize]
+        : decoratorSizeConfig[variant as VariantBody].chip[decoratorSize];
+    }
+
+    return isDecoratorEndAnIcon
+      ? decoratorSizeConfig[variant as VariantBody].icon[decoratorSize]
+      : decoratorSizeConfig[variant as VariantBody].chip[decoratorSize];
+  };
+
+  const decoratorStartDimension = hasStart ? getDecoratorSize('start') : decoratorSize;
+  const decoratorEndDimension = hasEnd ? getDecoratorSize('end') : decoratorSize;
+
+  const getTextFromChildren = useCallback(() => {
+    let label = '';
+
+    Children.map(children, (child) => {
+      if (typeof child === 'string') {
+        label += child;
+      }
+    });
+
+    return label;
+  }, [children]);
+
+  const generatedID = slugify(String(id ?? getTextFromChildren()), { lower: true });
 
   return (
     <Wrapper
       ref={forwardedRef}
-      data-text-size={size}
-      data-text-weight={weight}
-      data-text-sentiment={sentiment}
-      data-text-dimmed={dimmed}
-      data-text-line-height={lineHeight}
-      data-text-responsive={size === 14 ? 14 : responsive}
+      data-text-variant={variant}
+      data-text-color={color}
+      data-text-prevent-responsive={preventResponsive}
+      data-text-truncate={truncate}
+      data-text-decorator={hasStart || hasEnd}
+      data-text-prevent-break-word={preventBreakWord}
       className={clsx(styles.Text, className)}
       style={{ ...dynamicStyle, ...style }}
+      id={id}
       {...otherProps}
     >
+      {hasStart
+          && isValidElement(decoratorStart)
+          && cloneElement(decoratorStart as ReactElement,
+            {
+              ...decoratorStart.props as React.ComponentPropsWithRef<
+              React.ElementType<SymbolProps> | React.ElementType<ChipProps>>,
+              dimension: decoratorStartDimension,
+            })}
+
       {children}
+
+      {(anchor && isTitle) && (
+        <a href={`#${generatedID}`} className={styles.Anchor} rel="noreferrer">
+          <Symbol source="link" weight="duotone" dimension={isDisplay ? 24 : 16} />
+        </a>
+      )}
+
+      {hasEnd
+          && isValidElement(decoratorEnd)
+          && cloneElement(decoratorEnd as ReactElement,
+            {
+              ...decoratorEnd.props as React.ComponentPropsWithRef<
+              React.ElementType<SymbolProps> | React.ElementType<ChipProps>>,
+              dimension: decoratorEndDimension,
+            })}
     </Wrapper>
   );
 }) as PolymorphicText;
+
+Text.displayName = 'Text';

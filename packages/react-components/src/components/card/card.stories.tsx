@@ -2,9 +2,8 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
 import {
-  Stack, Symbol,
+  Stack, Symbol, Text,
 } from '../..';
-import { Text } from '../text-new';
 import { Card } from './card';
 
 const story: ComponentMeta<typeof Card> = {
