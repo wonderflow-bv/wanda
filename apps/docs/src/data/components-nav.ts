@@ -234,18 +234,8 @@ const ComponentsNav: NavigationMenu = [
         target: '',
       },
       {
-        path: '/get-started/components/typography/prose',
-        label: 'Prose',
-        target: '',
-      },
-      {
         path: '/get-started/components/typography/text',
         label: 'Text',
-        target: '',
-      },
-      {
-        path: '/get-started/components/typography/title',
-        label: 'Title',
         target: '',
       },
     ],

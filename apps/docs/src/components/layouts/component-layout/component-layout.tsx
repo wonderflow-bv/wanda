@@ -4,7 +4,7 @@ import {
   ButtonsGroup,
   Chip,
   ChipProps,
-  List, Prose, Stack, Symbol, Title, useResponsiveContext,
+  List, Stack, Symbol, Title, useResponsiveContext,
 } from '@wonderflow/react-components';
 import Markdown from 'markdown-to-jsx';
 import Link from 'next/link';
@@ -16,6 +16,7 @@ import { DocLayout } from '@/components/layouts/doc-layout';
 import { IPropsMDXLayout, MDX_COMPONENTS } from '@/components/layouts/mdx-layout';
 
 import { ClientOnly } from '../../shared/client-only';
+import { Prose } from '../../shared/prose';
 
 export interface IPropsComponentLayout extends IPropsMDXLayout {
   features?: string[];
