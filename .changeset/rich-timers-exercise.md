@@ -3,4 +3,4 @@
 "@wonderflow/tokens": major
 ---
 
-New Typography Tokens and Text Component
+Add new `Typography Tokens` and `Text` component, remove `Title` and `Prose` components and old configurations.
