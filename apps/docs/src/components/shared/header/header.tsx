@@ -56,9 +56,9 @@ export const Header: FCClass<HeaderProps> = ({
             vPadding={16}
             columnGap={matches.small ? 24 : undefined}
           >
-            <Link href="/"><a className={styles.LogoLink}><Logo /></a></Link>
+            <Link href="/"><a className={styles.LogoLink}><Logo style={{ width: matches.small ? '116' : '36' }} /></a></Link>
             <Stack direction="row" vAlign="center" fill={false} columnGap={8}>
-              <Chip className={styles.Version} dimension="small" icon={matches.small ? 'tags' : undefined} color="green">
+              <Chip className={styles.Version} dimension="small" icon="tags" color="green">
                 {`v${pkg.dependencies['@wonderflow/react-components']}`}
               </Chip>
               {matches.medium && <MainNav />}
