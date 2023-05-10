@@ -4,12 +4,17 @@ import { Avatar } from './avatar';
 
 describe('<Avatar>', () => {
   test('should render properly', () => {
-    const { container } = render(<Avatar src="https://api.lorem.space/image/face?w=150&h=150" dimension="small" />);
+    const { container } = render(<Avatar src="https://xsgames.co/randomusers/avatar.php?g=male" dimension="small" />);
     expect(container).not.toBeNull();
   });
 
   test('should render properly - w/o dimension', () => {
-    const { container } = render(<Avatar src="https://api.lorem.space/image/face?w=150&h=150" />);
+    const { container } = render(<Avatar src="https://xsgames.co/randomusers/avatar.php?g=male" />);
+    expect(container).not.toBeNull();
+  });
+
+  test('should render properly - w/o src', () => {
+    const { container } = render(<Avatar />);
     expect(container).not.toBeNull();
   });
 });

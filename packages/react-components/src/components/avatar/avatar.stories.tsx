@@ -8,7 +8,7 @@ const story: ComponentMeta<typeof Avatar> = {
   component: Avatar,
   args: {
     dimension: 'regular',
-    src: 'https://api.lorem.space/image/face?w=150&h=150',
+    src: 'https://xsgames.co/randomusers/avatar.php?g=male',
   },
   argTypes: {
     dimension: {
