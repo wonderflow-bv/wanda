@@ -102,7 +102,7 @@ export const Bezier = ({
             </Stack>
             <Stack direction="row" columnGap={8} vAlign="center">
               <Symbol dimension={16} fill="var(--highlight-mint-foreground)" source="clock-rotate-left" />
-              <Text as="span" size={14}>
+              <Text as="span" variant="body-2">
                 {timing === duration ? duration : duration * 2 }
                 s
               </Text>
@@ -132,7 +132,7 @@ export const Bezier = ({
                   ease: value,
                 }}
               />
-              <Text size={14}>Easing</Text>
+              <Text variant="body-2">Easing</Text>
             </Stack>
 
             {compare && (
@@ -150,7 +150,7 @@ export const Bezier = ({
                   }}
                   {...otherProps}
                 />
-                <Text size={14}>No easing</Text>
+                <Text variant="body-2">No easing</Text>
               </Stack>
             )}
           </LazyMotion>

@@ -88,7 +88,7 @@ export const Code: FCChildrenClass<CodeProps> = ({
 
       {(showLanguage || actions) && (
         <Stack direction="row" fill={false} hAlign="space-between" vAlign="center" className={styles.Toolbar}>
-          <Text responsive={false} size={14} dimmed={5}>{hasLanguage}</Text>
+          <Text preventResponsive variant="body-2">{hasLanguage}</Text>
 
           <Stack direction="row" rowGap={8}>
             {!hideCopy && (

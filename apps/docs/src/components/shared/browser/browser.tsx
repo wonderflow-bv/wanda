@@ -73,7 +73,7 @@ export const Browser: FCChildrenClass<BrowserProps> = ({
           columnGap={8}
         >
           <Symbol source="lock" dimension={12} />
-          <Text size={14} lineHeight="none">
+          <Text variant="body-2">
             <ClampText rows={1}>{url}</ClampText>
           </Text>
         </Stack>

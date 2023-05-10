@@ -18,19 +18,11 @@ const ComponentsNav: NavigationMenu = [
       {
         path: '/get-started/components/actions/accordion',
         label: 'Accordion',
-        tag: {
-          color: 'blue',
-          label: 'beta',
-        },
         target: '',
       },
       {
         path: '/get-started/components/actions/expander',
         label: 'Expander',
-        tag: {
-          color: 'green',
-          label: 'new',
-        },
         target: '',
       },
       {
@@ -237,6 +229,10 @@ const ComponentsNav: NavigationMenu = [
         path: '/get-started/components/typography/text',
         label: 'Text',
         target: '',
+        tag: {
+          color: 'red',
+          label: 'update',
+        },
       },
     ],
   },

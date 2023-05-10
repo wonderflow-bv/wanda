@@ -63,7 +63,7 @@ export const Swatch: React.FC<SwatchProps> = ({
         hAlign="center"
         fill={false}
       >
-        {isCopied && <Text as="b" weight="bold" size={16}>COPIED</Text>}
+        {isCopied && <Text as="b">COPIED</Text>}
       </Stack>
       <Stack
         rowGap={8}
@@ -72,9 +72,9 @@ export const Swatch: React.FC<SwatchProps> = ({
         fill={false}
         hPadding={8}
       >
-        {name && <Text size={14} weight="bold">{name}</Text>}
+        {name && <Text as="b" variant="body-2">{name}</Text>}
         <Stack className={styles.Values} columnGap={4}>
-          <Text size={14} lineHeight="small">
+          <Text variant="body-2">
             {hslColor}
             {showCopy && (
               <IconButton
@@ -87,7 +87,7 @@ export const Swatch: React.FC<SwatchProps> = ({
               />
             )}
           </Text>
-          <Text size={14} lineHeight="small">
+          <Text variant="body-2">
             {hexColor}
             {showCopy && (
               <IconButton

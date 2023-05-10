@@ -8,7 +8,7 @@ import {
 import { Text, TextVariants } from './text';
 
 const story: ComponentMeta<typeof Text> = {
-  title: 'Typography/Text-New',
+  title: 'Typography/Text',
   component: Text,
   args: {
     variant: 'body-1',
