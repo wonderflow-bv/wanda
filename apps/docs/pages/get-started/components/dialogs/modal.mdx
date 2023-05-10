@@ -3,7 +3,7 @@ import { getLayoutProps } from "@/utils/get-layout-props";
 import { PropsTable } from "@/components/doc/props-table";
 import { KeyTable } from "@/components/shared/key-table";
 import { useState } from "react";
-import { Modal, Button, ResponsiveProvider } from "@wonderflow/react-components"
+import { Modal, Button, ResponsiveProvider, List } from "@wonderflow/react-components"
 
 export const getStaticProps = () =>
   getLayoutProps({
@@ -98,29 +98,49 @@ export default () => {
 
 ### When to use
 
-* Use to inform the user of critical information about their current workflow.
-* Use when you need to ask a confirmation from a user before proceeding.
-* Use when the user is required to take an action.
-* To provide context and guidance for a specific task or workflow, such as providing instructions for completing a form or setting up an account.
+<List>
+  <List.Li marker='circle-check' markerColor='var(--highlight-green-foreground)'>
+  Use to inform the user of critical information about their current workflow.
+  </List.Li>
+  <List.Li  marker='circle-check' markerColor='var(--highlight-green-foreground)'>
+  Use when you need to ask a confirmation from a user before proceeding.
+  </List.Li>
+  <List.Li  marker='circle-check' markerColor='var(--highlight-green-foreground)'>
+  Use when the user is required to take an action.
+  </List.Li>
+  <List.Li  marker='circle-check' markerColor='var(--highlight-green-foreground)'>
+  To provide context and guidance for a specific task or workflow, such as providing instructions for completing a form or setting up an account.
+  </List.Li>
+</List>
 
 ### When not to use
 
-* For information that is not related or relevant to the current user flow. This can be distracting and may interfere with the user's overall experience.
-* To display non-critical or secondary information, such as help text tips, or product recommendations. In these cases, a tooltip or a popover component may be more appropriate.
-* To force the user to take an action or make a decision.
-* To display complex forms or large amounts of information.
-* For navigation.
+<List>
+  <List.Li marker='circle-x' markerColor='var(--highlight-red-foreground)'>
+  For information that is not related or relevant to the current user flow. This can be distracting and may interfere with the user's overall experience.
+  </List.Li>
+  <List.Li  marker='circle-x' markerColor='var(--highlight-red-foreground)'>
+  To display non-critical or secondary information, such as help text tips, or product recommendations. In these cases, a tooltip or a popover component may be more appropriate.
+  </List.Li>
+  <List.Li  marker='circle-x' markerColor='var(--highlight-red-foreground)'>
+  To force the user to take an action or make a decision.
+  </List.Li>
+  <List.Li  marker='circle-x' markerColor='var(--highlight-red-foreground)'>
+  To display complex forms or large amounts of information.
+  </List.Li>
+  <List.Li  marker='circle-x' markerColor='var(--highlight-red-foreground)'>
+  For navigation.
+  </List.Li>
+</List>
 
 
 ### Best practice
 
-Keep the content relevant: Include only the essential information and actions that are required to complete the current task. Avoid overloading the modal with unnecessary content.
+Keep the **content relevant**: Include only the essential information and actions that are required to complete the current task. **Avoid overloading** the modal with unnecessary content.
+**Use modals sparingly**: Modals should only be used when it's necessary to temporarily interrupt the user's workflow to gather important information or to convey a critical message.
 
-Use modals sparingly: Modals should only be used when it's necessary to temporarily interrupt the user's workflow to gather important information or to convey a critical message.
-
-Avoid displaying a modal over another modal. Instead, consider adding the additional information to the existing modal content or directing users to a new screen.
-
-Avoid using nested modals. If a confirmation modal is required to approve a task in the first modal, the first task should not be performed in a modal.
+**Avoid displaying a modal over another modal**. Instead, consider adding the additional information to the existing modal content or directing users to a new screen.
+**Avoid using nested modals**. If a confirmation modal is required to approve a task in the first modal, the first task should not be performed in a modal.
 
 
 ### Sizes
@@ -265,14 +285,16 @@ export const CustomModal = () => {
     },
     {
       name: "size",
-      type: ["small | medium | large"],
+      type: ["enum"],
+      typeValue: "'small' | 'medium' | 'large'",
       default: "medium",
       required: false,
       description: "Set the Modal size.",
     },
     {
       name: "theme",
-      type: ["dark | light | auto"],
+      type: ["enum"],
+      typeValue: "'dark' | 'light' | 'auto'",
       default: "light",
       required: false,
       description: "Set the theme of the content card. To ensure contrast with the default overlay color (dark), this is set to `light` by default.",

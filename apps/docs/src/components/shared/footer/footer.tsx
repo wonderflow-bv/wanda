@@ -115,10 +115,17 @@ export const Footer: FC<FooterProps> = ({
 
         <Stack rowGap={24}>
           <Stack rowGap={8}>
-            <Text>
-              Created by Wonderflow Design Team for Wonderflow.
+            <Text color="dark">
+              Created by
+              {' '}
+              <b>Wonderflow Design Team</b>
+              {' '}
+              for
+              {' '}
+              <b>Wonderflow</b>
+              .
             </Text>
-            <Text>
+            <Text variant="subtitle-2">
               &copy; Wonderflow
               {' '}
               {new Date().getFullYear()}
