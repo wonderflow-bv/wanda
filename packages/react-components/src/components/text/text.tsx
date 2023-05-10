@@ -221,7 +221,7 @@ export const Text = forwardRef(({
       data-text-prevent-break-word={preventBreakWord}
       className={clsx(styles.Text, className)}
       style={{ ...dynamicStyle, ...style }}
-      id={id}
+      id={id || (isTitle && generatedID) || ''}
       {...otherProps}
     >
       {hasStart
