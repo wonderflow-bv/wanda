@@ -39,28 +39,28 @@
 
 
       &::before {
-        transform: translateX(-50%) rotate(45deg);
+        transform: translateX(-50%) translateY(-2px) rotate(45deg);
       }
     }
     @nest .Balloon[data-popper-placement^='left'] & {
       right: 6px;
 
       &::before {
-        transform: translateY(-50%) rotate(45deg);
+        transform: translateX(-2px) translateY(-50%) rotate(45deg);
       }
     }
     @nest .Balloon[data-popper-placement^='bottom'] & {
       top: -6px;
 
       &::before {
-        transform: translateX(-50%) rotate(45deg);
+        transform: translateX(-50%) translateY(2px) rotate(45deg);
       }
     }
     @nest .Balloon[data-popper-placement^='right'] & {
       left: -6px;
 
       &::before {
-        transform: translateY(-50%) rotate(45deg);
+        transform: translateX(2px) translateY(-50%) rotate(45deg);
       }
     }
   }
