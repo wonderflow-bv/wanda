@@ -40,8 +40,7 @@ export type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
    */
   label?: ReactNode;
   /**
-   * Optional hint text field, it provides additional help or context
-   * to the user, it is often used to explain the correct format of the textfield data.
+   * Optional hint text field, it provides additional help or context to the user.
    */
   message?: string;
   /**
