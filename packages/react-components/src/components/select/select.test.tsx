@@ -23,7 +23,7 @@ describe('<Select>', () => {
 
   test(' it should render properly with props', () => {
     const { container } = render(
-      <Select defaultValue="placeholder" label="My Label" dimension="small" disabled>
+      <Select defaultValue="placeholder" label="My Label" message="test" dimension="small" disabled>
         <option value="placeholder" hidden disabled>Pick an option</option>
         <optgroup label="Option Group One">
           <option value="1">This is a very long option selected</option>

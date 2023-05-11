@@ -28,6 +28,8 @@ const story: ComponentMeta<typeof Select> = {
   },
   args: {
     dimension: 'regular',
+    label: '',
+    message: '',
   },
 };
 
@@ -69,14 +71,15 @@ Single.args = {
   kind: 'single',
 };
 
+export const Multiple = MultipleTemplate.bind({});
+Multiple.args = {
+  kind: 'multiple',
+};
+
 export const WithLabel = SingleTemplate.bind({});
 WithLabel.args = {
   disabled: false,
   kind: 'single',
   label: 'Label',
-};
-
-export const Multiple = MultipleTemplate.bind({});
-Multiple.args = {
-  kind: 'multiple',
+  message: 'Sample hint text',
 };

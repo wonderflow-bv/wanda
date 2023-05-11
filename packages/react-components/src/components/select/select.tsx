@@ -40,6 +40,11 @@ export type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
    */
   label?: ReactNode;
   /**
+   * Optional hint text field, it provides additional help or context
+   * to the user, it is often used to explain the correct format of the textfield data.
+   */
+  message?: string;
+  /**
    * Set how many options can be selected at once.
    */
   kind?: 'single' | 'multiple';
@@ -63,6 +68,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(({
   disabled = false,
   icon = 'chevron-down',
   label,
+  message,
   kind = 'single',
   dimension = 'regular',
   onChange,
@@ -91,6 +97,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(({
       tabIndex={disabled ? 0 : undefined}
     >
       {label && <Text as="label" aria-disabled={disabled} className={styles.Label} variant={dimension === 'big' ? 'body-1' : 'body-2'} htmlFor={seedID('select')}>{label}</Text>}
+
       <div className={styles.FieldContainer}>
         <select
           disabled={disabled}
@@ -112,6 +119,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(({
           />
         ) }
       </div>
+
+      {message && <Text as="label" aria-disabled={disabled} className={styles.Label} variant="body-3">{message}</Text>}
     </Stack>
   );
 });
