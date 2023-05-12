@@ -160,11 +160,11 @@ export const StarMeter = forwardRef(({
           </linearGradient>
         </defs>
       </svg>
-      <Stack direction="row" columnGap={dimension === 'small' ? 2 : 4}>
+      <Stack direction="row" columnGap={dimension === 'small' ? 2 : 4} vAlign="center">
         {starType(starCount, value)}
       </Stack>
-      <Text id={seedID('star-meter')} variant={properties[dimension].labelSize as TextVariants}>
-        {!hideLabel && <b>{label ?? value.toString()}</b>}
+      <Text preventResponsive id={seedID('star-meter')} variant={properties[dimension].labelSize as TextVariants}>
+        <b>{(!hideLabel && label) ?? value.toString()}</b>
       </Text>
     </Stack>
   );

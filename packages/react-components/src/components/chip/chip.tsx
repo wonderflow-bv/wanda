@@ -75,7 +75,7 @@ export const Chip: FCChildrenClass<ChipProps> = forwardRef(({
     <Stack
       as="span"
       direction="row"
-      columnGap={8}
+      columnGap={dimension === 'big' ? 8 : 4}
       inline
       data-chip-color={color}
       data-chip-dimension={dimension}

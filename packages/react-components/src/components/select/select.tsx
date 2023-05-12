@@ -119,7 +119,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(({
         ) }
       </div>
 
-      {message && <Text as="label" aria-disabled={disabled} className={styles.Label} variant="body-3">{message}</Text>}
+      {message && <Text as="label" aria-disabled={disabled} className={styles.Label} variant={dimension === 'big' ? 'body-2' : 'body-3'}>{message}</Text>}
     </Stack>
   );
 });

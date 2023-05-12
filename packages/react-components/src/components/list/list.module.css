@@ -10,12 +10,10 @@
 
     &[data-list-size='small'] {
       --marker-size: token(--icon-size-12);
-      --marker-gap: token(--space-8);
     }
 
     &[data-list-size='big'] {
       --marker-size: token(--icon-size-18);
-      --marker-gap: token(--space-16);
     }
 
     &[data-list-no-marker='true'] {

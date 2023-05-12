@@ -180,7 +180,7 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
         )}
       </div>
 
-      {message && <Text as="label" color={(invalid && !disabled) ? 'danger' : undefined} aria-disabled={disabled} className={styles.Label} variant="body-3">{message}</Text>}
+      {message && <Text as="label" color={(invalid && !disabled) ? 'danger' : undefined} aria-disabled={disabled} className={styles.Label} variant={dimension === 'big' ? 'body-2' : 'body-3'}>{message}</Text>}
 
     </Stack>
   );
