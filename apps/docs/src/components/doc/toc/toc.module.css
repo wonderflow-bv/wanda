@@ -4,8 +4,3 @@
   }
 }
 
-.Item {
-  & svg {
-    margin-block-start: calc(var(--marker-size)/2);
-  }
-}
