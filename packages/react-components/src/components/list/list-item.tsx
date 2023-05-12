@@ -47,23 +47,23 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(({
 }, forwardedRef) => {
   const sizes = {
     small: {
+      text: 'body-3',
+      icon: {
+        size: 12,
+        weight: 'solid',
+      },
+    },
+    regular: {
       text: 'body-2',
       icon: {
         size: 16,
         weight: 'solid',
       },
     },
-    regular: {
+    big: {
       text: 'body-1',
       icon: {
         size: 16,
-        weight: 'solid',
-      },
-    },
-    big: {
-      text: 'heading-6',
-      icon: {
-        size: 18,
         weight: 'solid',
       },
     },
@@ -75,7 +75,7 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(({
       as="li"
       direction="row"
       hAlign="start"
-      vAlign="start"
+      vAlign="center"
       fill={false}
       ref={forwardedRef}
       {...otherProps}

@@ -21,6 +21,7 @@ export const getStaticProps = () =>
   });
 
 <LiveArea>
+  <Text >Lorem ipsum dolor sit, amet consectetur adipisicing elit.</Text>
   <Text>
     Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius
     dolores, tempore quas labore officiis praesentium. Porro sed dolorem,
@@ -33,9 +34,12 @@ export const getStaticProps = () =>
 ```tsx lines="1,4"
 import { Text } from "@wonderflow/react-components";
 
-export default () => {
-  return <Text>Text</Text>;
-};
+export default () => (
+  <>
+    <Text>...</Text>
+
+  </>
+);
 ```
 
 ## API Reference

@@ -25,9 +25,8 @@
     }
 
     &[data-disclosure-dimension='big'] {
-      --icon-top-offset: calc(var(--icon-size) / 12);
-      --icon-size: token(--icon-size-24);
-      --icon-padding: token(--space-16);
+      --icon-top-offset: calc(var(--icon-size) / 3);
+      --icon-size: token(--icon-size-18);
     }
   }
 

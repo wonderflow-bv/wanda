@@ -67,6 +67,6 @@
 
   .Filter {
     max-height: calc(100vh - 64px);
-    overflowy: scroll;
+    overflow-y: scroll;
   }
 }

@@ -61,7 +61,7 @@
       --fw-small: token(--wds-font-weight-heavy);
       --lh-small: token(--wds-line-height-64);
       --fs-extra-small: token(--wds-font-size-40);
-      --fw-extra-small: token(--wds-font-weight-bold);
+      --fw-extra-small: token(--wds-font-weight-heavy);
       --lh-extra-small: token(--wds-line-height-48);
     }
 
@@ -78,7 +78,7 @@
       --fw-small: token(--wds-font-weight-heavy);
       --lh-small: token(--wds-line-height-64);
       --fs-extra-small: token(--wds-font-size-40);
-      --fw-extra-small: token(--wds-font-weight-bold);
+      --fw-extra-small: token(--wds-font-weight-heavy);
       --lh-extra-small: token(--wds-line-height-48);
     }
 
@@ -92,10 +92,10 @@
       --fw-medium: token(--wds-font-weight-heavy);
       --lh-medium: token(--wds-line-height-64);
       --fs-small: token(--wds-font-size-48);
-      --fw-small: token(--wds-font-weight-bold);
+      --fw-small: token(--wds-font-weight-heavy);
       --lh-small: token(--wds-line-height-56);
       --fs-extra-small: token(--wds-font-size-40);
-      --fw-extra-small: token(--wds-font-weight-bold);
+      --fw-extra-small: token(--wds-font-weight-heavy);
       --lh-extra-small: token(--wds-line-height-48);
     }
 
@@ -109,10 +109,10 @@
       --fw-medium: token(--wds-font-weight-heavy);
       --lh-medium: token(--wds-line-height-64);
       --fs-small: token(--wds-font-size-48);
-      --fw-small: token(--wds-font-weight-bold);
+      --fw-small: token(--wds-font-weight-heavy);
       --lh-small: token(--wds-line-height-56);
       --fs-extra-small: token(--wds-font-size-40);
-      --fw-extra-small: token(--wds-font-weight-bold);
+      --fw-extra-small: token(--wds-font-weight-heavy);
       --lh-extra-small: token(--wds-line-height-48);
     }
 

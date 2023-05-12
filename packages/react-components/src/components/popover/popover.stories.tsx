@@ -174,3 +174,36 @@ WithElevator.args = {
     aria-label="Show property description"
   />,
 };
+
+const WithCodeTemplate: ComponentStory<typeof Popover> = args => (
+  <Popover {...args}>
+    <Elevator resting={2}>
+      <Card bordered style={{ width: '60ch', color: 'var(--global-background)', background: 'var(--dimmed-8)' }}>
+        <pre style={{ whiteSpace: 'pre-wrap' }}>
+          {`{
+  productId: '67rJ!B^*S3@izdX*8s26O1y6R6P4iwskG',
+  scope: 'main.scope.',
+  pipelines: [
+    'Nb9bSzJqcG2%^M8JDWXyYB072%hzGOKA',
+    'Nb9bSzJqcG2%^M8JDWXyYB072%hzGOKA'
+  ],
+  languages: [
+    'en',
+  ],
+}`}
+        </pre>
+      </Card>
+    </Elevator>
+  </Popover>
+);
+
+export const WithCode = WithCodeTemplate.bind({});
+WithCode.args = {
+  placement: 'auto-end',
+  trigger: <IconButton
+    kind="secondary"
+    icon="circle-info"
+    dimension="big"
+    aria-label="Show some formatted code"
+  />,
+};
