@@ -54,64 +54,64 @@ Our font-sizes are based on the Minor third scale with a base font size of 16px.
 
 <LiveArea hAlign="start" direction="column" rowGap={16}>
     <div>
-      <Text variant="body-3">body-3</Text>
       <Text variant="body-3">Wonderflow</Text>
+      <Text variant="body-3">body-3</Text>
     </div>
     <div>
-      <Text variant="body-3">body-2</Text>
       <Text variant="body-2">Wonderflow</Text>
+      <Text variant="body-3">body-2</Text>
     </div>
     <div>
-      <Text variant="body-3">body-1</Text>
       <Text variant="body-1">Wonderflow</Text>
+      <Text variant="body-3">body-1</Text>
     </div>
     <div>
-      <Text variant="body-3">subtitle-2</Text>
       <Text variant="subtitle-2">Wonderflow</Text>
+      <Text variant="body-3">subtitle-2</Text>
     </div>
     <div>
-      <Text variant="body-3">subtitle-1</Text>
       <Text variant="subtitle-1">Wonderflow</Text>
+      <Text variant="body-3">subtitle-1</Text>
     </div>
     <div>
-      <Text variant="body-3">heading-6</Text>
       <Text variant="heading-6">Wonderflow</Text>
+      <Text variant="body-3">heading-6</Text>
     </div>
     <div>
-      <Text variant="body-3">heading-5</Text>
       <Text variant="heading-5">Wonderflow</Text>
+      <Text variant="body-3">heading-5</Text>
     </div>
     <div>
-      <Text variant="body-3">heading-4</Text>
       <Text variant="heading-4">Wonderflow</Text>
+      <Text variant="body-3">heading-4</Text>
     </div>
     <div>
-      <Text variant="body-3">heading-3</Text>
       <Text variant="heading-3">Wonderflow</Text>
+      <Text variant="body-3">heading-3</Text>
     </div>
     <div>
-      <Text variant="body-3">heading-2</Text>
       <Text variant="heading-2">Wonderflow</Text>
+      <Text variant="body-3">heading-2</Text>
     </div>
     <div>
-      <Text variant="body-3">heading-1</Text>
       <Text variant="heading-1">Wonderflow</Text>
+      <Text variant="body-3">heading-1</Text>
     </div>
     <div>
-      <Text variant="body-3">display-4</Text>
       <Text variant="display-4">Wonderflow</Text>
+      <Text variant="body-3">display-4</Text>
     </div>
     <div>
-      <Text variant="body-3">display-3</Text>
       <Text variant="display-3">Wonderflow</Text>
+      <Text variant="body-3">display-3</Text>
     </div>
     <div>
-      <Text variant="body-3">display-2</Text>
       <Text variant="display-2">Wonderflow</Text>
+      <Text variant="body-3">display-2</Text>
     </div>
     <div>
-      <Text variant="body-3">display-1</Text>
       <Text variant="display-1">Wonderflow</Text>
+      <Text variant="body-3">display-1</Text>
     </div>
 </LiveArea>
 
@@ -120,25 +120,44 @@ Our font-sizes are based on the Minor third scale with a base font size of 16px.
 Font weights in typography can enhance the hierarchical structure and draw attention to important content on a surface. We recommend
 using Heavy, Bold, Medium, and Regular weights to support most use cases.
 
-<LiveArea hAlign="start" direction="column" rowGap={32}>
-  <Grid columns="3" filling={false}>
-    <Text style={{fontWeight: '400'}}>Regular</Text>
-    <Text style={{fontWeight: '400'}}>400</Text>
-    <Text style={{fontWeight: '400'}}>Wonderflow</Text>
+<LiveArea hAlign="start" direction="column" rowGap={24}>
+  <Stack rowGap={4}>
+    <Grid columns="3" filling={false}>
+      <Text style={{fontWeight: '400'}}>Regular</Text>
+      <Text style={{fontWeight: '400'}}>400</Text>
+      <Text style={{fontWeight: '400'}}>Wonderflow</Text>
+    </Grid>
+    <Text variant="body-3">--wds-font-weight-regular</Text>
+  </Stack>
 
-    <Text style={{fontWeight: '600'}}>Semibold</Text>
-    <Text style={{fontWeight: '600'}}>600</Text>
-    <Text style={{fontWeight: '600'}}>Wonderflow</Text>
+  <Stack rowGap={4}>
+    <Grid columns="3" filling={false}>
+      <Text style={{fontWeight: '600'}}>Semibold</Text>
+      <Text style={{fontWeight: '600'}}>600</Text>
+      <Text style={{fontWeight: '600'}}>Wonderflow</Text>
+    </Grid>
+    <Text variant="body-3">--wds-font-weight-semibold</Text>
+  </Stack>
 
-    <Text style={{fontWeight: '700'}}>Bold</Text>
-    <Text style={{fontWeight: '700'}}>700</Text>
-    <Text style={{fontWeight: '700'}}>Wonderflow</Text>
+  <Stack rowGap={4}>
+    <Grid columns="3" filling={false}>
+      <Text style={{fontWeight: '700'}}>Bold</Text>
+      <Text style={{fontWeight: '700'}}>700</Text>
+      <Text style={{fontWeight: '700'}}>Wonderflow</Text>
+    </Grid>
+    <Text variant="body-3">--wds-font-weight-bold</Text>
+  </Stack>
 
-    <Text style={{fontWeight: '800'}}>Heavy</Text>
-    <Text style={{fontWeight: '800'}}>800</Text>
-    <Text style={{fontWeight: '800'}}>Wonderflow</Text>
-  </Grid>
+  <Stack rowGap={4}>
+    <Grid columns="3" filling={false}>
+      <Text style={{fontWeight: '800'}}>Heavy</Text>
+      <Text style={{fontWeight: '800'}}>800</Text>
+      <Text style={{fontWeight: '800'}}>Wonderflow</Text>
+    </Grid>
+    <Text variant="body-3">--wds-font-weight-heavy</Text>
+  </Stack>
 </LiveArea>
+
 
 ## Text Color
 
