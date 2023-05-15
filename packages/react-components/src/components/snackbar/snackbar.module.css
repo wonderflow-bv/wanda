@@ -51,12 +51,12 @@
     color: var(--snackbar-fg);
 
     /* stylelint-disable-next-line number-max-precision */
-    margin-top: 0.475rem;
+    margin-top: 0.375rem;
 
     &[data-snackbar-has-title='true'] {
 
       /* stylelint-disable-next-line number-max-precision */
-      margin-top: token(--space-8);
+      margin-top: 0.625rem;
     }
   }
 }

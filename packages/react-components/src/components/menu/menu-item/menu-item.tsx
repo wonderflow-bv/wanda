@@ -185,7 +185,7 @@ export const MenuItem = forwardRef(({
               interactive
               trigger={InnerContent}
             >
-              {description}
+              <Text variant="body-2">{description}</Text>
             </Tooltip>
           )
           : InnerContent

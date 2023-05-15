@@ -225,7 +225,7 @@
     /* Variant Subtitle */
 
     &[data-text-variant='subtitle-1'] {
-      color: var(--dimmed-6);
+      color: var(--dimmed-7);
       letter-spacing: token(--wds-letter-spacing-16);
 
       --fs-large: token(--wds-font-size-16);
@@ -243,7 +243,7 @@
     }
 
     &[data-text-variant='subtitle-2'] {
-      color: var(--dimmed-6);
+      color: var(--dimmed-7);
       letter-spacing: token(--wds-letter-spacing-24);
 
       --fs-large: token(--wds-font-size-14);
@@ -264,7 +264,7 @@
     /* Variant Body */
 
     &[data-text-variant='body-1'] {
-      color: var(--dimmed-6);
+      color: var(--dimmed-7);
       letter-spacing: token(--wds-letter-spacing-16);
 
       --fs-large: token(--wds-font-size-16);
@@ -282,7 +282,7 @@
     }
 
     &[data-text-variant='body-2'] {
-      color: var(--dimmed-6);
+      color: var(--dimmed-7);
       letter-spacing: token(--wds-letter-spacing-14);
 
       --fs-large: token(--wds-font-size-14);
@@ -300,7 +300,7 @@
     }
 
     &[data-text-variant='body-3'] {
-      color: var(--dimmed-6);
+      color: var(--dimmed-7);
       letter-spacing: token(--wds-letter-spacing-32);
 
       --fs-large: token(--wds-font-size-12);
@@ -336,7 +336,7 @@
     }
 
     &[data-text-color='neutral'] {
-      color: var(--dimmed-6);
+      color: var(--dimmed-7);
     }
 
     &[data-text-color='dark'] {

@@ -40,7 +40,7 @@ export const TableHeader: FCChildren<TableHeaderProps> = ({
     {...otherProps}
   >
     <div>
-      {typeof title === 'string' ? <Text id={id} variant="subtitle-1" color="dark">{title}</Text> : title}
+      {typeof title === 'string' ? <Text id={id} variant="heading-6" color="dark">{title}</Text> : title}
     </div>
 
     <Stack direction="row" vAlign="center" columnGap={8} inline>

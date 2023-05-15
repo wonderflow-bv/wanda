@@ -106,7 +106,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>(({
   const fieldID = useMemo(() => id ?? seedID('slider'), [id, seedID]);
 
   return (
-    <Stack direction="column" rowGap={isSmall ? 4 : 8}>
+    <Stack direction="column" rowGap={4}>
       {label && <Text as="label" variant={isSmall ? 'body-2' : 'body-1'} className={styles.Label} aria-disabled={disabled} htmlFor={fieldID}>{label}</Text>}
 
       <Stack

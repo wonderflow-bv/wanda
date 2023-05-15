@@ -38,6 +38,8 @@ type VariantBody = 'body-1' | 'body-2' | 'body-3';
 
 export type TextVariants = VariantDisplay | VariantHeading | VariantSubtitle | VariantBody;
 
+export type TextColors = 'positive' | 'informative' | 'danger' | 'warning' | 'neutral' | 'dark';
+
 type Decorator = React.ReactElement<SymbolProps> | React.ReactElement<ChipProps>;
 
 type DecoratorSize = Record<VariantBody, {
@@ -100,7 +102,7 @@ export type TextProps = {
   /**
    * Set the color of the text.
    */
-  color?: 'positive' | 'informative' | 'danger' | 'warning' | 'neutral' | 'dark';
+  color?: TextColors;
   /**
    * Set the text alignment of the text. This is a logical property
    * based on the direction of the text.

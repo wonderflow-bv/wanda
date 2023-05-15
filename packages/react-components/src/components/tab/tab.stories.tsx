@@ -12,6 +12,12 @@ const story: ComponentMeta<typeof Tab> = {
     defaultValue: '1',
     dimension: 'regular',
   },
+  argTypes: {
+    dimension: {
+      options: ['regular', 'big'],
+      control: { type: 'select' },
+    },
+  },
 };
 export default story;
 

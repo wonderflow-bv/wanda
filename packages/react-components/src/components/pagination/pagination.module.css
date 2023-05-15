@@ -9,16 +9,17 @@
 
     & > li > a {
       border-radius: token(--radius-4);
-      line-height: token(--wds-line-height-16);
+      line-height: token(--wds-line-height-20);
       padding: 0 token(--space-8);
       cursor: pointer;
-      font-weight: token(--wds-wds-font-weight-bold);
+      font-weight: token(--wds-font-weight-semibold);
       user-select: none;
       color: var(--dimmed-5);
       display: inline-flex;
       align-items: center;
       justify-content: center;
       height: token(--space-32);
+      min-width: token(--space-32);
 
       &[aria-current='page'] {
         background-color: var(--cta-default);

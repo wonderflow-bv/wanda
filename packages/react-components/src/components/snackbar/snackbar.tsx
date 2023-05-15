@@ -21,6 +21,7 @@ import {
   Button, Polymorphic, Stack, Symbol, SymbolProps, Text,
 } from '@/components';
 
+import { TextColors } from '../text/text';
 import * as styles from './snackbar.module.css';
 
 export type SnackbarProps = {
@@ -61,6 +62,14 @@ export type SnackbarProps = {
 
 type PolymorphicSnackbar = Polymorphic.ForwardRefComponent<'output', SnackbarProps>;
 
+const mapping = {
+  info: 'informative',
+  warning: 'warning',
+  neutral: 'neutral',
+  positive: 'positive',
+  danger: 'danger',
+};
+
 export const Snackbar = forwardRef(({
   children,
   className,
@@ -100,7 +109,7 @@ export const Snackbar = forwardRef(({
 
         <Stack rowGap={16} vPadding={4}>
           <Stack rowGap={8}>
-            {title && <Text variant="subtitle-1" preventResponsive>{title}</Text>}
+            {title && <Text variant="heading-6" color={kind ? mapping[kind] as TextColors : 'neutral'} preventResponsive>{title}</Text>}
             <Text variant="body-2">{children}</Text>
           </Stack>
           {dismissable && (
