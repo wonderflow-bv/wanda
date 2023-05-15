@@ -17,6 +17,7 @@ const story: ComponentMeta<typeof Text> = {
     textAlign: 'start',
     preventBreakWord: false,
     truncate: false,
+    maxWidth: '',
     preventResponsive: false,
     anchor: false,
   },

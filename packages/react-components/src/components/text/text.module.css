@@ -6,6 +6,7 @@
     font-weight: var(--fw-extra-small);
     line-height: var(--lh-extra-small);
     letter-spacing: token(--wds-letter-spacing-0);
+    max-width: var(--max-width);
     min-block-size: 0.01vh;
     text-align: var(--t-align);
     word-break: break-word;
@@ -164,9 +165,9 @@
       --fs-small: token(--wds-font-size-32);
       --fw-small: token(--wds-font-weight-bold);
       --lh-small: token(--wds-line-height-40);
-      --fs-extra-small: token(--wds-font-size-32);
+      --fs-extra-small: token(--wds-font-size-28);
       --fw-extra-small: token(--wds-font-weight-bold);
-      --lh-extra-small: token(--wds-line-height-40);
+      --lh-extra-small: token(--wds-line-height-36);
     }
 
     &[data-text-variant='heading-4'] {
@@ -181,9 +182,9 @@
       --fs-small: token(--wds-font-size-28);
       --fw-small: token(--wds-font-weight-bold);
       --lh-small: token(--wds-line-height-36);
-      --fs-extra-small: token(--wds-font-size-28);
-      --fw-extra-small: token(--wds-font-weight-bold);
-      --lh-extra-small: token(--wds-line-height-36);
+      --fs-extra-small: token(--wds-font-size-24);
+      --fw-extra-small: token(--wds-font-weight-semibold);
+      --lh-extra-small: token(--wds-line-height-32);
     }
 
     &[data-text-variant='heading-5'] {
@@ -195,12 +196,12 @@
       --fs-medium: token(--wds-font-size-24);
       --fw-medium: token(--wds-font-weight-semibold);
       --lh-medium: token(--wds-line-height-32);
-      --fs-small: token(--wds-font-size-24);
+      --fs-small: token(--wds-font-size-20);
       --fw-small: token(--wds-font-weight-semibold);
-      --lh-small: token(--wds-line-height-32);
-      --fs-extra-small: token(--wds-font-size-24);
+      --lh-small: token(--wds-line-height-28);
+      --fs-extra-small: token(--wds-font-size-20);
       --fw-extra-small: token(--wds-font-weight-semibold);
-      --lh-extra-small: token(--wds-line-height-32);
+      --lh-extra-small: token(--wds-line-height-28);
     }
 
     &[data-text-variant='heading-6'] {
@@ -347,7 +348,8 @@
     &[data-text-truncate='true'] {
       white-space: nowrap;
       text-overflow: ellipsis;
-      overflow-wrap: break-word;
+      overflow: hidden;
+      width: inherit;
     }
   }
 }

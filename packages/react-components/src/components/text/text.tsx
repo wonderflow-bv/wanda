@@ -120,6 +120,10 @@ export type TextProps = {
    */
   truncate?: boolean;
   /**
+   * Set the maximum width of the text after which it will wrap.
+   */
+  maxWidth?: string;
+  /**
    * Place a Decorator before the string. This must be a Symbol or a Chip component.
    */
   decoratorStart?: Decorator;
@@ -152,6 +156,7 @@ export const Text = forwardRef(({
   as: Wrapper = 'p',
   preventResponsive = false,
   truncate = false,
+  maxWidth,
   preventBreakWord = false,
   decoratorStart,
   decoratorEnd,
@@ -163,6 +168,7 @@ export const Text = forwardRef(({
 }, forwardedRef) => {
   const dynamicStyle: CSSProperties = {
     '--t-align': textAlign,
+    '--max-width': maxWidth,
   };
 
   const isBody = useMemo(() => ['body-1', 'body-2', 'body-3'].some(b => b === variant), [variant]);
