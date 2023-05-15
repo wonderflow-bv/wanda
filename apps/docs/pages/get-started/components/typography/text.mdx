@@ -21,23 +21,36 @@ export const getStaticProps = () =>
   });
 
 <LiveArea>
-  <Text >Lorem ipsum dolor sit, amet consectetur adipisicing elit.</Text>
+  <Stack>
   <Text>
+    <Text as="span" variant="subtitle-2" color="danger">Lorem ipsum</Text>
+    <Text as="span" variant="subtitle-2" color="informative">dolor sit</Text>
+  </Text>
+  <Text as="h1" variant="heading-1">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</Text>
+  <Text as="h3" variant="subtitle-1">Lorem ipsum, amet consectetur adipisicing elit.</Text>
+  <br/>
+  <Text variant="body-1">
     Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius
     dolores, tempore quas labore officiis praesentium. Porro sed dolorem,
     numquam temporibus.
   </Text>
+  </Stack>
 </LiveArea>
 
 ## Anatomy
 
-```tsx lines="1,4"
+```tsx lines="5-11"
 import { Text } from "@wonderflow/react-components";
 
 export default () => (
   <>
-    <Text>...</Text>
-
+    <Text>
+      <Text as="span" variant="subtitle-2" color="danger">Lorem ipsum</Text>
+      <Text as="span" variant="subtitle-2" color="informative">dolor sit</Text>
+    </Text>
+    <Text as="h1" variant="heading-1">...</Text>
+    <Text as="h3" variant="subtitle-1">...</Text>
+    <Text variant="body-1">...</Text>
   </>
 );
 ```
@@ -49,7 +62,7 @@ export default () => (
     {
       name: "variant",
       type: ["enum"],
-      typeValue: "'display-1 | 'display-2' | 'display-3' | 'display-4' | 'heading-1'| 'heading-2' | 'heading-3' | 'heading-4' | 'heading-5' | 'heading-6' | 'subtitle-1' | 'subtitle-2' | 'body-1' | 'body-2' | 'body-3'",
+      typeValue: "'display-1' | 'display-2' | 'display-3' | 'display-4' | 'heading-1'| 'heading-2' | 'heading-3' | 'heading-4' | 'heading-5' | 'heading-6' | 'subtitle-1' | 'subtitle-2' | 'body-1' | 'body-2' | 'body-3'",
       default: "body-1",
       required: false,
       description:
@@ -72,6 +85,13 @@ export default () => (
       required: false,
       description:
         "Set the text alignment of the text. This is a logical property based on the direction of the text.",
+    },
+    {
+      name: "maxWidth",
+      type: ["string"],
+      default: "",
+      required: false,
+      description: "Set the maximum width of the text after which it will wrap.",
     },
     {
       name: "truncate",

@@ -71,7 +71,7 @@ export const ComponentLayout: FCChildren<IPropsComponentLayout> = ({
               <Text variant="heading-5">
                 Features
               </Text>
-              <List>
+              <List dimension="big">
                 {features.map(feat => (
                   <List.Li marker="check" markerColor="var(--highlight-green-foreground)" key={feat}>
                     <Markdown>{feat}</Markdown>
