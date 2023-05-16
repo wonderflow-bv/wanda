@@ -98,40 +98,107 @@ export default () => {
 
 ### When to use
 
-<List>
-  <List.Li marker='circle-check' markerColor='var(--highlight-green-foreground)'>
-  Use to inform the user of critical information about their current workflow.
-  </List.Li>
-  <List.Li  marker='circle-check' markerColor='var(--highlight-green-foreground)'>
-  Use when you need to ask a confirmation from a user before proceeding.
-  </List.Li>
-  <List.Li  marker='circle-check' markerColor='var(--highlight-green-foreground)'>
-  Use when the user is required to take an action.
-  </List.Li>
-  <List.Li  marker='circle-check' markerColor='var(--highlight-green-foreground)'>
-  To provide context and guidance for a specific task or workflow, such as providing instructions for completing a form or setting up an account.
-  </List.Li>
-</List>
+<Stack rowGap={8}>
+  <Stack direction='row' columnGap={8} fill={false} vAlign="start">
+    <div style={{maxWidth:'30px'}}>
+      <Symbol
+      dimension="18"
+      weight='solid'
+      source="circle-check"
+      style={{ color: 'var(--highlight-green-foreground)', marginTop: '0.25rem'}}/>
+    </div>
+    <Text>Use to inform the user of critical information about their current workflow.</Text>
+  </Stack>
+  <Stack direction='row' columnGap={8} fill={false} vAlign="start">
+    <div style={{maxWidth:'30px'}}>
+      <Symbol
+      dimension="18"
+      weight='solid'
+      source="circle-check"
+      style={{ color: 'var(--highlight-green-foreground)', marginTop: '0.25rem'}}/>
+    </div>
+    <Text>Use when you need to ask a confirmation from a user before proceeding.</Text>
+  </Stack>
+  <Stack direction='row' columnGap={8} fill={false} vAlign="start">
+    <div style={{maxWidth:'30px'}}>
+      <Symbol
+      dimension="18"
+      weight='solid'
+      source="circle-check"
+      style={{ color: 'var(--highlight-green-foreground)', marginTop: '0.25rem'}}/>
+    </div>
+    <Text>Use when the user is required to take an action.</Text>
+  </Stack>
+  <Stack direction='row' columnGap={8} fill={false} vAlign="start">
+    <div style={{maxWidth:'30px'}}>
+      <Symbol
+      dimension="18"
+      weight='solid'
+      source="circle-check"
+      style={{ color: 'var(--highlight-green-foreground)', marginTop: '0.25rem'}}/>
+    </div>
+    <Text>To provide context and guidance for a specific task or workflow, such as providing instructions for completing a form or setting up an account.</Text>
+  </Stack>
+</Stack>
 
 ### When not to use
 
-<List>
-  <List.Li marker='circle-x' markerColor='var(--highlight-red-foreground)'>
-  For information that is not related or relevant to the current user flow. This can be distracting and may interfere with the user's overall experience.
-  </List.Li>
-  <List.Li  marker='circle-x' markerColor='var(--highlight-red-foreground)'>
-  To display non-critical or secondary information, such as help text tips, or product recommendations. In these cases, a tooltip or a popover component may be more appropriate.
-  </List.Li>
-  <List.Li  marker='circle-x' markerColor='var(--highlight-red-foreground)'>
-  To force the user to take an action or make a decision.
-  </List.Li>
-  <List.Li  marker='circle-x' markerColor='var(--highlight-red-foreground)'>
-  To display complex forms or large amounts of information.
-  </List.Li>
-  <List.Li  marker='circle-x' markerColor='var(--highlight-red-foreground)'>
-  For navigation.
-  </List.Li>
-</List>
+<Stack rowGap={8}>
+  <Stack direction='row' columnGap={8} fill={false} vAlign="start">
+    <div style={{maxWidth:'30px'}}>
+      <Symbol
+      dimension="18"
+      weight='solid'
+      source="circle-x"
+      style={{ color: 'var(--highlight-red-foreground)', marginTop: '0.25rem'}}/>
+    </div>
+    <Text>For information that is not related or relevant to the current user flow. This can be distracting and may interfere with the user's overall experience.</Text>
+  </Stack>
+
+  <Stack direction='row' columnGap={8} fill={false} vAlign="start">
+    <div style={{maxWidth:'30px'}}>
+      <Symbol
+      dimension="18"
+      weight='solid'
+      source="circle-x"
+    style={{ color: 'var(--highlight-red-foreground)', marginTop: '0.25rem' }}/>
+    </div>
+    <Text>To display non-critical or secondary information, such as help text tips, or product recommendations. In these cases, a tooltip or a popover component may be more appropriate.</Text>
+  </Stack>
+
+  <Stack direction='row' columnGap={8} fill={false} vAlign="start">
+    <div style={{maxWidth:'30px'}}>
+      <Symbol
+      dimension="18"
+      weight='solid'
+      source="circle-x"
+      style={{ color: 'var(--highlight-red-foreground)', marginTop: '0.2rem' }}/>
+    </div>
+    <Text>To force the user to take an action or make a decision.</Text>
+  </Stack>
+
+  <Stack direction='row' columnGap={8} fill={false} vAlign="start">
+    <div style={{maxWidth:'30px'}}>
+      <Symbol
+      dimension="18"
+      weight='solid'
+      source="circle-x"
+      style={{ color: 'var(--highlight-red-foreground)', marginTop: '0.2rem' }}/>
+    </div>
+    <Text>To display complex forms or large amounts of information.</Text>
+  </Stack>
+
+  <Stack direction='row' columnGap={8} fill={false} vAlign="start">
+    <div style={{maxWidth:'30px'}}>
+      <Symbol
+      dimension="18"
+      weight='solid'
+      source="circle-x"
+      style={{ color: 'var(--highlight-red-foreground)', marginTop: '0.2rem' }}/>
+    </div>
+    <Text>For navigation.</Text>
+  </Stack>
+</Stack>
 
 
 ### Best practice
