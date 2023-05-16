@@ -55,6 +55,73 @@ export default () => (
 );
 ```
 
+## Decorators
+Decorators can be placed before or after a string. They must be a Symbol or a Chip component. Dimension will resize automatically depending on the **decoratorSize** property and the selected text variant, with a restriction to the **body** one.
+
+<LiveArea>
+  <Stack rowGap={16}>
+    <Text
+      as="div"
+      variant="body-3"
+      decoratorSize="small"
+      decoratorStart={<Symbol source="circle-check" weight="solid"/>}
+      decoratorEnd={<Chip color="red">small</Chip>}
+    >
+      <Text variant="body-3">Lorem ipsum</Text>
+    </Text>
+    <Text
+      as="div"
+      variant="body-2"
+      color="informative"
+      decoratorSize="small"
+      decoratorStart={<Symbol source="circle-check" weight="solid"/>}
+      decoratorEnd={<Chip color="blue">small</Chip>}
+    >
+      <Text variant="body-2" color="informative">Lorem ipsum</Text>
+    </Text>
+    <Text
+      as="div"
+      variant="body-1"
+      decoratorSize="big"
+      decoratorStart={<Symbol source="circle-check" weight="duotone" color="red"/>}
+      decoratorEnd={<Chip color="green" icon="star">big</Chip>}
+    >
+      <Text variant="body-1">Lorem ipsum</Text>
+    </Text>
+  </Stack>
+</LiveArea>
+
+```tsx lines="5-25"
+import { Symbol, Text, Chip } from "@wonderflow/react-components";
+
+export default () => (
+  <>
+    <Text
+      variant="body-3"
+      decoratorSize="small"
+      decoratorStart={<Symbol source="circle-check" weight="solid"/>}
+      decoratorEnd={<Chip color="red">small</Chip>}
+    >Lorem ipsum</Text>
+
+    <Text
+      variant="body-2"
+      color="informative"
+      decoratorSize="small"
+      decoratorStart={<Symbol source="circle-check" weight="solid"/>}
+      decoratorEnd={<Chip color="blue">small</Chip>}
+    >Lorem ipsum</Text>
+
+    <Text
+      variant="body-1"
+      decoratorSize="big"
+      decoratorStart={<Symbol source="circle-check" weight="duotone" color="red"/>}
+      decoratorEnd={<Chip color="green" icon="star">big</Chip>}
+    >Lorem ipsum</Text>
+  </>
+);
+```
+
+
 ## API Reference
 
 <PropsTable

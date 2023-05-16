@@ -123,6 +123,7 @@ const TemplateDecorators: ComponentStory<typeof Text> = () => {
             <Stack rowGap={8} key={v}>
               <Text
                 variant={v}
+                color="informative"
                 decoratorSize={sizes[0]}
                 decoratorStart={<Symbol source="circle-check" weight="solid" />}
                 decoratorEnd={<Chip color="cyan">{sizes[0]}</Chip>}
