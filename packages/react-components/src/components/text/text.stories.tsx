@@ -34,6 +34,9 @@ const story: ComponentMeta<typeof Text> = {
         'heading-4',
         'heading-5',
         'heading-6',
+        'tagline-1',
+        'tagline-2',
+        'tagline-3',
         'subtitle-1',
         'subtitle-2',
         'body-1',
@@ -60,11 +63,18 @@ export const Default = Template.bind({});
 
 const TemplateVariants: ComponentStory<typeof Text> = () => {
   const variants = ['display-1', 'display-2', 'display-3', 'display-4', 'heading-1', 'heading-2', 'heading-3',
-    'heading-4', 'heading-5', 'heading-6', 'subtitle-1', 'subtitle-2', 'body-1', 'body-2', 'body-3'] as TextVariants[];
+    'heading-4', 'heading-5', 'heading-6', 'tagline-1', 'tagline-2', 'tagline-3', 'subtitle-1', 'subtitle-2', 'body-1', 'body-2', 'body-3'] as TextVariants[];
 
   return (
     <Container dimension="fixed">
-      {variants.map(e => <Text key={e} variant={e}>{e}</Text>)}
+      <Stack rowGap={16}>
+        {variants.map(e => (
+          <div key={e}>
+            <Text variant="body-3">{e}</Text>
+            <Text variant={e}>Wonderflow</Text>
+          </div>
+        ))}
+      </Stack>
     </Container>
   );
 };
@@ -155,3 +165,28 @@ const TemplateDecorators: ComponentStory<typeof Text> = () => {
 };
 
 export const withDecorators = TemplateDecorators.bind({});
+
+const TemplatePairing: ComponentStory<typeof Text> = () => (
+  <Stack rowGap={16}>
+    <div style={{ maxWidth: '800px' }}>
+      <Text variant="display-1">96px display-1</Text>
+      <Text variant="tagline-1">28px tagline-1 Lorem ipsum sit amet, consectur adipiscing elit. Fusce aliquet cursus.</Text>
+    </div>
+
+    <div style={{ maxWidth: '800px' }}>
+      <Text variant="display-2">80px display-2</Text>
+      <Text variant="tagline-1">28px tagline-1 Lorem ipsum sit amet, consectur adipiscing elit. Fusce aliquet cursus.</Text>
+    </div>
+
+    <div style={{ maxWidth: '800px' }}>
+      <Text variant="display-3">68px display-3</Text>
+      <Text variant="tagline-2">24px tagline-2 Lorem ipsum sit amet, consectur adipiscing elit. Fusce aliquet cursus.</Text>
+    </div>
+
+    <div style={{ maxWidth: '800px' }}>
+      <Text variant="display-4">56px display-4</Text>
+      <Text variant="tagline-2">24px tagline-2 Lorem ipsum sit amet, consectur adipiscing elit. Fusce aliquet cursus.</Text>
+    </div>
+  </Stack>
+);
+export const sizePairing = TemplatePairing.bind({});

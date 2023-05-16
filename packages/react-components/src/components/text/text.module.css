@@ -221,6 +221,58 @@
       --lh-extra-small: token(--wds-line-height-28);
     }
 
+    /* Variant Tagline */
+
+    &[data-text-variant='tagline-1'] {
+      color: var(--dimmed-7);
+
+      --fs-large: token(--wds-font-size-28);
+      --fw-large: token(--wds-font-weight-light);
+      --lh-large: token(--wds-line-height-36);
+      --fs-medium: token(--wds-font-size-28);
+      --fw-medium: token(--wds-font-weight-light);
+      --lh-medium: token(--wds-line-height-36);
+      --fs-small: token(--wds-font-size-28);
+      --fw-small: token(--wds-font-weight-light);
+      --lh-small: token(--wds-line-height-36);
+      --fs-extra-small: token(--wds-font-size-24);
+      --fw-extra-small: token(--wds-font-weight-light);
+      --lh-extra-small: token(--wds-line-height-32);
+    }
+
+    &[data-text-variant='tagline-2'] {
+      color: var(--dimmed-7);
+
+      --fs-large: token(--wds-font-size-24);
+      --fw-large: token(--wds-font-weight-light);
+      --lh-large: token(--wds-line-height-32);
+      --fs-medium: token(--wds-font-size-24);
+      --fw-medium: token(--wds-font-weight-light);
+      --lh-medium: token(--wds-line-height-32);
+      --fs-small: token(--wds-font-size-20);
+      --fw-small: token(--wds-font-weight-light);
+      --lh-small: token(--wds-line-height-28);
+      --fs-extra-small: token(--wds-font-size-20);
+      --fw-extra-small: token(--wds-font-weight-light);
+      --lh-extra-small: token(--wds-line-height-28);
+    }
+
+    &[data-text-variant='tagline-3'] {
+      color: var(--dimmed-7);
+
+      --fs-large: token(--wds-font-size-20);
+      --fw-large: token(--wds-font-weight-light);
+      --lh-large: token(--wds-line-height-28);
+      --fs-medium: token(--wds-font-size-20);
+      --fw-medium: token(--wds-font-weight-light);
+      --lh-medium: token(--wds-line-height-28);
+      --fs-small: token(--wds-font-size-20);
+      --fw-small: token(--wds-font-weight-light);
+      --lh-small: token(--wds-line-height-28);
+      --fs-extra-small: token(--wds-font-size-20);
+      --fw-extra-small: token(--wds-font-weight-light);
+      --lh-extra-small: token(--wds-line-height-28);
+    }
 
     /* Variant Subtitle */
 

@@ -33,10 +33,11 @@ import * as styles from './text.module.css';
 
 type VariantDisplay = 'display-1' | 'display-2' | 'display-3' | 'display-4';
 type VariantHeading = 'heading-1' | 'heading-2' | 'heading-3' | 'heading-4' | 'heading-5' | 'heading-6';
+type VariantTagline = 'tagline-1' | 'tagline-2' | 'tagline-3';
 type VariantSubtitle = 'subtitle-1' | 'subtitle-2';
 type VariantBody = 'body-1' | 'body-2' | 'body-3';
 
-export type TextVariants = VariantDisplay | VariantHeading | VariantSubtitle | VariantBody;
+export type TextVariants = VariantDisplay | VariantHeading | VariantTagline | VariantSubtitle | VariantBody;
 
 export type TextColors = 'positive' | 'informative' | 'danger' | 'warning' | 'neutral' | 'dark';
 
@@ -173,9 +174,9 @@ export const Text = forwardRef(({
     '--max-width': maxWidth,
   };
 
-  const isBody = useMemo(() => ['body-1', 'body-2', 'body-3'].some(b => b === variant), [variant]);
-  const isTitle = useMemo(() => !['body-1', 'body-2', 'body-3', 'subtitle-1', 'subtitle-2'].some(b => b === variant), [variant]);
-  const isDisplay = useMemo(() => ['display-1', 'display-2', 'display-3', 'display-4'].some(b => b === variant), [variant]);
+  const isBody = useMemo(() => variant.includes('body'), [variant]);
+  const isTitle = useMemo(() => variant.includes('display') || variant.includes('heading'), [variant]);
+  const isDisplay = useMemo(() => variant.includes('display'), [variant]);
 
   const hasStart = useMemo(() => !!(isBody && decoratorStart), [decoratorStart, isBody]);
   const hasEnd = useMemo(() => !!(isBody && decoratorEnd), [decoratorEnd, isBody]);

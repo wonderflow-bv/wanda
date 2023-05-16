@@ -121,13 +121,10 @@ const Template: ComponentStory<typeof Container> = () => {
             className={clsx(style.Container, 'ContainerEx')}
           >
             <Stack rowGap={32} vPadding={32}>
-              <Snackbar>
-                <Text variant="heading-2">Product Card Container</Text>
-                <Text as="span">{`Window Width: ${size}px - Breakpoints Match: ${matches.toUpperCase()}`}</Text>
-                <br />
-                <Text as="span">{`Container Width: ${containerSize}px - Grid Columns: ${containerValue.col} -  Grid Gutter: ${containerValue.gutter}px`}</Text>
-                <br />
-                <Text as="span">{`useBreakpointsConfig.value: ${JSON.stringify(containerValue)} - useBreakpointsConfig.matches: ${containerMatches.toUpperCase()}`}</Text>
+              <Snackbar title="Product Card Container">
+                <Text>{`Window Width: ${size}px - Breakpoints Match: ${matches.toUpperCase()}`}</Text>
+                <Text>{`Container Width: ${containerSize}px - Grid Columns: ${containerValue.col} -  Grid Gutter: ${containerValue.gutter}px`}</Text>
+                <Text>{`useBreakpointsConfig.value: ${JSON.stringify(containerValue)} - useBreakpointsConfig.matches: ${containerMatches.toUpperCase()}`}</Text>
               </Snackbar>
 
               <Grid

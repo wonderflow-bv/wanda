@@ -35,6 +35,9 @@ describe('<Text>', () => {
       'heading-6',
       'subtitle-1',
       'subtitle-2',
+      'tagline-1',
+      'tagline-2',
+      'tagline-3',
       'body-1',
       'body-2',
       'body-3'] as TextVariants[];
