@@ -20,7 +20,7 @@
 import fs from 'fs-extra';
 import path from 'path';
 
-const deeperKeys = ['color', 'font', 'icon'];
+const deeperKeys = ['color', 'font', 'icon', 'wds', 'line', 'letter'];
 
 const printCorrectValue = (value: string | number) => (Number.isNaN(Number(value)) ? `'${value}'` : `${value} | '${value}'`);
 const getTypeUnion = (json: Record<string, unknown>) => Object.keys(json).reduce(
