@@ -1,7 +1,7 @@
 {
   "name": "docs",
   "description": "The Wonderflow Design System website",
-  "version": "11.0.0",
+  "version": "12.0.0",
   "private": true,
   "author": "Wonderflow",
   "license": "Apache-2.0",
