@@ -14,7 +14,7 @@ export const getStaticProps = () =>
 
 ## Product text styles
 
-Wonderflow types styles are grouped into three categories: display, headings and body. Each category comes with a default set of
+Wonderflow types styles are grouped into four categories: **display**, **headings**, **tagline** and **body**. Each category comes with a default set of
 variants, as well as a range of options that allow for flexibility within the user interface. By using a single scale for all variants our type styles can be applied seamlessly across all screen sizes, enabling a coherent and cohesive user experience.
 
 ## Typefaces
@@ -28,7 +28,7 @@ We want our digital products to feel seamless and natural to users. That's why w
 ![](https://figmage.com/images/mrFn4W84oJ_DfHI_RXT72.png)
 
 ## Font family
-Wonderflow’s font families are composed of two typefaces: Display, Text and Mono. Each is designed for a specific function that is core to the Wonderflow brand.
+Wonderflow’s font families are composed of two typefaces: **sans-serif** and **mono**. Each is designed for a specific function that is core to the Wonderflow brand.
 
 <LiveArea hAlign="start" direction="column" rowGap={32}>
   <Stack rowGap={24}>
@@ -41,7 +41,9 @@ Wonderflow’s font families are composed of two typefaces: Display, Text and Mo
     <Text variant="body-3">for UI text</Text>
     </div>
     <div>
-    <Text><pre>monospace</pre></Text>
+    <Text as="span">
+      <pre>monospace</pre>
+    </Text>
     <Text variant="body-3">for code</Text>
     </div>
   </Stack>
@@ -49,7 +51,7 @@ Wonderflow’s font families are composed of two typefaces: Display, Text and Mo
 
 ## Typographic scale
 
-Our font-sizes are based on the Minor third scale with a base font size of 16px. Each size is multiplied or divided by 1.2 from the previous size, starting with the base size, and rounded to a multiple of 4px.
+Our font-sizes are based on the **Minor third scale** with a base font size of 16px. Each size is multiplied or divided by 1.2 from the previous size, starting with the base size, and rounded to a multiple of 4px.
 
 
 <LiveArea hAlign="start" direction="column" rowGap={16}>
@@ -72,6 +74,18 @@ Our font-sizes are based on the Minor third scale with a base font size of 16px.
     <div>
       <Text variant="subtitle-1">Wonderflow</Text>
       <Text variant="body-3">subtitle-1</Text>
+    </div>
+    <div>
+      <Text variant="tagline-3">Wonderflow</Text>
+      <Text variant="body-3">tagline-3</Text>
+    </div>
+    <div>
+      <Text variant="tagline-2">Wonderflow</Text>
+      <Text variant="body-3">tagline-2</Text>
+    </div>
+    <div>
+      <Text variant="tagline-1">Wonderflow</Text>
+      <Text variant="body-3">tagline-1</Text>
     </div>
     <div>
       <Text variant="heading-6">Wonderflow</Text>
@@ -118,9 +132,18 @@ Our font-sizes are based on the Minor third scale with a base font size of 16px.
 ## Font Weight
 
 Font weights in typography can enhance the hierarchical structure and draw attention to important content on a surface. We recommend
-using Heavy, Bold, Medium, and Regular weights to support most use cases.
+using **Heavy**, **Bold**, **Medium**, **Regular** and **Light** weights to support most use cases.
 
-<LiveArea hAlign="start" direction="column" rowGap={24}>
+<LiveArea hAlign="start" direction="column" rowGap={32}>
+  <Stack rowGap={4}>
+    <Grid columns="3" filling={false}>
+      <Text style={{fontWeight: '300'}}>Light</Text>
+      <Text style={{fontWeight: '300'}}>300</Text>
+      <Text style={{fontWeight: '300'}}>Wonderflow</Text>
+    </Grid>
+    <Text variant="body-3">--wds-font-weight-light</Text>
+  </Stack>
+
   <Stack rowGap={4}>
     <Grid columns="3" filling={false}>
       <Text style={{fontWeight: '400'}}>Regular</Text>
@@ -161,7 +184,7 @@ using Heavy, Bold, Medium, and Regular weights to support most use cases.
 
 ## Text Color
 
-Our default text colour is light-dimmed-color-6. You may adjust the text colours using the recommended colour tokens that correspond to pre-defined colour values. This ensures that the text remains easily readable and has appropriate contrast against different background colours.
+Our default text colour is **light-dimmed-color-7**. You may adjust the text colours using the recommended colour tokens that correspond to pre-defined colour values. This ensures that the text remains easily readable and has appropriate contrast against different background colours.
 
 ### Light backgrounds
 When placing text on a light background, all type should use the following colour values:
@@ -183,9 +206,16 @@ The readability of paragraphs can be influenced by the line length. It is recomm
 
 Our recommendation is to use left alignment when styling UI copy in left-to-right languages. This creates a more visually consistent design and enhances the reading experience by highlighting the content hierarchy.
 
+![](https://wonderimages.gumlet.io/docs/typography/typography-left-right-align.png?format=webp&q=100)
+
 ### When to center
 
 While centering text may not always be the most effective approach for information design and legibility, it can be appropriate in certain contexts such as with an empty state, card or under an image if the amount of content is small.
+
+<div style={{maxWidth: '50%'}}>
+![](https://wonderimages.gumlet.io/docs/typography/typography-center-align.png?format=webp&q=100)
+</div>
+
 
 ## Type styles
 
@@ -195,22 +225,73 @@ Our type styles are organised into three groups: Display, Heading and Body. They
 
 Our type scale includes four display styles that are intended for editorial or marketing use. They work best on large screens.
 
+<div style={{maxWidth: '50%'}}>
+![](https://wonderimages.gumlet.io/docs/typography/typography-display-2.png?format=webp&q=100)
+</div>
+
 ### Headings
+
 Heading styles are used to establish hierarchy on a page by varying in size and weight. By combining different styles can differentiate content and help guide users through a page.
+
+![](https://wonderimages.gumlet.io/docs/typography/typography-heading.png?format=webp&q=100)
 
 ### Body
 
 Body text is available in three different sizes. Use body text for longer page content.
 
-## Baseline
-
-## Decorators
+<div style={{display: 'flex', flexDirection: 'row', gap: '8px'}}>
+  <div style={{maxWidth: '50%'}}>
+    ![](https://wonderimages.gumlet.io/docs/typography/typography-body-1.png?format=webp&q=100)
+  </div>
+  <div style={{maxWidth: '50%'}}>
+    ![](https://wonderimages.gumlet.io/docs/typography/typography-body-2.png?format=webp&q=100)
+  </div>
+</div>
 
 ## Responsive
 
-## Typography components
+Display and heading styles are responsive and will change size at different breakpoints. **Heading-6**, **tagline-3** and **body** styles will remain the same size regardless of breakpoint.
 
 ## Tokens
+
+### font-family
+
+<Table
+  columns={[
+    {
+      Header: 'Token',
+      accessor: 'token',
+      isCollapsed: true,
+      align: 'center'
+    },
+    {
+      Header: 'CSS Property',
+      accessor: 'property',
+      isCollapsed: true,
+      align: 'center'
+    },
+    {
+      Header: 'Value',
+      accessor: 'value',
+      isCollapsed: true,
+      align: 'center'
+    }
+  ]}
+  data={[
+    {
+      token: '--wds-font-family-sans',
+      property: 'font-family',
+      value: 'system-ui, sans-serif'
+    },
+    {
+      token: '--wds-font-family-mono',
+      property: 'font-family',
+      value: 'monospace'
+    }
+  ]}
+/>
+
+### font-size
 
 <Table
   columns={[
@@ -301,6 +382,199 @@ Body text is available in three different sizes. Use body text for longer page c
     },
   ]}
 />
+
+### font-weight
+
+<Table
+  columns={[
+    {
+      Header: 'Token',
+      accessor: 'token',
+      isCollapsed: true,
+      align: 'center'
+    },
+    {
+      Header: 'CSS Property',
+      accessor: 'property',
+      isCollapsed: true,
+      align: 'center'
+    },
+    {
+      Header: 'Value',
+      accessor: 'value',
+      isCollapsed: true,
+      align: 'center'
+    }
+  ]}
+  data={[
+    {
+      token: '--wds-font-weight-heavy',
+      property: 'font-weight',
+      value: '800'
+    },
+    {
+      token: '--wds-font-weight-bold',
+      property: 'font-weight',
+      value: '700'
+    },
+    {
+      token: '--wds-font-weight-semibold',
+      property: 'font-weight',
+      value: '600'
+    },
+    {
+      token: '--wds-font-weight-regular',
+      property: 'font-weight',
+      value: '400'
+    },
+    {
+      token: '--wds-font-weight-light',
+      property: 'font-weight',
+      value: '300'
+    },
+  ]}
+/>
+
+### letter-spacing
+
+<Table
+  columns={[
+    {
+      Header: 'Token',
+      accessor: 'token',
+      isCollapsed: true,
+      align: 'center'
+    },
+    {
+      Header: 'CSS Property',
+      accessor: 'property',
+      isCollapsed: true,
+      align: 'center'
+    },
+    {
+      Header: 'Value',
+      accessor: 'value',
+      isCollapsed: true,
+      align: 'center'
+    }
+  ]}
+  data={[
+    {
+      token: '--wds-letter-spacing-0',
+      property: 'letter-spacing',
+      value: '0'
+    },
+    {
+      token: '--wds-letter-spacing-16',
+      property: 'letter-spacing',
+      value: '0.01rem'
+    },
+    {
+      token: '--wds-letter-spacing-24',
+      property: 'letter-spacing',
+      value: '0.015rem'
+    },
+    {
+      token: '--wds-letter-spacing-32',
+      property: 'letter-spacing',
+      value: '0.02rem'
+    },
+  ]}
+/>
+
+### line-height
+
+<Table
+  columns={[
+    {
+      Header: 'Token',
+      accessor: 'token',
+      isCollapsed: true,
+      align: 'center'
+    },
+    {
+      Header: 'CSS Property',
+      accessor: 'property',
+      isCollapsed: true,
+      align: 'center'
+    },
+    {
+      Header: 'Value',
+      accessor: 'value',
+      isCollapsed: true,
+      align: 'center'
+    }
+  ]}
+  data={[
+    {
+      token: '--wds-line-height-16',
+      property: 'line-height',
+      value: '16px/1rem'
+    },
+    {
+      token: '--wds-line-height-20',
+      property: 'line-height',
+      value: '20px/1.25rem'
+    },
+    {
+      token: '--wds-line-height-24',
+      property: 'line-height',
+      value: '24px/1.5rem'
+    },
+    {
+      token: '--wds-line-height-28',
+      property: 'line-height',
+      value: '28px/1.75rem'
+    },
+    {
+      token: '--wds-line-height-32',
+      property: 'line-height',
+      value: '32px/2rem'
+    },
+    {
+      token: '--wds-line-height-36',
+      property: 'line-height',
+      value: '36px/2.25rem'
+    },
+    {
+      token: '--wds-line-height-40',
+      property: 'line-height',
+      value: '40px/2.5rem'
+    },
+    {
+      token: '--wds-line-height-48',
+      property: 'line-height',
+      value: '48px/3rem'
+    },
+    {
+      token: '--wds-line-height-56',
+      property: 'line-height',
+      value: '56px/3.5rem'
+    },
+    {
+      token: '--wds-line-height-64',
+      property: 'line-height',
+      value: '64px/4rem'
+    },
+    {
+      token: '--wds-line-height-80',
+      property: 'line-height',
+      value: '80px/5rem'
+    },
+    {
+      token: '--wds-line-height-96',
+      property: 'line-height',
+      value: '96px/6rem'
+    },
+    {
+      token: '--wds-line-height-108',
+      property: 'line-height',
+      value: '108px/6.75rem'
+    },
+  ]}
+/>
+
+
 
 
 

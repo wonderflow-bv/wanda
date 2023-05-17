@@ -29,11 +29,7 @@ export const getStaticProps = () =>
   <Text as="h1" variant="heading-1">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</Text>
   <Text as="h3" variant="subtitle-1">Lorem ipsum, amet consectetur adipisicing elit.</Text>
   <br/>
-  <Text variant="body-1">
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius
-    dolores, tempore quas labore officiis praesentium. Porro sed dolorem,
-    numquam temporibus.
-  </Text>
+  <Text variant="body-1">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius dolores, tempore quas labore officiis praesentium. Porro sed dolorem, numquam temporibus.</Text>
   </Stack>
 </LiveArea>
 
@@ -67,7 +63,7 @@ Decorators can be placed before or after a string. They must be a Symbol or a Ch
       decoratorStart={<Symbol source="circle-check" weight="solid"/>}
       decoratorEnd={<Chip color="red">small</Chip>}
     >
-      <Text variant="body-3">Lorem ipsum</Text>
+      <Text as="span" variant="body-3">Lorem ipsum</Text>
     </Text>
     <Text
       as="div"
@@ -77,7 +73,7 @@ Decorators can be placed before or after a string. They must be a Symbol or a Ch
       decoratorStart={<Symbol source="circle-check" weight="solid"/>}
       decoratorEnd={<Chip color="blue">small</Chip>}
     >
-      <Text variant="body-2" color="informative">Lorem ipsum</Text>
+      <Text as="span" variant="body-2" color="informative">Lorem ipsum</Text>
     </Text>
     <Text
       as="div"
@@ -86,7 +82,7 @@ Decorators can be placed before or after a string. They must be a Symbol or a Ch
       decoratorStart={<Symbol source="circle-check" weight="duotone" color="red"/>}
       decoratorEnd={<Chip color="green" icon="star">big</Chip>}
     >
-      <Text variant="body-1">Lorem ipsum</Text>
+      <Text as="span" variant="body-1">Lorem ipsum</Text>
     </Text>
   </Stack>
 </LiveArea>

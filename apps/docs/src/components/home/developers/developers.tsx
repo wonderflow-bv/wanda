@@ -48,7 +48,7 @@ export const Developers: FCClass = ({
             <Tab dimension="big" className={styles.Tab} defaultValue={activeTab} onValueChange={setActiveTab}>
               <Tab.Panel label="Components" icon={matches.large ? 'grid' : undefined} value="components">
                 <Stack rowGap={32} vPadding={56} hAlign="start">
-                  <Text variant="heading-6" color="neutral">
+                  <Text variant="tagline-3">
                     A full set of highly customizable React components and styles ready to use inside applications.
                   </Text>
                   <Link href="/get-started/components/actions/button" passHref>
@@ -59,7 +59,7 @@ export const Developers: FCClass = ({
 
               <Tab.Panel label="Design Tokens" icon={matches.large ? 'more-vert' : undefined} value="design-tokens">
                 <Stack rowGap={32} vPadding={56} hAlign="start">
-                  <Text variant="heading-6">
+                  <Text variant="tagline-3">
                     Color, spaces, font... every basic and common property is available as design token.
                     The foundamentals of consistency across platforms.
                   </Text>
@@ -71,7 +71,7 @@ export const Developers: FCClass = ({
 
               <Tab.Panel label="Themes" icon={matches.large ? 'style' : undefined} value="themes">
                 <Stack rowGap={32} vPadding={56} hAlign="start">
-                  <Text variant="heading-6">
+                  <Text variant="tagline-3">
                     Easily handle light/dark themes via JS or CSS, by using the provided
                     collections of custom properties and JSON values.
                   </Text>

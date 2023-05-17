@@ -26,7 +26,7 @@ export const DocHeader: FCClass<DocHeaderProps> = ({
         </Text>
       )}
       {title && <Text as="h1" variant="display-3">{title}</Text>}
-      {subtitle && <Text variant="heading-6" color="neutral" style={{ fontWeight: '400' }}>{subtitle}</Text>}
+      {subtitle && <Text variant="tagline-2">{subtitle}</Text>}
     </Stack>
     <span className={styles.Separator} />
   </Stack>

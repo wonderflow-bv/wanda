@@ -107,8 +107,8 @@ export const Brands = ({
       {...otherProps}
     >
       <canvas ref={canvasRef} className={styles.Globe} />
-      <Container as={Stack} hAlign="center" vAlign="center" dimension="large">
-        <Text variant="heading-6">Some Wonderflow’s customers enjoying Wanda</Text>
+      <Container as={Stack} hAlign="center" vAlign="center" dimension="large" rowGap={24}>
+        <Text variant="tagline-2">Some Wonderflow’s customers enjoying Wanda</Text>
         <Stack className={styles.Logos} direction="row" fill={false} hAlign="center" wrap>
           <Stack
             as="a"

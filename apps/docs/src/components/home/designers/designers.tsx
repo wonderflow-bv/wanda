@@ -48,7 +48,7 @@ export const Designers: FCClass = ({
             <Tab dimension="big" className={styles.Tab} defaultValue={activeTab} onValueChange={setActiveTab}>
               <Tab.Panel label="Foundation" icon={matches.large ? 'layer-group' : undefined} value="foundation">
                 <Stack rowGap={32} vPadding={56} hAlign="start">
-                  <Text variant="heading-6" color="neutral">
+                  <Text variant="tagline-3">
                     Colors, typography, symbols, themes, and much more,
                     everything a designer needs, Wanda provides it.
                   </Text>
@@ -60,7 +60,7 @@ export const Designers: FCClass = ({
 
               <Tab.Panel label="Symbols" icon={matches.large ? 'grip-vertical' : undefined} value="symbols">
                 <Stack rowGap={32} vPadding={56} hAlign="start">
-                  <Text variant="heading-6">
+                  <Text variant="tagline-3">
                     Wanda offers over 114 ready-to-use SVG icons and three solid,
                     outline, and duotone styles for over 342 icons.
                   </Text>
@@ -72,7 +72,7 @@ export const Designers: FCClass = ({
 
               <Tab.Panel label="Motion" icon={matches.large ? 'signal-stream' : undefined} value="motion">
                 <Stack rowGap={32} vPadding={56} hAlign="start">
-                  <Text variant="heading-6">
+                  <Text variant="tagline-3">
                     Motion is part of the life. Starting from cells.
                     They bring life to your interfaces and provide a great feeling of control.
                   </Text>
