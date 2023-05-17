@@ -116,7 +116,7 @@ const ListItem: React.FC<ListItemProps> = ({
         }}
         />
       )}
-    <Text weight="bold" size={16}>{label}</Text>
+    <Text variant="subtitle-1" color="dark">{label}</Text>
   </Stack>
 );
 
