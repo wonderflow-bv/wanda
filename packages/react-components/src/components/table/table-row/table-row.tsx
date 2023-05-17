@@ -36,7 +36,7 @@ export const TableRow = <T extends Record<string, unknown>>({
 }: TableRowProps<T>) => {
   const shouldHighlightRow = useMemo(() => {
     const [currentParentRowId] = rowData?.id.match(/.*(?=\.)/) ?? [];
-    const isHighlight = expandedRows?.includes(currentParentRowId) && expandedRows.every((rowId) => {
+    const isHighlight = expandedRows?.includes(currentParentRowId ?? '') && expandedRows.every((rowId) => {
       const [parentRowMatch] = rowId.match(/.*(?=\.)/) ?? [];
       return parentRowMatch !== currentParentRowId;
     });

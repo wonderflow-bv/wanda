@@ -101,7 +101,7 @@ export const ToggleButton = forwardRef(({
   const renderIcon = useCallback(
     (icon, dimension) => {
       const iconSize: Record<string, SymbolProps['dimension']> = {
-        big: 24,
+        big: 18,
         regular: 16,
         small: 12,
       };
