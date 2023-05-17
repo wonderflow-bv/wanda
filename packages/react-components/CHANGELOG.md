@@ -1,5 +1,20 @@
 # @wonderflow/react-components
 
+## 12.0.0
+
+### Major Changes
+
+- 2ff3ba76: Add new `Typography Tokens` and `Text` component, remove `Title` and `Prose` components and old configurations.
+
+### Minor Changes
+
+- 413bc8e6: Feat `Select` add message property
+
+### Patch Changes
+
+- a6d31fee: Fix `Tooltip` indicator
+- 71938f17: Fix `Avatar`: remove default image while src is provided
+
 ## 11.0.7
 
 ### Patch Changes
