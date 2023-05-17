@@ -217,7 +217,7 @@ export const Text = forwardRef(({
     return label;
   }, [children]);
 
-  const generatedID = slugify(String(id ?? getTextFromChildren()), { lower: true });
+  const generatedID = slugify(String(id ?? getTextFromChildren()), { lower: true, replacement: '_' });
 
   return (
     <Wrapper
