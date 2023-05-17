@@ -1,5 +1,11 @@
 # @wonderflow/tokens
 
+## 12.0.0
+
+### Major Changes
+
+- 2ff3ba76: Add new `Typography Tokens` and `Text` component, remove `Title` and `Prose` components and old configurations.
+
 ## 11.0.7
 
 ## 11.0.6
