@@ -13,9 +13,9 @@ export const getStaticProps = () =>
   });
 
 
-Wanda is a complete design system which provides all the tools you need to design and develop digital products, from Figma themes to shared configurations and components.
+Wanda is a complete design system which provides all the tools you need to design and develop digital products, from <a href="https://www.figma.com/file/kcYVgrOqcGIiD2jBjpP3MV/01-%E2%80%94-Themes?node-id=2%3A2" target="_blank">Figma themes</a> to shared configurations and components.
 
-While some of the developing tools like [PostCSS](https://postcss.org/) are mandatory to work with Wanda's UI components, others are **strongly recommended** to ensure consistency and elevetad code quality across projects.
+While some of the developing tools like <a href="https://postcss.org/" target="_blank">PostCSS</a> are **mandatory** to work with Wanda's UI components, others are **strongly recommended** to ensure consistency and elevetad code quality across projects.
 
 ## Installation
 
@@ -28,13 +28,13 @@ npm i -D @wonderflow/config
 
 <br />
 
-<Snackbar kind="info">The <b>@wonderflow/config</b> exposes the required PostCSS configuration which
+<Snackbar kind="warning">The <b>@wonderflow/config</b> exposes the required PostCSS configuration which
   you have to use in order to use tokens and CSS utilities from the design
   system. Read the next section for more info.</Snackbar>
 
 ## Configuration
 
-Wanda's components relies on [PostCSS](https://postcss.org/) to provide the best DX while writing CSS.
+Wanda's components relies on <a href="https://postcss.org/" target="_blank">PostCSS</a> to provide the best DX while writing CSS.
 
 To being able to use tokens and custom utilities like custom media queries provided by the design system there are a couple of steps to follow.
 
@@ -55,7 +55,7 @@ const { postcssConfig } = require("@wonderflow/config");
 module.exports = {
   plugins: {
     ...postcssConfig.plugins,
-    tailwindcss: {},
+    autoprefixer: {},
   },
 };
 ```
@@ -151,3 +151,28 @@ Then create a `tsconfig.eslint.json` at the project root to configure typescript
 }
 ```
 
+## Known Issues
+
+<Stack rowGap={8}>
+  <Stack direction='row' columnGap={8} fill={false} vAlign="start">
+    <div style={{maxWidth:'30px'}}>
+      <Symbol
+      dimension="18"
+      weight='solid'
+      source="ban"
+      style={{ color: 'var(--highlight-red-foreground)', marginTop: '0.25rem'}}/>
+    </div>
+    <Text>**Wanda** versions **>10.6** are no longer compatible with **Tailwind CSS**.</Text>
+  </Stack>
+
+  <Stack direction='row' columnGap={8} fill={false} vAlign="start">
+    <div style={{maxWidth:'30px'}}>
+      <Symbol
+      dimension="18"
+      weight='solid'
+      source="ban"
+    style={{ color: 'var(--highlight-red-foreground)', marginTop: '0.25rem' }}/>
+    </div>
+    <Text>Integrating **Wanda** on applications initialized with **Create React App 5** could lead to errors in importing css modules due to a CRA [bug reported](https://github.com/facebook/create-react-app/issues/11800).</Text>
+  </Stack>
+</Stack>
