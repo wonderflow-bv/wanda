@@ -1,5 +1,7 @@
 import UsageNav from "@/data/usage-nav";
 import { getLayoutProps } from "@/utils/get-layout-props";
+import { DosAndDonts } from '@/components/shared/dos-and-donts-block'
+import { Card, Chip } from '@wonderflow/react-components'
 
 export const getStaticProps = () =>
   getLayoutProps({
@@ -196,7 +198,7 @@ When placing text on a dark background, all type should use the following colour
 
 ![](https://figmage.com/images/Jsup6oSbL3UvGiJpeZUA7.png)
 
-## Line Heights
+## Line Length
 
 The readability of paragraphs can be influenced by the line length. It is recommended to have between 40 to 64 characters per line. This creates easy-to-read paragraphs with optimal readability.
 
@@ -206,15 +208,72 @@ The readability of paragraphs can be influenced by the line length. It is recomm
 
 Our recommendation is to use left alignment when styling UI copy in left-to-right languages. This creates a more visually consistent design and enhances the reading experience by highlighting the content hierarchy.
 
-![](https://wonderimages.gumlet.io/docs/typography/typography-left-right-align.png?format=webp&q=100)
+<Stack direction="row" columnGap={16}>
+  <DosAndDonts maxWidth="50%">
+  <Stack maxWidth="70%">
+    <div style={{
+      border: '1px solid var(--dimmed-2)',
+      borderRadius: '5px',
+      padding: '.5rem 1rem',
+      maxHeight: '100px'
+      }}>
+        <Stack rowGap={8} vPadding={4} style={{minWidth: '100%'}}>
+        <Text variant="subtitle-2" color="dark" textAlign="left">Relevance</Text>
+        <Text variant="body-3" textAlign="left">Learn what drives the satisfaction and dissatisfaction of customers.</Text>
+        </Stack>
+    </div>
+  </Stack>
+  <Chip color="green" dimension="small" style={{maxWidth: '32px'}}>Do</Chip>
+  <Text variant="body-3">- Left align text</Text>
+  <Stack>
+  </Stack>
+</DosAndDonts>
+
+<DosAndDonts maxWidth="50%">
+  <Stack maxWidth="70%">
+    <div style={{
+      border: '1px solid var(--dimmed-2)',
+      borderRadius: '5px',
+      padding: '.5rem 1rem',
+      maxHeight: '100px'
+      }}>
+        <Stack rowGap={8} vPadding={4} style={{minWidth: '100%'}}>
+        <Text variant="subtitle-2" color="dark" textAlign="right">Relevance</Text>
+        <Text variant="body-3" textAlign="right">Learn what drives the satisfaction and dissatisfaction of customers.</Text>
+        </Stack>
+    </div>
+  </Stack>
+  <Chip color="green" dimension="small" style={{maxWidth: '32px'}}>Do</Chip>
+  <Text variant="body-3">- Right align text for right-to-left languages</Text>
+  <Stack>
+  </Stack>
+</DosAndDonts>
+</Stack>
 
 ### When to center
 
 While centering text may not always be the most effective approach for information design and legibility, it can be appropriate in certain contexts such as with an empty state, card or under an image if the amount of content is small.
 
-<div style={{maxWidth: '50%'}}>
-![](https://wonderimages.gumlet.io/docs/typography/typography-center-align.png?format=webp&q=100)
-</div>
+
+<DosAndDonts maxWidth="50%">
+  <Stack maxWidth="70%">
+    <div style={{
+      border: '1px solid var(--dimmed-2)',
+      borderRadius: '5px',
+      padding: '.5rem 1rem',
+      maxHeight: '100px'
+      }}>
+        <Stack rowGap={8} vPadding={4} style={{minWidth: '100%'}}>
+        <Text variant="subtitle-2" color="dark" textAlign="center">Relevance</Text>
+        <Text variant="body-3" textAlign="center">Learn what drives the satisfaction and dissatisfaction of customers.</Text>
+        </Stack>
+    </div>
+  </Stack>
+  <Chip color="green" dimension="small" style={{maxWidth: '32px'}}>Do</Chip>
+  <Text variant="body-3">- Center align text</Text>
+  <Stack>
+  </Stack>
+</DosAndDonts>
 
 
 ## Type styles
