@@ -19,7 +19,7 @@
 
   .Panel {
     animation: fade-in token(--duration-200);
-    animation-timing-function: token(--easing-entrance));
+    animation-timing-function: token(--easing-entrance);
   }
 }
 @layer overrides {
@@ -30,7 +30,6 @@
     background-color: transparent;
     border: 0;
     border-radius: 0;
-    block-size: token(--space-48);
     color: var(--dimmed-6);
     font-family: inherit;
     font-weight: token(--wds-font-weight-regular);
@@ -44,7 +43,7 @@
 
     &[data-tab-dimension='big'] {
       font-size: token(--wds-font-size-16);
-      height: calc(token(--space-56) - var(--separator-size));
+      height: token(--space-48);
     }
 
     &:active {

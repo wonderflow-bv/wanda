@@ -101,7 +101,7 @@ export const Tab = ({
               data-tab-dimension={dimension}
               asChild
             >
-              <Button kind="flat" dimension="big">
+              <Button kind="flat">
                 {child.props.icon && <Symbol source={child.props.icon} dimension={dimension === 'big' ? 24 : 16} weight={dimension === 'big' ? 'duotone' : 'solid'} />}
                 {child.props.label}
                 {(child.props.value === activeItem || child.props.value === value) && (

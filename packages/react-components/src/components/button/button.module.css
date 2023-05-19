@@ -32,27 +32,25 @@
     /* Sizes */
 
     &[data-button-dimension='big'] {
-      padding: calc(token(--space-16) - token(--space-4)) token(--space-24);
+      block-size: token(--space-48);
       font-size: token(--wds-font-size-16);
       line-height: 0;
-      block-size: token(--space-48);
+      padding: calc(token(--space-16) - token(--space-4)) token(--space-24);
     }
 
     &[data-button-dimension='regular'] {
-      padding: token(--space-8) token(--space-16);
+      block-size: calc(token(--space-40) - token(--space-4));
       font-size: token(--wds-font-size-14);
       line-height: 0;
-      block-size: token(--space-40);
+      padding: token(--space-8) token(--space-16);
     }
 
     &[data-button-dimension='small'] {
-
-      /* stylelint-disable-next-line number-max-precision */
-      padding: token(--space-2) token(--space-8);
-      font-size: token(--wds-font-size-14);
-      line-height: 0;
       block-size: token(--space-24);
+      font-size: token(--wds-font-size-14);
       grid-gap: token(--space-4);
+      line-height: 0;
+      padding: token(--space-2) token(--space-8);
     }
 
     /* Types */
