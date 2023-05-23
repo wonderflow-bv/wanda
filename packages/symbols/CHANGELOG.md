@@ -1,5 +1,11 @@
 # @wonderflow/symbols
 
+## 12.1.0
+
+### Minor Changes
+
+- bed409d0: Add new `wonderflow` and `verified` icons
+
 ## 12.0.0
 
 ## 11.0.7
