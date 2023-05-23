@@ -153,7 +153,7 @@ export const MenuItem = forwardRef(({
       <Stack className={styles.DecorationContent} columnGap={16} fill={false} direction="row" hAlign="space-between">
         <Stack direction="column">
           {children}
-          {subtext && <Text variant="body-2">{subtext}</Text>}
+          {subtext && <Text variant={dimension === 'small' ? 'body-3' : 'body-2'}>{subtext}</Text>}
         </Stack>
         {decoration}
       </Stack>

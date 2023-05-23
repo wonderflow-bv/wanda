@@ -3,7 +3,8 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
 import {
-  Card, Chip, Container, Stack, Symbol,
+  Card, Chip, Container, Separator,
+  Stack, Symbol,
 } from '../..';
 import { Text, TextVariants } from './text';
 
@@ -167,26 +168,114 @@ const TemplateDecorators: ComponentStory<typeof Text> = () => {
 export const withDecorators = TemplateDecorators.bind({});
 
 const TemplatePairing: ComponentStory<typeof Text> = () => (
-  <Stack rowGap={16}>
+  <Stack rowGap={32}>
     <div style={{ maxWidth: '800px' }}>
-      <Text variant="display-1">96px display-1</Text>
-      <Text variant="tagline-1">28px tagline-1 Lorem ipsum sit amet, consectur adipiscing elit. Fusce aliquet cursus.</Text>
+      <Text variant="display-1" preventResponsive>96px display-1</Text>
+      <Text variant="tagline-1" preventResponsive>28px tagline-1 Lorem ipsum sit amet, consectur adipiscing elit. Fusce aliquet cursus.</Text>
     </div>
 
     <div style={{ maxWidth: '800px' }}>
-      <Text variant="display-2">80px display-2</Text>
-      <Text variant="tagline-1">28px tagline-1 Lorem ipsum sit amet, consectur adipiscing elit. Fusce aliquet cursus.</Text>
+      <Text variant="display-2" preventResponsive>80px display-2</Text>
+      <Text variant="tagline-1" preventResponsive>28px tagline-1 Lorem ipsum sit amet, consectur adipiscing elit. Fusce aliquet cursus.</Text>
     </div>
 
     <div style={{ maxWidth: '800px' }}>
-      <Text variant="display-3">68px display-3</Text>
-      <Text variant="tagline-2">24px tagline-2 Lorem ipsum sit amet, consectur adipiscing elit. Fusce aliquet cursus.</Text>
+      <Text variant="display-3" preventResponsive>68px display-3</Text>
+      <Text variant="tagline-2" preventResponsive>24px tagline-2 Lorem ipsum sit amet, consectur adipiscing elit. Fusce aliquet cursus.</Text>
     </div>
 
     <div style={{ maxWidth: '800px' }}>
-      <Text variant="display-4">56px display-4</Text>
-      <Text variant="tagline-2">24px tagline-2 Lorem ipsum sit amet, consectur adipiscing elit. Fusce aliquet cursus.</Text>
+      <Text variant="display-4" preventResponsive>56px display-4</Text>
+      <Text variant="tagline-2" preventResponsive>24px tagline-2 Lorem ipsum sit amet, consectur adipiscing elit. Fusce aliquet cursus.</Text>
     </div>
+
+    <div style={{ maxWidth: '800px' }}>
+      <Text variant="tagline-3" preventResponsive>20px tagline-3</Text>
+      <Text variant="heading-1" preventResponsive>48px heading-1</Text>
+      <Text variant="tagline-3">20px tagline-3</Text>
+    </div>
+
+    <div style={{ maxWidth: '800px' }}>
+      <Text variant="subtitle-1">16px subtitle-1</Text>
+      <Text variant="heading-1" preventResponsive>48px heading-1</Text>
+      <Text variant="body-1">16px body-1</Text>
+    </div>
+
+    <div style={{ maxWidth: '800px' }}>
+      <Text variant="heading-1" preventResponsive>48px heading-1</Text>
+      <Text variant="body-1">16px as body-1 Lorem ipsum sit amet, consectur adipiscing elit. Fusce aliquet cursus.</Text>
+    </div>
+
+    <div style={{ maxWidth: '800px' }}>
+      <Text variant="heading-2" preventResponsive>40px heading-2</Text>
+      <Text variant="body-1">16px as body-1 Lorem ipsum sit amet, consectur adipiscing elit. Fusce aliquet cursus.</Text>
+    </div>
+
+    <div>
+      <Text variant="subtitle-1" color="danger">Heading Title with Body text</Text>
+      <Separator />
+    </div>
+
+    <div style={{ maxWidth: '800px' }}>
+      <Text variant="heading-3" preventResponsive>32px heading-3</Text>
+      <Text variant="body-1">16px as body-1 Lorem ipsum sit amet, consectur adipiscing elit. Fusce aliquet cursus.</Text>
+    </div>
+
+    <div style={{ maxWidth: '800px' }}>
+      <Text variant="heading-4" preventResponsive>28px heading-4</Text>
+      <Text variant="body-1">16px as body-1 Lorem ipsum sit amet, consectur adipiscing elit. Fusce aliquet cursus.</Text>
+    </div>
+
+    <div style={{ maxWidth: '800px' }}>
+      <Text variant="heading-5" preventResponsive>24px heading-5</Text>
+      <Text variant="body-1">16px as body-1 Lorem ipsum sit amet, consectur adipiscing elit. Fusce aliquet cursus.</Text>
+    </div>
+
+    <div style={{ maxWidth: '800px' }}>
+      <Text variant="heading-6" preventResponsive>20px heading-6</Text>
+      <Text variant="body-1">16px as body-1 Lorem ipsum sit amet, consectur adipiscing elit. Fusce aliquet cursus.</Text>
+    </div>
+
+    <div style={{ maxWidth: '800px' }}>
+      <Text variant="heading-6" preventResponsive>20px heading-6</Text>
+      <Text variant="body-2">14px as body-2 Lorem ipsum sit amet, consectur adipiscing elit. Fusce aliquet cursus.</Text>
+    </div>
+
+    <div style={{ maxWidth: '800px' }}>
+      <Text variant="subtitle-1">16px subtitle-1</Text>
+      <Text variant="body-2">14px as body-2 Lorem ipsum sit amet, consectur adipiscing elit. Fusce aliquet cursus.</Text>
+    </div>
+
+    <div>
+      <Text variant="subtitle-1" color="danger">Title with eyebrow text</Text>
+      <Separator />
+    </div>
+
+    <div style={{ maxWidth: '800px' }}>
+      <Text variant="subtitle-1">16px subtitle-1</Text>
+      <Text variant="heading-4" preventResponsive>28px heading-4</Text>
+    </div>
+
+    <div style={{ maxWidth: '800px' }}>
+      <Text variant="subtitle-2">14px subtitle-2</Text>
+      <Text variant="heading-5" preventResponsive>24px heading-5</Text>
+    </div>
+
+    <div>
+      <Text variant="subtitle-1" color="danger">Paragraph with text</Text>
+      <Separator />
+    </div>
+
+    <div style={{ maxWidth: '800px' }}>
+      <Text>16px as body-1</Text>
+      <Text variant="body-3">12px as body-3</Text>
+    </div>
+
+    <div style={{ maxWidth: '800px' }}>
+      <Text variant="body-2">14px as body-2</Text>
+      <Text variant="body-3">12px as body-3</Text>
+    </div>
+
   </Stack>
 );
 export const sizePairing = TemplatePairing.bind({});

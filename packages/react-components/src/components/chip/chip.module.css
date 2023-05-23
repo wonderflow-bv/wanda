@@ -1,7 +1,7 @@
 @layer components {
   .Chip {
     background-color: var(--highlight-gray-background);
-    block-size: token(--space-32);
+    block-size: calc(token(--space-32) - token(--space-4));
     border-radius: token(--radius-48);
     color: var(--highlight-gray-foreground);
     font-size: token(--wds-font-size-14);
@@ -17,6 +17,7 @@
 
     &[data-chip-dimension='big'] {
       font-size: token(--wds-font-size-16);
+      block-size: token(--space-32);
     }
 
     &[data-chip-color='cyan'] {

@@ -84,7 +84,7 @@ export const Snackbar = forwardRef(({
 }, forwardedRef) => {
   const defaultIcons: Record<string, SymbolProps['source']> = {
     info: 'circle-info',
-    warning: 'circle-exclamation',
+    warning: 'triangle-exclamation',
     neutral: 'compass',
     positive: 'circle-check',
     danger: 'circle-x',
@@ -102,14 +102,14 @@ export const Snackbar = forwardRef(({
         <Symbol
           data-snackbar-has-title={!!title}
           className={styles.Icon}
-          weight="duotone"
+          weight="outline"
           source={icon ?? defaultIcons[kind]}
-          dimension={18}
+          dimension={24}
         />
 
-        <Stack rowGap={16} vPadding={4}>
-          <Stack rowGap={8}>
-            {title && <Text variant="heading-6" color={kind ? mapping[kind] as TextColors : 'neutral'} preventResponsive>{title}</Text>}
+        <Stack rowGap={16}>
+          <Stack rowGap={4}>
+            {title && <Text variant="subtitle-1" color={kind ? mapping[kind] as TextColors : 'neutral'} preventResponsive>{title}</Text>}
             <Text variant="body-2">{children}</Text>
           </Stack>
           {dismissable && (

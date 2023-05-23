@@ -8,10 +8,14 @@
     padding: token(--space-8) token(--space-16);
     border-radius: token(--radius-4);
     background-color: hsl(token(--color-primary-80));
-    font-size: token(--wds-font-size-16);
+    font-size: token(--wds-font-size-14);
     max-inline-size: var(--max-w);
     word-wrap: break-word;
     z-index: 5;
+
+    & p {
+      font-size: token(--wds-font-size-14);
+    }
 
     &[data-popper-reference-hidden='true'] {
       visibility: hidden;
