@@ -2,24 +2,24 @@
   .Pagination {
     align-items: center;
     display: inline-flex;
+    font-size: token(--wds-font-size-14);
     list-style: none;
     margin: 0;
     padding: 0;
-    font-size: token(--wds-font-size-14);
 
     & > li > a {
-      border-radius: token(--radius-4);
-      line-height: token(--wds-line-height-20);
-      padding: 0 token(--space-8);
-      cursor: pointer;
-      font-weight: token(--wds-font-weight-semibold);
-      user-select: none;
-      color: var(--dimmed-5);
-      display: inline-flex;
       align-items: center;
-      justify-content: center;
+      border-radius: token(--radius-4);
+      color: var(--dimmed-7);
+      cursor: pointer;
+      display: inline-flex;
+      font-weight: token(--wds-font-weight-semibold);
       height: token(--space-32);
+      justify-content: center;
+      line-height: token(--wds-line-height-20);
       min-width: token(--space-32);
+      padding: 0 token(--space-8);
+      user-select: none;
 
       &[aria-current='page'] {
         background-color: var(--cta-default);
