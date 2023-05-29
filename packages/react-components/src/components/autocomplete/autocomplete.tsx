@@ -38,6 +38,7 @@ import {
   Textfield, TextfieldProps,
 } from '@/components';
 
+import { isBrowser } from '../../utils/browser';
 import { MenuItemProps, MenuProps } from '../menu';
 import * as styles from './autocomplete.module.css';
 import { AutocompleteOption, AutocompleteOptionProps } from './autocomplete-option';
@@ -138,7 +139,7 @@ export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
 
   const isFocusWithin = useFocusWithin(autocompleteRef, {
     onChange: (isFocusWithin) => {
-      const m = document.getElementById(seedID('autocomplete-menu'));
+      const m = isBrowser() && document.getElementById(seedID('autocomplete-menu'));
       if (isFocusWithin || m) {
         setIsOpen(true);
       } else {
@@ -226,7 +227,7 @@ export const Autocomplete = forwardRef<HTMLElement, AutocompleteProps>(({
         readOnly={readOnly}
         {...otherProps}
       />
-      {visible && createPortal(
+      {isBrowser() && visible && createPortal(
         <AnimatePresence>
           <div
             ref={setTooltipRef}

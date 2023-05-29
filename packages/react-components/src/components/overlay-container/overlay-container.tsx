@@ -23,6 +23,7 @@ import { useUIDSeed } from 'react-uid';
 
 import { OverlayProvider } from '@/components';
 
+import { isBrowser } from '../../utils/browser';
 import * as styles from './overlay-container.module.css';
 
 export type OverlayContainerProps = {
@@ -102,5 +103,5 @@ export const OverlayContainer: FCChildren<OverlayContainerProps> = ({
       </AnimatePresence>
     </OverlayProvider>
   );
-  return createPortal(content, root ?? document.body);
+  return isBrowser() ? createPortal(content, root ?? document.body) : null;
 };

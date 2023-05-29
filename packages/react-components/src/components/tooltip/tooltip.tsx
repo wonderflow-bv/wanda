@@ -25,6 +25,7 @@ import { useUIDSeed } from 'react-uid';
 
 import { Elevator } from '@/components';
 
+import { isBrowser } from '../../utils/browser';
 import * as styles from './tooltip.module.css';
 
 export type TooltipProps = {
@@ -141,7 +142,7 @@ export const Tooltip: FCChildrenClass<TooltipProps> = ({
           'aria-describedby': id,
         },
       ))}
-      {visible && createPortal(
+      {isBrowser() && visible && createPortal(
         <Elevator resting={1}>
           <div
             ref={setTooltipRef}

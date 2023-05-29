@@ -21,7 +21,10 @@ import tkns from '@wonderflow/tokens/platforms/web/tokens.json';
 import { useFocusWithin, useKeyPress } from 'ahooks';
 import clsx from 'clsx';
 import {
-  AnimatePresence, domMax, LazyMotion, m,
+  AnimatePresence,
+  domMax,
+  LazyMotion,
+  m,
 } from 'framer-motion';
 import {
   Children,
@@ -40,6 +43,7 @@ import { mergeRefs } from 'react-merge-refs';
 import { usePopperTooltip } from 'react-popper-tooltip';
 import { useUIDSeed } from 'react-uid';
 
+import { isBrowser } from '../../utils/browser';
 import * as styles from './popover.module.css';
 
 export type PopoverProps = {
@@ -215,7 +219,7 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
           ...otherProps,
         },
       )}
-      {visible && createPortal(
+      {isBrowser() && visible && createPortal(
         <AnimatePresence>
           <div
             ref={setTooltipRef}
