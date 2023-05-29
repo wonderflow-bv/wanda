@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 12.1.1
+
+### Patch Changes
+
+- 379ef7e4: Fix: prevent Portal to fail during SSR
+
 ## 12.1.0
 
 ## 12.0.0
