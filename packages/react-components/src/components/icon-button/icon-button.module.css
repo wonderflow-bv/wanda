@@ -3,7 +3,7 @@
     padding: 0;
 
     &[data-icon-button-squared='false'] {
-      border-radius: 200px;
+      border-radius: 50%;
     }
 
     &[data-button-dimension='small'] {
@@ -13,6 +13,7 @@
     }
 
     &[data-button-dimension='regular'] {
+      block-size: token(--space-40);
       inline-size: token(--space-40);
       min-inline-size: token(--space-40);
       padding: 0;

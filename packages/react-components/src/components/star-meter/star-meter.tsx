@@ -163,7 +163,7 @@ export const StarMeter = forwardRef(({
       <Stack direction="row" columnGap={dimension === 'small' ? 2 : 4} vAlign="center">
         {starType(starCount, value)}
       </Stack>
-      <Text preventResponsive id={seedID('star-meter')} variant={properties[dimension].labelSize as TextVariants}>
+      <Text preventResponsive preventBreakWord id={seedID('star-meter')} variant={properties[dimension].labelSize as TextVariants}>
         <b>{(!hideLabel && label) ?? value.toString()}</b>
       </Text>
     </Stack>

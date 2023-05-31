@@ -230,7 +230,7 @@ export const Text = forwardRef(({
       data-text-prevent-break-word={preventBreakWord}
       className={clsx(styles.Text, className)}
       style={{ ...dynamicStyle, ...style }}
-      id={id || (isTitle && generatedID) || ''}
+      id={id || (isTitle && anchor) ? generatedID : undefined}
       {...otherProps}
     >
       {hasStart
