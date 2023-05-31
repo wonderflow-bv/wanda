@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 12.1.2
+
+### Patch Changes
+
+- bece3034: Fix `Icon Button` block size, `Star Meter` prevent break word, `Text` prevent creating an id when anchor or id are not provided
+
 ## 12.1.1
 
 ### Patch Changes
