@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 12.1.3
+
+### Patch Changes
+
+- 05397b9d: Fix `Select` and `Textfield` font size and height
+
 ## 12.1.2
 
 ### Patch Changes

@@ -1,7 +1,7 @@
 {
   "name": "@wonderflow/symbols",
   "description": "Wanda's symbols",
-  "version": "12.1.2",
+  "version": "12.1.3",
   "author": "Wonderflow",
   "license": "Apache-2.0",
   "main": "dist/index",
