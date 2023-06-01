@@ -11,9 +11,9 @@
     }
 
     &[data-textfield-dimension='regular'] {
-      --field-height: token(--space-40);
-      --field-padding: token(--space-16);
-      --font-size: token(--wds-font-size-16);
+      --field-height: calc(token(--space-40) -token(--space-4));
+      --field-padding: calc(token(--space-16) - token(--space-2));
+      --font-size: token(--wds-font-size-14);
     }
 
     &[data-textfield-dimension='big'] {

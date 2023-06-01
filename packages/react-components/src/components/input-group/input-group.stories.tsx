@@ -35,7 +35,6 @@ const Default: ComponentStory<typeof InputGroup> = args => (
       {...args}
     />
     <InputGroup
-      dimension="big"
       label="Sample label"
       prefix={<Textfield readOnly size={6} defaultValue="https://" />}
       suffix={(
