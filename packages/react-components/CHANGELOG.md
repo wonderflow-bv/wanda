@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 12.1.4
+
+### Patch Changes
+
+- c7c348ca: Fix `Select`, `selectionControls`, `Slider`, `Textfield` disabled label color
+
 ## 12.1.3
 
 ### Patch Changes
