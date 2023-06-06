@@ -110,7 +110,7 @@
     flex-shrink: 0;
   }
 
-  .Label,
+  label.Label,
   .Icon {
     &[aria-disabled='true'] {
       color: var(--global-disabled-foreground);

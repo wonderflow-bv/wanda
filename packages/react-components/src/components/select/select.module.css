@@ -120,7 +120,7 @@
     right: calc(var(--field-padding) - calc(var(--field-padding) / 3));
   }
 
-  .Label {
+  label.Label {
     &[aria-disabled='true'] {
       color: var(--global-disabled-foreground);
       cursor: not-allowed;

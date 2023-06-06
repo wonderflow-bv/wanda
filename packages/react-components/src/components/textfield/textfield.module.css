@@ -72,13 +72,18 @@
     @nest .Textfield[data-textfield-invalid='true'] & {
       fill: var(--highlight-red-foreground);
     }
+
+    &[aria-disabled='true'] {
+      color: var(--global-disabled-foreground);
+      cursor: not-allowed;
+    }
   }
 
   .InputField:invalid + .Icon {
     fill: var(--highlight-red-foreground);
   }
 
-  .Label {
+  label.Label {
     &[aria-disabled='true'] {
       color: var(--global-disabled-foreground);
       cursor: not-allowed;
@@ -94,9 +99,16 @@
     transform: translateY(-50%) translateX(var(--x));
     outline-offset: -0.25em;
 
-    &[data-button-kind='flat']:is(:hover, :active, :focus, [data-button-disabled='true']) {
+    &[data-button-kind='flat']:is(:hover, :active, :focus) {
       background-color: transparent;
       backdrop-filter: none;
+    }
+
+    &[data-button-kind='flat']:is([data-button-disabled='true']) {
+      background-color: unset;
+      backdrop-filter: none;
+      block-size: unset;
+      cursor: not-allowed;
     }
 
     @nest [data-textfield-icon-position='left'] & {

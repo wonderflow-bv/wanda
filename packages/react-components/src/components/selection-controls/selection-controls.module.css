@@ -168,7 +168,7 @@
     }
   }
 
-  .Label {
+  label.Label {
     cursor: none;
     word-break: break-word;
 
