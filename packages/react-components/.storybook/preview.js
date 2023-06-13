@@ -84,6 +84,23 @@ export const parameters = {
       }
     },
   },
+  options: {
+    storySort: {
+      order: [
+        'Layouts',
+        'Navigation',
+        'Typography',
+        'Actions',
+        'Dialogs',
+        'Inputs',
+        'Loading',
+        'Widgets',
+        'Core Styles',
+        'Domain Components',
+        'Examples'
+      ]
+    }
+  }
 };
 
 // .storybook/preview.js
