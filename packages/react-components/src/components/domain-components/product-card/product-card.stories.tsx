@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import {
   Text,
-} from '../..';
+} from '../../..';
 import { ProductCard } from './product-card';
 
 const story: ComponentMeta<typeof ProductCard> = {

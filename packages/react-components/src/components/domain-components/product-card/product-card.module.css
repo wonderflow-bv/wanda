@@ -1,4 +1,4 @@
-@import '../../core/utils/vibrancy.css';
+@import '../../../core/utils/vibrancy.css';
 
 @layer components {
   .Card {
