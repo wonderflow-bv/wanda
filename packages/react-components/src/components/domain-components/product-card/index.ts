@@ -14,5 +14,5 @@
  * limitations under the License.
  */
 
-export type { ProductCardProps as CardProps } from './product-card';
-export { ProductCard as Card } from './product-card';
+export type { ProductCardProps } from './product-card';
+export { ProductCard } from './product-card';

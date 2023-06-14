@@ -3,8 +3,9 @@
 @layer components {
   .Card {
     background-color: var(--global-background);
-    padding: var(--padding);
-    border-radius: var(--radius);
+    border-radius: token(--radius-8);
+    overflow: hidden;
+    padding: 0;
     position: relative;
 
     &[data-card-highlight-hover='true']:is(:hover, :focus-visible) {
@@ -14,89 +15,9 @@
     &[data-card-bordered='true'] {
       border: solid 1px var(--dimmed-1);
     }
-
-    &[data-card-dimmed='0'] {
-      background-color: var(--dimmed-0);
-
-      &[data-card-highlight-hover='true']:is(:hover, :focus-visible) {
-        background-color: var(--global-background);
-      }
-    }
-
-    &[data-card-dimmed='1'] {
-      background-color: var(--dimmed-1);
-
-      &[data-card-highlight-hover='true']:is(:hover, :focus-visible) {
-        background-color: var(--dimmed-0);
-      }
-
-      &[data-card-bordered='true'] {
-        border: solid 1px var(--dimmed-2);
-      }
-    }
-
-    &[data-card-dimmed='2'] {
-      background-color: var(--dimmed-2);
-
-      &[data-card-highlight-hover='true']:is(:hover, :focus-visible) {
-        background-color: var(--dimmed-1);
-      }
-
-      &[data-card-bordered='true'] {
-        border: solid 1px var(--dimmed-3);
-      }
-    }
-
-    &[data-card-vibrant='true'] {
-
-      @mixin vibrancy;
-
-      background-color: var(--global-vibrancy-background);
-
-      &[data-card-highlight-hover='true']:is(:hover, :focus-visible) {
-        background-color: var(--global-vibrancy-background-soft);
-      }
-    }
-
-    &[data-card-vibrant='true'][data-card-dimmed='0'] {
-      background-color: var(--global-vibrancy-background-soft);
-
-      &[data-card-highlight-hover='true']:is(:hover, :focus-visible) {
-        background-color: var(--global-background);
-      }
-    }
-
-    &[data-card-vibrant='true'][data-card-dimmed='1'] {
-      background-color: var(--global-vibrancy-background);
-
-      &[data-card-highlight-hover='true']:is(:hover, :focus-visible) {
-        background-color: var(--global-vibrancy-background-soft);
-      }
-    }
-
-    &[data-card-vibrant='true'][data-card-dimmed='2'] {
-      background-color: var(--global-vibrancy-background-hard);
-
-      &[data-card-highlight-hover='true']:is(:hover, :focus-visible) {
-        background-color: var(--global-vibrancy-background);
-      }
-    }
   }
 
   .Row {
     height: 100%;
-  }
-
-  .Left {
-    flex-shrink: 0;
-  }
-
-  .Content {
-    flex-grow: 1;
-    height: 100%;
-  }
-
-  .Right {
-    flex-shrink: 0;
   }
 }

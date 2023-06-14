@@ -10,17 +10,15 @@ const story: ComponentMeta<typeof ProductCard> = {
   component: ProductCard,
   args: {
     bordered: false,
-    vibrant: false,
-    highlightOnHover: true,
-    dimmed: 1,
-    children: (
-      <>
-        <Text variant="heading-4">Product Card title</Text>
-        <Text>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</Text>
-      </>
-    ),
+    highlightOnHover: false,
+    children: (<Text>Product Card Content</Text>),
+    footer: (<Text>Product Card Footer</Text>),
   },
   argTypes: {
+    direction: {
+      options: ['vertical', 'horizontal'],
+      control: { type: 'select' },
+    },
     children: {
       table: {
         disable: true,

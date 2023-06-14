@@ -1,113 +1,125 @@
-import type { TokensTypes } from '@wonderflow/tokens/platforms/web';
-import tkns from '@wonderflow/tokens/platforms/web/tokens.json';
 import clsx from 'clsx';
-import { CSSProperties, forwardRef, ReactNode } from 'react';
+import React, { forwardRef } from 'react';
 
-import { Polymorphic, Stack, StackProps } from '@/components';
+import {
+  ClampText,
+  Elevator,
+  IconButton,
+  Polymorphic, Stack,
+  Symbol, Text,
+} from '@/components';
 
 import * as styles from './product-card.module.css';
 
-export type ProductCardProps = Pick<
-StackProps,
-'wrap' | 'columnGap' | 'rowGap' | 'vAlign' | 'hAlign'>
-& {
+export type ProductCardProps = {
   /**
-   * Set the padding on each side of the card.
+   * Set the direction of the component.
    */
-  padding?: false | TokensTypes['space'];
-  /**
-   * Content rendered inside the card on the left side, before children.
-   */
-  left?: ReactNode;
-  /**
-   * Content rendered inside the card on the right side, after children.
-   */
-  right?: ReactNode;
+  direction?: 'vertical' | 'horizontal';
   /**
    * Add a border to the card to increase its visual weight and contrast.
    */
   bordered?: boolean;
   /**
-   * Define the edge radius of the card.
-   */
-  radius?: false | TokensTypes['radius'];
-  /**
-   * Change the background color of the card.
-   */
-  dimmed?: 0 | 1 | 2;
-  /**
-   * Make the card vibrant. Add tranlucent background.
-   */
-  vibrant?: boolean;
-  /**
    * Change the background color of the card when it is hovered.
    */
   highlightOnHover?: boolean;
+  /**
+   * Add content on the footer.
+   */
+  footer?: React.ReactNode;
 }
 
 type PolymorphicProductCard = Polymorphic.ForwardRefComponent<'div', ProductCardProps>;
 
 export const ProductCard = forwardRef(({
   as: Wrapper = 'div',
-  children,
-  className,
-  padding = 24,
-  radius = 8,
-  left,
-  right,
-  dimmed,
-  bordered,
-  columnGap = 24,
-  rowGap = 24,
-  vAlign = 'start',
-  hAlign = 'space-between',
-  vibrant = false,
+  direction = 'vertical',
+  footer,
+  bordered = false,
   highlightOnHover = false,
-  wrap,
+  className,
   style,
+  children,
   ...otherProps
-}, forwardedRef) => {
-  const dynamicStyle: CSSProperties = {
-    '--padding': padding && tkns.space[padding],
-    '--radius': radius && tkns.radius[radius],
-  };
-
-  return (
+}, forwardedRef) => (
+  <Elevator resting={1} hover={2}>
     <Wrapper
       ref={forwardedRef}
       className={clsx(styles.Card, className)}
-      style={{ ...dynamicStyle, ...style }}
-      data-card-dimmed={dimmed}
+      style={{ ...style }}
       data-card-bordered={bordered}
-      data-card-vibrant={vibrant}
       data-card-highlight-hover={highlightOnHover}
       {...otherProps}
     >
       <Stack
-        data-inner-element="Row"
+        data-inner-element="ProductCard-Container"
         direction="row"
         className={styles.Row}
         fill={false}
-        vAlign={vAlign}
-        hAlign={hAlign}
-        columnGap={columnGap}
-        rowGap={rowGap}
-        wrap={wrap}
       >
-        {left && <div className={styles.Left} data-inner-element="Left">{left}</div>}
-
-        {children && (
-          <div className={styles.Content} data-inner-element="Content">
-            {children}
+        <Stack rowGap={16} direction={direction === 'vertical' ? 'column' : 'row'} data-inner-element="ProductCard-Direction">
+          <div data-inner-element="ProductCard-Media">
+            <img
+              src="https://storage.googleapis.com/wonderflow-product-images/KITCHENAID%205KSM15%20SERIES.png"
+              alt="caption"
+              width="100%"
+              height="auto"
+            />
           </div>
-        )}
 
-        {right && (
-          <div className={styles.Right} data-inner-element="Right">
-            {right}
-          </div>
-        )}
+          <Stack rowGap={16} direction="column" data-inner-element="ProductCard-Main">
+            <Stack rowGap={8} vPadding={16} direction="row" hPadding={24} data-inner-element="ProductCard-Header">
+              <Stack rowGap={8}>
+                <div>
+                  <Text variant="subtitle-2">subtitle</Text>
+
+                  <div>
+                    <ClampText rows={3} style={{ height: '84px' }}>
+                      <Text variant="heading-6">
+                        Title
+                      </Text>
+                    </ClampText>
+                  </div>
+                </div>
+
+                <div>
+                  <ClampText rows={3} style={{ height: '60px' }}>
+                    <Text variant="body-2">
+                      description
+                    </Text>
+                  </ClampText>
+                </div>
+              </Stack>
+
+              <div style={{ maxWidth: '1.5rem' }}>
+                <IconButton icon="more-vert" kind="flat" dimension="small" />
+              </div>
+            </Stack>
+
+            <Stack rowGap={8} hPadding={24} vPadding={8} data-inner-element="ProductCard-KPIs">
+              <Text variant="body-2" decoratorStart={<Symbol source="star" color="orange" weight="solid" />} decoratorSize="small"><b>4.2</b></Text>
+              <Text variant="body-2" decoratorStart={<Symbol source="file-alt" weight="solid" />} decoratorSize="small"><b>1.2</b></Text>
+              <Text variant="body-2" decoratorStart={<Symbol source="thumbs-up" weight="solid" />} decoratorSize="small"><b>234,212312</b></Text>
+              <Text variant="body-2" decoratorStart={<Symbol source="hearts-suit" color="red" weight="solid" />} decoratorSize="small"><b>1.2</b></Text>
+              <Text variant="body-2" decoratorStart={<Symbol source="grid" weight="solid" />} decoratorSize="small"><b>12</b></Text>
+              <Text variant="body-2" decoratorStart={<Symbol source="tags" weight="solid" />} decoratorSize="small"><b>€12</b></Text>
+              <Text variant="body-2" decoratorStart={<Symbol source="users" weight="solid" />} decoratorSize="small"><b>12</b></Text>
+              <Text variant="body-2" decoratorStart={<Symbol source="rectangle-barcode" weight="solid" />} decoratorSize="small"><b>1.2</b></Text>
+            </Stack>
+
+            <Stack hPadding={24} data-inner-element="ProductCard-Children">
+              {children}
+            </Stack>
+
+            <Stack hPadding={24} vPadding={16} data-inner-element="ProductCard-Footer">
+              {footer}
+            </Stack>
+          </Stack>
+
+        </Stack>
+
       </Stack>
     </Wrapper>
-  );
-}) as PolymorphicProductCard;
+  </Elevator>
+)) as PolymorphicProductCard;
