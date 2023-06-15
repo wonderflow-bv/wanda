@@ -43,7 +43,7 @@ export const ProductCard = forwardRef(({
   children,
   ...otherProps
 }, forwardedRef) => (
-  <Elevator resting={1} hover={2}>
+  <Elevator resting={1} hover={highlightOnHover ? 2 : undefined}>
     <Wrapper
       ref={forwardedRef}
       className={clsx(styles.Card, className)}
@@ -58,7 +58,11 @@ export const ProductCard = forwardRef(({
         className={styles.Row}
         fill={false}
       >
-        <Stack rowGap={16} direction={direction === 'vertical' ? 'column' : 'row'} data-inner-element="ProductCard-Direction">
+        <Stack
+          direction={direction === 'vertical' ? 'column' : 'row'}
+          className={styles.Direction}
+          data-inner-element="ProductCard-Direction"
+        >
           <div data-inner-element="ProductCard-Media">
             <img
               src="https://storage.googleapis.com/wonderflow-product-images/KITCHENAID%205KSM15%20SERIES.png"
@@ -97,7 +101,7 @@ export const ProductCard = forwardRef(({
               </div>
             </Stack>
 
-            <Stack rowGap={8} hPadding={24} vPadding={8} data-inner-element="ProductCard-KPIs">
+            <Stack rowGap={8} hPadding={24} data-inner-element="ProductCard-KPIs">
               <Text variant="body-2" decoratorStart={<Symbol source="star" color="orange" weight="solid" />} decoratorSize="small"><b>4.2</b></Text>
               <Text variant="body-2" decoratorStart={<Symbol source="file-alt" weight="solid" />} decoratorSize="small"><b>1.2</b></Text>
               <Text variant="body-2" decoratorStart={<Symbol source="thumbs-up" weight="solid" />} decoratorSize="small"><b>234,212312</b></Text>
@@ -123,3 +127,5 @@ export const ProductCard = forwardRef(({
     </Wrapper>
   </Elevator>
 )) as PolymorphicProductCard;
+
+ProductCard.displayName = 'ProductCard';

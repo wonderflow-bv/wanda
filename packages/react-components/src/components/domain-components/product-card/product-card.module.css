@@ -20,4 +20,8 @@
   .Row {
     height: 100%;
   }
+
+  .Direction {
+    flex-grow: 1;
+  }
 }
