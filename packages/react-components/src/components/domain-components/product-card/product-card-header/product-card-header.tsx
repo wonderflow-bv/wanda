@@ -27,6 +27,10 @@ export type ProductCardHeaderProps = {
    *
    */
   descriptionRows?: number;
+  /**
+   *
+   */
+  menuActions?: React.ReactNode;
 }
 
 export type PolymorphicProductCardHeader = Polymorphic.ForwardRefComponent<'div', ProductCardHeaderProps>;
@@ -37,7 +41,7 @@ export const ProductCardHeader = forwardRef(({
   titleRows = 3,
   description,
   descriptionRows = 3,
-
+  menuActions,
 }, forwardedRef) => (
   <Stack rowGap={8} vPadding={16} direction="row" hPadding={24} ref={forwardedRef}>
     <Stack rowGap={8}>
@@ -66,9 +70,11 @@ export const ProductCardHeader = forwardRef(({
       )}
     </Stack>
 
-    <Stack maxWidth="1.5rem" fill={false}>
-      <IconButton icon="more-vert" kind="flat" dimension="small" />
-    </Stack>
+    {menuActions && (
+      <Stack maxWidth="1.5rem" fill={false}>
+        <IconButton icon="more-vert" kind="flat" dimension="small" />
+      </Stack>
+    )}
   </Stack>
 
 )) as PolymorphicProductCardHeader;

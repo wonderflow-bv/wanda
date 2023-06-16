@@ -26,6 +26,18 @@ export type ProductCardProps = {
    */
   highlightOnHover?: boolean;
   /**
+   *
+   */
+  overlayActions?: React.ReactNode;
+  /**
+   *
+   */
+  menuActions?: React.ReactNode;
+  /**
+   *
+   */
+  onClick?: () => void;
+  /**
    * Add content on the footer.
    */
   footer?: React.ReactNode;
@@ -39,63 +51,77 @@ type PolymorphicProductCard = Polymorphic.ForwardRefComponent<'div', ProductCard
 };
 
 export const ProductCard = forwardRef(({
-  as: Wrapper = 'div',
   direction = 'vertical',
   footer,
   bordered = false,
   highlightOnHover = false,
+  overlayActions,
+  menuActions,
+  onClick,
   className,
   style,
   children,
   ...otherProps
-}, forwardedRef) => (
-  <Elevator resting={1} hover={highlightOnHover ? 2 : undefined}>
-    <Wrapper
-      ref={forwardedRef}
-      className={clsx(styles.Card, className)}
-      style={{ ...style }}
-      data-card-bordered={bordered}
-      data-card-highlight-hover={highlightOnHover}
-      {...otherProps}
-    >
+}, forwardedRef) => {
+  const hasOverlay = !!(overlayActions && !menuActions && !onClick);
+  const hasMenu = !!(menuActions && !overlayActions && !onClick);
+
+  return (
+    <Elevator resting={1} hover={highlightOnHover ? 2 : undefined}>
       <Stack
-        data-inner-element="ProductCard-Container"
-        direction="row"
-        className={styles.Row}
-        fill={false}
+        ref={forwardedRef}
+        className={clsx(styles.Card, className)}
+        style={{ ...style }}
+        data-card-bordered={bordered}
+        data-card-highlight-hover={highlightOnHover}
+        onClick={onClick}
+        {...otherProps}
       >
         <Stack
-          direction={direction === 'vertical' ? 'column' : 'row'}
-          className={styles.Direction}
-          data-inner-element="ProductCard-Direction"
+          data-inner-element="ProductCard-Container"
+          direction="row"
+          className={styles.Row}
+          fill={false}
         >
-
-          <ProductCard.Media {...otherProps} />
+          {hasOverlay && (
+            <Stack direction="row" hPadding={24} vAlign="center" hAlign="center" className={styles.OverlayActions}>
+              <Stack>
+                {overlayActions}
+              </Stack>
+            </Stack>
+          )}
 
           <Stack
-            rowGap={16}
-            direction="column"
+            direction={direction === 'vertical' ? 'column' : 'row'}
+            className={styles.Content}
             data-inner-element="ProductCard-Content"
           >
 
-            <ProductCard.Header {...otherProps} />
-            <ProductCard.Kpis {...otherProps} />
+            <ProductCard.Media {...otherProps} data-inner-element="ProductCard-Media" />
 
-            <Stack hPadding={24} data-inner-element="ProductCard-Children">
-              {children}
+            <Stack
+              rowGap={16}
+              direction="column"
+            >
+
+              <ProductCard.Header {...otherProps} menuActions={hasMenu ?? menuActions} />
+              <ProductCard.Kpis {...otherProps} />
+
+              <Stack hPadding={24} data-inner-element="ProductCard-Children">
+                {children}
+              </Stack>
+
+              <ProductCard.Footer data-inner-element="ProductCard-Footer">
+                {footer}
+              </ProductCard.Footer>
             </Stack>
-
-            <ProductCard.Footer data-inner-element="ProductCard-Footer">
-              {footer}
-            </ProductCard.Footer>
           </Stack>
 
         </Stack>
-
       </Stack>
-    </Wrapper>
-  </Elevator>
-)) as PolymorphicProductCard;
+    </Elevator>
+  );
+}) as PolymorphicProductCard;
 
 ProductCard.displayName = 'ProductCard';
 ProductCard.Media = ProductCardMedia;

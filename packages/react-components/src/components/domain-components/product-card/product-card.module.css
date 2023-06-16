@@ -17,11 +17,26 @@
     }
   }
 
+
   .Row {
+    position: relative;
     height: 100%;
   }
 
-  .Direction {
+  .Content {
     flex-grow: 1;
+  }
+
+  .OverlayActions {
+    background-color: var(--global-background);
+    height: 100%;
+    opacity: 0%;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+
+    &:hover {
+      opacity: 100%;
+    }
   }
 }
