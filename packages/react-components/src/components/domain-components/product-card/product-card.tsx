@@ -65,17 +65,18 @@ export const ProductCard = forwardRef(({
 }, forwardedRef) => {
   const hasOverlay = !!(overlayActions && !menuActions && !onClick);
   const hasMenu = !!(menuActions && !overlayActions && !onClick);
+  const hasHighlight = !!(onClick || highlightOnHover);
 
   return (
-    <Elevator resting={1} hover={highlightOnHover ? 2 : undefined}>
+    <Elevator resting={1} hover={hasHighlight ? 2 : undefined}>
       <Stack
         ref={forwardedRef}
         className={clsx(styles.Card, className)}
         style={{ ...style }}
         data-card-bordered={bordered}
         data-card-highlight-hover={highlightOnHover}
+        data-card-clickable={!!(onClick)}
         onClick={onClick}
-        {...otherProps}
       >
         <Stack
           data-inner-element="ProductCard-Container"

@@ -8,12 +8,16 @@
     padding: 0;
     position: relative;
 
-    &[data-card-highlight-hover='true']:is(:hover, :focus-visible) {
+    &[data-card-highlight-hover='true']:is(:hover, :focus-visible, :focus-within) {
       background-color: var(--dimmed-0);
     }
 
     &[data-card-bordered='true'] {
       border: solid 1px var(--dimmed-1);
+    }
+
+    &[data-card-clickable='true'] {
+      cursor: pointer;
     }
   }
 
@@ -32,6 +36,7 @@
     height: 100%;
     opacity: 0%;
     position: absolute;
+    transition: opacity token(--duration-300);
     width: 100%;
     z-index: 1;
 
