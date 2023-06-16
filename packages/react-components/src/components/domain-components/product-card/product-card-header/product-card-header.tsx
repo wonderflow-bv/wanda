@@ -44,7 +44,7 @@ export const ProductCardHeader = forwardRef(({
   descriptionRows = 3,
   menuActions,
 }, forwardedRef) => (
-  <Stack rowGap={8} vPadding={16} direction="row" hPadding={24} ref={forwardedRef}>
+  <Stack columnGap={8} vPadding={16} direction="row" hPadding={24} ref={forwardedRef}>
     <Stack rowGap={8}>
       <div>
         {subtitle && <Text variant="subtitle-2">{subtitle}</Text>}

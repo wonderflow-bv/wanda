@@ -108,9 +108,11 @@ export const ProductCard = forwardRef(({
               <ProductCard.Header {...otherProps} menuActions={hasMenu && menuActions} />
               <ProductCard.Kpis {...otherProps} />
 
-              <Stack hPadding={24} data-inner-element="ProductCard-Children">
-                {children}
-              </Stack>
+              {children && (
+                <Stack hPadding={24} data-inner-element="ProductCard-Children">
+                  {children}
+                </Stack>
+              )}
 
               <ProductCard.Footer data-inner-element="ProductCard-Footer">
                 {footer}

@@ -60,11 +60,10 @@ export const ProductCardKpis = forwardRef(({
   skus,
   className,
 }, forwardedRef) => (
-  <div style={{ height: '76px', overflow: 'hidden' }}>
+  <div className={clsx(styles.Kpis, className)}>
+    <Stack rowGap={8} hPadding={24} ref={forwardedRef}>
 
-    <Stack rowGap={8} hPadding={24} className={clsx(styles.Kpis, className)} ref={forwardedRef}>
-
-      {rating && <Text variant="body-2" decoratorStart={<Symbol source="star" color="orange" weight="solid" />} decoratorSize="small"><b>{rating}</b></Text>}
+      <Text variant="body-2" decoratorStart={<Symbol source="star" color="orange" weight="solid" />} decoratorSize="small"><b>{rating || '0'}</b></Text>
 
       {feedbackCount && <Text variant="body-2" decoratorStart={<Symbol source="file-alt" weight="solid" />} decoratorSize="small"><b>{feedbackCount}</b></Text>}
 

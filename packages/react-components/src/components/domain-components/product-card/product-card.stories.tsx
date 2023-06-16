@@ -26,14 +26,12 @@ const MenuActions = (
       Stats
     </Menu.Item>
     <Menu.Item
-      autoFocus
       icon="theater"
       value="1"
     >
       Compare
     </Menu.Item>
     <Menu.Item
-      autoFocus
       icon="grid"
       value="1"
       placement="right-start"
