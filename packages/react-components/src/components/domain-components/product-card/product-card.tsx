@@ -105,7 +105,7 @@ export const ProductCard = forwardRef(({
               direction="column"
             >
 
-              <ProductCard.Header {...otherProps} menuActions={hasMenu ?? menuActions} />
+              <ProductCard.Header {...otherProps} menuActions={hasMenu && menuActions} />
               <ProductCard.Kpis {...otherProps} />
 
               <Stack hPadding={24} data-inner-element="ProductCard-Children">

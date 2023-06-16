@@ -25,6 +25,7 @@ import {
   Polymorphic, Stack, Symbol, SymbolProps,
   Text,
   Tooltip,
+  TooltipProps,
 } from '@/components';
 
 import * as styles from './menu-item.module.css';
@@ -88,7 +89,7 @@ export type MenuItemProps = {
    * Assign a string value to the menu option. This is returned when the menu item is clicked.
    */
   value: string;
-}
+} & Pick<TooltipProps, 'placement'>;
 
 type PolymorphicMenuItem = Polymorphic.ForwardRefComponent<'button', MenuItemProps>;
 
@@ -183,6 +184,7 @@ export const MenuItem = forwardRef(({
               open={isFocused || isHovering}
               placement="auto"
               interactive
+              {...otherProps}
               trigger={InnerContent}
             >
               <Text variant="body-2">{description}</Text>

@@ -1,7 +1,8 @@
 import { forwardRef } from 'react';
 
 import {
-  ClampText, IconButton, Polymorphic, Stack, Text,
+  ClampText, Elevator, IconButton,
+  Polymorphic, Popover, Stack, Text,
 } from '@/components';
 
 import * as styles from './product-card-header.module.css';
@@ -72,7 +73,19 @@ export const ProductCardHeader = forwardRef(({
 
     {menuActions && (
       <Stack maxWidth="1.5rem" fill={false}>
-        <IconButton icon="more-vert" kind="flat" dimension="small" />
+        <Popover
+          trigger={<IconButton icon="more-vert" kind="flat" dimension="small" />}
+          placement="bottom-start"
+          offset={8}
+          closeOnOutsideClick
+        >
+          <Elevator resting={1}>
+            <>
+              {menuActions}
+            </>
+          </Elevator>
+        </Popover>
+
       </Stack>
     )}
   </Stack>

@@ -2,6 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import {
   Button,
+  Menu,
   Stack,
   Text,
 } from '../../..';
@@ -15,8 +16,37 @@ const OverlayButtons = (
   </Stack>
 );
 
+const MenuActions = (
+  <Menu>
+    <Menu.Item
+      autoFocus
+      icon="news"
+      value="1"
+    >
+      Stats
+    </Menu.Item>
+    <Menu.Item
+      autoFocus
+      icon="theater"
+      value="1"
+    >
+      Compare
+    </Menu.Item>
+    <Menu.Item
+      autoFocus
+      icon="grid"
+      value="1"
+      placement="right-start"
+      description="add product to group"
+    >
+      Add to group
+    </Menu.Item>
+  </Menu>
+
+);
+
 const story: ComponentMeta<typeof ProductCard> = {
-  title: 'Domain Components/ProductCard',
+  title: 'Domain Components/Product Card',
   component: ProductCard,
   args: {
     direction: 'vertical',
@@ -68,7 +98,7 @@ withOverlayActions.args = {
 
 export const withMenuActions = Template.bind({});
 withMenuActions.args = {
-  menuActions: <div>something here</div>,
+  menuActions: MenuActions,
 };
 
 export const clickable = Template.bind({});
