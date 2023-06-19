@@ -7,7 +7,7 @@ import {
 } from '@/components';
 
 import * as styles from './product-card.module.css';
-import { PolymorphicProductCardFooter, ProductCardFooter } from './product-card-footer/product-card-footer';
+import { PolymorphicProductCardFooter, ProductCardFooter, ProductCardFooterProps } from './product-card-footer/product-card-footer';
 import { PolymorphicProductCardHeader, ProductCardHeader, ProductCardHeaderProps } from './product-card-header/product-card-header';
 import { PolymorphicProductCardKpis, ProductCardKpis, ProductCardKpisProps } from './product-card-kpis/product-card-kpis';
 import { PolymorphicProductCardMedia, ProductCardMedia, ProductCardMediaProps } from './product-card-media/product-card-media';
@@ -45,7 +45,7 @@ export type ProductCardProps = {
    *
    */
   onClick?: () => void;
-} & ProductCardKpisProps & ProductCardHeaderProps & ProductCardMediaProps;
+} & ProductCardKpisProps & ProductCardHeaderProps & ProductCardMediaProps & ProductCardFooterProps;
 
 type PolymorphicProductCard = Polymorphic.ForwardRefComponent<'div', ProductCardProps> & {
   Media: PolymorphicProductCardMedia;
@@ -118,7 +118,7 @@ export const ProductCard = forwardRef(({
                 </Stack>
               )}
 
-              <ProductCard.Footer data-inner-element="ProductCard-Footer">
+              <ProductCard.Footer {...otherProps} data-inner-element="ProductCard-Footer">
                 {footer}
               </ProductCard.Footer>
             </Stack>

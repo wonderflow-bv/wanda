@@ -2,12 +2,22 @@
 import clsx from 'clsx';
 import { forwardRef } from 'react';
 
-import { Polymorphic, Stack, StackProps } from '@/components';
+import {
+  Polymorphic, Skeleton, Stack, StackProps,
+} from '@/components';
 
-export type PolymorphicProductCardFooter = Polymorphic.ForwardRefComponent<'div', StackProps>
+export type ProductCardFooterProps = {
+  /**
+   *
+   */
+  isLoading?: boolean;
+}
+
+export type PolymorphicProductCardFooter = Polymorphic.ForwardRefComponent<'div', StackProps & ProductCardFooterProps>;
 
 export const ProductCardFooter = forwardRef(({
   as: Wrapper = 'div',
+  isLoading = false,
   children,
   className,
   style,
@@ -19,11 +29,9 @@ export const ProductCardFooter = forwardRef(({
     style={{ ...style }}
     {...otherProps}
   >
-    {children && (
-      <Stack hPadding={24} vPadding={16} {...otherProps}>
-        {children}
-      </Stack>
-    )}
+    <Stack hPadding={24} vPadding={16} {...otherProps}>
+      {isLoading ? <Skeleton height="24px" style={{ lineHeight: '1.5rem' }} /> : children}
+    </Stack>
   </Wrapper>
 )) as PolymorphicProductCardFooter;
 
