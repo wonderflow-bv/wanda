@@ -63,6 +63,7 @@ const story: ComponentMeta<typeof ProductCard> = {
     price: '',
     users: '',
     skus: '',
+    isLoading: false,
     overlayActions: undefined,
     menuActions: undefined,
     onClick: undefined,
@@ -84,7 +85,7 @@ const story: ComponentMeta<typeof ProductCard> = {
 
 export default story;
 
-const Template: ComponentStory<typeof ProductCard> = args => <ProductCard {...args} style={{ maxWidth: '350px' }} />;
+const Template: ComponentStory<typeof ProductCard> = args => <ProductCard {...args} style={{ maxWidth: args.direction === 'vertical' ? '350px' : '650px' }} />;
 
 export const Default = Template.bind({});
 Default.args = {};

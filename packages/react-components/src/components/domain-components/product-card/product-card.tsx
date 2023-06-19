@@ -34,13 +34,17 @@ export type ProductCardProps = {
    */
   menuActions?: React.ReactNode;
   /**
-   *
-   */
-  onClick?: () => void;
-  /**
    * Add content on the footer.
    */
   footer?: React.ReactNode;
+  /**
+   *
+   */
+  isLoading?: boolean;
+  /**
+   *
+   */
+  onClick?: () => void;
 } & ProductCardKpisProps & ProductCardHeaderProps & ProductCardMediaProps;
 
 type PolymorphicProductCard = Polymorphic.ForwardRefComponent<'div', ProductCardProps> & {
