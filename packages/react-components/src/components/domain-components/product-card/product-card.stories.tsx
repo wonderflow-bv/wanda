@@ -53,7 +53,7 @@ const story: ComponentMeta<typeof ProductCard> = {
     title: 'Product Card Title',
     subtitle: 'subtitle',
     description: '',
-    source: 'https://storage.googleapis.com/wonderflow-product-images/KITCHENAID%205KSM15%20SERIES.png',
+    source: ['https://storage.googleapis.com/wonderflow-product-images/KITCHENAID%205KSM15%20SERIES.png'],
     rating: '4.3',
     feedbackCount: '123',
     votes: '',
@@ -103,5 +103,15 @@ withMenuActions.args = {
 export const clickable = Template.bind({});
 clickable.args = {
   onClick: () => console.log('pressed'),
+};
+
+export const withMultipleProducts = Template.bind({});
+withMultipleProducts.args = {
+  source: [
+    'https://storage.googleapis.com/wonderflow-product-images/KITCHENAID%205KSM15%20SERIES.png',
+    // 'https://storage.googleapis.com/wonderflow-product-images/CLASSIC%204.5%20QT.png',
+    'https://storage.googleapis.com/wonderflow-product-images/delonghi_coffee_DEDICA%20STYLE.png',
+    'https://storage.googleapis.com/wonderflow-product-images/delonghi_coffee_MC%20NESPRESSO%20INISSIA.png',
+  ],
 };
 

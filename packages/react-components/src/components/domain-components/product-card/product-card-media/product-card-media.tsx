@@ -3,13 +3,14 @@ import clsx from 'clsx';
 import { forwardRef } from 'react';
 
 import {
-  AspectRatio, AspectRatioProps, Polymorphic, Skeleton,
+  AspectRatio, AspectRatioProps,
+  Masonry, Polymorphic, Skeleton,
 } from '@/components';
 
 import * as styles from './product-card-media.module.css';
 
 export type ProductCardMediaProps = {
-  source?: string;
+  source?: string[];
   isLoading?: boolean;
 } & Pick<AspectRatioProps, 'ratio'>
 
@@ -40,12 +41,19 @@ export const ProductCardMedia = forwardRef(({
 
       {source && !isLoading
       && (
-        <img
-          src={source}
-          alt="product"
-          width="auto"
-          height="auto"
-        />
+        <Masonry columns={source.length < 2 ? 1 : 2} gutter={0} className={styles.Item}>
+
+          {source.splice(0, 4).map(el => (
+            <img
+              key={el}
+              src={el}
+              alt="product"
+              width="auto"
+              height="auto"
+            />
+          ))}
+        </Masonry>
+
       )
     }
     </AspectRatio>
