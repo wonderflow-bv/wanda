@@ -1,8 +1,9 @@
 import clsx from 'clsx';
-import { forwardRef } from 'react';
+import { SymbolNames } from 'packages/symbols/dist';
+import { forwardRef, ReactElement, useMemo } from 'react';
 
 import {
-  Polymorphic, Stack, Symbol, Text,
+  Polymorphic, Skeleton, Stack, Symbol, Text,
 } from '@/components';
 
 import * as styles from './product-card-kpi.module.css';
@@ -44,9 +45,21 @@ export type ProductCardKpisProps = {
   * Set the SKUs value
   */
   skus?: string;
+  /**
+   *
+   */
+  isLoading?: boolean;
 }
 
 export type PolymorphicProductCardKpis = Polymorphic.ForwardRefComponent<'div', ProductCardKpisProps>;
+
+type KpiItemType = {
+  property: string;
+  value?: string;
+  icon: SymbolNames | ReactElement<HTMLOrSVGElement>;
+  iconColor?: string;
+  defaultValue?: string;
+}
 
 export const ProductCardKpis = forwardRef(({
   rating,
@@ -58,31 +71,95 @@ export const ProductCardKpis = forwardRef(({
   price,
   users,
   skus,
+  isLoading = false,
   className,
-}, forwardedRef) => (
-  <div className={clsx(styles.Kpis, className)}>
-    <Stack rowGap={8} hPadding={24} ref={forwardedRef}>
+}, forwardedRef) => {
+  const config: KpiItemType[] = useMemo(() => ([
+    {
+      property: 'rating',
+      value: rating,
+      icon: 'star',
+      iconColor: 'orange',
+      defaultValue: undefined,
+    },
+    {
+      property: 'feedback-count',
+      value: feedbackCount,
+      icon: 'file-alt',
+      iconColor: undefined,
+      defaultValue: '0',
+    },
+    {
+      property: 'votes',
+      value: votes,
+      icon: 'thumbs-up',
+      iconColor: undefined,
+      defaultValue: '0',
+    },
+    {
+      property: 'sentiment',
+      value: sentiment,
+      icon: 'hearts-suit',
+      iconColor: 'red',
+      defaultValue: '0',
+    },
+    {
+      property: 'nps',
+      value: nps,
+      icon: 'nps',
+      iconColor: undefined,
+      defaultValue: undefined,
+    },
+    {
+      property: 'groups',
+      value: groups,
+      icon: 'grid',
+      iconColor: undefined,
+      defaultValue: undefined,
+    },
+    {
+      property: 'price',
+      value: price,
+      icon: 'tags',
+      iconColor: undefined,
+      defaultValue: undefined,
+    },
+    {
+      property: 'users',
+      value: users,
+      icon: 'users',
+      iconColor: undefined,
+      defaultValue: '0',
+    },
+    {
+      property: 'skus',
+      value: skus,
+      icon: 'rectangle-barcode',
+      iconColor: undefined,
+      defaultValue: undefined,
+    },
+  ]), [feedbackCount, groups, nps, price, rating, sentiment, skus, users, votes]);
 
-      <Text variant="body-2" decoratorStart={<Symbol source="star" color="orange" weight="solid" />} decoratorSize="small"><b>{rating || '0'}</b></Text>
+  return (
+    <div className={clsx(styles.Kpis, className)} ref={forwardedRef}>
+      {isLoading
+        ? (
+          <Stack hPadding={24}>
+            <Skeleton height="20px" width="50%" count={3} />
+          </Stack>
+        )
+        : (
+          <Stack rowGap={8} hPadding={24}>
 
-      {feedbackCount && <Text variant="body-2" decoratorStart={<Symbol source="file-alt" weight="solid" />} decoratorSize="small"><b>{feedbackCount}</b></Text>}
+            {config.map(el => ((el.value || el.defaultValue)
+            // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+            && <Text variant="body-2" key={el.property} decoratorStart={<Symbol source={el.icon} color={el.iconColor} weight="solid" />} decoratorSize="small"><b>{el.value || el.defaultValue}</b></Text>
+            ))}
 
-      {votes && <Text variant="body-2" decoratorStart={<Symbol source="thumbs-up" weight="solid" />} decoratorSize="small"><b>{votes}</b></Text>}
-
-      {sentiment && <Text variant="body-2" decoratorStart={<Symbol source="hearts-suit" color="red" weight="solid" />} decoratorSize="small"><b>{sentiment}</b></Text>}
-
-      {nps && <Text variant="body-2" decoratorStart={<Symbol source="nps" weight="solid" />} decoratorSize="small"><b>{nps}</b></Text>}
-
-      {groups && <Text variant="body-2" decoratorStart={<Symbol source="grid" weight="solid" />} decoratorSize="small"><b>{groups}</b></Text>}
-
-      {price && <Text variant="body-2" decoratorStart={<Symbol source="tags" weight="solid" />} decoratorSize="small"><b>{price}</b></Text>}
-
-      {users && <Text variant="body-2" decoratorStart={<Symbol source="users" weight="solid" />} decoratorSize="small"><b>{users}</b></Text>}
-
-      {skus && <Text variant="body-2" decoratorStart={<Symbol source="rectangle-barcode" weight="solid" />} decoratorSize="small"><b>{skus}</b></Text>}
-
-    </Stack>
-  </div>
-)) as PolymorphicProductCardKpis;
+          </Stack>
+        )}
+    </div>
+  );
+}) as PolymorphicProductCardKpis;
 
 ProductCardKpis.displayName = 'ProductCard.Kpis';
