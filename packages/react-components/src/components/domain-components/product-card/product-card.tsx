@@ -62,12 +62,13 @@ export const ProductCard = forwardRef(({
   overlayActions,
   menuActions,
   onClick,
+  isLoading,
   className,
   style,
   children,
   ...otherProps
 }, forwardedRef) => {
-  const hasOverlay = !!(overlayActions && !menuActions && !onClick);
+  const hasOverlay = !!(overlayActions && !menuActions && !onClick && !isLoading);
   const hasMenu = !!(menuActions && !overlayActions && !onClick);
   const hasHighlight = !!(onClick || highlightOnHover);
 
@@ -79,8 +80,8 @@ export const ProductCard = forwardRef(({
         style={{ ...style }}
         data-card-bordered={bordered}
         data-card-highlight-hover={highlightOnHover}
-        data-card-clickable={!!(onClick)}
-        onClick={onClick}
+        data-card-clickable={!!(!isLoading && onClick)}
+        onClick={isLoading ? undefined : onClick}
       >
         <Stack
           data-inner-element="ProductCard-Container"
@@ -102,23 +103,23 @@ export const ProductCard = forwardRef(({
             data-inner-element="ProductCard-Content"
           >
 
-            <ProductCard.Media {...otherProps} data-inner-element="ProductCard-Media" />
+            <ProductCard.Media {...otherProps} isLoading={isLoading} data-inner-element="ProductCard-Media" />
 
             <Stack
               rowGap={16}
               direction="column"
             >
 
-              <ProductCard.Header {...otherProps} menuActions={hasMenu && menuActions} />
-              <ProductCard.Kpis {...otherProps} />
+              <ProductCard.Header {...otherProps} isLoading={isLoading} menuActions={hasMenu && menuActions} />
+              <ProductCard.Kpis {...otherProps} isLoading={isLoading} />
 
-              {children && (
+              {children && !isLoading && (
                 <Stack hPadding={24} data-inner-element="ProductCard-Children">
                   {children}
                 </Stack>
               )}
 
-              <ProductCard.Footer {...otherProps} data-inner-element="ProductCard-Footer">
+              <ProductCard.Footer {...otherProps} isLoading={isLoading} data-inner-element="ProductCard-Footer">
                 {footer}
               </ProductCard.Footer>
             </Stack>

@@ -1,6 +1,6 @@
 
 import clsx from 'clsx';
-import { forwardRef } from 'react';
+import { forwardRef, useMemo } from 'react';
 
 import {
   AspectRatio, AspectRatioProps,
@@ -10,7 +10,7 @@ import {
 import * as styles from './product-card-media.module.css';
 
 export type ProductCardMediaProps = {
-  source?: string[];
+  source: string | string[];
   isLoading?: boolean;
 } & Pick<AspectRatioProps, 'ratio'>
 
@@ -23,31 +23,36 @@ export const ProductCardMedia = forwardRef(({
   className,
   style,
   ...otherProps
-}, forwardedRef) => (
-  <Wrapper
-    ref={forwardedRef}
-    className={clsx(styles.Media, className)}
-    style={{ ...style }}
-  >
-    <AspectRatio ratio={otherProps.ratio || '1'}>
+}, forwardedRef) => {
+  const s = useMemo(() => {
+    if (typeof source === 'string') return [source];
+    return source;
+  }, [source]);
 
-      {isLoading && (
-        <Skeleton
-          style={{ borderRadius: '0px', lineHeight: '2rem' }}
-          width="inherit"
-          height="inherit"
-        />
-      )}
+  return (
+    <Wrapper
+      ref={forwardedRef}
+      className={clsx(styles.Media, className)}
+      style={{ ...style }}
+    >
+      <AspectRatio ratio={otherProps.ratio || '1'}>
 
-      {source && !isLoading
+        {isLoading && (
+          <Skeleton
+            style={{ borderRadius: '0px', lineHeight: '2rem' }}
+            width="inherit"
+            height="inherit"
+          />
+        )}
+
+        {!isLoading
       && (
-        <Masonry columns={source.length < 2 ? 1 : 2} gutter={0} className={styles.Item}>
-
-          {source.splice(0, 4).map(el => (
+        <Masonry columns={s.length < 2 ? 1 : 2} gutter={0} className={styles.Item}>
+          {s.splice(0, 4).map((el: string, i: number) => (
             <img
               key={el}
               src={el}
-              alt="product"
+              alt={`product-${i + 1}`}
               width="auto"
               height="auto"
             />
@@ -56,8 +61,9 @@ export const ProductCardMedia = forwardRef(({
 
       )
     }
-    </AspectRatio>
-  </Wrapper>
-)) as PolymorphicProductCardMedia;
+      </AspectRatio>
+    </Wrapper>
+  );
+}) as PolymorphicProductCardMedia;
 
 ProductCardMedia.displayName = 'ProductCardMedia';

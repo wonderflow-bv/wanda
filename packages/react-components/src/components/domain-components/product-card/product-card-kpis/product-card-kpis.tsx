@@ -18,9 +18,13 @@ export type ProductCardKpisProps = {
    */
   feedbackCount?: string;
   /**
-   * Set the votes value
+   * Set the votes count value
    */
-  votes?: string;
+  votesCount?: string;
+  /**
+   * Set the votes rating value
+   */
+  votesRating?: string;
   /**
    * Set the sentiment index value
    */
@@ -64,7 +68,8 @@ type KpiItemType = {
 export const ProductCardKpis = forwardRef(({
   rating,
   feedbackCount,
-  votes,
+  votesCount,
+  votesRating,
   sentiment,
   nps,
   groups,
@@ -90,9 +95,16 @@ export const ProductCardKpis = forwardRef(({
       defaultValue: '0',
     },
     {
-      property: 'votes',
-      value: votes,
+      property: 'votes-count',
+      value: votesCount,
       icon: 'thumbs-up',
+      iconColor: undefined,
+      defaultValue: '0',
+    },
+    {
+      property: 'votes-rating',
+      value: votesRating,
+      icon: 'arrow-trend-up',
       iconColor: undefined,
       defaultValue: '0',
     },
@@ -138,7 +150,7 @@ export const ProductCardKpis = forwardRef(({
       iconColor: undefined,
       defaultValue: undefined,
     },
-  ]), [feedbackCount, groups, nps, price, rating, sentiment, skus, users, votes]);
+  ]), [feedbackCount, groups, nps, price, rating, sentiment, skus, users, votesCount, votesRating]);
 
   return (
     <div className={clsx(styles.Kpis, className)} ref={forwardedRef}>
