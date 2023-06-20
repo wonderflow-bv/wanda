@@ -94,10 +94,6 @@ export const ProductCardKpis = forwardRef(({
   className,
   style,
 }, forwardedRef) => {
-  const dynamicStyle: CSSProperties = {
-    '--height': `${kpiItems * 20 + (kpiItems - 1) * (+kpisRowGap)}px`,
-  };
-
   const config: KpiItemType[] = useMemo(() => ([
     {
       property: 'rating',
@@ -170,6 +166,10 @@ export const ProductCardKpis = forwardRef(({
       defaultValue: undefined,
     },
   ]), [feedbackCount, groups, nps, price, rating, sentiment, skus, users, votesCount, votesRating]);
+
+  const dynamicStyle: CSSProperties = {
+    '--height': `${kpiItems * 20 + ((kpiItems - 1) * (+kpisRowGap))}px`,
+  };
 
   return (
     <div className={clsx(styles.Kpis, className)} style={{ ...dynamicStyle, ...style }} ref={forwardedRef}>
