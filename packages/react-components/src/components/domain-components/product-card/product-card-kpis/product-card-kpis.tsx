@@ -1,9 +1,13 @@
 import clsx from 'clsx';
 import { SymbolNames } from 'packages/symbols/dist';
-import { forwardRef, ReactElement, useMemo } from 'react';
+import { TokensTypes } from 'packages/tokens/platforms/web';
+import {
+  CSSProperties, forwardRef, ReactElement, useMemo,
+} from 'react';
 
 import {
-  Polymorphic, Skeleton, Stack, Symbol, Text,
+  Polymorphic, Skeleton, Stack,
+  Symbol, Text,
 } from '@/components';
 
 import * as styles from './product-card-kpi.module.css';
@@ -12,43 +16,51 @@ export type ProductCardKpisProps = {
   /**
    * Set the stars rating value
    */
-  rating?: string;
+  rating?: number;
   /**
    * Set the feedback count value
    */
-  feedbackCount?: string;
+  feedbackCount?: number;
   /**
    * Set the votes count value
    */
-  votesCount?: string;
+  votesCount?: number;
   /**
    * Set the votes rating value
    */
-  votesRating?: string;
+  votesRating?: number;
   /**
    * Set the sentiment index value
    */
-  sentiment?: string;
+  sentiment?: number;
   /**
    * Set the NPS value
    */
-  nps?: string;
+  nps?: number;
   /**
    * Set the groups value
    */
-  groups?: string;
+  groups?: number;
   /**
    * Set the price value
    */
-  price?: string;
+  price?: number;
   /**
    * Set the users value
   */
-  users?: string;
+  users?: number;
   /**
   * Set the SKUs value
   */
-  skus?: string;
+  skus?: number;
+  /**
+   *
+   */
+  kpiItems?: number;
+  /**
+   *
+   */
+  kpisRowGap?: TokensTypes['space'];
   /**
    *
    */
@@ -76,76 +88,83 @@ export const ProductCardKpis = forwardRef(({
   price,
   users,
   skus,
+  kpiItems = 3,
+  kpisRowGap = 8,
   isLoading = false,
   className,
+  style,
 }, forwardedRef) => {
+  const dynamicStyle: CSSProperties = {
+    '--height': `${kpiItems * 20 + (kpiItems - 1) * (+kpisRowGap)}px`,
+  };
+
   const config: KpiItemType[] = useMemo(() => ([
     {
       property: 'rating',
-      value: rating,
+      value: rating?.toFixed(2),
       icon: 'star',
       iconColor: 'orange',
       defaultValue: undefined,
     },
     {
       property: 'feedback-count',
-      value: feedbackCount,
+      value: feedbackCount?.toFixed(0),
       icon: 'file-alt',
       iconColor: undefined,
-      defaultValue: '0',
+      defaultValue: undefined,
     },
     {
       property: 'votes-count',
-      value: votesCount,
+      value: votesCount?.toFixed(0),
       icon: 'thumbs-up',
       iconColor: undefined,
-      defaultValue: '0',
+      defaultValue: undefined,
     },
     {
       property: 'votes-rating',
-      value: votesRating,
+      value: votesRating?.toFixed(2),
       icon: 'arrow-trend-up',
       iconColor: undefined,
-      defaultValue: '0',
+      defaultValue: undefined,
     },
     {
       property: 'sentiment',
-      value: sentiment,
+      value: sentiment?.toFixed(2),
       icon: 'hearts-suit',
       iconColor: 'red',
-      defaultValue: '0',
+      defaultValue: undefined,
     },
     {
       property: 'nps',
-      value: nps,
+      value: nps?.toFixed(2),
       icon: 'nps',
       iconColor: undefined,
       defaultValue: undefined,
     },
     {
       property: 'groups',
-      value: groups,
+      value: groups?.toFixed(0),
       icon: 'grid',
       iconColor: undefined,
       defaultValue: undefined,
     },
     {
       property: 'price',
-      value: price,
+      value: price ? `€${price?.toFixed(2)}` : undefined,
       icon: 'tags',
       iconColor: undefined,
       defaultValue: undefined,
     },
     {
       property: 'users',
-      value: users,
+      value: users?.toFixed(0),
       icon: 'users',
       iconColor: undefined,
-      defaultValue: '0',
+      defaultValue: undefined,
     },
     {
       property: 'skus',
-      value: skus,
+      value: skus?.toFixed(0),
       icon: 'rectangle-barcode',
       iconColor: undefined,
       defaultValue: undefined,
@@ -153,15 +172,15 @@ export const ProductCardKpis = forwardRef(({
   ]), [feedbackCount, groups, nps, price, rating, sentiment, skus, users, votesCount, votesRating]);
 
   return (
-    <div className={clsx(styles.Kpis, className)} ref={forwardedRef}>
+    <div className={clsx(styles.Kpis, className)} style={{ ...dynamicStyle, ...style }} ref={forwardedRef}>
       {isLoading
         ? (
           <Stack hPadding={24}>
-            <Skeleton height="20px" width="50%" count={3} />
+            <Skeleton height="20px" width="50%" count={kpiItems} />
           </Stack>
         )
         : (
-          <Stack rowGap={8} hPadding={24}>
+          <Stack rowGap={kpisRowGap} hPadding={24}>
 
             {config.map(el => ((el.value || el.defaultValue)
             // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing

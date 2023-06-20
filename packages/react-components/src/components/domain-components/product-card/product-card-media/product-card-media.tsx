@@ -3,30 +3,35 @@ import clsx from 'clsx';
 import { forwardRef, useMemo } from 'react';
 
 import {
-  AspectRatio, AspectRatioProps,
+  AspectRatio,
   Masonry, Polymorphic, Skeleton,
 } from '@/components';
 
 import * as styles from './product-card-media.module.css';
 
 export type ProductCardMediaProps = {
-  source: string | string[];
+  source?: string | string[];
+  ratio?: string;
   isLoading?: boolean;
-} & Pick<AspectRatioProps, 'ratio'>
+}
 
 export type PolymorphicProductCardMedia = Polymorphic.ForwardRefComponent<'div', ProductCardMediaProps>
 
 export const ProductCardMedia = forwardRef(({
   as: Wrapper = 'div',
-  source,
+  source = [],
+  ratio = '1',
   isLoading = false,
   className,
   style,
   ...otherProps
 }, forwardedRef) => {
   const s = useMemo(() => {
-    if (typeof source === 'string') return [source];
-    return source;
+    if (typeof source === 'string') {
+      return [source];
+    }
+
+    return source.slice(0, 4);
   }, [source]);
 
   return (
@@ -34,8 +39,9 @@ export const ProductCardMedia = forwardRef(({
       ref={forwardedRef}
       className={clsx(styles.Media, className)}
       style={{ ...style }}
+      {...otherProps}
     >
-      <AspectRatio ratio={otherProps.ratio || '1'}>
+      <AspectRatio ratio={ratio}>
 
         {isLoading && (
           <Skeleton
@@ -48,7 +54,7 @@ export const ProductCardMedia = forwardRef(({
         {!isLoading
       && (
         <Masonry columns={s.length < 2 ? 1 : 2} gutter={0} className={styles.Item}>
-          {s.splice(0, 4).map((el: string, i: number) => (
+          {s.map((el: string, i: number) => (
             <img
               key={el}
               src={el}

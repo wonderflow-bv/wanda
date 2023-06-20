@@ -1,4 +1,4 @@
 .Kpis {
-  height: 76px;
+  height: var(--height);
   overflow: hidden;
 }

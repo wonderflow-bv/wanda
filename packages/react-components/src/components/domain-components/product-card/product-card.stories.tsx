@@ -43,6 +43,13 @@ const MenuActions = (
 
 );
 
+const SourceImages = [
+  'https://storage.googleapis.com/wonderflow-product-images/KITCHENAID%205KSM15%20SERIES.png',
+  // 'https://storage.googleapis.com/wonderflow-product-images/CLASSIC%204.5%20QT.png',
+  'https://storage.googleapis.com/wonderflow-product-images/delonghi_coffee_DEDICA%20STYLE.png',
+  'https://storage.googleapis.com/wonderflow-product-images/delonghi_coffee_MC%20NESPRESSO%20INISSIA.png',
+];
+
 const story: ComponentMeta<typeof ProductCard> = {
   title: 'Domain Components/Product Card',
   component: ProductCard,
@@ -52,28 +59,33 @@ const story: ComponentMeta<typeof ProductCard> = {
     highlightOnHover: false,
     title: 'Product Card Title',
     subtitle: 'subtitle',
-    description: '',
-    rating: '4.3',
-    feedbackCount: '123',
-    votesCount: '',
-    votesRating: '',
-    sentiment: '1.2',
-    nps: '',
-    groups: '',
-    price: '',
-    users: '',
-    skus: '',
+    rating: 4.3,
+    feedbackCount: 123,
+    votesCount: undefined,
+    votesRating: undefined,
+    sentiment: 1.2,
+    nps: undefined,
+    groups: undefined,
+    price: undefined,
+    users: undefined,
+    skus: undefined,
+    kpiItems: 3,
+    kpisRowGap: 8,
     isLoading: false,
     overlayActions: undefined,
     menuActions: undefined,
     onClick: undefined,
     children: undefined,
-    source: ['https://storage.googleapis.com/wonderflow-product-images/KITCHENAID%205KSM15%20SERIES.png'],
+    source: SourceImages[0],
     footer: (<Text variant="body-2">Apr 2023</Text>),
   },
   argTypes: {
     direction: {
       options: ['vertical', 'horizontal'],
+      control: { type: 'select' },
+    },
+    kpisRowGap: {
+      options: [2, '2', 4, '4', 8, '8', 16, '16', 24, '24', 32, '32', 40, '40', 48, '48', 56, '56', 64, '64', 72, '72', 80, '80', 88, '88', 96, '96', 104, '104', 112, '112', 120, '120', 128, '128', 136, '136', 144, '144', 152, '152', 160, '160', 168, '168', 176, '176', 184, '184', 192, '192', 200, '200'],
       control: { type: 'select' },
     },
     children: {
@@ -108,11 +120,6 @@ clickable.args = {
 
 export const withMultipleProducts = Template.bind({});
 withMultipleProducts.args = {
-  source: [
-    'https://storage.googleapis.com/wonderflow-product-images/KITCHENAID%205KSM15%20SERIES.png',
-    // 'https://storage.googleapis.com/wonderflow-product-images/CLASSIC%204.5%20QT.png',
-    'https://storage.googleapis.com/wonderflow-product-images/delonghi_coffee_DEDICA%20STYLE.png',
-    'https://storage.googleapis.com/wonderflow-product-images/delonghi_coffee_MC%20NESPRESSO%20INISSIA.png',
-  ],
+  source: SourceImages,
 };
 

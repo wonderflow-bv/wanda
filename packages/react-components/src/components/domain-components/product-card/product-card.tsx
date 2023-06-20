@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import clsx from 'clsx';
 import React, { forwardRef } from 'react';
 
@@ -7,7 +8,7 @@ import {
 } from '@/components';
 
 import * as styles from './product-card.module.css';
-import { PolymorphicProductCardFooter, ProductCardFooter, ProductCardFooterProps } from './product-card-footer/product-card-footer';
+import { PolymorphicProductCardFooter, ProductCardFooter } from './product-card-footer/product-card-footer';
 import { PolymorphicProductCardHeader, ProductCardHeader, ProductCardHeaderProps } from './product-card-header/product-card-header';
 import { PolymorphicProductCardKpis, ProductCardKpis, ProductCardKpisProps } from './product-card-kpis/product-card-kpis';
 import { PolymorphicProductCardMedia, ProductCardMedia, ProductCardMediaProps } from './product-card-media/product-card-media';
@@ -30,10 +31,6 @@ export type ProductCardProps = {
    */
   overlayActions?: React.ReactNode;
   /**
-   *
-   */
-  menuActions?: React.ReactNode;
-  /**
    * Add content on the footer.
    */
   footer?: React.ReactNode;
@@ -45,7 +42,10 @@ export type ProductCardProps = {
    *
    */
   onClick?: () => void;
-} & ProductCardKpisProps & ProductCardHeaderProps & ProductCardMediaProps & ProductCardFooterProps;
+}
+& Pick<ProductCardMediaProps, 'ratio' | 'source'>
+& Pick<ProductCardHeaderProps, 'title' | 'titleRows' | 'subtitle' | 'menuActions'>
+& Omit<ProductCardKpisProps, 'isLoading'>
 
 type PolymorphicProductCard = Polymorphic.ForwardRefComponent<'div', ProductCardProps> & {
   Media: PolymorphicProductCardMedia;
@@ -56,11 +56,28 @@ type PolymorphicProductCard = Polymorphic.ForwardRefComponent<'div', ProductCard
 
 export const ProductCard = forwardRef(({
   direction = 'vertical',
-  footer,
   bordered = false,
   highlightOnHover = false,
-  overlayActions,
+  title,
+  titleRows = 3,
+  subtitle,
   menuActions,
+  rating,
+  feedbackCount,
+  votesCount,
+  votesRating,
+  sentiment,
+  nps,
+  groups,
+  price,
+  users,
+  skus,
+  kpiItems: items,
+  kpisRowGap,
+  ratio,
+  source,
+  footer,
+  overlayActions,
   onClick,
   isLoading,
   className,
@@ -71,6 +88,7 @@ export const ProductCard = forwardRef(({
   const hasOverlay = !!(overlayActions && !menuActions && !onClick && !isLoading);
   const hasMenu = !!(menuActions && !overlayActions && !onClick);
   const hasHighlight = !!(onClick || highlightOnHover);
+  const isClickable = !!(!isLoading && onClick);
 
   return (
     <Elevator resting={1} hover={hasHighlight ? 2 : undefined}>
@@ -80,7 +98,7 @@ export const ProductCard = forwardRef(({
         style={{ ...style }}
         data-card-bordered={bordered}
         data-card-highlight-hover={highlightOnHover}
-        data-card-clickable={!!(!isLoading && onClick)}
+        data-card-clickable={isClickable}
         onClick={isLoading ? undefined : onClick}
       >
         <Stack
@@ -98,20 +116,47 @@ export const ProductCard = forwardRef(({
           )}
 
           <Stack
-            direction={direction === 'vertical' ? 'column' : 'row'}
+            direction={(direction === 'vertical') ? 'column' : 'row'}
             className={styles.Content}
             data-inner-element="ProductCard-Content"
           >
 
-            <ProductCard.Media {...otherProps} isLoading={isLoading} data-inner-element="ProductCard-Media" />
+            {!!(source?.length) && (
+              <ProductCard.Media
+                source={source}
+                isLoading={isLoading}
+                data-inner-element="ProductCard-Media"
+              />
+            )}
 
             <Stack
               rowGap={16}
               direction="column"
             >
 
-              <ProductCard.Header {...otherProps} isLoading={isLoading} menuActions={hasMenu && menuActions} />
-              <ProductCard.Kpis {...otherProps} isLoading={isLoading} />
+              <ProductCard.Header
+                title={title}
+                titleRows={titleRows}
+                subtitle={subtitle}
+                isLoading={isLoading}
+                menuActions={hasMenu && menuActions}
+              />
+
+              <ProductCard.Kpis
+                rating={rating}
+                feedbackCount={feedbackCount}
+                votesCount={votesCount}
+                votesRating={votesRating}
+                sentiment={sentiment}
+                nps={nps}
+                groups={groups}
+                price={price}
+                users={users}
+                skus={skus}
+                isLoading={isLoading}
+                kpiItems={items}
+                kpisRowGap={kpisRowGap}
+              />
 
               {children && !isLoading && (
                 <Stack hPadding={24} data-inner-element="ProductCard-Children">

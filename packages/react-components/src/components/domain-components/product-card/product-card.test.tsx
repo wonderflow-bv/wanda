@@ -5,7 +5,7 @@ import { ProductCard } from './product-card';
 describe('<ProductCard>', () => {
   test('it should render properly', () => {
     const { container } = render(
-      <ProductCard />,
+      <ProductCard source="test" />,
     );
 
     expect(container).not.toBeNull();
