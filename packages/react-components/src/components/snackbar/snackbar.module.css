@@ -51,11 +51,9 @@
     color: var(--snackbar-fg);
 
     /* stylelint-disable-next-line number-max-precision */
-    margin-top: 0.2rem;
+    margin-top: -0.15rem;
 
     &[data-snackbar-has-title='true'] {
-
-      /* stylelint-disable-next-line number-max-precision */
       margin-top: 0;
     }
   }
