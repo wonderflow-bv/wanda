@@ -1,4 +1,5 @@
 .Kpis {
-  height: var(--height);
+  min-height: var(--height);
+  max-height: var(--height);
   overflow: hidden;
 }

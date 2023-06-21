@@ -69,7 +69,8 @@ export const ProductCard = forwardRef(({
   sentiment,
   nps,
   groups,
-  price,
+  priceMin,
+  priceMax,
   users,
   skus,
   kpiItems: items,
@@ -150,7 +151,8 @@ export const ProductCard = forwardRef(({
                 sentiment={sentiment}
                 nps={nps}
                 groups={groups}
-                price={price}
+                priceMin={priceMin}
+                priceMax={priceMax}
                 users={users}
                 skus={skus}
                 isLoading={isLoading}

@@ -1,3 +1,19 @@
+/*
+ * Copyright 2023 Wonderflow Design Team
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import clsx from 'clsx';
 import { SymbolNames } from 'packages/symbols/dist';
 import { TokensTypes } from 'packages/tokens/platforms/web';
@@ -10,6 +26,7 @@ import {
   Symbol, Text,
 } from '@/components';
 
+import { formatPriceRangeValues } from '../../../../utils';
 import * as styles from './product-card-kpi.module.css';
 
 export type ProductCardKpisProps = {
@@ -42,9 +59,13 @@ export type ProductCardKpisProps = {
    */
   groups?: number;
   /**
-   * Set the price value
+   * Set the minimum price value
    */
-  price?: number;
+  priceMin?: number;
+  /**
+   * Set the maximum price value
+   */
+  priceMax?: number;
   /**
    * Set the users value
   */
@@ -85,7 +106,8 @@ export const ProductCardKpis = forwardRef(({
   sentiment,
   nps,
   groups,
-  price,
+  priceMin,
+  priceMax,
   users,
   skus,
   kpiItems = 3,
@@ -100,72 +122,54 @@ export const ProductCardKpis = forwardRef(({
       value: rating?.toFixed(2),
       icon: 'star',
       iconColor: 'orange',
-      defaultValue: undefined,
     },
     {
       property: 'feedback-count',
       value: feedbackCount?.toFixed(0),
       icon: 'file-alt',
-      iconColor: undefined,
-      defaultValue: undefined,
     },
     {
       property: 'votes-count',
       value: votesCount?.toFixed(0),
       icon: 'thumbs-up',
-      iconColor: undefined,
-      defaultValue: undefined,
     },
     {
       property: 'votes-rating',
       value: votesRating?.toFixed(2),
       icon: 'arrow-trend-up',
-      iconColor: undefined,
-      defaultValue: undefined,
     },
     {
       property: 'sentiment',
       value: sentiment?.toFixed(2),
       icon: 'hearts-suit',
       iconColor: 'red',
-      defaultValue: undefined,
     },
     {
       property: 'nps',
       value: nps?.toFixed(2),
       icon: 'nps',
-      iconColor: undefined,
-      defaultValue: undefined,
     },
     {
       property: 'groups',
       value: groups?.toFixed(0),
       icon: 'grid',
-      iconColor: undefined,
-      defaultValue: undefined,
     },
     {
       property: 'price',
-      value: price ? `€${price?.toFixed(2)}` : undefined,
+      value: formatPriceRangeValues(priceMin, priceMax),
       icon: 'tags',
-      iconColor: undefined,
-      defaultValue: undefined,
     },
     {
       property: 'users',
       value: users?.toFixed(0),
       icon: 'users',
-      iconColor: undefined,
-      defaultValue: undefined,
     },
     {
       property: 'skus',
       value: skus?.toFixed(0),
       icon: 'rectangle-barcode',
-      iconColor: undefined,
-      defaultValue: undefined,
     },
-  ]), [feedbackCount, groups, nps, price, rating, sentiment, skus, users, votesCount, votesRating]);
+  ]), [feedbackCount, groups, nps, rating, sentiment, priceMin, priceMax, skus, users, votesCount, votesRating]);
 
   const dynamicStyle: CSSProperties = {
     '--height': `${kpiItems * 20 + ((kpiItems - 1) * (+kpisRowGap))}px`,
