@@ -19,7 +19,8 @@ import { forwardRef, useMemo } from 'react';
 
 import {
   AspectRatio,
-  Masonry, Polymorphic, Skeleton,
+  Grid,
+  Polymorphic, Skeleton,
 } from '@/components';
 
 import * as styles from './product-card-media.module.css';
@@ -49,6 +50,17 @@ export const ProductCardMedia = forwardRef(({
     return source.slice(0, 4);
   }, [source]);
 
+  const row = (index: number) => {
+    if (index === 0) return '1';
+
+    if (index === 1) {
+      if (s.length < 3) return '1';
+      return '1 / 3';
+    }
+
+    return '2';
+  };
+
   return (
     <Wrapper
       ref={forwardedRef}
@@ -58,29 +70,32 @@ export const ProductCardMedia = forwardRef(({
     >
       <AspectRatio ratio={ratio}>
 
-        {isLoading && (
-          <Skeleton
-            style={{ borderRadius: '0px', lineHeight: '2rem' }}
-            width="inherit"
-            height="inherit"
-          />
-        )}
-
-        {!isLoading
-      && (
-        <Masonry columns={s.length < 2 ? 1 : 2} gutter={0} className={styles.Item}>
-          {s.map((el: string, i: number) => (
-            <img
-              key={el}
-              src={el}
-              alt={`product-${i + 1}`}
-              width="auto"
-              height="auto"
+        {isLoading
+          ? (
+            <Skeleton
+              style={{ borderRadius: '0px', lineHeight: '2rem' }}
+              width="inherit"
+              height="inherit"
             />
-          ))}
-        </Masonry>
-
-      )
+          )
+          : (
+            <Grid
+              aria-label=""
+              rows={s.length > 2 ? 2 : 1}
+              rowMinHeight="1fr"
+              columns={s.length > 2 ? 2 : 1}
+              colMinWidth="1fr"
+            >
+              {s.map((el: string, i: number) => (
+                <Grid.Item
+                  className={styles.Image}
+                  row={row(i)}
+                  column={i % 2 === 1 ? '2' : '1'}
+                  style={{ backgroundImage: `url("${el}")` }}
+                />
+              ))}
+            </Grid>
+          )
     }
       </AspectRatio>
     </Wrapper>

@@ -3,8 +3,8 @@
   height: 100%;
 }
 
-.Item {
-  & div {
-    align-self: center;
-  }
+.Image {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }

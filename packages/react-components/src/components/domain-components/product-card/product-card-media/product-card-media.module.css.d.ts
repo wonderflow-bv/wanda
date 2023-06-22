@@ -1,6 +1,6 @@
 declare const styles: {
   readonly "Media": string;
-  readonly "Item": string;
+  readonly "Image": string;
 };
 export = styles;
 
