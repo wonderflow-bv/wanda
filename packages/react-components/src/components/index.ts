@@ -26,7 +26,7 @@ export * from './clamp-text';
 export * from './container';
 export * from './datetime';
 export * from './disclosure';
-export * from './domain-components/product-card';
+export * from './domain-components';
 export * from './drawer';
 export * from './elevator';
 export * from './expander';

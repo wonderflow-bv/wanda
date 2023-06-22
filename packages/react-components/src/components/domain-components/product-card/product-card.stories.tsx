@@ -45,8 +45,8 @@ const MenuActions = (
 
 const SourceImages = [
   'https://storage.googleapis.com/wonderflow-product-images/KITCHENAID%205KSM15%20SERIES.png',
-  // 'https://storage.googleapis.com/wonderflow-product-images/CLASSIC%204.5%20QT.png',
-  'https://storage.googleapis.com/wonderflow-product-images/delonghi_coffee_DEDICA%20STYLE.png',
+  'https://storage.googleapis.com/wonderflow-product-images/CLASSIC%204.5%20QT.png',
+  'https://products.gumlet.io/image-1675779605803.jpeg',
   'https://storage.googleapis.com/wonderflow-product-images/delonghi_coffee_MC%20NESPRESSO%20INISSIA.png',
 ];
 
