@@ -126,6 +126,7 @@ export const ProductCard = forwardRef(({
               <ProductCard.Media
                 source={source}
                 isLoading={isLoading}
+                ratio={ratio}
                 data-inner-element="ProductCard-Media"
               />
             )}

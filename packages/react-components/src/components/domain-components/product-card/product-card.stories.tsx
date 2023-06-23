@@ -16,7 +16,7 @@ const OverlayButtons = (
   </Stack>
 );
 
-const MenuActions = (
+const MenuItems = (
   <Menu>
     <Menu.Item
       autoFocus
@@ -73,6 +73,7 @@ const story: ComponentMeta<typeof ProductCard> = {
     kpiItems: 3,
     kpisRowGap: 8,
     isLoading: false,
+    ratio: '1',
     overlayActions: undefined,
     menuActions: undefined,
     onClick: undefined,
@@ -122,7 +123,7 @@ withOverlayActions.args = {
 
 export const withMenuActions = Template.bind({});
 withMenuActions.args = {
-  menuActions: MenuActions,
+  menuActions: MenuItems,
 };
 
 export const clickable = Template.bind({});
