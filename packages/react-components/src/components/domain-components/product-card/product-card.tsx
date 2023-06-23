@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import clsx from 'clsx';
 import React, { forwardRef } from 'react';
+import { Except } from 'type-fest';
 
 import {
   Elevator,
@@ -45,7 +45,7 @@ export type ProductCardProps = {
 }
 & Pick<ProductCardMediaProps, 'ratio' | 'source'>
 & Pick<ProductCardHeaderProps, 'title' | 'titleRows' | 'subtitle' | 'menuActions'>
-& Omit<ProductCardKpisProps, 'isLoading'>
+& Except<ProductCardKpisProps, 'isLoading'>
 
 type PolymorphicProductCard = Polymorphic.ForwardRefComponent<'div', ProductCardProps> & {
   Media: PolymorphicProductCardMedia;

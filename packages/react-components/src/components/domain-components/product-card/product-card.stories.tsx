@@ -111,7 +111,11 @@ const story: ComponentMeta<typeof ProductCard> = {
 
 export default story;
 
-const Template: ComponentStory<typeof ProductCard> = args => <ProductCard {...args} style={{ maxWidth: args.direction === 'vertical' ? '350px' : '650px' }} />;
+const Template: ComponentStory<typeof ProductCard> = (args) => {
+  const { direction } = args;
+  return (<div style={{ maxWidth: direction === 'vertical' ? '350px' : '650px' }}><ProductCard {...args} /></div>
+  );
+};
 
 export const Default = Template.bind({});
 Default.args = {};
