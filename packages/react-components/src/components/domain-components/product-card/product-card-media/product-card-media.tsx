@@ -33,6 +33,12 @@ export type ProductCardMediaProps = {
 
 export type PolymorphicProductCardMedia = Polymorphic.ForwardRefComponent<'div', ProductCardMediaProps>
 
+type ImageConfig = {
+  row: string;
+  col: string;
+  val: string;
+}
+
 export const ProductCardMedia = forwardRef(({
   as: Wrapper = 'div',
   source = [],
@@ -44,22 +50,23 @@ export const ProductCardMedia = forwardRef(({
 }, forwardedRef) => {
   const s = useMemo(() => {
     if (typeof source === 'string') {
-      return [source];
+      return [{
+        row: '1',
+        col: '1',
+        val: source,
+      }] as ImageConfig[];
     }
 
-    return source.slice(0, 4);
+    const t: ImageConfig[] = source.slice(0, 4).map((el: string, i: number) => ({
+      row: i < 2 ? '1' : '2',
+      col: i % 2 === 0 ? '1' : '2',
+      val: el,
+    }));
+
+    if (t.length === 3) t[1].row = '1 / 3';
+
+    return t;
   }, [source]);
-
-  const row = (index: number) => {
-    if (index === 0) return '1';
-
-    if (index === 1) {
-      if (s.length < 3) return '1';
-      return '1 / 3';
-    }
-
-    return '2';
-  };
 
   return (
     <Wrapper
@@ -86,12 +93,13 @@ export const ProductCardMedia = forwardRef(({
               columns={s.length > 2 ? 2 : 1}
               colMinWidth="1fr"
             >
-              {s.map((el: string, i: number) => (
+              {s.map(el => (
                 <Grid.Item
+                  key={el.val}
                   className={styles.Image}
-                  row={row(i)}
-                  column={i % 2 === 1 ? '2' : '1'}
-                  style={{ backgroundImage: `url("${el}")` }}
+                  row={el.row}
+                  column={el.col}
+                  style={{ backgroundImage: `url("${el.val}")` }}
                 />
               ))}
             </Grid>
