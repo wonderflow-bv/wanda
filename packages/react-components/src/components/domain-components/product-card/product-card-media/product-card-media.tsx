@@ -61,49 +61,44 @@ export const ProductCardMedia = forwardRef(({
   }, [source]);
 
   return (
-    (s.length > 0)
-      ? (
-        <Wrapper
-          ref={forwardedRef}
-          className={clsx(styles.Media, className)}
-          style={{ ...style }}
-          {...otherProps}
-        >
-          <AspectRatio ratio={ratio}>
+    <Wrapper
+      ref={forwardedRef}
+      className={clsx(styles.Media, className)}
+      style={{ ...style }}
+      {...otherProps}
+    >
+      <AspectRatio ratio={ratio}>
 
-            {isLoading
-              ? (
-                <Skeleton
-                  style={{ borderRadius: '0px', lineHeight: '2rem' }}
-                  width="inherit"
-                  height="inherit"
+        {isLoading
+          ? (
+            <Skeleton
+              style={{ borderRadius: '0px', lineHeight: '2rem' }}
+              width="inherit"
+              height="inherit"
+            />
+          )
+          : (
+            <Grid
+              aria-label=""
+              rows={s.length > 2 ? 2 : 1}
+              rowMinHeight="1fr"
+              columns={s.length > 2 ? 2 : 1}
+              colMinWidth="1fr"
+            >
+              {s.map(el => (
+                <Grid.Item
+                  key={el.val}
+                  className={styles.Image}
+                  row={el.row}
+                  column={el.col}
+                  style={{ backgroundImage: `url("${el.val}")` }}
                 />
-              )
-              : (
-                <Grid
-                  aria-label=""
-                  rows={s.length > 2 ? 2 : 1}
-                  rowMinHeight="1fr"
-                  columns={s.length > 2 ? 2 : 1}
-                  colMinWidth="1fr"
-                >
-                  {s.map(el => (
-                    <Grid.Item
-                      key={el.val}
-                      className={styles.Image}
-                      row={el.row}
-                      column={el.col}
-                      style={{ backgroundImage: `url("${el.val}")` }}
-                    />
-                  ))}
-                </Grid>
-              )
+              ))}
+            </Grid>
+          )
     }
-          </AspectRatio>
-        </Wrapper>
-      )
-      : null
-
+      </AspectRatio>
+    </Wrapper>
   );
 }) as PolymorphicProductCardMedia;
 

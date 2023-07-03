@@ -80,7 +80,7 @@ export const ProductCard = forwardRef(({
   footer,
   overlayActions,
   onClick,
-  isLoading,
+  isLoading = false,
   className,
   style,
   children,
@@ -101,6 +101,7 @@ export const ProductCard = forwardRef(({
         data-card-highlight-hover={highlightOnHover}
         data-card-clickable={isClickable}
         onClick={isLoading ? undefined : onClick}
+        {...otherProps}
       >
         <Stack
           data-inner-element="ProductCard-Container"
@@ -165,9 +166,11 @@ export const ProductCard = forwardRef(({
                 </Stack>
               )}
 
-              <ProductCard.Footer {...otherProps} isLoading={isLoading} data-inner-element="ProductCard-Footer">
-                {footer}
-              </ProductCard.Footer>
+              {footer && (
+                <ProductCard.Footer isLoading={isLoading} data-inner-element="ProductCard-Footer">
+                  {footer}
+                </ProductCard.Footer>
+              )}
             </Stack>
           </Stack>
 
@@ -178,6 +181,7 @@ export const ProductCard = forwardRef(({
 }) as PolymorphicProductCard;
 
 ProductCard.displayName = 'ProductCard';
+
 ProductCard.Media = ProductCardMedia;
 ProductCard.Header = ProductCardHeader;
 ProductCard.Kpis = ProductCardKpis;

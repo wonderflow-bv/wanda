@@ -23,7 +23,7 @@ import {
 
 export type ProductCardFooterProps = {
   /**
-   *
+   * Set loading state.
    */
   isLoading?: boolean;
 }
