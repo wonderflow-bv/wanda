@@ -82,17 +82,6 @@ const story: ComponentMeta<typeof ProductCard> = {
     footer: (<Text variant="body-2">Apr 2023</Text>),
   },
   argTypes: {
-    rating: { option: 'number' || undefined },
-    feedbackCount: { option: 'number' || undefined },
-    votesCount: { option: 'number' || undefined },
-    votesRating: { option: 'number' || undefined },
-    sentiment: { option: 'number' || undefined },
-    nps: { option: 'number' || undefined },
-    groups: { option: 'number' || undefined },
-    priceMin: { option: 'number' || undefined },
-    priceMax: { option: 'number' || undefined },
-    users: { option: 'number' || undefined },
-    skus: { option: 'number' || undefined },
     direction: {
       options: ['vertical', 'horizontal'],
       control: { type: 'select' },
