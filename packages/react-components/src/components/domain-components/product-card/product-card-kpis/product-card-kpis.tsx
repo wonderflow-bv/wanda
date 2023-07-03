@@ -31,59 +31,59 @@ import * as styles from './product-card-kpi.module.css';
 
 export type ProductCardKpisProps = {
   /**
-   * Set the stars rating value
+   * Set the stars rating value.
    */
   rating?: number;
   /**
-   * Set the feedback count value
+   * Set the feedback count value.
    */
   feedbackCount?: number;
   /**
-   * Set the votes count value
+   * Set the votes count value.
    */
   votesCount?: number;
   /**
-   * Set the votes rating value
+   * Set the votes rating value.
    */
   votesRating?: number;
   /**
-   * Set the sentiment index value
+   * Set the sentiment index value.
    */
   sentiment?: number;
   /**
-   * Set the NPS value
+   * Set the NPS value.
    */
   nps?: number;
   /**
-   * Set the groups value
+   * Set the groups value.
    */
   groups?: number;
   /**
-   * Set the minimum price value
+   * Set the minimum price value.
    */
   priceMin?: number;
   /**
-   * Set the maximum price value
+   * Set the maximum price value.
    */
   priceMax?: number;
   /**
-   * Set the users value
+   * Set the users value.
   */
   users?: number;
   /**
-  * Set the SKUs value
+  * Set the SKUs value.
   */
   skus?: number;
   /**
-   *
+   * Set the number of Kpis items to be displayed.
    */
   kpiItems?: number;
   /**
-   *
+   * Set the space between Kpis items.
    */
   kpisRowGap?: TokensTypes['space'];
   /**
-   *
+   * Set the loading state showing a skeleton.
    */
   isLoading?: boolean;
 }
@@ -95,7 +95,6 @@ type KpiItemType = {
   value?: string;
   icon: SymbolNames | ReactElement<HTMLOrSVGElement>;
   iconColor?: string;
-  defaultValue?: string;
 }
 
 export const ProductCardKpis = forwardRef(({
@@ -185,12 +184,10 @@ export const ProductCardKpis = forwardRef(({
         )
         : (
           <Stack rowGap={kpisRowGap} hPadding={24}>
-
-            {config.map(el => ((el.value || el.defaultValue)
+            {config.map(el => ((el.value)
             // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-            && <Text variant="body-2" key={el.property} decoratorStart={<Symbol source={el.icon} color={el.iconColor} weight="solid" />} decoratorSize="small"><b>{el.value || el.defaultValue}</b></Text>
+            && <Text variant="body-2" key={el.property} decoratorStart={<Symbol source={el.icon} color={el.iconColor} weight="solid" />} decoratorSize="small"><b>{el.value}</b></Text>
             ))}
-
           </Stack>
         )}
     </div>

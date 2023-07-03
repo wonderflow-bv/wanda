@@ -26,8 +26,17 @@ import {
 import * as styles from './product-card-media.module.css';
 
 export type ProductCardMediaProps = {
+  /**
+   * Set an array of paths to the images.
+   */
   source?: string[];
+  /**
+   * Set the ratio following the CSS syntax.
+   */
   ratio?: string;
+  /**
+   * Set the loading state showing a skeleton.
+   */
   isLoading?: boolean;
 }
 
@@ -72,7 +81,7 @@ export const ProductCardMedia = forwardRef(({
         {isLoading
           ? (
             <Skeleton
-              style={{ borderRadius: '0px', lineHeight: '2rem' }}
+              style={{ borderRadius: '0', lineHeight: '2rem' }}
               width="inherit"
               height="inherit"
             />
@@ -85,9 +94,9 @@ export const ProductCardMedia = forwardRef(({
               columns={s.length > 2 ? 2 : 1}
               colMinWidth="1fr"
             >
-              {s.map(el => (
+              {s.map((el: ImageConfig) => (
                 <Grid.Item
-                  key={el.val}
+                  key={`${el.val}-${el.row}-${el.col}`}
                   className={styles.Image}
                   row={el.row}
                   column={el.col}

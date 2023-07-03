@@ -15,7 +15,7 @@ import { PolymorphicProductCardMedia, ProductCardMedia, ProductCardMediaProps } 
 
 export type ProductCardProps = {
   /**
-   * Set the direction of the component.
+   * Change the product card layout.
    */
   direction?: 'vertical' | 'horizontal';
   /**
@@ -23,23 +23,23 @@ export type ProductCardProps = {
    */
   bordered?: boolean;
   /**
-   * Change the background color of the card when it is hovered.
+   * Change the style of the card when it is hovered.
    */
   highlightOnHover?: boolean;
   /**
-   *
+   * Set the content to be displayed on the overlay layer.
    */
   overlayActions?: React.ReactNode;
   /**
-   * Add content on the footer.
+   * Add content to the footer.
    */
   footer?: React.ReactNode;
   /**
-   *
+   * Set the loading state showing a skeleton.
    */
   isLoading?: boolean;
   /**
-   *
+   * Set an action to be performed when clicked.
    */
   onClick?: () => void;
 }

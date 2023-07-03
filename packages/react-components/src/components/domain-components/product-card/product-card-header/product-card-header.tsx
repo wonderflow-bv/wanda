@@ -25,31 +25,31 @@ import * as styles from './product-card-header.module.css';
 
 export type ProductCardHeaderProps = {
   /**
-   *
+   * Set the subtitle or product brand.
    */
   subtitle?: string;
   /**
-   *
+   * Set the title or product name.
    */
   title?: string;
   /**
-   *
+   * Define how many lines the title should be clamped to.
    */
   titleRows?: number;
   /**
-   *
+   * Set a description text.
    */
   description?: string;
   /**
-   *
+   * Define how many lines the description should be clamped to.
    */
   descriptionRows?: number;
   /**
-   *
+   * Set the content to be displayed in the header menu.
    */
   menuActions?: React.ReactNode;
   /**
-   *
+   * Set the loading state showing a skeleton.
    */
   isLoading?: boolean;
 }

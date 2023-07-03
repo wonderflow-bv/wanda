@@ -23,7 +23,7 @@ import {
 
 export type ProductCardFooterProps = {
   /**
-   * Set loading state.
+   * Set the loading state showing a skeleton.
    */
   isLoading?: boolean;
 }
@@ -45,7 +45,7 @@ export const ProductCardFooter = forwardRef(({
     {...otherProps}
   >
     <Stack hPadding={24} vPadding={16} {...otherProps}>
-      {isLoading ? <Skeleton height="24px" style={{ lineHeight: '1.5rem' }} /> : <>{children}</>}
+      {isLoading ? <Skeleton height="24px" style={{ lineHeight: '1.5rem' }} /> : children}
     </Stack>
   </Wrapper>
 )) as PolymorphicProductCardFooter;
