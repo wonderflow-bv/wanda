@@ -122,14 +122,12 @@ export const ProductCard = forwardRef(({
             data-inner-element="ProductCard-Content"
           >
 
-            {!!(source?.length) && (
-              <ProductCard.Media
-                source={source}
-                isLoading={isLoading}
-                ratio={ratio}
-                data-inner-element="ProductCard-Media"
-              />
-            )}
+            <ProductCard.Media
+              source={source}
+              isLoading={isLoading}
+              ratio={ratio}
+              data-inner-element="ProductCard-Media"
+            />
 
             <Stack
               rowGap={16}

@@ -26,7 +26,7 @@ import {
 import * as styles from './product-card-media.module.css';
 
 export type ProductCardMediaProps = {
-  source?: string | string[];
+  source?: string[];
   ratio?: string;
   isLoading?: boolean;
 }
@@ -49,14 +49,6 @@ export const ProductCardMedia = forwardRef(({
   ...otherProps
 }, forwardedRef) => {
   const s = useMemo(() => {
-    if (typeof source === 'string') {
-      return [{
-        row: '1',
-        col: '1',
-        val: source,
-      }] as ImageConfig[];
-    }
-
     const t: ImageConfig[] = source.slice(0, 4).map((el: string, i: number) => ({
       row: i < 2 ? '1' : '2',
       col: i % 2 === 0 ? '1' : '2',
@@ -69,44 +61,49 @@ export const ProductCardMedia = forwardRef(({
   }, [source]);
 
   return (
-    <Wrapper
-      ref={forwardedRef}
-      className={clsx(styles.Media, className)}
-      style={{ ...style }}
-      {...otherProps}
-    >
-      <AspectRatio ratio={ratio}>
+    (s.length > 0)
+      ? (
+        <Wrapper
+          ref={forwardedRef}
+          className={clsx(styles.Media, className)}
+          style={{ ...style }}
+          {...otherProps}
+        >
+          <AspectRatio ratio={ratio}>
 
-        {isLoading
-          ? (
-            <Skeleton
-              style={{ borderRadius: '0px', lineHeight: '2rem' }}
-              width="inherit"
-              height="inherit"
-            />
-          )
-          : (
-            <Grid
-              aria-label=""
-              rows={s.length > 2 ? 2 : 1}
-              rowMinHeight="1fr"
-              columns={s.length > 2 ? 2 : 1}
-              colMinWidth="1fr"
-            >
-              {s.map(el => (
-                <Grid.Item
-                  key={el.val}
-                  className={styles.Image}
-                  row={el.row}
-                  column={el.col}
-                  style={{ backgroundImage: `url("${el.val}")` }}
+            {isLoading
+              ? (
+                <Skeleton
+                  style={{ borderRadius: '0px', lineHeight: '2rem' }}
+                  width="inherit"
+                  height="inherit"
                 />
-              ))}
-            </Grid>
-          )
+              )
+              : (
+                <Grid
+                  aria-label=""
+                  rows={s.length > 2 ? 2 : 1}
+                  rowMinHeight="1fr"
+                  columns={s.length > 2 ? 2 : 1}
+                  colMinWidth="1fr"
+                >
+                  {s.map(el => (
+                    <Grid.Item
+                      key={el.val}
+                      className={styles.Image}
+                      row={el.row}
+                      column={el.col}
+                      style={{ backgroundImage: `url("${el.val}")` }}
+                    />
+                  ))}
+                </Grid>
+              )
     }
-      </AspectRatio>
-    </Wrapper>
+          </AspectRatio>
+        </Wrapper>
+      )
+      : null
+
   );
 }) as PolymorphicProductCardMedia;
 

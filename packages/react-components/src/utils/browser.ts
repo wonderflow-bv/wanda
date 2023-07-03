@@ -14,6 +14,6 @@
  * limitations under the License.
  */
 
-export const isBrowser = () => (typeof window !== 'undefined'
+export const isBrowser = () => !!(typeof window !== 'undefined'
     && window.document
     && window.document.documentElement);

@@ -78,7 +78,7 @@ const story: ComponentMeta<typeof ProductCard> = {
     menuActions: undefined,
     onClick: undefined,
     children: undefined,
-    source: SourceImages[0],
+    source: SourceImages.slice(0, 1),
     footer: (<Text variant="body-2">Apr 2023</Text>),
   },
   argTypes: {
