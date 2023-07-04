@@ -129,3 +129,8 @@ withMultipleProducts.args = {
   source: SourceImages,
 };
 
+export const withBrokenImage = Template.bind({});
+withBrokenImage.args = {
+  source: [...SourceImages, 'broken'],
+};
+

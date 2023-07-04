@@ -15,7 +15,9 @@
  */
 
 import clsx from 'clsx';
-import { forwardRef, useMemo } from 'react';
+import {
+  forwardRef, useEffect, useMemo, useState,
+} from 'react';
 
 import {
   AspectRatio,
@@ -57,8 +59,27 @@ export const ProductCardMedia = forwardRef(({
   style,
   ...otherProps
 }, forwardedRef) => {
+  const [urls, setUrls] = useState<string[]>([]);
+
+  useEffect(() => {
+    const preloadImage = async (url: string) => new Promise((resolve) => {
+      const img = new Image();
+      img.src = url;
+      img.onload = () => resolve(url);
+      img.onerror = () => resolve('/image-placeholder.png');
+    });
+
+    const images = source.slice(0, 4).map(async s => preloadImage(s));
+
+    Promise.all(images)
+      .then(res => setUrls(res as string[]))
+    // eslint-disable-next-line no-console
+      .catch(err => console.error(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const s = useMemo(() => {
-    const t: ImageConfig[] = source.slice(0, 4).map((el: string, i: number) => ({
+    const t: ImageConfig[] = urls.map((el: string, i: number) => ({
       row: i < 2 ? '1' : '2',
       col: i % 2 === 0 ? '1' : '2',
       val: el,
@@ -67,7 +88,7 @@ export const ProductCardMedia = forwardRef(({
     if (t.length === 3) t[1].row = '1 / 3';
 
     return t;
-  }, [source]);
+  }, [urls]);
 
   return (
     <Wrapper
