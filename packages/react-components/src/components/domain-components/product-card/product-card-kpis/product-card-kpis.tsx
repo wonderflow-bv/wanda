@@ -27,7 +27,7 @@ import {
 } from '@/components';
 
 import { formatPriceRangeValues } from '../../../../utils';
-import * as styles from './product-card-kpi.module.css';
+import * as styles from './product-card-kpis.module.css';
 
 export type ProductCardKpisProps = {
   /**
@@ -170,8 +170,9 @@ export const ProductCardKpis = forwardRef(({
     },
   ]), [feedbackCount, groups, nps, rating, sentiment, priceMin, priceMax, skus, users, votesCount, votesRating]);
 
+  const itemHeight = 20;
   const dynamicStyle: CSSProperties = {
-    '--height': `${kpiItems * 20 + ((kpiItems - 1) * (+kpisRowGap))}px`,
+    '--height': `${kpiItems * itemHeight + ((kpiItems - 1) * (+kpisRowGap))}px`,
   };
 
   return (
@@ -184,10 +185,18 @@ export const ProductCardKpis = forwardRef(({
         )
         : (
           <Stack rowGap={kpisRowGap} hPadding={24}>
-            {config.map(el => ((el.value)
-            // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-            && <Text variant="body-2" key={el.property} decoratorStart={<Symbol source={el.icon} color={el.iconColor} weight="solid" />} decoratorSize="small"><b>{el.value}</b></Text>
-            ))}
+            {config
+              .filter(el => el.value)
+              .map(el => (
+                <Text
+                  key={el.property}
+                  variant="body-2"
+                  decoratorStart={<Symbol source={el.icon} color={el.iconColor} weight="solid" />}
+                  decoratorSize="small"
+                >
+                  <b>{el.value}</b>
+                </Text>
+              ))}
           </Stack>
         )}
     </div>

@@ -110,7 +110,14 @@ export const ProductCard = forwardRef(({
           fill={false}
         >
           {hasOverlay && (
-            <Stack direction="row" hPadding={24} vAlign="center" hAlign="center" className={styles.OverlayActions}>
+            <Stack
+              direction="row"
+              hPadding={24}
+              vAlign="center"
+              hAlign="center"
+              className={styles.OverlayActions}
+              data-inner-element="ProductCard-OverlayActions"
+            >
               <Stack>
                 {overlayActions}
               </Stack>
@@ -141,6 +148,7 @@ export const ProductCard = forwardRef(({
                 subtitle={subtitle}
                 isLoading={isLoading}
                 menuActions={hasMenu && menuActions}
+                data-inner-element="ProductCard-Header"
               />
 
               <ProductCard.Kpis
@@ -158,6 +166,7 @@ export const ProductCard = forwardRef(({
                 isLoading={isLoading}
                 kpiItems={items}
                 kpisRowGap={kpisRowGap}
+                data-inner-element="ProductCard-Kpis"
               />
 
               {children && !isLoading && (
