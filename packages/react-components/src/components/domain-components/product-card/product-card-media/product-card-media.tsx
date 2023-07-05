@@ -16,7 +16,8 @@
 
 import clsx from 'clsx';
 import {
-  forwardRef, useEffect, useMemo, useState,
+  forwardRef, useEffect,
+  useState,
 } from 'react';
 
 import {
@@ -59,36 +60,35 @@ export const ProductCardMedia = forwardRef(({
   style,
   ...otherProps
 }, forwardedRef) => {
-  const [urls, setUrls] = useState<string[]>([]);
+  const [imgs, setImgs] = useState<ImageConfig[]>([]);
 
   useEffect(() => {
-    const preloadImage = async (url: string) => new Promise((resolve) => {
+    const preloadImage: (url: string) => Promise<string> = async (url: string) => new Promise((resolve) => {
       const img = new Image();
       img.src = url;
       img.onload = () => resolve(url);
       img.onerror = () => resolve('/image-placeholder.png');
+      img.onabort = () => resolve('/image-placeholder.png');
     });
 
     const images = source.slice(0, 4).map(async s => preloadImage(s));
 
     Promise.all(images)
-      .then(res => setUrls(res as string[]))
+      .then((urls) => {
+        const t: ImageConfig[] = urls.map((el: string, i: number) => ({
+          row: i < 2 ? '1' : '2',
+          col: i % 2 === 0 ? '1' : '2',
+          val: el,
+        }));
+
+        if (t.length === 3) t[1].row = '1 / 3';
+
+        setImgs(t);
+      })
     // eslint-disable-next-line no-console
       .catch(err => console.error(err));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const s = useMemo(() => {
-    const t: ImageConfig[] = urls.map((el: string, i: number) => ({
-      row: i < 2 ? '1' : '2',
-      col: i % 2 === 0 ? '1' : '2',
-      val: el,
-    }));
-
-    if (t.length === 3) t[1].row = '1 / 3';
-
-    return t;
-  }, [urls]);
 
   return (
     <Wrapper
@@ -110,12 +110,12 @@ export const ProductCardMedia = forwardRef(({
           : (
             <Grid
               aria-label=""
-              rows={s.length > 2 ? 2 : 1}
+              rows={imgs.length > 2 ? 2 : 1}
               rowMinHeight="1fr"
-              columns={s.length > 2 ? 2 : 1}
+              columns={imgs.length > 2 ? 2 : 1}
               colMinWidth="1fr"
             >
-              {s.map((el: ImageConfig) => (
+              {imgs.map((el: ImageConfig) => (
                 <Grid.Item
                   key={`${el.val}-${el.row}-${el.col}`}
                   className={styles.Image}
