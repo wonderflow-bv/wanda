@@ -22,14 +22,14 @@ import {
 } from 'react';
 
 import {
-  Polymorphic, Skeleton, Stack,
+  Skeleton, Stack,
   Symbol, Text,
 } from '@/components';
 
 import { formatPriceRangeValues } from '../../../../utils';
 import * as styles from './product-card-kpis.module.css';
 
-export type ProductCardKpisProps = {
+export type ProductCardKpisProps = PropsWithClass<{
   /**
    * Set the stars rating value.
    */
@@ -86,9 +86,9 @@ export type ProductCardKpisProps = {
    * Set the loading state showing a skeleton.
    */
   isLoading?: boolean;
-}
+}>
 
-export type PolymorphicProductCardKpis = Polymorphic.ForwardRefComponent<'div', ProductCardKpisProps>;
+export type ProductCardKpis = React.ForwardRefExoticComponent<ProductCardKpisProps>;
 
 type KpiItemType = {
   property: string;
@@ -114,7 +114,7 @@ export const ProductCardKpis = forwardRef(({
   isLoading = false,
   className,
   style,
-}, forwardedRef) => {
+}, forwardedRef: React.ForwardedRef<HTMLDivElement>) => {
   const config: KpiItemType[] = useMemo(() => ([
     {
       property: 'rating',
@@ -201,6 +201,6 @@ export const ProductCardKpis = forwardRef(({
         )}
     </div>
   );
-}) as PolymorphicProductCardKpis;
+}) as ProductCardKpis;
 
 ProductCardKpis.displayName = 'ProductCard.Kpis';

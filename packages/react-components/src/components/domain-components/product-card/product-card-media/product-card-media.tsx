@@ -23,12 +23,12 @@ import {
 import {
   AspectRatio,
   Grid,
-  Polymorphic, Skeleton,
+  Skeleton,
 } from '@/components';
 
 import * as styles from './product-card-media.module.css';
 
-export type ProductCardMediaProps = {
+export type ProductCardMediaProps = PropsWithClass<{
   /**
    * Set an array of paths to the images.
    */
@@ -41,9 +41,9 @@ export type ProductCardMediaProps = {
    * Set the loading state showing a skeleton.
    */
   isLoading?: boolean;
-}
+}>
 
-export type PolymorphicProductCardMedia = Polymorphic.ForwardRefComponent<'div', ProductCardMediaProps>
+export type ProductCardMedia = React.ForwardRefExoticComponent<ProductCardMediaProps>
 
 type ImageConfig = {
   row: string;
@@ -52,14 +52,13 @@ type ImageConfig = {
 }
 
 export const ProductCardMedia = forwardRef(({
-  as: Wrapper = 'div',
   source = [],
   ratio = '1',
   isLoading = false,
   className,
   style,
   ...otherProps
-}, forwardedRef) => {
+}, forwardedRef: React.ForwardedRef<HTMLDivElement>) => {
   const [imgs, setImgs] = useState<ImageConfig[]>([]);
 
   useEffect(() => {
@@ -91,7 +90,7 @@ export const ProductCardMedia = forwardRef(({
   }, []);
 
   return (
-    <Wrapper
+    <div
       ref={forwardedRef}
       className={clsx(styles.Media, className)}
       style={{ ...style }}
@@ -128,8 +127,8 @@ export const ProductCardMedia = forwardRef(({
           )
     }
       </AspectRatio>
-    </Wrapper>
+    </div>
   );
-}) as PolymorphicProductCardMedia;
+}) as ProductCardMedia;
 
 ProductCardMedia.displayName = 'ProductCardMedia';

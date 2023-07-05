@@ -4,14 +4,14 @@ import { Except } from 'type-fest';
 
 import {
   Elevator,
-  Polymorphic, Stack,
+  Stack,
 } from '@/components';
 
 import * as styles from './product-card.module.css';
-import { PolymorphicProductCardFooter, ProductCardFooter } from './product-card-footer/product-card-footer';
-import { PolymorphicProductCardHeader, ProductCardHeader, ProductCardHeaderProps } from './product-card-header/product-card-header';
-import { PolymorphicProductCardKpis, ProductCardKpis, ProductCardKpisProps } from './product-card-kpis/product-card-kpis';
-import { PolymorphicProductCardMedia, ProductCardMedia, ProductCardMediaProps } from './product-card-media/product-card-media';
+import { ProductCardFooter } from './product-card-footer/product-card-footer';
+import { ProductCardHeader, ProductCardHeaderProps } from './product-card-header/product-card-header';
+import { ProductCardKpis, ProductCardKpisProps } from './product-card-kpis/product-card-kpis';
+import { ProductCardMedia, ProductCardMediaProps } from './product-card-media/product-card-media';
 
 export type ProductCardProps = {
   /**
@@ -47,11 +47,11 @@ export type ProductCardProps = {
 & Pick<ProductCardHeaderProps, 'title' | 'titleRows' | 'subtitle' | 'menuActions'>
 & Except<ProductCardKpisProps, 'isLoading'>
 
-type PolymorphicProductCard = Polymorphic.ForwardRefComponent<'div', ProductCardProps> & {
-  Media: PolymorphicProductCardMedia;
-  Kpis: PolymorphicProductCardKpis;
-  Header: PolymorphicProductCardHeader;
-  Footer: PolymorphicProductCardFooter;
+type ProductCard = React.ForwardRefExoticComponent<ProductCardProps> & {
+  Media: ProductCardMedia;
+  Kpis: ProductCardKpis;
+  Header: ProductCardHeader;
+  Footer: ProductCardFooter;
 };
 
 export const ProductCard = forwardRef(({
@@ -85,10 +85,10 @@ export const ProductCard = forwardRef(({
   style,
   children,
   ...otherProps
-}, forwardedRef) => {
+}, forwardedRef: React.ForwardedRef<HTMLDivElement>) => {
   const hasOverlay = !!(overlayActions && !menuActions && !onClick && !isLoading);
   const hasMenu = !!(menuActions && !overlayActions && !onClick);
-  const hasHighlight = !!(onClick || highlightOnHover);
+  const hasHighlight = !!(onClick ?? highlightOnHover);
   const isClickable = !!(!isLoading && onClick);
 
   return (
@@ -187,7 +187,7 @@ export const ProductCard = forwardRef(({
       </Stack>
     </Elevator>
   );
-}) as PolymorphicProductCard;
+}) as ProductCard;
 
 ProductCard.displayName = 'ProductCard';
 

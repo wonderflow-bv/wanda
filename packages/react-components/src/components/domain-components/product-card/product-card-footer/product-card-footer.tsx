@@ -14,40 +14,29 @@
  * limitations under the License.
  */
 
-import clsx from 'clsx';
-import { forwardRef } from 'react';
+import { forwardRef, PropsWithChildren } from 'react';
 
 import {
-  Polymorphic, Skeleton, Stack, StackProps,
+  Skeleton, Stack,
 } from '@/components';
 
-export type ProductCardFooterProps = {
+export type ProductCardFooterProps = PropsWithChildren<{
   /**
    * Set the loading state showing a skeleton.
    */
   isLoading?: boolean;
-}
+}>
 
-export type PolymorphicProductCardFooter = Polymorphic.ForwardRefComponent<'div', StackProps & ProductCardFooterProps>;
+export type ProductCardFooter = React.ForwardRefExoticComponent<ProductCardFooterProps>;
 
 export const ProductCardFooter = forwardRef(({
-  as: Wrapper = 'div',
   isLoading = false,
   children,
-  className,
-  style,
   ...otherProps
-}, forwardedRef) => (
-  <Wrapper
-    ref={forwardedRef}
-    className={clsx(className)}
-    style={{ ...style }}
-    {...otherProps}
-  >
-    <Stack hPadding={24} vPadding={16} {...otherProps}>
-      {isLoading ? <Skeleton height="24px" style={{ lineHeight: '1.5rem' }} /> : children}
-    </Stack>
-  </Wrapper>
-)) as PolymorphicProductCardFooter;
+}, forwardedRef: React.ForwardedRef<HTMLDivElement>) => (
+  <Stack hPadding={24} vPadding={16} {...otherProps} ref={forwardedRef}>
+    {isLoading ? <Skeleton height="24px" style={{ lineHeight: '1.5rem' }} /> : children}
+  </Stack>
+)) as ProductCardFooter;
 
 ProductCardFooter.displayName = 'ProductCardFooter';
