@@ -1,11 +1,13 @@
-.Media {
-  width: 100%;
-  height: 100%;
-}
+@layer components {
+  .Media {
+    width: 100%;
+    height: 100%;
+  }
 
-.Image {
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  margin: 0.25rem;
+  .Image {
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0.25rem;
+  }
 }

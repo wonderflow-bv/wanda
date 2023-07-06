@@ -1,7 +1,9 @@
-.Title {
-  height: 5.25rem;
-}
+@layer components {
+  .Title {
+    height: 5.25rem;
+  }
 
-.Description {
-  height: 3.75rem;
+  .Description {
+    height: 3.75rem;
+  }
 }

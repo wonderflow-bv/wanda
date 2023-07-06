@@ -1,5 +1,3 @@
-@import '../../../core/utils/vibrancy.css';
-
 @layer components {
   .Card {
     background-color: var(--global-background);
