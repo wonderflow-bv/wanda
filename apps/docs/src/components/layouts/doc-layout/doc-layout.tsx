@@ -51,7 +51,13 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
     const url = new URL(process.env.NEXT_PUBLIC_DOMAIN + router.asPath);
     const pretitle = (url.pathname.split('/')[3] || url.pathname.split('/')[2]).replace(/-/g, ' ');
     const isDifferentFromTitle = pretitle.replace('-', ' ') !== title?.toLowerCase();
-    return pretitle && isDifferentFromTitle ? pretitle : 'documentation';
+
+    if (pretitle && isDifferentFromTitle) {
+      if (router.asPath.includes('domain-components')) return 'domain components';
+      return pretitle;
+    }
+
+    return 'documentation';
   }, [router, title]);
 
   const dynamicStyle: CSSProperties = {

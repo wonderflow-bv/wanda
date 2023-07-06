@@ -37,4 +37,8 @@
   &[data-gradient-text='yellow'] {
     background-image: linear-gradient(92deg, #f5a957 0%, #e07452 104.37%);
   }
+
+  &[data-gradient-text='red'] {
+    background-image: linear-gradient(92deg, #f56a57 0%, #b84521 104.37%);
+  }
 }
