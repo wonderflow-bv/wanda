@@ -8,10 +8,6 @@
     padding: 0;
     position: relative;
 
-    &[data-card-highlight-hover='true']:is(:hover, :focus-visible, :focus-within) {
-      background-color: var(--dimmed-0);
-    }
-
     &[data-card-bordered='true'] {
       border: solid 1px var(--dimmed-1);
     }

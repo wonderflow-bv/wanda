@@ -67,7 +67,7 @@ export const ProductCardHeader = forwardRef(({
 }, forwardedRef: React.ForwardedRef<HTMLDivElement>) => {
   if (isLoading) {
     return (
-      <Stack direction="row" vPadding={16} hPadding={24} columnGap={8}>
+      <Stack direction="row" vPadding={24} hPadding={24} columnGap={8}>
         <Stack style={{ width: '100%' }} rowGap={8}>
           <div>
             {subtitle && <Skeleton count={1} width="50%" />}
@@ -81,7 +81,7 @@ export const ProductCardHeader = forwardRef(({
   }
 
   return (
-    <Stack columnGap={8} vPadding={16} direction="row" hPadding={24} ref={forwardedRef}>
+    <Stack columnGap={8} vPadding={24} direction="row" hPadding={24} ref={forwardedRef}>
       <Stack rowGap={8}>
         <div>
           {subtitle && <Text variant="subtitle-2">{subtitle}</Text>}

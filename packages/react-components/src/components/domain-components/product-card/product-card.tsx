@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { forwardRef } from 'react';
+import React, { forwardRef, PropsWithChildren } from 'react';
 import { Except } from 'type-fest';
 
 import {
@@ -13,7 +13,7 @@ import { ProductCardHeader, ProductCardHeaderProps } from './product-card-header
 import { ProductCardKpis, ProductCardKpisProps } from './product-card-kpis/product-card-kpis';
 import { ProductCardMedia, ProductCardMediaProps } from './product-card-media/product-card-media';
 
-export type ProductCardProps = {
+export type ProductCardProps = PropsWithChildren<{
   /**
    * Change the product card layout.
    */
@@ -42,7 +42,7 @@ export type ProductCardProps = {
    * Set an action to be performed when clicked.
    */
   onClick?: () => void;
-}
+}>
 & Pick<ProductCardMediaProps, 'ratio' | 'source'>
 & Pick<ProductCardHeaderProps, 'title' | 'titleRows' | 'subtitle' | 'menuActions'>
 & Except<ProductCardKpisProps, 'isLoading'>
@@ -98,7 +98,6 @@ export const ProductCard = forwardRef(({
         className={clsx(styles.Card, className)}
         style={{ ...style }}
         data-card-bordered={bordered}
-        data-card-highlight-hover={highlightOnHover}
         data-card-clickable={isClickable}
         onClick={isLoading ? undefined : onClick}
         {...otherProps}
@@ -138,7 +137,6 @@ export const ProductCard = forwardRef(({
             />
 
             <Stack
-              rowGap={16}
               direction="column"
             >
 
