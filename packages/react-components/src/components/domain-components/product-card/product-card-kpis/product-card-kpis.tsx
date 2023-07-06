@@ -22,11 +22,11 @@ import {
 } from 'react';
 
 import {
+  formatPriceRangeValues,
   Skeleton, Stack,
   Symbol, Text,
 } from '@/components';
 
-import { formatPriceRangeValues } from '../../../../utils';
 import * as styles from './product-card-kpis.module.css';
 
 export type ProductCardKpisProps = PropsWithClass<{
