@@ -27,7 +27,7 @@ export type ProductCardFooterProps = PropsWithChildren<{
   isLoading?: boolean;
 }>
 
-export type ProductCardFooter = React.ForwardRefExoticComponent<ProductCardFooterProps>;
+export type ProductCardFooterComponent = React.ForwardRefExoticComponent<ProductCardFooterProps>;
 
 export const ProductCardFooter = forwardRef(({
   isLoading = false,
@@ -37,6 +37,6 @@ export const ProductCardFooter = forwardRef(({
   <Stack hPadding={24} vPadding={24} {...otherProps} ref={forwardedRef}>
     {isLoading ? <Skeleton height="24px" style={{ lineHeight: '1.5rem' }} /> : children}
   </Stack>
-)) as ProductCardFooter;
+)) as ProductCardFooterComponent;
 
 ProductCardFooter.displayName = 'ProductCardFooter';

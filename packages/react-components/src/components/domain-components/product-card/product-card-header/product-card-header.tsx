@@ -54,7 +54,7 @@ export type ProductCardHeaderProps = {
   isLoading?: boolean;
 }
 
-export type ProductCardHeader = React.ForwardRefExoticComponent<ProductCardHeaderProps>;
+export type ProductCardHeaderComponent = React.ForwardRefExoticComponent<ProductCardHeaderProps>;
 
 export const ProductCardHeader = forwardRef(({
   subtitle,
@@ -128,6 +128,6 @@ export const ProductCardHeader = forwardRef(({
     </Stack>
 
   );
-}) as ProductCardHeader;
+}) as ProductCardHeaderComponent;
 
 ProductCardHeader.displayName = 'ProductCardHeader';

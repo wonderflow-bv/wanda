@@ -8,10 +8,10 @@ import {
 } from '@/components';
 
 import * as styles from './product-card.module.css';
-import { ProductCardFooter } from './product-card-footer/product-card-footer';
-import { ProductCardHeader, ProductCardHeaderProps } from './product-card-header/product-card-header';
-import { ProductCardKpis, ProductCardKpisProps } from './product-card-kpis/product-card-kpis';
-import { ProductCardMedia, ProductCardMediaProps } from './product-card-media/product-card-media';
+import { ProductCardFooter, ProductCardFooterComponent } from './product-card-footer/product-card-footer';
+import { ProductCardHeader, ProductCardHeaderComponent, ProductCardHeaderProps } from './product-card-header/product-card-header';
+import { ProductCardKpis, ProductCardKpisComponent, ProductCardKpisProps } from './product-card-kpis/product-card-kpis';
+import { ProductCardMedia, ProductCardMediaComponent, ProductCardMediaProps } from './product-card-media/product-card-media';
 
 export type ProductCardProps = PropsWithChildren<{
   /**
@@ -48,10 +48,10 @@ export type ProductCardProps = PropsWithChildren<{
 & Except<ProductCardKpisProps, 'isLoading'>
 
 type ProductCard = React.ForwardRefExoticComponent<ProductCardProps> & {
-  Media: ProductCardMedia;
-  Kpis: ProductCardKpis;
-  Header: ProductCardHeader;
-  Footer: ProductCardFooter;
+  Media: ProductCardMediaComponent;
+  Kpis: ProductCardKpisComponent;
+  Header: ProductCardHeaderComponent;
+  Footer: ProductCardFooterComponent;
 };
 
 export const ProductCard = forwardRef(({

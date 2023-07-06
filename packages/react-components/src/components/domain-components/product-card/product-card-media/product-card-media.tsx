@@ -43,7 +43,7 @@ export type ProductCardMediaProps = PropsWithClass<{
   isLoading?: boolean;
 }>
 
-export type ProductCardMedia = React.ForwardRefExoticComponent<ProductCardMediaProps>
+export type ProductCardMediaComponent = React.ForwardRefExoticComponent<ProductCardMediaProps>
 
 type ImageConfig = {
   row: string;
@@ -129,6 +129,6 @@ export const ProductCardMedia = forwardRef(({
       </AspectRatio>
     </div>
   );
-}) as ProductCardMedia;
+}) as ProductCardMediaComponent;
 
 ProductCardMedia.displayName = 'ProductCardMedia';

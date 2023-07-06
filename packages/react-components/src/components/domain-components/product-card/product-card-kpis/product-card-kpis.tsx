@@ -88,7 +88,7 @@ export type ProductCardKpisProps = PropsWithClass<{
   isLoading?: boolean;
 }>
 
-export type ProductCardKpis = React.ForwardRefExoticComponent<ProductCardKpisProps>;
+export type ProductCardKpisComponent = React.ForwardRefExoticComponent<ProductCardKpisProps>;
 
 type KpiItemType = {
   property: string;
@@ -201,6 +201,6 @@ export const ProductCardKpis = forwardRef(({
         )}
     </div>
   );
-}) as ProductCardKpis;
+}) as ProductCardKpisComponent;
 
 ProductCardKpis.displayName = 'ProductCard.Kpis';
