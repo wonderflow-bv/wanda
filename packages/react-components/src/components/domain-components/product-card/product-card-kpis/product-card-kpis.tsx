@@ -197,10 +197,11 @@ export const ProductCardKpis = forwardRef(({
                   <b>{el.value}</b>
                 </Text>
               ))}
+
           </Stack>
         )}
     </div>
   );
 }) as ProductCardKpisComponent;
 
-ProductCardKpis.displayName = 'ProductCard.Kpis';
+ProductCardKpis.displayName = 'ProductCardKpis';

@@ -13,7 +13,7 @@ import { ProductCardHeader, ProductCardHeaderComponent, ProductCardHeaderProps }
 import { ProductCardKpis, ProductCardKpisComponent, ProductCardKpisProps } from './product-card-kpis/product-card-kpis';
 import { ProductCardMedia, ProductCardMediaComponent, ProductCardMediaProps } from './product-card-media/product-card-media';
 
-export type ProductCardProps = PropsWithChildren<{
+export type ProductCardProps = PropsWithClass<PropsWithChildren<{
   /**
    * Change the product card layout.
    */
@@ -42,7 +42,7 @@ export type ProductCardProps = PropsWithChildren<{
    * Set an action to be performed when clicked.
    */
   onClick?: () => void;
-}>
+}>>
 & Pick<ProductCardMediaProps, 'ratio' | 'source'>
 & Pick<ProductCardHeaderProps, 'title' | 'titleRows' | 'subtitle' | 'menuActions'>
 & Except<ProductCardKpisProps, 'isLoading'>
