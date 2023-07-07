@@ -73,7 +73,7 @@ export const ProductCard = forwardRef(({
   priceMax,
   users,
   skus,
-  kpiItems: items,
+  kpiItems,
   kpisRowGap,
   ratio,
   source,
@@ -149,7 +149,7 @@ export const ProductCard = forwardRef(({
                 data-inner-element="ProductCard-Header"
               />
 
-              <ProductCard.Kpis
+              <ProductCardKpis
                 rating={rating}
                 feedbackCount={feedbackCount}
                 votesCount={votesCount}
@@ -162,7 +162,7 @@ export const ProductCard = forwardRef(({
                 users={users}
                 skus={skus}
                 isLoading={isLoading}
-                kpiItems={items}
+                kpiItems={kpiItems}
                 kpisRowGap={kpisRowGap}
                 data-inner-element="ProductCard-Kpis"
               />
