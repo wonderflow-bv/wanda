@@ -47,7 +47,7 @@ export type ProductCardProps = PropsWithChildren<{
 & Pick<ProductCardHeaderProps, 'title' | 'titleRows' | 'subtitle' | 'menuActions'>
 & Except<ProductCardKpisProps, 'isLoading'>
 
-type ProductCard = React.ForwardRefExoticComponent<ProductCardProps> & {
+export type ProductCardComponent = React.ForwardRefExoticComponent<ProductCardProps> & {
   Media: ProductCardMediaComponent;
   Kpis: ProductCardKpisComponent;
   Header: ProductCardHeaderComponent;
@@ -185,7 +185,7 @@ export const ProductCard = forwardRef(({
       </Stack>
     </Elevator>
   );
-}) as ProductCard;
+}) as ProductCardComponent;
 
 ProductCard.displayName = 'ProductCard';
 
