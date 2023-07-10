@@ -2,7 +2,7 @@ import DomainComponentsNav from "@/data/domain-components-nav";
 import { getLayoutProps } from "@/utils/get-layout-props";
 import { PropsTable } from "@/components/doc/props-table";
 import tkns from "@wonderflow/tokens/platforms/web/tokens.json";
-import { ProductCard } from '@wonderflow/react-components'
+import { ProductCard, Menu } from '@wonderflow/react-components'
 
 export const getStaticProps = () =>
   getLayoutProps({
@@ -13,14 +13,52 @@ export const getStaticProps = () =>
       subtitle: "A features rich card for products",
       navigation: DomainComponentsNav,
       features: [
-        "Invent something here",
+        "Product Image Gallery",
+        "Overlay Actions",
+        "Header Menu Actions",
+        "Clickable",
       ]
     }
   });
 
 <LiveArea>
-  <Card
+  <Stack style={{width: '300px'}}>
+  <ProductCard
+  subtitle="Branding"
+  title="Product Card labels will be displayed on three lines by default"
+  source={[
+  'https://products.gumlet.io/image-1675779605803.jpeg',
+  'https://storage.googleapis.com/wonderflow-product-images/KITCHENAID%205KSM15%20SERIES.png',
+  'https://storage.googleapis.com/wonderflow-product-images/CLASSIC%204.5%20QT.png',
+  'https://storage.googleapis.com/wonderflow-product-images/delonghi_coffee_MC%20NESPRESSO%20INISSIA.png',
+  ]}
+  rating={4.3}
+  feedbackCount={123}
+  votesCount={3456}
+  footer="27 Apr 2023"
+  menuActions={<Menu>
+    <Menu.Item
+      icon="news"
+      value="1"
+    >
+      Stats
+    </Menu.Item>
+    <Menu.Item
+      icon="theater"
+      value="1"
+    >
+      Compare
+    </Menu.Item>
+    <Menu.Item
+      icon="grid"
+      value="1"
+      placement="right-start"
+    >
+      Add to group
+    </Menu.Item>
+  </Menu>}
   />
+  </Stack>
 </LiveArea>
 
 ## Anatomy
@@ -30,7 +68,7 @@ import { ProductCard } from "@wonderflow/react-components";
 
 export default () => {
   return (
-    <Card />
+    <ProductCard />
   );
 };
 ```
@@ -40,112 +78,204 @@ export default () => {
 <PropsTable
   properties={[
     {
-      name: "wrap",
-      type: ["boolean"],
-      typeValue: "StackProps['wrap']",
-      typeLink: "/get-started/components/layouts/stack#prop-wrap",
-      default: "false",
-      required: false,
-      description: "Wrap `left`, `children` and `right` there is no space for them",
-    },
-    {
-      name: "columnGap",
-      type: "enum",
-      typeValue: "StackProps['columnGap']",
-      typeLink: "/get-started/components/layouts/stack#prop-columngap",
-      default: "24",
-      required: false,
-      description: "Set the space between `left`, `children` and `right`",
-    },
-    {
-      name: "vAlign",
-      type: ["string"],
-      typeValue: "StackProps['vAlign']",
-      typeLink: "/get-started/components/layouts/stack#prop-vAlign",
-      default: "start",
-      required: false,
-      description:
-        "Set the vertical content placement instead of growing to fill the available space.",
-    },
-    {
-      name: "hAlign",
-      type: ["string"],
-      typeValue: "StackProps['hAlign']",
-      typeLink: "/get-started/components/layouts/stack#prop-hAlign",
-      default: "space-between",
-      required: false,
-      description:
-        "Set the horizontal content placement instead of growing to fill the available space.",
-    },
-    {
-      name: "padding",
+      name: "direction",
       type: ["enum"],
-      typeValue: `false | ${Object.keys(tkns.space).map(name => `${name}`).join(" | ")}`,
-      default: "24",
+      typeValue: "'vertical' | 'horizontal'",
+      default: "vertical",
       required: false,
-      dangerous: false,
-      description: "Set the padding or remove it",
-    },
-    {
-      name: "left",
-      type: ["ReactNode"],
-      default: "",
-      required: false,
-      description: "ontent rendered inside the card on the left side, before children.",
-    },
-    {
-      name: "right",
-      type: ["ReactNode"],
-      default: "",
-      required: false,
-      description: "Content rendered inside the card on the right side, after children.",
+      description: "Change the product card layout.",
     },
     {
       name: "bordered",
-      type: ["boolean"],
-      default: "",
+      type: "boolean",
+      default: "false",
       required: false,
       description: "Add a border to the card to increase its visual weight and contrast.",
     },
     {
-      name: "radius",
-      type: ["enum"],
-      typeValue: `false | ${Object.keys(tkns.radius).map(name => `${name}`).join(" | ")}`,
-      default: "8",
-      required: false,
-      description: "Define the edge radius of the card.",
-    },
-    {
-      name: "dimmed",
-      type: ["enum"],
-      typeValue: "0 | 1 | 2",
-      default: "",
-      required: false,
-      description: "Change the background color of the card.",
-    },
-    {
-      name: "vibrant",
-      type: ["boolean"],
-      default: "",
-      required: false,
-      description: "Make the card vibrant. Add tranlucent background.",
-    },
-    {
       name: "highlightOnHover",
-      type: ["boolean"],
-      default: "",
+      type: "boolean",
+      default: "false",
       required: false,
-      description:
-        "Change the background color of the card when it is hovered.",
+      description: "Change the style of the card when it is hovered.",
     },
     {
-      name: "as",
-      type: ["enum"],
-      typeValue: "keyof JSX.IntrinsicElements | React.ComponentType<any>",
-      default: 'div',
+      name: "source",
+      type: "Array<string>",
+      default: "[]",
+      required: false,
+      description: "Set an array of paths to the images.",
+    },
+    {
+      name: "title",
+      type: "string",
+      default: false,
+      required: false,
+      description: "Set the title or product name.",
+    },
+    {
+      name: "subtitle",
+      type: "string",
+      default: false,
+      required: false,
+      description: "Set the subtitle or product brand name.",
+    },
+    {
+      name: "titleRows",
+      type: "number",
+      default: 3,
+      required: false,
+      description: "Set the subtitle or product brand name.",
+    },
+    {
+      name: "footer",
+      type: ["ReactNode"],
+      default: false,
       required: false,
       description:
-        "Set the component to a different HTML tag or custom component",
-    }
+        "Add content to the footer.",
+    },
+    {
+      name: "ratio",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set the stars rating value.",
+    },
+    {
+      name: "feedbackCount",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set the feedback count value.",
+    },
+    {
+      name: "votesCount",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set the votes count value.",
+    },
+    {
+      name: "votesRating",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set the votes rating value.",
+    },
+    {
+      name: "sentiment",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set the sentiment index value.",
+    },
+    {
+      name: "nps",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set the NPS value.",
+    },
+    {
+      name: "groups",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set the number of groups.",
+    },
+    {
+      name: "priceMin",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set the minimum price value.",
+    },
+    {
+      name: "priceMax",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set the maximum price value.",
+    },
+    {
+      name: "users",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set the number of users.",
+    },
+    {
+      name: "skus",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set the SKUs value.",
+    },
+    {
+      name: "kpiItems",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set the number of Kpis items to be displayed.",
+    },
+    {
+      name: "kpisRowGap",
+      type: "TokensTypes['space']",
+      default: false,
+      required: false,
+      description:
+        "Set the space between Kpis items.",
+    },
+    {
+      name: "menuActions",
+      type: ["ReactNode"],
+      default: false,
+      required: false,
+      description:
+        "Set the content to be displayed in the header menu.",
+    },
+    {
+      name: "overlayActions",
+      type: ["ReactNode"],
+      default: false,
+      required: false,
+      description:
+        "Set the content to be displayed on the overlay layer.",
+    },
+    {
+      name: "onClick",
+      type: ["Function"],
+      default: false,
+      required: false,
+      description: "Set an action to be performed when clicked.",
+    },
+    {
+      name: "isLoading",
+      type: "boolean",
+      default: "false",
+      required: false,
+      description: "Set the loading state showing a skeleton.",
+    },
+    {
+      name: "ratio",
+      type: "string",
+      default: "1/1",
+      required: false,
+      description: "Set the ratio for the images following the CSS syntax.",
+    },
+
   ]}
 />
