@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
+import { TokensTypes } from '@wonderflow/tokens/platforms/web';
 import clsx from 'clsx';
-import { SymbolNames } from 'packages/symbols/dist';
-import { TokensTypes } from 'packages/tokens/platforms/web';
 import {
-  CSSProperties, forwardRef, ReactElement, useMemo,
+  CSSProperties, forwardRef, useMemo,
 } from 'react';
 
 import {
@@ -93,7 +92,7 @@ export type ProductCardKpisComponent = React.ForwardRefExoticComponent<ProductCa
 type KpiItemType = {
   property: string;
   value?: string;
-  icon: SymbolNames | ReactElement<HTMLOrSVGElement>;
+  icon: any;
   iconColor?: string;
 }
 
@@ -197,7 +196,6 @@ export const ProductCardKpis = forwardRef(({
                   <b>{el.value}</b>
                 </Text>
               ))}
-
           </Stack>
         )}
     </div>
