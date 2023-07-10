@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import React, { forwardRef, PropsWithChildren } from 'react';
-import { Except } from 'type-fest';
 
 import {
   Elevator,
@@ -45,7 +44,7 @@ export type ProductCardProps = PropsWithClass<PropsWithChildren<{
 }>>
 & Pick<ProductCardMediaProps, 'ratio' | 'source'>
 & Pick<ProductCardHeaderProps, 'title' | 'titleRows' | 'subtitle' | 'menuActions'>
-& Except<ProductCardKpisProps, 'isLoading'>
+& Pick<ProductCardKpisProps, 'rating' | 'feedbackCount' | 'votesCount' | 'votesRating' | 'users' | 'skus' | 'sentiment' | 'priceMin' | 'priceMax' | 'nps' | 'kpisRowGap' | 'kpiItems' | 'groups'>
 
 export type ProductCardComponent = React.ForwardRefExoticComponent<ProductCardProps> & {
   Media: ProductCardMediaComponent;

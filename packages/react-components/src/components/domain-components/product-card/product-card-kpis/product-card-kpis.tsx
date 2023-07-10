@@ -22,11 +22,12 @@ import {
 } from 'react';
 
 import {
+  formatKpiValue,
+  formatPriceRangeValues,
   Skeleton, Stack,
   Symbol, Text,
 } from '@/components';
 
-import { formatPriceRangeValues } from '../../../../utils';
 import * as styles from './product-card-kpis.module.css';
 
 export type ProductCardKpisProps = PropsWithClass<{
@@ -118,39 +119,39 @@ export const ProductCardKpis = forwardRef(({
   const config: KpiItemType[] = useMemo(() => ([
     {
       property: 'rating',
-      value: rating?.toFixed(2),
+      value: formatKpiValue(rating, 2),
       icon: 'star',
       iconColor: 'orange',
     },
     {
       property: 'feedback-count',
-      value: feedbackCount?.toFixed(0),
+      value: formatKpiValue(feedbackCount),
       icon: 'file-alt',
     },
     {
       property: 'votes-count',
-      value: votesCount?.toFixed(0),
+      value: formatKpiValue(votesCount),
       icon: 'thumbs-up',
     },
     {
       property: 'votes-rating',
-      value: votesRating?.toFixed(2),
+      value: formatKpiValue(votesRating, 2),
       icon: 'arrow-trend-up',
     },
     {
       property: 'sentiment',
-      value: sentiment?.toFixed(2),
+      value: formatKpiValue(sentiment, 2),
       icon: 'hearts-suit',
       iconColor: 'red',
     },
     {
       property: 'nps',
-      value: nps?.toFixed(2),
+      value: formatKpiValue(nps, 2),
       icon: 'nps',
     },
     {
       property: 'groups',
-      value: groups?.toFixed(0),
+      value: formatKpiValue(groups),
       icon: 'grid',
     },
     {
@@ -160,12 +161,12 @@ export const ProductCardKpis = forwardRef(({
     },
     {
       property: 'users',
-      value: users?.toFixed(0),
+      value: formatKpiValue(users),
       icon: 'users',
     },
     {
       property: 'skus',
-      value: skus?.toFixed(0),
+      value: formatKpiValue(skus),
       icon: 'rectangle-barcode',
     },
   ]), [feedbackCount, groups, nps, rating, sentiment, priceMin, priceMax, skus, users, votesCount, votesRating]);

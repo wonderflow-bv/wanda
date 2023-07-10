@@ -31,3 +31,8 @@ export const formatPriceRangeValues = (p1?: number, p2?: number) => {
 
   return undefined;
 };
+
+export const formatKpiValue = (value?: number, decimal = 0) => {
+  if (typeof value === 'number' && value >= 0) return value.toFixed(decimal);
+  return '';
+};
