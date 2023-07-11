@@ -128,6 +128,15 @@ const ComponentsNav: NavigationMenu = [
         target: '',
       },
       {
+        path: '/get-started/components/layouts/product-card',
+        label: 'Product Card',
+        target: '',
+        tag: {
+          color: 'green',
+          label: 'new',
+        },
+      },
+      {
         path: '/get-started/components/layouts/container',
         label: 'Container',
         target: '',
@@ -237,7 +246,7 @@ const ComponentsNav: NavigationMenu = [
     ],
   },
   {
-    title: 'Other',
+    title: 'Widget',
     icon: 'grid',
     items: [
       {

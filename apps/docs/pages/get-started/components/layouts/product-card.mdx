@@ -1,4 +1,4 @@
-import DomainComponentsNav from "@/data/domain-components-nav";
+import ComponentsNav from "@/data/components-nav";
 import { getLayoutProps } from "@/utils/get-layout-props";
 import { PropsTable } from "@/components/doc/props-table";
 import tkns from "@wonderflow/tokens/platforms/web/tokens.json";
@@ -9,9 +9,9 @@ export const getStaticProps = () =>
     layout: "component",
     layoutProps: {
       title: "Product Card",
-      color: "red",
+      color: "indigo",
       subtitle: "A features rich card for products",
-      navigation: DomainComponentsNav,
+      navigation: ComponentsNav,
       features: [
         "Product Image Gallery",
         "Overlay Actions",

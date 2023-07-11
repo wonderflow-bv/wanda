@@ -14,12 +14,6 @@ const DocNav: DocNavType = [
     url: '/get-started/components/actions/button',
   },
   {
-    label: 'Domain Components',
-    icon: 'layer-group',
-    color: 'red',
-    url: '/get-started/domain-components/layouts/product-card',
-  },
-  {
     label: 'Symbols',
     icon: 'grip-vertical',
     color: 'dipsy',
