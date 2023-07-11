@@ -5,7 +5,7 @@ import {
   Menu,
   Stack,
   Text,
-} from '../../..';
+} from '../..';
 import { ProductCard } from './product-card';
 
 const OverlayButtons = (

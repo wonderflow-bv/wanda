@@ -25,7 +25,7 @@ import {
   Symbol, Text,
 } from '@/components';
 
-import { formatKpiValue, formatPriceRangeValues } from '../../../../utils/formatting';
+import { formatKpiValue, formatPriceRangeValues } from '../../../utils/formatting';
 import * as styles from './product-card-kpis.module.css';
 
 export type ProductCardKpisProps = PropsWithClass<{
@@ -117,7 +117,7 @@ export const ProductCardKpis = forwardRef(({
   const config: KpiItemType[] = useMemo(() => ([
     {
       property: 'rating',
-      value: formatKpiValue(rating, 2),
+      value: formatKpiValue(rating, { decimal: 2, maxRange: 5 }),
       icon: 'star',
       iconColor: 'orange',
     },
@@ -133,18 +133,18 @@ export const ProductCardKpis = forwardRef(({
     },
     {
       property: 'votes-rating',
-      value: formatKpiValue(votesRating, 2),
+      value: formatKpiValue(votesRating, { decimal: 2, maxRange: 5 }),
       icon: 'arrow-trend-up',
     },
     {
       property: 'sentiment',
-      value: formatKpiValue(sentiment, 2),
+      value: formatKpiValue(sentiment, { decimal: 2, maxRange: 1 }),
       icon: 'hearts-suit',
-      iconColor: 'red',
+      iconColor: (sentiment && sentiment > 0.5) ? 'red' : undefined,
     },
     {
       property: 'nps',
-      value: formatKpiValue(nps, 2),
+      value: formatKpiValue(nps, { decimal: 0, minRange: -100, maxRange: 100 }),
       icon: 'nps',
     },
     {

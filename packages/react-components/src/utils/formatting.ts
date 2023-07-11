@@ -32,7 +32,29 @@ export const formatPriceRangeValues = (p1?: number, p2?: number) => {
   return undefined;
 };
 
-export const formatKpiValue = (value?: number, decimal = 0) => {
-  if (typeof value === 'number' && value >= 0) return value.toFixed(decimal);
+export const clampValue = (value: number, minRange?: number, maxRange?: number) => {
+  if (!minRange && maxRange) return value < maxRange ? value : maxRange;
+  if (minRange && !maxRange) return value > minRange ? value : minRange;
+  if (minRange && maxRange) return Math.min(Math.max(value, minRange), maxRange);
+  return value;
+};
+
+export const formatKpiValue = (
+  value?: number,
+  option: {
+    decimal: number;
+    minRange?: number;
+    maxRange?: number;
+  } = { decimal: 0, minRange: 0 },
+) => {
+  const { decimal, minRange, maxRange } = option;
+
+  const hasValue = typeof value === 'number';
+  const d = typeof decimal === 'number' && decimal > 0 ? decimal : 0;
+
+  if (hasValue) {
+    return clampValue(value, minRange, maxRange).toFixed(d);
+  }
+
   return '';
 };
