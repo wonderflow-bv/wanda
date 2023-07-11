@@ -64,10 +64,11 @@ export const ProductCardMedia = forwardRef(({
   useEffect(() => {
     const preloadImage: (url: string) => Promise<string> = async (url: string) => new Promise((resolve) => {
       const img = new Image();
+      const placeholder = 'https://wonderimages.gumlet.io/placeholders/image-placeholder.png';
       img.src = url;
       img.onload = () => resolve(url);
-      img.onerror = () => resolve('/image-placeholder.png');
-      img.onabort = () => resolve('/image-placeholder.png');
+      img.onerror = () => resolve(placeholder);
+      img.onabort = () => resolve(placeholder);
     });
 
     const images = source.slice(0, 4).map(async s => preloadImage(s));
