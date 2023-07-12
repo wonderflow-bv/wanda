@@ -21,6 +21,9 @@ export const getStaticProps = () =>
     }
   });
 
+## Overview
+ProductCard is a variant of the Card component that displays product information. There are four core sections — Media, Header, Content and Footer. Each of these sections can hold the pre-styled subcomponents (images, title, subtitle and actions) or other content including text, buttons and links.
+
 <LiveArea>
   <Stack style={{width: '300px'}}>
   <ProductCard
@@ -34,7 +37,7 @@ export const getStaticProps = () =>
   ]}
   rating={4.3}
   feedbackCount={123}
-  votesCount={3456}
+  sentiment={0.51}
   footer="27 Apr 2023"
   menuActions={<Menu>
     <Menu.Item
@@ -63,15 +66,60 @@ export const getStaticProps = () =>
 
 ## Anatomy
 
-```tsx lines="1,5-10"
-import { ProductCard } from "@wonderflow/react-components";
+```tsx lines="1,5-14"
+import { ProductCard, Menu } from "@wonderflow/react-components";
 
 export default () => {
   return (
-    <ProductCard />
+    <ProductCard
+      subtitle="Branding"
+      title="Product Card..."
+      source={['https://...']}
+      rating={4.3}
+      sentiment={0.51}
+      feedbackCount={123}
+      footer="27 Apr 2023"
+      menuActions={<Menu>...</Menu>}
+      />
   );
 };
 ```
+## Usage guidelines
+The product Card is most often used inside the main content area. Cards in a grid should be the same height.
+
+## Best practices
+Product cards should group related information.
+Use product cards to display content and actions on a single topic.
+
+## Features
+
+### Orientation
+Cards can have a vertical or horizontal image orientation.
+
+![](https://wonderimages.gumlet.io/docs/productCard/product-card-orientation.png?format=webp&q=100)
+
+### Card Header
+The Card header serves as an area to display a title, optional subtitle and actions that
+are relevant to the entire card. In situations where additional actions are present,
+we utilise a Menu to accommodate them.
+
+<img src="https://wonderimages.gumlet.io/docs/productCard/product-card-header-menu.png?format=webp&q=100" alt="" style={{width: "350px"}}/>
+
+For the Title, we recommend a maximum of three lines, with a minimum height of 84px.
+As for the subtitle, it is recommended to keep it to a single line.
+
+### Card Media
+Card images are specifically designed to maintain the aspect ratio while filling the width of the card.
+This ensures that the images are displayed proportionally and avoids any distortion or stretching.
+Card media can accommodate up to four cards.
+
+![](https://wonderimages.gumlet.io/docs/productCard/product-card-media.png?format=webp&q=100)
+
+
+### Content
+Cards content most commonly displays the product KPIs such as Rating, Feedback count and Sentiment Index.
+We recommended showing a maximum of three KPIs.
+
 
 ## API Reference
 
@@ -275,6 +323,13 @@ export default () => {
       default: "1/1",
       required: false,
       description: "Set the ratio for the images following the CSS syntax.",
+    },
+    {
+      name: "children",
+      type: "ReactNode",
+      default: false,
+      required: false,
+      description: "Add some content to the card just above the footer section",
     },
 
   ]}
