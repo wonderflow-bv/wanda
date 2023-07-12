@@ -122,6 +122,12 @@ export const ProductCardKpis = forwardRef(({
       iconColor: 'orange',
     },
     {
+      property: 'sentiment',
+      value: formatKpiValue(sentiment, { decimal: 2, maxRange: 1 }),
+      icon: 'hearts-suit',
+      iconColor: (sentiment && sentiment > 0.5) ? 'red' : undefined,
+    },
+    {
       property: 'feedback-count',
       value: formatKpiValue(feedbackCount),
       icon: 'file-alt',
@@ -135,12 +141,6 @@ export const ProductCardKpis = forwardRef(({
       property: 'votes-rating',
       value: formatKpiValue(votesRating, { decimal: 2, maxRange: 5 }),
       icon: 'arrow-trend-up',
-    },
-    {
-      property: 'sentiment',
-      value: formatKpiValue(sentiment, { decimal: 2, maxRange: 1 }),
-      icon: 'hearts-suit',
-      iconColor: (sentiment && sentiment > 0.5) ? 'red' : undefined,
     },
     {
       property: 'nps',
