@@ -13,9 +13,9 @@
     }
 
     &[data-button-dimension='regular'] {
-      block-size: token(--space-40);
-      inline-size: token(--space-40);
-      min-inline-size: token(--space-40);
+      block-size: calc(token(--space-40) - token(--space-4));
+      inline-size: calc(token(--space-40) - token(--space-4));
+      min-inline-size: calc(token(--space-40) - token(--space-4));
       padding: 0;
     }
 
