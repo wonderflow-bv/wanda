@@ -66,6 +66,7 @@ const story: ComponentMeta<typeof ProductCard> = {
     votesRating: 2.3,
     nps: 23,
     groups: 4,
+    tgw: 0.75,
     priceMin: 33,
     priceMax: 45,
     users: 789,

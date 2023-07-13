@@ -44,7 +44,7 @@ export type ProductCardProps = PropsWithClass<PropsWithChildren<{
 }>>
 & Pick<ProductCardMediaProps, 'ratio' | 'source'>
 & Pick<ProductCardHeaderProps, 'title' | 'titleRows' | 'subtitle' | 'menuActions'>
-& Pick<ProductCardKpisProps, 'rating' | 'feedbackCount' | 'votesCount' | 'votesRating' | 'users' | 'skus' | 'sentiment' | 'priceMin' | 'priceMax' | 'nps' | 'kpisRowGap' | 'kpiItems' | 'groups'>
+& Pick<ProductCardKpisProps, 'rating' | 'feedbackCount' | 'votesCount' | 'votesRating' | 'users' | 'skus' | 'sentiment' | 'priceMin' | 'priceMax' | 'nps' | 'kpisRowGap' | 'kpiItems' | 'groups' | 'tgw'>
 
 export type ProductCardComponent = React.ForwardRefExoticComponent<ProductCardProps> & {
   Media: ProductCardMediaComponent;
@@ -68,6 +68,7 @@ export const ProductCard = forwardRef(({
   sentiment,
   nps,
   groups,
+  tgw,
   priceMin,
   priceMax,
   users,
@@ -156,6 +157,7 @@ export const ProductCard = forwardRef(({
                 sentiment={sentiment}
                 nps={nps}
                 groups={groups}
+                tgw={tgw}
                 priceMin={priceMin}
                 priceMax={priceMax}
                 users={users}

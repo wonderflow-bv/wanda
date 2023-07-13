@@ -58,6 +58,10 @@ export type ProductCardKpisProps = PropsWithClass<{
    */
   groups?: number;
   /**
+   * Set the TGW value.
+   */
+  tgw?: number;
+  /**
    * Set the minimum price value.
    */
   priceMin?: number;
@@ -104,6 +108,7 @@ export const ProductCardKpis = forwardRef(({
   sentiment,
   nps,
   groups,
+  tgw,
   priceMin,
   priceMax,
   users,
@@ -153,6 +158,11 @@ export const ProductCardKpis = forwardRef(({
       icon: 'grid',
     },
     {
+      property: 'tgw',
+      value: formatKpiValue(tgw, { decimal: 2, maxRange: 1 }),
+      icon: 'frown',
+    },
+    {
       property: 'price',
       value: formatPriceRangeValues(priceMin, priceMax),
       icon: 'tags',
@@ -167,7 +177,7 @@ export const ProductCardKpis = forwardRef(({
       value: formatKpiValue(skus),
       icon: 'rectangle-barcode',
     },
-  ]), [feedbackCount, groups, nps, rating, sentiment, priceMin, priceMax, skus, users, votesCount, votesRating]);
+  ]), [rating, sentiment, feedbackCount, votesCount, votesRating, nps, groups, tgw, priceMin, priceMax, users, skus]);
 
   const itemHeight = 20;
   const dynamicStyle: CSSProperties = {

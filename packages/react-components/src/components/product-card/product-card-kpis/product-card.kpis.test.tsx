@@ -20,6 +20,7 @@ describe('<ProductCardKpis>', () => {
         votesRating={1.2}
         sentiment={1.2}
         nps={1.2}
+        tgw={1}
         groups={1.2}
         priceMin={1.2}
         priceMax={1.2}
