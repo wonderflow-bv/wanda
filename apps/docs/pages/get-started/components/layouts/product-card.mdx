@@ -22,7 +22,7 @@ export const getStaticProps = () =>
   });
 
 ## Overview
-ProductCard is a variant of the Card component that displays product information. There are four core sections — Media, Header, Content and Footer. Each of these sections can hold the pre-styled subcomponents (images, title, subtitle and actions) or other content including text, buttons and links.
+ProductCard is a variant of the Card component that displays product information. There are four core sections — Media, Header, Kpis and Footer. Each of these sections can hold the pre-styled subcomponents (images, title, subtitle and actions) or other content including text, buttons and links.
 
 <LiveArea>
   <Stack style={{width: '300px'}}>
@@ -88,8 +88,8 @@ export default () => {
 The product Card is most often used inside the main content area. Cards in a grid should be the same height.
 
 ## Best practices
-Product cards should group related information.
-Use product cards to display content and actions on a single topic.
+- Product cards should group related information.
+- Use product cards to display content and actions on a single topic.
 
 ## Features
 
@@ -98,7 +98,14 @@ Cards can have a vertical or horizontal image orientation.
 
 ![](https://wonderimages.gumlet.io/docs/productCard/product-card-orientation.png?format=webp&q=100)
 
-### Card Header
+### Media
+Card images are specifically designed to maintain the aspect ratio while filling the width of the card.
+This ensures that the images are displayed proportionally and avoids any distortion or stretching.
+Card media can accommodate up to four cards.
+
+![](https://wonderimages.gumlet.io/docs/productCard/product-card-media.png?format=webp&q=100)
+
+### Header
 The Card header serves as an area to display a title, optional subtitle and actions that
 are relevant to the entire card. In situations where additional actions are present,
 we utilise a Menu to accommodate them.
@@ -108,21 +115,18 @@ we utilise a Menu to accommodate them.
 For the Title, we recommend a maximum of three lines, with a minimum height of 84px.
 As for the subtitle, it is recommended to keep it to a single line.
 
-### Card Media
-Card images are specifically designed to maintain the aspect ratio while filling the width of the card.
-This ensures that the images are displayed proportionally and avoids any distortion or stretching.
-Card media can accommodate up to four cards.
 
-![](https://wonderimages.gumlet.io/docs/productCard/product-card-media.png?format=webp&q=100)
-
-
-### Content
+### Kpis
 Cards content most commonly displays the product KPIs such as Rating, Feedback count and Sentiment Index.
 We recommended showing a maximum of three KPIs.
+
+<img src="https://wonderimages.gumlet.io/docs/productCard/product-card-kpis.png?format=webp&q=100" alt="" style={{width: "175px"}}/>
+
 
 
 ## API Reference
 
+### ProductCard
 <PropsTable
   properties={[
     {
@@ -152,7 +156,14 @@ We recommended showing a maximum of three KPIs.
       type: "Array<string>",
       default: "[]",
       required: false,
-      description: "Set an array of paths to the images.",
+      description: "Set an array of urls for the images.",
+    },
+    {
+      name: "ratio",
+      type: "string",
+      default: "1/1",
+      required: false,
+      description: "Set the ratio for the images following the CSS syntax.",
     },
     {
       name: "title",
@@ -184,12 +195,12 @@ We recommended showing a maximum of three KPIs.
         "Add content to the footer.",
     },
     {
-      name: "ratio",
+      name: "rating",
       type: "number",
       default: false,
       required: false,
       description:
-        "Set the stars rating value.",
+        "Set the rating value.",
     },
     {
       name: "feedbackCount",
@@ -240,6 +251,14 @@ We recommended showing a maximum of three KPIs.
         "Set the number of groups.",
     },
     {
+      name: "tgw",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set the TGW value.",
+    },
+    {
       name: "priceMin",
       type: "number",
       default: false,
@@ -274,7 +293,7 @@ We recommended showing a maximum of three KPIs.
     {
       name: "kpiItems",
       type: "number",
-      default: false,
+      default: 3,
       required: false,
       description:
         "Set the number of Kpis items to be displayed.",
@@ -282,7 +301,7 @@ We recommended showing a maximum of three KPIs.
     {
       name: "kpisRowGap",
       type: "TokensTypes['space']",
-      default: false,
+      default: 8,
       required: false,
       description:
         "Set the space between Kpis items.",
@@ -318,6 +337,26 @@ We recommended showing a maximum of three KPIs.
       description: "Set the loading state showing a skeleton.",
     },
     {
+      name: "children",
+      type: "ReactNode",
+      default: false,
+      required: false,
+      description: "Add some content to the card just above the footer section",
+    },
+  ]}
+/>
+
+### ProductCard.Media
+<PropsTable
+  properties={[
+    {
+      name: "source",
+      type: "Array<string>",
+      default: "[]",
+      required: false,
+      description: "Set an array of urls for the images.",
+    },
+    {
       name: "ratio",
       type: "string",
       default: "1/1",
@@ -325,12 +364,192 @@ We recommended showing a maximum of three KPIs.
       description: "Set the ratio for the images following the CSS syntax.",
     },
     {
-      name: "children",
-      type: "ReactNode",
+      name: "isLoading",
+      type: "boolean",
+      default: "false",
+      required: false,
+      description: "Set the loading state showing a skeleton.",
+    },
+  ]}
+/>
+
+### ProductCard.Header
+<PropsTable
+  properties={[
+    {
+      name: "title",
+      type: "string",
       default: false,
       required: false,
-      description: "Add some content to the card just above the footer section",
+      description: "Set the title or product name.",
     },
+    {
+      name: "subtitle",
+      type: "string",
+      default: false,
+      required: false,
+      description: "Set the subtitle or product brand name.",
+    },
+    {
+      name: "description",
+      type: "string",
+      default: false,
+      required: false,
+      description: "Set a description text.",
+    },
+    {
+      name: "titleRows",
+      type: "number",
+      default: 3,
+      required: false,
+      description: "Set the subtitle or product brand name.",
+    },
+    {
+      name: "descriptionRows",
+      type: "number",
+      default: 3,
+      required: false,
+      description: "Define how many lines the description should be clamped to.",
+    },
+    {
+      name: "menuActions",
+      type: ["ReactNode"],
+      default: false,
+      required: false,
+      description:
+        "Set the content to be displayed in the header menu.",
+    },
+    {
+      name: "isLoading",
+      type: "boolean",
+      default: "false",
+      required: false,
+      description: "Set the loading state showing a skeleton.",
+    }
+  ]}
+/>
 
+### ProductCard.Kpis
+<PropsTable
+  properties={[
+    {
+      name: "rating",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set the rating value.",
+    },
+    {
+      name: "feedbackCount",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set the feedback count value.",
+    },
+    {
+      name: "votesCount",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set the votes count value.",
+    },
+    {
+      name: "votesRating",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set the votes rating value.",
+    },
+    {
+      name: "sentiment",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set the sentiment index value.",
+    },
+    {
+      name: "nps",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set the NPS value.",
+    },
+    {
+      name: "groups",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set the number of groups.",
+    },
+    {
+      name: "tgw",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set the TGW value.",
+    },
+    {
+      name: "priceMin",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set the minimum price value.",
+    },
+    {
+      name: "priceMax",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set the maximum price value.",
+    },
+    {
+      name: "users",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set the number of users.",
+    },
+    {
+      name: "skus",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set the SKUs value.",
+    },
+    {
+      name: "kpiItems",
+      type: "number",
+      default: 3,
+      required: false,
+      description:
+        "Set the number of Kpis items to be displayed.",
+    },
+    {
+      name: "kpisRowGap",
+      type: "TokensTypes['space']",
+      default: 8,
+      required: false,
+      description:
+        "Set the space between Kpis items.",
+    },
+    {
+      name: "isLoading",
+      type: "boolean",
+      default: "false",
+      required: false,
+      description: "Set the loading state showing a skeleton.",
+    },
   ]}
 />
