@@ -1,5 +1,9 @@
+import { useDebounce } from 'ahooks';
 import clsx from 'clsx';
-import React, { forwardRef, PropsWithChildren } from 'react';
+import React, {
+  forwardRef, PropsWithChildren,
+  useRef,
+} from 'react';
 
 import {
   Elevator,
@@ -91,6 +95,33 @@ export const ProductCard = forwardRef(({
   const hasHighlight = !!(onClick ?? highlightOnHover);
   const isClickable = !!(!isLoading && onClick);
 
+  const containerRef = useRef(null);
+
+  const mediaSizeStyle = (direction: 'vertical' | 'horizontal') => {
+    if (containerRef?.current) {
+      // @ts-expect-error: getBoundingClientRect()
+      const { width, height } = containerRef.current.getBoundingClientRect();
+
+      if (direction === 'vertical') {
+        return ({
+          flexGrow: 0,
+          height: `${Math.min(width, height)}px`,
+          width: 'auto',
+        });
+      }
+
+      return ({
+        flexGrow: 0,
+        width: `${Math.min(width, height)}px`,
+        height: 'auto',
+      });
+    }
+
+    return ({});
+  };
+
+  const deboucedStyle = useDebounce(mediaSizeStyle(direction), { wait: 750 });
+
   return (
     <Elevator resting={1} hover={hasHighlight ? 2 : undefined}>
       <Stack
@@ -107,6 +138,7 @@ export const ProductCard = forwardRef(({
           direction="row"
           className={styles.Row}
           fill={false}
+          ref={containerRef}
         >
           {hasOverlay && (
             <Stack
@@ -134,6 +166,7 @@ export const ProductCard = forwardRef(({
               isLoading={isLoading}
               ratio={ratio}
               data-inner-element="ProductCard-Media"
+              style={deboucedStyle}
             />
 
             <Stack
