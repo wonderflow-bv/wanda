@@ -26,7 +26,7 @@ export const formatPriceRangeValues = (p1?: number, p2?: number, currency?: stri
 
   if (isP1Number || isP2Number) {
     const val = isP1Number ? p1.toFixed(2) : p2!.toFixed(2);
-    return `${val} €`;
+    return (`${val} ${currency ?? ''}`).trim();
   }
 
   return undefined;
