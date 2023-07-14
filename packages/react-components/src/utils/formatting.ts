@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-export const formatPriceRangeValues = (p1?: number, p2?: number) => {
+export const formatPriceRangeValues = (p1?: number, p2?: number, currency?: string) => {
   const isP1Number = typeof p1 === 'number';
   const isP2Number = typeof p2 === 'number';
 
   if (isP1Number && isP2Number) {
     const min = Math.min(p1, p2).toFixed(2);
     const max = Math.max(p1, p2).toFixed(2);
-    return `${min} - ${max} €`;
+    return (`${min} - ${max} ${currency ?? ''}`).trim();
   }
 
   if (isP1Number || isP2Number) {
@@ -33,9 +33,14 @@ export const formatPriceRangeValues = (p1?: number, p2?: number) => {
 };
 
 export const clampValue = (value: number, minRange?: number, maxRange?: number) => {
-  if (!minRange && maxRange) return value < maxRange ? value : maxRange;
-  if (minRange && !maxRange) return value > minRange ? value : minRange;
-  if (minRange && maxRange) return Math.min(Math.max(value, minRange), maxRange);
+  const isMin = typeof minRange === 'number';
+  const isMax = typeof maxRange === 'number';
+  let newMin = value;
+  let newMax = value;
+  if (isMin) newMin = minRange;
+  if (isMax) newMax = maxRange;
+  if (value < newMin) return newMin;
+  if (value > newMax) return newMax;
   return value;
 };
 
@@ -45,16 +50,28 @@ export const formatKpiValue = (
     decimal: number;
     minRange?: number;
     maxRange?: number;
+    cap?: number;
   } = { decimal: 0, minRange: 0 },
 ) => {
-  const { decimal, minRange, maxRange } = option;
+  const {
+    decimal, minRange, maxRange, cap,
+  } = option;
 
   const hasValue = typeof value === 'number';
   const d = typeof decimal === 'number' && decimal > 0 ? decimal : 0;
 
   if (hasValue) {
-    return clampValue(value, minRange, maxRange).toFixed(d);
+    const res = clampValue(value, minRange, maxRange).toFixed(d);
+
+    if (typeof cap === 'number' && cap > 0) {
+      const c = clampValue(cap, minRange, maxRange).toFixed(d);
+      return `${res} / ${c}`;
+    }
+
+    return res;
   }
 
   return '';
 };
+
+export const isValueOverCap = (value?: number, cap?: number) => !!(typeof value === 'number' && typeof cap === 'number' && value > cap);

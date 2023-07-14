@@ -47,6 +47,15 @@ describe('clampValue()', () => {
     const res = clampValue(val, min, max);
     expect(res).toBe(test);
   });
+
+  it('should clamp negative value correctly w/o max', () => {
+    const val = -10;
+    const min = 0;
+    const max = undefined;
+    const test = 0;
+    const res = clampValue(val, min, max);
+    expect(res).toBe(test);
+  });
 });
 
 describe('formatKpiValue()', () => {

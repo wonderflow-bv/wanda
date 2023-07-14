@@ -16,5 +16,7 @@
 
 export { isBrowser } from './browser';
 export { cssRelativeUnitsToPixel } from './conversions';
-export { clampValue, formatKpiValue, formatPriceRangeValues } from './formatting';
+export {
+  clampValue, formatKpiValue, formatPriceRangeValues, isValueOverCap,
+} from './formatting';
 export { getCurrentTheme, getPrefersColorScheme } from './themes';

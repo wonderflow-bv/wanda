@@ -48,7 +48,7 @@ export type ProductCardProps = PropsWithClass<PropsWithChildren<{
 }>>
 & Pick<ProductCardMediaProps, 'ratio' | 'source'>
 & Pick<ProductCardHeaderProps, 'title' | 'titleRows' | 'subtitle' | 'menuActions'>
-& Pick<ProductCardKpisProps, 'rating' | 'feedbackCount' | 'votesCount' | 'votesRating' | 'users' | 'skus' | 'sentiment' | 'priceMin' | 'priceMax' | 'nps' | 'kpisRowGap' | 'kpiItems' | 'groups' | 'tgw'>
+& Pick<ProductCardKpisProps, 'rating' | 'feedbackCount' | 'votesCount' | 'votesRating' | 'users' | 'skus' | 'sentiment' | 'priceMin' | 'priceMax' | 'nps' | 'kpisRowGap' | 'kpiItems' | 'groups' | 'tgw' | 'skusCap' | 'usersCap' | 'currency'>
 
 export type ProductCardComponent = React.ForwardRefExoticComponent<ProductCardProps> & {
   Media: ProductCardMediaComponent;
@@ -75,8 +75,11 @@ export const ProductCard = forwardRef(({
   tgw,
   priceMin,
   priceMax,
+  currency,
   users,
+  usersCap,
   skus,
+  skusCap,
   kpiItems,
   kpisRowGap,
   ratio,
@@ -193,8 +196,11 @@ export const ProductCard = forwardRef(({
                 tgw={tgw}
                 priceMin={priceMin}
                 priceMax={priceMax}
+                currency={currency}
                 users={users}
+                usersCap={usersCap}
                 skus={skus}
+                skusCap={skusCap}
                 isLoading={isLoading}
                 kpiItems={kpiItems}
                 kpisRowGap={kpisRowGap}

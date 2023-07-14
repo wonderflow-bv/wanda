@@ -25,8 +25,10 @@ import {
   Symbol, Text,
 } from '@/components';
 
-import { formatKpiValue, formatPriceRangeValues } from '../../../utils/formatting';
+import { formatKpiValue, formatPriceRangeValues, isValueOverCap } from '../../../utils/formatting';
 import * as styles from './product-card-kpis.module.css';
+
+export type Currency = 'EUR' | 'USD' | 'GBP' | 'JPY' | 'CNY';
 
 export type ProductCardKpisProps = PropsWithClass<{
   /**
@@ -70,13 +72,25 @@ export type ProductCardKpisProps = PropsWithClass<{
    */
   priceMax?: number;
   /**
+   * Set the users currency code based on ISO 4217.
+  */
+  currency?: Currency;
+  /**
    * Set the users value.
   */
   users?: number;
   /**
+  * Set a cap value for users.
+  */
+  usersCap?: number;
+  /**
   * Set the SKUs value.
   */
   skus?: number;
+  /**
+  * Set the a cap value for SKUs.
+  */
+  skusCap?: number;
   /**
    * Set the number of Kpis items to be displayed.
    */
@@ -111,26 +125,43 @@ export const ProductCardKpis = forwardRef(({
   tgw,
   priceMin,
   priceMax,
+  currency = 'EUR',
   users,
+  usersCap,
   skus,
+  skusCap,
   kpiItems = 3,
   kpisRowGap = 8,
   isLoading = false,
   className,
   style,
 }, forwardedRef: React.ForwardedRef<HTMLDivElement>) => {
+  const getCurrency = (currency: Currency) => {
+    switch (currency) {
+      case 'USD':
+        return '$';
+      case 'GBP':
+        return '£';
+      case 'JPY':
+      case 'CNY':
+        return '¥';
+      default:
+        return '€';
+    }
+  };
+
   const config: KpiItemType[] = useMemo(() => ([
     {
       property: 'rating',
-      value: formatKpiValue(rating, { decimal: 2, maxRange: 5 }),
+      value: formatKpiValue(rating, { decimal: 2, minRange: 0, maxRange: 5 }),
       icon: 'star',
       iconColor: 'orange',
     },
     {
       property: 'sentiment',
-      value: formatKpiValue(sentiment, { decimal: 2, maxRange: 1 }),
+      value: formatKpiValue(sentiment, { decimal: 2, minRange: -1, maxRange: 1 }),
       icon: 'hearts-suit',
-      iconColor: (sentiment && sentiment > 0.5) ? 'red' : undefined,
+      iconColor: (typeof sentiment === 'number' && sentiment > 0.5) ? 'red' : undefined,
     },
     {
       property: 'feedback-count',
@@ -144,12 +175,12 @@ export const ProductCardKpis = forwardRef(({
     },
     {
       property: 'votes-rating',
-      value: formatKpiValue(votesRating, { decimal: 2, maxRange: 5 }),
+      value: formatKpiValue(votesRating, { decimal: 2, minRange: 0, maxRange: 5 }),
       icon: 'arrow-trend-up',
     },
     {
       property: 'nps',
-      value: formatKpiValue(nps, { decimal: 0, minRange: -100, maxRange: 100 }),
+      value: formatKpiValue(nps, { decimal: 0, minRange: 0, maxRange: 100 }),
       icon: 'nps',
     },
     {
@@ -159,25 +190,42 @@ export const ProductCardKpis = forwardRef(({
     },
     {
       property: 'tgw',
-      value: formatKpiValue(tgw, { decimal: 2, maxRange: 1 }),
+      value: formatKpiValue(tgw, { decimal: 2, minRange: 0 }),
       icon: 'frown',
     },
     {
       property: 'price',
-      value: formatPriceRangeValues(priceMin, priceMax),
+      value: formatPriceRangeValues(priceMin, priceMax, getCurrency(currency)),
       icon: 'tags',
     },
     {
       property: 'users',
-      value: formatKpiValue(users),
+      value: formatKpiValue(users, { decimal: 0, minRange: 0, cap: usersCap }),
       icon: 'users',
+      iconColor: isValueOverCap(users, usersCap) ? 'red' : undefined,
     },
     {
       property: 'skus',
-      value: formatKpiValue(skus),
+      value: formatKpiValue(skus, { decimal: 0, minRange: 0, cap: skusCap }),
       icon: 'rectangle-barcode',
+      iconColor: isValueOverCap(skus, skusCap) ? 'red' : undefined,
     },
-  ]), [rating, sentiment, feedbackCount, votesCount, votesRating, nps, groups, tgw, priceMin, priceMax, users, skus]);
+  ]), [
+    rating,
+    sentiment,
+    feedbackCount,
+    votesCount,
+    votesRating,
+    nps,
+    groups,
+    tgw,
+    priceMin,
+    priceMax,
+    currency,
+    users,
+    usersCap,
+    skus,
+    skusCap]);
 
   const itemHeight = 20;
   const dynamicStyle: CSSProperties = {

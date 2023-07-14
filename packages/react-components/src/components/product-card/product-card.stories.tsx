@@ -69,8 +69,11 @@ const story: ComponentMeta<typeof ProductCard> = {
     tgw: 0.75,
     priceMin: 33,
     priceMax: 45,
+    currency: 'EUR',
     users: 789,
+    usersCap: 1000,
     skus: 2,
+    skusCap: 1000,
     kpiItems: 3,
     kpisRowGap: 8,
     isLoading: false,
@@ -85,6 +88,10 @@ const story: ComponentMeta<typeof ProductCard> = {
   argTypes: {
     direction: {
       options: ['vertical', 'horizontal'],
+      control: { type: 'select' },
+    },
+    currency: {
+      options: ['EUR', 'USD', 'GBP', 'JPY', 'CNY'],
       control: { type: 'select' },
     },
     kpisRowGap: {
