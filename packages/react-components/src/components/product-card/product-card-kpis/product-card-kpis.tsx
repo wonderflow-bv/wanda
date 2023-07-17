@@ -72,7 +72,7 @@ export type ProductCardKpisProps = PropsWithClass<{
    */
   priceMax?: number;
   /**
-   * Set the users currency code based on ISO 4217.
+   * Set the price currency code based on ISO 4217.
   */
   currency?: Currency;
   /**
@@ -166,7 +166,7 @@ export const ProductCardKpis = forwardRef(({
       property: 'sentiment',
       value: formatKpiValue(sentiment, { decimal: 2, minRange: -1, maxRange: 1 }),
       icon: 'hearts-suit',
-      iconColor: (typeof sentiment === 'number' && sentiment > 0.5) ? 'red' : undefined,
+      iconColor: (typeof sentiment === 'number' && sentiment > 0.5) ? 'var(--highlight-red-foreground)' : undefined,
     },
     {
       property: 'feedback-count',
@@ -207,13 +207,13 @@ export const ProductCardKpis = forwardRef(({
       property: 'users',
       value: formatKpiValue(users, { decimal: 0, minRange: 0, cap: usersCap }),
       icon: 'users',
-      iconColor: isValueOverCap(users, usersCap) ? 'red' : undefined,
+      iconColor: isValueOverCap(users, usersCap) ? 'var(--highlight-red-foreground)' : undefined,
     },
     {
       property: 'skus',
       value: formatKpiValue(skus, { decimal: 0, minRange: 0, cap: skusCap }),
       icon: 'rectangle-barcode',
-      iconColor: isValueOverCap(skus, skusCap) ? 'red' : undefined,
+      iconColor: isValueOverCap(skus, skusCap) ? 'var(--highlight-red-foreground)' : undefined,
     },
   ]), [
     rating,

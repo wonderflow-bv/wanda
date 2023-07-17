@@ -1,4 +1,6 @@
-import { clampValue, formatKpiValue, formatPriceRangeValues } from './formatting';
+import {
+  clampValue, formatKpiValue, formatPriceRangeValues, isValueOverCap,
+} from './formatting';
 
 describe('formatPriceRangeValues()', () => {
   it('should return both price values', () => {
@@ -9,6 +11,11 @@ describe('formatPriceRangeValues()', () => {
   it('should return both price values with currency $ and w/o decimal', () => {
     const res = formatPriceRangeValues(10, 20, { currency: '$', decimal: 0 });
     expect(res).toBe('10 - 20 $');
+  });
+
+  it('should return both price values w/o currency', () => {
+    const res = formatPriceRangeValues(10, 20, { currency: '', decimal: 0 });
+    expect(res).toBe('10 - 20');
   });
   it('should return only the first value', () => {
     const res = formatPriceRangeValues(10);
@@ -97,5 +104,33 @@ describe('formatKpiValue()', () => {
   it('should return an empty string passing nullish value', () => {
     const res = formatKpiValue(undefined, { decimal: 2 });
     expect(res).toBe('');
+  });
+
+  it('should return correct format with cap', () => {
+    const res = formatKpiValue(10, { decimal: 0, cap: 100 });
+    expect(res).toBe('10 / 100');
+  });
+});
+
+describe('isValueOverCap()', () => {
+  it('should return true when value > cap', () => {
+    const val = 10;
+    const cap = 9;
+    const isOver = isValueOverCap(val, cap);
+    expect(isOver).toBeTruthy();
+  });
+
+  it('should return true when value < cap', () => {
+    const val = 10;
+    const cap = 11;
+    const isOver = isValueOverCap(val, cap);
+    expect(isOver).not.toBeTruthy();
+  });
+
+  it('should return false when cap = 0', () => {
+    const val = 10;
+    const cap = 0;
+    const isOver = isValueOverCap(val, cap);
+    expect(isOver).not.toBeTruthy();
   });
 });

@@ -152,7 +152,7 @@ const TemplateDecorators: ComponentStory<typeof Text> = () => {
               <Text
                 variant={v}
                 decoratorSize={sizes[2]}
-                decoratorStart={<Symbol source="circle-check" weight="outline" color="red" />}
+                decoratorStart={<Symbol source="circle-check" weight="outline" color="var(--highlight-red-foreground)" />}
                 decoratorEnd={<Chip color="red">{sizes[2]}</Chip>}
               >
                 {v}

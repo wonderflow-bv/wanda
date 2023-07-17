@@ -29,12 +29,12 @@ export const formatPriceRangeValues = (
   if (isP1Number && isP2Number) {
     const min = Math.min(p1, p2).toFixed(decimal);
     const max = Math.max(p1, p2).toFixed(decimal);
-    return (`${min} - ${max} ${currency ?? ''}`).trim();
+    return (`${min} - ${max} ${currency}`).trim();
   }
 
   if (isP1Number || isP2Number) {
     const val = isP1Number ? p1.toFixed(decimal) : p2!.toFixed(decimal);
-    return (`${val} ${currency ?? ''}`).trim();
+    return (`${val} ${currency}`).trim();
   }
 
   return undefined;
@@ -82,4 +82,4 @@ export const formatKpiValue = (
   return '';
 };
 
-export const isValueOverCap = (value?: number, cap?: number) => !!(typeof value === 'number' && typeof cap === 'number' && value > cap);
+export const isValueOverCap = (value?: number, cap?: number) => !!(typeof value === 'number' && typeof cap === 'number' && value > cap && cap > 0);
