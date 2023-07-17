@@ -89,6 +89,8 @@ export const ProductCardMedia = forwardRef(({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  if (source.length === 0) return null;
+
   return (
     <div
       ref={forwardedRef}

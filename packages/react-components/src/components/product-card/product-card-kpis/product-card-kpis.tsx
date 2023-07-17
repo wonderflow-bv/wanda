@@ -76,6 +76,10 @@ export type ProductCardKpisProps = PropsWithClass<{
   */
   currency?: Currency;
   /**
+   * Set the number of decimal to be used for currency formatting.
+  */
+  currencyDecimals?: number;
+  /**
    * Set the users value.
   */
   users?: number;
@@ -126,6 +130,7 @@ export const ProductCardKpis = forwardRef(({
   priceMin,
   priceMax,
   currency = 'EUR',
+  currencyDecimals = 0,
   users,
   usersCap,
   skus,
@@ -195,7 +200,7 @@ export const ProductCardKpis = forwardRef(({
     },
     {
       property: 'price',
-      value: formatPriceRangeValues(priceMin, priceMax, getCurrency(currency)),
+      value: formatPriceRangeValues(priceMin, priceMax, { currency: getCurrency(currency), decimal: currencyDecimals }),
       icon: 'tags',
     },
     {
@@ -222,6 +227,7 @@ export const ProductCardKpis = forwardRef(({
     priceMin,
     priceMax,
     currency,
+    currencyDecimals,
     users,
     usersCap,
     skus,

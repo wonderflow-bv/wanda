@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { forwardRef } from 'react';
+import { CSSProperties, forwardRef } from 'react';
 
 import {
   ClampText, Elevator, IconButton,
@@ -65,15 +65,22 @@ export const ProductCardHeader = forwardRef(({
   menuActions,
   isLoading = false,
 }, forwardedRef: React.ForwardedRef<HTMLDivElement>) => {
+  const titleRem = 1.75;
+  const descriptionRem = 1.25;
+  const dynamicStyle: CSSProperties = {
+    '--title-height': `${(titleRows ?? 0) * titleRem}rem`,
+    '--description-height': `${(descriptionRows ?? 0) * descriptionRem}rem`,
+  };
+
   if (isLoading) {
     return (
       <Stack direction="row" vPadding={24} hPadding={24} columnGap={8}>
         <Stack style={{ width: '100%' }} rowGap={8}>
           <div>
             {subtitle && <Skeleton count={1} width="50%" />}
-            {title && <div style={{ height: '84px' }}><Skeleton count={1} height="28px" width="60%" /></div>}
+            {title && <div><Skeleton count={1} height="28px" width="60%" /></div>}
           </div>
-          {description && <div style={{ height: '60px' }}><Skeleton count={1} width="80%" /></div>}
+          {description && <div><Skeleton count={1} width="80%" /></div>}
         </Stack>
         {menuActions && <Skeleton count={1} width="24px" height="24px" />}
       </Stack>
@@ -81,10 +88,10 @@ export const ProductCardHeader = forwardRef(({
   }
 
   return (
-    <Stack columnGap={8} vPadding={24} direction="row" hPadding={24} ref={forwardedRef}>
+    <Stack columnGap={8} vPadding={24} direction="row" hPadding={24} ref={forwardedRef} style={{ ...dynamicStyle }}>
       <Stack rowGap={8}>
         <div>
-          {subtitle && <Text variant="subtitle-2">{subtitle}</Text>}
+          {subtitle && <Text variant="subtitle-2" className={styles.Subtitle}>{subtitle}</Text>}
 
           {title && (
             <div className={styles.Title}>

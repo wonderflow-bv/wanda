@@ -48,7 +48,8 @@ export type ProductCardProps = PropsWithClass<PropsWithChildren<{
 }>>
 & Pick<ProductCardMediaProps, 'ratio' | 'source'>
 & Pick<ProductCardHeaderProps, 'title' | 'titleRows' | 'subtitle' | 'menuActions'>
-& Pick<ProductCardKpisProps, 'rating' | 'feedbackCount' | 'votesCount' | 'votesRating' | 'users' | 'skus' | 'sentiment' | 'priceMin' | 'priceMax' | 'nps' | 'kpisRowGap' | 'kpiItems' | 'groups' | 'tgw' | 'skusCap' | 'usersCap' | 'currency'>
+& Pick<ProductCardKpisProps, 'rating' | 'feedbackCount' | 'votesCount' | 'votesRating' | 'users' | 'skus' | 'sentiment' | 'priceMin' | 'priceMax' | 'nps' | 'kpisRowGap' | 'kpiItems' | 'groups' | 'tgw' | 'skusCap' | 'usersCap' | 'currency' |
+'currencyDecimals'>
 
 export type ProductCardComponent = React.ForwardRefExoticComponent<ProductCardProps> & {
   Media: ProductCardMediaComponent;
@@ -76,6 +77,7 @@ export const ProductCard = forwardRef(({
   priceMin,
   priceMax,
   currency,
+  currencyDecimals,
   users,
   usersCap,
   skus,
@@ -159,9 +161,9 @@ export const ProductCard = forwardRef(({
           )}
 
           <Stack
+            data-inner-element="ProductCard-Group"
             direction={(direction === 'vertical') ? 'column' : 'row'}
             className={styles.Content}
-            data-inner-element="ProductCard-Content"
           >
 
             <ProductCard.Media
@@ -177,15 +179,16 @@ export const ProductCard = forwardRef(({
             >
 
               <ProductCard.Header
+                data-inner-element="ProductCard-Header"
                 title={title}
                 titleRows={titleRows}
                 subtitle={subtitle}
                 isLoading={isLoading}
                 menuActions={hasMenu && menuActions}
-                data-inner-element="ProductCard-Header"
               />
 
               <ProductCardKpis
+                data-inner-element="ProductCard-Kpis"
                 rating={rating}
                 feedbackCount={feedbackCount}
                 votesCount={votesCount}
@@ -197,6 +200,7 @@ export const ProductCard = forwardRef(({
                 priceMin={priceMin}
                 priceMax={priceMax}
                 currency={currency}
+                currencyDecimals={currencyDecimals}
                 users={users}
                 usersCap={usersCap}
                 skus={skus}
@@ -204,7 +208,6 @@ export const ProductCard = forwardRef(({
                 isLoading={isLoading}
                 kpiItems={kpiItems}
                 kpisRowGap={kpisRowGap}
-                data-inner-element="ProductCard-Kpis"
               />
 
               {children && !isLoading && (
@@ -213,11 +216,9 @@ export const ProductCard = forwardRef(({
                 </Stack>
               )}
 
-              {footer && (
-                <ProductCard.Footer isLoading={isLoading} data-inner-element="ProductCard-Footer">
-                  {footer}
-                </ProductCard.Footer>
-              )}
+              <ProductCard.Footer isLoading={isLoading} data-inner-element="ProductCard-Footer">
+                {footer}
+              </ProductCard.Footer>
             </Stack>
           </Stack>
 

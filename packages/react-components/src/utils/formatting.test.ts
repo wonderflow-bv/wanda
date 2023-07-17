@@ -2,21 +2,26 @@ import { clampValue, formatKpiValue, formatPriceRangeValues } from './formatting
 
 describe('formatPriceRangeValues()', () => {
   it('should return both price values', () => {
-    const res = formatPriceRangeValues(10, 20, '€');
+    const res = formatPriceRangeValues(10, 20);
     expect(res).toBe('10.00 - 20.00 €');
+  });
+
+  it('should return both price values with currency $ and w/o decimal', () => {
+    const res = formatPriceRangeValues(10, 20, { currency: '$', decimal: 0 });
+    expect(res).toBe('10 - 20 $');
   });
   it('should return only the first value', () => {
     const res = formatPriceRangeValues(10);
-    expect(res).toBe('10.00');
+    expect(res).toBe('10.00 €');
   });
 
   it('should return only the second value', () => {
-    const res = formatPriceRangeValues(undefined, 20, '€');
+    const res = formatPriceRangeValues(undefined, 20);
     expect(res).toBe('20.00 €');
   });
 
   it('should return undefined', () => {
-    const res = formatPriceRangeValues(undefined, undefined, '€');
+    const res = formatPriceRangeValues(undefined, undefined);
     expect(res).toBeFalsy();
   });
 });

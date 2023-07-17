@@ -58,6 +58,7 @@ const story: ComponentMeta<typeof ProductCard> = {
     bordered: false,
     highlightOnHover: false,
     title: 'Product Card Title',
+    titleRows: 3,
     subtitle: 'subtitle',
     rating: 4.3,
     sentiment: 0.48,
@@ -70,6 +71,7 @@ const story: ComponentMeta<typeof ProductCard> = {
     priceMin: 33,
     priceMax: 45,
     currency: 'EUR',
+    currencyDecimals: 0,
     users: 789,
     usersCap: 1000,
     skus: 2,
@@ -110,7 +112,7 @@ export default story;
 
 const Template: ComponentStory<typeof ProductCard> = (args) => {
   const { direction } = args;
-  return (<div style={{ maxWidth: direction === 'vertical' ? '350px' : '650px' }}><ProductCard {...args} /></div>
+  return (<div style={{ maxWidth: direction === 'vertical' ? '250px' : '650px' }}><ProductCard {...args} /></div>
   );
 };
 
@@ -140,5 +142,29 @@ withMultipleProducts.args = {
 export const withBrokenImage = Template.bind({});
 withBrokenImage.args = {
   source: [...SourceImages, 'broken'],
+};
+
+export const withNoMedia = Template.bind({});
+withNoMedia.args = {
+  source: [],
+  subtitle: '',
+  title: 'Wonderflow Space Catalog Label',
+  titleRows: 2,
+  kpiItems: 2,
+  rating: undefined,
+  sentiment: undefined,
+  feedbackCount: undefined,
+  votesCount: undefined,
+  votesRating: undefined,
+  nps: undefined,
+  groups: undefined,
+  tgw: undefined,
+  priceMin: undefined,
+  priceMax: undefined,
+  users: 1789,
+  usersCap: 1000,
+  skus: 234,
+  skusCap: 1000,
+  footer: undefined,
 };
 

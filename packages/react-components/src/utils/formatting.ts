@@ -14,18 +14,26 @@
  * limitations under the License.
  */
 
-export const formatPriceRangeValues = (p1?: number, p2?: number, currency?: string) => {
+export const formatPriceRangeValues = (
+  p1?: number,
+  p2?: number,
+  option: {
+    currency: string;
+    decimal: number;
+  } = { currency: '€', decimal: 2 },
+) => {
+  const { currency, decimal } = option;
   const isP1Number = typeof p1 === 'number';
   const isP2Number = typeof p2 === 'number';
 
   if (isP1Number && isP2Number) {
-    const min = Math.min(p1, p2).toFixed(2);
-    const max = Math.max(p1, p2).toFixed(2);
+    const min = Math.min(p1, p2).toFixed(decimal);
+    const max = Math.max(p1, p2).toFixed(decimal);
     return (`${min} - ${max} ${currency ?? ''}`).trim();
   }
 
   if (isP1Number || isP2Number) {
-    const val = isP1Number ? p1.toFixed(2) : p2!.toFixed(2);
+    const val = isP1Number ? p1.toFixed(decimal) : p2!.toFixed(decimal);
     return (`${val} ${currency ?? ''}`).trim();
   }
 
