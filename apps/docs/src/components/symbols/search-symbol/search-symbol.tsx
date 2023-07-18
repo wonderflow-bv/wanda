@@ -181,8 +181,20 @@ export const SearchSymbol = () => {
               rel="noopener noreferrer"
               icon="circle-question"
             >
-              <Text as="h2" variant="heading-6">Didn&apos;t find the icon?</Text>
-              <Text variant="body-2">Ask for new icons on GitHub.</Text>
+              <Text as="h2" variant="heading-6">Couldn&apos;t find the icon?</Text>
+              <Text variant="body-2">
+                Ask for new icons on
+                {' '}
+                <a
+                  href="https://github.com/wonderflow-bv/wanda/issues"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  GitHub
+
+                </a>
+                .
+              </Text>
             </Banner>
           </Stack>
         )}

@@ -7,6 +7,6 @@
 }
 
 .Icon {
-  inline-size: token(--space-24);
-  block-size: token(--space-24);
+  inline-size: token(--space-32);
+  block-size: token(--space-32);
 }
