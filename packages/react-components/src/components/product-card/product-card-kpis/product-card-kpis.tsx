@@ -15,6 +15,7 @@
  */
 
 import { TokensTypes } from '@wonderflow/tokens/platforms/web';
+import tkns from '@wonderflow/tokens/platforms/web/tokens.json';
 import clsx from 'clsx';
 import {
   CSSProperties, forwardRef, useMemo,
@@ -157,10 +158,10 @@ export const ProductCardKpis = forwardRef(({
 
   const config: KpiItemType[] = useMemo(() => ([
     {
-      property: 'rating',
+      property: 'feedback-rating',
       value: formatKpiValue(rating, { decimal: 2, minRange: 0, maxRange: 5 }),
-      icon: 'star',
-      iconColor: 'orange',
+      icon: 'feedback-rating',
+      iconColor: `hsl(${tkns.color.yellow['30']})`,
     },
     {
       property: 'sentiment',
@@ -171,17 +172,18 @@ export const ProductCardKpis = forwardRef(({
     {
       property: 'feedback-count',
       value: formatKpiValue(feedbackCount),
-      icon: 'file-alt',
+      icon: 'message',
     },
     {
       property: 'votes-count',
       value: formatKpiValue(votesCount),
-      icon: 'thumbs-up',
+      icon: 'votes-count',
     },
     {
       property: 'votes-rating',
       value: formatKpiValue(votesRating, { decimal: 2, minRange: 0, maxRange: 5 }),
-      icon: 'arrow-trend-up',
+      icon: 'star',
+      iconColor: `hsl(${tkns.color.yellow['20']})`,
     },
     {
       property: 'nps',
