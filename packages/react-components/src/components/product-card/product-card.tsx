@@ -125,7 +125,7 @@ export const ProductCard = forwardRef(({
     return ({});
   };
 
-  const deboucedStyle = useDebounce(mediaSizeStyle(direction), { wait: 750 });
+  const deboucedStyle = useDebounce(mediaSizeStyle(direction), { wait: 150 });
 
   return (
     <Elevator resting={1} hover={hasHighlight ? 2 : undefined}>

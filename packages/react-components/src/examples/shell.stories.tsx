@@ -8,10 +8,9 @@ import { useUIDSeed } from 'react-uid';
 
 import {
   Button,
-  Card,
   Container,
   Disclosure,
-  Grid, IconButton, Menu, Snackbar, Stack,
+  Grid, IconButton, Menu, ProductCard, Snackbar, Stack,
   Text,
   useBreakpoints,
   useBreakpointsConfig,
@@ -136,11 +135,16 @@ const Template: ComponentStory<typeof Container> = () => {
               >
                 {Array(12).fill('Card').map((e, i) => (
                   <Grid.Item key={seed(`cards${i}`)}>
-                    <Card bordered style={{ height: '500px' }}>
-                      <Stack hAlign="center">
-                        <Text variant="body-2">{`${e} ${i + 1}`}</Text>
-                      </Stack>
-                    </Card>
+                    <ProductCard
+                      source={['https://storage.googleapis.com/wonderflow-product-images/KITCHENAID%20CLASSIC%20SERIES.png']}
+                      subtitle="brand name"
+                      title={`Product-${e} ${i + 1}`}
+                      sentiment={0.51}
+                      rating={4.51}
+                      feedbackCount={3251}
+                      footer={`${new Date(Date.now()).toUTCString().slice(5, 16)}`}
+                      highlightOnHover
+                    />
                   </Grid.Item>
                 ))}
               </Grid>
