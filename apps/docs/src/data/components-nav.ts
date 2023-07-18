@@ -246,41 +246,41 @@ const ComponentsNav: NavigationMenu = [
     ],
   },
   {
-    title: 'Widget',
+    title: 'Widgets',
     icon: 'grid',
     items: [
       {
-        path: '/get-started/components/other/avatar',
+        path: '/get-started/components/widgets/avatar',
         label: 'Avatar',
         target: '',
       },
       {
-        path: '/get-started/components/other/aspect-ratio',
+        path: '/get-started/components/widgets/aspect-ratio',
         label: 'Aspect ratio',
         target: '',
       },
       {
-        path: '/get-started/components/other/chip',
+        path: '/get-started/components/widgets/chip',
         label: 'Chip',
         target: '',
       },
       {
-        path: '/get-started/components/other/datetime',
+        path: '/get-started/components/widgets/datetime',
         label: 'Datetime',
         target: '',
       },
       {
-        path: '/get-started/components/other/elevator',
+        path: '/get-started/components/widgets/elevator',
         label: 'Elevator',
         target: '',
       },
       {
-        path: '/get-started/components/other/symbol',
+        path: '/get-started/components/widgets/symbol',
         label: 'Symbol',
         target: '',
       },
       {
-        path: '/get-started/components/other/star-meter',
+        path: '/get-started/components/widgets/star-meter',
         label: 'Star meter',
         target: '',
       },

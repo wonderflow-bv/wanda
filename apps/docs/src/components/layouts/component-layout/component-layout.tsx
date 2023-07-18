@@ -47,7 +47,7 @@ export const ComponentLayout: FCChildren<IPropsComponentLayout> = ({
     .join('-')
     .replace('selection-controls', 'checkbox')
     .replace('info-state', 'infostate')
-    .replace('other', 'widgets'), [router]);
+    .replace('layouts-product-card', 'domain-components-product-card'), [router]);
 
   return (
     <DocLayout title={title} {...otherProps}>

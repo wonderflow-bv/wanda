@@ -116,7 +116,7 @@ For the Title, we recommend a maximum of three lines, with a minimum height of 8
 As for the subtitle, it is recommended to keep it to a single line.
 
 
-### Kpis
+### KPIs
 Cards content most commonly displays the product KPIs such as Rating, Feedback count and Sentiment Index.
 We recommended showing a maximum of three KPIs.
 
@@ -283,12 +283,28 @@ We recommended showing a maximum of three KPIs.
         "Set the number of users.",
     },
     {
+      name: "usersCap",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set a cap value for users.",
+    },
+    {
       name: "skus",
       type: "number",
       default: false,
       required: false,
       description:
         "Set the SKUs value.",
+    },
+    {
+      name: "skusCap",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set a cap value for SKUs.",
     },
     {
       name: "kpiItems",
@@ -305,6 +321,23 @@ We recommended showing a maximum of three KPIs.
       required: false,
       description:
         "Set the space between Kpis items.",
+    },
+    {
+      name: "currency",
+      type: "enum",
+      typeValue: "'EUR' | 'USD' | 'GBP' | 'JPY' | 'CNY'",
+      default: 'EUR',
+      required: false,
+      description:
+        "Set the price currency code based on ISO 4217.",
+    },
+    {
+      name: "currencyDecimals",
+      type: "number",
+      default: '0',
+      required: false,
+      description:
+        "Set the number of decimals for price formatting.",
     },
     {
       name: "menuActions",
@@ -513,6 +546,23 @@ We recommended showing a maximum of three KPIs.
         "Set the maximum price value.",
     },
     {
+      name: "currency",
+      type: "enum",
+      typeValue: "'EUR' | 'USD' | 'GBP' | 'JPY' | 'CNY'",
+      default: 'EUR',
+      required: false,
+      description:
+        "Set the price currency code based on ISO 4217.",
+    },
+    {
+      name: "currencyDecimals",
+      type: "number",
+      default: '0',
+      required: false,
+      description:
+        "Set the number of decimals for price formatting.",
+    },
+    {
       name: "users",
       type: "number",
       default: false,
@@ -521,12 +571,28 @@ We recommended showing a maximum of three KPIs.
         "Set the number of users.",
     },
     {
+      name: "usersCap",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set a cap value for users.",
+    },
+    {
       name: "skus",
       type: "number",
       default: false,
       required: false,
       description:
         "Set the SKUs value.",
+    },
+    {
+      name: "skusCap",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set a cap value for SKUs.",
     },
     {
       name: "kpiItems",
