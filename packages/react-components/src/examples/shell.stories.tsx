@@ -143,6 +143,17 @@ const Template: ComponentStory<typeof Container> = () => {
                       rating={4.51}
                       feedbackCount={3251}
                       footer={`${new Date(Date.now()).toUTCString().slice(5, 16)}`}
+                      menuActions={(
+                        <Menu>
+                          <Menu.Item
+                            autoFocus
+                            icon="news"
+                            value="1"
+                          >
+                            Stats
+                          </Menu.Item>
+                        </Menu>
+                      )}
                       highlightOnHover
                     />
                   </Grid.Item>
