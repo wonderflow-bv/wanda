@@ -2,4 +2,4 @@
 "@wonderflow/symbols": minor
 ---
 
-Add Wonder Icon
+Add `Wonder` Icon
