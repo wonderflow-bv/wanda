@@ -14,27 +14,45 @@
  * limitations under the License.
  */
 
+import { Currency } from '../components/product-card/product-card-kpis/product-card-kpis';
+
+export const getCurrency = (currency?: Currency) => {
+  switch (currency) {
+    case 'EUR':
+      return '€';
+    case 'USD':
+      return '$';
+    case 'GBP':
+      return '£';
+    case 'JPY':
+    case 'CNY':
+      return '¥';
+    default:
+      return '';
+  }
+};
+
 export const formatPriceRangeValues = (
   p1?: number,
   p2?: number,
   option: {
-    currency: string;
-    decimal: number;
-  } = { currency: '€', decimal: 2 },
+    currency?: Currency;
+    decimals: number;
+  } = { currency: 'EUR', decimals: 2 },
 ) => {
-  const { currency, decimal } = option;
+  const { currency, decimals: decimal } = option;
   const isP1Number = typeof p1 === 'number';
   const isP2Number = typeof p2 === 'number';
 
   if (isP1Number && isP2Number) {
     const min = Math.min(p1, p2).toFixed(decimal);
     const max = Math.max(p1, p2).toFixed(decimal);
-    return (`${min} - ${max} ${currency}`).trim();
+    return (`${min} - ${max} ${getCurrency(currency)}`).trim();
   }
 
   if (isP1Number || isP2Number) {
     const val = isP1Number ? p1.toFixed(decimal) : p2!.toFixed(decimal);
-    return (`${val} ${currency}`).trim();
+    return (`${val} ${getCurrency(currency)}`).trim();
   }
 
   return undefined;
@@ -83,3 +101,5 @@ export const formatKpiValue = (
 };
 
 export const isValueOverCap = (value?: number, cap?: number) => !!(typeof value === 'number' && typeof cap === 'number' && value > cap && cap > 0);
+
+export const isGreaterThan = (threashold: number, value?: number) => (typeof value === 'number' && value > threashold);

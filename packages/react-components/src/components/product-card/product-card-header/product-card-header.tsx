@@ -68,8 +68,8 @@ export const ProductCardHeader = forwardRef(({
   const titleRem = 1.75;
   const descriptionRem = 1.25;
   const dynamicStyle: CSSProperties = {
-    '--title-height': `${(titleRows ?? 0) * titleRem}rem`,
-    '--description-height': `${(descriptionRows ?? 0) * descriptionRem}rem`,
+    '--header-title-height': `${(titleRows ?? 0) * titleRem}rem`,
+    '--header-description-height': `${(descriptionRows ?? 0) * descriptionRem}rem`,
   };
 
   if (isLoading) {
@@ -129,7 +129,6 @@ export const ProductCardHeader = forwardRef(({
               </>
             </Elevator>
           </Popover>
-
         </Stack>
       )}
     </Stack>

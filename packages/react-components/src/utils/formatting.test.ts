@@ -1,5 +1,6 @@
+import { Currency } from '../components/product-card/product-card-kpis/product-card-kpis';
 import {
-  clampValue, formatKpiValue, formatPriceRangeValues, isValueOverCap,
+  clampValue, formatKpiValue, formatPriceRangeValues, getCurrency, isGreaterThan, isValueOverCap,
 } from './formatting';
 
 describe('formatPriceRangeValues()', () => {
@@ -9,12 +10,12 @@ describe('formatPriceRangeValues()', () => {
   });
 
   it('should return both price values with currency $ and w/o decimal', () => {
-    const res = formatPriceRangeValues(10, 20, { currency: '$', decimal: 0 });
+    const res = formatPriceRangeValues(10, 20, { currency: 'USD', decimals: 0 });
     expect(res).toBe('10 - 20 $');
   });
 
   it('should return both price values w/o currency', () => {
-    const res = formatPriceRangeValues(10, 20, { currency: '', decimal: 0 });
+    const res = formatPriceRangeValues(10, 20, { currency: undefined, decimals: 0 });
     expect(res).toBe('10 - 20');
   });
   it('should return only the first value', () => {
@@ -133,4 +134,47 @@ describe('isValueOverCap()', () => {
     const isOver = isValueOverCap(val, cap);
     expect(isOver).not.toBeTruthy();
   });
+});
+
+describe('isGreaterThan()', () => {
+  it('should return true when value > threashold', () => {
+    const v = 10;
+    const t = 5;
+    const isGreater = isGreaterThan(t, v);
+    expect(isGreater).toBeTruthy();
+  });
+
+  it('should return false when value < threashold', () => {
+    const v = 10;
+    const t = 15;
+    const isGreater = isGreaterThan(t, v);
+    expect(isGreater).not.toBeTruthy();
+  });
+
+  it('should return false when value = undefined', () => {
+    const v = undefined;
+    const t = 15;
+    const isGreater = isGreaterThan(t, v);
+    expect(isGreater).not.toBeTruthy();
+  });
+});
+
+describe('getCurrency()', () => {
+  const tests: Array<{ code: Currency | undefined; out: string }> = [
+    { code: 'EUR', out: '€' },
+    { code: 'USD', out: '$' },
+    { code: 'GBP', out: '£' },
+    { code: 'JPY', out: '¥' },
+    { code: 'CNY', out: '¥' },
+    { code: undefined, out: '' },
+  ];
+
+  tests.map(t => (
+    it(`should return ${t.out}`, () => {
+      const input = t.code;
+      const output = getCurrency(input);
+      const test = t.out;
+      expect(output).toBe(test);
+    })
+  ));
 });

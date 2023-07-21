@@ -4,10 +4,10 @@
   }
 
   .Title {
-    height: var(--title-height);
+    height: var(--header-title-height);
   }
 
   .Description {
-    height: var(--descriotion-height);
+    height: var(--header-descriotion-height);
   }
 }

@@ -3,6 +3,6 @@
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    margin: 0.25rem;
+    margin: token(--space-4);
   }
 }

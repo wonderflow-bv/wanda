@@ -110,8 +110,8 @@ export const ProductCard = forwardRef(({
       if (direction === 'vertical') {
         return ({
           flexGrow: 0,
-          height: `${Math.min(width, height)}px`,
-          width: 'auto',
+          height: 'auto',
+          width: '100%',
         });
       }
 
@@ -125,7 +125,7 @@ export const ProductCard = forwardRef(({
     return ({});
   };
 
-  const deboucedStyle = useDebounce(mediaSizeStyle(direction), { wait: 150 });
+  const deboucedStyle = useDebounce(mediaSizeStyle(direction), { wait: 500 });
 
   return (
     <Elevator resting={1} hover={hasHighlight ? 2 : undefined}>

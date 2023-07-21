@@ -1,8 +1,7 @@
 @layer components {
   .Kpis {
-    min-height: var(--height);
-    max-height: var(--height);
-    margin: 0.5rem 0;
+    height: var(--kpis-height);
+    margin: token(--space-8) 0;
     overflow: hidden;
   }
 }

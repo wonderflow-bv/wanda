@@ -26,7 +26,9 @@ import {
   Symbol, Text,
 } from '@/components';
 
-import { formatKpiValue, formatPriceRangeValues, isValueOverCap } from '../../../utils/formatting';
+import {
+  formatKpiValue, formatPriceRangeValues, isGreaterThan, isValueOverCap,
+} from '../../../utils/formatting';
 import * as styles from './product-card-kpis.module.css';
 
 export type Currency = 'EUR' | 'USD' | 'GBP' | 'JPY' | 'CNY';
@@ -142,32 +144,18 @@ export const ProductCardKpis = forwardRef(({
   className,
   style,
 }, forwardedRef: React.ForwardedRef<HTMLDivElement>) => {
-  const getCurrency = (currency: Currency) => {
-    switch (currency) {
-      case 'USD':
-        return '$';
-      case 'GBP':
-        return '£';
-      case 'JPY':
-      case 'CNY':
-        return '¥';
-      default:
-        return '€';
-    }
-  };
-
   const config: KpiItemType[] = useMemo(() => ([
     {
       property: 'feedback-rating',
       value: formatKpiValue(rating, { decimal: 2, minRange: 0, maxRange: 5 }),
       icon: 'feedback-rating',
-      iconColor: `hsl(${tkns.color.yellow['30']})`,
+      iconColor: isGreaterThan(3.99, rating) ? `hsl(${tkns.color.yellow['30']})` : undefined,
     },
     {
       property: 'sentiment',
       value: formatKpiValue(sentiment, { decimal: 2, minRange: -1, maxRange: 1 }),
       icon: 'hearts-suit',
-      iconColor: (typeof sentiment === 'number' && sentiment > 0.5) ? 'var(--highlight-red-foreground)' : undefined,
+      iconColor: isGreaterThan(0.5, sentiment) ? 'var(--highlight-red-foreground)' : undefined,
     },
     {
       property: 'feedback-count',
@@ -175,15 +163,15 @@ export const ProductCardKpis = forwardRef(({
       icon: 'message',
     },
     {
-      property: 'votes-count',
-      value: formatKpiValue(votesCount),
-      icon: 'votes-count',
-    },
-    {
       property: 'votes-rating',
       value: formatKpiValue(votesRating, { decimal: 2, minRange: 0, maxRange: 5 }),
       icon: 'star',
-      iconColor: `hsl(${tkns.color.yellow['20']})`,
+      iconColor: isGreaterThan(3.99, votesRating) ? `hsl(${tkns.color.yellow['20']})` : undefined,
+    },
+    {
+      property: 'votes-count',
+      value: formatKpiValue(votesCount),
+      icon: 'votes-count',
     },
     {
       property: 'nps',
@@ -202,7 +190,7 @@ export const ProductCardKpis = forwardRef(({
     },
     {
       property: 'price',
-      value: formatPriceRangeValues(priceMin, priceMax, { currency: getCurrency(currency), decimal: currencyDecimals }),
+      value: formatPriceRangeValues(priceMin, priceMax, { currency, decimals: currencyDecimals }),
       icon: 'tags',
     },
     {
@@ -237,7 +225,7 @@ export const ProductCardKpis = forwardRef(({
 
   const itemHeight = 20;
   const dynamicStyle: CSSProperties = {
-    '--height': `${kpiItems * itemHeight + ((kpiItems - 1) * (+kpisRowGap))}px`,
+    '--kpis-height': `${kpiItems * itemHeight + ((kpiItems - 1) * (+kpisRowGap))}px`,
   };
 
   return (

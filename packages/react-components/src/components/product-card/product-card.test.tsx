@@ -7,7 +7,7 @@ describe('<ProductCard>', () => {
     'https://products.gumlet.io/image-1675779605803.jpeg',
     'https://storage.googleapis.com/wonderflow-product-images/KITCHENAID%205KSM15%20SERIES.png',
     'https://storage.googleapis.com/wonderflow-product-images/CLASSIC%204.5%20QT.png',
-    'https://broken-link.png',
+    'this-is-a-broken-link.png',
   ];
   test('it should render properly', () => {
     const { container } = render(
@@ -46,11 +46,12 @@ describe('<ProductCard>', () => {
     expect(container).not.toBeNull();
   });
   test('it should render properly with menu actions', () => {
+    const s = SourceImages.slice(0, 3);
     const { container } = render(
       <ProductCard
         title="title"
         subtitle="subtitle"
-        source={SourceImages}
+        source={s}
         direction="horizontal"
         rating={1.2}
         feedbackCount={1.2}
