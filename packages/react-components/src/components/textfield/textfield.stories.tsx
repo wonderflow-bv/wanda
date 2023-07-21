@@ -56,6 +56,7 @@ const MultipleTemplate: ComponentStory<typeof Textfield> = args => (
   <Stack rowGap={24}>
     <Textfield {...args} label="Filled" defaultValue="Sample value" />
     <Textfield {...args} label="Filled read only" defaultValue="Sample value" readOnly />
+    <Textfield {...args} label="With optional placeholder" defaultValue="" placeholder="Placeholder" />
     <Textfield {...args} label="Empty disbled" placeholder="Placeholder" disabled />
     <Textfield {...args} label="Filled disabled" defaultValue="Sample value" disabled />
     <Textfield {...args} type="password" label="Type password" defaultValue="912435jh345" />
@@ -96,7 +97,13 @@ Types.argTypes = {
 };
 
 const TextareaTemplate: ComponentStory<typeof Textfield> = args => (
-  <Textfield {...args} defaultValue="123123klòasj" placeholder="Placeholder" />
+  <Textfield
+    {...args}
+    defaultValue="Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas aut, enim tempore necessitatibus maiores temporibus? Cumque nulla harum pariatur nesciunt repellat similique. Velit, totam qui."
+    placeholder="Placeholder"
+    label="Label"
+    message="Sample hint text"
+  />
 );
 
 export const Textarea = TextareaTemplate.bind({});
