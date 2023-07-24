@@ -56,6 +56,10 @@ export type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
    */
   disabled?: boolean;
   /**
+   * Set the invalid state.
+   */
+  invalid?: boolean;
+  /**
    * Callback function to be called when a new value is selected.
    */
   onChange?: (event: ChangeEvent<HTMLSelectElement>) => void;
@@ -64,6 +68,7 @@ export type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(({
   children,
   className,
+  invalid = false,
   disabled = false,
   icon = 'chevron-down',
   label,
@@ -89,7 +94,9 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(({
       data-select-is-multiple={kind === 'multiple'}
       data-select-has-label={Boolean(label)}
       data-select-dimension={dimension}
+      data-select-invalid={invalid && !disabled}
       aria-disabled={disabled}
+      aria-invalid={invalid && !disabled}
       hAlign="start"
       vAlign="start"
       inline
@@ -100,6 +107,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(({
       <div className={styles.FieldContainer}>
         <select
           disabled={disabled}
+          aria-invalid={invalid && !disabled}
           className={styles.Field}
           id={seedID('select')}
           multiple={kind === 'multiple'}
@@ -119,7 +127,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(({
         ) }
       </div>
 
-      {message && <Text as="label" aria-disabled={disabled} className={styles.Label} variant={dimension === 'big' ? 'body-2' : 'body-3'}>{message}</Text>}
+      {message && <Text as="label" aria-disabled={disabled} color={(invalid && !disabled) ? 'danger' : undefined} className={styles.Label} variant={dimension === 'big' ? 'body-2' : 'body-3'}>{message}</Text>}
     </Stack>
   );
 });

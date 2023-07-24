@@ -129,6 +129,7 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
       data-textfield-invalid={invalid && !disabled}
       data-textfield-fullwidth={fullWidth}
       aria-disabled={disabled}
+      aria-invalid={invalid && !disabled}
       hAlign="stretch"
       vAlign="start"
       tabIndex={disabled ? 0 : undefined}

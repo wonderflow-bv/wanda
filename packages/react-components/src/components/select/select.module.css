@@ -28,6 +28,8 @@
   .FieldContainer {
     position: relative;
     color: var(--global-vibrancy-foreground);
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
     inline-size: 100%;
 
     @nest .Select[aria-disabled='true'] & {
@@ -39,30 +41,30 @@
 
     @mixin vibrancy;
 
-    margin: 0;
-    border: 0;
-    text-overflow: ellipsis;
-    font-size: var(--font-size);
-    border-radius: token(--radius-4);
-    font-family: inherit;
     appearance: none;
-    display: block;
-    min-inline-size: 100%;
-    box-sizing: border-box;
-    overflow: hidden;
-    color: inherit;
-    block-size: var(--field-height);
-    padding:
-      0
-      calc(var(--field-padding) * 3.5)
-      0
-      var(--field-padding);
     background:
       linear-gradient(
         to bottom,
         var(--global-vibrancy-background),
         var(--global-vibrancy-background)
       );
+    block-size: var(--field-height);
+    border: 1px solid transparent;
+    border-radius: token(--radius-4);
+    box-sizing: border-box;
+    color: inherit;
+    display: block;
+    font-size: var(--font-size);
+    font-family: inherit;
+    overflow: hidden;
+    margin: 0;
+    min-inline-size: 100%;
+    padding:
+      0
+      calc(var(--field-padding) * 3.5)
+      0
+      var(--field-padding);
+    text-overflow: ellipsis;
 
     &:disabled {
       cursor: not-allowed;
@@ -73,6 +75,10 @@
           var(--global-disabled-background),
           var(--global-disabled-background)
         );
+    }
+
+    &[aria-invalid='true'] {
+      border: 1px solid var(--highlight-red-foreground);
     }
 
     & option {
@@ -127,3 +133,4 @@
     }
   }
 }
+

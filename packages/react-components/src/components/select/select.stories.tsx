@@ -25,6 +25,10 @@ const story: ComponentMeta<typeof Select> = {
       options: [true, false],
       control: { type: 'inline-radio' },
     },
+    invalid: {
+      options: [true, false],
+      control: { type: 'inline-radio' },
+    },
   },
   args: {
     dimension: 'regular',
