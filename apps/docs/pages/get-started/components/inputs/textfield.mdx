@@ -136,6 +136,20 @@ export default () => {
       description: "Set the invalid state",
     },
     {
+      name: "minRows",
+      type: ["number"],
+      default: 4,
+      required: false,
+      description: "Set a minimum number of rows for the textarea only.",
+    },
+    {
+      name: "maxRows",
+      type: ["number"],
+      default: 6,
+      required: false,
+      description: "Set a maximum number of rows for the textarea only. The rest of the content will be scrollable.",
+    },
+    {
       name: "value",
       type: ["string"],
       default: "",

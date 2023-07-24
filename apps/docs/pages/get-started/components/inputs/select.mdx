@@ -126,6 +126,13 @@ export default () => {
       description: "Set disabled state. The select is not interactive and grayed out.",
     },
     {
+      name: "invalid",
+      type: ["boolean"],
+      default: "",
+      required: false,
+      description: "Set the invalid state",
+    },
+    {
       name: "onChange",
       type: ["function"],
       typeValue: "(event: ChangeEvent<HTMLSelectElement>) => void",
