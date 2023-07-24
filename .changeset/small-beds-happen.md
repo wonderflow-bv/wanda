@@ -2,4 +2,4 @@
 "@wonderflow/react-components": patch
 ---
 
-Fix `IconButton` regular size
+Fix: `IconButton` regular size
