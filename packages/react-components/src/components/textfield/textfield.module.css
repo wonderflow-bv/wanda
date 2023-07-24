@@ -27,6 +27,13 @@
     }
   }
 
+  textarea.Textarea {
+    padding: token(--space-8) token(--space-16);
+    min-height: var(--textarea-min-height);
+    max-height: var(--textarea-max-height);
+    overflow-y: var(--textarea-overflow-y);
+  }
+
   .FieldContainer {
     position: relative;
   }

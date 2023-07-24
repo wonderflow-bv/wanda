@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import {
-  ChangeEvent, forwardRef, Ref, useCallback, useMemo, useState,
+  ChangeEvent, CSSProperties, forwardRef, Ref, useCallback, useMemo, useState,
 } from 'react';
 import { useUIDSeed } from 'react-uid';
 
@@ -65,6 +65,14 @@ export type TextfieldProps<T = Record<string, unknown>> = BaseFieldProps<{
    * Make the textfield full width, filling the available space.
    */
   fullWidth?: boolean;
+  /**
+   * Set a minimum number of rows for the textarea only.
+   */
+  minRows?: number;
+  /**
+   * Set a maximum number of rows for the textarea only. The rest of the content will be scrollable.
+   */
+  maxRows?: number;
 }> & T
 
 export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
@@ -82,8 +90,10 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
   message,
   type,
   style,
-  onChange,
   fullWidth,
+  minRows = 4,
+  maxRows = 6,
+  onChange,
   ...otherProps
 }: TextfieldProps, forwardedRef) => {
   const [isPasswordVisible, setPasswordVisible] = useState<boolean>(false);
@@ -97,6 +107,12 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
     },
     [],
   );
+
+  const dynamicStyle: CSSProperties = {
+    '--textarea-min-height': (minRows > 0) ? `${24 * minRows + 16 + 2}px` : 'unset',
+    '--textarea-max-height': (maxRows > 0) ? `${24 * maxRows + 16 + 2}px` : 'unset',
+    '--textarea-overflow-y': (maxRows > 0) ? 'scroll' : 'unset',
+  };
 
   const iconSizes = {
     small: 12,
@@ -143,6 +159,8 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
             <BaseField
               ref={forwardedRef as Ref<HTMLTextAreaElement>}
               as="textarea"
+              className={styles.Textarea}
+              style={{ ...dynamicStyle }}
               id={fieldID}
               {...commonProps}
               {...otherProps}

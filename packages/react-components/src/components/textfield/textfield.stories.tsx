@@ -11,6 +11,8 @@ const story: ComponentMeta<typeof Textfield> = {
     dimension: 'regular',
     readOnly: false,
     defaultValue: 'Sample value',
+    minRows: 0,
+    maxRows: 0,
   },
   argTypes: {
     onChange: {
@@ -110,6 +112,8 @@ export const Textarea = TextareaTemplate.bind({});
 Textarea.args = {
   disabled: false,
   textarea: true,
+  minRows: 4,
+  maxRows: 6,
 };
 Textarea.argTypes = {
   textarea: {
