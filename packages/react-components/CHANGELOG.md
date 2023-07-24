@@ -1,5 +1,18 @@
 # @wonderflow/react-components
 
+## 12.2.0
+
+### Minor Changes
+
+- e8f82f6d: Feat: add new `ProductCard` component
+- da8984fa: Feat: Add `invalid` state to `Select` component. Add a `minRows` and `maxRows` props as a constraint to component `Textfield` textarea.
+
+### Patch Changes
+
+- bdb92623: Fix: `Textfield` icon button style when disabled
+- 7ebd2ed9: Fix: `Snackbar` icon alignment w/o title
+- 991d351a: Fix: `IconButton` regular size
+
 ## 12.1.4
 
 ### Patch Changes
