@@ -1,5 +1,13 @@
 # @wonderflow/symbols
 
+## 12.2.0
+
+### Minor Changes
+
+- aae85ce2: Feat: Add `Wonder` Icon
+- 02ee0174: Feat: Add and Update icons `Message`, `Feedback Rating`, `Feedback Count` and `Barcode Rectangle`
+- 9f587a9f: Feat: Add new `Icons` for `Bar-Char`, `Line-Chart` and `Polar-Chart`
+
 ## 12.1.4
 
 ## 12.1.3
