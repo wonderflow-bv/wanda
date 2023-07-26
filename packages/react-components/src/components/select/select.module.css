@@ -26,11 +26,10 @@
   }
 
   .FieldContainer {
-    position: relative;
-    color: var(--global-vibrancy-foreground);
-    border: 1px solid transparent;
     border-radius: 0.25rem;
+    color: var(--global-vibrancy-foreground);
     inline-size: 100%;
+    position: relative;
 
     @nest .Select[aria-disabled='true'] & {
       color: var(--global-disabled-foreground);
