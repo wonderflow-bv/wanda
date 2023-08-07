@@ -70,6 +70,7 @@ export const Symbol = forwardRef<SVGSVGElement, SymbolProps>(({
         height={dimension}
         fill={fill}
         className={clsx(styles.Icon, className)}
+        style={{ color: fill ?? 'currentcolor' }}
         ref={forwardedRef}
         {...otherProps}
       >
@@ -85,6 +86,7 @@ export const Symbol = forwardRef<SVGSVGElement, SymbolProps>(({
             'aria-hidden': 'true',
             width: dimension,
             height: dimension,
+            color: fill ?? 'currentcolor',
           },
         ))}
       </>
