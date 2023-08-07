@@ -20,6 +20,10 @@
     display: flex;
     caret-color: var(--cta-default);
 
+    &::-webkit-calendar-picker-indicator {
+      filter: invert(13%) sepia(1%) saturate(2042%) hue-rotate(315deg) brightness(76%) contrast(75%);
+    }
+
     @nest [data-textfield-has-icon='true'] &::-webkit-calendar-picker-indicator {
       opacity: 0%;
       position: absolute;
@@ -77,6 +81,10 @@
     &:is(:invalid, [data-basefield-invalid='true'], :out-of-range),
     &:is(:invalid, [data-basefield-invalid='true'], :out-of-range):focus-visible {
       border-color: var(--highlight-red-foreground);
+
+      &::-webkit-calendar-picker-indicator {
+        filter: invert(13%) sepia(87%) saturate(5603%) hue-rotate(346deg) brightness(55%) contrast(100%);
+      }
     }
 
 

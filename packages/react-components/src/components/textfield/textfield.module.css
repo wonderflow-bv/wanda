@@ -80,7 +80,7 @@
       fill: var(--highlight-red-foreground);
     }
 
-    &[aria-disabled='true'] {
+    &[aria-disabled='true'] svg {
       color: var(--global-disabled-foreground);
       cursor: not-allowed;
     }

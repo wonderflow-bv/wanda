@@ -187,6 +187,7 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
             aria-label="Reveal password"
             data-testid="RevealIcon"
             icon={isPasswordVisible ? 'eye-slash' : 'eye'}
+            iconColor={disabled ? 'var(--global-disabled-foreground)' : 'var(--global-foreground)'}
             disabled={disabled}
           />
         )}
@@ -197,6 +198,7 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
             source={icon}
             dimension={iconSizes[dimension] as SymbolProps['dimension']}
             aria-disabled={disabled}
+            fill={disabled ? 'var(--global-disabled-foreground)' : 'currentcolor'}
           />
         )}
       </div>
