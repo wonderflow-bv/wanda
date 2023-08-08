@@ -1,5 +1,18 @@
 # @wonderflow/react-components
 
+## 12.3.0
+
+### Minor Changes
+
+- 77dd8c9f: - Add new icons `column` and `folder-link`;
+  - Minor change to `Symbol` component;
+
+### Patch Changes
+
+- 66c5a425: - Fix icons color on `Textfield` component when disabled/invalid;
+  - Minor style fix on `Tooltip` and `Symbol` components;
+- cea09275: - Small style fix on `Select`component
+
 ## 12.2.0
 
 ### Minor Changes
