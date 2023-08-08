@@ -121,9 +121,9 @@ const Template: ComponentStory<typeof Container> = () => {
           >
             <Stack rowGap={32} vPadding={32}>
               <Snackbar title="Product Card Container">
-                <Text>{`Window Width: ${size}px - Breakpoints Match: ${matches.toUpperCase()}`}</Text>
-                <Text>{`Container Width: ${containerSize}px - Grid Columns: ${containerValue.col} -  Grid Gutter: ${containerValue.gutter}px`}</Text>
-                <Text>{`useBreakpointsConfig.value: ${JSON.stringify(containerValue)} - useBreakpointsConfig.matches: ${containerMatches.toUpperCase()}`}</Text>
+                <Text as="span" variant="body-2">{`Window Width: ${size}px - Breakpoints Match: ${matches.toUpperCase()}`}</Text>
+                <Text as="span" variant="body-2">{`Container Width: ${containerSize}px - Grid Columns: ${containerValue.col} -  Grid Gutter: ${containerValue.gutter}px`}</Text>
+                <Text as="span" variant="body-2">{`useBreakpointsConfig.value: ${JSON.stringify(containerValue)} - useBreakpointsConfig.matches: ${containerMatches.toUpperCase()}`}</Text>
               </Snackbar>
 
               <Grid
