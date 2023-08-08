@@ -1,10 +1,10 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import { CartesianBaseChart } from './base-chart';
+import { CartesianBaseChart } from './cartesian-base-chart';
 
 const story: ComponentMeta<typeof CartesianBaseChart> = {
-  title: 'Charts/Base',
+  title: 'Charts/CartesianBase',
   component: CartesianBaseChart,
   args: {
 
