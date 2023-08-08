@@ -142,7 +142,7 @@ const Template: ComponentStory<typeof Container> = () => {
                       sentiment={0.51}
                       rating={4.51}
                       feedbackCount={3251}
-                      footer={`${new Date(Date.now()).toUTCString().slice(5, 16)}`}
+                      footer="01 Aug 2023"
                       menuActions={(
                         <Menu>
                           <Menu.Item

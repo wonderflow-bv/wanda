@@ -61,6 +61,7 @@ export const Symbol = forwardRef<SVGSVGElement, SymbolProps>(({
   ...otherProps
 }: SymbolProps, forwardedRef) => {
   const computedStyle = useMemo(() => (+dimension < 18 ? 'solid' : weight), [weight, dimension]);
+  const colorFill = { '--fill': fill ?? otherProps.color ?? 'currentcolor' };
 
   return (typeof source === 'string')
     ? (
@@ -70,7 +71,7 @@ export const Symbol = forwardRef<SVGSVGElement, SymbolProps>(({
         height={dimension}
         fill={fill}
         className={clsx(styles.Icon, className)}
-        style={{ color: fill ?? 'currentcolor' }}
+        style={colorFill}
         ref={forwardedRef}
         {...otherProps}
       >

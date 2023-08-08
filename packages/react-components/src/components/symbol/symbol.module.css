@@ -1,5 +1,7 @@
 @layer components {
   .Icon {
+    color: var(--fill);
+
     & *[fill] {
       fill: currentcolor;
     }
