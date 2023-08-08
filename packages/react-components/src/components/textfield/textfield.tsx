@@ -187,7 +187,12 @@ export const Textfield = forwardRef<PrimitiveInputType, TextfieldProps>(({
             aria-label="Reveal password"
             data-testid="RevealIcon"
             icon={isPasswordVisible ? 'eye-slash' : 'eye'}
-            iconColor={disabled ? 'var(--global-disabled-foreground)' : 'var(--global-foreground)'}
+            // eslint-disable-next-line no-nested-ternary
+            iconColor={disabled
+              ? 'var(--global-disabled-foreground)'
+              : invalid
+                ? 'var(--highlight-red-foreground)'
+                : 'var(--global-foreground)'}
             disabled={disabled}
           />
         )}
