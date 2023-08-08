@@ -1,5 +1,12 @@
 # @wonderflow/symbols
 
+## 12.3.0
+
+### Minor Changes
+
+- 77dd8c9f: - Add new icons `column` and `folder-link`;
+  - Minor change to `Symbol` component;
+
 ## 12.2.0
 
 ### Minor Changes
