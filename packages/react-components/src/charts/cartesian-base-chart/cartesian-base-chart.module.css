@@ -1,0 +1,10 @@
+.Container {
+  max-width: 100%;
+  height: auto;
+  font-size: 14px;
+  font-family: system-ui, sans-serif;
+}
+
+.Axis {
+  font-family: system-ui, sans-serif;
+}

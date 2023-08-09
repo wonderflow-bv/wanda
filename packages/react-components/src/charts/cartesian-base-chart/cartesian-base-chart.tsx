@@ -1,10 +1,11 @@
 import {
-  AxisBottom, AxisLeft, AxisRight, AxisTop,
+  Axis,
 } from '@visx/axis';
 import { Grid } from '@visx/grid';
 import { Group } from '@visx/group';
 import { scaleLinear } from '@visx/scale';
-import React from 'react';
+
+import styles from './cartesian-base-chart.module.css';
 
 export type BaseChartProps = {
   width?: number;
@@ -26,7 +27,7 @@ export const CartesianBaseChart = ({
   height = 600,
   background = '#e9e9e9',
   margin = {
-    top: 32, right: 32, bottom: 32, left: 32,
+    top: 60, right: 60, bottom: 60, left: 60,
   },
   otherProps,
 }: BaseChartProps) => {
@@ -54,7 +55,7 @@ export const CartesianBaseChart = ({
   });
 
   return (
-    <svg width={width} height={height} {...otherProps}>
+    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} className={styles.Container} {...otherProps}>
       <rect x={0} y={0} width={width} height={height} fill={background} rx={8} />
       <Group>
         <Grid
@@ -71,10 +72,68 @@ export const CartesianBaseChart = ({
           stroke="black"
           strokeOpacity={0.1}
         />
-        <AxisTop scale={xScale} top={top} left={left} numTicks={25} />
-        <AxisRight scale={yScale} top={top} left={xMax + left} />
-        <AxisBottom scale={xScale} top={yMax + top} left={left} />
-        <AxisLeft scale={yScale} top={top} left={left} numTicks={25} />
+        <Axis
+          axisClassName={styles.Axis}
+          orientation="top"
+          scale={xScale}
+          top={top}
+          left={left}
+          numTicks={25}
+          tickLength={4}
+          tickLabelProps={{ dy: -4, fontSize: 12 }}
+          label="Top Axis"
+          labelOffset={12}
+          labelProps={{
+            fontSize: 14, fontFamily: 'system-ui, sans-serif', fontWeight: 600, textAnchor: 'middle',
+          }}
+        />
+        <Axis
+          axisClassName={styles.Axis}
+          orientation="right"
+          scale={yScale}
+          top={top}
+          left={xMax + left}
+          numTicks={10}
+          tickLength={4}
+          tickLabelProps={{ dx: 12, dy: 4, fontSize: 12 }}
+          label="Right Axis"
+          labelOffset={12}
+          labelProps={{
+            fontSize: 14, fontFamily: 'system-ui, sans-serif', fontWeight: 600, dx: 16, textAnchor: 'middle',
+          }}
+        />
+        <Axis
+          axisClassName={styles.Axis}
+          orientation="bottom"
+          scale={xScale}
+          top={yMax + top}
+          left={left}
+          numTicks={25}
+          tickLength={4}
+          tickLabelProps={{ dy: 4, fontSize: 12 }}
+          label="Bottom Axis"
+          labelOffset={12}
+          labelProps={{
+            fontSize: 14, fontFamily: 'system-ui, sans-serif', fontWeight: 600, textAnchor: 'middle',
+          }}
+        />
+        <Axis
+          axisClassName={styles.Axis}
+          orientation="left"
+          scale={yScale}
+          top={top}
+          left={left}
+          numTicks={10}
+          tickLength={4}
+          tickLabelProps={{ dx: -12, dy: 4, fontSize: 12 }}
+          label="Left Axis"
+          labelOffset={12}
+          labelProps={{
+            fontSize: 14, fontFamily: 'system-ui, sans-serif', fontWeight: 600, dx: -16, textAnchor: 'middle',
+          }}
+        />
+
+        {/* <Axis orientation="left" scale={yScale} top={top} left={left} numTicks={25} label="Left Axis" /> */}
       </Group>
     </svg>
   );
