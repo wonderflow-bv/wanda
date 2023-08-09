@@ -4,7 +4,7 @@ import React from 'react';
 import { CartesianBase } from './cartesian-base';
 
 const story: ComponentMeta<typeof CartesianBase> = {
-  title: 'Charts/CartesianBase',
+  title: 'Charts/Cartesian Base',
   component: CartesianBase,
   args: {
 
