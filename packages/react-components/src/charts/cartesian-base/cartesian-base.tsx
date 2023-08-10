@@ -4,6 +4,8 @@ import {
 import { Grid } from '@visx/grid';
 import { Group } from '@visx/group';
 import { scaleBand, scaleLinear } from '@visx/scale';
+import { useSize } from 'ahooks';
+import { useRef } from 'react';
 
 import styles from './cartesian-base.module.css';
 
@@ -45,12 +47,21 @@ export const CartesianBase = ({
   otherProps,
 }: BaseChartProps) => {
   const {
-    top, right, bottom, left,
+    top,
+    right,
+    bottom,
+    left,
   } = margin;
   const { tickColumns, tickRows } = grid;
 
-  const xMax = width - left - right;
-  const yMax = height - top - bottom;
+  const ref = useRef(null);
+  const size = useSize(ref);
+
+  const dynamicWidth = size?.width ?? width;
+  const dynamicHeight = size?.height ?? height;
+
+  const xMax = dynamicWidth - left - right;
+  const yMax = dynamicHeight - top - bottom;
 
   const xScaleValues = scaleLinear({
     domain: [0, 100],
@@ -76,9 +87,15 @@ export const CartesianBase = ({
   });
 
   return (
-    <div className={styles.Wrapper}>
-      <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} className={styles.Container} {...otherProps}>
-        <rect x={0} y={0} width={width} height={height} fill={background} rx={8} />
+    <div className={styles.Wrapper} ref={ref}>
+      <svg
+        width={dynamicWidth}
+        height={dynamicHeight}
+        viewBox={`0 0 ${dynamicWidth} ${dynamicHeight}`}
+        className={styles.Container}
+        {...otherProps}
+      >
+        <rect x={0} y={0} width={dynamicWidth} height={dynamicHeight} fill={background} rx={8} />
         <Group>
           <Grid
             top={top}

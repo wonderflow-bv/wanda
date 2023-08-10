@@ -1,16 +1,15 @@
 .Wrapper {
-  resize: both;
   width: 100%;
   height: 100%;
   position: relative;
   border: 1px dashed red;
   overflow: auto;
+  display: flex;
+  resize: both;
 }
 
 .Container {
   font-family: system-ui, sans-serif;
-  width: 100%;
-  height: auto;
 }
 
 .Axis {
