@@ -3,7 +3,8 @@ import {
 } from '@visx/axis';
 import { Grid } from '@visx/grid';
 import { Group } from '@visx/group';
-import { scaleBand, scaleLinear } from '@visx/scale';
+import { scaleBand, scaleLinear, scaleUtc } from '@visx/scale';
+import { timeFormat } from '@visx/vendor/d3-time-format';
 import { useSize } from 'ahooks';
 import { useRef } from 'react';
 
@@ -30,6 +31,21 @@ export type MarginProps = {
 export type GridProps = {
   tickColumns: number;
   tickRows: number;
+}
+
+export type AxisProp = {
+  orientation: 'top' | 'left' | 'right' | 'bottom';
+  label?: string;
+  scaleType: 'linear' | 'label' | 'time';
+  domain: Array<string | number>;
+  range: number[];
+  round?: boolean;
+  nice?: boolean;
+  clamp?: boolean;
+  paddingInner?: number;
+  paddingOuter?: number;
+  numTicks?: number;
+  otherProps: Record<string, unknown>;
 }
 
 export const CartesianBase = ({
@@ -65,8 +81,8 @@ export const CartesianBase = ({
   const xMax = dynamicWidth - left - right;
   const yMax = dynamicHeight - top - bottom;
 
-  const xScaleValues = scaleLinear({
-    domain: [0, 100],
+  const xTimeValues = scaleUtc({
+    domain: [new Date('2000-01-01'), new Date('2000-01-15')],
     range: [0, xMax],
     round: true,
     nice: false,
@@ -102,7 +118,7 @@ export const CartesianBase = ({
           <Grid
             top={top}
             left={left}
-            xScale={xScaleValues}
+            xScale={xTimeValues}
             yScale={yScaleValues}
             width={xMax}
             height={yMax}
@@ -119,7 +135,6 @@ export const CartesianBase = ({
             scale={xBandValues}
             top={top}
             left={left}
-          // numTicks={10}
             tickLength={4}
             tickLabelProps={{ dy: -4, fontSize: 12 }}
             label="Top Axis"
@@ -146,12 +161,18 @@ export const CartesianBase = ({
           <Axis
             axisClassName={styles.Axis}
             orientation="bottom"
-            scale={xScaleValues}
+            scale={xTimeValues}
             top={yMax + top}
             left={left}
-            numTicks={25}
+            numTicks={10}
             tickLength={4}
             tickLabelProps={{ dy: 4, fontSize: 12 }}
+            tickFormat={(v: Date, i: number) => {
+              const val1 = timeFormat('%d')(v);
+              const val2 = timeFormat('%b %d')(v);
+              console.log('***date***', v);
+              return (i % 2 === 0 ? val1 : val2);
+            }}
             label="Bottom Axis"
             labelOffset={12}
             labelProps={{
