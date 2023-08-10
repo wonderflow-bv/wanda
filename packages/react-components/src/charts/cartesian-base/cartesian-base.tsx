@@ -1,7 +1,7 @@
 import {
   Axis,
 } from '@visx/axis';
-import { Grid } from '@visx/grid';
+import { GridColumns, GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
 import { scaleBand, scaleLinear, scaleUtc } from '@visx/scale';
 import { timeFormat } from '@visx/vendor/d3-time-format';
@@ -51,7 +51,7 @@ export type AxisProps = {
 export const CartesianBase = ({
   width = 800,
   height = 600,
-  background = '#e9e9e9',
+  background = '#fff',
   margin = {
     top: 60,
     right: 60,
@@ -64,6 +64,61 @@ export const CartesianBase = ({
   },
   otherProps,
 }: CartesianBaseProps) => {
+  const config: any = {
+    grid: {
+      xOffset: 0,
+      yOffset: 0,
+      stroke: '#ccc',
+      strokeOpacity: 1,
+    },
+    axis: {
+      labelOffset: 12,
+      tickLength: 4,
+      labelProps: {
+        color: 'var(--dimmed-7)',
+        fontFamily: 'system-ui, sans-serif',
+        fontSize: 14,
+        fontWeight: 400,
+        textAnchor: 'middle',
+      },
+      tickLabelProps: {
+        color: 'var(--dimmed-7)',
+        fontFamily: 'system-ui, sans-serif',
+        fontSize: 14,
+        fontWeight: 400,
+      },
+      top: {
+        tickLabelProps: {
+          dy: -4,
+        },
+      },
+      right: {
+        tickLabelProps: {
+          dx: 4,
+          dy: 4,
+          textAnchor: 'start',
+        },
+        labelProps: {
+          dx: 16,
+        },
+      },
+      bottom: {
+        tickLabelProps: {
+          dy: 4,
+        },
+      },
+      left: {
+        tickLabelProps: {
+          dx: -4,
+          dy: 4,
+          textAnchor: 'end',
+        },
+        labelProps: {
+          dx: -16,
+        },
+      },
+    },
+  };
   const {
     top,
     right,
@@ -115,19 +170,25 @@ export const CartesianBase = ({
       >
         <rect x={0} y={0} width={dynamicWidth} height={dynamicHeight} fill={background} rx={8} />
         <Group>
-          <Grid
+          <GridRows
             top={top}
             left={left}
-            xScale={xTimeValues}
-            yScale={yScaleValues}
+            scale={yScaleValues}
             width={xMax}
+            numTicks={tickRows}
+            offset={config.grid.xOffset}
+            stroke={config.grid.stroke}
+            strokeOpacity={config.grid.strokeOpacity}
+          />
+          <GridColumns
+            top={top}
+            left={left}
+            scale={xTimeValues}
             height={yMax}
-            numTicksColumns={tickColumns}
-            numTicksRows={tickRows}
-            xOffset={0}
-            yOffset={0}
-            stroke="black"
-            strokeOpacity={0.1}
+            numTicks={tickColumns}
+            offset={config.grid.yOffset}
+            stroke={config.grid.stroke}
+            strokeOpacity={config.grid.strokeOpacity}
           />
           <Axis
             axisClassName={styles.Axis}
@@ -135,13 +196,11 @@ export const CartesianBase = ({
             scale={xBandValues}
             top={top}
             left={left}
-            tickLength={4}
-            tickLabelProps={{ dy: -4, fontSize: 12 }}
+            tickLength={config.axis.tickLength}
+            tickLabelProps={{ ...config.axis.tickLabelProps, ...config.axis.top.tickLabelProps }}
             label="Top Axis"
-            labelOffset={12}
-            labelProps={{
-              fontSize: 14, fontFamily: 'system-ui, sans-serif', fontWeight: 600, textAnchor: 'middle',
-            }}
+            labelOffset={config.axis.labelOffset}
+            labelProps={config.axis.labelProps}
           />
           <Axis
             axisClassName={styles.Axis}
@@ -150,13 +209,11 @@ export const CartesianBase = ({
             top={top}
             left={xMax + left}
             numTicks={10}
-            tickLength={4}
-            tickLabelProps={{ dx: 12, dy: 4, fontSize: 12 }}
+            tickLength={config.axis.tickLength}
+            tickLabelProps={{ ...config.axis.tickLabelProps, ...config.axis.right.tickLabelProps }}
             label="Right Axis"
-            labelOffset={12}
-            labelProps={{
-              fontSize: 14, fontFamily: 'system-ui, sans-serif', fontWeight: 600, dx: 16, textAnchor: 'middle',
-            }}
+            labelOffset={config.axis.labelOffset}
+            labelProps={{ ...config.axis.labelProps, ...config.axis.right.labelProps }}
           />
           <Axis
             axisClassName={styles.Axis}
@@ -165,18 +222,16 @@ export const CartesianBase = ({
             top={yMax + top}
             left={left}
             numTicks={10}
-            tickLength={4}
-            tickLabelProps={{ dy: 4, fontSize: 12 }}
+            tickLength={config.axis.tickLength}
+            tickLabelProps={{ ...config.axis.tickLabelProps, ...config.axis.bottom.tickLabelProps }}
             tickFormat={(v: any, i: number) => {
               const val1 = timeFormat('%d')(v);
               const val2 = timeFormat('%b %d')(v);
               return (i % 2 === 0 ? val1 : val2);
             }}
             label="Bottom Axis"
-            labelOffset={12}
-            labelProps={{
-              fontSize: 14, fontFamily: 'system-ui, sans-serif', fontWeight: 600, textAnchor: 'middle',
-            }}
+            labelOffset={config.axis.labelOffset}
+            labelProps={config.axis.labelProps}
           />
           <Axis
             axisClassName={styles.Axis}
@@ -185,13 +240,11 @@ export const CartesianBase = ({
             top={top}
             left={left}
             numTicks={10}
-            tickLength={4}
-            tickLabelProps={{ dx: -12, dy: 4, fontSize: 12 }}
+            tickLength={config.axis.tickLength}
+            tickLabelProps={{ ...config.axis.tickLabelProps, ...config.axis.left.tickLabelProps }}
             label="Left Axis"
-            labelOffset={12}
-            labelProps={{
-              fontSize: 14, fontFamily: 'system-ui, sans-serif', fontWeight: 600, dx: -16, textAnchor: 'middle',
-            }}
+            labelOffset={config.axis.labelOffset}
+            labelProps={{ ...config.axis.labelProps, ...config.axis.left.labelProps }}
           />
         </Group>
       </svg>
