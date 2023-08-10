@@ -9,6 +9,8 @@ import { useRef } from 'react';
 
 import styles from './cartesian-base.module.css';
 
+// TODO: clean css from resize and margins
+
 export type BaseChartProps = {
   width?: number;
   height?: number;

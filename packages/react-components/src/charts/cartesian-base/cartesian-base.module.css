@@ -5,11 +5,14 @@
   border: 1px dashed red;
   overflow: auto;
   display: flex;
+  justify-content: center;
+  align-items: center;
   resize: both;
 }
 
 .Container {
   font-family: system-ui, sans-serif;
+  margin: 1rem 0.5rem;
 }
 
 .Axis {
