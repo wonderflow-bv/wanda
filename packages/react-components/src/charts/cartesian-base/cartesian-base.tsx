@@ -12,7 +12,7 @@ import styles from './cartesian-base.module.css';
 
 // TODO: clean css from resize and margins
 
-export type BaseChartProps = {
+export type CartesianBaseProps = {
   width?: number;
   height?: number;
   background?: string;
@@ -33,11 +33,11 @@ export type GridProps = {
   tickRows: number;
 }
 
-export type AxisProp = {
+export type AxisProps = {
   orientation: 'top' | 'left' | 'right' | 'bottom';
   label?: string;
   scaleType: 'linear' | 'label' | 'time';
-  domain: Array<string | number>;
+  domain: Array<string | number | Date>;
   range: number[];
   round?: boolean;
   nice?: boolean;
@@ -63,7 +63,7 @@ export const CartesianBase = ({
     tickRows: 10,
   },
   otherProps,
-}: BaseChartProps) => {
+}: CartesianBaseProps) => {
   const {
     top,
     right,
@@ -167,10 +167,9 @@ export const CartesianBase = ({
             numTicks={10}
             tickLength={4}
             tickLabelProps={{ dy: 4, fontSize: 12 }}
-            tickFormat={(v: Date, i: number) => {
+            tickFormat={(v: any, i: number) => {
               const val1 = timeFormat('%d')(v);
               const val2 = timeFormat('%b %d')(v);
-              console.log('***date***', v);
               return (i % 2 === 0 ? val1 : val2);
             }}
             label="Bottom Axis"
