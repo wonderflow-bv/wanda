@@ -101,6 +101,7 @@
   "dependencies": {
     "@radix-ui/react-tabs": "1.0.0",
     "@visx/axis": "3.3.0",
+    "@visx/gradient": "3.3.0",
     "@visx/grid": "3.3.0",
     "@visx/group": "3.3.0",
     "@visx/responsive": "3.3.0",

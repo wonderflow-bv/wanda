@@ -1,6 +1,7 @@
 import {
   Axis,
 } from '@visx/axis';
+import { LinearGradient } from '@visx/gradient';
 import { GridColumns, GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
 import { scaleBand, scaleLinear, scaleUtc } from '@visx/scale';
@@ -51,7 +52,7 @@ export type AxisProps = {
 export const CartesianBase = ({
   width = 800,
   height = 600,
-  background = '#fff',
+  background = 'var(--global-background)',
   margin = {
     top: 60,
     right: 60,
@@ -75,14 +76,14 @@ export const CartesianBase = ({
       labelOffset: 12,
       tickLength: 4,
       labelProps: {
-        color: 'var(--dimmed-7)',
+        fill: 'var(--global-foreground)',
         fontFamily: 'system-ui, sans-serif',
         fontSize: 14,
         fontWeight: 400,
         textAnchor: 'middle',
       },
       tickLabelProps: {
-        color: 'var(--dimmed-7)',
+        fill: 'var(--global-foreground)',
         fontFamily: 'system-ui, sans-serif',
         fontSize: 14,
         fontWeight: 400,
@@ -168,7 +169,8 @@ export const CartesianBase = ({
         className={styles.Container}
         {...otherProps}
       >
-        <rect x={0} y={0} width={dynamicWidth} height={dynamicHeight} fill={background} rx={8} />
+        <LinearGradient id="cartesian" to="var(--global-vibrancy-background)" from={background} />
+        <rect x={0} y={0} width={dynamicWidth} height={dynamicHeight} fill="url(#cartesian)" rx={8} />
         <Group>
           <GridRows
             top={top}
