@@ -111,6 +111,7 @@
     "clsx": "1.2.1",
     "constate": "3.3.2",
     "framer-motion": "6.5.1",
+    "lodash": "4.17.21",
     "react-focus-on": "3.6.0",
     "react-masonry-css": "1.0.16",
     "react-merge-refs": "2.0.1",

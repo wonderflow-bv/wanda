@@ -236,7 +236,7 @@ export const CartesianBase = ({
             labelProps={config.axis.labelProps}
           />
           <Axis
-            axisClassName={styles.Axis}
+            axisClassName={styles.AxisLeft}
             orientation="left"
             scale={yScaleValues}
             top={top}
