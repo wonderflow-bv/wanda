@@ -14,12 +14,3 @@
   font-family: system-ui, sans-serif;
 }
 
-.Axis {
-
-  /* font-family: system-ui, sans-serif; */
-}
-
-.AxisLeft {
-  outline: solid 1px blue;
-  outline-offset: -1px;
-}

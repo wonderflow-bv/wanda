@@ -1,16 +1,17 @@
 import _ from 'lodash';
 
-export const isArrayOfNumber = (arr: any[]) => Array.isArray(arr) && arr.length > 0 && arr.every(el => typeof el === 'number');
-export const isArrayOfDate = (arr: any[]) => Array.isArray(arr) && arr.length > 0 && arr.every(el => _.isDate(el));
+export const isArrayTypeString = (arr: any[]) => Array.isArray(arr) && arr.length > 0 && arr.every(el => typeof el === 'number');
+export const isArrayTypeNumber = (arr: any[]) => Array.isArray(arr) && arr.length > 0 && arr.every(el => typeof el === 'number');
+export const isArrayTypeDate = (arr: any[]) => Array.isArray(arr) && arr.length > 0 && arr.every(el => _.isDate(el));
 
 export const getMinMaxNumber = (values: number[]) => {
-  if (isArrayOfNumber(values)) return [Math.min(...values), Math.max(...values)];
+  if (isArrayTypeNumber(values)) return [Math.min(...values), Math.max(...values)];
   return undefined;
 };
 
 export const getMinMaxDate = (values: Array<number | Date>) => {
-  const isNumbers = isArrayOfNumber(values);
-  const isDates = isArrayOfDate(values);
+  const isNumbers = isArrayTypeNumber(values);
+  const isDates = isArrayTypeDate(values);
   let dates;
 
   if (isNumbers) {
@@ -29,4 +30,9 @@ export const getMinMaxDate = (values: Array<number | Date>) => {
   }
 
   return undefined;
+};
+
+export const getMaxCharactersNum = (values: Array<string | number>) => {
+  if (values.length === 0) return 0;
+  return values.map(el => String(el)).sort((a, b) => b.length - a.length)[0].length;
 };

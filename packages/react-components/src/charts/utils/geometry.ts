@@ -17,7 +17,6 @@ export const axisSpacingConfig: AxisSpacingConfigType = {
 };
 
 export const computeAxisOffset = (
-  orientation: 'vertical' | 'horizontal',
   tickLabelMaxCharactersNum = 3,
   config = axisSpacingConfig,
 ) => {
@@ -34,6 +33,6 @@ export const computeAxisOffset = (
   const v = lch * tickLabelMaxCharactersNum + f;
   const h = tlh + f;
 
-  return orientation === 'vertical' ? v : h;
+  return { verticalAxisOffset: v, horizontalAxisOffset: h };
 };
 

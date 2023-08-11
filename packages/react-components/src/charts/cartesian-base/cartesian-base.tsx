@@ -9,6 +9,7 @@ import { timeFormat } from '@visx/vendor/d3-time-format';
 import { useSize } from 'ahooks';
 import { useRef } from 'react';
 
+import { computeAxisOffset } from '../utils/geometry';
 import styles from './cartesian-base.module.css';
 
 // TODO: clean css from resize and margins
@@ -54,10 +55,10 @@ export const CartesianBase = ({
   height = 600,
   background = 'var(--global-background)',
   margin = {
-    top: 60,
-    right: 60,
-    bottom: 60,
-    left: 60,
+    top: 24,
+    right: 24,
+    bottom: 24,
+    left: 24,
   },
   grid = {
     tickColumns: 10,
@@ -120,12 +121,7 @@ export const CartesianBase = ({
       },
     },
   };
-  const {
-    top,
-    right,
-    bottom,
-    left,
-  } = margin;
+
   const { tickColumns, tickRows } = grid;
 
   const ref = useRef(null);
@@ -134,8 +130,12 @@ export const CartesianBase = ({
   const dynamicWidth = size?.width ?? width;
   const dynamicHeight = size?.height ?? height;
 
-  const xMax = dynamicWidth - left - right;
-  const yMax = dynamicHeight - top - bottom;
+  const { verticalAxisOffset, horizontalAxisOffset } = computeAxisOffset(3);
+
+  const xMax = dynamicWidth - margin.left - margin.right - verticalAxisOffset * 2;
+  const yMax = dynamicHeight - margin.top - margin.bottom - horizontalAxisOffset * 2;
+  const top = margin.top + horizontalAxisOffset;
+  const left = margin.left + verticalAxisOffset;
 
   const xTimeValues = scaleUtc({
     domain: [new Date('2000-01-01'), new Date('2000-01-15')],
@@ -193,7 +193,6 @@ export const CartesianBase = ({
             strokeOpacity={config.grid.strokeOpacity}
           />
           <Axis
-            axisClassName={styles.Axis}
             orientation="top"
             scale={xBandValues}
             top={top}
@@ -205,7 +204,6 @@ export const CartesianBase = ({
             labelProps={config.axis.labelProps}
           />
           <Axis
-            axisClassName={styles.Axis}
             orientation="right"
             scale={yScaleValues}
             top={top}
@@ -218,7 +216,6 @@ export const CartesianBase = ({
             labelProps={{ ...config.axis.labelProps, ...config.axis.right.labelProps }}
           />
           <Axis
-            axisClassName={styles.Axis}
             orientation="bottom"
             scale={xTimeValues}
             top={yMax + top}
@@ -236,7 +233,6 @@ export const CartesianBase = ({
             labelProps={config.axis.labelProps}
           />
           <Axis
-            axisClassName={styles.AxisLeft}
             orientation="left"
             scale={yScaleValues}
             top={top}
