@@ -1,5 +1,5 @@
 export type AxisSpacingConfigType = {
-  labelCharHeight: number;
+  labelCharacterExtimatedWidth: number;
   labelHeight: number;
   labelOffset: number;
   tickLabelHeight: number;
@@ -8,20 +8,21 @@ export type AxisSpacingConfigType = {
 }
 
 export const axisSpacingConfig: AxisSpacingConfigType = {
-  labelCharHeight: 9,
-  labelHeight: 14,
-  labelOffset: 12,
-  tickLabelHeight: 14,
+  labelCharacterExtimatedWidth: 9,
+  labelHeight: 14, // based on a 12px font size
+  labelOffset: 16,
+  tickLabelHeight: 16.5, // based on a 14px font size
   tickOffset: 4,
   tickLength: 4,
 };
 
 export const computeAxisOffset = (
-  tickLabelMaxCharactersNum = 3,
+  tickLabelMaxCharLeft = 3,
+  tickLabelMaxCharRight = 3,
   config = axisSpacingConfig,
 ) => {
   const {
-    labelCharHeight: lch,
+    labelCharacterExtimatedWidth: lcw,
     labelHeight: lh,
     labelOffset: lo,
     tickLabelHeight: tlh,
@@ -30,9 +31,17 @@ export const computeAxisOffset = (
   } = config;
 
   const f = lh + lo + to + tl;
-  const v = lch * tickLabelMaxCharactersNum + f;
+  const vl = lcw * tickLabelMaxCharLeft + f;
+  const vr = lcw * tickLabelMaxCharRight + f;
   const h = tlh + f;
 
-  return { verticalAxisOffset: v, horizontalAxisOffset: h };
+  return {
+    leftAxisOffset: vl,
+    rightAxisOffset: vr,
+    topAxisOffset: h,
+    bottomAxisOffset: h,
+    verticalAxisOffset: vl + vr,
+    horizontalAxisOffset: h + h,
+  };
 };
 

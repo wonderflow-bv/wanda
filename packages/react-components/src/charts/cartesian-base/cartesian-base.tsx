@@ -74,12 +74,11 @@ export const CartesianBase = ({
       strokeOpacity: 1,
     },
     axis: {
-      labelOffset: 12,
       tickLength: 4,
       labelProps: {
         fill: 'var(--global-foreground)',
         fontFamily: 'system-ui, sans-serif',
-        fontSize: 14,
+        fontSize: 12,
         fontWeight: 400,
         textAnchor: 'middle',
       },
@@ -93,6 +92,7 @@ export const CartesianBase = ({
         tickLabelProps: {
           dy: -4,
         },
+        labelOffset: 12,
       },
       right: {
         tickLabelProps: {
@@ -100,14 +100,13 @@ export const CartesianBase = ({
           dy: 4,
           textAnchor: 'start',
         },
-        labelProps: {
-          dx: 16,
-        },
+        labelOffset: 52, // this is influenced by the num of tick chars
       },
       bottom: {
         tickLabelProps: {
           dy: 4,
         },
+        labelOffset: 12,
       },
       left: {
         tickLabelProps: {
@@ -115,9 +114,7 @@ export const CartesianBase = ({
           dy: 4,
           textAnchor: 'end',
         },
-        labelProps: {
-          dx: -16,
-        },
+        labelOffset: 52, // this is influenced by the num of tick chars
       },
     },
   };
@@ -130,12 +127,18 @@ export const CartesianBase = ({
   const dynamicWidth = size?.width ?? width;
   const dynamicHeight = size?.height ?? height;
 
-  const { verticalAxisOffset, horizontalAxisOffset } = computeAxisOffset(3);
+  const {
+    leftAxisOffset,
+    rightAxisOffset,
+    topAxisOffset,
+    horizontalAxisOffset,
+  } = computeAxisOffset(3, 3);
 
-  const xMax = dynamicWidth - margin.left - margin.right - verticalAxisOffset * 2;
-  const yMax = dynamicHeight - margin.top - margin.bottom - horizontalAxisOffset * 2;
-  const top = margin.top + horizontalAxisOffset;
-  const left = margin.left + verticalAxisOffset;
+  const xMax = dynamicWidth - margin.left - margin.right - leftAxisOffset - rightAxisOffset;
+  const yMax = dynamicHeight - margin.top - margin.bottom - horizontalAxisOffset;
+
+  const top = margin.top + topAxisOffset;
+  const left = margin.left + leftAxisOffset;
 
   const xTimeValues = scaleUtc({
     domain: [new Date('2000-01-01'), new Date('2000-01-15')],
@@ -146,7 +149,7 @@ export const CartesianBase = ({
   });
 
   const yScaleValues = scaleLinear({
-    domain: [0, 100],
+    domain: [0, 10000],
     range: [yMax, 0],
     round: true,
     nice: false,
@@ -200,7 +203,7 @@ export const CartesianBase = ({
             tickLength={config.axis.tickLength}
             tickLabelProps={{ ...config.axis.tickLabelProps, ...config.axis.top.tickLabelProps }}
             label="Top Axis"
-            labelOffset={config.axis.labelOffset}
+            labelOffset={config.axis.top.labelOffset}
             labelProps={config.axis.labelProps}
           />
           <Axis
@@ -212,7 +215,7 @@ export const CartesianBase = ({
             tickLength={config.axis.tickLength}
             tickLabelProps={{ ...config.axis.tickLabelProps, ...config.axis.right.tickLabelProps }}
             label="Right Axis"
-            labelOffset={config.axis.labelOffset}
+            labelOffset={config.axis.right.labelOffset}
             labelProps={{ ...config.axis.labelProps, ...config.axis.right.labelProps }}
           />
           <Axis
@@ -229,7 +232,7 @@ export const CartesianBase = ({
               return (i % 2 === 0 ? val1 : val2);
             }}
             label="Bottom Axis"
-            labelOffset={config.axis.labelOffset}
+            labelOffset={config.axis.bottom.labelOffset}
             labelProps={config.axis.labelProps}
           />
           <Axis
@@ -241,8 +244,8 @@ export const CartesianBase = ({
             tickLength={config.axis.tickLength}
             tickLabelProps={{ ...config.axis.tickLabelProps, ...config.axis.left.tickLabelProps }}
             label="Left Axis"
-            labelOffset={config.axis.labelOffset}
-            labelProps={{ ...config.axis.labelProps, ...config.axis.left.labelProps }}
+            labelOffset={config.axis.left.labelOffset}
+            labelProps={config.axis.labelProps}
           />
         </Group>
       </svg>
