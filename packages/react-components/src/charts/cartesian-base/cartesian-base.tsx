@@ -40,7 +40,7 @@ export type AxisProps = {
   label?: string;
   scaleType: 'linear' | 'label' | 'time';
   domain: Array<string | number | Date>;
-  range: number[];
+  range?: number[];
   round?: boolean;
   nice?: boolean;
   clamp?: boolean;
