@@ -9,7 +9,7 @@ import { timeFormat } from '@visx/vendor/d3-time-format';
 import { useSize } from 'ahooks';
 import { useRef } from 'react';
 
-import { computeAxisOffset } from '../utils/axis';
+import { computeAllAxisOffset } from '../utils/axis';
 import styles from './cartesian-base.module.css';
 
 // TODO: clean css from resize and margins
@@ -132,7 +132,7 @@ export const CartesianBase = ({
     rightAxisOffset,
     topAxisOffset,
     horizontalAxisOffset,
-  } = computeAxisOffset(3, 3);
+  } = computeAllAxisOffset(3, 3);
 
   const xMax = dynamicWidth - margin.left - margin.right - leftAxisOffset - rightAxisOffset;
   const yMax = dynamicHeight - margin.top - margin.bottom - horizontalAxisOffset;

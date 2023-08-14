@@ -1,5 +1,7 @@
 import { getMaxCharactersNum } from './math';
 
+export type AxisOrientationType = 'vertical' | 'horizontal';
+
 type TextAnchor = 'start' | 'middle' | 'end'
 
 export type AxisOffsetConfigType = {
@@ -47,7 +49,7 @@ export type AxisConfigType = {
 }
 
 export type AxisSpacingConfigType = {
-  labelCharacterExtimatedWidth: number;
+  labelCharExtimatedWidth: number;
   labelHeight: number;
   labelOffset: number;
   tickLabelHeight: number;
@@ -56,7 +58,7 @@ export type AxisSpacingConfigType = {
 }
 
 export const axisSpacingConfig: AxisSpacingConfigType = {
-  labelCharacterExtimatedWidth: 9,
+  labelCharExtimatedWidth: 9,
   labelHeight: 14, // based on a 12px font size
   labelOffset: 16,
   tickLabelHeight: 16.5, // based on a 14px font size
@@ -64,13 +66,46 @@ export const axisSpacingConfig: AxisSpacingConfigType = {
   tickLength: 4,
 };
 
-export const computeAxisOffset = (
+export const computeSingleAxisOffset = (
+  domain: Array<string | number>,
+  orientation: AxisOrientationType,
+  label?: string,
+  config = axisSpacingConfig,
+) => {
+  const hasValues = !!domain?.length;
+  if (hasValues) {
+    const isVertical = orientation === 'vertical';
+    const tickLabelMaxChar = (isVertical) ? getMaxCharactersNum(domain) : 0;
+
+    const {
+      labelCharExtimatedWidth: char,
+      labelHeight: lh,
+      labelOffset: lo,
+      tickLabelHeight: tlh,
+      tickOffset: to,
+      tickLength: tl,
+    } = config;
+
+    const tick = tl + to;
+    const axisLabel = label ? (lo + lh) : 0;
+    const maxChar = char * tickLabelMaxChar;
+
+    const v = tick + maxChar + axisLabel;
+    const h = tick + tlh + axisLabel;
+
+    return isVertical ? v : h;
+  }
+
+  return 0;
+};
+
+export const computeAllAxisOffset = (
   tickLabelMaxCharLeft = 0,
   tickLabelMaxCharRight = 0,
   config = axisSpacingConfig,
 ) => {
   const {
-    labelCharacterExtimatedWidth: lcw,
+    labelCharExtimatedWidth: char,
     labelHeight: lh,
     labelOffset: lo,
     tickLabelHeight: tlh,
@@ -78,10 +113,11 @@ export const computeAxisOffset = (
     tickLength: tl,
   } = config;
 
-  const f = lh + lo + to + tl;
-  const vl = lcw * tickLabelMaxCharLeft + f;
-  const vr = lcw * tickLabelMaxCharRight + f;
-  const h = tlh + f;
+  const common = to + tl;
+  const label = lo + lh;
+  const vl = char * tickLabelMaxCharLeft + common + label;
+  const vr = char * tickLabelMaxCharRight + common + label;
+  const h = common + tlh + label;
 
   return {
     leftAxisOffset: vl,
@@ -99,7 +135,7 @@ export const computeAxisConfig = (
   config = axisSpacingConfig,
 ) => {
   const {
-    labelCharacterExtimatedWidth: lcw,
+    labelCharExtimatedWidth: lcw,
     labelOffset,
     tickOffset,
     tickLength,
@@ -107,7 +143,7 @@ export const computeAxisConfig = (
 
   const tickLabelMaxCharLeft = domainLeft && getMaxCharactersNum(domainLeft);
   const tickLabelMaxCharRight = domainRight && getMaxCharactersNum(domainRight);
-  const offset = computeAxisOffset(tickLabelMaxCharLeft, tickLabelMaxCharRight, config);
+  const offset = computeAllAxisOffset(tickLabelMaxCharLeft, tickLabelMaxCharRight, config);
 
   const main: {
     offset: AxisOffsetConfigType;
