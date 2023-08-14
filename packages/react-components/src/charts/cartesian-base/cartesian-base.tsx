@@ -9,7 +9,7 @@ import { timeFormat } from '@visx/vendor/d3-time-format';
 import { useSize } from 'ahooks';
 import { useRef } from 'react';
 
-import { computeAxisOffset } from '../utils/geometry';
+import { computeAxisOffset } from '../utils/axis';
 import styles from './cartesian-base.module.css';
 
 // TODO: clean css from resize and margins
