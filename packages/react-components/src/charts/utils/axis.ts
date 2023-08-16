@@ -1,8 +1,9 @@
-// import { scaleBand } from '@visx/scale';
-// import { scaleLinear } from '@visx/vendor/d3-scale';
+import { scaleBand, scaleLinear, scaleUtc } from '@visx/scale';
 
 import { AxisProps } from '../cartesian-base/cartesian-base';
-import { getMaxCharactersNum } from './math';
+import {
+  getMaxCharactersNum, isArrayTypeDate,
+} from './math';
 
 type TextAnchor = 'start' | 'middle' | 'end';
 
@@ -219,36 +220,52 @@ export const computeAxisConfig = (
   return c;
 };
 
-// eslint-disable-next-line max-len
-// export const scaleDomainToAxis = (axis: Pick<AxisProps, 'domain' | 'range' | 'scaleType' | 'clamp' | 'nice' | 'round' | 'paddingInner' | 'paddingOuter' >) => {
-//   const {
-//     domain, range, scaleType, clamp, nice, round, paddingInner, paddingOuter,
-//   } = axis;
+export const scaleDomainToAxis = (axis: Pick<AxisProps, 'domain' | 'range' | 'scaleType' | 'clamp' | 'nice' | 'round' | 'paddingInner' | 'paddingOuter' >) => {
+  const {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    domain, range, scaleType, clamp, nice, round, paddingInner, paddingOuter,
+  } = axis;
 
-//   const hasData = domain.length && range?.length && scaleType;
+  const hasData = domain.length && range?.length && scaleType;
 
-//   if (hasData) {
-//     if (scaleType === 'label') {
-//       return scaleBand({
-//         domain,
-//         range,
-//         paddingInner,
-//         paddingOuter,
-//       });
-//     }
+  if (hasData) {
+    if (scaleType === 'label') {
+      return scaleBand({
+        domain: domain.map(v => v.toString()),
+        range,
+        paddingInner,
+        paddingOuter,
+      });
+    }
 
-//     if (scaleType === 'linear') {
-//       return scaleLinear({
-//         domain,
-//         range,
-//         round,
-//         nice,
-//         clamp,
-//       });
-//     }
+    if (scaleType === 'linear') {
+      return scaleLinear({
+        domain: domain.map(v => Number(v)),
+        range,
+        round: round ?? true,
+        nice,
+        clamp,
+      });
+    }
 
-//     if (scaleType === 'time') {
+    if (scaleType === 'time') {
+      const d = domain.map(v => new Date(v));
+      const isDates = isArrayTypeDate(d);
 
-//     }
-//   }
-// };
+      return scaleUtc({
+        domain: isDates ? d : [],
+        range,
+        round: round ?? true,
+        nice,
+        clamp,
+      });
+    }
+  }
+
+  return scaleBand({
+    domain: domain.map(v => v.toString()),
+    range,
+    paddingInner,
+    paddingOuter,
+  });
+};

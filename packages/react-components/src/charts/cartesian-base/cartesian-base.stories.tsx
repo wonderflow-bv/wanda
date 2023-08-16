@@ -19,9 +19,9 @@ const story: ComponentMeta<typeof CartesianBase> = {
 
     },
     bottom: {
-      domain: ['a', 'b', 'c', 'd', 'e'],
+      domain: [new Date('2023-08-1').getTime(), new Date('2023-08-16').getTime()],
       label: 'Bottom Label',
-      scaleType: 'label',
+      scaleType: 'time',
     },
     left: {
       domain: [0, 10000],
