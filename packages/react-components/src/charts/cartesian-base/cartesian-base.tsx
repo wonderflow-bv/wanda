@@ -9,7 +9,7 @@ import { timeFormat } from '@visx/vendor/d3-time-format';
 import { useSize } from 'ahooks';
 import { useRef } from 'react';
 
-import { computeAllAxisOffset } from '../utils/axis';
+import { computeAxisConfig } from '../utils/axis';
 import styles from './cartesian-base.module.css';
 
 // TODO: clean css from resize and margins
@@ -20,6 +20,10 @@ export type CartesianBaseProps = {
   background?: string;
   margin?: MarginProps;
   grid?: GridProps;
+  top?: AxisProps;
+  right?: AxisProps;
+  bottom?: AxisProps;
+  left?: AxisProps;
   otherProps?: Record<string, unknown>;
 }
 
@@ -35,11 +39,13 @@ export type GridProps = {
   tickRows: number;
 }
 
+export type AxisOrientationType = 'top' | 'left' | 'right' | 'bottom';
+
 export type AxisProps = {
-  orientation: 'top' | 'left' | 'right' | 'bottom';
+  domain: Array<string | number>;
+  orientation: AxisOrientationType;
   label?: string;
   scaleType: 'linear' | 'label' | 'time';
-  domain: Array<string | number | Date>;
   range?: number[];
   round?: boolean;
   nice?: boolean;
@@ -47,7 +53,7 @@ export type AxisProps = {
   paddingInner?: number;
   paddingOuter?: number;
   numTicks?: number;
-  otherProps: Record<string, unknown>;
+  otherProps?: Record<string, unknown>;
 }
 
 export const CartesianBase = ({
@@ -64,58 +70,22 @@ export const CartesianBase = ({
     tickColumns: 10,
     tickRows: 10,
   },
+  top,
+  right,
+  bottom,
+  left,
   otherProps,
 }: CartesianBaseProps) => {
-  const config: any = {
+  const axisConfig = computeAxisConfig({
+    top, right, bottom, left,
+  });
+
+  const gridConfig: any = {
     grid: {
       xOffset: 0,
       yOffset: 0,
       stroke: '#ccc',
       strokeOpacity: 1,
-    },
-    axis: {
-      tickLength: 4,
-      labelProps: {
-        fill: 'var(--global-foreground)',
-        fontFamily: 'system-ui, sans-serif',
-        fontSize: 12,
-        fontWeight: 400,
-        textAnchor: 'middle',
-      },
-      tickLabelProps: {
-        fill: 'var(--global-foreground)',
-        fontFamily: 'system-ui, sans-serif',
-        fontSize: 14,
-        fontWeight: 400,
-      },
-      top: {
-        tickLabelProps: {
-          dy: -4,
-        },
-        labelOffset: 12,
-      },
-      right: {
-        tickLabelProps: {
-          dx: 4,
-          dy: 4,
-          textAnchor: 'start',
-        },
-        labelOffset: 52, // this is influenced by the num of tick chars
-      },
-      bottom: {
-        tickLabelProps: {
-          dy: 4,
-        },
-        labelOffset: 12,
-      },
-      left: {
-        tickLabelProps: {
-          dx: -4,
-          dy: 4,
-          textAnchor: 'end',
-        },
-        labelOffset: 52, // this is influenced by the num of tick chars
-      },
     },
   };
 
@@ -129,18 +99,18 @@ export const CartesianBase = ({
 
   const {
     leftAxisOffset,
-    rightAxisOffset,
     topAxisOffset,
+    verticalAxisOffset,
     horizontalAxisOffset,
-  } = computeAllAxisOffset(3, 3);
+  } = axisConfig.offset;
 
-  const xMax = dynamicWidth - margin.left - margin.right - leftAxisOffset - rightAxisOffset;
+  const xMax = dynamicWidth - margin.left - margin.right - verticalAxisOffset;
   const yMax = dynamicHeight - margin.top - margin.bottom - horizontalAxisOffset;
 
-  const top = margin.top + topAxisOffset;
-  const left = margin.left + leftAxisOffset;
+  const topPos = margin.top + topAxisOffset;
+  const leftPos = margin.left + leftAxisOffset;
 
-  const xTimeValues = scaleUtc({
+  const bottomAxisValues = scaleUtc({
     domain: [new Date('2000-01-01'), new Date('2000-01-15')],
     range: [0, xMax],
     round: true,
@@ -148,7 +118,7 @@ export const CartesianBase = ({
     clamp: false,
   });
 
-  const yScaleValues = scaleLinear({
+  const leftAxisValues = scaleLinear({
     domain: [0, 10000],
     range: [yMax, 0],
     round: true,
@@ -156,7 +126,15 @@ export const CartesianBase = ({
     clamp: false,
   });
 
-  const xBandValues = scaleBand({
+  const rightAxisValues = scaleLinear({
+    domain: [0, 1],
+    range: [yMax, 0],
+    round: true,
+    nice: false,
+    clamp: false,
+  });
+
+  const topAxisValue = scaleBand({
     domain: ['a', 'b', 'c', 'd', 'e'],
     range: [0, xMax],
     paddingInner: 0.2,
@@ -176,76 +154,76 @@ export const CartesianBase = ({
         <rect x={0} y={0} width={dynamicWidth} height={dynamicHeight} fill="url(#cartesian)" rx={8} />
         <Group>
           <GridRows
-            top={top}
-            left={left}
-            scale={yScaleValues}
+            top={topPos}
+            left={leftPos}
+            scale={leftAxisValues}
             width={xMax}
             numTicks={tickRows}
-            offset={config.grid.xOffset}
-            stroke={config.grid.stroke}
-            strokeOpacity={config.grid.strokeOpacity}
+            offset={gridConfig.grid.xOffset}
+            stroke={gridConfig.grid.stroke}
+            strokeOpacity={gridConfig.grid.strokeOpacity}
           />
           <GridColumns
-            top={top}
-            left={left}
-            scale={xTimeValues}
+            top={topPos}
+            left={leftPos}
+            scale={bottomAxisValues}
             height={yMax}
             numTicks={tickColumns}
-            offset={config.grid.yOffset}
-            stroke={config.grid.stroke}
-            strokeOpacity={config.grid.strokeOpacity}
+            offset={gridConfig.grid.yOffset}
+            stroke={gridConfig.grid.stroke}
+            strokeOpacity={gridConfig.grid.strokeOpacity}
           />
           <Axis
             orientation="top"
-            scale={xBandValues}
-            top={top}
-            left={left}
-            tickLength={config.axis.tickLength}
-            tickLabelProps={{ ...config.axis.tickLabelProps, ...config.axis.top.tickLabelProps }}
-            label="Top Axis"
-            labelOffset={config.axis.top.labelOffset}
-            labelProps={config.axis.labelProps}
+            scale={topAxisValue}
+            top={topPos}
+            left={leftPos}
+            tickLength={axisConfig.tickLength}
+            tickLabelProps={{ ...axisConfig.tickLabelProps, ...axisConfig.top.tickLabelProps }}
+            label={top?.label}
+            labelOffset={axisConfig.top.labelOffset}
+            labelProps={axisConfig.labelProps}
           />
           <Axis
             orientation="right"
-            scale={yScaleValues}
-            top={top}
-            left={xMax + left}
+            scale={rightAxisValues}
+            top={topPos}
+            left={xMax + leftPos}
             numTicks={10}
-            tickLength={config.axis.tickLength}
-            tickLabelProps={{ ...config.axis.tickLabelProps, ...config.axis.right.tickLabelProps }}
-            label="Right Axis"
-            labelOffset={config.axis.right.labelOffset}
-            labelProps={{ ...config.axis.labelProps, ...config.axis.right.labelProps }}
+            tickLength={axisConfig.tickLength}
+            tickLabelProps={{ ...axisConfig.tickLabelProps, ...axisConfig.right.tickLabelProps }}
+            label={right?.label}
+            labelOffset={axisConfig.right.labelOffset}
+            labelProps={axisConfig.labelProps}
           />
           <Axis
             orientation="bottom"
-            scale={xTimeValues}
-            top={yMax + top}
-            left={left}
+            scale={bottomAxisValues}
+            top={yMax + topPos}
+            left={leftPos}
             numTicks={10}
-            tickLength={config.axis.tickLength}
-            tickLabelProps={{ ...config.axis.tickLabelProps, ...config.axis.bottom.tickLabelProps }}
+            tickLength={axisConfig.tickLength}
+            tickLabelProps={{ ...axisConfig.tickLabelProps, ...axisConfig.bottom.tickLabelProps }}
             tickFormat={(v: any, i: number) => {
               const val1 = timeFormat('%d')(v);
               const val2 = timeFormat('%b %d')(v);
               return (i % 2 === 0 ? val1 : val2);
             }}
-            label="Bottom Axis"
-            labelOffset={config.axis.bottom.labelOffset}
-            labelProps={config.axis.labelProps}
+            label={bottom?.label}
+            labelOffset={axisConfig.right.labelOffset}
+            labelProps={axisConfig.labelProps}
           />
           <Axis
             orientation="left"
-            scale={yScaleValues}
-            top={top}
-            left={left}
+            scale={leftAxisValues}
+            top={topPos}
+            left={leftPos}
             numTicks={10}
-            tickLength={config.axis.tickLength}
-            tickLabelProps={{ ...config.axis.tickLabelProps, ...config.axis.left.tickLabelProps }}
-            label="Left Axis"
-            labelOffset={config.axis.left.labelOffset}
-            labelProps={config.axis.labelProps}
+            tickLength={axisConfig.tickLength}
+            tickLabelProps={{ ...axisConfig.tickLabelProps, ...axisConfig.left.tickLabelProps }}
+            label={left?.label}
+            labelOffset={axisConfig.left.labelOffset}
+            labelProps={axisConfig.labelProps}
           />
         </Group>
       </svg>

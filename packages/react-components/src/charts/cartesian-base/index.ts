@@ -15,6 +15,6 @@
  */
 
 export type {
-  AxisProps as AxisProp, CartesianBaseProps, GridProps, MarginProps,
+  AxisProps, CartesianBaseProps, GridProps, MarginProps,
 } from './cartesian-base';
 export { CartesianBase } from './cartesian-base';

@@ -1,14 +1,9 @@
+import { AxisProps } from '../cartesian-base/cartesian-base';
 import { getMaxCharactersNum } from './math';
-
-export type AxisOrientationType = 'vertical' | 'horizontal';
 
 type TextAnchor = 'start' | 'middle' | 'end';
 
-type AxisOffsetInput = {
-  domain: Array<string | number>;
-  orientation: AxisOrientationType;
-  label?: string;
-}
+export type AxisOffsetInput = Pick<AxisProps, 'domain' | 'orientation' | 'label'>
 
 export type AxisOffsetConfigType = {
   leftAxisOffset: number;
@@ -79,7 +74,7 @@ export const computeSingleAxisOffset = (
   const { domain, orientation, label } = axis;
   const hasValues = !!domain?.length;
   if (hasValues) {
-    const isVertical = orientation === 'vertical';
+    const isVertical = orientation === 'left' || orientation === 'right';
     const tickLabelMaxChar = (isVertical) ? getMaxCharactersNum(domain) : 0;
 
     const {
@@ -127,8 +122,8 @@ export const computeAllAxisOffset = (
     rightAxisOffset: r,
     topAxisOffset: t,
     bottomAxisOffset: b,
-    verticalAxisOffset: t + b,
-    horizontalAxisOffset: l + r,
+    verticalAxisOffset: l + r,
+    horizontalAxisOffset: t + b,
   };
 };
 
