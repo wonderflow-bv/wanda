@@ -12,8 +12,6 @@ import { useRef } from 'react';
 import { computeAxisConfig } from '../utils/axis';
 import styles from './cartesian-base.module.css';
 
-// TODO: clean css from resize and margins
-
 export type CartesianBaseProps = {
   width?: number;
   height?: number;
@@ -39,11 +37,8 @@ export type GridProps = {
   tickRows: number;
 }
 
-export type AxisOrientationType = 'top' | 'left' | 'right' | 'bottom';
-
 export type AxisProps = {
   domain: Array<string | number>;
-  orientation: AxisOrientationType;
   label?: string;
   scaleType: 'linear' | 'label' | 'time';
   range?: number[];
@@ -79,6 +74,8 @@ export const CartesianBase = ({
   const axisConfig = computeAxisConfig({
     top, right, bottom, left,
   });
+
+  console.log('axisConfig', axisConfig);
 
   const gridConfig: any = {
     grid: {

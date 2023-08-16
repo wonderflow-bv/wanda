@@ -3,7 +3,11 @@ import { getMaxCharactersNum } from './math';
 
 type TextAnchor = 'start' | 'middle' | 'end';
 
-export type AxisOffsetInput = Pick<AxisProps, 'domain' | 'orientation' | 'label'>
+type AxisOrientationType = 'top' | 'left' | 'right' | 'bottom';
+
+type AllAxisOffsetInput = Pick<AxisProps, 'domain' | 'label'>
+
+type SingleAxisOffsetInput = AllAxisOffsetInput & { orientation: AxisOrientationType }
 
 export type AxisOffsetConfigType = {
   leftAxisOffset: number;
@@ -68,7 +72,7 @@ export const axisSpacingConfig: AxisSpacingConfigType = {
 };
 
 export const computeSingleAxisOffset = (
-  axis: AxisOffsetInput,
+  axis: SingleAxisOffsetInput,
   config = axisSpacingConfig,
 ) => {
   const { domain, orientation, label } = axis;
@@ -101,10 +105,10 @@ export const computeSingleAxisOffset = (
 
 export const computeAllAxisOffset = (
   axis: {
-    top?: AxisOffsetInput;
-    right?: AxisOffsetInput;
-    bottom?: AxisOffsetInput;
-    left?: AxisOffsetInput;
+    top?: AllAxisOffsetInput;
+    right?: AllAxisOffsetInput;
+    bottom?: AllAxisOffsetInput;
+    left?: AllAxisOffsetInput;
   },
   config = axisSpacingConfig,
 ) => {
@@ -112,10 +116,10 @@ export const computeAllAxisOffset = (
     top, right, bottom, left,
   } = axis;
 
-  const t = top ? computeSingleAxisOffset(top, config) : 0;
-  const r = right ? computeSingleAxisOffset(right, config) : 0;
-  const b = bottom ? computeSingleAxisOffset(bottom, config) : 0;
-  const l = left ? computeSingleAxisOffset(left, config) : 0;
+  const t = top ? computeSingleAxisOffset({ ...top, orientation: 'top' }, config) : 0;
+  const r = right ? computeSingleAxisOffset({ ...right, orientation: 'right' }, config) : 0;
+  const b = bottom ? computeSingleAxisOffset({ ...bottom, orientation: 'bottom' }, config) : 0;
+  const l = left ? computeSingleAxisOffset({ ...left, orientation: 'left' }, config) : 0;
 
   return {
     leftAxisOffset: l,
@@ -129,10 +133,10 @@ export const computeAllAxisOffset = (
 
 export const computeAxisConfig = (
   axis: {
-    top?: AxisOffsetInput;
-    right?: AxisOffsetInput;
-    bottom?: AxisOffsetInput;
-    left?: AxisOffsetInput;
+    top?: AllAxisOffsetInput;
+    right?: AllAxisOffsetInput;
+    bottom?: AllAxisOffsetInput;
+    left?: AllAxisOffsetInput;
   },
   config = axisSpacingConfig,
 ) => {

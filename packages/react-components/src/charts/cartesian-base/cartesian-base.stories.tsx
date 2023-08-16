@@ -10,26 +10,22 @@ const story: ComponentMeta<typeof CartesianBase> = {
     top: {
       domain: ['a', 'b', 'c', 'd', 'e'],
       label: 'Top Label',
-      orientation: 'top',
       scaleType: 'label',
     },
     right: {
       domain: [0, 1],
       label: 'Right Label',
-      orientation: 'top',
       scaleType: 'linear',
 
     },
     bottom: {
       domain: ['a', 'b', 'c', 'd', 'e'],
       label: 'Bottom Label',
-      orientation: 'top',
       scaleType: 'label',
     },
     left: {
       domain: [0, 10000],
       label: 'Left Label',
-      orientation: 'top',
       scaleType: 'linear',
     },
   },
