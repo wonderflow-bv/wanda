@@ -75,8 +75,6 @@ export const CartesianBase = ({
     top, right, bottom, left,
   });
 
-  console.log('axisConfig', axisConfig);
-
   const gridConfig: any = {
     grid: {
       xOffset: 0,
@@ -124,7 +122,7 @@ export const CartesianBase = ({
   });
 
   const rightAxisValues = scaleLinear({
-    domain: [0, 1],
+    domain: [0, 10],
     range: [yMax, 0],
     round: true,
     nice: false,
