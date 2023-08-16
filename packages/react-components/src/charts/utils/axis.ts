@@ -1,3 +1,6 @@
+// import { scaleBand } from '@visx/scale';
+// import { scaleLinear } from '@visx/vendor/d3-scale';
+
 import { AxisProps } from '../cartesian-base/cartesian-base';
 import { getMaxCharactersNum } from './math';
 
@@ -215,3 +218,37 @@ export const computeAxisConfig = (
   };
   return c;
 };
+
+// eslint-disable-next-line max-len
+// export const scaleDomainToAxis = (axis: Pick<AxisProps, 'domain' | 'range' | 'scaleType' | 'clamp' | 'nice' | 'round' | 'paddingInner' | 'paddingOuter' >) => {
+//   const {
+//     domain, range, scaleType, clamp, nice, round, paddingInner, paddingOuter,
+//   } = axis;
+
+//   const hasData = domain.length && range?.length && scaleType;
+
+//   if (hasData) {
+//     if (scaleType === 'label') {
+//       return scaleBand({
+//         domain,
+//         range,
+//         paddingInner,
+//         paddingOuter,
+//       });
+//     }
+
+//     if (scaleType === 'linear') {
+//       return scaleLinear({
+//         domain,
+//         range,
+//         round,
+//         nice,
+//         clamp,
+//       });
+//     }
+
+//     if (scaleType === 'time') {
+
+//     }
+//   }
+// };

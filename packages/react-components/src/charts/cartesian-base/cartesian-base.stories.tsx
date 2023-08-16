@@ -13,7 +13,7 @@ const story: ComponentMeta<typeof CartesianBase> = {
       scaleType: 'label',
     },
     right: {
-      domain: [0, 10],
+      domain: [0, 1],
       label: 'Right Label',
       scaleType: 'linear',
 

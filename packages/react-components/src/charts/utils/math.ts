@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-export const isArrayTypeString = (arr: any[]) => Array.isArray(arr) && arr.length > 0 && arr.every(el => typeof el === 'number');
+export const isArrayTypeString = (arr: any[]) => Array.isArray(arr) && arr.length > 0 && arr.every(el => typeof el === 'string');
 export const isArrayTypeNumber = (arr: any[]) => Array.isArray(arr) && arr.length > 0 && arr.every(el => typeof el === 'number');
 export const isArrayTypeDate = (arr: any[]) => Array.isArray(arr) && arr.length > 0 && arr.every(el => _.isDate(el));
 

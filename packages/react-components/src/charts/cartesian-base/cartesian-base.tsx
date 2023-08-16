@@ -39,8 +39,8 @@ export type GridProps = {
 
 export type AxisProps = {
   domain: Array<string | number>;
-  label?: string;
   scaleType: 'linear' | 'label' | 'time';
+  label?: string;
   range?: number[];
   round?: boolean;
   nice?: boolean;
@@ -122,7 +122,7 @@ export const CartesianBase = ({
   });
 
   const rightAxisValues = scaleLinear({
-    domain: [0, 10],
+    domain: [0, 1],
     range: [yMax, 0],
     round: true,
     nice: false,
@@ -205,7 +205,7 @@ export const CartesianBase = ({
               return (i % 2 === 0 ? val1 : val2);
             }}
             label={bottom?.label}
-            labelOffset={axisConfig.right.labelOffset}
+            labelOffset={axisConfig.bottom.labelOffset}
             labelProps={axisConfig.labelProps}
           />
           <Axis
