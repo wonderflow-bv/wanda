@@ -1,5 +1,11 @@
 # @wonderflow/symbols
 
+## 12.4.0
+
+### Minor Changes
+
+- da0ea501: Add new `phone` icon
+
 ## 12.3.0
 
 ### Minor Changes
