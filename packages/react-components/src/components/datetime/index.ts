@@ -14,5 +14,7 @@
  * limitations under the License.
  */
 
+'use client';
+
 export type { DatetimeProps } from './datetime';
 export { Datetime } from './datetime';

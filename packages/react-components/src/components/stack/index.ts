@@ -14,5 +14,7 @@
  * limitations under the License.
  */
 
+'use client';
+
 export type { StackProps } from './stack';
 export { Stack } from './stack';

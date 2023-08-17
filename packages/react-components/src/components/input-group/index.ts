@@ -14,5 +14,7 @@
  * limitations under the License.
  */
 
+'use client';
+
 export type { InputGroupProps } from './input-group';
 export { InputGroup } from './input-group';

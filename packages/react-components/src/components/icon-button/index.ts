@@ -14,5 +14,7 @@
  * limitations under the License.
  */
 
+'use client';
+
 export type { IconButtonProps } from './icon-button';
 export { IconButton } from './icon-button';

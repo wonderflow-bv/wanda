@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+'use client';
+
 export { isBrowser } from './browser';
 export { cssRelativeUnitsToPixel } from './conversions';
 export {

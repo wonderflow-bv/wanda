@@ -14,5 +14,7 @@
  * limitations under the License.
  */
 
+'use client';
+
 export type { TabProps } from './tab';
 export { Tab } from './tab';

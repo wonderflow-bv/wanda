@@ -14,5 +14,7 @@
  * limitations under the License.
  */
 
+'use client';
+
 export type { SkeletonProps } from './skeleton';
 export { Skeleton } from './skeleton';

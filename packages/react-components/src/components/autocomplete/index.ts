@@ -14,5 +14,7 @@
  * limitations under the License.
  */
 
+'use client';
+
 export type { AutocompleteProps } from './autocomplete';
 export { Autocomplete } from './autocomplete';

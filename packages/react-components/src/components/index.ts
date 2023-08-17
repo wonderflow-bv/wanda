@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+'use client';
+
 export * from './accordion';
 export * from './aspect-ratio';
 export * from './autocomplete';

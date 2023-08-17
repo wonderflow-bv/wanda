@@ -14,5 +14,7 @@
  * limitations under the License.
  */
 
+'use client';
+
 export type { TableProps } from './table';
 export { Table } from './table';

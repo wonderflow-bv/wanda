@@ -14,5 +14,7 @@
  * limitations under the License.
  */
 
+'use client';
+
 export type { SpinnerProps } from './spinner';
 export { Spinner } from './spinner';

@@ -14,5 +14,7 @@
  * limitations under the License.
  */
 
+'use client';
+
 export type { SeparatorProps } from './separator';
 export { Separator } from './separator';
