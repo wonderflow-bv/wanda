@@ -14,5 +14,7 @@
  * limitations under the License.
  */
 
+'use client';
+
 export type { MasonryProps } from './masonry';
 export { Masonry } from './masonry';

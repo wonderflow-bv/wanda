@@ -14,5 +14,7 @@
  * limitations under the License.
  */
 
+'use client';
+
 export type { ElevatorProps } from './elevator';
 export { Elevator } from './elevator';

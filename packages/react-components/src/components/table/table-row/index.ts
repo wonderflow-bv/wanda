@@ -14,4 +14,6 @@
  * limitations under the License.
  */
 
+'use client';
+
 export { TableRow } from './table-row';

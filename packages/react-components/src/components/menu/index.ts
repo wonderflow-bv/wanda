@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+'use client';
+
 export type { MenuProps } from './menu';
 export { Menu } from './menu';
 export type { MenuItemProps } from './menu-item/menu-item';

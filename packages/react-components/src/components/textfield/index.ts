@@ -14,5 +14,7 @@
  * limitations under the License.
  */
 
+'use client';
+
 export type { TextfieldProps } from './textfield';
 export { Textfield } from './textfield';

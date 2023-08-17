@@ -14,5 +14,7 @@
  * limitations under the License.
  */
 
+'use client';
+
 export type { DrawerProps } from './drawer';
 export { Drawer } from './drawer';

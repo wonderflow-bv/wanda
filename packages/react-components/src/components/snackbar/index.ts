@@ -14,5 +14,7 @@
  * limitations under the License.
  */
 
+'use client';
+
 export type { SnackbarProps } from './snackbar';
 export { Snackbar } from './snackbar';

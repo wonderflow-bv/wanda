@@ -14,5 +14,7 @@
  * limitations under the License.
  */
 
+'use client';
+
 export type { AvatarProps } from './avatar';
 export { Avatar } from './avatar';

@@ -14,4 +14,6 @@
  * limitations under the License.
  */
 
+'use client';
+
 export { TableCheckbox } from './table-checkbox';

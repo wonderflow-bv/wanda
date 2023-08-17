@@ -14,5 +14,7 @@
  * limitations under the License.
  */
 
+'use client';
+
 export type { SelectProps } from './select';
 export { Select } from './select';

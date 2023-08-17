@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+'use client';
+
 export { useBreakpoints } from './useBreakpoints';
 export { useBreakpointsConfig } from './useBreakpointsConfig';
 export { useSSR } from './useSSR';

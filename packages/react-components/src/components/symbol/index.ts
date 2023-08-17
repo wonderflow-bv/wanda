@@ -14,5 +14,7 @@
  * limitations under the License.
  */
 
+'use client';
+
 export type { SymbolProps } from './symbol';
 export { Symbol } from './symbol';

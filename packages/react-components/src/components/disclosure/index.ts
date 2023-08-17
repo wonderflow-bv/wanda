@@ -14,5 +14,7 @@
  * limitations under the License.
  */
 
+'use client';
+
 export type { DisclosureProps } from './disclosure';
 export { Disclosure } from './disclosure';

@@ -14,4 +14,6 @@
  * limitations under the License.
  */
 
+'use client';
+
 export { TableCell } from './table-cell';

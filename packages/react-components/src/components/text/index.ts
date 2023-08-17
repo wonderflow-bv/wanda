@@ -14,5 +14,7 @@
  * limitations under the License.
  */
 
+'use client';
+
 export type { TextProps, TextVariants } from './text';
 export { Text } from './text';

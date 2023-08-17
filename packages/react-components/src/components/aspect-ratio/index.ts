@@ -14,5 +14,7 @@
  * limitations under the License.
  */
 
+'use client';
+
 export type { AspectRatioProps } from './aspect-ratio';
 export { AspectRatio } from './aspect-ratio';

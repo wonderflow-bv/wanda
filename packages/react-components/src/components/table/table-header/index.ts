@@ -14,5 +14,7 @@
  * limitations under the License.
  */
 
+'use client';
+
 export type { TableHeaderProps } from './table-header';
 export { TableHeader } from './table-header';

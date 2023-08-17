@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+'use client';
+
 export type { CheckboxProps } from './checkbox';
 export { Checkbox } from './checkbox';
 export type { RadioProps } from './radio';
