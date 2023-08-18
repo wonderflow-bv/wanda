@@ -1,10 +1,13 @@
 import {
   Axis,
+  TickFormatter,
 } from '@visx/axis';
 import { LinearGradient } from '@visx/gradient';
 import { GridColumns, GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
-import { timeFormat } from '@visx/vendor/d3-time-format';
+import {
+  NumberValue, ScaleBand, ScaleLinear, ScaleTime,
+} from '@visx/vendor/d3-scale';
 import { useSize } from 'ahooks';
 import { useRef } from 'react';
 
@@ -32,9 +35,11 @@ export type MarginProps = {
 }
 
 export type GridProps = {
-  tickColumns: number;
-  tickRows: number;
+  tickColumns?: number;
+  tickRows?: number;
 }
+
+export type AxisPosition = 'top' | 'left' | 'right' | 'bottom';
 
 export type AxisProps = {
   domain: Array<string | number>;
@@ -47,7 +52,16 @@ export type AxisProps = {
   paddingInner?: number;
   paddingOuter?: number;
   numTicks?: number;
+  tickFormat?: TickFormatter<NumberValue | string | Date>;
   otherProps?: Record<string, unknown>;
+}
+
+export type AxisConfig = {
+  orientation: AxisPosition;
+  top: number;
+  left: number;
+  axis: AxisProps | undefined;
+  valueScale: ScaleBand<string> | ScaleLinear<number, number> | ScaleTime<number, number> | undefined;
 }
 
 export const CartesianBase = ({
@@ -60,36 +74,29 @@ export const CartesianBase = ({
     bottom: 24,
     left: 24,
   },
-  grid = {
-    tickColumns: 10,
-    tickRows: 10,
-  },
+  grid,
   top,
   right,
   bottom,
   left,
   otherProps,
 }: CartesianBaseProps) => {
-  const axisConfig = computeAxisConfig({
-    top, right, bottom, left,
-  });
-
-  const gridConfig: any = {
-    grid: {
-      xOffset: 0,
-      yOffset: 0,
-      stroke: '#ccc',
-      strokeOpacity: 1,
-    },
+  const gridConfig = {
+    xOffset: 0,
+    yOffset: 0,
+    stroke: '#ccc',
+    strokeOpacity: 1,
   };
-
-  const { tickColumns, tickRows } = grid;
 
   const ref = useRef(null);
   const size = useSize(ref);
 
   const dynamicWidth = size?.width ?? width;
   const dynamicHeight = size?.height ?? height;
+
+  const axisConfig = computeAxisConfig({
+    top, right, bottom, left,
+  });
 
   const {
     leftAxisOffset,
@@ -102,12 +109,45 @@ export const CartesianBase = ({
   const yMax = dynamicHeight - margin.top - margin.bottom - horizontalAxisOffset;
 
   const topPos = margin.top + topAxisOffset;
+  const rightPos = margin.left + leftAxisOffset + xMax;
+  const bottomPos = margin.top + topAxisOffset + yMax;
   const leftPos = margin.left + leftAxisOffset;
 
-  const bottomValuesScale = bottom && scaleDomainToAxis({ ...bottom, range: [0, xMax] });
-  const topValuesScale = top && scaleDomainToAxis({ ...top, range: [0, xMax] });
-  const rightValuesScale = right && scaleDomainToAxis({ ...right, range: [yMax, 0] });
-  const leftValuesScale = left && scaleDomainToAxis({ ...left, range: [yMax, 0] });
+  const topScale = top && scaleDomainToAxis({ ...top, range: [0, xMax] });
+  const rightScale = right && scaleDomainToAxis({ ...right, range: [yMax, 0] });
+  const bottomScale = bottom && scaleDomainToAxis({ ...bottom, range: [0, xMax] });
+  const leftScale = left && scaleDomainToAxis({ ...left, range: [yMax, 0] });
+
+  const allAxis: AxisConfig[] = [
+    {
+      orientation: 'top',
+      top: topPos,
+      left: leftPos,
+      axis: top,
+      valueScale: topScale,
+    },
+    {
+      orientation: 'right',
+      top: topPos,
+      left: rightPos,
+      axis: right,
+      valueScale: rightScale,
+    },
+    {
+      orientation: 'bottom',
+      top: bottomPos,
+      left: leftPos,
+      axis: bottom,
+      valueScale: bottomScale,
+    },
+    {
+      orientation: 'left',
+      top: topPos,
+      left: leftPos,
+      axis: left,
+      valueScale: leftScale,
+    },
+  ];
 
   return (
     <div className={styles.Wrapper} ref={ref}>
@@ -125,82 +165,42 @@ export const CartesianBase = ({
             <GridRows
               top={topPos}
               left={leftPos}
-              scale={leftValuesScale ?? rightValuesScale!}
+              scale={leftScale ?? rightScale!}
               width={xMax}
-              numTicks={tickRows}
-              offset={gridConfig.grid.xOffset}
-              stroke={gridConfig.grid.stroke}
-              strokeOpacity={gridConfig.grid.strokeOpacity}
+              numTicks={grid?.tickRows}
+              offset={gridConfig.xOffset}
+              stroke={gridConfig.stroke}
+              strokeOpacity={gridConfig.strokeOpacity}
             />
           )}
           {(top || bottom) && (
             <GridColumns
               top={topPos}
               left={leftPos}
-              scale={bottomValuesScale ?? topValuesScale!}
+              scale={bottomScale ?? topScale!}
               height={yMax}
-              numTicks={tickColumns}
-              offset={gridConfig.grid.yOffset}
-              stroke={gridConfig.grid.stroke}
-              strokeOpacity={gridConfig.grid.strokeOpacity}
+              numTicks={grid?.tickColumns}
+              offset={gridConfig.yOffset}
+              stroke={gridConfig.stroke}
+              strokeOpacity={gridConfig.strokeOpacity}
             />
           )}
-          {top && (
+          {allAxis.filter(a => a.axis).map(a => (
             <Axis
-              orientation="top"
-              scale={topValuesScale!}
-              top={topPos}
-              left={leftPos}
+              key={a.orientation}
+              orientation={a.orientation}
+              scale={a.valueScale!}
+              top={a.top}
+              left={a.left}
+              numTicks={a.axis!.numTicks}
               tickLength={axisConfig.tickLength}
-              tickLabelProps={{ ...axisConfig.tickLabelProps, ...axisConfig.top.tickLabelProps }}
-              label={top?.label}
-              labelOffset={axisConfig.top.labelOffset}
+              tickLabelProps={{ ...axisConfig.tickLabelProps, ...axisConfig[a.orientation].tickLabelProps }}
+              label={a.axis!.label}
+              labelOffset={axisConfig[a.orientation].labelOffset}
               labelProps={axisConfig.labelProps}
+              tickFormat={a.axis!.tickFormat}
             />
-          )}
-          {right && (
-            <Axis
-              orientation="right"
-              scale={rightValuesScale!}
-              top={topPos}
-              left={xMax + leftPos}
-              numTicks={10}
-              tickLength={axisConfig.tickLength}
-              tickLabelProps={{ ...axisConfig.tickLabelProps, ...axisConfig.right.tickLabelProps }}
-              label={right?.label}
-              labelOffset={axisConfig.right.labelOffset}
-              labelProps={axisConfig.labelProps}
-            />
-          )}
-          {bottom && (
-            <Axis
-              orientation="bottom"
-              scale={bottomValuesScale!}
-              top={yMax + topPos}
-              left={leftPos}
-              numTicks={10}
-              tickLength={axisConfig.tickLength}
-              tickLabelProps={{ ...axisConfig.tickLabelProps, ...axisConfig.bottom.tickLabelProps }}
-              tickFormat={(v: any) => timeFormat('%b %d')(v)}
-              label={bottom?.label}
-              labelOffset={axisConfig.bottom.labelOffset}
-              labelProps={axisConfig.labelProps}
-            />
-          )}
-          {left && (
-            <Axis
-              orientation="left"
-              scale={leftValuesScale!}
-              top={topPos}
-              left={leftPos}
-              numTicks={10}
-              tickLength={axisConfig.tickLength}
-              tickLabelProps={{ ...axisConfig.tickLabelProps, ...axisConfig.left.tickLabelProps }}
-              label={left?.label}
-              labelOffset={axisConfig.left.labelOffset}
-              labelProps={axisConfig.labelProps}
-            />
-          )}
+          ))}
         </Group>
       </svg>
     </div>

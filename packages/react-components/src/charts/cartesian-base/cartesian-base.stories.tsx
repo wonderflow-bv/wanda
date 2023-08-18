@@ -7,6 +7,10 @@ const story: ComponentMeta<typeof CartesianBase> = {
   title: 'Charts/Cartesian Base',
   component: CartesianBase,
   args: {
+    grid: {
+      tickColumns: 10,
+      tickRows: 10,
+    },
     top: {
       domain: ['a', 'b', 'c', 'd', 'e'],
       label: 'Top Label',
@@ -19,7 +23,7 @@ const story: ComponentMeta<typeof CartesianBase> = {
 
     },
     bottom: {
-      domain: [new Date('2023-08-1').getTime(), new Date('2023-08-16').getTime()],
+      domain: [new Date('2020-01-01').getTime(), new Date('2020-01-10').getTime()],
       label: 'Bottom Label',
       scaleType: 'time',
     },

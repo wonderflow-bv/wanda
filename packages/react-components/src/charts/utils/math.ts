@@ -1,8 +1,19 @@
 import _ from 'lodash';
 
-export const isArrayTypeString = (arr: any[]) => Array.isArray(arr) && arr.length > 0 && arr.every(el => typeof el === 'string');
-export const isArrayTypeNumber = (arr: any[]) => Array.isArray(arr) && arr.length > 0 && arr.every(el => typeof el === 'number');
-export const isArrayTypeDate = (arr: any[]) => Array.isArray(arr) && arr.length > 0 && arr.every(el => _.isDate(el));
+export type ValidTypeOf = 'undefined'| 'object'| 'boolean'| 'number'| 'string'| 'function'| 'symbol'| 'bigint';
+
+export const isArrayType = (
+  arr: unknown[],
+  type: ValidTypeOf | 'date',
+) => {
+  if (type === 'date') return Array.isArray(arr) && arr.length > 0 && arr.every(el => _.isDate(el));
+  // eslint-disable-next-line valid-typeof
+  return Array.isArray(arr) && arr.length > 0 && arr.every(el => typeof el === type);
+};
+
+export const isArrayTypeString = (arr: any[]) => isArrayType(arr, 'string');
+export const isArrayTypeNumber = (arr: any[]) => isArrayType(arr, 'number');
+export const isArrayTypeDate = (arr: any[]) => isArrayType(arr, 'date');
 
 export const getMinMaxNumber = (values: number[]) => {
   if (isArrayTypeNumber(values)) return [Math.min(...values), Math.max(...values)];
