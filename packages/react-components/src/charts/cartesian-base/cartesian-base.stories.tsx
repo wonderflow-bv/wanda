@@ -1,5 +1,4 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import React from 'react';
 
 import { CartesianBase } from './cartesian-base';
 
@@ -15,6 +14,7 @@ const story: ComponentMeta<typeof CartesianBase> = {
       domain: ['a', 'b', 'c', 'd', 'e'],
       label: 'Top Label',
       scaleType: 'label',
+      numTicks: 12,
     },
     right: {
       domain: [0, 1],
@@ -46,3 +46,4 @@ export const Default = Template.bind({});
 Default.args = {
 
 };
+

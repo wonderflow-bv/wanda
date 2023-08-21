@@ -35,24 +35,13 @@ export const getMinMaxDate = (values: Array<number | Date>) => {
     dates = getMinMaxNumber(n);
   }
 
-  if (dates) {
-    const [min, max] = dates;
-    return [new Date(min), new Date(max)];
-  }
-
-  return undefined;
+  return dates && [new Date(dates[0]), new Date(dates[1])];
 };
 
 export const getMaxCharactersNum = (values: Array<string | number>) => {
   if (values.length === 0) return 0;
-  const isNumbers = isArrayTypeNumber(values);
 
-  const max = values.map(el => String(el)).sort((a, b) => b.length - a.length)[0].length;
-
-  if (isNumbers) {
-    const diff = Math.max(...values as number[]) - Math.min(...values as number[]);
-    return diff >= 10 ? max : max + 2;
-  }
+  const max = values.map(el => `${el}`).sort((a, b) => b.length - a.length)[0].length;
 
   return max;
 };
