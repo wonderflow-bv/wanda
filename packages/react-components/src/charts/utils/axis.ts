@@ -2,34 +2,43 @@ import { scaleBand, scaleLinear, scaleUtc } from '@visx/scale';
 
 import { AxisProps } from '../cartesian-base/cartesian-base';
 import {
-  getMaxCharactersNum, isArrayTypeDate,
+  getMaxCharactersNum, getMinMaxNumber, isArrayTypeDate,
 } from './math';
 
 type TextAnchor = 'start' | 'middle' | 'end';
 
-type AxisOrientationType = 'top' | 'left' | 'right' | 'bottom';
+export type AxisOrientation = 'top' | 'left' | 'right' | 'bottom';
 
 type AllAxisOffsetInput = Pick<AxisProps, 'domain' | 'label'>
 
-type SingleAxisOffsetInput = AllAxisOffsetInput & { orientation: AxisOrientationType }
+type SingleAxisOffsetInput = AllAxisOffsetInput & { orientation: AxisOrientation }
 
-export type AxisOffsetConfigType = {
-  leftAxisOffset: number;
-  rightAxisOffset: number;
+export type AxisOffsetConfig = {
   topAxisOffset: number;
+  rightAxisOffset: number;
   bottomAxisOffset: number;
+  leftAxisOffset: number;
   verticalAxisOffset: number;
   horizontalAxisOffset: number;
 }
 
-export type HorizontalAxisConfigType = {
+export type AxisSpacingConfig = {
+  labelCharExtimatedWidth: number;
+  labelHeight: number;
+  labelOffset: number;
+  tickLabelHeight: number;
+  tickOffset: number;
+  tickLength: number;
+}
+
+export type HorizontalAxisConfig = {
   tickLabelProps: {
     dy: number;
   };
   labelOffset: number;
 }
 
-export type VerticalAxisConfigType = {
+export type VerticalAxisConfig = {
   tickLabelProps: {
     dx: number;
     dy: number;
@@ -45,28 +54,19 @@ export type LabelProps = {
   fontWeight: number;
 }
 
-export type AxisConfigType = {
-  offset: AxisOffsetConfigType;
+export type AxisConfig = {
+  offset: AxisOffsetConfig;
   tickLength: number;
   labelProps: LabelProps & { textAnchor: TextAnchor };
   tickLabelProps: LabelProps;
-  top: HorizontalAxisConfigType;
-  right: VerticalAxisConfigType;
-  bottom: HorizontalAxisConfigType;
-  left: VerticalAxisConfigType;
+  top: HorizontalAxisConfig;
+  right: VerticalAxisConfig;
+  bottom: HorizontalAxisConfig;
+  left: VerticalAxisConfig;
 
 }
 
-export type AxisSpacingConfigType = {
-  labelCharExtimatedWidth: number;
-  labelHeight: number;
-  labelOffset: number;
-  tickLabelHeight: number;
-  tickOffset: number;
-  tickLength: number;
-}
-
-export const axisSpacingConfig: AxisSpacingConfigType = {
+export const axisSpacingConfig: AxisSpacingConfig = {
   labelCharExtimatedWidth: 9,
   labelHeight: 14, // based on a 12px font size
   labelOffset: 16,
@@ -160,7 +160,7 @@ export const computeAxisConfig = (
   const maxCharRight = axis.right ? getMaxCharactersNum(axis.right.domain) : 0;
 
   const main: {
-    offset: AxisOffsetConfigType;
+    offset: AxisOffsetConfig;
     tickLength: number;
     labelProps: LabelProps & { textAnchor: TextAnchor };
     tickLabelProps: LabelProps;
@@ -182,14 +182,14 @@ export const computeAxisConfig = (
     },
   };
 
-  const top: HorizontalAxisConfigType = {
+  const top: HorizontalAxisConfig = {
     tickLabelProps: {
       dy: -tickOffset,
     },
     labelOffset,
   };
 
-  const right: VerticalAxisConfigType = {
+  const right: VerticalAxisConfig = {
     tickLabelProps: {
       dx: tickOffset,
       dy: tickOffset,
@@ -198,14 +198,14 @@ export const computeAxisConfig = (
     labelOffset: hasLabelRight ? (labelOffset + lcw * maxCharRight) : 0,
   };
 
-  const bottom: HorizontalAxisConfigType = {
+  const bottom: HorizontalAxisConfig = {
     tickLabelProps: {
       dy: tickOffset,
     },
     labelOffset,
   };
 
-  const left: VerticalAxisConfigType = {
+  const left: VerticalAxisConfig = {
     tickLabelProps: {
       dx: -tickOffset,
       dy: tickOffset,
@@ -214,7 +214,7 @@ export const computeAxisConfig = (
     labelOffset: hasLabelLeft ? (labelOffset + lcw * maxCharLeft) : 0,
   };
 
-  const c: AxisConfigType = {
+  const c: AxisConfig = {
     ...main, top, right, bottom, left,
   };
   return c;
@@ -240,7 +240,7 @@ export const scaleDomainToAxis = (axis: Pick<AxisProps, 'domain' | 'range' | 'sc
 
     if (scaleType === 'linear') {
       return scaleLinear({
-        domain: domain.map(v => Number(v)),
+        domain: getMinMaxNumber(domain.map(v => Number(v))),
         range,
         round: round ?? true,
         nice,

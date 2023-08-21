@@ -11,7 +11,7 @@ import {
 import { useSize } from 'ahooks';
 import { useRef } from 'react';
 
-import { computeAxisConfig, scaleDomainToAxis } from '../utils/axis';
+import { AxisOrientation, computeAxisConfig, scaleDomainToAxis } from '../utils/axis';
 import styles from './cartesian-base.module.css';
 
 export type CartesianBaseProps = {
@@ -39,8 +39,6 @@ export type GridProps = {
   tickRows?: number;
 }
 
-export type AxisPosition = 'top' | 'left' | 'right' | 'bottom';
-
 export type AxisProps = {
   domain: Array<string | number>;
   scaleType: 'linear' | 'label' | 'time';
@@ -57,7 +55,7 @@ export type AxisProps = {
 }
 
 export type AxisConfig = {
-  orientation: AxisPosition;
+  orientation: AxisOrientation;
   top: number;
   left: number;
   axis: AxisProps | undefined;

@@ -14,13 +14,13 @@ const story: ComponentMeta<typeof CartesianBase> = {
       domain: ['a', 'b', 'c', 'd', 'e'],
       label: 'Top Label',
       scaleType: 'label',
-      numTicks: 12,
+      paddingOuter: 0,
+      paddingInner: 1,
     },
     right: {
-      domain: [0, 1],
+      domain: [0, 5.0, 3.0, 4.0, 7.0],
       label: 'Right Label',
       scaleType: 'linear',
-
     },
     bottom: {
       domain: [new Date('2020-01-01').getTime(), new Date('2020-01-10').getTime()],
@@ -44,6 +44,5 @@ const Template: ComponentStory<typeof CartesianBase> = args => <CartesianBase {.
 
 export const Default = Template.bind({});
 Default.args = {
-
 };
 
