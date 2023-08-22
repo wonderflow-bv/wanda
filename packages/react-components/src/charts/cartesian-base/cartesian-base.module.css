@@ -1,16 +1,13 @@
 .Wrapper {
-  width: 100%;
-  height: auto;
-  position: relative;
-  border: 1px dashed red;
-  overflow: auto;
-  display: flex;
-  justify-content: center;
   align-items: center;
+  display: flex;
+  height: auto;
+  justify-content: center;
+  overflow: auto;
+  position: relative;
   resize: both;
-}
-
-.Container {
-  outline: 1px solid blue;
+  width: 100%;
+  border-radius: 0.5rem;
+  box-shadow: 4px 4px 16px #ccc;
 }
 

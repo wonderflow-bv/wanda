@@ -74,14 +74,14 @@ export type AxisProps = {
   paddingInner?: number;
   paddingOuter?: number;
   numTicks?: number;
-  tickFormat?: TickFormatter<NumberValue | string | Date>;
   hideAxisLine?: boolean;
   hideTicks?: boolean;
   hideZero?: boolean;
+  tickFormat?: TickFormatter<NumberValue | string | Date>;
   otherProps?: Record<string, unknown>;
 }
 
-export type AxisConfig = {
+export type Axis = {
   orientation: AxisOrientation;
   top: number;
   left: number;
@@ -111,8 +111,7 @@ export const CartesianBase = ({
 }: CartesianBaseProps) => {
   const { from, to } = background;
 
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  const { hideRows, hideColumns } = grid;
+  const { hideRows: hasRows, hideColumns: hasCols } = grid;
   const gridStyle: GridStyleConfig = useMemo(() => _.merge(gridStyleConfig, grid.style), [grid]);
 
   const ref = useRef(null);
@@ -126,51 +125,58 @@ export const CartesianBase = ({
   }), [bottom, left, right, top]);
 
   const {
-    leftAxisOffset,
-    topAxisOffset,
-    verticalAxisOffset,
-    horizontalAxisOffset,
+    top: tm,
+    right: rm,
+    bottom: bm,
+    left: lm,
+  } = margin;
+
+  const {
+    leftAxisOffset: lOff,
+    topAxisOffset: tOff,
+    verticalAxisOffset: vOff,
+    horizontalAxisOffset: hOff,
   } = axisConfig.offset;
 
-  const xMax = dynamicWidth - margin.left - margin.right - verticalAxisOffset;
-  const yMax = dynamicHeight - margin.top - margin.bottom - horizontalAxisOffset;
+  const xMax = dynamicWidth - lm - rm - vOff;
+  const yMax = dynamicHeight - tm - bm - hOff;
 
-  const topPos = margin.top + topAxisOffset;
-  const rightPos = margin.left + leftAxisOffset + xMax;
-  const bottomPos = margin.top + topAxisOffset + yMax;
-  const leftPos = margin.left + leftAxisOffset;
+  const tPos = tm + tOff;
+  const rPos = lm + lOff + xMax;
+  const bPos = tm + tOff + yMax;
+  const lPos = lm + lOff;
 
   const topScale = useMemo(() => top && scaleDomainToAxis({ ...top, range: [0, xMax] }), [top, xMax]);
   const rightScale = useMemo(() => right && scaleDomainToAxis({ ...right, range: [yMax, 0] }), [right, yMax]);
   const bottomScale = useMemo(() => bottom && scaleDomainToAxis({ ...bottom, range: [0, xMax] }), [bottom, xMax]);
   const leftScale = useMemo(() => left && scaleDomainToAxis({ ...left, range: [yMax, 0] }), [left, yMax]);
 
-  const allAxis: AxisConfig[] = [
+  const allAxis: Axis[] = [
     {
       orientation: 'top',
-      top: topPos,
-      left: leftPos,
+      top: tPos,
+      left: lPos,
       axis: top,
       valueScale: topScale,
     },
     {
       orientation: 'right',
-      top: topPos,
-      left: rightPos,
+      top: tPos,
+      left: rPos,
       axis: right,
       valueScale: rightScale,
     },
     {
       orientation: 'bottom',
-      top: bottomPos,
-      left: leftPos,
+      top: bPos,
+      left: lPos,
       axis: bottom,
       valueScale: bottomScale,
     },
     {
       orientation: 'left',
-      top: topPos,
-      left: leftPos,
+      top: tPos,
+      left: lPos,
       axis: left,
       valueScale: leftScale,
     },
@@ -182,18 +188,17 @@ export const CartesianBase = ({
         width={dynamicWidth}
         height={dynamicHeight}
         viewBox={`0 0 ${dynamicWidth} ${dynamicHeight}`}
-        className={styles.Container}
         {...otherProps}
       >
         <LinearGradient id="cartesian" from={from} to={to} />
 
-        <rect x={0} y={0} width={dynamicWidth} height={dynamicHeight} fill="url(#cartesian)" rx={8} />
+        <rect x={0} y={0} width={dynamicWidth} height={dynamicHeight} fill="url(#cartesian)" rx={8} stroke="#999" strokeWidth={1} />
 
         <Group>
-          {!hideRows && (left || right) && (
+          {!hasRows && (left || right) && (
             <GridRows
-              top={topPos}
-              left={leftPos}
+              top={tPos}
+              left={lPos}
               scale={leftScale ?? rightScale!}
               width={xMax}
               numTicks={grid?.tickRows}
@@ -208,10 +213,10 @@ export const CartesianBase = ({
             />
           )}
 
-          {!hideColumns && (top || bottom) && (
+          {!hasCols && (top || bottom) && (
             <GridColumns
-              top={topPos}
-              left={leftPos}
+              top={tPos}
+              left={lPos}
               scale={bottomScale ?? topScale!}
               height={yMax}
               numTicks={grid?.tickColumns}
