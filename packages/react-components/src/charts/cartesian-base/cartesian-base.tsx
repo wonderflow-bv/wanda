@@ -9,15 +9,19 @@ import {
   NumberValue, ScaleBand, ScaleLinear, ScaleTime,
 } from '@visx/vendor/d3-scale';
 import { useSize } from 'ahooks';
-import { useRef } from 'react';
+import _ from 'lodash';
+import { useMemo, useRef } from 'react';
 
+import type { Background } from '../style-config';
+import { backgroundStyleConfig, gridStyleConfig } from '../style-config';
+import { GridStyleConfig } from '../style-config/grid';
 import { AxisOrientation, computeAxisConfig, scaleDomainToAxis } from '../utils/axis';
 import styles from './cartesian-base.module.css';
 
 export type CartesianBaseProps = {
   width?: number;
   height?: number;
-  background?: string;
+  background?: Background;
   margin?: MarginProps;
   grid?: GridProps;
   top?: AxisProps;
@@ -35,8 +39,12 @@ export type MarginProps = {
 }
 
 export type GridProps = {
-  tickColumns?: number;
+  hideRows?: boolean;
+  hideColumns?: boolean;
   tickRows?: number;
+  tickColumns?: number;
+  style?: GridStyleConfig;
+  otherProps?: Record<string, unknown>;
 }
 
 export type AxisProps = {
@@ -65,26 +73,28 @@ export type AxisConfig = {
 export const CartesianBase = ({
   width = 800,
   height = 600,
-  background = 'var(--global-background)',
+  background = backgroundStyleConfig,
   margin = {
     top: 24,
     right: 24,
     bottom: 24,
     left: 24,
   },
-  grid,
+  grid = {
+    hideColumns: false,
+    hideRows: false,
+  },
   top,
   right,
   bottom,
   left,
   otherProps,
 }: CartesianBaseProps) => {
-  const gridConfig = {
-    xOffset: 0,
-    yOffset: 0,
-    stroke: '#ccc',
-    strokeOpacity: 1,
-  };
+  const { from, to } = background;
+
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  const { hideRows, hideColumns } = grid;
+  const gridStyle: GridStyleConfig = useMemo(() => _.merge(gridStyleConfig, grid.style), [grid]);
 
   const ref = useRef(null);
   const size = useSize(ref);
@@ -92,9 +102,9 @@ export const CartesianBase = ({
   const dynamicWidth = size?.width ?? width;
   const dynamicHeight = size?.height ?? height;
 
-  const axisConfig = computeAxisConfig({
+  const axisConfig = useMemo(() => computeAxisConfig({
     top, right, bottom, left,
-  });
+  }), [bottom, left, right, top]);
 
   const {
     leftAxisOffset,
@@ -111,10 +121,10 @@ export const CartesianBase = ({
   const bottomPos = margin.top + topAxisOffset + yMax;
   const leftPos = margin.left + leftAxisOffset;
 
-  const topScale = top && scaleDomainToAxis({ ...top, range: [0, xMax] });
-  const rightScale = right && scaleDomainToAxis({ ...right, range: [yMax, 0] });
-  const bottomScale = bottom && scaleDomainToAxis({ ...bottom, range: [0, xMax] });
-  const leftScale = left && scaleDomainToAxis({ ...left, range: [yMax, 0] });
+  const topScale = useMemo(() => top && scaleDomainToAxis({ ...top, range: [0, xMax] }), [top, xMax]);
+  const rightScale = useMemo(() => right && scaleDomainToAxis({ ...right, range: [yMax, 0] }), [right, yMax]);
+  const bottomScale = useMemo(() => bottom && scaleDomainToAxis({ ...bottom, range: [0, xMax] }), [bottom, xMax]);
+  const leftScale = useMemo(() => left && scaleDomainToAxis({ ...left, range: [yMax, 0] }), [left, yMax]);
 
   const allAxis: AxisConfig[] = [
     {
@@ -156,33 +166,47 @@ export const CartesianBase = ({
         className={styles.Container}
         {...otherProps}
       >
-        <LinearGradient id="cartesian" to="var(--global-vibrancy-background)" from={background} />
+        <LinearGradient id="cartesian" from={from} to={to} />
+
         <rect x={0} y={0} width={dynamicWidth} height={dynamicHeight} fill="url(#cartesian)" rx={8} />
+
         <Group>
-          {(left || right) && (
+          {!hideRows && (left || right) && (
             <GridRows
               top={topPos}
               left={leftPos}
               scale={leftScale ?? rightScale!}
               width={xMax}
               numTicks={grid?.tickRows}
-              offset={gridConfig.xOffset}
-              stroke={gridConfig.stroke}
-              strokeOpacity={gridConfig.strokeOpacity}
+              offset={gridStyle.rows?.offset}
+              fill={gridStyle.rows?.fill}
+              stroke={gridStyle.rows?.stroke}
+              strokeOpacity={gridStyle.rows?.strokeOpacity}
+              strokeWidth={gridStyle.rows?.strokeWidth}
+              strokeDasharray={gridStyle.rows?.strokeDasharray}
+              lineStyle={gridStyle.rows?.lineStyle}
+              {...grid.otherProps}
             />
           )}
-          {(top || bottom) && (
+
+          {!hideColumns && (top || bottom) && (
             <GridColumns
               top={topPos}
               left={leftPos}
               scale={bottomScale ?? topScale!}
               height={yMax}
               numTicks={grid?.tickColumns}
-              offset={gridConfig.yOffset}
-              stroke={gridConfig.stroke}
-              strokeOpacity={gridConfig.strokeOpacity}
+              offset={gridStyle.columns?.offset}
+              fill={gridStyle.columns?.fill}
+              stroke={gridStyle.columns?.stroke}
+              strokeOpacity={gridStyle.columns?.strokeOpacity}
+              strokeWidth={gridStyle.columns?.strokeWidth}
+              strokeDasharray={gridStyle.columns?.strokeDasharray}
+              lineStyle={gridStyle.columns?.lineStyle}
+              {...grid.otherProps}
             />
           )}
+
           {allAxis.filter(a => a.axis).map(a => (
             <Axis
               key={a.orientation}
@@ -197,6 +221,7 @@ export const CartesianBase = ({
               labelOffset={axisConfig[a.orientation].labelOffset}
               labelProps={axisConfig.labelProps}
               tickFormat={a.axis!.tickFormat}
+              {...a.axis!.otherProps}
             />
           ))}
         </Group>

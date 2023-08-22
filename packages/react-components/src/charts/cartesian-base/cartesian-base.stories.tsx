@@ -18,7 +18,7 @@ const story: ComponentMeta<typeof CartesianBase> = {
       paddingInner: 1,
     },
     right: {
-      domain: [0, 5.0, 3.0, 4.0, 7.0],
+      domain: [0, 5.0, 3.0, 4.0, 1.0],
       label: 'Right Label',
       scaleType: 'linear',
     },

@@ -1,6 +1,7 @@
 import { scaleBand, scaleLinear, scaleUtc } from '@visx/scale';
 
 import { AxisProps } from '../cartesian-base/cartesian-base';
+import { LabelProps, TickLabelProps } from '../style-config';
 import {
   getMaxCharactersNum, getMinMaxNumber, isArrayTypeDate,
 } from './math';
@@ -47,18 +48,11 @@ export type VerticalAxisConfig = {
   labelOffset: number;
 }
 
-export type LabelProps = {
-  fill: string;
-  fontFamily: string;
-  fontSize: number;
-  fontWeight: number;
-}
-
 export type AxisConfig = {
   offset: AxisOffsetConfig;
   tickLength: number;
-  labelProps: LabelProps & { textAnchor: TextAnchor };
-  tickLabelProps: LabelProps;
+  labelProps: LabelProps;
+  tickLabelProps: TickLabelProps;
   top: HorizontalAxisConfig;
   right: VerticalAxisConfig;
   bottom: HorizontalAxisConfig;
@@ -162,8 +156,8 @@ export const computeAxisConfig = (
   const main: {
     offset: AxisOffsetConfig;
     tickLength: number;
-    labelProps: LabelProps & { textAnchor: TextAnchor };
-    tickLabelProps: LabelProps;
+    labelProps: LabelProps;
+    tickLabelProps: TickLabelProps;
   } = {
     offset,
     tickLength,

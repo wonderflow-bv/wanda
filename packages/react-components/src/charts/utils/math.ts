@@ -39,7 +39,20 @@ export const getMinMaxDate = (values: Array<number | Date>) => {
 };
 
 export const getMaxCharactersNum = (values: Array<string | number>) => {
-  if (values.length === 0) return 0;
+  if (!values.length) return 0;
+
+  const isNumbers = isArrayTypeNumber(values);
+
+  if (isNumbers) {
+    const minMax = getMinMaxNumber(values as number[]);
+    if (minMax !== undefined) {
+      const [min, max] = minMax;
+      const diff = max - min;
+      if (diff > 0 && diff < 10) {
+        return max.toFixed(1).length;
+      }
+    }
+  }
 
   const max = values.map(el => `${el}`).sort((a, b) => b.length - a.length)[0].length;
 
