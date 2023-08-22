@@ -133,15 +133,15 @@ export const computeAxisConfig = (
     bottom?: AllAxisOffsetInput;
     left?: AllAxisOffsetInput;
   },
-  config = axisStyleConfig.spacing,
+  config = axisStyleConfig,
 ) => {
   const {
     labelCharExtimatedWidth: lcw,
     labelOffset,
     tickOffset,
-  } = config;
+  } = config.spacing;
 
-  const offset = computeAllAxisOffset(axis, config);
+  const offset = computeAllAxisOffset(axis, config.spacing);
 
   const hasLabelLeft = Boolean(axis.left?.label);
   const maxCharLeft = axis.left ? getMaxCharactersNum(axis.left.domain) : 0;

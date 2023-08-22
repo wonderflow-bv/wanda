@@ -19,7 +19,15 @@ export type Background = {
   to: string;
 }
 
-export const backgroundStyleConfig: Background = {
+export const backgroundStyle: Background = {
   from: 'hsl(0 0% 100%)',
   to: 'hsl(210 20% 98%)',
+};
+
+export type LinearGradientStyleConfig = {
+  background: Background;
+}
+
+export const linearGradientStyleConfig: LinearGradientStyleConfig = {
+  background: backgroundStyle,
 };

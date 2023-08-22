@@ -29,8 +29,8 @@ import _ from 'lodash';
 import { useMemo, useRef } from 'react';
 
 import type { Background } from '../style-config';
-import { backgroundStyleConfig, gridStyleConfig } from '../style-config';
-import { GridStyleConfig } from '../style-config/grid';
+import { CartesianStyleConfig, cartesianStyleConfig } from '../style-config/cartesian';
+import { RecursivePartial } from '../types/main';
 import { AxisOrientation, computeAxisConfig, scaleDomainToAxis } from '../utils/axis';
 import styles from './cartesian-base.module.css';
 
@@ -44,6 +44,7 @@ export type CartesianBaseProps = {
   right?: AxisProps;
   bottom?: AxisProps;
   left?: AxisProps;
+  styleConfig?: RecursivePartial<CartesianStyleConfig>;
   otherProps?: Record<string, unknown>;
 }
 
@@ -59,7 +60,6 @@ export type GridProps = {
   hideColumns?: boolean;
   tickRows?: number;
   tickColumns?: number;
-  style?: GridStyleConfig;
   otherProps?: Record<string, unknown>;
 }
 
@@ -92,7 +92,7 @@ export type Axis = {
 export const CartesianBase = ({
   width = 800,
   height = 600,
-  background = backgroundStyleConfig,
+  background,
   margin = {
     top: 24,
     right: 24,
@@ -107,12 +107,18 @@ export const CartesianBase = ({
   right,
   bottom,
   left,
+  styleConfig,
   otherProps,
 }: CartesianBaseProps) => {
-  const { from, to } = background;
+  const {
+    linearGradient: lgStyle,
+    grid: gStyle,
+    axis: aStyle,
+  } = useMemo(() => _.merge(cartesianStyleConfig, styleConfig), [styleConfig]);
+
+  const { from, to } = _.merge(lgStyle.background, background);
 
   const { hideRows: hasRows, hideColumns: hasCols } = grid;
-  const gridStyle: GridStyleConfig = useMemo(() => _.merge(gridStyleConfig, grid.style), [grid]);
 
   const ref = useRef(null);
   const size = useSize(ref);
@@ -122,7 +128,7 @@ export const CartesianBase = ({
 
   const axisConfig = useMemo(() => computeAxisConfig({
     top, right, bottom, left,
-  }), [bottom, left, right, top]);
+  }, aStyle), [aStyle, bottom, left, right, top]);
 
   const {
     top: tm,
@@ -202,13 +208,13 @@ export const CartesianBase = ({
               scale={leftScale ?? rightScale!}
               width={xMax}
               numTicks={grid?.tickRows}
-              offset={gridStyle.rows?.offset}
-              fill={gridStyle.rows?.fill}
-              stroke={gridStyle.rows?.stroke}
-              strokeOpacity={gridStyle.rows?.strokeOpacity}
-              strokeWidth={gridStyle.rows?.strokeWidth}
-              strokeDasharray={gridStyle.rows?.strokeDasharray}
-              lineStyle={gridStyle.rows?.lineStyle}
+              offset={gStyle.rows?.offset}
+              fill={gStyle.rows?.fill}
+              stroke={gStyle.rows?.stroke}
+              strokeOpacity={gStyle.rows?.strokeOpacity}
+              strokeWidth={gStyle.rows?.strokeWidth}
+              strokeDasharray={gStyle.rows?.strokeDasharray}
+              lineStyle={gStyle.rows?.lineStyle}
               {...grid.otherProps}
             />
           )}
@@ -220,13 +226,13 @@ export const CartesianBase = ({
               scale={bottomScale ?? topScale!}
               height={yMax}
               numTicks={grid?.tickColumns}
-              offset={gridStyle.columns?.offset}
-              fill={gridStyle.columns?.fill}
-              stroke={gridStyle.columns?.stroke}
-              strokeOpacity={gridStyle.columns?.strokeOpacity}
-              strokeWidth={gridStyle.columns?.strokeWidth}
-              strokeDasharray={gridStyle.columns?.strokeDasharray}
-              lineStyle={gridStyle.columns?.lineStyle}
+              offset={gStyle.columns?.offset}
+              fill={gStyle.columns?.fill}
+              stroke={gStyle.columns?.stroke}
+              strokeOpacity={gStyle.columns?.strokeOpacity}
+              strokeWidth={gStyle.columns?.strokeWidth}
+              strokeDasharray={gStyle.columns?.strokeDasharray}
+              lineStyle={gStyle.columns?.lineStyle}
               {...grid.otherProps}
             />
           )}

@@ -32,6 +32,9 @@ const story: ComponentMeta<typeof CartesianBase> = {
       label: 'Left Label',
       scaleType: 'linear',
     },
+    styleConfig: {
+      // grid: { rows: { stroke: 'blue' } },
+    },
   },
   argTypes: {
 
