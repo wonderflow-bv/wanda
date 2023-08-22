@@ -75,6 +75,9 @@ export type AxisProps = {
   paddingOuter?: number;
   numTicks?: number;
   tickFormat?: TickFormatter<NumberValue | string | Date>;
+  hideAxisLine?: boolean;
+  hideTicks?: boolean;
+  hideZero?: boolean;
   otherProps?: Record<string, unknown>;
 }
 
@@ -231,13 +234,17 @@ export const CartesianBase = ({
               top={a.top}
               left={a.left}
               numTicks={a.axis!.numTicks}
-              tickLength={axisConfig.tickLength}
-              tickLabelProps={{ ...axisConfig.tickLabelProps, ...axisConfig[a.orientation].tickLabelProps }}
+              tickLength={axisConfig.style.tickLineProps.length}
+              tickLabelProps={{ ...axisConfig.style.tickLabelProps, ...axisConfig[a.orientation].tickLabelProps }}
+              tickLineProps={axisConfig.style.tickLineProps}
               label={a.axis!.label}
               labelOffset={axisConfig[a.orientation].labelOffset}
-              labelProps={axisConfig.labelProps}
+              labelProps={axisConfig.style.labelProps}
               tickFormat={a.axis!.tickFormat}
               {...a.axis!.otherProps}
+              stroke={axisConfig.style.axisLineProps.stroke}
+              strokeDasharray={axisConfig.style.axisLineProps.strokeDasharray}
+              strokeWidth={axisConfig.style.axisLineProps.strokeWidth}
             />
           ))}
         </Group>

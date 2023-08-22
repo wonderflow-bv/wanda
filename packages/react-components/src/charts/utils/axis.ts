@@ -17,12 +17,14 @@
 import { scaleBand, scaleLinear, scaleUtc } from '@visx/scale';
 
 import { AxisProps } from '../cartesian-base/cartesian-base';
-import { LabelProps, TickLabelProps } from '../style-config';
+import {
+  AxisStyleConfig,
+  axisStyleConfig,
+  TextAnchor,
+} from '../style-config';
 import {
   getMaxCharactersNum, getMinMaxNumber, isArrayTypeDate,
 } from './math';
-
-type TextAnchor = 'start' | 'middle' | 'end';
 
 export type AxisOrientation = 'top' | 'left' | 'right' | 'bottom';
 
@@ -37,15 +39,6 @@ export type AxisOffsetConfig = {
   leftAxisOffset: number;
   verticalAxisOffset: number;
   horizontalAxisOffset: number;
-}
-
-export type AxisSpacingConfig = {
-  labelCharExtimatedWidth: number;
-  labelHeight: number;
-  labelOffset: number;
-  tickLabelHeight: number;
-  tickOffset: number;
-  tickLength: number;
 }
 
 export type HorizontalAxisConfig = {
@@ -66,28 +59,16 @@ export type VerticalAxisConfig = {
 
 export type AxisConfig = {
   offset: AxisOffsetConfig;
-  tickLength: number;
-  labelProps: LabelProps;
-  tickLabelProps: TickLabelProps;
+  style: AxisStyleConfig;
   top: HorizontalAxisConfig;
   right: VerticalAxisConfig;
   bottom: HorizontalAxisConfig;
   left: VerticalAxisConfig;
-
 }
-
-export const axisSpacingConfig: AxisSpacingConfig = {
-  labelCharExtimatedWidth: 9,
-  labelHeight: 14, // based on a 12px font size
-  labelOffset: 16,
-  tickLabelHeight: 16.5, // based on a 14px font size
-  tickOffset: 4,
-  tickLength: 4,
-};
 
 export const computeSingleAxisOffset = (
   axis: SingleAxisOffsetInput,
-  config = axisSpacingConfig,
+  config = axisStyleConfig.spacing,
 ) => {
   const { domain, orientation, label } = axis;
   const hasValues = !!domain?.length;
@@ -124,7 +105,7 @@ export const computeAllAxisOffset = (
     bottom?: AllAxisOffsetInput;
     left?: AllAxisOffsetInput;
   },
-  config = axisSpacingConfig,
+  config = axisStyleConfig.spacing,
 ) => {
   const {
     top, right, bottom, left,
@@ -152,13 +133,12 @@ export const computeAxisConfig = (
     bottom?: AllAxisOffsetInput;
     left?: AllAxisOffsetInput;
   },
-  config = axisSpacingConfig,
+  config = axisStyleConfig.spacing,
 ) => {
   const {
     labelCharExtimatedWidth: lcw,
     labelOffset,
     tickOffset,
-    tickLength,
   } = config;
 
   const offset = computeAllAxisOffset(axis, config);
@@ -168,29 +148,6 @@ export const computeAxisConfig = (
 
   const hasLabelRight = Boolean(axis.right?.label);
   const maxCharRight = axis.right ? getMaxCharactersNum(axis.right.domain) : 0;
-
-  const main: {
-    offset: AxisOffsetConfig;
-    tickLength: number;
-    labelProps: LabelProps;
-    tickLabelProps: TickLabelProps;
-  } = {
-    offset,
-    tickLength,
-    labelProps: {
-      fill: 'var(--global-foreground)',
-      fontFamily: 'system-ui, sans-serif',
-      fontSize: 12,
-      fontWeight: 400,
-      textAnchor: 'middle',
-    },
-    tickLabelProps: {
-      fill: 'var(--global-foreground)',
-      fontFamily: 'system-ui, sans-serif',
-      fontSize: 14,
-      fontWeight: 400,
-    },
-  };
 
   const top: HorizontalAxisConfig = {
     tickLabelProps: {
@@ -225,7 +182,12 @@ export const computeAxisConfig = (
   };
 
   const c: AxisConfig = {
-    ...main, top, right, bottom, left,
+    offset,
+    style: axisStyleConfig,
+    top,
+    right,
+    bottom,
+    left,
   };
   return c;
 };
