@@ -15,7 +15,7 @@ describe('getMaxCharactersNum()', () => {
 
   it('should return the right amount for floats', () => {
     const res = getMaxCharactersNum([0.1, 0.5]);
-    expect(res).toBe(3);
+    expect(res).toBe(4);
   });
   it('should return 0 for zero length array', () => {
     const res = getMaxCharactersNum([]);

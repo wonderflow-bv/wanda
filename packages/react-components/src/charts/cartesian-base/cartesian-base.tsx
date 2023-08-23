@@ -30,7 +30,7 @@ import { useMemo, useRef } from 'react';
 
 import type { Background } from '../style-config';
 import { CartesianStyleConfig, cartesianStyleConfig } from '../style-config/cartesian';
-import { RecursivePartial } from '../types/main';
+import { DeepPartial } from '../types/main';
 import { AxisOrientation, computeAxisConfig, scaleDomainToAxis } from '../utils/axis';
 import styles from './cartesian-base.module.css';
 
@@ -44,7 +44,7 @@ export type CartesianBaseProps = {
   right?: AxisProps;
   bottom?: AxisProps;
   left?: AxisProps;
-  styleConfig?: RecursivePartial<CartesianStyleConfig>;
+  styleConfig?: DeepPartial<CartesianStyleConfig>;
   otherProps?: Record<string, unknown>;
 }
 

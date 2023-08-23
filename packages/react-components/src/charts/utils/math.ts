@@ -64,9 +64,11 @@ export const getMaxCharactersNum = (values: Array<string | number>) => {
     if (minMax !== undefined) {
       const [min, max] = minMax;
       const diff = max - min;
-      if (diff > 0 && diff < 10) {
-        return max.toFixed(1).length;
+      if (diff > 0) {
+        return (diff / 10).toString().length;
       }
+
+      return max.toString().length;
     }
   }
 

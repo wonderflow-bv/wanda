@@ -1,3 +1,3 @@
-export type RecursivePartial<T> = {
-  [P in keyof T]?: RecursivePartial<T[P]>;
+export type DeepPartial<T> = {
+  [P in keyof T]?: DeepPartial<T[P]>;
 };
