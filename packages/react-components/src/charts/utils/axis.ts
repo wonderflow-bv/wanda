@@ -72,9 +72,17 @@ export const computeSingleAxisOffset = (
 ) => {
   const { domain, orientation, label } = axis;
   const hasValues = !!domain?.length;
+
   if (hasValues) {
     const isVertical = orientation === 'left' || orientation === 'right';
     const tickLabelMaxChar = (isVertical) ? getMaxCharactersNum(domain) : 0;
+
+    const hasLabelExtraOffset = orientation === 'left' || orientation === 'bottom';
+    const extra = {
+      left: config.labelOffsetExtraLeft,
+      bottom: config.labelOffsetExtraBottom,
+    };
+    const extraOff = hasLabelExtraOffset ? extra[orientation] : 0;
 
     const {
       labelCharExtimatedWidth: char,
@@ -86,7 +94,7 @@ export const computeSingleAxisOffset = (
     } = config;
 
     const tick = tl + to;
-    const axisLabel = label ? (lo + lh) : 0;
+    const axisLabel = label ? (lo + lh + extraOff) : 0;
     const maxChar = char * tickLabelMaxChar;
 
     const v = tick + maxChar + axisLabel;
@@ -138,6 +146,8 @@ export const computeAxisConfig = (
   const {
     labelCharExtimatedWidth: lcw,
     labelOffset,
+    labelOffsetExtraBottom: extraB,
+    labelOffsetExtraLeft: extraL,
     tickOffset,
   } = config.spacing;
 
@@ -169,7 +179,7 @@ export const computeAxisConfig = (
     tickLabelProps: {
       dy: tickOffset,
     },
-    labelOffset,
+    labelOffset: labelOffset + extraB,
   };
 
   const left: VerticalAxisConfig = {
@@ -178,7 +188,9 @@ export const computeAxisConfig = (
       dy: tickOffset,
       textAnchor: 'end',
     },
-    labelOffset: hasLabelLeft ? (labelOffset + lcw * maxCharLeft) : 0,
+    labelOffset: hasLabelLeft
+      ? (labelOffset + lcw * maxCharLeft + extraL)
+      : 0,
   };
 
   const c: AxisConfig = {

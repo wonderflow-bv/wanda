@@ -46,6 +46,8 @@ export type AxisSpacing = {
   labelCharExtimatedWidth: number;
   labelHeight: number;
   labelOffset: number;
+  labelOffsetExtraLeft: number;
+  labelOffsetExtraBottom: number;
   tickLabelHeight: number;
   tickOffset: number;
   tickLength: number;
@@ -88,6 +90,8 @@ export const axisStyleConfig: AxisStyleConfig = {
     labelCharExtimatedWidth: 9,
     labelHeight: 14, // based on a 12px font size
     labelOffset: 16,
+    labelOffsetExtraLeft: 8,
+    labelOffsetExtraBottom: 4,
     tickLabelHeight: 16.5, // based on a 14px font size
     tickOffset: 4,
     tickLength: 4,
