@@ -28,10 +28,12 @@ import { useSize } from 'ahooks';
 import _ from 'lodash';
 import { useMemo, useRef } from 'react';
 
-import type { Background } from '../style-config';
-import { CartesianStyleConfig, cartesianStyleConfig } from '../style-config/cartesian';
+import { cartesianStyleConfig } from '../style-config/cartesian';
+import { AxisOrientation } from '../types/axis';
+import { CartesianStyleConfig, MarginProps } from '../types/cartesian';
+import { Background } from '../types/linear-gradient';
 import { DeepPartial } from '../types/main';
-import { AxisOrientation, computeAxisConfig, scaleDomainToAxis } from '../utils/axis';
+import { computeAxisConfig, scaleDomainToAxis } from '../utils/axis';
 import styles from './cartesian-base.module.css';
 
 export type CartesianBaseProps = {
@@ -46,13 +48,6 @@ export type CartesianBaseProps = {
   left?: AxisProps;
   styleConfig?: DeepPartial<CartesianStyleConfig>;
   otherProps?: Record<string, unknown>;
-}
-
-export type MarginProps = {
-  top: number;
-  right: number;
-  left: number;
-  bottom: number;
 }
 
 export type GridProps = {
@@ -246,11 +241,17 @@ export const CartesianBase = ({
               left={a.left}
               numTicks={a.axis!.numTicks}
               tickLength={axisConfig.style.tickLineProps.length}
-              tickLabelProps={{ ...axisConfig.style.tickLabelProps, ...axisConfig[a.orientation].tickLabelProps }}
+              tickLabelProps={{
+                ...axisConfig.style.tickLabelProps,
+                ...axisConfig[a.orientation].tickLabelProps,
+              }}
               tickLineProps={axisConfig.style.tickLineProps}
               label={a.axis!.label}
               labelOffset={axisConfig[a.orientation].labelOffset}
-              labelProps={{ ...axisConfig.style.labelProps, ...axisConfig[a.orientation].labelProps }}
+              labelProps={{
+                ...axisConfig.style.labelProps,
+                ...axisConfig[a.orientation].labelProps,
+              }}
               tickFormat={a.axis!.tickFormat}
               {...a.axis!.otherProps}
               stroke={axisConfig.style.axisLineProps.stroke}

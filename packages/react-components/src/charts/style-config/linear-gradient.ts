@@ -14,19 +14,12 @@
  * limitations under the License.
  */
 
-export type Background = {
-  from: string;
-  to: string;
-}
+import { Background, LinearGradientStyleConfig } from '../types/linear-gradient';
 
 export const backgroundStyle: Background = {
   from: 'hsl(0 0% 100%)',
   to: 'hsl(210 20% 98%)',
 };
-
-export type LinearGradientStyleConfig = {
-  background: Background;
-}
 
 export const linearGradientStyleConfig: LinearGradientStyleConfig = {
   background: backgroundStyle,

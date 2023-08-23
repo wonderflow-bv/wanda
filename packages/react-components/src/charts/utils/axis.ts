@@ -18,61 +18,14 @@ import { scaleBand, scaleLinear, scaleUtc } from '@visx/scale';
 
 import { AxisProps } from '../cartesian-base/cartesian-base';
 import {
-  AxisStyleConfig,
   axisStyleConfig,
-  TextAnchor,
 } from '../style-config';
+import {
+  AllAxisOffsetInput, AxisConfig, HorizontalAxisConfig, SingleAxisOffsetInput, VerticalAxisConfig,
+} from '../types/axis';
 import {
   getMaxCharactersNum, getMinMaxNumber, isArrayTypeDate,
 } from './math';
-
-export type AxisOrientation = 'top' | 'left' | 'right' | 'bottom';
-export type DominantBaseline = 'auto' | 'middle' | 'hanging';
-
-type AllAxisOffsetInput = Pick<AxisProps, 'domain' | 'label'>
-
-type SingleAxisOffsetInput = AllAxisOffsetInput & { orientation: AxisOrientation }
-
-export type AxisOffsetConfig = {
-  topAxisOffset: number;
-  rightAxisOffset: number;
-  bottomAxisOffset: number;
-  leftAxisOffset: number;
-  verticalAxisOffset: number;
-  horizontalAxisOffset: number;
-}
-
-export type HorizontalAxisConfig = {
-  tickLabelProps: {
-    dy: number;
-    dominantBaseline: DominantBaseline;
-  };
-  labelProps: {
-    dominantBaseline: DominantBaseline;
-  };
-  labelOffset: number;
-}
-
-export type VerticalAxisConfig = {
-  tickLabelProps: {
-    dx: number;
-    dominantBaseline: DominantBaseline;
-    textAnchor: TextAnchor;
-  };
-  labelProps: {
-    dominantBaseline: DominantBaseline;
-  };
-  labelOffset: number;
-}
-
-export type AxisConfig = {
-  offset: AxisOffsetConfig;
-  style: AxisStyleConfig;
-  top: HorizontalAxisConfig;
-  right: VerticalAxisConfig;
-  bottom: HorizontalAxisConfig;
-  left: VerticalAxisConfig;
-}
 
 export const computeSingleAxisOffset = (
   axis: SingleAxisOffsetInput,

@@ -16,7 +16,7 @@
 
 import _ from 'lodash';
 
-export type ValidTypeOf = 'undefined'| 'object'| 'boolean'| 'number'| 'string'| 'function'| 'symbol'| 'bigint';
+import { ValidTypeOf } from '../types/main';
 
 export const isArrayType = (
   arr: unknown[],
