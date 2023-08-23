@@ -250,7 +250,7 @@ export const CartesianBase = ({
               tickLineProps={axisConfig.style.tickLineProps}
               label={a.axis!.label}
               labelOffset={axisConfig[a.orientation].labelOffset}
-              labelProps={axisConfig.style.labelProps}
+              labelProps={{ ...axisConfig.style.labelProps, ...axisConfig[a.orientation].labelProps }}
               tickFormat={a.axis!.tickFormat}
               {...a.axis!.otherProps}
               stroke={axisConfig.style.axisLineProps.stroke}

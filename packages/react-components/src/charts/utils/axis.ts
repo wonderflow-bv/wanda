@@ -27,6 +27,7 @@ import {
 } from './math';
 
 export type AxisOrientation = 'top' | 'left' | 'right' | 'bottom';
+export type DominantBaseline = 'auto' | 'middle' | 'hanging';
 
 type AllAxisOffsetInput = Pick<AxisProps, 'domain' | 'label'>
 
@@ -44,6 +45,10 @@ export type AxisOffsetConfig = {
 export type HorizontalAxisConfig = {
   tickLabelProps: {
     dy: number;
+    dominantBaseline: DominantBaseline;
+  };
+  labelProps: {
+    dominantBaseline: DominantBaseline;
   };
   labelOffset: number;
 }
@@ -51,8 +56,11 @@ export type HorizontalAxisConfig = {
 export type VerticalAxisConfig = {
   tickLabelProps: {
     dx: number;
-    dy: number;
+    dominantBaseline: DominantBaseline;
     textAnchor: TextAnchor;
+  };
+  labelProps: {
+    dominantBaseline: DominantBaseline;
   };
   labelOffset: number;
 }
@@ -77,13 +85,6 @@ export const computeSingleAxisOffset = (
     const isVertical = orientation === 'left' || orientation === 'right';
     const tickLabelMaxChar = (isVertical) ? getMaxCharactersNum(domain) : 0;
 
-    const hasLabelExtraOffset = orientation === 'left' || orientation === 'bottom';
-    const extra = {
-      left: config.labelOffsetExtraLeft,
-      bottom: config.labelOffsetExtraBottom,
-    };
-    const extraOff = hasLabelExtraOffset ? extra[orientation] : 0;
-
     const {
       labelCharExtimatedWidth: char,
       labelHeight: lh,
@@ -94,7 +95,7 @@ export const computeSingleAxisOffset = (
     } = config;
 
     const tick = tl + to;
-    const axisLabel = label ? (lo + lh + extraOff) : 0;
+    const axisLabel = label ? (lo + lh) : 0;
     const maxChar = char * tickLabelMaxChar;
 
     const v = tick + maxChar + axisLabel;
@@ -146,8 +147,6 @@ export const computeAxisConfig = (
   const {
     labelCharExtimatedWidth: lcw,
     labelOffset,
-    labelOffsetExtraBottom: extraB,
-    labelOffsetExtraLeft: extraL,
     tickOffset,
   } = config.spacing;
 
@@ -162,6 +161,10 @@ export const computeAxisConfig = (
   const top: HorizontalAxisConfig = {
     tickLabelProps: {
       dy: -tickOffset,
+      dominantBaseline: 'auto',
+    },
+    labelProps: {
+      dominantBaseline: 'middle',
     },
     labelOffset,
   };
@@ -169,8 +172,11 @@ export const computeAxisConfig = (
   const right: VerticalAxisConfig = {
     tickLabelProps: {
       dx: tickOffset,
-      dy: tickOffset,
       textAnchor: 'start',
+      dominantBaseline: 'middle',
+    },
+    labelProps: {
+      dominantBaseline: 'middle',
     },
     labelOffset: hasLabelRight ? (labelOffset + lcw * maxCharRight) : 0,
   };
@@ -178,18 +184,25 @@ export const computeAxisConfig = (
   const bottom: HorizontalAxisConfig = {
     tickLabelProps: {
       dy: tickOffset,
+      dominantBaseline: 'auto',
     },
-    labelOffset: labelOffset + extraB,
+    labelProps: {
+      dominantBaseline: 'middle',
+    },
+    labelOffset,
   };
 
   const left: VerticalAxisConfig = {
     tickLabelProps: {
       dx: -tickOffset,
-      dy: tickOffset,
       textAnchor: 'end',
+      dominantBaseline: 'middle',
+    },
+    labelProps: {
+      dominantBaseline: 'auto',
     },
     labelOffset: hasLabelLeft
-      ? (labelOffset + lcw * maxCharLeft + extraL)
+      ? (labelOffset + lcw * maxCharLeft)
       : 0,
   };
 
