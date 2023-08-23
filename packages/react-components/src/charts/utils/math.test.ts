@@ -8,6 +8,11 @@ describe('getMaxCharactersNum()', () => {
     expect(res).toBe(3);
   });
 
+  it('should return the right amount for integers', () => {
+    const res = getMaxCharactersNum([0, 10000]);
+    expect(res).toBe(6);
+  });
+
   it('should return the right amount for floats', () => {
     const res = getMaxCharactersNum([0.1]);
     expect(res).toBe(3);

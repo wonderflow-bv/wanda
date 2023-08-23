@@ -199,7 +199,7 @@ export const computeAxisConfig = (
       dominantBaseline: 'middle',
     },
     labelProps: {
-      dominantBaseline: 'auto',
+      dominantBaseline: 'hanging',
     },
     labelOffset: hasLabelLeft
       ? (labelOffset + lcw * maxCharLeft)

@@ -64,11 +64,12 @@ export const getMaxCharactersNum = (values: Array<string | number>) => {
     if (minMax !== undefined) {
       const [min, max] = minMax;
       const diff = max - min;
-      if (diff > 0) {
-        return (diff / 10).toString().length;
+
+      if (diff && diff < 10) {
+        return new Intl.NumberFormat('en-US').format(diff / 10).length;
       }
 
-      return max.toString().length;
+      return new Intl.NumberFormat('en-US').format(max).length;
     }
   }
 
