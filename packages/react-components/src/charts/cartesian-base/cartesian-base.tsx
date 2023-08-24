@@ -191,9 +191,17 @@ export const CartesianBase = ({
         viewBox={`0 0 ${dynamicWidth} ${dynamicHeight}`}
         {...otherProps}
       >
+        {/* <defs>
+          <filter id="shadow" x="0" y="0" width="200%" height="200%">
+            <feOffset result="offOut" in="SourceAlpha" dx="2" dy="2" />
+            <feGaussianBlur result="blurOut" in="offOut" stdDeviation="4" />
+            <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+          </filter>
+        </defs> */}
+
         <LinearGradient id="cartesian" from={from} to={to} />
 
-        <rect x={0} y={0} width={dynamicWidth} height={dynamicHeight} fill="url(#cartesian)" rx={8} stroke="#999" strokeWidth={1} />
+        <rect x={0} y={0} width={dynamicWidth} height={dynamicHeight} fill="url(#cartesian)" filter="url(#shadow)" rx={8} strokeWidth={1} stroke="hsl(0, 0%, 92%)" />
 
         <Group>
           {!hasRows && (left || right) && (

@@ -3,7 +3,7 @@ import { GridStyle, GridStyleConfig } from '../types/grid';
 export const gridRowsStyleConfig: GridStyle = {
   offset: 0,
   fill: '',
-  stroke: '#ccc',
+  stroke: 'hsl(0, 0%, 92%)',
   strokeWidth: 1,
   strokeOpacity: 1,
   strokeDasharray: '',
@@ -13,7 +13,7 @@ export const gridRowsStyleConfig: GridStyle = {
 export const gridColumnsStyleConfig: GridStyle = {
   offset: 0,
   fill: '',
-  stroke: '#ccc',
+  stroke: 'hsl(0, 0%, 92%)',
   strokeWidth: 1,
   strokeOpacity: 1,
   strokeDasharray: '',

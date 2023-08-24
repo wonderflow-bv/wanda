@@ -61,26 +61,26 @@ export type AxisStyleConfig = {
 
 export const axisStyleConfig: AxisStyleConfig = {
   labelProps: {
-    fill: 'var(--global-foreground)',
+    fill: 'hsl(210, 5%, 27%)',
     fontFamily: 'system-ui, sans-serif',
     fontSize: 12,
     fontWeight: 400,
     textAnchor: 'middle',
   },
   tickLabelProps: {
-    fill: 'var(--global-foreground)',
+    fill: 'hsl(225, 1%, 49%)',
     fontFamily: 'system-ui, sans-serif',
     fontSize: 14,
     fontWeight: 400,
   },
   tickLineProps: {
     length: 4,
-    stroke: '#999',
+    stroke: 'hsl(0, 0%, 80%)',
     strokeWidth: 1,
     strokeLinecap: 'round',
   },
   axisLineProps: {
-    stroke: '#999',
+    stroke: 'hsl(0, 0%, 80%)',
     strokeWidth: 1,
     strokeDasharray: '',
   },

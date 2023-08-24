@@ -1,13 +1,13 @@
 .Wrapper {
   align-items: center;
+  border-radius: 0.5rem;
+  box-shadow: 2px 2px 4px #ccc;
   display: flex;
   height: auto;
   justify-content: center;
-  overflow: auto;
+  overflow: hidden;
   position: relative;
   resize: both;
   width: 100%;
-  border-radius: 0.5rem;
-  box-shadow: 4px 4px 16px #ccc;
 }
 
