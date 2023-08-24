@@ -37,6 +37,9 @@ import { computeAxisConfig, scaleDomainToAxis } from '../utils/axis';
 import styles from './cartesian-base.module.css';
 
 export type CartesianBaseProps = {
+  title?: string;
+  subtitle?: string;
+  caption?: string;
   width?: number;
   height?: number;
   background?: Background;
@@ -90,9 +93,9 @@ export const CartesianBase = ({
   background,
   margin = {
     top: 32,
-    right: 48,
+    right: 32,
     bottom: 32,
-    left: 48,
+    left: 32,
   },
   grid = {
     hideColumns: false,
@@ -125,12 +128,16 @@ export const CartesianBase = ({
     top, right, bottom, left,
   }, aStyle), [aStyle, bottom, left, right, top]);
 
-  const {
-    top: tm,
-    right: rm,
-    bottom: bm,
-    left: lm,
-  } = margin;
+  const tm = margin.top * (top ? 1 : 2);
+  const rm = margin.right * (right ? 1 : 2);
+  const bm = margin.bottom * (bottom ? 1 : 2);
+  const lm = margin.left * (left ? 1 : 2);
+  // const {
+  //   top: tm,
+  //   right: rm,
+  //   bottom: bm,
+  //   left: lm,
+  // } = margin;
 
   const {
     leftAxisOffset: lOff,
@@ -193,7 +200,16 @@ export const CartesianBase = ({
       >
         <LinearGradient id="cartesian" from={from} to={to} />
 
-        <rect x={0} y={0} width={dynamicWidth} height={dynamicHeight} fill="url(#cartesian)" filter="url(#shadow)" rx={8} strokeWidth={1} stroke="hsl(0, 0%, 92%)" />
+        <rect
+          x={0}
+          y={0}
+          width={dynamicWidth}
+          height={dynamicHeight}
+          fill="url(#cartesian)"
+          rx={8}
+          strokeWidth={1}
+          stroke="hsl(0, 0%, 92%)"
+        />
 
         <Group top={0} left={0}>
           {!hasRows && (left || right) && (
@@ -257,6 +273,9 @@ export const CartesianBase = ({
               stroke={axisConfig.style.axisLineProps.stroke}
               strokeDasharray={axisConfig.style.axisLineProps.strokeDasharray}
               strokeWidth={axisConfig.style.axisLineProps.strokeWidth}
+              hideAxisLine={a.axis?.hideAxisLine}
+              hideTicks={a.axis?.hideTicks}
+              hideZero={a.axis?.hideZero}
             />
           ))}
         </Group>

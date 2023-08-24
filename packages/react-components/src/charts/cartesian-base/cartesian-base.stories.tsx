@@ -54,19 +54,24 @@ TwoAxis.args = {
     hideColumns: true,
     tickColumns: 10,
     tickRows: 10,
+    otherProps: {
+      strokeDasharray: '3 2',
+    },
   },
   top: undefined,
   right: undefined,
   bottom: {
     domain: [new Date('2020-01-01').getTime(), new Date('2020-01-10').getTime()],
-    label: 'Bottom Label',
+    label: 'Time',
     scaleType: 'time',
   },
   left: {
-    domain: [0, 1000000],
-    label: 'Left Label',
+    domain: [0, 1000],
+    label: 'Quantity',
     scaleType: 'linear',
     hideAxisLine: true,
+    hideTicks: true,
+    hideZero: true,
   },
 };
 
