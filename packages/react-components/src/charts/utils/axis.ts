@@ -100,7 +100,6 @@ export const computeAxisConfig = (
   const {
     labelCharExtimatedWidth: lcw,
     labelOffset,
-    tickOffset,
   } = config.spacing;
 
   const offset = computeAllAxisOffset(axis, config.spacing);
@@ -112,48 +111,24 @@ export const computeAxisConfig = (
   const maxCharRight = axis.right ? getMaxCharactersNum(axis.right.domain) : 0;
 
   const top: HorizontalAxisConfig = {
-    tickLabelProps: {
-      dy: -tickOffset,
-      dominantBaseline: 'auto',
-    },
-    labelProps: {
-      dominantBaseline: 'middle',
-    },
+    ...axisStyleConfig.top,
     labelOffset,
   };
 
   const right: VerticalAxisConfig = {
-    tickLabelProps: {
-      dx: tickOffset,
-      textAnchor: 'start',
-      dominantBaseline: 'middle',
-    },
-    labelProps: {
-      dominantBaseline: 'middle',
-    },
-    labelOffset: hasLabelRight ? (labelOffset + lcw * maxCharRight) : 0,
+    ...axisStyleConfig.right,
+    labelOffset: hasLabelRight
+      ? (labelOffset + lcw * maxCharRight)
+      : 0,
   };
 
   const bottom: HorizontalAxisConfig = {
-    tickLabelProps: {
-      dy: tickOffset,
-      dominantBaseline: 'auto',
-    },
-    labelProps: {
-      dominantBaseline: 'middle',
-    },
+    ...axisStyleConfig.bottom,
     labelOffset,
   };
 
   const left: VerticalAxisConfig = {
-    tickLabelProps: {
-      dx: -tickOffset,
-      textAnchor: 'end',
-      dominantBaseline: 'middle',
-    },
-    labelProps: {
-      dominantBaseline: 'hanging',
-    },
+    ...axisStyleConfig.left,
     labelOffset: hasLabelLeft
       ? (labelOffset + lcw * maxCharLeft)
       : 0,

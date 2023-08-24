@@ -14,50 +14,7 @@
  * limitations under the License.
  */
 
-import { Except } from 'type-fest';
-
-export type TextAnchor = 'start' | 'middle' | 'end';
-export type StrokeLinecap = 'butt' | 'round' | 'square'
-
-export type LabelProps = {
-  fill: string;
-  fontFamily: string;
-  fontSize: number;
-  fontWeight: number;
-  textAnchor: TextAnchor;
-}
-
-export type TickLabelProps = Except<LabelProps, 'textAnchor'>
-
-export type TickLineProps = {
-  length: number;
-  stroke: string;
-  strokeWidth: number;
-  strokeLinecap: StrokeLinecap;
-}
-
-export type AxisLineProps = {
-  stroke: string;
-  strokeWidth: number;
-  strokeDasharray: string;
-}
-
-export type AxisSpacing = {
-  labelCharExtimatedWidth: number;
-  labelHeight: number;
-  labelOffset: number;
-  tickLabelHeight: number;
-  tickOffset: number;
-  tickLength: number;
-}
-
-export type AxisStyleConfig = {
-  labelProps: LabelProps;
-  tickLabelProps: TickLabelProps;
-  tickLineProps: TickLineProps;
-  axisLineProps: AxisLineProps;
-  spacing: AxisSpacing;
-}
+import { AxisStyleConfig } from '../types/axis';
 
 export const axisStyleConfig: AxisStyleConfig = {
   labelProps: {
@@ -91,5 +48,43 @@ export const axisStyleConfig: AxisStyleConfig = {
     tickLabelHeight: 16.5, // based on a 14px font size
     tickOffset: 4,
     tickLength: 4,
+  },
+  top: {
+    tickLabelProps: {
+      dy: -4,
+      dominantBaseline: 'auto',
+    },
+    labelProps: {
+      dominantBaseline: 'middle',
+    },
+  },
+  right: {
+    tickLabelProps: {
+      dx: 4,
+      textAnchor: 'start',
+      dominantBaseline: 'middle',
+    },
+    labelProps: {
+      dominantBaseline: 'middle',
+    },
+  },
+  bottom: {
+    tickLabelProps: {
+      dy: 4,
+      dominantBaseline: 'auto',
+    },
+    labelProps: {
+      dominantBaseline: 'middle',
+    },
+  },
+  left: {
+    tickLabelProps: {
+      dx: -4,
+      textAnchor: 'end',
+      dominantBaseline: 'middle',
+    },
+    labelProps: {
+      dominantBaseline: 'hanging',
+    },
   },
 };

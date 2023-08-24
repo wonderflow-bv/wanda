@@ -84,10 +84,35 @@ export type AxisSpacing = {
   tickLength: number;
 }
 
+export type VerticalAxisStyleConfig = {
+  tickLabelProps: {
+    dx: number;
+    textAnchor: TextAnchor;
+    dominantBaseline: DominantBaseline;
+  };
+  labelProps: {
+    dominantBaseline: DominantBaseline;
+  };
+};
+
+export type HorizontalAxisStyleConfig = {
+  tickLabelProps: {
+    dy: number;
+    dominantBaseline: DominantBaseline;
+  };
+  labelProps: {
+    dominantBaseline: DominantBaseline;
+  };
+};
+
 export type AxisStyleConfig = {
   labelProps: LabelProps;
   tickLabelProps: TickLabelProps;
   tickLineProps: TickLineProps;
   axisLineProps: AxisLineProps;
   spacing: AxisSpacing;
+  top: HorizontalAxisStyleConfig;
+  right: VerticalAxisStyleConfig;
+  bottom: HorizontalAxisStyleConfig;
+  left: VerticalAxisStyleConfig;
 }
