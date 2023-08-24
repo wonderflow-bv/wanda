@@ -46,6 +46,25 @@ export default story;
 const Template: ComponentStory<typeof CartesianBase> = args => <CartesianBase {...args} />;
 
 export const Default = Template.bind({});
-Default.args = {
+Default.args = {};
+
+export const TwoAxis = Template.bind({});
+TwoAxis.args = {
+  grid: {
+    tickColumns: 10,
+    tickRows: 10,
+  },
+  top: undefined,
+  right: undefined,
+  bottom: {
+    domain: [new Date('2020-01-01').getTime(), new Date('2020-01-10').getTime()],
+    label: 'Bottom Label',
+    scaleType: 'time',
+  },
+  left: {
+    domain: [0, 1000000],
+    label: 'Left Label',
+    scaleType: 'linear',
+  },
 };
 

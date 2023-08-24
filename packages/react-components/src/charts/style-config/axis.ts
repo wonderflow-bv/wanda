@@ -85,7 +85,7 @@ export const axisStyleConfig: AxisStyleConfig = {
     strokeDasharray: '',
   },
   spacing: {
-    labelCharExtimatedWidth: 9,
+    labelCharExtimatedWidth: 8.5,
     labelHeight: 14, // based on a 12px font size
     labelOffset: 16,
     tickLabelHeight: 16.5, // based on a 14px font size

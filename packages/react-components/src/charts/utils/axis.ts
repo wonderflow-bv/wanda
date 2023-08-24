@@ -48,7 +48,7 @@ export const computeSingleAxisOffset = (
     } = config;
 
     const tick = tl + to;
-    const axisLabel = label ? (lo + lh) : 0;
+    const axisLabel = label ? (lh + lo) : 0;
     const maxChar = char * tickLabelMaxChar;
 
     const v = tick + maxChar + axisLabel;
@@ -181,7 +181,7 @@ export const scaleDomainToAxis = (axis: Pick<AxisProps, 'domain' | 'range' | 'sc
   if (hasData) {
     if (scaleType === 'label') {
       return scaleBand({
-        domain: domain.map(v => v.toString()),
+        domain: domain.map(v => `${v}`),
         range,
         paddingInner,
         paddingOuter,
@@ -212,10 +212,5 @@ export const scaleDomainToAxis = (axis: Pick<AxisProps, 'domain' | 'range' | 'sc
     }
   }
 
-  return scaleBand({
-    domain: domain.map(v => v.toString()),
-    range,
-    paddingInner,
-    paddingOuter,
-  });
+  return undefined;
 };

@@ -182,6 +182,9 @@ export const CartesianBase = ({
       valueScale: leftScale,
     },
   ];
+  console.log({
+    dynamicWidth, dynamicHeight, xMax, yMax, axisConfig,
+  });
 
   return (
     <div className={styles.Wrapper} ref={ref}>
@@ -191,19 +194,11 @@ export const CartesianBase = ({
         viewBox={`0 0 ${dynamicWidth} ${dynamicHeight}`}
         {...otherProps}
       >
-        {/* <defs>
-          <filter id="shadow" x="0" y="0" width="200%" height="200%">
-            <feOffset result="offOut" in="SourceAlpha" dx="2" dy="2" />
-            <feGaussianBlur result="blurOut" in="offOut" stdDeviation="4" />
-            <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
-          </filter>
-        </defs> */}
-
         <LinearGradient id="cartesian" from={from} to={to} />
 
         <rect x={0} y={0} width={dynamicWidth} height={dynamicHeight} fill="url(#cartesian)" filter="url(#shadow)" rx={8} strokeWidth={1} stroke="hsl(0, 0%, 92%)" />
 
-        <Group>
+        <Group top={0} left={0}>
           {!hasRows && (left || right) && (
             <GridRows
               top={tPos}
