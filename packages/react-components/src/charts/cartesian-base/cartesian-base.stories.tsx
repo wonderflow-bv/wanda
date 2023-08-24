@@ -11,7 +11,7 @@ const story: ComponentMeta<typeof CartesianBase> = {
       tickRows: 10,
     },
     top: {
-      domain: ['a', 'b', 'c', 'd', 'e'],
+      domain: ['A', 'B', 'C', 'D', 'E'],
       label: 'Top Label',
       scaleType: 'label',
       paddingOuter: 0,
@@ -51,6 +51,7 @@ Default.args = {};
 export const TwoAxis = Template.bind({});
 TwoAxis.args = {
   grid: {
+    hideColumns: true,
     tickColumns: 10,
     tickRows: 10,
   },
@@ -65,6 +66,7 @@ TwoAxis.args = {
     domain: [0, 1000000],
     label: 'Left Label',
     scaleType: 'linear',
+    hideAxisLine: true,
   },
 };
 

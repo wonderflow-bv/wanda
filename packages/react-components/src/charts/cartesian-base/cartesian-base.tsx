@@ -89,10 +89,10 @@ export const CartesianBase = ({
   height = 600,
   background,
   margin = {
-    top: 24,
-    right: 24,
-    bottom: 24,
-    left: 24,
+    top: 32,
+    right: 48,
+    bottom: 32,
+    left: 48,
   },
   grid = {
     hideColumns: false,
@@ -182,9 +182,6 @@ export const CartesianBase = ({
       valueScale: leftScale,
     },
   ];
-  console.log({
-    dynamicWidth, dynamicHeight, xMax, yMax, axisConfig,
-  });
 
   return (
     <div className={styles.Wrapper} ref={ref}>

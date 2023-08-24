@@ -42,10 +42,10 @@ export const axisStyleConfig: AxisStyleConfig = {
     strokeDasharray: '',
   },
   spacing: {
-    labelCharExtimatedWidth: 8.5,
+    labelCharExtimatedWidth: 8,
     labelHeight: 14, // based on a 12px font size
     labelOffset: 16,
-    tickLabelHeight: 16.5, // based on a 14px font size
+    tickLabelHeight: 16, // based on a 14px font size
     tickOffset: 4,
     tickLength: 4,
   },

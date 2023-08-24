@@ -48,13 +48,20 @@ export const computeSingleAxisOffset = (
     } = config;
 
     const tick = tl + to;
-    const axisLabel = label ? (lh + lo) : 0;
+    const axisLabel = label ? (lh / 2 + lo) : 0;
     const maxChar = char * tickLabelMaxChar;
 
     const v = tick + maxChar + axisLabel;
-    const h = tick + tlh + axisLabel;
+    const h = tick + tlh / 2 + axisLabel;
 
-    return isVertical ? v : h;
+    const offset = {
+      top: h - to,
+      right: v - to,
+      bottom: h + to,
+      left: v - lo,
+    };
+
+    return offset[orientation];
   }
 
   return 0;
