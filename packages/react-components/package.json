@@ -106,6 +106,7 @@
     "@visx/group": "3.3.0",
     "@visx/responsive": "3.3.0",
     "@visx/scale": "3.3.0",
+    "@visx/text": "3.3.0",
     "@visx/vendor": "3.3.0",
     "ahooks": "3.7.5",
     "clsx": "1.2.1",

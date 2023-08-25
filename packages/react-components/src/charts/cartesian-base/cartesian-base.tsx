@@ -28,6 +28,7 @@ import { useSize } from 'ahooks';
 import _ from 'lodash';
 import { useMemo, useRef } from 'react';
 
+import { Headings } from '../headings';
 import { cartesianStyleConfig } from '../style-config/cartesian';
 import { AxisOrientation } from '../types/axis';
 import { CartesianStyleConfig, MarginProps } from '../types/cartesian';
@@ -101,6 +102,8 @@ export const CartesianBase = ({
     hideColumns: false,
     hideRows: false,
   },
+  title,
+  subtitle,
   top,
   right,
   bottom,
@@ -124,20 +127,24 @@ export const CartesianBase = ({
   const dynamicWidth = size?.width ?? width;
   const dynamicHeight = size?.height ?? height;
 
+  const viewport = {
+    xs: _.inRange(dynamicWidth, 0, 480),
+    sm: _.inRange(dynamicWidth, 480, 768),
+    lg: dynamicWidth >= 768,
+  };
+  console.log('viewport',
+    Object.entries(viewport).filter(arr => arr[1])[0][0]);
+
   const axisConfig = useMemo(() => computeAxisConfig({
     top, right, bottom, left,
   }, aStyle), [aStyle, bottom, left, right, top]);
 
-  const tm = margin.top * (top ? 1 : 2);
+  const heading = title ? 50 : 0;
+
+  const tm = margin.top * (top ? 1 : 2) + heading;
   const rm = margin.right * (right ? 1 : 2);
   const bm = margin.bottom * (bottom ? 1 : 2);
   const lm = margin.left * (left ? 1 : 2);
-  // const {
-  //   top: tm,
-  //   right: rm,
-  //   bottom: bm,
-  //   left: lm,
-  // } = margin;
 
   const {
     leftAxisOffset: lOff,
@@ -211,7 +218,14 @@ export const CartesianBase = ({
           stroke="hsl(0, 0%, 92%)"
         />
 
-        <Group top={0} left={0}>
+        <Headings
+          title={title}
+          subtitle={subtitle}
+          top={40}
+          left={lm}
+        />
+
+        <Group>
           {!hasRows && (left || right) && (
             <GridRows
               top={tPos}

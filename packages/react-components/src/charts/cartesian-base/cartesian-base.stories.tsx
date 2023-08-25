@@ -6,6 +6,8 @@ const story: ComponentMeta<typeof CartesianBase> = {
   title: 'Charts/Cartesian Base',
   component: CartesianBase,
   args: {
+    title: 'Chart Title',
+    subtitle: 'Subtitle text',
     grid: {
       tickColumns: 10,
       tickRows: 10,
@@ -53,7 +55,7 @@ TwoAxis.args = {
   grid: {
     hideColumns: true,
     tickColumns: 10,
-    tickRows: 10,
+    tickRows: 5,
     otherProps: {
       strokeDasharray: '3 2',
     },
@@ -64,6 +66,7 @@ TwoAxis.args = {
     domain: [new Date('2020-01-01').getTime(), new Date('2020-01-10').getTime()],
     label: 'Time',
     scaleType: 'time',
+    numTicks: 10,
   },
   left: {
     domain: [0, 1000],
@@ -72,6 +75,7 @@ TwoAxis.args = {
     hideAxisLine: true,
     hideTicks: true,
     hideZero: true,
+    numTicks: 10,
   },
 };
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Wonderflow Design Team
+ * Copyright 2022-2023 Wonderflow Design Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,5 @@
  * limitations under the License.
  */
 
-import { AxisStyleConfig } from './axis';
-import { GridStyleConfig } from './grid';
-import { LinearGradientStyleConfig } from './linear-gradient';
-
-export type MarginProps = {
-  top: number;
-  right: number;
-  left: number;
-  bottom: number;
-}
-
-export type CartesianStyleConfig = {
-  linearGradient: LinearGradientStyleConfig;
-  grid: GridStyleConfig;
-  axis: AxisStyleConfig;
-}
+export type { HeadingsProps } from './headings';
+export { Headings } from './headings';

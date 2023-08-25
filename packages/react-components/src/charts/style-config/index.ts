@@ -17,4 +17,5 @@
 export * from './axis';
 export * from './cartesian';
 export * from './grid';
+export * from './headings';
 export * from './linear-gradient';
