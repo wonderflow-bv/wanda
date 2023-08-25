@@ -28,7 +28,8 @@ import { useSize } from 'ahooks';
 import _ from 'lodash';
 import { useMemo, useRef } from 'react';
 
-import { Headings } from '../headings';
+import { Headings, HeadingsProps } from '../headings';
+import { headingsStyleConfig as hStyle } from '../style-config';
 import { cartesianStyleConfig } from '../style-config/cartesian';
 import { AxisOrientation } from '../types/axis';
 import { CartesianStyleConfig, MarginProps } from '../types/cartesian';
@@ -40,7 +41,7 @@ import styles from './cartesian-base.module.css';
 export type CartesianBaseProps = {
   title?: string;
   subtitle?: string;
-  caption?: string;
+  headings?: Pick<HeadingsProps, 'top'| 'left'| 'config'>;
   width?: number;
   height?: number;
   background?: Background;
@@ -104,6 +105,7 @@ export const CartesianBase = ({
   },
   title,
   subtitle,
+  headings,
   top,
   right,
   bottom,
@@ -139,7 +141,7 @@ export const CartesianBase = ({
     top, right, bottom, left,
   }, aStyle), [aStyle, bottom, left, right, top]);
 
-  const heading = title ? 50 : 0;
+  const heading = title ? hStyle.height : 0;
 
   const tm = margin.top * (top ? 1 : 2) + heading;
   const rm = margin.right * (right ? 1 : 2);
@@ -221,8 +223,9 @@ export const CartesianBase = ({
         <Headings
           title={title}
           subtitle={subtitle}
-          top={40}
-          left={lm}
+          top={headings?.top ?? 40}
+          left={headings?.left ?? lm}
+          config={headings?.config}
         />
 
         <Group>
