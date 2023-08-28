@@ -15,10 +15,11 @@
  */
 
 import { Background, LinearGradientStyleConfig } from '../types';
+import { themeLight } from './themes';
 
 export const backgroundStyle: Background = {
-  from: 'hsl(0 0% 100%)',
-  to: 'hsl(210 20% 98%)',
+  from: themeLight.background.from,
+  to: themeLight.background.to,
 };
 
 export const linearGradientStyleConfig: LinearGradientStyleConfig = {

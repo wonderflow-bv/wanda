@@ -3,16 +3,16 @@ import { colors } from './colors';
 
 export const themeLight: Theme = {
   background: {
-    from: colors.neutrals.dimmed0,
+    from: colors.neutrals.white,
     to: colors.neutrals.dimmed1,
   },
   headings: {
-    title: colors.neutrals.dimmed9,
-    subtitle: colors.neutrals.dimmed7,
+    title: colors.neutrals.dimmed7,
+    subtitle: colors.neutrals.dimmed5,
   },
   axis: {
-    label: colors.neutrals.dimmed5,
-    tickLabel: colors.neutrals.dimmed4,
+    label: colors.neutrals.dimmed8,
+    tickLabel: colors.neutrals.dimmed5,
     tick: colors.neutrals.dimmed4,
     line: colors.neutrals.dimmed4,
   },
@@ -24,7 +24,7 @@ export const themeLight: Theme = {
 export const themeDark: Theme = {
   background: {
     from: colors.neutrals.dimmed7,
-    to: colors.neutrals.dimmed8,
+    to: colors.neutrals.dimmed9,
   },
   headings: {
     title: colors.neutrals.dimmed0,

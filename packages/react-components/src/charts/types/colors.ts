@@ -1,5 +1,7 @@
 export type Colors = {
   neutrals: {
+    white: string;
+    black: string;
     dimmed0: string;
     dimmed1: string;
     dimmed2: string;

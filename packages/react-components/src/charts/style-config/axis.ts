@@ -15,29 +15,30 @@
  */
 
 import { AxisStyleConfig } from '../types/axis';
+import { themeLight } from './themes';
 
 export const axisStyleConfig: AxisStyleConfig = {
   labelProps: {
-    fill: 'hsl(210, 5%, 27%)',
+    fill: themeLight.axis.label,
     fontFamily: 'system-ui, sans-serif',
     fontSize: 12,
     fontWeight: 400,
     textAnchor: 'middle',
   },
   tickLabelProps: {
-    fill: 'hsl(225, 1%, 49%)',
+    fill: themeLight.axis.tickLabel,
     fontFamily: 'system-ui, sans-serif',
     fontSize: 14,
     fontWeight: 400,
   },
   tickLineProps: {
     length: 4,
-    stroke: 'hsl(0, 0%, 80%)',
+    stroke: themeLight.axis.tick,
     strokeWidth: 1,
     strokeLinecap: 'round',
   },
   axisLineProps: {
-    stroke: 'hsl(0, 0%, 80%)',
+    stroke: themeLight.axis.line,
     strokeWidth: 1,
     strokeDasharray: '',
   },

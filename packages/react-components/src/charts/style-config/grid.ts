@@ -1,9 +1,10 @@
 import { GridStyle, GridStyleConfig } from '../types/grid';
+import { themeLight } from './themes';
 
 export const gridRowsStyleConfig: GridStyle = {
   offset: 0,
   fill: '',
-  stroke: 'hsl(0, 0%, 92%)',
+  stroke: themeLight.grid.line,
   strokeWidth: 1,
   strokeOpacity: 1,
   strokeDasharray: '',
@@ -13,7 +14,7 @@ export const gridRowsStyleConfig: GridStyle = {
 export const gridColumnsStyleConfig: GridStyle = {
   offset: 0,
   fill: '',
-  stroke: 'hsl(0, 0%, 92%)',
+  stroke: themeLight.grid.line,
   strokeWidth: 1,
   strokeOpacity: 1,
   strokeDasharray: '',
