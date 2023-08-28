@@ -1,12 +1,17 @@
 import { Group } from '@visx/group';
 import { Text } from '@visx/text';
 import _ from 'lodash';
+import { useMemo } from 'react';
 
-import { headingsStyleConfig } from '../style-config';
-import { HeadingsStyleConfig } from '../types';
+import { HeadingsStyleConfig, ThemeVariants } from '../types';
 import { DeepPartial } from '../types/main';
+import { getCartesianStyleConfigFromTheme } from '../utils/colors';
 
 export type HeadingsProps = {
+  /**
+   *
+   */
+  theme?: ThemeVariants;
   /**
    *
    */
@@ -30,13 +35,19 @@ export type HeadingsProps = {
 }
 
 export const Headings = ({
+  theme = 'light',
   title,
   subtitle,
   top = 0,
   left = 0,
+
   config,
 }: HeadingsProps) => {
-  const mergeStyle: HeadingsStyleConfig = _.merge(headingsStyleConfig, config);
+  const mergeStyle: HeadingsStyleConfig = useMemo(() => {
+    const { headings } = getCartesianStyleConfigFromTheme(theme);
+    return _.merge(headings, config);
+  }, [theme, config]);
+
   const { title: t, subtitle: s } = mergeStyle;
 
   if (!title) return null;

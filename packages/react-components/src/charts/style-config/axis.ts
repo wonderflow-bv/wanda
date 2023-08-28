@@ -51,7 +51,7 @@ export const axisStyleConfig: AxisStyleConfig = {
   },
   top: {
     tickLabelProps: {
-      dy: -4,
+      dy: -4, // this has to be +/- tickLength
       dominantBaseline: 'auto',
     },
     labelProps: {
@@ -60,7 +60,7 @@ export const axisStyleConfig: AxisStyleConfig = {
   },
   right: {
     tickLabelProps: {
-      dx: 4,
+      dx: 4, // this has to be +/- tickLength
       textAnchor: 'start',
       dominantBaseline: 'middle',
     },
@@ -70,7 +70,7 @@ export const axisStyleConfig: AxisStyleConfig = {
   },
   bottom: {
     tickLabelProps: {
-      dy: 4,
+      dy: 4, // this has to be +/- tickLength
       dominantBaseline: 'auto',
     },
     labelProps: {
@@ -79,7 +79,7 @@ export const axisStyleConfig: AxisStyleConfig = {
   },
   left: {
     tickLabelProps: {
-      dx: -4,
+      dx: -4, // this has to be +/- tickLength
       textAnchor: 'end',
       dominantBaseline: 'middle',
     },

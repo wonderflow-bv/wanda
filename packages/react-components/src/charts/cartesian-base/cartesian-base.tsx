@@ -30,15 +30,17 @@ import { useMemo, useRef } from 'react';
 
 import { Headings, HeadingsProps } from '../headings';
 import { headingsStyleConfig as hStyle } from '../style-config';
-import { cartesianStyleConfig } from '../style-config/cartesian';
+import { ThemeVariants } from '../types';
 import { AxisOrientation } from '../types/axis';
 import { CartesianStyleConfig, MarginProps } from '../types/cartesian';
 import { Background } from '../types/linear-gradient';
 import { DeepPartial } from '../types/main';
 import { computeAxisConfig, scaleDomainToAxis } from '../utils/axis';
+import { getCartesianStyleConfigFromTheme } from '../utils/colors';
 import styles from './cartesian-base.module.css';
 
 export type CartesianBaseProps = {
+  theme?: ThemeVariants;
   title?: string;
   subtitle?: string;
   headings?: Pick<HeadingsProps, 'top'| 'left'| 'config'>;
@@ -90,6 +92,7 @@ export type Axis = {
 }
 
 export const CartesianBase = ({
+  theme = 'light',
   width = 800,
   height = 600,
   background,
@@ -117,7 +120,10 @@ export const CartesianBase = ({
     linearGradient: lgStyle,
     grid: gStyle,
     axis: aStyle,
-  } = useMemo(() => _.merge(cartesianStyleConfig, styleConfig), [styleConfig]);
+  } = useMemo(() => {
+    const cConfig = getCartesianStyleConfigFromTheme(theme);
+    return _.cloneDeep(_.merge(cConfig, styleConfig));
+  }, [styleConfig, theme]);
 
   const { from, to } = _.merge(lgStyle.background, background);
 
@@ -221,6 +227,7 @@ export const CartesianBase = ({
         />
 
         <Headings
+          theme={theme}
           title={title}
           subtitle={subtitle}
           top={headings?.top ?? 40}

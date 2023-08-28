@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Background, LinearGradientStyleConfig } from '../types/linear-gradient';
+import { Background, LinearGradientStyleConfig } from '../types';
 
 export const backgroundStyle: Background = {
   from: 'hsl(0 0% 100%)',

@@ -17,10 +17,12 @@
 import { CartesianStyleConfig } from '../types/cartesian';
 import { axisStyleConfig } from './axis';
 import { gridStyleConfig } from './grid';
+import { headingsStyleConfig } from './headings';
 import { linearGradientStyleConfig } from './linear-gradient';
 
 export const cartesianStyleConfig: CartesianStyleConfig = {
   linearGradient: linearGradientStyleConfig,
   grid: gridStyleConfig,
   axis: axisStyleConfig,
+  headings: headingsStyleConfig,
 };

@@ -1,4 +1,6 @@
-export const headingsStyleConfig = {
+import { HeadingsStyleConfig } from '../types';
+
+export const headingsStyleConfig: HeadingsStyleConfig = {
   height: 50,
   fontFamily: 'system-ui',
   title: {

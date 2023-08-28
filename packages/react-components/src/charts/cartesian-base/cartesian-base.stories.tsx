@@ -6,6 +6,7 @@ const story: ComponentMeta<typeof CartesianBase> = {
   title: 'Charts/Cartesian Base',
   component: CartesianBase,
   args: {
+    theme: 'light',
     title: 'Chart Title',
     subtitle: 'Subtitle text',
     grid: {
@@ -79,3 +80,5 @@ TwoAxis.args = {
   },
 };
 
+export const DarkTheme = Template.bind({});
+DarkTheme.args = { theme: 'dark' };

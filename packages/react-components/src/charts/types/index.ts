@@ -16,6 +16,8 @@
 
 export * from './axis';
 export * from './cartesian';
+export * from './colors';
 export * from './grid';
 export * from './headings';
 export * from './linear-gradient';
+export * from './themes';

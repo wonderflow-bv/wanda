@@ -16,6 +16,7 @@
 
 import { AxisStyleConfig } from './axis';
 import { GridStyleConfig } from './grid';
+import { HeadingsStyleConfig } from './headings';
 import { LinearGradientStyleConfig } from './linear-gradient';
 
 export type MarginProps = {
@@ -29,4 +30,5 @@ export type CartesianStyleConfig = {
   linearGradient: LinearGradientStyleConfig;
   grid: GridStyleConfig;
   axis: AxisStyleConfig;
+  headings: HeadingsStyleConfig;
 }
