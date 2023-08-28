@@ -31,8 +31,8 @@ export const themeDark: Theme = {
     subtitle: colors.neutrals.dimmed3,
   },
   axis: {
-    label: colors.neutrals.dimmed6,
-    tickLabel: colors.neutrals.dimmed6,
+    label: colors.neutrals.dimmed2,
+    tickLabel: colors.neutrals.dimmed4,
     tick: colors.neutrals.dimmed4,
     line: colors.neutrals.dimmed4,
   },

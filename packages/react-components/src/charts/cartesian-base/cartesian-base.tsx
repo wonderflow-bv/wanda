@@ -206,7 +206,7 @@ export const CartesianBase = ({
   ];
 
   return (
-    <div className={styles.Wrapper} ref={ref}>
+    <div className={styles.Wrapper} data-theme={theme} ref={ref}>
       <svg
         width={dynamicWidth}
         height={dynamicHeight}
@@ -223,7 +223,7 @@ export const CartesianBase = ({
           fill="url(#cartesian)"
           rx={8}
           strokeWidth={1}
-          stroke="hsl(0, 0%, 92%)"
+          stroke={theme === 'light' ? 'lightgray' : 'slategray'}
         />
 
         <Headings

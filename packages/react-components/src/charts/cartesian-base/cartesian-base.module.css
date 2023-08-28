@@ -9,5 +9,9 @@
   position: relative;
   resize: both;
   width: 100%;
+
+  &[data-theme='dark'] {
+    box-shadow: none;
+  }
 }
 

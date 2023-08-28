@@ -118,24 +118,24 @@ export const computeAxisConfig = (
   const maxCharRight = axis.right ? getMaxCharactersNum(axis.right.domain) : 0;
 
   const top: HorizontalAxisConfig = {
-    ...axisStyleConfig.top,
+    ...config.top,
     labelOffset,
   };
 
   const right: VerticalAxisConfig = {
-    ...axisStyleConfig.right,
+    ...config.right,
     labelOffset: hasLabelRight
       ? (labelOffset + lcw * maxCharRight)
       : 0,
   };
 
   const bottom: HorizontalAxisConfig = {
-    ...axisStyleConfig.bottom,
+    ...config.bottom,
     labelOffset,
   };
 
   const left: VerticalAxisConfig = {
-    ...axisStyleConfig.left,
+    ...config.left,
     labelOffset: hasLabelLeft
       ? (labelOffset + lcw * maxCharLeft)
       : 0,
@@ -143,7 +143,7 @@ export const computeAxisConfig = (
 
   const c: AxisConfig = {
     offset,
-    style: axisStyleConfig,
+    style: config,
     top,
     right,
     bottom,

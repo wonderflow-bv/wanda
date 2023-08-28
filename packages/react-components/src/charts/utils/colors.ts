@@ -18,8 +18,5 @@ export const getCartesianStyleConfigFromTheme = (theme: 'light' | 'dark') => {
     cStyle.headings.subtitle.fill = themeDark.headings.subtitle;
   }
 
-  console.log('getCartesianStyleConfigFromTheme', cStyle);
-  console.log('themeDark', themeDark);
-
   return cStyle;
 };
