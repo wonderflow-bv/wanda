@@ -82,6 +82,7 @@
     "@types/react-dom": "17.0.14",
     "@types/react-table": "7.7.12",
     "@types/react-test-renderer": "18.0.0",
+    "@types/uuid": "9.0.2",
     "@wonderflow/config": "12.4.0",
     "@wonderflow/tokens": "12.4.0",
     "babel-loader": "8.2.5",
@@ -101,12 +102,14 @@
   "dependencies": {
     "@radix-ui/react-tabs": "1.0.0",
     "@visx/axis": "3.3.0",
+    "@visx/event": "3.3.0",
     "@visx/gradient": "3.3.0",
     "@visx/grid": "3.3.0",
     "@visx/group": "3.3.0",
     "@visx/responsive": "3.3.0",
     "@visx/scale": "3.3.0",
     "@visx/text": "3.3.0",
+    "@visx/tooltip": "3.3.0",
     "@visx/vendor": "3.3.0",
     "ahooks": "3.7.5",
     "clsx": "1.2.1",
@@ -122,6 +125,7 @@
     "react-table": "7.8.0",
     "react-uid": "2.3.2",
     "slugify": "1.6.5",
-    "type-fest": "3.0.0"
+    "type-fest": "3.0.0",
+    "uuid": "9.0.0"
   }
 }

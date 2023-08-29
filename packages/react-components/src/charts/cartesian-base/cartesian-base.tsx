@@ -18,9 +18,11 @@ import {
   Axis,
   TickFormatter,
 } from '@visx/axis';
+import { localPoint } from '@visx/event';
 import { LinearGradient } from '@visx/gradient';
 import { GridColumns, GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
+import { useTooltip, useTooltipInPortal } from '@visx/tooltip';
 import {
   NumberValue, ScaleBand, ScaleLinear, ScaleTime,
 } from '@visx/vendor/d3-scale';
@@ -30,6 +32,7 @@ import { useMemo, useRef } from 'react';
 
 import { Headings, HeadingsProps } from '../headings';
 import { headingsStyleConfig as hStyle } from '../style-config';
+import { Tooltip } from '../tooltip';
 import { ThemeVariants } from '../types';
 import { AxisOrientation } from '../types/axis';
 import { CartesianStyleConfig, MarginProps } from '../types/cartesian';
@@ -55,6 +58,7 @@ export type CartesianBaseProps = {
   left?: AxisProps;
   styleConfig?: DeepPartial<CartesianStyleConfig>;
   otherProps?: Record<string, unknown>;
+  children?: React.ReactNode;
 }
 
 export type GridProps = {
@@ -115,6 +119,7 @@ export const CartesianBase = ({
   left,
   styleConfig,
   otherProps,
+  children,
 }: CartesianBaseProps) => {
   const {
     linearGradient: lgStyle,
@@ -205,12 +210,40 @@ export const CartesianBase = ({
     },
   ];
 
+  const {
+    tooltipLeft,
+    tooltipTop,
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    tooltipOpen,
+    showTooltip,
+    hideTooltip,
+  } = useTooltip();
+
+  const { containerRef } = useTooltipInPortal({
+    detectBounds: true,
+    scroll: true,
+    debounce: 50,
+    zIndex: 10,
+  });
+
+  const handleMouseOver = (event: any, datum: any) => {
+    const coords = localPoint(event.target.ownerSVGElement, event);
+    showTooltip({
+      tooltipLeft: coords?.x ?? 0,
+      tooltipTop: coords?.y ?? 0,
+      tooltipData: datum,
+    });
+  };
+
   return (
     <div className={styles.Wrapper} data-theme={theme} ref={ref}>
       <svg
         width={dynamicWidth}
         height={dynamicHeight}
         viewBox={`0 0 ${dynamicWidth} ${dynamicHeight}`}
+        ref={containerRef}
+        onMouseOver={e => handleMouseOver(e, 'tooltip')}
+        onMouseOut={hideTooltip}
         {...otherProps}
       >
         <LinearGradient id="cartesian" from={from} to={to} />
@@ -302,8 +335,20 @@ export const CartesianBase = ({
               hideZero={a.axis?.hideZero}
             />
           ))}
+
+          {children}
         </Group>
       </svg>
+
+      <Tooltip
+        theme={theme}
+        isOpen={tooltipOpen}
+        top={tooltipTop}
+        left={tooltipLeft}
+      >
+        <strong>tooltip test</strong>
+      </Tooltip>
+
     </div>
   );
 };

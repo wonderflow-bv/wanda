@@ -38,6 +38,7 @@ const story: ComponentMeta<typeof CartesianBase> = {
     styleConfig: {
       // grid: { rows: { stroke: 'blue' } },
     },
+    children: undefined,
   },
   argTypes: {
 
