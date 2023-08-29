@@ -1,7 +1,11 @@
 import { defaultStyles, useTooltipInPortal } from '@visx/tooltip';
+import _ from 'lodash';
+import { useMemo } from 'react';
 import { v4 as uuid } from 'uuid';
 
-import { ThemeVariants } from '../types';
+import { tooltipTheme } from '../style-config/tooltip';
+import { ThemeVariants, TooltipStyleConfig } from '../types';
+import { DeepPartial } from '../types/main';
 
 export type TooltipProps = {
   /**
@@ -23,7 +27,19 @@ export type TooltipProps = {
   /**
    *
    */
+  offsetTop?: number;
+  /**
+   *
+   */
+  offsetLeft?: number;
+  /**
+   *
+   */
   children?: React.ReactNode;
+  /**
+   *
+   */
+  config?: DeepPartial<TooltipStyleConfig>;
 }
 
 export const Tooltip = ({
@@ -31,7 +47,10 @@ export const Tooltip = ({
   isOpen,
   top,
   left,
+  offsetTop = 25,
+  offsetLeft = 35,
   children,
+  config,
 }: TooltipProps) => {
   const { TooltipInPortal } = useTooltipInPortal({
     detectBounds: true,
@@ -40,7 +59,7 @@ export const Tooltip = ({
     zIndex: 10,
   });
 
-  console.log('tooltip theme', theme);
+  const tStyle = useMemo(() => _.cloneDeep(_.merge(tooltipTheme[theme], config)), [theme, config]);
 
   if (!isOpen) return null;
 
@@ -48,24 +67,18 @@ export const Tooltip = ({
 
     <TooltipInPortal
       key={uuid()}
-      top={top}
-      left={left}
+      top={(top ?? -999) + (offsetTop ?? 0)}
+      left={(left ?? -999) + (offsetLeft ?? 0)}
       style={{
         ...defaultStyles,
-        background: 'linear-gradient(#ffffffaa, #b1b1b192)',
-        color: 'slategray',
-        width: 152,
-        height: 72,
-        padding: 12,
-        backdropFilter: 'blur(1px)',
-        border: '1px solid lightgray',
-        borderRadius: '0.125rem',
-        boxShadow: '2px 2px 4px rgba(60, 60, 60, 0.2)',
-        zIndex: '10',
+        ...tStyle,
       }}
     >
-      {children}
+      <div style={{ padding: '8px 16px' }}>
+        {children}
+      </div>
     </TooltipInPortal>
   );
 };
 
+Tooltip.displayName = 'ChartTooltip';

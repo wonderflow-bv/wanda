@@ -18,7 +18,6 @@ import {
   Axis,
   TickFormatter,
 } from '@visx/axis';
-import { localPoint } from '@visx/event';
 import { LinearGradient } from '@visx/gradient';
 import { GridColumns, GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
@@ -28,7 +27,7 @@ import {
 } from '@visx/vendor/d3-scale';
 import { useSize } from 'ahooks';
 import _ from 'lodash';
-import { useMemo, useRef } from 'react';
+import { useCallback, useMemo, useRef } from 'react';
 
 import { Headings, HeadingsProps } from '../headings';
 import { headingsStyleConfig as hStyle } from '../style-config';
@@ -210,30 +209,34 @@ export const CartesianBase = ({
     },
   ];
 
+  /** TODO: tooltip logic to be removed from here, only for debugging purpose */
+
   const {
     tooltipLeft,
     tooltipTop,
     // eslint-disable-next-line @typescript-eslint/naming-convention
     tooltipOpen,
-    showTooltip,
+    tooltipData,
     hideTooltip,
+    showTooltip,
   } = useTooltip();
 
-  const { containerRef } = useTooltipInPortal({
+  const { containerRef, containerBounds } = useTooltipInPortal({
     detectBounds: true,
     scroll: true,
     debounce: 50,
     zIndex: 10,
   });
 
-  const handleMouseOver = (event: any, datum: any) => {
-    const coords = localPoint(event.target.ownerSVGElement, event);
+  const handleMouseMove = useCallback((event: any, datum: any) => {
+    const containerX = ('clientX' in event ? event.clientX : 0) - containerBounds.left;
+    const containerY = ('clientY' in event ? event.clientY : 0) - containerBounds.top;
     showTooltip({
-      tooltipLeft: coords?.x ?? 0,
-      tooltipTop: coords?.y ?? 0,
+      tooltipLeft: containerX ?? 0,
+      tooltipTop: containerY ?? 0,
       tooltipData: datum,
     });
-  };
+  }, [containerBounds.left, containerBounds.top, showTooltip]);
 
   return (
     <div className={styles.Wrapper} data-theme={theme} ref={ref}>
@@ -242,7 +245,7 @@ export const CartesianBase = ({
         height={dynamicHeight}
         viewBox={`0 0 ${dynamicWidth} ${dynamicHeight}`}
         ref={containerRef}
-        onMouseOver={e => handleMouseOver(e, 'tooltip')}
+        onMouseMove={e => handleMouseMove(e, 'test')}
         onMouseOut={hideTooltip}
         {...otherProps}
       >
@@ -340,13 +343,16 @@ export const CartesianBase = ({
         </Group>
       </svg>
 
+      {/** TODO: to be removed from here, only for debugging purpose */}
       <Tooltip
         theme={theme}
         isOpen={tooltipOpen}
         top={tooltipTop}
         left={tooltipLeft}
       >
-        <strong>tooltip test</strong>
+        <p style={{ fontSize: '14px' }}><strong>{`Tooltip ${tooltipData as any}`}</strong></p>
+        <p style={{ fontSize: '12px' }}><span>{`top: ${(tooltipTop ?? 0).toFixed() as any}px`}</span></p>
+        <p style={{ fontSize: '12px' }}><span>{`left: ${(tooltipLeft ?? 0).toFixed() as any}px`}</span></p>
       </Tooltip>
 
     </div>

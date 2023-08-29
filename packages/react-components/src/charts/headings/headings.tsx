@@ -100,4 +100,4 @@ export const Headings = ({
   );
 };
 
-Headings.displayName = 'Headings';
+Headings.displayName = 'ChartHeadings';

@@ -19,7 +19,7 @@ import { Colors } from '../types';
 export const colors: Colors = {
   neutrals: {
     white: 'hsl(0 0% 100%)',
-    black: 'hsl(255 0% 100%)',
+    black: 'hsl(0 0% 0%)',
     dimmed0: 'hsl(210 20% 98%)',
     dimmed1: 'hsl(220 19% 91%)',
     dimmed2: 'hsl(220 16% 85%)',

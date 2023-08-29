@@ -36,3 +36,22 @@ export const getCartesianStyleConfigFromTheme = (theme: 'light' | 'dark') => {
 
   return cStyle;
 };
+
+export const toHSLA = (hsl: string, alpha: number) => {
+  const a = _.clamp(alpha, 0, 1);
+  const hsla = hsl.replace('hsl(', 'hsla(').replace(')', ` / ${alpha})`);
+  return a < 1 ? hsla : hsl;
+};
+
+export const fromHSLA = (hsla: string) => {
+  const reStart = /hsla?\s*\(\s*/gi;
+  const reSeparator = /[\s,/]+/g;
+  const clean = hsla.replace(reStart, '')
+    .replace(')', '')
+    .trim()
+    .split(reSeparator);
+  const [h, s, l, a] = clean;
+  return {
+    h, s, l, a: a ?? '100%',
+  };
+};

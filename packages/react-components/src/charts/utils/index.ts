@@ -15,5 +15,6 @@
  */
 
 export * from './axis';
+export * from './colors';
 export * from './data';
 export * from './math';
