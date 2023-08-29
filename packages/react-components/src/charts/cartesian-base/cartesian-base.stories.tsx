@@ -9,6 +9,7 @@ const story: ComponentMeta<typeof CartesianBase> = {
     theme: 'light',
     title: 'Chart Title',
     subtitle: 'Subtitle text',
+    preventResponsive: false,
     grid: {
       tickColumns: 10,
       tickRows: 10,

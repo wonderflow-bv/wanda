@@ -2,16 +2,24 @@
   align-items: center;
   border-radius: 0.5rem;
   box-shadow: 2px 2px 4px #ccc;
-  display: flex;
-  height: auto;
+  display: block;
+  height: var(--static-height);
   justify-content: center;
   overflow: hidden;
   position: relative;
-  resize: both;
-  width: 100%;
+  width: var(--static-width);
+  resize: none;
 
   &[data-theme='dark'] {
     box-shadow: none;
+  }
+
+  &[data-responsive='true'] {
+    display: flex;
+    height: auto;
+    justify-content: center;
+    resize: both;
+    width: 100%;
   }
 }
 

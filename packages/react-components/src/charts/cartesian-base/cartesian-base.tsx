@@ -27,7 +27,9 @@ import {
 } from '@visx/vendor/d3-scale';
 import { useSize } from 'ahooks';
 import _ from 'lodash';
-import { useCallback, useMemo, useRef } from 'react';
+import {
+  CSSProperties, useCallback, useMemo, useRef,
+} from 'react';
 
 import { Headings, HeadingsProps } from '../headings';
 import { headingsStyleConfig as hStyle } from '../style-config';
@@ -48,6 +50,7 @@ export type CartesianBaseProps = {
   headings?: Pick<HeadingsProps, 'top'| 'left'| 'config'>;
   width?: number;
   height?: number;
+  preventResponsive?: boolean;
   background?: Background;
   margin?: MarginProps;
   grid?: GridProps;
@@ -98,6 +101,7 @@ export const CartesianBase = ({
   theme = 'light',
   width = 800,
   height = 600,
+  preventResponsive,
   background,
   margin = {
     top: 32,
@@ -136,8 +140,13 @@ export const CartesianBase = ({
   const ref = useRef(null);
   const size = useSize(ref);
 
-  const dynamicWidth = size?.width ?? width;
-  const dynamicHeight = size?.height ?? height;
+  const dynamicWidth = preventResponsive ? width : (size?.width ?? width);
+  const dynamicHeight = preventResponsive ? height : (size?.height ?? height);
+
+  const dynamicStyle: CSSProperties = {
+    '--static-width': `${dynamicWidth}px`,
+    '--static-height': `${dynamicHeight}px`,
+  };
 
   const viewport = {
     xs: _.inRange(dynamicWidth, 0, 480),
@@ -238,8 +247,16 @@ export const CartesianBase = ({
     });
   }, [containerBounds.left, containerBounds.top, showTooltip]);
 
+  /** end of tooltip logic */
+
   return (
-    <div className={styles.Wrapper} data-theme={theme} ref={ref}>
+    <div
+      className={styles.Wrapper}
+      data-theme={theme}
+      data-responsive={!preventResponsive}
+      ref={ref}
+      style={dynamicStyle}
+    >
       <svg
         width={dynamicWidth}
         height={dynamicHeight}
