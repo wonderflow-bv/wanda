@@ -96,7 +96,6 @@ export type AxisSpacing = {
   labelHeight: number;
   labelOffset: number;
   tickLabelHeight: number;
-  tickOffset: number;
   tickLength: number;
 }
 

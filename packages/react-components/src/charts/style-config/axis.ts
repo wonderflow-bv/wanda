@@ -43,16 +43,15 @@ export const axisStyleConfig: AxisStyleConfig = {
     strokeDasharray: '',
   },
   spacing: {
-    labelCharExtimatedWidth: 8.5,
+    labelCharExtimatedWidth: 8,
     labelHeight: 14, // based on a 12px font size
     labelOffset: 16,
     tickLabelHeight: 16, // based on a 14px font size
-    tickOffset: 4,
     tickLength: 4,
   },
   top: {
     tickLabelProps: {
-      dy: -4, // this has to be +/- tickLength
+      dy: -12,
       dominantBaseline: 'auto',
     },
     labelProps: {
@@ -61,7 +60,7 @@ export const axisStyleConfig: AxisStyleConfig = {
   },
   right: {
     tickLabelProps: {
-      dx: 4, // this has to be +/- tickLength
+      dx: 4,
       textAnchor: 'start',
       dominantBaseline: 'middle',
     },
@@ -71,21 +70,21 @@ export const axisStyleConfig: AxisStyleConfig = {
   },
   bottom: {
     tickLabelProps: {
-      dy: 4, // this has to be +/- tickLength
+      dy: 4,
       dominantBaseline: 'auto',
     },
     labelProps: {
-      dominantBaseline: 'middle',
+      dominantBaseline: 'auto',
     },
   },
   left: {
     tickLabelProps: {
-      dx: -4, // this has to be +/- tickLength
+      dx: -4,
       textAnchor: 'end',
       dominantBaseline: 'middle',
     },
     labelProps: {
-      dominantBaseline: 'hanging',
+      dominantBaseline: 'auto',
     },
   },
 };
