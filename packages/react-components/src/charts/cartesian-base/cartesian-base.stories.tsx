@@ -23,7 +23,7 @@ const story: ComponentMeta<typeof CartesianBase> = {
       tickFormat: (v: any) => `${JSON.stringify(v)} qualcosa`,
     },
     right: {
-      domain: [0, 0.0001],
+      domain: [0, 0.010],
       label: 'Right Label',
       scaleType: 'linear',
       tickFormat: (v: any) => `${JSON.stringify(v)} $`,

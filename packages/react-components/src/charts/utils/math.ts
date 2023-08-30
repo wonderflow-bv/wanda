@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import { TickFormatter } from '@visx/axis/lib/types';
+import { NumberValue } from '@visx/vendor/d3-scale';
 import _ from 'lodash';
 
 import { ValidTypeOf } from '../types/main';
@@ -54,12 +56,25 @@ export const getMinMaxDate = (values: Array<number | Date>) => {
   return dates && [new Date(dates[0]), new Date(dates[1])];
 };
 
-export const getMaxCharactersNum = (values: Array<string | number>) => {
-  if (!values.length) return 0;
-  const isNumbers = isArrayTypeNumber(values);
+export const getMaxCharactersNum = (
+  domain: Array<string | number>,
+  tickFormat?: TickFormatter<string | Date | NumberValue>,
+) => {
+  if (!domain.length) return 0;
+  const isNumbers = isArrayTypeNumber(domain);
+
+  let diffLen = 0;
+
+  if (tickFormat) {
+    const formatObj = domain.map((e, i) => ({ value: e, index: i }));
+    const domainFormatted = tickFormat ? domain.map((v, i) => tickFormat(v, i, formatObj)) : domain;
+    const diff = domainFormatted.map((df, i) => (`${df as any}`).length - (`${domain[i]}`).length);
+    const [highest] = diff.sort((a, b) => b - a);
+    diffLen = highest;
+  }
 
   if (isNumbers) {
-    const minMax = getMinMaxNumber(values as number[]);
+    const minMax = getMinMaxNumber(domain as number[]);
     if (minMax !== undefined) {
       const [min, max] = minMax;
       const diff = max - min;
@@ -73,7 +88,7 @@ export const getMaxCharactersNum = (values: Array<string | number>) => {
     }
   }
 
-  const max = values.map(el => `${el}`).sort((a, b) => b.length - a.length)[0].length;
+  const max = domain.map(el => `${el}`).sort((a, b) => b.length - a.length)[0].length;
 
-  return max;
+  return max + diffLen;
 };

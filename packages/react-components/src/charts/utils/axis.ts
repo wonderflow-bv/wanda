@@ -40,18 +40,9 @@ export const computeSingleAxisOffset = (
 
   const hasValues = !!domain?.length;
 
-  let diffLen = 0;
-  if (tickFormat) {
-    const formatObj = domain.map((e, i) => ({ value: e, index: i }));
-    const domainFormatted = tickFormat ? domain.map((v, i) => tickFormat(v, i, formatObj)) : domain;
-    const diff = domainFormatted.map((df, i) => (`${df as any}`).length - (`${domain[i]}`).length);
-    const [highest] = diff.sort((a, b) => b - a);
-    diffLen = highest;
-  }
-
   if (hasValues) {
     const isVertical = orientation === 'left' || orientation === 'right';
-    const tickLabelMaxChar = (isVertical) ? getMaxCharactersNum(domain) + diffLen : 0;
+    const tickLabelMaxChar = (isVertical) ? getMaxCharactersNum(domain, tickFormat) : 0;
 
     const {
       labelCharExtimatedWidth: char,
@@ -127,10 +118,10 @@ export const computeAxisConfig = (
   const offset = computeAllAxisOffset(axis, config.spacing);
 
   const hasLabelLeft = Boolean(axis.left?.label);
-  const maxCharLeft = axis.left ? getMaxCharactersNum(axis.left.domain) : 0;
+  const maxCharLeft = axis.left ? getMaxCharactersNum(axis.left.domain, axis.left.tickFormat) : 0;
 
   const hasLabelRight = Boolean(axis.right?.label);
-  const maxCharRight = axis.right ? getMaxCharactersNum(axis.right.domain) : 0;
+  const maxCharRight = axis.right ? getMaxCharactersNum(axis.right.domain, axis.right.tickFormat) : 0;
 
   const top: HorizontalAxisConfig = {
     ...config.top,
