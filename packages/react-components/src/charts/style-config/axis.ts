@@ -66,7 +66,7 @@ export const axisStyleConfig: AxisStyleConfig = {
       dominantBaseline: 'middle',
     },
     labelProps: {
-      dominantBaseline: 'middle',
+      dominantBaseline: 'auto',
     },
   },
   bottom: {

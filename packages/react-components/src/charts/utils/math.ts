@@ -56,7 +56,6 @@ export const getMinMaxDate = (values: Array<number | Date>) => {
 
 export const getMaxCharactersNum = (values: Array<string | number>) => {
   if (!values.length) return 0;
-
   const isNumbers = isArrayTypeNumber(values);
 
   if (isNumbers) {
@@ -66,7 +65,8 @@ export const getMaxCharactersNum = (values: Array<string | number>) => {
       const diff = max - min;
 
       if (diff && diff < 10) {
-        return new Intl.NumberFormat('en-US').format(diff / 10).length;
+        const opts = { maximumSignificantDigits: 12 };
+        return new Intl.NumberFormat('en-US', opts).format(_.divide(diff, 10)).length;
       }
 
       return new Intl.NumberFormat('en-US').format(max).length;

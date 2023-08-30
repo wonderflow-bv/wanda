@@ -157,8 +157,12 @@ export const CartesianBase = ({
     Object.entries(viewport).filter(arr => arr[1])[0][0]);
 
   const axisConfig = useMemo(() => computeAxisConfig({
-    top, right, bottom, left,
-  }, aStyle), [aStyle, bottom, left, right, top]);
+    top,
+    right,
+    bottom,
+    left,
+  },
+  aStyle), [aStyle, bottom, left, right, top]);
 
   const heading = title ? hStyle.height : 0;
 

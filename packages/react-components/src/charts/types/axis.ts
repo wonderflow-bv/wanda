@@ -23,7 +23,7 @@ export type DominantBaseline = 'auto' | 'middle' | 'hanging';
 export type TextAnchor = 'end' | 'middle' | 'start';
 export type StrokeLinecap = 'butt' | 'round' | 'square'
 
-export type AllAxisOffsetInput = Pick<AxisProps, 'domain' | 'label'>
+export type AllAxisOffsetInput = Pick<AxisProps, 'domain' | 'label' | 'tickFormat'>
 
 export type SingleAxisOffsetInput = AllAxisOffsetInput & { orientation: AxisOrientation }
 

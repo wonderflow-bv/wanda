@@ -20,11 +20,13 @@ const story: ComponentMeta<typeof CartesianBase> = {
       scaleType: 'label',
       paddingOuter: 0,
       paddingInner: 1,
+      tickFormat: (v: any) => `${JSON.stringify(v)} qualcosa`,
     },
     right: {
-      domain: [0, 0.01],
+      domain: [0, 0.0001],
       label: 'Right Label',
       scaleType: 'linear',
+      tickFormat: (v: any) => `${JSON.stringify(v)} $`,
     },
     bottom: {
       domain: [new Date('2020-01-01').getTime(), new Date('2020-01-10').getTime()],

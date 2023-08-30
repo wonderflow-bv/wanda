@@ -31,12 +31,27 @@ export const computeSingleAxisOffset = (
   axis: SingleAxisOffsetInput,
   config = axisStyleConfig.spacing,
 ) => {
-  const { domain, orientation, label } = axis;
+  const {
+    domain,
+    orientation,
+    label,
+    tickFormat,
+  } = axis;
+
   const hasValues = !!domain?.length;
+
+  let diffLen = 0;
+  if (tickFormat) {
+    const formatObj = domain.map((e, i) => ({ value: e, index: i }));
+    const domainFormatted = tickFormat ? domain.map((v, i) => tickFormat(v, i, formatObj)) : domain;
+    const diff = domainFormatted.map((df, i) => (`${df as any}`).length - (`${domain[i]}`).length);
+    const [highest] = diff.sort((a, b) => b - a);
+    diffLen = highest;
+  }
 
   if (hasValues) {
     const isVertical = orientation === 'left' || orientation === 'right';
-    const tickLabelMaxChar = (isVertical) ? getMaxCharactersNum(domain) : 0;
+    const tickLabelMaxChar = (isVertical) ? getMaxCharactersNum(domain) + diffLen : 0;
 
     const {
       labelCharExtimatedWidth: char,
@@ -149,6 +164,7 @@ export const computeAxisConfig = (
     bottom,
     left,
   };
+
   return c;
 };
 
