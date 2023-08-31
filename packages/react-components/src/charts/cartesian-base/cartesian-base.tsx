@@ -39,6 +39,7 @@ import { AxisOrientation } from '../types/axis';
 import { CartesianStyleConfig, MarginProps } from '../types/cartesian';
 import { Background } from '../types/linear-gradient';
 import { DeepPartial } from '../types/main';
+import { formatValue } from '../utils';
 import { computeAxisConfig, scaleDomainToAxis } from '../utils/axis';
 import { getCartesianStyleConfigFromTheme } from '../utils/colors';
 import styles from './cartesian-base.module.css';
@@ -149,6 +150,7 @@ export const CartesianBase = ({
   };
 
   const viewport = {
+    tiny: _.inRange(dynamicWidth, 0, 480),
     xs: _.inRange(dynamicWidth, 0, 480),
     sm: _.inRange(dynamicWidth, 480, 768),
     lg: dynamicWidth >= 768,
@@ -221,6 +223,26 @@ export const CartesianBase = ({
       valueScale: leftScale,
     },
   ];
+
+  const manageTickFormat = (condition: boolean, axis: AxisProps) => {
+    const { tickFormat } = axis;
+
+    if (condition) {
+      if (tickFormat) {
+        return (v: any, i: number) => (
+          i % 2 === 0
+            ? tickFormat(v, i, [{ value: v, index: i }])
+            : '');
+      }
+
+      return (v: any, i: number) => (
+        i % 2 === 0
+          ? formatValue(v)
+          : '');
+    }
+
+    return undefined;
+  };
 
   /** TODO: tooltip logic to be removed from here, only for debugging purpose */
 
@@ -349,14 +371,14 @@ export const CartesianBase = ({
                 ...axisConfig.style.labelProps,
                 ...axisConfig[a.orientation].labelProps,
               }}
-              tickFormat={a.axis!.tickFormat}
-              {...a.axis!.otherProps}
+              tickFormat={manageTickFormat(true, a.axis!)}
               stroke={axisConfig.style.axisLineProps.stroke}
               strokeDasharray={axisConfig.style.axisLineProps.strokeDasharray}
               strokeWidth={axisConfig.style.axisLineProps.strokeWidth}
               hideAxisLine={a.axis?.hideAxisLine}
               hideTicks={a.axis?.hideTicks}
               hideZero={a.axis?.hideZero}
+              {...a.axis!.otherProps}
             />
           ))}
 
