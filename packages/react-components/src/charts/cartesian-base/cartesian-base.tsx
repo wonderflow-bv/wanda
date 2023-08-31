@@ -150,7 +150,6 @@ export const CartesianBase = ({
   };
 
   const viewport = {
-    tiny: _.inRange(dynamicWidth, 0, 480),
     xs: _.inRange(dynamicWidth, 0, 480),
     sm: _.inRange(dynamicWidth, 480, 768),
     lg: dynamicWidth >= 768,
@@ -240,6 +239,8 @@ export const CartesianBase = ({
           ? formatValue(v)
           : '');
     }
+
+    if (tickFormat) return (v: any, i: number) => (tickFormat(v, i, [{ value: v, index: i }]));
 
     return undefined;
   };
@@ -371,7 +372,7 @@ export const CartesianBase = ({
                 ...axisConfig.style.labelProps,
                 ...axisConfig[a.orientation].labelProps,
               }}
-              tickFormat={manageTickFormat(true, a.axis!)}
+              tickFormat={manageTickFormat(!viewport.lg, a.axis!)}
               stroke={axisConfig.style.axisLineProps.stroke}
               strokeDasharray={axisConfig.style.axisLineProps.strokeDasharray}
               strokeWidth={axisConfig.style.axisLineProps.strokeWidth}

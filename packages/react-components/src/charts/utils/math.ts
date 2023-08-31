@@ -19,6 +19,7 @@ import { NumberValue } from '@visx/vendor/d3-scale';
 import _ from 'lodash';
 
 import { ValidTypeOf } from '../types/main';
+import { formatNumber } from './format';
 
 export const isArrayType = (
   arr: unknown[],
@@ -80,11 +81,10 @@ export const getMaxCharactersNum = (
       const diff = max - min;
 
       if (diff && diff < 10) {
-        const opts = { maximumSignificantDigits: 12 };
-        return new Intl.NumberFormat('en-US', opts).format(_.divide(diff, 10)).length;
+        return formatNumber(_.divide(diff, 10)).length;
       }
 
-      return new Intl.NumberFormat('en-US').format(max).length;
+      return formatNumber(max).length;
     }
   }
 

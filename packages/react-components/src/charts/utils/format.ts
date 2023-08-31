@@ -5,8 +5,10 @@ export const getLocales = (
   defaultLocales = 'en-US',
 ) => {
   try {
+    // @ts-expect-error: missing Intl d.ts declaration
     return Intl.getCanonicalLocales(value);
   } catch (err: unknown) {
+    // eslint-disable-next-line no-console
     console.error(err);
     return defaultLocales;
   }
@@ -21,8 +23,8 @@ export const formatNumber = (
 export const formatDate = (
   value: Date,
   locales = 'en-US',
-  options = { year: 'numeric', month: 'short', day: 'numeric' } as { year: 'numeric'; month: 'short'; day: 'numeric' },
-) => new Intl.DateTimeFormat(getLocales(locales), options).format(value);
+  options = { year: '2-digit', month: '2-digit', day: '2-digit' } as any,
+) => new Intl.DateTimeFormat(getLocales(locales), options).format(value).replaceAll('/', '.');
 
 export const formatValue = (
   value: string | number | Date,
