@@ -21,15 +21,28 @@ import {
   axisStyleConfig,
 } from '../style-config';
 import {
-  AllAxisOffsetInput, AxisConfig, HorizontalAxisConfig, SingleAxisOffsetInput, VerticalAxisConfig,
+  AllAxisOffsetInput,
+  AxisConfig,
+  AxisHideElementsConfig,
+  HorizontalAxisConfig,
+  SingleAxisOffsetInput,
+  VerticalAxisConfig,
 } from '../types/axis';
 import {
   getMaxCharactersNum, getMinMaxNumber, isArrayTypeDate,
 } from './math';
 
+export const hideConfig: AxisHideElementsConfig = {
+  tick: false,
+  tickLabel: false,
+  axisLabel: false,
+  axisLine: false,
+};
+
 export const computeSingleAxisOffset = (
   axis: SingleAxisOffsetInput,
   config = axisStyleConfig,
+  hide = hideConfig,
 ) => {
   const {
     domain,
@@ -48,19 +61,21 @@ export const computeSingleAxisOffset = (
       labelCharExtimatedWidth: char,
       labelHeight: lh,
       labelOffset: lo,
-      tickLabelHeight: tlh,
+      tickLabelHeight,
       tickLength: tl,
     } = config.spacing;
 
     const tickOffset = isVertical ? config[orientation].tickLabelProps.dx : config[orientation].tickLabelProps.dy;
     const extraChar = orientation === 'right' ? 1 : 0;
 
-    const tick = tl + Math.abs(tickOffset);
-    const axisLabel = label ? (lh / 2 + lo) : 0;
-    const maxChar = char * (tickLabelMaxChar + extraChar);
+    const tick = hide.tick ? 0 : tl + Math.abs(tickOffset);
+    const axisLabel = (label && !hide.axisLabel) ? (lh / 2 + lo) : 0;
+    const maxChar = hide.tickLabel ? 0 : char * (tickLabelMaxChar + extraChar);
+    const tlh = hide.tickLabel ? 0 : tickLabelHeight / 2;
+    const axisLine = hide.axisLine ? 0 : config.axisLineProps.strokeWidth;
 
-    const v = tick + maxChar + axisLabel;
-    const h = tick + tlh / 2 + axisLabel;
+    const v = tick + maxChar + axisLabel + axisLine;
+    const h = tick + tlh + axisLabel + axisLine;
 
     const offset = {
       top: h - tickOffset,
@@ -83,15 +98,21 @@ export const computeAllAxisOffset = (
     left?: AllAxisOffsetInput;
   },
   config = axisStyleConfig,
+  hide = {
+    top: hideConfig,
+    right: hideConfig,
+    bottom: hideConfig,
+    left: hideConfig,
+  },
 ) => {
   const {
     top, right, bottom, left,
   } = axis;
 
-  const t = top ? computeSingleAxisOffset({ ...top, orientation: 'top' }, config) : 0;
-  const r = right ? computeSingleAxisOffset({ ...right, orientation: 'right' }, config) : 0;
-  const b = bottom ? computeSingleAxisOffset({ ...bottom, orientation: 'bottom' }, config) : 0;
-  const l = left ? computeSingleAxisOffset({ ...left, orientation: 'left' }, config) : 0;
+  const t = top ? computeSingleAxisOffset({ ...top, orientation: 'top' }, config, hide.top) : 0;
+  const r = right ? computeSingleAxisOffset({ ...right, orientation: 'right' }, config, hide.right) : 0;
+  const b = bottom ? computeSingleAxisOffset({ ...bottom, orientation: 'bottom' }, config, hide.bottom) : 0;
+  const l = left ? computeSingleAxisOffset({ ...left, orientation: 'left' }, config, hide.left) : 0;
 
   return {
     leftAxisOffset: l,
@@ -111,13 +132,19 @@ export const computeAxisConfig = (
     left?: AllAxisOffsetInput;
   },
   config = axisStyleConfig,
+  hide = {
+    top: hideConfig,
+    right: hideConfig,
+    bottom: hideConfig,
+    left: hideConfig,
+  },
 ) => {
   const {
     labelCharExtimatedWidth: lcw,
     labelOffset,
   } = config.spacing;
 
-  const offset = computeAllAxisOffset(axis, config);
+  const offset = computeAllAxisOffset(axis, config, hide);
 
   const hasLabelLeft = Boolean(axis.left?.label);
   const maxCharLeft = axis.left ? getMaxCharactersNum(axis.left.domain, axis.left.tickFormat) : 0;

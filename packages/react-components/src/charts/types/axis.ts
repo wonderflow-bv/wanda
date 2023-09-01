@@ -68,6 +68,13 @@ export type AxisConfig = {
   left: VerticalAxisConfig;
 }
 
+export type AxisHideElementsConfig = {
+  tick: boolean;
+  tickLabel: boolean;
+  axisLabel: boolean;
+  axisLine: boolean;
+}
+
 export type LabelProps = {
   fill: string;
   fontFamily: string;

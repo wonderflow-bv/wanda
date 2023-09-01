@@ -229,13 +229,13 @@ export const CartesianBase = ({
     if (condition) {
       if (tickFormat) {
         return (v: any, i: number) => (
-          i % 2 === 0
+          i % 2 === 1
             ? tickFormat(v, i, [{ value: v, index: i }])
             : '');
       }
 
       return (v: any, i: number) => (
-        i % 2 === 0
+        i % 2 === 1
           ? formatValue(v)
           : '');
     }
