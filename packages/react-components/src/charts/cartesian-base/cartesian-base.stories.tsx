@@ -29,7 +29,7 @@ const story: ComponentMeta<typeof CartesianBase> = {
       tickFormat: (v: any) => `${JSON.stringify(v)} $`,
     },
     bottom: {
-      domain: [new Date('2020-01-01').getTime(), new Date('2023-01-2').getTime()],
+      domain: [new Date('2020-01-01').getTime(), new Date('2022-01-01').getTime()],
       label: 'Bottom Label',
       scaleType: 'time',
     },

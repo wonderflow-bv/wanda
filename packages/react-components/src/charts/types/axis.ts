@@ -23,7 +23,7 @@ export type DominantBaseline = 'auto' | 'middle' | 'hanging';
 export type TextAnchor = 'end' | 'middle' | 'start';
 export type StrokeLinecap = 'butt' | 'round' | 'square'
 
-export type AllAxisOffsetInput = Pick<AxisProps, 'domain' | 'label' | 'tickFormat'>
+export type AllAxisOffsetInput = Pick<AxisProps, 'domain' | 'label' | 'tickFormat' | 'hideAxisLine' | 'hideTicks' | 'hideTickLabel'>
 
 export type SingleAxisOffsetInput = AllAxisOffsetInput & { orientation: AxisOrientation }
 
@@ -34,6 +34,17 @@ export type AxisOffsetConfig = {
   leftAxisOffset: number;
   verticalAxisOffset: number;
   horizontalAxisOffset: number;
+}
+
+export type SingleAxisElementsValues = {
+  offset: number;
+  tickLabelMaxChar: number;
+  tickLabelMaxLength: number;
+  tickLength: number;
+  tickLabelOffset: number;
+  axisLabel: number;
+  labelOffset: number;
+  axisLine: number;
 }
 
 export type HorizontalAxisConfig = {
@@ -66,13 +77,6 @@ export type AxisConfig = {
   right: VerticalAxisConfig;
   bottom: HorizontalAxisConfig;
   left: VerticalAxisConfig;
-}
-
-export type AxisHideElementsConfig = {
-  tick: boolean;
-  tickLabel: boolean;
-  axisLabel: boolean;
-  axisLine: boolean;
 }
 
 export type LabelProps = {
