@@ -83,8 +83,9 @@ export type AxisProps = {
   paddingInner?: number;
   paddingOuter?: number;
   numTicks?: number;
-  hideAxisLine?: boolean;
   hideTicks?: boolean;
+  hideTickLabel?: boolean;
+  hideAxisLine?: boolean;
   hideZero?: boolean;
   tickFormat?: TickFormatter<NumberValue | string | Date>;
   otherProps?: Record<string, unknown>;
