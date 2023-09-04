@@ -73,12 +73,14 @@ export const computeSingleAxisOffset = (
       tickLength: tl,
     } = config.spacing;
 
-    const tickOffset = isVertical ? config[orientation].tickLabelProps.dx : config[orientation].tickLabelProps.dy;
+    const tickOffset = isVertical
+      ? config[orientation].tickLabelProps.dx
+      : config[orientation].tickLabelProps.dy;
 
     const extraChar = orientation === 'right' ? 1 : 0;
 
     const tick = hideTicks ? 0 : tl + Math.abs(tickOffset);
-    const labelOffset = label ? lo + tickOffset : 0;
+    const labelOffset = label ? lo : 0;
     const axisLabel = label ? (lh + labelOffset) : 0;
     const maxChar = hideTickLabel ? 0 : char * (tickLabelMaxChar + extraChar);
     const tlh = hideTickLabel ? 0 : tickLabelHeight;
@@ -106,6 +108,7 @@ export const computeSingleAxisOffset = (
     };
   }
 
+  console.log('single', orientation, res);
   return res;
 };
 

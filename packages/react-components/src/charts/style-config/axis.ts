@@ -79,7 +79,7 @@ export const axisStyleConfig: AxisStyleConfig = {
   },
   left: {
     tickLabelProps: {
-      dx: -40,
+      dx: -4,
       textAnchor: 'end',
       dominantBaseline: 'middle',
     },
