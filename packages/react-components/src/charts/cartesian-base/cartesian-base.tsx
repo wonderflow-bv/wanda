@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /*
  * Copyright 2023 Wonderflow Design Team
  *
@@ -106,10 +107,10 @@ export const CartesianBase = ({
   preventResponsive,
   background,
   margin = {
-    top: 32,
-    right: 32,
-    bottom: 32,
-    left: 32,
+    top: 24,
+    right: 24,
+    bottom: 24,
+    left: 24,
   },
   grid = {
     hideColumns: false,
@@ -225,7 +226,11 @@ export const CartesianBase = ({
   ];
 
   const manageTickFormat = (condition: boolean, axis: AxisProps) => {
-    const { tickFormat } = axis;
+    const { tickFormat, hideTickLabel } = axis;
+
+    if (hideTickLabel) {
+      return () => ('');
+    }
 
     if (condition) {
       if (tickFormat) {
@@ -261,7 +266,7 @@ export const CartesianBase = ({
   const { containerRef, containerBounds } = useTooltipInPortal({
     detectBounds: true,
     scroll: true,
-    debounce: 50,
+    debounce: 500,
     zIndex: 10,
   });
 

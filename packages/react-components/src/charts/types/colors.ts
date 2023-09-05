@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
+export type Neutrals = 'white'
+| 'black'
+| 'dimmed0'
+| 'dimmed1'
+| 'dimmed2'
+| 'dimmed3'
+| 'dimmed4'
+| 'dimmed5'
+| 'dimmed6'
+| 'dimmed7'
+| 'dimmed8'
+| 'dimmed9'
+
 export type Colors = {
-  neutrals: {
-    white: string;
-    black: string;
-    dimmed0: string;
-    dimmed1: string;
-    dimmed2: string;
-    dimmed3: string;
-    dimmed4: string;
-    dimmed5: string;
-    dimmed6: string;
-    dimmed7: string;
-    dimmed8: string;
-    dimmed9: string;
-  };
+  neutrals: Record<Neutrals, string>;
 }

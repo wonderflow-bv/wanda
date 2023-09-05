@@ -22,7 +22,8 @@ import {
   axisStyleConfig,
 } from '../style-config';
 import {
-  AllAxisOffsetInput,
+  AllAxisElementsValues,
+  AllAxisInput,
   AxisConfig,
   AxisOffsetConfig,
   HorizontalAxisConfig,
@@ -51,11 +52,13 @@ export const computeSingleAxisOffset = (
   const hasValues = !!domain?.length;
 
   let res: SingleAxisElementsValues = {
+    orientation: 'left',
     offset: 0,
     tickLabelMaxChar: 0,
     tickLabelMaxLength: 0,
     tickLength: 0,
     tickLabelOffset: 0,
+    tickLabelHeight: 0,
     labelOffset: 0,
     axisLabel: 0,
     axisLine: 0,
@@ -63,14 +66,15 @@ export const computeSingleAxisOffset = (
 
   if (hasValues) {
     const isVertical = orientation === 'left' || orientation === 'right';
+
     const tickLabelMaxChar = (isVertical) ? getMaxCharactersNum(domain, tickFormat) : 0;
 
     const {
       labelCharExtimatedWidth: char,
-      labelHeight: lh,
-      labelOffset: lo,
+      labelHeight,
+      labelOffset,
       tickLabelHeight,
-      tickLength: tl,
+      tickLength,
     } = config.spacing;
 
     const tickOffset = isVertical
@@ -79,14 +83,18 @@ export const computeSingleAxisOffset = (
 
     const extraChar = orientation === 'right' ? 1 : 0;
 
-    const tick = hideTicks ? 0 : tl + Math.abs(tickOffset);
-    const labelOffset = label ? lo : 0;
-    const axisLabel = label ? (lh + labelOffset) : 0;
-    const maxChar = hideTickLabel ? 0 : char * (tickLabelMaxChar + extraChar);
-    const tlh = hideTickLabel ? 0 : tickLabelHeight;
+    const tick = hideTicks ? 0 : tickLength;
+    const to = Math.abs(tickOffset);
+    const tlh = hideTickLabel ? 0 : tickLabelHeight + to;
+
+    const lo = label ? labelOffset : 0;
+    const axisLabel = label ? (labelHeight + lo) : 0;
+
+    const maxLength = hideTickLabel ? 0 : char * (tickLabelMaxChar + extraChar);
+
     const axisLine = hideAxisLine ? 0 : config.axisLineProps.strokeWidth;
 
-    const v = tick + maxChar + axisLabel + axisLine;
+    const v = tick + to + maxLength + axisLabel + axisLine;
     const h = tick + tlh + axisLabel + axisLine;
 
     const offset = {
@@ -97,28 +105,24 @@ export const computeSingleAxisOffset = (
     };
 
     res = {
+      orientation,
       offset: offset[orientation],
       tickLabelMaxChar,
-      tickLabelMaxLength: maxChar,
-      tickLength: tl,
+      tickLabelMaxLength: maxLength,
+      tickLength,
       tickLabelOffset: tickOffset,
+      tickLabelHeight: tlh,
       axisLabel,
-      labelOffset,
+      labelOffset: lo,
       axisLine,
     };
   }
 
-  console.log('single', orientation, res);
   return res;
 };
 
 export const computeAllAxisOffset = (
-  axis: {
-    top?: AllAxisOffsetInput;
-    right?: AllAxisOffsetInput;
-    bottom?: AllAxisOffsetInput;
-    left?: AllAxisOffsetInput;
-  },
+  axis: AllAxisInput,
   config = axisStyleConfig,
 ) => {
   const {
@@ -144,17 +148,17 @@ export const computeAllAxisOffset = (
     horizontalAxisOffset: to + bo,
   };
 
-  const all = {
-    offset,
-    axis: {
-      top: t,
-      right: r,
-      bottom: b,
-      left: l,
-    },
+  const a: AllAxisElementsValues = {
+    top: t,
+    right: r,
+    bottom: b,
+    left: l,
   };
 
-  return all;
+  return ({
+    offset,
+    axis: a,
+  });
 };
 
 export const computeAxisConfig = (
@@ -166,37 +170,52 @@ export const computeAxisConfig = (
   },
   config = axisStyleConfig,
 ) => {
-  const { offset, axis: a } = computeAllAxisOffset(axis, config);
+  const { offset, axis: ao } = computeAllAxisOffset(axis, config);
   const { labelOffset } = config.spacing;
   const {
     top: t, right: r, bottom: b, left: l,
-  } = a;
+  } = ao;
+
+  const tickLabelSize = {
+    top: axis?.top?.hideTickLabel
+      ? (config.spacing.tickLabelHeight + Math.abs(config.top.tickLabelProps.dy))
+      : 0,
+    right: axis?.right?.hideTickLabel
+      ? r!.tickLabelMaxLength + Math.abs(r!.tickLabelOffset)
+      : 0,
+    bottom: axis?.bottom?.hideTickLabel
+      ? (config.spacing.tickLabelHeight + Math.abs(config.bottom.tickLabelProps.dy))
+      : 0,
+    left: axis?.left?.hideTickLabel
+      ? l!.tickLabelMaxLength + Math.abs(l!.tickLabelOffset)
+      : 0,
+  };
 
   const top: HorizontalAxisConfig = {
     ...config.top,
     labelOffset: t
-      ? (labelOffset + Math.abs(t.tickLabelOffset))
+      ? labelOffset + (-t.tickLabelOffset) - tickLabelSize.top
       : 0,
   };
 
   const right: VerticalAxisConfig = {
     ...config.right,
     labelOffset: r
-      ? (labelOffset + r.tickLabelMaxLength + r.tickLabelOffset)
+      ? labelOffset + r.tickLabelMaxLength + r.tickLabelOffset - tickLabelSize.right
       : 0,
   };
 
   const bottom: HorizontalAxisConfig = {
     ...config.bottom,
     labelOffset: b
-      ? labelOffset + b.tickLabelOffset
+      ? labelOffset + b.tickLabelOffset - tickLabelSize.bottom
       : 0,
   };
 
   const left: VerticalAxisConfig = {
     ...config.left,
     labelOffset: l
-      ? (labelOffset + l.tickLabelMaxLength + Math.abs(l.tickLabelOffset))
+      ? labelOffset + l.tickLabelMaxLength + (-l.tickLabelOffset) - tickLabelSize.left
       : 0,
   };
 
