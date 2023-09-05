@@ -52,6 +52,7 @@ export type SingleAxisElementsValues = {
   tickLength: number;
   tickLabelOffset: number;
   tickLabelHeight: number;
+  tickLabelSize: number;
   axisLabel: number;
   labelOffset: number;
   axisLine: number;
