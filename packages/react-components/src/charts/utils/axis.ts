@@ -26,6 +26,7 @@ import {
   AllAxisInput,
   AxisConfig,
   AxisOffsetConfig,
+  AxisOrientation,
   HorizontalAxisConfig,
   SingleAxisElementsValues,
   SingleAxisOffsetInput,
@@ -35,7 +36,82 @@ import {
   getMaxCharactersNum, getMinMaxNumber, isArrayTypeDate,
 } from './math';
 
-export const computeSingleAxisOffset = (
+const getAxisOffset = ({
+  orientation,
+  tick,
+  tickOffset,
+  tickLabelHeight,
+  maxLength,
+  axisLabel,
+  axisLine,
+}: {
+  orientation: AxisOrientation;
+  tick: number;
+  tickOffset: number;
+  tickLabelHeight: number;
+  maxLength: number;
+  axisLabel: number;
+  axisLine: number;
+}) => {
+  const v = tick + Math.abs(tickOffset) + maxLength + axisLabel + axisLine;
+  const h = tick + tickLabelHeight + axisLabel + axisLine;
+
+  const offset = {
+    top: h,
+    right: v,
+    bottom: h,
+    left: v,
+  };
+
+  return offset[orientation];
+};
+
+const getTickLabelSize = ({
+  isVertical,
+  hideTickLabel,
+  maxLength,
+  tickOffset,
+  tickLabelHeight,
+}: {
+  isVertical: boolean;
+  hideTickLabel: boolean | undefined;
+  maxLength: number;
+  tickOffset: number;
+  tickLabelHeight: number;
+}) => {
+  if (hideTickLabel) {
+    return isVertical
+      ? maxLength + Math.abs(tickOffset)
+      : tickLabelHeight + Math.abs(tickOffset);
+  }
+
+  return 0;
+};
+
+const getLabelOffset = ({
+  orientation,
+  labelOffset,
+  tickOffset,
+  tickLabelSize,
+  maxLength,
+}: {
+  orientation: AxisOrientation;
+  labelOffset: number;
+  tickOffset: number;
+  tickLabelSize: number;
+  maxLength: number;
+}) => {
+  const off = {
+    top: labelOffset + (-tickOffset) - tickLabelSize,
+    right: labelOffset + maxLength + tickOffset - tickLabelSize,
+    bottom: labelOffset + tickOffset - tickLabelSize,
+    left: labelOffset + maxLength + (-tickOffset) - tickLabelSize,
+  };
+
+  return off[orientation];
+};
+
+const computeSingleAxisOffset = (
   axis: SingleAxisOffsetInput,
   config = axisStyleConfig,
 ) => {
@@ -85,42 +161,40 @@ export const computeSingleAxisOffset = (
     const extraChar = orientation === 'right' ? 1 : 0;
 
     const tick = hideTicks ? 0 : tickLength;
-    const to = Math.abs(tickOffset);
-    const tlh = hideTickLabel ? 0 : tickLabelHeight + to;
-
-    const lo = label ? labelOffset : 0;
-    const axisLabel = label ? (labelHeight + lo) : 0;
-
+    const tlh = hideTickLabel ? 0 : tickLabelHeight + Math.abs(tickOffset);
+    const axisLabel = label ? (labelHeight + labelOffset) : 0;
     const maxLength = hideTickLabel ? 0 : char * (tickLabelMaxChar + extraChar);
-
     const axisLine = hideAxisLine ? 0 : config.axisLineProps.strokeWidth;
 
-    const v = tick + to + maxLength + axisLabel + axisLine;
-    const h = tick + tlh + axisLabel + axisLine;
+    const offset = getAxisOffset({
+      orientation,
+      axisLabel,
+      axisLine,
+      maxLength,
+      tick,
+      tickOffset,
+      tickLabelHeight: tlh,
+    });
 
-    const offset = {
-      top: h,
-      right: v,
-      bottom: h,
-      left: v,
-    };
+    const tickLabelSize = getTickLabelSize({
+      isVertical,
+      hideTickLabel,
+      maxLength,
+      tickLabelHeight,
+      tickOffset,
+    });
 
-    const tls = isVertical
-      ? maxLength + to
-      : tickLabelHeight + to;
-
-    const tickLabelSize = hideTickLabel ? tls : 0;
-
-    const loff = {
-      top: labelOffset + (-tickOffset) - tickLabelSize,
-      right: labelOffset + maxLength + tickOffset - tickLabelSize,
-      bottom: labelOffset + tickOffset - tickLabelSize,
-      left: labelOffset + maxLength + (-tickOffset) - tickLabelSize,
-    };
+    const lo = getLabelOffset({
+      orientation,
+      labelOffset,
+      maxLength,
+      tickLabelSize,
+      tickOffset,
+    });
 
     res = {
       orientation,
-      offset: offset[orientation],
+      offset,
       tickLabelMaxChar,
       tickLabelMaxLength: maxLength,
       tickLength,
@@ -128,7 +202,7 @@ export const computeSingleAxisOffset = (
       tickLabelHeight: tlh,
       tickLabelSize,
       axisLabel,
-      labelOffset: loff[orientation],
+      labelOffset: lo,
       axisLine,
     };
   }
@@ -136,7 +210,7 @@ export const computeSingleAxisOffset = (
   return res;
 };
 
-export const computeAllAxisOffset = (
+const computeAllAxisOffset = (
   axis: AllAxisInput,
   config = axisStyleConfig,
 ) => {
