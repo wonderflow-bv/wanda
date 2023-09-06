@@ -60,7 +60,7 @@ export const axisStyleConfig: AxisStyleConfig = {
   },
   right: {
     tickLabelProps: {
-      dx: 40,
+      dx: 4,
       textAnchor: 'start',
       dominantBaseline: 'middle',
     },

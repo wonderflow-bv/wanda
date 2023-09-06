@@ -105,9 +105,20 @@ export const computeSingleAxisOffset = (
       left: v,
     };
 
-    const tickLabelSize = isVertical
+    const tls = isVertical
       ? maxLength + to
-      : tickLabelHeight + Math.abs(tickOffset);
+      : tickLabelHeight + to;
+
+    const tickLabelSize = hideTickLabel ? tls : 0;
+
+    const loff = {
+      top: labelOffset + (-tickOffset) - tickLabelSize,
+      right: labelOffset + char * (tickLabelMaxChar + extraChar) + tickOffset - tickLabelSize,
+      bottom: labelOffset + tickOffset - tickLabelSize,
+      left: labelOffset + char * (tickLabelMaxChar + extraChar) + (-tickOffset) - tickLabelSize,
+    };
+
+    console.log(orientation, loff[orientation], tickLabelSize, tls);
 
     res = {
       orientation,
@@ -117,14 +128,13 @@ export const computeSingleAxisOffset = (
       tickLength,
       tickLabelOffset: tickOffset,
       tickLabelHeight: tlh,
-      tickLabelSize: hideTickLabel ? tickLabelSize : 0,
+      tickLabelSize,
       axisLabel,
       labelOffset: lo,
       axisLine,
     };
   }
 
-  console.log(orientation, res);
   return res;
 };
 
