@@ -113,12 +113,10 @@ export const computeSingleAxisOffset = (
 
     const loff = {
       top: labelOffset + (-tickOffset) - tickLabelSize,
-      right: labelOffset + char * (tickLabelMaxChar + extraChar) + tickOffset - tickLabelSize,
+      right: labelOffset + maxLength + tickOffset - tickLabelSize,
       bottom: labelOffset + tickOffset - tickLabelSize,
-      left: labelOffset + char * (tickLabelMaxChar + extraChar) + (-tickOffset) - tickLabelSize,
+      left: labelOffset + maxLength + (-tickOffset) - tickLabelSize,
     };
-
-    console.log(orientation, loff[orientation], tickLabelSize, tls);
 
     res = {
       orientation,
@@ -130,7 +128,7 @@ export const computeSingleAxisOffset = (
       tickLabelHeight: tlh,
       tickLabelSize,
       axisLabel,
-      labelOffset: lo,
+      labelOffset: loff[orientation],
       axisLine,
     };
   }
@@ -194,30 +192,22 @@ export const computeAxisConfig = (
 
   const top: HorizontalAxisConfig = {
     ...config.top,
-    labelOffset: t
-      ? t.labelOffset + (-t.tickLabelOffset) - t.tickLabelSize
-      : 0,
+    labelOffset: t ? t.labelOffset : 0,
   };
 
   const right: VerticalAxisConfig = {
     ...config.right,
-    labelOffset: r
-      ? r.labelOffset + r.tickLabelMaxLength + r.tickLabelOffset - r.tickLabelSize
-      : 0,
+    labelOffset: r ? r.labelOffset : 0,
   };
 
   const bottom: HorizontalAxisConfig = {
     ...config.bottom,
-    labelOffset: b
-      ? b.labelOffset + b.tickLabelOffset - b.tickLabelSize
-      : 0,
+    labelOffset: b ? b.labelOffset : 0,
   };
 
   const left: VerticalAxisConfig = {
     ...config.left,
-    labelOffset: l
-      ? l.labelOffset + l.tickLabelMaxLength + (-l.tickLabelOffset) - l.tickLabelSize
-      : 0,
+    labelOffset: l ? l.labelOffset : 0,
   };
 
   const c: AxisConfig = {
