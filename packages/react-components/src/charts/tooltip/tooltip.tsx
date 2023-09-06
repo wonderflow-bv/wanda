@@ -75,7 +75,7 @@ export const Tooltip = ({
     zIndex: 10,
   });
 
-  const tStyle = useMemo(() => _.cloneDeep(_.merge(tooltipTheme[theme], config)), [theme, config]);
+  const tStyle = useMemo(() => _.merge(tooltipTheme[theme], config), [theme, config]);
 
   if (!isOpen) return null;
 

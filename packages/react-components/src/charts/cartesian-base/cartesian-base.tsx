@@ -133,7 +133,7 @@ export const CartesianBase = ({
     axis: aStyle,
   } = useMemo(() => {
     const cConfig = getCartesianStyleConfigFromTheme(theme);
-    return _.cloneDeep(_.merge(cConfig, styleConfig));
+    return _.merge(cConfig, styleConfig);
   }, [styleConfig, theme]);
 
   const { from, to } = _.merge(lgStyle.background, background);
@@ -143,8 +143,11 @@ export const CartesianBase = ({
   const ref = useRef(null);
   const size = useSize(ref);
 
-  const dynamicWidth = preventResponsive ? width : (size?.width ?? width);
-  const dynamicHeight = preventResponsive ? height : (size?.height ?? height);
+  const w = size ? size.width : width;
+  const h = size ? size.height : height;
+
+  const dynamicWidth = preventResponsive ? width : w;
+  const dynamicHeight = preventResponsive ? height : h;
 
   const dynamicStyle: CSSProperties = {
     '--static-width': `${dynamicWidth}px`,
