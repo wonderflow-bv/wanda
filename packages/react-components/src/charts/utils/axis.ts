@@ -32,6 +32,7 @@ import {
   SingleAxisOffsetInput,
   VerticalAxisConfig,
 } from '../types/axis';
+import { formatValue } from './format';
 import {
   getMaxCharactersNum, getMinMaxNumber, isArrayTypeDate,
 } from './math';
@@ -343,6 +344,32 @@ export const scaleDomainToAxis = (axis: Pick<AxisProps, 'domain' | 'range' | 'sc
       });
     }
   }
+
+  return undefined;
+};
+
+export const manageTickFormat = (condition: boolean, axis: AxisProps) => {
+  const { tickFormat, hideTickLabel } = axis;
+
+  if (hideTickLabel) {
+    return () => ('');
+  }
+
+  if (condition) {
+    if (tickFormat) {
+      return (v: any, i: number) => (
+        i % 2 === 1
+          ? tickFormat(v, i, [{ value: v, index: i }])
+          : '');
+    }
+
+    return (v: any, i: number) => (
+      i % 2 === 1
+        ? formatValue(v)
+        : '');
+  }
+
+  if (tickFormat) return (v: any, i: number) => (tickFormat(v, i, [{ value: v, index: i }]));
 
   return undefined;
 };

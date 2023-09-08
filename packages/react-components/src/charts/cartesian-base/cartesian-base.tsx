@@ -40,8 +40,7 @@ import { AxisOrientation } from '../types/axis';
 import { CartesianStyleConfig, MarginProps } from '../types/cartesian';
 import { Background } from '../types/linear-gradient';
 import { DeepPartial } from '../types/main';
-import { formatValue } from '../utils';
-import { computeAxisConfig, scaleDomainToAxis } from '../utils/axis';
+import { computeAxisConfig, manageTickFormat, scaleDomainToAxis } from '../utils/axis';
 import { getCartesianStyleConfigFromTheme } from '../utils/colors';
 import styles from './cartesian-base.module.css';
 
@@ -60,6 +59,7 @@ export type CartesianBaseProps = {
   right?: AxisProps;
   bottom?: AxisProps;
   left?: AxisProps;
+  legend?: React.ReactNode;
   styleConfig?: DeepPartial<CartesianStyleConfig>;
   otherProps?: Record<string, unknown>;
   children?: React.ReactNode;
@@ -123,6 +123,7 @@ export const CartesianBase = ({
   right,
   bottom,
   left,
+  legend,
   styleConfig,
   otherProps,
   children,
@@ -146,12 +147,20 @@ export const CartesianBase = ({
   const w = size ? size.width : width;
   const h = size ? size.height : height;
 
+  const refLegend = useRef(null);
+  const sizeLegend = useSize(refLegend);
+
+  const legendH = sizeLegend?.height ?? 0;
+
   const dynamicWidth = preventResponsive ? width : w;
   const dynamicHeight = preventResponsive ? height : h;
 
   const dynamicStyle: CSSProperties = {
     '--static-width': `${dynamicWidth}px`,
     '--static-height': `${dynamicHeight}px`,
+    '--legend-width': `calc(100% - ${margin.left + margin.right}px)`,
+    '--legend-top': `calc(100% - ${legendH + margin.bottom}px)`,
+    '--legend-left': `${margin.left}px`,
   };
 
   const viewport = {
@@ -172,10 +181,10 @@ export const CartesianBase = ({
 
   const heading = title ? hStyle.height : 0;
 
-  const tm = margin.top * (top ? 1 : 2) + heading;
-  const rm = margin.right * (right ? 1 : 2);
-  const bm = margin.bottom * (bottom ? 1 : 2);
-  const lm = margin.left * (left ? 1 : 2);
+  const mt = margin.top * (top ? 1 : 2) + heading;
+  const mr = margin.right * (right ? 1 : 2);
+  const mb = margin.bottom * (bottom ? 1 : 2) + legendH;
+  const ml = margin.left * (left ? 1 : 2);
 
   const {
     leftAxisOffset: lOff,
@@ -184,20 +193,20 @@ export const CartesianBase = ({
     horizontalAxisOffset: hOff,
   } = axisConfig.offset;
 
-  const xMax = dynamicWidth - lm - rm - vOff;
-  const yMax = dynamicHeight - tm - bm - hOff;
+  const xMax = dynamicWidth - ml - mr - vOff;
+  const yMax = dynamicHeight - mt - mb - hOff;
 
-  const tPos = tm + tOff;
-  const rPos = lm + lOff + xMax;
-  const bPos = tm + tOff + yMax;
-  const lPos = lm + lOff;
+  const tPos = mt + tOff;
+  const rPos = ml + lOff + xMax;
+  const bPos = mt + tOff + yMax;
+  const lPos = ml + lOff;
 
   const topScale = useMemo(() => top && scaleDomainToAxis({ ...top, range: [0, xMax] }), [top, xMax]);
   const rightScale = useMemo(() => right && scaleDomainToAxis({ ...right, range: [yMax, 0] }), [right, yMax]);
   const bottomScale = useMemo(() => bottom && scaleDomainToAxis({ ...bottom, range: [0, xMax] }), [bottom, xMax]);
   const leftScale = useMemo(() => left && scaleDomainToAxis({ ...left, range: [yMax, 0] }), [left, yMax]);
 
-  const allAxis: Axis[] = [
+  const allAxis: Axis[] = useMemo(() => [
     {
       orientation: 'top',
       top: tPos,
@@ -226,33 +235,7 @@ export const CartesianBase = ({
       axis: left,
       valueScale: leftScale,
     },
-  ];
-
-  const manageTickFormat = (condition: boolean, axis: AxisProps) => {
-    const { tickFormat, hideTickLabel } = axis;
-
-    if (hideTickLabel) {
-      return () => ('');
-    }
-
-    if (condition) {
-      if (tickFormat) {
-        return (v: any, i: number) => (
-          i % 2 === 1
-            ? tickFormat(v, i, [{ value: v, index: i }])
-            : '');
-      }
-
-      return (v: any, i: number) => (
-        i % 2 === 1
-          ? formatValue(v)
-          : '');
-    }
-
-    if (tickFormat) return (v: any, i: number) => (tickFormat(v, i, [{ value: v, index: i }]));
-
-    return undefined;
-  };
+  ], [bPos, bottom, bottomScale, lPos, left, leftScale, rPos, right, rightScale, tPos, top, topScale]);
 
   /** TODO: tooltip logic to be removed from here, only for debugging purpose */
 
@@ -320,7 +303,7 @@ export const CartesianBase = ({
           title={title}
           subtitle={subtitle}
           top={headings?.top ?? 40}
-          left={headings?.left ?? lm}
+          left={headings?.left ?? ml}
           config={headings?.config}
         />
 
@@ -394,7 +377,14 @@ export const CartesianBase = ({
 
           {children}
         </Group>
+
       </svg>
+
+      {legend && (
+        <div ref={refLegend} className={styles.Legend}>
+          {legend}
+        </div>
+      )}
 
       {/** TODO: to be removed from here, only for debugging purpose */}
       <Tooltip

@@ -23,3 +23,11 @@
   }
 }
 
+.Legend {
+  left: var(--legend-left);
+  overflow: hidden;
+  padding: 0.5rem 0 0;
+  position: absolute;
+  top: var(--legend-top);
+  width: var(--legend-width);
+}
