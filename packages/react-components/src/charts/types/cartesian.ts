@@ -17,6 +17,7 @@
 import { AxisStyleConfig } from './axis';
 import { GridStyleConfig } from './grid';
 import { HeadingsStyleConfig } from './headings';
+import { LegendStyleConfig } from './legend';
 import { LinearGradientStyleConfig } from './linear-gradient';
 
 export type MarginProps = {
@@ -31,4 +32,5 @@ export type CartesianStyleConfig = {
   grid: GridStyleConfig;
   axis: AxisStyleConfig;
   headings: HeadingsStyleConfig;
+  legend: LegendStyleConfig;
 }

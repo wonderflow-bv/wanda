@@ -18,6 +18,7 @@ import { CartesianStyleConfig } from '../types/cartesian';
 import { axisStyleConfig } from './axis';
 import { gridStyleConfig } from './grid';
 import { headingsStyleConfig } from './headings';
+import { legendStyleConfig } from './legend';
 import { linearGradientStyleConfig } from './linear-gradient';
 
 export const cartesianStyleConfig: CartesianStyleConfig = {
@@ -25,4 +26,5 @@ export const cartesianStyleConfig: CartesianStyleConfig = {
   grid: gridStyleConfig,
   axis: axisStyleConfig,
   headings: headingsStyleConfig,
+  legend: legendStyleConfig,
 };

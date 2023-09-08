@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 /*
  * Copyright 2023 Wonderflow Design Team
  *
@@ -132,6 +131,7 @@ export const CartesianBase = ({
     linearGradient: lgStyle,
     grid: gStyle,
     axis: aStyle,
+    legend: lStyle,
   } = useMemo(() => {
     const cConfig = getCartesianStyleConfigFromTheme(theme);
     return _.merge(cConfig, styleConfig);
@@ -161,6 +161,7 @@ export const CartesianBase = ({
     '--legend-width': `calc(100% - ${margin.left + margin.right}px)`,
     '--legend-top': `calc(100% - ${legendH + margin.bottom}px)`,
     '--legend-left': `${margin.left}px`,
+    '--legend-padding': lStyle.padding,
   };
 
   const viewport = {

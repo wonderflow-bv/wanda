@@ -100,4 +100,4 @@ export const DarkTheme = Template.bind({});
 DarkTheme.args = { theme: 'dark' };
 
 export const WithLegend = Template.bind({});
-WithLegend.args = { legend: <p>some legend content here</p> };
+WithLegend.args = { legend: <ul><li style={{ fontSize: '12px' }}>some legend content here</li></ul> };

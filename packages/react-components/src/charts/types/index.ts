@@ -19,6 +19,7 @@ export * from './cartesian';
 export * from './colors';
 export * from './grid';
 export * from './headings';
+export * from './legend';
 export * from './linear-gradient';
 export * from './themes';
 export * from './tooltip';
