@@ -31,16 +31,16 @@ import {
   CSSProperties, useCallback, useMemo, useRef,
 } from 'react';
 
+import { headingsStyleConfig as hStyle } from '../../style-config';
+import { ThemeVariants } from '../../types';
+import { AxisOrientation } from '../../types/axis';
+import { CartesianStyleConfig, MarginProps } from '../../types/cartesian';
+import { Background } from '../../types/linear-gradient';
+import { DeepPartial } from '../../types/main';
+import { computeAxisConfig, manageTickFormat, scaleDomainToAxis } from '../../utils/axis';
+import { getCartesianStyleConfigFromTheme } from '../../utils/colors';
 import { Headings, HeadingsProps } from '../headings';
-import { headingsStyleConfig as hStyle } from '../style-config';
 import { Tooltip } from '../tooltip';
-import { ThemeVariants } from '../types';
-import { AxisOrientation } from '../types/axis';
-import { CartesianStyleConfig, MarginProps } from '../types/cartesian';
-import { Background } from '../types/linear-gradient';
-import { DeepPartial } from '../types/main';
-import { computeAxisConfig, manageTickFormat, scaleDomainToAxis } from '../utils/axis';
-import { getCartesianStyleConfigFromTheme } from '../utils/colors';
 import styles from './cartesian-base.module.css';
 
 export type CartesianBaseProps = {

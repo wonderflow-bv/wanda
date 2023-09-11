@@ -19,9 +19,9 @@ import { Text } from '@visx/text';
 import _ from 'lodash';
 import { useMemo } from 'react';
 
-import { HeadingsStyleConfig, ThemeVariants } from '../types';
-import { DeepPartial } from '../types/main';
-import { getCartesianStyleConfigFromTheme } from '../utils/colors';
+import { HeadingsStyleConfig, ThemeVariants } from '../../types';
+import { DeepPartial } from '../../types/main';
+import { getCartesianStyleConfigFromTheme } from '../../utils/colors';
 
 export type HeadingsProps = {
   /**

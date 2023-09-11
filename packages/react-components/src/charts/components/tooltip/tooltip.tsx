@@ -19,9 +19,9 @@ import _ from 'lodash';
 import { useMemo } from 'react';
 import { v4 as uuid } from 'uuid';
 
-import { tooltipTheme } from '../style-config/tooltip';
-import { ThemeVariants, TooltipStyleConfig } from '../types';
-import { DeepPartial } from '../types/main';
+import { tooltipTheme } from '../../style-config/tooltip';
+import { ThemeVariants, TooltipStyleConfig } from '../../types';
+import { DeepPartial } from '../../types/main';
 
 export type TooltipProps = {
   /**

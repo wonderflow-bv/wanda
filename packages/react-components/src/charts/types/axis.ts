@@ -16,7 +16,7 @@
 
 import { Except } from 'type-fest';
 
-import { AxisProps } from '../cartesian-base';
+import { AxisProps } from '../components/cartesian-base';
 
 export type AxisOrientation = 'top' | 'left' | 'right' | 'bottom';
 export type DominantBaseline = 'auto' | 'middle' | 'hanging';

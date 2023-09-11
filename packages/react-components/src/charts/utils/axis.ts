@@ -17,7 +17,7 @@
 
 import { scaleBand, scaleLinear, scaleUtc } from '@visx/scale';
 
-import { AxisProps } from '../cartesian-base/cartesian-base';
+import { AxisProps } from '../components/cartesian-base/cartesian-base';
 import {
   axisStyleConfig,
 } from '../style-config';
