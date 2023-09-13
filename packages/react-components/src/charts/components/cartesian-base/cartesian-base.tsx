@@ -44,6 +44,7 @@ import { Tooltip } from '../tooltip';
 import styles from './cartesian-base.module.css';
 
 export type CartesianBaseProps = {
+  data: Array<Record<string, unknown>>;
   theme?: ThemeVariants;
   title?: string;
   subtitle?: string;
@@ -73,6 +74,7 @@ export type GridProps = {
 }
 
 export type AxisProps = {
+  dataKey: string | string[];
   domain: Array<string | number>;
   scaleType: 'linear' | 'label' | 'time';
   label?: string;

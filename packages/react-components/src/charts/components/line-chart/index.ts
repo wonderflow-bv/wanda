@@ -14,7 +14,5 @@
  * limitations under the License.
  */
 
-export * from './cartesian-base';
-export * from './headings';
-export * from './line-chart';
-export * from './tooltip';
+export type { LineChartProps } from './line-chart';
+export { LineChart } from './line-chart';
