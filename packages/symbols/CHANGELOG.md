@@ -1,5 +1,11 @@
 # @wonderflow/symbols
 
+## 12.5.0
+
+### Minor Changes
+
+- 55aad25f: Add new `column-chart` and `bar-chart` icons
+
 ## 12.4.0
 
 ### Minor Changes
