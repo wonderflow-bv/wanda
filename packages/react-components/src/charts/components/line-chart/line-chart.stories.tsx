@@ -8,13 +8,12 @@ const story: ComponentMeta<typeof LineChart> = {
   component: LineChart,
   args: {
     data: feedbackCount,
-    collection: ['value'],
     bottom: {
-      dataKey: 'date',
+      dataKey: ['date'],
       scaleType: 'label',
     },
     left: {
-      dataKey: 'value',
+      dataKey: ['value'],
       scaleType: 'linear',
     },
   },

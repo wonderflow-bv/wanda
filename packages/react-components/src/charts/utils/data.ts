@@ -34,7 +34,21 @@ export const getValueFromKey = (
   return r;
 };
 
+export const getPrimitiveFromKey = (
+  object: Record<string, unknown>,
+  key: string,
+) => {
+  const r = getValueFromKey(object, key);
+  const isNumberOrString = typeof r === 'number' || typeof r === 'string';
+  return isNumberOrString ? r : undefined;
+};
+
 export const extractDataFromArray = (
   arr: Array<Record<string, unknown>>,
   key: string,
 ) => arr.map(e => getValueFromKey(e, key));
+
+export const extractPrimitiveFromArray = (
+  arr: Array<Record<string, unknown>>,
+  key: string,
+) => arr.map(e => getPrimitiveFromKey(e, key));
