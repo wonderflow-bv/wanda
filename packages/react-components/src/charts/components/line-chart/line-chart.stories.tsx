@@ -1,11 +1,22 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
+import { feedbackCount } from '../../mock-data';
 import { LineChart } from './line-chart';
 
 const story: ComponentMeta<typeof LineChart> = {
   title: 'Charts/Line Chart',
   component: LineChart,
   args: {
+    data: feedbackCount,
+    collection: ['value'],
+    bottom: {
+      dataKey: 'date',
+      scaleType: 'label',
+    },
+    left: {
+      dataKey: 'value',
+      scaleType: 'linear',
+    },
   },
   argTypes: {},
 };

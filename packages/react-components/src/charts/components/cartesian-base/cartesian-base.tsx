@@ -18,9 +18,11 @@ import {
   Axis,
   TickFormatter,
 } from '@visx/axis';
+import { curveBasis } from '@visx/curve';
 import { LinearGradient } from '@visx/gradient';
 import { GridColumns, GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
+import { LinePath } from '@visx/shape';
 import { useTooltip, useTooltipInPortal } from '@visx/tooltip';
 import {
   NumberValue, ScaleBand, ScaleLinear, ScaleTime,
@@ -44,7 +46,8 @@ import { Tooltip } from '../tooltip';
 import styles from './cartesian-base.module.css';
 
 export type CartesianBaseProps = {
-  data: Array<Record<string, unknown>>;
+  data?: Array<Record<string, unknown>>;
+  renderBy?: 'lines' | 'bars';
   theme?: ThemeVariants;
   title?: string;
   subtitle?: string;
@@ -74,7 +77,6 @@ export type GridProps = {
 }
 
 export type AxisProps = {
-  dataKey: string | string[];
   domain: Array<string | number>;
   scaleType: 'linear' | 'label' | 'time';
   label?: string;
@@ -102,6 +104,8 @@ export type Axis = {
 }
 
 export const CartesianBase = ({
+  data = [],
+  renderBy = 'lines',
   theme = 'light',
   width = 800,
   height = 600,
@@ -377,6 +381,21 @@ export const CartesianBase = ({
               {...a.axis!.otherProps}
             />
           ))}
+
+          <Group top={tPos} left={lPos}>
+            {renderBy === 'lines' && (
+              <LinePath
+                data={data}
+                curve={curveBasis}
+                x={(d: any) => (bottomScale ? bottomScale(new Date(d.date) as any) as any : 0)}
+                y={(d: any) => (leftScale ? leftScale(d.value) as any : 0)}
+                stroke="#cf1c1c"
+                strokeWidth={1.5}
+                strokeOpacity={0.8}
+                strokeDasharray="1,2"
+              />
+            )}
+          </Group>
 
           {children}
         </Group>

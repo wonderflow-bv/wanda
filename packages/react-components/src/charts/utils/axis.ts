@@ -34,7 +34,7 @@ import {
 } from '../types/axis';
 import { formatValue } from './format';
 import {
-  getMaxCharactersNum, getMinMaxNumber, isArrayTypeDate,
+  getMaxCharactersNum, getMinMaxDate, getMinMaxNumber, isArrayTypeDate,
 } from './math';
 
 const getAxisOffset = ({
@@ -304,7 +304,7 @@ export const scaleDomainToAxis = (axis: Pick<AxisProps, 'domain' | 'range' | 'sc
     scaleType,
     clamp,
     nice,
-    round,
+    round = true,
     paddingInner,
     paddingOuter,
   } = axis;
@@ -325,7 +325,7 @@ export const scaleDomainToAxis = (axis: Pick<AxisProps, 'domain' | 'range' | 'sc
       return scaleLinear({
         domain: getMinMaxNumber(domain.map(v => Number(v))),
         range,
-        round: round ?? true,
+        round,
         nice,
         clamp,
       });
@@ -336,9 +336,9 @@ export const scaleDomainToAxis = (axis: Pick<AxisProps, 'domain' | 'range' | 'sc
       const isDates = isArrayTypeDate(d);
 
       return scaleUtc({
-        domain: isDates ? d : [],
+        domain: isDates ? getMinMaxDate(d) : [],
         range,
-        round: round ?? true,
+        round,
         nice,
         clamp,
       });

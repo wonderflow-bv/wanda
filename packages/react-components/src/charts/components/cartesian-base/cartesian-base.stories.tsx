@@ -1,5 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
+import { feedbackCount } from '../../mock-data';
+import { extractDataFromArray } from '../../utils';
 import { CartesianBase } from './cartesian-base';
 
 const story: ComponentMeta<typeof CartesianBase> = {
@@ -10,6 +12,7 @@ const story: ComponentMeta<typeof CartesianBase> = {
     title: 'Chart Title',
     subtitle: 'Subtitle text',
     preventResponsive: false,
+    data: [],
     grid: {
       tickColumns: 10,
       tickRows: 10,
@@ -101,3 +104,21 @@ DarkTheme.args = { theme: 'dark' };
 
 export const WithLegend = Template.bind({});
 WithLegend.args = { legend: <ul><li style={{ fontSize: '12px' }}>some legend content here</li></ul> };
+
+export const TestLines = Template.bind({});
+TestLines.args = {
+  data: feedbackCount,
+  top: undefined,
+  right: undefined,
+  bottom: {
+    domain: extractDataFromArray(feedbackCount, 'date') as string[],
+    scaleType: 'time',
+    label: 'Year',
+    numTicks: undefined,
+  },
+  left: {
+    domain: extractDataFromArray(feedbackCount, 'value') as number[],
+    scaleType: 'linear',
+    label: 'Feedback Count',
+  },
+};

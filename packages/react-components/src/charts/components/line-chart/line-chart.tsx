@@ -1,46 +1,46 @@
-import { curveBasis } from '@visx/curve';
-import { LinePath } from '@visx/shape';
+import { Except } from 'type-fest';
 
 import { extractDataFromArray } from '../../utils';
 import { AxisProps } from '../cartesian-base';
 
+export type Data = Array<Record<string, unknown>>;
+export type DataCollection = unknown[][]
+
 export type LineChartProps = {
-  data: Array<Record<string, unknown>>;
-  top?: AxisProps;
-  right?: AxisProps;
-  bottom?: AxisProps;
-  left?: AxisProps;
+  data: Data;
+  collection: string[];
+  top?: Except<AxisProps, 'domain'> & { dataKey: string };
+  right?: Except<AxisProps, 'domain'> & { dataKey: string };
+  bottom?: Except<AxisProps, 'domain'> & { dataKey: string };
+  left?: Except<AxisProps, 'domain'> & { dataKey: string };
 }
 
 export const LineChart = ({
   data,
+  collection,
   top,
   right,
   bottom,
   left,
 }: LineChartProps) => {
-  const topA: any = top ? { ...top, domain: extractDataFromArray(data, top.dataKey as string) } : undefined;
-  const rightA: any = right ? { ...right, domain: extractDataFromArray(data, right.dataKey as string) } : undefined;
-  const bottomA: any = bottom ? { ...bottom, domain: extractDataFromArray(data, bottom.dataKey as string) } : undefined;
-  const leftA: any = left ? { ...left, domain: extractDataFromArray(data, left.dataKey as string) } : undefined;
-
-  console.log('y axis:', topA);
-  console.log('y axis:', rightA);
-  console.log('x axis:', bottomA);
-  console.log('y axis:', leftA);
+  const dataC: DataCollection = collection.map(k => extractDataFromArray(data, k));
+  const topA: any = top ? { ...top, domain: extractDataFromArray(data, top.dataKey) } : undefined;
+  const rightA: any = right ? { ...right, domain: extractDataFromArray(data, right.dataKey) } : undefined;
+  const bottomA: any = bottom ? { ...bottom, domain: extractDataFromArray(data, bottom.dataKey) } : undefined;
+  const leftA: any = left ? { ...left, domain: extractDataFromArray(data, left.dataKey) } : undefined;
 
   return (
+    // <CartesianBase />
+    <div>
+      {JSON.stringify({
+        dataCollection: dataC,
+        topA,
+        rightA,
+        bottomA,
+        leftA,
+      })}
 
-    <LinePath
-      data={data}
-      curve={curveBasis}
-      x={(d: any) => d.date ?? 0}
-      y={(d: any) => d.value ?? 0}
-      stroke="#cd1313"
-      strokeWidth={1.5}
-      strokeOpacity={0.8}
-      strokeDasharray="1,2"
-    />
+    </div>
   );
 };
 
