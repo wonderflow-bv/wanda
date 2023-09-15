@@ -48,7 +48,7 @@ export const extractDataFromArray = (
   key: string,
 ) => arr.map(e => getValueFromKey(e, key));
 
-export const extractPrimitiveFromArray = (
+export const extractPrimitivesFromArray = (
   arr: Array<Record<string, unknown>>,
   key: string,
 ) => arr.map(e => getPrimitiveFromKey(e, key));

@@ -42,12 +42,18 @@ import { DeepPartial } from '../../types/main';
 import { computeAxisConfig, manageTickFormat, scaleDomainToAxis } from '../../utils/axis';
 import { getCartesianStyleConfigFromTheme } from '../../utils/colors';
 import { Headings, HeadingsProps } from '../headings';
+import { LineChartMetadata } from '../line-chart/line-chart';
 import { Tooltip } from '../tooltip';
 import styles from './cartesian-base.module.css';
 
+export enum Charts {
+  LINE_CHART = 'LINE_CHART',
+  BAR_CHART = 'BAR_CHART',
+}
+
 export type CartesianBaseProps = {
   data?: Array<Record<string, unknown>>;
-  renderBy?: 'lines' | 'bars';
+  metadata?: LineChartMetadata;
   theme?: ThemeVariants;
   title?: string;
   subtitle?: string;
@@ -105,7 +111,7 @@ export type Axis = {
 
 export const CartesianBase = ({
   data = [],
-  renderBy = 'lines',
+  metadata,
   theme = 'light',
   width = 800,
   height = 600,
@@ -383,7 +389,7 @@ export const CartesianBase = ({
           ))}
 
           <Group top={tPos} left={lPos}>
-            {renderBy === 'lines' && (
+            {metadata?.type === Charts.LINE_CHART && (
               <LinePath
                 data={data}
                 curve={curveBasis}

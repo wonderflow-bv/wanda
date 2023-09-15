@@ -13,7 +13,7 @@ const story: ComponentMeta<typeof LineChart> = {
       scaleType: 'label',
     },
     left: {
-      dataKey: ['value'],
+      dataKey: ['value', 'overlay'],
       scaleType: 'linear',
     },
   },
