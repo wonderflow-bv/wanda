@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 12.5.1
+
+### Patch Changes
+
+- 8067ef0c: Fix icon color in `Snackbar` component
+
 ## 12.5.0
 
 ## 12.4.0

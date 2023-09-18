@@ -49,6 +49,7 @@
     max-width: token(--space-24);
     height: token(--space-24);
     color: var(--snackbar-fg);
+    fill: var(--snackbar-fg);
 
     /* stylelint-disable-next-line number-max-precision */
     margin-top: -0.15rem;
