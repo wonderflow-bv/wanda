@@ -1,8 +1,9 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import { feedbackCount } from '../../mock-data';
-import { extractDataFromArray } from '../../utils';
-import { CartesianBase } from './cartesian-base';
+import { extractPrimitivesFromArray } from '../../utils';
+import { CartesianChartLayout } from '../line-chart/line-chart';
+import { CartesianBase, Charts } from './cartesian-base';
 
 const story: ComponentMeta<typeof CartesianBase> = {
   title: 'Charts/Cartesian Base',
@@ -108,16 +109,20 @@ WithLegend.args = { legend: <ul><li style={{ fontSize: '12px' }}>some legend con
 export const TestLines = Template.bind({});
 TestLines.args = {
   data: feedbackCount,
+  metadata: {
+    type: Charts.LINE_CHART,
+    layout: CartesianChartLayout.HORIZONTAL,
+  },
   top: undefined,
   right: undefined,
   bottom: {
-    domain: extractDataFromArray(feedbackCount, 'date') as string[],
+    domain: extractPrimitivesFromArray(feedbackCount, 'date') as string[],
     scaleType: 'time',
     label: 'Year',
     numTicks: undefined,
   },
   left: {
-    domain: extractDataFromArray(feedbackCount, 'value') as number[],
+    domain: extractPrimitivesFromArray(feedbackCount, 'value') as number[],
     scaleType: 'linear',
     label: 'Feedback Count',
   },
