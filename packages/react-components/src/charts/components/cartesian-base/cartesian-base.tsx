@@ -388,8 +388,8 @@ export const CartesianBase = ({
             />
           ))}
 
-          <Group top={tPos} left={lPos}>
-            {metadata?.type === Charts.LINE_CHART && (
+          {metadata?.type === Charts.LINE_CHART && (
+            <Group top={tPos} left={lPos}>
               <LinePath
                 data={data}
                 curve={curveBasis}
@@ -400,8 +400,8 @@ export const CartesianBase = ({
                 strokeOpacity={0.8}
                 strokeDasharray="1,2"
               />
-            )}
-          </Group>
+            </Group>
+          )}
 
           {children}
         </Group>

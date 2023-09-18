@@ -3,23 +3,24 @@ import { Except } from 'type-fest';
 
 import { extractPrimitivesFromArray } from '../../utils';
 import { AxisProps } from '../cartesian-base';
-import { Charts } from '../cartesian-base/cartesian-base';
+import { CartesianBase, CartesianBaseProps, Charts } from '../cartesian-base/cartesian-base';
 
 export type Data = Array<Record<string, unknown>>;
 export type DataCollection = unknown[][];
 export enum CartesianChartLayout {
-  VERTICAL = 'VERTICAL',
-  HORIZONTAL = 'HORIZONTAL',
+  VERTICAL = 'vertical',
+  HORIZONTAL = 'horizontal',
 }
+export type LineChartAxis = Except<AxisProps, 'domain'> & { dataKey: string[] };
 
 export type LineChartProps = {
   layout: CartesianChartLayout;
   data: Data;
-  top?: Except<AxisProps, 'domain'> & { dataKey: string[] };
-  right?: Except<AxisProps, 'domain'> & { dataKey: string[] };
-  bottom?: Except<AxisProps, 'domain'> & { dataKey: string[] };
-  left?: Except<AxisProps, 'domain'> & { dataKey: string[] };
-}
+  top?: LineChartAxis;
+  right?: LineChartAxis;
+  bottom?: LineChartAxis;
+  left?: LineChartAxis;
+} & Except<CartesianBaseProps, 'data' | 'top' | 'right' | 'bottom' | 'left'>
 
 export type LineChartMetadata = {
   type: Charts;
@@ -36,24 +37,22 @@ export const LineChart = ({
   right,
   bottom,
   left,
+  ...rest
 }: LineChartProps) => {
-  const topDomain = top
-    ? _.uniq(_.flattenDeep(top.dataKey.map(k => extractPrimitivesFromArray(data, k))))
-    : undefined;
-  const rightDomain = right
-    ? _.uniq(_.flattenDeep(right.dataKey.map(k => extractPrimitivesFromArray(data, k))))
-    : undefined;
-  const bottomDomain = bottom
-    ? _.uniq(_.flattenDeep(bottom.dataKey.map(k => extractPrimitivesFromArray(data, k))))
-    : undefined;
-  const leftDomain = left
-    ? _.uniq(_.flattenDeep(left.dataKey.map(k => extractPrimitivesFromArray(data, k))))
-    : undefined;
+  const extractDomain = (data: Data, axis: LineChartAxis) => {
+    let domain: Array<string | number> = [];
+    if (axis) {
+      const domainData = _.uniq(_.flattenDeep(axis.dataKey.map(k => extractPrimitivesFromArray(data, k))));
+      domain = domainData.filter((d): d is string | number => !_.isNil(d));
+    }
 
-  const topA = top ? { ...top, domain: topDomain } : undefined;
-  const rightA = right ? { ...right, domain: rightDomain } : undefined;
-  const bottomA = bottom ? { ...bottom, domain: bottomDomain } : undefined;
-  const leftA = left ? { ...left, domain: leftDomain } : undefined;
+    return domain;
+  };
+
+  const topA = top ? { ...top, domain: extractDomain(data, top) } : undefined;
+  const rightA = right ? { ...right, domain: extractDomain(data, right) } : undefined;
+  const bottomA = bottom ? { ...bottom, domain: extractDomain(data, bottom) } : undefined;
+  const leftA = left ? { ...left, domain: extractDomain(data, left) } : undefined;
 
   const c = {
     type: Charts.LINE_CHART,
@@ -67,26 +66,25 @@ export const LineChart = ({
     overlay: right?.dataKey ?? [],
   };
 
-  const vr = {
+  const vr: LineChartMetadata = {
     ...c,
     index: left?.dataKey[0] ?? right?.dataKey[0],
     collection: bottom?.dataKey ?? [],
     overlay: top?.dataKey ?? [],
   };
 
-  console.log('data:', layout === CartesianChartLayout.HORIZONTAL ? hr : vr);
+  const metadata = layout === CartesianChartLayout.HORIZONTAL ? hr : vr;
 
   return (
-    // <CartesianBase />
-    <div>
-      {JSON.stringify({
-        topA,
-        rightA,
-        bottomA,
-        leftA,
-      })}
-
-    </div>
+    <CartesianBase
+      data={data}
+      metadata={metadata}
+      top={topA}
+      right={rightA}
+      bottom={bottomA}
+      left={leftA}
+      {...rest}
+    />
   );
 };
 

@@ -1,9 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import { feedbackCount } from '../../mock-data';
-import { extractPrimitivesFromArray } from '../../utils';
-import { CartesianChartLayout } from '../line-chart/line-chart';
-import { CartesianBase, Charts } from './cartesian-base';
+import { CartesianBase } from './cartesian-base';
 
 const story: ComponentMeta<typeof CartesianBase> = {
   title: 'Charts/Cartesian Base',
@@ -106,24 +103,3 @@ DarkTheme.args = { theme: 'dark' };
 export const WithLegend = Template.bind({});
 WithLegend.args = { legend: <ul><li style={{ fontSize: '12px' }}>some legend content here</li></ul> };
 
-export const TestLines = Template.bind({});
-TestLines.args = {
-  data: feedbackCount,
-  metadata: {
-    type: Charts.LINE_CHART,
-    layout: CartesianChartLayout.HORIZONTAL,
-  },
-  top: undefined,
-  right: undefined,
-  bottom: {
-    domain: extractPrimitivesFromArray(feedbackCount, 'date') as string[],
-    scaleType: 'time',
-    label: 'Year',
-    numTicks: undefined,
-  },
-  left: {
-    domain: extractPrimitivesFromArray(feedbackCount, 'value') as number[],
-    scaleType: 'linear',
-    label: 'Feedback Count',
-  },
-};

@@ -7,14 +7,18 @@ const story: ComponentMeta<typeof LineChart> = {
   title: 'Charts/Line Chart',
   component: LineChart,
   args: {
+    title: 'Feedback Count',
+    subtitle: 'a feedback count chart',
     data: feedbackCount,
     bottom: {
       dataKey: ['date'],
-      scaleType: 'label',
+      scaleType: 'time',
+      label: 'Year',
     },
     left: {
-      dataKey: ['value', 'overlay'],
+      dataKey: ['value'],
       scaleType: 'linear',
+      label: 'Feedback Count',
     },
   },
   argTypes: {},
