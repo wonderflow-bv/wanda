@@ -21,5 +21,6 @@ export * from './grid';
 export * from './headings';
 export * from './legend';
 export * from './linear-gradient';
+export * from './main';
 export * from './themes';
 export * from './tooltip';

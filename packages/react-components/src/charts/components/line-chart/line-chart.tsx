@@ -1,16 +1,11 @@
 import _ from 'lodash';
 import { Except } from 'type-fest';
 
+import { CartesianChartLayout, Charts, Data } from '../../types';
 import { extractPrimitivesFromArray } from '../../utils';
 import { AxisProps } from '../cartesian-base';
-import { CartesianBase, CartesianBaseProps, Charts } from '../cartesian-base/cartesian-base';
+import { CartesianBase, CartesianBaseProps } from '../cartesian-base/cartesian-base';
 
-export type Data = Array<Record<string, unknown>>;
-export type DataCollection = unknown[][];
-export enum CartesianChartLayout {
-  VERTICAL = 'vertical',
-  HORIZONTAL = 'horizontal',
-}
 export type LineChartAxis = Except<AxisProps, 'domain'> & { dataKey: string[] };
 
 export type LineChartProps = {

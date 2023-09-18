@@ -20,6 +20,11 @@ import { HeadingsStyleConfig } from './headings';
 import { LegendStyleConfig } from './legend';
 import { LinearGradientStyleConfig } from './linear-gradient';
 
+export enum CartesianChartLayout {
+  VERTICAL = 'vertical',
+  HORIZONTAL = 'horizontal',
+}
+
 export type MarginProps = {
   top: number;
   right: number;

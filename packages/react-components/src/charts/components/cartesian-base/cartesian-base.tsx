@@ -38,7 +38,7 @@ import { ThemeVariants } from '../../types';
 import { AxisOrientation } from '../../types/axis';
 import { CartesianStyleConfig, MarginProps } from '../../types/cartesian';
 import { Background } from '../../types/linear-gradient';
-import { DeepPartial } from '../../types/main';
+import { Charts, Data, DeepPartial } from '../../types/main';
 import { computeAxisConfig, manageTickFormat, scaleDomainToAxis } from '../../utils/axis';
 import { getCartesianStyleConfigFromTheme } from '../../utils/colors';
 import { Headings, HeadingsProps } from '../headings';
@@ -46,13 +46,8 @@ import { LineChartMetadata } from '../line-chart/line-chart';
 import { Tooltip } from '../tooltip';
 import styles from './cartesian-base.module.css';
 
-export enum Charts {
-  LINE_CHART = 'LINE_CHART',
-  BAR_CHART = 'BAR_CHART',
-}
-
 export type CartesianBaseProps = {
-  data?: Array<Record<string, unknown>>;
+  data?: Data;
   metadata?: LineChartMetadata;
   theme?: ThemeVariants;
   title?: string;
