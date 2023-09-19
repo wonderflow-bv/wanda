@@ -18,7 +18,7 @@
 
 import { scaleBand, scaleLinear, scaleUtc } from '@visx/scale';
 
-import { AxisProps } from '../components/cartesian-base/cartesian-base';
+import { Axis, AxisProps } from '../components/cartesian-base/cartesian-base';
 import {
   axisStyleConfig,
 } from '../style-config';
@@ -373,4 +373,128 @@ export const manageTickFormat = (condition: boolean, axis: AxisProps) => {
   if (tickFormat) return (v: any, i: number) => (tickFormat(v, i, [{ value: v, index: i }]));
 
   return undefined;
+};
+
+export const computeAxisProperties = ({
+  axis,
+  orientation,
+  maxRangeX,
+  maxRangeY,
+  positionTop,
+  positionRight,
+  positionBottom,
+  positionLeft,
+}: {
+  axis?: AxisProps;
+  orientation: AxisOrientation;
+  maxRangeX: number;
+  maxRangeY: number;
+  positionTop: number;
+  positionRight: number;
+  positionBottom: number;
+  positionLeft: number;
+}): Axis | undefined => {
+  if (axis) {
+    if (orientation === 'top') {
+      return {
+        ...axis,
+        orientation,
+        scale: scaleDomainToAxis({ ...axis, range: [0, maxRangeX] })!,
+        top: positionTop,
+        left: positionLeft,
+      };
+    }
+
+    if (orientation === 'right') {
+      return {
+        ...axis,
+        orientation,
+        scale: scaleDomainToAxis({ ...axis, range: [maxRangeY, 0] })!,
+        top: positionTop,
+        left: positionRight,
+      };
+    }
+
+    if (orientation === 'bottom') {
+      return {
+        ...axis,
+        orientation,
+        scale: scaleDomainToAxis({ ...axis, range: [0, maxRangeX] })!,
+        top: positionBottom,
+        left: positionLeft,
+      };
+    }
+
+    if (orientation === 'left') {
+      return {
+        ...axis,
+        orientation,
+        scale: scaleDomainToAxis({ ...axis, range: [maxRangeY, 0] })!,
+        top: positionTop,
+        left: positionLeft,
+      };
+    }
+  }
+
+  return undefined;
+};
+
+export const computeAllAxisProperties = ({
+  top,
+  right,
+  bottom,
+  left,
+  maxRangeX,
+  maxRangeY,
+  positionTop,
+  positionRight,
+  positionBottom,
+  positionLeft,
+}: {
+  top?: AxisProps;
+  right?: AxisProps;
+  bottom?: AxisProps;
+  left?: AxisProps;
+  maxRangeX: number;
+  maxRangeY: number;
+  positionTop: number;
+  positionRight: number;
+  positionBottom: number;
+  positionLeft: number;
+}) => {
+  const shared = {
+    maxRangeX,
+    maxRangeY,
+    positionTop,
+    positionRight,
+    positionBottom,
+    positionLeft,
+  };
+  const t = computeAxisProperties({
+    axis: top,
+    orientation: 'top',
+    ...shared,
+  });
+  const r = computeAxisProperties({
+    axis: right,
+    orientation: 'right',
+    ...shared,
+  });
+  const b = computeAxisProperties({
+    axis: bottom,
+    orientation: 'bottom',
+    ...shared,
+  });
+  const l = computeAxisProperties({
+    axis: left,
+    orientation: 'left',
+    ...shared,
+  });
+
+  return {
+    top: t,
+    right: r,
+    bottom: b,
+    left: l,
+  };
 };

@@ -19,7 +19,7 @@ import { Group } from '@visx/group';
 import { LinePath } from '@visx/shape';
 
 import { CartesianChartLayout, Data } from '../../../types';
-import { AxisProps } from '../../cartesian-base';
+import { Axis } from '../../cartesian-base/cartesian-base';
 import { LineChartMetadata } from '../../line-chart/line-chart';
 
 export type LinesProps = {
@@ -27,10 +27,10 @@ export type LinesProps = {
   metadata: LineChartMetadata;
   topPosition: number;
   leftPosition: number;
-  top?: AxisProps;
-  right?: AxisProps;
-  bottom?: AxisProps;
-  left?: AxisProps;
+  top?: Axis;
+  right?: Axis;
+  bottom?: Axis;
+  left?: Axis;
 }
 
 export const Lines = ({
@@ -49,7 +49,7 @@ export const Lines = ({
   const hasIndex = isHorizontal ? Boolean(bottom ?? top) : Boolean(left ?? right);
   const hasCollection = isHorizontal ? (left ?? right) : (bottom ?? top);
 
-  const accessor = (axis: AxisProps, dataKey: string, d?: Record<string, unknown>) => {
+  const accessor = (axis: Axis, dataKey: string, d?: Record<string, unknown>) => {
     let value = 0;
     if (axis.scale && d && d[dataKey]) {
       const t = axis.scaleType === 'time' ? new Date(d[dataKey] as string | number) : d[dataKey];

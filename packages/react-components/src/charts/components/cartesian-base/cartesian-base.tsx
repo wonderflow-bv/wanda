@@ -1,18 +1,20 @@
 /*
- * Copyright 2023 Wonderflow Design Team
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+* Copyright 2023 Wonderflow Design Team
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
+
+/* eslint-disable @typescript-eslint/naming-convention */
 
 import {
   Axis,
@@ -37,7 +39,9 @@ import { AxisOrientation } from '../../types/axis';
 import { CartesianStyleConfig, MarginProps } from '../../types/cartesian';
 import { Background } from '../../types/linear-gradient';
 import { Charts, Data, DeepPartial } from '../../types/main';
-import { computeAxisConfig, manageTickFormat, scaleDomainToAxis } from '../../utils/axis';
+import {
+  computeAllAxisProperties, computeAxisConfig, manageTickFormat,
+} from '../../utils/axis';
 import { getCartesianStyleConfigFromTheme } from '../../utils/colors';
 import { Headings, HeadingsProps } from '../headings';
 import { LineChartMetadata } from '../line-chart/line-chart';
@@ -79,7 +83,6 @@ export type GridProps = {
 export type AxisProps = {
   domain: Array<string | number>;
   scaleType: 'linear' | 'label' | 'time';
-  scale?: ScaleBand<string> | ScaleLinear<number, number> | ScaleTime<number, number>;
   label?: string;
   range?: [number, number];
   round?: boolean;
@@ -100,8 +103,8 @@ export type Axis = {
   orientation: AxisOrientation;
   top: number;
   left: number;
-  axis: AxisProps | undefined;
-}
+  scale: ScaleBand<string> | ScaleLinear<number, number> | ScaleTime<number, number>;
+} & AxisProps
 
 export const CartesianBase = ({
   data = [],
@@ -208,52 +211,22 @@ export const CartesianBase = ({
   const bPos = mt + tOff + yMax;
   const lPos = ml + lOff;
 
-  const tWithScale = useMemo(() => (top
-    ? { ...top, scale: scaleDomainToAxis({ ...top, range: [0, xMax] }) }
-    : undefined), [top, xMax]);
-  const rWithScale = useMemo(() => (right
-    ? { ...right, scale: scaleDomainToAxis({ ...right, range: [yMax, 0] }) }
-    : undefined), [right, yMax]);
-  const bWithScale = useMemo(() => (bottom
-    ? { ...bottom, scale: scaleDomainToAxis({ ...bottom, range: [0, xMax] }) }
-    : undefined), [bottom, xMax]);
-  const lWithScale = useMemo(() => (left
-    ? { ...left, scale: scaleDomainToAxis({ ...left, range: [yMax, 0] }) }
-    : undefined), [left, yMax]);
-
-  const allAxis: Axis[] = useMemo(() => [
-    {
-      orientation: 'top',
-      top: tPos,
-      left: lPos,
-      axis: tWithScale,
-    },
-    {
-      orientation: 'right',
-      top: tPos,
-      left: rPos,
-      axis: rWithScale,
-    },
-    {
-      orientation: 'bottom',
-      top: bPos,
-      left: lPos,
-      axis: bWithScale,
-    },
-    {
-      orientation: 'left',
-      top: tPos,
-      left: lPos,
-      axis: lWithScale,
-    },
-  ], [bPos, bWithScale, lPos, lWithScale, rPos, rWithScale, tPos, tWithScale]);
-
-  /** TODO: tooltip logic to be removed from here, only for debugging purpose */
+  const allAxis = computeAllAxisProperties({
+    top,
+    right,
+    bottom,
+    left,
+    maxRangeX: xMax,
+    maxRangeY: yMax,
+    positionTop: tPos,
+    positionRight: rPos,
+    positionBottom: bPos,
+    positionLeft: lPos,
+  });
 
   const {
     tooltipLeft,
     tooltipTop,
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     tooltipOpen,
     tooltipData,
     hideTooltip,
@@ -323,7 +296,7 @@ export const CartesianBase = ({
             <GridRows
               top={tPos}
               left={lPos}
-              scale={lWithScale?.scale ?? rWithScale!.scale!}
+              scale={allAxis.left?.scale ?? allAxis.right!.scale}
               width={xMax}
               numTicks={grid?.tickRows}
               offset={gStyle.rows?.offset}
@@ -341,7 +314,7 @@ export const CartesianBase = ({
             <GridColumns
               top={tPos}
               left={lPos}
-              scale={bWithScale?.scale ?? tWithScale!.scale!}
+              scale={allAxis.bottom?.scale ?? allAxis.top!.scale}
               height={yMax}
               numTicks={grid?.tickColumns}
               offset={gStyle.columns?.offset}
@@ -355,34 +328,34 @@ export const CartesianBase = ({
             />
           )}
 
-          {allAxis.filter(a => a.axis).map(a => (
+          {Object.values(allAxis).filter((a): a is Axis => !!a).map(a => (
             <Axis
               key={a.orientation}
               orientation={a.orientation}
-              scale={a.axis!.scale!}
+              scale={a.scale}
               top={a.top}
               left={a.left}
-              numTicks={a.axis!.numTicks}
+              numTicks={a.numTicks}
               tickLength={axisConfig.style.tickLineProps.length}
               tickLabelProps={{
                 ...axisConfig.style.tickLabelProps,
                 ...axisConfig[a.orientation].tickLabelProps,
               }}
               tickLineProps={axisConfig.style.tickLineProps}
-              label={a.axis!.label}
+              label={a.label}
               labelOffset={axisConfig[a.orientation].labelOffset}
               labelProps={{
                 ...axisConfig.style.labelProps,
                 ...axisConfig[a.orientation].labelProps,
               }}
-              tickFormat={manageTickFormat(!viewport.lg, a.axis!)}
+              tickFormat={manageTickFormat(!viewport.lg, a)}
               stroke={axisConfig.style.axisLineProps.stroke}
               strokeDasharray={axisConfig.style.axisLineProps.strokeDasharray}
               strokeWidth={axisConfig.style.axisLineProps.strokeWidth}
-              hideAxisLine={a.axis?.hideAxisLine}
-              hideTicks={a.axis?.hideTicks}
-              hideZero={a.axis?.hideZero}
-              {...a.axis!.otherProps}
+              hideAxisLine={a.hideAxisLine}
+              hideTicks={a.hideTicks}
+              hideZero={a.hideZero}
+              {...a.otherProps}
             />
           ))}
 
@@ -392,10 +365,10 @@ export const CartesianBase = ({
               metadata={metadata}
               topPosition={tPos}
               leftPosition={lPos}
-              top={tWithScale}
-              right={rWithScale}
-              bottom={bWithScale}
-              left={lWithScale}
+              top={allAxis.top}
+              right={allAxis.right}
+              bottom={allAxis.bottom}
+              left={allAxis.left}
             />
           )}
 

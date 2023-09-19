@@ -22,7 +22,7 @@ import { extractPrimitivesFromArray } from '../../utils';
 import { AxisProps } from '../cartesian-base';
 import { CartesianBase, CartesianBaseProps } from '../cartesian-base/cartesian-base';
 
-export type LineChartAxis = Except<AxisProps, 'domain' | 'scale'> & { dataKey: string[] };
+export type LineChartAxis = Except<AxisProps, 'domain'> & { dataKey: string[] };
 
 export type LineChartProps = {
   layout: CartesianChartLayout;
