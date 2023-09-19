@@ -17,4 +17,5 @@
 export * from './cartesian-base';
 export * from './headings';
 export * from './line-chart';
+export * from './shapes';
 export * from './tooltip';
