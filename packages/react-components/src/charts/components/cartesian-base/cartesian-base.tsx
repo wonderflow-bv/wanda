@@ -18,11 +18,9 @@ import {
   Axis,
   TickFormatter,
 } from '@visx/axis';
-import { curveBasis } from '@visx/curve';
 import { LinearGradient } from '@visx/gradient';
 import { GridColumns, GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
-import { LinePath } from '@visx/shape';
 import { useTooltip, useTooltipInPortal } from '@visx/tooltip';
 import {
   NumberValue, ScaleBand, ScaleLinear, ScaleTime,
@@ -43,6 +41,7 @@ import { computeAxisConfig, manageTickFormat, scaleDomainToAxis } from '../../ut
 import { getCartesianStyleConfigFromTheme } from '../../utils/colors';
 import { Headings, HeadingsProps } from '../headings';
 import { LineChartMetadata } from '../line-chart/line-chart';
+import { Lines } from '../shapes';
 import { Tooltip } from '../tooltip';
 import styles from './cartesian-base.module.css';
 
@@ -80,6 +79,7 @@ export type GridProps = {
 export type AxisProps = {
   domain: Array<string | number>;
   scaleType: 'linear' | 'label' | 'time';
+  scale?: ScaleBand<string> | ScaleLinear<number, number> | ScaleTime<number, number>;
   label?: string;
   range?: [number, number];
   round?: boolean;
@@ -101,7 +101,6 @@ export type Axis = {
   top: number;
   left: number;
   axis: AxisProps | undefined;
-  valueScale: ScaleBand<string> | ScaleLinear<number, number> | ScaleTime<number, number> | undefined;
 }
 
 export const CartesianBase = ({
@@ -209,41 +208,45 @@ export const CartesianBase = ({
   const bPos = mt + tOff + yMax;
   const lPos = ml + lOff;
 
-  const topScale = useMemo(() => top && scaleDomainToAxis({ ...top, range: [0, xMax] }), [top, xMax]);
-  const rightScale = useMemo(() => right && scaleDomainToAxis({ ...right, range: [yMax, 0] }), [right, yMax]);
-  const bottomScale = useMemo(() => bottom && scaleDomainToAxis({ ...bottom, range: [0, xMax] }), [bottom, xMax]);
-  const leftScale = useMemo(() => left && scaleDomainToAxis({ ...left, range: [yMax, 0] }), [left, yMax]);
+  const tWithScale = useMemo(() => (top
+    ? { ...top, scale: scaleDomainToAxis({ ...top, range: [0, xMax] }) }
+    : undefined), [top, xMax]);
+  const rWithScale = useMemo(() => (right
+    ? { ...right, scale: scaleDomainToAxis({ ...right, range: [yMax, 0] }) }
+    : undefined), [right, yMax]);
+  const bWithScale = useMemo(() => (bottom
+    ? { ...bottom, scale: scaleDomainToAxis({ ...bottom, range: [0, xMax] }) }
+    : undefined), [bottom, xMax]);
+  const lWithScale = useMemo(() => (left
+    ? { ...left, scale: scaleDomainToAxis({ ...left, range: [yMax, 0] }) }
+    : undefined), [left, yMax]);
 
   const allAxis: Axis[] = useMemo(() => [
     {
       orientation: 'top',
       top: tPos,
       left: lPos,
-      axis: top,
-      valueScale: topScale,
+      axis: tWithScale,
     },
     {
       orientation: 'right',
       top: tPos,
       left: rPos,
-      axis: right,
-      valueScale: rightScale,
+      axis: rWithScale,
     },
     {
       orientation: 'bottom',
       top: bPos,
       left: lPos,
-      axis: bottom,
-      valueScale: bottomScale,
+      axis: bWithScale,
     },
     {
       orientation: 'left',
       top: tPos,
       left: lPos,
-      axis: left,
-      valueScale: leftScale,
+      axis: lWithScale,
     },
-  ], [bPos, bottom, bottomScale, lPos, left, leftScale, rPos, right, rightScale, tPos, top, topScale]);
+  ], [bPos, bWithScale, lPos, lWithScale, rPos, rWithScale, tPos, tWithScale]);
 
   /** TODO: tooltip logic to be removed from here, only for debugging purpose */
 
@@ -320,7 +323,7 @@ export const CartesianBase = ({
             <GridRows
               top={tPos}
               left={lPos}
-              scale={leftScale ?? rightScale!}
+              scale={lWithScale?.scale ?? rWithScale!.scale!}
               width={xMax}
               numTicks={grid?.tickRows}
               offset={gStyle.rows?.offset}
@@ -338,7 +341,7 @@ export const CartesianBase = ({
             <GridColumns
               top={tPos}
               left={lPos}
-              scale={bottomScale ?? topScale!}
+              scale={bWithScale?.scale ?? tWithScale!.scale!}
               height={yMax}
               numTicks={grid?.tickColumns}
               offset={gStyle.columns?.offset}
@@ -356,7 +359,7 @@ export const CartesianBase = ({
             <Axis
               key={a.orientation}
               orientation={a.orientation}
-              scale={a.valueScale!}
+              scale={a.axis!.scale!}
               top={a.top}
               left={a.left}
               numTicks={a.axis!.numTicks}
@@ -384,18 +387,16 @@ export const CartesianBase = ({
           ))}
 
           {metadata?.type === Charts.LINE_CHART && (
-            <Group top={tPos} left={lPos}>
-              <LinePath
-                data={data}
-                curve={curveBasis}
-                x={(d: any) => (bottomScale ? bottomScale(new Date(d.date) as any) as any : 0)}
-                y={(d: any) => (leftScale ? leftScale(d.value) as any : 0)}
-                stroke="#cf1c1c"
-                strokeWidth={1.5}
-                strokeOpacity={0.8}
-                strokeDasharray="1,2"
-              />
-            </Group>
+            <Lines
+              data={data}
+              metadata={metadata}
+              topPosition={tPos}
+              leftPosition={lPos}
+              top={tWithScale}
+              right={rWithScale}
+              bottom={bWithScale}
+              left={lWithScale}
+            />
           )}
 
           {children}

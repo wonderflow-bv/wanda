@@ -22,7 +22,7 @@ import { extractPrimitivesFromArray } from '../../utils';
 import { AxisProps } from '../cartesian-base';
 import { CartesianBase, CartesianBaseProps } from '../cartesian-base/cartesian-base';
 
-export type LineChartAxis = Except<AxisProps, 'domain'> & { dataKey: string[] };
+export type LineChartAxis = Except<AxisProps, 'domain' | 'scale'> & { dataKey: string[] };
 
 export type LineChartProps = {
   layout: CartesianChartLayout;
@@ -36,8 +36,8 @@ export type LineChartProps = {
 export type LineChartMetadata = {
   type: Charts;
   layout: CartesianChartLayout;
-  index?: string;
-  collection?: string[];
+  index: string;
+  collection: string[];
   overlay?: string[];
 }
 
@@ -72,15 +72,15 @@ export const LineChart = ({
 
   const hr: LineChartMetadata = {
     ...c,
-    index: bottom?.dataKey[0] ?? top?.dataKey[0],
-    collection: left?.dataKey,
+    index: bottom?.dataKey[0] ?? top?.dataKey[0] ?? '',
+    collection: left?.dataKey ?? [],
     overlay: right?.dataKey,
   };
 
   const vr: LineChartMetadata = {
     ...c,
-    index: left?.dataKey[0] ?? right?.dataKey[0],
-    collection: bottom?.dataKey,
+    index: left?.dataKey[0] ?? right?.dataKey[0] ?? '',
+    collection: bottom?.dataKey ?? [],
     overlay: top?.dataKey,
   };
 

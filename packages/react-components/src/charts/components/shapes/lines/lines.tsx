@@ -17,22 +17,20 @@
 import { curveBasis } from '@visx/curve';
 import { Group } from '@visx/group';
 import { LinePath } from '@visx/shape';
-import { ScaleBand, ScaleLinear, ScaleTime } from '@visx/vendor/d3-scale';
 
 import { CartesianChartLayout, Data } from '../../../types';
+import { AxisProps } from '../../cartesian-base';
 import { LineChartMetadata } from '../../line-chart/line-chart';
-
-type Scales = ScaleBand<string> | ScaleLinear<number, number> | ScaleTime<number, number>;
 
 export type LinesProps = {
   data: Data;
   metadata: LineChartMetadata;
   topPosition: number;
   leftPosition: number;
-  topScale?: Scales;
-  rightScale?: Scales;
-  bottomScale?: Scales;
-  leftScale?: Scales;
+  top?: AxisProps;
+  right?: AxisProps;
+  bottom?: AxisProps;
+  left?: AxisProps;
 }
 
 export const Lines = ({
@@ -40,20 +38,36 @@ export const Lines = ({
   metadata,
   topPosition: tPos,
   leftPosition: lPos,
-  topScale,
-  rightScale,
-  bottomScale,
-  leftScale,
+  top,
+  right,
+  bottom,
+  left,
 }: LinesProps) => {
-  const isHorizontal = metadata.layout === CartesianChartLayout.HORIZONTAL;
-  console.log(isHorizontal, topScale, rightScale);
+  const { index, collection, layout } = metadata;
+
+  const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
+  const hasIndex = isHorizontal ? Boolean(bottom ?? top) : Boolean(left ?? right);
+  const hasCollection = isHorizontal ? (left ?? right) : (bottom ?? top);
+
+  const accessor = (axis: AxisProps, dataKey: string, d?: Record<string, unknown>) => {
+    let value = 0;
+    if (axis.scale && d && d[dataKey]) {
+      const t = axis.scaleType === 'time' ? new Date(d[dataKey] as string | number) : d[dataKey];
+      value = axis.scale(t as any) ?? 0;
+    }
+
+    return value;
+  };
+
+  if (!(hasIndex && hasCollection)) return null;
+
   return (
     <Group top={tPos} left={lPos}>
       <LinePath
         data={data}
         curve={curveBasis}
-        x={(d: any) => (bottomScale ? bottomScale(new Date(d.date) as any) as any : 0)}
-        y={(d: any) => (leftScale ? leftScale(d.value) as any : 0)}
+        x={(d: Record<string, unknown>) => accessor(bottom!, index, d)}
+        y={(d: Record<string, unknown>) => accessor(left!, collection[0], d)}
         stroke="#cf1c1c"
         strokeWidth={1.5}
         strokeOpacity={0.8}
