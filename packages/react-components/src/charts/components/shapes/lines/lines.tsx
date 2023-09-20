@@ -43,11 +43,19 @@ export const Lines = ({
   bottom,
   left,
 }: LinesProps) => {
-  const { index, collection, layout } = metadata;
+  const {
+    index, collection, overlay, layout,
+  } = metadata;
 
   const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
-  const hasIndex = isHorizontal ? Boolean(bottom ?? top) : Boolean(left ?? right);
-  const hasCollection = isHorizontal ? (left ?? right) : (bottom ?? top);
+
+  const indexAxis = isHorizontal ? (bottom ?? top) : (left ?? right);
+  const collectionAxis = isHorizontal ? (left ?? right) : (bottom ?? top);
+  const overlayAxis = isHorizontal ? right : top;
+
+  const hasIndex = Boolean(indexAxis && index);
+  const hasCollection = Boolean(collectionAxis && collection.length);
+  const hasOverlay = Boolean(overlayAxis && overlay?.length);
 
   const accessor = (axis: Axis, dataKey: string, d?: Record<string, unknown>) => {
     let value = 0;
@@ -59,20 +67,44 @@ export const Lines = ({
     return value;
   };
 
-  if (!(hasIndex && hasCollection)) return null;
+  if (!hasIndex || !hasCollection) return null;
 
   return (
     <Group top={tPos} left={lPos}>
-      <LinePath
-        data={data}
-        curve={curveBasis}
-        x={(d: Record<string, unknown>) => accessor(bottom!, index, d)}
-        y={(d: Record<string, unknown>) => accessor(left!, collection[0], d)}
-        stroke="#cf1c1c"
-        strokeWidth={1.5}
-        strokeOpacity={0.8}
-        strokeDasharray="1,2"
-      />
+      {collection.map(k => (
+        <LinePath
+          key={k}
+          data={data}
+          curve={curveBasis}
+          x={(d: Record<string, unknown>) => (isHorizontal
+            ? accessor(indexAxis!, index, d)
+            : accessor(collectionAxis!, k, d))}
+          y={(d: Record<string, unknown>) => (isHorizontal
+            ? accessor(collectionAxis!, k, d)
+            : accessor(indexAxis!, index, d))}
+          stroke="#cf1c1c"
+          strokeWidth={1.5}
+          strokeOpacity={0.8}
+          strokeDasharray="1,2"
+        />
+      ))}
+      {hasOverlay && overlay!.map(k => (
+        <LinePath
+          key={k}
+          data={data}
+          curve={curveBasis}
+          x={(d: Record<string, unknown>) => (isHorizontal
+            ? accessor(indexAxis!, index, d)
+            : accessor(overlayAxis!, k, d))}
+          y={(d: Record<string, unknown>) => (isHorizontal
+            ? accessor(overlayAxis!, k, d)
+            : accessor(indexAxis!, index, d))}
+          stroke="#8f1389"
+          strokeWidth={1.5}
+          strokeOpacity={0.8}
+          strokeDasharray="3,2"
+        />
+      ))}
     </Group>
   );
 };

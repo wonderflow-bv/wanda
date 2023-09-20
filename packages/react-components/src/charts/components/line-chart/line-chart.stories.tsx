@@ -1,6 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import { feedbackCount } from '../../mock-data';
+import { CartesianChartLayout } from '../../types';
 import { LineChart } from './line-chart';
 
 const story: ComponentMeta<typeof LineChart> = {
@@ -30,3 +31,33 @@ const Template: ComponentStory<typeof LineChart> = args => <LineChart {...args} 
 
 export const Default = Template.bind({});
 Default.args = {};
+
+export const withOverlay = Template.bind({});
+withOverlay.args = {
+  right: {
+    dataKey: ['overlay'],
+    scaleType: 'linear',
+    label: 'Overlay',
+  },
+};
+
+export const vertical = Template.bind({});
+vertical.args = {
+  layout: CartesianChartLayout.VERTICAL,
+  top: {
+    dataKey: ['overlay'],
+    scaleType: 'linear',
+    label: 'Overlay',
+  },
+  left: {
+    dataKey: ['date'],
+    scaleType: 'time',
+    label: 'Year',
+  },
+  bottom: {
+    dataKey: ['value'],
+    scaleType: 'linear',
+    label: 'Feedback Count',
+  },
+};
+
