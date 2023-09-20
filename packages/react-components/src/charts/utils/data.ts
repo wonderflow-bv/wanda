@@ -16,6 +16,8 @@
 
 import _ from 'lodash';
 
+import { Data, ScaleType } from '../types';
+
 export const getValueFromKey = (
   object: Record<string, unknown>,
   key: string,
@@ -52,3 +54,20 @@ export const extractPrimitivesFromArray = (
   arr: Array<Record<string, unknown>>,
   key: string,
 ) => arr.map(e => getPrimitiveFromKey(e, key));
+
+export const extractDomainFromData = (data: Data, axis: { scaleType: ScaleType; dataKey: string[] }) => {
+  const { scaleType, dataKey } = axis;
+
+  let domain: Array<string | number> = [];
+
+  if (axis) {
+    const domainData = _.flattenDeep(dataKey.map(k => extractPrimitivesFromArray(data, k)));
+    if (scaleType === 'label') {
+      domain = domainData.map(e => (e ? `${e}` : ''));
+    } else {
+      domain = _.uniq(domainData).filter((d): d is string | number => !_.isNil(d));
+    }
+  }
+
+  return domain;
+};

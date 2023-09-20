@@ -26,3 +26,5 @@ export enum Charts {
   LINE_CHART = 'LINE_CHART',
   BAR_CHART = 'BAR_CHART',
 }
+
+export type ScaleType = 'linear' | 'label' | 'time';

@@ -25,6 +25,7 @@ import {
 import {
   AllAxisElementsValues,
   AllAxisInput,
+  AllAxisProperties,
   AxisConfig,
   AxisOffsetConfig,
   AxisOrientation,
@@ -491,10 +492,12 @@ export const computeAllAxisProperties = ({
     ...shared,
   });
 
-  return {
+  const a: AllAxisProperties = {
     top: t,
     right: r,
     bottom: b,
     left: l,
   };
+
+  return a;
 };

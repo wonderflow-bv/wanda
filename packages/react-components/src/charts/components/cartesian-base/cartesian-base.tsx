@@ -38,7 +38,9 @@ import { ThemeVariants } from '../../types';
 import { AxisOrientation } from '../../types/axis';
 import { CartesianStyleConfig, MarginProps } from '../../types/cartesian';
 import { Background } from '../../types/linear-gradient';
-import { Charts, Data, DeepPartial } from '../../types/main';
+import {
+  Charts, Data, DeepPartial, ScaleType,
+} from '../../types/main';
 import {
   computeAllAxisProperties, computeAxisConfig, manageTickFormat,
 } from '../../utils/axis';
@@ -79,10 +81,9 @@ export type GridProps = {
   tickColumns?: number;
   otherProps?: Record<string, unknown>;
 }
-
 export type AxisProps = {
   domain: Array<string | number>;
-  scaleType: 'linear' | 'label' | 'time';
+  scaleType: ScaleType;
   label?: string;
   range?: [number, number];
   round?: boolean;

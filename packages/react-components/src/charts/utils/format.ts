@@ -33,7 +33,7 @@ export const getLocales = (
 export const formatNumber = (
   value: number,
   locales = 'en-US',
-  options = { maximumSignificantDigits: 12 },
+  options = { maximumSignificantDigits: 3 },
 ) => new Intl.NumberFormat(getLocales(locales), options).format(value);
 
 export const formatDate = (

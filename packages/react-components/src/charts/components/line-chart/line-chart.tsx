@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-import _ from 'lodash';
 import { Except } from 'type-fest';
 
-import { CartesianChartLayout, Charts, Data } from '../../types';
-import { extractPrimitivesFromArray } from '../../utils';
+import {
+  CartesianChartLayout, Charts, Data,
+} from '../../types';
+import { extractDomainFromData } from '../../utils';
 import { AxisProps } from '../cartesian-base';
 import { CartesianBase, CartesianBaseProps } from '../cartesian-base/cartesian-base';
 
@@ -31,7 +32,7 @@ export type LineChartProps = {
   right?: LineChartAxis;
   bottom?: LineChartAxis;
   left?: LineChartAxis;
-} & Except<CartesianBaseProps, 'data' | 'top' | 'right' | 'bottom' | 'left'>
+} & Except<CartesianBaseProps, 'data' | 'metadata' | 'top' | 'right' | 'bottom' | 'left'>
 
 export type LineChartMetadata = {
   type: Charts;
@@ -50,20 +51,10 @@ export const LineChart = ({
   left,
   ...rest
 }: LineChartProps) => {
-  const extractDomain = (data: Data, axis: LineChartAxis) => {
-    let domain: Array<string | number> = [];
-    if (axis) {
-      const domainData = _.uniq(_.flattenDeep(axis.dataKey.map(k => extractPrimitivesFromArray(data, k))));
-      domain = domainData.filter((d): d is string | number => !_.isNil(d));
-    }
-
-    return domain;
-  };
-
-  const topA = top ? { ...top, domain: extractDomain(data, top) } : undefined;
-  const rightA = right ? { ...right, domain: extractDomain(data, right) } : undefined;
-  const bottomA = bottom ? { ...bottom, domain: extractDomain(data, bottom) } : undefined;
-  const leftA = left ? { ...left, domain: extractDomain(data, left) } : undefined;
+  const topA = top ? { ...top, domain: extractDomainFromData(data, top) } : undefined;
+  const rightA = right ? { ...right, domain: extractDomainFromData(data, right) } : undefined;
+  const bottomA = bottom ? { ...bottom, domain: extractDomainFromData(data, bottom) } : undefined;
+  const leftA = left ? { ...left, domain: extractDomainFromData(data, left) } : undefined;
 
   const c = {
     type: Charts.LINE_CHART,

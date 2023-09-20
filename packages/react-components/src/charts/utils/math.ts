@@ -18,6 +18,7 @@ import { TickFormatter } from '@visx/axis/lib/types';
 import { NumberValue } from '@visx/vendor/d3-scale';
 import _ from 'lodash';
 
+// import { Axis } from '../components/cartesian-base/cartesian-base';
 import { ValidTypeOf } from '../types/main';
 import { formatNumber } from './format';
 
@@ -64,6 +65,7 @@ export const getMaxCharactersNum = (
   if (!domain.length) return 0;
   const isNumbers = isArrayTypeNumber(domain);
 
+  let maxLen = 0;
   let diffLen = 0;
 
   if (tickFormat) {
@@ -81,14 +83,25 @@ export const getMaxCharactersNum = (
       const diff = max - min;
 
       if (diff && diff < 10) {
-        return formatNumber(_.divide(diff, 10)).length;
+        maxLen = formatNumber(_.multiply(diff, 10)).length;
+      } else {
+        maxLen = formatNumber(max).length;
       }
-
-      return formatNumber(max).length;
     }
+  } else {
+    maxLen = domain.map(el => `${el}`).sort((a, b) => b.length - a.length)[0].length;
   }
 
-  const max = domain.map(el => `${el}`).sort((a, b) => b.length - a.length)[0].length;
-
-  return max + diffLen;
+  return maxLen + diffLen;
 };
+
+// export const getTickLabelLengthOutOfScale = (axis: Axis) => {
+//   const { scale, range } = axis;
+//   const min = range ? range[0] : 0;
+//   const max = range ? range[1] : 0;
+
+//   return {
+//     low: scale(min),
+//     high: scale(max),
+//   };
+// };
