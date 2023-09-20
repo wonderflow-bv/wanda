@@ -82,7 +82,9 @@ export const getMaxCharactersNum = (
       const [min, max] = minMax;
       const diff = max - min;
 
-      if (diff && diff < 10) {
+      if (diff && diff < 0.5) {
+        maxLen = formatNumber(_.divide(diff, 10)).length;
+      } else if (diff && diff < 10) {
         maxLen = formatNumber(_.multiply(diff, 10)).length;
       } else {
         maxLen = formatNumber(max).length;
