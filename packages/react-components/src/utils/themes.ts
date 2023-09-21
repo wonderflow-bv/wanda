@@ -25,7 +25,7 @@ export const getPrefersColorScheme = () => {
 
 export const getCurrentTheme = () => (
   (typeof window !== 'undefined'
-  && window.document?.querySelector('htlm')?.getAttribute('data-theme') === 'dark')
+  && window.document?.querySelector('html')?.getAttribute('data-theme') === 'dark')
     ? 'dark'
     : 'light');
 
