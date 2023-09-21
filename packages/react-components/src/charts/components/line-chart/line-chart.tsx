@@ -23,7 +23,10 @@ import { extractDomainFromData } from '../../utils';
 import { AxisProps } from '../cartesian-base';
 import { CartesianBase, CartesianBaseProps } from '../cartesian-base/cartesian-base';
 
-export type LineChartAxis = Except<AxisProps, 'domain'> & { dataKey: string[] };
+export type LineChartAxis = Except<AxisProps, 'domain'> & {
+  dataKey: string[];
+  domain?: Array<string | number>;
+};
 
 export type LineChartProps = {
   layout: CartesianChartLayout;
@@ -51,10 +54,22 @@ export const LineChart = ({
   left,
   ...rest
 }: LineChartProps) => {
-  const topA = top ? { ...top, domain: extractDomainFromData(data, top) } : undefined;
-  const rightA = right ? { ...right, domain: extractDomainFromData(data, right) } : undefined;
-  const bottomA = bottom ? { ...bottom, domain: extractDomainFromData(data, bottom) } : undefined;
-  const leftA = left ? { ...left, domain: extractDomainFromData(data, left) } : undefined;
+  const topA = top ? {
+    ...top,
+    domain: top.domain ?? extractDomainFromData(data, top),
+  } : undefined;
+  const rightA = right ? {
+    ...right,
+    domain: right.domain ?? extractDomainFromData(data, right),
+  } : undefined;
+  const bottomA = bottom ? {
+    ...bottom,
+    domain: bottom.domain ?? extractDomainFromData(data, bottom),
+  } : undefined;
+  const leftA = left ? {
+    ...left,
+    domain: left.domain ?? extractDomainFromData(data, left),
+  } : undefined;
 
   const c = {
     type: Charts.LINE_CHART,

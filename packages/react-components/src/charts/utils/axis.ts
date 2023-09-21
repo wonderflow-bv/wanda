@@ -39,7 +39,7 @@ import {
   getMaxCharactersNum, getMinMaxDate, getMinMaxNumber, isArrayTypeDate,
 } from './math';
 
-const getAxisOffset = ({
+export const getAxisOffset = ({
   orientation,
   tick,
   tickOffset,
@@ -69,7 +69,7 @@ const getAxisOffset = ({
   return offset[orientation];
 };
 
-const getTickLabelSize = ({
+export const getTickLabelSize = ({
   isVertical,
   hideTickLabel,
   maxLength,
@@ -91,7 +91,7 @@ const getTickLabelSize = ({
   return 0;
 };
 
-const getLabelOffset = ({
+export const getLabelOffset = ({
   orientation,
   labelOffset,
   tickOffset,
@@ -114,7 +114,7 @@ const getLabelOffset = ({
   return off[orientation];
 };
 
-const computeSingleAxisOffset = (
+export const computeSingleAxisOffset = (
   axis: SingleAxisOffsetInput,
   config = axisStyleConfig,
 ) => {
@@ -213,7 +213,7 @@ const computeSingleAxisOffset = (
   return res;
 };
 
-const computeAllAxisOffset = (
+export const computeAllAxisOffset = (
   axis: AllAxisInput,
   config = axisStyleConfig,
 ) => {

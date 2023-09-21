@@ -41,6 +41,16 @@ withOverlay.args = {
   },
 };
 
+export const withCustomDomain = Template.bind({});
+withCustomDomain.args = {
+  left: {
+    dataKey: ['value'],
+    scaleType: 'linear',
+    label: 'Feedback Count',
+    domain: [-12000, 12000],
+  },
+};
+
 export const vertical = Template.bind({});
 vertical.args = {
   layout: CartesianChartLayout.VERTICAL,
