@@ -71,6 +71,7 @@ export const getMaxCharactersNum = (
   if (tickFormat) {
     const formatObj = domain.map((e, i) => ({ value: e, index: i }));
     const domainFormatted = tickFormat ? domain.map((v, i) => tickFormat(v, i, formatObj)) : domain;
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     const diff = domainFormatted.map((df, i) => (`${df as any}`).length - (`${domain[i]}`).length);
     const [highest] = diff.sort((a, b) => b - a);
     diffLen = highest;

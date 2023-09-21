@@ -392,8 +392,8 @@ export const CartesianBase = ({
         left={tooltipLeft}
       >
         <p style={{ fontSize: '14px' }}><strong>{`Tooltip ${tooltipData as any}`}</strong></p>
-        <p style={{ fontSize: '12px' }}><span>{`top: ${(tooltipTop ?? 0).toFixed() as any}px`}</span></p>
-        <p style={{ fontSize: '12px' }}><span>{`left: ${(tooltipLeft ?? 0).toFixed() as any}px`}</span></p>
+        <p style={{ fontSize: '12px' }}><span>{`top: ${(tooltipTop ?? 0).toFixed()}px`}</span></p>
+        <p style={{ fontSize: '12px' }}><span>{`left: ${(tooltipLeft ?? 0).toFixed()}px`}</span></p>
       </Tooltip>
 
     </div>
