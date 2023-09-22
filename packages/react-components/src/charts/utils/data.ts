@@ -17,6 +17,7 @@
 import _ from 'lodash';
 
 import { Data, ScaleType } from '../types';
+import { getMinMaxDate, getMinMaxNumber } from './math';
 
 export const getValueFromKey = (
   object: Record<string, unknown>,
@@ -55,17 +56,47 @@ export const extractPrimitivesFromArray = (
   key: string,
 ) => arr.map(e => getPrimitiveFromKey(e, key));
 
-export const extractDomainFromData = (data: Data, axis: { scaleType: ScaleType; dataKey: string[] }) => {
+export const extractDomainFromData = (
+  data: Data,
+  axis: { scaleType: ScaleType; dataKey: string[] },
+  override?: [number, number],
+) => {
   const { scaleType, dataKey } = axis;
 
   let domain: Array<string | number> = [];
 
-  if (axis) {
-    const domainData = _.flattenDeep(dataKey.map(k => extractPrimitivesFromArray(data, k)));
+  const domainData = _.flattenDeep(dataKey.map(k => extractPrimitivesFromArray(data, k)));
+  if (scaleType === 'label') {
+    domain = domainData.map(e => (e ? `${e}` : ''));
+  } else {
+    domain = _.uniq(domainData).filter((d): d is string | number => !_.isNil(d));
+  }
+
+  if (override?.length === 2) {
     if (scaleType === 'label') {
-      domain = domainData.map(e => (e ? `${e}` : ''));
-    } else {
-      domain = _.uniq(domainData).filter((d): d is string | number => !_.isNil(d));
+      domain = override;
+    }
+
+    if (scaleType === 'time') {
+      const minMaxDate = getMinMaxDate(domain);
+      if (minMaxDate) {
+        const [oldMin, oldMax] = minMaxDate;
+        const [newMin, newMax] = override;
+        const low = newMin > oldMin.getTime() ? newMin : oldMin.getTime();
+        const high = newMax < oldMax.getTime() ? newMax : oldMax.getTime();
+        domain = [low, high];
+      }
+    }
+
+    if (scaleType === 'linear') {
+      const minMaxNum = getMinMaxNumber(domain as number[]);
+      if (minMaxNum) {
+        const [oldMin, oldMax] = minMaxNum;
+        const [newMin, newMax] = override;
+        const low = newMin > oldMin ? newMin : oldMin;
+        const high = newMax < oldMax ? newMax : oldMax;
+        domain = [low, high];
+      }
     }
   }
 

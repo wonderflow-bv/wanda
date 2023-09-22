@@ -35,18 +35,24 @@ export const isArrayTypeString = (arr: any[]) => isArrayType(arr, 'string');
 export const isArrayTypeNumber = (arr: any[]) => isArrayType(arr, 'number');
 export const isArrayTypeDate = (arr: any[]) => isArrayType(arr, 'date');
 
-export const getMinMaxNumber = (values: number[]) => {
+export const getMinMaxNumber = (values: number[]): [number, number] | undefined => {
   if (isArrayTypeNumber(values)) return [Math.min(...values), Math.max(...values)];
   return undefined;
 };
 
-export const getMinMaxDate = (values: Array<number | Date>) => {
+export const getMinMaxDate = (values: Array<number | string | Date>) => {
   const isNumbers = isArrayTypeNumber(values);
   const isDates = isArrayTypeDate(values);
-  let dates;
+  const isString = isArrayTypeString(values);
+  let dates: [number, number] | undefined;
 
   if (isNumbers) {
     dates = getMinMaxNumber(values as number[]);
+  }
+
+  if (isString) {
+    const n = values.map(s => new Date(s).getTime());
+    dates = getMinMaxNumber(n);
   }
 
   if (isDates) {
