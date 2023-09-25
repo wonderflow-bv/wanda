@@ -103,14 +103,3 @@ export const getMaxCharactersNum = (
 
   return maxLen + diffLen;
 };
-
-// export const getTickLabelLengthOutOfScale = (axis: Axis) => {
-//   const { scale, range } = axis;
-//   const min = range ? range[0] : 0;
-//   const max = range ? range[1] : 0;
-
-//   return {
-//     low: scale(min),
-//     high: scale(max),
-//   };
-// };

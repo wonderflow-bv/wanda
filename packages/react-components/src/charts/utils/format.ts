@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { NumberValue } from '@visx/vendor/d3-scale';
 import _ from 'lodash';
 
 export const getLocales = (
@@ -43,7 +44,7 @@ export const formatDate = (
 ) => new Intl.DateTimeFormat(getLocales(locales), options).format(value).replaceAll('/', '.');
 
 export const formatValue = (
-  value: string | number | Date,
+  value: string | NumberValue | Date,
   locales = 'en-US',
   options?: any,
 ) => {
@@ -51,3 +52,15 @@ export const formatValue = (
   if (_.isDate(value)) return formatDate(value, locales, options);
   return value;
 };
+
+export const truncate = (
+  text: string,
+  options: {
+    length?: number;
+    omission?: string;
+    separator?: RegExp | string;
+  } = {
+    length: 20,
+    omission: '...',
+  },
+) => _.truncate(text, options);

@@ -34,7 +34,7 @@ import {
   SingleAxisOffsetInput,
   VerticalAxisConfig,
 } from '../types/axis';
-import { formatValue } from './format';
+import { formatValue, truncate } from './format';
 import {
   getMaxCharactersNum, getMinMaxDate, getMinMaxNumber, isArrayTypeDate,
 } from './math';
@@ -316,7 +316,7 @@ export const scaleDomainToAxis = (axis: Pick<AxisProps, 'domain' | 'range' | 'sc
   if (hasData) {
     if (scaleType === 'label') {
       return scaleBand({
-        domain: domain.map(v => `${v}`),
+        domain: domain.map(v => truncate(`${v}`)),
         range,
         paddingInner,
         paddingOuter,
@@ -351,7 +351,9 @@ export const scaleDomainToAxis = (axis: Pick<AxisProps, 'domain' | 'range' | 'sc
 };
 
 export const manageTickFormat = (condition: boolean, axis: AxisProps) => {
-  const { tickFormat, hideTickLabel } = axis;
+  const { tickFormat, hideTickLabel, scaleType } = axis;
+  const isLabel = scaleType === 'label';
+  const doTruncate = (value: any) => (isLabel ? truncate(value as string) : value);
 
   if (hideTickLabel) {
     return () => ('');
@@ -361,17 +363,17 @@ export const manageTickFormat = (condition: boolean, axis: AxisProps) => {
     if (tickFormat) {
       return (v: any, i: number) => (
         i % 2 === 1
-          ? tickFormat(v, i, [{ value: v, index: i }])
+          ? doTruncate(tickFormat(v, i, [{ value: v, index: i }]))
           : '');
     }
 
     return (v: any, i: number) => (
       i % 2 === 1
-        ? formatValue(v)
+        ? doTruncate(formatValue(v))
         : '');
   }
 
-  if (tickFormat) return (v: any, i: number) => (tickFormat(v, i, [{ value: v, index: i }]));
+  if (tickFormat) return (v: any, i: number) => doTruncate((tickFormat(v, i, [{ value: v, index: i }])));
 
   return undefined;
 };

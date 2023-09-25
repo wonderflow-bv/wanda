@@ -81,6 +81,7 @@ export type GridProps = {
   tickColumns?: number;
   otherProps?: Record<string, unknown>;
 }
+
 export type AxisProps = {
   domain: Array<string | number>;
   scaleType: ScaleType;
@@ -225,6 +226,7 @@ export const CartesianBase = ({
     positionLeft: lPos,
   });
 
+  /** start of tooltip logic */
   const {
     tooltipLeft,
     tooltipTop,
@@ -349,7 +351,7 @@ export const CartesianBase = ({
                 ...axisConfig.style.labelProps,
                 ...axisConfig[a.orientation].labelProps,
               }}
-              tickFormat={manageTickFormat(!viewport.lg, a)}
+              tickFormat={manageTickFormat(!viewport.lg, a) as TickFormatter<string | NumberValue | Date> | undefined}
               stroke={axisConfig.style.axisLineProps.stroke}
               strokeDasharray={axisConfig.style.axisLineProps.strokeDasharray}
               strokeWidth={axisConfig.style.axisLineProps.strokeWidth}
