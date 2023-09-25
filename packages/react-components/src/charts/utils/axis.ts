@@ -350,9 +350,32 @@ export const scaleDomainToAxis = (axis: Pick<AxisProps, 'domain' | 'range' | 'sc
   return undefined;
 };
 
-export const manageTickFormat = (condition: boolean, axis: AxisProps) => {
-  const { tickFormat, hideTickLabel, scaleType } = axis;
+export const manageTickFormat = (condition: boolean, axis: Axis) => {
+  const {
+    tickFormat, hideTickLabel, scaleType, numTicks,
+  } = axis;
+
+  const isTime = scaleType === 'time';
   const isLabel = scaleType === 'label';
+
+  const isKeyTick = (i: number, numTicks = 10) => {
+    if (isLabel) return true;
+
+    const start = 0;
+    let end = start;
+    let middle = start;
+
+    if (isTime) {
+      end = numTicks - 2;
+    } else {
+      end = numTicks;
+    }
+
+    middle = Math.round(end / 2);
+
+    return i === start || i === end || i === middle;
+  };
+
   const doTruncate = (value: any) => (isLabel ? truncate(value as string) : value);
 
   if (hideTickLabel) {
@@ -362,13 +385,13 @@ export const manageTickFormat = (condition: boolean, axis: AxisProps) => {
   if (condition) {
     if (tickFormat) {
       return (v: any, i: number) => (
-        i % 2 === 1
+        isKeyTick(i, numTicks)
           ? doTruncate(tickFormat(v, i, [{ value: v, index: i }]))
           : '');
     }
 
     return (v: any, i: number) => (
-      i % 2 === 1
+      isKeyTick(i, numTicks)
         ? doTruncate(formatValue(v))
         : '');
   }

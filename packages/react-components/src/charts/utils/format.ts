@@ -41,7 +41,7 @@ export const formatDate = (
   value: Date,
   locales = 'en-US',
   options = { year: '2-digit', month: '2-digit', day: '2-digit' } as any,
-) => new Intl.DateTimeFormat(getLocales(locales), options).format(value).replaceAll('/', '.');
+) => new Intl.DateTimeFormat(getLocales(locales), options).format(value).replaceAll('/', '-');
 
 export const formatValue = (
   value: string | NumberValue | Date,
