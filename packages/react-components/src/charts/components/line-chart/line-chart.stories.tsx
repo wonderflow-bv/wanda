@@ -49,6 +49,12 @@ withCustomDomain.args = {
     label: 'Feedback Count',
     domain: [-12000, 12000],
   },
+  bottom: {
+    dataKey: ['date'],
+    scaleType: 'time',
+    label: 'Year',
+    domain: ['1999-01-01', '2024-01-01'],
+  },
 };
 
 export const vertical = Template.bind({});

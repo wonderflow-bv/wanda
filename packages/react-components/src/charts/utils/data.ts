@@ -59,7 +59,7 @@ export const extractPrimitivesFromArray = (
 export const extractDomainFromData = (
   data: Data,
   axis: { scaleType: ScaleType; dataKey: string[] },
-  override?: [number, number],
+  override?: Array<string | number>,
 ) => {
   const { scaleType, dataKey } = axis;
 
@@ -82,8 +82,12 @@ export const extractDomainFromData = (
       if (minMaxDate) {
         const [oldMin, oldMax] = minMaxDate;
         const [newMin, newMax] = override;
-        const low = newMin > oldMin.getTime() ? newMin : oldMin.getTime();
-        const high = newMax < oldMax.getTime() ? newMax : oldMax.getTime();
+        const nMin = new Date(newMin).getTime();
+        const nMax = new Date(newMax).getTime();
+        const oMin = oldMin.getTime();
+        const oMax = oldMax.getTime();
+        const low = nMin < oMin ? nMin : oMin;
+        const high = nMax > oMax ? nMax : oMax;
         domain = [low, high];
       }
     }
@@ -93,8 +97,10 @@ export const extractDomainFromData = (
       if (minMaxNum) {
         const [oldMin, oldMax] = minMaxNum;
         const [newMin, newMax] = override;
-        const low = newMin > oldMin ? newMin : oldMin;
-        const high = newMax < oldMax ? newMax : oldMax;
+        const nMin = Number(newMin);
+        const nMax = Number(newMax);
+        const low = nMin < oldMin ? nMin : oldMin;
+        const high = nMax > oldMax ? nMax : oldMax;
         domain = [low, high];
       }
     }

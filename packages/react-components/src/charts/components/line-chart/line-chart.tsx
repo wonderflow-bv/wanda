@@ -56,19 +56,19 @@ export const LineChart = ({
 }: LineChartProps) => {
   const topA = top ? {
     ...top,
-    domain: top.domain ?? extractDomainFromData(data, top),
+    domain: extractDomainFromData(data, top, top.domain),
   } : undefined;
   const rightA = right ? {
     ...right,
-    domain: right.domain ?? extractDomainFromData(data, right),
+    domain: extractDomainFromData(data, right, right.domain),
   } : undefined;
   const bottomA = bottom ? {
     ...bottom,
-    domain: bottom.domain ?? extractDomainFromData(data, bottom),
+    domain: extractDomainFromData(data, bottom, bottom.domain),
   } : undefined;
   const leftA = left ? {
     ...left,
-    domain: left.domain ?? extractDomainFromData(data, left),
+    domain: extractDomainFromData(data, left, left.domain),
   } : undefined;
 
   const c = {
