@@ -17,6 +17,8 @@
 import { NumberValue } from '@visx/vendor/d3-scale';
 import _ from 'lodash';
 
+import { axisStyleConfig } from '../style-config';
+
 export const getLocales = (
   value: string | string[],
   defaultLocales = 'en-US',
@@ -60,7 +62,7 @@ export const truncate = (
     omission?: string;
     separator?: RegExp | string;
   } = {
-    length: 20,
-    omission: '...',
+    length: axisStyleConfig.tickLabelProps.maxCharactersLength,
+    omission: axisStyleConfig.tickLabelProps.omission,
   },
 ) => _.truncate(text, options);

@@ -84,7 +84,7 @@ export type LabelProps = {
   textAnchor: TextAnchor;
 }
 
-export type TickLabelProps = Except<LabelProps, 'textAnchor'>
+export type TickLabelProps = Except<LabelProps, 'textAnchor'> & { maxCharactersLength: number; omission: string }
 
 export type TickLineProps = {
   length: number;
