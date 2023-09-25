@@ -42,7 +42,7 @@ import {
   Charts, Data, DeepPartial, ScaleType,
 } from '../../types/main';
 import {
-  computeAllAxisProperties, computeAxisConfig, manageTickFormat,
+  computeAllAxisProperties, computeAxisConfig, manageTickFormat, manageTickNumber,
 } from '../../utils/axis';
 import { getCartesianStyleConfigFromTheme } from '../../utils/colors';
 import { Headings, HeadingsProps } from '../headings';
@@ -157,6 +157,33 @@ export const CartesianBase = ({
 
   const w = size ? size.width : width;
   const h = size ? size.height : height;
+
+  const hasVerticalTickLabel = (width: number, orientation: AxisOrientation, axis?: AxisProps) => {
+    if (axis) {
+      const { domain, scaleType, numTicks } = axis;
+      const isLabel = scaleType === 'label';
+      const isTime = scaleType === 'time';
+      const isHorizontal = orientation === 'bottom' || orientation === 'top';
+      if (isHorizontal) {
+        let ticks = numTicks ?? domain.length;
+        let ratio;
+        if (isLabel) {
+          ratio = width / ticks;
+        }
+
+        if (isTime) {
+          ticks = _.uniq(domain).length;
+          ratio = width / ticks;
+        }
+
+        console.log(orientation, width, ticks, ratio);
+      }
+    }
+
+    return false;
+  };
+
+  console.log('bottom:', hasVerticalTickLabel(w, 'bottom', bottom), 'top', hasVerticalTickLabel(w, 'top', top));
 
   const refLegend = useRef(null);
   const sizeLegend = useSize(refLegend);
@@ -338,7 +365,7 @@ export const CartesianBase = ({
               scale={a.scale}
               top={a.top}
               left={a.left}
-              numTicks={a.numTicks}
+              numTicks={manageTickNumber(a, xMax, yMax)}
               tickLength={axisConfig.style.tickLineProps.length}
               tickLabelProps={{
                 ...axisConfig.style.tickLabelProps,
@@ -351,7 +378,7 @@ export const CartesianBase = ({
                 ...axisConfig.style.labelProps,
                 ...axisConfig[a.orientation].labelProps,
               }}
-              tickFormat={manageTickFormat(!viewport.lg, a) as TickFormatter<string | NumberValue | Date> | undefined}
+              tickFormat={manageTickFormat(a) as TickFormatter<string | NumberValue | Date> | undefined}
               stroke={axisConfig.style.axisLineProps.stroke}
               strokeDasharray={axisConfig.style.axisLineProps.strokeDasharray}
               strokeWidth={axisConfig.style.axisLineProps.strokeWidth}

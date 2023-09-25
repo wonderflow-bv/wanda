@@ -17,6 +17,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 
 import { scaleBand, scaleLinear, scaleUtc } from '@visx/scale';
+import _ from 'lodash';
 
 import { Axis, AxisProps } from '../components/cartesian-base/cartesian-base';
 import {
@@ -34,7 +35,7 @@ import {
   SingleAxisOffsetInput,
   VerticalAxisConfig,
 } from '../types/axis';
-import { formatValue, truncate } from './format';
+import { truncate } from './format';
 import {
   getMaxCharactersNum, getMinMaxDate, getMinMaxNumber, isArrayTypeDate,
 } from './math';
@@ -350,31 +351,12 @@ export const scaleDomainToAxis = (axis: Pick<AxisProps, 'domain' | 'range' | 'sc
   return undefined;
 };
 
-export const manageTickFormat = (condition: boolean, axis: Axis) => {
+export const manageTickFormat = (axis: Axis) => {
   const {
-    tickFormat, hideTickLabel, scaleType, numTicks,
+    tickFormat, hideTickLabel, scaleType,
   } = axis;
 
-  const isTime = scaleType === 'time';
   const isLabel = scaleType === 'label';
-
-  const isKeyTick = (i: number, numTicks = 10) => {
-    if (isLabel) return true;
-
-    const start = 0;
-    let end = start;
-    let middle = start;
-
-    if (isTime) {
-      end = numTicks - 2;
-    } else {
-      end = numTicks;
-    }
-
-    middle = Math.round(end / 2);
-
-    return i === start || i === end || i === middle;
-  };
 
   const doTruncate = (value: any) => (isLabel ? truncate(value as string) : value);
 
@@ -382,23 +364,30 @@ export const manageTickFormat = (condition: boolean, axis: Axis) => {
     return () => ('');
   }
 
-  if (condition) {
-    if (tickFormat) {
-      return (v: any, i: number) => (
-        isKeyTick(i, numTicks)
-          ? doTruncate(tickFormat(v, i, [{ value: v, index: i }]))
-          : '');
-    }
-
-    return (v: any, i: number) => (
-      isKeyTick(i, numTicks)
-        ? doTruncate(formatValue(v))
-        : '');
-  }
-
   if (tickFormat) return (v: any, i: number) => doTruncate((tickFormat(v, i, [{ value: v, index: i }])));
 
   return undefined;
+};
+
+export const manageTickNumber = (axis: Axis, width: number, height: number) => {
+  const { orientation, numTicks } = axis;
+  const isVertical = orientation === 'left' || orientation === 'right';
+  const size = isVertical ? height : width;
+  const config = {
+    xs: {
+      hasRange: _.inRange(size, 0, 200),
+      ticks: 2,
+    },
+    sm: {
+      hasRange: _.inRange(size, 200, 350),
+      ticks: 3,
+    },
+    lg: {
+      hasRange: size >= 350,
+      ticks: numTicks,
+    },
+  };
+  return Object.values(config).filter(v => v.hasRange)[0].ticks;
 };
 
 export const computeAxisProperties = ({
