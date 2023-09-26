@@ -45,6 +45,7 @@ import {
   computeAllAxisProperties, computeAxisConfig, handleTickFormat,
   handleTickNumber,
   handleVerticalTickLabelTransform,
+  hasVerticalTickLabel,
 } from '../../utils/axis';
 import { getCartesianStyleConfigFromTheme } from '../../utils/colors';
 import { Headings, HeadingsProps } from '../headings';
@@ -160,33 +161,6 @@ export const CartesianBase = ({
 
   const w = size ? size.width : width;
   const h = size ? size.height : height;
-
-  const hasVerticalTickLabel = (width: number, orientation: AxisOrientation, axis?: AxisProps) => {
-    if (axis) {
-      const { domain, scaleType, numTicks } = axis;
-      const isLabel = scaleType === 'label';
-      const isTime = scaleType === 'time';
-      const isHorizontal = orientation === 'bottom' || orientation === 'top';
-      if (isHorizontal) {
-        let ticks = numTicks ?? domain.length;
-        let ratio;
-        if (isLabel) {
-          ratio = width / ticks;
-        }
-
-        if (isTime) {
-          ticks = _.uniq(domain).length;
-          ratio = width / ticks;
-        }
-
-        console.log(orientation, width, ticks, ratio);
-      }
-    }
-
-    return false;
-  };
-
-  console.log('bottom:', hasVerticalTickLabel(w, 'bottom', bottom), 'top', hasVerticalTickLabel(w, 'top', top));
 
   const refLegend = useRef(null);
   const sizeLegend = useSize(refLegend);
@@ -365,7 +339,11 @@ export const CartesianBase = ({
               tickLabelProps={v => ({
                 ...axisConfig.style.tickLabelProps,
                 ...axisConfig[a.orientation].tickLabelProps,
-                ...handleVerticalTickLabelTransform(v, true, a),
+                ...handleVerticalTickLabelTransform(
+                  v,
+                  hasVerticalTickLabel(xMax, a, vStyle),
+                  a,
+                ),
               })}
               tickLineProps={axisConfig.style.tickLineProps}
               label={a.label}

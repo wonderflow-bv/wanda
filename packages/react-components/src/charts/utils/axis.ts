@@ -17,6 +17,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 
 import { scaleBand, scaleLinear, scaleUtc } from '@visx/scale';
+import _ from 'lodash';
 
 import { Axis, AxisProps } from '../components/cartesian-base/cartesian-base';
 import {
@@ -377,19 +378,56 @@ export const handleTickNumber = (
   config: ViewportStyleConfig,
 ) => manageViewport(width, height, axis, config).numTicks;
 
-export const handleVerticalTickLabelTransform = (t: any, isVertical: boolean, axis: Axis) => {
-  const { orientation, scale } = axis;
-  let res = {};
-  if (isVertical && orientation === 'bottom') {
-    res = {
-      transform: `translate(13, 6) rotate(90, ${scale(t) as any}, 0)`,
-    };
+export const hasVerticalTickLabel = (width: number, axis: Axis, config: ViewportStyleConfig) => {
+  const {
+    domain, scaleType, numTicks, orientation,
+  } = axis;
+
+  const isLabel = scaleType === 'label';
+
+  const isHorizontal = orientation === 'bottom' || orientation === 'top';
+
+  const isTiny = _.inRange(width, 0, config.tiny.maxWidth);
+  const isSmall = _.inRange(width, config.tiny.maxWidth!, config.small.maxWidth);
+
+  if (isHorizontal) {
+    if (isLabel) {
+      const len = domain.join().length * 8;
+      return len / width > 2;
+    }
+
+    if (isTiny) return false;
+    if (isSmall) return true;
+    if (!isTiny && !isSmall) return false;
+    if (numTicks && numTicks > 10) return true;
   }
 
-  if (isVertical && orientation === 'top') {
-    res = {
-      transform: `translate(9, -4) rotate(-90, ${scale(t) as any}, 0)`,
-    };
+  return false;
+};
+
+export const handleVerticalTickLabelTransform = (t: any, isVertical: boolean, axis: Axis) => {
+  const { orientation, scale } = axis;
+
+  let res = {};
+
+  if (orientation === 'bottom') {
+    if (isVertical) {
+      res = {
+        transform: `translate(13, 6) rotate(90, ${scale(t) as any}, 0)`,
+      };
+    } else {
+      res = { transform: '', textAnchor: 'middle' };
+    }
+  }
+
+  if (orientation === 'top') {
+    if (isVertical) {
+      res = {
+        transform: `translate(9, -4) rotate(-90, ${scale(t) as any}, 0)`,
+      };
+    } else {
+      res = { transform: '', textAnchor: 'middle' };
+    }
   }
 
   return res;
