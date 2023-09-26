@@ -17,12 +17,12 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 
 import { scaleBand, scaleLinear, scaleUtc } from '@visx/scale';
-import _ from 'lodash';
 
 import { Axis, AxisProps } from '../components/cartesian-base/cartesian-base';
 import {
   axisStyleConfig,
 } from '../style-config';
+import { ViewportStyleConfig } from '../types';
 import {
   AllAxisElementsValues,
   AllAxisInput,
@@ -39,6 +39,7 @@ import { truncate } from './format';
 import {
   getMaxCharactersNum, getMinMaxDate, getMinMaxNumber, isArrayTypeDate,
 } from './math';
+import { manageViewport } from './viewport';
 
 export const getAxisOffset = ({
   orientation,
@@ -369,26 +370,12 @@ export const manageTickFormat = (axis: Axis) => {
   return undefined;
 };
 
-export const manageTickNumber = (axis: Axis, width: number, height: number) => {
-  const { orientation, numTicks } = axis;
-  const isVertical = orientation === 'left' || orientation === 'right';
-  const size = isVertical ? height : width;
-  const config = {
-    xs: {
-      hasRange: _.inRange(size, 0, 200),
-      ticks: 2,
-    },
-    sm: {
-      hasRange: _.inRange(size, 200, 350),
-      ticks: 3,
-    },
-    lg: {
-      hasRange: size >= 350,
-      ticks: numTicks,
-    },
-  };
-  return Object.values(config).filter(v => v.hasRange)[0].ticks;
-};
+export const manageTickNumber = (
+  width: number,
+  height: number,
+  axis: Axis,
+  config: ViewportStyleConfig,
+) => manageViewport(width, height, axis, config).numTicks;
 
 export const computeAxisProperties = ({
   axis,

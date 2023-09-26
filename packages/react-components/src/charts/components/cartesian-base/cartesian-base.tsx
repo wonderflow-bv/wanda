@@ -143,6 +143,7 @@ export const CartesianBase = ({
     grid: gStyle,
     axis: aStyle,
     legend: lStyle,
+    viewport: vStyle,
   } = useMemo(() => {
     const cConfig = getCartesianStyleConfigFromTheme(theme);
     return _.merge(cConfig, styleConfig);
@@ -157,6 +158,9 @@ export const CartesianBase = ({
 
   const w = size ? size.width : width;
   const h = size ? size.height : height;
+
+  /**
+   *
 
   const hasVerticalTickLabel = (width: number, orientation: AxisOrientation, axis?: AxisProps) => {
     if (axis) {
@@ -184,6 +188,7 @@ export const CartesianBase = ({
   };
 
   console.log('bottom:', hasVerticalTickLabel(w, 'bottom', bottom), 'top', hasVerticalTickLabel(w, 'top', top));
+   */
 
   const refLegend = useRef(null);
   const sizeLegend = useSize(refLegend);
@@ -201,14 +206,6 @@ export const CartesianBase = ({
     '--legend-left': `${margin.left}px`,
     '--legend-padding': lStyle.padding,
   };
-
-  const viewport = {
-    xs: _.inRange(dynamicWidth, 0, 480),
-    sm: _.inRange(dynamicWidth, 480, 768),
-    lg: dynamicWidth >= 768,
-  };
-  console.log('viewport',
-    Object.entries(viewport).filter(arr => arr[1])[0][0]);
 
   const axisConfig = useMemo(() => computeAxisConfig({
     top,
@@ -365,7 +362,7 @@ export const CartesianBase = ({
               scale={a.scale}
               top={a.top}
               left={a.left}
-              numTicks={manageTickNumber(a, xMax, yMax)}
+              numTicks={manageTickNumber(xMax, yMax, a, vStyle)}
               tickLength={axisConfig.style.tickLineProps.length}
               tickLabelProps={{
                 ...axisConfig.style.tickLabelProps,

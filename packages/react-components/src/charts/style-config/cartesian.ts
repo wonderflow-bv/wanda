@@ -20,6 +20,7 @@ import { gridStyleConfig } from './grid';
 import { headingsStyleConfig } from './headings';
 import { legendStyleConfig } from './legend';
 import { linearGradientStyleConfig } from './linear-gradient';
+import { viewportStyleConfig } from './viewport';
 
 export const cartesianStyleConfig: CartesianStyleConfig = {
   linearGradient: linearGradientStyleConfig,
@@ -27,4 +28,5 @@ export const cartesianStyleConfig: CartesianStyleConfig = {
   axis: axisStyleConfig,
   headings: headingsStyleConfig,
   legend: legendStyleConfig,
+  viewport: viewportStyleConfig,
 };

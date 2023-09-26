@@ -18,7 +18,6 @@ import { TickFormatter } from '@visx/axis/lib/types';
 import { NumberValue } from '@visx/vendor/d3-scale';
 import _ from 'lodash';
 
-// import { Axis } from '../components/cartesian-base/cartesian-base';
 import { ValidTypeOf } from '../types/main';
 import { formatNumber } from './format';
 

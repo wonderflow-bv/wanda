@@ -19,6 +19,7 @@ import { GridStyleConfig } from './grid';
 import { HeadingsStyleConfig } from './headings';
 import { LegendStyleConfig } from './legend';
 import { LinearGradientStyleConfig } from './linear-gradient';
+import { ViewportStyleConfig } from './viewport';
 
 export enum CartesianChartLayout {
   VERTICAL = 'vertical',
@@ -38,4 +39,5 @@ export type CartesianStyleConfig = {
   axis: AxisStyleConfig;
   headings: HeadingsStyleConfig;
   legend: LegendStyleConfig;
+  viewport: ViewportStyleConfig;
 }
