@@ -42,7 +42,9 @@ import {
   Charts, Data, DeepPartial, ScaleType,
 } from '../../types/main';
 import {
-  computeAllAxisProperties, computeAxisConfig, manageTickFormat, manageTickNumber,
+  computeAllAxisProperties, computeAxisConfig, handleTickFormat,
+  handleTickNumber,
+  handleVerticalTickLabelTransform,
 } from '../../utils/axis';
 import { getCartesianStyleConfigFromTheme } from '../../utils/colors';
 import { Headings, HeadingsProps } from '../headings';
@@ -159,9 +161,6 @@ export const CartesianBase = ({
   const w = size ? size.width : width;
   const h = size ? size.height : height;
 
-  /**
-   *
-
   const hasVerticalTickLabel = (width: number, orientation: AxisOrientation, axis?: AxisProps) => {
     if (axis) {
       const { domain, scaleType, numTicks } = axis;
@@ -188,7 +187,6 @@ export const CartesianBase = ({
   };
 
   console.log('bottom:', hasVerticalTickLabel(w, 'bottom', bottom), 'top', hasVerticalTickLabel(w, 'top', top));
-   */
 
   const refLegend = useRef(null);
   const sizeLegend = useSize(refLegend);
@@ -362,12 +360,13 @@ export const CartesianBase = ({
               scale={a.scale}
               top={a.top}
               left={a.left}
-              numTicks={manageTickNumber(xMax, yMax, a, vStyle)}
+              numTicks={handleTickNumber(xMax, yMax, a, vStyle)}
               tickLength={axisConfig.style.tickLineProps.length}
-              tickLabelProps={{
+              tickLabelProps={v => ({
                 ...axisConfig.style.tickLabelProps,
                 ...axisConfig[a.orientation].tickLabelProps,
-              }}
+                ...handleVerticalTickLabelTransform(v, true, a),
+              })}
               tickLineProps={axisConfig.style.tickLineProps}
               label={a.label}
               labelOffset={axisConfig[a.orientation].labelOffset}
@@ -375,7 +374,7 @@ export const CartesianBase = ({
                 ...axisConfig.style.labelProps,
                 ...axisConfig[a.orientation].labelProps,
               }}
-              tickFormat={manageTickFormat(a) as TickFormatter<string | NumberValue | Date> | undefined}
+              tickFormat={handleTickFormat(a) as TickFormatter<string | NumberValue | Date> | undefined}
               stroke={axisConfig.style.axisLineProps.stroke}
               strokeDasharray={axisConfig.style.axisLineProps.strokeDasharray}
               strokeWidth={axisConfig.style.axisLineProps.strokeWidth}

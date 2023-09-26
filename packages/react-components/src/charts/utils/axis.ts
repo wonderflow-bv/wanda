@@ -352,7 +352,7 @@ export const scaleDomainToAxis = (axis: Pick<AxisProps, 'domain' | 'range' | 'sc
   return undefined;
 };
 
-export const manageTickFormat = (axis: Axis) => {
+export const handleTickFormat = (axis: Axis) => {
   const {
     tickFormat, hideTickLabel, scaleType,
   } = axis;
@@ -370,12 +370,30 @@ export const manageTickFormat = (axis: Axis) => {
   return undefined;
 };
 
-export const manageTickNumber = (
+export const handleTickNumber = (
   width: number,
   height: number,
   axis: Axis,
   config: ViewportStyleConfig,
 ) => manageViewport(width, height, axis, config).numTicks;
+
+export const handleVerticalTickLabelTransform = (t: any, isVertical: boolean, axis: Axis) => {
+  const { orientation, scale } = axis;
+  let res = {};
+  if (isVertical && orientation === 'bottom') {
+    res = {
+      transform: `translate(13, 6) rotate(90, ${scale(t) as any}, 0)`,
+    };
+  }
+
+  if (isVertical && orientation === 'top') {
+    res = {
+      transform: `translate(9, -4) rotate(-90, ${scale(t) as any}, 0)`,
+    };
+  }
+
+  return res;
+};
 
 export const computeAxisProperties = ({
   axis,
