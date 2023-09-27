@@ -23,7 +23,7 @@ import { Axis, AxisProps } from '../components/cartesian-base/cartesian-base';
 import {
   axisStyleConfig,
 } from '../style-config';
-import { ViewportStyleConfig } from '../types';
+import { CartesianStyleConfig, ViewportStyleConfig } from '../types';
 import {
   AllAxisElementsValues,
   AllAxisInput,
@@ -378,9 +378,14 @@ export const handleTickNumber = (
   config: ViewportStyleConfig,
 ) => manageViewport(width, height, axis, config).numTicks;
 
-export const hasVerticalTickLabel = (width: number, axis: Axis, config: ViewportStyleConfig) => {
+export const hasVerticalTickLabel = (
+  width: number,
+  orientation: AxisOrientation,
+  axis: AxisProps,
+  config: ViewportStyleConfig,
+) => {
   const {
-    domain, scaleType, numTicks, orientation,
+    domain, scaleType, numTicks,
   } = axis;
 
   const isLabel = scaleType === 'label';
@@ -431,6 +436,30 @@ export const handleVerticalTickLabelTransform = (t: any, isVertical: boolean, ax
   }
 
   return res;
+};
+
+export const handleVerticalTickLabelOffset = (
+  width: number,
+  orientation: AxisOrientation,
+  axis: AxisProps,
+  config: CartesianStyleConfig,
+) => {
+  const { viewport, axis: aConfig } = config;
+  const {
+    domain, tickFormat, scaleType,
+  } = axis;
+  const { maxCharactersLength: l, omission: o } = aConfig.tickLabelProps;
+  const { labelCharExtimatedWidth: w } = aConfig.spacing;
+
+  let res = 0;
+
+  if (hasVerticalTickLabel(width, orientation, axis, viewport)) {
+    const num = getMaxCharactersNum(domain, tickFormat);
+    if (scaleType === 'label') res = _.clamp(num, 0, l - o.length);
+    else res = _.clamp(num, 0, 10);
+  }
+
+  return res * w;
 };
 
 export const computeAxisProperties = ({

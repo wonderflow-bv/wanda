@@ -44,6 +44,7 @@ import {
 import {
   computeAllAxisProperties, computeAxisConfig, handleTickFormat,
   handleTickNumber,
+  handleVerticalTickLabelOffset,
   handleVerticalTickLabelTransform,
   hasVerticalTickLabel,
 } from '../../utils/axis';
@@ -141,16 +142,18 @@ export const CartesianBase = ({
   otherProps,
   children,
 }: CartesianBaseProps) => {
+  const cartesianConfig = useMemo(() => {
+    const cConfig = getCartesianStyleConfigFromTheme(theme);
+    return _.merge(cConfig, styleConfig);
+  }, [styleConfig, theme]);
+
   const {
     linearGradient: lgStyle,
     grid: gStyle,
     axis: aStyle,
     legend: lStyle,
     viewport: vStyle,
-  } = useMemo(() => {
-    const cConfig = getCartesianStyleConfigFromTheme(theme);
-    return _.merge(cConfig, styleConfig);
-  }, [styleConfig, theme]);
+  } = cartesianConfig;
 
   const { from, to } = _.merge(lgStyle.background, background);
 
@@ -189,9 +192,7 @@ export const CartesianBase = ({
 
   const heading = title ? hStyle.height : 0;
 
-  const mt = margin.top * (top ? 1 : 2) + heading;
   const mr = margin.right * (right ? 1 : 2);
-  const mb = margin.bottom * (bottom ? 1 : 2) + legendH;
   const ml = margin.left * (left ? 1 : 2);
 
   const {
@@ -202,6 +203,13 @@ export const CartesianBase = ({
   } = axisConfig.offset;
 
   const xMax = dynamicWidth - ml - mr - vOff;
+
+  const topTickLabelOffset = top ? handleVerticalTickLabelOffset(xMax, 'top', top, cartesianConfig) : 0;
+  const bottomTickLabelOffset = bottom ? handleVerticalTickLabelOffset(xMax, 'bottom', bottom, cartesianConfig) : 0;
+
+  const mt = margin.top * (top ? 1 : 2) + heading + topTickLabelOffset;
+  const mb = margin.bottom * (bottom ? 1 : 2) + legendH + bottomTickLabelOffset;
+
   const yMax = dynamicHeight - mt - mb - hOff;
 
   const tPos = mt + tOff;
@@ -341,13 +349,16 @@ export const CartesianBase = ({
                 ...axisConfig[a.orientation].tickLabelProps,
                 ...handleVerticalTickLabelTransform(
                   v,
-                  hasVerticalTickLabel(xMax, a, vStyle),
+                  hasVerticalTickLabel(xMax, a.orientation, a, vStyle),
                   a,
                 ),
               })}
               tickLineProps={axisConfig.style.tickLineProps}
               label={a.label}
-              labelOffset={axisConfig[a.orientation].labelOffset}
+              labelOffset={
+                axisConfig[a.orientation].labelOffset
+                + handleVerticalTickLabelOffset(xMax, a.orientation, a, cartesianConfig)
+              }
               labelProps={{
                 ...axisConfig.style.labelProps,
                 ...axisConfig[a.orientation].labelProps,

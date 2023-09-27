@@ -68,6 +68,7 @@ export const getMaxCharactersNum = (
   tickFormat?: TickFormatter<string | Date | NumberValue>,
 ) => {
   if (!domain.length) return 0;
+
   const isNumbers = isArrayTypeNumber(domain);
 
   let maxLen = 0;
