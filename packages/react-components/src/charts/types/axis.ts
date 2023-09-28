@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
+import { ScaleBand, ScaleLinear, ScaleTime } from '@visx/vendor/d3-scale';
 import { Except } from 'type-fest';
 
 import { AxisProps } from '../components/cartesian-base';
-import { Axis } from '../components/cartesian-base/cartesian-base';
 
 export type AxisOrientation = 'top' | 'left' | 'right' | 'bottom';
 export type DominantBaseline = 'auto' | 'middle' | 'hanging';
@@ -140,4 +140,11 @@ export type AxisStyleConfig = {
   left: VerticalAxisStyleConfig;
 }
 
-export type AllAxisProperties = Record<AxisOrientation, Axis | undefined>
+export type AxisType = {
+  orientation: AxisOrientation;
+  top: number;
+  left: number;
+  scale: ScaleBand<string> | ScaleLinear<number, number> | ScaleTime<number, number>;
+} & AxisProps
+
+export type AllAxisProperties = Record<AxisOrientation, AxisType | undefined>

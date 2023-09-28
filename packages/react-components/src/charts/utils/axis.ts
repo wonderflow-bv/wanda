@@ -19,7 +19,7 @@
 import { scaleBand, scaleLinear, scaleUtc } from '@visx/scale';
 import _ from 'lodash';
 
-import { Axis, AxisProps } from '../components/cartesian-base/cartesian-base';
+import { AxisProps } from '../components/cartesian-base/cartesian-base';
 import {
   axisStyleConfig,
 } from '../style-config';
@@ -31,6 +31,7 @@ import {
   AxisConfig,
   AxisOffsetConfig,
   AxisOrientation,
+  AxisType,
   HorizontalAxisConfig,
   SingleAxisElementsValues,
   SingleAxisOffsetInput,
@@ -353,7 +354,7 @@ export const scaleDomainToAxis = (axis: Pick<AxisProps, 'domain' | 'range' | 'sc
   return undefined;
 };
 
-export const handleTickFormat = (axis: Axis) => {
+export const handleTickFormat = (axis: AxisType) => {
   const {
     tickFormat, hideTickLabel, scaleType,
   } = axis;
@@ -374,7 +375,7 @@ export const handleTickFormat = (axis: Axis) => {
 export const handleTickNumber = (
   width: number,
   height: number,
-  axis: Axis,
+  axis: AxisType,
   config: ViewportStyleConfig,
 ) => manageViewport(width, height, axis, config).numTicks;
 
@@ -410,7 +411,7 @@ export const hasVerticalTickLabel = (
   return false;
 };
 
-export const handleVerticalTickLabelTransform = (t: any, isVertical: boolean, axis: Axis) => {
+export const handleVerticalTickLabelTransform = (t: any, isVertical: boolean, axis: AxisType) => {
   const { orientation, scale } = axis;
 
   let res = {};
@@ -456,7 +457,8 @@ export const handleVerticalTickLabelOffset = (
   if (hasVerticalTickLabel(width, orientation, axis, viewport)) {
     const num = getMaxCharactersNum(domain, tickFormat);
     if (scaleType === 'label') res = _.clamp(num, 0, l - o.length);
-    else res = _.clamp(num, 0, 10);
+    else if (scaleType === 'linear') res = num;
+    else res = _.clamp(num, 0, 8);
   }
 
   return res * w;
@@ -480,7 +482,7 @@ export const computeAxisProperties = ({
   positionRight: number;
   positionBottom: number;
   positionLeft: number;
-}): Axis | undefined => {
+}): AxisType | undefined => {
   if (axis) {
     if (orientation === 'top') {
       return {
