@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 12.5.2
+
+### Patch Changes
+
+- 731a613c: Fix value format and typo
+
 ## 12.5.1
 
 ### Patch Changes

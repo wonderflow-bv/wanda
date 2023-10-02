@@ -175,7 +175,7 @@ export const ProductCardKpis = forwardRef(({
     },
     {
       property: 'nps',
-      value: formatKpiValue(nps, { decimal: 0, minRange: 0, maxRange: 100 }),
+      value: formatKpiValue(nps, { decimal: 0, minRange: -100, maxRange: 100 }),
       icon: 'nps',
     },
     {
