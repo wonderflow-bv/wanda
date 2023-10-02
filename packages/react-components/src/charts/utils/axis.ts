@@ -449,7 +449,7 @@ export const handleVerticalTickLabelOffset = (
   const {
     domain, tickFormat, scaleType,
   } = axis;
-  const { maxCharactersLength: l, omission: o } = aConfig.tickLabelProps;
+  const { maxCharactersLength: l, omission: o } = aConfig.formatting;
   const { labelCharExtimatedWidth: w } = aConfig.spacing;
 
   let res = 0;

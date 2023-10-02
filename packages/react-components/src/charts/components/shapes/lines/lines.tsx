@@ -153,7 +153,7 @@ export const Lines = ({
     <Group
       top={tPos}
       left={lPos}
-      ref={containerRef}
+      innerRef={containerRef}
       onMouseMove={e => handleMouseMove(e, 'test')}
       onMouseOut={hideTooltip}
     >

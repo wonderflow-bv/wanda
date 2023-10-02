@@ -18,6 +18,10 @@ import { AxisStyleConfig } from '../types/axis';
 import { themeLight } from './themes';
 
 export const axisStyleConfig: AxisStyleConfig = {
+  formatting: {
+    maxCharactersLength: 20,
+    omission: '...',
+  },
   labelProps: {
     fill: themeLight.axis.label,
     fontFamily: 'system-ui, sans-serif',
@@ -30,8 +34,6 @@ export const axisStyleConfig: AxisStyleConfig = {
     fontFamily: 'system-ui, sans-serif',
     fontSize: 14,
     fontWeight: 400,
-    maxCharactersLength: 20,
-    omission: '...',
   },
   tickLineProps: {
     length: 4,

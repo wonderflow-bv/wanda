@@ -62,7 +62,7 @@ export const truncate = (
     omission?: string;
     separator?: RegExp | string;
   } = {
-    length: axisStyleConfig.tickLabelProps.maxCharactersLength,
-    omission: axisStyleConfig.tickLabelProps.omission,
+    length: axisStyleConfig.formatting.maxCharactersLength,
+    omission: axisStyleConfig.formatting.omission,
   },
 ) => _.truncate(text, options);

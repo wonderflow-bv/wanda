@@ -84,7 +84,7 @@ export type LabelProps = {
   textAnchor: TextAnchor;
 }
 
-export type TickLabelProps = Except<LabelProps, 'textAnchor'> & { maxCharactersLength: number; omission: string }
+export type TickLabelProps = Except<LabelProps, 'textAnchor'>;
 
 export type TickLineProps = {
   length: number;
@@ -129,6 +129,7 @@ export type HorizontalAxisStyleConfig = {
 };
 
 export type AxisStyleConfig = {
+  formatting: { maxCharactersLength: number; omission: string };
   labelProps: LabelProps;
   tickLabelProps: TickLabelProps;
   tickLineProps: TickLineProps;

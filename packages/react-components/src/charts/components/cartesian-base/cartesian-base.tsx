@@ -153,7 +153,9 @@ export const CartesianBase = ({
   const axisBottom = axis?.bottom;
   const axisLeft = axis?.left;
 
-  const { hideRows: hasRows, hideColumns: hasCols } = grid;
+  const { hideRows, hideColumns } = grid;
+  const hasRows = !hideRows && (axisLeft || axisRight);
+  const hasCols = !hideColumns && (axisBottom || axisTop);
 
   const ref = useRef(null);
   const size = useSize(ref);
@@ -263,7 +265,7 @@ export const CartesianBase = ({
         />
 
         <Group>
-          {!hasRows && (axisLeft || axisRight) && (
+          {hasRows && (
             <GridRows
               top={tPos}
               left={lPos}
@@ -281,7 +283,7 @@ export const CartesianBase = ({
             />
           )}
 
-          {!hasCols && (axisTop || axisBottom) && (
+          {hasCols && (
             <GridColumns
               top={tPos}
               left={lPos}
