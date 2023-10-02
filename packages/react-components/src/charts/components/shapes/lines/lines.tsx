@@ -34,10 +34,12 @@ export type LinesProps = {
   metadata: LineChartMetadata;
   topPosition: number;
   leftPosition: number;
-  top?: AxisType;
-  right?: AxisType;
-  bottom?: AxisType;
-  left?: AxisType;
+  axis: {
+    top?: AxisType;
+    right?: AxisType;
+    bottom?: AxisType;
+    left?: AxisType;
+  };
 }
 
 export const Lines = ({
@@ -46,27 +48,27 @@ export const Lines = ({
   metadata,
   topPosition: tPos,
   leftPosition: lPos,
-  top,
-  right,
-  bottom,
-  left,
+  axis,
 }: LinesProps) => {
   const {
-    index, collection, overlay, layout,
+    top, right, bottom, left,
+  } = axis;
+  const {
+    index, series, overlay, layout,
   } = metadata;
+
+  // console.log(JSON.stringify(axis, null, 2));
 
   const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
 
-  const indexAxis = isHorizontal ? (bottom ?? top) : (left ?? right);
-  const collectionAxis = isHorizontal ? (left ?? right) : (bottom ?? top);
+  const indexAxis = isHorizontal ? bottom! : left!;
+  const seriesAxis = isHorizontal ? left! : bottom!;
   const overlayAxis = isHorizontal ? right : top;
 
-  const indexId = isHorizontal ? 'x' : 'y';
-  const collectionId = isHorizontal ? 'y' : 'x';
-
-  const hasIndex = Boolean(indexAxis && index);
-  const hasCollection = Boolean(collectionAxis && collection.length);
   const hasOverlay = Boolean(overlayAxis && overlay?.length);
+
+  const indexId = isHorizontal ? 'x' : 'y';
+  const seriesId = isHorizontal ? 'y' : 'x';
 
   const accessor = (axis: AxisType, dataKey: string, d?: Record<string, unknown>) => {
     let value = 0;
@@ -128,7 +130,7 @@ export const Lines = ({
       content,
       coords,
       index: accessorInvert(indexAxis, coords[indexId]) ?? 0,
-      collection: accessorInvert(collectionAxis, coords[collectionId]) ?? 0,
+      collection: accessorInvert(seriesAxis, coords[seriesId]) ?? 0,
       overlay: accessorInvert(overlayAxis, coords[indexId]) ?? 0,
     };
 
@@ -138,16 +140,14 @@ export const Lines = ({
       tooltipData: d,
     });
   }, [
-    collectionAxis,
-    collectionId,
+    seriesAxis,
+    seriesId,
     containerBounds.left,
     containerBounds.top,
     indexAxis,
     indexId,
     overlayAxis,
     showTooltip]);
-
-  if (!hasIndex || !hasCollection) return null;
 
   return (
     <Group
@@ -157,40 +157,39 @@ export const Lines = ({
       onMouseMove={e => handleMouseMove(e, 'test')}
       onMouseOut={hideTooltip}
     >
-      {collection.map(k => (
+      {series.map(k => (
         <LinePath
           key={k}
           data={data}
           curve={curveBasis}
           x={(d: Record<string, unknown>) => (isHorizontal
-            ? accessor(indexAxis!, index, d)
-            : accessor(collectionAxis!, k, d))}
+            ? accessor(indexAxis, index, d)
+            : accessor(seriesAxis, k, d))}
           y={(d: Record<string, unknown>) => (isHorizontal
-            ? accessor(collectionAxis!, k, d)
-            : accessor(indexAxis!, index, d))}
+            ? accessor(seriesAxis, k, d)
+            : accessor(indexAxis, index, d))}
           stroke="#cf1c1c"
           strokeWidth={2}
           strokeOpacity={1}
           strokeDasharray=""
         />
       ))}
-      {hasOverlay && overlay!.map(k => (
+      {hasOverlay && (
         <LinePath
-          key={k}
           data={data}
           curve={curveBasis}
           x={(d: Record<string, unknown>) => (isHorizontal
-            ? accessor(indexAxis!, index, d)
-            : accessor(overlayAxis!, k, d))}
+            ? accessor(indexAxis, index, d)
+            : accessor(overlayAxis!, overlay!, d))}
           y={(d: Record<string, unknown>) => (isHorizontal
-            ? accessor(overlayAxis!, k, d)
-            : accessor(indexAxis!, index, d))}
+            ? accessor(overlayAxis!, overlay!, d)
+            : accessor(indexAxis, index, d))}
           stroke="#8f1389"
           strokeWidth={2}
           strokeOpacity={0.5}
           strokeDasharray=""
         />
-      ))}
+      )}
       <Tooltip
         theme={theme}
         isOpen={tooltipOpen}

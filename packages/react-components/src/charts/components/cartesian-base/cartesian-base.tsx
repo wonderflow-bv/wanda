@@ -67,10 +67,12 @@ export type CartesianBaseProps = {
   background?: Background;
   margin?: MarginProps;
   grid?: GridProps;
-  top?: AxisProps;
-  right?: AxisProps;
-  bottom?: AxisProps;
-  left?: AxisProps;
+  axis?: {
+    top?: AxisProps;
+    right?: AxisProps;
+    bottom?: AxisProps;
+    left?: AxisProps;
+  };
   legend?: React.ReactNode;
   styleConfig?: DeepPartial<CartesianStyleConfig>;
   otherProps?: Record<string, unknown>;
@@ -125,10 +127,7 @@ export const CartesianBase = ({
   title,
   subtitle,
   headings,
-  top,
-  right,
-  bottom,
-  left,
+  axis,
   legend,
   styleConfig,
   otherProps,
@@ -148,6 +147,11 @@ export const CartesianBase = ({
   } = cartesianConfig;
 
   const { from, to } = _.merge(lgStyle.background, background);
+
+  const axisTop = axis?.top;
+  const axisRight = axis?.right;
+  const axisBottom = axis?.bottom;
+  const axisLeft = axis?.left;
 
   const { hideRows: hasRows, hideColumns: hasCols } = grid;
 
@@ -175,17 +179,17 @@ export const CartesianBase = ({
   };
 
   const axisConfig = useMemo(() => computeAxisConfig({
-    top,
-    right,
-    bottom,
-    left,
+    top: axisTop,
+    right: axisRight,
+    bottom: axisBottom,
+    left: axisLeft,
   },
-  aStyle), [aStyle, bottom, left, right, top]);
+  aStyle), [aStyle, axisBottom, axisLeft, axisRight, axisTop]);
 
   const heading = title ? hStyle.height : 0;
 
-  const mr = margin.right * (right ? 1 : 2);
-  const ml = margin.left * (left ? 1 : 2);
+  const mr = margin.right * (axisRight ? 1 : 2);
+  const ml = margin.left * (axisLeft ? 1 : 2);
 
   const {
     leftAxisOffset: lOff,
@@ -196,11 +200,11 @@ export const CartesianBase = ({
 
   const xMax = dynamicWidth - ml - mr - vOff;
 
-  const topTickLabelOffset = top ? handleVerticalTickLabelOffset(xMax, 'top', top, cartesianConfig) : 0;
-  const bottomTickLabelOffset = bottom ? handleVerticalTickLabelOffset(xMax, 'bottom', bottom, cartesianConfig) : 0;
+  const topTickLabelOffset = axisTop ? handleVerticalTickLabelOffset(xMax, 'top', axisTop, cartesianConfig) : 0;
+  const bottomTickLabelOffset = axisBottom ? handleVerticalTickLabelOffset(xMax, 'bottom', axisBottom, cartesianConfig) : 0;
 
   const mt = margin.top * (top ? 1 : 2) + heading + topTickLabelOffset;
-  const mb = margin.bottom * (bottom ? 1 : 2) + legendH + bottomTickLabelOffset;
+  const mb = margin.bottom * (axisBottom ? 1 : 2) + legendH + bottomTickLabelOffset;
 
   const yMax = dynamicHeight - mt - mb - hOff;
 
@@ -210,10 +214,10 @@ export const CartesianBase = ({
   const lPos = ml + lOff;
 
   const allAxis = computeAllAxisProperties({
-    top,
-    right,
-    bottom,
-    left,
+    top: axisTop,
+    right: axisRight,
+    bottom: axisBottom,
+    left: axisLeft,
     maxRangeX: xMax,
     maxRangeY: yMax,
     positionTop: tPos,
@@ -259,7 +263,7 @@ export const CartesianBase = ({
         />
 
         <Group>
-          {!hasRows && (left || right) && (
+          {!hasRows && (axisLeft || axisRight) && (
             <GridRows
               top={tPos}
               left={lPos}
@@ -277,7 +281,7 @@ export const CartesianBase = ({
             />
           )}
 
-          {!hasCols && (top || bottom) && (
+          {!hasCols && (axisTop || axisBottom) && (
             <GridColumns
               top={tPos}
               left={lPos}
@@ -341,10 +345,7 @@ export const CartesianBase = ({
               metadata={metadata}
               topPosition={tPos}
               leftPosition={lPos}
-              top={allAxis.top}
-              right={allAxis.right}
-              bottom={allAxis.bottom}
-              left={allAxis.left}
+              axis={allAxis}
             />
           )}
 

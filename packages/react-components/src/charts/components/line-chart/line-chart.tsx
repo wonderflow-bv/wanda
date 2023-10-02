@@ -23,7 +23,12 @@ import { extractDomainFromData } from '../../utils';
 import { AxisProps } from '../cartesian-base';
 import { CartesianBase, CartesianBaseProps } from '../cartesian-base/cartesian-base';
 
-export type LineChartAxis = Except<AxisProps, 'domain'> & {
+export type LineChartIndex = Except<AxisProps, 'domain'> & {
+  dataKey: string;
+  domain?: Array<string | number>;
+};
+
+export type LineChartSeries = Except<AxisProps, 'domain'> & {
   dataKey: string[];
   domain?: Array<string | number>;
 };
@@ -31,75 +36,71 @@ export type LineChartAxis = Except<AxisProps, 'domain'> & {
 export type LineChartProps = {
   layout: CartesianChartLayout;
   data: Data;
-  top?: LineChartAxis;
-  right?: LineChartAxis;
-  bottom?: LineChartAxis;
-  left?: LineChartAxis;
-} & Except<CartesianBaseProps, 'data' | 'metadata' | 'top' | 'right' | 'bottom' | 'left'>
+  index: LineChartIndex;
+  series: LineChartSeries;
+  overlay?: LineChartIndex;
+} & Except<CartesianBaseProps, 'data' | 'metadata' | 'axis'>
 
 export type LineChartMetadata = {
   type: Charts;
   layout: CartesianChartLayout;
   index: string;
-  collection: string[];
-  overlay?: string[];
+  series: string[];
+  overlay?: string;
 }
 
 export const LineChart = ({
   layout = CartesianChartLayout.HORIZONTAL,
   data,
-  top,
-  right,
-  bottom,
-  left,
+  index,
+  series,
+  overlay,
   ...rest
 }: LineChartProps) => {
-  const topA = top ? {
-    ...top,
-    domain: extractDomainFromData(data, top, top.domain),
-  } : undefined;
-  const rightA = right ? {
-    ...right,
-    domain: extractDomainFromData(data, right, right.domain),
-  } : undefined;
-  const bottomA = bottom ? {
-    ...bottom,
-    domain: extractDomainFromData(data, bottom, bottom.domain),
-  } : undefined;
-  const leftA = left ? {
-    ...left,
-    domain: extractDomainFromData(data, left, left.domain),
-  } : undefined;
+  const axis = {
+    vertical: {
+      left: {
+        ...index,
+        domain: extractDomainFromData(data, index, index.domain),
+      },
+      bottom: {
+        ...series,
+        domain: extractDomainFromData(data, series, series.domain),
+      },
+      top: overlay ? {
+        ...overlay,
+        domain: extractDomainFromData(data, overlay, overlay.domain),
+      } : undefined,
+    },
+    horizontal: {
+      bottom: {
+        ...index,
+        domain: extractDomainFromData(data, index, index.domain),
+      },
+      left: {
+        ...series,
+        domain: extractDomainFromData(data, series, series.domain),
+      },
+      right: overlay ? {
+        ...overlay,
+        domain: extractDomainFromData(data, overlay, overlay.domain),
+      } : undefined,
+    },
+  };
 
-  const c = {
+  const metadata = {
     type: Charts.LINE_CHART,
     layout,
+    index: index.dataKey,
+    series: series.dataKey,
+    overlay: overlay?.dataKey,
   };
-
-  const hr: LineChartMetadata = {
-    ...c,
-    index: bottom?.dataKey[0] ?? top?.dataKey[0] ?? '',
-    collection: left?.dataKey ?? [],
-    overlay: right?.dataKey,
-  };
-
-  const vr: LineChartMetadata = {
-    ...c,
-    index: left?.dataKey[0] ?? right?.dataKey[0] ?? '',
-    collection: bottom?.dataKey ?? [],
-    overlay: top?.dataKey,
-  };
-
-  const metadata = layout === CartesianChartLayout.HORIZONTAL ? hr : vr;
 
   return (
     <CartesianBase
       data={data}
       metadata={metadata}
-      top={topA}
-      right={rightA}
-      bottom={bottomA}
-      left={leftA}
+      axis={axis[layout]}
       {...rest}
     />
   );

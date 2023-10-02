@@ -11,12 +11,12 @@ const story: ComponentMeta<typeof LineChart> = {
     title: 'Feedback Count',
     subtitle: 'a feedback count chart',
     data: feedbackCount,
-    bottom: {
-      dataKey: ['date'],
+    index: {
+      dataKey: 'date',
       scaleType: 'time',
       label: 'Year',
     },
-    left: {
+    series: {
       dataKey: ['value'],
       scaleType: 'linear',
       label: 'Feedback Count',
@@ -34,8 +34,8 @@ Default.args = {};
 
 export const withOverlay = Template.bind({});
 withOverlay.args = {
-  right: {
-    dataKey: ['overlay'],
+  overlay: {
+    dataKey: 'overlay',
     scaleType: 'linear',
     label: 'Overlay',
   },
@@ -43,14 +43,14 @@ withOverlay.args = {
 
 export const withCustomDomain = Template.bind({});
 withCustomDomain.args = {
-  left: {
+  series: {
     dataKey: ['value'],
     scaleType: 'linear',
     label: 'Feedback Count',
     domain: [-12000, 12000],
   },
-  bottom: {
-    dataKey: ['date'],
+  index: {
+    dataKey: 'date',
     scaleType: 'time',
     label: 'Year',
     domain: ['1999-01-01', '2024-01-01'],
@@ -60,17 +60,17 @@ withCustomDomain.args = {
 export const vertical = Template.bind({});
 vertical.args = {
   layout: CartesianChartLayout.VERTICAL,
-  top: {
-    dataKey: ['overlay'],
+  overlay: {
+    dataKey: 'overlay',
     scaleType: 'linear',
     label: 'Overlay',
   },
-  left: {
-    dataKey: ['date'],
+  index: {
+    dataKey: 'date',
     scaleType: 'time',
     label: 'Year',
   },
-  bottom: {
+  series: {
     dataKey: ['value'],
     scaleType: 'linear',
     label: 'Feedback Count',

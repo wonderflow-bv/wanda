@@ -58,14 +58,14 @@ export const extractPrimitivesFromArray = (
 
 export const extractDomainFromData = (
   data: Data,
-  axis: { scaleType: ScaleType; dataKey: string[] },
+  axis: { scaleType: ScaleType; dataKey: string | string[] },
   override?: Array<string | number>,
 ) => {
   const { scaleType, dataKey } = axis;
 
   let domain: Array<string | number> = [];
 
-  const domainData = _.flattenDeep(dataKey.map(k => extractPrimitivesFromArray(data, k)));
+  const domainData = _.flattenDeep([dataKey].flat().map(k => extractPrimitivesFromArray(data, k)));
   if (scaleType === 'label') {
     domain = domainData.map(e => (e ? `${e}` : ''));
   } else {
