@@ -127,9 +127,9 @@ export const Lines = ({
     const d = {
       content,
       coords,
-      index: accessorInvert(indexAxis, coords[indexId]) ?? 'n.d',
-      collection: accessorInvert(collectionAxis, coords[collectionId]) ?? 'n.d',
-      overlay: accessorInvert(overlayAxis, coords[indexId]) ?? 'n.d',
+      index: accessorInvert(indexAxis, coords[indexId]) ?? 0,
+      collection: accessorInvert(collectionAxis, coords[collectionId]) ?? 0,
+      overlay: accessorInvert(overlayAxis, coords[indexId]) ?? 0,
     };
 
     showTooltip({
@@ -202,7 +202,7 @@ export const Lines = ({
         {/** @ts-expect-error: tootlidata typing */}
         <p style={{ fontSize: '12px' }}>{`feedback: ${tooltipData?.collection.toFixed()}`}</p>
         {/** @ts-expect-error: tootlidata typing */}
-        <p style={{ fontSize: '12px' }}>{`overlay: ${tooltipData?.overlay.toFixed(2)}`}</p>
+        {!!tooltipData?.overlay && <p style={{ fontSize: '12px' }}>{`overlay: ${tooltipData?.overlay.toFixed(2)}`}</p>}
       </Tooltip>
     </Group>
   );
