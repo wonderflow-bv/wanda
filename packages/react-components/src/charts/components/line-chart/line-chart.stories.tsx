@@ -13,12 +13,10 @@ const story: ComponentMeta<typeof LineChart> = {
     data: feedbackCount,
     index: {
       dataKey: 'date',
-      scaleType: 'time',
       label: 'Year',
     },
     series: {
       dataKey: ['value'],
-      scaleType: 'linear',
       label: 'Feedback Count',
     },
   },
@@ -36,7 +34,6 @@ export const withOverlay = Template.bind({});
 withOverlay.args = {
   overlay: {
     dataKey: 'overlay',
-    scaleType: 'linear',
     label: 'Overlay',
   },
 };
@@ -45,13 +42,11 @@ export const withCustomDomain = Template.bind({});
 withCustomDomain.args = {
   series: {
     dataKey: ['value'],
-    scaleType: 'linear',
     label: 'Feedback Count',
     domain: [-12000, 12000],
   },
   index: {
     dataKey: 'date',
-    scaleType: 'time',
     label: 'Year',
     domain: ['1999-01-01', '2024-01-01'],
   },
@@ -62,17 +57,14 @@ vertical.args = {
   layout: CartesianChartLayout.VERTICAL,
   overlay: {
     dataKey: 'overlay',
-    scaleType: 'linear',
     label: 'Overlay',
   },
   index: {
     dataKey: 'date',
-    scaleType: 'time',
     label: 'Year',
   },
   series: {
     dataKey: ['value'],
-    scaleType: 'linear',
     label: 'Feedback Count',
   },
 };

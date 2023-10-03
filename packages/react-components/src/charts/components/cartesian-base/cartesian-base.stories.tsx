@@ -9,6 +9,7 @@ const story: ComponentMeta<typeof CartesianBase> = {
     theme: 'light',
     title: 'Chart Title',
     subtitle: 'Subtitle text',
+    isLoading: false,
     preventResponsive: false,
     data: [],
     grid: {
@@ -25,7 +26,6 @@ const story: ComponentMeta<typeof CartesianBase> = {
           'E-veryLongLabelThatExceed',
         ],
         label: 'Top Label',
-        scaleType: 'label',
         paddingOuter: 0,
         paddingInner: 1,
         tickFormat: (v: any) => (`Add Prefix ${JSON.stringify(v)} something else`),
@@ -36,7 +36,6 @@ const story: ComponentMeta<typeof CartesianBase> = {
       right: {
         domain: [0, 0.010],
         label: 'Right Label',
-        scaleType: 'linear',
         tickFormat: (v: any) => `${JSON.stringify(v)} $`,
         hideAxisLine: false,
         hideTickLabel: false,
@@ -53,7 +52,6 @@ const story: ComponentMeta<typeof CartesianBase> = {
       left: {
         domain: [0, 10000],
         label: 'Left Label',
-        scaleType: 'linear',
         hideAxisLine: false,
         hideTickLabel: false,
         hideTicks: false,
@@ -98,7 +96,6 @@ TwoAxis.args = {
     left: {
       domain: [0, 1000],
       label: 'Quantity',
-      scaleType: 'linear',
       hideAxisLine: true,
       hideTicks: true,
       hideZero: true,

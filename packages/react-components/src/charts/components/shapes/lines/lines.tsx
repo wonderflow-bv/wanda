@@ -57,8 +57,6 @@ export const Lines = ({
     index, series, overlay, layout,
   } = metadata;
 
-  // console.log(JSON.stringify(axis, null, 2));
-
   const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
 
   const indexAxis = isHorizontal ? bottom! : left!;
@@ -130,7 +128,7 @@ export const Lines = ({
       content,
       coords,
       index: accessorInvert(indexAxis, coords[indexId]) ?? 0,
-      collection: accessorInvert(seriesAxis, coords[seriesId]) ?? 0,
+      series: accessorInvert(seriesAxis, coords[seriesId]) ?? 0,
       overlay: accessorInvert(overlayAxis, coords[indexId]) ?? 0,
     };
 
@@ -199,9 +197,9 @@ export const Lines = ({
         {/** @ts-expect-error: tootlidata typing */}
         <p style={{ fontSize: '12px' }}>{`date: ${tooltipData?.index.slice(0, 8)}`}</p>
         {/** @ts-expect-error: tootlidata typing */}
-        <p style={{ fontSize: '12px' }}>{`feedback: ${tooltipData?.collection.toFixed()}`}</p>
+        <p style={{ fontSize: '12px' }}>{`feedback: ${tooltipData?.series.toFixed()}`}</p>
         {/** @ts-expect-error: tootlidata typing */}
-        {!!tooltipData?.overlay && <p style={{ fontSize: '12px' }}>{`overlay: ${tooltipData?.overlay.toFixed(2)}`}</p>}
+        {!!tooltipData?.overlay && <p style={{ fontSize: '12px' }}>{`overlay: ${tooltipData?.overlay?.toFixed(2)}`}</p>}
       </Tooltip>
     </Group>
   );

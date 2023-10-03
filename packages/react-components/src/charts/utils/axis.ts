@@ -16,14 +16,16 @@
 
 /* eslint-disable @typescript-eslint/naming-convention */
 
-import { scaleBand, scaleLinear, scaleUtc } from '@visx/scale';
+import {
+  scaleBand, scaleLinear, scaleUtc,
+} from '@visx/scale';
 import _ from 'lodash';
 
 import { AxisProps } from '../components/cartesian-base/cartesian-base';
 import {
   axisStyleConfig,
 } from '../style-config';
-import { CartesianStyleConfig, ViewportStyleConfig } from '../types';
+import { CartesianStyleConfig, ScaleType, ViewportStyleConfig } from '../types';
 import {
   AllAxisElementsValues,
   AllAxisInput,
@@ -39,7 +41,7 @@ import {
 } from '../types/axis';
 import { truncate } from './format';
 import {
-  getMaxCharactersNum, getMinMaxDate, getMinMaxNumber, isArrayTypeDate,
+  getMaxCharactersNum, getMinMaxDate, getMinMaxNumber, isArrayTypeDate, isArrayTypeNumber, isArrayTypeString,
 } from './math';
 import { manageViewport } from './viewport';
 
@@ -301,6 +303,20 @@ export const computeAxisConfig = (
   };
 
   return c;
+};
+
+export const inferScaleTypeFromDomain = (
+  domain: Array<string | number>,
+  scaleType?: ScaleType,
+): ScaleType => {
+  if (scaleType) return scaleType;
+  if (isArrayTypeNumber(domain)) return 'linear';
+  if (isArrayTypeString(domain)) {
+    const toDate = domain.map(el => new Date(el));
+    if (isArrayTypeDate(toDate)) return 'time';
+  }
+
+  return 'label';
 };
 
 export const scaleDomainToAxis = (axis: Pick<AxisProps, 'domain' | 'range' | 'scaleType' | 'clamp' | 'nice' | 'round' | 'paddingInner' | 'paddingOuter' >) => {

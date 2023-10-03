@@ -47,6 +47,7 @@ import {
   handleVerticalTickLabelOffset,
   handleVerticalTickLabelTransform,
   hasVerticalTickLabel,
+  inferScaleTypeFromDomain,
 } from '../../utils/axis';
 import { getCartesianStyleConfigFromTheme } from '../../utils/colors';
 import { Headings, HeadingsProps } from '../headings';
@@ -64,10 +65,11 @@ export type CartesianBaseProps = {
   width?: number;
   height?: number;
   preventResponsive?: boolean;
+  isLoading?: boolean;
   background?: Background;
   margin?: MarginProps;
   grid?: GridProps;
-  axis?: {
+  axis: {
     top?: AxisProps;
     right?: AxisProps;
     bottom?: AxisProps;
@@ -89,7 +91,7 @@ export type GridProps = {
 
 export type AxisProps = {
   domain: Array<string | number>;
-  scaleType: ScaleType;
+  scaleType?: ScaleType;
   label?: string;
   range?: [number, number];
   round?: boolean;
@@ -113,6 +115,7 @@ export const CartesianBase = ({
   width = 800,
   height = 600,
   preventResponsive,
+  isLoading = false,
   background,
   margin = {
     top: 24,
@@ -148,14 +151,18 @@ export const CartesianBase = ({
 
   const { from, to } = _.merge(lgStyle.background, background);
 
-  const axisTop = axis?.top;
-  const axisRight = axis?.right;
-  const axisBottom = axis?.bottom;
-  const axisLeft = axis?.left;
+  const {
+    top, right, bottom, left,
+  } = axis;
+
+  if (top) top.scaleType = inferScaleTypeFromDomain(top.domain, top.scaleType);
+  if (right) right.scaleType = inferScaleTypeFromDomain(right.domain, right.scaleType);
+  if (bottom) bottom.scaleType = inferScaleTypeFromDomain(bottom.domain, bottom.scaleType);
+  if (left) left.scaleType = inferScaleTypeFromDomain(left.domain, left.scaleType);
 
   const { hideRows, hideColumns } = grid;
-  const hasRows = !hideRows && (axisLeft || axisRight);
-  const hasCols = !hideColumns && (axisBottom || axisTop);
+  const hasRows = !hideRows && (left || right);
+  const hasCols = !hideColumns && (bottom || top);
 
   const ref = useRef(null);
   const size = useSize(ref);
@@ -181,17 +188,17 @@ export const CartesianBase = ({
   };
 
   const axisConfig = useMemo(() => computeAxisConfig({
-    top: axisTop,
-    right: axisRight,
-    bottom: axisBottom,
-    left: axisLeft,
+    top,
+    right,
+    bottom,
+    left,
   },
-  aStyle), [aStyle, axisBottom, axisLeft, axisRight, axisTop]);
+  aStyle), [aStyle, bottom, left, right, top]);
 
   const heading = title ? hStyle.height : 0;
 
-  const mr = margin.right * (axisRight ? 1 : 2);
-  const ml = margin.left * (axisLeft ? 1 : 2);
+  const mr = margin.right * (right ? 1 : 2);
+  const ml = margin.left * (left ? 1 : 2);
 
   const {
     leftAxisOffset: lOff,
@@ -202,11 +209,11 @@ export const CartesianBase = ({
 
   const xMax = dynamicWidth - ml - mr - vOff;
 
-  const topTickLabelOffset = axisTop ? handleVerticalTickLabelOffset(xMax, 'top', axisTop, cartesianConfig) : 0;
-  const bottomTickLabelOffset = axisBottom ? handleVerticalTickLabelOffset(xMax, 'bottom', axisBottom, cartesianConfig) : 0;
+  const topTickLabelOffset = top ? handleVerticalTickLabelOffset(xMax, 'top', top, cartesianConfig) : 0;
+  const bottomTickLabelOffset = bottom ? handleVerticalTickLabelOffset(xMax, 'bottom', bottom, cartesianConfig) : 0;
 
   const mt = margin.top * (top ? 1 : 2) + heading + topTickLabelOffset;
-  const mb = margin.bottom * (axisBottom ? 1 : 2) + legendH + bottomTickLabelOffset;
+  const mb = margin.bottom * (bottom ? 1 : 2) + legendH + bottomTickLabelOffset;
 
   const yMax = dynamicHeight - mt - mb - hOff;
 
@@ -216,10 +223,10 @@ export const CartesianBase = ({
   const lPos = ml + lOff;
 
   const allAxis = computeAllAxisProperties({
-    top: axisTop,
-    right: axisRight,
-    bottom: axisBottom,
-    left: axisLeft,
+    top,
+    right,
+    bottom,
+    left,
     maxRangeX: xMax,
     maxRangeY: yMax,
     positionTop: tPos,
@@ -227,6 +234,8 @@ export const CartesianBase = ({
     positionBottom: bPos,
     positionLeft: lPos,
   });
+
+  if (isLoading) return <div>Loading...</div>;
 
   return (
     <div
@@ -301,44 +310,46 @@ export const CartesianBase = ({
             />
           )}
 
-          {Object.values(allAxis).filter((a): a is AxisType => !!a).map(a => (
-            <Axis
-              key={a.orientation}
-              orientation={a.orientation}
-              scale={a.scale}
-              top={a.top}
-              left={a.left}
-              numTicks={handleTickNumber(xMax, yMax, a, vStyle)}
-              tickLength={axisConfig.style.tickLineProps.length}
-              tickLabelProps={v => ({
-                ...axisConfig.style.tickLabelProps,
-                ...axisConfig[a.orientation].tickLabelProps,
-                ...handleVerticalTickLabelTransform(
-                  v,
-                  hasVerticalTickLabel(xMax, a.orientation, a, vStyle),
-                  a,
-                ),
-              })}
-              tickLineProps={axisConfig.style.tickLineProps}
-              label={a.label}
-              labelOffset={
+          {Object.values(allAxis)
+            .filter((a): a is AxisType => !!a)
+            .map(a => (
+              <Axis
+                key={a.orientation}
+                orientation={a.orientation}
+                scale={a.scale}
+                top={a.top}
+                left={a.left}
+                numTicks={handleTickNumber(xMax, yMax, a, vStyle)}
+                tickLength={axisConfig.style.tickLineProps.length}
+                tickLabelProps={v => ({
+                  ...axisConfig.style.tickLabelProps,
+                  ...axisConfig[a.orientation].tickLabelProps,
+                  ...handleVerticalTickLabelTransform(
+                    v,
+                    hasVerticalTickLabel(xMax, a.orientation, a, vStyle),
+                    a,
+                  ),
+                })}
+                tickLineProps={axisConfig.style.tickLineProps}
+                label={a.label}
+                labelOffset={
                 axisConfig[a.orientation].labelOffset
                 + handleVerticalTickLabelOffset(xMax, a.orientation, a, cartesianConfig)
               }
-              labelProps={{
-                ...axisConfig.style.labelProps,
-                ...axisConfig[a.orientation].labelProps,
-              }}
-              tickFormat={handleTickFormat(a) as TickFormatter<string | NumberValue | Date> | undefined}
-              stroke={axisConfig.style.axisLineProps.stroke}
-              strokeDasharray={axisConfig.style.axisLineProps.strokeDasharray}
-              strokeWidth={axisConfig.style.axisLineProps.strokeWidth}
-              hideAxisLine={a.hideAxisLine}
-              hideTicks={a.hideTicks}
-              hideZero={a.hideZero}
-              {...a.otherProps}
-            />
-          ))}
+                labelProps={{
+                  ...axisConfig.style.labelProps,
+                  ...axisConfig[a.orientation].labelProps,
+                }}
+                tickFormat={handleTickFormat(a) as TickFormatter<string | NumberValue | Date> | undefined}
+                stroke={axisConfig.style.axisLineProps.stroke}
+                strokeDasharray={axisConfig.style.axisLineProps.strokeDasharray}
+                strokeWidth={axisConfig.style.axisLineProps.strokeWidth}
+                hideAxisLine={a.hideAxisLine}
+                hideTicks={a.hideTicks}
+                hideZero={a.hideZero}
+                {...a.otherProps}
+              />
+            ))}
 
           {metadata?.type === Charts.LINE_CHART && (
             <Lines
