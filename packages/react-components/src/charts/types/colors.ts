@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-export type Neutrals = 'white'
+export type SupportColorNames = 'brand' | 'white' | 'black';
+
+export type NeutralsColorNames = 'white'
 | 'black'
 | 'dimmed0'
 | 'dimmed1'
@@ -27,7 +29,7 @@ export type Neutrals = 'white'
 | 'dimmed8'
 | 'dimmed9'
 
-export type Kpis = 'salesData'
+export type KpisColorsNames = 'salesData'
 | 'rating1star'
 | 'rating2star'
 | 'rating3star'
@@ -44,10 +46,9 @@ export type Kpis = 'salesData'
 | 'subrating'
 
 export type Gradient = '0' | '5' | '10' | '20' | '30' | '40' | '50' | '60' | '70' | '80' | '90' | '100';
-export type Support = 'brand' | 'white' | 'black';
 
 export type Colors = {
-  support: Record<Support, string>;
+  support: Record<SupportColorNames, string>;
   primary: Record<Gradient, string>;
   red: Record<Gradient, string>;
   magenta: Record<Gradient, string>;

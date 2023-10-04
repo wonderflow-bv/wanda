@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Colors, Kpis, Neutrals } from '../types';
+import { Colors, KpisColorsNames, NeutralsColorNames } from '../types';
 
 export const colors: Colors = {
   support: {
@@ -206,7 +206,7 @@ export const colors: Colors = {
   },
 };
 
-export const colorPaletteKpis: Record<Kpis, string> = {
+export const colorPaletteKpis: Record<KpisColorsNames, string> = {
   salesData: colors.blue[30],
   rating1star: colors.red[20],
   rating2star: colors.red[30],
@@ -224,7 +224,7 @@ export const colorPaletteKpis: Record<Kpis, string> = {
   subrating: colors.salmon[30],
 };
 
-export const colorPaletteNeutrals: Record<Neutrals, string> = {
+export const colorPaletteNeutrals: Record<NeutralsColorNames, string> = {
   white: colors.support.white,
   black: colors.support.black,
   dimmed0: colors.primary[0],
