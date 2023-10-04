@@ -18,7 +18,7 @@ import _ from 'lodash';
 
 import { AxisProps } from '../components';
 import { LineChartIndex, LineChartSeries } from '../components/line-chart/line-chart';
-import { Data, ScaleType } from '../types';
+import { Data } from '../types';
 import { inferScaleTypeFromDomain } from './axis';
 import { getMinMaxDate, getMinMaxNumber, isArrayTypeString } from './math';
 
@@ -58,63 +58,6 @@ export const extractPrimitivesFromArray = (
   arr: Array<Record<string, unknown>>,
   key: string,
 ) => arr.map(e => getPrimitiveFromKey(e, key));
-
-export const extractDomainFromData = (
-  data: Data,
-  axis: { scaleType?: ScaleType; dataKey: string | string[] },
-  override?: Array<string | number>,
-) => {
-  const { scaleType, dataKey } = axis;
-
-  const dk = typeof dataKey === 'string' ? [dataKey] : dataKey;
-  const domainData = _.flattenDeep(dk.map(k => extractPrimitivesFromArray(data, k)));
-
-  let domain: Array<string | number> = [];
-
-  if (isArrayTypeString(domainData)) {
-    domain = domainData.map(e => (e ? `${e}` : ''));
-  } else {
-    domain = _.uniq(domainData).filter((d): d is string | number => !_.isNil(d));
-  }
-
-  const st = inferScaleTypeFromDomain(domain, scaleType);
-
-  if (override?.length === 2) {
-    if (st === 'label') {
-      domain = override;
-    }
-
-    if (st === 'time') {
-      const minMaxDate = getMinMaxDate(domain);
-      if (minMaxDate) {
-        const [oldMin, oldMax] = minMaxDate;
-        const [newMin, newMax] = override;
-        const nMin = new Date(newMin).getTime();
-        const nMax = new Date(newMax).getTime();
-        const oMin = oldMin.getTime();
-        const oMax = oldMax.getTime();
-        const low = nMin < oMin ? newMin : oldMin.toUTCString();
-        const high = nMax > oMax ? newMax : oldMax.toUTCString();
-        domain = [low, high];
-      }
-    }
-
-    if (st === 'linear') {
-      const minMaxNum = getMinMaxNumber(domain as number[]);
-      if (minMaxNum) {
-        const [oldMin, oldMax] = minMaxNum;
-        const [newMin, newMax] = override;
-        const nMin = Number(newMin);
-        const nMax = Number(newMax);
-        const low = nMin < oldMin ? nMin : oldMin;
-        const high = nMax > oldMax ? nMax : oldMax;
-        domain = [low, high];
-      }
-    }
-  }
-
-  return domain;
-};
 
 export const handleData = (
   data: Data,
