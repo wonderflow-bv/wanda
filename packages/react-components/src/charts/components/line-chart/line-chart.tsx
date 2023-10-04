@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { useMemo } from 'react';
 import { Except } from 'type-fest';
 
 import {
@@ -51,18 +52,22 @@ export const LineChart = ({
   overlay,
   ...rest
 }: LineChartProps) => {
-  const axis = {
+  const i = useMemo(() => handleData(data, index), [data, index]);
+  const s = useMemo(() => handleData(data, series), [data, series]);
+  const o = useMemo(() => (overlay ? handleData(data, overlay) : undefined), [data, overlay]);
+
+  const axis = useMemo(() => ({
     vertical: {
-      left: handleData(data, index),
-      bottom: handleData(data, series),
-      top: overlay ? handleData(data, overlay) : undefined,
+      left: i,
+      bottom: s,
+      top: o,
     },
     horizontal: {
-      bottom: handleData(data, index),
-      left: handleData(data, series),
-      right: overlay ? handleData(data, overlay) : undefined,
+      bottom: i,
+      left: s,
+      right: o,
     },
-  };
+  }), [i, o, s]);
 
   const metadata = {
     type: Charts.LINE_CHART,
