@@ -18,10 +18,10 @@ import {
   TooltipStyleColors, TooltipStyleConfig, TooltipStyleMain, TooltipStyleTheme,
 } from '../types';
 import { toHSLA } from '../utils';
-import { colors } from '.';
+import { colorPaletteNeutrals } from '.';
 
 export const tooltipStyleMain: TooltipStyleMain = {
-  color: colors.neutrals.dimmed6,
+  color: colorPaletteNeutrals.dimmed6,
   minWidth: 160,
   minHeight: 80,
   maxWidth: 220,
@@ -33,19 +33,19 @@ export const tooltipStyleMain: TooltipStyleMain = {
 };
 
 export const tooltipStyleLight: TooltipStyleColors = {
-  backdropFilter: 'blur(5px) hue-rotate(120deg) saturate(50%)',
-  background: `radial-gradient(at left top, ${toHSLA(colors.neutrals.white, 0.7)}, ${toHSLA(colors.neutrals.dimmed3, 0.5)}) no-repeat`,
-  border: `1px solid ${colors.neutrals.dimmed1}`,
-  boxShadow: `4px 4px 4px ${toHSLA(colors.neutrals.dimmed4, 0.8)}`,
-  color: colors.neutrals.dimmed6,
+  backdropFilter: 'blur(10px) hue-rotate(20deg) saturate(20%)',
+  background: `radial-gradient(at left top, ${toHSLA(colorPaletteNeutrals.white, 0.2)}, ${toHSLA(colorPaletteNeutrals.dimmed3, 0.15)}) no-repeat`,
+  border: `1px solid ${colorPaletteNeutrals.dimmed1}`,
+  boxShadow: `4px 4px 4px ${toHSLA(colorPaletteNeutrals.dimmed4, 0.8)}`,
+  color: colorPaletteNeutrals.dimmed6,
 };
 
 export const tooltipStyleDark: TooltipStyleColors = {
-  backdropFilter: 'blur(5px) hue-rotate(120deg) saturate(50%)',
-  background: `radial-gradient(at left top, ${toHSLA(colors.neutrals.dimmed8, 0.5)}, ${toHSLA(colors.neutrals.black, 0.7)})`,
-  border: `1px solid ${colors.neutrals.dimmed8}`,
-  boxShadow: `4px 4px 4px ${toHSLA(colors.neutrals.black, 0.5)}`,
-  color: colors.neutrals.dimmed2,
+  backdropFilter: 'blur(10px) hue-rotate(20deg) saturate(100%)',
+  background: `radial-gradient(at left top, ${toHSLA(colorPaletteNeutrals.dimmed8, 0.1)}, ${toHSLA(colorPaletteNeutrals.black, 0.12)})`,
+  border: `1px solid ${colorPaletteNeutrals.dimmed8}`,
+  boxShadow: `4px 4px 4px ${toHSLA(colorPaletteNeutrals.black, 0.5)}`,
+  color: colorPaletteNeutrals.dimmed2,
 };
 
 export const tooltipStyleConfigLight: TooltipStyleConfig = {

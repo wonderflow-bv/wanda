@@ -15,45 +15,45 @@
  */
 
 import { Theme, Themes } from '../types';
-import { colors } from './colors';
+import { colorPaletteNeutrals } from './colors';
 
 export const themeLight: Theme = {
   background: {
-    from: colors.neutrals.white,
-    to: colors.neutrals.dimmed1,
+    from: colorPaletteNeutrals.white,
+    to: colorPaletteNeutrals.dimmed1,
   },
   headings: {
-    title: colors.neutrals.dimmed7,
-    subtitle: colors.neutrals.dimmed5,
+    title: colorPaletteNeutrals.dimmed7,
+    subtitle: colorPaletteNeutrals.dimmed5,
   },
   axis: {
-    label: colors.neutrals.dimmed8,
-    tickLabel: colors.neutrals.dimmed5,
-    tick: colors.neutrals.dimmed4,
-    line: colors.neutrals.dimmed4,
+    label: colorPaletteNeutrals.dimmed8,
+    tickLabel: colorPaletteNeutrals.dimmed5,
+    tick: colorPaletteNeutrals.dimmed4,
+    line: colorPaletteNeutrals.dimmed4,
   },
   grid: {
-    line: colors.neutrals.dimmed2,
+    line: colorPaletteNeutrals.dimmed2,
   },
 };
 
 export const themeDark: Theme = {
   background: {
-    from: colors.neutrals.dimmed7,
-    to: colors.neutrals.dimmed9,
+    from: colorPaletteNeutrals.dimmed7,
+    to: colorPaletteNeutrals.dimmed9,
   },
   headings: {
-    title: colors.neutrals.dimmed0,
-    subtitle: colors.neutrals.dimmed3,
+    title: colorPaletteNeutrals.dimmed0,
+    subtitle: colorPaletteNeutrals.dimmed3,
   },
   axis: {
-    label: colors.neutrals.dimmed2,
-    tickLabel: colors.neutrals.dimmed4,
-    tick: colors.neutrals.dimmed4,
-    line: colors.neutrals.dimmed4,
+    label: colorPaletteNeutrals.dimmed2,
+    tickLabel: colorPaletteNeutrals.dimmed4,
+    tick: colorPaletteNeutrals.dimmed4,
+    line: colorPaletteNeutrals.dimmed4,
   },
   grid: {
-    line: colors.neutrals.dimmed6,
+    line: colorPaletteNeutrals.dimmed6,
   },
 };
 
