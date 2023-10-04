@@ -16,8 +16,11 @@
 
 import _ from 'lodash';
 
+import { AxisProps } from '../components';
+import { LineChartIndex, LineChartSeries } from '../components/line-chart/line-chart';
 import { Data, ScaleType } from '../types';
-import { getMinMaxDate, getMinMaxNumber } from './math';
+import { inferScaleTypeFromDomain } from './axis';
+import { getMinMaxDate, getMinMaxNumber, isArrayTypeString } from './math';
 
 export const getValueFromKey = (
   object: Record<string, unknown>,
@@ -63,21 +66,25 @@ export const extractDomainFromData = (
 ) => {
   const { scaleType, dataKey } = axis;
 
+  const dk = typeof dataKey === 'string' ? [dataKey] : dataKey;
+  const domainData = _.flattenDeep(dk.map(k => extractPrimitivesFromArray(data, k)));
+
   let domain: Array<string | number> = [];
 
-  const domainData = _.flattenDeep([dataKey].flat().map(k => extractPrimitivesFromArray(data, k)));
-  if (scaleType === 'label') {
+  if (isArrayTypeString(domainData)) {
     domain = domainData.map(e => (e ? `${e}` : ''));
   } else {
     domain = _.uniq(domainData).filter((d): d is string | number => !_.isNil(d));
   }
 
+  const st = inferScaleTypeFromDomain(domain, scaleType);
+
   if (override?.length === 2) {
-    if (scaleType === 'label') {
+    if (st === 'label') {
       domain = override;
     }
 
-    if (scaleType === 'time') {
+    if (st === 'time') {
       const minMaxDate = getMinMaxDate(domain);
       if (minMaxDate) {
         const [oldMin, oldMax] = minMaxDate;
@@ -86,13 +93,13 @@ export const extractDomainFromData = (
         const nMax = new Date(newMax).getTime();
         const oMin = oldMin.getTime();
         const oMax = oldMax.getTime();
-        const low = nMin < oMin ? nMin : oMin;
-        const high = nMax > oMax ? nMax : oMax;
+        const low = nMin < oMin ? newMin : oldMin.toUTCString();
+        const high = nMax > oMax ? newMax : oldMax.toUTCString();
         domain = [low, high];
       }
     }
 
-    if (scaleType === 'linear') {
+    if (st === 'linear') {
       const minMaxNum = getMinMaxNumber(domain as number[]);
       if (minMaxNum) {
         const [oldMin, oldMax] = minMaxNum;
@@ -107,4 +114,64 @@ export const extractDomainFromData = (
   }
 
   return domain;
+};
+
+export const handleData = (
+  data: Data,
+  axis: LineChartIndex | LineChartSeries,
+): AxisProps => {
+  const { scaleType, dataKey, domain } = axis;
+
+  const dk = typeof dataKey === 'string' ? [dataKey] : dataKey;
+  const domainData = _.flattenDeep(dk.map(k => extractPrimitivesFromArray(data, k)));
+
+  let d: Array<string | number> = [];
+
+  if (isArrayTypeString(domainData)) {
+    d = domainData.map(e => (e ? `${e}` : ''));
+  } else {
+    d = _.uniq(domainData).filter((d): d is string | number => !_.isNil(d));
+  }
+
+  const st = inferScaleTypeFromDomain(d, scaleType);
+
+  if (domain?.length) {
+    if (st === 'label') {
+      d = domain;
+    }
+
+    if (st === 'time') {
+      const minMaxDate = getMinMaxDate(domain);
+      if (minMaxDate) {
+        const [oldMin, oldMax] = minMaxDate;
+        const [newMin, newMax] = domain;
+        const nMin = new Date(newMin).getTime();
+        const nMax = new Date(newMax).getTime();
+        const oMin = oldMin.getTime();
+        const oMax = oldMax.getTime();
+        const low = nMin < oMin ? newMin : oldMin.toUTCString();
+        const high = nMax > oMax ? newMax : oldMax.toUTCString();
+        d = [low, high];
+      }
+    }
+
+    if (st === 'linear') {
+      const minMaxNum = getMinMaxNumber(domain as number[]);
+      if (minMaxNum) {
+        const [oldMin, oldMax] = minMaxNum;
+        const [newMin, newMax] = domain;
+        const nMin = Number(newMin);
+        const nMax = Number(newMax);
+        const low = nMin < oldMin ? nMin : oldMin;
+        const high = nMax > oldMax ? nMax : oldMax;
+        d = [low, high];
+      }
+    }
+  }
+
+  return {
+    ...axis,
+    domain: d,
+    scaleType: st,
+  };
 };

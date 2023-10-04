@@ -1,0 +1,11 @@
+.LinesItem {
+  filter: saturate(100%) opacity(1);
+}
+
+.LinesItem:hover {
+  filter: saturate(100%) opacity(1);
+}
+
+.LinesItemGroup:hover .LinesItem:not(:hover) {
+  filter: saturate(80%) opacity(0.3) blur(2px);
+}

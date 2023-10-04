@@ -27,6 +27,7 @@ import {
 } from '../../../types';
 import { LineChartMetadata } from '../../line-chart/line-chart';
 import { Tooltip } from '../../tooltip';
+import { LinesItem, LinesItemGroup } from './lines.module.css';
 
 export type LinesProps = {
   theme: ThemeVariants;
@@ -129,7 +130,7 @@ export const Lines = ({
       coords,
       index: accessorInvert(indexAxis, coords[indexId]) ?? 0,
       series: accessorInvert(seriesAxis, coords[seriesId]) ?? 0,
-      overlay: accessorInvert(overlayAxis, coords[indexId]) ?? 0,
+      overlay: accessorInvert(overlayAxis, coords[seriesId]) ?? 0,
     };
 
     showTooltip({
@@ -149,6 +150,7 @@ export const Lines = ({
 
   return (
     <Group
+      className={LinesItemGroup}
       top={tPos}
       left={lPos}
       innerRef={containerRef}
@@ -157,6 +159,7 @@ export const Lines = ({
     >
       {series.map(k => (
         <LinePath
+          className={LinesItem}
           key={k}
           data={data}
           curve={curveBasis}
@@ -174,6 +177,7 @@ export const Lines = ({
       ))}
       {hasOverlay && (
         <LinePath
+          className={LinesItem}
           data={data}
           curve={curveBasis}
           x={(d: Record<string, unknown>) => (isHorizontal

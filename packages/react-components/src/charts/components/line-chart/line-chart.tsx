@@ -19,19 +19,13 @@ import { Except } from 'type-fest';
 import {
   CartesianChartLayout, Charts, Data,
 } from '../../types';
-import { extractDomainFromData } from '../../utils';
+import { handleData } from '../../utils';
 import { AxisProps } from '../cartesian-base';
 import { CartesianBase, CartesianBaseProps } from '../cartesian-base/cartesian-base';
 
-export type LineChartIndex = Except<AxisProps, 'domain'> & {
-  dataKey: string;
-  domain?: Array<string | number>;
-};
+export type LineChartIndex = Partial<AxisProps> & { dataKey: string };
 
-export type LineChartSeries = Except<AxisProps, 'domain'> & {
-  dataKey: string[];
-  domain?: Array<string | number>;
-};
+export type LineChartSeries = Partial<AxisProps> & { dataKey: string[] };
 
 export type LineChartProps = {
   layout: CartesianChartLayout;
@@ -59,32 +53,14 @@ export const LineChart = ({
 }: LineChartProps) => {
   const axis = {
     vertical: {
-      left: {
-        ...index,
-        domain: extractDomainFromData(data, index, index.domain),
-      },
-      bottom: {
-        ...series,
-        domain: extractDomainFromData(data, series, series.domain),
-      },
-      top: overlay ? {
-        ...overlay,
-        domain: extractDomainFromData(data, overlay, overlay.domain),
-      } : undefined,
+      left: handleData(data, index),
+      bottom: handleData(data, series),
+      top: overlay ? handleData(data, overlay) : undefined,
     },
     horizontal: {
-      bottom: {
-        ...index,
-        domain: extractDomainFromData(data, index, index.domain),
-      },
-      left: {
-        ...series,
-        domain: extractDomainFromData(data, series, series.domain),
-      },
-      right: overlay ? {
-        ...overlay,
-        domain: extractDomainFromData(data, overlay, overlay.domain),
-      } : undefined,
+      bottom: handleData(data, index),
+      left: handleData(data, series),
+      right: overlay ? handleData(data, overlay) : undefined,
     },
   };
 
