@@ -22,10 +22,18 @@ import { ValidTypeOf } from '../types/main';
 import { formatNumber } from './format';
 
 export const isArrayType = (
-  arr: unknown[],
+  arr: Array<string | number | Date>,
   type: ValidTypeOf | 'date',
 ) => {
-  if (type === 'date') return Array.isArray(arr) && arr.length > 0 && arr.every(el => _.isDate(el));
+  if (type === 'date') {
+    return Array.isArray(arr)
+  && arr.length > 0
+&& arr.every((el) => {
+  const toDate = new Date(el).toString();
+  return _.isDate(el) && toDate !== 'Invalid Date';
+});
+  }
+
   // eslint-disable-next-line valid-typeof
   return Array.isArray(arr) && arr.length > 0 && arr.every(el => typeof el === type);
 };

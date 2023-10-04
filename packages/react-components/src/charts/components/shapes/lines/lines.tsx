@@ -182,7 +182,7 @@ export const Lines = ({
           y={(d: Record<string, unknown>) => (isHorizontal
             ? accessor(overlayAxis!, overlay!, d)
             : accessor(indexAxis, index, d))}
-          stroke="#8f1389"
+          stroke="#0e9044"
           strokeWidth={2}
           strokeOpacity={0.5}
           strokeDasharray=""
@@ -195,7 +195,7 @@ export const Lines = ({
         left={tooltipLeft}
       >
         {/** @ts-expect-error: tootlidata typing */}
-        <p style={{ fontSize: '12px' }}>{`date: ${tooltipData?.index.slice(0, 8)}`}</p>
+        <p style={{ fontSize: '12px' }}>{`date: ${tooltipData?.index}`}</p>
         {/** @ts-expect-error: tootlidata typing */}
         <p style={{ fontSize: '12px' }}>{`feedback: ${tooltipData?.series.toFixed()}`}</p>
         {/** @ts-expect-error: tootlidata typing */}

@@ -58,7 +58,7 @@ export const extractPrimitivesFromArray = (
 
 export const extractDomainFromData = (
   data: Data,
-  axis: { scaleType: ScaleType; dataKey: string | string[] },
+  axis: { scaleType?: ScaleType; dataKey: string | string[] },
   override?: Array<string | number>,
 ) => {
   const { scaleType, dataKey } = axis;
