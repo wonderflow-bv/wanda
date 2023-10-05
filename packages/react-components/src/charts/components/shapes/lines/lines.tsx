@@ -197,28 +197,43 @@ export const Lines = ({
               cy={isHorizontal
                 ? accessor(seriesAxis, k, d)
                 : accessor(indexAxis, index, d)}
-              stroke="white"
-              fill="#cf1c1c"
+              stroke="#cf1c1c"
+              fill="white"
             />
           ))}
         </Group>
       ))}
       {hasOverlay && (
-        <LinePath
-          className={LinesItem}
-          data={data}
-          curve={curveCatmullRom}
-          x={(d: Record<string, unknown>) => (isHorizontal
-            ? accessor(indexAxis, index, d)
-            : accessor(overlayAxis!, overlay!, d))}
-          y={(d: Record<string, unknown>) => (isHorizontal
-            ? accessor(overlayAxis!, overlay!, d)
-            : accessor(indexAxis, index, d))}
-          stroke="#0e9044"
-          strokeWidth={2}
-          strokeOpacity={0.5}
-          strokeDasharray=""
-        />
+        <Group className={LinesItem}>
+          <LinePath
+            data={data}
+            curve={curveCatmullRom}
+            x={(d: Record<string, unknown>) => (isHorizontal
+              ? accessor(indexAxis, index, d)
+              : accessor(overlayAxis!, overlay!, d))}
+            y={(d: Record<string, unknown>) => (isHorizontal
+              ? accessor(overlayAxis!, overlay!, d)
+              : accessor(indexAxis, index, d))}
+            stroke="#0e9044"
+            strokeWidth={2}
+            strokeOpacity={0.5}
+            strokeDasharray=""
+          />
+          {showPoints && data.map(d => (
+            <circle
+              key={JSON.stringify(d)}
+              r={1.5}
+              cx={isHorizontal
+                ? accessor(indexAxis, index, d)
+                : accessor(overlayAxis!, 'overlay', d)}
+              cy={isHorizontal
+                ? accessor(overlayAxis!, 'overlay', d)
+                : accessor(indexAxis, index, d)}
+              stroke="#0e9044"
+              fill="white"
+            />
+          ))}
+        </Group>
       )}
       <Tooltip
         theme={theme}

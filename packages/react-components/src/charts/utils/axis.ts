@@ -338,8 +338,8 @@ export const scaleDomainToAxis = (axis: Pick<AxisProps, 'domain' | 'range' | 'sc
       return scaleBand({
         domain: domain.map(v => truncate(`${v}`)),
         range,
-        paddingInner,
-        paddingOuter,
+        paddingInner: paddingInner ?? 1,
+        paddingOuter: paddingOuter ?? 1,
       });
     }
 

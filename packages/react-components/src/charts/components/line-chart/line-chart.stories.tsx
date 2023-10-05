@@ -14,13 +14,14 @@ const story: ComponentMeta<typeof LineChart> = {
     index: {
       dataKey: 'date',
       label: 'Year',
+      // scaleType: 'label',
     },
     series: {
       dataKey: ['value'],
       label: 'Feedback Count',
     },
     overlay: undefined,
-    showPoints: true,
+    showPoints: false,
   },
   argTypes: {},
 };
