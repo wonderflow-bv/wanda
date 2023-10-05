@@ -28,6 +28,14 @@ export type LineChartIndex = Partial<AxisProps> & { dataKey: string };
 
 export type LineChartSeries = Partial<AxisProps> & { dataKey: string[] };
 
+export type LineStyle = {
+  stroke?: string;
+  strokeWidth?: number;
+  strokeOpacity?: number;
+  strokeDasharray?: string;
+  hasValueLabel?: boolean;
+}
+
 export type LineChartProps = {
   layout: CartesianChartLayout;
   data: Data;
@@ -53,8 +61,10 @@ export const LineChart = ({
   series,
   overlay,
   showPoints = false,
-  ...rest
+  ...otherProps
 }: LineChartProps) => {
+  const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
+
   const i = useMemo(() => handleData(data, index), [data, index]);
   const s = useMemo(() => handleData(data, series), [data, series]);
   const o = useMemo(() => (overlay ? handleData(data, overlay) : undefined), [data, overlay]);
@@ -86,7 +96,11 @@ export const LineChart = ({
       data={data}
       metadata={metadata}
       axis={axis[layout]}
-      {...rest}
+      grid={{
+        hideRows: !isHorizontal,
+        hideColumns: isHorizontal,
+      }}
+      {...otherProps}
     />
   );
 };

@@ -73,7 +73,7 @@ export const handleData = (
   if (isArrayTypeString(domainData)) {
     d = domainData.map(e => (e ? `${e}` : ''));
   } else {
-    d = _.uniq(domainData).filter((d): d is string | number => !_.isNil(d));
+    d = domainData.filter((d): d is string | number => !_.isNil(d));
   }
 
   const st = inferScaleTypeFromDomain(d, scaleType);

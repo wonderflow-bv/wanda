@@ -358,6 +358,8 @@ export const CartesianBase = ({
               metadata={metadata}
               topPosition={tPos}
               leftPosition={lPos}
+              maxWidth={xMax}
+              maxHeight={yMax}
               axis={allAxis}
             />
           )}
