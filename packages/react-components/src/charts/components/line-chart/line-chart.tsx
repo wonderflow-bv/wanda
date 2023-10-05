@@ -34,6 +34,7 @@ export type LineChartProps = {
   index: LineChartIndex;
   series: LineChartSeries;
   overlay?: LineChartIndex;
+  showPoints?: boolean;
 } & Except<CartesianBaseProps, 'data' | 'metadata' | 'axis'>
 
 export type LineChartMetadata = {
@@ -42,6 +43,7 @@ export type LineChartMetadata = {
   index: string;
   series: string[];
   overlay?: string;
+  showPoints?: boolean;
 }
 
 export const LineChart = ({
@@ -50,6 +52,7 @@ export const LineChart = ({
   index,
   series,
   overlay,
+  showPoints = false,
   ...rest
 }: LineChartProps) => {
   const i = useMemo(() => handleData(data, index), [data, index]);
@@ -75,6 +78,7 @@ export const LineChart = ({
     index: index.dataKey,
     series: series.dataKey,
     overlay: overlay?.dataKey,
+    showPoints,
   };
 
   return (

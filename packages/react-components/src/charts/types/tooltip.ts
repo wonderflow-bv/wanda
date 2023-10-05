@@ -18,10 +18,10 @@ import { ThemeVariants } from './themes';
 
 export type TooltipStyleMain = {
   color: string;
-  minWidth: number;
-  minHeight: number;
-  maxWidth: number;
-  maxHeight: number;
+  minWidth: string | number;
+  minHeight: string | number;
+  maxWidth: string | number;
+  maxHeight: string | number;
   overflow: string;
   padding: string;
   borderRadius: string;

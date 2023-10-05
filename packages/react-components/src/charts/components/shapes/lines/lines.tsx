@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /*
  * Copyright 2023 Wonderflow Design Team
  *
@@ -14,11 +15,14 @@
  * limitations under the License.
  */
 
-import { curveBasis } from '@visx/curve';
+import {
+  curveCatmullRom,
+} from '@visx/curve';
 import { localPoint } from '@visx/event';
 import { Group } from '@visx/group';
 import { LinePath } from '@visx/shape';
 import { useTooltip, useTooltipInPortal } from '@visx/tooltip';
+import { bisector } from '@visx/vendor/d3-array';
 import { ScaleLinear, ScaleTime } from '@visx/vendor/d3-scale';
 import { useCallback } from 'react';
 
@@ -55,7 +59,7 @@ export const Lines = ({
     top, right, bottom, left,
   } = axis;
   const {
-    index, series, overlay, layout,
+    index, series, overlay, layout, showPoints,
   } = metadata;
 
   const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
@@ -93,14 +97,14 @@ export const Lines = ({
 
       if (scaleType !== 'label') {
         const s = scale as ScaleLinear<number, number> | ScaleTime<number, number>;
-        const fromNumber = s.invert(num) as number;
-        const fromDate = s.invert(num).toLocaleString();
-        res = scaleType === 'time' ? fromDate : fromNumber;
+        res = s.invert(num);
       }
     }
 
     return res;
   };
+
+  const bisectIndex = bisector((index: string | number) => new Date(index)).left;
 
   const {
     tooltipLeft,
@@ -125,27 +129,36 @@ export const Lines = ({
 
     const coords = localPoint(event.target.ownerSVGElement, event) ?? { x: 0, y: 0 };
 
+    const dateIndex = bisectIndex(indexAxis.domain, accessorInvert(indexAxis, coords[indexId]) as any);
+    const fromDate = indexAxis.domain[dateIndex - 1];
+    const toSeries = seriesAxis.domain[dateIndex - 1];
+    const toOverlay = overlayAxis?.domain[dateIndex - 1];
+
     const d = {
       content,
       coords,
       index: accessorInvert(indexAxis, coords[indexId]) ?? 0,
       series: accessorInvert(seriesAxis, coords[seriesId]) ?? 0,
       overlay: accessorInvert(overlayAxis, coords[seriesId]) ?? 0,
+      fromDate,
+      toSeries,
+      toOverlay,
     };
 
     showTooltip({
-      tooltipLeft: containerX ?? 0,
-      tooltipTop: containerY ?? 0,
+      tooltipLeft: containerX,
+      tooltipTop: containerY,
       tooltipData: d,
     });
   }, [
-    seriesAxis,
-    seriesId,
     containerBounds.left,
     containerBounds.top,
+    bisectIndex,
     indexAxis,
     indexId,
+    seriesAxis,
     overlayAxis,
+    seriesId,
     showTooltip]);
 
   return (
@@ -157,29 +170,44 @@ export const Lines = ({
       onMouseMove={e => handleMouseMove(e, 'test')}
       onMouseOut={hideTooltip}
     >
-      {series.map(k => (
-        <LinePath
-          className={LinesItem}
-          key={k}
-          data={data}
-          curve={curveBasis}
-          x={(d: Record<string, unknown>) => (isHorizontal
-            ? accessor(indexAxis, index, d)
-            : accessor(seriesAxis, k, d))}
-          y={(d: Record<string, unknown>) => (isHorizontal
-            ? accessor(seriesAxis, k, d)
-            : accessor(indexAxis, index, d))}
-          stroke="#cf1c1c"
-          strokeWidth={2}
-          strokeOpacity={1}
-          strokeDasharray=""
-        />
+
+      {series.map((k: string) => (
+        <Group key={k} className={LinesItem}>
+          <LinePath
+            data={data}
+            curve={curveCatmullRom}
+            x={(d: Record<string, unknown>) => (isHorizontal
+              ? accessor(indexAxis, index, d)
+              : accessor(seriesAxis, k, d))}
+            y={(d: Record<string, unknown>) => (isHorizontal
+              ? accessor(seriesAxis, k, d)
+              : accessor(indexAxis, index, d))}
+            stroke="#cf1c1c"
+            strokeWidth={2}
+            strokeOpacity={1}
+            strokeDasharray=""
+          />
+          {showPoints && data.map(d => (
+            <circle
+              key={JSON.stringify(d)}
+              r={1.5}
+              cx={isHorizontal
+                ? accessor(indexAxis, index, d)
+                : accessor(seriesAxis, k, d)}
+              cy={isHorizontal
+                ? accessor(seriesAxis, k, d)
+                : accessor(indexAxis, index, d)}
+              stroke="white"
+              fill="#cf1c1c"
+            />
+          ))}
+        </Group>
       ))}
       {hasOverlay && (
         <LinePath
           className={LinesItem}
           data={data}
-          curve={curveBasis}
+          curve={curveCatmullRom}
           x={(d: Record<string, unknown>) => (isHorizontal
             ? accessor(indexAxis, index, d)
             : accessor(overlayAxis!, overlay!, d))}
@@ -199,11 +227,11 @@ export const Lines = ({
         left={tooltipLeft}
       >
         {/** @ts-expect-error: tootlidata typing */}
-        <p style={{ fontSize: '12px' }}>{`date: ${tooltipData?.index}`}</p>
+        <p style={{ fontSize: '12px' }}>{`date: ${tooltipData?.fromDate}`}</p>
         {/** @ts-expect-error: tootlidata typing */}
-        <p style={{ fontSize: '12px' }}>{`feedback: ${tooltipData?.series.toFixed()}`}</p>
+        <p style={{ fontSize: '12px' }}>{`feedback: ${tooltipData?.toSeries}`}</p>
         {/** @ts-expect-error: tootlidata typing */}
-        {!!tooltipData?.overlay && <p style={{ fontSize: '12px' }}>{`overlay: ${tooltipData?.overlay?.toFixed(2)}`}</p>}
+        {!!tooltipData?.overlay && <p style={{ fontSize: '12px' }}>{`overlay: ${tooltipData?.toOverlay}`}</p>}
       </Tooltip>
     </Group>
   );
