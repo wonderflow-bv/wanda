@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import { feedbackCount } from '../../mock-data';
+import { feedbackCount, proCons } from '../../mock-data';
 import { CartesianChartLayout } from '../../types';
 import { LineChart } from './line-chart';
 
@@ -8,13 +8,12 @@ const story: ComponentMeta<typeof LineChart> = {
   title: 'Charts/Line Chart',
   component: LineChart,
   args: {
-    title: 'Feedback Count',
-    subtitle: 'a feedback count chart',
+    title: 'Line Charts',
+    subtitle: 'A trend line charts',
     data: feedbackCount,
     index: {
       dataKey: 'date',
       label: 'Year',
-      // scaleType: 'label',
     },
     series: {
       dataKey: ['value'],
@@ -38,6 +37,21 @@ withOverlay.args = {
   overlay: {
     dataKey: 'overlay',
     label: 'Overlay',
+  },
+};
+
+export const withMultipleSeries = Template.bind({});
+withMultipleSeries.args = {
+  title: 'Multiple Series',
+  subtitle: 'A trend line chart with multiple series',
+  data: proCons,
+  index: {
+    dataKey: 'date',
+    label: 'Time',
+  },
+  series: {
+    dataKey: ['positiveValue', 'neutralValue', 'negativeValue'],
+    label: 'Pros & cons',
   },
 };
 

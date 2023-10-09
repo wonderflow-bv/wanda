@@ -64,7 +64,6 @@ export const handleData = (
   axis: LineChartIndex | LineChartSeries,
 ): AxisProps => {
   const { scaleType, dataKey, domain } = axis;
-
   const dk = typeof dataKey === 'string' ? [dataKey] : dataKey;
   const domainData = _.flattenDeep(dk.map(k => extractPrimitivesFromArray(data, k)));
 

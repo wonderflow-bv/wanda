@@ -129,10 +129,9 @@ export const Lines = ({
   });
 
   const handleTooltip = useCallback((event: any, content: string) => {
-    const containerX = ('clientX' in event ? event.clientX : 0) - containerBounds.left;
-    const containerY = ('clientY' in event ? event.clientY : 0) - containerBounds.top;
-
     const coords = localPoint(event.target.ownerSVGElement, event) ?? { x: 0, y: 0 };
+    const containerX = coords.x - containerBounds.left;
+    const containerY = coords.y - containerBounds.top;
 
     const indexAccessorInvert = accessorInvert(indexAxis, coords[indexId]);
     const dateIndex = bisectIndex(indexAxis.domain, indexAccessorInvert as any, 0) - 1;

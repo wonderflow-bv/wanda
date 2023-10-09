@@ -15,3 +15,4 @@
  */
 
 export * from './feedbackCount';
+export * from './prosCons';
