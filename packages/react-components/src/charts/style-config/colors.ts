@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-import { Colors, KpisColorsNames, NeutralsColorNames } from '../types';
+import {
+  Colors, KpisColorsNames, NeutralsColorNames, ThemeVariants,
+} from '../types';
 
 export const colors: Colors = {
   support: {
@@ -41,7 +43,7 @@ export const colors: Colors = {
     5: 'hsl(351 100% 88%)',
     10: 'hsl(351 100% 81%)',
     20: 'hsl(351 77% 64%)',
-    30: 'hsl(219 8% 47%)',
+    30: 'hsl(351 66% 49%)',
     40: 'hsl(351 92% 37%)',
     50: 'hsl(351 100% 31%)',
     60: 'hsl(351 100% 25%)',
@@ -237,4 +239,44 @@ export const colorPaletteNeutrals: Record<NeutralsColorNames, string> = {
   dimmed7: colors.primary[70],
   dimmed8: colors.primary[80],
   dimmed9: colors.primary[90],
+};
+
+export const defaultLineChartPalette: Record<ThemeVariants, {
+  overlay: string;
+  series: string[];
+}> = {
+  light: {
+    overlay: colorPaletteKpis.subrating,
+    series: [
+      colors.green[50],
+      colors.red[40],
+      colors.blue[50],
+      colors.magenta[50],
+      colors.mint[50],
+      colors.cyan[50],
+      colors.purple[50],
+      colors.dipsy[50],
+      colors.indigo[50],
+      colors.yellow[50],
+      colors.violet[50],
+      colors.salmon[50],
+    ],
+  },
+  dark: {
+    overlay: colorPaletteKpis.subrating,
+    series: [
+      colors.green[70],
+      colors.red[70],
+      colors.blue[70],
+      colors.magenta[70],
+      colors.mint[70],
+      colors.cyan[70],
+      colors.purple[70],
+      colors.dipsy[70],
+      colors.indigo[70],
+      colors.yellow[70],
+      colors.violet[70],
+      colors.salmon[70],
+    ],
+  },
 };

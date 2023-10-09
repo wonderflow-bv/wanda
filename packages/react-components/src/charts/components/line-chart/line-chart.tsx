@@ -42,6 +42,8 @@ export type LineChartProps = {
   index: LineChartIndex;
   series: LineChartSeries;
   overlay?: LineChartIndex;
+  styleSeries?: Array<LineStyle | undefined>;
+  styleOverlay?: LineStyle;
   showPoints?: boolean;
 } & Except<CartesianBaseProps, 'data' | 'metadata' | 'axis'>
 
@@ -51,6 +53,8 @@ export type LineChartMetadata = {
   index: string;
   series: string[];
   overlay?: string;
+  styleSeries?: Array<LineStyle | undefined>;
+  styleOverlay?: LineStyle;
   showPoints?: boolean;
 }
 
@@ -60,6 +64,8 @@ export const LineChart = ({
   index,
   series,
   overlay,
+  styleSeries,
+  styleOverlay,
   showPoints = false,
   ...otherProps
 }: LineChartProps) => {
@@ -88,6 +94,8 @@ export const LineChart = ({
     index: index.dataKey,
     series: series.dataKey,
     overlay: overlay?.dataKey,
+    styleSeries,
+    styleOverlay,
     showPoints,
   };
 

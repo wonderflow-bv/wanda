@@ -55,6 +55,36 @@ withMultipleSeries.args = {
   },
 };
 
+export const withCustomLineStyle = Template.bind({});
+withCustomLineStyle.args = {
+  title: 'Multiple Series',
+  subtitle: 'A trend line chart with multiple series',
+  data: proCons,
+  index: {
+    dataKey: 'date',
+    label: 'Time',
+  },
+  series: {
+    dataKey: ['positiveValue', 'negativeValue', 'neutralValue'],
+    label: 'Pros & cons',
+  },
+  styleSeries: [
+    undefined,
+    {
+      stroke: 'red',
+      strokeDasharray: '6 8',
+      strokeOpacity: 0.5,
+      strokeWidth: 2.5,
+    },
+    {
+      stroke: 'grey',
+      strokeDasharray: '2 4',
+      strokeOpacity: 0.8,
+      strokeWidth: 1.5,
+    },
+  ],
+};
+
 export const withCustomDomain = Template.bind({});
 withCustomDomain.args = {
   series: {

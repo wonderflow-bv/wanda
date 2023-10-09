@@ -27,8 +27,9 @@ import { Line, LinePath } from '@visx/shape';
 import { useTooltip, useTooltipInPortal } from '@visx/tooltip';
 import { bisector } from '@visx/vendor/d3-array';
 import { ScaleLinear, ScaleTime } from '@visx/vendor/d3-scale';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
+import { colorPaletteNeutrals, defaultLineChartPalette } from '../../../style-config';
 import {
   AxisType, CartesianChartLayout, Data, ThemeVariants,
 } from '../../../types';
@@ -66,8 +67,10 @@ export const Lines = ({
     top, right, bottom, left,
   } = axis;
   const {
-    index, series, overlay, layout, showPoints,
+    index, series, overlay, layout, showPoints, styleSeries, styleOverlay,
   } = metadata;
+
+  const palette = useMemo(() => defaultLineChartPalette[theme], [theme]);
 
   const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
 
@@ -173,22 +176,8 @@ export const Lines = ({
       top={tPos}
       left={lPos}
     >
-      <rect
-        x={0}
-        y={0}
-        width={xMax}
-        height={yMax}
-        fill="transparent"
-        ref={containerRef}
-        onMouseMove={e => handleTooltip(e, 'test')}
-        onTouchMove={e => handleTooltip(e, 'test')}
-        onTouchStart={e => handleTooltip(e, 'test')}
-        onMouseOut={hideTooltip}
-        onMouseLeave={hideTooltip}
-      />
-
       <Group className={LinesItemGroup}>
-        {series.map((k: string) => (
+        {series.map((k: string, i: number) => (
           <Group key={k} className={LinesItem}>
             <LinePath
               data={data}
@@ -199,10 +188,10 @@ export const Lines = ({
               y={(d: Record<string, unknown>) => (isHorizontal
                 ? accessor(seriesAxis, k, d)
                 : accessor(indexAxis, index, d))}
-              stroke="#cf1c1c"
-              strokeWidth={2}
-              strokeOpacity={1}
-              strokeDasharray=""
+              stroke={styleSeries?.[i] ? styleSeries[i].stroke : palette.series[i]}
+              strokeWidth={styleSeries?.[i] ? styleSeries[i]?.strokeWidth : 2}
+              strokeOpacity={styleSeries?.[i] ? styleSeries[i]?.strokeOpacity : 1}
+              strokeDasharray={styleSeries?.[i] ? styleSeries[i]?.strokeDasharray : ''}
             />
             {showPoints && data.map(d => (
               <circle
@@ -214,8 +203,10 @@ export const Lines = ({
                 cy={isHorizontal
                   ? accessor(seriesAxis, k, d)
                   : accessor(indexAxis, index, d)}
-                stroke="#cf1c1c"
-                fill="white"
+                stroke={styleSeries?.[i] ? styleSeries[i].stroke : palette.series[i]}
+                fill={theme === 'light' ? colorPaletteNeutrals.white : colorPaletteNeutrals.black}
+                strokeWidth={styleSeries?.[i] ? styleSeries[i]?.strokeWidth : 1}
+                strokeOpacity={styleSeries?.[i] ? styleSeries[i]?.strokeOpacity : 1}
               />
             ))}
           </Group>
@@ -228,14 +219,14 @@ export const Lines = ({
               curve={curveCatmullRom}
               x={(d: Record<string, unknown>) => (isHorizontal
                 ? accessor(indexAxis, index, d)
-                : accessor(overlayAxis!, overlay!, d))}
+                : accessor(overlayAxis!, 'overlay', d))}
               y={(d: Record<string, unknown>) => (isHorizontal
-                ? accessor(overlayAxis!, overlay!, d)
+                ? accessor(overlayAxis!, 'overlay', d)
                 : accessor(indexAxis, index, d))}
-              stroke="#254d23"
-              strokeWidth={2}
-              strokeOpacity={0.5}
-              strokeDasharray=""
+              stroke={styleOverlay?.stroke ?? palette.overlay}
+              strokeWidth={styleOverlay?.strokeWidth ?? 2}
+              strokeOpacity={styleOverlay?.strokeOpacity ?? 1}
+              strokeDasharray={styleOverlay?.strokeDasharray}
             />
             {showPoints && data.map(d => (
               <circle
@@ -247,15 +238,29 @@ export const Lines = ({
                 cy={isHorizontal
                   ? accessor(overlayAxis!, 'overlay', d)
                   : accessor(indexAxis, index, d)}
-                stroke="#137d0b"
-                fill="white"
-                strokeWidth={1}
-                strokeOpacity={0.5}
+                stroke={styleOverlay?.stroke ?? palette.overlay}
+                fill={theme === 'light' ? colorPaletteNeutrals.white : colorPaletteNeutrals.black}
+                strokeWidth={styleOverlay?.strokeWidth ?? 1}
+                strokeOpacity={styleOverlay?.strokeOpacity ?? 1}
               />
             ))}
           </Group>
         )}
       </Group>
+
+      <rect
+        x={0}
+        y={0}
+        width={xMax + 10}
+        height={yMax}
+        fill="transparent"
+        ref={containerRef}
+        onMouseMove={e => handleTooltip(e, 'test')}
+        onTouchMove={e => handleTooltip(e, 'test')}
+        onTouchStart={e => handleTooltip(e, 'test')}
+        onMouseOut={hideTooltip}
+        onMouseLeave={hideTooltip}
+      />
 
       {tooltipData && (
         <Group>
