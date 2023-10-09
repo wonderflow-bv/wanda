@@ -117,3 +117,11 @@ export const handleData = (
     scaleType: st,
   };
 };
+
+export const handleSeries = (
+  data: Data,
+  series: string[],
+) => series.map((s) => {
+  const d = extractPrimitivesFromArray(data, s);
+  return ({ label: s, data: d });
+});

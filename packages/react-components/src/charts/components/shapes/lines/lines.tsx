@@ -33,6 +33,7 @@ import { colorPaletteNeutrals, defaultLineChartPalette } from '../../../style-co
 import {
   AxisType, CartesianChartLayout, Data, ThemeVariants,
 } from '../../../types';
+import { handleSeries } from '../../../utils';
 import { LineChartMetadata } from '../../line-chart/line-chart';
 import { Tooltip } from '../../tooltip';
 import { LinesItem, LinesItemGroup } from './lines.module.css';
@@ -137,22 +138,32 @@ export const Lines = ({
     const containerY = coords.y - containerBounds.top;
 
     const indexAccessorInvert = accessorInvert(indexAxis, coords[indexId]);
-    const dateIndex = bisectIndex(indexAxis.domain, indexAccessorInvert as any, 0) - 1;
+    const indexBisectValue = bisectIndex(indexAxis.domain, indexAccessorInvert as any, 0) - 1;
 
-    const fromDate = indexAxis.domain[dateIndex];
-    const toSeries = seriesAxis.domain[dateIndex];
-    const toOverlay = overlayAxis?.domain[dateIndex];
+    const indexData = indexAxis.domain[indexBisectValue];
+    const overlayData = overlayAxis?.domain[indexBisectValue];
+    const allSeries = handleSeries(data, series)
+      .map(s => ({
+        label: series.length > 1 ? _.capitalize(s.label) : seriesAxis.label,
+        data: s.data[indexBisectValue],
+      }));
 
-    const val = indexAxis.domain[dateIndex];
-    const valDate = new Date(val);
-    const tooltipLineIndexPos = indexAxis.scale(valDate as any);
+    const indexValue = indexAxis.domain[indexBisectValue];
+    const indexScaleValue = indexAxis.scaleType === 'time' ? new Date(indexValue) : indexValue;
+    const tooltipLineIndexPos = indexAxis.scale(indexScaleValue as any);
 
     const d = {
-      content,
       coords,
-      fromDate,
-      toSeries,
-      toOverlay,
+      content,
+      index: {
+        data: indexData,
+        label: indexAxis.label ?? index,
+      },
+      series: allSeries,
+      overlay: {
+        data: overlayData,
+        label: overlayAxis?.label ?? overlay,
+      },
       tooltipLineIndexPos,
     };
 
@@ -161,15 +172,19 @@ export const Lines = ({
       tooltipTop: containerY,
       tooltipData: d,
     });
-  }, [
-    containerBounds.left,
+  }, [containerBounds.left,
     containerBounds.top,
-    bisectIndex,
     indexAxis,
     indexId,
-    seriesAxis,
-    overlayAxis,
-    showTooltip]);
+    bisectIndex,
+    overlayAxis?.domain,
+    overlayAxis?.label,
+    data,
+    series,
+    index,
+    overlay,
+    showTooltip,
+    seriesAxis.label]);
 
   return (
     <Group
@@ -289,9 +304,9 @@ export const Lines = ({
           top={tooltipTop}
           left={tooltipLeft}
         >
-          <p style={{ fontSize: '12px' }}>{`date: ${tooltipData.fromDate}`}</p>
-          <p style={{ fontSize: '12px' }}>{`feedback: ${tooltipData.toSeries}`}</p>
-          {!!tooltipData.toOverlay && <p style={{ fontSize: '12px' }}>{`overlay: ${tooltipData.toOverlay}`}</p>}
+          <p style={{ fontSize: '12px' }}>{`${tooltipData.index.label}: ${tooltipData.index.data}`}</p>
+          {tooltipData.series.map(s => <p key={s.label} style={{ fontSize: '12px' }}>{`${s.label}: ${s.data}`}</p>)}
+          {!!tooltipData.overlay?.data && <p style={{ fontSize: '12px' }}>{`${tooltipData.overlay.label}: ${tooltipData.overlay.data}`}</p>}
         </Tooltip>
       )}
     </Group>
