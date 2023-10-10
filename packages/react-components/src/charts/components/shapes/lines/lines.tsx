@@ -265,10 +265,10 @@ export const Lines = ({
       </Group>
 
       <rect
-        x={0}
-        y={isHorizontal ? 0 : -10}
-        width={isHorizontal ? xMax + 10 : xMax}
-        height={isHorizontal ? yMax : yMax + 10}
+        x={-5}
+        y={-5}
+        width={xMax + 10}
+        height={yMax + 10}
         fill="transparent"
         ref={containerRef}
         onMouseMove={e => handleTooltip(e)}
@@ -295,23 +295,39 @@ export const Lines = ({
             pointerEvents="none"
             strokeDasharray="1,2 "
           />
-          {tooltipData.series
-            .map((s: string, i: number) => (
-              <circle
-                key={JSON.stringify(s)}
-                r={2}
-                cx={isHorizontal
-                  ? tooltipData.tooltipLineIndexPos
-                  : seriesAxis.scale(s.data)}
-                cy={isHorizontal
-                  ? seriesAxis.scale(s.data)
-                  : tooltipData.tooltipLineIndexPos}
-                stroke={styleSeries?.[i] ? styleSeries[i].stroke : palette.series[i]}
-                fill={styleSeries?.[i] ? styleSeries[i].stroke : palette.series[i]}
-                strokeWidth={styleSeries?.[i]?.strokeWidth ?? 1}
-                strokeOpacity={styleSeries?.[i]?.strokeOpacity ?? 1}
-              />
-            ))}
+
+          {tooltipData.series.map((s: { data: string | number; label: string }, i: number) => (
+            <circle
+              key={s.label}
+              r={2}
+              cx={isHorizontal
+                ? tooltipData.tooltipLineIndexPos
+                : seriesAxis.scale(s.data)}
+              cy={isHorizontal
+                ? seriesAxis.scale(s.data)
+                : tooltipData.tooltipLineIndexPos}
+              stroke={styleSeries?.[i] ? styleSeries[i].stroke : palette.series[i]}
+              fill={styleSeries?.[i] ? styleSeries[i].stroke : palette.series[i]}
+              strokeWidth={styleSeries?.[i]?.strokeWidth ?? 1}
+              strokeOpacity={styleSeries?.[i]?.strokeOpacity ?? 1}
+            />
+          ))}
+
+          {tooltipData.overlay && (
+            <circle
+              r={2}
+              cx={isHorizontal
+                ? tooltipData.tooltipLineIndexPos
+                : overlayAxis?.scale(tooltipData.overlay.data)}
+              cy={isHorizontal
+                ? overlayAxis?.scale(tooltipData.overlay.data)
+                : tooltipData.tooltipLineIndexPos}
+              stroke={styleOverlay?.stroke ?? palette.overlay}
+              fill={styleOverlay?.stroke ?? palette.overlay}
+              strokeWidth={styleOverlay?.strokeWidth ?? 1}
+              strokeOpacity={styleOverlay?.strokeOpacity ?? 1}
+            />
+          )}
 
         </Group>
       )}
