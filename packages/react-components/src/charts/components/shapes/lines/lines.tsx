@@ -132,10 +132,11 @@ export const Lines = ({
     zIndex: 10,
   });
 
-  const handleTooltip = useCallback((event: any, content: string) => {
+  const handleTooltip = useCallback((event: any, content?: unknown) => {
     const coords = localPoint(event.target.ownerSVGElement, event) ?? { x: 0, y: 0 };
+
     const containerX = coords.x - containerBounds.left;
-    const containerY = coords.y - containerBounds.top;
+    const containerY = coords.y + containerBounds.top / 2;
 
     const indexAccessorInvert = accessorInvert(indexAxis, coords[indexId]);
     const indexBisectValue = bisectIndex(indexAxis.domain, indexAccessorInvert as any, 0) - 1;
@@ -152,7 +153,7 @@ export const Lines = ({
     const indexScaleValue = indexAxis.scaleType === 'time' ? new Date(indexValue) : indexValue;
     const tooltipLineIndexPos = indexAxis.scale(indexScaleValue as any);
 
-    const d = {
+    const tooltipData = {
       coords,
       content,
       index: {
@@ -170,7 +171,7 @@ export const Lines = ({
     showTooltip({
       tooltipLeft: containerX,
       tooltipTop: containerY,
-      tooltipData: d,
+      tooltipData,
     });
   }, [containerBounds.left,
     containerBounds.top,
@@ -203,15 +204,15 @@ export const Lines = ({
               y={(d: Record<string, unknown>) => (isHorizontal
                 ? accessor(seriesAxis, k, d)
                 : accessor(indexAxis, index, d))}
-              stroke={styleSeries?.[i] ? styleSeries[i].stroke : palette.series[i]}
-              strokeWidth={styleSeries?.[i] ? styleSeries[i]?.strokeWidth : 2}
-              strokeOpacity={styleSeries?.[i] ? styleSeries[i]?.strokeOpacity : 1}
-              strokeDasharray={styleSeries?.[i] ? styleSeries[i]?.strokeDasharray : ''}
+              stroke={styleSeries?.[i]?.stroke ?? palette.series[i]}
+              strokeWidth={styleSeries?.[i]?.strokeWidth ?? 2}
+              strokeOpacity={styleSeries?.[i]?.strokeOpacity ?? 1}
+              strokeDasharray={styleSeries?.[i]?.strokeDasharray}
             />
             {showPoints && data.map(d => (
               <circle
                 key={JSON.stringify(d)}
-                r={1.5}
+                r={2}
                 cx={isHorizontal
                   ? accessor(indexAxis, index, d)
                   : accessor(seriesAxis, k, d)}
@@ -220,8 +221,8 @@ export const Lines = ({
                   : accessor(indexAxis, index, d)}
                 stroke={styleSeries?.[i] ? styleSeries[i].stroke : palette.series[i]}
                 fill={theme === 'light' ? colorPaletteNeutrals.white : colorPaletteNeutrals.black}
-                strokeWidth={styleSeries?.[i] ? styleSeries[i]?.strokeWidth : 1}
-                strokeOpacity={styleSeries?.[i] ? styleSeries[i]?.strokeOpacity : 1}
+                strokeWidth={styleSeries?.[i]?.strokeWidth ?? 1}
+                strokeOpacity={styleSeries?.[i]?.strokeOpacity ?? 1}
               />
             ))}
           </Group>
@@ -246,7 +247,7 @@ export const Lines = ({
             {showPoints && data.map(d => (
               <circle
                 key={JSON.stringify(d)}
-                r={1.5}
+                r={2}
                 cx={isHorizontal
                   ? accessor(indexAxis, index, d)
                   : accessor(overlayAxis!, 'overlay', d)}
@@ -265,14 +266,14 @@ export const Lines = ({
 
       <rect
         x={0}
-        y={0}
-        width={xMax + 10}
-        height={yMax}
+        y={isHorizontal ? 0 : -10}
+        width={isHorizontal ? xMax + 10 : xMax}
+        height={isHorizontal ? yMax : yMax + 10}
         fill="transparent"
         ref={containerRef}
-        onMouseMove={e => handleTooltip(e, 'test')}
-        onTouchMove={e => handleTooltip(e, 'test')}
-        onTouchStart={e => handleTooltip(e, 'test')}
+        onMouseMove={e => handleTooltip(e)}
+        onTouchMove={e => handleTooltip(e)}
+        onTouchStart={e => handleTooltip(e)}
         onMouseOut={hideTooltip}
         onMouseLeave={hideTooltip}
       />
@@ -288,12 +289,30 @@ export const Lines = ({
               x: isHorizontal ? tooltipData.tooltipLineIndexPos : xMax,
               y: isHorizontal ? yMax : tooltipData.tooltipLineIndexPos,
             }}
-            stroke="black"
+            stroke={colorPaletteNeutrals.dimmed4}
             strokeWidth={1}
-            opacity={0.2}
+            opacity={0.6}
             pointerEvents="none"
-            strokeDasharray="3"
+            strokeDasharray="1,2 "
           />
+          {tooltipData.series
+            .map((s: string, i: number) => (
+              <circle
+                key={JSON.stringify(s)}
+                r={2}
+                cx={isHorizontal
+                  ? tooltipData.tooltipLineIndexPos
+                  : seriesAxis.scale(s.data)}
+                cy={isHorizontal
+                  ? seriesAxis.scale(s.data)
+                  : tooltipData.tooltipLineIndexPos}
+                stroke={styleSeries?.[i] ? styleSeries[i].stroke : palette.series[i]}
+                fill={styleSeries?.[i] ? styleSeries[i].stroke : palette.series[i]}
+                strokeWidth={styleSeries?.[i]?.strokeWidth ?? 1}
+                strokeOpacity={styleSeries?.[i]?.strokeOpacity ?? 1}
+              />
+            ))}
+
         </Group>
       )}
 

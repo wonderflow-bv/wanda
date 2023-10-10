@@ -26,7 +26,15 @@ import { CartesianBase, CartesianBaseProps } from '../cartesian-base/cartesian-b
 
 export type LineChartIndex = Partial<AxisProps> & { dataKey: string };
 
-export type LineChartSeries = Partial<AxisProps> & { dataKey: string[] };
+export type LineChartOverlay = Partial<AxisProps> & {
+  dataKey: string;
+  style?: LineStyle;
+};
+
+export type LineChartSeries = Partial<AxisProps> & {
+  dataKey: string[];
+  style?: Array<LineStyle | undefined>;
+};
 
 export type LineStyle = {
   stroke?: string;
@@ -41,9 +49,7 @@ export type LineChartProps = {
   data: Data;
   index: LineChartIndex;
   series: LineChartSeries;
-  overlay?: LineChartIndex;
-  styleSeries?: Array<LineStyle | undefined>;
-  styleOverlay?: LineStyle;
+  overlay?: LineChartOverlay;
   showPoints?: boolean;
 } & Except<CartesianBaseProps, 'data' | 'metadata' | 'axis'>
 
@@ -64,8 +70,6 @@ export const LineChart = ({
   index,
   series,
   overlay,
-  styleSeries,
-  styleOverlay,
   showPoints = false,
   ...otherProps
 }: LineChartProps) => {
@@ -94,8 +98,8 @@ export const LineChart = ({
     index: index.dataKey,
     series: series.dataKey,
     overlay: overlay?.dataKey,
-    styleSeries,
-    styleOverlay,
+    styleSeries: series.style,
+    styleOverlay: overlay?.style,
     showPoints,
   };
 
