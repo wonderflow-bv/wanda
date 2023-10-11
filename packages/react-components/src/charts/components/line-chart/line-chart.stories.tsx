@@ -9,11 +9,12 @@ const story: ComponentMeta<typeof LineChart> = {
   component: LineChart,
   args: {
     title: 'Line Charts',
-    subtitle: 'A trend line charts',
+    subtitle: 'A trend line chart',
     data: feedbackCount,
     index: {
       dataKey: 'date',
       label: 'Year',
+      scaleType: 'label',
     },
     series: {
       dataKey: ['value'],
@@ -48,6 +49,7 @@ withMultipleSeries.args = {
   index: {
     dataKey: 'date',
     label: 'Time',
+    scaleType: 'label',
   },
   series: {
     domain: [0, 200],

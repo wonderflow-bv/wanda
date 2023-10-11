@@ -16,17 +16,21 @@
 
 import _ from 'lodash';
 
-import { Axis } from '../components/cartesian-base/cartesian-base';
-import { ViewportStyleConfig } from '../types';
+import { AxisType, ViewportStyleConfig } from '../types';
 
-export const manageViewport = (width: number, height: number, axis: Axis, config: ViewportStyleConfig) => {
-  const { orientation, numTicks } = axis;
+export const manageViewport = (width: number, height: number, axis: AxisType, config: ViewportStyleConfig) => {
+  const {
+    orientation, numTicks, scaleType, domain,
+  } = axis;
 
   const isVertical = orientation === 'left' || orientation === 'right';
   const size = isVertical ? height : width;
   const key = isVertical ? 'maxHeight' : 'maxWidth';
 
+  const defaultLabelTicksNum = scaleType === 'label' ? domain.length : undefined;
+  const defaultConfigLarge = defaultLabelTicksNum ?? config.large.numTicks;
+
   if (_.inRange(size, 0, config.tiny[key])) return config.tiny;
   if (_.inRange(size, config.tiny[key]!, config.small[key])) return config.small;
-  return numTicks ? { ...config.large, numTicks } : config.large;
+  return numTicks ? { ...config.large, numTicks } : { ...config.large, numTicks: defaultConfigLarge };
 };

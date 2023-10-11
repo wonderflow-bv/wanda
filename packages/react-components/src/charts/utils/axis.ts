@@ -336,7 +336,7 @@ export const scaleDomainToAxis = (axis: Pick<AxisProps, 'domain' | 'range' | 'sc
   if (hasData) {
     if (scaleType === 'label') {
       return scaleBand({
-        domain: domain.map(v => truncate(`${v}`)),
+        domain: domain.map(v => `${v}`),
         range,
         paddingInner: paddingInner ?? 1,
         paddingOuter: paddingOuter ?? 1,
@@ -385,7 +385,7 @@ export const handleTickFormat = (axis: AxisType) => {
 
   if (tickFormat) return (v: any, i: number) => doTruncate((tickFormat(v, i, [{ value: v, index: i }])));
 
-  return undefined;
+  return (v: any) => doTruncate(v);
 };
 
 export const handleTickNumber = (

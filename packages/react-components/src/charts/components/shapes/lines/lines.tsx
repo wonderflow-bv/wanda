@@ -26,7 +26,7 @@ import { Group } from '@visx/group';
 import { Line, LinePath } from '@visx/shape';
 import { useTooltip, useTooltipInPortal } from '@visx/tooltip';
 import { bisector } from '@visx/vendor/d3-array';
-import { ScaleLinear, ScaleTime } from '@visx/vendor/d3-scale';
+import { scaleBand, ScaleLinear, ScaleTime } from '@visx/vendor/d3-scale';
 import { useCallback, useMemo } from 'react';
 
 import { colorPaletteNeutrals, defaultLineChartPalette } from '../../../style-config';
@@ -83,10 +83,19 @@ export const Lines = ({
 
   const indexId = isHorizontal ? 'x' : 'y';
 
-  const accessor = (axis: AxisType, dataKey: string, d?: Record<string, unknown>) => {
+  const accessor = (axis: AxisType, dataKey: string, datum?: Record<string, unknown>) => {
     let value = 0;
-    if (axis.scale && d && d[dataKey]) {
-      const t = axis.scaleType === 'time' ? new Date(d[dataKey] as string | number) : d[dataKey];
+    if (axis.scale && datum && datum[dataKey]) {
+      const t = axis.scaleType === 'time' ? new Date(datum[dataKey] as string | number) : datum[dataKey];
+
+      if (axis.scaleType === 'label') {
+        const d = axis.domain;
+        const r = axis.scale.range();
+        const s = scaleBand(d, r);
+        const x = s(datum[dataKey]);
+        console.log(datum, d, r, x);
+      }
+
       value = axis.scale(t as any) ?? 0;
     }
 
@@ -108,6 +117,13 @@ export const Lines = ({
       if (scaleType !== 'label') {
         const s = scale as ScaleLinear<number, number> | ScaleTime<number, number>;
         res = s.invert(num);
+      } else {
+        const [min, max] = scale.range();
+        const divider = axis.numTicks ?? axis.domain.length;
+        const bandwidth = (max - min) / divider;
+        const padding = scale.padding() ? bandwidth / 2 : 0;
+        const i = Math.round((num - padding) / bandwidth);
+        res = axis.domain[i];
       }
     }
 
@@ -139,10 +155,14 @@ export const Lines = ({
     const containerY = coords.y + containerBounds.top / 2;
 
     const indexAccessorInvert = accessorInvert(indexAxis, coords[indexId]);
-    const indexBisectValue = bisectIndex(indexAxis.domain, indexAccessorInvert as any, 0) - 1;
+    const indexBisectValue = indexAxis.scaleType === 'label'
+      ? indexAxis.domain.indexOf(indexAccessorInvert)
+      : bisectIndex(indexAxis.domain, indexAccessorInvert, 0) - 1;
+    const indexBisected = indexAxis.domain[indexBisectValue];
 
-    const indexData = indexAxis.domain[indexBisectValue];
+    const indexData = indexAxis.scaleType === 'label' ? indexAccessorInvert : indexBisected;
     const overlayData = overlayAxis?.domain[indexBisectValue];
+
     const allSeries = handleSeries(data, series)
       .map(s => ({
         label: series.length > 1 ? _.capitalize(s.label) : seriesAxis.label,
@@ -150,7 +170,7 @@ export const Lines = ({
       }));
 
     const indexValue = indexAxis.domain[indexBisectValue];
-    const indexScaleValue = indexAxis.scaleType === 'time' ? new Date(indexValue) : indexValue;
+    const indexScaleValue = indexAxis.scaleType === 'label' ? indexAccessorInvert : new Date(indexValue);
     const tooltipLineIndexPos = indexAxis.scale(indexScaleValue as any);
 
     const tooltipData = {
@@ -313,7 +333,7 @@ export const Lines = ({
             />
           ))}
 
-          {tooltipData.overlay && (
+          {hasOverlay && (
             <circle
               r={2}
               cx={isHorizontal
