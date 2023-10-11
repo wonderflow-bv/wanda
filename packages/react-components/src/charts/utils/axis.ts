@@ -385,7 +385,9 @@ export const handleTickFormat = (axis: AxisType) => {
 
   if (tickFormat) return (v: any, i: number) => doTruncate((tickFormat(v, i, [{ value: v, index: i }])));
 
-  return (v: any) => doTruncate(v);
+  if (!tickFormat && isLabel) return (v: any) => doTruncate(v);
+
+  return undefined;
 };
 
 export const handleTickNumber = (
