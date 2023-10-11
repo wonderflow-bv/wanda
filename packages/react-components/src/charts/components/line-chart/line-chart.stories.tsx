@@ -14,7 +14,6 @@ const story: ComponentMeta<typeof LineChart> = {
     index: {
       dataKey: 'date',
       label: 'Year',
-      scaleType: 'label',
     },
     series: {
       dataKey: ['value'],
@@ -49,7 +48,6 @@ withMultipleSeries.args = {
   index: {
     dataKey: 'date',
     label: 'Time',
-    scaleType: 'label',
   },
   series: {
     domain: [0, 200],
@@ -99,7 +97,6 @@ withCustomDomain.args = {
   index: {
     dataKey: 'date',
     label: 'Year',
-    domain: ['1999-01-01', '2024-01-01'],
   },
 };
 
