@@ -47,6 +47,7 @@ import {
   handleVerticalTickLabelOffset,
   handleVerticalTickLabelTransform,
   hasVerticalTickLabel,
+  inferScaleTypeFromDomain,
 } from '../../utils/axis';
 import { getCartesianStyleConfigFromTheme } from '../../utils/colors';
 import { Headings, HeadingsProps } from '../headings';
@@ -155,6 +156,11 @@ export const CartesianBase = ({
   const {
     top, right, bottom, left,
   } = axis;
+
+  if (top) top.scaleType = inferScaleTypeFromDomain(top.domain, top.scaleType);
+  if (right) right.scaleType = inferScaleTypeFromDomain(right.domain, right.scaleType);
+  if (bottom) bottom.scaleType = inferScaleTypeFromDomain(bottom.domain, bottom.scaleType);
+  if (left) left.scaleType = inferScaleTypeFromDomain(left.domain, left.scaleType);
 
   const { hideRows, hideColumns } = grid;
   const hasRows = !hideRows && (left || right);
