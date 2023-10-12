@@ -47,6 +47,7 @@ export type LineStyle = {
 export type LineChartProps = {
   layout: CartesianChartLayout;
   data: Data;
+  renderAs?: 'lines' | 'curves';
   index: LineChartIndex;
   series: LineChartSeries;
   overlay?: LineChartOverlay;
@@ -56,6 +57,7 @@ export type LineChartProps = {
 export type LineChartMetadata = {
   type: Charts;
   layout: CartesianChartLayout;
+  renderAs?: 'lines' | 'curves';
   index: string;
   series: string[];
   overlay?: string;
@@ -66,6 +68,7 @@ export type LineChartMetadata = {
 
 export const LineChart = ({
   layout = CartesianChartLayout.HORIZONTAL,
+  renderAs = 'curves',
   data,
   index,
   series,
@@ -94,6 +97,7 @@ export const LineChart = ({
 
   const metadata = {
     type: Charts.LINE_CHART,
+    renderAs,
     layout,
     index: index.dataKey,
     series: series.dataKey,

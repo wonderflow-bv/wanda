@@ -34,6 +34,7 @@ Default.args = {};
 
 export const withOverlay = Template.bind({});
 withOverlay.args = {
+  subtitle: 'A trend line chart with overlay',
   overlay: {
     dataKey: 'overlay',
     label: 'Overlay',
@@ -97,6 +98,23 @@ withCustomDomain.args = {
   index: {
     dataKey: 'date',
     label: 'Year',
+  },
+};
+
+export const withLines = Template.bind({});
+withLines.args = {
+  title: 'Multiple Series',
+  subtitle: 'A trend line chart rendered with lines',
+  data: proCons,
+  renderAs: 'lines',
+  index: {
+    dataKey: 'date',
+    label: 'Time',
+  },
+  series: {
+    domain: [0, 200],
+    dataKey: ['positiveValue', 'negativeValue'],
+    label: 'Pros & cons',
   },
 };
 

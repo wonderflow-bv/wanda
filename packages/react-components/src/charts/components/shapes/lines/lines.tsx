@@ -19,14 +19,14 @@
  */
 
 import {
-  curveCatmullRom,
+  curveCatmullRom, curveLinear,
 } from '@visx/curve';
 import { localPoint } from '@visx/event';
 import { Group } from '@visx/group';
 import { Line, LinePath } from '@visx/shape';
 import { useTooltip, useTooltipInPortal } from '@visx/tooltip';
 import { bisector } from '@visx/vendor/d3-array';
-import { scaleBand, ScaleLinear, ScaleTime } from '@visx/vendor/d3-scale';
+import { ScaleLinear, ScaleTime } from '@visx/vendor/d3-scale';
 import { useCallback, useMemo } from 'react';
 
 import { colorPaletteNeutrals, defaultLineChartPalette } from '../../../style-config';
@@ -68,10 +68,11 @@ export const Lines = ({
     top, right, bottom, left,
   } = axis;
   const {
-    index, series, overlay, layout, showPoints, styleSeries, styleOverlay,
+    index, series, overlay, layout, showPoints, styleSeries, styleOverlay, renderAs,
   } = metadata;
 
   const palette = useMemo(() => defaultLineChartPalette[theme], [theme]);
+  const renderer = renderAs === 'curves' ? curveCatmullRom : curveLinear;
 
   const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
 
@@ -87,15 +88,6 @@ export const Lines = ({
     let value = 0;
     if (axis.scale && datum && datum[dataKey]) {
       const t = axis.scaleType === 'time' ? new Date(datum[dataKey] as string | number) : datum[dataKey];
-
-      if (axis.scaleType === 'label') {
-        const d = axis.domain;
-        const r = axis.scale.range();
-        const s = scaleBand(d, r);
-        const x = s(datum[dataKey]);
-        console.log(datum, d, r, x);
-      }
-
       value = axis.scale(t as any) ?? 0;
     }
 
@@ -217,7 +209,7 @@ export const Lines = ({
           <Group key={k} className={LinesItem}>
             <LinePath
               data={data}
-              curve={curveCatmullRom}
+              curve={renderer}
               x={(d: Record<string, unknown>) => (isHorizontal
                 ? accessor(indexAxis, index, d)
                 : accessor(seriesAxis, k, d))}
@@ -229,6 +221,7 @@ export const Lines = ({
               strokeOpacity={styleSeries?.[i]?.strokeOpacity ?? 1}
               strokeDasharray={styleSeries?.[i]?.strokeDasharray}
             />
+
             {showPoints && data.map(d => (
               <circle
                 key={JSON.stringify(d)}
@@ -252,7 +245,7 @@ export const Lines = ({
           <Group className={LinesItem}>
             <LinePath
               data={data}
-              curve={curveCatmullRom}
+              curve={renderer}
               x={(d: Record<string, unknown>) => (isHorizontal
                 ? accessor(indexAxis, index, d)
                 : accessor(overlayAxis!, 'overlay', d))}
@@ -264,6 +257,7 @@ export const Lines = ({
               strokeOpacity={styleOverlay?.strokeOpacity ?? 1}
               strokeDasharray={styleOverlay?.strokeDasharray}
             />
+
             {showPoints && data.map(d => (
               <circle
                 key={JSON.stringify(d)}
