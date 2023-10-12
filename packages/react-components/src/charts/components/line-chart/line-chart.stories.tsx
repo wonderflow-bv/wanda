@@ -16,7 +16,7 @@ const story: ComponentMeta<typeof LineChart> = {
       label: 'Year',
     },
     series: {
-      dataKey: ['value'],
+      dataKey: ['feedback count'],
       label: 'Feedback Count',
     },
     overlay: undefined,
@@ -52,7 +52,7 @@ withMultipleSeries.args = {
   },
   series: {
     domain: [0, 200],
-    dataKey: ['positiveValue', 'negativeValue', 'neutralValue'],
+    dataKey: ['positive', 'negative', 'neutral'],
     label: 'Pros & cons',
     style: [undefined, undefined, { stroke: 'gray' }],
   },
@@ -68,7 +68,7 @@ withCustomLineStyle.args = {
     label: 'Time',
   },
   series: {
-    dataKey: ['positiveValue', 'negativeValue', 'neutralValue'],
+    dataKey: ['positive', 'negative', 'neutral'],
     label: 'Pros & cons',
     style: [
       undefined,
@@ -92,7 +92,7 @@ export const withCustomDomain = Template.bind({});
 withCustomDomain.args = {
   subtitle: 'A trend line chart with custom domain',
   series: {
-    dataKey: ['value'],
+    dataKey: ['feedback count'],
     label: 'Feedback Count',
     domain: [-12000, 12000],
   },
@@ -114,7 +114,7 @@ withLines.args = {
   },
   series: {
     domain: [0, 200],
-    dataKey: ['positiveValue', 'negativeValue'],
+    dataKey: ['positive', 'negative'],
     label: 'Pros & cons',
   },
 };
@@ -131,7 +131,7 @@ vertical.args = {
     label: 'Year',
   },
   series: {
-    dataKey: ['value'],
+    dataKey: ['feedback count'],
     label: 'Feedback Count',
   },
 };
