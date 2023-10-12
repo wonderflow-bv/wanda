@@ -1,7 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-/* eslint-disable @typescript-eslint/naming-convention */
-// @ts-nocheck
-
 /*
  * Copyright 2023 Wonderflow Design Team
  *
@@ -17,6 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 
 import {
   curveCatmullRom, curveLinear,
@@ -113,6 +113,7 @@ export const Lines = ({
         const [min, max] = scale.range();
         const divider = axis.numTicks ?? axis.domain.length;
         const bandwidth = (max - min) / divider;
+        // @ts-expect-error: methods not detected
         const padding = scale.padding() ? bandwidth / 2 : 0;
         const i = Math.round((num - padding) / bandwidth);
         res = axis.domain[i];
@@ -148,7 +149,7 @@ export const Lines = ({
 
     const indexAccessorInvert = accessorInvert(indexAxis, coords[indexId]);
     const indexBisectValue = indexAxis.scaleType === 'label'
-      ? indexAxis.domain.indexOf(indexAccessorInvert)
+      ? indexAxis.domain.indexOf(indexAccessorInvert as string)
       : bisectIndex(indexAxis.domain, indexAccessorInvert, 0) - 1;
     const indexBisected = indexAxis.domain[indexBisectValue];
 
@@ -232,7 +233,7 @@ export const Lines = ({
                 cy={isHorizontal
                   ? accessor(seriesAxis, k, d)
                   : accessor(indexAxis, index, d)}
-                stroke={styleSeries?.[i] ? styleSeries[i].stroke : palette.series[i]}
+                stroke={styleSeries?.[i] ? styleSeries[i]?.stroke : palette.series[i]}
                 fill={theme === 'light' ? colorPaletteNeutrals.white : colorPaletteNeutrals.black}
                 strokeWidth={styleSeries?.[i]?.strokeWidth ?? 1}
                 strokeOpacity={styleSeries?.[i]?.strokeOpacity ?? 1}

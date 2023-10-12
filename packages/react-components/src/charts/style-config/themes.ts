@@ -20,7 +20,7 @@ import { colorPaletteNeutrals } from './colors';
 export const themeLight: Theme = {
   background: {
     from: colorPaletteNeutrals.white,
-    to: colorPaletteNeutrals.dimmed1,
+    to: colorPaletteNeutrals.white,
   },
   headings: {
     title: colorPaletteNeutrals.dimmed7,
@@ -34,6 +34,10 @@ export const themeLight: Theme = {
   },
   grid: {
     line: colorPaletteNeutrals.dimmed2,
+    background: {
+      from: colorPaletteNeutrals.white,
+      to: colorPaletteNeutrals.dimmed0,
+    },
   },
 };
 
@@ -54,6 +58,10 @@ export const themeDark: Theme = {
   },
   grid: {
     line: colorPaletteNeutrals.dimmed6,
+    background: {
+      from: colorPaletteNeutrals.dimmed7,
+      to: colorPaletteNeutrals.dimmed8,
+    },
   },
 };
 

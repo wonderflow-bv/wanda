@@ -1,3 +1,4 @@
+import { Background } from '../types';
 import { GridStyle, GridStyleConfig } from '../types/grid';
 import { themeLight } from './themes';
 
@@ -21,7 +22,13 @@ export const gridColumnsStyleConfig: GridStyle = {
   lineStyle: {},
 };
 
+export const gridBackgroundStyleConfig: Background = {
+  from: themeLight.grid.background.from,
+  to: themeLight.grid.background.to,
+};
+
 export const gridStyleConfig: GridStyleConfig = {
   rows: gridRowsStyleConfig,
   columns: gridColumnsStyleConfig,
+  background: gridBackgroundStyleConfig,
 };

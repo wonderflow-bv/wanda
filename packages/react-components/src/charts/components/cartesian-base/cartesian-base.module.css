@@ -1,6 +1,5 @@
 .Wrapper {
   align-items: center;
-  border-radius: 0.5rem;
   box-shadow: 2px 2px 4px #ccc;
   display: block;
   height: var(--static-height);

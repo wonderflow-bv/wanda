@@ -1,3 +1,5 @@
+import { Background } from './linear-gradient';
+
 export type GridStyle = {
   offset?: number;
   fill?: string;
@@ -11,4 +13,5 @@ export type GridStyle = {
 export type GridStyleConfig = {
   rows?: GridStyle;
   columns?: GridStyle;
+  background: Background;
 }

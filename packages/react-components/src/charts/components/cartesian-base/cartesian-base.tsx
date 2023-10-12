@@ -47,7 +47,6 @@ import {
   handleVerticalTickLabelOffset,
   handleVerticalTickLabelTransform,
   hasVerticalTickLabel,
-  inferScaleTypeFromDomain,
 } from '../../utils/axis';
 import { getCartesianStyleConfigFromTheme } from '../../utils/colors';
 import { Headings, HeadingsProps } from '../headings';
@@ -86,6 +85,7 @@ export type GridProps = {
   hideColumns?: boolean;
   tickRows?: number;
   tickColumns?: number;
+  background?: Background;
   otherProps?: Record<string, unknown>;
 }
 
@@ -150,15 +150,11 @@ export const CartesianBase = ({
   } = cartesianConfig;
 
   const { from, to } = _.merge(lgStyle.background, background);
+  const { from: gridFrom, to: gridTo } = { ...gStyle.background, ...grid.background };
 
   const {
     top, right, bottom, left,
   } = axis;
-
-  if (top) top.scaleType = inferScaleTypeFromDomain(top.domain, top.scaleType);
-  if (right) right.scaleType = inferScaleTypeFromDomain(right.domain, right.scaleType);
-  if (bottom) bottom.scaleType = inferScaleTypeFromDomain(bottom.domain, bottom.scaleType);
-  if (left) left.scaleType = inferScaleTypeFromDomain(left.domain, left.scaleType);
 
   const { hideRows, hideColumns } = grid;
   const hasRows = !hideRows && (left || right);
@@ -167,11 +163,11 @@ export const CartesianBase = ({
   const ref = useRef(null);
   const size = useSize(ref);
 
-  const w = size ? size.width : width;
-  const h = size ? size.height : height;
-
   const refLegend = useRef(null);
   const sizeLegend = useSize(refLegend);
+
+  const w = size ? size.width : width;
+  const h = size ? size.height : height;
 
   const legendH = sizeLegend?.height ?? 0;
 
@@ -251,15 +247,16 @@ export const CartesianBase = ({
         viewBox={`0 0 ${dynamicWidth} ${dynamicHeight}`}
         {...otherProps}
       >
-        <LinearGradient id="cartesian" from={from} to={to} />
+        <LinearGradient id="cartesian-container" from={from} to={to} />
+        <LinearGradient id="cartesian-grid-background" from={gridFrom} to={gridTo} />
 
         <rect
           x={0}
           y={0}
           width={dynamicWidth}
           height={dynamicHeight}
-          fill="url(#cartesian)"
-          rx={8}
+          fill="url(#cartesian-container)"
+          rx={0}
           strokeWidth={1}
           stroke={theme === 'light' ? 'lightgray' : 'slategray'}
         />
@@ -274,6 +271,14 @@ export const CartesianBase = ({
         />
 
         <Group>
+          <rect
+            x={lPos}
+            y={tPos}
+            width={xMax}
+            height={yMax}
+            fill="url(#cartesian-grid-background)"
+          />
+
           {hasRows && (
             <GridRows
               top={tPos}

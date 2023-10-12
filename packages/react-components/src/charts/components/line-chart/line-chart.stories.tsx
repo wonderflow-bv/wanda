@@ -90,6 +90,7 @@ withCustomLineStyle.args = {
 
 export const withCustomDomain = Template.bind({});
 withCustomDomain.args = {
+  subtitle: 'A trend line chart with custom domain',
   series: {
     dataKey: ['value'],
     label: 'Feedback Count',

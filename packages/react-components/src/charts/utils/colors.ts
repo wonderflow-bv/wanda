@@ -32,6 +32,8 @@ export const getCartesianStyleConfigFromTheme = (theme: 'light' | 'dark') => {
     cStyle.grid.columns!.stroke = themeDark.grid.line;
     cStyle.headings.title.fill = themeDark.headings.title;
     cStyle.headings.subtitle.fill = themeDark.headings.subtitle;
+    cStyle.grid.background.from = themeDark.grid.background.from;
+    cStyle.grid.background.to = themeDark.grid.background.to;
   }
 
   return cStyle;

@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
+import { Background } from './linear-gradient';
+
 export type Theme = {
-  background: {
-    from: string;
-    to: string;
-  };
+  background: Background;
   headings: {
     title: string;
     subtitle: string;
@@ -31,6 +30,7 @@ export type Theme = {
   };
   grid: {
     line: string;
+    background: Background;
   };
 }
 
