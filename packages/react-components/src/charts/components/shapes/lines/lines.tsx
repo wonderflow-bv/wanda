@@ -114,13 +114,16 @@ export const Lines = ({
         const s = scale as ScaleLinear<number, number> | ScaleTime<number, number>;
         res = s.invert(num);
       } else {
-        const [min, max] = scale.range();
+        const [from, to] = scale.range();
+        const min = Math.min(from, to);
+        const max = Math.max(from, to);
         const divider = axis.numTicks ?? axis.domain.length;
         const bandwidth = (max - min) / divider;
         // @ts-expect-error: methods not detected
         const padding = scale.padding() ? bandwidth / 2 : 0;
         const i = Math.round((num - padding) / bandwidth);
-        res = axis.domain[i];
+        const len = axis.domain.length;
+        res = isVertical ? axis.domain[len - i] : axis.domain[i];
       }
     }
 
@@ -152,9 +155,11 @@ export const Lines = ({
     const containerY = coords.y + containerBounds.top / 2;
 
     const indexAccessorInvert = accessorInvert(indexAxis, coords[indexId]);
+
     const indexBisectValue = indexAxis.scaleType === 'label'
       ? indexAxis.domain.indexOf(indexAccessorInvert as string)
       : bisectIndex(indexAxis.domain, indexAccessorInvert, 0) - 1;
+
     const indexBisected = indexAxis.domain[indexBisectValue];
 
     const indexData = indexAxis.scaleType === 'label' ? indexAccessorInvert : indexBisected;
