@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import { feedbackCount, proCons } from '../../mock-data';
+import { channels, feedbackCount, proCons } from '../../mock-data';
 import { CartesianChartLayout } from '../../types';
 import { LineChart } from './line-chart';
 
@@ -55,6 +55,21 @@ withMultipleSeries.args = {
     dataKey: ['positive', 'negative', 'neutral'],
     label: 'Pros & cons',
     style: [undefined, undefined, { stroke: 'gray' }],
+  },
+};
+
+export const withLabelIndex = Template.bind({});
+withLabelIndex.args = {
+  title: 'Multiple Series',
+  subtitle: 'A line chart with label index',
+  data: channels,
+  index: {
+    dataKey: 'channel',
+    label: 'Channels',
+  },
+  series: {
+    dataKey: ['1 star', '2 stars', '3 stars', '4 stars', '5 stars'],
+    label: 'Star Value',
   },
 };
 

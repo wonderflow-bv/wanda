@@ -14,5 +14,6 @@
  * limitations under the License.
  */
 
+export * from './channels';
 export * from './feedbackCount';
 export * from './prosCons';

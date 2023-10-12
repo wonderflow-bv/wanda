@@ -19,7 +19,9 @@
 // @ts-nocheck
 
 import {
-  curveCatmullRom, curveLinear,
+  curveLinear,
+  curveMonotoneX,
+  curveMonotoneY,
 } from '@visx/curve';
 import { localPoint } from '@visx/event';
 import { Group } from '@visx/group';
@@ -72,9 +74,11 @@ export const Lines = ({
   } = metadata;
 
   const palette = useMemo(() => defaultLineChartPalette[theme], [theme]);
-  const renderer = renderAs === 'curves' ? curveCatmullRom : curveLinear;
 
   const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
+
+  const curveByLayout = isHorizontal ? curveMonotoneX : curveMonotoneY;
+  const renderer = renderAs === 'curves' ? curveByLayout : curveLinear;
 
   const indexAxis = isHorizontal ? bottom! : left!;
   const seriesAxis = isHorizontal ? left! : bottom!;
@@ -86,9 +90,9 @@ export const Lines = ({
 
   const accessor = (axis: AxisType, dataKey: string, datum?: Record<string, unknown>) => {
     let value = 0;
-    if (axis.scale && datum && datum[dataKey]) {
+    if (axis.scale && datum) {
       const t = axis.scaleType === 'time' ? new Date(datum[dataKey] as string | number) : datum[dataKey];
-      value = axis.scale(t as any) ?? 0;
+      value = axis.scale(t as any);
     }
 
     return value;
@@ -354,7 +358,7 @@ export const Lines = ({
           top={tooltipTop}
           left={tooltipLeft}
         >
-          <p style={{ fontSize: '12px' }}>{`${tooltipData.index.label}: ${tooltipData.index.data}`}</p>
+          <p style={{ fontSize: '12px', fontWeight: '700' }}>{`${tooltipData.index.data}`}</p>
           {tooltipData.series.map(s => <p key={s.label} style={{ fontSize: '12px' }}>{`${s.label}: ${s.data}`}</p>)}
           {!!tooltipData.overlay?.data && <p style={{ fontSize: '12px' }}>{`${tooltipData.overlay.label}: ${tooltipData.overlay.data}`}</p>}
         </Tooltip>
