@@ -111,3 +111,4 @@ export const getMaxCharactersNum = (
 
   return maxLen + diffLen;
 };
+

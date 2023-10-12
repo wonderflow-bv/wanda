@@ -19,7 +19,7 @@
 import {
   scaleBand, scaleLinear, scaleUtc,
 } from '@visx/scale';
-import { NumberValue } from '@visx/vendor/d3-scale';
+import { NumberValue, ScaleTime } from '@visx/vendor/d3-scale';
 import _ from 'lodash';
 
 import { AxisProps } from '../components/cartesian-base/cartesian-base';
@@ -373,10 +373,11 @@ export const scaleDomainToAxis = (axis: Pick<AxisProps, 'domain' | 'range' | 'sc
 
 export const handleTickFormat = (axis: AxisType) => {
   const {
-    tickFormat, hideTickLabel, scaleType,
+    tickFormat, hideTickLabel, scaleType, scale,
   } = axis;
 
   const isLabel = scaleType === 'label';
+  const isTime = scaleType === 'time';
 
   const doTruncate = (value: string | Date | NumberValue | undefined) => (isLabel ? truncate(value as string) : value);
 
@@ -390,7 +391,18 @@ export const handleTickFormat = (axis: AxisType) => {
     );
   }
 
-  if (!tickFormat && isLabel) return (v: string | Date | NumberValue) => doTruncate(v);
+  if (!tickFormat) {
+    return (v: string | Date | NumberValue) => {
+      if (isLabel) doTruncate(v);
+      if (isTime) {
+        const s = scale as ScaleTime<number, number>;
+        const f = s.tickFormat();
+        return (f(v as Date));
+      }
+
+      return v;
+    };
+  }
 
   return undefined;
 };
