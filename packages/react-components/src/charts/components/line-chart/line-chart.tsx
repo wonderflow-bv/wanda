@@ -36,6 +36,8 @@ export type LineChartSeries = Partial<AxisProps> & {
   style?: Array<LineStyle | undefined>;
 };
 
+export type LineChartRenderType = 'lines' | 'curves' | 'steps';
+
 export type LineStyle = {
   stroke?: string;
   strokeWidth?: number;
@@ -47,7 +49,7 @@ export type LineStyle = {
 export type LineChartProps = {
   layout: CartesianChartLayout;
   data: Data;
-  renderAs?: 'lines' | 'curves';
+  renderAs?: LineChartRenderType;
   index: LineChartIndex;
   series: LineChartSeries;
   overlay?: LineChartOverlay;
@@ -57,7 +59,7 @@ export type LineChartProps = {
 export type LineChartMetadata = {
   type: Charts;
   layout: CartesianChartLayout;
-  renderAs?: 'lines' | 'curves';
+  renderAs?: LineChartRenderType;
   index: string;
   series: string[];
   overlay?: string;

@@ -22,6 +22,8 @@ import {
   curveLinear,
   curveMonotoneX,
   curveMonotoneY,
+  curveStepAfter,
+  curveStepBefore,
 } from '@visx/curve';
 import { localPoint } from '@visx/event';
 import { Group } from '@visx/group';
@@ -77,8 +79,14 @@ export const Lines = ({
 
   const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
 
-  const curveByLayout = isHorizontal ? curveMonotoneX : curveMonotoneY;
-  const renderer = renderAs === 'curves' ? curveByLayout : curveLinear;
+  const renderer = useMemo(() => {
+    const whichMonotone = isHorizontal ? curveMonotoneX : curveMonotoneY;
+    const whichStep = isHorizontal ? curveStepAfter : curveStepBefore;
+
+    if (renderAs === 'curves') return whichMonotone;
+    if (renderAs === 'lines') return curveLinear;
+    return whichStep;
+  }, [isHorizontal, renderAs]);
 
   const indexAxis = isHorizontal ? bottom! : left!;
   const seriesAxis = isHorizontal ? left! : bottom!;
