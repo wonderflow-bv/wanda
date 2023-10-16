@@ -43,7 +43,8 @@ export type LineStyle = {
   strokeWidth?: number;
   strokeOpacity?: number;
   strokeDasharray?: string;
-  hasValueLabel?: boolean;
+  showMarker?: boolean;
+  showMarkerLabel?: boolean;
 }
 
 export type LineChartProps = {
@@ -53,7 +54,8 @@ export type LineChartProps = {
   index: LineChartIndex;
   series: LineChartSeries;
   overlay?: LineChartOverlay;
-  showPoints?: boolean;
+  showMarker?: boolean;
+  showMarkerLabel?: boolean;
 } & Except<CartesianBaseProps, 'data' | 'metadata' | 'axis'>
 
 export type LineChartMetadata = {
@@ -65,7 +67,8 @@ export type LineChartMetadata = {
   overlay?: string;
   styleSeries?: Array<LineStyle | undefined>;
   styleOverlay?: LineStyle;
-  showPoints?: boolean;
+  showMarker?: boolean;
+  showMarkerLabel?: boolean;
 }
 
 export const LineChart = ({
@@ -75,7 +78,8 @@ export const LineChart = ({
   index,
   series,
   overlay,
-  showPoints = false,
+  showMarker = false,
+  showMarkerLabel = false,
   ...otherProps
 }: LineChartProps) => {
   const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
@@ -106,7 +110,8 @@ export const LineChart = ({
     overlay: overlay?.dataKey,
     styleSeries: series.style,
     styleOverlay: overlay?.style,
-    showPoints,
+    showMarker,
+    showMarkerLabel,
   };
 
   return (

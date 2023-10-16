@@ -20,41 +20,58 @@ import { AxisProps } from '../components';
 import { LineChartIndex, LineChartSeries } from '../components/line-chart/line-chart';
 import { Data } from '../types';
 import { inferScaleTypeFromDomain } from './axis';
-import { getMinMaxDate, getMinMaxNumber, isArrayTypeString } from './math';
+import {
+  getMinMaxDate, getMinMaxNumber, isArrayTypeObject, isArrayTypeString,
+} from './math';
 
-export const getValueFromKey = (
+export const getValueFromKeyRecursively = (
   object: Record<string, unknown>,
   key: string,
+  maxDepth = 2,
 ) => {
   let r = object[key];
 
-  if (_.isUndefined(r)) {
-    Object.entries(object)
-      .filter(arr => _.isObject(arr[1]) && !_.isArray(arr[1]) && !_.isNil(arr[1]))
-      .forEach((arr) => {
-        const m = getValueFromKey(arr[1] as Record<string, unknown>, key);
-        r = m ?? r;
+  if (_.isUndefined(r) && maxDepth) {
+    const depth = maxDepth - 1;
+
+    Object.values(object)
+      .filter(v => _.isObject(v) && !_.isNil(v))
+      .forEach((o) => {
+        if (Array.isArray(o) && isArrayTypeObject(o)) {
+          const arr = o.map(n => getValueFromKeyRecursively(n as Record<string, unknown>, key, depth)).filter(f => f);
+          if (arr.length) r = arr;
+        } else {
+          r = getValueFromKeyRecursively(o as Record<string, unknown>, key, depth);
+        }
       });
   }
 
   return r;
 };
 
+// export const getValueFromKey = (
+//   object: Record<string, unknown>,
+//   key: string,
+// ) => {
+//   let r = object[key];
+
+//   if (_.isUndefined(r)) {
+//     Object.entries(object)
+//       .filter(arr => _.isObject(arr[1]) && !_.isArray(arr[1]) && !_.isNil(arr[1]))
+//       .forEach((arr) => {
+//         const m = getValueFromKey(arr[1] as Record<string, unknown>, key);
+//         r = m ?? r;
+//       });
+//   }
+
+//   return r;
+// };
+
 export const getPrimitiveFromKey = (
   object: Record<string, unknown>,
   key: string,
 ) => {
-  const r = getValueFromKey(object, key);
-  const isNumberOrString = typeof r === 'number' || typeof r === 'string';
-  return isNumberOrString ? r : undefined;
-};
-
-export const getPrimitiveFromPath = (
-  object: Record<string, unknown>,
-  path: string,
-) => {
-  const array = _.at(object, path);
-  const r = array.length === 1 ? array[0] : undefined;
+  const r = getValueFromKeyRecursively(object, key);
   const isNumberOrString = typeof r === 'number' || typeof r === 'string';
   return isNumberOrString ? r : undefined;
 };
@@ -62,7 +79,7 @@ export const getPrimitiveFromPath = (
 export const extractDataFromArray = (
   arr: Array<Record<string, unknown>>,
   key: string,
-) => arr.map(e => getValueFromKey(e, key));
+) => arr.map(e => getValueFromKeyRecursively(e, key));
 
 export const extractPrimitivesFromArray = (
   arr: Array<Record<string, unknown>>,

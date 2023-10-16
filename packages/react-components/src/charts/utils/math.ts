@@ -38,6 +38,7 @@ export const isArrayType = (
   return Array.isArray(arr) && arr.length > 0 && arr.every(el => typeof el === type);
 };
 
+export const isArrayTypeObject = (arr: any[]) => isArrayType(arr, 'object');
 export const isArrayTypeString = (arr: any[]) => isArrayType(arr, 'string');
 export const isArrayTypeNumber = (arr: any[]) => isArrayType(arr, 'number');
 export const isArrayTypeDate = (arr: any[]) => isArrayType(arr, 'date');

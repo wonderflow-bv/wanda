@@ -20,7 +20,7 @@ const story: ComponentMeta<typeof LineChart> = {
       label: 'Feedback Count',
     },
     overlay: undefined,
-    showPoints: false,
+    showMarker: false,
   },
   argTypes: {},
 };
