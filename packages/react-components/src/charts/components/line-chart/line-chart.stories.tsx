@@ -69,7 +69,7 @@ withLabelIndex.args = {
   },
   series: {
     dataKey: ['1 star', '2 stars', '3 stars', '4 stars', '5 stars'],
-    label: 'Star Value',
+    label: 'Feedback count',
   },
 };
 
@@ -123,6 +123,23 @@ withLines.args = {
   subtitle: 'A trend line chart rendered with lines',
   data: proCons,
   renderAs: 'lines',
+  index: {
+    dataKey: 'date',
+    label: 'Time',
+  },
+  series: {
+    domain: [0, 200],
+    dataKey: ['positive', 'negative'],
+    label: 'Pros & cons',
+  },
+};
+
+export const withSteps = Template.bind({});
+withSteps.args = {
+  title: 'Multiple Series',
+  subtitle: 'A trend line chart rendered with steps',
+  data: proCons,
+  renderAs: 'steps',
   index: {
     dataKey: 'date',
     label: 'Time',

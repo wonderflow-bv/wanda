@@ -8,6 +8,11 @@ const data = [
     value: {
       num: 1, str: 'inner-joe', arr: [1, 2, 3], obj: { a: 1 },
     },
+    series: [
+      { value: 100, percentage: 30 },
+      { value: 90, percentage: 26 },
+      { value: 30, percentage: 8 },
+    ],
   },
   {
     user: 'john',
@@ -16,6 +21,11 @@ const data = [
     value: {
       num: 2, str: 'inner-john', arr: [3, 4, 5], obj: { a: 2 },
     },
+    series: [
+      { value: 98, percentage: 28 },
+      { value: 81, percentage: 23 },
+      { value: 34, percentage: 3 },
+    ],
   },
   {
     user: 'bob',
@@ -24,6 +34,11 @@ const data = [
     value: {
       num: 3, str: 'inner-bob', arr: [6, 7, 8], obj: { a: 3 },
     },
+    series: [
+      { value: 85, percentage: 21 },
+      { value: 77, percentage: 12 },
+      { value: 28, percentage: 4 },
+    ],
   },
 ];
 

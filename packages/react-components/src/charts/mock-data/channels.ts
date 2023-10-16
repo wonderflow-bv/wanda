@@ -168,3 +168,181 @@ export const channels = [
     '5 stars': 7663,
   },
 ];
+
+export const nestedChannels = [
+  {
+    name: 'bestbuy.ca',
+    values: [
+      {
+        value: 388,
+        valueInfo: 0,
+        label: 'bestbuy.ca',
+        label2: 1,
+      },
+      {
+        value: 242,
+        valueInfo: 0,
+        label: 'bestbuy.ca',
+        label2: 2,
+      },
+      {
+        value: 562,
+        valueInfo: 0,
+        label: 'bestbuy.ca',
+        label2: 3,
+      },
+      {
+        value: 3548,
+        valueInfo: 2,
+        label: 'bestbuy.ca',
+        label2: 4,
+      },
+      {
+        value: 38635,
+        valueInfo: 17,
+        label: 'bestbuy.ca',
+        label2: 5,
+      },
+    ],
+  },
+  {
+    name: 'target.com',
+    values: [
+      {
+        value: 349,
+        valueInfo: 0,
+        label: 'target.com',
+        label2: 1,
+      },
+      {
+        value: 206,
+        valueInfo: 0,
+        label: 'target.com',
+        label2: 2,
+      },
+      {
+        value: 484,
+        valueInfo: 0,
+        label: 'target.com',
+        label2: 3,
+      },
+      {
+        value: 3264,
+        valueInfo: 1,
+        label: 'target.com',
+        label2: 4,
+      },
+      {
+        value: 36357,
+        valueInfo: 16,
+        label: 'target.com',
+        label2: 5,
+      },
+    ],
+  },
+  {
+    name: 'bedbathandbeyond.com',
+    values: [
+      {
+        value: 421,
+        valueInfo: 0,
+        label: 'bedbathandbeyond.com',
+        label2: 1,
+      },
+      {
+        value: 236,
+        valueInfo: 0,
+        label: 'bedbathandbeyond.com',
+        label2: 2,
+      },
+      {
+        value: 529,
+        valueInfo: 0,
+        label: 'bedbathandbeyond.com',
+        label2: 3,
+      },
+      {
+        value: 3217,
+        valueInfo: 1,
+        label: 'bedbathandbeyond.com',
+        label2: 4,
+      },
+      {
+        value: 35541,
+        valueInfo: 16,
+        label: 'bedbathandbeyond.com',
+        label2: 5,
+      },
+    ],
+  },
+  {
+    name: 'canadiantire.ca',
+    values: [
+      {
+        value: 311,
+        valueInfo: 0,
+        label: 'canadiantire.ca',
+        label2: 1,
+      },
+      {
+        value: 193,
+        valueInfo: 0,
+        label: 'canadiantire.ca',
+        label2: 2,
+      },
+      {
+        value: 468,
+        valueInfo: 0,
+        label: 'canadiantire.ca',
+        label2: 3,
+      },
+      {
+        value: 3108,
+        valueInfo: 1,
+        label: 'canadiantire.ca',
+        label2: 4,
+      },
+      {
+        value: 34484,
+        valueInfo: 16,
+        label: 'canadiantire.ca',
+        label2: 5,
+      },
+    ],
+  },
+  {
+    name: 'myer.com.au',
+    values: [
+      {
+        value: 286,
+        valueInfo: 0,
+        label: 'myer.com.au',
+        label2: 1,
+      },
+      {
+        value: 181,
+        valueInfo: 0,
+        label: 'myer.com.au',
+        label2: 2,
+      },
+      {
+        value: 452,
+        valueInfo: 0,
+        label: 'myer.com.au',
+        label2: 3,
+      },
+      {
+        value: 2984,
+        valueInfo: 1,
+        label: 'myer.com.au',
+        label2: 4,
+      },
+      {
+        value: 33501,
+        valueInfo: 15,
+        label: 'myer.com.au',
+        label2: 5,
+      },
+    ],
+  },
+];

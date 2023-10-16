@@ -49,6 +49,16 @@ export const getPrimitiveFromKey = (
   return isNumberOrString ? r : undefined;
 };
 
+export const getPrimitiveFromPath = (
+  object: Record<string, unknown>,
+  path: string,
+) => {
+  const array = _.at(object, path);
+  const r = array.length === 1 ? array[0] : undefined;
+  const isNumberOrString = typeof r === 'number' || typeof r === 'string';
+  return isNumberOrString ? r : undefined;
+};
+
 export const extractDataFromArray = (
   arr: Array<Record<string, unknown>>,
   key: string,
