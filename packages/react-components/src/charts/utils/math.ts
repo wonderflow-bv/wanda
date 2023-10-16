@@ -22,16 +22,16 @@ import { ValidTypeOf } from '../types/main';
 import { formatNumber } from './format';
 
 export const isArrayType = (
-  arr: Array<string | number | Date>,
+  arr: any[],
   type: ValidTypeOf | 'date',
 ) => {
   if (type === 'date') {
     return Array.isArray(arr)
-  && arr.length > 0
-&& arr.every((el) => {
-  const toDate = new Date(el).toString();
-  return _.isDate(el) && toDate !== 'Invalid Date';
-});
+    && arr.length > 0
+    && arr.every((el) => {
+      const toDate = new Date(el).toString();
+      return _.isDate(el) && toDate !== 'Invalid Date';
+    });
   }
 
   // eslint-disable-next-line valid-typeof
@@ -112,4 +112,7 @@ export const getMaxCharactersNum = (
 
   return maxLen + diffLen;
 };
+
+export const removeNilValuesFromArray = (arr: any[]) => arr
+  .filter((el: unknown): el is NonNullable<string | number | any[] | Record<string, unknown>> => !_.isNil(el));
 

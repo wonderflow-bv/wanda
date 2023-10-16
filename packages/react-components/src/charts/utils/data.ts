@@ -21,7 +21,8 @@ import { LineChartIndex, LineChartSeries } from '../components/line-chart/line-c
 import { Data } from '../types';
 import { inferScaleTypeFromDomain } from './axis';
 import {
-  getMinMaxDate, getMinMaxNumber, isArrayTypeObject, isArrayTypeString,
+  getMinMaxDate, getMinMaxNumber, isArrayTypeObject,
+  removeNilValuesFromArray,
 } from './math';
 
 export const getValueFromKeyRecursively = (
@@ -94,15 +95,8 @@ export const handleData = (
   const dk = typeof dataKey === 'string' ? [dataKey] : dataKey;
   const domainData = _.flattenDeep(dk.map(k => extractPrimitivesFromArray(data, k)));
 
-  let d: Array<string | number> = [];
-
-  if (isArrayTypeString(domainData)) {
-    d = domainData.map(e => (e ? `${e}` : ''));
-  } else {
-    d = domainData.filter((d): d is string | number => !_.isNil(d));
-  }
-
-  const st = inferScaleTypeFromDomain(d, scaleType);
+  let d = removeNilValuesFromArray(domainData) as Array<string | number>;
+  const st = inferScaleTypeFromDomain(domainData, scaleType);
 
   if (domain?.length) {
     if (st === 'label') {

@@ -42,7 +42,13 @@ import {
 } from '../types/axis';
 import { truncate } from './format';
 import {
-  getMaxCharactersNum, getMinMaxDate, getMinMaxNumber, isArrayTypeDate, isArrayTypeNumber, isArrayTypeString,
+  getMaxCharactersNum,
+  getMinMaxDate,
+  getMinMaxNumber,
+  isArrayTypeDate,
+  isArrayTypeNumber,
+  isArrayTypeString,
+  removeNilValuesFromArray,
 } from './math';
 import { manageViewport } from './viewport';
 
@@ -307,13 +313,17 @@ export const computeAxisConfig = (
 };
 
 export const inferScaleTypeFromDomain = (
-  domain: Array<string | number>,
+  domain: Array<string | number | undefined>,
   scaleType?: ScaleType,
 ): ScaleType => {
+  const d = removeNilValuesFromArray(domain) as Array<string | number>;
+
   if (scaleType) return scaleType;
-  if (isArrayTypeNumber(domain)) return 'linear';
-  if (isArrayTypeString(domain)) {
-    const toDate = domain.map(el => new Date(el));
+
+  if (isArrayTypeNumber(d)) return 'linear';
+
+  if (isArrayTypeString(d)) {
+    const toDate = d.map(el => new Date(el));
     if (isArrayTypeDate(toDate)) return 'time';
   }
 
