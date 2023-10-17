@@ -43,33 +43,6 @@ const data = [
   },
 ];
 
-// describe.skip('getValueFromKey()', () => {
-//   it('should return a nested numeric value', () => {
-//     const res = getValueFromKey(data[0], 'a');
-//     expect(res).toBe(1);
-//   });
-//   it('should return a nested string value', () => {
-//     const res = getValueFromKey(data[0], 'str');
-//     expect(res).toBe('inner-joe');
-//   });
-//   it('should return a nested array value', () => {
-//     const res = getValueFromKey(data[0], 'arr');
-//     expect(res).toEqual([1, 2, 3]);
-//   });
-//   it('should return a nested object value', () => {
-//     const res = getValueFromKey(data[0], 'obj');
-//     expect(res).toEqual({ a: 1 });
-//   });
-//   it('should return a first level value', () => {
-//     const res = getValueFromKey(data[0], 'user');
-//     expect(res).toBe('joe');
-//   });
-//   it('should return undefined for missing keys', () => {
-//     const res = getValueFromKey(data[0], 'none');
-//     expect(res).toBe(undefined);
-//   });
-// });
-
 describe('getValueFromKeyRecursive()', () => {
   it('should return a nested numeric value', () => {
     const res = getValueFromKeyRecursively(data[0], 'a');

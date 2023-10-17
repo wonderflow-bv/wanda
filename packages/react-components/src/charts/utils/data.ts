@@ -87,13 +87,13 @@ export const extractPrimitivesFromArray = (
   key: string,
 ) => arr.map(e => getPrimitiveFromKey(e, key));
 
-export const handleData = (
+export const handleDomainAndScaleTypeFromData = (
   data: Data,
   axis: LineChartIndex | LineChartSeries,
 ): AxisProps => {
   const { scaleType, dataKey, domain } = axis;
   const dk = typeof dataKey === 'string' ? [dataKey] : dataKey;
-  const domainData = _.flattenDeep(dk.map(k => extractPrimitivesFromArray(data, k)));
+  const domainData = _.uniq(_.flattenDeep(dk.map(k => extractPrimitivesFromArray(data, k))));
 
   let d = removeNilValuesFromArray(domainData) as Array<string | number>;
   const st = inferScaleTypeFromDomain(domainData, scaleType);

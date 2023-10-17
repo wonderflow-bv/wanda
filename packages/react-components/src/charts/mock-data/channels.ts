@@ -173,14 +173,14 @@ export const channels = [
  *
   const data = [
     {
-      index: 'channelName' | 123456 ,
-      overlay: 'channelName' | 123456 | {  name: 'tgw', value: 23, percentage: 30 }
+      index: 'string' | 123456 ,
+      overlay: {  label: 'tgw', value: 23, percentage: 30 }
       series: [
-        { name: 'star 1', value: 23, percentage: 30 },
-        { name: 'star 2', value: 23, percentage: 30 },
-        { name: 'star 3', value: 23, percentage: 30 },
-        { name: 'star 4', value: 23, percentage: 30 },
-        { name: 'star 5', value: 23, percentage: 30 },
+        { label: '1 star', value: 23, percentage: 30 },
+        { label: '2 stars', value: 23, percentage: 30 },
+        { label: '3 stars', value: 23, percentage: 30 },
+        { label: '4 stars', value: 23, percentage: 30 },
+        { label: '5 stars', value: 23, percentage: 30 },
       ],
     },
   ];

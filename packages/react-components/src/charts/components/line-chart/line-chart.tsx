@@ -20,7 +20,7 @@ import { Except } from 'type-fest';
 import {
   CartesianChartLayout, Charts, Data,
 } from '../../types';
-import { handleData } from '../../utils';
+import { handleDomainAndScaleTypeFromData } from '../../utils';
 import { AxisProps } from '../cartesian-base';
 import { CartesianBase, CartesianBaseProps } from '../cartesian-base/cartesian-base';
 
@@ -84,9 +84,9 @@ export const LineChart = ({
 }: LineChartProps) => {
   const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
 
-  const i = useMemo(() => handleData(data, index), [data, index]);
-  const s = useMemo(() => handleData(data, series), [data, series]);
-  const o = useMemo(() => (overlay ? handleData(data, overlay) : undefined), [data, overlay]);
+  const i = useMemo(() => handleDomainAndScaleTypeFromData(data, index), [data, index]);
+  const s = useMemo(() => handleDomainAndScaleTypeFromData(data, series), [data, series]);
+  const o = useMemo(() => (overlay ? handleDomainAndScaleTypeFromData(data, overlay) : undefined), [data, overlay]);
 
   const axis = useMemo(() => ({
     vertical: {
