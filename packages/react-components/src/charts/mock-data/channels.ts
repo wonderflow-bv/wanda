@@ -169,23 +169,6 @@ export const channels = [
   },
 ];
 
-/**
- *
-  const data = [
-    {
-      index: 'string' | 123456 ,
-      overlay: {  label: 'tgw', value: 23, percentage: 30 }
-      series: [
-        { label: '1 star', value: 23, percentage: 30 },
-        { label: '2 stars', value: 23, percentage: 30 },
-        { label: '3 stars', value: 23, percentage: 30 },
-        { label: '4 stars', value: 23, percentage: 30 },
-        { label: '5 stars', value: 23, percentage: 30 },
-      ],
-    },
-  ];
- */
-
 export const nestedChannels = [
   {
     name: 'bestbuy.ca',

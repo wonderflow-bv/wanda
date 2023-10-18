@@ -1,5 +1,6 @@
 
-import { extractDataFromArray, getValueFromKeyRecursively } from './data';
+import { channels, nestedChannels } from '../mock-data';
+import { createDataModel, extractDataFromArray, getValueFromKeyRecursively } from './data';
 
 const data = [
   {
@@ -109,6 +110,166 @@ describe('extractDataFromArray()', () => {
         { percentage: 4, value: 28 },
       ],
     ];
+    expect(res).toStrictEqual(exp);
+  });
+});
+
+describe.only('reateDataModel()', () => {
+  it('should create a model from a series array', () => {
+    const config = {
+      index: { dataKey: 'name' },
+      series: {
+        dataKey: ['value'],
+        from: 'values',
+        name: ['star1', 'star2', 'star3', 'star4', 'star5'],
+      },
+    };
+    const res = createDataModel([nestedChannels[0]], config);
+    const exp = [{
+      index: 'bestbuy.ca',
+      overlay: undefined,
+      series: [
+        {
+          label: 'bestbuy.ca',
+          label2: 1,
+          name: 'star1',
+          value: 388,
+          valueInfo: 0,
+        },
+        {
+          label: 'bestbuy.ca',
+          label2: 2,
+          name: 'star2',
+          value: 242,
+          valueInfo: 0,
+        },
+        {
+          label: 'bestbuy.ca',
+          label2: 3,
+          name: 'star3',
+          value: 562,
+          valueInfo: 0,
+        },
+        {
+          label: 'bestbuy.ca',
+          label2: 4,
+          name: 'star4',
+          value: 3548,
+          valueInfo: 2,
+        },
+        {
+          label: 'bestbuy.ca',
+          label2: 5,
+          name: 'star5',
+          value: 38635,
+          valueInfo: 17,
+        },
+      ],
+    }];
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should create a model from a series array with name ref', () => {
+    const config = {
+      index: { dataKey: 'name' },
+      series: {
+        dataKey: ['value'],
+        from: 'values',
+        name: ['label2'],
+      },
+    };
+    const res = createDataModel([nestedChannels[0]], config);
+    const exp = [{
+      index: 'bestbuy.ca',
+      overlay: undefined,
+      series: [
+        {
+          label: 'bestbuy.ca',
+          label2: 1,
+          name: '1',
+          value: 388,
+          valueInfo: 0,
+        },
+        {
+          label: 'bestbuy.ca',
+          label2: 2,
+          name: '2',
+          value: 242,
+          valueInfo: 0,
+        },
+        {
+          label: 'bestbuy.ca',
+          label2: 3,
+          name: '3',
+          value: 562,
+          valueInfo: 0,
+        },
+        {
+          label: 'bestbuy.ca',
+          label2: 4,
+          name: '4',
+          value: 3548,
+          valueInfo: 2,
+        },
+        {
+          label: 'bestbuy.ca',
+          label2: 5,
+          name: '5',
+          value: 38635,
+          valueInfo: 17,
+        },
+      ],
+    }];
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should create a model from a plain object', () => {
+    const config = {
+      index: { dataKey: 'channel' },
+      series: {
+        dataKey: ['1 star', '2 stars'],
+        name: ['⭐', '⭐⭐'],
+      },
+    };
+    const res = createDataModel([channels[0]], config);
+    const exp = [{
+      index: 'amazon.ca',
+      overlay: undefined,
+      series: [
+        {
+          name: '⭐',
+          value: 159,
+        },
+        {
+          name: '⭐⭐',
+          value: 51,
+        }],
+    }];
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should create a model from a plain object', () => {
+    const config = {
+      index: { dataKey: 'channel' },
+      series: {
+        dataKey: ['1 star', '2 stars'],
+        name: undefined,
+      },
+    };
+    const res = createDataModel([channels[0]], config);
+    const exp = [{
+      index: 'amazon.ca',
+      overlay: undefined,
+      series: [
+        {
+          name: '1 star',
+          value: 159,
+        },
+        {
+          name: '2 stars',
+          value: 51,
+        }],
+    }];
     expect(res).toStrictEqual(exp);
   });
 });

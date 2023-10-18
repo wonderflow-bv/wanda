@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-export * from './axis';
-export * from './cartesian';
-export * from './colors';
-export * from './data';
-export * from './grid';
-export * from './headings';
-export * from './legend';
-export * from './linear-gradient';
-export * from './main';
-export * from './themes';
-export * from './tooltip';
-export * from './viewport';
+export type DataAccessorConfig = {
+  index: { dataKey: string };
+  series: { dataKey: string[]; from?: string; name?: string[] };
+  overlay?: { dataKey: string };
+}
+export type ChartDataType = { name: string; value: string | number | undefined } & Record<string, unknown>
+
+export type ChartDataModel = {
+  index: string | number;
+  series: ChartDataType[];
+  overlay?: ChartDataType;
+}

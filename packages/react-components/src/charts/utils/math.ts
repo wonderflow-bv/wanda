@@ -114,5 +114,5 @@ export const getMaxCharactersNum = (
 };
 
 export const removeNilValuesFromArray = (arr: any[]) => arr
-  .filter((el: unknown): el is NonNullable<string | number | any[] | Record<string, unknown>> => !_.isNil(el));
+  .filter((el: unknown): el is NonNullable<any> => !_.isNil(el));
 

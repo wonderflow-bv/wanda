@@ -18,7 +18,7 @@ import _ from 'lodash';
 
 import { AxisProps } from '../components';
 import { LineChartIndex, LineChartSeries } from '../components/line-chart/line-chart';
-import { Data } from '../types';
+import { ChartDataModel, Data, DataAccessorConfig } from '../types';
 import { inferScaleTypeFromDomain } from './axis';
 import {
   getMinMaxDate, getMinMaxNumber, isArrayTypeObject,
@@ -50,24 +50,6 @@ export const getValueFromKeyRecursively = (
   return r;
 };
 
-// export const getValueFromKey = (
-//   object: Record<string, unknown>,
-//   key: string,
-// ) => {
-//   let r = object[key];
-
-//   if (_.isUndefined(r)) {
-//     Object.entries(object)
-//       .filter(arr => _.isObject(arr[1]) && !_.isArray(arr[1]) && !_.isNil(arr[1]))
-//       .forEach((arr) => {
-//         const m = getValueFromKey(arr[1] as Record<string, unknown>, key);
-//         r = m ?? r;
-//       });
-//   }
-
-//   return r;
-// };
-
 export const getPrimitiveFromKey = (
   object: Record<string, unknown>,
   key: string,
@@ -87,13 +69,13 @@ export const extractPrimitivesFromArray = (
   key: string,
 ) => arr.map(e => getPrimitiveFromKey(e, key));
 
-export const handleDomainAndScaleTypeFromData = (
+export const handleDomainAndScaleType = (
   data: Data,
   axis: LineChartIndex | LineChartSeries,
 ): AxisProps => {
   const { scaleType, dataKey, domain } = axis;
-  const dk = typeof dataKey === 'string' ? [dataKey] : dataKey;
-  const domainData = _.uniq(_.flattenDeep(dk.map(k => extractPrimitivesFromArray(data, k))));
+  const keys = typeof dataKey === 'string' ? [dataKey] : dataKey;
+  const domainData = _.flattenDeep(keys.map(k => extractPrimitivesFromArray(data, k)));
 
   let d = removeNilValuesFromArray(domainData) as Array<string | number>;
   const st = inferScaleTypeFromDomain(domainData, scaleType);
@@ -146,3 +128,65 @@ export const handleSeries = (
   const d = extractPrimitivesFromArray(data, s);
   return ({ label: s, data: d });
 });
+
+export const createDataModel = (
+  data: Array<Record<string, unknown>>,
+  config: DataAccessorConfig,
+): ChartDataModel[] => {
+  const createSeries = (datum: Record<string, unknown>) => {
+    const { dataKey, from, name } = config.series;
+
+    const source = from ? datum[from] : datum;
+
+    if (Array.isArray(source)) {
+      return source.map((s: unknown, i: number) => {
+        if (_.isObject(s)) {
+          const o: Record<string, unknown> = { ...s };
+
+          const v = o[dataKey[0]];
+          const value = (typeof v === 'string' || typeof v === 'number') ? v : undefined;
+
+          const getName = () => {
+            const hasName = Boolean(name?.length);
+            const hasOwnNameProp = Boolean(name?.length && (typeof o[name[0]] === 'string' || typeof o[name[0]] === 'number'));
+
+            if (hasOwnNameProp) {
+              const n = o[name![0]] as string | number;
+              return `${n}`;
+            }
+
+            if (hasName) return name![i];
+            return `series${i}`;
+          };
+
+          return ({
+            ...o,
+            name: getName(),
+            value,
+          });
+        }
+
+        return {
+          name: `series${i}`,
+          value: undefined,
+        };
+      });
+    }
+
+    return dataKey.map((k: string, i: number) => {
+      const v = datum[dataKey[i]];
+      const value = (typeof v === 'string' || typeof v === 'number') ? v : undefined;
+
+      return ({
+        name: name ? name[i] : k,
+        value,
+      });
+    });
+  };
+
+  return data.map(d => ({
+    index: getPrimitiveFromKey(d, config.index.dataKey) ?? 'no value',
+    overlay: undefined,
+    series: createSeries(d),
+  }));
+};
