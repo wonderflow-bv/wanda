@@ -133,29 +133,35 @@ export const createDataModel = (
   data: Array<Record<string, unknown>>,
   config: DataAccessorConfig,
 ): ChartDataModel[] => {
+  const { dataKey: indexKey } = config.index;
+
   const createSeries = (datum: Record<string, unknown>) => {
-    const { dataKey, from, name } = config.series;
+    const { dataKey: seriesKeys, from, name: seriesName } = config.series;
 
-    const source = from ? datum[from] : datum;
+    const seriesArray = from ? _.at(datum, from) : undefined;
+    const hasValidArray = Array.isArray(seriesArray) && isArrayTypeObject(seriesArray);
 
-    if (Array.isArray(source)) {
-      return source.map((s: unknown, i: number) => {
+    if (hasValidArray) {
+      return seriesArray?.flat().map((s: unknown, i: number) => {
         if (_.isObject(s)) {
           const o: Record<string, unknown> = { ...s };
 
-          const v = o[dataKey[0]];
-          const value = (typeof v === 'string' || typeof v === 'number') ? v : undefined;
+          const v = o[seriesKeys[0]];
+          const value = (_.isString(v) || _.isNumber(v)) ? v : undefined;
 
           const getName = () => {
-            const hasName = Boolean(name?.length);
-            const hasOwnNameProp = Boolean(name?.length && (typeof o[name[0]] === 'string' || typeof o[name[0]] === 'number'));
+            const hasNameArray = Boolean(seriesName?.length);
+
+            const firstName = seriesName?.length ? seriesName[0] : undefined;
+            const hasOwnNameProp = Boolean(firstName && (_.isString(o[firstName]) || _.isNumber(o[firstName])));
 
             if (hasOwnNameProp) {
-              const n = o[name![0]] as string | number;
+              const n = o[firstName!] as string | number;
               return `${n}`;
             }
 
-            if (hasName) return name![i];
+            if (hasNameArray) return seriesName![i];
+
             return `series${i}`;
           };
 
@@ -167,26 +173,63 @@ export const createDataModel = (
         }
 
         return {
-          name: `series${i}`,
+          name: 'unknown series',
           value: undefined,
         };
       });
     }
 
-    return dataKey.map((k: string, i: number) => {
-      const v = datum[dataKey[i]];
-      const value = (typeof v === 'string' || typeof v === 'number') ? v : undefined;
+    return seriesKeys.map((k: string, i: number) => {
+      const name = seriesName?.length ? seriesName[i] : k;
+
+      const v = datum[k];
+      const value = (_.isNumber(v) || _.isString(v)) ? v : undefined;
 
       return ({
-        name: name ? name[i] : k,
+        name,
         value,
       });
     });
   };
 
+  const createOverlay = (datum: Record<string, unknown>) => {
+    const overlayKey = config.overlay?.dataKey;
+    const overlayFrom = config.overlay?.from;
+    const overlayName = config.overlay?.name;
+
+    if (overlayKey) {
+      if (overlayFrom) {
+        const f = datum[overlayFrom];
+        if (_.isObject(f)) {
+          const o: Record<string, unknown> = { ...f };
+          const v = o[overlayKey];
+          const value = (_.isString(v) || _.isNumber(v)) ? v : undefined;
+
+          const n = overlayName ? o[overlayName] : overlayName;
+          const name = (_.isString(n) || _.isNumber(n)) ? `${n}` : 'overlay';
+
+          return {
+            name,
+            value,
+          };
+        }
+      }
+
+      const v = datum[overlayKey];
+      const value = (_.isString(v) || _.isNumber(v)) ? v : undefined;
+
+      return {
+        name: overlayKey,
+        value,
+      };
+    }
+
+    return undefined;
+  };
+
   return data.map(d => ({
-    index: getPrimitiveFromKey(d, config.index.dataKey) ?? 'no value',
-    overlay: undefined,
+    index: getPrimitiveFromKey(d, indexKey) ?? 'no index',
     series: createSeries(d),
+    overlay: createOverlay(d),
   }));
 };

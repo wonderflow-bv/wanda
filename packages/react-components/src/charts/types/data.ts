@@ -16,8 +16,15 @@
 
 export type DataAccessorConfig = {
   index: { dataKey: string };
-  series: { dataKey: string[]; from?: string; name?: string[] };
-  overlay?: { dataKey: string };
+  series: {
+    dataKey: string[];
+    from?: string;
+    name?: string[]; };
+  overlay?: {
+    dataKey: string;
+    from?: string;
+    name?: string;
+  };
 }
 export type ChartDataType = { name: string; value: string | number | undefined } & Record<string, unknown>
 

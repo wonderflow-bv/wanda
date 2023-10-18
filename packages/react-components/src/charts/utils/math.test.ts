@@ -86,6 +86,30 @@ describe('isArrayType()', () => {
     const isType = isArrayType(arr, 'date');
     expect(isType).toBeTruthy();
   });
+
+  it('should return true for object not for array', () => {
+    const arr = [{ a: 'test' }];
+    const isType = isArrayType(arr, 'object');
+    expect(isType).toBeTruthy();
+  });
+
+  it('should return true for object not for array', () => {
+    const arr = [[1, 2, 3]];
+    const isType = isArrayType(arr, 'object');
+    expect(isType).toBeTruthy();
+  });
+
+  it('should return false for undefined array', () => {
+    const arr = [undefined];
+    const isType = isArrayType(arr, 'object');
+    expect(isType).not.toBeTruthy();
+  });
+
+  it('should return false for wrong values', () => {
+    const arr = [1, 2, 3];
+    const isType = isArrayType(arr, 'object');
+    expect(isType).not.toBeTruthy();
+  });
 });
 
 describe('isArrayTypeString()', () => {

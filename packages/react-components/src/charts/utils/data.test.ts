@@ -114,7 +114,7 @@ describe('extractDataFromArray()', () => {
   });
 });
 
-describe.only('reateDataModel()', () => {
+describe.only('createDataModel()', () => {
   it('should create a model from a series array', () => {
     const config = {
       index: { dataKey: 'name' },

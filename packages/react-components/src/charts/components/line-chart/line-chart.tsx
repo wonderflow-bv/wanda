@@ -28,11 +28,15 @@ export type LineChartIndex = Partial<AxisProps> & { dataKey: string };
 
 export type LineChartOverlay = Partial<AxisProps> & {
   dataKey: string;
+  from?: string;
+  name?: string;
   style?: LineStyle;
 };
 
 export type LineChartSeries = Partial<AxisProps> & {
   dataKey: string[];
+  from?: string;
+  name?: string[];
   style?: Array<LineStyle | undefined>;
 };
 
