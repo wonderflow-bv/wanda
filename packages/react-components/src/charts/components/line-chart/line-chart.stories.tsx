@@ -1,6 +1,8 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import { channels, feedbackCount, proCons } from '../../mock-data';
+import {
+  channels, channelsB, feedbackCount, proCons,
+} from '../../mock-data';
 import { CartesianChartLayout } from '../../types';
 import { LineChart } from './line-chart';
 
@@ -73,6 +75,32 @@ withLabelIndex.args = {
   },
 };
 
+export const withNestedData = Template.bind({});
+withNestedData.args = {
+  title: 'Multiple Series',
+  subtitle: 'A line chart rendered from nested data',
+  data: channelsB,
+  index: {
+    dataKey: 'channel',
+    label: 'Channels',
+  },
+  series: {
+    dataKey: ['1 star.value', '2 stars.value', '3 stars.value', '4 stars.value', '5 stars.value'],
+    label: 'Feedback count',
+  },
+  overlay: {
+    dataKey: 'overlay.value',
+    label: 'TGW',
+    domain: [0, 5],
+    style: {
+      strokeDasharray: '2 4',
+    },
+  },
+  renderAs: 'lines',
+  layout: CartesianChartLayout.VERTICAL,
+  showMarker: true,
+};
+
 export const withCustomLineStyle = Template.bind({});
 withCustomLineStyle.args = {
   title: 'Multiple Series',
@@ -117,8 +145,8 @@ withCustomDomain.args = {
   },
 };
 
-export const withLines = Template.bind({});
-withLines.args = {
+export const renderAsLines = Template.bind({});
+renderAsLines.args = {
   title: 'Multiple Series',
   subtitle: 'A trend line chart rendered with lines',
   data: proCons,
@@ -134,8 +162,8 @@ withLines.args = {
   },
 };
 
-export const withSteps = Template.bind({});
-withSteps.args = {
+export const renderAsSteps = Template.bind({});
+renderAsSteps.args = {
   title: 'Multiple Series',
   subtitle: 'A trend line chart rendered with steps',
   data: proCons,

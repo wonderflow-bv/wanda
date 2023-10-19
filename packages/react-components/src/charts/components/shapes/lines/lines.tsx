@@ -237,9 +237,9 @@ export const Lines = ({
               curve={renderer}
               x={(d: Record<string, unknown>) => (isHorizontal
                 ? accessor(indexAxis, index, d)
-                : accessor(overlayAxis!, 'overlay', d))}
+                : accessor(overlayAxis!, overlay, d))}
               y={(d: Record<string, unknown>) => (isHorizontal
-                ? accessor(overlayAxis!, 'overlay', d)
+                ? accessor(overlayAxis!, overlay, d)
                 : accessor(indexAxis, index, d))}
               stroke={styleOverlay?.stroke ?? palette.overlay}
               strokeWidth={styleOverlay?.strokeWidth ?? 2}
@@ -253,9 +253,9 @@ export const Lines = ({
                 r={2}
                 cx={isHorizontal
                   ? accessor(indexAxis, index, d)
-                  : accessor(overlayAxis!, 'overlay', d)}
+                  : accessor(overlayAxis!, overlay, d)}
                 cy={isHorizontal
-                  ? accessor(overlayAxis!, 'overlay', d)
+                  ? accessor(overlayAxis!, overlay, d)
                   : accessor(indexAxis, index, d)}
                 stroke={styleOverlay?.stroke ?? palette.overlay}
                 fill={theme === 'light' ? colorPaletteNeutrals.white : colorPaletteNeutrals.black}
@@ -350,7 +350,7 @@ export const Lines = ({
           ))}
           {overlay && (
             <p style={{ fontSize: '12px' }}>
-              {`${_.startCase(getLabelFromObjectPath(overlay))}: ${getPrimitiveFromObjectPath(tooltipData.data, overlay) ?? 'n.d.'}`}
+              {`${_.startCase(overlayAxis?.label) ?? _.startCase(getLabelFromObjectPath(overlay))}: ${getPrimitiveFromObjectPath(tooltipData.data, overlay) ?? 'n.d.'}`}
             </p>
           )}
         </Tooltip>
