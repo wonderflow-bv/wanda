@@ -40,8 +40,8 @@ export type LineChartRenderType = 'lines' | 'curves' | 'steps';
 
 export type LineStyle = {
   stroke?: string;
-  strokeWidth?: number;
-  strokeOpacity?: number;
+  strokeWidth?: string;
+  strokeOpacity?: string;
   strokeDasharray?: string;
   showMarker?: boolean;
   showMarkerLabel?: boolean;

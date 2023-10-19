@@ -16,7 +16,7 @@
 
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
+// @ts-nocheck: inconsitencies
 
 import {
   curveLinear,
@@ -31,13 +31,14 @@ import { Line, LinePath } from '@visx/shape';
 import { useTooltip, useTooltipInPortal } from '@visx/tooltip';
 import { bisector } from '@visx/vendor/d3-array';
 import { ScaleLinear, ScaleTime } from '@visx/vendor/d3-scale';
+import _ from 'lodash';
 import { useCallback, useMemo } from 'react';
 
 import { colorPaletteNeutrals, defaultLineChartPalette } from '../../../style-config';
 import {
   AxisType, CartesianChartLayout, Data, ThemeVariants,
 } from '../../../types';
-import { getPrimitiveFromObjectPath, handleSeries } from '../../../utils';
+import { getLabelFromObjectPath, getPrimitiveFromObjectPath } from '../../../utils';
 import { LineChartMetadata } from '../../line-chart/line-chart';
 import { Tooltip } from '../../tooltip';
 import { LinesItem, LinesItemGroup } from './lines.module.css';
@@ -72,7 +73,7 @@ export const Lines = ({
     top, right, bottom, left,
   } = axis;
   const {
-    index, series, overlay, layout, showPoints, styleSeries, styleOverlay, renderAs,
+    index, series, overlay, layout, showMarker, styleSeries, styleOverlay, renderAs,
   } = metadata;
 
   const palette = useMemo(() => defaultLineChartPalette[theme], [theme]);
@@ -139,7 +140,7 @@ export const Lines = ({
     return res;
   };
 
-  const bisectIndex = bisector((index: string | number) => new Date(index)).center;
+  const bisectIndex = bisector((index: string | number) => new Date(index)).right;
 
   const {
     tooltipLeft,
@@ -157,28 +158,17 @@ export const Lines = ({
     zIndex: 10,
   });
 
-  const handleTooltip = useCallback((event: any, content?: unknown) => {
+  const handleTooltip = useCallback((event: any, extraContent?: unknown) => {
     const coords = localPoint(event.target.ownerSVGElement, event) ?? { x: 0, y: 0 };
 
-    const containerX = coords.x - containerBounds.left;
-    const containerY = coords.y + containerBounds.top / 2;
+    const containerX = coords.x - containerBounds.left / 8;
+    const containerY = coords.y - containerBounds.top / 2;
 
     const indexAccessorInvert = accessorInvert(indexAxis, coords[indexId]);
 
     const indexBisectValue = indexAxis.scaleType === 'label'
       ? indexAxis.domain.indexOf(indexAccessorInvert as string)
-      : bisectIndex(indexAxis.domain, indexAccessorInvert, 0) - 1;
-
-    const indexBisected = indexAxis.domain[indexBisectValue];
-
-    const indexData = indexAxis.scaleType === 'label' ? indexAccessorInvert : indexBisected;
-    const overlayData = overlayAxis?.domain[indexBisectValue];
-
-    const allSeries = handleSeries(data, series)
-      .map(s => ({
-        label: series.length > 1 ? _.capitalize(s.label) : seriesAxis.label,
-        data: s.data[indexBisectValue],
-      }));
+      : bisectIndex(indexAxis.domain, indexAccessorInvert as any, 0) - 1;
 
     const indexValue = indexAxis.domain[indexBisectValue];
     const indexScaleValue = indexAxis.scaleType === 'label' ? indexAccessorInvert : new Date(indexValue);
@@ -186,16 +176,8 @@ export const Lines = ({
 
     const tooltipData = {
       coords,
-      content,
-      index: {
-        data: indexData,
-        label: indexAxis.label ?? index,
-      },
-      series: allSeries,
-      overlay: {
-        data: overlayData,
-        label: overlayAxis?.label ?? overlay,
-      },
+      extraContent,
+      data: data[indexBisectValue],
       tooltipLineIndexPos,
     };
 
@@ -204,19 +186,7 @@ export const Lines = ({
       tooltipTop: containerY,
       tooltipData,
     });
-  }, [containerBounds.left,
-    containerBounds.top,
-    indexAxis,
-    indexId,
-    bisectIndex,
-    overlayAxis?.domain,
-    overlayAxis?.label,
-    data,
-    series,
-    index,
-    overlay,
-    showTooltip,
-    seriesAxis.label]);
+  }, [containerBounds.left, containerBounds.top, indexAxis, indexId, bisectIndex, data, showTooltip]);
 
   return (
     <Group
@@ -241,7 +211,7 @@ export const Lines = ({
               strokeDasharray={styleSeries?.[i]?.strokeDasharray}
             />
 
-            {showPoints && data.map(d => (
+            {showMarker && data.map(d => (
               <circle
                 key={JSON.stringify(d)}
                 r={2}
@@ -277,7 +247,7 @@ export const Lines = ({
               strokeDasharray={styleOverlay?.strokeDasharray}
             />
 
-            {showPoints && data.map(d => (
+            {showMarker && data.map(d => (
               <circle
                 key={JSON.stringify(d)}
                 r={2}
@@ -311,7 +281,7 @@ export const Lines = ({
         onMouseLeave={hideTooltip}
       />
 
-      {tooltipData && (
+      {tooltipData?.data && (
         <Group>
           <Line
             from={{
@@ -329,18 +299,18 @@ export const Lines = ({
             strokeDasharray="1,2 "
           />
 
-          {tooltipData.series.map((s: { data: string | number; label: string }, i: number) => (
+          {series.map((s: string, i: number) => (
             <circle
-              key={s.label}
+              key={s}
               r={2}
               cx={isHorizontal
                 ? tooltipData.tooltipLineIndexPos
-                : seriesAxis.scale(s.data)}
+                : seriesAxis.scale(getPrimitiveFromObjectPath(tooltipData.data, s))}
               cy={isHorizontal
-                ? seriesAxis.scale(s.data)
+                ? seriesAxis.scale(getPrimitiveFromObjectPath(tooltipData.data, s))
                 : tooltipData.tooltipLineIndexPos}
-              stroke={styleSeries?.[i] ? styleSeries[i].stroke : palette.series[i]}
-              fill={styleSeries?.[i] ? styleSeries[i].stroke : palette.series[i]}
+              stroke={styleSeries?.[i] ? styleSeries?.[i].stroke : palette.series[i]}
+              fill={styleSeries?.[i] ? styleSeries?.[i].stroke : palette.series[i]}
               strokeWidth={styleSeries?.[i]?.strokeWidth ?? 1}
               strokeOpacity={styleSeries?.[i]?.strokeOpacity ?? 1}
             />
@@ -351,9 +321,9 @@ export const Lines = ({
               r={2}
               cx={isHorizontal
                 ? tooltipData.tooltipLineIndexPos
-                : overlayAxis?.scale(tooltipData.overlay.data)}
+                : overlayAxis?.scale(getPrimitiveFromObjectPath(tooltipData.data, overlay))}
               cy={isHorizontal
-                ? overlayAxis?.scale(tooltipData.overlay.data)
+                ? overlayAxis?.scale(getPrimitiveFromObjectPath(tooltipData.data, overlay))
                 : tooltipData.tooltipLineIndexPos}
               stroke={styleOverlay?.stroke ?? palette.overlay}
               fill={styleOverlay?.stroke ?? palette.overlay}
@@ -365,16 +335,24 @@ export const Lines = ({
         </Group>
       )}
 
-      {tooltipData && (
+      {tooltipData?.data && (
         <Tooltip
           theme={theme}
           isOpen={tooltipOpen}
           top={tooltipTop}
           left={tooltipLeft}
         >
-          <p style={{ fontSize: '12px', fontWeight: '700' }}>{`${tooltipData.index.data}`}</p>
-          {tooltipData.series.map(s => <p key={s.label} style={{ fontSize: '12px' }}>{`${s.label}: ${s.data}`}</p>)}
-          {!!tooltipData.overlay?.data && <p style={{ fontSize: '12px' }}>{`${tooltipData.overlay.label}: ${tooltipData.overlay.data}`}</p>}
+          <p style={{ fontSize: '12px', fontWeight: '700' }}>{`${getPrimitiveFromObjectPath(tooltipData.data, index) ?? ''}`}</p>
+          {series.map(s => (
+            <p key={s} style={{ fontSize: '12px' }}>
+              {`${_.startCase(getLabelFromObjectPath(s))}: ${getPrimitiveFromObjectPath(tooltipData.data, s) ?? 'n.d.'}`}
+            </p>
+          ))}
+          {overlay && (
+            <p style={{ fontSize: '12px' }}>
+              {`${_.startCase(getLabelFromObjectPath(overlay))}: ${getPrimitiveFromObjectPath(tooltipData.data, overlay) ?? 'n.d.'}`}
+            </p>
+          )}
         </Tooltip>
       )}
     </Group>
