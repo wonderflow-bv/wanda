@@ -5,6 +5,7 @@ import {
   extractDataFromArray,
   getLabelFromObjectPath,
   getPrimitiveFromObjectPath,
+  getPrimitivesFromArrayWithObjectPath,
   getValueFromKeyRecursively,
   getValueFromObjectPath,
 } from './data';
@@ -363,5 +364,35 @@ describe('getLabelFromObjectPath()', () => {
     const res = getLabelFromObjectPath(input);
     const exp = 'child-100';
     expect(res).toBe(exp);
+  });
+});
+
+describe('getPrimitivesFromArrayWithObjectPath', () => {
+  it('should return an array of users name', () => {
+    const path = 'user';
+    const req = getPrimitivesFromArrayWithObjectPath(data, path);
+    const res = ['joe', 'john', 'bob'];
+    expect(req).toStrictEqual(res);
+  });
+
+  it('should return an array of ages', () => {
+    const path = 'age';
+    const req = getPrimitivesFromArrayWithObjectPath(data, path);
+    const res = [36, 40, 1];
+    expect(req).toStrictEqual(res);
+  });
+
+  it('should return an array of values from within an array', () => {
+    const path = 'series[0].value';
+    const req = getPrimitivesFromArrayWithObjectPath(data, path);
+    const res = [100, 98, 85];
+    expect(req).toStrictEqual(res);
+  });
+
+  it('should return undefined for each non primitive value', () => {
+    const path = 'nested.arr';
+    const req = getPrimitivesFromArrayWithObjectPath(data, path);
+    const res = [undefined, undefined, undefined];
+    expect(req).toStrictEqual(res);
   });
 });
