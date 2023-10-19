@@ -37,7 +37,7 @@ import { colorPaletteNeutrals, defaultLineChartPalette } from '../../../style-co
 import {
   AxisType, CartesianChartLayout, Data, ThemeVariants,
 } from '../../../types';
-import { handleSeries } from '../../../utils';
+import { getPrimitiveFromObjectPath, handleSeries } from '../../../utils';
 import { LineChartMetadata } from '../../line-chart/line-chart';
 import { Tooltip } from '../../tooltip';
 import { LinesItem, LinesItemGroup } from './lines.module.css';
@@ -99,7 +99,8 @@ export const Lines = ({
   const accessor = (axis: AxisType, dataKey: string, datum?: Record<string, unknown>) => {
     let value = 0;
     if (axis.scale && datum) {
-      const t = axis.scaleType === 'time' ? new Date(datum[dataKey] as string | number) : datum[dataKey];
+      const d = getPrimitiveFromObjectPath(datum, dataKey);
+      const t = axis.scaleType === 'time' ? new Date(d) : d;
       value = axis.scale(t as any);
     }
 
@@ -138,7 +139,7 @@ export const Lines = ({
     return res;
   };
 
-  const bisectIndex = bisector((index: string | number) => new Date(index)).left;
+  const bisectIndex = bisector((index: string | number) => new Date(index)).center;
 
   const {
     tooltipLeft,
