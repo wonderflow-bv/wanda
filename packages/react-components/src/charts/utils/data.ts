@@ -25,6 +25,34 @@ import {
   removeNilValuesFromArray,
 } from './math';
 
+export const getValueFromObjectPath = (object: Record<string, unknown>, path: string) => _.at(object, path)[0];
+
+export const getPrimitiveFromObjectPath = (object: Record<string, unknown>, path: string) => {
+  const value = getValueFromObjectPath(object, path);
+  return (_.isString(value) || _.isNumber(value)) ? value : undefined;
+};
+
+export const getLabelFromObjectPath = (path: string) => {
+  const notation = path.split('.');
+
+  let res = notation[0];
+
+  if (notation.length > 1) {
+    const parent = notation.at(-2);
+    res = parent ?? res;
+  }
+
+  const regex = /([a-zA-Z]+)\[(\d+)\]/;
+  const replacer = (match: any, name: string, index: number) => `${name}-${index}`;
+
+  return res.replace(regex, replacer);
+};
+
+export const getPrimitivesFromArrayWithObjectPath = (
+  arr: Array<Record<string, unknown>>,
+  path: string,
+) => arr.map(o => getPrimitiveFromObjectPath(o, path));
+
 export const getValueFromKeyRecursively = (
   object: Record<string, unknown>,
   key: string,
@@ -75,7 +103,7 @@ export const handleDomainAndScaleType = (
 ): AxisProps => {
   const { scaleType, dataKey, domain } = axis;
   const keys = typeof dataKey === 'string' ? [dataKey] : dataKey;
-  const domainData = _.flattenDeep(keys.map(k => extractPrimitivesFromArray(data, k)));
+  const domainData = _.flattenDeep(keys.map(k => getPrimitivesFromArrayWithObjectPath(data, k)));
 
   let d = removeNilValuesFromArray(domainData) as Array<string | number>;
   const st = inferScaleTypeFromDomain(domainData, scaleType);
@@ -128,29 +156,6 @@ export const handleSeries = (
   const d = extractPrimitivesFromArray(data, s);
   return ({ label: s, data: d });
 });
-
-export const getValueFromObjectPath = (object: Record<string, unknown>, path: string) => _.at(object, path)[0];
-
-export const getPrimitiveFromObjectPath = (object: Record<string, unknown>, path: string) => {
-  const value = getValueFromObjectPath(object, path);
-  return (_.isString(value) || _.isNumber(value)) ? value : undefined;
-};
-
-export const getLabelFromObjectPath = (path: string) => {
-  const notation = path.split('.');
-
-  let res = notation[0];
-
-  if (notation.length > 1) {
-    const parent = notation.at(-2);
-    res = parent ?? res;
-  }
-
-  const regex = /([a-zA-Z]+)\[(\d+)\]/;
-  const replacer = (match: any, name: string, index: number) => `${name}-${index}`;
-
-  return res.replace(regex, replacer);
-};
 
 export const createDataModel = (
   data: Array<Record<string, unknown>>,
