@@ -169,6 +169,49 @@ export const channels = [
   },
 ];
 
+export const channelsB = [
+  {
+    channel: 'bestbuy.ca',
+    '1 star': { value: 388, percentage: 1 },
+    '2 stars': { value: 242, percentage: 0 },
+    '3 stars': { value: 562, percentage: 1 },
+    '4 stars': { value: 3548, percentage: 2 },
+    '5 stars': { value: 38635, percentage: 17 },
+  },
+  {
+    channel: 'amazon.com',
+    '1 star': { value: 339, percentage: 0 },
+    '2 stars': { value: 208, percentage: 0 },
+    '3 stars': { value: 418, percentage: 0 },
+    '4 stars': { value: 3218, percentage: 1 },
+    '5 stars': { value: 36357, percentage: 16 },
+  },
+  {
+    channel: 'bedbathandbeyond.com',
+    '1 star': { value: 421, percentage: 1 },
+    '2 stars': { value: 234, percentage: 0 },
+    '3 stars': { value: 529, percentage: 1 },
+    '4 stars': { value: 3216, percentage: 2 },
+    '5 stars': { value: 35541, percentage: 16 },
+  },
+  {
+    channel: 'canadiant.ca',
+    '1 star': { value: 310, percentage: 1 },
+    '2 stars': { value: 193, percentage: 0 },
+    '3 stars': { value: 468, percentage: 2 },
+    '4 stars': { value: 3109, percentage: 4 },
+    '5 stars': { value: 34484, percentage: 14 },
+  },
+  {
+    channel: 'myer.max.au',
+    '1 star': { value: 286, percentage: 2 },
+    '2 stars': { value: 181, percentage: 0 },
+    '3 stars': { value: 511, percentage: 4 },
+    '4 stars': { value: 2912, percentage: 5 },
+    '5 stars': { value: 33586, percentage: 12 },
+  },
+];
+
 export const nestedChannels = [
   {
     name: 'bestbuy.ca',

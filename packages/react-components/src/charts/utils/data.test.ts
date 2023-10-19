@@ -1,6 +1,13 @@
 
 import { channels, nestedChannels } from '../mock-data';
-import { createDataModel, extractDataFromArray, getValueFromKeyRecursively } from './data';
+import {
+  createDataModel,
+  extractDataFromArray,
+  getLabelFromObjectPath,
+  getPrimitiveFromObjectPath,
+  getValueFromKeyRecursively,
+  getValueFromObjectPath,
+} from './data';
 
 const data = [
   {
@@ -114,7 +121,7 @@ describe('extractDataFromArray()', () => {
   });
 });
 
-describe.only('createDataModel()', () => {
+describe('createDataModel()', () => {
   it('should create a model from a series array', () => {
     const config = {
       index: { dataKey: 'name' },
@@ -274,3 +281,87 @@ describe.only('createDataModel()', () => {
   });
 });
 
+describe('getValueFromObjectPath()', () => {
+  it('should return the corresponding object', () => {
+    const path = 'nested';
+    const res = getValueFromObjectPath(data[0], path);
+    const exp = {
+      num: 1, str: 'inner-joe', arr: [1, 2, 3], obj: { a: 1 },
+    };
+    expect(res).toStrictEqual(exp);
+  });
+});
+
+describe('getPrimitiveFromObjectPath()', () => {
+  it('should return undefined for a non primitive value (object)', () => {
+    const path = 'nested';
+    const res = getPrimitiveFromObjectPath(data[0], path);
+    const exp = undefined;
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return undefined for a non primitive value (array)', () => {
+    const path = 'series';
+    const res = getPrimitiveFromObjectPath(data[0], path);
+    const exp = undefined;
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return a value for a primitive (number)', () => {
+    const path = 'series[0].value';
+    const res = getPrimitiveFromObjectPath(data[0], path);
+    const exp = 100;
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return a value for a primitive (string)', () => {
+    const path = 'nested.str';
+    const res = getPrimitiveFromObjectPath(data[0], path);
+    const exp = 'inner-joe';
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return undefined for a non existent path', () => {
+    const path = 'wrong path';
+    const res = getPrimitiveFromObjectPath(data[0], path);
+    const exp = undefined;
+    expect(res).toStrictEqual(exp);
+  });
+});
+
+describe('getLabelFromObjectPath()', () => {
+  it('should return input as is', () => {
+    const input = 'parent';
+    const res = getLabelFromObjectPath(input);
+    const exp = 'parent';
+    expect(res).toBe(exp);
+  });
+
+  it('should return the parent level', () => {
+    const input = 'parent.child';
+    const res = getLabelFromObjectPath(input);
+    const exp = 'parent';
+    expect(res).toBe(exp);
+  });
+
+  it('should return the child level', () => {
+    const input = 'parent.child.grandchild';
+    const res = getLabelFromObjectPath(input);
+    const exp = 'child';
+    expect(res).toBe(exp);
+  });
+
+  it('should return the child[n] level', () => {
+    const input = 'parent.child[0].grandchild';
+    const res = getLabelFromObjectPath(input);
+    const exp = 'child-0';
+    expect(res).toBe(exp);
+  });
+
+  it('should return the child[nnn] level', () => {
+    const input = 'parent.child[100].grandchild';
+    const res = getLabelFromObjectPath(input);
+    const exp = 'child-100';
+    expect(res).toBe(exp);
+  });
+});

@@ -129,6 +129,29 @@ export const handleSeries = (
   return ({ label: s, data: d });
 });
 
+export const getValueFromObjectPath = (object: Record<string, unknown>, path: string) => _.at(object, path)[0];
+
+export const getPrimitiveFromObjectPath = (object: Record<string, unknown>, path: string) => {
+  const value = getValueFromObjectPath(object, path);
+  return (_.isString(value) || _.isNumber(value)) ? value : undefined;
+};
+
+export const getLabelFromObjectPath = (path: string) => {
+  const notation = path.split('.');
+
+  let res = notation[0];
+
+  if (notation.length > 1) {
+    const parent = notation.at(-2);
+    res = parent ?? res;
+  }
+
+  const regex = /([a-zA-Z]+)\[(\d+)\]/;
+  const replacer = (match: any, name: string, index: number) => `${name}-${index}`;
+
+  return res.replace(regex, replacer);
+};
+
 export const createDataModel = (
   data: Array<Record<string, unknown>>,
   config: DataAccessorConfig,
