@@ -17,7 +17,6 @@
 export * from './axis';
 export * from './cartesian';
 export * from './colors';
-export * from './data';
 export * from './grid';
 export * from './headings';
 export * from './legend';

@@ -71,7 +71,7 @@ export const Tooltip = ({
   const { TooltipInPortal } = useTooltipInPortal({
     detectBounds: true,
     scroll: true,
-    debounce: 100,
+    debounce: 500,
     zIndex: 10,
   });
 

@@ -444,7 +444,7 @@ export const hasVerticalTickLabel = (
   if (isHorizontal) {
     if (isLabel) {
       const len = domain.join().length * 8;
-      return len / width > 2;
+      return width / len < 2;
     }
 
     if (isTiny) return false;

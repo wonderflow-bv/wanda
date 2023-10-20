@@ -76,9 +76,15 @@ export const Lines = ({
     index, series, overlay, layout, showMarker, styleSeries, styleOverlay, renderAs,
   } = metadata;
 
-  const palette = useMemo(() => defaultLineChartPalette[theme], [theme]);
-
   const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
+
+  const indexAxis = isHorizontal ? bottom! : left!;
+  const seriesAxis = isHorizontal ? left! : bottom!;
+  const overlayAxis = isHorizontal ? right : top;
+
+  const hasOverlay = Boolean(overlayAxis && overlay?.length);
+
+  const palette = useMemo(() => defaultLineChartPalette[theme], [theme]);
 
   const renderer = useMemo(() => {
     const whichMonotone = isHorizontal ? curveMonotoneX : curveMonotoneY;
@@ -88,14 +94,6 @@ export const Lines = ({
     if (renderAs === 'lines') return curveLinear;
     return whichStep;
   }, [isHorizontal, renderAs]);
-
-  const indexAxis = isHorizontal ? bottom! : left!;
-  const seriesAxis = isHorizontal ? left! : bottom!;
-  const overlayAxis = isHorizontal ? right : top;
-
-  const hasOverlay = Boolean(overlayAxis && overlay?.length);
-
-  const indexId = isHorizontal ? 'x' : 'y';
 
   const accessor = (axis: AxisType, dataKey: string, datum?: Record<string, unknown>) => {
     let value = 0;
@@ -129,7 +127,6 @@ export const Lines = ({
         const max = Math.max(from, to);
         const divider = axis.numTicks ?? axis.domain.length;
         const bandwidth = (max - min) / divider;
-        // @ts-expect-error: methods not detected
         const padding = scale.padding() ? bandwidth / 2 : 0;
         const i = Math.round((num - padding) / bandwidth);
         const len = axis.domain.length;
@@ -159,20 +156,34 @@ export const Lines = ({
   });
 
   const handleTooltip = useCallback((event: any, extraContent?: unknown) => {
-    const coords = localPoint(event.target.ownerSVGElement, event) ?? { x: 0, y: 0 };
+    const { scaleType, domain, scale } = indexAxis;
+    const { top: tBound, left: lBound } = containerBounds;
 
-    const containerX = coords.x - containerBounds.left / 8;
-    const containerY = coords.y - containerBounds.top / 2;
+    const xy = isHorizontal ? 'x' : 'y';
 
-    const indexAccessorInvert = accessorInvert(indexAxis, coords[indexId]);
+    const coords = localPoint(event.target.ownerSVGElement, event) ?? { x: -999, y: -999 };
 
-    const indexBisectValue = indexAxis.scaleType === 'label'
-      ? indexAxis.domain.indexOf(indexAccessorInvert as string)
-      : bisectIndex(indexAxis.domain, indexAccessorInvert as any, 0) - 1;
+    const indexAccessorInvert = accessorInvert(indexAxis, coords[xy]);
 
-    const indexValue = indexAxis.domain[indexBisectValue];
-    const indexScaleValue = indexAxis.scaleType === 'label' ? indexAccessorInvert : new Date(indexValue);
-    const tooltipLineIndexPos = indexAxis.scale(indexScaleValue as any);
+    const indexBisectValue = scaleType === 'label'
+      ? domain.indexOf(indexAccessorInvert as string)
+      : bisectIndex(domain, indexAccessorInvert as any, 0) - 1;
+
+    const indexValue = domain[indexBisectValue];
+
+    const indexScaleValue = scaleType === 'label'
+      ? indexAccessorInvert
+      : new Date(indexValue);
+
+    const tooltipLineIndexPos = scale(indexScaleValue as any);
+
+    const tooltipLeft = isHorizontal
+      ? coords.x + lBound / 4
+      : coords.x;
+
+    const tooltipTop = isHorizontal
+      ? coords.y - tBound
+      : coords.y;
 
     const tooltipData = {
       coords,
@@ -182,11 +193,11 @@ export const Lines = ({
     };
 
     showTooltip({
-      tooltipLeft: containerX,
-      tooltipTop: containerY,
+      tooltipLeft,
+      tooltipTop,
       tooltipData,
     });
-  }, [containerBounds.left, containerBounds.top, indexAxis, indexId, bisectIndex, data, showTooltip]);
+  }, [containerBounds, indexAxis, isHorizontal, bisectIndex, data, showTooltip]);
 
   return (
     <Group
@@ -268,6 +279,7 @@ export const Lines = ({
       </Group>
 
       <rect
+        id="transparent-overlay-layer"
         x={-5}
         y={-5}
         width={xMax + 10}
@@ -296,7 +308,7 @@ export const Lines = ({
             strokeWidth={1}
             opacity={0.6}
             pointerEvents="none"
-            strokeDasharray="1,2 "
+            strokeDasharray="1 2"
           />
 
           {series.map((s: string, i: number) => (
@@ -331,7 +343,6 @@ export const Lines = ({
               strokeOpacity={styleOverlay?.strokeOpacity ?? 1}
             />
           )}
-
         </Group>
       )}
 
