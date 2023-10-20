@@ -163,33 +163,28 @@ export const Lines = ({
 
     const coords = localPoint(event.target.ownerSVGElement, event) ?? { x: -999, y: -999 };
 
-    const indexAccessorInvert = accessorInvert(indexAxis, coords[xy]);
+    const accessorInvertIndexOf = accessorInvert(indexAxis, coords[xy]);
 
-    const indexBisectValue = scaleType === 'label'
-      ? domain.indexOf(indexAccessorInvert as string)
-      : bisectIndex(domain, indexAccessorInvert as any, 0) - 1;
+    const bisectValueIndexOf = scaleType === 'label'
+      ? domain.indexOf(accessorInvertIndexOf as string)
+      : bisectIndex(domain, accessorInvertIndexOf as any, 0) - 1;
 
-    const indexValue = domain[indexBisectValue];
+    const valueFromDomainIndex = domain[bisectValueIndexOf];
 
     const indexScaleValue = scaleType === 'label'
-      ? indexAccessorInvert
-      : new Date(indexValue);
+      ? accessorInvertIndexOf
+      : new Date(valueFromDomainIndex);
 
-    const tooltipLineIndexPos = scale(indexScaleValue as any);
+    const lineIndicatorPos = scale(indexScaleValue as any);
 
-    const tooltipLeft = isHorizontal
-      ? coords.x + lBound / 4
-      : coords.x;
-
-    const tooltipTop = isHorizontal
-      ? coords.y - tBound
-      : coords.y;
+    const tooltipLeft = coords.x + lBound / 4;
+    const tooltipTop = coords.y + tBound / 4;
 
     const tooltipData = {
       coords,
       extraContent,
-      data: data[indexBisectValue],
-      tooltipLineIndexPos,
+      data: data[bisectValueIndexOf],
+      lineIndicatorPos,
     };
 
     showTooltip({
@@ -297,12 +292,12 @@ export const Lines = ({
         <Group>
           <Line
             from={{
-              x: isHorizontal ? tooltipData.tooltipLineIndexPos : 0,
-              y: isHorizontal ? 0 : tooltipData.tooltipLineIndexPos,
+              x: isHorizontal ? tooltipData.lineIndicatorPos : 0,
+              y: isHorizontal ? 0 : tooltipData.lineIndicatorPos,
             }}
             to={{
-              x: isHorizontal ? tooltipData.tooltipLineIndexPos : xMax,
-              y: isHorizontal ? yMax : tooltipData.tooltipLineIndexPos,
+              x: isHorizontal ? tooltipData.lineIndicatorPos : xMax,
+              y: isHorizontal ? yMax : tooltipData.lineIndicatorPos,
             }}
             stroke={colorPaletteNeutrals.dimmed4}
             strokeWidth={1}
@@ -316,11 +311,11 @@ export const Lines = ({
               key={s}
               r={2}
               cx={isHorizontal
-                ? tooltipData.tooltipLineIndexPos
+                ? tooltipData.lineIndicatorPos
                 : seriesAxis.scale(getPrimitiveFromObjectPath(tooltipData.data, s))}
               cy={isHorizontal
                 ? seriesAxis.scale(getPrimitiveFromObjectPath(tooltipData.data, s))
-                : tooltipData.tooltipLineIndexPos}
+                : tooltipData.lineIndicatorPos}
               stroke={styleSeries?.[i] ? styleSeries?.[i].stroke : palette.series[i]}
               fill={styleSeries?.[i] ? styleSeries?.[i].stroke : palette.series[i]}
               strokeWidth={styleSeries?.[i]?.strokeWidth ?? 1}
@@ -332,11 +327,11 @@ export const Lines = ({
             <circle
               r={2}
               cx={isHorizontal
-                ? tooltipData.tooltipLineIndexPos
+                ? tooltipData.lineIndicatorPos
                 : overlayAxis?.scale(getPrimitiveFromObjectPath(tooltipData.data, overlay))}
               cy={isHorizontal
                 ? overlayAxis?.scale(getPrimitiveFromObjectPath(tooltipData.data, overlay))
-                : tooltipData.tooltipLineIndexPos}
+                : tooltipData.lineIndicatorPos}
               stroke={styleOverlay?.stroke ?? palette.overlay}
               fill={styleOverlay?.stroke ?? palette.overlay}
               strokeWidth={styleOverlay?.strokeWidth ?? 1}
