@@ -28,24 +28,24 @@ export const tooltipStyleMain: TooltipStyleMain = {
   maxHeight: 'unset',
   overflow: 'scroll',
   padding: '0rem 0.5rem',
-  borderRadius: '0.125rem',
+  borderRadius: '0.25rem',
   zIndex: '10',
 };
 
-export const tooltipStyleLight: TooltipStyleColors = {
-  backdropFilter: 'blur(10px) hue-rotate(20deg) saturate(20%)',
-  background: `radial-gradient(at left top, ${toHSLA(colorPaletteNeutrals.white, 0.2)}, ${toHSLA(colorPaletteNeutrals.dimmed3, 0.15)}) no-repeat`,
-  border: `1px solid ${colorPaletteNeutrals.dimmed1}`,
-  boxShadow: `4px 4px 4px ${toHSLA(colorPaletteNeutrals.dimmed4, 0.8)}`,
-  color: colorPaletteNeutrals.dimmed6,
+export const tooltipStyleDark: TooltipStyleColors = {
+  backdropFilter: 'blur(10px) hue-rotate(-10deg) saturate(750%)',
+  background: `radial-gradient(at left top, ${toHSLA(colorPaletteNeutrals.dimmed0, 0.9)}, ${toHSLA(colorPaletteNeutrals.dimmed3, 0.7)}) no-repeat`,
+  border: `1px solid ${colorPaletteNeutrals.dimmed4}`,
+  boxShadow: `4px 4px 10px ${toHSLA(colorPaletteNeutrals.black, 0.5)}`,
+  color: colorPaletteNeutrals.dimmed8,
 };
 
-export const tooltipStyleDark: TooltipStyleColors = {
-  backdropFilter: 'blur(10px) hue-rotate(20deg) saturate(100%)',
-  background: `radial-gradient(at left top, ${toHSLA(colorPaletteNeutrals.dimmed8, 0.1)}, ${toHSLA(colorPaletteNeutrals.black, 0.12)})`,
-  border: `1px solid ${colorPaletteNeutrals.dimmed8}`,
-  boxShadow: `4px 4px 4px ${toHSLA(colorPaletteNeutrals.black, 0.5)}`,
-  color: colorPaletteNeutrals.dimmed2,
+export const tooltipStyleLight: TooltipStyleColors = {
+  backdropFilter: 'blur(10px) hue-rotate(10deg) saturate(750%)',
+  background: `radial-gradient(at left top, ${toHSLA(colorPaletteNeutrals.dimmed9, 0.7)}, ${toHSLA(colorPaletteNeutrals.black, 0.8)})`,
+  border: `1px solid ${colorPaletteNeutrals.dimmed6}`,
+  boxShadow: `4px 4px 10px ${toHSLA(colorPaletteNeutrals.dimmed8, 0.5)}`,
+  color: colorPaletteNeutrals.dimmed0,
 };
 
 export const tooltipStyleConfigLight: TooltipStyleConfig = {

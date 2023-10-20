@@ -177,8 +177,8 @@ export const Lines = ({
 
     const lineIndicatorPos = scale(indexScaleValue as any);
 
-    const tooltipLeft = coords.x + lBound / 4;
-    const tooltipTop = coords.y + tBound / 4;
+    const tooltipLeft = isHorizontal ? coords.x + lBound / 4 : coords.x;
+    const tooltipTop = isHorizontal ? coords.y : coords.y + tBound / 8;
 
     const tooltipData = {
       coords,
