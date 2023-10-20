@@ -22,9 +22,9 @@ import { colorPaletteNeutrals } from '.';
 
 export const tooltipStyleMain: TooltipStyleMain = {
   color: colorPaletteNeutrals.dimmed6,
-  minWidth: 160,
+  minWidth: 250,
   minHeight: 80,
-  maxWidth: 320,
+  maxWidth: 350,
   maxHeight: 'unset',
   overflow: 'scroll',
   padding: '0rem 0.5rem',
@@ -43,7 +43,7 @@ export const tooltipStyleDark: TooltipStyleColors = {
 export const tooltipStyleLight: TooltipStyleColors = {
   backdropFilter: 'blur(10px) hue-rotate(10deg) saturate(750%)',
   background: `radial-gradient(at left top, ${toHSLA(colorPaletteNeutrals.dimmed9, 0.7)}, ${toHSLA(colorPaletteNeutrals.black, 0.8)})`,
-  border: `1px solid ${colorPaletteNeutrals.dimmed6}`,
+  border: `1px solid ${colorPaletteNeutrals.dimmed5}`,
   boxShadow: `4px 4px 10px ${toHSLA(colorPaletteNeutrals.dimmed8, 0.5)}`,
   color: colorPaletteNeutrals.dimmed0,
 };

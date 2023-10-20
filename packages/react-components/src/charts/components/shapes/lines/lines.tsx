@@ -41,7 +41,9 @@ import {
 import { getLabelFromObjectPath, getPrimitiveFromObjectPath } from '../../../utils';
 import { LineChartMetadata } from '../../line-chart/line-chart';
 import { Tooltip } from '../../tooltip';
-import { LinesItem, LinesItemGroup } from './lines.module.css';
+import {
+  LinesItem, LinesItemGroup, LinesTooltipContent, LinesTooltipSeries,
+} from './lines.module.css';
 
 export type LinesProps = {
   theme: ThemeVariants;
@@ -156,7 +158,9 @@ export const Lines = ({
   });
 
   const handleTooltip = useCallback((event: any, extraContent?: unknown) => {
-    const { scaleType, domain, scale } = indexAxis;
+    const {
+      scaleType, domain, scale,
+    } = indexAxis;
     const { top: tBound, left: lBound } = containerBounds;
 
     const xy = isHorizontal ? 'x' : 'y';
@@ -177,7 +181,7 @@ export const Lines = ({
 
     const lineIndicatorPos = scale(indexScaleValue as any);
 
-    const tooltipLeft = isHorizontal ? coords.x + lBound / 4 : coords.x;
+    const tooltipLeft = isHorizontal ? coords.x + lBound / 8 : coords.x;
     const tooltipTop = isHorizontal ? coords.y : coords.y + tBound / 8;
 
     const tooltipData = {
@@ -348,17 +352,85 @@ export const Lines = ({
           top={tooltipTop}
           left={tooltipLeft}
         >
-          <p style={{ fontSize: '12px', fontWeight: '700' }}>{`${getPrimitiveFromObjectPath(tooltipData.data, index) ?? ''}`}</p>
-          {series.map(s => (
-            <p key={s} style={{ fontSize: '12px' }}>
-              {`${_.startCase(getLabelFromObjectPath(s))}: ${getPrimitiveFromObjectPath(tooltipData.data, s) ?? 'n.d.'}`}
+          <div className={LinesTooltipContent}>
+            <p>
+              <b>
+                { indexAxis.tickFormat
+                  ? indexAxis.tickFormat(getPrimitiveFromObjectPath(tooltipData.data, index) ?? '')
+                  : getPrimitiveFromObjectPath(tooltipData.data, index) ?? ''
+              }
+              </b>
             </p>
-          ))}
-          {overlay && (
-            <p style={{ fontSize: '12px' }}>
-              {`${_.startCase(overlayAxis?.label) ?? _.startCase(getLabelFromObjectPath(overlay))}: ${getPrimitiveFromObjectPath(tooltipData.data, overlay) ?? 'n.d.'}`}
-            </p>
-          )}
+
+            <ul>
+              {series.map((s: string, i: number) => (
+                <li key={s}>
+                  <div className={LinesTooltipSeries}>
+                    <svg width={12} height={12}>
+                      <rect
+                        x={0}
+                        y={0}
+                        width={12}
+                        height={12}
+                        rx={2}
+                        ry={2}
+                        fill={styleSeries?.[i] ? styleSeries[i]?.stroke : palette.series[i]}
+                      />
+                    </svg>
+                    <span>
+                      {`${_.startCase(getLabelFromObjectPath(s))}: `}
+                    </span>
+                  </div>
+
+                  <div>
+                    <p>{`${'30%'} `}</p>
+                  </div>
+
+                  <div>
+                    <p>
+                      <b>
+                        {`${getPrimitiveFromObjectPath(tooltipData.data, s) ?? 'n.d.'}`}
+                      </b>
+                    </p>
+                  </div>
+                </li>
+              ))}
+
+              {overlay && (
+                <li>
+                  <div className={LinesTooltipSeries}>
+                    <svg width={12} height={12}>
+                      <rect
+                        x={0}
+                        y={0}
+                        width={12}
+                        height={12}
+                        rx={2}
+                        ry={2}
+                        fill={styleOverlay?.stroke ?? palette.overlay}
+                      />
+                    </svg>
+                    <span>
+                      {`${_.startCase(overlayAxis?.label) ?? _.startCase(getLabelFromObjectPath(overlay))}: `}
+                    </span>
+                  </div>
+
+                  <div>
+                    <p>{`${'30%'} `}</p>
+                  </div>
+
+                  <div>
+                    <p>
+                      <b>
+                        {`${getPrimitiveFromObjectPath(tooltipData.data, overlay) ?? 'n.d.'}`}
+                      </b>
+                    </p>
+                  </div>
+                </li>
+              )}
+            </ul>
+
+          </div>
         </Tooltip>
       )}
     </Group>

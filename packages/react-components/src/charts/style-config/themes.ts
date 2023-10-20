@@ -35,8 +35,8 @@ export const themeLight: Theme = {
   grid: {
     line: colorPaletteNeutrals.dimmed2,
     background: {
-      from: colorPaletteNeutrals.white,
-      to: colorPaletteNeutrals.dimmed0,
+      from: colorPaletteNeutrals.dimmed0,
+      to: colorPaletteNeutrals.white,
     },
   },
 };
@@ -60,7 +60,7 @@ export const themeDark: Theme = {
     line: colorPaletteNeutrals.dimmed6,
     background: {
       from: colorPaletteNeutrals.dimmed7,
-      to: colorPaletteNeutrals.dimmed8,
+      to: colorPaletteNeutrals.dimmed9,
     },
   },
 };

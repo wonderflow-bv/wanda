@@ -64,7 +64,7 @@ export const Tooltip = ({
   top,
   left,
   offsetTop = 15,
-  offsetLeft = 25,
+  offsetLeft = 15,
   children,
   config,
 }: TooltipProps) => {

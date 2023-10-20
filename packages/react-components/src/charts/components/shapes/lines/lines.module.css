@@ -9,3 +9,38 @@
 .LinesItemGroup:hover .LinesItem:not(:hover) {
   filter: saturate(80%) opacity(0.3) blur(2px);
 }
+
+.LinesTooltipContent {
+  display: block;
+  padding: 0;
+
+  & p {
+    font-size: 12px;
+  }
+
+  & ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+  }
+
+  & li {
+    display: grid;
+    grid-template-columns: 1fr 0.5fr 0.5fr;
+    grid-template-rows: 1fr;
+    grid-gap: 8px 4px;
+
+    & div:nth-child(n + 2) {
+      text-align: right;
+    }
+  }
+}
+
+.LinesTooltipSeries {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  font-size: 12px;
+}
