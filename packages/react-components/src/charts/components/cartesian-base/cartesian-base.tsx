@@ -36,7 +36,7 @@ import {
 import { headingsStyleConfig as hStyle } from '../../style-config';
 import { ThemeVariants } from '../../types';
 import { AxisType } from '../../types/axis';
-import { CartesianStyleConfig, MarginProps } from '../../types/cartesian';
+import { CartesianChartLayout, CartesianStyleConfig, MarginProps } from '../../types/cartesian';
 import { Background } from '../../types/linear-gradient';
 import {
   Charts, Data, DeepPartial, ScaleType,
@@ -152,6 +152,7 @@ export const CartesianBase = ({
 
   const { from, to } = _.merge(lgStyle.background, background);
   const { from: gridFrom, to: gridTo } = { ...gStyle.background, ...grid.background };
+  const isHorizontal = metadata?.layout === CartesianChartLayout.HORIZONTAL;
 
   const {
     top, right, bottom, left,
@@ -254,7 +255,7 @@ export const CartesianBase = ({
         {...otherProps}
       >
         <LinearGradient id="cartesian-container" from={from} to={to} />
-        <LinearGradient id="cartesian-grid-background" from={gridFrom} to={gridTo} />
+        <LinearGradient id="cartesian-grid-background" from={gridFrom} to={gridTo} rotate={isHorizontal ? 0 : 270} />
 
         <rect
           x={0}

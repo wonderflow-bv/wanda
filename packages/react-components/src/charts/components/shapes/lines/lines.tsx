@@ -389,7 +389,7 @@ export const Lines = ({
                   <div>
                     <p>
                       <b>
-                        {`${getPrimitiveFromObjectPath(tooltipData.data, s) ?? 'n.d.'}`}
+                        {`${getPrimitiveFromObjectPath(tooltipData.data, s) ?? 'n/a'}`}
                       </b>
                     </p>
                   </div>
@@ -416,13 +416,13 @@ export const Lines = ({
                   </div>
 
                   <div>
-                    <p>{`${'30%'} `}</p>
+                    <p>{`${'3%'} `}</p>
                   </div>
 
                   <div>
                     <p>
                       <b>
-                        {`${getPrimitiveFromObjectPath(tooltipData.data, overlay) ?? 'n.d.'}`}
+                        {`${getPrimitiveFromObjectPath(tooltipData.data, overlay) ?? 'n/a'}`}
                       </b>
                     </p>
                   </div>
