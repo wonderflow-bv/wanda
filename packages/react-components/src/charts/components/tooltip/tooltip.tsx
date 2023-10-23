@@ -75,7 +75,7 @@ export const Tooltip = ({
     zIndex: 10,
   });
 
-  const tStyle = useMemo(() => _.merge(tooltipTheme[theme], config), [theme, config]);
+  const tStyle = useMemo(() => _.merge(defaultStyles, tooltipTheme[theme], config), [theme, config]);
 
   if (!isOpen) return null;
 
@@ -85,12 +85,9 @@ export const Tooltip = ({
       key={uuid()}
       top={(top ?? -999) + (offsetTop ?? 0)}
       left={(left ?? -999) + (offsetLeft ?? 0)}
-      style={{
-        ...defaultStyles,
-        ...tStyle,
-      }}
+      style={tStyle}
     >
-      <div style={{ padding: '8px 16px' }}>
+      <div style={{ padding: '0.25rem 0' }}>
         {children}
       </div>
     </TooltipInPortal>

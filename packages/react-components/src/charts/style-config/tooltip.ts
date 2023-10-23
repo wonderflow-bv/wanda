@@ -27,7 +27,7 @@ export const tooltipStyleMain: TooltipStyleMain = {
   maxWidth: 350,
   maxHeight: 'unset',
   overflow: 'scroll',
-  padding: '0rem 0.5rem',
+  padding: '0rem 0rem',
   borderRadius: '0.25rem',
   zIndex: '10',
 };

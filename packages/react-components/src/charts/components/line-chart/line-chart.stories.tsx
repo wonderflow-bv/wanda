@@ -96,6 +96,11 @@ withNestedData.args = {
       strokeDasharray: '2 4',
     },
   },
+  tooltip: {
+    extraSeriesData: series => `${series.percentage}%`,
+    extraOverlayData: overlay => `${overlay.percentage}%`,
+    extraContent: <div>some extra content</div>,
+  },
   renderAs: 'lines',
   layout: CartesianChartLayout.VERTICAL,
   showMarker: true,

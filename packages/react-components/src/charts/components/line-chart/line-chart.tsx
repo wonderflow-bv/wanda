@@ -36,6 +36,12 @@ export type LineChartSeries = Partial<AxisProps> & {
   style?: Array<LineStyle | undefined>;
 };
 
+export type LineChartTooltip = {
+  extraSeriesData?: (args?: any) => string;
+  extraOverlayData?: (args?: any) => string;
+  extraContent?: React.ReactNode;
+};
+
 export type LineChartRenderType = 'lines' | 'curves' | 'steps';
 
 export type LineStyle = {
@@ -54,6 +60,7 @@ export type LineChartProps = {
   index: LineChartIndex;
   series: LineChartSeries;
   overlay?: LineChartOverlay;
+  tooltip?: LineChartTooltip;
   showMarker?: boolean;
   showMarkerLabel?: boolean;
 } & Except<CartesianBaseProps, 'data' | 'metadata' | 'axis'>
@@ -65,6 +72,7 @@ export type LineChartMetadata = {
   index: string;
   series: string[];
   overlay?: string;
+  tooltip?: LineChartTooltip;
   styleSeries?: Array<LineStyle | undefined>;
   styleOverlay?: LineStyle;
   showMarker?: boolean;
@@ -78,6 +86,7 @@ export const LineChart = ({
   index,
   series,
   overlay,
+  tooltip,
   showMarker = false,
   showMarkerLabel = false,
   ...otherProps
@@ -108,6 +117,7 @@ export const LineChart = ({
     index: index.dataKey,
     series: series.dataKey,
     overlay: overlay?.dataKey,
+    tooltip,
     styleSeries: series.style,
     styleOverlay: overlay?.style,
     showMarker,

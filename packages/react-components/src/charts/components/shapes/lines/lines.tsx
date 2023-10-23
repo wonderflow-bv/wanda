@@ -42,6 +42,7 @@ import { getLabelFromObjectPath, getPrimitiveFromObjectPath } from '../../../uti
 import { LineChartMetadata } from '../../line-chart/line-chart';
 import { Tooltip } from '../../tooltip';
 import {
+  ExtraContent,
   LinesItem, LinesItemGroup, LinesTooltipContent, LinesTooltipSeries,
 } from './lines.module.css';
 
@@ -75,7 +76,7 @@ export const Lines = ({
     top, right, bottom, left,
   } = axis;
   const {
-    index, series, overlay, layout, showMarker, styleSeries, styleOverlay, renderAs,
+    index, series, overlay, layout, showMarker, styleSeries, styleOverlay, renderAs, tooltip,
   } = metadata;
 
   const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
@@ -378,12 +379,14 @@ export const Lines = ({
                       />
                     </svg>
                     <span>
-                      {`${_.startCase(getLabelFromObjectPath(s))}: `}
+                      {`${_.startCase(getLabelFromObjectPath(s))}`}
                     </span>
                   </div>
 
                   <div>
-                    <p>{`${'30%'} `}</p>
+                    {tooltip?.extraSeriesData && (
+                      <p>{tooltip.extraSeriesData(_.at(tooltipData.data, getLabelFromObjectPath(s))[0])}</p>
+                    )}
                   </div>
 
                   <div>
@@ -411,12 +414,14 @@ export const Lines = ({
                       />
                     </svg>
                     <span>
-                      {`${_.startCase(overlayAxis?.label) ?? _.startCase(getLabelFromObjectPath(overlay))}: `}
+                      {`${_.startCase(overlayAxis?.label) ?? _.startCase(getLabelFromObjectPath(overlay))}`}
                     </span>
                   </div>
 
                   <div>
-                    <p>{`${'3%'} `}</p>
+                    {tooltip?.extraOverlayData && (
+                      <p>{tooltip.extraOverlayData(_.at(tooltipData.data, getLabelFromObjectPath(overlay))[0])}</p>
+                    )}
                   </div>
 
                   <div>
@@ -429,8 +434,16 @@ export const Lines = ({
                 </li>
               )}
             </ul>
-
           </div>
+
+          { tooltip?.extraContent && (
+            <div
+              className={ExtraContent}
+              style={{ borderColor: colorPaletteNeutrals.dimmed5 }}
+            >
+              {tooltip.extraContent}
+            </div>
+          )}
         </Tooltip>
       )}
     </Group>

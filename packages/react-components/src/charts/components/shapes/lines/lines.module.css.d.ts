@@ -3,6 +3,7 @@ declare const styles: {
   readonly "LinesItemGroup": string;
   readonly "LinesTooltipContent": string;
   readonly "LinesTooltipSeries": string;
+  readonly "ExtraContent": string;
 };
 export = styles;
 
