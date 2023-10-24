@@ -77,6 +77,7 @@ export const Lines = ({
   } = axis;
   const {
     index, series, overlay, layout, showMarker, styleSeries, styleOverlay, renderAs, tooltip,
+    seriesRename, overlayRename,
   } = metadata;
 
   const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
@@ -379,7 +380,10 @@ export const Lines = ({
                       />
                     </svg>
                     <span>
-                      {`${_.startCase(getLabelFromObjectPath(s))}`}
+                      { seriesRename
+                        ? `${_.startCase(seriesRename(s, i))}`
+                        : `${_.startCase(getLabelFromObjectPath(s))}`
+                      }
                     </span>
                   </div>
 
@@ -414,7 +418,11 @@ export const Lines = ({
                       />
                     </svg>
                     <span>
-                      {`${_.startCase(overlayAxis?.label) ?? _.startCase(getLabelFromObjectPath(overlay))}`}
+                      {
+                        overlayRename
+                        ?? _.startCase(overlayAxis?.label)
+                        ?? _.startCase(getLabelFromObjectPath(overlay))
+                      }
                     </span>
                   </div>
 

@@ -29,16 +29,18 @@ export type LineChartIndex = Partial<AxisProps> & { dataKey: string };
 export type LineChartOverlay = Partial<AxisProps> & {
   dataKey: string;
   style?: LineStyle;
+  rename?: string;
 };
 
 export type LineChartSeries = Partial<AxisProps> & {
   dataKey: string[];
   style?: Array<LineStyle | undefined>;
+  rename?: (...args: any) => string;
 };
 
 export type LineChartTooltip = {
-  extraSeriesData?: (args?: any) => string;
-  extraOverlayData?: (args?: any) => string;
+  extraSeriesData?: (...args: any) => string;
+  extraOverlayData?: (...args: any) => string;
   extraContent?: React.ReactNode;
 };
 
@@ -71,7 +73,9 @@ export type LineChartMetadata = {
   renderAs?: LineChartRenderType;
   index: string;
   series: string[];
+  seriesRename?: (...args: any) => string;
   overlay?: string;
+  overlayRename?: string;
   tooltip?: LineChartTooltip;
   styleSeries?: Array<LineStyle | undefined>;
   styleOverlay?: LineStyle;
@@ -116,7 +120,9 @@ export const LineChart = ({
     layout,
     index: index.dataKey,
     series: series.dataKey,
+    seriesRename: series.rename,
     overlay: overlay?.dataKey,
+    overlayRename: overlay?.rename,
     tooltip,
     styleSeries: series.style,
     styleOverlay: overlay?.style,
