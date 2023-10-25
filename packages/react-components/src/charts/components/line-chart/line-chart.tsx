@@ -74,15 +74,18 @@ export type LineChartMetadata = {
   layout: CartesianChartLayout;
   renderAs?: LineChartRenderType;
   index: string;
-  series: string[];
-  seriesNames: string[];
-  seriesColors: Array<string | undefined>;
-  overlay?: string;
-  overlayName: string;
-  overlayColor: string;
-  tooltip?: LineChartTooltip;
-  styleSeries?: Array<LineStyle | undefined>;
-  styleOverlay?: LineStyle;
+  series: {
+    dataKey: string[];
+    names: string[];
+    colors: Array<string | undefined>;
+    style?: Array<LineStyle | undefined>;
+  };
+  overlay: {
+    dataKey?: string;
+    name: string;
+    color: string;
+    style?: LineStyle;
+  };
   showMarker?: boolean;
   showMarkerLabel?: boolean;
 }
@@ -148,15 +151,19 @@ export const LineChart = ({
     renderAs,
     layout,
     index: index.dataKey,
-    series: series.dataKey,
-    seriesNames,
-    seriesColors,
-    overlay: overlay?.dataKey,
-    overlayName,
-    overlayColor,
+    series: {
+      dataKey: series.dataKey,
+      names: seriesNames,
+      colors: seriesColors,
+      style: series.style,
+    },
+    overlay: {
+      dataKey: overlay?.dataKey,
+      name: overlayName,
+      color: overlayColor,
+      style: overlay?.style,
+    },
     tooltip,
-    styleSeries: series.style,
-    styleOverlay: overlay?.style,
     showMarker,
     showMarkerLabel,
   };

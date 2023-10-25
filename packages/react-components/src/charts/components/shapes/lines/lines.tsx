@@ -34,7 +34,7 @@ import { ScaleLinear, ScaleTime } from '@visx/vendor/d3-scale';
 import _ from 'lodash';
 import { useCallback, useMemo } from 'react';
 
-import { colorPaletteNeutrals, defaultLineChartPalette } from '../../../style-config';
+import { colorPaletteNeutrals } from '../../../style-config';
 import {
   AxisType, CartesianChartLayout, Data, ThemeVariants,
 } from '../../../types';
@@ -76,8 +76,7 @@ export const Lines = ({
     top, right, bottom, left,
   } = axis;
   const {
-    index, series, overlay, layout, showMarker, styleSeries, styleOverlay, renderAs, tooltip,
-    seriesNames, overlayName, seriesColors, overlayColor,
+    index, layout, showMarker, renderAs, tooltip, series, overlay,
   } = metadata;
 
   const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
@@ -86,9 +85,7 @@ export const Lines = ({
   const seriesAxis = isHorizontal ? left! : bottom!;
   const overlayAxis = isHorizontal ? right : top;
 
-  const hasOverlay = Boolean(overlayAxis && overlay?.length);
-
-  const palette = useMemo(() => defaultLineChartPalette[theme], [theme]);
+  const hasOverlay = Boolean(overlayAxis && overlay.dataKey);
 
   const renderer = useMemo(() => {
     const whichMonotone = isHorizontal ? curveMonotoneX : curveMonotoneY;
@@ -205,7 +202,7 @@ export const Lines = ({
       left={lPos}
     >
       <Group className={LinesItemGroup}>
-        {series.map((k: string, i: number) => (
+        {series.dataKey.map((k: string, i: number) => (
           <Group key={k} className={LinesItem}>
             <LinePath
               data={data}
@@ -216,10 +213,10 @@ export const Lines = ({
               y={(d: Record<string, unknown>) => (isHorizontal
                 ? accessor(seriesAxis, k, d)
                 : accessor(indexAxis, index, d))}
-              stroke={styleSeries?.[i]?.stroke ?? palette.series[i]}
-              strokeWidth={styleSeries?.[i]?.strokeWidth ?? 2}
-              strokeOpacity={styleSeries?.[i]?.strokeOpacity ?? 1}
-              strokeDasharray={styleSeries?.[i]?.strokeDasharray}
+              stroke={series.colors[i]}
+              strokeWidth={series.style?.[i]?.strokeWidth ?? 2}
+              strokeOpacity={series.style?.[i]?.strokeOpacity ?? 1}
+              strokeDasharray={series.style?.[i]?.strokeDasharray}
             />
 
             {showMarker && data.map(d => (
@@ -232,10 +229,10 @@ export const Lines = ({
                 cy={isHorizontal
                   ? accessor(seriesAxis, k, d)
                   : accessor(indexAxis, index, d)}
-                stroke={styleSeries?.[i] ? styleSeries[i]?.stroke : palette.series[i]}
+                stroke={series.colors[i]}
                 fill={theme === 'light' ? colorPaletteNeutrals.white : colorPaletteNeutrals.black}
-                strokeWidth={styleSeries?.[i]?.strokeWidth ?? 1}
-                strokeOpacity={styleSeries?.[i]?.strokeOpacity ?? 1}
+                strokeWidth={series.style?.[i]?.strokeWidth ?? 1}
+                strokeOpacity={series.style?.[i]?.strokeOpacity ?? 1}
               />
             ))}
           </Group>
@@ -248,14 +245,14 @@ export const Lines = ({
               curve={renderer}
               x={(d: Record<string, unknown>) => (isHorizontal
                 ? accessor(indexAxis, index, d)
-                : accessor(overlayAxis!, overlay, d))}
+                : accessor(overlayAxis!, overlay.dataKey, d))}
               y={(d: Record<string, unknown>) => (isHorizontal
-                ? accessor(overlayAxis!, overlay, d)
+                ? accessor(overlayAxis!, overlay.dataKey, d)
                 : accessor(indexAxis, index, d))}
-              stroke={styleOverlay?.stroke ?? palette.overlay}
-              strokeWidth={styleOverlay?.strokeWidth ?? 2}
-              strokeOpacity={styleOverlay?.strokeOpacity ?? 1}
-              strokeDasharray={styleOverlay?.strokeDasharray}
+              stroke={overlay.color}
+              strokeWidth={overlay.style?.strokeWidth ?? 2}
+              strokeOpacity={overlay.style?.strokeOpacity ?? 1}
+              strokeDasharray={overlay.style?.strokeDasharray}
             />
 
             {showMarker && data.map(d => (
@@ -264,14 +261,14 @@ export const Lines = ({
                 r={2}
                 cx={isHorizontal
                   ? accessor(indexAxis, index, d)
-                  : accessor(overlayAxis!, overlay, d)}
+                  : accessor(overlayAxis!, overlay.dataKey, d)}
                 cy={isHorizontal
-                  ? accessor(overlayAxis!, overlay, d)
+                  ? accessor(overlayAxis!, overlay.dataKey, d)
                   : accessor(indexAxis, index, d)}
-                stroke={styleOverlay?.stroke ?? palette.overlay}
+                stroke={overlay.color}
                 fill={theme === 'light' ? colorPaletteNeutrals.white : colorPaletteNeutrals.black}
-                strokeWidth={styleOverlay?.strokeWidth ?? 1}
-                strokeOpacity={styleOverlay?.strokeOpacity ?? 1}
+                strokeWidth={overlay.style?.strokeWidth ?? 1}
+                strokeOpacity={overlay.style?.strokeOpacity ?? 1}
               />
             ))}
           </Group>
@@ -312,7 +309,7 @@ export const Lines = ({
               strokeDasharray="1 2"
             />
 
-            {series.map((s: string, i: number) => (
+            {series.dataKey.map((s: string, i: number) => (
               <circle
                 key={s}
                 r={2}
@@ -322,10 +319,10 @@ export const Lines = ({
                 cy={isHorizontal
                   ? seriesAxis.scale(getPrimitiveFromObjectPath(tooltipData.data, s))
                   : tooltipData.lineIndicatorPos}
-                stroke={styleSeries?.[i] ? styleSeries?.[i].stroke : palette.series[i]}
-                fill={styleSeries?.[i] ? styleSeries?.[i].stroke : palette.series[i]}
-                strokeWidth={styleSeries?.[i]?.strokeWidth ?? 1}
-                strokeOpacity={styleSeries?.[i]?.strokeOpacity ?? 1}
+                stroke={series.colors[i]}
+                fill={series.colors[i]}
+                strokeWidth={series.style?.[i]?.strokeWidth ?? 1}
+                strokeOpacity={series.style?.[i]?.strokeOpacity ?? 1}
               />
             ))}
 
@@ -334,14 +331,14 @@ export const Lines = ({
                 r={2}
                 cx={isHorizontal
                   ? tooltipData.lineIndicatorPos
-                  : overlayAxis?.scale(getPrimitiveFromObjectPath(tooltipData.data, overlay))}
+                  : overlayAxis?.scale(getPrimitiveFromObjectPath(tooltipData.data, overlay.dataKey))}
                 cy={isHorizontal
-                  ? overlayAxis?.scale(getPrimitiveFromObjectPath(tooltipData.data, overlay))
+                  ? overlayAxis?.scale(getPrimitiveFromObjectPath(tooltipData.data, overlay.dataKey))
                   : tooltipData.lineIndicatorPos}
-                stroke={styleOverlay?.stroke ?? palette.overlay}
-                fill={styleOverlay?.stroke ?? palette.overlay}
-                strokeWidth={styleOverlay?.strokeWidth ?? 1}
-                strokeOpacity={styleOverlay?.strokeOpacity ?? 1}
+                stroke={overlay.color}
+                fill={overlay.color}
+                strokeWidth={overlay.style?.strokeWidth ?? 1}
+                strokeOpacity={overlay.style?.strokeOpacity ?? 1}
               />
             )}
           </Group>
@@ -363,7 +360,7 @@ export const Lines = ({
               </p>
 
               <ul>
-                {series.map((s: string, i: number) => (
+                {series.dataKey.map((s: string, i: number) => (
                   <li key={s}>
                     <div className={LinesTooltipSeries}>
                       <svg width={12} height={12}>
@@ -374,11 +371,11 @@ export const Lines = ({
                           height={12}
                           rx={2}
                           ry={2}
-                          fill={seriesColors[i]}
+                          fill={series.colors[i]}
                         />
                       </svg>
                       <span>
-                        { seriesNames[i]}
+                        {series.names[i]}
                       </span>
                     </div>
 
@@ -400,7 +397,7 @@ export const Lines = ({
                   </li>
                 ))}
 
-                {overlay && (
+                {hasOverlay && (
                   <li>
                     <div className={LinesTooltipSeries}>
                       <svg width={12} height={12}>
@@ -411,24 +408,29 @@ export const Lines = ({
                           height={12}
                           rx={2}
                           ry={2}
-                          fill={overlayColor}
+                          fill={overlay.color}
                         />
                       </svg>
                       <span>
-                        {overlayName}
+                        {overlay.name}
                       </span>
                     </div>
 
                     <div>
                       {tooltip?.extraOverlayData && (
-                        <p>{tooltip.extraOverlayData(_.at(tooltipData.data, getLabelFromObjectPath(overlay))[0])}</p>
+                        <p>
+                          {tooltip.extraOverlayData(
+                            _.at(tooltipData.data, getLabelFromObjectPath(overlay.dataKey))[0],
+                          )}
+
+                        </p>
                       )}
                     </div>
 
                     <div>
                       <p>
                         <b>
-                          {`${getPrimitiveFromObjectPath(tooltipData.data, overlay) ?? 'n/a'}`}
+                          {`${getPrimitiveFromObjectPath(tooltipData.data, overlay.dataKey) ?? 'n/a'}`}
                         </b>
                       </p>
                     </div>
