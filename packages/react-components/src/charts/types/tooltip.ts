@@ -17,7 +17,6 @@
 import { ThemeVariants } from './themes';
 
 export type TooltipStyleMain = {
-  color: string;
   minWidth: string | number;
   minHeight: string | number;
   maxWidth: string | number;

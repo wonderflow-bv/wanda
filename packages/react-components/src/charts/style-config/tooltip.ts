@@ -21,13 +21,12 @@ import { toHSLA } from '../utils';
 import { colorPaletteNeutrals } from '.';
 
 export const tooltipStyleMain: TooltipStyleMain = {
-  color: colorPaletteNeutrals.dimmed6,
   minWidth: 250,
   minHeight: 80,
   maxWidth: 350,
   maxHeight: 'unset',
-  overflow: 'scroll',
-  padding: '0rem 0rem',
+  overflow: 'auto',
+  padding: '0rem',
   borderRadius: '0.25rem',
   zIndex: '10',
 };

@@ -77,7 +77,7 @@ export const Lines = ({
   } = axis;
   const {
     index, series, overlay, layout, showMarker, styleSeries, styleOverlay, renderAs, tooltip,
-    seriesRename, overlayRename,
+    seriesNames, overlayName, seriesColors, overlayColor,
   } = metadata;
 
   const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
@@ -159,7 +159,7 @@ export const Lines = ({
     zIndex: 10,
   });
 
-  const handleTooltip = useCallback((event: any, extraContent?: unknown) => {
+  const handleTooltip = useCallback((event: React.SyntheticEvent<ownerSVGElement>) => {
     const {
       scaleType, domain, scale,
     } = indexAxis;
@@ -188,7 +188,6 @@ export const Lines = ({
 
     const tooltipData = {
       coords,
-      extraContent,
       data: data[bisectValueIndexOf],
       lineIndicatorPos,
     };
@@ -295,164 +294,159 @@ export const Lines = ({
       />
 
       {tooltipData?.data && (
-        <Group>
-          <Line
-            from={{
-              x: isHorizontal ? tooltipData.lineIndicatorPos : 0,
-              y: isHorizontal ? 0 : tooltipData.lineIndicatorPos,
-            }}
-            to={{
-              x: isHorizontal ? tooltipData.lineIndicatorPos : xMax,
-              y: isHorizontal ? yMax : tooltipData.lineIndicatorPos,
-            }}
-            stroke={colorPaletteNeutrals.dimmed4}
-            strokeWidth={1}
-            opacity={0.6}
-            pointerEvents="none"
-            strokeDasharray="1 2"
-          />
-
-          {series.map((s: string, i: number) => (
-            <circle
-              key={s}
-              r={2}
-              cx={isHorizontal
-                ? tooltipData.lineIndicatorPos
-                : seriesAxis.scale(getPrimitiveFromObjectPath(tooltipData.data, s))}
-              cy={isHorizontal
-                ? seriesAxis.scale(getPrimitiveFromObjectPath(tooltipData.data, s))
-                : tooltipData.lineIndicatorPos}
-              stroke={styleSeries?.[i] ? styleSeries?.[i].stroke : palette.series[i]}
-              fill={styleSeries?.[i] ? styleSeries?.[i].stroke : palette.series[i]}
-              strokeWidth={styleSeries?.[i]?.strokeWidth ?? 1}
-              strokeOpacity={styleSeries?.[i]?.strokeOpacity ?? 1}
+        <>
+          <Group>
+            <Line
+              from={{
+                x: isHorizontal ? tooltipData.lineIndicatorPos : 0,
+                y: isHorizontal ? 0 : tooltipData.lineIndicatorPos,
+              }}
+              to={{
+                x: isHorizontal ? tooltipData.lineIndicatorPos : xMax,
+                y: isHorizontal ? yMax : tooltipData.lineIndicatorPos,
+              }}
+              stroke={colorPaletteNeutrals.dimmed4}
+              strokeWidth={1}
+              opacity={0.6}
+              pointerEvents="none"
+              strokeDasharray="1 2"
             />
-          ))}
 
-          {hasOverlay && (
-            <circle
-              r={2}
-              cx={isHorizontal
-                ? tooltipData.lineIndicatorPos
-                : overlayAxis?.scale(getPrimitiveFromObjectPath(tooltipData.data, overlay))}
-              cy={isHorizontal
-                ? overlayAxis?.scale(getPrimitiveFromObjectPath(tooltipData.data, overlay))
-                : tooltipData.lineIndicatorPos}
-              stroke={styleOverlay?.stroke ?? palette.overlay}
-              fill={styleOverlay?.stroke ?? palette.overlay}
-              strokeWidth={styleOverlay?.strokeWidth ?? 1}
-              strokeOpacity={styleOverlay?.strokeOpacity ?? 1}
-            />
-          )}
-        </Group>
-      )}
+            {series.map((s: string, i: number) => (
+              <circle
+                key={s}
+                r={2}
+                cx={isHorizontal
+                  ? tooltipData.lineIndicatorPos
+                  : seriesAxis.scale(getPrimitiveFromObjectPath(tooltipData.data, s))}
+                cy={isHorizontal
+                  ? seriesAxis.scale(getPrimitiveFromObjectPath(tooltipData.data, s))
+                  : tooltipData.lineIndicatorPos}
+                stroke={styleSeries?.[i] ? styleSeries?.[i].stroke : palette.series[i]}
+                fill={styleSeries?.[i] ? styleSeries?.[i].stroke : palette.series[i]}
+                strokeWidth={styleSeries?.[i]?.strokeWidth ?? 1}
+                strokeOpacity={styleSeries?.[i]?.strokeOpacity ?? 1}
+              />
+            ))}
 
-      {tooltipData?.data && (
-        <Tooltip
-          theme={theme}
-          isOpen={tooltipOpen}
-          top={tooltipTop}
-          left={tooltipLeft}
-        >
-          <div className={LinesTooltipContent}>
-            <p>
-              <b>
-                { indexAxis.tickFormat
-                  ? indexAxis.tickFormat(getPrimitiveFromObjectPath(tooltipData.data, index) ?? '')
-                  : getPrimitiveFromObjectPath(tooltipData.data, index) ?? ''
-              }
-              </b>
-            </p>
+            {hasOverlay && (
+              <circle
+                r={2}
+                cx={isHorizontal
+                  ? tooltipData.lineIndicatorPos
+                  : overlayAxis?.scale(getPrimitiveFromObjectPath(tooltipData.data, overlay))}
+                cy={isHorizontal
+                  ? overlayAxis?.scale(getPrimitiveFromObjectPath(tooltipData.data, overlay))
+                  : tooltipData.lineIndicatorPos}
+                stroke={styleOverlay?.stroke ?? palette.overlay}
+                fill={styleOverlay?.stroke ?? palette.overlay}
+                strokeWidth={styleOverlay?.strokeWidth ?? 1}
+                strokeOpacity={styleOverlay?.strokeOpacity ?? 1}
+              />
+            )}
+          </Group>
 
-            <ul>
-              {series.map((s: string, i: number) => (
-                <li key={s}>
-                  <div className={LinesTooltipSeries}>
-                    <svg width={12} height={12}>
-                      <rect
-                        x={0}
-                        y={0}
-                        width={12}
-                        height={12}
-                        rx={2}
-                        ry={2}
-                        fill={styleSeries?.[i] ? styleSeries[i]?.stroke : palette.series[i]}
-                      />
-                    </svg>
-                    <span>
-                      { seriesRename
-                        ? `${_.startCase(seriesRename(s, i))}`
-                        : `${_.startCase(getLabelFromObjectPath(s))}`
-                      }
-                    </span>
-                  </div>
+          <Tooltip
+            theme={theme}
+            isOpen={tooltipOpen}
+            top={tooltipTop}
+            left={tooltipLeft}
+          >
+            <div className={LinesTooltipContent}>
+              <p>
+                <b>
+                  { indexAxis.tickFormat
+                    ? indexAxis.tickFormat(getPrimitiveFromObjectPath(tooltipData.data, index) ?? '')
+                    : getPrimitiveFromObjectPath(tooltipData.data, index) ?? ''
+                }
+                </b>
+              </p>
 
-                  <div>
-                    {tooltip?.extraSeriesData && (
-                      <p>{tooltip.extraSeriesData(_.at(tooltipData.data, getLabelFromObjectPath(s))[0])}</p>
-                    )}
-                  </div>
+              <ul>
+                {series.map((s: string, i: number) => (
+                  <li key={s}>
+                    <div className={LinesTooltipSeries}>
+                      <svg width={12} height={12}>
+                        <rect
+                          x={0}
+                          y={0}
+                          width={12}
+                          height={12}
+                          rx={2}
+                          ry={2}
+                          fill={seriesColors[i]}
+                        />
+                      </svg>
+                      <span>
+                        { seriesNames[i]}
+                      </span>
+                    </div>
 
-                  <div>
-                    <p>
-                      <b>
-                        {`${getPrimitiveFromObjectPath(tooltipData.data, s) ?? 'n/a'}`}
-                      </b>
-                    </p>
-                  </div>
-                </li>
-              ))}
+                    <div>
+                      {tooltip?.extraSeriesData && (
+                        <p>
+                          {tooltip.extraSeriesData(_.at(tooltipData.data, getLabelFromObjectPath(s))[0])}
+                        </p>
+                      )}
+                    </div>
 
-              {overlay && (
-                <li>
-                  <div className={LinesTooltipSeries}>
-                    <svg width={12} height={12}>
-                      <rect
-                        x={0}
-                        y={0}
-                        width={12}
-                        height={12}
-                        rx={2}
-                        ry={2}
-                        fill={styleOverlay?.stroke ?? palette.overlay}
-                      />
-                    </svg>
-                    <span>
-                      {
-                        overlayRename
-                        ?? _.startCase(overlayAxis?.label)
-                        ?? _.startCase(getLabelFromObjectPath(overlay))
-                      }
-                    </span>
-                  </div>
+                    <div>
+                      <p>
+                        <b>
+                          {`${getPrimitiveFromObjectPath(tooltipData.data, s) ?? 'n/a'}`}
+                        </b>
+                      </p>
+                    </div>
+                  </li>
+                ))}
 
-                  <div>
-                    {tooltip?.extraOverlayData && (
-                      <p>{tooltip.extraOverlayData(_.at(tooltipData.data, getLabelFromObjectPath(overlay))[0])}</p>
-                    )}
-                  </div>
+                {overlay && (
+                  <li>
+                    <div className={LinesTooltipSeries}>
+                      <svg width={12} height={12}>
+                        <rect
+                          x={0}
+                          y={0}
+                          width={12}
+                          height={12}
+                          rx={2}
+                          ry={2}
+                          fill={overlayColor}
+                        />
+                      </svg>
+                      <span>
+                        {overlayName}
+                      </span>
+                    </div>
 
-                  <div>
-                    <p>
-                      <b>
-                        {`${getPrimitiveFromObjectPath(tooltipData.data, overlay) ?? 'n/a'}`}
-                      </b>
-                    </p>
-                  </div>
-                </li>
-              )}
-            </ul>
-          </div>
+                    <div>
+                      {tooltip?.extraOverlayData && (
+                        <p>{tooltip.extraOverlayData(_.at(tooltipData.data, getLabelFromObjectPath(overlay))[0])}</p>
+                      )}
+                    </div>
 
-          { tooltip?.extraContent && (
-            <div
-              className={ExtraContent}
-              style={{ borderColor: colorPaletteNeutrals.dimmed5 }}
-            >
-              {tooltip.extraContent}
+                    <div>
+                      <p>
+                        <b>
+                          {`${getPrimitiveFromObjectPath(tooltipData.data, overlay) ?? 'n/a'}`}
+                        </b>
+                      </p>
+                    </div>
+                  </li>
+                )}
+              </ul>
             </div>
-          )}
-        </Tooltip>
+
+            { tooltip?.extraContent && (
+              <div
+                className={ExtraContent}
+                style={{ borderColor: colorPaletteNeutrals.dimmed5 }}
+              >
+                {tooltip.extraContent}
+              </div>
+            )}
+          </Tooltip>
+        </>
       )}
     </Group>
   );

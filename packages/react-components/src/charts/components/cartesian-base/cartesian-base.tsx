@@ -76,6 +76,7 @@ export type CartesianBaseProps = {
     left?: AxisProps;
   };
   legend?: React.ReactNode;
+  hideLegend?: boolean;
   styleConfig?: DeepPartial<CartesianStyleConfig>;
   otherProps?: Record<string, unknown>;
   children?: React.ReactNode;
@@ -109,6 +110,8 @@ export type AxisProps = {
   otherProps?: Record<string, unknown>;
 }
 
+const renderLegendContent = () => <div>my legend</div>;
+
 export const CartesianBase = ({
   data = [],
   metadata,
@@ -133,6 +136,7 @@ export const CartesianBase = ({
   headings,
   axis,
   legend,
+  hideLegend = false,
   styleConfig,
   otherProps,
   children,
@@ -381,9 +385,9 @@ export const CartesianBase = ({
 
       </svg>
 
-      {legend && (
+      {!hideLegend && (
         <div ref={refLegend} className={styles.Legend}>
-          {legend}
+          {legend ?? renderLegendContent()}
         </div>
       )}
     </div>
@@ -391,3 +395,4 @@ export const CartesianBase = ({
 };
 
 CartesianBase.displayName = 'CartesianBase';
+

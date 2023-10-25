@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
+import _ from 'lodash';
 import { useMemo } from 'react';
 import { Except } from 'type-fest';
 
+import { defaultLineChartPalette } from '../../style-config';
 import {
   CartesianChartLayout, Charts, Data,
 } from '../../types';
-import { handleDomainAndScaleType } from '../../utils';
+import { getLabelFromObjectPath, handleDomainAndScaleType } from '../../utils';
 import { AxisProps } from '../cartesian-base';
 import { CartesianBase, CartesianBaseProps } from '../cartesian-base/cartesian-base';
 
@@ -73,9 +75,11 @@ export type LineChartMetadata = {
   renderAs?: LineChartRenderType;
   index: string;
   series: string[];
-  seriesRename?: (...args: any) => string;
+  seriesNames: string[];
+  seriesColors: Array<string | undefined>;
   overlay?: string;
-  overlayRename?: string;
+  overlayName: string;
+  overlayColor: string;
   tooltip?: LineChartTooltip;
   styleSeries?: Array<LineStyle | undefined>;
   styleOverlay?: LineStyle;
@@ -84,6 +88,7 @@ export type LineChartMetadata = {
 }
 
 export const LineChart = ({
+  theme = 'light',
   layout = CartesianChartLayout.HORIZONTAL,
   renderAs = 'curves',
   data,
@@ -114,15 +119,41 @@ export const LineChart = ({
     },
   }), [i, o, s]);
 
+  const seriesNames = useMemo(() => series.dataKey.map((s: string, i: number) => (series.rename
+    ? `${_.startCase(series.rename(s, i))}`
+    : `${_.startCase(getLabelFromObjectPath(s))}`)), [series]);
+
+  const palette = useMemo(() => defaultLineChartPalette[theme], [theme]);
+
+  const seriesColors = useMemo(() => series.dataKey.map((_, i: number) => (
+    series.style?.[i] ? series.style[i]?.stroke : palette.series[i]
+  )), [palette.series, series.dataKey, series.style]);
+
+  const overlayColor = useMemo(
+    () => overlay?.style?.stroke ?? palette.overlay, [overlay?.style?.stroke, palette.overlay],
+  );
+
+  const overlayName = useMemo(() => {
+    if (overlay) {
+      return overlay.rename
+        ?? _.startCase(overlay?.label)
+        ?? _.startCase(getLabelFromObjectPath(overlay.dataKey));
+    }
+
+    return '';
+  }, [overlay]);
+
   const metadata = {
     type: Charts.LINE_CHART,
     renderAs,
     layout,
     index: index.dataKey,
     series: series.dataKey,
-    seriesRename: series.rename,
+    seriesNames,
+    seriesColors,
     overlay: overlay?.dataKey,
-    overlayRename: overlay?.rename,
+    overlayName,
+    overlayColor,
     tooltip,
     styleSeries: series.style,
     styleOverlay: overlay?.style,
@@ -132,6 +163,7 @@ export const LineChart = ({
 
   return (
     <CartesianBase
+      theme={theme}
       data={data}
       metadata={metadata}
       axis={axis[layout]}
