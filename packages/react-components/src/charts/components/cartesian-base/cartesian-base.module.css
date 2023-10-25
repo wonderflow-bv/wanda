@@ -30,3 +30,28 @@
   top: var(--legend-top);
   width: var(--legend-width);
 }
+
+.LegendContent {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  & ul {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    list-style: none;
+    gap: 1rem;
+
+    & li > div {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 4px;
+      font-size: 12px;
+    }
+  }
+}

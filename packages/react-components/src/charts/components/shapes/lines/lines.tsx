@@ -322,7 +322,6 @@ export const Lines = ({
                 stroke={series.colors[i]}
                 fill={series.colors[i]}
                 strokeWidth={series.style?.[i]?.strokeWidth ?? 1}
-                strokeOpacity={series.style?.[i]?.strokeOpacity ?? 1}
               />
             ))}
 
@@ -338,7 +337,6 @@ export const Lines = ({
                 stroke={overlay.color}
                 fill={overlay.color}
                 strokeWidth={overlay.style?.strokeWidth ?? 1}
-                strokeOpacity={overlay.style?.strokeOpacity ?? 1}
               />
             )}
           </Group>
@@ -442,7 +440,7 @@ export const Lines = ({
             { tooltip?.extraContent && (
               <div
                 className={ExtraContent}
-                style={{ borderColor: colorPaletteNeutrals.dimmed5 }}
+                style={{ borderColor: colorPaletteNeutrals.dimmed3 }}
               >
                 {tooltip.extraContent}
               </div>

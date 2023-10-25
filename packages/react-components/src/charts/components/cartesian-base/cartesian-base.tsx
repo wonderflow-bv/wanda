@@ -110,7 +110,59 @@ export type AxisProps = {
   otherProps?: Record<string, unknown>;
 }
 
-const renderLegendContent = () => <div>my legend</div>;
+const renderLegendContent = (metadata?: LineChartMetadata) => {
+  if (metadata) {
+    const { names, colors, dataKey: sdk } = metadata.series;
+    const { name, color, dataKey: odk } = metadata.overlay;
+    return (
+      <ul>
+        {sdk.map((s: string, i: number) => (
+          <li key={s}>
+            <div>
+              <svg width={12} height={12}>
+                <rect
+                  x={0}
+                  y={0}
+                  width={12}
+                  height={12}
+                  rx={2}
+                  ry={2}
+                  fill={colors[i]}
+                />
+              </svg>
+              <span>
+                {names[i]}
+              </span>
+            </div>
+          </li>
+        ))}
+
+        {odk && (
+          <li>
+            <div>
+              <svg width={12} height={12}>
+                <rect
+                  x={0}
+                  y={0}
+                  width={12}
+                  height={12}
+                  rx={2}
+                  ry={2}
+                  fill={color}
+                />
+              </svg>
+              <span>
+                {name}
+              </span>
+            </div>
+          </li>
+        )}
+      </ul>
+    );
+  }
+
+  return null;
+};
 
 export const CartesianBase = ({
   data = [],
@@ -387,7 +439,9 @@ export const CartesianBase = ({
 
       {!hideLegend && (
         <div ref={refLegend} className={styles.Legend}>
-          {legend ?? renderLegendContent()}
+          <div className={styles.LegendContent}>
+            {legend ?? renderLegendContent(metadata)}
+          </div>
         </div>
       )}
     </div>
