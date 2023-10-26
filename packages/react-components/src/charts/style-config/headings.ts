@@ -23,7 +23,7 @@ export const headingsStyleConfig: HeadingsStyleConfig = {
   title: {
     height: 23.5,
     fill: themeLight.headings.title,
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: 600,
     lineHeight: 1.25,
     textAnchor: 'start',
@@ -34,12 +34,12 @@ export const headingsStyleConfig: HeadingsStyleConfig = {
   subtitle: {
     height: 19,
     fill: themeLight.headings.subtitle,
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: 400,
     lineHeight: 1,
     textAnchor: 'start',
     verticalAnchor: 'start',
     x: 0,
-    y: 25,
+    y: 21,
   },
 };

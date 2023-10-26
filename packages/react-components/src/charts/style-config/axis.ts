@@ -26,7 +26,7 @@ export const axisStyleConfig: AxisStyleConfig = {
     fill: themeLight.axis.label,
     fontFamily: 'system-ui, sans-serif',
     fontSize: 12,
-    fontWeight: 400,
+    fontWeight: 600,
     textAnchor: 'middle',
   },
   tickLabelProps: {
