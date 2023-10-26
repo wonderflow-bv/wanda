@@ -28,6 +28,7 @@ import {
 import { localPoint } from '@visx/event';
 import { Group } from '@visx/group';
 import { Line, LinePath } from '@visx/shape';
+import { Text } from '@visx/text';
 import { useTooltip, useTooltipInPortal } from '@visx/tooltip';
 import { bisector } from '@visx/vendor/d3-array';
 import { ScaleLinear, ScaleTime } from '@visx/vendor/d3-scale';
@@ -42,8 +43,7 @@ import { getLabelFromObjectPath, getPrimitiveFromObjectPath } from '../../../uti
 import { LineChartMetadata } from '../../line-chart/line-chart';
 import { Tooltip } from '../../tooltip';
 import {
-  ExtraContent,
-  LinesItem, LinesItemGroup, LinesTooltipContent, LinesTooltipSeries,
+  ExtraContent, LinesItem, LinesItemGroup, LinesTooltipContent, LinesTooltipSeries,
 } from './lines.module.css';
 
 export type LinesProps = {
@@ -76,7 +76,7 @@ export const Lines = ({
     top, right, bottom, left,
   } = axis;
   const {
-    index, layout, showMarker, renderAs, tooltip, series, overlay,
+    index, layout, showMarker, showMarkerLabel, renderAs, tooltip, series, overlay,
   } = metadata;
 
   const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
@@ -203,7 +203,10 @@ export const Lines = ({
     >
       <Group className={LinesItemGroup}>
         {series.dataKey.map((k: string, i: number) => (
-          <Group key={k} className={LinesItem}>
+          <Group
+            key={k}
+            className={LinesItem}
+          >
             <LinePath
               data={data}
               curve={renderer}
@@ -219,21 +222,44 @@ export const Lines = ({
               strokeDasharray={series.style?.[i]?.strokeDasharray}
             />
 
-            {showMarker && data.map(d => (
-              <circle
-                key={JSON.stringify(d)}
-                r={2}
-                cx={isHorizontal
-                  ? accessor(indexAxis, index, d)
-                  : accessor(seriesAxis, k, d)}
-                cy={isHorizontal
-                  ? accessor(seriesAxis, k, d)
-                  : accessor(indexAxis, index, d)}
-                stroke={series.colors[i]}
-                fill={theme === 'light' ? colorPaletteNeutrals.white : colorPaletteNeutrals.black}
-                strokeWidth={series.style?.[i]?.strokeWidth ?? 1}
-                strokeOpacity={series.style?.[i]?.strokeOpacity ?? 1}
-              />
+            {(showMarker
+            || showMarkerLabel
+            || series.style?.[i]?.showMarker
+            || series.style?.[i]?.showMarkerLabel
+            ) && data.map((d: Record<string, any>, f: number) => (
+              <Group key={JSON.stringify(d)}>
+                <circle
+                  r={2}
+                  cx={isHorizontal
+                    ? accessor(indexAxis, index, d)
+                    : accessor(seriesAxis, k, d)}
+                  cy={isHorizontal
+                    ? accessor(seriesAxis, k, d)
+                    : accessor(indexAxis, index, d)}
+                  stroke={series.colors[i]}
+                  fill={theme === 'light' ? colorPaletteNeutrals.white : colorPaletteNeutrals.black}
+                  strokeWidth={series.style?.[i]?.strokeWidth ?? 1}
+                  strokeOpacity={series.style?.[i]?.strokeOpacity ?? 1}
+                />
+
+                {(showMarkerLabel || series.style?.[i]?.showMarkerLabel) && (
+                  <Text
+                    fontSize={12}
+                    angle={0}
+                    textAnchor="middle"
+                    dy={-6}
+                    dx={f === 0 ? 10 : 0}
+                    x={isHorizontal
+                      ? accessor(indexAxis, index, d)
+                      : accessor(seriesAxis, k, d)}
+                    y={isHorizontal
+                      ? accessor(seriesAxis, k, d)
+                      : accessor(indexAxis, index, d)}
+                  >
+                    {`${getPrimitiveFromObjectPath(d, k) ?? ''}`}
+                  </Text>
+                )}
+              </Group>
             ))}
           </Group>
         ))}
@@ -273,6 +299,7 @@ export const Lines = ({
             ))}
           </Group>
         )}
+
       </Group>
 
       <rect

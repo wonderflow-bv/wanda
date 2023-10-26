@@ -44,14 +44,19 @@
     align-items: center;
     list-style: none;
     gap: 1rem;
+  }
 
-    & li > div {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 4px;
-      font-size: 12px;
+  & li > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 4px;
+    font-size: 12px;
+
+    & :hover {
+      cursor: pointer;
     }
   }
 }
+
