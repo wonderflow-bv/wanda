@@ -247,7 +247,7 @@ export const Lines = ({
                     fontSize={12}
                     angle={0}
                     textAnchor="middle"
-                    dy={-6}
+                    dy={-8}
                     dx={f === 0 ? 10 : 0}
                     x={isHorizontal
                       ? accessor(indexAxis, index, d)

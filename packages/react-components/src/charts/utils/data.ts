@@ -63,7 +63,7 @@ export const handleDomainAndScaleType = (
 
   let d = removeNilValuesFromArray(domainData) as Array<string | number>;
   const st = inferScaleTypeFromDomain(domainData, scaleType);
-
+  console.log('handleDomainAndScaleType', d);
   if (domain?.length) {
     if (st === 'label') {
       d = domain;
@@ -95,6 +95,12 @@ export const handleDomainAndScaleType = (
         const high = nMax > oldMax ? nMax : oldMax;
         d = [low, high];
       }
+    }
+  } else if (st === 'linear') {
+    const minMaxNum = getMinMaxNumber(d as number[]);
+    if (minMaxNum) {
+      const [min, max] = minMaxNum;
+      d = [min, _.ceil(max * 1.05)];
     }
   }
 
