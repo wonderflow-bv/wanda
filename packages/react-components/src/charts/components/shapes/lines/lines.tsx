@@ -347,7 +347,6 @@ export const Lines = ({
                 {(showMarkerLabel || series.style?.[i]?.showMarkerLabel) && (
                   <Text
                     fontSize={12}
-                    angle={0}
                     textAnchor={getMarkerLabelProps(d, k, isHorizontal, false).anchor}
                     dx={getMarkerLabelProps(d, k, isHorizontal, false).dx}
                     dy={getMarkerLabelProps(d, k, isHorizontal, false).dy}
@@ -377,8 +376,8 @@ export const Lines = ({
 
             {(showMarker
             || showMarkerLabel
-            || overlay.style?.[i]?.showMarker
-            || overlay.style?.[i]?.showMarkerLabel
+            || overlay.style?.showMarker
+            || overlay.style?.showMarkerLabel
             ) && data.map((d: Record<string, any>) => (
               <Group
                 key={JSON.stringify(d)}
@@ -396,7 +395,6 @@ export const Lines = ({
                 {(showMarkerLabel || overlay.style?.showMarkerLabel) && (
                   <Text
                     fontSize={12}
-                    angle={0}
                     textAnchor={getMarkerLabelProps(d, overlay.dataKey, isHorizontal, true).anchor}
                     dx={getMarkerLabelProps(d, overlay.dataKey, isHorizontal, true).dx}
                     dy={getMarkerLabelProps(d, overlay.dataKey, isHorizontal, true).dy}
