@@ -196,6 +196,71 @@ export const Lines = ({
     });
   }, [containerBounds, indexAxis, isHorizontal, bisectIndex, data, showTooltip]);
 
+  const handleMarkerLabelPosition = (
+    data: Data,
+    index: number,
+    isHorizontal: boolean,
+  ) => {
+    if (isHorizontal) {
+      if (index === 0) return 'start';
+      if (index === data.length - 1) return 'end';
+      return 'middle';
+    }
+
+    return 'start';
+  };
+
+  const getCoordinates = (
+    {
+      datum,
+      indexAxis,
+      indexDataKey,
+      otherAxis,
+      otherDataKey,
+      isHorizontal,
+    }: {
+      datum: Record<string, unknown>;
+      indexAxis: AxisType;
+      indexDataKey: string;
+      otherAxis: AxisType;
+      otherDataKey: string;
+      isHorizontal: boolean;
+    },
+  ) => {
+    const i = accessor(indexAxis, indexDataKey, datum);
+    const o = accessor(otherAxis, otherDataKey, datum);
+
+    return isHorizontal
+      ? { x: i, y: o }
+      : { x: o, y: i };
+  };
+
+  const getSeriesCoordinates = (
+    datum: Record<string, unknown>,
+    dataKey: string,
+    isHorizontal: boolean,
+  ) => getCoordinates({
+    datum,
+    indexAxis,
+    indexDataKey: index,
+    otherAxis: seriesAxis,
+    otherDataKey: dataKey,
+    isHorizontal,
+  });
+
+  const getOverlayCoordinates = (
+    datum: Record<string, unknown>,
+    dataKey: string,
+    isHorizontal: boolean,
+  ) => getCoordinates({
+    datum,
+    indexAxis,
+    indexDataKey: index,
+    otherAxis: overlayAxis,
+    otherDataKey: dataKey,
+    isHorizontal,
+  });
+
   return (
     <Group
       top={tPos}
@@ -210,12 +275,8 @@ export const Lines = ({
             <LinePath
               data={data}
               curve={renderer}
-              x={(d: Record<string, unknown>) => (isHorizontal
-                ? accessor(indexAxis, index, d)
-                : accessor(seriesAxis, k, d))}
-              y={(d: Record<string, unknown>) => (isHorizontal
-                ? accessor(seriesAxis, k, d)
-                : accessor(indexAxis, index, d))}
+              x={d => getSeriesCoordinates(d, k, isHorizontal).x}
+              y={d => getSeriesCoordinates(d, k, isHorizontal).y}
               stroke={series.colors[i]}
               strokeWidth={series.style?.[i]?.strokeWidth ?? 2}
               strokeOpacity={series.style?.[i]?.strokeOpacity ?? 1}
@@ -230,12 +291,8 @@ export const Lines = ({
               <Group key={JSON.stringify(d)}>
                 <circle
                   r={2}
-                  cx={isHorizontal
-                    ? accessor(indexAxis, index, d)
-                    : accessor(seriesAxis, k, d)}
-                  cy={isHorizontal
-                    ? accessor(seriesAxis, k, d)
-                    : accessor(indexAxis, index, d)}
+                  cx={getSeriesCoordinates(d, k, isHorizontal).x}
+                  cy={getSeriesCoordinates(d, k, isHorizontal).y}
                   stroke={series.colors[i]}
                   fill={theme === 'light' ? colorPaletteNeutrals.white : colorPaletteNeutrals.black}
                   strokeWidth={series.style?.[i]?.strokeWidth ?? 1}
@@ -246,15 +303,11 @@ export const Lines = ({
                   <Text
                     fontSize={12}
                     angle={0}
-                    textAnchor="middle"
-                    dy={-8}
-                    dx={f === 0 ? 10 : 0}
-                    x={isHorizontal
-                      ? accessor(indexAxis, index, d)
-                      : accessor(seriesAxis, k, d)}
-                    y={isHorizontal
-                      ? accessor(seriesAxis, k, d)
-                      : accessor(indexAxis, index, d)}
+                    textAnchor={handleMarkerLabelPosition(data, f, isHorizontal)}
+                    dy={-4}
+                    dx={f === 0 ? 2 : -2}
+                    x={getSeriesCoordinates(d, k, isHorizontal).x}
+                    y={getSeriesCoordinates(d, k, isHorizontal).y}
                   >
                     {`${getPrimitiveFromObjectPath(d, k) ?? ''}`}
                   </Text>
@@ -269,33 +322,46 @@ export const Lines = ({
             <LinePath
               data={data}
               curve={renderer}
-              x={(d: Record<string, unknown>) => (isHorizontal
-                ? accessor(indexAxis, index, d)
-                : accessor(overlayAxis!, overlay.dataKey, d))}
-              y={(d: Record<string, unknown>) => (isHorizontal
-                ? accessor(overlayAxis!, overlay.dataKey, d)
-                : accessor(indexAxis, index, d))}
+              x={d => getOverlayCoordinates(d, overlay.dataKey, isHorizontal).x}
+              y={d => getOverlayCoordinates(d, overlay.dataKey, isHorizontal).y}
               stroke={overlay.color}
               strokeWidth={overlay.style?.strokeWidth ?? 2}
               strokeOpacity={overlay.style?.strokeOpacity ?? 1}
               strokeDasharray={overlay.style?.strokeDasharray}
             />
 
-            {showMarker && data.map(d => (
-              <circle
+            {(showMarker
+            || showMarkerLabel
+            || overlay.style?.[i]?.showMarker
+            || overlay.style?.[i]?.showMarkerLabel
+            ) && data.map((d: Record<string, any>, f: number) => (
+              <Group
                 key={JSON.stringify(d)}
-                r={2}
-                cx={isHorizontal
-                  ? accessor(indexAxis, index, d)
-                  : accessor(overlayAxis!, overlay.dataKey, d)}
-                cy={isHorizontal
-                  ? accessor(overlayAxis!, overlay.dataKey, d)
-                  : accessor(indexAxis, index, d)}
-                stroke={overlay.color}
-                fill={theme === 'light' ? colorPaletteNeutrals.white : colorPaletteNeutrals.black}
-                strokeWidth={overlay.style?.strokeWidth ?? 1}
-                strokeOpacity={overlay.style?.strokeOpacity ?? 1}
-              />
+              >
+                <circle
+                  r={2}
+                  cx={getOverlayCoordinates(d, overlay.dataKey, isHorizontal).x}
+                  cy={getOverlayCoordinates(d, overlay.dataKey, isHorizontal).y}
+                  stroke={overlay.color}
+                  fill={theme === 'light' ? colorPaletteNeutrals.white : colorPaletteNeutrals.black}
+                  strokeWidth={overlay.style?.strokeWidth ?? 1}
+                  strokeOpacity={overlay.style?.strokeOpacity ?? 1}
+                />
+
+                {(showMarkerLabel || overlay.style?.[i]?.showMarkerLabel) && (
+                  <Text
+                    fontSize={12}
+                    angle={0}
+                    textAnchor={handleMarkerLabelPosition(data, f, isHorizontal)}
+                    dy={-4}
+                    dx={f === 0 ? 2 : -2}
+                    x={getOverlayCoordinates(d, overlay.dataKey, isHorizontal).x}
+                    y={getOverlayCoordinates(d, overlay.dataKey, isHorizontal).y}
+                  >
+                    {`${getPrimitiveFromObjectPath(d, overlay.dataKey) ?? ''}`}
+                  </Text>
+                )}
+              </Group>
             ))}
           </Group>
         )}

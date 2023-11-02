@@ -102,6 +102,7 @@
   },
   "dependencies": {
     "@radix-ui/react-tabs": "1.0.0",
+    "@visx/annotation": "3.3.0",
     "@visx/axis": "3.3.0",
     "@visx/curve": "3.3.0",
     "@visx/event": "3.3.0",

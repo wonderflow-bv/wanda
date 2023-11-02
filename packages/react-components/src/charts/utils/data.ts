@@ -63,7 +63,7 @@ export const handleDomainAndScaleType = (
 
   let d = removeNilValuesFromArray(domainData) as Array<string | number>;
   const st = inferScaleTypeFromDomain(domainData, scaleType);
-  console.log('handleDomainAndScaleType', d);
+
   if (domain?.length) {
     if (st === 'label') {
       d = domain;
