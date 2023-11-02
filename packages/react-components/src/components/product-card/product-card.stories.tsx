@@ -61,22 +61,22 @@ const story: ComponentMeta<typeof ProductCard> = {
     titleRows: 3,
     subtitle: 'subtitle',
     rating: 4.3,
-    sentiment: 0.48,
-    feedbackCount: 123,
-    votesCount: 3456,
-    votesRating: 2.3,
     nps: 23,
-    groups: 4,
+    feedbackCount: 123,
+    votesRating: 2.3,
+    votesCount: 3456,
+    sentiment: 0.54,
     tgw: 0.75,
     priceMin: 33,
     priceMax: 45,
     currency: 'EUR',
     currencyDecimals: 0,
+    groups: 4,
     users: 789,
     usersCap: 1000,
     skus: 2,
     skusCap: 1000,
-    kpiItems: 3,
+    kpiItems: 11,
     kpisRowGap: 8,
     isLoading: false,
     ratio: '1',
@@ -118,6 +118,24 @@ const Template: ComponentStory<typeof ProductCard> = (args) => {
 
 export const Default = Template.bind({});
 Default.args = {};
+
+export const withFewKpis = Template.bind({});
+withFewKpis.args = {
+  rating: 4.3,
+  nps: undefined,
+  feedbackCount: 123,
+  votesRating: undefined,
+  votesCount: undefined,
+  sentiment: 0.54,
+  tgw: undefined,
+  priceMin: undefined,
+  priceMax: undefined,
+  groups: undefined,
+  users: undefined,
+  usersCap: undefined,
+  skus: undefined,
+  skusCap: undefined,
+};
 
 export const withOverlayActions = Template.bind({});
 withOverlayActions.args = {
