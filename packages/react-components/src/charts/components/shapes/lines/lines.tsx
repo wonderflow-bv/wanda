@@ -196,20 +196,6 @@ export const Lines = ({
     });
   }, [containerBounds, indexAxis, isHorizontal, bisectIndex, data, showTooltip]);
 
-  const handleMarkerLabelPosition = (
-    data: Data,
-    index: number,
-    isHorizontal: boolean,
-  ) => {
-    if (isHorizontal) {
-      if (index === 0) return 'start';
-      if (index === data.length - 1) return 'end';
-      return 'middle';
-    }
-
-    return 'start';
-  };
-
   const getCoordinates = (
     {
       datum,
@@ -261,6 +247,65 @@ export const Lines = ({
     isHorizontal,
   });
 
+  const getMarkerLabelProps = (
+    datum: Record<string, unknown>,
+    dataKey: string,
+    isHorizontal: boolean,
+    isOverlay: boolean,
+  ) => {
+    let anchor = 'middle';
+    let dx = 0;
+    let dy = 0;
+
+    const pos = isOverlay
+      ? getOverlayCoordinates(datum, dataKey, isHorizontal)
+      : getSeriesCoordinates(datum, dataKey, isHorizontal);
+
+    const isLeft = pos.x < (xMax * 0.05);
+    const isRigth = pos.x > (xMax * 0.95);
+    const isTop = pos.y < (yMax * 0.075);
+
+    if (isHorizontal) {
+      if (isLeft) {
+        anchor = 'start';
+        dx = 2;
+      }
+
+      if (isRigth) {
+        anchor = 'end';
+        dx = -2;
+      }
+
+      if (isTop) {
+        dy = 16;
+      } else {
+        dy = -6;
+      }
+    } else {
+      anchor = 'start';
+
+      if (isTop) {
+        dy = 16;
+      } else {
+        dy = -6;
+      }
+
+      if (isLeft) {
+        dx = 6;
+      }
+
+      if (isRigth) {
+        anchor = 'end';
+      }
+    }
+
+    return {
+      anchor,
+      dx,
+      dy,
+    };
+  };
+
   return (
     <Group
       top={tPos}
@@ -287,7 +332,7 @@ export const Lines = ({
             || showMarkerLabel
             || series.style?.[i]?.showMarker
             || series.style?.[i]?.showMarkerLabel
-            ) && data.map((d: Record<string, any>, f: number) => (
+            ) && data.map((d: Record<string, any>) => (
               <Group key={JSON.stringify(d)}>
                 <circle
                   r={2}
@@ -303,9 +348,9 @@ export const Lines = ({
                   <Text
                     fontSize={12}
                     angle={0}
-                    textAnchor={handleMarkerLabelPosition(data, f, isHorizontal)}
-                    dy={-4}
-                    dx={f === 0 ? 2 : -2}
+                    textAnchor={getMarkerLabelProps(d, k, isHorizontal, false).anchor}
+                    dx={getMarkerLabelProps(d, k, isHorizontal, false).dx}
+                    dy={getMarkerLabelProps(d, k, isHorizontal, false).dy}
                     x={getSeriesCoordinates(d, k, isHorizontal).x}
                     y={getSeriesCoordinates(d, k, isHorizontal).y}
                   >
@@ -334,7 +379,7 @@ export const Lines = ({
             || showMarkerLabel
             || overlay.style?.[i]?.showMarker
             || overlay.style?.[i]?.showMarkerLabel
-            ) && data.map((d: Record<string, any>, f: number) => (
+            ) && data.map((d: Record<string, any>) => (
               <Group
                 key={JSON.stringify(d)}
               >
@@ -348,13 +393,13 @@ export const Lines = ({
                   strokeOpacity={overlay.style?.strokeOpacity ?? 1}
                 />
 
-                {(showMarkerLabel || overlay.style?.[i]?.showMarkerLabel) && (
+                {(showMarkerLabel || overlay.style?.showMarkerLabel) && (
                   <Text
                     fontSize={12}
                     angle={0}
-                    textAnchor={handleMarkerLabelPosition(data, f, isHorizontal)}
-                    dy={-4}
-                    dx={f === 0 ? 2 : -2}
+                    textAnchor={getMarkerLabelProps(d, overlay.dataKey, isHorizontal, true).anchor}
+                    dx={getMarkerLabelProps(d, overlay.dataKey, isHorizontal, true).dx}
+                    dy={getMarkerLabelProps(d, overlay.dataKey, isHorizontal, true).dy}
                     x={getOverlayCoordinates(d, overlay.dataKey, isHorizontal).x}
                     y={getOverlayCoordinates(d, overlay.dataKey, isHorizontal).y}
                   >
