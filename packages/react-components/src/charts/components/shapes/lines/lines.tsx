@@ -18,6 +18,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck: inconsitencies
 
+import { Label } from '@visx/annotation';
 import {
   curveLinear,
   curveMonotoneX,
@@ -28,7 +29,6 @@ import {
 import { localPoint } from '@visx/event';
 import { Group } from '@visx/group';
 import { Line, LinePath } from '@visx/shape';
-import { Text } from '@visx/text';
 import { useTooltip, useTooltipInPortal } from '@visx/tooltip';
 import { bisector } from '@visx/vendor/d3-array';
 import { ScaleLinear, ScaleTime } from '@visx/vendor/d3-scale';
@@ -261,31 +261,32 @@ export const Lines = ({
       ? getOverlayCoordinates(datum, dataKey, isHorizontal)
       : getSeriesCoordinates(datum, dataKey, isHorizontal);
 
-    const isLeft = pos.x < (xMax * 0.05);
-    const isRigth = pos.x > (xMax * 0.95);
+    const isLeft = pos.x < (xMax * 0.075);
+    const isRigth = pos.x > (xMax * 0.9);
     const isTop = pos.y < (yMax * 0.075);
+    const isBottom = pos.y > (yMax * 0.9);
 
     if (isHorizontal) {
       if (isLeft) {
         anchor = 'start';
-        dx = 2;
+        dx = 4;
       }
 
       if (isRigth) {
         anchor = 'end';
-        dx = -2;
+        dx = -4;
       }
 
-      if (isTop) {
-        dy = 16;
-      } else {
+      if (isBottom) {
         dy = -6;
+      } else {
+        dy = 28;
       }
     } else {
       anchor = 'start';
 
       if (isTop) {
-        dy = 16;
+        dy = 24;
       } else {
         dy = -6;
       }
@@ -333,30 +334,49 @@ export const Lines = ({
             || series.style?.[i]?.showMarker
             || series.style?.[i]?.showMarkerLabel
             ) && data.map((d: Record<string, any>) => (
-              <Group key={JSON.stringify(d)}>
-                <circle
-                  r={2}
-                  cx={getSeriesCoordinates(d, k, isHorizontal).x}
-                  cy={getSeriesCoordinates(d, k, isHorizontal).y}
-                  stroke={series.colors[i]}
-                  fill={theme === 'light' ? colorPaletteNeutrals.white : colorPaletteNeutrals.black}
-                  strokeWidth={series.style?.[i]?.strokeWidth ?? 1}
-                  strokeOpacity={series.style?.[i]?.strokeOpacity ?? 1}
-                />
+              <circle
+                key={JSON.stringify(d)}
+                r={2}
+                cx={getSeriesCoordinates(d, k, isHorizontal).x}
+                cy={getSeriesCoordinates(d, k, isHorizontal).y}
+                stroke={series.colors[i]}
+                fill={theme === 'light' ? colorPaletteNeutrals.white : colorPaletteNeutrals.black}
+                strokeWidth={series.style?.[i]?.strokeWidth ?? 1}
+                strokeOpacity={series.style?.[i]?.strokeOpacity ?? 1}
+              />
+            ))}
 
-                {(showMarkerLabel || series.style?.[i]?.showMarkerLabel) && (
-                  <Text
-                    fontSize={12}
-                    textAnchor={getMarkerLabelProps(d, k, isHorizontal, false).anchor}
-                    dx={getMarkerLabelProps(d, k, isHorizontal, false).dx}
-                    dy={getMarkerLabelProps(d, k, isHorizontal, false).dy}
-                    x={getSeriesCoordinates(d, k, isHorizontal).x}
-                    y={getSeriesCoordinates(d, k, isHorizontal).y}
-                  >
-                    {`${getPrimitiveFromObjectPath(d, k) ?? ''}`}
-                  </Text>
-                )}
-              </Group>
+            {(showMarkerLabel || series.style?.[i]?.showMarkerLabel)
+            && data.map((d: Record<string, any>) => (
+              <Label
+                key={JSON.stringify(d)}
+                backgroundFill="#ccc"
+                x={getSeriesCoordinates(d, k, isHorizontal).x}
+                y={getSeriesCoordinates(d, k, isHorizontal).y}
+                title={`${getPrimitiveFromObjectPath(d, k) ?? ''}`}
+                titleFontSize={12}
+                titleFontWeight={400}
+                titleProps={{
+                  x: getMarkerLabelProps(d, k, isHorizontal, false).dx + 6,
+                  y: getMarkerLabelProps(d, k, isHorizontal, false).dy + 4,
+                }}
+                showAnchorLine={false}
+                horizontalAnchor={getMarkerLabelProps(d, k, isHorizontal, false).anchor}
+                verticalAnchor="end"
+                showBackground
+                backgroundPadding={{
+                  top: 4,
+                  rigth: 0,
+                  bottom: 4,
+                  left: 6,
+                }}
+                backgroundProps={{
+                  rx: 4,
+                  ry: 4,
+                  x: getMarkerLabelProps(d, k, isHorizontal, false).dx,
+                  y: getMarkerLabelProps(d, k, isHorizontal, false).dy,
+                }}
+              />
             ))}
           </Group>
         ))}
@@ -379,33 +399,51 @@ export const Lines = ({
             || overlay.style?.showMarker
             || overlay.style?.showMarkerLabel
             ) && data.map((d: Record<string, any>) => (
-              <Group
+              <circle
                 key={JSON.stringify(d)}
-              >
-                <circle
-                  r={2}
-                  cx={getOverlayCoordinates(d, overlay.dataKey, isHorizontal).x}
-                  cy={getOverlayCoordinates(d, overlay.dataKey, isHorizontal).y}
-                  stroke={overlay.color}
-                  fill={theme === 'light' ? colorPaletteNeutrals.white : colorPaletteNeutrals.black}
-                  strokeWidth={overlay.style?.strokeWidth ?? 1}
-                  strokeOpacity={overlay.style?.strokeOpacity ?? 1}
-                />
-
-                {(showMarkerLabel || overlay.style?.showMarkerLabel) && (
-                  <Text
-                    fontSize={12}
-                    textAnchor={getMarkerLabelProps(d, overlay.dataKey, isHorizontal, true).anchor}
-                    dx={getMarkerLabelProps(d, overlay.dataKey, isHorizontal, true).dx}
-                    dy={getMarkerLabelProps(d, overlay.dataKey, isHorizontal, true).dy}
-                    x={getOverlayCoordinates(d, overlay.dataKey, isHorizontal).x}
-                    y={getOverlayCoordinates(d, overlay.dataKey, isHorizontal).y}
-                  >
-                    {`${getPrimitiveFromObjectPath(d, overlay.dataKey) ?? ''}`}
-                  </Text>
-                )}
-              </Group>
+                r={2}
+                cx={getOverlayCoordinates(d, overlay.dataKey, isHorizontal).x}
+                cy={getOverlayCoordinates(d, overlay.dataKey, isHorizontal).y}
+                stroke={overlay.color}
+                fill={theme === 'light' ? colorPaletteNeutrals.white : colorPaletteNeutrals.black}
+                strokeWidth={overlay.style?.strokeWidth ?? 1}
+                strokeOpacity={overlay.style?.strokeOpacity ?? 1}
+              />
             ))}
+
+            {(showMarkerLabel || overlay.style?.showMarkerLabel)
+            && data.map((d: Record<string, any>) => (
+              <Label
+                key={JSON.stringify(d)}
+                backgroundFill="#ccc"
+                x={getOverlayCoordinates(d, overlay.dataKey, isHorizontal).x}
+                y={getOverlayCoordinates(d, overlay.dataKey, isHorizontal).y}
+                title={`${getPrimitiveFromObjectPath(d, overlay.dataKey) ?? ''}`}
+                titleFontSize={12}
+                titleFontWeight={400}
+                titleProps={{
+                  x: getMarkerLabelProps(d, overlay.dataKey, isHorizontal, true).dx + 6,
+                  y: getMarkerLabelProps(d, overlay.dataKey, isHorizontal, true).dy + 4,
+                }}
+                showAnchorLine={false}
+                horizontalAnchor={getMarkerLabelProps(d, overlay.dataKey, isHorizontal, true).anchor}
+                verticalAnchor="end"
+                showBackground
+                backgroundPadding={{
+                  top: 4,
+                  rigth: 0,
+                  bottom: 4,
+                  left: 6,
+                }}
+                backgroundProps={{
+                  rx: 4,
+                  ry: 4,
+                  x: getMarkerLabelProps(d, overlay.dataKey, isHorizontal, true).dx,
+                  y: getMarkerLabelProps(d, overlay.dataKey, isHorizontal, true).dy,
+                }}
+              />
+            ))}
+
           </Group>
         )}
 
