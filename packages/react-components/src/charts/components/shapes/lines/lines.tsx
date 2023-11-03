@@ -1,37 +1,28 @@
 /*
- * Copyright 2023 Wonderflow Design Team
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+* Copyright 2023 Wonderflow Design Team
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 
-/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck: inconsitencies
+/* eslint-disable @typescript-eslint/naming-convention */
+// @ts-nocheck
 
 import { Label } from '@visx/annotation';
-import {
-  curveLinear,
-  curveMonotoneX,
-  curveMonotoneY,
-  curveStepAfter,
-  curveStepBefore,
-} from '@visx/curve';
 import { localPoint } from '@visx/event';
 import { Group } from '@visx/group';
 import { Line, LinePath } from '@visx/shape';
 import { useTooltip, useTooltipInPortal } from '@visx/tooltip';
-import { bisector } from '@visx/vendor/d3-array';
-import { ScaleLinear, ScaleTime } from '@visx/vendor/d3-scale';
 import _ from 'lodash';
 import { useCallback, useMemo } from 'react';
 
@@ -39,7 +30,9 @@ import { colorPaletteNeutrals } from '../../../style-config';
 import {
   AxisType, CartesianChartLayout, Data, ThemeVariants,
 } from '../../../types';
-import { getLabelFromObjectPath, getPrimitiveFromObjectPath } from '../../../utils';
+import {
+  accessorInvert, bisectIndex, getCoordinates, getLabelFromObjectPath, getLinesRenderer, getPrimitiveFromObjectPath,
+} from '../../../utils';
 import { LineChartMetadata } from '../../line-chart/line-chart';
 import { Tooltip } from '../../tooltip';
 import {
@@ -87,58 +80,7 @@ export const Lines = ({
 
   const hasOverlay = Boolean(overlayAxis && overlay.dataKey);
 
-  const renderer = useMemo(() => {
-    const whichMonotone = isHorizontal ? curveMonotoneX : curveMonotoneY;
-    const whichStep = isHorizontal ? curveStepAfter : curveStepBefore;
-
-    if (renderAs === 'curves') return whichMonotone;
-    if (renderAs === 'lines') return curveLinear;
-    return whichStep;
-  }, [isHorizontal, renderAs]);
-
-  const accessor = (axis: AxisType, dataKey: string, datum?: Record<string, unknown>) => {
-    let value = 0;
-    if (axis.scale && datum) {
-      const d = getPrimitiveFromObjectPath(datum, dataKey);
-      const t = axis.scaleType === 'time' ? new Date(d) : d;
-      value = axis.scale(t as any);
-    }
-
-    return value;
-  };
-
-  const accessorInvert = (axis?: AxisType, value?: number) => {
-    let res;
-
-    if (axis && value) {
-      const {
-        orientation, top, left, scale, scaleType,
-      } = axis;
-
-      const isVertical = orientation === 'left' || orientation === 'right';
-      const offset = isVertical ? top : left;
-      const num = value - offset;
-
-      if (scaleType !== 'label') {
-        const s = scale as ScaleLinear<number, number> | ScaleTime<number, number>;
-        res = s.invert(num);
-      } else {
-        const [from, to] = scale.range();
-        const min = Math.min(from, to);
-        const max = Math.max(from, to);
-        const divider = axis.numTicks ?? axis.domain.length;
-        const bandwidth = (max - min) / divider;
-        const padding = scale.padding() ? bandwidth / 2 : 0;
-        const i = Math.round((num - padding) / bandwidth);
-        const len = axis.domain.length;
-        res = isVertical ? axis.domain[len - i] : axis.domain[i];
-      }
-    }
-
-    return res;
-  };
-
-  const bisectIndex = bisector((index: string | number) => new Date(index)).right;
+  const renderer = useMemo(() => getLinesRenderer(renderAs, isHorizontal), [isHorizontal, renderAs]);
 
   const {
     tooltipLeft,
@@ -156,15 +98,14 @@ export const Lines = ({
     zIndex: 10,
   });
 
-  const handleTooltip = useCallback((event: React.SyntheticEvent<ownerSVGElement>) => {
+  const handleTooltip = useCallback((event: React.MouseEvent<SVGElement>) => {
     const {
       scaleType, domain, scale,
     } = indexAxis;
     const { top: tBound, left: lBound } = containerBounds;
 
     const xy = isHorizontal ? 'x' : 'y';
-
-    const coords = localPoint(event.target.ownerSVGElement, event) ?? { x: -999, y: -999 };
+    const coords = localPoint(event.target.SVGElement, event) ?? { x: -999, y: -999 };
 
     const accessorInvertIndexOf = accessorInvert(indexAxis, coords[xy]);
 
@@ -194,32 +135,7 @@ export const Lines = ({
       tooltipTop,
       tooltipData,
     });
-  }, [containerBounds, indexAxis, isHorizontal, bisectIndex, data, showTooltip]);
-
-  const getCoordinates = (
-    {
-      datum,
-      indexAxis,
-      indexDataKey,
-      otherAxis,
-      otherDataKey,
-      isHorizontal,
-    }: {
-      datum: Record<string, unknown>;
-      indexAxis: AxisType;
-      indexDataKey: string;
-      otherAxis: AxisType;
-      otherDataKey: string;
-      isHorizontal: boolean;
-    },
-  ) => {
-    const i = accessor(indexAxis, indexDataKey, datum);
-    const o = accessor(otherAxis, otherDataKey, datum);
-
-    return isHorizontal
-      ? { x: i, y: o }
-      : { x: o, y: i };
-  };
+  }, [containerBounds, indexAxis, isHorizontal, data, showTooltip]);
 
   const getSeriesCoordinates = (
     datum: Record<string, unknown>,
@@ -252,7 +168,11 @@ export const Lines = ({
     dataKey: string,
     isHorizontal: boolean,
     isOverlay: boolean,
-  ) => {
+  ): {
+    anchor: 'middle' | 'start' | 'end' | 'inherit' | undefined;
+    dx: number;
+    dy: number;
+  } => {
     let anchor = 'middle';
     let dx = 0;
     let dy = 0;
@@ -357,7 +277,7 @@ export const Lines = ({
                 titleFontSize={12}
                 titleFontWeight={400}
                 titleProps={{
-                  x: getMarkerLabelProps(d, k, isHorizontal, false).dx + 6,
+                  x: getMarkerLabelProps(d, k, isHorizontal, false).dx + 4,
                   y: getMarkerLabelProps(d, k, isHorizontal, false).dy + 4,
                 }}
                 showAnchorLine={false}
@@ -365,10 +285,7 @@ export const Lines = ({
                 verticalAnchor="end"
                 showBackground
                 backgroundPadding={{
-                  top: 4,
-                  rigth: 0,
-                  bottom: 4,
-                  left: 6,
+                  top: 4, right: 6, bottom: 4, left: 6,
                 }}
                 backgroundProps={{
                   rx: 4,
@@ -402,8 +319,8 @@ export const Lines = ({
               <circle
                 key={JSON.stringify(d)}
                 r={2}
-                cx={getOverlayCoordinates(d, overlay.dataKey, isHorizontal).x}
-                cy={getOverlayCoordinates(d, overlay.dataKey, isHorizontal).y}
+                cx={getOverlayCoordinates(d, overlay.dataKey!, isHorizontal).x}
+                cy={getOverlayCoordinates(d, overlay.dataKey!, isHorizontal).y}
                 stroke={overlay.color}
                 fill={theme === 'light' ? colorPaletteNeutrals.white : colorPaletteNeutrals.black}
                 strokeWidth={overlay.style?.strokeWidth ?? 1}
@@ -416,30 +333,27 @@ export const Lines = ({
               <Label
                 key={JSON.stringify(d)}
                 backgroundFill="#ccc"
-                x={getOverlayCoordinates(d, overlay.dataKey, isHorizontal).x}
-                y={getOverlayCoordinates(d, overlay.dataKey, isHorizontal).y}
-                title={`${getPrimitiveFromObjectPath(d, overlay.dataKey) ?? ''}`}
+                x={getOverlayCoordinates(d, overlay.dataKey!, isHorizontal).x}
+                y={getOverlayCoordinates(d, overlay.dataKey!, isHorizontal).y}
+                title={`${getPrimitiveFromObjectPath(d, overlay.dataKey!) ?? ''}`}
                 titleFontSize={12}
                 titleFontWeight={400}
                 titleProps={{
-                  x: getMarkerLabelProps(d, overlay.dataKey, isHorizontal, true).dx + 6,
-                  y: getMarkerLabelProps(d, overlay.dataKey, isHorizontal, true).dy + 4,
+                  x: getMarkerLabelProps(d, overlay.dataKey!, isHorizontal, true).dx + 4,
+                  y: getMarkerLabelProps(d, overlay.dataKey!, isHorizontal, true).dy + 4,
                 }}
                 showAnchorLine={false}
-                horizontalAnchor={getMarkerLabelProps(d, overlay.dataKey, isHorizontal, true).anchor}
+                horizontalAnchor={getMarkerLabelProps(d, overlay.dataKey!, isHorizontal, true).anchor}
                 verticalAnchor="end"
                 showBackground
                 backgroundPadding={{
-                  top: 4,
-                  rigth: 0,
-                  bottom: 4,
-                  left: 6,
+                  top: 4, right: 6, bottom: 4, left: 6,
                 }}
                 backgroundProps={{
                   rx: 4,
                   ry: 4,
-                  x: getMarkerLabelProps(d, overlay.dataKey, isHorizontal, true).dx,
-                  y: getMarkerLabelProps(d, overlay.dataKey, isHorizontal, true).dy,
+                  x: getMarkerLabelProps(d, overlay.dataKey!, isHorizontal, true).dx,
+                  y: getMarkerLabelProps(d, overlay.dataKey!, isHorizontal, true).dy,
                 }}
               />
             ))}
@@ -592,7 +506,7 @@ export const Lines = ({
                       {tooltip?.extraOverlayData && (
                         <p>
                           {tooltip.extraOverlayData(
-                            _.at(tooltipData.data, getLabelFromObjectPath(overlay.dataKey))[0],
+                            _.at(tooltipData.data, getLabelFromObjectPath(overlay.dataKey!))[0],
                           )}
 
                         </p>
@@ -602,7 +516,7 @@ export const Lines = ({
                     <div>
                       <p>
                         <b>
-                          {`${getPrimitiveFromObjectPath(tooltipData.data, overlay.dataKey) ?? 'n/a'}`}
+                          {`${getPrimitiveFromObjectPath(tooltipData.data, overlay.dataKey!) ?? 'n/a'}`}
                         </b>
                       </p>
                     </div>

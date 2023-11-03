@@ -18,4 +18,5 @@ export * from './axis';
 export * from './colors';
 export * from './data';
 export * from './format';
+export * from './lines';
 export * from './math';

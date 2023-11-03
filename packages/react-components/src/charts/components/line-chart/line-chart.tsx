@@ -86,6 +86,7 @@ export type LineChartMetadata = {
     color: string;
     style?: LineStyle;
   };
+  tooltip?: LineChartTooltip;
   showMarker?: boolean;
   showMarkerLabel?: boolean;
 }
