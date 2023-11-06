@@ -104,3 +104,13 @@ export const getLinesRenderer = (renderAs: LineChartRenderType | undefined, isHo
   if (renderAs === 'lines') return curveLinear;
   return whichStep;
 };
+
+export const isMarkerLabelActive = (index: number, numLabels: number, maxLabels = 12) => {
+  const step = Math.ceil(numLabels / maxLabels);
+  const half = Math.round(numLabels / 2);
+  const leftIndex = [];
+  for (let i = 0; i < half; i += step) leftIndex.push(i);
+  const rightIndex = leftIndex.map(e => numLabels - e);
+  const allIndex = leftIndex.concat(rightIndex).sort((a, b) => a - b);
+  return allIndex.includes(index);
+};

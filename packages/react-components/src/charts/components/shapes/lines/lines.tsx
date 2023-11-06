@@ -31,7 +31,13 @@ import {
   AxisType, CartesianChartLayout, Data, ThemeVariants,
 } from '../../../types';
 import {
-  accessorInvert, bisectIndex, getCoordinates, getLabelFromObjectPath, getLinesRenderer, getPrimitiveFromObjectPath,
+  accessorInvert,
+  bisectIndex,
+  getCoordinates,
+  getLabelFromObjectPath,
+  getLinesRenderer,
+  getPrimitiveFromObjectPath,
+  isMarkerLabelActive,
 } from '../../../utils';
 import { LineChartMetadata } from '../../line-chart/line-chart';
 import { Tooltip } from '../../tooltip';
@@ -98,14 +104,14 @@ export const Lines = ({
     zIndex: 10,
   });
 
-  const handleTooltip = useCallback((event: React.MouseEvent<SVGElement>) => {
+  const handleTooltip = useCallback((event: React.MouseEvent<ownerSVGElement>) => {
     const {
       scaleType, domain, scale,
     } = indexAxis;
     const { top: tBound, left: lBound } = containerBounds;
 
     const xy = isHorizontal ? 'x' : 'y';
-    const coords = localPoint(event.target.SVGElement, event) ?? { x: -999, y: -999 };
+    const coords = localPoint(event.target.ownerSVGElement, event) ?? { x: -999, y: -999 };
 
     const accessorInvertIndexOf = accessorInvert(indexAxis, coords[xy]);
 
@@ -267,33 +273,36 @@ export const Lines = ({
             ))}
 
             {(showMarkerLabel || series.style?.[i]?.showMarkerLabel)
-            && data.map((d: Record<string, any>) => (
-              <Label
-                key={JSON.stringify(d)}
-                backgroundFill="#ccc"
-                x={getSeriesCoordinates(d, k, isHorizontal).x}
-                y={getSeriesCoordinates(d, k, isHorizontal).y}
-                title={`${getPrimitiveFromObjectPath(d, k) ?? ''}`}
-                titleFontSize={12}
-                titleFontWeight={400}
-                titleProps={{
-                  x: getMarkerLabelProps(d, k, isHorizontal, false).dx + 4,
-                  y: getMarkerLabelProps(d, k, isHorizontal, false).dy + 4,
-                }}
-                showAnchorLine={false}
-                horizontalAnchor={getMarkerLabelProps(d, k, isHorizontal, false).anchor}
-                verticalAnchor="end"
-                showBackground
-                backgroundPadding={{
-                  top: 4, right: 6, bottom: 4, left: 6,
-                }}
-                backgroundProps={{
-                  rx: 4,
-                  ry: 4,
-                  x: getMarkerLabelProps(d, k, isHorizontal, false).dx,
-                  y: getMarkerLabelProps(d, k, isHorizontal, false).dy,
-                }}
-              />
+            && data.map((d: Record<string, any>, di: number) => (
+              isMarkerLabelActive(di, data.length)
+                ? (
+                  <Label
+                    key={JSON.stringify(d)}
+                    backgroundFill="#ccc"
+                    x={getSeriesCoordinates(d, k, isHorizontal).x}
+                    y={getSeriesCoordinates(d, k, isHorizontal).y}
+                    title={`${getPrimitiveFromObjectPath(d, k) ?? ''}`}
+                    titleFontSize={12}
+                    titleFontWeight={400}
+                    titleProps={{
+                      x: getMarkerLabelProps(d, k, isHorizontal, false).dx + 4,
+                      y: getMarkerLabelProps(d, k, isHorizontal, false).dy + 4,
+                    }}
+                    showAnchorLine={false}
+                    horizontalAnchor={getMarkerLabelProps(d, k, isHorizontal, false).anchor}
+                    verticalAnchor="end"
+                    showBackground
+                    backgroundPadding={{
+                      top: 4, right: 6, bottom: 4, left: 6,
+                    }}
+                    backgroundProps={{
+                      rx: 4,
+                      ry: 4,
+                      x: getMarkerLabelProps(d, k, isHorizontal, false).dx,
+                      y: getMarkerLabelProps(d, k, isHorizontal, false).dy,
+                    }}
+                  />
+                ) : null
             ))}
           </Group>
         ))}
@@ -329,33 +338,35 @@ export const Lines = ({
             ))}
 
             {(showMarkerLabel || overlay.style?.showMarkerLabel)
-            && data.map((d: Record<string, any>) => (
-              <Label
-                key={JSON.stringify(d)}
-                backgroundFill="#ccc"
-                x={getOverlayCoordinates(d, overlay.dataKey!, isHorizontal).x}
-                y={getOverlayCoordinates(d, overlay.dataKey!, isHorizontal).y}
-                title={`${getPrimitiveFromObjectPath(d, overlay.dataKey!) ?? ''}`}
-                titleFontSize={12}
-                titleFontWeight={400}
-                titleProps={{
-                  x: getMarkerLabelProps(d, overlay.dataKey!, isHorizontal, true).dx + 4,
-                  y: getMarkerLabelProps(d, overlay.dataKey!, isHorizontal, true).dy + 4,
-                }}
-                showAnchorLine={false}
-                horizontalAnchor={getMarkerLabelProps(d, overlay.dataKey!, isHorizontal, true).anchor}
-                verticalAnchor="end"
-                showBackground
-                backgroundPadding={{
-                  top: 4, right: 6, bottom: 4, left: 6,
-                }}
-                backgroundProps={{
-                  rx: 4,
-                  ry: 4,
-                  x: getMarkerLabelProps(d, overlay.dataKey!, isHorizontal, true).dx,
-                  y: getMarkerLabelProps(d, overlay.dataKey!, isHorizontal, true).dy,
-                }}
-              />
+            && data.map((d: Record<string, any>, di: number) => (
+              isMarkerLabelActive(di, data.length) ? (
+                <Label
+                  key={JSON.stringify(d)}
+                  backgroundFill="#ccc"
+                  x={getOverlayCoordinates(d, overlay.dataKey!, isHorizontal).x}
+                  y={getOverlayCoordinates(d, overlay.dataKey!, isHorizontal).y}
+                  title={`${getPrimitiveFromObjectPath(d, overlay.dataKey!) ?? ''}`}
+                  titleFontSize={12}
+                  titleFontWeight={400}
+                  titleProps={{
+                    x: getMarkerLabelProps(d, overlay.dataKey!, isHorizontal, true).dx + 4,
+                    y: getMarkerLabelProps(d, overlay.dataKey!, isHorizontal, true).dy + 4,
+                  }}
+                  showAnchorLine={false}
+                  horizontalAnchor={getMarkerLabelProps(d, overlay.dataKey!, isHorizontal, true).anchor}
+                  verticalAnchor="end"
+                  showBackground
+                  backgroundPadding={{
+                    top: 4, right: 6, bottom: 4, left: 6,
+                  }}
+                  backgroundProps={{
+                    rx: 4,
+                    ry: 4,
+                    x: getMarkerLabelProps(d, overlay.dataKey!, isHorizontal, true).dx,
+                    y: getMarkerLabelProps(d, overlay.dataKey!, isHorizontal, true).dy,
+                  }}
+                />
+              ) : null
             ))}
 
           </Group>
