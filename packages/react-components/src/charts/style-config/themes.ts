@@ -23,17 +23,17 @@ export const themeLight: Theme = {
     to: colorPaletteNeutrals.white,
   },
   headings: {
-    title: colorPaletteNeutrals.dimmed7,
-    subtitle: colorPaletteNeutrals.dimmed5,
+    title: colorPaletteNeutrals.dimmed9,
+    subtitle: colorPaletteNeutrals.dimmed7,
   },
   axis: {
     label: colorPaletteNeutrals.dimmed8,
-    tickLabel: colorPaletteNeutrals.dimmed5,
+    tickLabel: colorPaletteNeutrals.dimmed7,
     tick: colorPaletteNeutrals.dimmed4,
     line: colorPaletteNeutrals.dimmed4,
   },
   grid: {
-    line: colorPaletteNeutrals.dimmed2,
+    line: colorPaletteNeutrals.dimmed1,
     background: {
       from: colorPaletteNeutrals.dimmed0,
       to: colorPaletteNeutrals.white,
@@ -43,12 +43,12 @@ export const themeLight: Theme = {
 
 export const themeDark: Theme = {
   background: {
-    from: colorPaletteNeutrals.dimmed7,
+    from: colorPaletteNeutrals.dimmed9,
     to: colorPaletteNeutrals.dimmed9,
   },
   headings: {
     title: colorPaletteNeutrals.dimmed0,
-    subtitle: colorPaletteNeutrals.dimmed3,
+    subtitle: colorPaletteNeutrals.dimmed2,
   },
   axis: {
     label: colorPaletteNeutrals.dimmed2,
@@ -59,7 +59,7 @@ export const themeDark: Theme = {
   grid: {
     line: colorPaletteNeutrals.dimmed6,
     background: {
-      from: colorPaletteNeutrals.dimmed7,
+      from: colorPaletteNeutrals.dimmed8,
       to: colorPaletteNeutrals.dimmed9,
     },
   },

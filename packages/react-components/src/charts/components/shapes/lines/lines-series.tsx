@@ -18,20 +18,16 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 // @ts-nocheck
 
-import { Label } from '@visx/annotation';
 import { Group } from '@visx/group';
 import { LinePath } from '@visx/shape';
-import { CurveFactory } from 'd3';
+import { useMemo } from 'react';
 
 import { colorPaletteNeutrals } from '../../../style-config';
 import {
-  AxisType,
-  Data, ThemeVariants,
+  AxisType, CartesianChartLayout, Data, ThemeVariants,
 } from '../../../types';
 import {
-  getCoordinates,
-  getPrimitiveFromObjectPath,
-  isMarkerLabelActive,
+  getCoordinates, getLinesRenderer,
 } from '../../../utils';
 import { LineChartMetadata } from '../../line-chart/line-chart';
 import {
@@ -40,12 +36,8 @@ import {
 
 export type LinesSeriesProps = {
   theme: ThemeVariants;
-  isHorizontal: boolean;
   data: Data;
   metadata: LineChartMetadata;
-  maxWidth: number;
-  maxHeight: number;
-  renderer: CurveFactory;
   axis: {
     top?: AxisType;
     right?: AxisType;
@@ -56,21 +48,21 @@ export type LinesSeriesProps = {
 
 export const LinesSeries = ({
   theme,
-  isHorizontal,
   data,
   metadata,
-  maxWidth: xMax,
-  maxHeight: yMax,
-  renderer,
   axis,
 }: LinesSeriesProps) => {
   const { bottom, left } = axis;
   const {
-    index, showMarker, showMarkerLabel, series,
+    index, layout, renderAs, showMarker, showMarkerLabel, series,
   } = metadata;
+
+  const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
 
   const indexAxis = isHorizontal ? bottom! : left!;
   const seriesAxis = isHorizontal ? left! : bottom!;
+
+  const renderer = useMemo(() => getLinesRenderer(renderAs, isHorizontal), [isHorizontal, renderAs]);
 
   const getSeriesCoordinates = (
     datum: Record<string, unknown>,
@@ -85,72 +77,11 @@ export const LinesSeries = ({
     isHorizontal,
   });
 
-  const getMarkerLabelProps = (
-    datum: Record<string, unknown>,
-    dataKey: string,
-    isHorizontal: boolean,
-  ): {
-    anchor: 'middle' | 'start' | 'end' | 'inherit' | undefined;
-    dx: number;
-    dy: number;
-  } => {
-    let anchor = 'middle';
-    let dx = 0;
-    let dy = 0;
-
-    const pos = getSeriesCoordinates(datum, dataKey, isHorizontal);
-
-    const isLeft = pos.x < (xMax * 0.075);
-    const isRigth = pos.x > (xMax * 0.9);
-    const isTop = pos.y < (yMax * 0.075);
-    const isBottom = pos.y > (yMax * 0.9);
-
-    if (isHorizontal) {
-      if (isLeft) {
-        anchor = 'start';
-        dx = 4;
-      }
-
-      if (isRigth) {
-        anchor = 'end';
-        dx = -4;
-      }
-
-      if (isBottom) {
-        dy = -6;
-      } else {
-        dy = 28;
-      }
-    } else {
-      anchor = 'start';
-
-      if (isTop) {
-        dy = 24;
-      } else {
-        dy = -6;
-      }
-
-      if (isLeft) {
-        dx = 6;
-      }
-
-      if (isRigth) {
-        anchor = 'end';
-      }
-    }
-
-    return {
-      anchor,
-      dx,
-      dy,
-    };
-  };
-
   return (
     <>
       {series.dataKey.map((k: string, i: number) => (
         <Group
-          key={k}
+          key={`${k}-lines-series`}
           className={LinesItem}
         >
           <LinePath
@@ -180,42 +111,8 @@ export const LinesSeries = ({
               strokeOpacity={series.style?.[i]?.strokeOpacity ?? 1}
             />
           ))}
-
-          {(showMarkerLabel || series.style?.[i]?.showMarkerLabel)
-            && data.map((d: Record<string, any>, di: number) => (
-              isMarkerLabelActive(di, data.length)
-                ? (
-                  <Label
-                    key={JSON.stringify(d)}
-                    backgroundFill="#ccc"
-                    x={getSeriesCoordinates(d, k, isHorizontal).x}
-                    y={getSeriesCoordinates(d, k, isHorizontal).y}
-                    title={`${getPrimitiveFromObjectPath(d, k) ?? ''}`}
-                    titleFontSize={12}
-                    titleFontWeight={400}
-                    titleProps={{
-                      x: getMarkerLabelProps(d, k, isHorizontal).dx + 4,
-                      y: getMarkerLabelProps(d, k, isHorizontal).dy + 4,
-                    }}
-                    showAnchorLine={false}
-                    horizontalAnchor={getMarkerLabelProps(d, k, isHorizontal).anchor}
-                    verticalAnchor="end"
-                    showBackground
-                    backgroundPadding={{
-                      top: 4, right: 6, bottom: 4, left: 6,
-                    }}
-                    backgroundProps={{
-                      rx: 4,
-                      ry: 4,
-                      x: getMarkerLabelProps(d, k, isHorizontal).dx,
-                      y: getMarkerLabelProps(d, k, isHorizontal).dy,
-                    }}
-                  />
-                ) : null
-            ))}
         </Group>
       ))}
-
     </>
   );
 };

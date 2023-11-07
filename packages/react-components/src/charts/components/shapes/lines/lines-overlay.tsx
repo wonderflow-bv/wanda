@@ -18,19 +18,16 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 // @ts-nocheck
 
-import { Label } from '@visx/annotation';
 import { Group } from '@visx/group';
 import { LinePath } from '@visx/shape';
-import { CurveFactory } from 'd3';
+import { useMemo } from 'react';
 
 import { colorPaletteNeutrals } from '../../../style-config';
 import {
   AxisType, CartesianChartLayout, Data, ThemeVariants,
 } from '../../../types';
 import {
-  getCoordinates,
-  getPrimitiveFromObjectPath,
-  isMarkerLabelActive,
+  getCoordinates, getLinesRenderer,
 } from '../../../utils';
 import { LineChartMetadata } from '../../line-chart/line-chart';
 import {
@@ -41,9 +38,6 @@ export type LinesOverlayProps = {
   theme: ThemeVariants;
   data: Data;
   metadata: LineChartMetadata;
-  maxWidth: number;
-  maxHeight: number;
-  renderer: CurveFactory;
   axis: {
     top?: AxisType;
     right?: AxisType;
@@ -56,16 +50,13 @@ export const LinesOverlay = ({
   theme,
   data,
   metadata,
-  maxWidth: xMax,
-  maxHeight: yMax,
-  renderer,
   axis,
 }: LinesOverlayProps) => {
   const {
     top, right, bottom, left,
   } = axis;
   const {
-    index, layout, showMarker, showMarkerLabel, overlay,
+    index, renderAs, layout, showMarker, showMarkerLabel, overlay,
   } = metadata;
 
   const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
@@ -74,6 +65,8 @@ export const LinesOverlay = ({
   const overlayAxis = isHorizontal ? right : top;
 
   const hasOverlay = Boolean(overlayAxis && overlay.dataKey);
+
+  const renderer = useMemo(() => getLinesRenderer(renderAs, isHorizontal), [isHorizontal, renderAs]);
 
   const getOverlayCoordinates = (
     datum: Record<string, unknown>,
@@ -87,67 +80,6 @@ export const LinesOverlay = ({
     otherDataKey: dataKey,
     isHorizontal,
   });
-
-  const getMarkerLabelProps = (
-    datum: Record<string, unknown>,
-    dataKey: string,
-    isHorizontal: boolean,
-  ): {
-    anchor: 'middle' | 'start' | 'end' | 'inherit' | undefined;
-    dx: number;
-    dy: number;
-  } => {
-    let anchor = 'middle';
-    let dx = 0;
-    let dy = 0;
-
-    const pos = getOverlayCoordinates(datum, dataKey, isHorizontal);
-
-    const isLeft = pos.x < (xMax * 0.075);
-    const isRigth = pos.x > (xMax * 0.9);
-    const isTop = pos.y < (yMax * 0.075);
-    const isBottom = pos.y > (yMax * 0.9);
-
-    if (isHorizontal) {
-      if (isLeft) {
-        anchor = 'start';
-        dx = 4;
-      }
-
-      if (isRigth) {
-        anchor = 'end';
-        dx = -4;
-      }
-
-      if (isBottom) {
-        dy = -6;
-      } else {
-        dy = 28;
-      }
-    } else {
-      anchor = 'start';
-
-      if (isTop) {
-        dy = 24;
-      } else {
-        dy = -6;
-      }
-
-      if (isLeft) {
-        dx = 6;
-      }
-
-      if (isRigth) {
-        anchor = 'end';
-      }
-    }
-
-    return {
-      anchor,
-      dx,
-      dy,
-    };
-  };
 
   return (
     <>
@@ -180,39 +112,6 @@ export const LinesOverlay = ({
               strokeOpacity={overlay.style?.strokeOpacity ?? 1}
             />
           ))}
-
-          {(showMarkerLabel || overlay.style?.showMarkerLabel)
-            && data.map((d: Record<string, any>, di: number) => (
-              isMarkerLabelActive(di, data.length) ? (
-                <Label
-                  key={JSON.stringify(d)}
-                  backgroundFill="#ccc"
-                  x={getOverlayCoordinates(d, overlay.dataKey!, isHorizontal).x}
-                  y={getOverlayCoordinates(d, overlay.dataKey!, isHorizontal).y}
-                  title={`${getPrimitiveFromObjectPath(d, overlay.dataKey!) ?? ''}`}
-                  titleFontSize={12}
-                  titleFontWeight={400}
-                  titleProps={{
-                    x: getMarkerLabelProps(d, overlay.dataKey!, isHorizontal).dx + 4,
-                    y: getMarkerLabelProps(d, overlay.dataKey!, isHorizontal).dy + 4,
-                  }}
-                  showAnchorLine={false}
-                  horizontalAnchor={getMarkerLabelProps(d, overlay.dataKey!, isHorizontal).anchor}
-                  verticalAnchor="end"
-                  showBackground
-                  backgroundPadding={{
-                    top: 4, right: 6, bottom: 4, left: 6,
-                  }}
-                  backgroundProps={{
-                    rx: 4,
-                    ry: 4,
-                    x: getMarkerLabelProps(d, overlay.dataKey!, isHorizontal).dx,
-                    y: getMarkerLabelProps(d, overlay.dataKey!, isHorizontal).dy,
-                  }}
-                />
-              ) : null
-            ))}
-
         </Group>
       )}
 
