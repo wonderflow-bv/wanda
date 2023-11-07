@@ -21,6 +21,7 @@
 import { Label } from '@visx/annotation';
 import { Group } from '@visx/group';
 
+import { colorPaletteNeutrals } from '../../../style-config';
 import {
   AxisType,
   CartesianChartLayout,
@@ -102,6 +103,19 @@ export const LinesMarkerLabels = ({
     let dx = 0;
     let dy = 0;
 
+    const main = {
+      fontSize: 12,
+      fontWeight: 400,
+      titleDx: 4,
+      titleDy: 4,
+      background: colorPaletteNeutrals.dimmed2,
+      padding: {
+        top: 4, right: 6, bottom: 4, left: 6,
+      },
+      rx: 4,
+      ry: 4,
+    };
+
     const isLeft = pos.x < (xMax * 0.075);
     const isRigth = pos.x > (xMax * 0.9);
     const isTop = pos.y < (yMax * 0.075);
@@ -119,17 +133,17 @@ export const LinesMarkerLabels = ({
       }
 
       if (isBottom) {
-        dy = -6;
+        dy = -4;
       } else {
-        dy = 28;
+        dy = 26;
       }
     } else {
       anchor = 'start';
 
       if (isTop) {
-        dy = 24;
+        dy = 26;
       } else {
-        dy = -6;
+        dy = -4;
       }
 
       if (isLeft) {
@@ -142,6 +156,7 @@ export const LinesMarkerLabels = ({
     }
 
     return {
+      ...main,
       anchor,
       dx,
       dy,
@@ -159,31 +174,30 @@ export const LinesMarkerLabels = ({
             && data.map((d: Record<string, any>, di: number) => {
               const coordinates = getSeriesCoordinates(d, k, isHorizontal);
               const markerLabelProps = getMarkerLabelProps(coordinates);
+
               return (
                 isMarkerLabelActive(di, data.length)
                   ? (
                     <Label
                       key={JSON.stringify(d)}
-                      backgroundFill="#ccc"
+                      backgroundFill={markerLabelProps.background}
                       x={coordinates.x}
                       y={coordinates.y}
                       title={`${getPrimitiveFromObjectPath(d, k) ?? ''}`}
-                      titleFontSize={12}
-                      titleFontWeight={400}
+                      titleFontSize={markerLabelProps.fontSize}
+                      titleFontWeight={markerLabelProps.fontWeight}
                       titleProps={{
-                        x: markerLabelProps.dx + 4,
-                        y: markerLabelProps.dy + 4,
+                        x: markerLabelProps.dx + markerLabelProps.titleDx,
+                        y: markerLabelProps.dy + markerLabelProps.titleDy,
                       }}
                       showAnchorLine={false}
                       horizontalAnchor={markerLabelProps.anchor}
                       verticalAnchor="end"
                       showBackground
-                      backgroundPadding={{
-                        top: 4, right: 6, bottom: 4, left: 6,
-                      }}
+                      backgroundPadding={markerLabelProps.padding}
                       backgroundProps={{
-                        rx: 4,
-                        ry: 4,
+                        rx: markerLabelProps.rx,
+                        ry: markerLabelProps.ry,
                         x: markerLabelProps.dx,
                         y: markerLabelProps.dy,
                       }}
@@ -203,26 +217,24 @@ export const LinesMarkerLabels = ({
                 isMarkerLabelActive(di, data.length) ? (
                   <Label
                     key={JSON.stringify(d)}
-                    backgroundFill="#ccc"
+                    backgroundFill={markerLabelProps.background}
                     x={coordinates.x}
                     y={coordinates.y}
                     title={`${getPrimitiveFromObjectPath(d, overlay.dataKey!) ?? ''}`}
-                    titleFontSize={12}
-                    titleFontWeight={400}
+                    titleFontSize={markerLabelProps.fontSize}
+                    titleFontWeight={markerLabelProps.fontWeight}
                     titleProps={{
-                      x: markerLabelProps.dx + 4,
-                      y: markerLabelProps.dy + 4,
+                      x: markerLabelProps.dx + markerLabelProps.titleDx,
+                      y: markerLabelProps.dy + markerLabelProps.titleDy,
                     }}
                     showAnchorLine={false}
                     horizontalAnchor={markerLabelProps.anchor}
                     verticalAnchor="end"
                     showBackground
-                    backgroundPadding={{
-                      top: 4, right: 6, bottom: 4, left: 6,
-                    }}
+                    backgroundPadding={markerLabelProps.padding}
                     backgroundProps={{
-                      rx: 4,
-                      ry: 4,
+                      rx: markerLabelProps.rx,
+                      ry: markerLabelProps.ry,
                       x: markerLabelProps.dx,
                       y: markerLabelProps.dy,
                     }}
