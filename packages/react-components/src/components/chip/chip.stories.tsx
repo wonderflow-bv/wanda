@@ -18,7 +18,7 @@ const story: ComponentMeta<typeof Chip> = {
       control: { type: 'radio' },
     },
     color: {
-      options: ['gray', 'cyan', 'green', 'purple', 'yellow', 'red', 'blue'],
+      options: ['blue', 'cyan', 'dipsy', 'gray', 'green', 'indigo', 'magenta', 'purple', 'red', 'salmon', 'violet', 'yellow'],
       control: { type: 'select' },
     },
   },
