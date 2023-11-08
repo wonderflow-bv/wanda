@@ -1,5 +1,11 @@
 # @wonderflow/symbols
 
+## 12.6.0
+
+### Minor Changes
+
+- d3c3fbc5: Add new icon `cloud-mining`
+
 ## 12.5.2
 
 ## 12.5.1
