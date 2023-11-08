@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /*
 * Copyright 2023 Wonderflow Design Team
 *
@@ -14,18 +15,16 @@
 * limitations under the License.
 */
 
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-/* eslint-disable @typescript-eslint/naming-convention */
-// @ts-nocheck
-
 import { Label } from '@visx/annotation';
 import { Group } from '@visx/group';
+import _ from 'lodash';
 
-import { colorPaletteNeutrals } from '../../../style-config';
+import { themes } from '../../../style-config';
 import {
   AxisType,
   CartesianChartLayout,
   Data,
+  ThemeVariants,
 } from '../../../types';
 import {
   getCoordinates,
@@ -38,6 +37,7 @@ import {
 } from './lines.module.css';
 
 export type LinesMarkerLabelsProps = {
+  theme: ThemeVariants;
   data: Data;
   metadata: LineChartMetadata;
   maxWidth: number;
@@ -51,6 +51,7 @@ export type LinesMarkerLabelsProps = {
 }
 
 export const LinesMarkerLabels = ({
+  theme,
   data,
   metadata,
   maxWidth: xMax,
@@ -99,68 +100,76 @@ export const LinesMarkerLabels = ({
   });
 
   const getMarkerLabelProps = (pos: { x: number | undefined; y: number | undefined }) => {
-    let anchor = 'middle' as 'middle' | 'start' | 'end' | 'inherit' | undefined;
-    let dx = 0;
-    let dy = 0;
-
     const main = {
+      anchor: 'middle' as 'middle' | 'start' | 'end' | 'inherit' | undefined,
+      verticalAnchor: 'end' as 'end' | 'middle' | 'start' | undefined,
+      fontColor: themes[theme].markerLabel.fontColor,
       fontSize: 12,
       fontWeight: 400,
-      titleDx: 4,
-      titleDy: 4,
-      background: colorPaletteNeutrals.dimmed2,
+      background: themes[theme].markerLabel.background,
       padding: {
-        top: 4, right: 6, bottom: 4, left: 6,
+        top: 2, right: 6, bottom: 2, left: 6,
       },
-      rx: 4,
-      ry: 4,
+      titleProps: {
+        x: 4,
+        y: 2,
+        textAnchor: 'start' as 'middle' | 'start' | 'end' | 'inherit' | undefined,
+      },
+      backgroundProps: {
+        rx: 4,
+        ry: 4,
+        x: 0,
+        y: 0,
+      },
     };
 
-    const isLeft = pos.x < (xMax * 0.075);
-    const isRigth = pos.x > (xMax * 0.9);
-    const isTop = pos.y < (yMax * 0.075);
-    const isBottom = pos.y > (yMax * 0.9);
+    if (!_.isNil(pos.x) && !_.isNil(pos.y)) {
+      const isLeft = pos.x < (xMax * 0.075);
+      const isRigth = pos.x > (xMax * 0.9);
+      const isTop = pos.y < (yMax * 0.075);
+      const isBottom = pos.y > (yMax * 0.9);
 
-    if (isHorizontal) {
-      if (isLeft) {
-        anchor = 'start';
-        dx = 4;
-      }
+      if (isHorizontal) {
+        if (isLeft) {
+          main.anchor = 'start';
+          main.backgroundProps.x = 4;
+        }
 
-      if (isRigth) {
-        anchor = 'end';
-        dx = -4;
-      }
+        if (isRigth) {
+          main.anchor = 'end';
+          main.backgroundProps.x = -4;
+        }
 
-      if (isBottom) {
-        dy = -4;
+        if (isBottom) {
+          main.backgroundProps.y = -4;
+        } else {
+          main.verticalAnchor = 'start';
+          main.backgroundProps.y = 4;
+        }
       } else {
-        dy = 26;
-      }
-    } else {
-      anchor = 'start';
+        main.anchor = 'start';
 
-      if (isTop) {
-        dy = 26;
-      } else {
-        dy = -4;
+        if (isTop) {
+          main.verticalAnchor = 'start';
+          main.backgroundProps.y = 4;
+        } else {
+          main.backgroundProps.y = -4;
+        }
+
+        if (isLeft) {
+          main.backgroundProps.x = 6;
+        }
+
+        if (isRigth) {
+          main.anchor = 'end';
+        }
       }
 
-      if (isLeft) {
-        dx = 6;
-      }
-
-      if (isRigth) {
-        anchor = 'end';
-      }
+      main.titleProps.x += main.backgroundProps.x;
+      main.titleProps.y += main.backgroundProps.y;
     }
 
-    return {
-      ...main,
-      anchor,
-      dx,
-      dy,
-    };
+    return main;
   };
 
   return (
@@ -183,24 +192,17 @@ export const LinesMarkerLabels = ({
                       backgroundFill={markerLabelProps.background}
                       x={coordinates.x}
                       y={coordinates.y}
+                      fontColor={markerLabelProps.fontColor}
                       title={`${getPrimitiveFromObjectPath(d, k) ?? ''}`}
                       titleFontSize={markerLabelProps.fontSize}
                       titleFontWeight={markerLabelProps.fontWeight}
-                      titleProps={{
-                        x: markerLabelProps.dx + markerLabelProps.titleDx,
-                        y: markerLabelProps.dy + markerLabelProps.titleDy,
-                      }}
+                      titleProps={markerLabelProps.titleProps}
                       showAnchorLine={false}
                       horizontalAnchor={markerLabelProps.anchor}
-                      verticalAnchor="end"
+                      verticalAnchor={markerLabelProps.verticalAnchor}
                       showBackground
                       backgroundPadding={markerLabelProps.padding}
-                      backgroundProps={{
-                        rx: markerLabelProps.rx,
-                        ry: markerLabelProps.ry,
-                        x: markerLabelProps.dx,
-                        y: markerLabelProps.dy,
-                      }}
+                      backgroundProps={markerLabelProps.backgroundProps}
                     />
                   ) : null
               );
@@ -223,21 +225,13 @@ export const LinesMarkerLabels = ({
                     title={`${getPrimitiveFromObjectPath(d, overlay.dataKey!) ?? ''}`}
                     titleFontSize={markerLabelProps.fontSize}
                     titleFontWeight={markerLabelProps.fontWeight}
-                    titleProps={{
-                      x: markerLabelProps.dx + markerLabelProps.titleDx,
-                      y: markerLabelProps.dy + markerLabelProps.titleDy,
-                    }}
+                    titleProps={markerLabelProps.titleProps}
                     showAnchorLine={false}
                     horizontalAnchor={markerLabelProps.anchor}
-                    verticalAnchor="end"
+                    verticalAnchor={markerLabelProps.verticalAnchor}
                     showBackground
                     backgroundPadding={markerLabelProps.padding}
-                    backgroundProps={{
-                      rx: markerLabelProps.rx,
-                      ry: markerLabelProps.ry,
-                      x: markerLabelProps.dx,
-                      y: markerLabelProps.dy,
-                    }}
+                    backgroundProps={markerLabelProps.backgroundProps}
                   />
                 ) : null
               );

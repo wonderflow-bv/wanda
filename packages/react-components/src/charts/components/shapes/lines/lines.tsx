@@ -85,6 +85,7 @@ export const Lines = ({
     />
 
     <LinesMarkerLabels
+      theme={theme}
       data={data}
       metadata={metadata}
       axis={axis}

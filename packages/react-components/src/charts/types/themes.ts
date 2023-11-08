@@ -32,6 +32,10 @@ export type Theme = {
     line: string;
     background: Background;
   };
+  markerLabel: {
+    fontColor: string;
+    background: string;
+  };
 }
 
 export type ThemeVariants = 'light' | 'dark';
