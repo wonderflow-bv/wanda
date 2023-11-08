@@ -25,9 +25,12 @@ import { useTooltip, useTooltipInPortal } from '@visx/tooltip';
 import _ from 'lodash';
 import { useCallback } from 'react';
 
+import { useLayoutContext } from '../../../providers';
+import { useDataContext } from '../../../providers/data';
+import { useThemeContext } from '../../../providers/theme';
 import { colorPaletteNeutrals } from '../../../style-config';
 import {
-  AxisType, CartesianChartLayout, Data, ThemeVariants,
+  AxisType,
 } from '../../../types';
 import {
   accessorInvert,
@@ -35,7 +38,6 @@ import {
   getLabelFromObjectPath,
   getPrimitiveFromObjectPath,
 } from '../../../utils';
-import { LineChartMetadata } from '../../line-chart/line-chart';
 import { Tooltip } from '../../tooltip';
 import {
   ExtraContent,
@@ -43,9 +45,6 @@ import {
 } from './lines.module.css';
 
 export type LinesTooltipProps = {
-  theme: ThemeVariants;
-  data: Data;
-  metadata: LineChartMetadata;
   maxWidth: number;
   maxHeight: number;
   axis: {
@@ -57,21 +56,20 @@ export type LinesTooltipProps = {
 }
 
 export const LinesTooltip = ({
-  theme,
-  data,
-  metadata,
   maxWidth: xMax,
   maxHeight: yMax,
   axis,
 }: LinesTooltipProps) => {
+  const theme = useThemeContext();
+  const { data, metadata } = useDataContext();
+  const { isHorizontal } = useLayoutContext();
+
   const {
     top, right, bottom, left,
   } = axis;
   const {
-    index, layout, tooltip, series, overlay,
-  } = metadata;
-
-  const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
+    index, tooltip, series, overlay,
+  } = metadata!;
 
   const indexAxis = isHorizontal ? bottom! : left!;
   const seriesAxis = isHorizontal ? left! : bottom!;

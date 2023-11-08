@@ -33,13 +33,16 @@ import {
   useMemo, useRef,
 } from 'react';
 
+import { useLayoutContext } from '../../providers';
+import { useDataContext } from '../../providers/data';
+import { useThemeContext } from '../../providers/theme';
 import { headingsStyleConfig as hStyle } from '../../style-config';
-import { ThemeVariants } from '../../types';
 import { AxisType } from '../../types/axis';
-import { CartesianChartLayout, CartesianStyleConfig, MarginProps } from '../../types/cartesian';
+import { CartesianStyleConfig, MarginProps } from '../../types/cartesian';
 import { Background } from '../../types/linear-gradient';
 import {
-  Charts, Data, DeepPartial, ScaleType,
+  Charts,
+  DeepPartial, ScaleType,
 } from '../../types/main';
 import {
   computeAllAxisProperties, computeAxisConfig, handleTickFormat,
@@ -56,9 +59,6 @@ import { Lines } from '../shapes';
 import styles from './cartesian-base.module.css';
 
 export type CartesianBaseProps = {
-  data?: Data;
-  metadata?: LineChartMetadata;
-  theme?: ThemeVariants;
   title?: string;
   subtitle?: string;
   headings?: Pick<HeadingsProps, 'top'| 'left'| 'config'>;
@@ -165,9 +165,6 @@ const renderLegendContent = (metadata?: LineChartMetadata) => {
 };
 
 export const CartesianBase = ({
-  data = [],
-  metadata,
-  theme = 'light',
   width = 800,
   height = 600,
   preventResponsive,
@@ -193,6 +190,10 @@ export const CartesianBase = ({
   otherProps,
   children,
 }: CartesianBaseProps) => {
+  const theme = useThemeContext();
+  const { metadata } = useDataContext();
+  const { isHorizontal } = useLayoutContext();
+
   const cartesianConfig = useMemo(() => {
     const cConfig = getCartesianStyleConfigFromTheme(theme);
     return _.merge(cConfig, styleConfig);
@@ -208,7 +209,6 @@ export const CartesianBase = ({
 
   const { from, to } = _.merge(lgStyle.background, background);
   const { from: gridFrom, to: gridTo } = { ...gStyle.background, ...grid.background };
-  const isHorizontal = metadata?.layout === CartesianChartLayout.HORIZONTAL;
 
   const {
     top, right, bottom, left,
@@ -421,9 +421,6 @@ export const CartesianBase = ({
 
           {metadata?.type === Charts.LINE_CHART && (
             <Lines
-              theme={theme}
-              data={data}
-              metadata={metadata}
               topPosition={tPos}
               leftPosition={lPos}
               maxWidth={xMax}

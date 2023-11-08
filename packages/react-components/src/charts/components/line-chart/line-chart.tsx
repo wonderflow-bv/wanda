@@ -18,9 +18,12 @@ import _ from 'lodash';
 import { useMemo } from 'react';
 import { Except } from 'type-fest';
 
+import { LayoutProvider } from '../../providers';
+import { DataProvider } from '../../providers/data';
+import { ThemeProvider } from '../../providers/theme';
 import { defaultLineChartPalette } from '../../style-config';
 import {
-  CartesianChartLayout, Charts, Data,
+  CartesianChartLayout, Charts, Data, ThemeVariants,
 } from '../../types';
 import { getLabelFromObjectPath, handleDomainAndScaleType } from '../../utils';
 import { AxisProps } from '../cartesian-base';
@@ -58,6 +61,7 @@ export type LineStyle = {
 }
 
 export type LineChartProps = {
+  theme: ThemeVariants;
   layout: CartesianChartLayout;
   data: Data;
   renderAs?: LineChartRenderType;
@@ -67,11 +71,10 @@ export type LineChartProps = {
   tooltip?: LineChartTooltip;
   showMarker?: boolean;
   showMarkerLabel?: boolean;
-} & Except<CartesianBaseProps, 'data' | 'metadata' | 'axis'>
+} & Except<CartesianBaseProps, 'axis'>
 
 export type LineChartMetadata = {
   type: Charts;
-  layout: CartesianChartLayout;
   renderAs?: LineChartRenderType;
   index: string;
   series: {
@@ -150,7 +153,6 @@ export const LineChart = ({
   const metadata = {
     type: Charts.LINE_CHART,
     renderAs,
-    layout,
     index: index.dataKey,
     series: {
       dataKey: series.dataKey,
@@ -170,17 +172,20 @@ export const LineChart = ({
   };
 
   return (
-    <CartesianBase
-      theme={theme}
-      data={data}
-      metadata={metadata}
-      axis={axis[layout]}
-      grid={{
-        hideRows: !isHorizontal,
-        hideColumns: isHorizontal,
-      }}
-      {...otherProps}
-    />
+    <ThemeProvider theme={theme}>
+      <LayoutProvider layout={layout}>
+        <DataProvider data={data} metadata={metadata}>
+          <CartesianBase
+            axis={axis[layout]}
+            grid={{
+              hideRows: !isHorizontal,
+              hideColumns: isHorizontal,
+            }}
+            {...otherProps}
+          />
+        </DataProvider>
+      </LayoutProvider>
+    </ThemeProvider>
   );
 };
 

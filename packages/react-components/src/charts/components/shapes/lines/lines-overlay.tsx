@@ -22,22 +22,21 @@ import { Group } from '@visx/group';
 import { LinePath } from '@visx/shape';
 import { useMemo } from 'react';
 
+import { useLayoutContext } from '../../../providers';
+import { useDataContext } from '../../../providers/data';
+import { useThemeContext } from '../../../providers/theme';
 import { colorPaletteNeutrals } from '../../../style-config';
 import {
-  AxisType, CartesianChartLayout, Data, ThemeVariants,
+  AxisType,
 } from '../../../types';
 import {
   getCoordinates, getLinesRenderer,
 } from '../../../utils';
-import { LineChartMetadata } from '../../line-chart/line-chart';
 import {
   LinesItem,
 } from './lines.module.css';
 
 export type LinesOverlayProps = {
-  theme: ThemeVariants;
-  data: Data;
-  metadata: LineChartMetadata;
   axis: {
     top?: AxisType;
     right?: AxisType;
@@ -47,19 +46,17 @@ export type LinesOverlayProps = {
 }
 
 export const LinesOverlay = ({
-  theme,
-  data,
-  metadata,
   axis,
 }: LinesOverlayProps) => {
+  const theme = useThemeContext();
+  const { data, metadata } = useDataContext();
+  const { isHorizontal } = useLayoutContext();
   const {
     top, right, bottom, left,
   } = axis;
   const {
-    index, renderAs, layout, showMarker, showMarkerLabel, overlay,
-  } = metadata;
-
-  const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
+    index, renderAs, showMarker, showMarkerLabel, overlay,
+  } = metadata!;
 
   const indexAxis = isHorizontal ? bottom! : left!;
   const overlayAxis = isHorizontal ? right : top;

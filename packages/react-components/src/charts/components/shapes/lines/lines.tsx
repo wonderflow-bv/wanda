@@ -18,9 +18,7 @@ import { Group } from '@visx/group';
 
 import {
   AxisType,
-  Data, ThemeVariants,
 } from '../../../types';
-import { LineChartMetadata } from '../../line-chart/line-chart';
 import {
   LinesItemGroup,
 } from './lines.module.css';
@@ -30,9 +28,6 @@ import { LinesSeries } from './lines-series';
 import { LinesTooltip } from './lines-tooltip';
 
 export type LinesProps = {
-  theme: ThemeVariants;
-  data: Data;
-  metadata: LineChartMetadata;
   topPosition: number;
   leftPosition: number;
   maxWidth: number;
@@ -46,9 +41,6 @@ export type LinesProps = {
 }
 
 export const Lines = ({
-  theme,
-  data,
-  metadata,
   topPosition: tPos,
   leftPosition: lPos,
   maxWidth: xMax,
@@ -61,33 +53,21 @@ export const Lines = ({
   >
     <Group className={LinesItemGroup}>
       <LinesOverlay
-        theme={theme}
-        data={data}
-        metadata={metadata}
         axis={axis}
       />
 
       <LinesSeries
-        theme={theme}
-        data={data}
-        metadata={metadata}
         axis={axis}
       />
     </Group>
 
     <LinesTooltip
-      theme={theme}
-      data={data}
-      metadata={metadata}
       axis={axis}
       maxWidth={xMax}
       maxHeight={yMax}
     />
 
     <LinesMarkerLabels
-      theme={theme}
-      data={data}
-      metadata={metadata}
       axis={axis}
       maxWidth={xMax}
       maxHeight={yMax}

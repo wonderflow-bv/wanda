@@ -22,22 +22,21 @@ import { Group } from '@visx/group';
 import { LinePath } from '@visx/shape';
 import { useMemo } from 'react';
 
+import { useLayoutContext } from '../../../providers';
+import { useDataContext } from '../../../providers/data';
+import { useThemeContext } from '../../../providers/theme';
 import { colorPaletteNeutrals } from '../../../style-config';
 import {
-  AxisType, CartesianChartLayout, Data, ThemeVariants,
+  AxisType,
 } from '../../../types';
 import {
   getCoordinates, getLinesRenderer,
 } from '../../../utils';
-import { LineChartMetadata } from '../../line-chart/line-chart';
 import {
   LinesItem,
 } from './lines.module.css';
 
 export type LinesSeriesProps = {
-  theme: ThemeVariants;
-  data: Data;
-  metadata: LineChartMetadata;
   axis: {
     top?: AxisType;
     right?: AxisType;
@@ -47,17 +46,16 @@ export type LinesSeriesProps = {
 }
 
 export const LinesSeries = ({
-  theme,
-  data,
-  metadata,
   axis,
 }: LinesSeriesProps) => {
+  const theme = useThemeContext();
+  const { data, metadata } = useDataContext();
+  const { isHorizontal } = useLayoutContext();
+
   const { bottom, left } = axis;
   const {
-    index, layout, renderAs, showMarker, showMarkerLabel, series,
-  } = metadata;
-
-  const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
+    index, renderAs, showMarker, showMarkerLabel, series,
+  } = metadata!;
 
   const indexAxis = isHorizontal ? bottom! : left!;
   const seriesAxis = isHorizontal ? left! : bottom!;

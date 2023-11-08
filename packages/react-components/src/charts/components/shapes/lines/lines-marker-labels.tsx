@@ -19,27 +19,23 @@ import { Label } from '@visx/annotation';
 import { Group } from '@visx/group';
 import _ from 'lodash';
 
+import { useLayoutContext } from '../../../providers';
+import { useDataContext } from '../../../providers/data';
+import { useThemeContext } from '../../../providers/theme';
 import { themes } from '../../../style-config';
 import {
   AxisType,
-  CartesianChartLayout,
-  Data,
-  ThemeVariants,
 } from '../../../types';
 import {
   getCoordinates,
   getPrimitiveFromObjectPath,
   isMarkerLabelActive,
 } from '../../../utils';
-import { LineChartMetadata } from '../../line-chart/line-chart';
 import {
   LinesItem,
 } from './lines.module.css';
 
 export type LinesMarkerLabelsProps = {
-  theme: ThemeVariants;
-  data: Data;
-  metadata: LineChartMetadata;
   maxWidth: number;
   maxHeight: number;
   axis: {
@@ -51,21 +47,20 @@ export type LinesMarkerLabelsProps = {
 }
 
 export const LinesMarkerLabels = ({
-  theme,
-  data,
-  metadata,
   maxWidth: xMax,
   maxHeight: yMax,
   axis,
 }: LinesMarkerLabelsProps) => {
+  const theme = useThemeContext();
+  const { data, metadata } = useDataContext();
+  const { isHorizontal } = useLayoutContext();
+
   const {
     bottom, left, right, top,
   } = axis;
   const {
-    index, layout, showMarkerLabel, series, overlay,
-  } = metadata;
-
-  const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
+    index, showMarkerLabel, series, overlay,
+  } = metadata!;
 
   const indexAxis = isHorizontal ? bottom! : left!;
   const seriesAxis = isHorizontal ? left! : bottom!;
@@ -120,6 +115,7 @@ export const LinesMarkerLabels = ({
         ry: 4,
         x: 0,
         y: 0,
+        filter: 'opacity(0.7)',
       },
     };
 
@@ -222,6 +218,7 @@ export const LinesMarkerLabels = ({
                     backgroundFill={markerLabelProps.background}
                     x={coordinates.x}
                     y={coordinates.y}
+                    fontColor={markerLabelProps.fontColor}
                     title={`${getPrimitiveFromObjectPath(d, overlay.dataKey!) ?? ''}`}
                     titleFontSize={markerLabelProps.fontSize}
                     titleFontWeight={markerLabelProps.fontWeight}
