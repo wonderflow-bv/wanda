@@ -152,10 +152,9 @@ export const ProductCardKpis = forwardRef(({
       iconColor: isGreaterThan(3.99, rating) ? `hsl(${tkns.color.yellow['30']})` : undefined,
     },
     {
-      property: 'sentiment',
-      value: formatKpiValue(sentiment, { decimal: 2, minRange: -1, maxRange: 1 }),
-      icon: 'hearts-suit',
-      iconColor: isGreaterThan(0.5, sentiment) ? 'var(--highlight-red-foreground)' : undefined,
+      property: 'nps',
+      value: formatKpiValue(nps, { decimal: 0, minRange: -100, maxRange: 100 }),
+      icon: 'nps',
     },
     {
       property: 'feedback-count',
@@ -174,14 +173,10 @@ export const ProductCardKpis = forwardRef(({
       icon: 'votes-count',
     },
     {
-      property: 'nps',
-      value: formatKpiValue(nps, { decimal: 0, minRange: -100, maxRange: 100 }),
-      icon: 'nps',
-    },
-    {
-      property: 'groups',
-      value: formatKpiValue(groups),
-      icon: 'grid',
+      property: 'sentiment',
+      value: formatKpiValue(sentiment, { decimal: 2, minRange: -1, maxRange: 1 }),
+      icon: 'hearts-suit',
+      iconColor: isGreaterThan(0.5, sentiment) ? 'var(--highlight-red-foreground)' : undefined,
     },
     {
       property: 'tgw',
@@ -192,6 +187,11 @@ export const ProductCardKpis = forwardRef(({
       property: 'price',
       value: formatPriceRangeValues(priceMin, priceMax, { currency, decimals: currencyDecimals }),
       icon: 'tags',
+    },
+    {
+      property: 'groups',
+      value: formatKpiValue(groups),
+      icon: 'grid',
     },
     {
       property: 'users',

@@ -203,20 +203,20 @@ We recommended showing a maximum of three KPIs.
         "Set the rating value.",
     },
     {
+      name: "nps",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set the NPS value.",
+    },
+    {
       name: "feedbackCount",
       type: "number",
       default: false,
       required: false,
       description:
         "Set the feedback count value.",
-    },
-    {
-      name: "votesCount",
-      type: "number",
-      default: false,
-      required: false,
-      description:
-        "Set the votes count value.",
     },
     {
       name: "votesRating",
@@ -227,28 +227,20 @@ We recommended showing a maximum of three KPIs.
         "Set the votes rating value.",
     },
     {
+      name: "votesCount",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set the votes count value.",
+    },
+    {
       name: "sentiment",
       type: "number",
       default: false,
       required: false,
       description:
         "Set the sentiment index value.",
-    },
-    {
-      name: "nps",
-      type: "number",
-      default: false,
-      required: false,
-      description:
-        "Set the NPS value.",
-    },
-    {
-      name: "groups",
-      type: "number",
-      default: false,
-      required: false,
-      description:
-        "Set the number of groups.",
     },
     {
       name: "tgw",
@@ -273,6 +265,31 @@ We recommended showing a maximum of three KPIs.
       required: false,
       description:
         "Set the maximum price value.",
+    },
+    {
+      name: "currency",
+      type: "enum",
+      typeValue: "'EUR' | 'USD' | 'GBP' | 'JPY' | 'CNY'",
+      default: 'EUR',
+      required: false,
+      description:
+        "Set the price currency code based on ISO 4217.",
+    },
+    {
+      name: "currencyDecimals",
+      type: "number",
+      default: '0',
+      required: false,
+      description:
+        "Set the number of decimals for price formatting.",
+    },
+    {
+      name: "groups",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set the number of groups.",
     },
     {
       name: "users",
@@ -321,23 +338,6 @@ We recommended showing a maximum of three KPIs.
       required: false,
       description:
         "Set the space between Kpis items.",
-    },
-    {
-      name: "currency",
-      type: "enum",
-      typeValue: "'EUR' | 'USD' | 'GBP' | 'JPY' | 'CNY'",
-      default: 'EUR',
-      required: false,
-      description:
-        "Set the price currency code based on ISO 4217.",
-    },
-    {
-      name: "currencyDecimals",
-      type: "number",
-      default: '0',
-      required: false,
-      description:
-        "Set the number of decimals for price formatting.",
     },
     {
       name: "menuActions",
@@ -474,20 +474,20 @@ We recommended showing a maximum of three KPIs.
         "Set the rating value.",
     },
     {
+      name: "nps",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set the NPS value.",
+    },
+    {
       name: "feedbackCount",
       type: "number",
       default: false,
       required: false,
       description:
         "Set the feedback count value.",
-    },
-    {
-      name: "votesCount",
-      type: "number",
-      default: false,
-      required: false,
-      description:
-        "Set the votes count value.",
     },
     {
       name: "votesRating",
@@ -498,28 +498,20 @@ We recommended showing a maximum of three KPIs.
         "Set the votes rating value.",
     },
     {
+      name: "votesCount",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set the votes count value.",
+    },
+    {
       name: "sentiment",
       type: "number",
       default: false,
       required: false,
       description:
         "Set the sentiment index value.",
-    },
-    {
-      name: "nps",
-      type: "number",
-      default: false,
-      required: false,
-      description:
-        "Set the NPS value.",
-    },
-    {
-      name: "groups",
-      type: "number",
-      default: false,
-      required: false,
-      description:
-        "Set the number of groups.",
     },
     {
       name: "tgw",
@@ -561,6 +553,14 @@ We recommended showing a maximum of three KPIs.
       required: false,
       description:
         "Set the number of decimals for price formatting.",
+    },
+    {
+      name: "groups",
+      type: "number",
+      default: false,
+      required: false,
+      description:
+        "Set the number of groups.",
     },
     {
       name: "users",

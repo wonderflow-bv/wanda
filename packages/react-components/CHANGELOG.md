@@ -1,5 +1,7 @@
 # @wonderflow/react-components
 
+## 12.6.0
+
 ## 12.5.2
 
 ### Patch Changes
