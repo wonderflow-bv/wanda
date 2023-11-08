@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /*
 * Copyright 2023 Wonderflow Design Team
 *
@@ -13,10 +14,6 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-/* eslint-disable @typescript-eslint/naming-convention */
-// @ts-nocheck
 
 import { Group } from '@visx/group';
 import { LinePath } from '@visx/shape';

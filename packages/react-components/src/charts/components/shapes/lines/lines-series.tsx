@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /*
 * Copyright 2023 Wonderflow Design Team
 *
@@ -13,10 +14,6 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-/* eslint-disable @typescript-eslint/naming-convention */
-// @ts-nocheck
 
 import { Group } from '@visx/group';
 import { LinePath } from '@visx/shape';
@@ -73,8 +70,8 @@ export const LinesSeries = () => {
           <LinePath
             data={data}
             curve={renderer}
-            x={d => getSeriesCoordinates(d, k, isHorizontal).x}
-            y={d => getSeriesCoordinates(d, k, isHorizontal).y}
+            x={d => getSeriesCoordinates(d, k, isHorizontal).x as any}
+            y={d => getSeriesCoordinates(d, k, isHorizontal).y as any}
             stroke={series.colors[i]}
             strokeWidth={series.style?.[i]?.strokeWidth ?? 2}
             strokeOpacity={series.style?.[i]?.strokeOpacity ?? 1}
