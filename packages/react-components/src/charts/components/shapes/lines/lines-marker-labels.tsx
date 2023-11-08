@@ -20,12 +20,10 @@ import { Group } from '@visx/group';
 import _ from 'lodash';
 
 import { useLayoutContext } from '../../../providers';
+import { useCartesianContext } from '../../../providers/cartesian';
 import { useDataContext } from '../../../providers/data';
 import { useThemeContext } from '../../../providers/theme';
 import { themes } from '../../../style-config';
-import {
-  AxisType,
-} from '../../../types';
 import {
   getCoordinates,
   getPrimitiveFromObjectPath,
@@ -35,25 +33,11 @@ import {
   LinesItem,
 } from './lines.module.css';
 
-export type LinesMarkerLabelsProps = {
-  maxWidth: number;
-  maxHeight: number;
-  axis: {
-    top?: AxisType;
-    right?: AxisType;
-    bottom?: AxisType;
-    left?: AxisType;
-  };
-}
-
-export const LinesMarkerLabels = ({
-  maxWidth: xMax,
-  maxHeight: yMax,
-  axis,
-}: LinesMarkerLabelsProps) => {
+export const LinesMarkerLabels = () => {
   const theme = useThemeContext();
   const { data, metadata } = useDataContext();
   const { isHorizontal } = useLayoutContext();
+  const { axis, maxHeight: yMax, maxWidth: xMax } = useCartesianContext();
 
   const {
     bottom, left, right, top,

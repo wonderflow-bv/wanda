@@ -23,12 +23,10 @@ import { LinePath } from '@visx/shape';
 import { useMemo } from 'react';
 
 import { useLayoutContext } from '../../../providers';
+import { useCartesianContext } from '../../../providers/cartesian';
 import { useDataContext } from '../../../providers/data';
 import { useThemeContext } from '../../../providers/theme';
 import { colorPaletteNeutrals } from '../../../style-config';
-import {
-  AxisType,
-} from '../../../types';
 import {
   getCoordinates, getLinesRenderer,
 } from '../../../utils';
@@ -36,21 +34,11 @@ import {
   LinesItem,
 } from './lines.module.css';
 
-export type LinesSeriesProps = {
-  axis: {
-    top?: AxisType;
-    right?: AxisType;
-    bottom?: AxisType;
-    left?: AxisType;
-  };
-}
-
-export const LinesSeries = ({
-  axis,
-}: LinesSeriesProps) => {
+export const LinesSeries = () => {
   const theme = useThemeContext();
   const { data, metadata } = useDataContext();
   const { isHorizontal } = useLayoutContext();
+  const { axis } = useCartesianContext();
 
   const { bottom, left } = axis;
   const {

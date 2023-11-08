@@ -26,12 +26,10 @@ import _ from 'lodash';
 import { useCallback } from 'react';
 
 import { useLayoutContext } from '../../../providers';
+import { useCartesianContext } from '../../../providers/cartesian';
 import { useDataContext } from '../../../providers/data';
 import { useThemeContext } from '../../../providers/theme';
 import { colorPaletteNeutrals } from '../../../style-config';
-import {
-  AxisType,
-} from '../../../types';
 import {
   accessorInvert,
   bisectIndex,
@@ -44,25 +42,11 @@ import {
   LinesTooltipContent, LinesTooltipSeries,
 } from './lines.module.css';
 
-export type LinesTooltipProps = {
-  maxWidth: number;
-  maxHeight: number;
-  axis: {
-    top?: AxisType;
-    right?: AxisType;
-    bottom?: AxisType;
-    left?: AxisType;
-  };
-}
-
-export const LinesTooltip = ({
-  maxWidth: xMax,
-  maxHeight: yMax,
-  axis,
-}: LinesTooltipProps) => {
+export const LinesTooltip = () => {
   const theme = useThemeContext();
   const { data, metadata } = useDataContext();
   const { isHorizontal } = useLayoutContext();
+  const { axis, maxHeight: yMax, maxWidth: xMax } = useCartesianContext();
 
   const {
     top, right, bottom, left,

@@ -34,6 +34,7 @@ import {
 } from 'react';
 
 import { useLayoutContext } from '../../providers';
+import { CartesianProvider } from '../../providers/cartesian';
 import { useDataContext } from '../../providers/data';
 import { useThemeContext } from '../../providers/theme';
 import { headingsStyleConfig as hStyle } from '../../style-config';
@@ -419,15 +420,19 @@ export const CartesianBase = ({
               />
             ))}
 
-          {metadata?.type === Charts.LINE_CHART && (
-            <Lines
-              topPosition={tPos}
-              leftPosition={lPos}
-              maxWidth={xMax}
-              maxHeight={yMax}
-              axis={allAxis}
-            />
-          )}
+          <CartesianProvider
+            position={{
+              top: tPos,
+              right: rPos,
+              bottom: bPos,
+              left: lPos,
+            }}
+            maxWidth={xMax}
+            maxHeight={yMax}
+            axis={allAxis}
+          >
+            {metadata?.type === Charts.LINE_CHART && <Lines />}
+          </CartesianProvider>
 
           {children}
         </Group>

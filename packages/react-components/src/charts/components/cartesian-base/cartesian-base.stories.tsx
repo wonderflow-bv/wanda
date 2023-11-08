@@ -6,12 +6,10 @@ const story: ComponentMeta<typeof CartesianBase> = {
   title: 'Charts/Cartesian Base',
   component: CartesianBase,
   args: {
-    theme: 'light',
     title: 'Chart Title',
     subtitle: 'Subtitle text',
     isLoading: false,
     preventResponsive: false,
-    data: [],
     grid: {
       tickColumns: 10,
       tickRows: 10,
@@ -103,9 +101,6 @@ TwoAxis.args = {
     },
   },
 };
-
-export const DarkTheme = Template.bind({});
-DarkTheme.args = { theme: 'dark' };
 
 export const WithLegend = Template.bind({});
 WithLegend.args = { legend: <ul><li style={{ fontSize: '12px' }}>some legend content here</li></ul> };

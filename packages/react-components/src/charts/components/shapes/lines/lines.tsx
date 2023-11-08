@@ -16,9 +16,7 @@
 
 import { Group } from '@visx/group';
 
-import {
-  AxisType,
-} from '../../../types';
+import { useCartesianContext } from '../../../providers/cartesian';
 import {
   LinesItemGroup,
 } from './lines.module.css';
@@ -27,52 +25,23 @@ import { LinesOverlay } from './lines-overlay';
 import { LinesSeries } from './lines-series';
 import { LinesTooltip } from './lines-tooltip';
 
-export type LinesProps = {
-  topPosition: number;
-  leftPosition: number;
-  maxWidth: number;
-  maxHeight: number;
-  axis: {
-    top?: AxisType;
-    right?: AxisType;
-    bottom?: AxisType;
-    left?: AxisType;
-  };
-}
+export const Lines = () => {
+  const { position } = useCartesianContext();
+  return (
+    <Group
+      top={position.top}
+      left={position.left}
+    >
+      <Group className={LinesItemGroup}>
+        <LinesOverlay />
+        <LinesSeries />
+      </Group>
 
-export const Lines = ({
-  topPosition: tPos,
-  leftPosition: lPos,
-  maxWidth: xMax,
-  maxHeight: yMax,
-  axis,
-}: LinesProps) => (
-  <Group
-    top={tPos}
-    left={lPos}
-  >
-    <Group className={LinesItemGroup}>
-      <LinesOverlay
-        axis={axis}
-      />
+      <LinesTooltip />
 
-      <LinesSeries
-        axis={axis}
-      />
+      <LinesMarkerLabels />
     </Group>
-
-    <LinesTooltip
-      axis={axis}
-      maxWidth={xMax}
-      maxHeight={yMax}
-    />
-
-    <LinesMarkerLabels
-      axis={axis}
-      maxWidth={xMax}
-      maxHeight={yMax}
-    />
-  </Group>
-);
+  );
+};
 
 Lines.displayName = 'Lines';
