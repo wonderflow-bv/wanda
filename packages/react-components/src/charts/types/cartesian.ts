@@ -14,11 +14,15 @@
  * limitations under the License.
  */
 
+import { TickFormatter } from '@visx/axis';
+import { NumberValue } from '@visx/vendor/d3-scale';
+
 import { AxisStyleConfig } from './axis';
 import { GridStyleConfig } from './grid';
 import { HeadingsStyleConfig } from './headings';
 import { LegendStyleConfig } from './legend';
-import { LinearGradientStyleConfig } from './linear-gradient';
+import { Background, LinearGradientStyleConfig } from './linear-gradient';
+import { ScaleType } from './main';
 import { ViewportStyleConfig } from './viewport';
 
 export enum CartesianChartLayout {
@@ -31,6 +35,34 @@ export type MarginProps = {
   right: number;
   left: number;
   bottom: number;
+}
+
+export type GridProps = {
+  hideRows?: boolean;
+  hideColumns?: boolean;
+  tickRows?: number;
+  tickColumns?: number;
+  background?: Background;
+  otherProps?: Record<string, unknown>;
+}
+
+export type AxisProps = {
+  domain: Array<string | number>;
+  scaleType?: ScaleType;
+  label?: string;
+  range?: [number, number];
+  round?: boolean;
+  nice?: boolean;
+  clamp?: boolean;
+  paddingInner?: number;
+  paddingOuter?: number;
+  numTicks?: number;
+  hideTicks?: boolean;
+  hideTickLabel?: boolean;
+  hideAxisLine?: boolean;
+  hideZero?: boolean;
+  tickFormat?: TickFormatter<NumberValue | string | Date>;
+  otherProps?: Record<string, unknown>;
 }
 
 export type CartesianStyleConfig = {

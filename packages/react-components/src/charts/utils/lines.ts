@@ -21,8 +21,7 @@ import { bisector } from '@visx/vendor/d3-array';
 import { ScaleLinear, ScaleTime } from '@visx/vendor/d3-scale';
 import _ from 'lodash';
 
-import { LineChartRenderType } from '../components/line-chart/line-chart';
-import { AxisType } from '../types';
+import { AxisType, LineChartRenderType } from '../types';
 import { getPrimitiveFromObjectPath } from './data';
 
 export const accessor = (axis: AxisType, dataKey: string, datum?: Record<string, unknown>) => {

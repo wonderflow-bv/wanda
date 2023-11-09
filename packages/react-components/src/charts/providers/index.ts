@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+export * from './cartesian';
 export * from './data';
 export * from './layout';
 export * from './theme';
+

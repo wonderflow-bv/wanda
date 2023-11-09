@@ -25,7 +25,7 @@ import { LinesOverlay } from './lines-overlay';
 import { LinesSeries } from './lines-series';
 import { LinesTooltip } from './lines-tooltip';
 
-export const Lines = () => {
+export const Lines: React.FC = () => {
   const { position } = useCartesianContext();
   return (
     <Group

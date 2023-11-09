@@ -58,7 +58,7 @@ export type TooltipProps = {
   config?: DeepPartial<TooltipStyleConfig>;
 }
 
-export const Tooltip = ({
+export const Tooltip: FCChildren<TooltipProps> = ({
   theme = 'light',
   isOpen,
   top,

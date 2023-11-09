@@ -42,7 +42,7 @@ import {
   LinesTooltipContent, LinesTooltipSeries,
 } from './lines.module.css';
 
-export const LinesTooltip = () => {
+export const LinesTooltip: React.FC = () => {
   const theme = useThemeContext();
   const { data, metadata } = useDataContext();
   const { isHorizontal } = useLayoutContext();

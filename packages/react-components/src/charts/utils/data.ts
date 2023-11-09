@@ -16,9 +16,9 @@
 
 import _ from 'lodash';
 
-import { AxisProps } from '../components';
-import { LineChartIndex, LineChartSeries } from '../components/line-chart/line-chart';
-import { Data } from '../types';
+import {
+  AxisProps, Data, LineChartIndex, LineChartSeries,
+} from '../types';
 import { inferScaleTypeFromDomain } from './axis';
 import {
   getMinMaxDate, getMinMaxNumber,
@@ -59,7 +59,9 @@ export const handleDomainAndScaleType = (
 ): AxisProps => {
   const { scaleType, dataKey, domain } = axis;
   const keys = typeof dataKey === 'string' ? [dataKey] : dataKey;
-  const domainData = _.flattenDeep(keys.map(k => getPrimitivesFromArrayWithObjectPath(data, k)));
+  const domainData = _.flattenDeep<Array<string | number | undefined>>(
+    keys.map((k: string) => getPrimitivesFromArrayWithObjectPath(data, k)),
+  );
 
   let d = removeNilValuesFromArray(domainData) as Array<string | number>;
   const st = inferScaleTypeFromDomain(domainData, scaleType);

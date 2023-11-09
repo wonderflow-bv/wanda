@@ -17,7 +17,7 @@
 import { ScaleBand, ScaleLinear, ScaleTime } from '@visx/vendor/d3-scale';
 import { Except } from 'type-fest';
 
-import { AxisProps } from '../components/cartesian-base';
+import { AxisProps } from './cartesian';
 
 export type AxisOrientation = 'top' | 'left' | 'right' | 'bottom';
 export type DominantBaseline = 'auto' | 'middle' | 'hanging';

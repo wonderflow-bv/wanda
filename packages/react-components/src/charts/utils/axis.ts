@@ -22,11 +22,12 @@ import {
 import { NumberValue, ScaleTime } from '@visx/vendor/d3-scale';
 import _ from 'lodash';
 
-import { AxisProps } from '../components/cartesian-base/cartesian-base';
 import {
   axisStyleConfig,
 } from '../style-config';
-import { CartesianStyleConfig, ScaleType, ViewportStyleConfig } from '../types';
+import {
+  AxisProps, CartesianStyleConfig, ScaleType, ViewportStyleConfig,
+} from '../types';
 import {
   AllAxisElementsValues,
   AllAxisInput,
@@ -456,7 +457,11 @@ export const hasVerticalTickLabel = (
   return false;
 };
 
-export const handleVerticalTickLabelTransform = (t: any, isVertical: boolean, axis: AxisType) => {
+export const handleVerticalTickLabelTransform = (
+  t: any,
+  isVertical: boolean,
+  axis: AxisType,
+) => {
   const { orientation, scale } = axis;
 
   let res = {};
@@ -464,7 +469,7 @@ export const handleVerticalTickLabelTransform = (t: any, isVertical: boolean, ax
   if (orientation === 'bottom') {
     if (isVertical) {
       res = {
-        transform: `translate(13, 6) rotate(90, ${scale(t) as any}, 0)`,
+        transform: `translate(13, 6) rotate(90, ${scale(t) ?? 0}, 0)`,
       };
     } else {
       res = { transform: '', textAnchor: 'middle' };
@@ -474,7 +479,7 @@ export const handleVerticalTickLabelTransform = (t: any, isVertical: boolean, ax
   if (orientation === 'top') {
     if (isVertical) {
       res = {
-        transform: `translate(9, -4) rotate(-90, ${scale(t) as any}, 0)`,
+        transform: `translate(9, -4) rotate(-90, ${scale(t) ?? 0}, 0)`,
       };
     } else {
       res = { transform: '', textAnchor: 'middle' };

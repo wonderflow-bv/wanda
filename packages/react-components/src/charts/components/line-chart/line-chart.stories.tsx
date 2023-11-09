@@ -91,7 +91,7 @@ withNestedData.args = {
   series: {
     dataKey: ['1 star.value', '2 stars.value', '3 stars.value', '4 stars.value', '5 stars.value'],
     label: 'Feedback count',
-    rename: (_, i: number) => Array(i + 1).fill('⭐').join(),
+    rename: (_: string, i: number) => Array(i + 1).fill('⭐').join(),
   },
   overlay: {
     dataKey: 'overlay.value',

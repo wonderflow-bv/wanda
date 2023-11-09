@@ -33,7 +33,7 @@ import {
   LinesItem,
 } from './lines.module.css';
 
-export const LinesMarkerLabels = () => {
+export const LinesMarkerLabels: React.FC = () => {
   const theme = useThemeContext();
   const { data, metadata } = useDataContext();
   const { isHorizontal } = useLayoutContext();

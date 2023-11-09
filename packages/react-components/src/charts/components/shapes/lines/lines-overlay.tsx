@@ -31,7 +31,7 @@ import {
   LinesItem,
 } from './lines.module.css';
 
-export const LinesOverlay = () => {
+export const LinesOverlay: React.FC = () => {
   const theme = useThemeContext();
   const { data, metadata } = useDataContext();
   const { isHorizontal } = useLayoutContext();

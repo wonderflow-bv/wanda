@@ -20,6 +20,7 @@ export * from './colors';
 export * from './grid';
 export * from './headings';
 export * from './legend';
+export * from './line-chart';
 export * from './linear-gradient';
 export * from './main';
 export * from './themes';

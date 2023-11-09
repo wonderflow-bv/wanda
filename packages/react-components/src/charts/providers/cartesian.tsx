@@ -18,7 +18,7 @@ import { createContext, useContext } from 'react';
 
 import { AxisType } from '../types';
 
-export type DataContextProps = {
+export type CartesianContextProps = {
   position: {
     top: number;
     right: number;
@@ -35,7 +35,7 @@ export type DataContextProps = {
   };
 };
 
-export type CartesianProviderProps = DataContextProps
+export type CartesianProviderProps = CartesianContextProps
 
 const defaultSetting = {
   position: {
@@ -49,7 +49,7 @@ const defaultSetting = {
   axis: {},
 };
 
-export const CartesianContext = createContext<DataContextProps>(defaultSetting);
+export const CartesianContext = createContext<CartesianContextProps>(defaultSetting);
 
 export const CartesianProvider: FCChildren<CartesianProviderProps> = ({
   children,

@@ -25,40 +25,11 @@ import { defaultLineChartPalette } from '../../style-config';
 import {
   CartesianChartLayout, Charts, Data, ThemeVariants,
 } from '../../types';
+import {
+  LineChartIndex, LineChartMetadata, LineChartOverlay, LineChartRenderType, LineChartSeries, LineChartTooltip,
+} from '../../types/line-chart';
 import { getLabelFromObjectPath, handleDomainAndScaleType } from '../../utils';
-import { AxisProps } from '../cartesian-base';
 import { CartesianBase, CartesianBaseProps } from '../cartesian-base/cartesian-base';
-
-export type LineChartIndex = Partial<AxisProps> & { dataKey: string };
-
-export type LineChartOverlay = Partial<AxisProps> & {
-  dataKey: string;
-  style?: LineStyle;
-  rename?: string;
-};
-
-export type LineChartSeries = Partial<AxisProps> & {
-  dataKey: string[];
-  style?: Array<LineStyle | undefined>;
-  rename?: (...args: any) => string;
-};
-
-export type LineChartTooltip = {
-  extraSeriesData?: (...args: any) => string;
-  extraOverlayData?: (...args: any) => string;
-  extraContent?: React.ReactNode;
-};
-
-export type LineChartRenderType = 'lines' | 'curves' | 'steps';
-
-export type LineStyle = {
-  stroke?: string;
-  strokeWidth?: string;
-  strokeOpacity?: string;
-  strokeDasharray?: string;
-  showMarker?: boolean;
-  showMarkerLabel?: boolean;
-}
 
 export type LineChartProps = {
   theme: ThemeVariants;
@@ -73,28 +44,7 @@ export type LineChartProps = {
   showMarkerLabel?: boolean;
 } & Except<CartesianBaseProps, 'axis'>
 
-export type LineChartMetadata = {
-  type: Charts;
-  renderAs?: LineChartRenderType;
-  index: string;
-  series: {
-    dataKey: string[];
-    names: string[];
-    colors: Array<string | undefined>;
-    style?: Array<LineStyle | undefined>;
-  };
-  overlay: {
-    dataKey?: string;
-    name: string;
-    color: string;
-    style?: LineStyle;
-  };
-  tooltip?: LineChartTooltip;
-  showMarker?: boolean;
-  showMarkerLabel?: boolean;
-}
-
-export const LineChart = ({
+export const LineChart: React.FC<LineChartProps> = ({
   theme = 'light',
   layout = CartesianChartLayout.HORIZONTAL,
   renderAs = 'curves',
@@ -132,12 +82,13 @@ export const LineChart = ({
 
   const palette = useMemo(() => defaultLineChartPalette[theme], [theme]);
 
-  const seriesColors = useMemo(() => series.dataKey.map((_, i: number) => (
+  const seriesColors = useMemo(() => series.dataKey.map((_: string, i: number) => (
     series.style?.[i] ? series.style[i]?.stroke : palette.series[i]
   )), [palette.series, series.dataKey, series.style]);
 
   const overlayColor = useMemo(
-    () => overlay?.style?.stroke ?? palette.overlay, [overlay?.style?.stroke, palette.overlay],
+    () => overlay?.style?.stroke ?? palette.overlay,
+    [overlay?.style?.stroke, palette.overlay],
   );
 
   const overlayName = useMemo(() => {
@@ -150,7 +101,7 @@ export const LineChart = ({
     return '';
   }, [overlay]);
 
-  const metadata = {
+  const metadata: LineChartMetadata = {
     type: Charts.LINE_CHART,
     renderAs,
     index: index.dataKey,

@@ -19,15 +19,12 @@ import { Text } from '@visx/text';
 import _ from 'lodash';
 import { useMemo } from 'react';
 
-import { HeadingsStyleConfig, ThemeVariants } from '../../types';
+import { useThemeContext } from '../../providers';
+import { HeadingsStyleConfig } from '../../types';
 import { DeepPartial } from '../../types/main';
 import { getCartesianStyleConfigFromTheme } from '../../utils/colors';
 
 export type HeadingsProps = {
-  /**
-   *
-   */
-  theme?: ThemeVariants;
   /**
    *
    */
@@ -51,7 +48,6 @@ export type HeadingsProps = {
 }
 
 export const Headings = ({
-  theme = 'light',
   title,
   subtitle,
   top = 0,
@@ -59,6 +55,7 @@ export const Headings = ({
 
   config,
 }: HeadingsProps) => {
+  const theme = useThemeContext();
   const mergeStyle: HeadingsStyleConfig = useMemo(() => {
     const { headings } = getCartesianStyleConfigFromTheme(theme);
     return _.merge(headings, config);

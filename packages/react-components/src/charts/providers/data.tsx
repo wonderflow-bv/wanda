@@ -16,18 +16,14 @@
 
 import { createContext, useContext } from 'react';
 
-import { LineChartMetadata } from '../components/line-chart/line-chart';
-import { Data } from '../types';
+import { Data, LineChartMetadata } from '../types';
 
 export type DataContextProps = {
   data: Data;
   metadata?: LineChartMetadata;
 };
 
-export type DataProviderProps = {
-  data: Data;
-  metadata?: LineChartMetadata;
-}
+export type DataProviderProps = DataContextProps
 
 const defaultData = {
   data: [],

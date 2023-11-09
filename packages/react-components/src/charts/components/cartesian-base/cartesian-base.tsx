@@ -39,11 +39,13 @@ import { useDataContext } from '../../providers/data';
 import { useThemeContext } from '../../providers/theme';
 import { headingsStyleConfig as hStyle } from '../../style-config';
 import { AxisType } from '../../types/axis';
-import { CartesianStyleConfig, MarginProps } from '../../types/cartesian';
+import {
+  AxisProps, CartesianStyleConfig, GridProps, MarginProps,
+} from '../../types/cartesian';
 import { Background } from '../../types/linear-gradient';
 import {
   Charts,
-  DeepPartial, ScaleType,
+  DeepPartial,
 } from '../../types/main';
 import {
   computeAllAxisProperties, computeAxisConfig, handleTickFormat,
@@ -55,9 +57,9 @@ import {
 } from '../../utils/axis';
 import { getCartesianStyleConfigFromTheme } from '../../utils/colors';
 import { Headings, HeadingsProps } from '../headings';
-import { LineChartMetadata } from '../line-chart/line-chart';
 import { Lines } from '../shapes';
 import styles from './cartesian-base.module.css';
+import { CartesianBaseLegend } from './cartesian-base-legend';
 
 export type CartesianBaseProps = {
   title?: string;
@@ -83,89 +85,7 @@ export type CartesianBaseProps = {
   children?: React.ReactNode;
 }
 
-export type GridProps = {
-  hideRows?: boolean;
-  hideColumns?: boolean;
-  tickRows?: number;
-  tickColumns?: number;
-  background?: Background;
-  otherProps?: Record<string, unknown>;
-}
-
-export type AxisProps = {
-  domain: Array<string | number>;
-  scaleType?: ScaleType;
-  label?: string;
-  range?: [number, number];
-  round?: boolean;
-  nice?: boolean;
-  clamp?: boolean;
-  paddingInner?: number;
-  paddingOuter?: number;
-  numTicks?: number;
-  hideTicks?: boolean;
-  hideTickLabel?: boolean;
-  hideAxisLine?: boolean;
-  hideZero?: boolean;
-  tickFormat?: TickFormatter<NumberValue | string | Date>;
-  otherProps?: Record<string, unknown>;
-}
-
-const renderLegendContent = (metadata?: LineChartMetadata) => {
-  if (metadata) {
-    const { names, colors, dataKey: sdk } = metadata.series;
-    const { name, color, dataKey: odk } = metadata.overlay;
-    return (
-      <ul>
-        {sdk.map((s: string, i: number) => (
-          <li key={s}>
-            <div>
-              <svg width={12} height={12}>
-                <rect
-                  x={0}
-                  y={0}
-                  width={12}
-                  height={12}
-                  rx={2}
-                  ry={2}
-                  fill={colors[i]}
-                />
-              </svg>
-              <span>
-                {names[i]}
-              </span>
-            </div>
-          </li>
-        ))}
-
-        {odk && (
-          <li>
-            <div>
-              <svg width={12} height={12}>
-                <rect
-                  x={0}
-                  y={0}
-                  width={12}
-                  height={12}
-                  rx={2}
-                  ry={2}
-                  fill={color}
-                />
-              </svg>
-              <span>
-                {name}
-              </span>
-            </div>
-          </li>
-        )}
-      </ul>
-    );
-  }
-
-  return null;
-};
-
-export const CartesianBase = ({
+export const CartesianBase: React.FC<CartesianBaseProps> = ({
   width = 800,
   height = 600,
   preventResponsive,
@@ -189,7 +109,6 @@ export const CartesianBase = ({
   hideLegend = false,
   styleConfig,
   otherProps,
-  children,
 }: CartesianBaseProps) => {
   const theme = useThemeContext();
   const { metadata } = useDataContext();
@@ -326,7 +245,6 @@ export const CartesianBase = ({
         />
 
         <Headings
-          theme={theme}
           title={title}
           subtitle={subtitle}
           top={headings?.top ?? 40}
@@ -433,22 +351,17 @@ export const CartesianBase = ({
           >
             {metadata?.type === Charts.LINE_CHART && <Lines />}
           </CartesianProvider>
-
-          {children}
         </Group>
 
       </svg>
 
-      {!hideLegend && (
-        <div ref={refLegend} className={styles.Legend}>
-          <div className={styles.LegendContent}>
-            {legend ?? renderLegendContent(metadata)}
-          </div>
-        </div>
-      )}
+      <CartesianBaseLegend
+        legend={legend}
+        hideLegend={hideLegend}
+        ref={refLegend}
+      />
     </div>
   );
 };
 
 CartesianBase.displayName = 'CartesianBase';
-

@@ -14,7 +14,5 @@
  * limitations under the License.
  */
 
-export type {
-  AxisProps, CartesianBaseProps, GridProps,
-} from './cartesian-base';
+export type { CartesianBaseProps } from './cartesian-base';
 export { CartesianBase } from './cartesian-base';
