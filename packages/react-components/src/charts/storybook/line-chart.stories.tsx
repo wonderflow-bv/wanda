@@ -1,11 +1,10 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { LineChart, LineChartProps } from '@wonderflow/charts';
+import { CartesianChartLayout, LineChart, LineChartProps } from '@wonderflow/charts';
 import React from 'react';
 
 import {
   channels, channelsB, feedbackCount, proCons,
 } from '../mock-data';
-import { CartesianChartLayout } from '../types';
 
 const story: ComponentMeta<typeof LineChart> = {
   title: 'Charts/Line Chart',
