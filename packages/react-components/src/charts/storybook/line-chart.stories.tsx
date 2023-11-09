@@ -1,10 +1,11 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import React from 'react';
 
+import { LineChart, LineChartProps } from '../components';
 import {
   channels, channelsB, feedbackCount, proCons,
-} from '../../mock-data';
-import { CartesianChartLayout } from '../../types';
-import { LineChart } from './line-chart';
+} from '../mock-data';
+import { CartesianChartLayout } from '../types';
 
 const story: ComponentMeta<typeof LineChart> = {
   title: 'Charts/Line Chart',
@@ -33,7 +34,7 @@ const story: ComponentMeta<typeof LineChart> = {
 
 export default story;
 
-const Template: ComponentStory<typeof LineChart> = args => <LineChart {...args} />;
+const Template: ComponentStory<typeof LineChart> = (args: LineChartProps) => <LineChart {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {};

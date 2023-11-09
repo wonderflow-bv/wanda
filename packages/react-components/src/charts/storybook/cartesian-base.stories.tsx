@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import { CartesianBase } from './cartesian-base';
+import { CartesianBase } from '../components';
 
 const story: ComponentMeta<typeof CartesianBase> = {
   title: 'Charts/Cartesian Base',
