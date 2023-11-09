@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { LineChart, LineChartProps } from '@wonderflow/charts';
 import React from 'react';
 
-import { LineChart, LineChartProps } from '../components';
 import {
   channels, channelsB, feedbackCount, proCons,
 } from '../mock-data';

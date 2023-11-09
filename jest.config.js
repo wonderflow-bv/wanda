@@ -24,6 +24,10 @@ module.exports = {
       displayName: 'tokens',
       roots: ['<rootDir>/packages/tokens/'],
     },
+    {
+      displayName: 'charts',
+      roots: ['<rootDir>/packages/charts/'],
+    },
   ],
   verbose: true,
 };

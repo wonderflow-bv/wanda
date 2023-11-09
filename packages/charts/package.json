@@ -18,7 +18,18 @@
     "node": ">=14.x",
     "npm": ">=8.x"
   },
-  "scripts": {},
+  "scripts": {
+    "prebuild": "run-s clean build:csstypes",
+    "build": "run-s build:ts build:css",
+    "postbuild": "rimraf dist/**/_mixins.css",
+    "build:ts": "tsc && tsc-alias",
+    "build:css": "cpy '**/*.css' '../dist' --parents --cwd=src && postcss dist/*.css \"dist/**/!(utils)/!(_mixins).css\" --replace",
+    "lint": "run-s lint:styles",
+    "lint:styles": "stylelint ./src/**/*.css",
+    "clean": "rimraf dist core core.css",
+    "watch:csstypes": "tcm -w -p '**/*.module.css' src",
+    "build:csstypes": "tcm -p '**/*.module.css' src"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wonderflow-bv/wanda.git"
