@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 /*
  * Copyright 2023 Wonderflow Design Team
  *

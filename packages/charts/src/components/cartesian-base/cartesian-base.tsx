@@ -69,6 +69,7 @@ export type CartesianBaseProps = {
   height?: number;
   preventResponsive?: boolean;
   isLoading?: boolean;
+  emptyState?: React.ReactNode;
   background?: Background;
   margin?: MarginProps;
   grid?: GridProps;
@@ -82,7 +83,6 @@ export type CartesianBaseProps = {
   hideLegend?: boolean;
   styleConfig?: DeepPartial<CartesianStyleConfig>;
   otherProps?: Record<string, unknown>;
-  children?: React.ReactNode;
 }
 
 export const CartesianBase: React.FC<CartesianBaseProps> = ({
@@ -90,6 +90,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   height = 600,
   preventResponsive,
   isLoading = false,
+  emptyState,
   background,
   margin = {
     top: 24,
@@ -214,7 +215,8 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
     positionLeft: lPos,
   });
 
-  if (isLoading) return <div>Loading...</div>;
+  const isEmpty = !isLoading && !!emptyState;
+  const isReady = !isLoading && !emptyState;
 
   return (
     <div
@@ -252,114 +254,142 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
           config={headings?.config}
         />
 
-        <Group>
-          <rect
-            x={lPos}
-            y={tPos}
-            width={xMax}
-            height={yMax}
-            fill="url(#cartesian-grid-background)"
-          />
+        {isLoading && (
+          <Group top={dynamicHeight / 2} left={dynamicWidth / 2}>
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" enableBackground="new 0 0 100 100" xmlSpace="preserve">
+              <rect fill="#454545" width="10" height="100" rx="4" transform="translate(0) rotate(180 5 50)">
+                <animate attributeName="height" attributeType="XML" dur="1.1s" values="30; 100; 30" repeatCount="indefinite" />
+              </rect>
+              <rect x="17" fill="#454545" width="10" height="100" rx="4" transform="translate(0) rotate(180 20 50)">
+                <animate attributeName="height" attributeType="XML" dur="1.25s" values="30; 100; 30" repeatCount="indefinite" begin="0.1s" />
+              </rect>
+              <rect x="40" fill="#454545" width="10" height="100" rx="4" transform="translate(0) rotate(180 38 50)">
+                <animate attributeName="height" attributeType="XML" dur="1.15s" values="30; 100; 30" repeatCount="indefinite" begin="0.3s" />
+              </rect>
+              <rect x="60" fill="#454545" width="10" height="100" rx="4" transform="translate(0) rotate(180 55 50)">
+                <animate attributeName="height" attributeType="XML" dur="1.25s" values="30; 100; 30" repeatCount="indefinite" begin="0.5s" />
+              </rect>
+              <rect x="80" fill="#454545" width="10" height="100" rx="4" transform="translate(0) rotate(180 72 50)">
+                <animate attributeName="height" attributeType="XML" dur="1.0s" values="30; 100; 30" repeatCount="indefinite" begin="0.1s" />
+              </rect>
+            </svg>
+          </Group>
+        )}
+        {isEmpty && emptyState}
 
-          {hasRows && (
-            <GridRows
-              top={tPos}
-              left={lPos}
-              scale={allAxis.left?.scale ?? allAxis.right!.scale}
+        {isReady && (
+          <Group>
+            <rect
+              x={lPos}
+              y={tPos}
               width={xMax}
-              numTicks={grid?.tickRows}
-              offset={gStyle.rows?.offset}
-              fill={gStyle.rows?.fill}
-              stroke={gStyle.rows?.stroke}
-              strokeOpacity={gStyle.rows?.strokeOpacity}
-              strokeWidth={gStyle.rows?.strokeWidth}
-              strokeDasharray={gStyle.rows?.strokeDasharray}
-              lineStyle={gStyle.rows?.lineStyle}
-              {...grid.otherProps}
-            />
-          )}
-
-          {hasCols && (
-            <GridColumns
-              top={tPos}
-              left={lPos}
-              scale={allAxis.bottom?.scale ?? allAxis.top!.scale}
               height={yMax}
-              numTicks={grid?.tickColumns}
-              offset={gStyle.columns?.offset}
-              fill={gStyle.columns?.fill}
-              stroke={gStyle.columns?.stroke}
-              strokeOpacity={gStyle.columns?.strokeOpacity}
-              strokeWidth={gStyle.columns?.strokeWidth}
-              strokeDasharray={gStyle.columns?.strokeDasharray}
-              lineStyle={gStyle.columns?.lineStyle}
-              {...grid.otherProps}
+              fill="url(#cartesian-grid-background)"
             />
-          )}
 
-          {Object.values(allAxis)
-            .filter((a): a is AxisType => !!a)
-            .map(a => (
-              <Axis
-                key={a.orientation}
-                orientation={a.orientation}
-                scale={a.scale}
-                top={a.top}
-                left={a.left}
-                numTicks={handleTickNumber(xMax, yMax, a, vStyle)}
-                tickLength={axisConfig.style.tickLineProps.length}
-                tickLabelProps={v => ({
-                  ...axisConfig.style.tickLabelProps,
-                  ...axisConfig[a.orientation].tickLabelProps,
-                  ...handleVerticalTickLabelTransform(
-                    v,
-                    hasVerticalTickLabel(xMax, a.orientation, a, vStyle),
-                    a,
-                  ),
-                })}
-                tickLineProps={axisConfig.style.tickLineProps}
-                label={a.label}
-                labelOffset={
+            {hasRows && (
+              <GridRows
+                top={tPos}
+                left={lPos}
+                scale={allAxis.left?.scale ?? allAxis.right!.scale}
+                width={xMax}
+                numTicks={grid?.tickRows}
+                offset={gStyle.rows?.offset}
+                fill={gStyle.rows?.fill}
+                stroke={gStyle.rows?.stroke}
+                strokeOpacity={gStyle.rows?.strokeOpacity}
+                strokeWidth={gStyle.rows?.strokeWidth}
+                strokeDasharray={gStyle.rows?.strokeDasharray}
+                lineStyle={gStyle.rows?.lineStyle}
+                {...grid.otherProps}
+              />
+            )}
+
+            {hasCols && (
+              <GridColumns
+                top={tPos}
+                left={lPos}
+                scale={allAxis.bottom?.scale ?? allAxis.top!.scale}
+                height={yMax}
+                numTicks={grid?.tickColumns}
+                offset={gStyle.columns?.offset}
+                fill={gStyle.columns?.fill}
+                stroke={gStyle.columns?.stroke}
+                strokeOpacity={gStyle.columns?.strokeOpacity}
+                strokeWidth={gStyle.columns?.strokeWidth}
+                strokeDasharray={gStyle.columns?.strokeDasharray}
+                lineStyle={gStyle.columns?.lineStyle}
+                {...grid.otherProps}
+              />
+            )}
+
+            {Object.values(allAxis)
+              .filter((a): a is AxisType => !!a)
+              .map(a => (
+                <Axis
+                  key={a.orientation}
+                  orientation={a.orientation}
+                  scale={a.scale}
+                  top={a.top}
+                  left={a.left}
+                  numTicks={handleTickNumber(xMax, yMax, a, vStyle)}
+                  tickLength={axisConfig.style.tickLineProps.length}
+                  tickLabelProps={v => ({
+                    ...axisConfig.style.tickLabelProps,
+                    ...axisConfig[a.orientation].tickLabelProps,
+                    ...handleVerticalTickLabelTransform(
+                      v,
+                      hasVerticalTickLabel(xMax, a.orientation, a, vStyle),
+                      a,
+                    ),
+                  })}
+                  tickLineProps={axisConfig.style.tickLineProps}
+                  label={a.label}
+                  labelOffset={
                 axisConfig[a.orientation].labelOffset
                 + handleVerticalTickLabelOffset(xMax, a.orientation, a, cartesianConfig)
               }
-                labelProps={{
-                  ...axisConfig.style.labelProps,
-                  ...axisConfig[a.orientation].labelProps,
-                }}
-                tickFormat={handleTickFormat(a) as TickFormatter<string | NumberValue | Date> | undefined}
-                stroke={axisConfig.style.axisLineProps.stroke}
-                strokeDasharray={axisConfig.style.axisLineProps.strokeDasharray}
-                strokeWidth={axisConfig.style.axisLineProps.strokeWidth}
-                hideAxisLine={a.hideAxisLine}
-                hideTicks={a.hideTicks}
-                hideZero={a.hideZero}
-                {...a.otherProps}
-              />
-            ))}
+                  labelProps={{
+                    ...axisConfig.style.labelProps,
+                    ...axisConfig[a.orientation].labelProps,
+                  }}
+                  tickFormat={handleTickFormat(a) as TickFormatter<string | NumberValue | Date> | undefined}
+                  stroke={axisConfig.style.axisLineProps.stroke}
+                  strokeDasharray={axisConfig.style.axisLineProps.strokeDasharray}
+                  strokeWidth={axisConfig.style.axisLineProps.strokeWidth}
+                  hideAxisLine={a.hideAxisLine}
+                  hideTicks={a.hideTicks}
+                  hideZero={a.hideZero}
+                  {...a.otherProps}
+                />
+              ))}
 
-          <CartesianProvider
-            position={{
-              top: tPos,
-              right: rPos,
-              bottom: bPos,
-              left: lPos,
-            }}
-            maxWidth={xMax}
-            maxHeight={yMax}
-            axis={allAxis}
-          >
-            {metadata?.type === Charts.LINE_CHART && <Lines />}
-          </CartesianProvider>
-        </Group>
+            <CartesianProvider
+              position={{
+                top: tPos,
+                right: rPos,
+                bottom: bPos,
+                left: lPos,
+              }}
+              maxWidth={xMax}
+              maxHeight={yMax}
+              axis={allAxis}
+            >
+              {metadata?.type === Charts.LINE_CHART && <Lines />}
+            </CartesianProvider>
+          </Group>
+        )}
 
       </svg>
 
-      <CartesianBaseLegend
-        legend={legend}
-        hideLegend={hideLegend}
-        ref={refLegend}
-      />
+      {isReady && (
+        <CartesianBaseLegend
+          legend={legend}
+          hideLegend={hideLegend}
+          ref={refLegend}
+        />
+      )}
+
     </div>
   );
 };
