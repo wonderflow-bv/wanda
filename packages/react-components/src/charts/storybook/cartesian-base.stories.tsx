@@ -1,5 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { CartesianBase } from '@wonderflow/charts';
+
+import { CartesianBase } from '../../../../charts/src';
 
 const story: ComponentMeta<typeof CartesianBase> = {
   title: 'Charts/Cartesian Base',
