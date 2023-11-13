@@ -51,7 +51,7 @@ export const LinesOverlay: React.FC = () => {
 
   const hasOverlay = Boolean(overlayAxis && overlay.dataKey);
 
-  const missingData = {
+  const noDataSegmentStyle = {
     stroke: hideMissingDataConnection ? 'transparent' : themes[theme].lines.noData,
     strokeDashArray: '2 3',
   };
@@ -73,8 +73,8 @@ export const LinesOverlay: React.FC = () => {
 
   const subPaths = useMemo(() => createSubPaths(
     data,
-    d => Boolean(overlay.dataKey && _.isNil(getValueFromObjectPath(d, overlay.dataKey))),
-  ), [data, overlay.dataKey]);
+    d => hasOverlay && _.isNil(getValueFromObjectPath(d, overlay.dataKey!)),
+  ), [data, hasOverlay, overlay.dataKey]);
 
   return (
     <>
@@ -87,10 +87,10 @@ export const LinesOverlay: React.FC = () => {
               curve={renderer}
               x={d => getOverlayCoordinates(d, overlay.dataKey!, isHorizontal).x as any}
               y={d => getOverlayCoordinates(d, overlay.dataKey!, isHorizontal).y as any}
-              stroke={i % 2 === 0 ? overlay.color : missingData.stroke}
+              stroke={i % 2 === 0 ? overlay.color : noDataSegmentStyle.stroke}
               strokeWidth={overlay.style?.strokeWidth ?? 2}
               strokeOpacity={overlay.style?.strokeOpacity ?? 1}
-              strokeDasharray={i % 2 === 0 ? overlay.style?.strokeDasharray : missingData.strokeDashArray}
+              strokeDasharray={i % 2 === 0 ? overlay.style?.strokeDasharray : noDataSegmentStyle.strokeDashArray}
             />
 
             {(showMarker
