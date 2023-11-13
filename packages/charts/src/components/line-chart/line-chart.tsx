@@ -40,6 +40,7 @@ export type LineChartProps = {
   series: LineChartSeries;
   overlay?: LineChartOverlay;
   tooltip?: LineChartTooltip;
+  hideMissingDataConnection?: boolean;
   showMarker?: boolean;
   showMarkerLabel?: boolean;
 } & Except<CartesianBaseProps, 'axis'>
@@ -53,6 +54,7 @@ export const LineChart: React.FC<LineChartProps> = ({
   series,
   overlay,
   tooltip,
+  hideMissingDataConnection = false,
   showMarker = false,
   showMarkerLabel = false,
   ...otherProps
@@ -118,6 +120,7 @@ export const LineChart: React.FC<LineChartProps> = ({
       style: overlay?.style,
     },
     tooltip,
+    hideMissingDataConnection,
     showMarker,
     showMarkerLabel,
   };

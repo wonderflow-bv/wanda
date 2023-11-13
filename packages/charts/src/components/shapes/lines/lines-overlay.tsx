@@ -23,7 +23,7 @@ import { useLayoutContext } from '../../../providers';
 import { useCartesianContext } from '../../../providers/cartesian';
 import { useDataContext } from '../../../providers/data';
 import { useThemeContext } from '../../../providers/theme';
-import { colorPaletteNeutrals } from '../../../style-config';
+import { colorPaletteNeutrals, themes } from '../../../style-config';
 import {
   createSubPaths,
   getCoordinates, getLinesRenderer,
@@ -43,6 +43,7 @@ export const LinesOverlay: React.FC = () => {
   } = axis;
   const {
     index, renderAs, showMarker, showMarkerLabel, overlay,
+    hideMissingDataConnection,
   } = metadata!;
 
   const indexAxis = isHorizontal ? bottom! : left!;
@@ -52,7 +53,7 @@ export const LinesOverlay: React.FC = () => {
 
   const renderer = useMemo(() => getLinesRenderer(renderAs, isHorizontal), [isHorizontal, renderAs]);
 
-  const getOverlayCoordinates = (
+  const getOverlayCoordinates = useMemo(() => (
     datum: Record<string, unknown>,
     dataKey: string,
     isHorizontal: boolean,
@@ -63,9 +64,14 @@ export const LinesOverlay: React.FC = () => {
     otherAxis: overlayAxis!,
     otherDataKey: dataKey,
     isHorizontal,
-  });
+  }), [index, indexAxis, overlayAxis]);
 
   const subPaths = useMemo(() => createSubPaths(data, d => _.isNil(d[overlay.dataKey!])), [data, overlay.dataKey]);
+
+  const missingData = {
+    stroke: hideMissingDataConnection ? 'transparent' : themes[theme].lines.noData,
+    strokeDashArray: '2 3',
+  };
 
   return (
     <>
@@ -78,10 +84,10 @@ export const LinesOverlay: React.FC = () => {
               curve={renderer}
               x={d => getOverlayCoordinates(d, overlay.dataKey!, isHorizontal).x as any}
               y={d => getOverlayCoordinates(d, overlay.dataKey!, isHorizontal).y as any}
-              stroke={i % 2 === 0 ? overlay.color : 'grey'}
+              stroke={i % 2 === 0 ? overlay.color : missingData.stroke}
               strokeWidth={overlay.style?.strokeWidth ?? 2}
               strokeOpacity={overlay.style?.strokeOpacity ?? 1}
-              strokeDasharray={i % 2 === 0 ? overlay.style?.strokeDasharray : '2 3'}
+              strokeDasharray={i % 2 === 0 ? overlay.style?.strokeDasharray : missingData.strokeDashArray}
             />
 
             {(showMarker

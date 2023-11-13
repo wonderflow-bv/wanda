@@ -36,6 +36,9 @@ export type Theme = {
     fontColor: string;
     background: string;
   };
+  lines: {
+    noData: string;
+  };
 }
 
 export type ThemeVariants = 'light' | 'dark';

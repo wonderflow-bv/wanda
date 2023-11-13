@@ -168,7 +168,7 @@ export const LinesTooltip: React.FC = () => {
               />
             ))}
 
-            {hasOverlay && (
+            {hasOverlay && tooltipData.data[overlay.dataKey] && (
               <circle
                 r={2}
                 cx={isHorizontal

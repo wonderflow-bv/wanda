@@ -23,6 +23,8 @@ const story: ComponentMeta<typeof LineChart> = {
     overlay: undefined,
     showMarker: false,
     showMarkerLabel: false,
+    hideMissingDataConnection: false,
+    hideLegend: false,
     layout: CartesianChartLayout.HORIZONTAL,
     renderAs: 'curves',
     theme: 'light',
