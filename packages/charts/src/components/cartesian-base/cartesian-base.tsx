@@ -153,7 +153,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   const w = size ? size.width : width;
   const h = size ? size.height : height;
 
-  const legendH = sizeLegend?.height ?? 0;
+  const legendH = hideLegend ? 0 : (sizeLegend?.height ?? 0);
 
   const dynamicWidth = preventResponsive ? width : w;
   const dynamicHeight = preventResponsive ? height : h;
