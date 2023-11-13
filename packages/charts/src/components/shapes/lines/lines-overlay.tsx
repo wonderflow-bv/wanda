@@ -26,7 +26,7 @@ import { useThemeContext } from '../../../providers/theme';
 import { colorPaletteNeutrals, themes } from '../../../style-config';
 import {
   createSubPaths,
-  getCoordinates, getLinesRenderer,
+  getCoordinates, getLinesRenderer, getValueFromObjectPath,
 } from '../../../utils';
 import {
   LinesItem,
@@ -51,6 +51,11 @@ export const LinesOverlay: React.FC = () => {
 
   const hasOverlay = Boolean(overlayAxis && overlay.dataKey);
 
+  const missingData = {
+    stroke: hideMissingDataConnection ? 'transparent' : themes[theme].lines.noData,
+    strokeDashArray: '2 3',
+  };
+
   const renderer = useMemo(() => getLinesRenderer(renderAs, isHorizontal), [isHorizontal, renderAs]);
 
   const getOverlayCoordinates = useMemo(() => (
@@ -66,12 +71,10 @@ export const LinesOverlay: React.FC = () => {
     isHorizontal,
   }), [index, indexAxis, overlayAxis]);
 
-  const subPaths = useMemo(() => createSubPaths(data, d => _.isNil(d[overlay.dataKey!])), [data, overlay.dataKey]);
-
-  const missingData = {
-    stroke: hideMissingDataConnection ? 'transparent' : themes[theme].lines.noData,
-    strokeDashArray: '2 3',
-  };
+  const subPaths = useMemo(() => createSubPaths(
+    data,
+    d => Boolean(overlay.dataKey && _.isNil(getValueFromObjectPath(d, overlay.dataKey))),
+  ), [data, overlay.dataKey]);
 
   return (
     <>
