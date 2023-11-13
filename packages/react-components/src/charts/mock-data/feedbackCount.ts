@@ -148,3 +148,138 @@ export const feedbackCount = [
     extraData: null,
   },
 ];
+
+export const feedbackCountGaps = [
+  {
+    date: '2002',
+    overlay: 0.1,
+    'feedback count': 16,
+    extraData: null,
+  },
+  {
+    date: '2003',
+    overlay: 0.11,
+    'feedback count': 30,
+    extraData: null,
+  },
+  {
+    date: '2004',
+    overlay: 0.14,
+    'feedback count': 20,
+    extraData: null,
+  },
+  {
+    date: '2005',
+    overlay: 0.13,
+    'feedback count': 52,
+    extraData: null,
+  },
+  {
+    date: '2006',
+    overlay: 0.14,
+    'feedback count': 131,
+    extraData: null,
+  },
+  {
+    date: '2007',
+    overlay: 0.18,
+    'feedback count': 462,
+    extraData: null,
+  },
+  {
+    date: '2008',
+    overlay: 0.16,
+    'feedback count': 419,
+    extraData: null,
+  },
+  {
+    date: '2009',
+    overlay: 0.13,
+    'feedback count': 266,
+    extraData: null,
+  },
+  {
+    date: '2010',
+    overlay: 0.15,
+    'feedback count': 273,
+    extraData: null,
+  },
+  {
+    date: '2011',
+    overlay: 0.21,
+    'feedback count': 491,
+    extraData: null,
+  },
+  {
+    date: '2012',
+    overlay: null,
+    'feedback count': 558,
+    extraData: null,
+  },
+  {
+    date: '2013',
+    overlay: null,
+    'feedback count': 2414,
+    extraData: null,
+  },
+  {
+    date: '2014',
+    overlay: null,
+    'feedback count': 8031,
+    extraData: null,
+  },
+  {
+    date: '2015',
+    overlay: null,
+    'feedback count': 9196,
+    extraData: null,
+  },
+  {
+    date: '2016',
+    overlay: 0.14,
+    'feedback count': 5869,
+    extraData: null,
+  },
+  {
+    date: '2017',
+    overlay: 0.24,
+    'feedback count': 8786,
+    extraData: null,
+  },
+  {
+    date: '2018',
+    overlay: 0.32,
+    'feedback count': 4182,
+    extraData: null,
+  },
+  {
+    date: '2019',
+    overlay: 0.31,
+    'feedback count': 8303,
+    extraData: null,
+  },
+  {
+    date: '2020',
+    overlay: 0.44,
+    'feedback count': 11490,
+    extraData: null,
+  },
+  {
+    date: '2021',
+    overlay: null,
+    'feedback count': 5539,
+    extraData: null,
+  },
+  {
+    date: '2022',
+    overlay: 0.75,
+    'feedback count': 2952,
+    extraData: null,
+  },
+  {
+    date: '2023',
+    overlay: 0.74,
+    'feedback count': 1746,
+    extraData: null,
+  },
+];

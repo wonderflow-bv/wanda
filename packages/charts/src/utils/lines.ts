@@ -21,7 +21,7 @@ import { bisector } from '@visx/vendor/d3-array';
 import { ScaleLinear, ScaleTime } from '@visx/vendor/d3-scale';
 import _ from 'lodash';
 
-import { AxisType, LineChartRenderType } from '../types';
+import { AxisType, Data, LineChartRenderType } from '../types';
 import { getPrimitiveFromObjectPath } from './data';
 
 export const accessor = (axis: AxisType, dataKey: string, datum?: Record<string, unknown>) => {
@@ -112,4 +112,43 @@ export const isMarkerLabelActive = (index: number, numLabels: number, maxLabels 
   const rightIndex = leftIndex.map(e => numLabels - e);
   const allIndex = leftIndex.concat(rightIndex).sort((a, b) => a - b);
   return allIndex.includes(index);
+};
+
+export const createSubArrays = (
+  arr: Array<Record<string, any>>,
+  condition: (d: Record<string, any>) => boolean,
+) => arr.reduce((acc, cur) => {
+  if (condition(cur)) {
+    if (acc.length > 0 && acc[acc.length - 1].length > 0) {
+      acc.push([]);
+    }
+  } else if (acc.length === 0 || acc[acc.length - 1].length === 0) {
+    acc.push([cur]);
+  } else {
+    acc[acc.length - 1].push(cur);
+  }
+
+  return acc;
+}, []) as Array<Array<Record<string, any>>>;
+
+export const createSubPaths = (
+  data: Data,
+  condition: (d: Record<string, any>) => boolean,
+) => {
+  const subArray = createSubArrays(data, condition);
+
+  if (!subArray[0].length) subArray.shift();
+  if (!subArray[subArray.length - 1].length) subArray.pop();
+
+  if (subArray.length > 1) {
+    return subArray.map((a: Array<Record<string, any>>, i: number) => {
+      const len = a.length;
+      const prev = i - 1;
+      const post = i + 1;
+      if (!len) return [subArray[prev][subArray[prev].length - 1], subArray[post][0]];
+      return a;
+    });
+  }
+
+  return subArray;
 };

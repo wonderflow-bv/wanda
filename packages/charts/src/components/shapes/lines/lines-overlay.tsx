@@ -16,6 +16,7 @@
 
 import { Group } from '@visx/group';
 import { LinePath } from '@visx/shape';
+import _ from 'lodash';
 import { useMemo } from 'react';
 
 import { useLayoutContext } from '../../../providers';
@@ -24,6 +25,7 @@ import { useDataContext } from '../../../providers/data';
 import { useThemeContext } from '../../../providers/theme';
 import { colorPaletteNeutrals } from '../../../style-config';
 import {
+  createSubPaths,
   getCoordinates, getLinesRenderer,
 } from '../../../utils';
 import {
@@ -63,38 +65,43 @@ export const LinesOverlay: React.FC = () => {
     isHorizontal,
   });
 
+  const subPaths = useMemo(() => createSubPaths(data, d => _.isNil(d[overlay.dataKey!])), [data, overlay.dataKey]);
+
   return (
     <>
       {hasOverlay && (
-        <Group className={LinesItem}>
-          <LinePath
-            data={data}
-            curve={renderer}
-            x={d => getOverlayCoordinates(d, overlay.dataKey!, isHorizontal).x as any}
-            y={d => getOverlayCoordinates(d, overlay.dataKey!, isHorizontal).y as any}
-            stroke={overlay.color}
-            strokeWidth={overlay.style?.strokeWidth ?? 2}
-            strokeOpacity={overlay.style?.strokeOpacity ?? 1}
-            strokeDasharray={overlay.style?.strokeDasharray}
-          />
+        subPaths.map((data: Array<Record<string, any>>, i: number) => (
 
-          {(showMarker
+          <Group className={LinesItem} key={JSON.stringify(data)}>
+            <LinePath
+              data={data}
+              curve={renderer}
+              x={d => getOverlayCoordinates(d, overlay.dataKey!, isHorizontal).x as any}
+              y={d => getOverlayCoordinates(d, overlay.dataKey!, isHorizontal).y as any}
+              stroke={i % 2 === 0 ? overlay.color : 'grey'}
+              strokeWidth={overlay.style?.strokeWidth ?? 2}
+              strokeOpacity={overlay.style?.strokeOpacity ?? 1}
+              strokeDasharray={i % 2 === 0 ? overlay.style?.strokeDasharray : '2 3'}
+            />
+
+            {(showMarker
             || showMarkerLabel
             || overlay.style?.showMarker
             || overlay.style?.showMarkerLabel
-          ) && data.map((d: Record<string, any>) => (
-            <circle
-              key={JSON.stringify(d)}
-              r={2}
-              cx={getOverlayCoordinates(d, overlay.dataKey!, isHorizontal).x}
-              cy={getOverlayCoordinates(d, overlay.dataKey!, isHorizontal).y}
-              stroke={overlay.color}
-              fill={theme === 'light' ? colorPaletteNeutrals.white : colorPaletteNeutrals.black}
-              strokeWidth={overlay.style?.strokeWidth ?? 1}
-              strokeOpacity={overlay.style?.strokeOpacity ?? 1}
-            />
-          ))}
-        </Group>
+            ) && data.map((d: Record<string, any>) => (
+              <circle
+                key={JSON.stringify(d)}
+                r={2}
+                cx={getOverlayCoordinates(d, overlay.dataKey!, isHorizontal).x}
+                cy={getOverlayCoordinates(d, overlay.dataKey!, isHorizontal).y}
+                stroke={overlay.color}
+                fill={theme === 'light' ? colorPaletteNeutrals.white : colorPaletteNeutrals.black}
+                strokeWidth={overlay.style?.strokeWidth ?? 1}
+                strokeOpacity={overlay.style?.strokeOpacity ?? 1}
+              />
+            ))}
+          </Group>
+        ))
       )}
 
     </>

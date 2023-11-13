@@ -20,7 +20,7 @@ export type DeepPartial<T> = {
 
 export type ValidTypeOf = 'undefined'| 'object'| 'boolean'| 'number'| 'string'| 'function'| 'symbol'| 'bigint';
 
-export type Data = Array<Record<string, unknown>>;
+export type Data = Array<Record<string, any>>;
 
 export enum Charts {
   LINE_CHART = 'LINE_CHART',

@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import { CartesianChartLayout, LineChart, LineChartProps } from '../../../../charts/src';
 import {
-  channels, channelsB, feedbackCount, proCons,
+  channels, channelsB, feedbackCount, feedbackCountGaps, proCons,
 } from '../mock-data';
 
 const story: ComponentMeta<typeof LineChart> = {
@@ -40,6 +40,16 @@ Default.args = {};
 export const withOverlay = Template.bind({});
 withOverlay.args = {
   subtitle: 'A trend line chart with overlay',
+  overlay: {
+    dataKey: 'overlay',
+    label: 'Overlay',
+  },
+};
+
+export const withGaps = Template.bind({});
+withGaps.args = {
+  data: feedbackCountGaps,
+  subtitle: 'A trend line chart with null values',
   overlay: {
     dataKey: 'overlay',
     label: 'Overlay',
