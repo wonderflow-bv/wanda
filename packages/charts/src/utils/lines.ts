@@ -147,11 +147,16 @@ export const createSubPaths = (
       const prev = i - 1;
       const post = i + 1;
 
-      const arrPrev = subArray[prev];
-      const arrPrevLast = subArray[prev].length - 1;
-      const arrPost = subArray[post];
+      if (!len) {
+        const arrPrev = subArray[prev];
+        const arrPrevLast = arrPrev.length - 1;
 
-      if (!len) return [arrPrev[arrPrevLast], arrPost[post][0]];
+        const fromPrev = arrPrev[arrPrevLast];
+        const fromPost = subArray[post][0];
+
+        return [fromPrev, fromPost];
+      }
+
       return a;
     });
   }
