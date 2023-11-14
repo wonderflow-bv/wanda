@@ -38,8 +38,8 @@ import {
 } from '../../../utils';
 import { Tooltip } from '../../tooltip';
 import {
-  ExtraContent,
-  LinesTooltipContent, LinesTooltipSeries,
+  ExtraContent, LinesTooltipContent, LinesTooltipSeries,
+  NoData,
 } from './lines.module.css';
 
 export const LinesTooltip: React.FC = () => {
@@ -103,9 +103,15 @@ export const LinesTooltip: React.FC = () => {
     const tooltipLeft = isHorizontal ? coords.x + lBound / 8 : coords.x;
     const tooltipTop = isHorizontal ? coords.y : coords.y + tBound / 8;
 
+    const datum = data[bisectValueIndexOf];
+
+    const hasSeriesData = series.dataKey.every(s => !_.isNil(getPrimitiveFromObjectPath(datum, s)));
+    const hasOverlayData = !_.isNil(getPrimitiveFromObjectPath(datum, overlay.dataKey!));
+
     const tooltipData = {
       coords,
-      data: data[bisectValueIndexOf],
+      data: datum,
+      hasData: hasSeriesData || hasOverlayData,
       lineIndicatorPos,
     };
 
@@ -114,7 +120,7 @@ export const LinesTooltip: React.FC = () => {
       tooltipTop,
       tooltipData,
     });
-  }, [containerBounds, indexAxis, isHorizontal, data, showTooltip]);
+  }, [indexAxis, containerBounds, isHorizontal, data, series.dataKey, overlay.dataKey, showTooltip]);
 
   return (
     <>
@@ -265,7 +271,6 @@ export const LinesTooltip: React.FC = () => {
                           {tooltip.extraOverlayData(
                             _.at(tooltipData.data, getLabelFromObjectPath(overlay.dataKey!))[0],
                           )}
-
                         </p>
                       )}
                     </div>
@@ -282,12 +287,13 @@ export const LinesTooltip: React.FC = () => {
               </ul>
             </div>
 
-            { tooltip?.extraContent && (
+            { (tooltip?.extraContent || !tooltipData.hasData) && (
               <div
                 className={ExtraContent}
                 style={{ borderColor: colorPaletteNeutrals.dimmed3 }}
               >
-                {tooltip.extraContent}
+                {tooltip?.extraContent && tooltip.extraContent}
+                {!tooltipData.hasData && <p className={NoData}>No data available</p>}
               </div>
             )}
           </Tooltip>

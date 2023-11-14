@@ -21,6 +21,7 @@ import { toHSLA } from '../utils';
 import { colorPaletteNeutrals } from '.';
 
 export const tooltipStyleMain: TooltipStyleMain = {
+  color: colorPaletteNeutrals.dimmed0,
   minWidth: 250,
   minHeight: 80,
   maxWidth: 350,
@@ -32,19 +33,17 @@ export const tooltipStyleMain: TooltipStyleMain = {
 };
 
 export const tooltipStyleDark: TooltipStyleColors = {
-  backdropFilter: 'blur(10px) hue-rotate(-10deg) saturate(750%)',
-  background: `radial-gradient(at left top, ${toHSLA(colorPaletteNeutrals.dimmed0, 0.9)}, ${toHSLA(colorPaletteNeutrals.dimmed3, 0.7)}) no-repeat`,
-  border: `1px solid ${colorPaletteNeutrals.dimmed4}`,
+  backdropFilter: 'blur(10px) hue-rotate(10deg) saturate(200%)',
+  background: `radial-gradient(at left top, ${toHSLA(colorPaletteNeutrals.dimmed8, 0.5)}, ${toHSLA(colorPaletteNeutrals.dimmed7, 0.6)}) no-repeat`,
+  border: `1px solid ${colorPaletteNeutrals.dimmed8}`,
   boxShadow: `4px 4px 10px ${toHSLA(colorPaletteNeutrals.black, 0.5)}`,
-  color: colorPaletteNeutrals.dimmed8,
 };
 
 export const tooltipStyleLight: TooltipStyleColors = {
   backdropFilter: 'blur(10px) hue-rotate(10deg) saturate(750%)',
-  background: `radial-gradient(at left top, ${toHSLA(colorPaletteNeutrals.dimmed9, 0.7)}, ${toHSLA(colorPaletteNeutrals.black, 0.8)})`,
+  background: `radial-gradient(at left top, ${toHSLA(colorPaletteNeutrals.dimmed9, 0.7)}, ${toHSLA(colorPaletteNeutrals.black, 0.8)}) no-repeat`,
   border: `1px solid ${colorPaletteNeutrals.dimmed5}`,
   boxShadow: `4px 4px 10px ${toHSLA(colorPaletteNeutrals.dimmed8, 0.5)}`,
-  color: colorPaletteNeutrals.dimmed0,
 };
 
 export const tooltipStyleConfigLight: TooltipStyleConfig = {

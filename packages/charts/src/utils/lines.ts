@@ -143,9 +143,15 @@ export const createSubPaths = (
   if (subArray.length > 1) {
     return subArray.map((a: Array<Record<string, any>>, i: number) => {
       const len = a.length;
+
       const prev = i - 1;
       const post = i + 1;
-      if (!len) return [subArray[prev][subArray[prev].length - 1], subArray[post][0]];
+
+      const arrPrev = subArray[prev];
+      const arrPrevLast = subArray[prev].length - 1;
+      const arrPost = subArray[post];
+
+      if (!len) return [arrPrev[arrPrevLast], arrPost[post][0]];
       return a;
     });
   }
