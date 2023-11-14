@@ -153,19 +153,21 @@ export const LinesTooltip: React.FC = () => {
             />
 
             {series.dataKey.map((d: string, di: number) => (
-              <circle
-                key={d}
-                r={2}
-                cx={isHorizontal
-                  ? tooltipData.lineIndicatorPos
-                  : seriesAxis.scale(getPrimitiveFromObjectPath(tooltipData.data, d))}
-                cy={isHorizontal
-                  ? seriesAxis.scale(getPrimitiveFromObjectPath(tooltipData.data, d))
-                  : tooltipData.lineIndicatorPos}
-                stroke={series.colors[di]}
-                fill={series.colors[di]}
-                strokeWidth={series.style?.[di]?.strokeWidth ?? 1}
-              />
+              tooltipData.data[d] && (
+                <circle
+                  key={d}
+                  r={2}
+                  cx={isHorizontal
+                    ? tooltipData.lineIndicatorPos
+                    : seriesAxis.scale(getPrimitiveFromObjectPath(tooltipData.data, d))}
+                  cy={isHorizontal
+                    ? seriesAxis.scale(getPrimitiveFromObjectPath(tooltipData.data, d))
+                    : tooltipData.lineIndicatorPos}
+                  stroke={series.colors[di]}
+                  fill={series.colors[di]}
+                  strokeWidth={series.style?.[di]?.strokeWidth ?? 1}
+                />
+              )
             ))}
 
             {hasOverlay && tooltipData.data[overlay.dataKey] && (
