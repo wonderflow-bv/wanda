@@ -112,7 +112,6 @@ export const LinesOverlay: React.FC = () => {
           </Group>
         ))
       )}
-
     </>
   );
 };

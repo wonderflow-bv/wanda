@@ -79,7 +79,7 @@ export const getCoordinates = (
     otherDataKey,
     isHorizontal,
   }: {
-    datum: Record<string, unknown>;
+    datum: Record<string, any>;
     indexAxis: AxisType;
     indexDataKey: string;
     otherAxis: AxisType;

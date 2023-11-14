@@ -16,15 +16,17 @@
 
 import { Group } from '@visx/group';
 import { LinePath } from '@visx/shape';
+import _ from 'lodash';
 import { useMemo } from 'react';
 
 import { useLayoutContext } from '../../../providers';
 import { useCartesianContext } from '../../../providers/cartesian';
 import { useDataContext } from '../../../providers/data';
 import { useThemeContext } from '../../../providers/theme';
-import { colorPaletteNeutrals } from '../../../style-config';
+import { colorPaletteNeutrals, themes } from '../../../style-config';
 import {
-  getCoordinates, getLinesRenderer,
+  createSubPaths,
+  getCoordinates, getLinesRenderer, getValueFromObjectPath,
 } from '../../../utils';
 import {
   LinesItem,
@@ -38,16 +40,22 @@ export const LinesSeries: React.FC = () => {
 
   const { bottom, left } = axis;
   const {
-    index, renderAs, showMarker, showMarkerLabel, series,
+    index, renderAs, showMarker, showMarkerLabel,
+    series, hideMissingDataConnection,
   } = metadata!;
 
   const indexAxis = isHorizontal ? bottom! : left!;
   const seriesAxis = isHorizontal ? left! : bottom!;
 
+  const noDataSegmentStyle = {
+    stroke: hideMissingDataConnection ? 'transparent' : themes[theme].lines.noData,
+    strokeDashArray: '2 3',
+  };
+
   const renderer = useMemo(() => getLinesRenderer(renderAs, isHorizontal), [isHorizontal, renderAs]);
 
   const getSeriesCoordinates = (
-    datum: Record<string, unknown>,
+    datum: Record<string, any>,
     dataKey: string,
     isHorizontal: boolean,
   ) => getCoordinates({
@@ -61,40 +69,56 @@ export const LinesSeries: React.FC = () => {
 
   return (
     <>
-      {series.dataKey.map((k: string, i: number) => (
-        <Group
-          key={`${k}-lines-series`}
-          className={LinesItem}
-        >
-          <LinePath
-            data={data}
-            curve={renderer}
-            x={d => getSeriesCoordinates(d, k, isHorizontal).x as any}
-            y={d => getSeriesCoordinates(d, k, isHorizontal).y as any}
-            stroke={series.colors[i]}
-            strokeWidth={series.style?.[i]?.strokeWidth ?? 2}
-            strokeOpacity={series.style?.[i]?.strokeOpacity ?? 1}
-            strokeDasharray={series.style?.[i]?.strokeDasharray}
-          />
+      {series.dataKey.map((k: string, i: number) => {
+        const subPath = createSubPaths(
+          data,
+          d => _.isNil(getValueFromObjectPath(d, k)),
+        );
 
-          {(showMarker
+        return (
+          subPath.map((
+            data: Array<Record<string, any>>,
+            di: number,
+          ) => (
+            <Group
+              key={JSON.stringify(data)}
+              className={LinesItem}
+            >
+              <LinePath
+                data={data}
+                curve={renderer}
+                x={d => getSeriesCoordinates(d, k, isHorizontal).x as any}
+                y={d => getSeriesCoordinates(d, k, isHorizontal).y as any}
+                stroke={di % 2 === 0
+                  ? series.colors[i]
+                  : noDataSegmentStyle.stroke}
+                strokeWidth={series.style?.[i]?.strokeWidth ?? 2}
+                strokeOpacity={series.style?.[i]?.strokeOpacity ?? 1}
+                strokeDasharray={di % 2 === 0
+                  ? series.style?.[i]?.strokeDasharray
+                  : noDataSegmentStyle.strokeDashArray}
+              />
+
+              {(showMarker
             || showMarkerLabel
             || series.style?.[i]?.showMarker
             || series.style?.[i]?.showMarkerLabel
-          ) && data.map((d: Record<string, any>) => (
-            <circle
-              key={JSON.stringify(d)}
-              r={2}
-              cx={getSeriesCoordinates(d, k, isHorizontal).x}
-              cy={getSeriesCoordinates(d, k, isHorizontal).y}
-              stroke={series.colors[i]}
-              fill={theme === 'light' ? colorPaletteNeutrals.white : colorPaletteNeutrals.black}
-              strokeWidth={series.style?.[i]?.strokeWidth ?? 1}
-              strokeOpacity={series.style?.[i]?.strokeOpacity ?? 1}
-            />
-          ))}
-        </Group>
-      ))}
+              ) && data.map((d: Record<string, any>) => (
+                <circle
+                  key={JSON.stringify(d)}
+                  r={2}
+                  cx={getSeriesCoordinates(d, k, isHorizontal).x}
+                  cy={getSeriesCoordinates(d, k, isHorizontal).y}
+                  stroke={series.colors[i]}
+                  fill={theme === 'light' ? colorPaletteNeutrals.white : colorPaletteNeutrals.black}
+                  strokeWidth={series.style?.[i]?.strokeWidth ?? 1}
+                  strokeOpacity={series.style?.[i]?.strokeOpacity ?? 1}
+                />
+              ))}
+            </Group>
+          ))
+        );
+      })}
     </>
   );
 };

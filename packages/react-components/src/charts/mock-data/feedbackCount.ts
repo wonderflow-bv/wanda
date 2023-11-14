@@ -195,25 +195,25 @@ export const feedbackCountGaps = [
   {
     date: '2009',
     overlay: 0.13,
-    'feedback count': 266,
+    'feedback count': null,
     extraData: null,
   },
   {
     date: '2010',
     overlay: 0.15,
-    'feedback count': 273,
+    'feedback count': null,
     extraData: null,
   },
   {
     date: '2011',
     overlay: 0.21,
-    'feedback count': 491,
+    'feedback count': null,
     extraData: null,
   },
   {
     date: '2012',
     overlay: null,
-    'feedback count': 558,
+    'feedback count': null,
     extraData: null,
   },
   {
@@ -255,19 +255,19 @@ export const feedbackCountGaps = [
   {
     date: '2019',
     overlay: 0.31,
-    'feedback count': 8303,
+    'feedback count': null,
     extraData: null,
   },
   {
     date: '2020',
     overlay: 0.44,
-    'feedback count': 11490,
+    'feedback count': null,
     extraData: null,
   },
   {
     date: '2021',
     overlay: null,
-    'feedback count': 5539,
+    'feedback count': null,
     extraData: null,
   },
   {
