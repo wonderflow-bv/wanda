@@ -48,8 +48,8 @@ withOverlay.args = {
   },
 };
 
-export const withGaps = Template.bind({});
-withGaps.args = {
+export const withMissingData = Template.bind({});
+withMissingData.args = {
   data: feedbackCountGaps,
   subtitle: 'A trend line chart with null values',
   overlay: {
