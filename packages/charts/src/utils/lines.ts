@@ -21,7 +21,9 @@ import { bisector } from '@visx/vendor/d3-array';
 import { ScaleLinear, ScaleTime } from '@visx/vendor/d3-scale';
 import _ from 'lodash';
 
-import { AxisType, Data, LineChartRenderType } from '../types';
+import {
+  AxisType, Data, LineChartRenderType, Theme,
+} from '../types';
 import { getPrimitiveFromObjectPath } from './data';
 
 export const accessor = (axis: AxisType, dataKey: string, datum?: Record<string, unknown>) => {
@@ -104,14 +106,96 @@ export const getLinesRenderer = (renderAs: LineChartRenderType | undefined, isHo
   return whichStep;
 };
 
-export const isMarkerLabelActive = (index: number, numLabels: number, maxLabels = 12) => {
-  const step = Math.ceil(numLabels / maxLabels);
-  const half = Math.round(numLabels / 2);
+export const isMarkerLabelVisible = (index: number, totalLabels: number, maxLabels = 12) => {
+  const divider = maxLabels > 1 ? maxLabels : 1;
+  const step = Math.ceil(totalLabels / divider);
+  const half = Math.round(totalLabels / 2);
   const leftIndex = [];
   for (let i = 0; i < half; i += step) leftIndex.push(i);
-  const rightIndex = leftIndex.map(e => numLabels - e);
+  const rightIndex = leftIndex.map(e => totalLabels - e);
   const allIndex = leftIndex.concat(rightIndex).sort((a, b) => a - b);
   return allIndex.includes(index);
+};
+
+export const getMarkerLabelProps = (
+  pos: { x: number | undefined; y: number | undefined },
+  dimension: { maxWidth: number ; maxHeight: number },
+  isHorizontal: boolean,
+  theme: Theme,
+) => {
+  const { maxWidth, maxHeight } = dimension;
+
+  const main = {
+    anchor: 'middle' as 'middle' | 'start' | 'end' | 'inherit' | undefined,
+    verticalAnchor: 'end' as 'end' | 'middle' | 'start' | undefined,
+    fontColor: theme.markerLabel.fontColor,
+    fontSize: 12,
+    fontWeight: 400,
+    background: theme.markerLabel.background,
+    padding: {
+      top: 2, right: 6, bottom: 2, left: 6,
+    },
+    titleProps: {
+      x: 4,
+      y: 2,
+      textAnchor: 'start' as 'middle' | 'start' | 'end' | 'inherit' | undefined,
+    },
+    backgroundProps: {
+      rx: 4,
+      ry: 4,
+      x: 0,
+      y: 0,
+      filter: 'opacity(0.7)',
+    },
+  };
+
+  if (!_.isNil(pos.x) && !_.isNil(pos.y)) {
+    const isLeft = pos.x < (maxWidth * 0.075);
+    const isRigth = pos.x > (maxWidth * 0.9);
+    const isTop = pos.y < (maxHeight * 0.075);
+    const isBottom = pos.y > (maxHeight * 0.9);
+
+    if (isHorizontal) {
+      if (isLeft) {
+        main.anchor = 'start';
+        main.backgroundProps.x = 4;
+      }
+
+      if (isRigth) {
+        main.anchor = 'end';
+        main.backgroundProps.x = -4;
+      }
+
+      if (isBottom) {
+        main.backgroundProps.y = -4;
+      } else {
+        main.verticalAnchor = 'start';
+        main.backgroundProps.y = 4;
+      }
+    } else {
+      main.anchor = 'start';
+
+      if (isTop) {
+        main.verticalAnchor = 'start';
+        main.backgroundProps.y = 4;
+      } else {
+        main.backgroundProps.y = -4;
+      }
+
+      if (isLeft) {
+        main.backgroundProps.x = 6;
+      }
+
+      if (isRigth) {
+        main.anchor = 'end';
+      }
+    }
+
+    main.titleProps.x += main.backgroundProps.x;
+    main.titleProps.y += main.backgroundProps.y;
+  }
+
+  return main;
 };
 
 export const createSubArrays = (

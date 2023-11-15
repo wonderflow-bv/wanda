@@ -140,7 +140,7 @@ withCustomLineStyle.args = {
         stroke: 'red',
         strokeDasharray: '6 8',
         strokeOpacity: '0.5',
-        strokeWidth: '2.5',
+        strokeWidth: '3',
       },
       {
         stroke: 'grey',

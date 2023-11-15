@@ -16,7 +16,7 @@
 
 import { Label } from '@visx/annotation';
 import { Group } from '@visx/group';
-import _ from 'lodash';
+import { v4 as uuid } from 'uuid';
 
 import { useLayoutContext } from '../../../providers';
 import { useCartesianContext } from '../../../providers/cartesian';
@@ -25,8 +25,9 @@ import { useThemeContext } from '../../../providers/theme';
 import { themes } from '../../../style-config';
 import {
   getCoordinates,
+  getMarkerLabelProps,
   getPrimitiveFromObjectPath,
-  isMarkerLabelActive,
+  isMarkerLabelVisible,
 } from '../../../utils';
 import {
   LinesItem,
@@ -36,7 +37,8 @@ export const LinesMarkerLabels: React.FC = () => {
   const theme = useThemeContext();
   const { data, metadata } = useDataContext();
   const { isHorizontal } = useLayoutContext();
-  const { axis, maxHeight: yMax, maxWidth: xMax } = useCartesianContext();
+  const { axis, maxHeight, maxWidth } = useCartesianContext();
+  const dimension = { maxWidth, maxHeight };
 
   const {
     bottom, left, right, top,
@@ -51,8 +53,11 @@ export const LinesMarkerLabels: React.FC = () => {
 
   const hasOverlay = Boolean(overlayAxis && overlay.dataKey);
 
+  const themeConfig = themes[theme];
+  const totalLabels = data.length;
+
   const getSeriesCoordinates = (
-    datum: Record<string, unknown>,
+    datum: Record<string, any>,
     dataKey: string,
     isHorizontal: boolean,
   ) => getCoordinates({
@@ -65,7 +70,7 @@ export const LinesMarkerLabels: React.FC = () => {
   });
 
   const getOverlayCoordinates = (
-    datum: Record<string, unknown>,
+    datum: Record<string, any>,
     dataKey: string,
     isHorizontal: boolean,
   ) => getCoordinates({
@@ -77,111 +82,50 @@ export const LinesMarkerLabels: React.FC = () => {
     isHorizontal,
   });
 
-  const getMarkerLabelProps = (pos: { x: number | undefined; y: number | undefined }) => {
-    const main = {
-      anchor: 'middle' as 'middle' | 'start' | 'end' | 'inherit' | undefined,
-      verticalAnchor: 'end' as 'end' | 'middle' | 'start' | undefined,
-      fontColor: themes[theme].markerLabel.fontColor,
-      fontSize: 12,
-      fontWeight: 400,
-      background: themes[theme].markerLabel.background,
-      padding: {
-        top: 2, right: 6, bottom: 2, left: 6,
-      },
-      titleProps: {
-        x: 4,
-        y: 2,
-        textAnchor: 'start' as 'middle' | 'start' | 'end' | 'inherit' | undefined,
-      },
-      backgroundProps: {
-        rx: 4,
-        ry: 4,
-        x: 0,
-        y: 0,
-        filter: 'opacity(0.7)',
-      },
-    };
-
-    if (!_.isNil(pos.x) && !_.isNil(pos.y)) {
-      const isLeft = pos.x < (xMax * 0.075);
-      const isRigth = pos.x > (xMax * 0.9);
-      const isTop = pos.y < (yMax * 0.075);
-      const isBottom = pos.y > (yMax * 0.9);
-
-      if (isHorizontal) {
-        if (isLeft) {
-          main.anchor = 'start';
-          main.backgroundProps.x = 4;
-        }
-
-        if (isRigth) {
-          main.anchor = 'end';
-          main.backgroundProps.x = -4;
-        }
-
-        if (isBottom) {
-          main.backgroundProps.y = -4;
-        } else {
-          main.verticalAnchor = 'start';
-          main.backgroundProps.y = 4;
-        }
-      } else {
-        main.anchor = 'start';
-
-        if (isTop) {
-          main.verticalAnchor = 'start';
-          main.backgroundProps.y = 4;
-        } else {
-          main.backgroundProps.y = -4;
-        }
-
-        if (isLeft) {
-          main.backgroundProps.x = 6;
-        }
-
-        if (isRigth) {
-          main.anchor = 'end';
-        }
-      }
-
-      main.titleProps.x += main.backgroundProps.x;
-      main.titleProps.y += main.backgroundProps.y;
-    }
-
-    return main;
-  };
-
   return (
     <>
       {series.dataKey.map((k: string, i: number) => (
         <Group
-          key={`${k}-marker-label`}
+          key={uuid()}
           className={LinesItem}
         >
           {(showMarkerLabel || series.style?.[i]?.showMarkerLabel)
             && data.map((d: Record<string, any>, di: number) => {
+              const isVisible = isMarkerLabelVisible(di, totalLabels);
+              const title = `${getPrimitiveFromObjectPath(d, k) ?? ''}`;
               const coordinates = getSeriesCoordinates(d, k, isHorizontal);
-              const markerLabelProps = getMarkerLabelProps(coordinates);
+              const markerLabelProps = getMarkerLabelProps(coordinates, dimension, isHorizontal, themeConfig);
+              const {
+                background,
+                fontColor,
+                fontSize,
+                fontWeight,
+                titleProps,
+                anchor,
+                verticalAnchor,
+                padding,
+                backgroundProps,
+              } = markerLabelProps;
 
               return (
-                isMarkerLabelActive(di, data.length)
+                isVisible
                   ? (
                     <Label
-                      key={JSON.stringify(d)}
-                      backgroundFill={markerLabelProps.background}
+                      key={uuid()}
+                      backgroundFill={background}
                       x={coordinates.x}
                       y={coordinates.y}
-                      fontColor={markerLabelProps.fontColor}
-                      title={`${getPrimitiveFromObjectPath(d, k) ?? ''}`}
-                      titleFontSize={markerLabelProps.fontSize}
-                      titleFontWeight={markerLabelProps.fontWeight}
-                      titleProps={markerLabelProps.titleProps}
+                      fontColor={fontColor}
+                      title={title}
+                      titleFontSize={fontSize}
+                      titleFontWeight={fontWeight}
+                      titleProps={titleProps}
                       showAnchorLine={false}
-                      horizontalAnchor={markerLabelProps.anchor}
-                      verticalAnchor={markerLabelProps.verticalAnchor}
+                      horizontalAnchor={anchor}
+                      verticalAnchor={verticalAnchor}
                       showBackground
-                      backgroundPadding={markerLabelProps.padding}
-                      backgroundProps={markerLabelProps.backgroundProps}
+                      backgroundPadding={padding}
+                      backgroundProps={backgroundProps}
                     />
                   ) : null
               );
@@ -191,29 +135,43 @@ export const LinesMarkerLabels: React.FC = () => {
 
       {hasOverlay && (showMarkerLabel || overlay.style?.showMarkerLabel)
             && data.map((d: Record<string, any>, di: number) => {
+              const isVisible = isMarkerLabelVisible(di, totalLabels);
+              const title = `${getPrimitiveFromObjectPath(d, overlay.dataKey!) ?? ''}`;
               const coordinates = getOverlayCoordinates(d, overlay.dataKey!, isHorizontal);
-              const markerLabelProps = getMarkerLabelProps(coordinates);
+              const markerLabelProps = getMarkerLabelProps(coordinates, dimension, isHorizontal, themeConfig);
+              const {
+                background,
+                fontColor,
+                fontSize,
+                fontWeight,
+                titleProps,
+                anchor,
+                verticalAnchor,
+                padding,
+                backgroundProps,
+              } = markerLabelProps;
 
               return (
-                isMarkerLabelActive(di, data.length) ? (
-                  <Label
-                    key={JSON.stringify(d)}
-                    backgroundFill={markerLabelProps.background}
-                    x={coordinates.x}
-                    y={coordinates.y}
-                    fontColor={markerLabelProps.fontColor}
-                    title={`${getPrimitiveFromObjectPath(d, overlay.dataKey!) ?? ''}`}
-                    titleFontSize={markerLabelProps.fontSize}
-                    titleFontWeight={markerLabelProps.fontWeight}
-                    titleProps={markerLabelProps.titleProps}
-                    showAnchorLine={false}
-                    horizontalAnchor={markerLabelProps.anchor}
-                    verticalAnchor={markerLabelProps.verticalAnchor}
-                    showBackground
-                    backgroundPadding={markerLabelProps.padding}
-                    backgroundProps={markerLabelProps.backgroundProps}
-                  />
-                ) : null
+                isVisible
+                  ? (
+                    <Label
+                      key={uuid()}
+                      backgroundFill={background}
+                      x={coordinates.x}
+                      y={coordinates.y}
+                      fontColor={fontColor}
+                      title={title}
+                      titleFontSize={fontSize}
+                      titleFontWeight={fontWeight}
+                      titleProps={titleProps}
+                      showAnchorLine={false}
+                      horizontalAnchor={anchor}
+                      verticalAnchor={verticalAnchor}
+                      showBackground
+                      backgroundPadding={padding}
+                      backgroundProps={backgroundProps}
+                    />
+                  ) : null
               );
             })}
     </>

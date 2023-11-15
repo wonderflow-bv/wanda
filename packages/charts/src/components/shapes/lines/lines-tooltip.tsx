@@ -290,7 +290,7 @@ export const LinesTooltip: React.FC = () => {
             { (tooltip?.extraContent || !tooltipData.hasData) && (
               <div
                 className={ExtraContent}
-                style={{ borderColor: colorPaletteNeutrals.dimmed3 }}
+                style={{ borderColor: colorPaletteNeutrals.dimmed6 }} // dimmed7 for dark theme
               >
                 {tooltip?.extraContent && tooltip.extraContent}
                 {!tooltipData.hasData && <p className={NoData}>No data available</p>}

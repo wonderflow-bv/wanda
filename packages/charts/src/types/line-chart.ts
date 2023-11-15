@@ -17,7 +17,9 @@
 import { AxisProps } from './cartesian';
 import { Charts } from './main';
 
-export type LineChartIndex = Partial<AxisProps> & { dataKey: string };
+export type LineChartIndex = Partial<AxisProps> & {
+  dataKey: string;
+};
 
 export type LineChartOverlay = Partial<AxisProps> & {
   dataKey: string;

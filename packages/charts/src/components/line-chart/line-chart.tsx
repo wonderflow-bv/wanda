@@ -32,12 +32,33 @@ import { getLabelFromObjectPath, handleDomainAndScaleType } from '../../utils';
 import { CartesianBase, CartesianBaseProps } from '../cartesian-base/cartesian-base';
 
 export type LineChartProps = {
+  /**
+   * Set the theme of the chart. This is set to light by default.
+   */
   theme: ThemeVariants;
+  /**
+   * Set the layout of the chart. `Index`, `Series` and eventually `Overlay` will be automatically rearranged.
+   */
   layout: CartesianChartLayout;
+  /**
+   * Set the data structure that will be used to render the chart.
+   */
   data: Data;
+  /**
+   * Set the type of render function used to draw any chart line.
+   */
   renderAs?: LineChartRenderType;
+  /**
+   * Set the properties associated with the Index Axis.
+   */
   index: LineChartIndex;
+  /**
+   * Set the properties associated with any Series of lines.
+   */
   series: LineChartSeries;
+  /**
+   * Set the properties associated with the Overlay Axis.
+   */
   overlay?: LineChartOverlay;
   tooltip?: LineChartTooltip;
   hideMissingDataConnection?: boolean;
