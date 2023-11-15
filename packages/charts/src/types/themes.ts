@@ -36,6 +36,9 @@ export type Theme = {
     fontColor: string;
     background: string;
   };
+  marker: {
+    fill: string;
+  };
   lines: {
     noData: string;
   };

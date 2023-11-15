@@ -39,6 +39,9 @@ export const themeLight: Theme = {
       to: colorPaletteNeutrals.white,
     },
   },
+  marker: {
+    fill: colorPaletteNeutrals.white,
+  },
   markerLabel: {
     fontColor: colorPaletteNeutrals.dimmed9,
     background: colorPaletteNeutrals.dimmed2,
@@ -69,6 +72,9 @@ export const themeDark: Theme = {
       from: colorPaletteNeutrals.dimmed8,
       to: colorPaletteNeutrals.dimmed9,
     },
+  },
+  marker: {
+    fill: colorPaletteNeutrals.black,
   },
   markerLabel: {
     fontColor: colorPaletteNeutrals.dimmed0,

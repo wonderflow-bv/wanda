@@ -18,12 +18,12 @@ import { Group } from '@visx/group';
 import { LinePath } from '@visx/shape';
 import _ from 'lodash';
 import { useMemo } from 'react';
+import { v4 as uuid } from 'uuid';
 
-import { useLayoutContext } from '../../../providers';
-import { useCartesianContext } from '../../../providers/cartesian';
-import { useDataContext } from '../../../providers/data';
-import { useThemeContext } from '../../../providers/theme';
-import { colorPaletteNeutrals, themes } from '../../../style-config';
+import {
+  useCartesianContext, useDataContext, useLayoutContext, useThemeContext,
+} from '../../../providers';
+import { themes } from '../../../style-config';
 import {
   createSubPaths,
   getCoordinates, getLinesRenderer, getValueFromObjectPath,
@@ -47,10 +47,20 @@ export const LinesSeries: React.FC = () => {
   const indexAxis = isHorizontal ? bottom! : left!;
   const seriesAxis = isHorizontal ? left! : bottom!;
 
-  const noDataSegmentStyle = {
-    stroke: hideMissingDataConnection ? 'transparent' : themes[theme].lines.noData,
-    strokeDashArray: '2 3',
-  };
+  const defaultStyle = useMemo(() => ({
+    path: {
+      strokeWidth: 2,
+      strokeOpacity: 1,
+    },
+    segment: {
+      stroke: hideMissingDataConnection ? 'transparent' : themes[theme].lines.noData,
+      strokeDashArray: '2 3',
+    },
+    marker: {
+      strokeWidth: 1,
+      strokeOpacity: 1,
+    },
+  }), [hideMissingDataConnection, theme]);
 
   const renderer = useMemo(() => getLinesRenderer(renderAs, isHorizontal), [isHorizontal, renderAs]);
 
@@ -69,50 +79,51 @@ export const LinesSeries: React.FC = () => {
 
   return (
     <>
-      {series.dataKey.map((k: string, i: number) => {
-        const subPath = createSubPaths(
+      {series.dataKey.map((dataKey: string, di: number) => {
+        const subPaths = createSubPaths(
           data,
-          d => _.isNil(getValueFromObjectPath(d, k)),
+          d => _.isNil(getValueFromObjectPath(d, dataKey)),
         );
 
+        const hasMarker = showMarker
+        ?? showMarkerLabel
+        ?? series.style?.[di]?.showMarker
+        ?? series.style?.[di]?.showMarkerLabel;
+
         return (
-          subPath.map((
-            data: Array<Record<string, any>>,
-            di: number,
+          subPaths.map((
+            subPathData: Array<Record<string, any>>,
+            si: number,
           ) => (
             <Group
-              key={JSON.stringify(data)}
+              key={uuid()}
               className={LinesItem}
             >
               <LinePath
-                data={data}
+                data={subPathData}
                 curve={renderer}
-                x={d => getSeriesCoordinates(d, k, isHorizontal).x as any}
-                y={d => getSeriesCoordinates(d, k, isHorizontal).y as any}
-                stroke={di % 2 === 0
-                  ? series.colors[i]
-                  : noDataSegmentStyle.stroke}
-                strokeWidth={series.style?.[i]?.strokeWidth ?? 2}
-                strokeOpacity={series.style?.[i]?.strokeOpacity ?? 1}
-                strokeDasharray={di % 2 === 0
-                  ? series.style?.[i]?.strokeDasharray
-                  : noDataSegmentStyle.strokeDashArray}
+                x={datum => getSeriesCoordinates(datum, dataKey, isHorizontal).x as any}
+                y={datum => getSeriesCoordinates(datum, dataKey, isHorizontal).y as any}
+                stroke={si % 2 === 0
+                  ? series.colors[di]
+                  : defaultStyle.segment.stroke}
+                strokeWidth={series.style?.[di]?.strokeWidth ?? defaultStyle.path.strokeWidth}
+                strokeOpacity={series.style?.[di]?.strokeOpacity ?? defaultStyle.path.strokeOpacity}
+                strokeDasharray={si % 2 === 0
+                  ? series.style?.[di]?.strokeDasharray
+                  : defaultStyle.segment.strokeDashArray}
               />
 
-              {(showMarker
-            || showMarkerLabel
-            || series.style?.[i]?.showMarker
-            || series.style?.[i]?.showMarkerLabel
-              ) && data.map((d: Record<string, any>) => (
+              {hasMarker && subPathData.map((d: Record<string, any>) => (
                 <circle
-                  key={JSON.stringify(d)}
+                  key={uuid()}
                   r={2}
-                  cx={getSeriesCoordinates(d, k, isHorizontal).x}
-                  cy={getSeriesCoordinates(d, k, isHorizontal).y}
-                  stroke={series.colors[i]}
-                  fill={theme === 'light' ? colorPaletteNeutrals.white : colorPaletteNeutrals.black}
-                  strokeWidth={series.style?.[i]?.strokeWidth ?? 1}
-                  strokeOpacity={series.style?.[i]?.strokeOpacity ?? 1}
+                  cx={getSeriesCoordinates(d, dataKey, isHorizontal).x}
+                  cy={getSeriesCoordinates(d, dataKey, isHorizontal).y}
+                  stroke={series.colors[di]}
+                  fill={themes[theme].marker.fill}
+                  strokeWidth={series.style?.[di]?.strokeWidth ?? defaultStyle.marker.strokeWidth}
+                  strokeOpacity={series.style?.[di]?.strokeOpacity ?? defaultStyle.marker.strokeOpacity}
                 />
               ))}
             </Group>

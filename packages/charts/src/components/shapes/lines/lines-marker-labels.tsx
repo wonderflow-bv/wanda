@@ -18,10 +18,9 @@ import { Label } from '@visx/annotation';
 import { Group } from '@visx/group';
 import { v4 as uuid } from 'uuid';
 
-import { useLayoutContext } from '../../../providers';
-import { useCartesianContext } from '../../../providers/cartesian';
-import { useDataContext } from '../../../providers/data';
-import { useThemeContext } from '../../../providers/theme';
+import {
+  useCartesianContext, useDataContext, useLayoutContext, useThemeContext,
+} from '../../../providers';
 import { themes } from '../../../style-config';
 import {
   getCoordinates,
