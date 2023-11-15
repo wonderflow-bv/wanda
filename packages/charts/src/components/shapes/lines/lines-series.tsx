@@ -57,6 +57,7 @@ export const LinesSeries: React.FC = () => {
       strokeDashArray: '2 3',
     },
     marker: {
+      radius: 2,
       strokeWidth: 1,
       strokeOpacity: 1,
     },
@@ -117,7 +118,7 @@ export const LinesSeries: React.FC = () => {
               {hasMarker && subPathData.map((d: Record<string, any>) => (
                 <circle
                   key={uuid()}
-                  r={2}
+                  r={defaultStyle.marker.radius}
                   cx={getSeriesCoordinates(d, dataKey, isHorizontal).x}
                   cy={getSeriesCoordinates(d, dataKey, isHorizontal).y}
                   stroke={series.colors[di]}

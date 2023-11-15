@@ -18,12 +18,12 @@ import { Group } from '@visx/group';
 import { LinePath } from '@visx/shape';
 import _ from 'lodash';
 import { useMemo } from 'react';
+import { v4 as uuid } from 'uuid';
 
-import { useLayoutContext } from '../../../providers';
-import { useCartesianContext } from '../../../providers/cartesian';
-import { useDataContext } from '../../../providers/data';
-import { useThemeContext } from '../../../providers/theme';
-import { colorPaletteNeutrals, themes } from '../../../style-config';
+import {
+  useCartesianContext, useDataContext, useLayoutContext, useThemeContext,
+} from '../../../providers';
+import { themes } from '../../../style-config';
 import {
   createSubPaths,
   getCoordinates, getLinesRenderer, getValueFromObjectPath,
@@ -51,10 +51,21 @@ export const LinesOverlay: React.FC = () => {
 
   const hasOverlay = Boolean(overlayAxis && overlay.dataKey);
 
-  const noDataSegmentStyle = {
-    stroke: hideMissingDataConnection ? 'transparent' : themes[theme].lines.noData,
-    strokeDashArray: '2 3',
-  };
+  const defaultStyle = useMemo(() => ({
+    path: {
+      strokeWidth: 2,
+      strokeOpacity: 1,
+    },
+    segment: {
+      stroke: hideMissingDataConnection ? 'transparent' : themes[theme].lines.noData,
+      strokeDashArray: '2 3',
+    },
+    marker: {
+      radius: 2,
+      strokeWidth: 1,
+      strokeOpacity: 1,
+    },
+  }), [hideMissingDataConnection, theme]);
 
   const renderer = useMemo(() => getLinesRenderer(renderAs, isHorizontal), [isHorizontal, renderAs]);
 
@@ -76,37 +87,40 @@ export const LinesOverlay: React.FC = () => {
     d => hasOverlay && _.isNil(getValueFromObjectPath(d, overlay.dataKey!)),
   ), [data, hasOverlay, overlay.dataKey]);
 
+  const hasMarker = showMarker
+  ?? showMarkerLabel
+  ?? overlay.style?.showMarker
+  ?? overlay.style?.showMarkerLabel;
+
   return (
     <>
       {hasOverlay && (
-        subPaths.map((data: Array<Record<string, any>>, i: number) => (
-
-          <Group className={LinesItem} key={JSON.stringify(data)}>
+        subPaths.map((subPathData: Array<Record<string, any>>, si: number) => (
+          <Group
+            key={uuid()}
+            className={LinesItem}
+          >
             <LinePath
-              data={data}
+              data={subPathData}
               curve={renderer}
-              x={d => getOverlayCoordinates(d, overlay.dataKey!, isHorizontal).x as any}
-              y={d => getOverlayCoordinates(d, overlay.dataKey!, isHorizontal).y as any}
-              stroke={i % 2 === 0 ? overlay.color : noDataSegmentStyle.stroke}
-              strokeWidth={overlay.style?.strokeWidth ?? 2}
-              strokeOpacity={overlay.style?.strokeOpacity ?? 1}
-              strokeDasharray={i % 2 === 0 ? overlay.style?.strokeDasharray : noDataSegmentStyle.strokeDashArray}
+              x={datum => getOverlayCoordinates(datum, overlay.dataKey!, isHorizontal).x as any}
+              y={datum => getOverlayCoordinates(datum, overlay.dataKey!, isHorizontal).y as any}
+              stroke={si % 2 === 0 ? overlay.color : defaultStyle.segment.stroke}
+              strokeWidth={overlay.style?.strokeWidth ?? defaultStyle.path.strokeWidth}
+              strokeOpacity={overlay.style?.strokeOpacity ?? defaultStyle.path.strokeOpacity}
+              strokeDasharray={si % 2 === 0 ? overlay.style?.strokeDasharray : defaultStyle.segment.strokeDashArray}
             />
 
-            {(showMarker
-            || showMarkerLabel
-            || overlay.style?.showMarker
-            || overlay.style?.showMarkerLabel
-            ) && data.map((d: Record<string, any>) => (
+            {hasMarker && subPathData.map((d: Record<string, any>) => (
               <circle
-                key={JSON.stringify(d)}
-                r={2}
+                key={uuid()}
+                r={defaultStyle.marker.radius}
                 cx={getOverlayCoordinates(d, overlay.dataKey!, isHorizontal).x}
                 cy={getOverlayCoordinates(d, overlay.dataKey!, isHorizontal).y}
                 stroke={overlay.color}
-                fill={theme === 'light' ? colorPaletteNeutrals.white : colorPaletteNeutrals.black}
-                strokeWidth={overlay.style?.strokeWidth ?? 1}
-                strokeOpacity={overlay.style?.strokeOpacity ?? 1}
+                fill={themes[theme].marker.fill}
+                strokeWidth={overlay.style?.strokeWidth ?? defaultStyle.marker.strokeWidth}
+                strokeOpacity={overlay.style?.strokeOpacity ?? defaultStyle.marker.strokeOpacity}
               />
             ))}
           </Group>
