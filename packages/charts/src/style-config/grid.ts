@@ -4,8 +4,6 @@ import { themeLight } from './themes';
 
 export const gridRowsStyleConfig: GridStyle = {
   offset: 0,
-  fill: '',
-  stroke: themeLight.grid.line,
   strokeWidth: 1,
   strokeOpacity: 1,
   strokeDasharray: '',
@@ -14,8 +12,6 @@ export const gridRowsStyleConfig: GridStyle = {
 
 export const gridColumnsStyleConfig: GridStyle = {
   offset: 0,
-  fill: '',
-  stroke: themeLight.grid.line,
   strokeWidth: 1,
   strokeOpacity: 1,
   strokeDasharray: '',

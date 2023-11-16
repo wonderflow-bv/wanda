@@ -21,14 +21,13 @@ import {
   cartesianStyleConfig,
   gridStyleConfig,
   headingsStyleConfig,
-  linearGradientStyleConfig,
   linesStyleConfig,
   viewportStyleConfig,
 } from '../style-config';
 import { legendStyleConfig } from '../style-config/legend';
 import {
   AxisStyleConfig, CartesianStyleConfig,
-  GridStyleConfig, HeadingsStyleConfig, LegendStyleConfig, LinearGradientStyleConfig,
+  GridStyleConfig, HeadingsStyleConfig, LegendStyleConfig,
   ViewportStyleConfig,
 } from '../types';
 import { LinesStyleConfig } from '../types/lines';
@@ -39,7 +38,6 @@ export type StyleConfigContextProps = {
   grid: GridStyleConfig;
   headings: HeadingsStyleConfig;
   legend: LegendStyleConfig;
-  linearGradient: LinearGradientStyleConfig;
   lines: LinesStyleConfig;
   viewport: ViewportStyleConfig;
 };
@@ -54,7 +52,6 @@ const defaultStyleConfig = {
   grid: gridStyleConfig,
   headings: headingsStyleConfig,
   legend: legendStyleConfig,
-  linearGradient: linearGradientStyleConfig,
   lines: linesStyleConfig,
   viewport: viewportStyleConfig,
 };

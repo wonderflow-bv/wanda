@@ -33,11 +33,11 @@ import {
   useMemo, useRef,
 } from 'react';
 
-import { useLayoutContext } from '../../providers';
+import { useLayoutContext, useStyleConfigContext } from '../../providers';
 import { CartesianProvider } from '../../providers/cartesian';
 import { useDataContext } from '../../providers/data';
 import { useThemeContext } from '../../providers/theme';
-import { headingsStyleConfig as hStyle } from '../../style-config';
+import { headingsStyleConfig as hStyle, themes } from '../../style-config';
 import { AxisType } from '../../types/axis';
 import {
   AxisProps, CartesianStyleConfig, GridProps, MarginProps,
@@ -112,6 +112,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   otherProps,
 }: CartesianBaseProps) => {
   const theme = useThemeContext();
+  const { grid: gStyle, legend: lStyle, viewport: vStyle } = useStyleConfigContext();
   const { metadata } = useDataContext();
   const { isHorizontal } = useLayoutContext();
 
@@ -121,15 +122,11 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   }, [styleConfig, theme]);
 
   const {
-    linearGradient: lgStyle,
-    grid: gStyle,
     axis: aStyle,
-    legend: lStyle,
-    viewport: vStyle,
   } = cartesianConfig;
 
-  const { from, to } = _.merge(lgStyle.background, background);
-  const { from: gridFrom, to: gridTo } = { ...gStyle.background, ...grid.background };
+  const { from, to } = _.merge(themes[theme].background, background);
+  const { from: gridFrom, to: gridTo } = { ...themes[theme].grid.background, ...grid.background };
 
   const {
     top, right, bottom, left,
@@ -242,8 +239,8 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
           height={dynamicHeight}
           fill="url(#cartesian-container)"
           rx={0}
-          strokeWidth={1}
-          stroke={theme === 'light' ? 'lightgray' : 'slategray'}
+          strokeWidth={0}
+          stroke=""
         />
 
         <Headings
@@ -295,8 +292,8 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
                 width={xMax}
                 numTicks={grid?.tickRows}
                 offset={gStyle.rows?.offset}
-                fill={gStyle.rows?.fill}
-                stroke={gStyle.rows?.stroke}
+                fill=""
+                stroke={themes[theme].grid.line}
                 strokeOpacity={gStyle.rows?.strokeOpacity}
                 strokeWidth={gStyle.rows?.strokeWidth}
                 strokeDasharray={gStyle.rows?.strokeDasharray}
@@ -313,8 +310,8 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
                 height={yMax}
                 numTicks={grid?.tickColumns}
                 offset={gStyle.columns?.offset}
-                fill={gStyle.columns?.fill}
-                stroke={gStyle.columns?.stroke}
+                fill=""
+                stroke={themes[theme].grid.line}
                 strokeOpacity={gStyle.columns?.strokeOpacity}
                 strokeWidth={gStyle.columns?.strokeWidth}
                 strokeDasharray={gStyle.columns?.strokeDasharray}
