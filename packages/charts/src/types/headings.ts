@@ -21,7 +21,6 @@ export type HeadingsStyleConfig = {
   fontFamily: string;
   title: {
     height: number;
-    fill: string;
     fontSize: number;
     fontWeight: number;
     lineHeight: number;
@@ -32,7 +31,6 @@ export type HeadingsStyleConfig = {
   };
   subtitle: {
     height: number;
-    fill: string;
     fontSize: number;
     fontWeight: number;
     lineHeight: number;

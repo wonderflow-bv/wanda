@@ -15,14 +15,12 @@
  */
 
 import { HeadingsStyleConfig } from '../types';
-import { themeLight } from './themes';
 
 export const headingsStyleConfig: HeadingsStyleConfig = {
   height: 62,
   fontFamily: 'system-ui',
   title: {
     height: 23.5,
-    fill: themeLight.headings.title,
     fontSize: 16,
     fontWeight: 600,
     lineHeight: 1.25,
@@ -33,7 +31,6 @@ export const headingsStyleConfig: HeadingsStyleConfig = {
   },
   subtitle: {
     height: 19,
-    fill: themeLight.headings.subtitle,
     fontSize: 14,
     fontWeight: 400,
     lineHeight: 1,

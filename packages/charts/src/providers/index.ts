@@ -17,5 +17,6 @@
 export * from './cartesian';
 export * from './data';
 export * from './layout';
+export * from './style-config';
 export * from './theme';
 

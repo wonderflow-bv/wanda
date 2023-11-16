@@ -44,7 +44,9 @@ export type StyleConfigContextProps = {
   viewport: ViewportStyleConfig;
 };
 
-export type StyleConfigProviderProps = StyleConfigContextProps
+export type StyleConfigProviderProps = {
+  children?: React.ReactNode;
+}
 
 const defaultStyleConfig = {
   axis: axisStyleConfig,
@@ -61,26 +63,8 @@ export const StyleConfigContext = createContext<StyleConfigContextProps>(default
 
 export const StyleConfigProvider: FCChildren<StyleConfigProviderProps> = ({
   children,
-  axis,
-  cartesian,
-  grid,
-  headings,
-  legend,
-  linearGradient,
-  lines,
-  viewport,
 }) => (
-  <StyleConfigContext.Provider value={{
-    axis,
-    cartesian,
-    grid,
-    headings,
-    legend,
-    linearGradient,
-    lines,
-    viewport,
-  }}
-  >
+  <StyleConfigContext.Provider value={defaultStyleConfig}>
     {children}
   </StyleConfigContext.Provider>
 );

@@ -18,7 +18,9 @@ import _ from 'lodash';
 import { useMemo } from 'react';
 import { Except } from 'type-fest';
 
-import { DataProvider, LayoutProvider, ThemeProvider } from '../../providers';
+import {
+  DataProvider, LayoutProvider, StyleConfigProvider, ThemeProvider,
+} from '../../providers';
 import { defaultLineChartPalette } from '../../style-config';
 import {
   CartesianChartLayout, Charts, Data, ThemeVariants,
@@ -137,20 +139,22 @@ export const LineChart: React.FC<LineChartProps> = ({
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <LayoutProvider layout={layout}>
-        <DataProvider data={data} metadata={metadata}>
-          <CartesianBase
-            axis={axis[layout]}
-            grid={{
-              hideRows: !isHorizontal,
-              hideColumns: isHorizontal,
-            }}
-            {...otherProps}
-          />
-        </DataProvider>
-      </LayoutProvider>
-    </ThemeProvider>
+    <StyleConfigProvider>
+      <ThemeProvider theme={theme}>
+        <LayoutProvider layout={layout}>
+          <DataProvider data={data} metadata={metadata}>
+            <CartesianBase
+              axis={axis[layout]}
+              grid={{
+                hideRows: !isHorizontal,
+                hideColumns: isHorizontal,
+              }}
+              {...otherProps}
+            />
+          </DataProvider>
+        </LayoutProvider>
+      </ThemeProvider>
+    </StyleConfigProvider>
   );
 };
 

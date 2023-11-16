@@ -19,10 +19,10 @@ import { Text } from '@visx/text';
 import _ from 'lodash';
 import { useMemo } from 'react';
 
-import { useThemeContext } from '../../providers';
+import { useStyleConfigContext, useThemeContext } from '../../providers';
+import { themes } from '../../style-config';
 import { HeadingsStyleConfig } from '../../types';
 import { DeepPartial } from '../../types/main';
-import { getCartesianStyleConfigFromTheme } from '../../utils/colors';
 
 export type HeadingsProps = {
   /**
@@ -56,11 +56,10 @@ export const Headings: React.FC<HeadingsProps> = ({
   config,
 }: HeadingsProps) => {
   const theme = useThemeContext();
+  const { headings } = useStyleConfigContext();
 
-  const mergeStyle: HeadingsStyleConfig = useMemo(() => {
-    const { headings } = getCartesianStyleConfigFromTheme(theme);
-    return _.merge(headings, config);
-  }, [theme, config]);
+  const mergeStyle: HeadingsStyleConfig = useMemo(() => (_.merge(headings, config)),
+    [headings, config]);
 
   const { title: t, subtitle: s } = mergeStyle;
 
@@ -70,7 +69,7 @@ export const Headings: React.FC<HeadingsProps> = ({
     <Group top={top} left={left}>
       <Text
         fontFamily={mergeStyle.fontFamily}
-        fill={t.fill}
+        fill={themes[theme].headings.title}
         fontSize={t.fontSize}
         fontWeight={t.fontWeight}
         lineHeight={t.lineHeight}
@@ -83,7 +82,7 @@ export const Headings: React.FC<HeadingsProps> = ({
       </Text>
       <Text
         fontFamily={mergeStyle.fontFamily}
-        fill={s.fill}
+        fill={themes[theme].headings.subtitle}
         fontSize={s.fontSize}
         fontWeight={s.fontWeight}
         lineHeight={s.lineHeight}

@@ -21,7 +21,7 @@ import { useMemo } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import {
-  useCartesianContext, useDataContext, useLayoutContext, useThemeContext,
+  useCartesianContext, useDataContext, useLayoutContext, useStyleConfigContext, useThemeContext,
 } from '../../../providers';
 import { themes } from '../../../style-config';
 import {
@@ -34,6 +34,7 @@ import {
 
 export const LinesSeries: React.FC = () => {
   const theme = useThemeContext();
+  const { lines: defaultStyle } = useStyleConfigContext();
   const { data, metadata } = useDataContext();
   const { isHorizontal } = useLayoutContext();
   const { axis } = useCartesianContext();
@@ -46,21 +47,6 @@ export const LinesSeries: React.FC = () => {
 
   const indexAxis = isHorizontal ? bottom! : left!;
   const seriesAxis = isHorizontal ? left! : bottom!;
-
-  const defaultStyle = {
-    path: {
-      strokeWidth: 2,
-      strokeOpacity: 1,
-    },
-    segment: {
-      strokeDashArray: '2 3',
-    },
-    marker: {
-      radius: 2,
-      strokeWidth: 1,
-      strokeOpacity: 1,
-    },
-  };
 
   const renderer = useMemo(() => getLinesRenderer(renderAs, isHorizontal), [isHorizontal, renderAs]);
 

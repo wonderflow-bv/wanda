@@ -27,7 +27,7 @@ import { useCallback } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import {
-  useCartesianContext, useDataContext, useLayoutContext, useThemeContext,
+  useCartesianContext, useDataContext, useLayoutContext, useStyleConfigContext, useThemeContext,
 } from '../../../providers';
 import { tooltipTheme } from '../../../style-config/tooltip';
 import {
@@ -45,6 +45,7 @@ import {
 
 export const LinesTooltip: React.FC = () => {
   const theme = useThemeContext();
+  const { lines: defaultStyle } = useStyleConfigContext();
   const { data, metadata } = useDataContext();
   const { isHorizontal } = useLayoutContext();
   const { axis, maxHeight: yMax, maxWidth: xMax } = useCartesianContext();
@@ -61,19 +62,6 @@ export const LinesTooltip: React.FC = () => {
   const overlayAxis = isHorizontal ? right : top;
 
   const hasOverlay = Boolean(overlayAxis && overlay.dataKey);
-
-  const defaultStyle = {
-    lineIndicator: {
-      strokeWidth: 1,
-      opacity: 0.6,
-      pointerEvents: 'none',
-      strokeDasharray: '1 2',
-    },
-    dataPoint: {
-      radius: 2,
-      strokeWidth: 1,
-    },
-  };
 
   const {
     tooltipLeft,
