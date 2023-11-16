@@ -37,25 +37,12 @@ import {
   getLabelFromObjectPath,
   getPrimitiveFromObjectPath,
 } from '../../../utils';
+import { Placeholder } from '../../placeholder';
 import { Tooltip } from '../../tooltip';
 import {
   ExtraContent, LinesTooltipContent, LinesTooltipItem,
   NoData,
 } from './lines.module.css';
-
-const renderPlaceholder = (fill: string) => (
-  <svg width={12} height={12}>
-    <rect
-      x={0}
-      y={0}
-      width={12}
-      height={12}
-      rx={2}
-      ry={2}
-      fill={fill}
-    />
-  </svg>
-);
 
 export const LinesTooltip: React.FC = () => {
   const theme = useThemeContext();
@@ -247,7 +234,7 @@ export const LinesTooltip: React.FC = () => {
                 {series.dataKey.map((dataKey: string, di: number) => (
                   <li key={uuid()}>
                     <div className={LinesTooltipItem}>
-                      {renderPlaceholder(series.colors[di])}
+                      <Placeholder color={series.colors[di]} />
                       <span>
                         {series.names[di]}
                       </span>
@@ -274,7 +261,7 @@ export const LinesTooltip: React.FC = () => {
                 {hasOverlay && (
                   <li>
                     <div className={LinesTooltipItem}>
-                      {renderPlaceholder(overlay.color)}
+                      <Placeholder color={overlay.color} />
                       <span>
                         {overlay.name}
                       </span>

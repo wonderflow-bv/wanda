@@ -20,6 +20,7 @@ import {
 
 import { useDataContext } from '../../providers/data';
 import { LineChartMetadata } from '../../types';
+import { Placeholder } from '../placeholder';
 import styles from './cartesian-base.module.css';
 
 export type CartesianBaseLegendProps = {
@@ -31,22 +32,13 @@ const renderLegendItems = (metadata?: LineChartMetadata) => {
   if (metadata) {
     const { names, colors, dataKey: sdk } = metadata.series;
     const { name, color, dataKey: odk } = metadata.overlay;
+
     return (
       <ul>
         {sdk.map((s: string, i: number) => (
           <li key={s}>
             <div>
-              <svg width={12} height={12}>
-                <rect
-                  x={0}
-                  y={0}
-                  width={12}
-                  height={12}
-                  rx={2}
-                  ry={2}
-                  fill={colors[i]}
-                />
-              </svg>
+              <Placeholder color={colors[i]} />
               <span>
                 {names[i]}
               </span>
@@ -57,17 +49,7 @@ const renderLegendItems = (metadata?: LineChartMetadata) => {
         {odk && (
           <li>
             <div>
-              <svg width={12} height={12}>
-                <rect
-                  x={0}
-                  y={0}
-                  width={12}
-                  height={12}
-                  rx={2}
-                  ry={2}
-                  fill={color}
-                />
-              </svg>
+              <Placeholder color={color} />
               <span>
                 {name}
               </span>
@@ -81,7 +63,9 @@ const renderLegendItems = (metadata?: LineChartMetadata) => {
   return null;
 };
 
-export const CartesianBaseLegend = forwardRef<HTMLDivElement, CartesianBaseLegendProps>(({
+export const CartesianBaseLegend: React.ForwardRefExoticComponent<
+CartesianBaseLegendProps & React.RefAttributes<HTMLDivElement>
+> = forwardRef<HTMLDivElement, CartesianBaseLegendProps>(({
   legend,
   hideLegend = false,
 }: CartesianBaseLegendProps,

@@ -26,28 +26,28 @@ import { getCartesianStyleConfigFromTheme } from '../../utils/colors';
 
 export type HeadingsProps = {
   /**
-   *
+   * Set the title in the heading.
    */
   title?: string;
   /**
-   *
+   * Set the subtitle in the heading.
    */
   subtitle?: string;
   /**
-   *
+   * Set the position from top (Y axis).
    */
   top?: number;
   /**
-   *
+   * Set the position from left (X axis).
    */
   left?: number;
   /**
-   *
+   * Set custom headings style attributes.
    */
   config?: DeepPartial<HeadingsStyleConfig>;
 }
 
-export const Headings = ({
+export const Headings: React.FC<HeadingsProps> = ({
   title,
   subtitle,
   top = 0,
@@ -56,6 +56,7 @@ export const Headings = ({
   config,
 }: HeadingsProps) => {
   const theme = useThemeContext();
+
   const mergeStyle: HeadingsStyleConfig = useMemo(() => {
     const { headings } = getCartesianStyleConfigFromTheme(theme);
     return _.merge(headings, config);
