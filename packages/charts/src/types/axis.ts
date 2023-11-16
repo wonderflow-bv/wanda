@@ -128,6 +128,15 @@ export type HorizontalAxisStyleConfig = {
   };
 };
 
+export type AxisType = {
+  orientation: AxisOrientation;
+  top: number;
+  left: number;
+  scale: ScaleBand<string> | ScaleLinear<number, number> | ScaleTime<number, number>;
+} & AxisProps
+
+export type AllAxisProperties = Record<AxisOrientation, AxisType | undefined>
+
 export type AxisStyleConfig = {
   formatting: { maxCharactersLength: number; omission: string };
   labelProps: LabelProps;
@@ -140,12 +149,3 @@ export type AxisStyleConfig = {
   bottom: HorizontalAxisStyleConfig;
   left: VerticalAxisStyleConfig;
 }
-
-export type AxisType = {
-  orientation: AxisOrientation;
-  top: number;
-  left: number;
-  scale: ScaleBand<string> | ScaleLinear<number, number> | ScaleTime<number, number>;
-} & AxisProps
-
-export type AllAxisProperties = Record<AxisOrientation, AxisType | undefined>

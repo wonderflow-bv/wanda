@@ -104,5 +104,5 @@ TwoAxis.args = {
 };
 
 export const WithLegend = Template.bind({});
-WithLegend.args = { legend: <ul><li style={{ fontSize: '12px' }}>some legend content here</li></ul> };
+WithLegend.args = { customLegend: <ul><li style={{ fontSize: '12px' }}>some legend content here</li></ul> };
 

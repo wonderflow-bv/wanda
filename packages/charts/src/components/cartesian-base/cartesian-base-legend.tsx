@@ -24,7 +24,7 @@ import { Placeholder } from '../placeholder';
 import styles from './cartesian-base.module.css';
 
 export type CartesianBaseLegendProps = {
-  legend?: React.ReactNode;
+  customLegend?: React.ReactNode;
   hideLegend?: boolean;
 }
 
@@ -66,22 +66,20 @@ const renderLegendItems = (metadata?: LineChartMetadata) => {
 export const CartesianBaseLegend: React.ForwardRefExoticComponent<
 CartesianBaseLegendProps & React.RefAttributes<HTMLDivElement>
 > = forwardRef<HTMLDivElement, CartesianBaseLegendProps>(({
-  legend,
+  customLegend,
   hideLegend = false,
 }: CartesianBaseLegendProps,
 forwardedRef) => {
   const { metadata } = useDataContext();
 
+  if (hideLegend) return null;
+
   return (
-    hideLegend
-      ? null
-      : (
-        <div ref={forwardedRef} className={styles.Legend}>
-          <div className={styles.LegendContent}>
-            {legend ?? renderLegendItems(metadata)}
-          </div>
-        </div>
-      )
+    <div ref={forwardedRef} className={styles.Legend}>
+      <div className={styles.LegendContent}>
+        {customLegend ?? renderLegendItems(metadata)}
+      </div>
+    </div>
   );
 });
 

@@ -26,7 +26,7 @@
     "build:css": "cpy '**/*.css' '../dist' --parents --cwd=src && postcss dist/*.css \"dist/**/!(utils)/!(_mixins).css\" --replace",
     "lint": "run-s lint:styles",
     "lint:styles": "stylelint ./src/**/*.css",
-    "clean": "rimraf dist core core.css",
+    "clean": "rimraf dist",
     "watch:csstypes": "tcm -w -p '**/*.module.css' src",
     "build:csstypes": "tcm -p '**/*.module.css' src"
   },

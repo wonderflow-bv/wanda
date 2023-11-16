@@ -79,8 +79,8 @@ export type CartesianBaseProps = {
     bottom?: AxisProps;
     left?: AxisProps;
   };
-  legend?: React.ReactNode;
   hideLegend?: boolean;
+  customLegend?: React.ReactNode;
   styleConfig?: DeepPartial<CartesianStyleConfig>;
   otherProps?: Record<string, unknown>;
 }
@@ -106,7 +106,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   subtitle,
   headings,
   axis,
-  legend,
+  customLegend,
   hideLegend = false,
   styleConfig,
   otherProps,
@@ -384,7 +384,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
 
       {isReady && (
         <CartesianBaseLegend
-          legend={legend}
+          customLegend={customLegend}
           hideLegend={hideLegend}
           ref={refLegend}
         />

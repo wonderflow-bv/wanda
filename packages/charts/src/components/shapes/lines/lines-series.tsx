@@ -47,13 +47,12 @@ export const LinesSeries: React.FC = () => {
   const indexAxis = isHorizontal ? bottom! : left!;
   const seriesAxis = isHorizontal ? left! : bottom!;
 
-  const defaultStyle = useMemo(() => ({
+  const defaultStyle = {
     path: {
       strokeWidth: 2,
       strokeOpacity: 1,
     },
     segment: {
-      stroke: hideMissingDataConnection ? 'transparent' : themes[theme].lines.noData,
       strokeDashArray: '2 3',
     },
     marker: {
@@ -61,7 +60,7 @@ export const LinesSeries: React.FC = () => {
       strokeWidth: 1,
       strokeOpacity: 1,
     },
-  }), [hideMissingDataConnection, theme]);
+  };
 
   const renderer = useMemo(() => getLinesRenderer(renderAs, isHorizontal), [isHorizontal, renderAs]);
 
@@ -91,6 +90,8 @@ export const LinesSeries: React.FC = () => {
         || series.style?.[di]?.showMarker
         || series.style?.[di]?.showMarkerLabel);
 
+        const segmentStroke = hideMissingDataConnection ? 'transparent' : themes[theme].lines.noData;
+
         return (
           subPaths.map((
             subPathData: Array<Record<string, any>>,
@@ -107,7 +108,7 @@ export const LinesSeries: React.FC = () => {
                 y={datum => getSeriesCoordinates(datum, dataKey, isHorizontal).y as any}
                 stroke={si % 2 === 0
                   ? series.colors[di]
-                  : defaultStyle.segment.stroke}
+                  : segmentStroke}
                 strokeWidth={series.style?.[di]?.strokeWidth ?? defaultStyle.path.strokeWidth}
                 strokeOpacity={series.style?.[di]?.strokeOpacity ?? defaultStyle.path.strokeOpacity}
                 strokeDasharray={si % 2 === 0

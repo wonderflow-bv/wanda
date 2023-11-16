@@ -33,7 +33,8 @@ export type TooltipStyleColors = {
   background: string;
   border: string;
   boxShadow: string;
-  separator: string;
+  separatorStroke: string;
+  lineIndicatorStroke: string;
 }
 
 export type TooltipStyleConfig = TooltipStyleColors & TooltipStyleMain;

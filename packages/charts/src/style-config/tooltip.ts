@@ -37,7 +37,8 @@ export const tooltipStyleDark: TooltipStyleColors = {
   background: `radial-gradient(at left top, ${toHSLA(colorPaletteNeutrals.dimmed8, 0.5)}, ${toHSLA(colorPaletteNeutrals.dimmed7, 0.6)}) no-repeat`,
   border: `1px solid ${colorPaletteNeutrals.dimmed8}`,
   boxShadow: `4px 4px 10px ${toHSLA(colorPaletteNeutrals.black, 0.5)}`,
-  separator: colorPaletteNeutrals.dimmed7,
+  separatorStroke: colorPaletteNeutrals.dimmed7,
+  lineIndicatorStroke: colorPaletteNeutrals.dimmed6,
 };
 
 export const tooltipStyleLight: TooltipStyleColors = {
@@ -45,7 +46,8 @@ export const tooltipStyleLight: TooltipStyleColors = {
   background: `radial-gradient(at left top, ${toHSLA(colorPaletteNeutrals.dimmed9, 0.7)}, ${toHSLA(colorPaletteNeutrals.black, 0.8)}) no-repeat`,
   border: `1px solid ${colorPaletteNeutrals.dimmed5}`,
   boxShadow: `4px 4px 10px ${toHSLA(colorPaletteNeutrals.dimmed8, 0.5)}`,
-  separator: colorPaletteNeutrals.dimmed6,
+  separatorStroke: colorPaletteNeutrals.dimmed6,
+  lineIndicatorStroke: colorPaletteNeutrals.dimmed4,
 };
 
 export const tooltipStyleConfigLight: TooltipStyleConfig = {

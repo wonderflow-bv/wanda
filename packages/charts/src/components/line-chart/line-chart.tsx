@@ -101,26 +101,18 @@ export const LineChart: React.FC<LineChartProps> = ({
     ? `${_.startCase(series.rename(s, i))}`
     : `${_.startCase(getLabelFromObjectPath(s))}`)), [series]);
 
+  const overlayName = overlay?.rename
+    ?? _.startCase(overlay?.label)
+    ?? _.startCase(getLabelFromObjectPath(overlay?.dataKey ?? ''))
+    ?? '';
+
   const palette = useMemo(() => defaultLineChartPalette[theme], [theme]);
 
   const seriesColors = useMemo(() => series.dataKey.map((_: string, i: number) => (
     series.style?.[i] ? series.style[i]?.stroke : palette.series[i]
   )), [palette.series, series.dataKey, series.style]);
 
-  const overlayColor = useMemo(
-    () => overlay?.style?.stroke ?? palette.overlay,
-    [overlay?.style?.stroke, palette.overlay],
-  );
-
-  const overlayName = useMemo(() => {
-    if (overlay) {
-      return overlay.rename
-        ?? _.startCase(overlay?.label)
-        ?? _.startCase(getLabelFromObjectPath(overlay.dataKey));
-    }
-
-    return '';
-  }, [overlay]);
+  const overlayColor = overlay?.style?.stroke ?? palette.overlay;
 
   const metadata: LineChartMetadata = {
     type: Charts.LINE_CHART,

@@ -14,12 +14,29 @@
  * limitations under the License.
  */
 
-export * from './axis';
-export * from './cartesian';
-export * from './colors';
-export * from './grid';
-export * from './headings';
-export * from './linear-gradient';
-export * from './lines';
-export * from './themes';
-export * from './viewport';
+import { LinesStyleConfig } from '../types/lines';
+
+export const linesStyleConfig: LinesStyleConfig = {
+  lineIndicator: {
+    strokeWidth: 1,
+    opacity: 0.6,
+    pointerEvents: 'none',
+    strokeDasharray: '1 2',
+  },
+  dataPoint: {
+    radius: 2,
+    strokeWidth: 1,
+  },
+  path: {
+    strokeWidth: 2,
+    strokeOpacity: 1,
+  },
+  segment: {
+    strokeDashArray: '2 3',
+  },
+  marker: {
+    radius: 2,
+    strokeWidth: 1,
+    strokeOpacity: 1,
+  },
+};

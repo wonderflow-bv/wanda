@@ -29,7 +29,6 @@ import { v4 as uuid } from 'uuid';
 import {
   useCartesianContext, useDataContext, useLayoutContext, useThemeContext,
 } from '../../../providers';
-import { colorPaletteNeutrals } from '../../../style-config';
 import { tooltipTheme } from '../../../style-config/tooltip';
 import {
   accessorInvert,
@@ -65,7 +64,6 @@ export const LinesTooltip: React.FC = () => {
 
   const defaultStyle = {
     lineIndicator: {
-      stroke: colorPaletteNeutrals.dimmed4,
       strokeWidth: 1,
       opacity: 0.6,
       pointerEvents: 'none',
@@ -173,7 +171,7 @@ export const LinesTooltip: React.FC = () => {
                 x: isHorizontal ? tooltipData.lineIndicatorPos : xMax,
                 y: isHorizontal ? yMax : tooltipData.lineIndicatorPos,
               }}
-              stroke={defaultStyle.lineIndicator.stroke}
+              stroke={tooltipTheme[theme].lineIndicatorStroke}
               strokeWidth={defaultStyle.lineIndicator.strokeWidth}
               opacity={defaultStyle.lineIndicator.opacity}
               pointerEvents={defaultStyle.lineIndicator.pointerEvents}
@@ -292,7 +290,7 @@ export const LinesTooltip: React.FC = () => {
             { (tooltip?.extraContent || !tooltipData.hasData) && (
               <div
                 className={ExtraContent}
-                style={{ borderColor: tooltipTheme[theme].separator }}
+                style={{ borderColor: tooltipTheme[theme].separatorStroke }}
               >
                 {tooltip?.extraContent && tooltip.extraContent}
 
