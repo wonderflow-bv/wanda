@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 /*
  * Copyright 2023 Wonderflow Design Team
  *

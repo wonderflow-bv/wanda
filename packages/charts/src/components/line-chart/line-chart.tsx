@@ -18,9 +18,7 @@ import _ from 'lodash';
 import { useMemo } from 'react';
 import { Except } from 'type-fest';
 
-import { LayoutProvider } from '../../providers';
-import { DataProvider } from '../../providers/data';
-import { ThemeProvider } from '../../providers/theme';
+import { DataProvider, LayoutProvider, ThemeProvider } from '../../providers';
 import { defaultLineChartPalette } from '../../style-config';
 import {
   CartesianChartLayout, Charts, Data, ThemeVariants,
