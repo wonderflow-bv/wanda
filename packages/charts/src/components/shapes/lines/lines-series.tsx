@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 /*
  * Copyright 2023 Wonderflow Design Team
  *
@@ -86,10 +87,10 @@ export const LinesSeries: React.FC = () => {
           d => _.isNil(getValueFromObjectPath(d, dataKey)),
         );
 
-        const hasMarker = showMarker
-        ?? showMarkerLabel
-        ?? series.style?.[di]?.showMarker
-        ?? series.style?.[di]?.showMarkerLabel;
+        const hasMarker = Boolean(showMarker
+        || showMarkerLabel
+        || series.style?.[di]?.showMarker
+        || series.style?.[di]?.showMarkerLabel);
 
         return (
           subPaths.map((

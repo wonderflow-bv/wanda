@@ -67,14 +67,14 @@ export const Tooltip: React.FC<TooltipProps> = ({
 }: TooltipProps) => {
   const theme = useThemeContext();
 
+  const tStyle = useMemo(() => _.merge(defaultStyles, tooltipTheme[theme], config), [theme, config]);
+
   const { TooltipInPortal } = useTooltipInPortal({
     detectBounds: true,
     scroll: true,
     debounce: 500,
     zIndex: 10,
   });
-
-  const tStyle = useMemo(() => _.merge(defaultStyles, tooltipTheme[theme], config), [theme, config]);
 
   if (!isOpen) return null;
 

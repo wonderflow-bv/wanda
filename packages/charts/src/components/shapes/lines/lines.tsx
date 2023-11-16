@@ -33,8 +33,8 @@ export const Lines: React.FC = () => {
       left={position.left}
     >
       <Group className={LinesItemGroup}>
-        <LinesOverlay />
         <LinesSeries />
+        <LinesOverlay />
       </Group>
 
       <LinesTooltip />

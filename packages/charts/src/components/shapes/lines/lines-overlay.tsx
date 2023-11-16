@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 /*
  * Copyright 2023 Wonderflow Design Team
  *
@@ -87,10 +88,10 @@ export const LinesOverlay: React.FC = () => {
     d => hasOverlay && _.isNil(getValueFromObjectPath(d, overlay.dataKey!)),
   ), [data, hasOverlay, overlay.dataKey]);
 
-  const hasMarker = showMarker
-  ?? showMarkerLabel
-  ?? overlay.style?.showMarker
-  ?? overlay.style?.showMarkerLabel;
+  const hasMarker = Boolean(showMarker
+  || showMarkerLabel
+  || overlay.style?.showMarker
+  || overlay.style?.showMarkerLabel);
 
   return (
     <>

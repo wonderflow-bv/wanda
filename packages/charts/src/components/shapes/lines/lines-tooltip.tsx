@@ -24,11 +24,11 @@ import { Line } from '@visx/shape';
 import { useTooltip, useTooltipInPortal } from '@visx/tooltip';
 import _ from 'lodash';
 import { useCallback } from 'react';
+import { v4 as uuid } from 'uuid';
 
-import { useLayoutContext } from '../../../providers';
-import { useCartesianContext } from '../../../providers/cartesian';
-import { useDataContext } from '../../../providers/data';
-import { useThemeContext } from '../../../providers/theme';
+import {
+  useCartesianContext, useDataContext, useLayoutContext, useThemeContext,
+} from '../../../providers';
 import { colorPaletteNeutrals } from '../../../style-config';
 import { tooltipTheme } from '../../../style-config/tooltip';
 import {
@@ -39,9 +39,23 @@ import {
 } from '../../../utils';
 import { Tooltip } from '../../tooltip';
 import {
-  ExtraContent, LinesTooltipContent, LinesTooltipSeries,
+  ExtraContent, LinesTooltipContent, LinesTooltipItem,
   NoData,
 } from './lines.module.css';
+
+const renderPlaceholder = (fill: string) => (
+  <svg width={12} height={12}>
+    <rect
+      x={0}
+      y={0}
+      width={12}
+      height={12}
+      rx={2}
+      ry={2}
+      fill={fill}
+    />
+  </svg>
+);
 
 export const LinesTooltip: React.FC = () => {
   const theme = useThemeContext();
@@ -61,6 +75,20 @@ export const LinesTooltip: React.FC = () => {
   const overlayAxis = isHorizontal ? right : top;
 
   const hasOverlay = Boolean(overlayAxis && overlay.dataKey);
+
+  const defaultStyle = {
+    lineIndicator: {
+      stroke: colorPaletteNeutrals.dimmed4,
+      strokeWidth: 1,
+      opacity: 0.6,
+      pointerEvents: 'none',
+      strokeDasharray: '1 2',
+    },
+    dataPoint: {
+      radius: 2,
+      strokeWidth: 1,
+    },
+  };
 
   const {
     tooltipLeft,
@@ -84,28 +112,34 @@ export const LinesTooltip: React.FC = () => {
     } = indexAxis;
     const { top: tBound, left: lBound } = containerBounds;
 
+    const hiddenPos = { x: -999, y: -999 };
+
     const xy = isHorizontal ? 'x' : 'y';
-    const coords = localPoint(event.target.ownerSVGElement, event) ?? { x: -999, y: -999 };
 
-    const accessorInvertIndexOf = accessorInvert(indexAxis, coords[xy]);
+    const coords = localPoint(event.target.ownerSVGElement, event) ?? hiddenPos;
 
-    const bisectValueIndexOf = scaleType === 'label'
-      ? domain.indexOf(accessorInvertIndexOf as string)
-      : bisectIndex(domain, accessorInvertIndexOf as any, 0) - 1;
+    const accessorInvertValue = accessorInvert(indexAxis, coords[xy]);
 
-    const valueFromDomainIndex = domain[bisectValueIndexOf];
+    const indexOfBisectValue = scaleType === 'label'
+      ? domain.indexOf(accessorInvertValue as string)
+      : bisectIndex(domain, accessorInvertValue, 0) - 1;
+
+    const domainIndexValue = domain[indexOfBisectValue];
 
     const indexScaleValue = scaleType === 'label'
-      ? accessorInvertIndexOf
-      : new Date(valueFromDomainIndex);
+      ? accessorInvertValue
+      : new Date(domainIndexValue);
 
     const lineIndicatorPos = scale(indexScaleValue as any);
 
-    const tooltipLeft = isHorizontal ? coords.x + lBound / 8 : coords.x;
-    const tooltipTop = isHorizontal ? coords.y : coords.y + tBound / 8;
+    const tooltipLeft = isHorizontal
+      ? (coords.x + lBound / 8)
+      : coords.x;
+    const tooltipTop = isHorizontal
+      ? coords.y
+      : (coords.y + tBound / 8);
 
-    const datum = data[bisectValueIndexOf];
-
+    const datum = data[indexOfBisectValue];
     const hasSeriesData = series.dataKey.every(s => !_.isNil(getPrimitiveFromObjectPath(datum, s)));
     const hasOverlayData = !_.isNil(getPrimitiveFromObjectPath(datum, overlay.dataKey!));
 
@@ -152,34 +186,34 @@ export const LinesTooltip: React.FC = () => {
                 x: isHorizontal ? tooltipData.lineIndicatorPos : xMax,
                 y: isHorizontal ? yMax : tooltipData.lineIndicatorPos,
               }}
-              stroke={colorPaletteNeutrals.dimmed4}
-              strokeWidth={1}
-              opacity={0.6}
-              pointerEvents="none"
-              strokeDasharray="1 2"
+              stroke={defaultStyle.lineIndicator.stroke}
+              strokeWidth={defaultStyle.lineIndicator.strokeWidth}
+              opacity={defaultStyle.lineIndicator.opacity}
+              pointerEvents={defaultStyle.lineIndicator.pointerEvents}
+              strokeDasharray={defaultStyle.lineIndicator.strokeDasharray}
             />
 
-            {series.dataKey.map((d: string, di: number) => (
-              tooltipData.data[d] && (
+            {series.dataKey.map((dataKey: string, di: number) => (
+              tooltipData.data[dataKey] && (
                 <circle
-                  key={d}
-                  r={2}
+                  key={uuid()}
+                  r={defaultStyle.dataPoint.radius}
                   cx={isHorizontal
                     ? tooltipData.lineIndicatorPos
-                    : seriesAxis.scale(getPrimitiveFromObjectPath(tooltipData.data, d))}
+                    : seriesAxis.scale(getPrimitiveFromObjectPath(tooltipData.data, dataKey))}
                   cy={isHorizontal
-                    ? seriesAxis.scale(getPrimitiveFromObjectPath(tooltipData.data, d))
+                    ? seriesAxis.scale(getPrimitiveFromObjectPath(tooltipData.data, dataKey))
                     : tooltipData.lineIndicatorPos}
                   stroke={series.colors[di]}
                   fill={series.colors[di]}
-                  strokeWidth={series.style?.[di]?.strokeWidth ?? 1}
+                  strokeWidth={defaultStyle.dataPoint.strokeWidth}
                 />
               )
             ))}
 
             {hasOverlay && tooltipData.data[overlay.dataKey] && (
               <circle
-                r={2}
+                r={defaultStyle.dataPoint.radius}
                 cx={isHorizontal
                   ? tooltipData.lineIndicatorPos
                   : overlayAxis?.scale(getPrimitiveFromObjectPath(tooltipData.data, overlay.dataKey))}
@@ -188,7 +222,7 @@ export const LinesTooltip: React.FC = () => {
                   : tooltipData.lineIndicatorPos}
                 stroke={overlay.color}
                 fill={overlay.color}
-                strokeWidth={overlay.style?.strokeWidth ?? 1}
+                strokeWidth={defaultStyle.dataPoint.strokeWidth}
               />
             )}
           </Group>
@@ -210,29 +244,19 @@ export const LinesTooltip: React.FC = () => {
               </p>
 
               <ul>
-                {series.dataKey.map((s: string, i: number) => (
-                  <li key={s}>
-                    <div className={LinesTooltipSeries}>
-                      <svg width={12} height={12}>
-                        <rect
-                          x={0}
-                          y={0}
-                          width={12}
-                          height={12}
-                          rx={2}
-                          ry={2}
-                          fill={series.colors[i]}
-                        />
-                      </svg>
+                {series.dataKey.map((dataKey: string, di: number) => (
+                  <li key={uuid()}>
+                    <div className={LinesTooltipItem}>
+                      {renderPlaceholder(series.colors[di])}
                       <span>
-                        {series.names[i]}
+                        {series.names[di]}
                       </span>
                     </div>
 
                     <div>
                       {tooltip?.extraSeriesData && (
                         <p>
-                          {tooltip.extraSeriesData(_.at(tooltipData.data, getLabelFromObjectPath(s))[0])}
+                          {tooltip.extraSeriesData(_.at(tooltipData.data, getLabelFromObjectPath(dataKey))[0])}
                         </p>
                       )}
                     </div>
@@ -240,7 +264,7 @@ export const LinesTooltip: React.FC = () => {
                     <div>
                       <p>
                         <b>
-                          {`${getPrimitiveFromObjectPath(tooltipData.data, s) ?? 'n/a'}`}
+                          {`${getPrimitiveFromObjectPath(tooltipData.data, dataKey) ?? 'n/a'}`}
                         </b>
                       </p>
                     </div>
@@ -249,18 +273,8 @@ export const LinesTooltip: React.FC = () => {
 
                 {hasOverlay && (
                   <li>
-                    <div className={LinesTooltipSeries}>
-                      <svg width={12} height={12}>
-                        <rect
-                          x={0}
-                          y={0}
-                          width={12}
-                          height={12}
-                          rx={2}
-                          ry={2}
-                          fill={overlay.color}
-                        />
-                      </svg>
+                    <div className={LinesTooltipItem}>
+                      {renderPlaceholder(overlay.color)}
                       <span>
                         {overlay.name}
                       </span>
@@ -294,6 +308,7 @@ export const LinesTooltip: React.FC = () => {
                 style={{ borderColor: tooltipTheme[theme].separator }}
               >
                 {tooltip?.extraContent && tooltip.extraContent}
+
                 {!tooltipData.hasData && <p className={NoData}>No data available</p>}
               </div>
             )}
