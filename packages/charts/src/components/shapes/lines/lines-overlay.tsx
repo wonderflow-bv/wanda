@@ -70,7 +70,7 @@ export const LinesOverlay: React.FC = () => {
   const renderer = useMemo(() => getLinesRenderer(renderAs, isHorizontal), [isHorizontal, renderAs]);
 
   const getOverlayCoordinates = useMemo(() => (
-    datum: Record<string, unknown>,
+    datum: Record<string, any>,
     dataKey: string,
     isHorizontal: boolean,
   ) => getCoordinates({

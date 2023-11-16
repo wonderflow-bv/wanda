@@ -30,6 +30,7 @@ import { useCartesianContext } from '../../../providers/cartesian';
 import { useDataContext } from '../../../providers/data';
 import { useThemeContext } from '../../../providers/theme';
 import { colorPaletteNeutrals } from '../../../style-config';
+import { tooltipTheme } from '../../../style-config/tooltip';
 import {
   accessorInvert,
   bisectIndex,
@@ -290,7 +291,7 @@ export const LinesTooltip: React.FC = () => {
             { (tooltip?.extraContent || !tooltipData.hasData) && (
               <div
                 className={ExtraContent}
-                style={{ borderColor: colorPaletteNeutrals.dimmed6 }} // dimmed7 for dark theme
+                style={{ borderColor: tooltipTheme[theme].separator }}
               >
                 {tooltip?.extraContent && tooltip.extraContent}
                 {!tooltipData.hasData && <p className={NoData}>No data available</p>}

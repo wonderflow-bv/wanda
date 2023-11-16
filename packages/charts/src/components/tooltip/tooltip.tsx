@@ -19,55 +19,54 @@ import _ from 'lodash';
 import { useMemo } from 'react';
 import { v4 as uuid } from 'uuid';
 
+import { useThemeContext } from '../../providers';
 import { tooltipTheme } from '../../style-config/tooltip';
-import { ThemeVariants, TooltipStyleConfig } from '../../types';
+import { TooltipStyleConfig } from '../../types';
 import { DeepPartial } from '../../types/main';
+import { ContentWrapper } from './tooltip.module.css';
 
 export type TooltipProps = {
   /**
-   *
-   */
-  theme?: ThemeVariants;
-  /**
-   *
+   * Set if the tooltip should be shown or hidden.
    */
   isOpen?: boolean;
   /**
-   *
+   * Set the position from top (Y axis).
    */
   top?: number;
   /**
-   *
+   *  Set the position from left (X axis).
    */
   left?: number;
   /**
-   *
+   * Set an offset for the top position.
    */
   offsetTop?: number;
   /**
-   *
+   * Set an offset for the left position.
    */
   offsetLeft?: number;
   /**
-   *
+   * Set the tooltip content.
    */
   children?: React.ReactNode;
   /**
-   *
+   * Set custom tooltip style attributes.
    */
   config?: DeepPartial<TooltipStyleConfig>;
 }
 
-export const Tooltip: FCChildren<TooltipProps> = ({
-  theme = 'light',
+export const Tooltip: React.FC<TooltipProps> = ({
   isOpen,
-  top,
-  left,
+  top = -999,
+  left = -999,
   offsetTop = 15,
   offsetLeft = 15,
   children,
   config,
 }: TooltipProps) => {
+  const theme = useThemeContext();
+
   const { TooltipInPortal } = useTooltipInPortal({
     detectBounds: true,
     scroll: true,
@@ -80,14 +79,13 @@ export const Tooltip: FCChildren<TooltipProps> = ({
   if (!isOpen) return null;
 
   return (
-
     <TooltipInPortal
       key={uuid()}
-      top={(top ?? -999) + (offsetTop ?? 0)}
-      left={(left ?? -999) + (offsetLeft ?? 0)}
+      top={top + offsetTop}
+      left={left + offsetLeft}
       style={tStyle}
     >
-      <div style={{ padding: '0.25rem 0' }}>
+      <div className={ContentWrapper}>
         {children}
       </div>
     </TooltipInPortal>

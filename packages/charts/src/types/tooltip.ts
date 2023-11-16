@@ -33,6 +33,7 @@ export type TooltipStyleColors = {
   background: string;
   border: string;
   boxShadow: string;
+  separator: string;
 }
 
 export type TooltipStyleConfig = TooltipStyleColors & TooltipStyleMain;
