@@ -16,7 +16,7 @@
 
 import { createContext, useContext } from 'react';
 
-import { AxisType } from '../types';
+import { AllAxisProperties } from '../types';
 
 export type CartesianContextProps = {
   position: {
@@ -27,12 +27,7 @@ export type CartesianContextProps = {
   };
   maxWidth: number;
   maxHeight: number;
-  axis: {
-    top?: AxisType | undefined;
-    right?: AxisType | undefined;
-    bottom?: AxisType | undefined;
-    left?: AxisType | undefined;
-  };
+  axis?: AllAxisProperties;
 };
 
 export type CartesianProviderProps = CartesianContextProps
@@ -46,7 +41,7 @@ const defaultSetting = {
   },
   maxWidth: 800,
   maxHeight: 600,
-  axis: {},
+  axis: undefined,
 };
 
 export const CartesianContext = createContext<CartesianContextProps>(defaultSetting);

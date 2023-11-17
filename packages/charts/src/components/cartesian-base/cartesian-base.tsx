@@ -14,17 +14,8 @@
 * limitations under the License.
 */
 
-/* eslint-disable @typescript-eslint/naming-convention */
-
-import {
-  Axis,
-  TickFormatter,
-} from '@visx/axis';
 import { LinearGradient } from '@visx/gradient';
 import { Group } from '@visx/group';
-import {
-  NumberValue,
-} from '@visx/vendor/d3-scale';
 import { useSize } from 'ahooks';
 import _ from 'lodash';
 import {
@@ -37,7 +28,6 @@ import { CartesianProvider } from '../../providers/cartesian';
 import { useDataContext } from '../../providers/data';
 import { useThemeContext } from '../../providers/theme';
 import { headingsStyleConfig as hStyle, themes } from '../../style-config';
-import { AxisType } from '../../types/axis';
 import {
   AxisProps, CartesianStyleConfig, GridProps, MarginProps,
 } from '../../types/cartesian';
@@ -47,17 +37,15 @@ import {
   DeepPartial,
 } from '../../types/main';
 import {
-  computeAllAxisProperties, computeAxisConfig, handleTickFormat,
-  handleTickNumber,
+  computeAllAxisProperties, computeAxisConfig,
   handleVerticalTickLabelOffset,
-  handleVerticalTickLabelTransform,
-  hasVerticalTickLabel,
   inferScaleTypeFromDomain,
 } from '../../utils/axis';
 import { getCartesianStyleConfigFromTheme } from '../../utils/colors';
 import { Headings, HeadingsProps } from '../headings';
 import { Lines } from '../shapes';
 import styles from './cartesian-base.module.css';
+import { CartesianBaseAxis } from './cartesian-base-axis';
 import { CartesianBaseGrid } from './cartesian-base-grid';
 import { CartesianBaseLegend } from './cartesian-base-legend';
 
@@ -82,7 +70,7 @@ export type CartesianBaseProps = {
   hideLegend?: boolean;
   customLegend?: React.ReactNode;
   styleConfig?: DeepPartial<CartesianStyleConfig>;
-  otherProps?: Record<string, unknown>;
+  otherProps?: Record<string, any>;
 }
 
 export const CartesianBase: React.FC<CartesianBaseProps> = ({
@@ -112,7 +100,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   otherProps,
 }: CartesianBaseProps) => {
   const theme = useThemeContext();
-  const { legend: lStyle, viewport: vStyle } = useStyleConfigContext();
+  const { legend: lStyle } = useStyleConfigContext();
   const { metadata } = useDataContext();
 
   const cartesianConfig = useMemo(() => {
@@ -166,17 +154,17 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   },
   aStyle), [aStyle, bottom, left, right, top]);
 
-  const heading = title ? hStyle.height : 0;
-
-  const mr = margin.right * (right ? 1 : 2);
-  const ml = margin.left * (left ? 1 : 2);
-
   const {
     leftAxisOffset: lOff,
     topAxisOffset: tOff,
     verticalAxisOffset: vOff,
     horizontalAxisOffset: hOff,
   } = axisConfig.offset;
+
+  const heading = title ? hStyle.height : 0;
+
+  const mr = margin.right * (right ? 1 : 2);
+  const ml = margin.left * (left ? 1 : 2);
 
   const xMax = dynamicWidth - ml - mr - vOff;
 
@@ -284,46 +272,12 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
               otherProps={grid.otherProps}
             />
 
-            {Object.values(allAxis)
-              .filter((a): a is AxisType => !!a)
-              .map(a => (
-                <Axis
-                  key={a.orientation}
-                  orientation={a.orientation}
-                  scale={a.scale}
-                  top={a.top}
-                  left={a.left}
-                  numTicks={handleTickNumber(xMax, yMax, a, vStyle)}
-                  tickLength={axisConfig.style.tickLineProps.length}
-                  tickLabelProps={v => ({
-                    ...axisConfig.style.tickLabelProps,
-                    ...axisConfig[a.orientation].tickLabelProps,
-                    ...handleVerticalTickLabelTransform(
-                      v,
-                      hasVerticalTickLabel(xMax, a.orientation, a, vStyle),
-                      a,
-                    ),
-                  })}
-                  tickLineProps={axisConfig.style.tickLineProps}
-                  label={a.label}
-                  labelOffset={
-                axisConfig[a.orientation].labelOffset
-                + handleVerticalTickLabelOffset(xMax, a.orientation, a, cartesianConfig)
-              }
-                  labelProps={{
-                    ...axisConfig.style.labelProps,
-                    ...axisConfig[a.orientation].labelProps,
-                  }}
-                  tickFormat={handleTickFormat(a) as TickFormatter<string | NumberValue | Date> | undefined}
-                  stroke={axisConfig.style.axisLineProps.stroke}
-                  strokeDasharray={axisConfig.style.axisLineProps.strokeDasharray}
-                  strokeWidth={axisConfig.style.axisLineProps.strokeWidth}
-                  hideAxisLine={a.hideAxisLine}
-                  hideTicks={a.hideTicks}
-                  hideZero={a.hideZero}
-                  {...a.otherProps}
-                />
-              ))}
+            <CartesianBaseAxis
+              maxWidth={xMax}
+              maxHeight={yMax}
+              axis={allAxis}
+              axisConfig={axisConfig}
+            />
 
             <CartesianProvider
               position={{
@@ -340,7 +294,6 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
             </CartesianProvider>
           </Group>
         )}
-
       </svg>
 
       {isReady && (
