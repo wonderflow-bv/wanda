@@ -21,7 +21,6 @@ import {
   TickFormatter,
 } from '@visx/axis';
 import { LinearGradient } from '@visx/gradient';
-import { GridColumns, GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
 import {
   NumberValue,
@@ -33,7 +32,7 @@ import {
   useMemo, useRef,
 } from 'react';
 
-import { useLayoutContext, useStyleConfigContext } from '../../providers';
+import { useStyleConfigContext } from '../../providers';
 import { CartesianProvider } from '../../providers/cartesian';
 import { useDataContext } from '../../providers/data';
 import { useThemeContext } from '../../providers/theme';
@@ -59,6 +58,7 @@ import { getCartesianStyleConfigFromTheme } from '../../utils/colors';
 import { Headings, HeadingsProps } from '../headings';
 import { Lines } from '../shapes';
 import styles from './cartesian-base.module.css';
+import { CartesianBaseGrid } from './cartesian-base-grid';
 import { CartesianBaseLegend } from './cartesian-base-legend';
 
 export type CartesianBaseProps = {
@@ -112,9 +112,8 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   otherProps,
 }: CartesianBaseProps) => {
   const theme = useThemeContext();
-  const { grid: gStyle, legend: lStyle, viewport: vStyle } = useStyleConfigContext();
+  const { legend: lStyle, viewport: vStyle } = useStyleConfigContext();
   const { metadata } = useDataContext();
-  const { isHorizontal } = useLayoutContext();
 
   const cartesianConfig = useMemo(() => {
     const cConfig = getCartesianStyleConfigFromTheme(theme);
@@ -126,7 +125,6 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   } = cartesianConfig;
 
   const { from, to } = _.merge(themes[theme].background, background);
-  const { from: gridFrom, to: gridTo } = { ...themes[theme].grid.background, ...grid.background };
 
   const {
     top, right, bottom, left,
@@ -136,10 +134,6 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   if (right) right.scaleType = inferScaleTypeFromDomain(right.domain, right.scaleType);
   if (bottom) bottom.scaleType = inferScaleTypeFromDomain(bottom.domain, bottom.scaleType);
   if (left) left.scaleType = inferScaleTypeFromDomain(left.domain, left.scaleType);
-
-  const { hideRows, hideColumns } = grid;
-  const hasRows = !hideRows && (left || right);
-  const hasCols = !hideColumns && (bottom || top);
 
   const ref = useRef(null);
   const size = useSize(ref);
@@ -230,7 +224,6 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
         {...otherProps}
       >
         <LinearGradient id="cartesian-container" from={from} to={to} />
-        <LinearGradient id="cartesian-grid-background" from={gridFrom} to={gridTo} rotate={isHorizontal ? 0 : 270} />
 
         <rect
           x={0}
@@ -276,49 +269,20 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
 
         {isReady && (
           <Group>
-            <rect
-              x={lPos}
-              y={tPos}
-              width={xMax}
-              height={yMax}
-              fill="url(#cartesian-grid-background)"
+            <CartesianBaseGrid
+              left={lPos}
+              top={tPos}
+              scaleRow={allAxis.left?.scale ?? allAxis.right!.scale}
+              scaleCols={allAxis.bottom?.scale ?? allAxis.top!.scale}
+              maxWidth={xMax}
+              maxHeight={yMax}
+              hideRows={grid.hideRows}
+              hideColumns={grid.hideColumns}
+              tickRows={grid.tickRows}
+              tickColumns={grid.tickColumns}
+              background={grid.background}
+              otherProps={grid.otherProps}
             />
-
-            {hasRows && (
-              <GridRows
-                top={tPos}
-                left={lPos}
-                scale={allAxis.left?.scale ?? allAxis.right!.scale}
-                width={xMax}
-                numTicks={grid?.tickRows}
-                offset={gStyle.rows?.offset}
-                fill=""
-                stroke={themes[theme].grid.line}
-                strokeOpacity={gStyle.rows?.strokeOpacity}
-                strokeWidth={gStyle.rows?.strokeWidth}
-                strokeDasharray={gStyle.rows?.strokeDasharray}
-                lineStyle={gStyle.rows?.lineStyle}
-                {...grid.otherProps}
-              />
-            )}
-
-            {hasCols && (
-              <GridColumns
-                top={tPos}
-                left={lPos}
-                scale={allAxis.bottom?.scale ?? allAxis.top!.scale}
-                height={yMax}
-                numTicks={grid?.tickColumns}
-                offset={gStyle.columns?.offset}
-                fill=""
-                stroke={themes[theme].grid.line}
-                strokeOpacity={gStyle.columns?.strokeOpacity}
-                strokeWidth={gStyle.columns?.strokeWidth}
-                strokeDasharray={gStyle.columns?.strokeDasharray}
-                lineStyle={gStyle.columns?.lineStyle}
-                {...grid.otherProps}
-              />
-            )}
 
             {Object.values(allAxis)
               .filter((a): a is AxisType => !!a)
