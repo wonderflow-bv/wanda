@@ -77,7 +77,6 @@ export type AxisConfig = {
 }
 
 export type LabelProps = {
-  fill: string;
   fontFamily: string;
   fontSize: number;
   fontWeight: number;
@@ -88,13 +87,11 @@ export type TickLabelProps = Except<LabelProps, 'textAnchor'>;
 
 export type TickLineProps = {
   length: number;
-  stroke: string;
   strokeWidth: number;
   strokeLinecap: StrokeLinecap;
 }
 
 export type AxisLineProps = {
-  stroke: string;
   strokeWidth: number;
   strokeDasharray: string;
 }

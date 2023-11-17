@@ -15,7 +15,6 @@
  */
 
 import { AxisStyleConfig } from '../types/axis';
-import { themeLight } from './themes';
 
 export const axisStyleConfig: AxisStyleConfig = {
   formatting: {
@@ -23,26 +22,22 @@ export const axisStyleConfig: AxisStyleConfig = {
     omission: '...',
   },
   labelProps: {
-    fill: themeLight.axis.label,
     fontFamily: 'system-ui, sans-serif',
     fontSize: 12,
     fontWeight: 600,
     textAnchor: 'middle',
   },
   tickLabelProps: {
-    fill: themeLight.axis.tickLabel,
     fontFamily: 'system-ui, sans-serif',
     fontSize: 14,
     fontWeight: 400,
   },
   tickLineProps: {
     length: 4,
-    stroke: themeLight.axis.tick,
     strokeWidth: 1,
     strokeLinecap: 'round',
   },
   axisLineProps: {
-    stroke: themeLight.axis.line,
     strokeWidth: 1,
     strokeDasharray: '',
   },

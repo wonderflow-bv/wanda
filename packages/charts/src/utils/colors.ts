@@ -16,21 +16,6 @@
 
 import _ from 'lodash';
 
-import { cartesianStyleConfig, themeDark } from '../style-config';
-
-export const getCartesianStyleConfigFromTheme = (theme: 'light' | 'dark') => {
-  const cStyle = _.cloneDeep(cartesianStyleConfig);
-
-  if (theme === 'dark') {
-    cStyle.axis.axisLineProps.stroke = themeDark.axis.line;
-    cStyle.axis.labelProps.fill = themeDark.axis.label;
-    cStyle.axis.tickLabelProps.fill = themeDark.axis.tickLabel;
-    cStyle.axis.tickLineProps.stroke = themeDark.axis.tick;
-  }
-
-  return cStyle;
-};
-
 export const toHSLA = (hsl: string, alpha: number) => {
   const a = _.clamp(alpha, 0, 1);
   const hsla = hsl.replace('hsl(', 'hsla(').replace(')', ` / ${alpha})`);

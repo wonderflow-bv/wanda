@@ -24,7 +24,8 @@ import {
 } from '@visx/vendor/d3-scale';
 import { v4 as uuid } from 'uuid';
 
-import { useStyleConfigContext } from '../../providers';
+import { useStyleConfigContext, useThemeContext } from '../../providers';
+import { themes } from '../../style-config';
 import { AllAxisProperties, AxisConfig, AxisType } from '../../types/axis';
 import {
   handleTickFormat,
@@ -47,6 +48,7 @@ export const CartesianBaseAxis: React.FC<CartesianBaseAxisProps> = ({
   maxWidth: xMax,
   maxHeight: yMax,
 }: CartesianBaseAxisProps) => {
+  const theme = useThemeContext();
   const { viewport: vStyle, cartesian: cStyle } = useStyleConfigContext();
 
   return (
@@ -70,8 +72,12 @@ export const CartesianBaseAxis: React.FC<CartesianBaseAxisProps> = ({
                 hasVerticalTickLabel(xMax, a.orientation, a, vStyle),
                 a,
               ),
+              fill: themes[theme].axis.tickLabel,
             })}
-            tickLineProps={axisConfig.style.tickLineProps}
+            tickLineProps={{
+              ...axisConfig.style.tickLineProps,
+              stroke: themes[theme].axis.tick,
+            }}
             label={a.label}
             labelOffset={
                 axisConfig[a.orientation].labelOffset
@@ -80,9 +86,10 @@ export const CartesianBaseAxis: React.FC<CartesianBaseAxisProps> = ({
             labelProps={{
               ...axisConfig.style.labelProps,
               ...axisConfig[a.orientation].labelProps,
+              fill: themes[theme].axis.label,
             }}
             tickFormat={handleTickFormat(a) as TickFormatter<string | NumberValue | Date> | undefined}
-            stroke={axisConfig.style.axisLineProps.stroke}
+            stroke={themes[theme].axis.line}
             strokeDasharray={axisConfig.style.axisLineProps.strokeDasharray}
             strokeWidth={axisConfig.style.axisLineProps.strokeWidth}
             hideAxisLine={a.hideAxisLine}

@@ -41,7 +41,6 @@ import {
   handleVerticalTickLabelOffset,
   inferScaleTypeFromDomain,
 } from '../../utils/axis';
-import { getCartesianStyleConfigFromTheme } from '../../utils/colors';
 import { Headings, HeadingsProps } from '../headings';
 import { Lines } from '../shapes';
 import styles from './cartesian-base.module.css';
@@ -100,17 +99,11 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   otherProps,
 }: CartesianBaseProps) => {
   const theme = useThemeContext();
-  const { legend: lStyle } = useStyleConfigContext();
+  const { legend: lStyle, cartesian: cStyle } = useStyleConfigContext();
   const { metadata } = useDataContext();
 
-  const cartesianConfig = useMemo(() => {
-    const cConfig = getCartesianStyleConfigFromTheme(theme);
-    return _.merge(cConfig, styleConfig);
-  }, [styleConfig, theme]);
-
-  const {
-    axis: aStyle,
-  } = cartesianConfig;
+  const cartesianConfig = _.merge(cStyle, styleConfig);
+  const aStyle = cartesianConfig.axis;
 
   const { from, to } = _.merge(themes[theme].background, background);
 
@@ -132,7 +125,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   const w = size ? size.width : width;
   const h = size ? size.height : height;
 
-  const legendH = hideLegend ? 0 : (sizeLegend?.height ?? 0);
+  const legendHeight = hideLegend ? 0 : (sizeLegend?.height ?? 0);
 
   const dynamicWidth = preventResponsive ? width : w;
   const dynamicHeight = preventResponsive ? height : h;
@@ -141,18 +134,12 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
     '--static-width': `${dynamicWidth}px`,
     '--static-height': `${dynamicHeight}px`,
     '--legend-width': `calc(100% - ${margin.left + margin.right}px)`,
-    '--legend-top': `calc(100% - ${legendH + margin.bottom}px)`,
+    '--legend-top': `calc(100% - ${legendHeight + margin.bottom}px)`,
     '--legend-left': `${margin.left}px`,
     '--legend-padding': lStyle.padding,
   };
 
-  const axisConfig = useMemo(() => computeAxisConfig({
-    top,
-    right,
-    bottom,
-    left,
-  },
-  aStyle), [aStyle, bottom, left, right, top]);
+  const axisConfig = useMemo(() => computeAxisConfig(axis, aStyle), [aStyle, axis]);
 
   const {
     leftAxisOffset: lOff,
@@ -161,18 +148,22 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
     horizontalAxisOffset: hOff,
   } = axisConfig.offset;
 
-  const heading = title ? hStyle.height : 0;
+  const headingHeight = title ? hStyle.height : 0;
 
   const mr = margin.right * (right ? 1 : 2);
   const ml = margin.left * (left ? 1 : 2);
 
   const xMax = dynamicWidth - ml - mr - vOff;
 
-  const topTickLabelOffset = top ? handleVerticalTickLabelOffset(xMax, 'top', top, cartesianConfig) : 0;
-  const bottomTickLabelOffset = bottom ? handleVerticalTickLabelOffset(xMax, 'bottom', bottom, cartesianConfig) : 0;
+  const topTickLabelOffset = top
+    ? handleVerticalTickLabelOffset(xMax, 'top', top, cartesianConfig)
+    : 0;
+  const bottomTickLabelOffset = bottom
+    ? handleVerticalTickLabelOffset(xMax, 'bottom', bottom, cartesianConfig)
+    : 0;
 
-  const mt = margin.top * (top ? 1 : 2) + heading + topTickLabelOffset;
-  const mb = margin.bottom * (bottom ? 1 : 2) + legendH + bottomTickLabelOffset;
+  const mt = margin.top * (top ? 1 : 2) + headingHeight + topTickLabelOffset;
+  const mb = margin.bottom * (bottom ? 1 : 2) + legendHeight + bottomTickLabelOffset;
 
   const yMax = dynamicHeight - mt - mb - hOff;
 
@@ -211,6 +202,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
         viewBox={`0 0 ${dynamicWidth} ${dynamicHeight}`}
         {...otherProps}
       >
+
         <LinearGradient id="cartesian-container" from={from} to={to} />
 
         <rect
@@ -253,6 +245,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
             </svg>
           </Group>
         )}
+
         {isEmpty && emptyState}
 
         {isReady && (
