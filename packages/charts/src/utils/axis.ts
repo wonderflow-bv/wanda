@@ -425,12 +425,11 @@ export const handleTickNumber = (
 
 export const hasVerticalTickLabel = (
   width: number,
-  orientation: AxisOrientation,
   axis: AxisProps,
   config: ViewportStyleConfig,
 ) => {
   const {
-    domain, scaleType, numTicks,
+    domain, scaleType, numTicks, orientation,
   } = axis;
 
   const isLabel = scaleType === 'label';
@@ -489,10 +488,13 @@ export const handleVerticalTickLabelTransform = (
 
 export const handleVerticalTickLabelOffset = (
   width: number,
-  orientation: AxisOrientation,
-  axis: AxisProps,
   config: CartesianStyleConfig,
+  axis?: AxisProps,
 ) => {
+  let res = 0;
+
+  if (!axis) return res;
+
   const { viewport, axis: aConfig } = config;
   const {
     domain, tickFormat, scaleType,
@@ -500,9 +502,7 @@ export const handleVerticalTickLabelOffset = (
   const { maxCharactersLength: l, omission: o } = aConfig.formatting;
   const { labelCharExtimatedWidth: w } = aConfig.spacing;
 
-  let res = 0;
-
-  if (hasVerticalTickLabel(width, orientation, axis, viewport)) {
+  if (hasVerticalTickLabel(width, axis, viewport)) {
     const num = getMaxCharactersNum(domain, tickFormat);
     if (scaleType === 'label') res = _.clamp(num, 0, l - o.length);
     else if (scaleType === 'linear') res = num;

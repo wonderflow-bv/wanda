@@ -155,12 +155,8 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
 
   const xMax = dynamicWidth - ml - mr - vOff;
 
-  const topTickLabelOffset = top
-    ? handleVerticalTickLabelOffset(xMax, 'top', top, cartesianConfig)
-    : 0;
-  const bottomTickLabelOffset = bottom
-    ? handleVerticalTickLabelOffset(xMax, 'bottom', bottom, cartesianConfig)
-    : 0;
+  const topTickLabelOffset = handleVerticalTickLabelOffset(xMax, cartesianConfig, top);
+  const bottomTickLabelOffset = handleVerticalTickLabelOffset(xMax, cartesianConfig, bottom);
 
   const mt = margin.top * (top ? 1 : 2) + headingHeight + topTickLabelOffset;
   const mb = margin.bottom * (bottom ? 1 : 2) + legendHeight + bottomTickLabelOffset;

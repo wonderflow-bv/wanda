@@ -71,7 +71,7 @@ export const CartesianBaseAxis: React.FC<CartesianBaseAxisProps> = ({
               ...axisConfig[a.orientation].tickLabelProps,
               ...handleVerticalTickLabelTransform(
                 v,
-                hasVerticalTickLabel(xMax, a.orientation, a, vStyle),
+                hasVerticalTickLabel(xMax, a, vStyle),
                 a,
               ),
               fill: themes[theme].axis.tickLabel,
@@ -83,7 +83,7 @@ export const CartesianBaseAxis: React.FC<CartesianBaseAxisProps> = ({
             label={a.label}
             labelOffset={
                 axisConfig[a.orientation].labelOffset
-                + handleVerticalTickLabelOffset(xMax, a.orientation, a, cStyle)
+                + handleVerticalTickLabelOffset(xMax, cStyle, a)
               }
             labelProps={{
               ...axisConfig.style.labelProps,
