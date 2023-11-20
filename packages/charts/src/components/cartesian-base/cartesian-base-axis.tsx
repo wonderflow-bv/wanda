@@ -38,18 +38,20 @@ import {
 export type CartesianBaseAxisProps = {
   axis: AllAxisProperties;
   axisConfig: AxisConfig;
-  maxWidth: number;
-  maxHeight: number;
+  dimension: {
+    maxWidth: number;
+    maxHeight: number;
+  };
 }
 
 export const CartesianBaseAxis: React.FC<CartesianBaseAxisProps> = ({
   axis,
   axisConfig,
-  maxWidth: xMax,
-  maxHeight: yMax,
+  dimension,
 }: CartesianBaseAxisProps) => {
   const theme = useThemeContext();
   const { viewport: vStyle, cartesian: cStyle } = useStyleConfigContext();
+  const { maxWidth: xMax, maxHeight: yMax } = dimension;
 
   return (
     <Group>

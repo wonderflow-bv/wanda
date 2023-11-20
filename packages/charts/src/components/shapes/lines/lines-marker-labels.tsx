@@ -36,19 +36,15 @@ export const LinesMarkerLabels: React.FC = () => {
   const theme = useThemeContext();
   const { data, metadata } = useDataContext();
   const { isHorizontal } = useLayoutContext();
-  const { axis, maxHeight, maxWidth } = useCartesianContext();
-  const dimension = { maxWidth, maxHeight };
+  const { axis, dimension } = useCartesianContext();
 
-  const {
-    bottom, left, right, top,
-  } = axis;
   const {
     index, showMarkerLabel, series, overlay,
   } = metadata!;
 
-  const indexAxis = isHorizontal ? bottom! : left!;
-  const seriesAxis = isHorizontal ? left! : bottom!;
-  const overlayAxis = isHorizontal ? right : top;
+  const indexAxis = isHorizontal ? axis!.bottom : axis!.left;
+  const seriesAxis = isHorizontal ? axis!.left : axis!.bottom;
+  const overlayAxis = isHorizontal ? axis?.right : axis?.top;
 
   const hasOverlay = Boolean(overlayAxis && overlay.dataKey);
 
@@ -61,9 +57,9 @@ export const LinesMarkerLabels: React.FC = () => {
     isHorizontal: boolean,
   ) => getCoordinates({
     datum,
-    indexAxis,
+    indexAxis: indexAxis!,
     indexDataKey: index,
-    otherAxis: seriesAxis,
+    otherAxis: seriesAxis!,
     otherDataKey: dataKey,
     isHorizontal,
   });
@@ -74,7 +70,7 @@ export const LinesMarkerLabels: React.FC = () => {
     isHorizontal: boolean,
   ) => getCoordinates({
     datum,
-    indexAxis,
+    indexAxis: indexAxis!,
     indexDataKey: index,
     otherAxis: overlayAxis!,
     otherDataKey: dataKey,

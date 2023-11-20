@@ -578,54 +578,49 @@ export const computeAxisProperties = ({
   return undefined;
 };
 
-export const computeAllAxisProperties = ({
-  top,
-  right,
-  bottom,
-  left,
-  maxRangeX,
-  maxRangeY,
-  positionTop,
-  positionRight,
-  positionBottom,
-  positionLeft,
-}: {
-  top?: AxisProps;
-  right?: AxisProps;
-  bottom?: AxisProps;
-  left?: AxisProps;
-  maxRangeX: number;
-  maxRangeY: number;
-  positionTop: number;
-  positionRight: number;
-  positionBottom: number;
-  positionLeft: number;
-}) => {
+export const computeAllAxisProperties = (
+  axis: {
+    top?: AxisProps;
+    right?: AxisProps;
+    bottom?: AxisProps;
+    left?: AxisProps;
+  },
+  dimension: {
+    maxWidth: number;
+    maxHeight: number;
+  },
+  position: {
+    top: number;
+    right: number;
+    bottom: number;
+    left: number;
+  },
+) => {
   const shared = {
-    maxRangeX,
-    maxRangeY,
-    positionTop,
-    positionRight,
-    positionBottom,
-    positionLeft,
+    maxRangeX: dimension.maxWidth,
+    maxRangeY: dimension.maxHeight,
+    positionTop: position.top,
+    positionRight: position.right,
+    positionBottom: position.bottom,
+    positionLeft: position.left,
   };
   const t = computeAxisProperties({
-    axis: top,
+    axis: axis.top,
     orientation: 'top',
     ...shared,
   });
   const r = computeAxisProperties({
-    axis: right,
+    axis: axis.right,
     orientation: 'right',
     ...shared,
   });
   const b = computeAxisProperties({
-    axis: bottom,
+    axis: axis.bottom,
     orientation: 'bottom',
     ...shared,
   });
   const l = computeAxisProperties({
-    axis: left,
+    axis: axis.left,
     orientation: 'left',
     ...shared,
   });

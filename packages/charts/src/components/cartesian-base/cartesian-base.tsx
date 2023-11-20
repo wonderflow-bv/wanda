@@ -99,22 +99,12 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   otherProps,
 }: CartesianBaseProps) => {
   const theme = useThemeContext();
-  const { legend: lStyle, cartesian: cStyle } = useStyleConfigContext();
+  const { cartesian: cStyle } = useStyleConfigContext();
   const { metadata } = useDataContext();
 
   const cartesianConfig = _.merge(cStyle, styleConfig);
-  const aStyle = cartesianConfig.axis;
-
+  const { axis: aStyle, legend: lStyle } = cartesianConfig;
   const { from, to } = _.merge(themes[theme].background, background);
-
-  const {
-    top, right, bottom, left,
-  } = axis;
-
-  if (top) top.scaleType = inferScaleTypeFromDomain(top.domain, top.scaleType);
-  if (right) right.scaleType = inferScaleTypeFromDomain(right.domain, right.scaleType);
-  if (bottom) bottom.scaleType = inferScaleTypeFromDomain(bottom.domain, bottom.scaleType);
-  if (left) left.scaleType = inferScaleTypeFromDomain(left.domain, left.scaleType);
 
   const ref = useRef(null);
   const size = useSize(ref);
@@ -122,10 +112,11 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   const refLegend = useRef(null);
   const sizeLegend = useSize(refLegend);
 
+  const legendHeight = hideLegend ? 0 : (sizeLegend?.height ?? 0);
+  const headingHeight = title ? hStyle.height : 0;
+
   const w = size ? size.width : width;
   const h = size ? size.height : height;
-
-  const legendHeight = hideLegend ? 0 : (sizeLegend?.height ?? 0);
 
   const dynamicWidth = preventResponsive ? width : w;
   const dynamicHeight = preventResponsive ? height : h;
@@ -139,6 +130,17 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
     '--legend-padding': lStyle.padding,
   };
 
+  const {
+    top, right, bottom, left,
+  } = axis;
+
+  Object.values(axis)
+    .filter(a => !!a)
+    .forEach((a) => {
+      // eslint-disable-next-line no-param-reassign
+      a.scaleType = inferScaleTypeFromDomain(a.domain, a.scaleType);
+    });
+
   const axisConfig = useMemo(() => computeAxisConfig(axis, aStyle), [aStyle, axis]);
 
   const {
@@ -147,8 +149,6 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
     verticalAxisOffset: vOff,
     horizontalAxisOffset: hOff,
   } = axisConfig.offset;
-
-  const headingHeight = title ? hStyle.height : 0;
 
   const mr = margin.right * (right ? 1 : 2);
   const ml = margin.left * (left ? 1 : 2);
@@ -167,23 +167,19 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
 
   const yMax = dynamicHeight - mt - mb - hOff;
 
-  const tPos = mt + tOff;
-  const rPos = ml + lOff + xMax;
-  const bPos = mt + tOff + yMax;
-  const lPos = ml + lOff;
+  const dimension = {
+    maxWidth: xMax,
+    maxHeight: yMax,
+  };
 
-  const allAxis = computeAllAxisProperties({
-    top,
-    right,
-    bottom,
-    left,
-    maxRangeX: xMax,
-    maxRangeY: yMax,
-    positionTop: tPos,
-    positionRight: rPos,
-    positionBottom: bPos,
-    positionLeft: lPos,
-  });
+  const position = {
+    top: mt + tOff,
+    right: ml + lOff + xMax,
+    bottom: mt + tOff + yMax,
+    left: ml + lOff,
+  };
+
+  const allAxis = computeAllAxisProperties(axis, dimension, position);
 
   const isEmpty = !isLoading && !!emptyState;
   const isReady = !isLoading && !emptyState;
@@ -213,7 +209,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
           fill="url(#cartesian-container)"
           rx={0}
           strokeWidth={0}
-          stroke=""
+          stroke="none"
         />
 
         <Headings
@@ -251,12 +247,10 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
         {isReady && (
           <Group>
             <CartesianBaseGrid
-              left={lPos}
-              top={tPos}
+              position={position}
+              dimension={dimension}
               scaleRow={allAxis.left?.scale ?? allAxis.right!.scale}
               scaleCols={allAxis.bottom?.scale ?? allAxis.top!.scale}
-              maxWidth={xMax}
-              maxHeight={yMax}
               hideRows={grid.hideRows}
               hideColumns={grid.hideColumns}
               tickRows={grid.tickRows}
@@ -266,21 +260,14 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
             />
 
             <CartesianBaseAxis
-              maxWidth={xMax}
-              maxHeight={yMax}
+              dimension={dimension}
               axis={allAxis}
               axisConfig={axisConfig}
             />
 
             <CartesianProvider
-              position={{
-                top: tPos,
-                right: rPos,
-                bottom: bPos,
-                left: lPos,
-              }}
-              maxWidth={xMax}
-              maxHeight={yMax}
+              position={position}
+              dimension={dimension}
               axis={allAxis}
             >
               {metadata?.type === Charts.LINE_CHART && <Lines />}

@@ -48,7 +48,8 @@ export const LinesTooltip: React.FC = () => {
   const { lines: defaultStyle } = useStyleConfigContext();
   const { data, metadata } = useDataContext();
   const { isHorizontal } = useLayoutContext();
-  const { axis, maxHeight: yMax, maxWidth: xMax } = useCartesianContext();
+  const { axis, dimension } = useCartesianContext();
+  const { maxHeight: yMax, maxWidth: xMax } = dimension;
 
   const {
     top, right, bottom, left,
@@ -57,8 +58,8 @@ export const LinesTooltip: React.FC = () => {
     index, tooltip, series, overlay,
   } = metadata!;
 
-  const indexAxis = isHorizontal ? bottom! : left!;
-  const seriesAxis = isHorizontal ? left! : bottom!;
+  const indexAxis = isHorizontal ? bottom : left;
+  const seriesAxis = isHorizontal ? left : bottom;
   const overlayAxis = isHorizontal ? right : top;
 
   const hasOverlay = Boolean(overlayAxis && overlay.dataKey);

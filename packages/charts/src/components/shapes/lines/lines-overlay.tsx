@@ -40,15 +40,12 @@ export const LinesOverlay: React.FC = () => {
   const { axis } = useCartesianContext();
 
   const {
-    top, right, bottom, left,
-  } = axis;
-  const {
     index, renderAs, showMarker, showMarkerLabel, overlay,
     hideMissingDataConnection,
   } = metadata!;
 
-  const indexAxis = isHorizontal ? bottom! : left!;
-  const overlayAxis = isHorizontal ? right : top;
+  const indexAxis = isHorizontal ? axis!.bottom! : axis!.left!;
+  const overlayAxis = isHorizontal ? axis?.right : axis?.top;
 
   const hasOverlay = Boolean(overlayAxis && overlay.dataKey);
 
