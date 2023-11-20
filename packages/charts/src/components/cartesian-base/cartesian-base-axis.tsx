@@ -44,6 +44,8 @@ export type CartesianBaseAxisProps = {
   };
 }
 
+export type TickFormat = TickFormatter<string | NumberValue | Date> | undefined;
+
 export const CartesianBaseAxis: React.FC<CartesianBaseAxisProps> = ({
   axis,
   axisConfig,
@@ -57,49 +59,52 @@ export const CartesianBaseAxis: React.FC<CartesianBaseAxisProps> = ({
     <Group>
       {Object.values(axis)
         .filter((a): a is AxisType => !!a)
-        .map(a => (
-          <Axis
-            key={uuid()}
-            orientation={a.orientation}
-            scale={a.scale}
-            top={a.top}
-            left={a.left}
-            numTicks={handleTickNumber(xMax, yMax, a, vStyle)}
-            tickLength={axisConfig.style.tickLineProps.length}
-            tickLabelProps={v => ({
-              ...axisConfig.style.tickLabelProps,
-              ...axisConfig[a.orientation].tickLabelProps,
-              ...handleVerticalTickLabelTransform(
-                v,
-                hasVerticalTickLabel(xMax, a, vStyle),
-                a,
-              ),
-              fill: themes[theme].axis.tickLabel,
-            })}
-            tickLineProps={{
-              ...axisConfig.style.tickLineProps,
-              stroke: themes[theme].axis.tick,
-            }}
-            label={a.label}
-            labelOffset={
-                axisConfig[a.orientation].labelOffset
-                + handleVerticalTickLabelOffset(xMax, cStyle, a)
-              }
-            labelProps={{
-              ...axisConfig.style.labelProps,
-              ...axisConfig[a.orientation].labelProps,
-              fill: themes[theme].axis.label,
-            }}
-            tickFormat={handleTickFormat(a) as TickFormatter<string | NumberValue | Date> | undefined}
-            stroke={themes[theme].axis.line}
-            strokeDasharray={axisConfig.style.axisLineProps.strokeDasharray}
-            strokeWidth={axisConfig.style.axisLineProps.strokeWidth}
-            hideAxisLine={a.hideAxisLine}
-            hideTicks={a.hideTicks}
-            hideZero={a.hideZero}
-            {...a.otherProps}
-          />
-        ))}
+        .map((a) => {
+          const orientation = axisConfig[a.orientation];
+
+          const {
+            tickLabel, tick, label, line,
+          } = themes[theme].axis;
+
+          const {
+            tickLabelProps, tickLineProps, labelProps, axisLineProps,
+          } = axisConfig.style;
+
+          const isVertical = hasVerticalTickLabel(xMax, a, vStyle);
+          const numTicks = handleTickNumber(xMax, yMax, a, vStyle);
+          const labelOffset = orientation.labelOffset + handleVerticalTickLabelOffset(xMax, cStyle, a);
+          const tickFormat = handleTickFormat(a) as TickFormat;
+
+          return (
+            <Axis
+              key={uuid()}
+              numTicks={numTicks}
+              tickLength={tickLineProps.length}
+              tickLabelProps={v => ({
+                ...tickLabelProps,
+                ...orientation.tickLabelProps,
+                ...handleVerticalTickLabelTransform(v, isVertical, a),
+                fill: tickLabel,
+              })}
+              tickLineProps={{
+                ...tickLineProps,
+                stroke: tick,
+              }}
+              label={a.label}
+              labelOffset={labelOffset}
+              labelProps={{
+                ...labelProps,
+                ...orientation.labelProps,
+                fill: label,
+              }}
+              tickFormat={tickFormat}
+              stroke={line}
+              strokeDasharray={axisLineProps.strokeDasharray}
+              strokeWidth={axisLineProps.strokeWidth}
+              {...a}
+            />
+          );
+        })}
     </Group>
   );
 };
