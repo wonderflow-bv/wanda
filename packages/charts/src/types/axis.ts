@@ -25,7 +25,7 @@ export type TextAnchor = 'end' | 'middle' | 'start';
 export type StrokeLinecap = 'butt' | 'round' | 'square'
 
 export type SingleAxisOffsetInput = AllAxisOffsetInput & { orientation: AxisOrientation }
-export type AllAxisOffsetInput = Pick<AxisProps, 'domain' | 'label' | 'tickFormat' | 'hideAxisLine' | 'hideTicks' | 'hideTickLabel'>
+export type AllAxisOffsetInput = Pick<AxisProps, 'domain' | 'label' | 'tickFormat' | 'hideAxisLine' | 'hideTicks' | 'hideTickLabel' | 'orientation'>
 
 export type AllAxisInput = {
   top?: AllAxisOffsetInput;

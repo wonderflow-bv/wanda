@@ -14,8 +14,6 @@
 * limitations under the License.
 */
 
-/* eslint-disable @typescript-eslint/naming-convention */
-
 import {
   scaleBand, scaleLinear, scaleUtc,
 } from '@visx/scale';
@@ -235,10 +233,10 @@ export const computeAllAxisOffset = (
     top, right, bottom, left,
   } = axis;
 
-  const t = top && computeSingleAxisOffset({ ...top, orientation: 'top' }, config);
-  const r = right && computeSingleAxisOffset({ ...right, orientation: 'right' }, config);
-  const b = bottom && computeSingleAxisOffset({ ...bottom, orientation: 'bottom' }, config);
-  const l = left && computeSingleAxisOffset({ ...left, orientation: 'left' }, config);
+  const t = top && computeSingleAxisOffset(top, config);
+  const r = right && computeSingleAxisOffset(right, config);
+  const b = bottom && computeSingleAxisOffset(bottom, config);
+  const l = left && computeSingleAxisOffset(left, config);
 
   const to = t ? t.offset : 0;
   const ro = r ? r.offset : 0;
