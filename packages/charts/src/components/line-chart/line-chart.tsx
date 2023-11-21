@@ -23,6 +23,7 @@ import {
 } from '../../providers';
 import { defaultLineChartPalette } from '../../style-config';
 import {
+  AxisOrientation,
   AxisProps,
   CartesianChartLayout, Charts, Data, ThemeVariants,
 } from '../../types';
@@ -87,24 +88,18 @@ export const LineChart: React.FC<LineChartProps> = ({
   const s = useMemo(() => handleDomainAndScaleType(data, series), [data, series]);
   const o = useMemo(() => (overlay ? handleDomainAndScaleType(data, overlay) : undefined), [data, overlay]);
 
-  const axis: Record<
-  CartesianChartLayout,
-  {
-    top?: AxisProps;
-    right?: AxisProps;
-    bottom?: AxisProps;
-    left?: AxisProps;
-  }
-  > = useMemo(() => ({
+  const axis: Record<CartesianChartLayout, Record<AxisOrientation, AxisProps | undefined>> = useMemo(() => ({
     vertical: {
-      left: { ...i, orientation: 'left' },
-      bottom: { ...s, orientation: 'bottom' },
-      top: o ? { ...o, orientation: 'top' } : undefined,
+      left: i,
+      bottom: s,
+      top: o,
+      right: undefined,
     },
     horizontal: {
-      bottom: { ...i, orientation: 'bottom' },
-      left: { ...s, orientation: 'left' },
-      right: o ? { ...o, orientation: 'right' } : undefined,
+      bottom: i,
+      left: s,
+      right: o,
+      top: undefined,
     },
   }), [i, o, s]);
 

@@ -28,6 +28,7 @@ import { CartesianProvider } from '../../providers/cartesian';
 import { useDataContext } from '../../providers/data';
 import { useThemeContext } from '../../providers/theme';
 import { headingsStyleConfig as hStyle, themes } from '../../style-config';
+import { AxisOrientation } from '../../types';
 import {
   AxisProps, CartesianStyleConfig, GridProps, MarginProps,
 } from '../../types/cartesian';
@@ -38,8 +39,8 @@ import {
 } from '../../types/main';
 import {
   computeAllAxisProperties, computeAxisConfig,
+  handleOrientation,
   handleVerticalTickLabelOffset,
-  inferScaleTypeFromDomain,
 } from '../../utils/axis';
 import { Headings, HeadingsProps } from '../headings';
 import { Lines } from '../shapes';
@@ -60,12 +61,7 @@ export type CartesianBaseProps = {
   background?: Background;
   margin?: MarginProps;
   grid?: GridProps;
-  axis: {
-    top?: AxisProps;
-    right?: AxisProps;
-    bottom?: AxisProps;
-    left?: AxisProps;
-  };
+  axis: Record<AxisOrientation, AxisProps | undefined>;
   hideLegend?: boolean;
   customLegend?: React.ReactNode;
   styleConfig?: DeepPartial<CartesianStyleConfig>;
@@ -130,18 +126,12 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
     '--legend-padding': lStyle.padding,
   };
 
+  const orientedAxis = handleOrientation(axis);
   const {
     top, right, bottom, left,
-  } = axis;
+  } = orientedAxis;
 
-  Object.values(axis)
-    .filter(a => !!a)
-    .forEach((a) => {
-      // eslint-disable-next-line no-param-reassign
-      a.scaleType = inferScaleTypeFromDomain(a.domain, a.scaleType);
-    });
-
-  const axisConfig = useMemo(() => computeAxisConfig(axis, aStyle), [aStyle, axis]);
+  const axisConfig = useMemo(() => computeAxisConfig(orientedAxis, aStyle), [aStyle, orientedAxis]);
 
   const {
     leftAxisOffset: lOff,

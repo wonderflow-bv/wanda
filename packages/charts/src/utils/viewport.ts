@@ -16,9 +16,9 @@
 
 import _ from 'lodash';
 
-import { AxisType, ViewportStyleConfig } from '../types';
+import { AxisProperties, ViewportStyleConfig } from '../types';
 
-export const manageViewport = (width: number, height: number, axis: AxisType, config: ViewportStyleConfig) => {
+export const manageViewport = (width: number, height: number, axis: AxisProperties, config: ViewportStyleConfig) => {
   const {
     orientation, numTicks, scaleType, domain,
   } = axis;

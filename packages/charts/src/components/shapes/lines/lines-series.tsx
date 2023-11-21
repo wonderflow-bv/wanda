@@ -39,13 +39,14 @@ export const LinesSeries: React.FC = () => {
   const { isHorizontal } = useLayoutContext();
   const { axis } = useCartesianContext();
 
+  const { left, bottom } = axis!;
   const {
     index, renderAs, showMarker, showMarkerLabel,
     series, hideMissingDataConnection,
   } = metadata!;
 
-  const indexAxis = isHorizontal ? axis!.bottom! : axis!.left;
-  const seriesAxis = isHorizontal ? axis!.left : axis!.bottom;
+  const indexAxis = isHorizontal ? bottom : left;
+  const seriesAxis = isHorizontal ? left : bottom;
 
   const renderer = useMemo(() => getLinesRenderer(renderAs, isHorizontal), [isHorizontal, renderAs]);
 

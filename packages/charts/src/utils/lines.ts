@@ -22,11 +22,11 @@ import { ScaleLinear, ScaleTime } from '@visx/vendor/d3-scale';
 import _ from 'lodash';
 
 import {
-  AxisType, Data, LineChartRenderType, Theme,
+  AxisProperties, Data, LineChartRenderType, Theme,
 } from '../types';
 import { getPrimitiveFromObjectByPath } from './data';
 
-export const accessor = (axis: AxisType, dataKey: string, datum?: Record<string, unknown>) => {
+export const accessor = (axis: AxisProperties, dataKey: string, datum?: Record<string, unknown>) => {
   if (axis.scale && datum) {
     const d = getPrimitiveFromObjectByPath(datum, dataKey);
     if (!_.isNil(d)) {
@@ -38,7 +38,7 @@ export const accessor = (axis: AxisType, dataKey: string, datum?: Record<string,
   return undefined;
 };
 
-export const accessorInvert = (axis?: AxisType, value?: number) => {
+export const accessorInvert = (axis?: AxisProperties, value?: number) => {
   let res;
 
   if (axis && value) {
@@ -82,9 +82,9 @@ export const getCoordinates = (
     isHorizontal,
   }: {
     datum: Record<string, any>;
-    indexAxis: AxisType;
+    indexAxis: AxisProperties;
     indexDataKey: string;
-    otherAxis: AxisType;
+    otherAxis: AxisProperties;
     otherDataKey: string;
     isHorizontal: boolean;
   },

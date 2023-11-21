@@ -27,16 +27,15 @@ import {
   AxisProps, CartesianStyleConfig, ScaleType, ViewportStyleConfig,
 } from '../types';
 import {
-  AllAxisElementsValues,
-  AllAxisInput,
-  AllAxisProperties,
   AxisConfig,
+  AxisElementsValues,
   AxisOffsetConfig,
+  AxisOffsetInput,
   AxisOrientation,
-  AxisType,
+  AxisProperties,
+  AxisSystemElementsValues,
+  AxisSystemProperties,
   HorizontalAxisConfig,
-  SingleAxisElementsValues,
-  SingleAxisOffsetInput,
   VerticalAxisConfig,
 } from '../types/axis';
 import { truncate } from './format';
@@ -127,7 +126,7 @@ export const getLabelOffset = ({
 };
 
 export const computeSingleAxisOffset = (
-  axis: SingleAxisOffsetInput,
+  axis: AxisOffsetInput,
   config = axisStyleConfig,
 ) => {
   const {
@@ -142,7 +141,7 @@ export const computeSingleAxisOffset = (
 
   const hasValues = !!domain?.length;
 
-  let res: SingleAxisElementsValues = {
+  let res: AxisElementsValues = {
     orientation: 'left',
     offset: 0,
     tickLabelMaxChar: 0,
@@ -226,7 +225,7 @@ export const computeSingleAxisOffset = (
 };
 
 export const computeAllAxisOffset = (
-  axis: AllAxisInput,
+  axis: Record<AxisOrientation, AxisOffsetInput | undefined>,
   config = axisStyleConfig,
 ) => {
   const {
@@ -252,7 +251,7 @@ export const computeAllAxisOffset = (
     horizontalAxisOffset: to + bo,
   };
 
-  const a: AllAxisElementsValues = {
+  const a: AxisSystemElementsValues = {
     top: t,
     right: r,
     bottom: b,
@@ -266,12 +265,7 @@ export const computeAllAxisOffset = (
 };
 
 export const computeAxisConfig = (
-  axis: {
-    top?: AxisProps;
-    right?: AxisProps;
-    bottom?: AxisProps;
-    left?: AxisProps;
-  },
+  axis: Record<AxisOrientation, AxisOffsetInput | undefined>,
   config = axisStyleConfig,
 ) => {
   const { offset, axis: ao } = computeAllAxisOffset(axis, config);
@@ -329,7 +323,7 @@ export const inferScaleTypeFromDomain = (
   return 'label';
 };
 
-export const scaleDomainToAxis = (axis: Pick<AxisProps, 'domain' | 'range' | 'scaleType' | 'clamp' | 'nice' | 'round' | 'paddingInner' | 'paddingOuter' >) => {
+export const scaleDomainToAxis = (axis: AxisProps) => {
   const {
     domain,
     range,
@@ -380,14 +374,13 @@ export const scaleDomainToAxis = (axis: Pick<AxisProps, 'domain' | 'range' | 'sc
   return undefined;
 };
 
-export const handleTickFormat = (axis: AxisType) => {
+export const handleTickFormat = (axis: AxisProperties) => {
   const {
     tickFormat, hideTickLabel, scaleType, scale,
   } = axis;
 
   const isLabel = scaleType === 'label';
   const isTime = scaleType === 'time';
-
   const doTruncate = (value: string | Date | NumberValue | undefined) => (isLabel ? truncate(value as string) : value);
 
   if (hideTickLabel) {
@@ -419,7 +412,7 @@ export const handleTickFormat = (axis: AxisType) => {
 export const handleTickNumber = (
   width: number,
   height: number,
-  axis: AxisType,
+  axis: AxisProperties,
   config: ViewportStyleConfig,
 ) => manageViewport(width, height, axis, config).numTicks;
 
@@ -457,7 +450,7 @@ export const hasVerticalTickLabel = (
 export const handleVerticalTickLabelTransform = (
   t: any,
   isVertical: boolean,
-  axis: AxisType,
+  axis: AxisProperties,
 ) => {
   const { orientation, scale } = axis;
 
@@ -530,7 +523,7 @@ export const computeAxisProperties = ({
   positionRight: number;
   positionBottom: number;
   positionLeft: number;
-}): AxisType | undefined => {
+}): AxisProperties | undefined => {
   if (axis) {
     if (orientation === 'top') {
       return {
@@ -623,7 +616,7 @@ export const computeAllAxisProperties = (
     ...shared,
   });
 
-  const a: AllAxisProperties = {
+  const a: AxisSystemProperties = {
     top: t,
     right: r,
     bottom: b,
@@ -631,4 +624,32 @@ export const computeAllAxisProperties = (
   };
 
   return a;
+};
+
+export const handleOrientation = (axis: Record<AxisOrientation, AxisProps | undefined>) => {
+  const {
+    top, right, bottom, left,
+  } = axis;
+
+  if (top) {
+    top.orientation = 'top';
+    top.scaleType = inferScaleTypeFromDomain(top.domain, top.scaleType);
+  }
+
+  if (right) {
+    right.orientation = 'right';
+    right.scaleType = inferScaleTypeFromDomain(right.domain, right.scaleType);
+  }
+
+  if (bottom) {
+    bottom.orientation = 'bottom';
+    bottom.scaleType = inferScaleTypeFromDomain(bottom.domain, bottom.scaleType);
+  }
+
+  if (left) {
+    left.orientation = 'left';
+    left.scaleType = inferScaleTypeFromDomain(left.domain, left.scaleType);
+  }
+
+  return axis as Record<AxisOrientation, AxisOffsetInput | undefined>;
 };

@@ -14,14 +14,10 @@
  * limitations under the License.
  */
 
-import { Background, LinearGradientStyleConfig } from '../types';
+import { Background } from '../types';
 import { themeLight } from './themes';
 
 export const backgroundStyle: Background = {
   from: themeLight.background.from,
   to: themeLight.background.to,
-};
-
-export const linearGradientStyleConfig: LinearGradientStyleConfig = {
-  background: backgroundStyle,
 };

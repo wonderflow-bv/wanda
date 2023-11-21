@@ -20,19 +20,17 @@ import { Except } from 'type-fest';
 import { AxisProps } from './cartesian';
 
 export type AxisOrientation = 'top' | 'left' | 'right' | 'bottom';
+
 export type DominantBaseline = 'auto' | 'middle' | 'hanging';
 export type TextAnchor = 'end' | 'middle' | 'start';
-export type StrokeLinecap = 'butt' | 'round' | 'square'
+export type StrokeLinecap = 'butt' | 'round' | 'square';
 
-export type SingleAxisOffsetInput = AllAxisOffsetInput & { orientation: AxisOrientation }
-export type AllAxisOffsetInput = Pick<AxisProps, 'domain' | 'label' | 'tickFormat' | 'hideAxisLine' | 'hideTicks' | 'hideTickLabel' | 'orientation'>
-
-export type AllAxisInput = {
-  top?: AllAxisOffsetInput;
-  right?: AllAxisOffsetInput;
-  bottom?: AllAxisOffsetInput;
-  left?: AllAxisOffsetInput;
-}
+export type AxisOffsetInput = Pick<AxisProps, 'domain'
+| 'label'
+| 'tickFormat'
+| 'hideAxisLine'
+| 'hideTicks'
+| 'hideTickLabel'> & { orientation: AxisOrientation }
 
 export type AxisOffsetConfig = {
   topAxisOffset: number;
@@ -43,9 +41,9 @@ export type AxisOffsetConfig = {
   horizontalAxisOffset: number;
 }
 
-export type AllAxisElementsValues = Record<AxisOrientation, SingleAxisElementsValues | undefined>
+export type AxisSystemElementsValues = Record<AxisOrientation, AxisElementsValues | undefined>
 
-export type SingleAxisElementsValues = {
+export type AxisElementsValues = {
   orientation: AxisOrientation;
   offset: number;
   tickLabelMaxChar: number;
@@ -75,6 +73,8 @@ export type AxisConfig = {
   bottom: HorizontalAxisConfig;
   left: VerticalAxisConfig;
 }
+
+// Style Types
 
 export type LabelProps = {
   fontFamily: string;
@@ -125,14 +125,14 @@ export type HorizontalAxisStyleConfig = {
   };
 };
 
-export type AxisType = {
+export type AxisProperties = {
   orientation: AxisOrientation;
   top: number;
   left: number;
   scale: ScaleBand<string> | ScaleLinear<number, number> | ScaleTime<number, number>;
 } & AxisProps
 
-export type AllAxisProperties = Record<AxisOrientation, AxisType | undefined>
+export type AxisSystemProperties = Record<AxisOrientation, AxisProperties | undefined>
 
 export type AxisStyleConfig = {
   formatting: { maxCharactersLength: number; omission: string };

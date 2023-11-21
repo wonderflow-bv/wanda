@@ -26,7 +26,7 @@ import { v4 as uuid } from 'uuid';
 
 import { useStyleConfigContext, useThemeContext } from '../../providers';
 import { themes } from '../../style-config';
-import { AllAxisProperties, AxisConfig, AxisType } from '../../types/axis';
+import { AxisConfig, AxisProperties, AxisSystemProperties } from '../../types/axis';
 import {
   handleTickFormat,
   handleTickNumber,
@@ -36,7 +36,7 @@ import {
 } from '../../utils/axis';
 
 export type CartesianBaseAxisProps = {
-  axis: AllAxisProperties;
+  axis: AxisSystemProperties;
   axisConfig: AxisConfig;
   dimension: {
     maxWidth: number;
@@ -58,7 +58,7 @@ export const CartesianBaseAxis: React.FC<CartesianBaseAxisProps> = ({
   return (
     <Group>
       {Object.values(axis)
-        .filter((a): a is AxisType => !!a)
+        .filter((a): a is AxisProperties => !!a)
         .map((a) => {
           const orientation = axisConfig[a.orientation];
 

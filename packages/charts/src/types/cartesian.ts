@@ -21,7 +21,7 @@ import { AxisOrientation, AxisStyleConfig } from './axis';
 import { GridStyleConfig } from './grid';
 import { HeadingsStyleConfig } from './headings';
 import { LegendStyleConfig } from './legend';
-import { Background, LinearGradientStyleConfig } from './linear-gradient';
+import { Background } from './linear-gradient';
 import { ScaleType } from './main';
 import { ViewportStyleConfig } from './viewport';
 
@@ -49,7 +49,7 @@ export type GridProps = {
 export type AxisProps = {
   domain: Array<string | number>;
   scaleType?: ScaleType;
-  orientation: AxisOrientation;
+  orientation?: AxisOrientation;
   label?: string;
   range?: [number, number];
   round?: boolean;
@@ -67,7 +67,6 @@ export type AxisProps = {
 }
 
 export type CartesianStyleConfig = {
-  linearGradient: LinearGradientStyleConfig;
   grid: GridStyleConfig;
   axis: AxisStyleConfig;
   headings: HeadingsStyleConfig;

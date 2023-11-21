@@ -27,7 +27,7 @@ const story: ComponentMeta<typeof CartesianBase> = {
         label: 'Top Label',
         paddingOuter: 0,
         paddingInner: 1,
-        tickFormat: (v: any) => (`Add Prefix ${JSON.stringify(v)} something else`),
+        tickFormat: (v: any) => (`Add Prefix ${v} and some Suffix`),
         hideAxisLine: false,
         hideTickLabel: false,
         hideTicks: false,

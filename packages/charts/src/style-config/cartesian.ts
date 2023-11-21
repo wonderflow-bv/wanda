@@ -19,11 +19,9 @@ import { axisStyleConfig } from './axis';
 import { gridStyleConfig } from './grid';
 import { headingsStyleConfig } from './headings';
 import { legendStyleConfig } from './legend';
-import { linearGradientStyleConfig } from './linear-gradient';
 import { viewportStyleConfig } from './viewport';
 
 export const cartesianStyleConfig: CartesianStyleConfig = {
-  linearGradient: linearGradientStyleConfig,
   grid: gridStyleConfig,
   axis: axisStyleConfig,
   headings: headingsStyleConfig,
