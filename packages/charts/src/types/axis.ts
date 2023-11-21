@@ -18,6 +18,7 @@ import { ScaleBand, ScaleLinear, ScaleTime } from '@visx/vendor/d3-scale';
 import { Except } from 'type-fest';
 
 import { AxisProps } from './cartesian';
+import { ScaleType } from './main';
 
 export type AxisOrientation = 'top' | 'left' | 'right' | 'bottom';
 
@@ -25,25 +26,18 @@ export type DominantBaseline = 'auto' | 'middle' | 'hanging';
 export type TextAnchor = 'end' | 'middle' | 'start';
 export type StrokeLinecap = 'butt' | 'round' | 'square';
 
-export type AxisOffsetInput = Pick<AxisProps, 'domain'
-| 'label'
-| 'tickFormat'
-| 'hideAxisLine'
-| 'hideTicks'
-| 'hideTickLabel'> & { orientation: AxisOrientation }
-
-export type AxisOffsetConfig = {
-  topAxisOffset: number;
-  rightAxisOffset: number;
-  bottomAxisOffset: number;
-  leftAxisOffset: number;
-  verticalAxisOffset: number;
-  horizontalAxisOffset: number;
+export type AxisOriented = Except<AxisProps, 'orientation'> & {
+  orientation: AxisOrientation;
+  scaleType: ScaleType;
 }
 
-export type AxisSystemElementsValues = Record<AxisOrientation, AxisElementsValues | undefined>
+export type AxisProperties = AxisOriented & {
+  top: number;
+  left: number;
+  scale: ScaleBand<string> | ScaleLinear<number, number> | ScaleTime<number, number>;
+}
 
-export type AxisElementsValues = {
+export type AxisElements = {
   orientation: AxisOrientation;
   offset: number;
   tickLabelMaxChar: number;
@@ -57,24 +51,9 @@ export type AxisElementsValues = {
   axisLine: number;
 }
 
-export type HorizontalAxisConfig = HorizontalAxisStyleConfig & {
-  labelOffset: number;
-}
+export type AxisSystemElements = Record<AxisOrientation, AxisElements | undefined>
 
-export type VerticalAxisConfig = VerticalAxisStyleConfig & {
-  labelOffset: number;
-}
-
-export type AxisConfig = {
-  offset: AxisOffsetConfig;
-  style: AxisStyleConfig;
-  top: HorizontalAxisConfig;
-  right: VerticalAxisConfig;
-  bottom: HorizontalAxisConfig;
-  left: VerticalAxisConfig;
-}
-
-// Style Types
+export type AxisSystemProperties = Record<AxisOrientation, AxisProperties | undefined>
 
 export type LabelProps = {
   fontFamily: string;
@@ -125,16 +104,7 @@ export type HorizontalAxisStyleConfig = {
   };
 };
 
-export type AxisProperties = {
-  orientation: AxisOrientation;
-  top: number;
-  left: number;
-  scale: ScaleBand<string> | ScaleLinear<number, number> | ScaleTime<number, number>;
-} & AxisProps
-
-export type AxisSystemProperties = Record<AxisOrientation, AxisProperties | undefined>
-
-export type AxisStyleConfig = {
+export type AxisElementsStyleConfig = {
   formatting: { maxCharactersLength: number; omission: string };
   labelProps: LabelProps;
   tickLabelProps: TickLabelProps;
@@ -145,4 +115,30 @@ export type AxisStyleConfig = {
   right: VerticalAxisStyleConfig;
   bottom: HorizontalAxisStyleConfig;
   left: VerticalAxisStyleConfig;
+}
+
+export type AxisOffsetConfig = {
+  topAxisOffset: number;
+  rightAxisOffset: number;
+  bottomAxisOffset: number;
+  leftAxisOffset: number;
+  verticalAxisOffset: number;
+  horizontalAxisOffset: number;
+}
+
+export type HorizontalAxisOffsetConfig = HorizontalAxisStyleConfig & {
+  labelOffset: number;
+}
+
+export type VerticalAxisoffsetConfig = VerticalAxisStyleConfig & {
+  labelOffset: number;
+}
+
+export type AxisConfig = {
+  offset: AxisOffsetConfig;
+  style: AxisElementsStyleConfig;
+  top: HorizontalAxisOffsetConfig;
+  right: VerticalAxisoffsetConfig;
+  bottom: HorizontalAxisOffsetConfig;
+  left: VerticalAxisoffsetConfig;
 }

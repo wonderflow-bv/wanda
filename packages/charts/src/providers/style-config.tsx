@@ -26,14 +26,14 @@ import {
 } from '../style-config';
 import { legendStyleConfig } from '../style-config/legend';
 import {
-  AxisStyleConfig, CartesianStyleConfig,
+  AxisElementsStyleConfig, CartesianStyleConfig,
   GridStyleConfig, HeadingsStyleConfig, LegendStyleConfig,
   ViewportStyleConfig,
 } from '../types';
 import { LinesStyleConfig } from '../types/lines';
 
 export type StyleConfigContextProps = {
-  axis: AxisStyleConfig;
+  axis: AxisElementsStyleConfig;
   cartesian: CartesianStyleConfig;
   grid: GridStyleConfig;
   headings: HeadingsStyleConfig;

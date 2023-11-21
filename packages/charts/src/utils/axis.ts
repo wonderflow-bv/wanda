@@ -28,15 +28,15 @@ import {
 } from '../types';
 import {
   AxisConfig,
-  AxisElementsValues,
+  AxisElements,
   AxisOffsetConfig,
-  AxisOffsetInput,
   AxisOrientation,
+  AxisOriented,
   AxisProperties,
-  AxisSystemElementsValues,
+  AxisSystemElements,
   AxisSystemProperties,
-  HorizontalAxisConfig,
-  VerticalAxisConfig,
+  HorizontalAxisOffsetConfig,
+  VerticalAxisoffsetConfig,
 } from '../types/axis';
 import { truncate } from './format';
 import {
@@ -126,7 +126,7 @@ export const getLabelOffset = ({
 };
 
 export const computeSingleAxisOffset = (
-  axis: AxisOffsetInput,
+  axis: AxisOriented,
   config = axisStyleConfig,
 ) => {
   const {
@@ -141,7 +141,7 @@ export const computeSingleAxisOffset = (
 
   const hasValues = !!domain?.length;
 
-  let res: AxisElementsValues = {
+  let res: AxisElements = {
     orientation: 'left',
     offset: 0,
     tickLabelMaxChar: 0,
@@ -225,7 +225,7 @@ export const computeSingleAxisOffset = (
 };
 
 export const computeAllAxisOffset = (
-  axis: Record<AxisOrientation, AxisOffsetInput | undefined>,
+  axis: Record<AxisOrientation, AxisOriented | undefined>,
   config = axisStyleConfig,
 ) => {
   const {
@@ -251,7 +251,7 @@ export const computeAllAxisOffset = (
     horizontalAxisOffset: to + bo,
   };
 
-  const a: AxisSystemElementsValues = {
+  const a: AxisSystemElements = {
     top: t,
     right: r,
     bottom: b,
@@ -265,7 +265,7 @@ export const computeAllAxisOffset = (
 };
 
 export const computeAxisConfig = (
-  axis: Record<AxisOrientation, AxisOffsetInput | undefined>,
+  axis: Record<AxisOrientation, AxisOriented | undefined>,
   config = axisStyleConfig,
 ) => {
   const { offset, axis: ao } = computeAllAxisOffset(axis, config);
@@ -273,22 +273,22 @@ export const computeAxisConfig = (
     top: t, right: r, bottom: b, left: l,
   } = ao;
 
-  const top: HorizontalAxisConfig = {
+  const top: HorizontalAxisOffsetConfig = {
     ...config.top,
     labelOffset: t ? t.labelOffset : 0,
   };
 
-  const right: VerticalAxisConfig = {
+  const right: VerticalAxisoffsetConfig = {
     ...config.right,
     labelOffset: r ? r.labelOffset : 0,
   };
 
-  const bottom: HorizontalAxisConfig = {
+  const bottom: HorizontalAxisOffsetConfig = {
     ...config.bottom,
     labelOffset: b ? b.labelOffset : 0,
   };
 
-  const left: VerticalAxisConfig = {
+  const left: VerticalAxisoffsetConfig = {
     ...config.left,
     labelOffset: l ? l.labelOffset : 0,
   };
@@ -482,7 +482,7 @@ export const handleVerticalTickLabelTransform = (
 export const handleVerticalTickLabelOffset = (
   width: number,
   config: CartesianStyleConfig,
-  axis?: AxisProps,
+  axis?: AxisOriented,
 ) => {
   let res = 0;
 
@@ -507,7 +507,6 @@ export const handleVerticalTickLabelOffset = (
 
 export const computeAxisProperties = ({
   axis,
-  orientation,
   maxRangeX,
   maxRangeY,
   positionTop,
@@ -515,8 +514,7 @@ export const computeAxisProperties = ({
   positionBottom,
   positionLeft,
 }: {
-  axis?: AxisProps;
-  orientation: AxisOrientation;
+  axis?: AxisOriented;
   maxRangeX: number;
   maxRangeY: number;
   positionTop: number;
@@ -525,6 +523,8 @@ export const computeAxisProperties = ({
   positionLeft: number;
 }): AxisProperties | undefined => {
   if (axis) {
+    const { orientation } = axis;
+
     if (orientation === 'top') {
       return {
         ...axis,
@@ -570,12 +570,7 @@ export const computeAxisProperties = ({
 };
 
 export const computeAllAxisProperties = (
-  axis: {
-    top?: AxisProps;
-    right?: AxisProps;
-    bottom?: AxisProps;
-    left?: AxisProps;
-  },
+  axis: Record<AxisOrientation, AxisOriented | undefined>,
   dimension: {
     maxWidth: number;
     maxHeight: number;
@@ -597,22 +592,18 @@ export const computeAllAxisProperties = (
   };
   const t = computeAxisProperties({
     axis: axis.top,
-    orientation: 'top',
     ...shared,
   });
   const r = computeAxisProperties({
     axis: axis.right,
-    orientation: 'right',
     ...shared,
   });
   const b = computeAxisProperties({
     axis: axis.bottom,
-    orientation: 'bottom',
     ...shared,
   });
   const l = computeAxisProperties({
     axis: axis.left,
-    orientation: 'left',
     ...shared,
   });
 
@@ -651,5 +642,5 @@ export const handleOrientation = (axis: Record<AxisOrientation, AxisProps | unde
     left.scaleType = inferScaleTypeFromDomain(left.domain, left.scaleType);
   }
 
-  return axis as Record<AxisOrientation, AxisOffsetInput | undefined>;
+  return axis as Record<AxisOrientation, AxisOriented | undefined>;
 };

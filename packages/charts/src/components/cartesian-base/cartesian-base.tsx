@@ -127,6 +127,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   };
 
   const orientedAxis = handleOrientation(axis);
+
   const {
     top, right, bottom, left,
   } = orientedAxis;
@@ -165,7 +166,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
     left: ml + lOff,
   };
 
-  const allAxis = computeAllAxisProperties(axis, dimension, position);
+  const allAxis = computeAllAxisProperties(orientedAxis, dimension, position);
 
   const isEmpty = !isLoading && !!emptyState;
   const isReady = !isLoading && !emptyState;

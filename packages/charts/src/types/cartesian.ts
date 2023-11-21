@@ -17,7 +17,7 @@
 import { TickFormatter } from '@visx/axis';
 import { NumberValue } from '@visx/vendor/d3-scale';
 
-import { AxisOrientation, AxisStyleConfig } from './axis';
+import { AxisElementsStyleConfig, AxisOrientation } from './axis';
 import { GridStyleConfig } from './grid';
 import { HeadingsStyleConfig } from './headings';
 import { LegendStyleConfig } from './legend';
@@ -68,7 +68,7 @@ export type AxisProps = {
 
 export type CartesianStyleConfig = {
   grid: GridStyleConfig;
-  axis: AxisStyleConfig;
+  axis: AxisElementsStyleConfig;
   headings: HeadingsStyleConfig;
   legend: LegendStyleConfig;
   viewport: ViewportStyleConfig;

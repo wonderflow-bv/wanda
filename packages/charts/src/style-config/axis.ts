@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import { AxisStyleConfig } from '../types/axis';
+import { AxisElementsStyleConfig } from '../types/axis';
 
-export const axisStyleConfig: AxisStyleConfig = {
+export const axisStyleConfig: AxisElementsStyleConfig = {
   formatting: {
     maxCharactersLength: 20,
     omission: '...',

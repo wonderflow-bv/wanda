@@ -17,7 +17,7 @@
 import _ from 'lodash';
 
 import {
-  AxisProps, Data, LineChartIndex, LineChartSeries,
+  AxisProps, Data, LineChartIndex, LineChartOverlay, LineChartSeries,
 } from '../types';
 import { inferScaleTypeFromDomain } from './axis';
 import {
@@ -55,7 +55,7 @@ export const getPrimitivesFromObjectArrayByPath = (
 
 export const handleDomainAndScaleType = (
   data: Data,
-  axis: LineChartIndex | LineChartSeries,
+  axis: LineChartIndex | LineChartSeries | LineChartOverlay,
 ): AxisProps => {
   const { scaleType, dataKey, domain } = axis;
 
