@@ -26,7 +26,7 @@ import {
 import { themes } from '../../../style-config';
 import {
   createSubPaths,
-  getCoordinates, getLinesRenderer, getValueFromObjectPath,
+  getCoordinates, getLinesRenderer, getValueFromObjectByPath,
 } from '../../../utils';
 import {
   LinesItem,
@@ -39,14 +39,13 @@ export const LinesSeries: React.FC = () => {
   const { isHorizontal } = useLayoutContext();
   const { axis } = useCartesianContext();
 
-  const { bottom, left } = axis;
   const {
     index, renderAs, showMarker, showMarkerLabel,
     series, hideMissingDataConnection,
   } = metadata!;
 
-  const indexAxis = isHorizontal ? bottom! : left!;
-  const seriesAxis = isHorizontal ? left! : bottom!;
+  const indexAxis = isHorizontal ? axis!.bottom! : axis!.left;
+  const seriesAxis = isHorizontal ? axis!.left : axis!.bottom;
 
   const renderer = useMemo(() => getLinesRenderer(renderAs, isHorizontal), [isHorizontal, renderAs]);
 
@@ -56,9 +55,9 @@ export const LinesSeries: React.FC = () => {
     isHorizontal: boolean,
   ) => getCoordinates({
     datum,
-    indexAxis,
+    indexAxis: indexAxis!,
     indexDataKey: index,
-    otherAxis: seriesAxis,
+    otherAxis: seriesAxis!,
     otherDataKey: dataKey,
     isHorizontal,
   });
@@ -68,7 +67,7 @@ export const LinesSeries: React.FC = () => {
       {series.dataKey.map((dataKey: string, di: number) => {
         const subPaths = createSubPaths(
           data,
-          d => _.isNil(getValueFromObjectPath(d, dataKey)),
+          d => _.isNil(getValueFromObjectByPath(d, dataKey)),
         );
 
         const hasMarker = Boolean(showMarker

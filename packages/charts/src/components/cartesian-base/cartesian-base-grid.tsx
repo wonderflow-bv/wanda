@@ -62,6 +62,7 @@ export const CartesianBaseGrid: React.FC<CartesianBaseGridProps> = ({
   const { isHorizontal } = useLayoutContext();
 
   const { maxWidth, maxHeight } = dimension;
+  const { left, top } = position;
   const { from, to } = { ...themes[theme].grid.background, ...background };
 
   const hasRows = Boolean(!hideRows && scaleRow);
@@ -72,8 +73,8 @@ export const CartesianBaseGrid: React.FC<CartesianBaseGridProps> = ({
       <LinearGradient id="cartesian-grid-background" from={from} to={to} rotate={isHorizontal ? 0 : 270} />
 
       <rect
-        x={position.left}
-        y={position.top}
+        x={left}
+        y={top}
         width={maxWidth}
         height={maxHeight}
         fill="url(#cartesian-grid-background)"
@@ -81,8 +82,8 @@ export const CartesianBaseGrid: React.FC<CartesianBaseGridProps> = ({
 
       {hasRows && (
         <GridRows
-          left={position.left}
-          top={position.top}
+          left={left}
+          top={top}
           scale={scaleRow}
           width={maxWidth}
           numTicks={tickRows}
@@ -99,8 +100,8 @@ export const CartesianBaseGrid: React.FC<CartesianBaseGridProps> = ({
 
       {hasCols && (
         <GridColumns
-          left={position.left}
-          top={position.top}
+          left={left}
+          top={top}
           scale={scaleCols}
           height={maxHeight}
           numTicks={tickColumns}

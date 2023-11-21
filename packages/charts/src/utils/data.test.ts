@@ -1,9 +1,9 @@
 
 import {
-  getLabelFromObjectPath,
-  getPrimitiveFromObjectPath,
-  getPrimitivesFromArrayWithObjectPath,
-  getValueFromObjectPath,
+  getLabelFromPath,
+  getPrimitiveFromObjectByPath,
+  getPrimitivesFromObjectArrayByPath,
+  getValueFromObjectByPath,
 } from './data';
 
 const data = [
@@ -51,7 +51,7 @@ const data = [
 describe('getValueFromObjectPath()', () => {
   it('should return the corresponding object', () => {
     const path = 'nested';
-    const res = getValueFromObjectPath(data[0], path);
+    const res = getValueFromObjectByPath(data[0], path);
     const exp = {
       num: 1, str: 'inner-joe', arr: [1, 2, 3], obj: { a: 1 },
     };
@@ -62,35 +62,35 @@ describe('getValueFromObjectPath()', () => {
 describe('getPrimitiveFromObjectPath()', () => {
   it('should return undefined for a non primitive value (object)', () => {
     const path = 'nested';
-    const res = getPrimitiveFromObjectPath(data[0], path);
+    const res = getPrimitiveFromObjectByPath(data[0], path);
     const exp = undefined;
     expect(res).toStrictEqual(exp);
   });
 
   it('should return undefined for a non primitive value (array)', () => {
     const path = 'series';
-    const res = getPrimitiveFromObjectPath(data[0], path);
+    const res = getPrimitiveFromObjectByPath(data[0], path);
     const exp = undefined;
     expect(res).toStrictEqual(exp);
   });
 
   it('should return a value for a primitive (number)', () => {
     const path = 'series[0].value';
-    const res = getPrimitiveFromObjectPath(data[0], path);
+    const res = getPrimitiveFromObjectByPath(data[0], path);
     const exp = 100;
     expect(res).toStrictEqual(exp);
   });
 
   it('should return a value for a primitive (string)', () => {
     const path = 'nested.str';
-    const res = getPrimitiveFromObjectPath(data[0], path);
+    const res = getPrimitiveFromObjectByPath(data[0], path);
     const exp = 'inner-joe';
     expect(res).toStrictEqual(exp);
   });
 
   it('should return undefined for a non existent path', () => {
     const path = 'wrong path';
-    const res = getPrimitiveFromObjectPath(data[0], path);
+    const res = getPrimitiveFromObjectByPath(data[0], path);
     const exp = undefined;
     expect(res).toStrictEqual(exp);
   });
@@ -99,35 +99,35 @@ describe('getPrimitiveFromObjectPath()', () => {
 describe('getLabelFromObjectPath()', () => {
   it('should return input as is', () => {
     const input = 'parent';
-    const res = getLabelFromObjectPath(input);
+    const res = getLabelFromPath(input);
     const exp = 'parent';
     expect(res).toBe(exp);
   });
 
   it('should return the parent level', () => {
     const input = 'parent.child';
-    const res = getLabelFromObjectPath(input);
+    const res = getLabelFromPath(input);
     const exp = 'parent';
     expect(res).toBe(exp);
   });
 
   it('should return the child level', () => {
     const input = 'parent.child.grandchild';
-    const res = getLabelFromObjectPath(input);
+    const res = getLabelFromPath(input);
     const exp = 'child';
     expect(res).toBe(exp);
   });
 
   it('should return the child[n] level', () => {
     const input = 'parent.child[0].grandchild';
-    const res = getLabelFromObjectPath(input);
+    const res = getLabelFromPath(input);
     const exp = 'child-0';
     expect(res).toBe(exp);
   });
 
   it('should return the child[nnn] level', () => {
     const input = 'parent.child[100].grandchild';
-    const res = getLabelFromObjectPath(input);
+    const res = getLabelFromPath(input);
     const exp = 'child-100';
     expect(res).toBe(exp);
   });
@@ -136,28 +136,28 @@ describe('getLabelFromObjectPath()', () => {
 describe('getPrimitivesFromArrayWithObjectPath', () => {
   it('should return an array of users name', () => {
     const path = 'user';
-    const req = getPrimitivesFromArrayWithObjectPath(data, path);
+    const req = getPrimitivesFromObjectArrayByPath(data, path);
     const res = ['joe', 'john', 'bob'];
     expect(req).toStrictEqual(res);
   });
 
   it('should return an array of ages', () => {
     const path = 'age';
-    const req = getPrimitivesFromArrayWithObjectPath(data, path);
+    const req = getPrimitivesFromObjectArrayByPath(data, path);
     const res = [36, 40, 1];
     expect(req).toStrictEqual(res);
   });
 
   it('should return an array of values from within an array', () => {
     const path = 'series[0].value';
-    const req = getPrimitivesFromArrayWithObjectPath(data, path);
+    const req = getPrimitivesFromObjectArrayByPath(data, path);
     const res = [100, 98, 85];
     expect(req).toStrictEqual(res);
   });
 
   it('should return undefined for each non primitive value', () => {
     const path = 'nested.arr';
-    const req = getPrimitivesFromArrayWithObjectPath(data, path);
+    const req = getPrimitivesFromObjectArrayByPath(data, path);
     const res = [undefined, undefined, undefined];
     expect(req).toStrictEqual(res);
   });

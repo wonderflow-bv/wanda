@@ -25,7 +25,7 @@ import { themes } from '../../../style-config';
 import {
   getCoordinates,
   getMarkerLabelProps,
-  getPrimitiveFromObjectPath,
+  getPrimitiveFromObjectByPath,
   isMarkerLabelVisible,
 } from '../../../utils';
 import {
@@ -87,7 +87,7 @@ export const LinesMarkerLabels: React.FC = () => {
           {(showMarkerLabel || series.style?.[i]?.showMarkerLabel)
             && data.map((d: Record<string, any>, di: number) => {
               const isVisible = isMarkerLabelVisible(di, totalLabels);
-              const title = `${getPrimitiveFromObjectPath(d, k) ?? ''}`;
+              const title = `${getPrimitiveFromObjectByPath(d, k) ?? ''}`;
               const coordinates = getSeriesCoordinates(d, k, isHorizontal);
               const markerLabelProps = getMarkerLabelProps(coordinates, dimension, isHorizontal, themeConfig);
               const {
@@ -131,7 +131,7 @@ export const LinesMarkerLabels: React.FC = () => {
       {hasOverlay && (showMarkerLabel || overlay.style?.showMarkerLabel)
             && data.map((d: Record<string, any>, di: number) => {
               const isVisible = isMarkerLabelVisible(di, totalLabels);
-              const title = `${getPrimitiveFromObjectPath(d, overlay.dataKey!) ?? ''}`;
+              const title = `${getPrimitiveFromObjectByPath(d, overlay.dataKey!) ?? ''}`;
               const coordinates = getOverlayCoordinates(d, overlay.dataKey!, isHorizontal);
               const markerLabelProps = getMarkerLabelProps(coordinates, dimension, isHorizontal, themeConfig);
               const {

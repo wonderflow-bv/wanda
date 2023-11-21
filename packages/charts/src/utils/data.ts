@@ -15,6 +15,7 @@
  */
 
 import _ from 'lodash';
+import { Except } from 'type-fest';
 
 import {
   AxisProps, Data, LineChartIndex, LineChartSeries,
@@ -25,14 +26,14 @@ import {
   removeNilValuesFromArray,
 } from './math';
 
-export const getValueFromObjectPath = (object: Record<string, unknown>, path: string) => _.at(object, path)[0];
+export const getValueFromObjectByPath = (object: Record<string, any>, path: string) => _.at(object, path)[0];
 
-export const getPrimitiveFromObjectPath = (object: Record<string, unknown>, path: string) => {
-  const value = getValueFromObjectPath(object, path);
+export const getPrimitiveFromObjectByPath = (object: Record<string, any>, path: string) => {
+  const value = getValueFromObjectByPath(object, path);
   return (_.isString(value) || _.isNumber(value)) ? value : undefined;
 };
 
-export const getLabelFromObjectPath = (path: string) => {
+export const getLabelFromPath = (path: string) => {
   const notation = path.split('.');
 
   let res = notation[0];
@@ -48,19 +49,21 @@ export const getLabelFromObjectPath = (path: string) => {
   return res.replace(regex, replacer);
 };
 
-export const getPrimitivesFromArrayWithObjectPath = (
+export const getPrimitivesFromObjectArrayByPath = (
   arr: Array<Record<string, unknown>>,
   path: string,
-) => arr.map(o => getPrimitiveFromObjectPath(o, path));
+) => arr.map(o => getPrimitiveFromObjectByPath(o, path));
 
 export const handleDomainAndScaleType = (
   data: Data,
   axis: LineChartIndex | LineChartSeries,
-): AxisProps => {
+): Except<AxisProps, 'orientation'> => {
   const { scaleType, dataKey, domain } = axis;
+
   const keys = typeof dataKey === 'string' ? [dataKey] : dataKey;
+
   const domainData = _.flattenDeep<Array<string | number | undefined>>(
-    keys.map((k: string) => getPrimitivesFromArrayWithObjectPath(data, k)),
+    keys.map((k: string) => getPrimitivesFromObjectArrayByPath(data, k)),
   );
 
   let d = removeNilValuesFromArray(domainData) as Array<string | number>;

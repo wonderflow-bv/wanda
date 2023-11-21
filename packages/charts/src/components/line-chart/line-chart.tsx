@@ -29,7 +29,7 @@ import {
 import {
   LineChartIndex, LineChartMetadata, LineChartOverlay, LineChartRenderType, LineChartSeries, LineChartTooltip,
 } from '../../types/line-chart';
-import { getLabelFromObjectPath, handleDomainAndScaleType } from '../../utils';
+import { getLabelFromPath, handleDomainAndScaleType } from '../../utils';
 import { CartesianBase, CartesianBaseProps } from '../cartesian-base/cartesian-base';
 
 export type LineChartProps = {
@@ -108,13 +108,14 @@ export const LineChart: React.FC<LineChartProps> = ({
     },
   }), [i, o, s]);
 
-  const seriesNames = useMemo(() => series.dataKey.map((s: string, i: number) => (series.rename
-    ? `${_.startCase(series.rename(s, i))}`
-    : `${_.startCase(getLabelFromObjectPath(s))}`)), [series]);
+  const seriesNames = useMemo(() => series.dataKey.map((s: string, i: number) => {
+    const renamed = series.rename ? series.rename(s, i) : getLabelFromPath(s);
+    return _.startCase(renamed);
+  }), [series]);
 
   const overlayName = overlay?.rename
     ?? _.startCase(overlay?.label)
-    ?? _.startCase(getLabelFromObjectPath(overlay?.dataKey ?? ''))
+    ?? _.startCase(getLabelFromPath(overlay?.dataKey ?? ''))
     ?? '';
 
   const palette = useMemo(() => defaultLineChartPalette[theme], [theme]);

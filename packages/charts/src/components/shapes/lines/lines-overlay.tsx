@@ -26,7 +26,7 @@ import {
 import { themes } from '../../../style-config';
 import {
   createSubPaths,
-  getCoordinates, getLinesRenderer, getValueFromObjectPath,
+  getCoordinates, getLinesRenderer, getValueFromObjectByPath,
 } from '../../../utils';
 import {
   LinesItem,
@@ -66,7 +66,7 @@ export const LinesOverlay: React.FC = () => {
 
   const subPaths = useMemo(() => createSubPaths(
     data,
-    d => hasOverlay && _.isNil(getValueFromObjectPath(d, overlay.dataKey!)),
+    d => hasOverlay && _.isNil(getValueFromObjectByPath(d, overlay.dataKey!)),
   ), [data, hasOverlay, overlay.dataKey]);
 
   const hasMarker = Boolean(showMarker

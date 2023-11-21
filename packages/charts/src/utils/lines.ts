@@ -24,11 +24,11 @@ import _ from 'lodash';
 import {
   AxisType, Data, LineChartRenderType, Theme,
 } from '../types';
-import { getPrimitiveFromObjectPath } from './data';
+import { getPrimitiveFromObjectByPath } from './data';
 
 export const accessor = (axis: AxisType, dataKey: string, datum?: Record<string, unknown>) => {
   if (axis.scale && datum) {
-    const d = getPrimitiveFromObjectPath(datum, dataKey);
+    const d = getPrimitiveFromObjectByPath(datum, dataKey);
     if (!_.isNil(d)) {
       const t = axis.scaleType === 'time' ? new Date(d) : d;
       return axis.scale(t as any);
