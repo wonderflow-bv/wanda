@@ -28,7 +28,7 @@ const story: ComponentMeta<typeof CartesianBase> = {
         label: 'Top Label',
         paddingOuter: 0,
         paddingInner: 1,
-        // tickFormat: (v: any, i: number) => (`Prefix${i} + ${v} + Suffix`),
+        tickFormat: (v: any, i: number) => (`Prefix${i} + ${v} + Suffix`),
         hideAxisLine: false,
         hideTickLabel: false,
         hideTicks: false,
@@ -57,9 +57,7 @@ const story: ComponentMeta<typeof CartesianBase> = {
         hideTicks: false,
       },
     },
-    styleConfig: {
-      // grid: { rows: { stroke: 'blue' } },
-    },
+    styleConfig: {},
     children: undefined,
   },
   argTypes: {

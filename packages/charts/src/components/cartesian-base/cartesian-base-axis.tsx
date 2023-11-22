@@ -77,6 +77,7 @@ export const CartesianBaseAxis: React.FC<CartesianBaseAxisProps> = ({
 
           return (
             <Axis
+              {...a}
               key={uuid()}
               numTicks={numTicks}
               tickLength={tickLineProps.length}
@@ -97,11 +98,10 @@ export const CartesianBaseAxis: React.FC<CartesianBaseAxisProps> = ({
                 ...orientation.labelProps,
                 fill: label,
               }}
-              tickFormat={tickFormat}
               stroke={line}
               strokeDasharray={axisLineProps.strokeDasharray}
               strokeWidth={axisLineProps.strokeWidth}
-              {...a}
+              tickFormat={tickFormat}
             />
           );
         })}
