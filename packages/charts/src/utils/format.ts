@@ -56,7 +56,7 @@ export const formatValue = (
 };
 
 export const truncate = (
-  text: string,
+  text: string | undefined,
   options: {
     length?: number;
     omission?: string;

@@ -379,29 +379,30 @@ export const handleTickFormat = (axis: AxisProperties) => {
     tickFormat, hideTickLabel, scaleType, scale,
   } = axis;
 
-  const isLabel = scaleType === 'label';
-  const isTime = scaleType === 'time';
-  const doTruncate = (value: string | Date | NumberValue | undefined) => (isLabel ? truncate(value as string) : value);
-
   if (hideTickLabel) {
     return () => ('');
   }
 
-  if (!tickFormat) {
-    return (v: string | Date | NumberValue) => {
-      if (isLabel) return doTruncate(v);
+  const isLabel = scaleType === 'label';
+  const isTime = scaleType === 'time';
 
-      if (isTime && typeof v !== 'string') {
-        const s = scale as ScaleTime<number, number>;
-        const f = s.tickFormat();
-        return (f(v as Date));
-      }
+  const doTruncate = (value: string | Date | NumberValue | undefined) => (isLabel ? truncate(value as string) : value);
 
-      return v;
-    };
-  }
+  return (v: string | Date | NumberValue, i: number) => {
+    if (tickFormat) {
+      return doTruncate(tickFormat(v, i, [{ value: v, index: i }]));
+    }
 
-  return (v: string | Date | NumberValue, i: number) => doTruncate(tickFormat(v, i, []));
+    if (isLabel) return doTruncate(v);
+
+    if (isTime && typeof v !== 'string') {
+      const s = scale as ScaleTime<number, number>;
+      const f = s.tickFormat();
+      return (f(v as Date));
+    }
+
+    return v;
+  };
 };
 
 export const handleTickNumber = (

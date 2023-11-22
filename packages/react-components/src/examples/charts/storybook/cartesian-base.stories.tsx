@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 // import { CartesianBase } from '@wonderflow/charts';
-import { CartesianBase } from '../../../../../charts';
+import { CartesianBase } from '../../../../../charts/src';
 
 const story: ComponentMeta<typeof CartesianBase> = {
   title: 'Charts/Cartesian Base',
@@ -28,7 +28,7 @@ const story: ComponentMeta<typeof CartesianBase> = {
         label: 'Top Label',
         paddingOuter: 0,
         paddingInner: 1,
-        tickFormat: (v: any, i: number) => (`Prefix${i} + ${v} + Suffix`),
+        // tickFormat: (v: any, i: number) => (`Prefix${i} + ${v} + Suffix`),
         hideAxisLine: false,
         hideTickLabel: false,
         hideTicks: false,

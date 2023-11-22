@@ -73,6 +73,7 @@ export const CartesianBaseAxis: React.FC<CartesianBaseAxisProps> = ({
           const isVertical = hasVerticalTickLabel(xMax, a, vStyle);
           const numTicks = handleTickNumber(xMax, yMax, a, vStyle);
           const labelOffset = orientation.labelOffset + handleVerticalTickLabelOffset(xMax, cStyle, a);
+          const tickFormat = handleTickFormat(a) as TickFormat;
 
           return (
             <Axis
@@ -96,7 +97,7 @@ export const CartesianBaseAxis: React.FC<CartesianBaseAxisProps> = ({
                 ...orientation.labelProps,
                 fill: label,
               }}
-              tickFormat={handleTickFormat(a) as TickFormat}
+              tickFormat={tickFormat}
               stroke={line}
               strokeDasharray={axisLineProps.strokeDasharray}
               strokeWidth={axisLineProps.strokeWidth}
