@@ -18,16 +18,17 @@ const story: ComponentMeta<typeof CartesianBase> = {
     axis: {
       top: {
         domain: [
-          'A-veryLongLabelThatExceed',
-          'B-veryLongLabelThatExceed',
-          'C-veryLongLabelThatExceed',
-          'D-veryLongLabelThatExceed',
-          'E-veryLongLabelThatExceed',
+          'ALabelThatExceedTwentyCharacters',
+          'BLabelThatExceedTwentyCharacters',
+          'CLabelThatExceedTwentyCharacters',
+          'DLabelThatExceedTwentyCharacters',
+          'ELabelThatExceedTwentyCharacters',
+          'FLabelThatExceedTwentyCharacters',
         ],
         label: 'Top Label',
         paddingOuter: 0,
         paddingInner: 1,
-        tickFormat: (v: any) => (`Add Prefix ${v} and some Suffix`),
+        tickFormat: (v: any, i: number) => (`Prefix${i} + ${v} + Suffix`),
         hideAxisLine: false,
         hideTickLabel: false,
         hideTicks: false,

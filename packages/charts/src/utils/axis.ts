@@ -387,16 +387,11 @@ export const handleTickFormat = (axis: AxisProperties) => {
     return () => ('');
   }
 
-  if (tickFormat) {
-    return (v: string | Date | NumberValue, i: number) => doTruncate(
-      (tickFormat(v, i, [{ value: v, index: i }])),
-    );
-  }
-
   if (!tickFormat) {
     return (v: string | Date | NumberValue) => {
-      if (isLabel) doTruncate(v);
-      if (isTime) {
+      if (isLabel) return doTruncate(v);
+
+      if (isTime && typeof v !== 'string') {
         const s = scale as ScaleTime<number, number>;
         const f = s.tickFormat();
         return (f(v as Date));
@@ -406,7 +401,7 @@ export const handleTickFormat = (axis: AxisProperties) => {
     };
   }
 
-  return undefined;
+  return (v: string | Date | NumberValue, i: number) => doTruncate(tickFormat(v, i, []));
 };
 
 export const handleTickNumber = (
