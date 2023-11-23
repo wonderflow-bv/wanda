@@ -76,7 +76,7 @@ const story: ComponentMeta<typeof ProductCard> = {
     usersCap: 1000,
     skus: 2,
     skusCap: 1000,
-    kpiItems: 11,
+    kpiItems: 3,
     kpisRowGap: 8,
     isLoading: false,
     ratio: '1',
