@@ -2,7 +2,8 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useState } from 'react';
 
-import { Button } from '../..';
+import { Button, Table } from '../..';
+import { mockedColumns, mockedData } from '../table/mocked-data';
 import { Tab } from './tab';
 
 const story: ComponentMeta<typeof Tab> = {
@@ -105,3 +106,65 @@ export const WithIcons: ComponentStory<typeof Tab> = args => (
     <Tab.Panel icon="check" value="6" label="Tab 6">Panel 6</Tab.Panel>
   </Tab>
 );
+
+export const WithTables: ComponentStory<typeof Tab> = () => {
+  type TableTab = 'Table1' | 'Table2';
+  type TablePagination = { pageSize: number; pageIndex: number };
+  type Pagination = Record<TableTab, TablePagination>
+
+  const [activeTab, setActiveTab] = useState<TableTab>('Table1');
+  const [pagination, setPagination] = useState<Pagination>({
+    Table1: {
+      pageSize: 5,
+      pageIndex: 0,
+    },
+    Table2: {
+      pageSize: 10,
+      pageIndex: 0,
+    },
+  });
+
+  const handleTab = (tab: TableTab) => {
+    setActiveTab(tab);
+  };
+
+  const handlePagination = ({ pageIndex, pageSize }: TablePagination) => {
+    if (pageIndex !== pagination[activeTab].pageIndex
+      || pageSize !== pagination[activeTab].pageSize) {
+      const newPagination = { ...pagination, [activeTab]: { pageIndex, pageSize } };
+      setPagination(newPagination);
+    }
+  };
+
+  return (
+    <Tab defaultValue={activeTab} onValueChange={handleTab as ((value: string) => void)}>
+      <Tab.Panel value="Table1" label="Table 1">
+        <Table
+          background="seashell"
+          stripes
+          showSeparators
+          columns={mockedColumns}
+          data={mockedData}
+          showPagination
+          itemsPerPage={pagination.Table1.pageSize}
+          initialPageIndex={pagination.Table1.pageIndex}
+          onPaginationChange={handlePagination}
+        />
+      </Tab.Panel>
+
+      <Tab.Panel value="Table2" label="Table 2">
+        <Table
+          background="honeydew"
+          stripes
+          showSeparators
+          columns={mockedColumns}
+          data={mockedData}
+          showPagination
+          itemsPerPage={pagination.Table2.pageSize}
+          initialPageIndex={pagination.Table2.pageIndex}
+          onPaginationChange={handlePagination}
+        />
+      </Tab.Panel>
+    </Tab>
+  );
+};
