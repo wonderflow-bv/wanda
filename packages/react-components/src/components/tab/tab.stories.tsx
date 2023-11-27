@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { Button, Table } from '../..';
 import { mockedColumns, mockedData } from '../table/mocked-data';
@@ -136,6 +136,22 @@ export const WithTables: ComponentStory<typeof Tab> = () => {
     }
   };
 
+  const pageData1 = useMemo(() => {
+    const { pageIndex, pageSize } = pagination.Table1;
+    const newIndexStart = pageIndex * pageSize;
+    const newIndexEnd = (pageIndex * pageSize) + pageSize;
+
+    return mockedData.slice(newIndexStart, newIndexEnd);
+  }, [pagination]);
+
+  const pageData2 = useMemo(() => {
+    const { pageIndex, pageSize } = pagination.Table2;
+    const newIndexStart = pageIndex * pageSize;
+    const newIndexEnd = (pageIndex * pageSize) + pageSize;
+
+    return mockedData.slice(newIndexStart, newIndexEnd);
+  }, [pagination]);
+
   return (
     <Tab defaultValue={activeTab} onValueChange={handleTab as ((value: string) => void)}>
       <Tab.Panel value="Table1" label="Table 1">
@@ -144,11 +160,12 @@ export const WithTables: ComponentStory<typeof Tab> = () => {
           stripes
           showSeparators
           columns={mockedColumns}
-          data={mockedData}
+          data={pageData1}
           showPagination
           itemsPerPage={pagination.Table1.pageSize}
           initialPageIndex={pagination.Table1.pageIndex}
           onPaginationChange={handlePagination}
+          totalRows={mockedData.length}
         />
       </Tab.Panel>
 
@@ -158,11 +175,12 @@ export const WithTables: ComponentStory<typeof Tab> = () => {
           stripes
           showSeparators
           columns={mockedColumns}
-          data={mockedData}
+          data={pageData2}
           showPagination
           itemsPerPage={pagination.Table2.pageSize}
           initialPageIndex={pagination.Table2.pageIndex}
           onPaginationChange={handlePagination}
+          totalRows={mockedData.length}
         />
       </Tab.Panel>
     </Tab>
