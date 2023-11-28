@@ -113,6 +113,6 @@ export const getMaxCharactersNum = (
   return maxLen + diffLen;
 };
 
-export const removeNilValuesFromArray = (arr: any[]) => arr
-  .filter((el: unknown): el is NonNullable<any> => !_.isNil(el));
+export const removeNilValuesFromArray = (arr: Array<string | number | undefined>) => arr
+  .filter((el: string | number | undefined): el is NonNullable<string | number> => !_.isNil(el));
 

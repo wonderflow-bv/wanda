@@ -60,12 +60,10 @@ export const handleDomainAndScaleType = (
   const { scaleType, dataKey, domain } = axis;
 
   const keys = typeof dataKey === 'string' ? [dataKey] : dataKey;
+  const primitivesFromArray = keys.map((k: string) => getPrimitivesFromObjectArrayByPath(data, k));
+  const domainData = _.flattenDeep(primitivesFromArray);
 
-  const domainData = _.flattenDeep<Array<string | number | undefined>>(
-    keys.map((k: string) => getPrimitivesFromObjectArrayByPath(data, k)),
-  );
-
-  let d = removeNilValuesFromArray(domainData) as Array<string | number>;
+  let d = removeNilValuesFromArray(domainData);
   const st = inferScaleTypeFromDomain(domainData, scaleType);
 
   if (domain?.length) {

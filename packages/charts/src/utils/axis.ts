@@ -24,7 +24,8 @@ import {
   axisStyleConfig,
 } from '../style-config';
 import {
-  AxisProps, CartesianStyleConfig, ScaleType, ViewportStyleConfig,
+  AxisProps, CartesianStyleConfig,
+  ScaleType, ViewportStyleConfig,
 } from '../types';
 import {
   AxisConfig,
@@ -309,7 +310,7 @@ export const inferScaleTypeFromDomain = (
   domain: Array<string | number | undefined>,
   scaleType?: ScaleType,
 ): ScaleType => {
-  const d = removeNilValuesFromArray(domain) as Array<string | number>;
+  const d = removeNilValuesFromArray(domain);
 
   if (scaleType) return scaleType;
 
@@ -640,3 +641,4 @@ export const handleOrientation = (axis: Record<AxisOrientation, AxisProps | unde
 
   return axis as Record<AxisOrientation, AxisOriented | undefined>;
 };
+

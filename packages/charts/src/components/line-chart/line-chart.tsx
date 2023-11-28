@@ -86,7 +86,9 @@ export const LineChart: React.FC<LineChartProps> = ({
 
   const i = useMemo(() => handleDomainAndScaleType(data, index), [data, index]);
   const s = useMemo(() => handleDomainAndScaleType(data, series), [data, series]);
-  const o = useMemo(() => (overlay ? handleDomainAndScaleType(data, overlay) : undefined), [data, overlay]);
+  const o = useMemo(() => (overlay
+    ? handleDomainAndScaleType(data, overlay)
+    : undefined), [data, overlay]);
 
   const axis: Record<CartesianChartLayout, Record<AxisOrientation, AxisProps | undefined>> = useMemo(() => ({
     vertical: {
