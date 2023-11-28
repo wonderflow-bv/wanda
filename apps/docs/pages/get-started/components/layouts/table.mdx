@@ -378,14 +378,14 @@ This component extends [`react-table`](https://react-table.tanstack.com/docs/ove
       typeValue: `({ pageIndex, pageSize }) => Promise<void> | void`,
       default: "",
       required: false,
-      description: "The callback that is called when the active page index and page size change. Passing this property along side `showPagination` will enable manual pagination, disabling the automatic one.",
+      description: "The callback that is called when the active page index and page size change. Passing this property along side `showPagination` and `totalRows` will enable manual pagination, disabling the automatic one.",
     },
     {
       name: "totalRows",
       type: ["number"],
       default: "",
       required: false,
-      description: "Set the number of pages to show in the pagination. Used only when doing manual pagination.",
+      description: "Set the total data length used to display the number of pages in the pagination. This is used only for manual pagination.",
     },
     {
       name: "pageClusters",
