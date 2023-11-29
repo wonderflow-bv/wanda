@@ -39,7 +39,6 @@ import {
 } from '../../types/main';
 import {
   computeAllAxisProperties, computeAxisConfig,
-  handleOrientation,
   handleVerticalTickLabelOffset,
 } from '../../utils/axis';
 import { Headings, HeadingsProps } from '../headings';
@@ -126,13 +125,11 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
     '--legend-padding': lStyle.padding,
   };
 
-  const orientedAxis = handleOrientation(axis);
-
   const {
     top, right, bottom, left,
-  } = orientedAxis;
+  } = axis;
 
-  const axisConfig = useMemo(() => computeAxisConfig(orientedAxis, aStyle), [aStyle, orientedAxis]);
+  const axisConfig = useMemo(() => computeAxisConfig(axis, aStyle), [aStyle, axis]);
 
   const {
     leftAxisOffset: lOff,
@@ -166,7 +163,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
     left: ml + lOff,
   };
 
-  const allAxis = computeAllAxisProperties(orientedAxis, dimension, position);
+  const allAxis = computeAllAxisProperties(axis, dimension, position);
 
   const isEmpty = !isLoading && !!emptyState;
   const isReady = !isLoading && !emptyState;

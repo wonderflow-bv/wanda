@@ -92,15 +92,15 @@ export const LineChart: React.FC<LineChartProps> = ({
 
   const axis: Record<CartesianChartLayout, Record<AxisOrientation, AxisProps | undefined>> = useMemo(() => ({
     vertical: {
-      left: i,
-      bottom: s,
-      top: o,
+      left: { ...i, orientation: 'left' },
+      bottom: { ...s, orientation: 'bottom' },
+      top: o ? { ...o, orientation: 'top' } : undefined,
       right: undefined,
     },
     horizontal: {
-      bottom: i,
-      left: s,
-      right: o,
+      bottom: { ...i, orientation: 'bottom' },
+      left: { ...s, orientation: 'left' },
+      right: o ? { ...o, orientation: 'right' } : undefined,
       top: undefined,
     },
   }), [i, o, s]);

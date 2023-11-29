@@ -614,31 +614,3 @@ export const computeAllAxisProperties = (
   return a;
 };
 
-export const handleOrientation = (axis: Record<AxisOrientation, AxisProps | undefined>) => {
-  const {
-    top, right, bottom, left,
-  } = axis;
-
-  if (top) {
-    top.orientation = 'top';
-    top.scaleType = inferScaleTypeFromDomain(top.domain, top.scaleType);
-  }
-
-  if (right) {
-    right.orientation = 'right';
-    right.scaleType = inferScaleTypeFromDomain(right.domain, right.scaleType);
-  }
-
-  if (bottom) {
-    bottom.orientation = 'bottom';
-    bottom.scaleType = inferScaleTypeFromDomain(bottom.domain, bottom.scaleType);
-  }
-
-  if (left) {
-    left.orientation = 'left';
-    left.scaleType = inferScaleTypeFromDomain(left.domain, left.scaleType);
-  }
-
-  return axis as Record<AxisOrientation, AxisOriented | undefined>;
-};
-

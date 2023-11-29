@@ -25,6 +25,8 @@ const story: ComponentMeta<typeof CartesianBase> = {
           'ELabelThatExceedTwentyCharacters',
           'FLabelThatExceedTwentyCharacters',
         ],
+        orientation: 'top',
+        scaleType: 'label',
         label: 'Top Label',
         paddingOuter: 0,
         paddingInner: 1,
@@ -35,6 +37,8 @@ const story: ComponentMeta<typeof CartesianBase> = {
       },
       right: {
         domain: [0, 0.010],
+        orientation: 'right',
+        scaleType: 'linear',
         label: 'Right Label',
         tickFormat: (v: any) => `${JSON.stringify(v)} $`,
         hideAxisLine: false,
@@ -43,6 +47,7 @@ const story: ComponentMeta<typeof CartesianBase> = {
       },
       bottom: {
         domain: [new Date('2020-01-01').getTime(), new Date('2022-01-01').getTime()],
+        orientation: 'bottom',
         label: 'Bottom Label',
         scaleType: 'time',
         hideAxisLine: false,
@@ -51,6 +56,8 @@ const story: ComponentMeta<typeof CartesianBase> = {
       },
       left: {
         domain: [0, 10000],
+        orientation: 'left',
+        scaleType: 'linear',
         label: 'Left Label',
         hideAxisLine: false,
         hideTickLabel: false,
@@ -87,12 +94,15 @@ TwoAxis.args = {
     right: undefined,
     bottom: {
       domain: [new Date('2020-01-01').getTime(), new Date('2020-01-10').getTime()],
+      orientation: 'bottom',
       label: 'Time',
       scaleType: 'time',
       numTicks: 10,
     },
     left: {
       domain: [0, 1000],
+      orientation: 'left',
+      scaleType: 'linear',
       label: 'Quantity',
       hideAxisLine: true,
       hideTicks: true,

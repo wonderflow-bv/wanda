@@ -48,8 +48,8 @@ export type GridProps = {
 
 export type AxisProps = {
   domain: Array<string | number>;
-  scaleType?: ScaleType;
-  orientation?: AxisOrientation;
+  scaleType: ScaleType;
+  orientation: AxisOrientation;
   label?: string;
   range?: [number, number];
   round?: boolean;

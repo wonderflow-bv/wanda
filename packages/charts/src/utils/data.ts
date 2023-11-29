@@ -15,6 +15,7 @@
  */
 
 import _ from 'lodash';
+import { Except } from 'type-fest';
 
 import {
   AxisProps, Data, LineChartIndex, LineChartOverlay, LineChartSeries,
@@ -56,7 +57,7 @@ export const getPrimitivesFromObjectArrayByPath = (
 export const handleDomainAndScaleType = (
   data: Data,
   axis: LineChartIndex | LineChartSeries | LineChartOverlay,
-): AxisProps => {
+): Except<AxisProps, 'orientation'> => {
   const { scaleType, dataKey, domain } = axis;
 
   const keys = typeof dataKey === 'string' ? [dataKey] : dataKey;
