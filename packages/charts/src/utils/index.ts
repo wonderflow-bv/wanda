@@ -20,3 +20,4 @@ export * from './data';
 export * from './format';
 export * from './lines';
 export * from './math';
+export * from './metadata';

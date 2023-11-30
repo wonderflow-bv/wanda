@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import _ from 'lodash';
 import { useMemo } from 'react';
 import { Except } from 'type-fest';
 
@@ -29,7 +28,12 @@ import {
   LineChartIndex, LineChartMetadata, LineChartOverlay, LineChartRenderType, LineChartSeries, LineChartTooltip,
 } from '../../types/line-chart';
 import {
-  getLabelFromPath, handleChartAxisLayout, handleChartDomainAndScaleType,
+  handleChartAxisLayout,
+  handleChartDomainAndScaleType,
+  handleOverlayColor,
+  handleOverlayName,
+  handleSeriesColors,
+  handleSeriesNames,
 } from '../../utils';
 import { CartesianBase, CartesianBaseProps } from '../cartesian-base/cartesian-base';
 
@@ -90,45 +94,38 @@ export const LineChart: React.FC<LineChartProps> = ({
 
   const axis = useMemo(() => handleChartAxisLayout(i, s, o), [i, s, o]);
 
-  const seriesNames = useMemo(() => series.dataKey.map((s: string, i: number) => {
-    const renamed = series.rename ? series.rename(s, i) : getLabelFromPath(s);
-    return _.startCase(renamed);
-  }), [series]);
-
-  const overlayName = overlay?.rename
-    ?? _.startCase(overlay?.label)
-    ?? _.startCase(getLabelFromPath(overlay?.dataKey ?? ''))
-    ?? '';
-
   const palette = useMemo(() => defaultLineChartPalette[theme], [theme]);
 
-  const seriesColors = useMemo(() => series.dataKey.map((_: string, i: number) => (
-    series.style?.[i] ? series.style[i]?.stroke : palette.series[i]
-  )), [palette.series, series.dataKey, series.style]);
-
-  const overlayColor = overlay?.style?.stroke ?? palette.overlay;
-
-  const metadata: LineChartMetadata = {
+  const metadata: LineChartMetadata = useMemo(() => ({
     type: Charts.LINE_CHART,
     renderAs,
     index: index.dataKey,
     series: {
       dataKey: series.dataKey,
-      names: seriesNames,
-      colors: seriesColors,
+      names: handleSeriesNames(series),
+      colors: handleSeriesColors(series, palette.series),
       style: series.style,
     },
     overlay: {
       dataKey: overlay?.dataKey,
-      name: overlayName,
-      color: overlayColor,
+      name: handleOverlayName(overlay),
+      color: handleOverlayColor(overlay, palette.overlay),
       style: overlay?.style,
     },
     tooltip,
     hideMissingDataConnection,
     showMarker,
     showMarkerLabel,
-  };
+  }), [renderAs,
+    index.dataKey,
+    series,
+    palette.series,
+    palette.overlay,
+    overlay,
+    tooltip,
+    hideMissingDataConnection,
+    showMarker,
+    showMarkerLabel]);
 
   return (
     <StyleConfigProvider>
