@@ -38,7 +38,7 @@ import {
   DeepPartial,
 } from '../../types/main';
 import {
-  computeAllAxisProperties, computeAxisConfig,
+  computeAllAxisProperties, computeAxisStyleConfig,
   handleVerticalTickLabelOffset,
 } from '../../utils/axis';
 import { Headings, HeadingsProps } from '../headings';
@@ -129,7 +129,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
     top, right, bottom, left,
   } = axis;
 
-  const axisConfig = useMemo(() => computeAxisConfig(axis, aStyle), [aStyle, axis]);
+  const axisConfig = useMemo(() => computeAxisStyleConfig(axis, aStyle), [aStyle, axis]);
 
   const {
     leftAxisOffset: lOff,

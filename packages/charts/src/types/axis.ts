@@ -18,7 +18,6 @@ import { ScaleBand, ScaleLinear, ScaleTime } from '@visx/vendor/d3-scale';
 import { Except } from 'type-fest';
 
 import { AxisProps } from './cartesian';
-import { ScaleType } from './main';
 
 export type AxisOrientation = 'top' | 'left' | 'right' | 'bottom';
 
@@ -26,12 +25,7 @@ export type DominantBaseline = 'auto' | 'middle' | 'hanging';
 export type TextAnchor = 'end' | 'middle' | 'start';
 export type StrokeLinecap = 'butt' | 'round' | 'square';
 
-export type AxisOriented = Except<AxisProps, 'orientation'> & {
-  orientation: AxisOrientation;
-  scaleType: ScaleType;
-}
-
-export type AxisProperties = AxisOriented & {
+export type CartesianAxis = AxisProps & {
   top: number;
   left: number;
   scale: ScaleBand<string> | ScaleLinear<number, number> | ScaleTime<number, number>;
@@ -51,9 +45,9 @@ export type AxisElements = {
   axisLine: number;
 }
 
-export type AxisSystemElements = Record<AxisOrientation, AxisElements | undefined>
+export type SystemAxisElements = Record<AxisOrientation, AxisElements | undefined>
 
-export type AxisSystemProperties = Record<AxisOrientation, AxisProperties | undefined>
+export type CartesianSystemAxis = Record<AxisOrientation, CartesianAxis | undefined>
 
 export type LabelProps = {
   fontFamily: string;

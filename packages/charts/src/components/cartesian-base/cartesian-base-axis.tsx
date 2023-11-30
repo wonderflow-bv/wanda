@@ -26,17 +26,17 @@ import { v4 as uuid } from 'uuid';
 
 import { useStyleConfigContext, useThemeContext } from '../../providers';
 import { themes } from '../../style-config';
-import { AxisConfig, AxisProperties, AxisSystemProperties } from '../../types/axis';
+import { AxisConfig, CartesianAxis, CartesianSystemAxis } from '../../types/axis';
 import {
+  handleNumberOfTicks,
   handleTickFormat,
-  handleTickNumber,
   handleVerticalTickLabelOffset,
   handleVerticalTickLabelTransform,
   hasVerticalTickLabel,
 } from '../../utils/axis';
 
 export type CartesianBaseAxisProps = {
-  axis: AxisSystemProperties;
+  axis: CartesianSystemAxis;
   axisConfig: AxisConfig;
   dimension: {
     maxWidth: number;
@@ -58,7 +58,7 @@ export const CartesianBaseAxis: React.FC<CartesianBaseAxisProps> = ({
   return (
     <Group>
       {Object.values(axis)
-        .filter((a): a is AxisProperties => !!a)
+        .filter((a): a is CartesianAxis => !!a)
         .map((a) => {
           const orientation = axisConfig[a.orientation];
 
@@ -71,7 +71,7 @@ export const CartesianBaseAxis: React.FC<CartesianBaseAxisProps> = ({
           } = axisConfig.style;
 
           const isVertical = hasVerticalTickLabel(xMax, a, vStyle);
-          const numTicks = handleTickNumber(xMax, yMax, a, vStyle);
+          const numTicks = handleNumberOfTicks(xMax, yMax, a, vStyle);
           const labelOffset = orientation.labelOffset + handleVerticalTickLabelOffset(xMax, cStyle, a);
           const tickFormat = handleTickFormat(a) as TickFormat;
 

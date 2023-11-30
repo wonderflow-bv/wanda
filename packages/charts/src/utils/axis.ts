@@ -33,11 +33,10 @@ import {
   AxisElements,
   AxisOffsetConfig,
   AxisOrientation,
-  AxisOriented,
-  AxisProperties,
-  AxisSystemElements,
-  AxisSystemProperties,
+  CartesianAxis,
+  CartesianSystemAxis,
   HorizontalAxisOffsetConfig,
+  SystemAxisElements,
   VerticalAxisoffsetConfig,
 } from '../types/axis';
 import { truncate } from './format';
@@ -128,7 +127,7 @@ export const getLabelOffset = ({
 };
 
 export const computeSingleAxisOffset = (
-  axis: AxisOriented,
+  axis: AxisProps,
   config = axisStyleConfig,
 ) => {
   const {
@@ -227,7 +226,7 @@ export const computeSingleAxisOffset = (
 };
 
 export const computeAllAxisOffset = (
-  axis: Record<AxisOrientation, AxisOriented | undefined>,
+  axis: Record<AxisOrientation, AxisProps | undefined>,
   config = axisStyleConfig,
 ) => {
   const {
@@ -253,7 +252,7 @@ export const computeAllAxisOffset = (
     horizontalAxisOffset: to + bo,
   };
 
-  const a: AxisSystemElements = {
+  const a: SystemAxisElements = {
     top: t,
     right: r,
     bottom: b,
@@ -266,8 +265,8 @@ export const computeAllAxisOffset = (
   });
 };
 
-export const computeAxisConfig = (
-  axis: Record<AxisOrientation, AxisOriented | undefined>,
+export const computeAxisStyleConfig = (
+  axis: Record<AxisOrientation, AxisProps | undefined>,
   config = axisStyleConfig,
 ) => {
   const { offset, axis: ao } = computeAllAxisOffset(axis, config);
@@ -376,7 +375,7 @@ export const scaleDomainToAxis = (axis: AxisProps) => {
   return undefined;
 };
 
-export const handleTickFormat = (axis: AxisProperties) => {
+export const handleTickFormat = (axis: CartesianAxis) => {
   const {
     tickFormat, hideTickLabel, scaleType, scale,
   } = axis;
@@ -407,10 +406,10 @@ export const handleTickFormat = (axis: AxisProperties) => {
   };
 };
 
-export const handleTickNumber = (
+export const handleNumberOfTicks = (
   width: number,
   height: number,
-  axis: AxisProperties,
+  axis: CartesianAxis,
   config: ViewportStyleConfig,
 ) => manageViewport(width, height, axis, config).numTicks;
 
@@ -448,7 +447,7 @@ export const hasVerticalTickLabel = (
 export const handleVerticalTickLabelTransform = (
   t: any,
   isVertical: boolean,
-  axis: AxisProperties,
+  axis: CartesianAxis,
 ) => {
   const { orientation, scale } = axis;
 
@@ -480,7 +479,7 @@ export const handleVerticalTickLabelTransform = (
 export const handleVerticalTickLabelOffset = (
   width: number,
   config: CartesianStyleConfig,
-  axis?: AxisOriented,
+  axis?: AxisProps,
 ) => {
   let res = 0;
 
@@ -512,14 +511,14 @@ export const computeAxisProperties = ({
   positionBottom,
   positionLeft,
 }: {
-  axis?: AxisOriented;
+  axis?: AxisProps;
   maxRangeX: number;
   maxRangeY: number;
   positionTop: number;
   positionRight: number;
   positionBottom: number;
   positionLeft: number;
-}): AxisProperties | undefined => {
+}): CartesianAxis | undefined => {
   if (axis) {
     const { orientation } = axis;
 
@@ -568,7 +567,7 @@ export const computeAxisProperties = ({
 };
 
 export const computeAllAxisProperties = (
-  axis: Record<AxisOrientation, AxisOriented | undefined>,
+  axis: Record<AxisOrientation, AxisProps | undefined>,
   dimension: {
     maxWidth: number;
     maxHeight: number;
@@ -605,7 +604,7 @@ export const computeAllAxisProperties = (
     ...shared,
   });
 
-  const a: AxisSystemProperties = {
+  const a: CartesianSystemAxis = {
     top: t,
     right: r,
     bottom: b,
