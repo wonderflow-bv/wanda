@@ -113,3 +113,22 @@ export const handleDomainAndScaleType = (
     scaleType: st,
   };
 };
+
+export const handleChartDomainAndScaleType = (
+  data: Data,
+  index: LineChartIndex,
+  series: LineChartSeries,
+  overlay?: LineChartOverlay,
+) => {
+  const i = handleDomainAndScaleType(data, index);
+  const s = handleDomainAndScaleType(data, series);
+  const o = overlay
+    ? handleDomainAndScaleType(data, overlay)
+    : undefined;
+
+  return {
+    index: i,
+    series: s,
+    overlay: o,
+  };
+};

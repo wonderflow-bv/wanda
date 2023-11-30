@@ -23,14 +23,14 @@ import {
 } from '../../providers';
 import { defaultLineChartPalette } from '../../style-config';
 import {
-  AxisOrientation,
-  AxisProps,
   CartesianChartLayout, Charts, Data, ThemeVariants,
 } from '../../types';
 import {
   LineChartIndex, LineChartMetadata, LineChartOverlay, LineChartRenderType, LineChartSeries, LineChartTooltip,
 } from '../../types/line-chart';
-import { getLabelFromPath, handleDomainAndScaleType } from '../../utils';
+import {
+  getLabelFromPath, handleChartAxisLayout, handleChartDomainAndScaleType,
+} from '../../utils';
 import { CartesianBase, CartesianBaseProps } from '../cartesian-base/cartesian-base';
 
 export type LineChartProps = {
@@ -84,26 +84,11 @@ export const LineChart: React.FC<LineChartProps> = ({
 }: LineChartProps) => {
   const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
 
-  const i = useMemo(() => handleDomainAndScaleType(data, index), [data, index]);
-  const s = useMemo(() => handleDomainAndScaleType(data, series), [data, series]);
-  const o = useMemo(() => (overlay
-    ? handleDomainAndScaleType(data, overlay)
-    : undefined), [data, overlay]);
+  const { index: i, series: s, overlay: o } = useMemo(
+    () => handleChartDomainAndScaleType(data, index, series, overlay), [data, index, overlay, series],
+  );
 
-  const axis: Record<CartesianChartLayout, Record<AxisOrientation, AxisProps | undefined>> = useMemo(() => ({
-    vertical: {
-      left: { ...i, orientation: 'left' },
-      bottom: { ...s, orientation: 'bottom' },
-      top: o ? { ...o, orientation: 'top' } : undefined,
-      right: undefined,
-    },
-    horizontal: {
-      bottom: { ...i, orientation: 'bottom' },
-      left: { ...s, orientation: 'left' },
-      right: o ? { ...o, orientation: 'right' } : undefined,
-      top: undefined,
-    },
-  }), [i, o, s]);
+  const axis = useMemo(() => handleChartAxisLayout(i, s, o), [i, s, o]);
 
   const seriesNames = useMemo(() => series.dataKey.map((s: string, i: number) => {
     const renamed = series.rename ? series.rename(s, i) : getLabelFromPath(s);

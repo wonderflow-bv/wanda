@@ -19,12 +19,13 @@ import {
 } from '@visx/scale';
 import { NumberValue, ScaleTime } from '@visx/vendor/d3-scale';
 import _ from 'lodash';
+import { Except } from 'type-fest';
 
 import {
   axisStyleConfig,
 } from '../style-config';
 import {
-  AxisProps, CartesianStyleConfig,
+  AxisProps, CartesianChartLayout, CartesianStyleConfig,
   ScaleType, ViewportStyleConfig,
 } from '../types';
 import {
@@ -613,4 +614,23 @@ export const computeAllAxisProperties = (
 
   return a;
 };
+
+export const handleChartAxisLayout = (
+  index: Except<AxisProps, 'orientation'>,
+  series: Except<AxisProps, 'orientation'>,
+  overlay?: Except<AxisProps, 'orientation'>,
+): Record<CartesianChartLayout, Record<AxisOrientation, AxisProps | undefined>> => ({
+  vertical: {
+    left: { ...index, orientation: 'left' },
+    bottom: { ...series, orientation: 'bottom' },
+    top: overlay ? { ...overlay, orientation: 'top' } : undefined,
+    right: undefined,
+  },
+  horizontal: {
+    bottom: { ...index, orientation: 'bottom' },
+    left: { ...series, orientation: 'left' },
+    right: overlay ? { ...overlay, orientation: 'right' } : undefined,
+    top: undefined,
+  },
+});
 
