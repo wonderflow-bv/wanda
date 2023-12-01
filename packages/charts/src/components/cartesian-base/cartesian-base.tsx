@@ -42,6 +42,7 @@ import {
   handleVerticalTickLabelOffset,
 } from '../../utils/axis';
 import { Headings, HeadingsProps } from '../headings';
+import { Loader } from '../loader';
 import { Lines } from '../shapes';
 import styles from './cartesian-base.module.css';
 import { CartesianBaseAxis } from './cartesian-base-axis';
@@ -205,25 +206,12 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
         />
 
         {isLoading && (
-          <Group top={dynamicHeight / 2} left={dynamicWidth / 2}>
-            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="-10" y="-30" enableBackground="new 0 0 100 100" xmlSpace="preserve">
-              <rect fill="#454545" width="10" height="100" rx="4" transform="translate(0) rotate(180 5 50)">
-                <animate attributeName="height" attributeType="XML" dur="1.1s" values="30; 100; 30" repeatCount="indefinite" />
-              </rect>
-              <rect x="17" fill="#454545" width="10" height="100" rx="4" transform="translate(3) rotate(180 20 50)">
-                <animate attributeName="height" attributeType="XML" dur="1.25s" values="30; 100; 30" repeatCount="indefinite" begin="0.1s" />
-              </rect>
-              <rect x="40" fill="#454545" width="10" height="100" rx="4" transform="translate(6) rotate(180 38 50)">
-                <animate attributeName="height" attributeType="XML" dur="1.15s" values="30; 100; 30" repeatCount="indefinite" begin="0.3s" />
-              </rect>
-              <rect x="60" fill="#454545" width="10" height="100" rx="4" transform="translate(9) rotate(180 55 50)">
-                <animate attributeName="height" attributeType="XML" dur="1.25s" values="30; 100; 30" repeatCount="indefinite" begin="0.5s" />
-              </rect>
-              <rect x="80" fill="#454545" width="10" height="100" rx="4" transform="translate(12) rotate(180 72 50)">
-                <animate attributeName="height" attributeType="XML" dur="1.0s" values="30; 100; 30" repeatCount="indefinite" begin="0.1s" />
-              </rect>
-            </svg>
-          </Group>
+          <Loader
+            top={position.top}
+            left={0}
+            width={dynamicWidth}
+            height={dimension.maxHeight}
+          />
         )}
 
         {isEmpty && emptyState}

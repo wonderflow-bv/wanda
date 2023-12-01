@@ -14,9 +14,4 @@
  * limitations under the License.
  */
 
-export * from './cartesian-base';
-export * from './headings';
-export * from './line-chart';
 export * from './loader';
-export * from './shapes';
-export * from './tooltip';

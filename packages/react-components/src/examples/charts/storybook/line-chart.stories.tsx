@@ -12,6 +12,7 @@ const story: ComponentMeta<typeof LineChart> = {
   args: {
     title: 'Line Charts',
     subtitle: 'A trend line chart',
+    isLoading: false,
     data: feedbackCount,
     index: {
       dataKey: 'date',
