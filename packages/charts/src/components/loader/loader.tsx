@@ -20,6 +20,7 @@ import { useDataContext, useThemeContext } from '../../providers';
 import { Charts } from '../../types';
 
 export type LoaderProp = {
+  isLoading?: boolean;
   top?: number;
   left?: number;
   width?: number;
@@ -49,6 +50,7 @@ const pathString = (
 };
 
 export const Loader = ({
+  isLoading = false,
   top = 0,
   left = 0,
   width = 800,
@@ -59,13 +61,15 @@ export const Loader = ({
 
   const isLineChart = metadata?.type === Charts.LINE_CHART;
   const isBarChart = metadata?.type === Charts.BAR_CHART;
-  const fill = 'transparent'; // theme === 'light' ? 'white' : 'black';
+  const fill = 'transparent';
   const stroke = theme === 'light' ? 'slateGray' : 'lightGray';
 
   const linesAnimatedString = useMemo(() => pathString(4, 13, width, height / 2), [height, width]);
   const linesAnimatedString2 = useMemo(() => pathString(4, 9, width, height / 2), [height, width]);
   const linesAnimatedString3 = useMemo(() => pathString(4, 9, width, height / 2), [height, width]);
   const linesAnimatedString4 = useMemo(() => pathString(12, 9, width, height / 2), [height, width]);
+
+  if (!isLoading) return null;
 
   return (
     <svg version="1.1" id="Chart-Loader" xmlns="http:www.w3.org/2000/svg" viewBox={`0 0 ${width} ${height}`}>

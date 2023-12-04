@@ -16,7 +16,7 @@
 
 import { createContext, useContext } from 'react';
 
-import { CartesianSystemAxis } from '../types';
+import { CartesianxAxisSystem } from '../types';
 
 export type CartesianContextProps = {
   position: {
@@ -29,7 +29,7 @@ export type CartesianContextProps = {
     maxWidth: number;
     maxHeight: number;
   };
-  axis?: CartesianSystemAxis;
+  axis?: CartesianxAxisSystem;
 };
 
 export type CartesianProviderProps = CartesianContextProps

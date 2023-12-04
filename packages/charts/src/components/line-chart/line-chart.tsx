@@ -76,7 +76,7 @@ export const LineChart: React.FC<LineChartProps> = ({
   theme = 'light',
   layout = CartesianChartLayout.HORIZONTAL,
   renderAs = 'curves',
-  data,
+  data = [],
   index,
   series,
   overlay,

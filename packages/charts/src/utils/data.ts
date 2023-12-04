@@ -50,67 +50,78 @@ export const getLabelFromPath = (path: string) => {
 };
 
 export const getPrimitivesFromObjectArrayByPath = (
-  arr: Array<Record<string, unknown>>,
+  arr: Array<Record<string, any>>,
   path: string,
 ) => arr.map(o => getPrimitiveFromObjectByPath(o, path));
 
-export const handleDomainAndScaleType = (
+export const handleAxisDomainAndScaleType = (
   data: Data,
   axis: LineChartIndex | LineChartSeries | LineChartOverlay,
 ): Except<AxisProps, 'orientation'> => {
-  const { scaleType, dataKey, domain } = axis;
+  const hasData = !!data.length;
+  if (hasData) {
+    const { scaleType, dataKey, domain } = axis;
 
-  const keys = typeof dataKey === 'string' ? [dataKey] : dataKey;
-  const primitivesFromArray = keys.map((k: string) => getPrimitivesFromObjectArrayByPath(data, k));
-  const domainData = _.flattenDeep(primitivesFromArray);
+    const keys = typeof dataKey === 'string' ? [dataKey] : dataKey;
+    const primitivesFromArray = keys.map((k: string) => getPrimitivesFromObjectArrayByPath(data, k));
+    const domainData = _.flattenDeep(primitivesFromArray);
 
-  let d = removeNilValuesFromArray(domainData);
-  const st = inferScaleTypeFromDomain(domainData, scaleType);
+    let d = removeNilValuesFromArray(domainData);
+    const st = inferScaleTypeFromDomain(domainData, scaleType);
+    const hasCustomDomain = !!domain?.length;
 
-  if (domain?.length) {
-    if (st === 'label') {
-      d = domain;
-    }
-
-    if (st === 'time') {
-      const minMaxDate = getMinMaxDate(domain);
-      if (minMaxDate) {
-        const [oldMin, oldMax] = minMaxDate;
-        const [newMin, newMax] = domain;
-        const nMin = new Date(newMin).getTime();
-        const nMax = new Date(newMax).getTime();
-        const oMin = oldMin.getTime();
-        const oMax = oldMax.getTime();
-        const low = nMin < oMin ? newMin : oldMin.toUTCString();
-        const high = nMax > oMax ? newMax : oldMax.toUTCString();
-        d = [low, high];
+    if (hasCustomDomain) {
+      if (st === 'label') {
+        d = domain;
       }
-    }
 
-    if (st === 'linear') {
-      const minMaxNum = getMinMaxNumber(domain as number[]);
+      if (st === 'time') {
+        const minMaxDate = getMinMaxDate(domain);
+        if (minMaxDate) {
+          const [oldMin, oldMax] = minMaxDate;
+          const [newMin, newMax] = domain;
+          const nMin = new Date(newMin).getTime();
+          const nMax = new Date(newMax).getTime();
+          const oMin = oldMin.getTime();
+          const oMax = oldMax.getTime();
+          const low = nMin < oMin ? newMin : oldMin.toUTCString();
+          const high = nMax > oMax ? newMax : oldMax.toUTCString();
+          d = [low, high];
+        }
+      }
+
+      if (st === 'linear') {
+        const minMaxNum = getMinMaxNumber(domain as number[]);
+        if (minMaxNum) {
+          const [oldMin, oldMax] = minMaxNum;
+          const [newMin, newMax] = domain;
+          const nMin = Number(newMin);
+          const nMax = Number(newMax);
+          const low = nMin < oldMin ? nMin : oldMin;
+          const high = nMax > oldMax ? nMax : oldMax;
+          d = [low, high];
+        }
+      }
+    } else if (st === 'linear') {
+      const minMaxNum = getMinMaxNumber(d as number[]);
       if (minMaxNum) {
-        const [oldMin, oldMax] = minMaxNum;
-        const [newMin, newMax] = domain;
-        const nMin = Number(newMin);
-        const nMax = Number(newMax);
-        const low = nMin < oldMin ? nMin : oldMin;
-        const high = nMax > oldMax ? nMax : oldMax;
-        d = [low, high];
+        const [min, max] = minMaxNum;
+        d = [min, _.ceil(max * 1.05)];
       }
     }
-  } else if (st === 'linear') {
-    const minMaxNum = getMinMaxNumber(d as number[]);
-    if (minMaxNum) {
-      const [min, max] = minMaxNum;
-      d = [min, _.ceil(max * 1.05)];
-    }
+
+    return {
+      ...axis,
+      domain: d,
+      scaleType: st,
+    };
   }
 
   return {
     ...axis,
-    domain: d,
-    scaleType: st,
+    hideTickLabel: true,
+    domain: [0, 1],
+    scaleType: 'linear',
   };
 };
 
@@ -120,10 +131,10 @@ export const handleChartDomainAndScaleType = (
   series: LineChartSeries,
   overlay?: LineChartOverlay,
 ) => {
-  const i = handleDomainAndScaleType(data, index);
-  const s = handleDomainAndScaleType(data, series);
+  const i = handleAxisDomainAndScaleType(data, index);
+  const s = handleAxisDomainAndScaleType(data, series);
   const o = overlay
-    ? handleDomainAndScaleType(data, overlay)
+    ? handleAxisDomainAndScaleType(data, overlay)
     : undefined;
 
   return {

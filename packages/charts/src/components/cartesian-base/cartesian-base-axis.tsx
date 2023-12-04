@@ -26,7 +26,7 @@ import { v4 as uuid } from 'uuid';
 
 import { useStyleConfigContext, useThemeContext } from '../../providers';
 import { themes } from '../../style-config';
-import { AxisConfig, CartesianAxis, CartesianSystemAxis } from '../../types/axis';
+import { AxisConfig, CartesianAxis, CartesianxAxisSystem } from '../../types/axis';
 import {
   handleNumberOfTicks,
   handleTickFormat,
@@ -36,7 +36,7 @@ import {
 } from '../../utils/axis';
 
 export type CartesianBaseAxisProps = {
-  axis: CartesianSystemAxis;
+  axis: CartesianxAxisSystem;
   axisConfig: AxisConfig;
   dimension: {
     maxWidth: number;
@@ -91,6 +91,7 @@ export const CartesianBaseAxis: React.FC<CartesianBaseAxisProps> = ({
                 ...tickLineProps,
                 stroke: tick,
               }}
+              tickFormat={tickFormat}
               label={a.label}
               labelOffset={labelOffset}
               labelProps={{
@@ -101,7 +102,6 @@ export const CartesianBaseAxis: React.FC<CartesianBaseAxisProps> = ({
               stroke={line}
               strokeDasharray={axisLineProps.strokeDasharray}
               strokeWidth={axisLineProps.strokeWidth}
-              tickFormat={tickFormat}
             />
           );
         })}

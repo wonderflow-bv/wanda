@@ -33,10 +33,10 @@ import {
   AxisElements,
   AxisOffsetConfig,
   AxisOrientation,
+  AxisSystemElements,
   CartesianAxis,
-  CartesianSystemAxis,
+  CartesianxAxisSystem,
   HorizontalAxisOffsetConfig,
-  SystemAxisElements,
   VerticalAxisoffsetConfig,
 } from '../types/axis';
 import { truncate } from './format';
@@ -126,7 +126,7 @@ export const getLabelOffset = ({
   return off[orientation];
 };
 
-export const computeSingleAxisOffset = (
+export const computeAxisOffset = (
   axis: AxisProps,
   config = axisStyleConfig,
 ) => {
@@ -225,7 +225,7 @@ export const computeSingleAxisOffset = (
   return res;
 };
 
-export const computeAllAxisOffset = (
+export const computeAxisSystemOffset = (
   axis: Record<AxisOrientation, AxisProps | undefined>,
   config = axisStyleConfig,
 ) => {
@@ -233,10 +233,10 @@ export const computeAllAxisOffset = (
     top, right, bottom, left,
   } = axis;
 
-  const t = top && computeSingleAxisOffset(top, config);
-  const r = right && computeSingleAxisOffset(right, config);
-  const b = bottom && computeSingleAxisOffset(bottom, config);
-  const l = left && computeSingleAxisOffset(left, config);
+  const t = top && computeAxisOffset(top, config);
+  const r = right && computeAxisOffset(right, config);
+  const b = bottom && computeAxisOffset(bottom, config);
+  const l = left && computeAxisOffset(left, config);
 
   const to = t ? t.offset : 0;
   const ro = r ? r.offset : 0;
@@ -252,7 +252,7 @@ export const computeAllAxisOffset = (
     horizontalAxisOffset: to + bo,
   };
 
-  const a: SystemAxisElements = {
+  const a: AxisSystemElements = {
     top: t,
     right: r,
     bottom: b,
@@ -269,7 +269,7 @@ export const computeAxisStyleConfig = (
   axis: Record<AxisOrientation, AxisProps | undefined>,
   config = axisStyleConfig,
 ) => {
-  const { offset, axis: ao } = computeAllAxisOffset(axis, config);
+  const { offset, axis: ao } = computeAxisSystemOffset(axis, config);
   const {
     top: t, right: r, bottom: b, left: l,
   } = ao;
@@ -566,7 +566,7 @@ export const computeAxisProperties = ({
   return undefined;
 };
 
-export const computeAllAxisProperties = (
+export const computeAxisSystemProperties = (
   axis: Record<AxisOrientation, AxisProps | undefined>,
   dimension: {
     maxWidth: number;
@@ -587,6 +587,7 @@ export const computeAllAxisProperties = (
     positionBottom: position.bottom,
     positionLeft: position.left,
   };
+
   const t = computeAxisProperties({
     axis: axis.top,
     ...shared,
@@ -604,7 +605,7 @@ export const computeAllAxisProperties = (
     ...shared,
   });
 
-  const a: CartesianSystemAxis = {
+  const a: CartesianxAxisSystem = {
     top: t,
     right: r,
     bottom: b,

@@ -168,6 +168,28 @@ withCustomDomain.args = {
   },
 };
 
+export const withVerticalLayout = Template.bind({});
+withVerticalLayout.args = {
+  layout: CartesianChartLayout.VERTICAL,
+  overlay: {
+    dataKey: 'overlay',
+    label: 'Overlay',
+  },
+  index: {
+    dataKey: 'date',
+    label: 'Year',
+  },
+  series: {
+    dataKey: ['feedback count'],
+    label: 'Feedback Count',
+  },
+};
+
+export const withNoData = Template.bind({});
+withNoData.args = {
+  data: [],
+};
+
 export const renderAsLines = Template.bind({});
 renderAsLines.args = {
   title: 'Multiple Series',
@@ -199,23 +221,6 @@ renderAsSteps.args = {
     domain: [0, 200],
     dataKey: ['positive', 'negative'],
     label: 'Pros & cons',
-  },
-};
-
-export const vertical = Template.bind({});
-vertical.args = {
-  layout: CartesianChartLayout.VERTICAL,
-  overlay: {
-    dataKey: 'overlay',
-    label: 'Overlay',
-  },
-  index: {
-    dataKey: 'date',
-    label: 'Year',
-  },
-  series: {
-    dataKey: ['feedback count'],
-    label: 'Feedback Count',
   },
 };
 

@@ -45,9 +45,9 @@ export type AxisElements = {
   axisLine: number;
 }
 
-export type SystemAxisElements = Record<AxisOrientation, AxisElements | undefined>
+export type AxisSystemElements = Record<AxisOrientation, AxisElements | undefined>
 
-export type CartesianSystemAxis = Record<AxisOrientation, CartesianAxis | undefined>
+export type CartesianxAxisSystem = Record<AxisOrientation, CartesianAxis | undefined>
 
 export type LabelProps = {
   fontFamily: string;

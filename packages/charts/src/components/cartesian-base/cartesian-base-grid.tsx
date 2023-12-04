@@ -17,16 +17,14 @@
 import { LinearGradient } from '@visx/gradient';
 import { GridColumns, GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
-import { ScaleBand, ScaleLinear, ScaleTime } from '@visx/vendor/d3-scale';
 
 import { useLayoutContext, useStyleConfigContext } from '../../providers';
 import { useThemeContext } from '../../providers/theme';
 import { themes } from '../../style-config';
-import { Background } from '../../types';
+import { Background, CartesianxAxisSystem } from '../../types';
 
 export type CartesianBaseGridProps = {
-  scaleRow: ScaleBand<string> | ScaleLinear<number, number> | ScaleTime<number, number>;
-  scaleCols: ScaleBand<string> | ScaleLinear<number, number> | ScaleTime<number, number>;
+  axis: CartesianxAxisSystem;
   position: {
     top?: number;
     right?: number;
@@ -46,8 +44,7 @@ export type CartesianBaseGridProps = {
 }
 
 export const CartesianBaseGrid: React.FC<CartesianBaseGridProps> = ({
-  scaleRow,
-  scaleCols,
+  axis,
   position,
   dimension,
   hideColumns = false,
@@ -64,6 +61,9 @@ export const CartesianBaseGrid: React.FC<CartesianBaseGridProps> = ({
   const { maxWidth, maxHeight } = dimension;
   const { left, top } = position;
   const { from, to } = { ...themes[theme].grid.background, ...background };
+
+  const scaleRow = axis.left?.scale ?? axis.right!.scale;
+  const scaleCols = axis.bottom?.scale ?? axis.top!.scale;
 
   const hasRows = Boolean(!hideRows && scaleRow);
   const hasCols = Boolean(!hideColumns && scaleCols);
