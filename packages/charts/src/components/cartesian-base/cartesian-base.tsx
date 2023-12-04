@@ -41,6 +41,7 @@ import {
   computeAxisStyleConfig,
   computeAxisSystemProperties, handleVerticalTickLabelOffset,
 } from '../../utils/axis';
+import { EmptyState } from '../empty-state';
 import { Headings, HeadingsProps } from '../headings';
 import { Loader } from '../loader';
 import { Lines } from '../shapes';
@@ -57,12 +58,12 @@ export type CartesianBaseProps = {
   height?: number;
   preventResponsive?: boolean;
   isLoading?: boolean;
-  emptyState?: React.ReactNode;
   background?: Background;
   margin?: MarginProps;
   grid?: GridProps;
   axis: Record<AxisOrientation, AxisProps | undefined>;
   hideLegend?: boolean;
+  emptyState?: React.ReactNode;
   customLegend?: React.ReactNode;
   styleConfig?: DeepPartial<CartesianStyleConfig>;
   otherProps?: Record<string, any>;
@@ -73,7 +74,6 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   height = 600,
   preventResponsive,
   isLoading = false,
-  emptyState,
   background,
   margin = {
     top: 24,
@@ -89,8 +89,9 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   subtitle,
   headings,
   axis,
-  customLegend,
   hideLegend = false,
+  emptyState,
+  customLegend,
   styleConfig,
   otherProps,
 }: CartesianBaseProps) => {
@@ -108,8 +109,13 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   const refLegend = useRef(null);
   const sizeLegend = useSize(refLegend);
 
-  const legendHeight = hideLegend ? 0 : (sizeLegend?.height ?? 0);
-  const headingHeight = title ? hStyle.height : 0;
+  const hasData = !!data.length;
+  const hasEmptyState = !isLoading && !hasData;
+  const hasHeadings = !!title;
+  const hasLegend = hasData && !hideLegend && !isLoading;
+
+  const legendHeight = hasLegend ? (sizeLegend?.height ?? 0) : 0;
+  const headingHeight = hasHeadings ? hStyle.height : 0;
 
   const w = size ? size.width : width;
   const h = size ? size.height : height;
@@ -166,10 +172,6 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
 
   const axisSystem = computeAxisSystemProperties(axis, dimension, position);
 
-  const hasData = !!data.length;
-  const isEmpty = !isLoading && !hasData;
-  const isReady = !isLoading && !emptyState;
-
   return (
     <div
       className={styles.Wrapper}
@@ -214,9 +216,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
           height={dimension.maxHeight}
         />
 
-        {isEmpty && emptyState}
-
-        {isReady && (
+        {!isLoading && (
           <Group>
             <CartesianBaseGrid
               position={position}
@@ -236,6 +236,13 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
               axisConfig={axisConfig}
             />
 
+            <EmptyState
+              position={position}
+              dimension={dimension}
+              customEmptyState={emptyState}
+              isVisible={hasEmptyState}
+            />
+
             {hasData && (
               <CartesianProvider
                 position={position}
@@ -249,7 +256,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
         )}
       </svg>
 
-      {isReady && (
+      {hasLegend && (
         <CartesianBaseLegend
           customLegend={customLegend}
           hideLegend={hideLegend}

@@ -188,6 +188,8 @@ withVerticalLayout.args = {
 export const withNoData = Template.bind({});
 withNoData.args = {
   data: [],
+  title: 'Line Charts',
+  subtitle: 'A trend line chart w/o data',
 };
 
 export const renderAsLines = Template.bind({});
