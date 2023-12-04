@@ -20,7 +20,6 @@ import { Group } from '@visx/group';
 
 import { useLayoutContext, useStyleConfigContext } from '../../providers';
 import { useThemeContext } from '../../providers/theme';
-import { themes } from '../../style-config';
 import { Background, CartesianxAxisSystem } from '../../types';
 
 export type CartesianBaseGridProps = {
@@ -55,7 +54,7 @@ export const CartesianBaseGrid: React.FC<CartesianBaseGridProps> = ({
   otherProps,
 }: CartesianBaseGridProps) => {
   const theme = useThemeContext();
-  const { grid: gStyle } = useStyleConfigContext();
+  const { grid: gStyle, themes } = useStyleConfigContext();
   const { isHorizontal } = useLayoutContext();
 
   const { maxWidth, maxHeight } = dimension;

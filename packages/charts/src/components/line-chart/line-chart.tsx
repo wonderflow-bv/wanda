@@ -18,7 +18,8 @@ import { useMemo } from 'react';
 import { Except } from 'type-fest';
 
 import {
-  DataProvider, LayoutProvider, StyleConfigProvider, ThemeProvider,
+  DataProvider, LayoutProvider,
+  ThemeProvider,
 } from '../../providers';
 import { defaultLineChartPalette } from '../../style-config';
 import {
@@ -128,22 +129,20 @@ export const LineChart: React.FC<LineChartProps> = ({
     showMarkerLabel]);
 
   return (
-    <StyleConfigProvider>
-      <ThemeProvider theme={theme}>
-        <LayoutProvider layout={layout}>
-          <DataProvider data={data} metadata={metadata}>
-            <CartesianBase
-              axis={axis[layout]}
-              grid={{
-                hideRows: !isHorizontal,
-                hideColumns: isHorizontal,
-              }}
-              {...otherProps}
-            />
-          </DataProvider>
-        </LayoutProvider>
-      </ThemeProvider>
-    </StyleConfigProvider>
+    <ThemeProvider theme={theme}>
+      <LayoutProvider layout={layout}>
+        <DataProvider data={data} metadata={metadata}>
+          <CartesianBase
+            axis={axis[layout]}
+            grid={{
+              hideRows: !isHorizontal,
+              hideColumns: isHorizontal,
+            }}
+            {...otherProps}
+          />
+        </DataProvider>
+      </LayoutProvider>
+    </ThemeProvider>
   );
 };
 

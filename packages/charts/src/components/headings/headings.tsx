@@ -20,7 +20,6 @@ import _ from 'lodash';
 import { useMemo } from 'react';
 
 import { useStyleConfigContext, useThemeContext } from '../../providers';
-import { themes } from '../../style-config';
 import { HeadingsStyleConfig } from '../../types';
 import { DeepPartial } from '../../types/main';
 
@@ -56,7 +55,7 @@ export const Headings: React.FC<HeadingsProps> = ({
   config,
 }: HeadingsProps) => {
   const theme = useThemeContext();
-  const { headings } = useStyleConfigContext();
+  const { headings, themes } = useStyleConfigContext();
 
   const mergeStyle: HeadingsStyleConfig = useMemo(() => (_.merge(headings, config)),
     [headings, config]);

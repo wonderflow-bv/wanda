@@ -23,7 +23,6 @@ import { v4 as uuid } from 'uuid';
 import {
   useCartesianContext, useDataContext, useLayoutContext, useStyleConfigContext, useThemeContext,
 } from '../../../providers';
-import { themes } from '../../../style-config';
 import {
   createSubPaths,
   getCoordinates, getLinesRenderer, getValueFromObjectByPath,
@@ -34,7 +33,7 @@ import {
 
 export const LinesSeries: React.FC = () => {
   const theme = useThemeContext();
-  const { lines: defaultStyle } = useStyleConfigContext();
+  const { lines: defaultStyle, themes } = useStyleConfigContext();
   const { data, metadata } = useDataContext();
   const { isHorizontal } = useLayoutContext();
   const { axis } = useCartesianContext();

@@ -22,7 +22,9 @@ import { GridStyleConfig } from './grid';
 import { HeadingsStyleConfig } from './headings';
 import { LegendStyleConfig } from './legend';
 import { Background } from './linear-gradient';
+import { LinesStyleConfig } from './lines';
 import { ScaleType } from './main';
+import { Themes } from './themes';
 import { ViewportStyleConfig } from './viewport';
 
 export enum CartesianChartLayout {
@@ -67,9 +69,11 @@ export type AxisProps = {
 }
 
 export type CartesianStyleConfig = {
+  headings: HeadingsStyleConfig;
   grid: GridStyleConfig;
   axis: AxisElementsStyleConfig;
-  headings: HeadingsStyleConfig;
+  lines: LinesStyleConfig;
   legend: LegendStyleConfig;
   viewport: ViewportStyleConfig;
+  themes: Themes;
 }

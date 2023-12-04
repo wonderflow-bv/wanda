@@ -17,51 +17,26 @@
 import { createContext, useContext } from 'react';
 
 import {
-  axisStyleConfig,
   cartesianStyleConfig,
-  gridStyleConfig,
-  headingsStyleConfig,
-  linesStyleConfig,
-  viewportStyleConfig,
 } from '../style-config';
-import { legendStyleConfig } from '../style-config/legend';
 import {
-  AxisElementsStyleConfig, CartesianStyleConfig,
-  GridStyleConfig, HeadingsStyleConfig, LegendStyleConfig,
-  ViewportStyleConfig,
+  CartesianStyleConfig,
 } from '../types';
-import { LinesStyleConfig } from '../types/lines';
 
-export type StyleConfigContextProps = {
-  axis: AxisElementsStyleConfig;
-  cartesian: CartesianStyleConfig;
-  grid: GridStyleConfig;
-  headings: HeadingsStyleConfig;
-  legend: LegendStyleConfig;
-  lines: LinesStyleConfig;
-  viewport: ViewportStyleConfig;
-};
+export type StyleConfigContextProps = CartesianStyleConfig;
 
 export type StyleConfigProviderProps = {
+  styleConfig: CartesianStyleConfig;
   children?: React.ReactNode;
 }
 
-const defaultStyleConfig = {
-  axis: axisStyleConfig,
-  cartesian: cartesianStyleConfig,
-  grid: gridStyleConfig,
-  headings: headingsStyleConfig,
-  legend: legendStyleConfig,
-  lines: linesStyleConfig,
-  viewport: viewportStyleConfig,
-};
-
-export const StyleConfigContext = createContext<StyleConfigContextProps>(defaultStyleConfig);
+export const StyleConfigContext = createContext<StyleConfigContextProps>(cartesianStyleConfig);
 
 export const StyleConfigProvider: FCChildren<StyleConfigProviderProps> = ({
+  styleConfig,
   children,
 }) => (
-  <StyleConfigContext.Provider value={defaultStyleConfig}>
+  <StyleConfigContext.Provider value={styleConfig}>
     {children}
   </StyleConfigContext.Provider>
 );

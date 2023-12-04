@@ -19,12 +19,16 @@ import { axisStyleConfig } from './axis';
 import { gridStyleConfig } from './grid';
 import { headingsStyleConfig } from './headings';
 import { legendStyleConfig } from './legend';
+import { linesStyleConfig } from './lines';
+import { themes } from './themes';
 import { viewportStyleConfig } from './viewport';
 
 export const cartesianStyleConfig: CartesianStyleConfig = {
+  headings: headingsStyleConfig,
   grid: gridStyleConfig,
   axis: axisStyleConfig,
-  headings: headingsStyleConfig,
   legend: legendStyleConfig,
+  lines: linesStyleConfig,
   viewport: viewportStyleConfig,
+  themes,
 };

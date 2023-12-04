@@ -25,7 +25,6 @@ import {
 import { v4 as uuid } from 'uuid';
 
 import { useStyleConfigContext, useThemeContext } from '../../providers';
-import { themes } from '../../style-config';
 import { AxisConfig, CartesianAxis, CartesianxAxisSystem } from '../../types/axis';
 import {
   handleNumberOfTicks,
@@ -52,7 +51,8 @@ export const CartesianBaseAxis: React.FC<CartesianBaseAxisProps> = ({
   dimension,
 }: CartesianBaseAxisProps) => {
   const theme = useThemeContext();
-  const { viewport: vStyle, cartesian: cStyle } = useStyleConfigContext();
+  const styleConfig = useStyleConfigContext();
+  const { viewport, themes } = styleConfig;
   const { maxWidth: xMax, maxHeight: yMax } = dimension;
 
   return (
@@ -70,9 +70,9 @@ export const CartesianBaseAxis: React.FC<CartesianBaseAxisProps> = ({
             tickLabelProps, tickLineProps, labelProps, axisLineProps,
           } = axisConfig.style;
 
-          const isVertical = hasVerticalTickLabel(xMax, a, vStyle);
-          const numTicks = handleNumberOfTicks(xMax, yMax, a, vStyle);
-          const labelOffset = orientation.labelOffset + handleVerticalTickLabelOffset(xMax, cStyle, a);
+          const isVertical = hasVerticalTickLabel(xMax, a, viewport);
+          const numTicks = handleNumberOfTicks(xMax, yMax, a, viewport);
+          const labelOffset = orientation.labelOffset + handleVerticalTickLabelOffset(xMax, styleConfig, a);
           const tickFormat = handleTickFormat(a) as TickFormat;
 
           return (

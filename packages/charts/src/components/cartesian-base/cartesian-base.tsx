@@ -23,11 +23,11 @@ import {
   useMemo, useRef,
 } from 'react';
 
-import { useStyleConfigContext } from '../../providers';
+import { StyleConfigProvider } from '../../providers';
 import { CartesianProvider } from '../../providers/cartesian';
 import { useDataContext } from '../../providers/data';
 import { useThemeContext } from '../../providers/theme';
-import { headingsStyleConfig as hStyle, themes } from '../../style-config';
+import { cartesianStyleConfig, headingsStyleConfig as hStyle } from '../../style-config';
 import { AxisOrientation } from '../../types';
 import {
   AxisProps, CartesianStyleConfig, GridProps, MarginProps,
@@ -96,11 +96,10 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   otherProps,
 }: CartesianBaseProps) => {
   const theme = useThemeContext();
-  const { cartesian: cStyle } = useStyleConfigContext();
   const { metadata, data } = useDataContext();
 
-  const cartesianConfig = _.merge(cStyle, styleConfig);
-  const { axis: aStyle, legend: lStyle } = cartesianConfig;
+  const cartesianConfig = _.merge(cartesianStyleConfig, styleConfig);
+  const { axis: aStyle, legend: lStyle, themes } = cartesianConfig;
   const { from, to } = _.merge(themes[theme].background, background);
 
   const ref = useRef(null);
@@ -180,89 +179,91 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
       ref={ref}
       style={dynamicStyle}
     >
-      <svg
-        width={dynamicWidth}
-        height={dynamicHeight}
-        viewBox={`0 0 ${dynamicWidth} ${dynamicHeight}`}
-        {...otherProps}
-      >
-
-        <LinearGradient id="cartesian-container" from={from} to={to} />
-
-        <rect
-          x={0}
-          y={0}
+      <StyleConfigProvider styleConfig={cartesianConfig}>
+        <svg
           width={dynamicWidth}
           height={dynamicHeight}
-          fill="url(#cartesian-container)"
-          rx={0}
-          strokeWidth={0}
-          stroke="none"
-        />
+          viewBox={`0 0 ${dynamicWidth} ${dynamicHeight}`}
+          {...otherProps}
+        >
 
-        <Headings
-          title={title}
-          subtitle={subtitle}
-          top={headings?.top ?? 40}
-          left={headings?.left ?? ml}
-          config={headings?.config}
-        />
+          <LinearGradient id="cartesian-container" from={from} to={to} />
 
-        <Loader
-          isLoading={isLoading}
-          top={position.top}
-          left={0}
-          width={dynamicWidth}
-          height={dimension.maxHeight}
-        />
+          <rect
+            x={0}
+            y={0}
+            width={dynamicWidth}
+            height={dynamicHeight}
+            fill="url(#cartesian-container)"
+            rx={0}
+            strokeWidth={0}
+            stroke="none"
+          />
 
-        {!isLoading && (
-          <Group>
-            <CartesianBaseGrid
-              position={position}
-              dimension={dimension}
-              axis={axisSystem}
-              hideRows={grid.hideRows}
-              hideColumns={grid.hideColumns}
-              tickRows={grid.tickRows}
-              tickColumns={grid.tickColumns}
-              background={grid.background}
-              otherProps={grid.otherProps}
-            />
+          <Headings
+            title={title}
+            subtitle={subtitle}
+            top={headings?.top ?? 40}
+            left={headings?.left ?? ml}
+            config={headings?.config}
+          />
 
-            <CartesianBaseAxis
-              dimension={dimension}
-              axis={axisSystem}
-              axisConfig={axisConfig}
-            />
+          <Loader
+            isLoading={isLoading}
+            top={position.top}
+            left={0}
+            width={dynamicWidth}
+            height={dimension.maxHeight}
+          />
 
-            <EmptyState
-              position={position}
-              dimension={dimension}
-              customEmptyState={emptyState}
-              isVisible={hasEmptyState}
-            />
-
-            {hasData && (
-              <CartesianProvider
+          {!isLoading && (
+            <Group>
+              <CartesianBaseGrid
                 position={position}
                 dimension={dimension}
                 axis={axisSystem}
-              >
-                {metadata?.type === Charts.LINE_CHART && <Lines />}
-              </CartesianProvider>
-            )}
-          </Group>
-        )}
-      </svg>
+                hideRows={grid.hideRows}
+                hideColumns={grid.hideColumns}
+                tickRows={grid.tickRows}
+                tickColumns={grid.tickColumns}
+                background={grid.background}
+                otherProps={grid.otherProps}
+              />
 
-      {hasLegend && (
-        <CartesianBaseLegend
-          customLegend={customLegend}
-          hideLegend={hideLegend}
-          ref={refLegend}
-        />
-      )}
+              <CartesianBaseAxis
+                dimension={dimension}
+                axis={axisSystem}
+                axisConfig={axisConfig}
+              />
+
+              <EmptyState
+                position={position}
+                dimension={dimension}
+                customEmptyState={emptyState}
+                isVisible={hasEmptyState}
+              />
+
+              {hasData && (
+                <CartesianProvider
+                  position={position}
+                  dimension={dimension}
+                  axis={axisSystem}
+                >
+                  {metadata?.type === Charts.LINE_CHART && <Lines />}
+                </CartesianProvider>
+              )}
+            </Group>
+          )}
+        </svg>
+
+        {hasLegend && (
+          <CartesianBaseLegend
+            customLegend={customLegend}
+            hideLegend={hideLegend}
+            ref={refLegend}
+          />
+        )}
+      </StyleConfigProvider>
 
     </div>
   );

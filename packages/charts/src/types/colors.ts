@@ -14,6 +14,20 @@
  * limitations under the License.
  */
 
+export type ColorsNames = 'primary'
+| 'red'
+| 'magenta'
+| 'purple'
+| 'violet'
+| 'indigo'
+| 'blue'
+| 'cyan'
+| 'mint'
+| 'green'
+| 'dipsy'
+| 'yellow'
+| 'salmon';
+
 export type SupportColorNames = 'brand' | 'white' | 'black';
 
 export type NeutralsColorNames = 'white'
@@ -47,19 +61,5 @@ export type KpisColorsNames = 'salesData'
 
 export type Gradient = '0' | '5' | '10' | '20' | '30' | '40' | '50' | '60' | '70' | '80' | '90' | '100';
 
-export type Colors = {
-  support: Record<SupportColorNames, string>;
-  primary: Record<Gradient, string>;
-  red: Record<Gradient, string>;
-  magenta: Record<Gradient, string>;
-  purple: Record<Gradient, string>;
-  violet: Record<Gradient, string>;
-  indigo: Record<Gradient, string>;
-  blue: Record<Gradient, string>;
-  cyan: Record<Gradient, string>;
-  mint: Record<Gradient, string>;
-  green: Record<Gradient, string>;
-  dipsy: Record<Gradient, string>;
-  yellow: Record<Gradient, string>;
-  salmon: Record<Gradient, string>;
-}
+export type Colors = Record<ColorsNames, Record<Gradient, string>>
+& { support: Record<SupportColorNames, string> }
