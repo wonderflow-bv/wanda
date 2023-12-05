@@ -63,25 +63,25 @@ describe('formatNumber()', () => {
 describe('formatDate()', () => {
   it('should return the formatted date', () => {
     const res = formatDate(new Date('12-13-2023'));
-    const exp = '12-13-23';
+    const exp = '12-13-2023';
     expect(res).toStrictEqual(exp);
   });
 
   it('should return the formatted date', () => {
     const res = formatDate(new Date('2023-12-13'));
-    const exp = '12-13-23';
+    const exp = '12-13-2023';
     expect(res).toStrictEqual(exp);
   });
 
   it('should return the formatted date for UK', () => {
     const res = formatDate(new Date('2023-12-13'), 'en-UK');
-    const exp = '13-12-23';
+    const exp = '13-12-2023';
     expect(res).toStrictEqual(exp);
   });
 
   it('should return the formatted date for IT', () => {
     const res = formatDate(new Date('12-13-2023'), 'it-IT');
-    const exp = '13-12-23';
+    const exp = '13-12-2023';
     expect(res).toStrictEqual(exp);
   });
 });
@@ -95,7 +95,7 @@ describe('formatValue()', () => {
 
   it('should return the value for date', () => {
     const res = formatValue(new Date('12-13-2023'));
-    const exp = '12-13-23';
+    const exp = '12-13-2023';
     expect(res).toStrictEqual(exp);
   });
 

@@ -18,9 +18,11 @@ import _ from 'lodash';
 import { Except } from 'type-fest';
 
 import {
-  AxisProps, Data, LineChartIndex, LineChartOverlay, LineChartSeries,
+  AxisProps,
+  Data, LineChartIndex, LineChartOverlay, LineChartSeries,
 } from '../types';
 import { inferScaleTypeFromDomain } from './axis';
+import { formatDate } from './format';
 import {
   getMinMaxDate, getMinMaxNumber,
   removeNilsFromDomain,
@@ -39,8 +41,8 @@ export const getLabelFromPath = (path: string) => {
   let res = notation[0];
 
   if (notation.length > 1) {
-    const parent = notation.at(-2);
-    res = parent ?? res;
+    const parent = notation.at(-2)!;
+    res = parent;
   }
 
   const regex = /([a-zA-Z]+)\[(\d+)\]/;
@@ -54,11 +56,28 @@ export const getPrimitivesFromObjectArrayByPath = (
   path: string,
 ) => arr.map(o => getPrimitiveFromObjectByPath(o, path));
 
+export const removeKeysFromObject = (obj: Record<string, any>, keys: string[]) => {
+  const copy: Record<string, any> = {};
+  const allKeys = Object.keys(obj);
+
+  allKeys.forEach((k: string) => {
+    if (!keys.includes(k)) copy[k] = obj[k];
+  });
+  return copy;
+};
+
 export const handleAxisDomainAndScaleType = (
   data: Data,
   axis: LineChartIndex | LineChartSeries | LineChartOverlay,
 ): Except<AxisProps, 'orientation'> => {
   const hasData = !!data.length;
+  let res: Record<string, any> = {
+    ...axis,
+    hideTickLabel: true,
+    domain: [0, 1],
+    scaleType: 'linear',
+  };
+
   if (hasData) {
     const { scaleType, dataKey, domain } = axis;
 
@@ -66,17 +85,13 @@ export const handleAxisDomainAndScaleType = (
     const primitivesFromArray = keys.map((k: string) => getPrimitivesFromObjectArrayByPath(data, k));
     const domainData = _.flattenDeep(primitivesFromArray);
 
-    let d = removeNilsFromDomain(domainData);
+    let ownDomain = removeNilsFromDomain(domainData);
     const st = inferScaleTypeFromDomain(domainData, scaleType);
     const hasCustomDomain = !!domain?.length;
 
     if (hasCustomDomain) {
-      if (st === 'label') {
-        d = domain;
-      }
-
       if (st === 'time') {
-        const minMaxDate = getMinMaxDate(domain);
+        const minMaxDate = getMinMaxDate(ownDomain);
         if (minMaxDate) {
           const [oldMin, oldMax] = minMaxDate;
           const [newMin, newMax] = domain;
@@ -84,14 +99,14 @@ export const handleAxisDomainAndScaleType = (
           const nMax = new Date(newMax).getTime();
           const oMin = oldMin.getTime();
           const oMax = oldMax.getTime();
-          const low = nMin < oMin ? newMin : oldMin.toUTCString();
-          const high = nMax > oMax ? newMax : oldMax.toUTCString();
-          d = [low, high];
+          const low = nMin < oMin ? new Date(newMin) : oldMin;
+          const high = nMax > oMax ? new Date(newMax) : oldMax;
+          ownDomain = [formatDate(low), formatDate(high)];
         }
       }
 
       if (st === 'linear') {
-        const minMaxNum = getMinMaxNumber(domain as number[]);
+        const minMaxNum = getMinMaxNumber(ownDomain as number[]);
         if (minMaxNum) {
           const [oldMin, oldMax] = minMaxNum;
           const [newMin, newMax] = domain;
@@ -99,30 +114,25 @@ export const handleAxisDomainAndScaleType = (
           const nMax = Number(newMax);
           const low = nMin < oldMin ? nMin : oldMin;
           const high = nMax > oldMax ? nMax : oldMax;
-          d = [low, high];
+          ownDomain = [low, high];
         }
       }
     } else if (st === 'linear') {
-      const minMaxNum = getMinMaxNumber(d as number[]);
+      const minMaxNum = getMinMaxNumber(ownDomain as number[]);
       if (minMaxNum) {
         const [min, max] = minMaxNum;
-        d = [min, _.ceil(max * 1.05)];
+        ownDomain = [min, _.ceil(max * 1.05)];
       }
     }
 
-    return {
+    res = {
       ...axis,
-      domain: d,
+      domain: ownDomain,
       scaleType: st,
     };
   }
 
-  return {
-    ...axis,
-    hideTickLabel: true,
-    domain: [0, 1],
-    scaleType: 'linear',
-  };
+  return removeKeysFromObject(res, ['dataKey', 'style', 'rename']) as Except<AxisProps, 'orientation'>;
 };
 
 export const handleChartDomainAndScaleType = (

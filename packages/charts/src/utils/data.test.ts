@@ -1,9 +1,12 @@
 
+import { LineChartIndex, LineChartOverlay, LineChartSeries } from '../types';
 import {
   getLabelFromPath,
   getPrimitiveFromObjectByPath,
   getPrimitivesFromObjectArrayByPath,
   getValueFromObjectByPath,
+  handleAxisDomainAndScaleType,
+  handleChartDomainAndScaleType,
 } from './data';
 
 const data = [
@@ -160,5 +163,243 @@ describe('getPrimitivesFromArrayWithObjectPath', () => {
     const req = getPrimitivesFromObjectArrayByPath(data, path);
     const res = [undefined, undefined, undefined];
     expect(req).toStrictEqual(res);
+  });
+});
+
+describe('handleAxisDomainAndScaleType()', () => {
+  it('should return correct scale type and domain with date', () => {
+    const data = [{ date: '05-12-2022' }, { date: '05-12-2023' }];
+    const axis: LineChartIndex = {
+      scaleType: undefined,
+      dataKey: 'date',
+      domain: undefined,
+    };
+    const res = handleAxisDomainAndScaleType(data, axis);
+    const exp = {
+      scaleType: 'time',
+      domain: ['05-12-2022', '05-12-2023'],
+    };
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return min/max custom domain with date', () => {
+    const data = [{ date: '01-01-2022' }, { date: '01-01-2023' }];
+    const axis: LineChartIndex = {
+      scaleType: undefined,
+      dataKey: 'date',
+      domain: ['1-1-1970', '1-1-2024'],
+    };
+    const res = handleAxisDomainAndScaleType(data, axis);
+    const exp = {
+      scaleType: 'time',
+      domain: ['01-01-1970', '01-01-2024'],
+    };
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return min own domain and max custom domain with date', () => {
+    const data = [{ date: '01-01-2021' }, { date: '01-01-2023' }];
+    const axis: LineChartIndex = {
+      scaleType: undefined,
+      dataKey: 'date',
+      domain: ['1-1-2022', '1-1-2024'],
+    };
+    const res = handleAxisDomainAndScaleType(data, axis);
+    const exp = {
+      scaleType: 'time',
+      domain: ['01-01-2021', '01-01-2024'],
+    };
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return min custom domain and max own domain with date', () => {
+    const data = [{ date: '01-01-2021' }, { date: '01-01-2023' }];
+    const axis: LineChartIndex = {
+      scaleType: undefined,
+      dataKey: 'date',
+      domain: ['1-1-2020', '1-1-2022'],
+    };
+    const res = handleAxisDomainAndScaleType(data, axis);
+    const exp = {
+      scaleType: 'time',
+      domain: ['01-01-2020', '01-01-2023'],
+    };
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return correct scale type and domain for multiple datakeys', () => {
+    const data = [
+      { value: 100, percentage: 10 },
+      { value: undefined, percentage: 3 },
+      { value: 80, percentage: undefined },
+    ];
+    const axis: LineChartSeries = {
+      scaleType: undefined,
+      dataKey: ['value', 'percentage'],
+      domain: undefined,
+    };
+    const res = handleAxisDomainAndScaleType(data, axis);
+    const exp = {
+      scaleType: 'linear',
+      domain: [3, 105],
+    };
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return correct custom domain w numbers', () => {
+    const data = [
+      { value: 100, percentage: 10 },
+      { value: undefined, percentage: 3 },
+      { value: 80, percentage: undefined },
+    ];
+    const axis: LineChartSeries = {
+      scaleType: undefined,
+      dataKey: ['value', 'percentage'],
+      domain: [-100, 100],
+    };
+    const res = handleAxisDomainAndScaleType(data, axis);
+    const exp = {
+      scaleType: 'linear',
+      domain: [-100, 100],
+    };
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return min own domain and max custom domain w numbers', () => {
+    const data = [
+      { value: 100, percentage: 10 },
+      { value: undefined, percentage: 3 },
+      { value: 80, percentage: undefined },
+    ];
+    const axis: LineChartSeries = {
+      scaleType: undefined,
+      dataKey: ['value', 'percentage'],
+      domain: [50, 150],
+    };
+    const res = handleAxisDomainAndScaleType(data, axis);
+    const exp = {
+      scaleType: 'linear',
+      domain: [3, 150],
+    };
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return correct scale type and domain for labels', () => {
+    const data = [
+      { value: 'test1' },
+      { value: undefined },
+      { value: 'test2' },
+    ];
+    const axis: LineChartSeries = {
+      scaleType: undefined,
+      dataKey: ['value'],
+      domain: undefined,
+    };
+    const res = handleAxisDomainAndScaleType(data, axis);
+    const exp = {
+      scaleType: 'label',
+      domain: ['test1', 'test2'],
+    };
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return same labels w custom domain', () => {
+    const data = [
+      { value: 'test1' },
+      { value: undefined },
+      { value: 'test2' },
+    ];
+    const axis: LineChartSeries = {
+      scaleType: undefined,
+      dataKey: ['value'],
+      domain: ['a', 'b'],
+    };
+    const res = handleAxisDomainAndScaleType(data, axis);
+    const exp = {
+      scaleType: 'label',
+      domain: ['test1', 'test2'],
+    };
+    expect(res).toStrictEqual(exp);
+  });
+});
+
+describe('handleChartDomainAndScaleType()', () => {
+  it('should return a correct configuration', () => {
+    const data = [
+      {
+        date: '01-01-2000',
+        value: 100,
+        percentage: 30,
+        overlay: 23,
+      },
+      {
+        date: '01-01-2010',
+        value: 80,
+        percentage: 20,
+        overlay: 28,
+      },
+      {
+        date: '01-01-2020',
+        value: 45,
+        percentage: 42,
+        overlay: 12,
+      }];
+    const index: LineChartIndex = { dataKey: 'date' };
+    const series: LineChartSeries = { dataKey: ['value', 'percentage'] };
+    const overlay: LineChartOverlay = { dataKey: 'overlay' };
+    const res = handleChartDomainAndScaleType(data, index, series, overlay);
+    const exp = {
+      index: {
+        domain: ['01-01-2000', '01-01-2010', '01-01-2020'],
+        scaleType: 'time',
+      },
+      series: {
+        domain: [20, 105],
+        scaleType: 'linear',
+      },
+      overlay: {
+        domain: [12, 30],
+        scaleType: 'linear',
+      },
+    };
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return a correct configuration w/o overlay', () => {
+    const data = [
+      {
+        date: '01-01-2000',
+        value: 100,
+        percentage: 30,
+        overlay: 23,
+      },
+      {
+        date: '01-01-2010',
+        value: 80,
+        percentage: 20,
+        overlay: 28,
+      },
+      {
+        date: '01-01-2020',
+        value: 45,
+        percentage: 42,
+        overlay: 12,
+      }];
+    const index: LineChartIndex = { dataKey: 'date' };
+    const series: LineChartSeries = { dataKey: ['value', 'percentage'] };
+    const overlay = undefined;
+    const res = handleChartDomainAndScaleType(data, index, series, overlay);
+    const exp = {
+      index: {
+        domain: ['01-01-2000', '01-01-2010', '01-01-2020'],
+        scaleType: 'time',
+      },
+      series: {
+        domain: [20, 105],
+        scaleType: 'linear',
+      },
+      overlay: undefined,
+    };
+    expect(res).toStrictEqual(exp);
   });
 });
