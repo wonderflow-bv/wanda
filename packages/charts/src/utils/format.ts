@@ -21,8 +21,8 @@ import { axisStyleConfig } from '../style-config';
 
 export const getLocales = (
   value: string | string[],
-  defaultLocales = 'en-US',
-) => {
+  defaultLocales = ['en-US'],
+): string[] => {
   try {
     // @ts-expect-error: missing Intl d.ts declaration
     return Intl.getCanonicalLocales(value);
