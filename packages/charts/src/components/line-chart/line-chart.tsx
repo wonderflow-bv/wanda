@@ -40,7 +40,7 @@ import { CartesianBase, CartesianBaseProps } from '../cartesian-base/cartesian-b
 
 export type LineChartProps = {
   /**
-   * Set the theme of the chart. This is set to light by default.
+   * Set the theme of the chart. This is set to `light` by default.
    */
   theme: ThemeVariants;
   /**
@@ -67,9 +67,21 @@ export type LineChartProps = {
    * Set the properties associated with the Overlay Axis.
    */
   overlay?: LineChartOverlay;
+  /**
+   * Set extra data or custom content to be displayed in the tooltip.
+   */
   tooltip?: LineChartTooltip;
+  /**
+   * Prevent showing a connecting line between points when data is missing.
+   */
   hideMissingDataConnection?: boolean;
+  /**
+   * Show a marker for every single data point.
+   */
   showMarker?: boolean;
+  /**
+   * Show a label and a marker for every single data point.
+   */
   showMarkerLabel?: boolean;
 } & Except<CartesianBaseProps, 'axis'>
 

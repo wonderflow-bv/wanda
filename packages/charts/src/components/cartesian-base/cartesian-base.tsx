@@ -51,21 +51,69 @@ import { CartesianBaseGrid } from './cartesian-base-grid';
 import { CartesianBaseLegend } from './cartesian-base-legend';
 
 export type CartesianBaseProps = {
+  /**
+   * Set the title in the headings. If no title is set, headings will not be displayed.
+   */
   title?: string;
+  /**
+   * Set an optional subtitle in the headings.
+   */
   subtitle?: string;
+  /**
+   * Set headings custom position and style.
+   */
   headings?: Pick<HeadingsProps, 'top'| 'left'| 'config'>;
+  /**
+   * Set the Cartesian component width. 800px is the default value;
+   */
   width?: number;
+  /**
+   * Set the Cartesian component height. 600px is the default value;
+   */
   height?: number;
+  /**
+   * If true prevent the chart to be responsive.
+   */
   preventResponsive?: boolean;
+  /**
+   * Set the loading state.
+   */
   isLoading?: boolean;
+  /**
+   * Set the Cartesian component background `from` and `to` values.
+   */
   background?: Background;
+  /**
+   * Set margin using an object with `top`, `right`, `bottom` and `left` position.
+   */
   margin?: MarginProps;
+  /**
+   * Set `Grid` properties.
+   */
   grid?: GridProps;
+  /**
+   * Set `Axis System` properties.
+   */
   axis: Record<AxisOrientation, AxisProps | undefined>;
+  /**
+   * Hide `Legend` when set to `true`.
+   */
   hideLegend?: boolean;
+  /**
+   * Set an optional custom `Empty State` component.
+   */
   emptyState?: React.ReactNode;
+  /**
+   * Set a custom `Legend` content.
+   */
   customLegend?: React.ReactNode;
+  /**
+   * Set custom styling properties.
+   */
   styleConfig?: DeepPartial<CartesianStyleConfig>;
+  /**
+   * Set other custom properties.
+   */
   otherProps?: Record<string, any>;
 }
 
