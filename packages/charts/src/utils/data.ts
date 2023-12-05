@@ -23,7 +23,7 @@ import {
 import { inferScaleTypeFromDomain } from './axis';
 import {
   getMinMaxDate, getMinMaxNumber,
-  removeNilValuesFromArray,
+  removeNilsFromDomain,
 } from './math';
 
 export const getValueFromObjectByPath = (object: Record<string, any>, path: string) => _.at(object, path)[0];
@@ -66,7 +66,7 @@ export const handleAxisDomainAndScaleType = (
     const primitivesFromArray = keys.map((k: string) => getPrimitivesFromObjectArrayByPath(data, k));
     const domainData = _.flattenDeep(primitivesFromArray);
 
-    let d = removeNilValuesFromArray(domainData);
+    let d = removeNilsFromDomain(domainData);
     const st = inferScaleTypeFromDomain(domainData, scaleType);
     const hasCustomDomain = !!domain?.length;
 

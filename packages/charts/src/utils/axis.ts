@@ -47,7 +47,7 @@ import {
   isArrayTypeDate,
   isArrayTypeNumber,
   isArrayTypeString,
-  removeNilValuesFromArray,
+  removeNilsFromDomain,
 } from './math';
 import { manageViewport } from './viewport';
 
@@ -310,7 +310,7 @@ export const inferScaleTypeFromDomain = (
   domain: Array<string | number | undefined>,
   scaleType?: ScaleType,
 ): ScaleType => {
-  const d = removeNilValuesFromArray(domain);
+  const d = removeNilsFromDomain(domain);
 
   if (scaleType) return scaleType;
 

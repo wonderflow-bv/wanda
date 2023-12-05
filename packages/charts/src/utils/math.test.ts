@@ -1,5 +1,11 @@
 import {
-  getMaxCharactersNum, getMinMaxDate, getMinMaxNumber, isArrayType, isArrayTypeString,
+  getMaxCharactersNum,
+  getMinMaxDate,
+  getMinMaxNumber,
+  isArrayType,
+  isArrayTypeObject,
+  isArrayTypeString,
+  removeNilsFromDomain,
 } from './math';
 
 describe('getMaxCharactersNum()', () => {
@@ -15,16 +21,32 @@ describe('getMaxCharactersNum()', () => {
 
   it('should return the right amount for floats', () => {
     const res = getMaxCharactersNum([0.1]);
-    expect(res).toBe(3);
+    expect(res).toBe(4);
   });
 
   it('should return the right amount for floats', () => {
     const res = getMaxCharactersNum([0.1, 0.5]);
     expect(res).toBe(4);
   });
+
+  it('should return the right amount for floats with a div < 10', () => {
+    const res = getMaxCharactersNum([1, 9]);
+    expect(res).toBe(3);
+  });
+
   it('should return 0 for zero length array', () => {
     const res = getMaxCharactersNum([]);
     expect(res).toBe(0);
+  });
+
+  it('should return a correct value with a custom tick formatting', () => {
+    const res = getMaxCharactersNum([0, 10], (v: any) => `£ ${v}`);
+    expect(res).toBe(4);
+  });
+
+  it('should return a correct string values', () => {
+    const res = getMaxCharactersNum(['xyz', 'abc']);
+    expect(res).toBe(3);
   });
 });
 
@@ -62,6 +84,15 @@ describe('getMinMaxDate()', () => {
     expect(maxTime - minTime).toBeTruthy();
   });
 
+  it('should get min/max value with Dates string', () => {
+    const d1 = '2023-8-21';
+    const d2 = '2022-8-21';
+    const res = getMinMaxDate([d1, d2]);
+    const minTime = new Date(res![0]).getTime();
+    const maxTime = new Date(res![1]).getTime();
+    expect(maxTime - minTime).toBeTruthy();
+  });
+
   it('should get min/max value wrong Dates format', () => {
     const res = getMinMaxDate([]);
     expect(res).toBe(undefined);
@@ -87,13 +118,13 @@ describe('isArrayType()', () => {
     expect(isType).toBeTruthy();
   });
 
-  it('should return true for object not for array', () => {
+  it('should return true for object', () => {
     const arr = [{ a: 'test' }];
     const isType = isArrayType(arr, 'object');
     expect(isType).toBeTruthy();
   });
 
-  it('should return true for object not for array', () => {
+  it('should return true for array of array', () => {
     const arr = [[1, 2, 3]];
     const isType = isArrayType(arr, 'object');
     expect(isType).toBeTruthy();
@@ -117,5 +148,27 @@ describe('isArrayTypeString()', () => {
     const arr = ['a', 'b'];
     const isType = isArrayTypeString(arr);
     expect(isType).toBeTruthy();
+  });
+});
+
+describe('isArrayTypeObject()', () => {
+  it('should return true for object', () => {
+    const arr = [{}, {}];
+    const isType = isArrayTypeObject(arr);
+    expect(isType).toBeTruthy();
+  });
+});
+
+describe('removeNilsFromDomain()', () => {
+  it('should return non-nullables', () => {
+    const domain = [1, undefined, 2];
+    const res = removeNilsFromDomain(domain);
+    expect(res).toStrictEqual([1, 2]);
+  });
+
+  it('should return non-nullables', () => {
+    const domain = ['1', undefined, 2];
+    const res = removeNilsFromDomain(domain);
+    expect(res).toStrictEqual(['1', 2]);
   });
 });

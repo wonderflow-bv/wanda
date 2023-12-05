@@ -85,7 +85,7 @@ export const getMaxCharactersNum = (
 
   if (tickFormat) {
     const formatObj = domain.map((e, i) => ({ value: e, index: i }));
-    const domainFormatted = tickFormat ? domain.map((v, i) => tickFormat(v, i, formatObj)) : domain;
+    const domainFormatted = domain.map((v, i) => tickFormat(v, i, formatObj));
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     const diff = domainFormatted.map((df, i) => (`${df as any}`).length - (`${domain[i]}`).length);
     const [highest] = diff.sort((a, b) => b - a);
@@ -95,16 +95,12 @@ export const getMaxCharactersNum = (
   if (isNumbers) {
     const minMax = getMinMaxNumber(domain as number[]);
     if (minMax !== undefined) {
-      const [min, max] = minMax;
-      const diff = max - min;
-
-      if (diff && diff < 0.5) {
-        maxLen = formatNumber(_.divide(diff, 10)).length;
-      } else if (diff && diff < 10) {
-        maxLen = formatNumber(_.multiply(diff, 10)).length;
-      } else {
-        maxLen = formatNumber(max).length;
-      }
+      const [low, high] = minMax;
+      const step = high / 10;
+      const lowLen = formatNumber(low).length;
+      const highLen = formatNumber(high).length;
+      const stepLen = formatNumber(step).length;
+      maxLen = Math.max(highLen, stepLen, lowLen);
     }
   } else {
     maxLen = domain.map(el => `${el}`).sort((a, b) => b.length - a.length)[0].length;
@@ -113,6 +109,6 @@ export const getMaxCharactersNum = (
   return maxLen + diffLen;
 };
 
-export const removeNilValuesFromArray = (arr: Array<string | number | undefined>) => arr
-  .filter((el: string | number | undefined): el is NonNullable<string | number> => !_.isNil(el));
+export const removeNilsFromDomain = (domain: Array<string | number | undefined>) => domain
+  .filter((el): el is NonNullable<string | number> => !_.isNil(el));
 
