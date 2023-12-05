@@ -18,15 +18,17 @@ module.exports = {
     },
     {
       displayName: 'themes',
-      roots: ['<rootDir>/packages/themes/'],
+      roots: ['<rootDir>/packages/themes'],
+      modulePathIgnorePatterns: ['dist'],
     },
     {
       displayName: 'tokens',
-      roots: ['<rootDir>/packages/tokens/'],
+      roots: ['<rootDir>/packages/tokens'],
     },
     {
       displayName: 'charts',
-      roots: ['<rootDir>/packages/charts/'],
+      roots: ['<rootDir>/packages/charts/src/'],
+      modulePathIgnorePatterns: ['dist'],
     },
   ],
   verbose: true,
