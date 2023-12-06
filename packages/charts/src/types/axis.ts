@@ -31,6 +31,8 @@ export type CartesianAxis = AxisProps & {
   scale: ScaleBand<string> | ScaleLinear<number, number> | ScaleTime<number, number>;
 }
 
+export type AxisOffsetProps = Pick<AxisProps, 'domain' | 'orientation' | 'label' | 'hideAxisLine' | 'hideTickLabel' | 'hideTicks' | 'tickFormat'>
+
 export type AxisElements = {
   orientation: AxisOrientation;
   offset: number;

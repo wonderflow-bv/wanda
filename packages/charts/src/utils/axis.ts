@@ -32,6 +32,7 @@ import {
   AxisConfig,
   AxisElements,
   AxisOffsetConfig,
+  AxisOffsetProps,
   AxisOrientation,
   AxisSystemElements,
   CartesianAxis,
@@ -127,7 +128,7 @@ export const getLabelOffset = ({
 };
 
 export const computeAxisOffset = (
-  axis: AxisProps,
+  axis: AxisOffsetProps,
   config = axisStyleConfig,
 ) => {
   const {
@@ -226,7 +227,7 @@ export const computeAxisOffset = (
 };
 
 export const computeAxisSystemOffset = (
-  axis: Record<AxisOrientation, AxisProps | undefined>,
+  axis: Record<AxisOrientation, AxisOffsetProps | undefined>,
   config = axisStyleConfig,
 ) => {
   const {
@@ -324,7 +325,7 @@ export const inferScaleTypeFromDomain = (
   return 'label';
 };
 
-export const scaleDomainToAxis = (axis: AxisProps) => {
+export const scaleDomainToAxis = (axis: Except<AxisProps, 'orientation'>) => {
   const {
     domain,
     range,
