@@ -18,7 +18,7 @@ import _ from 'lodash';
 
 export const toHSLA = (hsl: string, alpha: number) => {
   const a = _.clamp(alpha, 0, 1);
-  const hsla = hsl.replace('hsl(', 'hsla(').replace(')', ` / ${alpha})`);
+  const hsla = hsl.replace('hsl(', 'hsla(').replace(')', ` / ${a})`);
   return a < 1 ? hsla : hsl;
 };
 
