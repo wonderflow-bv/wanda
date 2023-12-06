@@ -9,9 +9,11 @@ import {
   computeAxisProperties,
   computeAxisStyleConfig,
   computeAxisSystemOffset,
+  computeAxisSystemProperties,
   getAxisOffset,
   getLabelOffset,
   getTickLabelSize,
+  handleChartAxisLayout,
   handleNumberOfTicks,
   handleTickFormat,
   handleVerticalTickLabelOffset,
@@ -991,6 +993,180 @@ describe('handleVerticalTickLabelOffset()', () => {
     };
     const res = handleVerticalTickLabelOffset(400, cartesianStyleConfig, axis);
     const exp = 200;
+    expect(res).toStrictEqual(exp);
+  });
+});
+
+describe('computeAxisProperties()', () => {
+  it('should return properties for top axis', () => {
+    const axis: AxisProps = {
+      domain: [0, 1],
+      scaleType: 'linear',
+      orientation: 'top',
+    };
+    const res = computeAxisProperties({
+      axis,
+      maxRangeX: 800,
+      maxRangeY: 600,
+      positionTop: 1,
+      positionRight: 2,
+      positionBottom: 3,
+      positionLeft: 4,
+    });
+    expect(res!.scale).toBeDefined();
+  });
+
+  it('should return properties for rigth axis', () => {
+    const axis: AxisProps = {
+      domain: [0, 1],
+      scaleType: 'linear',
+      orientation: 'right',
+    };
+    const res = computeAxisProperties({
+      axis,
+      maxRangeX: 800,
+      maxRangeY: 600,
+      positionTop: 1,
+      positionRight: 2,
+      positionBottom: 3,
+      positionLeft: 4,
+    });
+    expect(res!.scale).toBeDefined();
+  });
+
+  it('should return properties for bottom axis', () => {
+    const axis: AxisProps = {
+      domain: [0, 1],
+      scaleType: 'linear',
+      orientation: 'bottom',
+    };
+    const res = computeAxisProperties({
+      axis,
+      maxRangeX: 800,
+      maxRangeY: 600,
+      positionTop: 1,
+      positionRight: 2,
+      positionBottom: 3,
+      positionLeft: 4,
+    });
+    expect(res!.scale).toBeDefined();
+  });
+
+  it('should return properties for left axis', () => {
+    const axis: AxisProps = {
+      domain: [0, 1],
+      scaleType: 'linear',
+      orientation: 'left',
+    };
+    const res = computeAxisProperties({
+      axis,
+      maxRangeX: 800,
+      maxRangeY: 600,
+      positionTop: 1,
+      positionRight: 2,
+      positionBottom: 3,
+      positionLeft: 4,
+    });
+    expect(res!.scale).toBeDefined();
+  });
+
+  it('should return undefined if no axis', () => {
+    const axis = undefined;
+    const res = computeAxisProperties({
+      axis,
+      maxRangeX: 800,
+      maxRangeY: 600,
+      positionTop: 1,
+      positionRight: 2,
+      positionBottom: 3,
+      positionLeft: 4,
+    });
+    expect(res).toBeUndefined();
+  });
+});
+
+describe('computeAxisSystemProperties()', () => {
+  it('should return', () => {
+    const axis: Record<AxisOrientation, AxisProps | undefined> = {
+      top: {
+        domain: [0, 1],
+        orientation: 'top',
+        scaleType: 'linear',
+      },
+      right: {
+        domain: [0, 1],
+        orientation: 'top',
+        scaleType: 'linear',
+      },
+      bottom: {
+        domain: [0, 1],
+        orientation: 'top',
+        scaleType: 'linear',
+      },
+      left: {
+        domain: [0, 1],
+        orientation: 'top',
+        scaleType: 'linear',
+      },
+    };
+    const res = computeAxisSystemProperties(
+      axis,
+      { maxWidth: 800, maxHeight: 600 },
+      {
+        top: 1, right: 2, bottom: 3, left: 4,
+      },
+    );
+    expect(res.top!.scale).toBeDefined();
+    expect(res.right!.scale).toBeDefined();
+    expect(res.bottom!.scale).toBeDefined();
+    expect(res.left!.scale).toBeDefined();
+  });
+});
+
+describe('handleChartAxisLayout()', () => {
+  it('should return a full configuration', () => {
+    const index: Except<AxisProps, 'orientation'> = {
+      domain: [0, 1],
+      scaleType: 'linear',
+    };
+    const series: Except<AxisProps, 'orientation'> = {
+      domain: [0, 1],
+      scaleType: 'linear',
+    };
+    const overlay: Except<AxisProps, 'orientation'> = {
+      domain: [0, 1],
+      scaleType: 'linear',
+    };
+    const res = handleChartAxisLayout(index, series, overlay);
+    const exp = {
+      horizontal: {
+        bottom: { domain: [0, 1], orientation: 'bottom', scaleType: 'linear' }, left: { domain: [0, 1], orientation: 'left', scaleType: 'linear' }, right: { domain: [0, 1], orientation: 'right', scaleType: 'linear' }, top: undefined,
+      },
+      vertical: {
+        bottom: { domain: [0, 1], orientation: 'bottom', scaleType: 'linear' }, left: { domain: [0, 1], orientation: 'left', scaleType: 'linear' }, right: undefined, top: { domain: [0, 1], orientation: 'top', scaleType: 'linear' },
+      },
+    };
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return a configuration w/o overlay', () => {
+    const index: Except<AxisProps, 'orientation'> = {
+      domain: [0, 1],
+      scaleType: 'linear',
+    };
+    const series: Except<AxisProps, 'orientation'> = {
+      domain: [0, 1],
+      scaleType: 'linear',
+    };
+    const res = handleChartAxisLayout(index, series);
+    const exp = {
+      horizontal: {
+        bottom: { domain: [0, 1], orientation: 'bottom', scaleType: 'linear' }, left: { domain: [0, 1], orientation: 'left', scaleType: 'linear' }, right: undefined, top: undefined,
+      },
+      vertical: {
+        bottom: { domain: [0, 1], orientation: 'bottom', scaleType: 'linear' }, left: { domain: [0, 1], orientation: 'left', scaleType: 'linear' }, right: undefined, top: undefined,
+      },
+    };
     expect(res).toStrictEqual(exp);
   });
 });
