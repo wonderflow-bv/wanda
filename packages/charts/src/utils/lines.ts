@@ -202,14 +202,17 @@ export const createSubArrays = (
   arr: Array<Record<string, any>>,
   condition: (d: Record<string, any>) => boolean,
 ) => arr.reduce((acc, cur) => {
+  const items = acc.length;
+  const lastIndex = acc.length - 1;
+
   if (condition(cur)) {
-    if (acc.length > 0 && acc[acc.length - 1].length > 0) {
+    if (items > 0 && acc[lastIndex].length > 0) {
       acc.push([]);
     }
-  } else if (acc.length === 0 || acc[acc.length - 1].length === 0) {
+  } else if (items === 0 || acc[lastIndex].length === 0) {
     acc.push([cur]);
   } else {
-    acc[acc.length - 1].push(cur);
+    acc[lastIndex].push(cur);
   }
 
   return acc;
