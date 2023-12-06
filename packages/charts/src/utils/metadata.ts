@@ -34,10 +34,14 @@ export const handleSeriesColors = (
 ));
 
 export const handleOverlayName = (overlay: LineChartOverlay | undefined) => {
-  if (!overlay) return '';
-  return overlay.rename
-  ?? _.startCase(overlay.label)
-  ?? _.startCase(getLabelFromPath(overlay.dataKey ?? ''));
+  if (overlay) {
+    const { rename, label, dataKey } = overlay;
+    if (rename) return rename;
+    if (label) return _.startCase(label);
+    return _.startCase(dataKey);
+  }
+
+  return '';
 };
 
 export const handleOverlayColor = (
