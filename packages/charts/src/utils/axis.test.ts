@@ -1,13 +1,22 @@
 import { Except } from 'type-fest';
 
-import { AxisOffsetProps, AxisOrientation, AxisProps } from '../types';
+import { cartesianStyleConfig, viewportStyleConfig } from '../style-config';
+import {
+  AxisOffsetProps, AxisOrientation, AxisProps,
+} from '../types';
 import {
   computeAxisOffset,
+  computeAxisProperties,
   computeAxisStyleConfig,
   computeAxisSystemOffset,
   getAxisOffset,
   getLabelOffset,
   getTickLabelSize,
+  handleNumberOfTicks,
+  handleTickFormat,
+  handleVerticalTickLabelOffset,
+  handleVerticalTickLabelTransform,
+  hasVerticalTickLabel,
   inferScaleTypeFromDomain,
   scaleDomainToAxis,
 } from './axis';
@@ -471,6 +480,14 @@ describe('inferScaleTypeFromDomain()', () => {
     expect(res).toStrictEqual(exp);
   });
 
+  it('should return defined scaleType', () => {
+    const domain: Array<string | number | undefined> = ['01-01-2020', '01-01-2023'];
+    const scaleType = 'label';
+    const res = inferScaleTypeFromDomain(domain, scaleType);
+    const exp = 'label';
+    expect(res).toStrictEqual(exp);
+  });
+
   it('should return time', () => {
     const domain: Array<string | number | undefined> = ['01-01-2020', '01-01-2023'];
     const scaleType = undefined;
@@ -481,6 +498,18 @@ describe('inferScaleTypeFromDomain()', () => {
 });
 
 describe('scaleDomainToAxis()', () => {
+  it('should return undefined for empty domain', () => {
+    const axis: Except<AxisProps, 'orientation'> = {
+      domain: [],
+      range: [0, 100],
+      scaleType: 'linear',
+    };
+    const scale = scaleDomainToAxis(axis);
+    const res = scale?.('0.5' as any);
+    const exp = undefined;
+    expect(res).toStrictEqual(exp);
+  });
+
   it('should return for linear', () => {
     const axis: Except<AxisProps, 'orientation'> = {
       domain: [0, 1],
@@ -514,6 +543,454 @@ describe('scaleDomainToAxis()', () => {
     const scale = scaleDomainToAxis(axis);
     const res = scale?.(new Date('01-01-2021') as any);
     const exp = 50;
+    expect(res).toStrictEqual(exp);
+  });
+});
+
+describe('handleTickFormat()', () => {
+  it('should return the same value w/o tickFormat', () => {
+    const axis: AxisProps = {
+      domain: [0, 1],
+      scaleType: 'linear',
+      orientation: 'top',
+      tickFormat: undefined,
+    };
+    const computed = computeAxisProperties({
+      axis,
+      maxRangeX: 800,
+      maxRangeY: 600,
+      positionTop: 0,
+      positionRight: 0,
+      positionBottom: 0,
+      positionLeft: 0,
+    });
+    const func = handleTickFormat(computed!);
+    const res = func(1, 1);
+    const exp = 1;
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return a formatted value', () => {
+    const axis: AxisProps = {
+      domain: [0, 1],
+      scaleType: 'linear',
+      orientation: 'top',
+      tickFormat: (v: any) => (`$ ${v}`),
+    };
+    const computed = computeAxisProperties({
+      axis,
+      maxRangeX: 800,
+      maxRangeY: 600,
+      positionTop: 0,
+      positionRight: 0,
+      positionBottom: 0,
+      positionLeft: 0,
+    });
+    const func = handleTickFormat(computed!);
+    const res = func(1, 1);
+    const exp = '$ 1';
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return an empty string w hideTickLabel', () => {
+    const axis: AxisProps = {
+      domain: [0, 1],
+      scaleType: 'linear',
+      orientation: 'top',
+      hideTickLabel: true,
+      tickFormat: (v: any) => (`$ ${v}`),
+    };
+    const computed = computeAxisProperties({
+      axis,
+      maxRangeX: 800,
+      maxRangeY: 600,
+      positionTop: 0,
+      positionRight: 0,
+      positionBottom: 0,
+      positionLeft: 0,
+    });
+    const func = handleTickFormat(computed!);
+    const res = func(1, 1);
+    const exp = '';
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return a truncated string', () => {
+    const axis: AxisProps = {
+      domain: ['1234567890123456789012345', '1234567890123456789012345'],
+      scaleType: 'label',
+      orientation: 'top',
+      hideTickLabel: false,
+      tickFormat: (v: any) => (`$ ${v}`),
+    };
+    const computed = computeAxisProperties({
+      axis,
+      maxRangeX: 800,
+      maxRangeY: 600,
+      positionTop: 0,
+      positionRight: 0,
+      positionBottom: 0,
+      positionLeft: 0,
+    });
+    const func = handleTickFormat(computed!);
+    const res = func('1234567890123456789012345', 1);
+    const exp = '$ 123456789012345...';
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return a truncated string w/o tickFormat', () => {
+    const axis: AxisProps = {
+      domain: ['1234567890123456789012345', '1234567890123456789012345'],
+      scaleType: 'label',
+      orientation: 'top',
+      hideTickLabel: false,
+      tickFormat: undefined,
+    };
+    const computed = computeAxisProperties({
+      axis,
+      maxRangeX: 800,
+      maxRangeY: 600,
+      positionTop: 0,
+      positionRight: 0,
+      positionBottom: 0,
+      positionLeft: 0,
+    });
+    const func = handleTickFormat(computed!);
+    const res = func('1234567890123456789012345', 1);
+    const exp = '12345678901234567...';
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return a formatted date value', () => {
+    const axis: AxisProps = {
+      domain: ['01-01-2020', '01-01-2023'],
+      scaleType: 'time',
+      orientation: 'top',
+      hideTickLabel: false,
+      tickFormat: (v: any) => (`today ${v}`),
+    };
+    const computed = computeAxisProperties({
+      axis,
+      maxRangeX: 800,
+      maxRangeY: 600,
+      positionTop: 0,
+      positionRight: 0,
+      positionBottom: 0,
+      positionLeft: 0,
+    });
+    const func = handleTickFormat(computed!);
+    const res = func('01-01-2023', 1);
+    const exp = 'today 01-01-2023';
+    expect(res).toStrictEqual(exp);
+  });
+});
+
+describe('handleNumberOfTicks()', () => {
+  it('should return 10 fro large size', () => {
+    const axis: AxisProps = {
+      domain: [0, 1],
+      scaleType: 'linear',
+      orientation: 'top',
+      tickFormat: undefined,
+    };
+    const computed = computeAxisProperties({
+      axis,
+      maxRangeX: 800,
+      maxRangeY: 600,
+      positionTop: 0,
+      positionRight: 0,
+      positionBottom: 0,
+      positionLeft: 0,
+    });
+    const res = handleNumberOfTicks(
+      800,
+      600,
+      computed!,
+      viewportStyleConfig,
+    );
+    const exp = 10;
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return 10 fro small size', () => {
+    const axis: AxisProps = {
+      domain: [0, 1],
+      scaleType: 'linear',
+      orientation: 'top',
+      tickFormat: undefined,
+    };
+    const computed = computeAxisProperties({
+      axis,
+      maxRangeX: 800,
+      maxRangeY: 600,
+      positionTop: 0,
+      positionRight: 0,
+      positionBottom: 0,
+      positionLeft: 0,
+    });
+    const res = handleNumberOfTicks(
+      400,
+      400,
+      computed!,
+      viewportStyleConfig,
+    );
+    const exp = 5;
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return 10 fro tiny size', () => {
+    const axis: AxisProps = {
+      domain: [0, 1],
+      scaleType: 'linear',
+      orientation: 'top',
+      tickFormat: undefined,
+    };
+    const computed = computeAxisProperties({
+      axis,
+      maxRangeX: 800,
+      maxRangeY: 600,
+      positionTop: 0,
+      positionRight: 0,
+      positionBottom: 0,
+      positionLeft: 0,
+    });
+    const res = handleNumberOfTicks(
+      200,
+      200,
+      computed!,
+      viewportStyleConfig,
+    );
+    const exp = 3;
+    expect(res).toStrictEqual(exp);
+  });
+});
+
+describe('hasVerticalTickLabel()', () => {
+  it('should return false for large size and short labels', () => {
+    const width = 800;
+    const axis: AxisProps = {
+      domain: [0, 1],
+      scaleType: 'linear',
+      orientation: 'top',
+    };
+    const hasVertical = hasVerticalTickLabel(width, axis, viewportStyleConfig);
+    expect(hasVertical).not.toBeTruthy();
+  });
+
+  it('should return true for long labels', () => {
+    const width = 400;
+    const axis: AxisProps = {
+      domain: ['1234567890123456789', '1234567890123456789'],
+      scaleType: 'label',
+      orientation: 'top',
+    };
+    const hasVertical = hasVerticalTickLabel(width, axis, viewportStyleConfig);
+    expect(hasVertical).toBeTruthy();
+  });
+
+  it('should return true for long labels', () => {
+    const width = 200;
+    const axis: AxisProps = {
+      domain: ['1234567890123456789', '1234567890123456789'],
+      scaleType: 'label',
+      orientation: 'top',
+    };
+    const hasVertical = hasVerticalTickLabel(width, axis, viewportStyleConfig);
+    expect(hasVertical).toBeTruthy();
+  });
+
+  it('should return false for tiny size', () => {
+    const width = 200;
+    const axis: AxisProps = {
+      domain: [0, 100],
+      scaleType: 'linear',
+      orientation: 'top',
+    };
+    const hasVertical = hasVerticalTickLabel(width, axis, viewportStyleConfig);
+    expect(hasVertical).not.toBeTruthy();
+  });
+
+  it('should return true for small size', () => {
+    const width = 400;
+    const axis: AxisProps = {
+      domain: [0, 100],
+      scaleType: 'linear',
+      orientation: 'top',
+    };
+    const hasVertical = hasVerticalTickLabel(width, axis, viewportStyleConfig);
+    expect(hasVertical).toBeTruthy();
+  });
+
+  it('should return true for numTicks > 10', () => {
+    const width = 800;
+    const axis: AxisProps = {
+      domain: [0, 100],
+      scaleType: 'linear',
+      orientation: 'top',
+      numTicks: 20,
+    };
+    const hasVertical = hasVerticalTickLabel(width, axis, viewportStyleConfig);
+    expect(hasVertical).toBeTruthy();
+  });
+
+  it('should return false for vertical axis', () => {
+    const width = 800;
+    const axis: AxisProps = {
+      domain: [0, 100],
+      scaleType: 'linear',
+      orientation: 'left',
+      numTicks: 20,
+    };
+    const hasVertical = hasVerticalTickLabel(width, axis, viewportStyleConfig);
+    expect(hasVertical).not.toBeTruthy();
+  });
+});
+
+describe('handleVerticalTickLabelTransform()', () => {
+  it('should return style for top axis', () => {
+    const axis: AxisProps = {
+      domain: [0, 1],
+      scaleType: 'linear',
+      orientation: 'top',
+      tickFormat: undefined,
+    };
+    const computed = computeAxisProperties({
+      axis,
+      maxRangeX: 800,
+      maxRangeY: 600,
+      positionTop: 0,
+      positionRight: 0,
+      positionBottom: 0,
+      positionLeft: 0,
+    });
+    const res = handleVerticalTickLabelTransform(1, true, computed!);
+    const exp = { transform: 'translate(9, -4) rotate(-90, 800, 0)' };
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return style for top axis - horizontal label', () => {
+    const axis: AxisProps = {
+      domain: [0, 1],
+      scaleType: 'linear',
+      orientation: 'top',
+      tickFormat: undefined,
+    };
+    const computed = computeAxisProperties({
+      axis,
+      maxRangeX: 800,
+      maxRangeY: 600,
+      positionTop: 0,
+      positionRight: 0,
+      positionBottom: 0,
+      positionLeft: 0,
+    });
+    const res = handleVerticalTickLabelTransform(1, false, computed!);
+    const exp = { transform: '', textAnchor: 'middle' };
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return style for bottom axis', () => {
+    const axis: AxisProps = {
+      domain: [0, 1],
+      scaleType: 'linear',
+      orientation: 'bottom',
+      tickFormat: undefined,
+    };
+    const computed = computeAxisProperties({
+      axis,
+      maxRangeX: 800,
+      maxRangeY: 600,
+      positionTop: 0,
+      positionRight: 0,
+      positionBottom: 0,
+      positionLeft: 0,
+    });
+    const res = handleVerticalTickLabelTransform(1, true, computed!);
+    const exp = { transform: 'translate(13, 6) rotate(90, 800, 0)' };
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return style for bottom axis - horizontal label', () => {
+    const axis: AxisProps = {
+      domain: [0, 1],
+      scaleType: 'linear',
+      orientation: 'bottom',
+      tickFormat: undefined,
+    };
+    const computed = computeAxisProperties({
+      axis,
+      maxRangeX: 800,
+      maxRangeY: 600,
+      positionTop: 0,
+      positionRight: 0,
+      positionBottom: 0,
+      positionLeft: 0,
+    });
+    const res = handleVerticalTickLabelTransform(1, false, computed!);
+    const exp = { transform: '', textAnchor: 'middle' };
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return {} for left/right axis', () => {
+    const axis: AxisProps = {
+      domain: [0, 1],
+      scaleType: 'linear',
+      orientation: 'left',
+      tickFormat: undefined,
+    };
+    const computed = computeAxisProperties({
+      axis,
+      maxRangeX: 800,
+      maxRangeY: 600,
+      positionTop: 0,
+      positionRight: 0,
+      positionBottom: 0,
+      positionLeft: 0,
+    });
+    const res = handleVerticalTickLabelTransform(1, true, computed!);
+    const exp = { };
+    expect(res).toStrictEqual(exp);
+  });
+});
+
+describe('handleVerticalTickLabelOffset()', () => {
+  it('should return 0 for no axis', () => {
+    const axis: AxisProps | undefined = undefined;
+    const res = handleVerticalTickLabelOffset(800, cartesianStyleConfig, axis);
+    const exp = 0;
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return a value for vertical string labels', () => {
+    const axis: AxisProps = {
+      domain: ['1234567890123456789', '1234567890123456789'],
+      scaleType: 'label',
+      orientation: 'top',
+    };
+    const res = handleVerticalTickLabelOffset(400, cartesianStyleConfig, axis);
+    const exp = 136;
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return a value for vertical date labels', () => {
+    const axis: AxisProps = {
+      domain: ['2011-10-10T14:48:00', '2011-10-10T14:48:00'],
+      scaleType: 'time',
+      orientation: 'top',
+    };
+    const res = handleVerticalTickLabelOffset(400, cartesianStyleConfig, axis);
+    const exp = 64;
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return a value for vertical number labels', () => {
+    const axis: AxisProps = {
+      domain: [1234567890123456789, 1234567890123456789],
+      scaleType: 'linear',
+      orientation: 'top',
+    };
+    const res = handleVerticalTickLabelOffset(400, cartesianStyleConfig, axis);
+    const exp = 200;
     expect(res).toStrictEqual(exp);
   });
 });

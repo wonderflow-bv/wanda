@@ -438,8 +438,8 @@ export const hasVerticalTickLabel = (
 
     if (isTiny) return false;
     if (isSmall) return true;
-    if (!isTiny && !isSmall) return false;
     if (numTicks && numTicks > 10) return true;
+    if (!isTiny && !isSmall) return false;
   }
 
   return false;
