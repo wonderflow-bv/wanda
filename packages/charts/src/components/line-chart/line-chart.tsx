@@ -23,7 +23,7 @@ import {
 } from '../../providers';
 import { defaultLineChartPalette } from '../../style-config';
 import {
-  CartesianChartLayout, Charts, Data, ThemeVariants,
+  CartesianChartLayout, Charts, Data, MarginProps, ThemeVariants,
 } from '../../types';
 import {
   LineChartIndex, LineChartMetadata, LineChartOverlay, LineChartRenderType, LineChartSeries, LineChartTooltip,
@@ -83,6 +83,10 @@ export type LineChartProps = {
    * Show a label and a marker for every single data point.
    */
   showMarkerLabel?: boolean;
+  /**
+   * Remove the padding from the chart container.
+   */
+  hidePadding?: boolean;
 } & Except<CartesianBaseProps, 'axis'>
 
 export const LineChart: React.FC<LineChartProps> = ({
@@ -97,6 +101,7 @@ export const LineChart: React.FC<LineChartProps> = ({
   hideMissingDataConnection = false,
   showMarker = false,
   showMarkerLabel = false,
+  hidePadding = false,
   ...otherProps
 }: LineChartProps) => {
   const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
@@ -108,6 +113,10 @@ export const LineChart: React.FC<LineChartProps> = ({
   const axis = useMemo(() => handleChartAxisLayout(i, s, o), [i, s, o]);
 
   const palette = useMemo(() => defaultLineChartPalette[theme], [theme]);
+
+  const zeroPadding: MarginProps | undefined = hidePadding ? {
+    top: 0, right: 12, bottom: 0, left: 0,
+  } : undefined;
 
   const metadata: LineChartMetadata = useMemo(() => ({
     type: Charts.LINE_CHART,
@@ -150,6 +159,7 @@ export const LineChart: React.FC<LineChartProps> = ({
               hideRows: !isHorizontal,
               hideColumns: isHorizontal,
             }}
+            margin={zeroPadding}
             {...otherProps}
           />
         </DataProvider>

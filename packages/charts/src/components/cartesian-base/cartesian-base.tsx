@@ -163,11 +163,12 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
 
   const hasData = !!data.length;
   const hasEmptyState = !isLoading && !hasData;
-  const hasHeadings = !!title;
-  const hasLegend = hasData && !hideLegend && !isLoading;
 
+  const hasLegend = hasData && !hideLegend && !isLoading;
   const legendHeight = hasLegend ? (sizeLegend?.height ?? 0) : 0;
-  const headingHeight = hasHeadings ? hStyle.height : 0;
+
+  const hasHeadings = !!title;
+  const headingsHeight = hasHeadings ? hStyle.height : 0;
 
   const w = size ? size.width : width;
   const h = size ? size.height : height;
@@ -205,7 +206,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   const topTickLabelOffset = handleVerticalTickLabelOffset(xMax, cartesianConfig, top);
   const bottomTickLabelOffset = handleVerticalTickLabelOffset(xMax, cartesianConfig, bottom);
 
-  const mt = margin.top * (top ? 1 : 2) + headingHeight + topTickLabelOffset;
+  const mt = margin.top * (top ? 1 : 2) + headingsHeight + topTickLabelOffset;
   const mb = margin.bottom * (bottom ? 1 : 2) + legendHeight + bottomTickLabelOffset;
 
   const yMax = dynamicHeight - mt - mb - hOff;
@@ -256,7 +257,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
           <Headings
             title={title}
             subtitle={subtitle}
-            top={headings?.top ?? 40}
+            top={headings?.top ?? margin.top + 4}
             left={headings?.left ?? ml}
             config={headings?.config}
           />
