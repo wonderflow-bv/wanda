@@ -37,6 +37,7 @@
   width: 100%;
 
   & ul {
+    padding: 0;
     display: flex;
     flex-direction: row;
     width: 100%;

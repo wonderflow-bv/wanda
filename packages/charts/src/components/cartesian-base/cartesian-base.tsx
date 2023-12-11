@@ -104,6 +104,10 @@ export type CartesianBaseProps = {
    */
   emptyState?: React.ReactNode;
   /**
+   * Set an optional `Empty State` message to be displayed under the label 'No Data Available'.
+   */
+  emptyStateMessage?: string;
+  /**
    * Set a custom `Legend` content.
    */
   customLegend?: React.ReactNode;
@@ -139,6 +143,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   axis,
   hideLegend = false,
   emptyState,
+  emptyStateMessage,
   customLegend,
   styleConfig,
   otherProps,
@@ -288,6 +293,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
                 position={position}
                 dimension={dimension}
                 customEmptyState={emptyState}
+                message={emptyStateMessage}
                 isVisible={hasEmptyState}
               />
 

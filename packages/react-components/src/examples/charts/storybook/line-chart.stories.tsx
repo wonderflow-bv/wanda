@@ -190,6 +190,7 @@ withNoData.args = {
   data: [],
   title: 'Line Charts',
   subtitle: 'A trend line chart w/o data',
+  emptyStateMessage: 'Please select items from the right menu to render the chart.',
 };
 
 export const renderAsLines = Template.bind({});
