@@ -10,6 +10,7 @@ import {
   accessorInvert,
   bisectIndex,
   createSubArrays,
+  createSubPaths,
   getCoordinates,
   getLinesRenderer,
   getMarkerLabelProps,
@@ -329,7 +330,7 @@ describe('isMarkerLabelVisible()', () => {
 });
 
 describe('getMarkerLabelProps()', () => {
-  it('shoult return a style configuration - horizontal', () => {
+  it('shoult return a style configuration - horizontal/left', () => {
     const res = getMarkerLabelProps(
       { x: 0, y: 0 },
       { maxWidth: 800, maxHeight: 600 },
@@ -354,6 +355,56 @@ describe('getMarkerLabelProps()', () => {
     expect(res).toStrictEqual(exp);
   });
 
+  it('shoult return a style configuration - horizontal/right', () => {
+    const res = getMarkerLabelProps(
+      { x: 795, y: 0 },
+      { maxWidth: 800, maxHeight: 600 },
+      true,
+      themes.light,
+    );
+    const exp = {
+      anchor: 'end',
+      background: 'hsl(220 16% 85%)',
+      backgroundProps: {
+        filter: 'opacity(0.7)', rx: 4, ry: 4, x: -4, y: 4,
+      },
+      fontColor: 'hsl(217 11% 14%)',
+      fontSize: 12,
+      fontWeight: 400,
+      padding: {
+        bottom: 2, left: 6, right: 6, top: 2,
+      },
+      titleProps: { textAnchor: 'start', x: 0, y: 6 },
+      verticalAnchor: 'start',
+    };
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('shoult return a style configuration - horizontal/bottom', () => {
+    const res = getMarkerLabelProps(
+      { x: 0, y: 595 },
+      { maxWidth: 800, maxHeight: 600 },
+      true,
+      themes.light,
+    );
+    const exp = {
+      anchor: 'start',
+      background: 'hsl(220 16% 85%)',
+      backgroundProps: {
+        filter: 'opacity(0.7)', rx: 4, ry: 4, x: 4, y: -4,
+      },
+      fontColor: 'hsl(217 11% 14%)',
+      fontSize: 12,
+      fontWeight: 400,
+      padding: {
+        bottom: 2, left: 6, right: 6, top: 2,
+      },
+      titleProps: { textAnchor: 'start', x: 8, y: -2 },
+      verticalAnchor: 'end',
+    };
+    expect(res).toStrictEqual(exp);
+  });
+
   it('shoult return a style configuration - vertical', () => {
     const res = getMarkerLabelProps(
       { x: 0, y: 0 },
@@ -374,6 +425,56 @@ describe('getMarkerLabelProps()', () => {
         bottom: 2, left: 6, right: 6, top: 2,
       },
       titleProps: { textAnchor: 'start', x: 10, y: 6 },
+      verticalAnchor: 'start',
+    };
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('shoult return a style configuration - vertical/top', () => {
+    const res = getMarkerLabelProps(
+      { x: 0, y: 595 },
+      { maxWidth: 800, maxHeight: 600 },
+      false,
+      themes.light,
+    );
+    const exp = {
+      anchor: 'start',
+      background: 'hsl(220 16% 85%)',
+      backgroundProps: {
+        filter: 'opacity(0.7)', rx: 4, ry: 4, x: 6, y: -4,
+      },
+      fontColor: 'hsl(217 11% 14%)',
+      fontSize: 12,
+      fontWeight: 400,
+      padding: {
+        bottom: 2, left: 6, right: 6, top: 2,
+      },
+      titleProps: { textAnchor: 'start', x: 10, y: -2 },
+      verticalAnchor: 'end',
+    };
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('shoult return a style configuration - vertical/bottom/right', () => {
+    const res = getMarkerLabelProps(
+      { x: 795, y: 5 },
+      { maxWidth: 800, maxHeight: 600 },
+      false,
+      themes.light,
+    );
+    const exp = {
+      anchor: 'end',
+      background: 'hsl(220 16% 85%)',
+      backgroundProps: {
+        filter: 'opacity(0.7)', rx: 4, ry: 4, x: 0, y: 4,
+      },
+      fontColor: 'hsl(217 11% 14%)',
+      fontSize: 12,
+      fontWeight: 400,
+      padding: {
+        bottom: 2, left: 6, right: 6, top: 2,
+      },
+      titleProps: { textAnchor: 'start', x: 4, y: 6 },
       verticalAnchor: 'start',
     };
     expect(res).toStrictEqual(exp);
@@ -414,6 +515,66 @@ describe('createSubArrays()', () => {
     const condition = (d: Record<string, any>) => d.value === 0;
     const res = createSubArrays(input, condition);
     const exp = [[{ value: 1 }, { value: 1 }, { value: 1 }], []];
+    expect(res).toStrictEqual(exp);
+  });
+});
+
+describe('createSubPaths()', () => {
+  it('should return a sub path / last', () => {
+    const input = [
+      { value: 1 },
+      { value: 2 },
+      { value: 3 },
+      { value: 0 }];
+    const condition = (d: Record<string, any>) => d.value === 0;
+    const res = createSubPaths(input, condition);
+    const exp = [
+      [{ value: 1 }, { value: 2 }, { value: 3 }],
+    ];
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return a sub path / nth', () => {
+    const input = [
+      { value: 1 },
+      { value: 0 },
+      { value: 2 },
+      { value: 3 },
+    ];
+    const condition = (d: Record<string, any>) => d.value === 0;
+    const res = createSubPaths(input, condition);
+    const exp = [
+      [{ value: 1 }],
+      [{ value: 1 }, { value: 2 }],
+      [{ value: 2 }, { value: 3 }],
+    ];
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return a sub path / first', () => {
+    const input = [
+      { value: 0 },
+      { value: 1 },
+      { value: 2 },
+      { value: 3 },
+    ];
+    const condition = (d: Record<string, any>) => d.value === 0;
+    const res = createSubPaths(input, condition);
+    const exp = [
+      [{ value: 1 }, { value: 2 }, { value: 3 }],
+    ];
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return a sub path / first', () => {
+    const input = [
+      { value: 1 },
+      { value: 2 },
+      { value: 3 },
+    ];
+    const condition = (d: Record<string, any>) => d.value === 0;
+    const res = createSubPaths(input, condition);
+    const exp = [[{ value: 1 }, { value: 2 }, { value: 3 }]];
     expect(res).toStrictEqual(exp);
   });
 });
