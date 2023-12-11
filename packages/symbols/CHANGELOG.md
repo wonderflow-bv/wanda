@@ -1,5 +1,11 @@
 # @wonderflow/symbols
 
+## 12.7.0
+
+### Minor Changes
+
+- 6cfcc92b: Add new `infinite` icon;
+
 ## 12.6.0
 
 ### Minor Changes
