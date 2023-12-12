@@ -76,6 +76,7 @@ export const Headings: React.FC<HeadingsProps> = ({
         verticalAnchor={t.verticalAnchor}
         x={t.x}
         y={t.y}
+        dy={4}
       >
         {title}
       </Text>
@@ -89,6 +90,7 @@ export const Headings: React.FC<HeadingsProps> = ({
         verticalAnchor={s.verticalAnchor}
         x={s.x}
         y={s.y}
+        dy={4}
       >
         {subtitle}
       </Text>

@@ -257,7 +257,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
           <Headings
             title={title}
             subtitle={subtitle}
-            top={headings?.top ?? margin.top + 4}
+            top={headings?.top ?? margin.top}
             left={headings?.left ?? ml}
             config={headings?.config}
           />
