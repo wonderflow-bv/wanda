@@ -427,8 +427,8 @@ export const hasVerticalTickLabel = (
 
   const isHorizontal = orientation === 'bottom' || orientation === 'top';
 
-  const isTiny = _.inRange(width, 0, config.tiny.maxWidth);
-  const isSmall = _.inRange(width, config.tiny.maxWidth!, config.small.maxWidth);
+  const isSmall = _.inRange(width, 0, config.small.maxWidth);
+  const isMedium = _.inRange(width, config.small.maxWidth!, config.medium.maxWidth);
 
   if (isHorizontal) {
     if (isLabel) {
@@ -436,10 +436,10 @@ export const hasVerticalTickLabel = (
       return width / len < 2;
     }
 
-    if (isTiny) return false;
-    if (isSmall) return true;
+    if (isSmall) return false;
+    if (isMedium) return true;
     if (numTicks && numTicks > 10) return true;
-    if (!isTiny && !isSmall) return false;
+    if (!isSmall && !isMedium) return false;
   }
 
   return false;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-export type ViewportSize = 'tiny' | 'small' | 'large';
+export type ViewportSize = 'small' | 'medium' | 'large';
 
 export type ViewportSizeConfig = {
   maxWidth?: number;

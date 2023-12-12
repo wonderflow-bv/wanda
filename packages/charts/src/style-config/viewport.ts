@@ -17,12 +17,12 @@
 import { ViewportStyleConfig } from '../types/viewport';
 
 export const viewportStyleConfig: ViewportStyleConfig = {
-  tiny: {
+  small: {
     maxWidth: 250,
     maxHeight: 120,
     numTicks: 3,
   },
-  small: {
+  medium: {
     maxWidth: 500,
     maxHeight: 250,
     numTicks: 5,

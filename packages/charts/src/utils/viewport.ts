@@ -30,7 +30,7 @@ export const manageViewport = (width: number, height: number, axis: CartesianAxi
   const defaultLabelTicksNum = scaleType === 'label' ? domain.length : undefined;
   const defaultConfigLarge = defaultLabelTicksNum ?? config.large.numTicks;
 
-  if (_.inRange(size, 0, config.tiny[key])) return config.tiny;
-  if (_.inRange(size, config.tiny[key]!, config.small[key])) return config.small;
+  if (_.inRange(size, 0, config.small[key])) return config.small;
+  if (_.inRange(size, config.small[key]!, config.medium[key])) return config.medium;
   return numTicks ? { ...config.large, numTicks } : { ...config.large, numTicks: defaultConfigLarge };
 };
