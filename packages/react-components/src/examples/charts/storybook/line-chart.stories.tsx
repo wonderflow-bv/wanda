@@ -1,5 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
+import { Card } from '@/components';
+
 // import { CartesianChartLayout, LineChart, LineChartProps } from '@wonderflow/charts';
 import { CartesianChartLayout, LineChart, LineChartProps } from '../../../../../charts/src';
 import {
@@ -12,6 +14,7 @@ const story: ComponentMeta<typeof LineChart> = {
   args: {
     title: 'Line Charts',
     subtitle: 'A trend line chart',
+    preventResponsive: false,
     isLoading: false,
     showMarker: false,
     showMarkerLabel: false,
@@ -228,3 +231,17 @@ renderAsSteps.args = {
   },
 };
 
+const WithinCardTemplate: ComponentStory<typeof LineChart> = args => (
+  <Card
+    bordered
+    style={{ height: '75vh', width: '100%' }}
+  >
+    <LineChart {...args} />
+  </Card>
+);
+
+export const WithinCard = WithinCardTemplate.bind({});
+WithinCard.args = {
+  subtitle: 'A trend line chart within a card 75vh and width 100%',
+  hidePadding: true,
+};

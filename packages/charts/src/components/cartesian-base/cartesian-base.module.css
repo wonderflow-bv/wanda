@@ -1,6 +1,5 @@
 .Wrapper {
   align-items: center;
-  box-shadow: 2px 2px 4px #ccc;
   display: block;
   height: var(--static-height);
   justify-content: center;
@@ -9,16 +8,13 @@
   width: var(--static-width);
   resize: none;
 
-  &[data-theme='dark'] {
-    box-shadow: none;
-  }
-
   &[data-responsive='true'] {
     display: flex;
-    height: auto;
+    height: inherit;
     justify-content: center;
-    resize: both;
-    width: 100%;
+    width: inherit;
+
+    /* resize: both; */
   }
 }
 
