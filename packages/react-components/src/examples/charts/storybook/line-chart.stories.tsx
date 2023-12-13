@@ -7,6 +7,7 @@ import { CartesianChartLayout, LineChart, LineChartProps } from '../../../../../
 import {
   channels, channelsB, feedbackCount, feedbackCountGaps, proCons,
 } from '../mock-data';
+import styles from './sb-charts.module.css';
 
 const story: ComponentMeta<typeof LineChart> = {
   title: 'Charts/Line Chart',
@@ -234,7 +235,7 @@ renderAsSteps.args = {
 const WithinCardTemplate: ComponentStory<typeof LineChart> = args => (
   <Card
     bordered
-    style={{ height: '75vh', width: '100%' }}
+    className={styles.Card}
   >
     <LineChart {...args} />
   </Card>
