@@ -264,9 +264,9 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
 
           <Loader
             isLoading={isLoading}
-            top={position.top}
-            left={0}
-            width={dynamicWidth}
+            // top={position.top}
+            left={ml}
+            width={dynamicWidth - margin.left - margin.right}
             height={dimension.maxHeight}
           />
 
