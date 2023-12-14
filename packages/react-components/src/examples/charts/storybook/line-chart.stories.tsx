@@ -36,7 +36,20 @@ const story: ComponentMeta<typeof LineChart> = {
     },
     overlay: undefined,
   },
-  argTypes: {},
+  argTypes: {
+    layout: {
+      options: ['horizontal', 'vertical'],
+      control: { type: 'radio' },
+    },
+    renderAs: {
+      options: ['curves', 'lines', 'steps'],
+      control: { type: 'radio' },
+    },
+    theme: {
+      options: ['light', 'dark'],
+      control: { type: 'radio' },
+    },
+  },
 };
 
 export default story;
