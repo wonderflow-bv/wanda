@@ -1,7 +1,9 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-// import { CartesianBase } from '@wonderflow/charts';
+import { InfoState, Stack } from '@/components';
+
 import { CartesianBase } from '../../../../../charts/src';
+import styles from './sb-charts.module.css';
 
 const story: ComponentMeta<typeof CartesianBase> = {
   title: 'Charts/Cartesian Base',
@@ -114,4 +116,20 @@ TwoAxis.args = {
 
 export const WithLegend = Template.bind({});
 WithLegend.args = { customLegend: <ul><li style={{ fontSize: '12px' }}>some legend content here</li></ul> };
+
+export const WithCustomEmptyState = Template.bind({});
+WithCustomEmptyState.args = {
+  axis: { ...story.args!.axis, top: undefined, right: undefined } as any,
+  emptyState: (
+    <Stack vAlign="center" hAlign="center" className={styles.InfoState}>
+      <InfoState
+        title="With Info State"
+        icon="compass"
+      >
+        <Stack hAlign="center" fill={false}>
+          This custom empty state uses an Info State component.
+        </Stack>
+      </InfoState>
+    </Stack>),
+};
 
