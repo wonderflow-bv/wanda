@@ -67,6 +67,7 @@ export const Headings: React.FC<HeadingsProps> = ({
   return (
     <Group top={top} left={left}>
       <Text
+        data-testid="headings"
         fontFamily={mergeStyle.fontFamily}
         fill={themes[theme].headings.title}
         fontSize={t.fontSize}

@@ -57,6 +57,7 @@ export const Loader = ({
       <Group clipPath="url(#clip-path-loader)">
 
         <rect
+          data-testid="loader"
           x={left}
           y={top}
           width={width + rightExtraPadding}

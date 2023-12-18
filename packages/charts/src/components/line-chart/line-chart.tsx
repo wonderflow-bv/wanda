@@ -42,11 +42,11 @@ export type LineChartProps = {
   /**
    * Set the theme of the chart. This is set to `light` by default.
    */
-  theme: ThemeVariants;
+  theme?: ThemeVariants;
   /**
    * Set the layout of the chart. `Index`, `Series` and eventually `Overlay` will be automatically rearranged.
    */
-  layout: CartesianChartLayout;
+  layout?: CartesianChartLayout;
   /**
    * Set the data structure that will be used to render the chart.
    */

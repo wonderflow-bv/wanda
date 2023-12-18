@@ -27,7 +27,7 @@ export const LineChartLoader = ({
   height = 600,
   otherProps,
 }: LineChartLoaderProps) => (
-  <svg version="1.1" id="Line-Chart-Loader" xmlns="http:www.w3.org/2000/svg" viewBox={`0 0 ${width} ${height}`} {...otherProps}>
+  <svg version="1.1" id="Line-Chart-Loader" xmlns="http:www.w3.org/2000/svg" viewBox={`0 0 ${width} ${height}`} data-testid="line-chart-loader" {...otherProps}>
 
     <g transform={`matrix(${width / 850},0,0,${height / 480},0,0)`}>
       <g transform={`translate(0 ${height / 3})`}>

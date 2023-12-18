@@ -34,28 +34,30 @@ export type EmptyStateProps = {
 }
 
 export const EmptyState: React.FC<EmptyStateProps> = ({
-  position = { top: 0, left: 0 },
-  dimension = { maxWidth: 800, maxHeight: 600 },
+  position,
+  dimension,
   message,
   customEmptyState,
-  isVisible = false,
+  isVisible,
 }: EmptyStateProps) => {
   const theme = useThemeContext();
   const { top, left } = position;
   const { maxWidth, maxHeight } = dimension;
+
   if (!isVisible) return null;
 
   return (
     <Group clipPath="url(#clip-path-cartesian-chart)">
       {customEmptyState
         ? (
-          <foreignObject x={left} y={top} width={maxWidth} height={maxHeight}>
+          <foreignObject x={left} y={top} width={maxWidth} height={maxHeight} data-testid="empty-state-custom">
             {customEmptyState}
           </foreignObject>
         )
         : (
           <Group>
             <Text
+              data-testid="empty-state"
               x={left + maxWidth / 2}
               y={top + maxHeight / 2}
               textAnchor="middle"
@@ -68,6 +70,7 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
             </Text>
             {message && (
               <Text
+                data-testid="empty-state-message"
                 x={left + maxWidth / 2}
                 y={top + maxHeight / 2}
                 dy={16}

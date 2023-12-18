@@ -27,7 +27,7 @@ export const BarChartLoader = ({
   height = 600,
   otherProps,
 }: BarChartLoaderProps) => (
-  <svg version="1.1" id="Line-Chart-Loader" xmlns="http:www.w3.org/2000/svg" viewBox={`0 0 ${width} ${height}`} {...otherProps}>
+  <svg version="1.1" id="Line-Chart-Loader" xmlns="http:www.w3.org/2000/svg" viewBox={`0 0 ${width} ${height}`} data-testid="bar-chart-loader" {...otherProps}>
 
     <g transform={`matrix(${width / 848},0,0,${height / (160 * 3)},0,0)`}>
       <g transform={`translate(0 ${height / 3})`}>

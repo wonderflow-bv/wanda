@@ -233,6 +233,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
       data-responsive={!preventResponsive}
       ref={ref}
       style={dynamicStyle}
+      data-testid="cartesian"
     >
       <StyleConfigProvider styleConfig={cartesianConfig}>
         <svg
