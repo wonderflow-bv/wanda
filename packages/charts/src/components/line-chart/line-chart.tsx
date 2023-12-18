@@ -138,6 +138,7 @@ export const LineChart: React.FC<LineChartProps> = ({
     hideMissingDataConnection,
     showMarker,
     showMarkerLabel,
+    hidePadding,
   }), [renderAs,
     index.dataKey,
     series,
@@ -147,7 +148,8 @@ export const LineChart: React.FC<LineChartProps> = ({
     tooltip,
     hideMissingDataConnection,
     showMarker,
-    showMarkerLabel]);
+    showMarkerLabel,
+    hidePadding]);
 
   return (
     <ThemeProvider theme={theme}>

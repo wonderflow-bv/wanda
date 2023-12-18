@@ -1,9 +1,9 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { CartesianChartLayout, LineChart, LineChartProps } from '@wonderflow/charts';
 
+// import { CartesianChartLayout, LineChart, LineChartProps } from '@wonderflow/charts';
 import { Card } from '@/components';
 
-// import { CartesianChartLayout, LineChart, LineChartProps } from '../../../../../charts/src';
+import { CartesianChartLayout, LineChart, LineChartProps } from '../../../../../charts/src';
 import {
   channels, channelsB, feedbackCount, feedbackCountGaps, proCons,
 } from '../mock-data';

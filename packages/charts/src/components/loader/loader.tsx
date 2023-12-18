@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
+import { RectClipPath } from '@visx/clip-path';
 import { LinearGradient } from '@visx/gradient';
+import { Group } from '@visx/group';
 
 import { useDataContext, useThemeContext } from '../../providers';
 import { themes } from '../../style-config';
@@ -25,6 +27,7 @@ import { LineChartLoader } from './line-chart-loader';
 export type LoaderProp = {
   isLoading?: boolean;
   left?: number;
+  top?: number;
   width?: number;
   height?: number;
 }
@@ -32,6 +35,7 @@ export type LoaderProp = {
 export const Loader = ({
   isLoading = false,
   left = 0,
+  top = 0,
   width = 800,
   height = 600,
 }: LoaderProp) => {
@@ -41,41 +45,29 @@ export const Loader = ({
 
   const isLineChart = metadata?.type === Charts.LINE_CHART;
   const isBarChart = metadata?.type === Charts.BAR_CHART;
+  const rightExtraPadding = metadata?.hidePadding ? 12 : 0;
 
   if (!isLoading) return null;
 
   return (
-    <svg version="1.1" id="Chart-Loader" xmlns="http:www.w3.org/2000/svg" viewBox={`0 0 ${width} ${height}`}>
+    <Group>
+      <RectClipPath id="clip-path-loader" x={left} y={top} width={width + rightExtraPadding} height={height} />
+      <LinearGradient id="loader-gradient" from={to} to={from} />
 
-      <clipPath id="clipRect">
-        <rect x={left} y={0} width={width} height={height} fill="black" />
-      </clipPath>
+      <Group clipPath="url(#clip-path-loader)">
 
-      <LinearGradient id="loader" from={to} to={from} />
+        <rect
+          x={left}
+          y={top}
+          width={width + rightExtraPadding}
+          height={height}
+          fill="url(#loader-gradient)"
+        />
 
-      <defs>
-        <linearGradient id="loader2" x1={0} x2={0} y1={0} y2={1}>
-          <stop stopColor={to} offset="0%" />
-          <stop stopColor={from} offset="50%" />
-          <stop stopColor={to} offset="100%" />
-        </linearGradient>
-      </defs>
-
-      <rect
-        x={left}
-        y={0}
-        width={width}
-        height={height}
-        fill="url(#loader)"
-        stroke="none"
-      />
-
-      <g clipPath="url(#clipRect)">
         {isLineChart && (<LineChartLoader width={width} height={height} />)}
         {isBarChart && (<BarChartLoader />)}
-      </g>
-
-    </svg>
+      </Group>
+    </Group>
   );
 };
 

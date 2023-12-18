@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { Group } from '@visx/group';
 import { Text } from '@visx/text';
 
 import { useThemeContext } from '../../providers';
@@ -45,7 +46,7 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
   if (!isVisible) return null;
 
   return (
-    <>
+    <Group clipPath="url(#clip-path-cartesian-chart)">
       {customEmptyState
         ? (
           <foreignObject x={left} y={top} width={maxWidth} height={maxHeight}>
@@ -53,12 +54,12 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
           </foreignObject>
         )
         : (
-          <g>
+          <Group>
             <Text
               x={left + maxWidth / 2}
               y={top + maxHeight / 2}
               textAnchor="middle"
-              verticalAnchor="middle"
+              verticalAnchor="start"
               fontSize={14}
               fontWeight={600}
               fill={themes[theme].headings.title}
@@ -68,21 +69,22 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
             {message && (
               <Text
                 x={left + maxWidth / 2}
-                y={top + maxHeight / 2 + 24}
+                y={top + maxHeight / 2}
+                dy={16}
                 textAnchor="middle"
-                verticalAnchor="middle"
+                verticalAnchor="start"
                 fontSize={12}
                 fontWeight={400}
-                width={400}
+                width={maxWidth * 0.8}
                 fill={themes[theme].headings.subtitle}
               >
                 {message}
               </Text>
             )}
-          </g>
+          </Group>
 
         )}
-    </>
+    </Group>
   );
 };
 

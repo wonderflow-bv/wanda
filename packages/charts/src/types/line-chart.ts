@@ -70,4 +70,5 @@ export type LineChartMetadata = {
   hideMissingDataConnection?: boolean;
   showMarker?: boolean;
   showMarkerLabel?: boolean;
+  hidePadding?: boolean;
 }

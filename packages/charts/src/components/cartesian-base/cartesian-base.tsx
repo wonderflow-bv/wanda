@@ -14,6 +14,7 @@
 * limitations under the License.
 */
 
+import { RectClipPath } from '@visx/clip-path';
 import { LinearGradient } from '@visx/gradient';
 import { Group } from '@visx/group';
 import { useSize } from 'ahooks';
@@ -241,6 +242,22 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
           {...otherProps}
         >
 
+          <RectClipPath
+            id="clip-path-cartesian-container"
+            x={0}
+            y={0}
+            width={dynamicWidth}
+            height={dynamicHeight}
+          />
+
+          <RectClipPath
+            id="clip-path-cartesian-chart"
+            x={position.left}
+            y={position.top}
+            width={dimension.maxWidth}
+            height={dimension.maxHeight}
+          />
+
           <LinearGradient id="cartesian-container" from={from} to={to} />
 
           <rect
@@ -264,14 +281,14 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
 
           <Loader
             isLoading={isLoading}
-            // top={position.top}
-            left={ml}
+            top={margin.top + headingsHeight}
+            left={margin.left}
             width={dynamicWidth - margin.left - margin.right}
-            height={dimension.maxHeight}
+            height={dynamicHeight - headingsHeight - margin.top - margin.bottom}
           />
 
           {!isLoading && (
-            <Group>
+            <Group clipPath="url(#clip-path-cartesian-container)">
               <CartesianBaseGrid
                 position={position}
                 dimension={dimension}
@@ -304,7 +321,9 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
                   dimension={dimension}
                   axis={axisSystem}
                 >
-                  {metadata?.type === Charts.LINE_CHART && <Lines />}
+                  <Group clipPath="url(#clip-path-cartesian-chart)">
+                    {metadata?.type === Charts.LINE_CHART && <Lines />}
+                  </Group>
                 </CartesianProvider>
               )}
             </Group>
