@@ -38,12 +38,21 @@ describe('handleSeriesColors()', () => {
     expect(res).toStrictEqual(exp);
   });
 
-  it('should return custom styled color', () => {
+  it('should return default palette color', () => {
     const series: LineChartSeries = {
       dataKey: ['test1', 'test2'],
     };
     const res = handleSeriesColors(series, colors);
     const exp = ['hsl(149 83% 35%)', 'hsl(350 66% 49%)'];
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return default palette color for a value greater than the palette color', () => {
+    const series: LineChartSeries = {
+      dataKey: Array(14).fill('test'),
+    };
+    const res = handleSeriesColors(series, colors)[13];
+    const exp = 'hsl(350 66% 49%)';
     expect(res).toStrictEqual(exp);
   });
 });

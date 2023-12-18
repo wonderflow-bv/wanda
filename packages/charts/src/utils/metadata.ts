@@ -30,7 +30,7 @@ export const handleSeriesColors = (
 ) => series.dataKey.map((_: string, i: number) => (
   series.style?.[i]
     ? series.style[i]?.stroke
-    : palette[i]
+    : palette[i % palette.length]
 ));
 
 export const handleOverlayName = (overlay: LineChartOverlay | undefined) => {
