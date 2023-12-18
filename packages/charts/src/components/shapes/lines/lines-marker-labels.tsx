@@ -106,6 +106,7 @@ export const LinesMarkerLabels: React.FC = () => {
                 isVisible
                   ? (
                     <Label
+                      data-testid="lines-marker-label"
                       key={uuid()}
                       backgroundFill={background}
                       x={coordinates.x}

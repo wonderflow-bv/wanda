@@ -26,7 +26,7 @@ export type PlaceholderProps = {
 export const Placeholder: React.FC<PlaceholderProps> = ({
   color = colorPaletteNeutrals.dimmed5,
 }) => (
-  <svg width={12} height={12}>
+  <svg width={12} height={12} data-testid="placeholder">
     <rect
       x={0}
       y={0}

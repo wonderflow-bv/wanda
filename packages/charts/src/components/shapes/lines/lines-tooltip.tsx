@@ -207,7 +207,7 @@ export const LinesTooltip: React.FC = () => {
             top={tooltipTop}
             left={tooltipLeft}
           >
-            <div className={LinesTooltipContent}>
+            <div className={LinesTooltipContent} data-testid="tooltip">
               <p>
                 <b>
                   { indexAxis.tickFormat

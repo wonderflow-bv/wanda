@@ -87,6 +87,7 @@ export const LinesSeries: React.FC = () => {
               className={LinesItem}
             >
               <LinePath
+                data-testid="lines-series"
                 data={subPathData}
                 curve={renderer}
                 x={datum => getSeriesCoordinates(datum, dataKey, isHorizontal).x as any}

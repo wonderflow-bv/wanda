@@ -84,6 +84,7 @@ export const LinesOverlay: React.FC = () => {
             className={LinesItem}
           >
             <LinePath
+              data-testid="lines-overlay"
               data={subPathData}
               curve={renderer}
               x={datum => getOverlayCoordinates(datum, overlay.dataKey!, isHorizontal).x as any}
