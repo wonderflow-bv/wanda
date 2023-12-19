@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 12.8.0
+
+### Patch Changes
+
+- af53078c: Fix `Card` component content width.
+
 ## 12.7.0
 
 ## 12.6.0
