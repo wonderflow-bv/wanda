@@ -1,4 +1,9 @@
-import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
+
+import {
+  fireEvent, render, screen,
+} from '@testing-library/react';
+import { scaleLinear, scaleUtc } from '@visx/scale';
 
 import {
   CartesianProvider, DataProvider, LayoutProvider, ThemeProvider,
@@ -7,12 +12,6 @@ import {
   CartesianChartLayout, CartesianxAxisSystem, Charts, LineChartMetadata,
 } from '../../../types';
 import { Lines } from './lines';
-
-// const Providers = () => (
-//   <DataProvider data={[{}]} metadata={}>
-//     {children}
-//   </DataProvider>
-// );
 
 global.ResizeObserver = jest.fn().mockImplementation(() => ({
   observe: jest.fn(),
@@ -68,6 +67,34 @@ const mockedAxisSystem: CartesianxAxisSystem | undefined = {
     top: 0,
     left: 0,
     scale: jest.fn() as any,
+  },
+};
+
+const mockedAxisSystem2: CartesianxAxisSystem | undefined = {
+  top: undefined,
+  right: {
+    domain: [0, 10],
+    scaleType: 'linear',
+    orientation: 'right',
+    top: 0,
+    left: 800,
+    scale: scaleLinear(),
+  },
+  bottom: {
+    domain: ['01-01-2020', '01-01-2023'],
+    scaleType: 'time',
+    orientation: 'bottom',
+    top: 600,
+    left: 0,
+    scale: scaleUtc(),
+  },
+  left: {
+    domain: [0, 10],
+    scaleType: 'linear',
+    orientation: 'left',
+    top: 0,
+    left: 0,
+    scale: scaleLinear(),
   },
 };
 
@@ -180,5 +207,44 @@ describe('<Lines>', () => {
     );
     const elementOverlay = screen.getByTestId('lines-overlay');
     expect(elementOverlay).toBeDefined();
+  });
+
+  it.skip('should trigger tooltip', async () => {
+    const { getByTestId, queryByTestId } = render(
+      <ThemeProvider theme="light">
+        <LayoutProvider layout={CartesianChartLayout.HORIZONTAL}>
+          <DataProvider
+            data={
+              [{ date: '01-01-2020', a: 1, b: 2 },
+                { date: '01-01-2021', a: 3, b: 4 },
+                { date: '01-01-2022', a: 1, b: 2 }]
+            }
+            metadata={mockMetadata}
+          >
+            <CartesianProvider
+              position={{
+                top: 24, right: 24, bottom: 24, left: 24,
+              }}
+              dimension={{ maxHeight: 600, maxWidth: 800 }}
+              axis={mockedAxisSystem2}
+            >
+              <Lines />
+            </CartesianProvider>
+          </DataProvider>
+        </LayoutProvider>
+      </ThemeProvider>,
+    );
+    const overlay = getByTestId('transparent-overlay-layer');
+    const tooltip = queryByTestId('lines-tooltip');
+
+    expect(overlay).toBeDefined();
+    expect(tooltip).toBeNull();
+
+    fireEvent.mouseOver(overlay);
+
+    // await waitFor(() => {
+    //   const tooltip = document.querySelector('div[style="z-index: 10;"]');
+    //   expect(tooltip).toBeInTheDocument();
+    // });
   });
 });

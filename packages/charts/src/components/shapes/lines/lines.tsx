@@ -32,7 +32,7 @@ export const Lines: React.FC = () => {
       top={position.top}
       left={position.left}
     >
-      <Group className={LinesItemGroup}>
+      <Group className={LinesItemGroup} data-testid="lines">
         <LinesSeries />
         <LinesOverlay />
       </Group>

@@ -135,6 +135,7 @@ export const LinesTooltip: React.FC = () => {
     <>
       <rect
         id="transparent-overlay-layer"
+        data-testid="transparent-overlay-layer"
         x={-5}
         y={-5}
         width={xMax + 10}
