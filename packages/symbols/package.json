@@ -46,7 +46,7 @@
     "symbols"
   ],
   "devDependencies": {
-    "directory-tree": "3.3.1",
+    "directory-tree": "3.5.1",
     "fs-extra": "10.1.0",
     "nanospinner": "1.1.0",
     "picocolors": "1.0.0",

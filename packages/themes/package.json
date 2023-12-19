@@ -43,8 +43,8 @@
   "devDependencies": {
     "@wonderflow/tokens": "12.8.0",
     "fs-extra": "10.1.0",
-    "style-dictionary": "3.7.1",
+    "style-dictionary": "3.9.1",
     "tsconfig": "10.0.0",
-    "yargs": "17.6.0"
+    "yargs": "17.7.2"
   }
 }
