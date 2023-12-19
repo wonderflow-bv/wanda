@@ -15,6 +15,8 @@
   },
   "rules": {
     "@next/next/no-img-element": "off",
+    "@typescript-eslint/naming-convention": "warn",
+    "@typescript-eslint/prefer-nullish-coalescing": "warn",
     "@typescript-eslint/no-unsafe-assignment": "off",
     "@typescript-eslint/no-unsafe-return": "off",
     "import/no-extraneous-dependencies": "off",

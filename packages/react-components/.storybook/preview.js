@@ -103,8 +103,6 @@ export const parameters = {
   }
 };
 
-// .storybook/preview.js
-
 export const globalTypes = {
   theme: {
     name: `📦 Wanda Design System v${pkg.version}`,

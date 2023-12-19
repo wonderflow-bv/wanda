@@ -19,6 +19,7 @@
     "lint": "turbo run lint",
     "test": "jest",
     "test:watch": "jest --watch",
+    "test:watchAll": "jest --watchAll",
     "release": "changeset publish",
     "prepare": "is-ci || husky install",
     "update:deps": "npx npm-upgrade-monorepo",

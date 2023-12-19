@@ -1,0 +1,11 @@
+.Card {
+  div & [data-inner-element='Content'] {
+    overflow: hidden;
+    width: 100%;
+    height: 75vh;
+  }
+}
+
+.InfoState {
+  transform: translate(0 50%);
+}
