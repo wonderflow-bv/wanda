@@ -1,7 +1,7 @@
 import { defaultLineChartPalette } from '../style-config';
 import { LineChartOverlay, LineChartSeries } from '../types';
 import {
-  handleOverlayColor, handleOverlayName, handleSeriesColors, handleSeriesNames,
+  handleLineChartOverlayColor, handleLineChartSeriesColors, handleOverlayName, handleSeriesNames,
 } from './metadata';
 
 describe('handleSeriesNames()', () => {
@@ -25,7 +25,7 @@ describe('handleSeriesNames()', () => {
   });
 });
 
-describe('handleSeriesColors()', () => {
+describe('handleLineChartSeriesColors()', () => {
   const colors = defaultLineChartPalette.light.series;
 
   it('should return custom styled color', () => {
@@ -33,7 +33,7 @@ describe('handleSeriesColors()', () => {
       dataKey: ['test1', 'test2'],
       style: [{ stroke: 'blue' }, { stroke: 'green' }],
     };
-    const res = handleSeriesColors(series, colors);
+    const res = handleLineChartSeriesColors(series, colors);
     const exp = ['blue', 'green'];
     expect(res).toStrictEqual(exp);
   });
@@ -42,7 +42,7 @@ describe('handleSeriesColors()', () => {
     const series: LineChartSeries = {
       dataKey: ['test1', 'test2'],
     };
-    const res = handleSeriesColors(series, colors);
+    const res = handleLineChartSeriesColors(series, colors);
     const exp = ['hsl(149 83% 35%)', 'hsl(350 66% 49%)'];
     expect(res).toStrictEqual(exp);
   });
@@ -51,7 +51,7 @@ describe('handleSeriesColors()', () => {
     const series: LineChartSeries = {
       dataKey: Array(14).fill('test'),
     };
-    const res = handleSeriesColors(series, colors)[13];
+    const res = handleLineChartSeriesColors(series, colors)[13];
     const exp = 'hsl(350 66% 49%)';
     expect(res).toStrictEqual(exp);
   });
@@ -94,14 +94,14 @@ describe('handleOverlayName()', () => {
   });
 });
 
-describe('handleOverlayColor()', () => {
+describe('handleLineChartOverlayColor()', () => {
   const colors = defaultLineChartPalette.light.overlay;
 
   it('should return the default color', () => {
     const overlay: LineChartOverlay = {
       dataKey: 'test',
     };
-    const res = handleOverlayColor(overlay, colors);
+    const res = handleLineChartOverlayColor(overlay, colors);
     const exp = 'hsl(14 63% 53%)';
     expect(res).toStrictEqual(exp);
   });
@@ -111,7 +111,7 @@ describe('handleOverlayColor()', () => {
       dataKey: 'test',
       style: { stroke: 'salmon' },
     };
-    const res = handleOverlayColor(overlay, colors);
+    const res = handleLineChartOverlayColor(overlay, colors);
     const exp = 'salmon';
     expect(res).toStrictEqual(exp);
   });

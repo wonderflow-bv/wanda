@@ -31,9 +31,9 @@ import {
 import {
   handleChartAxisLayout,
   handleChartDomainAndScaleType,
-  handleOverlayColor,
+  handleLineChartOverlayColor,
+  handleLineChartSeriesColors,
   handleOverlayName,
-  handleSeriesColors,
   handleSeriesNames,
 } from '../../utils';
 import { CartesianBase, CartesianBaseProps } from '../cartesian-base/cartesian-base';
@@ -125,13 +125,13 @@ export const LineChart: React.FC<LineChartProps> = ({
     series: {
       dataKey: series.dataKey,
       names: handleSeriesNames(series),
-      colors: handleSeriesColors(series, palette.series),
+      colors: handleLineChartSeriesColors(series, palette.series),
       style: series.style,
     },
     overlay: {
       dataKey: overlay?.dataKey,
       name: handleOverlayName(overlay),
-      color: handleOverlayColor(overlay, palette.overlay),
+      color: handleLineChartOverlayColor(overlay, palette.overlay),
       style: overlay?.style,
     },
     tooltip,

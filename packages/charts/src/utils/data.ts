@@ -21,6 +21,7 @@ import {
   AxisProps,
   Data, LineChartIndex, LineChartOverlay, LineChartSeries,
 } from '../types';
+import { BarChartIndex, BarChartOverlay, BarChartSeries } from '../types/bar-chart';
 import { inferScaleTypeFromDomain } from './axis';
 import { formatDate } from './format';
 import {
@@ -68,7 +69,7 @@ export const removeKeysFromObject = (obj: Record<string, any>, keys: string[]) =
 
 export const handleAxisDomainAndScaleType = (
   data: Data,
-  axis: LineChartIndex | LineChartSeries | LineChartOverlay,
+  axis: LineChartIndex | LineChartSeries | LineChartOverlay | BarChartIndex | BarChartSeries | BarChartOverlay,
 ): Except<AxisProps, 'orientation'> => {
   const hasData = !!data.length;
   let res: Record<string, any> = {
@@ -137,9 +138,9 @@ export const handleAxisDomainAndScaleType = (
 
 export const handleChartDomainAndScaleType = (
   data: Data,
-  index: LineChartIndex,
-  series: LineChartSeries,
-  overlay?: LineChartOverlay,
+  index: LineChartIndex | BarChartIndex,
+  series: LineChartSeries | BarChartSeries,
+  overlay?: LineChartOverlay | BarChartOverlay,
 ) => {
   const i = handleAxisDomainAndScaleType(data, index);
   const s = handleAxisDomainAndScaleType(data, series);

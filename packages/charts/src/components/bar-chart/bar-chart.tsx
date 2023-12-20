@@ -23,18 +23,17 @@ import {
 } from '../../providers';
 import { defaultLineChartPalette } from '../../style-config';
 import {
-  CartesianChartLayout, Charts, Data, MarginProps, ThemeVariants,
+  CartesianChartLayout, Charts, Data, MarginProps, SortingType, ThemeVariants,
 } from '../../types';
 import {
-  LineChartIndex, LineChartMetadata, LineChartOverlay,
-  LineChartSeries, LineChartTooltip,
-} from '../../types/line-chart';
+  BarChartIndex, BarChartMetadata, BarChartOverlay, BarChartSeries, BarChartTooltip,
+} from '../../types/bar-chart';
 import {
+  handleBarChartOverlayColor,
+  handleBarChartSeriesColors,
   handleChartAxisLayout,
   handleChartDomainAndScaleType,
-  handleOverlayColor,
   handleOverlayName,
-  handleSeriesColors,
   handleSeriesNames,
 } from '../../utils';
 import { CartesianBase, CartesianBaseProps } from '../cartesian-base/cartesian-base';
@@ -57,21 +56,30 @@ export type BarChartProps = {
    */
   isStacked?: boolean;
   /**
+   * Set the order data should be ordered by:
+   * 'label': data label alphabetical order;
+   * 'reverse-label': reverse data label alphabetical order;
+   * 'value': by data value;
+   * 'reverse-value': by reverse data value;
+   * 'dataKey': by data key (default);
+   */
+  sortBy?: SortingType;
+  /**
    * Set the properties associated with the Index Axis.
    */
-  index: LineChartIndex;
+  index: BarChartIndex;
   /**
    * Set the properties associated with any Series of lines.
    */
-  series: LineChartSeries;
+  series: BarChartSeries;
   /**
    * Set the properties associated with the Overlay Axis.
    */
-  overlay?: LineChartOverlay;
+  overlay?: BarChartOverlay;
   /**
    * Set extra data or custom content to be displayed in the tooltip.
    */
-  tooltip?: LineChartTooltip;
+  tooltip?: BarChartTooltip;
   /**
    * Remove the padding from the chart container.
    */
@@ -82,6 +90,7 @@ export const BarChart: React.FC<BarChartProps> = ({
   theme = 'light',
   layout = CartesianChartLayout.HORIZONTAL,
   isStacked = false,
+  sortBy = 'dataKey',
   data = [],
   index,
   series,
@@ -104,25 +113,26 @@ export const BarChart: React.FC<BarChartProps> = ({
     top: 0, right: 12, bottom: 0, left: 0,
   } : undefined;
 
-  const metadata: LineChartMetadata = useMemo(() => ({
+  const metadata: BarChartMetadata = useMemo(() => ({
     type: Charts.BAR_CHART,
     isStacked,
+    sortBy,
     index: index.dataKey,
     series: {
       dataKey: series.dataKey,
       names: handleSeriesNames(series),
-      colors: handleSeriesColors(series, palette.series),
+      colors: handleBarChartSeriesColors(series, palette.series),
       style: series.style,
     },
     overlay: {
       dataKey: overlay?.dataKey,
       name: handleOverlayName(overlay),
-      color: handleOverlayColor(overlay, palette.overlay),
+      color: handleBarChartOverlayColor(overlay, palette.overlay),
       style: overlay?.style,
     },
     tooltip,
     hidePadding,
-  }), [isStacked, index.dataKey, series, palette.series, palette.overlay, overlay, tooltip, hidePadding]);
+  }), [isStacked, sortBy, index.dataKey, series, palette.series, palette.overlay, overlay, tooltip, hidePadding]);
 
   return (
     <ThemeProvider theme={theme}>

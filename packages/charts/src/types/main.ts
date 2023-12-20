@@ -28,3 +28,5 @@ export enum Charts {
 }
 
 export type ScaleType = 'linear' | 'label' | 'time';
+
+export type SortingType = 'label' | 'reverse-label' | 'value' | 'reverse-value' | 'dataKey';

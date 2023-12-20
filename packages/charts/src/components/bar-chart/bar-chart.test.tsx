@@ -8,7 +8,7 @@ global.ResizeObserver = jest.fn().mockImplementation(() => ({
   disconnect: jest.fn(),
 }));
 
-describe('<LineChart>', () => {
+describe('<BarChart>', () => {
   it('should render the component', () => {
     render(<BarChart
       data={[{ date: 'a', value: 1 }, { date: 'b', value: 2 }]}

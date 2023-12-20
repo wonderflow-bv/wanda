@@ -17,10 +17,11 @@
 import { createContext, useContext } from 'react';
 
 import { Data, LineChartMetadata } from '../types';
+import { BarChartMetadata } from '../types/bar-chart';
 
 export type DataContextProps = {
   data: Data;
-  metadata?: LineChartMetadata;
+  metadata?: LineChartMetadata | BarChartMetadata;
 };
 
 export type DataProviderProps = DataContextProps
