@@ -16,6 +16,7 @@
 
 import { Label } from '@visx/annotation';
 import { Group } from '@visx/group';
+import { LineChartMetadata } from 'packages/charts/src/types';
 import { v4 as uuid } from 'uuid';
 
 import {
@@ -40,7 +41,7 @@ export const LinesMarkerLabels: React.FC = () => {
 
   const {
     index, showMarkerLabel, series, overlay,
-  } = metadata!;
+  } = metadata! as LineChartMetadata;
 
   const indexAxis = isHorizontal ? axis!.bottom : axis!.left;
   const seriesAxis = isHorizontal ? axis!.left : axis!.bottom;

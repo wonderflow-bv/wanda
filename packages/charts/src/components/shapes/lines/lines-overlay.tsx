@@ -17,6 +17,7 @@
 import { Group } from '@visx/group';
 import { LinePath } from '@visx/shape';
 import _ from 'lodash';
+import { LineChartMetadata } from 'packages/charts/src/types';
 import { useMemo } from 'react';
 import { v4 as uuid } from 'uuid';
 
@@ -41,7 +42,7 @@ export const LinesOverlay: React.FC = () => {
   const {
     index, renderAs, showMarker, showMarkerLabel, overlay,
     hideMissingDataConnection,
-  } = metadata!;
+  } = metadata! as LineChartMetadata;
 
   const indexAxis = isHorizontal ? axis!.bottom! : axis!.left!;
   const overlayAxis = isHorizontal ? axis?.right : axis?.top;

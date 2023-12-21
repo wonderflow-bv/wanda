@@ -17,6 +17,7 @@
 import { Group } from '@visx/group';
 import { LinePath } from '@visx/shape';
 import _ from 'lodash';
+import { LineChartMetadata } from 'packages/charts/src/types';
 import { useMemo } from 'react';
 import { v4 as uuid } from 'uuid';
 
@@ -42,7 +43,7 @@ export const LinesSeries: React.FC = () => {
   const {
     index, renderAs, showMarker, showMarkerLabel,
     series, hideMissingDataConnection,
-  } = metadata!;
+  } = metadata! as LineChartMetadata;
 
   const indexAxis = isHorizontal ? bottom : left;
   const seriesAxis = isHorizontal ? left : bottom;
