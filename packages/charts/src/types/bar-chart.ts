@@ -29,6 +29,7 @@ export type BarChartOverlay = Partial<AxisProps> & {
 
 export type BarChartSeries = Partial<AxisProps> & {
   dataKey: string[];
+  groupBy?: string[];
   style?: Array<BarStyle | undefined>;
   rename?: (...args: any) => string;
 };
@@ -73,6 +74,7 @@ export type BarChartMetadata = {
 //     continents: [
 //       {
 //         name: 'europe',
+//         value: 100,
 //         countries: [
 //           {
 //             name: 'italy',
@@ -86,6 +88,7 @@ export type BarChartMetadata = {
 //       },
 //       {
 //         name: 'africa',
+//         value: 100,
 //         countries: [
 //           {
 //             name: 'algeria',
@@ -101,6 +104,6 @@ export type BarChartMetadata = {
 //   },
 // ];
 
-// const index = 'product';
-// const series = ['continents.country.value'];
-// const groupBy = ['continents.name'];
+// const index = dataStructure[0].product; // 'product'
+// const series = dataStructure[0].continents[0].value; // 'continents[x].value'
+// const groupBy = dataStructure[0].continents[0].name; // 'continents[x].name'

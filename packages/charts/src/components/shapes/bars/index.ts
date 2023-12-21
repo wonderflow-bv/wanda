@@ -14,5 +14,4 @@
  * limitations under the License.
  */
 
-export * from './bars';
-export * from './lines';
+export { Bars } from './bars';

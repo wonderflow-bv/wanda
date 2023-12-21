@@ -45,7 +45,7 @@ import {
 import { EmptyState } from '../empty-state';
 import { Headings, HeadingsProps } from '../headings';
 import { Loader } from '../loader';
-import { Lines } from '../shapes';
+import { Bars, Lines } from '../shapes';
 import styles from './cartesian-base.module.css';
 import { CartesianBaseAxis } from './cartesian-base-axis';
 import { CartesianBaseGrid } from './cartesian-base-grid';
@@ -324,6 +324,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
                 >
                   <Group clipPath="url(#clip-path-cartesian-chart)">
                     {metadata?.type === Charts.LINE_CHART && <Lines />}
+                    {metadata?.type === Charts.BAR_CHART && <Bars />}
                   </Group>
                 </CartesianProvider>
               )}
