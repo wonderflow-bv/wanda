@@ -53,7 +53,7 @@ export const LinesMarkerLabels: React.FC = () => {
   const totalLabels = data.length;
 
   const getSeriesCoordinates = (
-    datum: Record<string, any>,
+    datum: Record<string, unknown>,
     dataKey: string,
     isHorizontal: boolean,
   ) => getCoordinates({
@@ -66,7 +66,7 @@ export const LinesMarkerLabels: React.FC = () => {
   });
 
   const getOverlayCoordinates = (
-    datum: Record<string, any>,
+    datum: Record<string, unknown>,
     dataKey: string,
     isHorizontal: boolean,
   ) => getCoordinates({
@@ -86,7 +86,7 @@ export const LinesMarkerLabels: React.FC = () => {
           className={LinesItem}
         >
           {(showMarkerLabel || series.style?.[i]?.showMarkerLabel)
-            && data.map((d: Record<string, any>, di: number) => {
+            && data.map((d: Record<string, unknown>, di: number) => {
               const isVisible = isMarkerLabelVisible(di, totalLabels);
               const title = `${getPrimitiveFromObjectByPath(d, k) ?? ''}`;
               const coordinates = getSeriesCoordinates(d, k, isHorizontal);
@@ -131,7 +131,7 @@ export const LinesMarkerLabels: React.FC = () => {
       ))}
 
       {hasOverlay && (showMarkerLabel || overlay.style?.showMarkerLabel)
-            && data.map((d: Record<string, any>, di: number) => {
+            && data.map((d: Record<string, unknown>, di: number) => {
               const isVisible = isMarkerLabelVisible(di, totalLabels);
               const title = `${getPrimitiveFromObjectByPath(d, overlay.dataKey!) ?? ''}`;
               const coordinates = getOverlayCoordinates(d, overlay.dataKey!, isHorizontal);

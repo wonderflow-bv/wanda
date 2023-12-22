@@ -37,7 +37,7 @@ const story: ComponentMeta<typeof BarChart> = {
       control: { type: 'radio' },
     },
     sortBy: {
-      options: ['dataKey', 'dataKey-reverse', 'value', 'value-reverse', 'as-is'],
+      options: ['descending-key', 'ascending-key', 'descending-value', 'ascending-value', 'as-is'],
       control: { type: 'select' },
     },
     theme: {

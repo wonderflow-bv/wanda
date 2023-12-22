@@ -81,7 +81,7 @@ export const getCoordinates = (
     otherDataKey,
     isHorizontal,
   }: {
-    datum: Record<string, any>;
+    datum: Record<string, unknown>;
     indexAxis: CartesianAxis;
     indexDataKey: string;
     otherAxis: CartesianAxis;
@@ -199,9 +199,9 @@ export const getMarkerLabelProps = (
 };
 
 export const createSubArrays = (
-  arr: Array<Record<string, any>>,
-  condition: (d: Record<string, any>) => boolean,
-) => arr.reduce((acc, cur) => {
+  arr: Array<Record<string, unknown>>,
+  condition: (d: Record<string, unknown>) => boolean,
+) => arr.reduce((acc: Array<Array<Record<string, unknown>>>, cur: Record<string, unknown>) => {
   const items = acc.length;
   const lastIndex = acc.length - 1;
 
@@ -216,11 +216,11 @@ export const createSubArrays = (
   }
 
   return acc;
-}, []) as Array<Array<Record<string, any>>>;
+}, []);
 
 export const createSubPaths = (
   data: Data,
-  condition: (d: Record<string, any>) => boolean,
+  condition: (d: Record<string, unknown>) => boolean,
 ) => {
   const subArray = createSubArrays(data, condition);
 
@@ -228,7 +228,7 @@ export const createSubPaths = (
   if (!subArray[subArray.length - 1].length) subArray.pop();
 
   if (subArray.length > 1) {
-    return subArray.map((a: Array<Record<string, any>>, i: number) => {
+    return subArray.map((a: Array<Record<string, unknown>>, i: number) => {
       const len = a.length;
 
       const prev = i - 1;

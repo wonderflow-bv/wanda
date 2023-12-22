@@ -51,7 +51,7 @@ export const LinesSeries: React.FC = () => {
   const renderer = useMemo(() => getLinesRenderer(renderAs, isHorizontal), [isHorizontal, renderAs]);
 
   const getSeriesCoordinates = (
-    datum: Record<string, any>,
+    datum: Record<string, unknown>,
     dataKey: string,
     isHorizontal: boolean,
   ) => getCoordinates({
@@ -80,7 +80,7 @@ export const LinesSeries: React.FC = () => {
 
         return (
           subPaths.map((
-            subPathData: Array<Record<string, any>>,
+            subPathData: Array<Record<string, unknown>>,
             si: number,
           ) => (
             <Group
@@ -103,7 +103,7 @@ export const LinesSeries: React.FC = () => {
                   : defaultStyle.segment.strokeDashArray}
               />
 
-              {hasMarker && subPathData.map((d: Record<string, any>) => (
+              {hasMarker && subPathData.map((d: Record<string, unknown>) => (
                 <circle
                   key={uuid()}
                   r={defaultStyle.marker.radius}

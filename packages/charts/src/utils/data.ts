@@ -29,9 +29,9 @@ import {
   removeNilsFromDomain,
 } from './math';
 
-export const getValueFromObjectByPath = (object: Record<string, any>, path: string) => _.at(object, path)[0];
+export const getValueFromObjectByPath = (object: Record<string, unknown>, path: string) => _.at(object, path)[0];
 
-export const getPrimitiveFromObjectByPath = (object: Record<string, any>, path: string) => {
+export const getPrimitiveFromObjectByPath = (object: Record<string, unknown>, path: string) => {
   const value = getValueFromObjectByPath(object, path);
   return (_.isString(value) || _.isNumber(value)) ? value : undefined;
 };
@@ -53,12 +53,12 @@ export const getLabelFromPath = (path: string) => {
 };
 
 export const getPrimitivesFromObjectArrayByPath = (
-  arr: Array<Record<string, any>>,
+  arr: Array<Record<string, unknown>>,
   path: string,
 ) => arr.map(o => getPrimitiveFromObjectByPath(o, path));
 
-export const removeKeysFromObject = (obj: Record<string, any>, keys: string[]) => {
-  const copy: Record<string, any> = {};
+export const removeKeysFromObject = (obj: Record<string, unknown>, keys: string[]) => {
+  const copy: Record<string, unknown> = {};
   const allKeys = Object.keys(obj);
 
   allKeys.forEach((k: string) => {
@@ -72,7 +72,7 @@ export const handleAxisDomainAndScaleType = (
   axis: LineChartIndex | LineChartSeries | LineChartOverlay | BarChartIndex | BarChartSeries | BarChartOverlay,
 ): Except<AxisProps, 'orientation'> => {
   const hasData = !!data.length;
-  let res: Record<string, any> = {
+  let res: Record<string, unknown> = {
     ...axis,
     hideTickLabel: true,
     domain: [0, 1],
@@ -155,14 +155,8 @@ export const handleChartDomainAndScaleType = (
   };
 };
 
-export const orderByValues = (datum: Record<string, string | number>) => {
-  const entries = Object.entries(datum).map(e => ({ key: e[0], value: e[1] }));
-  const ordered = _.orderBy(entries, 'value');
-  return ordered.map(e => e.key);
-};
-
 export const sortBy = (
-  datum: Record<string, string | number | undefined >,
+  datum: Record<string, string | number | undefined | null >,
   dataKey: string[],
   sorting: SortingType,
 ): string[] => {

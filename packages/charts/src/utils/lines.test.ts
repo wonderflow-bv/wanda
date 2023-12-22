@@ -488,7 +488,7 @@ describe('createSubArrays()', () => {
       { value: 1 },
       { value: 1 },
       { value: 1 }];
-    const condition = (d: Record<string, any>) => d.value === 0;
+    const condition = (d: Record<string, unknown>) => d.value === 0;
     const res = createSubArrays(input, condition);
     const exp = [[{ value: 1 }, { value: 1 }, { value: 1 }]];
     expect(res).toStrictEqual(exp);
@@ -500,7 +500,7 @@ describe('createSubArrays()', () => {
       { value: 0 },
       { value: 1 },
       { value: 1 }];
-    const condition = (d: Record<string, any>) => d.value === 0;
+    const condition = (d: Record<string, unknown>) => d.value === 0;
     const res = createSubArrays(input, condition);
     const exp = [[{ value: 1 }], [], [{ value: 1 }, { value: 1 }]];
     expect(res).toStrictEqual(exp);
@@ -512,7 +512,7 @@ describe('createSubArrays()', () => {
       { value: 1 },
       { value: 1 },
       { value: 0 }];
-    const condition = (d: Record<string, any>) => d.value === 0;
+    const condition = (d: Record<string, unknown>) => d.value === 0;
     const res = createSubArrays(input, condition);
     const exp = [[{ value: 1 }, { value: 1 }, { value: 1 }], []];
     expect(res).toStrictEqual(exp);
@@ -526,7 +526,7 @@ describe('createSubPaths()', () => {
       { value: 2 },
       { value: 3 },
       { value: 0 }];
-    const condition = (d: Record<string, any>) => d.value === 0;
+    const condition = (d: Record<string, unknown>) => d.value === 0;
     const res = createSubPaths(input, condition);
     const exp = [
       [{ value: 1 }, { value: 2 }, { value: 3 }],
@@ -541,7 +541,7 @@ describe('createSubPaths()', () => {
       { value: 2 },
       { value: 3 },
     ];
-    const condition = (d: Record<string, any>) => d.value === 0;
+    const condition = (d: Record<string, unknown>) => d.value === 0;
     const res = createSubPaths(input, condition);
     const exp = [
       [{ value: 1 }],
@@ -558,7 +558,7 @@ describe('createSubPaths()', () => {
       { value: 2 },
       { value: 3 },
     ];
-    const condition = (d: Record<string, any>) => d.value === 0;
+    const condition = (d: Record<string, unknown>) => d.value === 0;
     const res = createSubPaths(input, condition);
     const exp = [
       [{ value: 1 }, { value: 2 }, { value: 3 }],
@@ -572,7 +572,7 @@ describe('createSubPaths()', () => {
       { value: 2 },
       { value: 3 },
     ];
-    const condition = (d: Record<string, any>) => d.value === 0;
+    const condition = (d: Record<string, unknown>) => d.value === 0;
     const res = createSubPaths(input, condition);
     const exp = [[{ value: 1 }, { value: 2 }, { value: 3 }]];
     expect(res).toStrictEqual(exp);

@@ -119,7 +119,7 @@ export type CartesianBaseProps = {
   /**
    * Set other custom properties.
    */
-  otherProps?: Record<string, any>;
+  otherProps?: Record<string, unknown>;
 }
 
 export const CartesianBase: React.FC<CartesianBaseProps> = ({
