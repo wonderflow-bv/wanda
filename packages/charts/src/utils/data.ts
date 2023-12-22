@@ -19,7 +19,7 @@ import { Except } from 'type-fest';
 
 import {
   AxisProps,
-  Data, LineChartIndex, LineChartOverlay, LineChartSeries,
+  Data, LineChartIndex, LineChartOverlay, LineChartSeries, SortingType,
 } from '../types';
 import { BarChartIndex, BarChartOverlay, BarChartSeries } from '../types/bar-chart';
 import { inferScaleTypeFromDomain } from './axis';
@@ -153,4 +153,34 @@ export const handleChartDomainAndScaleType = (
     series: s,
     overlay: o,
   };
+};
+
+export const orderByValues = (datum: Record<string, string | number>) => {
+  const entries = Object.entries(datum).map(e => ({ key: e[0], value: e[1] }));
+  const ordered = _.orderBy(entries, 'value');
+  return ordered.map(e => e.key);
+};
+
+export const sortBy = (
+  datum: Record<string, string | number | undefined >,
+  dataKey: string[],
+  sorting: SortingType,
+): string[] => {
+  if (sorting === 'as-is') return dataKey;
+
+  let isAscending = false;
+  let order = ['key', 'value'];
+
+  if (sorting === 'ascending-key' || sorting === 'ascending-value') {
+    isAscending = true;
+  }
+
+  if (sorting === 'descending-value' || sorting === 'ascending-value') {
+    order = ['value', 'key'];
+  }
+
+  const entries = Object.entries(datum).filter(e => dataKey.includes(e[0])).map(e => ({ key: e[0], value: e[1] }));
+  const orderedKeys = _.orderBy(entries, order).map(e => e.key);
+
+  return isAscending ? orderedKeys.reverse() : orderedKeys;
 };

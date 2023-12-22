@@ -7,6 +7,7 @@ import {
   getValueFromObjectByPath,
   handleAxisDomainAndScaleType,
   handleChartDomainAndScaleType,
+  sortBy,
 } from './data';
 
 const data = [
@@ -400,6 +401,94 @@ describe('handleChartDomainAndScaleType()', () => {
       },
       overlay: undefined,
     };
+    expect(res).toStrictEqual(exp);
+  });
+});
+
+describe('sortBy()', () => {
+  it('should return an unmodified array of datakeys', () => {
+    const datum = { a: 2, b: 3, c: 1 };
+    const datakey = ['a', 'b', 'c'];
+    const res = sortBy(datum, datakey, 'as-is');
+    const exp = ['a', 'b', 'c'];
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return alphabetical ordered datakeys', () => {
+    const datum = { a: 2, b: 3, c: 1 };
+    const datakey = ['c', 'a', 'b'];
+    const res = sortBy(datum, datakey, 'descending-key');
+    const exp = ['a', 'b', 'c'];
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return reversed alphabetical ordered datakeys', () => {
+    const datum = { a: 2, b: 3, c: 1 };
+    const datakey = ['c', 'a', 'b'];
+    const res = sortBy(datum, datakey, 'ascending-key');
+    const exp = ['c', 'b', 'a'];
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return keys sorted by descending numerical dataValue', () => {
+    const datum = { a: 2, b: 3, c: 1 };
+    const datakey = ['a', 'b', 'c'];
+    const res = sortBy(datum, datakey, 'descending-value');
+    const exp = ['c', 'a', 'b'];
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return keys sorted by ascending numerical dataValue', () => {
+    const datum = { a: 2, b: 3, c: 1 };
+    const datakey = ['a', 'b', 'c'];
+    const res = sortBy(datum, datakey, 'ascending-value');
+    const exp = ['b', 'a', 'c'];
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return keys sorted by descending alphabetical dataValue', () => {
+    const datum = { a: 'xyz', b: 'jki', c: 'abc' };
+    const datakey = ['b', 'c', 'a'];
+    const res = sortBy(datum, datakey, 'descending-value');
+    const exp = ['c', 'b', 'a'];
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return keys sorted by ascending alphabetical dataValue', () => {
+    const datum = { a: 'xyz', b: 'jki', c: 'abc' };
+    const datakey = ['b', 'c', 'a'];
+    const res = sortBy(datum, datakey, 'ascending-value');
+    const exp = ['a', 'b', 'c'];
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return keys sorted by descending alphabetical dataValue with undefined value', () => {
+    const datum = {
+      a: 'xyz', b: undefined, c: 'abc', d: undefined,
+    };
+    const datakey = ['b', 'c', 'a', 'd'];
+    const res = sortBy(datum, datakey, 'descending-value');
+    const exp = ['c', 'a', 'b', 'd'];
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return keys sorted by descending alphabetical dataValue with undefined value', () => {
+    const datum = {
+      a: 'xyz', b: undefined, c: 'abc', d: undefined,
+    };
+    const datakey = ['b', 'c', 'a', 'd'];
+    const res = sortBy(datum, datakey, 'descending-value');
+    const exp = ['c', 'a', 'b', 'd'];
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return keys sorted by descending alphabetical dataValue with undefined value and less keys', () => {
+    const datum = {
+      a: 'xyz', b: undefined, c: 'abc', d: undefined,
+    };
+    const datakey = ['b', 'c'];
+    const res = sortBy(datum, datakey, 'descending-value');
+    const exp = ['c', 'b'];
     expect(res).toStrictEqual(exp);
   });
 });

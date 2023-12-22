@@ -13,7 +13,7 @@ const story: ComponentMeta<typeof BarChart> = {
     title: 'Bar Charts',
     subtitle: 'A quantitative bar chart',
     isStacked: false,
-    sortBy: 'dataKey',
+    sortBy: 'as-is',
     preventResponsive: false,
     isLoading: false,
     hideLegend: false,
@@ -37,7 +37,7 @@ const story: ComponentMeta<typeof BarChart> = {
       control: { type: 'radio' },
     },
     sortBy: {
-      options: ['dataKey', 'dataKey-reverse', 'value', 'value-reverse'],
+      options: ['dataKey', 'dataKey-reverse', 'value', 'value-reverse', 'as-is'],
       control: { type: 'select' },
     },
     theme: {

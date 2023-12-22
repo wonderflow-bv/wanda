@@ -56,12 +56,12 @@ export type BarChartProps = {
    */
   isStacked?: boolean;
   /**
-   * Set the order data should be ordered by:
-   * 'label': data label alphabetical order;
-   * 'reverse-label': reverse data label alphabetical order;
-   * 'value': by data value;
-   * 'reverse-value': by reverse data value;
-   * 'dataKey': by data key (default);
+   * Set the order data should be sorted by:
+   * 'descending-key': dataKey alphabetical order;
+   * 'ascending-key': reverse dataKey alphabetical order;
+   * 'descending-value': by data value;
+   * 'ascending-value': by reverse data value;
+   * 'as-is': as set in series/overlay dataKey;
    */
   sortBy?: SortingType;
   /**
@@ -90,7 +90,7 @@ export const BarChart: React.FC<BarChartProps> = ({
   theme = 'light',
   layout = CartesianChartLayout.HORIZONTAL,
   isStacked = false,
-  sortBy = 'dataKey',
+  sortBy = 'as-is',
   data = [],
   index,
   series,

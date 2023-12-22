@@ -29,4 +29,4 @@ export enum Charts {
 
 export type ScaleType = 'linear' | 'label' | 'time';
 
-export type SortingType = 'dataKey' | 'reverse-dataKey' | 'value' | 'reverse-value';
+export type SortingType = 'descending-key' | 'ascending-key' | 'descending-value' | 'ascending-value' | 'as-is';
