@@ -14,33 +14,36 @@
  * limitations under the License.
  */
 
+import { Label } from '@visx/annotation';
 import { Group } from '@visx/group';
 import { Line } from '@visx/shape';
 import { LineChartMetadata } from 'packages/charts/src/types';
 import { useMemo } from 'react';
 
 import {
-  useCartesianContext, useDataContext, useLayoutContext,
+  useCartesianContext, useDataContext, useLayoutContext, useStyleConfigContext, useThemeContext,
 } from '../../../providers';
 
 export type Point = { x: number; y: number };
 export type LinePoints = { from: Point; to: Point }
 
 export const LinesAverage: React.FC = () => {
-  // const theme = useThemeContext();
-  // const { lines: defaultStyle, themes } = useStyleConfigContext();
+  const theme = useThemeContext();
+  const { lines: defaultStyle, themes } = useStyleConfigContext();
   const {
     // data,
     metadata,
   } = useDataContext();
   const { isHorizontal } = useLayoutContext();
   const {
-    // axis,
     dimension,
   } = useCartesianContext();
 
   const { showAverage } = metadata! as LineChartMetadata;
   const { maxHeight, maxWidth } = dimension;
+  const {
+    strokeDasharray, strokeWidth, pointerEvents, opacity,
+  } = defaultStyle.average;
 
   const coordinates = useMemo(() => (isHorizontal
     ? {
@@ -59,10 +62,27 @@ export const LinesAverage: React.FC = () => {
           <Line
             from={coordinates.from}
             to={coordinates.to}
-            stroke="red"
-            strokeWidth={2}
-            pointerEvents="none"
-            strokeDasharray="5,2"
+            stroke={themes[theme].lines.average}
+            strokeWidth={strokeWidth}
+            pointerEvents={pointerEvents}
+            strokeDasharray={strokeDasharray}
+            opacity={opacity}
+          />
+          <Label
+            backgroundFill="grey"
+            x={coordinates.from.x + 4}
+            y={coordinates.from.y}
+            fontColor="white"
+            title="Average: number"
+            titleFontSize={14}
+            titleFontWeight={400}
+            titleProps={undefined}
+            showAnchorLine={false}
+            horizontalAnchor="start"
+            verticalAnchor="middle"
+            showBackground
+            backgroundPadding={4}
+            backgroundProps={{ rx: 4 }}
           />
         </Group>
       )}

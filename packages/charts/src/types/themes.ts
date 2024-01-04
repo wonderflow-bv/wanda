@@ -41,6 +41,7 @@ export type Theme = {
   };
   lines: {
     noData: string;
+    average: string;
   };
 }
 

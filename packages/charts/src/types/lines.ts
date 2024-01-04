@@ -37,4 +37,10 @@ export type LinesStyleConfig = {
     strokeWidth: number;
     strokeOpacity: number;
   };
+  average: {
+    strokeWidth: number;
+    opacity: number;
+    pointerEvents: string;
+    strokeDasharray: string;
+  };
 }

@@ -48,6 +48,7 @@ export const themeLight: Theme = {
   },
   lines: {
     noData: colorPaletteNeutrals.dimmed1,
+    average: colorPaletteNeutrals.dimmed8,
   },
 };
 
@@ -82,6 +83,7 @@ export const themeDark: Theme = {
   },
   lines: {
     noData: colorPaletteNeutrals.dimmed7,
+    average: colorPaletteNeutrals.dimmed1,
   },
 };
 

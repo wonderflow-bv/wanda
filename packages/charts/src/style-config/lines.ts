@@ -39,4 +39,10 @@ export const linesStyleConfig: LinesStyleConfig = {
     strokeWidth: 1,
     strokeOpacity: 1,
   },
+  average: {
+    strokeWidth: 1,
+    opacity: 0.8,
+    pointerEvents: 'none',
+    strokeDasharray: '5,2',
+  },
 };
