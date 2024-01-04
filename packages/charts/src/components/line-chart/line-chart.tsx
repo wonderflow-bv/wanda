@@ -68,7 +68,7 @@ export type LineChartProps = {
    */
   overlay?: LineChartOverlay;
   /**
-   * Display an average line when true.
+   * Display an average line and label when true.
    */
   showAverage?: boolean;
   /**
@@ -119,9 +119,11 @@ export const LineChart: React.FC<LineChartProps> = ({
 
   const palette = useMemo(() => defaultLineChartPalette[theme], [theme]);
 
-  const zeroPadding: MarginProps | undefined = hidePadding ? {
-    top: 0, right: 12, bottom: 0, left: 0,
-  } : undefined;
+  const zeroPadding: MarginProps | undefined = hidePadding
+    ? {
+      top: 0, right: 12, bottom: 0, left: 0,
+    }
+    : undefined;
 
   const metadata: LineChartMetadata = useMemo(() => ({
     type: Charts.LINE_CHART,
