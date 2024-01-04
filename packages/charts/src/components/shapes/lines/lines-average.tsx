@@ -80,20 +80,24 @@ export const LinesAverage: React.FC = () => {
       series: {
         from: { x: 0, y: averageSeriesScale },
         to: { x: maxWidth, y: averageSeriesScale },
+        label: { x: 4, y: averageSeriesScale },
       },
       overlay: {
         from: { x: 0, y: averageOverlayScale },
         to: { x: maxWidth, y: averageOverlayScale },
+        label: { x: maxWidth - 4, y: averageSeriesScale },
       },
     }
     : {
       series: {
         from: { x: averageSeriesScale, y: 0 },
         to: { x: averageSeriesScale, y: maxHeight },
+        label: { x: averageSeriesScale, y: maxHeight - 16 },
       },
       overlay: {
         from: { x: averageOverlayScale ?? 0, y: 0 },
         to: { x: averageOverlayScale ?? 0, y: maxHeight },
+        label: { x: averageOverlayScale, y: 16 },
       },
     }), [isHorizontal, averageSeriesScale, maxWidth, averageOverlayScale, maxHeight]);
 
@@ -112,15 +116,15 @@ export const LinesAverage: React.FC = () => {
           />
           <Label
             backgroundFill="grey"
-            x={coordinates.series.from.x + 4}
-            y={coordinates.series.from.y}
+            x={coordinates.series.label.x}
+            y={coordinates.series.label.y}
             fontColor="white"
             title={`Average: ${averageSeries.toFixed(1)}`}
             titleFontSize={14}
             titleFontWeight={400}
             titleProps={undefined}
             showAnchorLine={false}
-            horizontalAnchor="start"
+            horizontalAnchor={isHorizontal ? 'start' : 'middle'}
             verticalAnchor="middle"
             showBackground
             backgroundPadding={4}
@@ -142,15 +146,15 @@ export const LinesAverage: React.FC = () => {
           />
           <Label
             backgroundFill="grey"
-            x={coordinates.overlay.to.x - 4}
-            y={coordinates.overlay.to.y}
+            x={coordinates.overlay.label.x}
+            y={coordinates.overlay.label.y}
             fontColor="white"
             title={`Average: ${averageOverlay!.toFixed(2)}`}
             titleFontSize={14}
             titleFontWeight={400}
             titleProps={undefined}
             showAnchorLine={false}
-            horizontalAnchor="end"
+            horizontalAnchor={isHorizontal ? 'end' : 'middle'}
             verticalAnchor="middle"
             showBackground
             backgroundPadding={4}
