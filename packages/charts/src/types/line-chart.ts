@@ -67,6 +67,7 @@ export type LineChartMetadata = {
     style?: LineStyle;
   };
   tooltip?: LineChartTooltip;
+  showAverage: boolean;
   hideMissingDataConnection?: boolean;
   showMarker?: boolean;
   showMarkerLabel?: boolean;

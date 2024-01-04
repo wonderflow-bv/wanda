@@ -68,6 +68,10 @@ export type LineChartProps = {
    */
   overlay?: LineChartOverlay;
   /**
+   * Display an average line when true.
+   */
+  showAverage?: boolean;
+  /**
    * Set extra data or custom content to be displayed in the tooltip.
    */
   tooltip?: LineChartTooltip;
@@ -98,6 +102,7 @@ export const LineChart: React.FC<LineChartProps> = ({
   series,
   overlay,
   tooltip,
+  showAverage = false,
   hideMissingDataConnection = false,
   showMarker = false,
   showMarkerLabel = false,
@@ -135,6 +140,7 @@ export const LineChart: React.FC<LineChartProps> = ({
       style: overlay?.style,
     },
     tooltip,
+    showAverage,
     hideMissingDataConnection,
     showMarker,
     showMarkerLabel,
@@ -146,6 +152,7 @@ export const LineChart: React.FC<LineChartProps> = ({
     palette.overlay,
     overlay,
     tooltip,
+    showAverage,
     hideMissingDataConnection,
     showMarker,
     showMarkerLabel,

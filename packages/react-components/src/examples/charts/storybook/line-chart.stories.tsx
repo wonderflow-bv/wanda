@@ -1,9 +1,9 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { CartesianChartLayout, LineChart, LineChartProps } from '@wonderflow/charts';
 
+// import { CartesianChartLayout, LineChart, LineChartProps } from '@wonderflow/charts';
 import { Card } from '@/components';
 
-// import { CartesianChartLayout, LineChart, LineChartProps } from '../../../../../charts/src';
+import { CartesianChartLayout, LineChart, LineChartProps } from '../../../../../charts/src';
 import {
   channels, channelsB, feedbackCount, feedbackCountGaps, proCons,
 } from '../mock-data';
@@ -20,6 +20,7 @@ const story: ComponentMeta<typeof LineChart> = {
     showMarker: false,
     showMarkerLabel: false,
     hideMissingDataConnection: false,
+    showAverage: false,
     hideLegend: false,
     hidePadding: false,
     layout: CartesianChartLayout.HORIZONTAL,
@@ -66,6 +67,12 @@ withOverlay.args = {
     dataKey: 'overlay',
     label: 'Overlay',
   },
+};
+
+export const withAverage = Template.bind({});
+withAverage.args = {
+  subtitle: 'A trend line chart with average',
+  showAverage: true,
 };
 
 export const withMissingData = Template.bind({});

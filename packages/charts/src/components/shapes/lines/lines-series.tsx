@@ -50,7 +50,7 @@ export const LinesSeries: React.FC = () => {
 
   const renderer = useMemo(() => getLinesRenderer(renderAs, isHorizontal), [isHorizontal, renderAs]);
 
-  const getSeriesCoordinates = (
+  const getSeriesCoordinates = useMemo(() => (
     datum: Record<string, unknown>,
     dataKey: string,
     isHorizontal: boolean,
@@ -61,7 +61,7 @@ export const LinesSeries: React.FC = () => {
     otherAxis: seriesAxis!,
     otherDataKey: dataKey,
     isHorizontal,
-  });
+  }), [index, indexAxis, seriesAxis]);
 
   return (
     <>
