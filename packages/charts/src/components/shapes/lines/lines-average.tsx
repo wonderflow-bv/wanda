@@ -55,10 +55,16 @@ export const LinesAverage: React.FC = () => {
     data: Data,
     dataKeys: string[],
   ) => {
-    const values = dataKeys.map((s: string) => data.map(d => getPrimitiveFromObjectByPath(d, s))
-      .filter((d): d is number => typeof d === 'number'));
+    const dataKey = dataKeys.map((k: string) => ({
+      name: k,
+      average: _.mean(data
+        .map(d => getPrimitiveFromObjectByPath(d, k))
+        .filter((d): d is number => typeof d === 'number')),
+    }));
 
-    return _.mean(_.flattenDeep(values));
+    const all = _.mean(dataKey.map(k => k.average));
+
+    return { average: all, dataKey };
   };
 
   const averageSeries = useMemo(() => computeAverage(data, series.dataKey),
@@ -69,8 +75,8 @@ export const LinesAverage: React.FC = () => {
     : undefined),
   [data, overlay.dataKey]);
 
-  const averageSeriesScale = seriesAxis!.scale(averageSeries as any) ?? 0;
-  const averageOverlayScale = (overlayAxis && averageOverlay) ? overlayAxis.scale(averageOverlay as any) : 0;
+  const averageSeriesScale = seriesAxis!.scale(averageSeries.average as any) ?? 0;
+  const averageOverlayScale = (overlayAxis && averageOverlay) ? overlayAxis.scale(averageOverlay.average as any) : 0;
 
   const hasAverageSeries = Boolean(showAverage && averageSeries);
   const hasAverageOverlay = Boolean(showAverage && averageOverlay);
@@ -85,7 +91,7 @@ export const LinesAverage: React.FC = () => {
       overlay: {
         from: { x: 0, y: averageOverlayScale },
         to: { x: maxWidth, y: averageOverlayScale },
-        label: { x: maxWidth - 4, y: averageSeriesScale },
+        label: { x: maxWidth - 4, y: averageOverlayScale },
       },
     }
     : {
@@ -100,6 +106,8 @@ export const LinesAverage: React.FC = () => {
         label: { x: averageOverlayScale, y: 16 },
       },
     }), [isHorizontal, averageSeriesScale, maxWidth, averageOverlayScale, maxHeight]);
+
+  const formatAverage = (value: number) => value.toFixed(2);
 
   return (
     <>
@@ -119,7 +127,7 @@ export const LinesAverage: React.FC = () => {
             x={coordinates.series.label.x}
             y={coordinates.series.label.y}
             fontColor="white"
-            title={`Average: ${averageSeries.toFixed(1)}`}
+            title={`Average: ${formatAverage(averageSeries.average)}`}
             titleFontSize={14}
             titleFontWeight={400}
             titleProps={undefined}
@@ -149,7 +157,7 @@ export const LinesAverage: React.FC = () => {
             x={coordinates.overlay.label.x}
             y={coordinates.overlay.label.y}
             fontColor="white"
-            title={`Average: ${averageOverlay!.toFixed(2)}`}
+            title={`Average: ${formatAverage(averageOverlay!.average)}`}
             titleFontSize={14}
             titleFontWeight={400}
             titleProps={undefined}
