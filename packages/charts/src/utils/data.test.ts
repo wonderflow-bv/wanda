@@ -1,6 +1,9 @@
 
-import { LineChartIndex, LineChartOverlay, LineChartSeries } from '../types';
 import {
+  Data, LineChartIndex, LineChartOverlay, LineChartSeries,
+} from '../types';
+import {
+  computeAverage,
   getLabelFromPath,
   getPrimitiveFromObjectByPath,
   getPrimitivesFromObjectArrayByPath,
@@ -489,6 +492,40 @@ describe('sortBy()', () => {
     const datakey = ['b', 'c'];
     const res = sortBy(datum, datakey, 'descending-value');
     const exp = ['c', 'b'];
+    expect(res).toStrictEqual(exp);
+  });
+});
+
+describe('computeAverage()', () => {
+  it('should return undefined when average is NaN', () => {
+    const data: Data = [];
+    const datakeys: string[] = [];
+    const res = computeAverage(data, datakeys);
+    const exp = undefined;
+    expect(res).toBe(exp);
+  });
+
+  it('should return average for a single dataKey', () => {
+    const data: Data = [{ testA: 3, testB: 5 }, { testA: 1, testB: 2 }];
+    const datakeys: string[] = ['testA'];
+    const res = computeAverage(data, datakeys);
+    const exp = { average: 2, dataKey: [{ name: 'testA', average: 2 }] };
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return average for multiple dataKeys', () => {
+    const data: Data = [{ testA: 3, testB: 5 }, { testA: 1, testB: 3 }];
+    const datakeys: string[] = ['testA', 'testB'];
+    const res = computeAverage(data, datakeys);
+    const exp = { average: 3, dataKey: [{ name: 'testA', average: 2 }, { name: 'testB', average: 4 }] };
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return average for multiple dataKeys with undefined value', () => {
+    const data: Data = [{ testA: 3, testB: 5 }, { testA: 3, testB: 3 }, { testA: undefined, testB: 4 }];
+    const datakeys: string[] = ['testA', 'testB'];
+    const res = computeAverage(data, datakeys);
+    const exp = { average: 3.5, dataKey: [{ name: 'testA', average: 3 }, { name: 'testB', average: 4 }] };
     expect(res).toStrictEqual(exp);
   });
 });

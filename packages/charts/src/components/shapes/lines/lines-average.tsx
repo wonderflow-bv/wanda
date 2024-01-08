@@ -17,14 +17,13 @@
 import { Label } from '@visx/annotation';
 import { Group } from '@visx/group';
 import { Line } from '@visx/shape';
-import _ from 'lodash';
 import { useMemo } from 'react';
 
 import {
   useCartesianContext, useDataContext, useLayoutContext, useStyleConfigContext, useThemeContext,
 } from '../../../providers';
-import { Data, LineChartMetadata } from '../../../types';
-import { getPrimitiveFromObjectByPath } from '../../../utils';
+import { LineChartMetadata } from '../../../types';
+import { computeAverage } from '../../../utils';
 
 export const LinesAverage: React.FC = () => {
   const theme = useThemeContext();
@@ -51,22 +50,6 @@ export const LinesAverage: React.FC = () => {
     opacity,
   } = defaultStyle.average;
 
-  const computeAverage = (
-    data: Data,
-    dataKeys: string[],
-  ) => {
-    const dataKey = dataKeys.map((k: string) => ({
-      name: k,
-      average: _.mean(data
-        .map(d => getPrimitiveFromObjectByPath(d, k))
-        .filter((d): d is number => typeof d === 'number')),
-    }));
-
-    const all = _.mean(dataKey.map(k => k.average));
-
-    return { average: all, dataKey };
-  };
-
   const averageSeries = useMemo(() => computeAverage(data, series.dataKey),
     [data, series.dataKey]);
 
@@ -75,11 +58,14 @@ export const LinesAverage: React.FC = () => {
     : undefined),
   [data, overlay.dataKey]);
 
-  const averageSeriesScale = seriesAxis!.scale(averageSeries.average as any) ?? 0;
+  const averageSeriesScale = seriesAxis!.scale(averageSeries?.average as any) ?? 0;
   const averageOverlayScale = (overlayAxis && averageOverlay) ? overlayAxis.scale(averageOverlay.average as any) : 0;
 
-  const hasAverageSeries = Boolean(showAverage && averageSeries);
-  const hasAverageOverlay = Boolean(showAverage && averageOverlay);
+  const hasAverageSeries = Boolean(showAverage && averageSeries?.average);
+  const hasAverageOverlay = Boolean(showAverage && averageOverlay?.average);
+
+  const maxLabelWidth = 200;
+  const hasLabel = dimension.maxWidth > maxLabelWidth;
 
   const coordinates = useMemo(() => (isHorizontal
     ? {
@@ -122,22 +108,25 @@ export const LinesAverage: React.FC = () => {
             strokeDasharray={strokeDasharray}
             opacity={opacity}
           />
-          <Label
-            backgroundFill="grey"
-            x={coordinates.series.label.x}
-            y={coordinates.series.label.y}
-            fontColor="white"
-            title={`Average: ${formatAverage(averageSeries.average)}`}
-            titleFontSize={14}
-            titleFontWeight={400}
-            titleProps={undefined}
-            showAnchorLine={false}
-            horizontalAnchor={isHorizontal ? 'start' : 'middle'}
-            verticalAnchor="middle"
-            showBackground
-            backgroundPadding={4}
-            backgroundProps={{ rx: 4 }}
-          />
+          {hasLabel && (
+            <Label
+              backgroundFill="grey"
+              x={coordinates.series.label.x}
+              y={coordinates.series.label.y}
+              fontColor="white"
+              title={`Average: ${formatAverage(averageSeries!.average)}`}
+              titleFontSize={14}
+              titleFontWeight={400}
+              titleProps={undefined}
+              showAnchorLine={false}
+              horizontalAnchor={isHorizontal ? 'start' : 'middle'}
+              verticalAnchor="middle"
+              showBackground
+              backgroundPadding={4}
+              backgroundProps={{ rx: 4 }}
+              maxWidth={200}
+            />
+          )}
         </Group>
       )}
 
@@ -152,22 +141,25 @@ export const LinesAverage: React.FC = () => {
             strokeDasharray={strokeDasharray}
             opacity={opacity}
           />
-          <Label
-            backgroundFill="grey"
-            x={coordinates.overlay.label.x}
-            y={coordinates.overlay.label.y}
-            fontColor="white"
-            title={`Average: ${formatAverage(averageOverlay!.average)}`}
-            titleFontSize={14}
-            titleFontWeight={400}
-            titleProps={undefined}
-            showAnchorLine={false}
-            horizontalAnchor={isHorizontal ? 'end' : 'middle'}
-            verticalAnchor="middle"
-            showBackground
-            backgroundPadding={4}
-            backgroundProps={{ rx: 4 }}
-          />
+          {hasLabel && (
+            <Label
+              backgroundFill="grey"
+              x={coordinates.overlay.label.x}
+              y={coordinates.overlay.label.y}
+              fontColor="white"
+              title={`Average: ${formatAverage(averageOverlay!.average)}`}
+              titleFontSize={14}
+              titleFontWeight={400}
+              titleProps={undefined}
+              showAnchorLine={false}
+              horizontalAnchor={isHorizontal ? 'end' : 'middle'}
+              verticalAnchor="middle"
+              showBackground
+              backgroundPadding={4}
+              backgroundProps={{ rx: 4 }}
+              maxWidth={200}
+            />
+          )}
         </Group>
       )}
     </>

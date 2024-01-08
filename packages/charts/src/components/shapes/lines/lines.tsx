@@ -42,6 +42,7 @@ export const Lines: React.FC = () => {
       <LinesTooltip />
 
       <LinesMarkerLabels />
+
     </Group>
   );
 };

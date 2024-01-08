@@ -178,3 +178,25 @@ export const sortBy = (
 
   return isAscending ? orderedKeys.reverse() : orderedKeys;
 };
+
+export const computeAverage = (
+  data: Data,
+  dataKeys: string[],
+): ({
+    average: number;
+    dataKey: Array<{
+      name: string;
+      average: number;
+    }> ;
+  } | undefined) => {
+  const dataKey = dataKeys.map((k: string) => ({
+    name: k,
+    average: _.mean(data
+      .map(d => getPrimitiveFromObjectByPath(d, k))
+      .filter((d): d is number => typeof d === 'number')),
+  }));
+
+  const all = _.mean(dataKey.map(k => k.average));
+
+  return _.isNaN(all) ? undefined : { average: all, dataKey };
+};
