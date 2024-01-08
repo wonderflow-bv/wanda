@@ -38,10 +38,11 @@ export type LinesStyleConfig = {
     strokeOpacity: number;
   };
   average: {
-    strokeWidth: number;
+    maxLabelWidth: number;
     opacity: number;
     pointerEvents: string;
     strokeDasharray: string;
+    strokeWidth: number;
     titleFontSize: number;
     titleFontWeight: number;
   };

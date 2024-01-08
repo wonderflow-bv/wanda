@@ -16,10 +16,10 @@
 
 export type ViewportSize = 'small' | 'medium' | 'large';
 
-export type ViewportSizeConfig = {
-  maxWidth?: number;
-  maxHeight?: number;
+export type ViewportSizeProperties = {
+  maxWidth: number;
+  maxHeight: number;
   numTicks: number;
 }
 
-export type ViewportStyleConfig = Record<ViewportSize, ViewportSizeConfig>
+export type ViewportStyleConfig = Record<'small' | 'medium', ViewportSizeProperties> & Record<'large', Pick<ViewportSizeProperties, 'numTicks'>>

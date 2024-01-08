@@ -40,10 +40,11 @@ export const linesStyleConfig: LinesStyleConfig = {
     strokeOpacity: 1,
   },
   average: {
-    strokeWidth: 1,
+    maxLabelWidth: 200,
     opacity: 0.8,
     pointerEvents: 'none',
     strokeDasharray: '5,2',
+    strokeWidth: 1,
     titleFontSize: 12,
     titleFontWeight: 400,
   },

@@ -20,9 +20,8 @@ import { LineChartMetadata } from 'packages/charts/src/types';
 import { v4 as uuid } from 'uuid';
 
 import {
-  useCartesianContext, useDataContext, useLayoutContext, useThemeContext,
+  useCartesianContext, useDataContext, useLayoutContext, useStyleConfigContext, useThemeContext,
 } from '../../../providers';
-import { themes } from '../../../style-config';
 import {
   getCoordinates,
   getMarkerLabelProps,
@@ -38,6 +37,7 @@ export const LinesMarkerLabels: React.FC = () => {
   const { data, metadata } = useDataContext();
   const { isHorizontal } = useLayoutContext();
   const { axis, dimension } = useCartesianContext();
+  const { themes, viewport } = useStyleConfigContext();
 
   const {
     index, showMarkerLabel, series, overlay,
@@ -46,6 +46,8 @@ export const LinesMarkerLabels: React.FC = () => {
   const indexAxis = isHorizontal ? axis!.bottom : axis!.left;
   const seriesAxis = isHorizontal ? axis!.left : axis!.bottom;
   const overlayAxis = isHorizontal ? axis?.right : axis?.top;
+
+  const hasMarkerLabel = dimension.maxWidth > viewport.small.maxWidth;
 
   const hasOverlay = Boolean(overlayAxis && overlay.dataKey);
 
@@ -78,9 +80,11 @@ export const LinesMarkerLabels: React.FC = () => {
     isHorizontal,
   });
 
+  if (!hasMarkerLabel) return null;
+
   return (
     <>
-      {series.dataKey.map((k: string, i: number) => (
+      { series.dataKey.map((k: string, i: number) => (
         <Group
           key={uuid()}
           className={LinesItem}

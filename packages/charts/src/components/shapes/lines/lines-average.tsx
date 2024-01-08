@@ -26,7 +26,7 @@ import { LineChartMetadata } from '../../../types';
 
 export const LinesAverage: React.FC = () => {
   const theme = useThemeContext();
-  const { lines: defaultStyle, themes } = useStyleConfigContext();
+  const { lines: defaultStyle, themes, viewport } = useStyleConfigContext();
   const { metadata } = useDataContext();
   const { isHorizontal } = useLayoutContext();
   const { axis, dimension } = useCartesianContext();
@@ -43,10 +43,11 @@ export const LinesAverage: React.FC = () => {
   const { maxHeight, maxWidth } = dimension;
 
   const {
+    maxLabelWidth,
+    opacity,
+    pointerEvents,
     strokeDasharray,
     strokeWidth,
-    pointerEvents,
-    opacity,
     titleFontSize,
     titleFontWeight,
   } = defaultStyle.average;
@@ -60,8 +61,7 @@ export const LinesAverage: React.FC = () => {
   const hasAverageSeries = Boolean(showAverage && averageSeries);
   const hasAverageOverlay = Boolean(showAverage && averageOverlay);
 
-  const maxLabelWidth = 200;
-  const hasLabel = dimension.maxWidth > maxLabelWidth;
+  const hasLabel = dimension.maxWidth > viewport.small.maxWidth;
 
   const coordinates = useMemo(() => (isHorizontal
     ? {
@@ -120,7 +120,7 @@ export const LinesAverage: React.FC = () => {
               showBackground
               backgroundPadding={4}
               backgroundProps={{ rx: 4 }}
-              maxWidth={200}
+              maxWidth={maxLabelWidth}
             />
           )}
         </Group>
@@ -153,7 +153,7 @@ export const LinesAverage: React.FC = () => {
               showBackground
               backgroundPadding={4}
               backgroundProps={{ rx: 4 }}
-              maxWidth={200}
+              maxWidth={maxLabelWidth}
             />
           )}
         </Group>
