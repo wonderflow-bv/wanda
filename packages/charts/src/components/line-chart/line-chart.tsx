@@ -29,6 +29,7 @@ import {
   LineChartIndex, LineChartMetadata, LineChartOverlay, LineChartRenderType, LineChartSeries, LineChartTooltip,
 } from '../../types/line-chart';
 import {
+  computeAverage,
   handleChartAxisLayout,
   handleChartDomainAndScaleType,
   handleLineChartOverlayColor,
@@ -134,12 +135,14 @@ export const LineChart: React.FC<LineChartProps> = ({
       names: handleSeriesNames(series),
       colors: handleLineChartSeriesColors(series, palette.series),
       style: series.style,
+      average: computeAverage(data, series.dataKey),
     },
     overlay: {
       dataKey: overlay?.dataKey,
       name: handleOverlayName(overlay),
       color: handleLineChartOverlayColor(overlay, palette.overlay),
       style: overlay?.style,
+      average: overlay?.dataKey ? computeAverage(data, [overlay.dataKey]) : undefined,
     },
     tooltip,
     showAverage,
@@ -152,7 +155,7 @@ export const LineChart: React.FC<LineChartProps> = ({
     series,
     palette.series,
     palette.overlay,
-    overlay,
+    data, overlay,
     tooltip,
     showAverage,
     hideMissingDataConnection,

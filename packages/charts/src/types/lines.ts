@@ -42,5 +42,7 @@ export type LinesStyleConfig = {
     opacity: number;
     pointerEvents: string;
     strokeDasharray: string;
+    titleFontSize: number;
+    titleFontWeight: number;
   };
 }

@@ -18,6 +18,7 @@ import _ from 'lodash';
 import { Except } from 'type-fest';
 
 import {
+  AverageType,
   AxisProps,
   Data, LineChartIndex, LineChartOverlay, LineChartSeries, SortingType,
 } from '../types';
@@ -182,13 +183,7 @@ export const sortBy = (
 export const computeAverage = (
   data: Data,
   dataKeys: string[],
-): ({
-    average: number;
-    dataKey: Array<{
-      name: string;
-      average: number;
-    }> ;
-  } | undefined) => {
+): AverageType => {
   const dataKey = dataKeys.map((k: string) => ({
     name: k,
     average: _.mean(data

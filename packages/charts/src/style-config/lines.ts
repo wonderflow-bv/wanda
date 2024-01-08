@@ -44,5 +44,7 @@ export const linesStyleConfig: LinesStyleConfig = {
     opacity: 0.8,
     pointerEvents: 'none',
     strokeDasharray: '5,2',
+    titleFontSize: 12,
+    titleFontWeight: 400,
   },
 };

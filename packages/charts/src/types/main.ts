@@ -30,3 +30,11 @@ export enum Charts {
 export type ScaleType = 'linear' | 'label' | 'time';
 
 export type SortingType = 'descending-key' | 'ascending-key' | 'descending-value' | 'ascending-value' | 'as-is';
+
+export type AverageType = {
+  average: number;
+  dataKey: Array<{
+    name: string;
+    average: number;
+  }> ;
+} | undefined

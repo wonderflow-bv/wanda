@@ -23,12 +23,11 @@ import {
   useCartesianContext, useDataContext, useLayoutContext, useStyleConfigContext, useThemeContext,
 } from '../../../providers';
 import { LineChartMetadata } from '../../../types';
-import { computeAverage } from '../../../utils';
 
 export const LinesAverage: React.FC = () => {
   const theme = useThemeContext();
   const { lines: defaultStyle, themes } = useStyleConfigContext();
-  const { data, metadata } = useDataContext();
+  const { metadata } = useDataContext();
   const { isHorizontal } = useLayoutContext();
   const { axis, dimension } = useCartesianContext();
 
@@ -48,21 +47,18 @@ export const LinesAverage: React.FC = () => {
     strokeWidth,
     pointerEvents,
     opacity,
+    titleFontSize,
+    titleFontWeight,
   } = defaultStyle.average;
 
-  const averageSeries = useMemo(() => computeAverage(data, series.dataKey),
-    [data, series.dataKey]);
+  const averageSeries = series.average?.average;
+  const averageOverlay = overlay.average?.average;
 
-  const averageOverlay = useMemo(() => (overlay.dataKey
-    ? computeAverage(data, [overlay.dataKey])
-    : undefined),
-  [data, overlay.dataKey]);
+  const averageSeriesScale = seriesAxis!.scale(averageSeries as any) ?? 0;
+  const averageOverlayScale = (overlayAxis && averageOverlay) ? overlayAxis.scale(averageOverlay as any) : 0;
 
-  const averageSeriesScale = seriesAxis!.scale(averageSeries?.average as any) ?? 0;
-  const averageOverlayScale = (overlayAxis && averageOverlay) ? overlayAxis.scale(averageOverlay.average as any) : 0;
-
-  const hasAverageSeries = Boolean(showAverage && averageSeries?.average);
-  const hasAverageOverlay = Boolean(showAverage && averageOverlay?.average);
+  const hasAverageSeries = Boolean(showAverage && averageSeries);
+  const hasAverageOverlay = Boolean(showAverage && averageOverlay);
 
   const maxLabelWidth = 200;
   const hasLabel = dimension.maxWidth > maxLabelWidth;
@@ -114,9 +110,9 @@ export const LinesAverage: React.FC = () => {
               x={coordinates.series.label.x}
               y={coordinates.series.label.y}
               fontColor="white"
-              title={`Average: ${formatAverage(averageSeries!.average)}`}
-              titleFontSize={14}
-              titleFontWeight={400}
+              title={`Average: ${formatAverage(averageSeries!)}`}
+              titleFontSize={titleFontSize}
+              titleFontWeight={titleFontWeight}
               titleProps={undefined}
               showAnchorLine={false}
               horizontalAnchor={isHorizontal ? 'start' : 'middle'}
@@ -147,9 +143,9 @@ export const LinesAverage: React.FC = () => {
               x={coordinates.overlay.label.x}
               y={coordinates.overlay.label.y}
               fontColor="white"
-              title={`Average: ${formatAverage(averageOverlay!.average)}`}
-              titleFontSize={14}
-              titleFontWeight={400}
+              title={`Average: ${formatAverage(averageOverlay!)}`}
+              titleFontSize={titleFontSize}
+              titleFontWeight={titleFontWeight}
               titleProps={undefined}
               showAnchorLine={false}
               horizontalAnchor={isHorizontal ? 'end' : 'middle'}
