@@ -335,17 +335,12 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
           )}
         </svg>
 
-        {hasLegend && (
-          <CartesianBaseLegend
-            customLegend={customLegend}
-            hideLegend={hideLegend}
-            ref={refLegend}
-            onMouseOver={(dataKey: string) => {
-              console.log(`over Legend: ${dataKey}`);
-              setOverLegend(dataKey);
-            }}
-          />
-        )}
+        <CartesianBaseLegend
+          customLegend={customLegend}
+          hideLegend={!hasLegend}
+          ref={refLegend}
+          onMouseOver={(dataKey: string) => setOverLegend(dataKey)}
+        />
       </StyleConfigProvider>
 
     </div>

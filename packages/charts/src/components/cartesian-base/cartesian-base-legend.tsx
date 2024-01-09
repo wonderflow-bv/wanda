@@ -38,15 +38,26 @@ CartesianBaseLegendProps & React.RefAttributes<HTMLDivElement>
 forwardedRef) => {
   const { metadata } = useDataContext();
 
-  if (hideLegend || !metadata) return null;
+  if (hideLegend) return null;
 
-  const { names, colors, dataKey: sdk } = metadata.series;
-  const { name, color, dataKey: odk } = metadata.overlay;
+  if (customLegend) {
+    return (
+      <div ref={forwardedRef} className={styles.Legend}>
+        <div className={styles.LegendContent}>
+          {customLegend}
+        </div>
+      </div>
+    );
+  }
 
-  return (
-    <div ref={forwardedRef} className={styles.Legend}>
-      <div className={styles.LegendContent}>
-        {customLegend
+  if (metadata) {
+    const { names, colors, dataKey: sdk } = metadata.series;
+    const { name, color, dataKey: odk } = metadata.overlay;
+
+    return (
+      <div ref={forwardedRef} className={styles.Legend}>
+        <div className={styles.LegendContent}>
+          {customLegend
         ?? (
           <ul>
             {sdk.map((s: string, i: number) => (
@@ -81,9 +92,12 @@ forwardedRef) => {
             )}
           </ul>
         )}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  return null;
 });
 
 CartesianBaseLegend.displayName = 'CartesianBaseLegend';

@@ -115,9 +115,6 @@ TwoAxis.args = {
   },
 };
 
-export const WithLegend = Template.bind({});
-WithLegend.args = { customLegend: <ul><li style={{ fontSize: '12px' }}>some legend content here</li></ul> };
-
 export const WithCustomEmptyState = Template.bind({});
 WithCustomEmptyState.args = {
   axis: { ...story.args!.axis, top: undefined, right: undefined } as any,

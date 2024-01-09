@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 
 import { AxisOrientation, AxisProps } from '../../types';
 import { CartesianBase } from './cartesian-base';
+// import { CartesianBaseLegend } from './cartesian-base-legend';
 
 global.ResizeObserver = jest.fn().mockImplementation(() => ({
   observe: jest.fn(),
@@ -32,7 +33,7 @@ const mockedAxis: Record<AxisOrientation, AxisProps | undefined> = {
   },
 };
 
-describe('<LineChart>', () => {
+describe('<CartesianBase>', () => {
   it('should render the component', () => {
     render(<CartesianBase
       axis={mockedAxis}
@@ -68,4 +69,22 @@ describe('<LineChart>', () => {
     const element = screen.getByTestId('cartesian');
     expect(element).toBeDefined();
   });
+
+  it('should render the component w/o legend', () => {
+    render(<CartesianBase
+      axis={{ ...mockedAxis }}
+      title="Title"
+      hideLegend
+    />);
+    const element = screen.getByTestId('cartesian');
+    expect(element).toBeDefined();
+  });
 });
+
+// describe('<CartesianBaseLegend>', () => {
+//   it.todo('should render', () => {
+//     render(<CartesianBaseLegend onMouseOver={console.log} />);
+//     const element = screen.getByTestId('cartesian');
+//     expect(element).toBeDefined();
+//   });
+// });
