@@ -19,65 +19,68 @@ import {
 } from 'react';
 
 import { useDataContext } from '../../providers/data';
-import { LineChartMetadata } from '../../types';
 import { Placeholder } from '../placeholder';
 import styles from './cartesian-base.module.css';
 
 export type CartesianBaseLegendProps = {
   customLegend?: React.ReactNode;
   hideLegend?: boolean;
+  onMouseOver: (key: string) => void;
 }
-
-const renderLegendItems = (metadata?: LineChartMetadata) => {
-  if (metadata) {
-    const { names, colors, dataKey: sdk } = metadata.series;
-    const { name, color, dataKey: odk } = metadata.overlay;
-
-    return (
-      <ul>
-        {sdk.map((s: string, i: number) => (
-          <li key={s}>
-            <div>
-              <Placeholder color={colors[i]} />
-              <span>
-                {names[i]}
-              </span>
-            </div>
-          </li>
-        ))}
-
-        {odk && (
-          <li>
-            <div>
-              <Placeholder color={color} />
-              <span>
-                {name}
-              </span>
-            </div>
-          </li>
-        )}
-      </ul>
-    );
-  }
-
-  return null;
-};
 
 export const CartesianBaseLegend: React.ForwardRefExoticComponent<
 CartesianBaseLegendProps & React.RefAttributes<HTMLDivElement>
 > = forwardRef<HTMLDivElement, CartesianBaseLegendProps>(({
   customLegend,
   hideLegend = false,
+  onMouseOver,
 }: CartesianBaseLegendProps,
 forwardedRef) => {
   const { metadata } = useDataContext();
 
-  if (hideLegend) return null;
+  if (hideLegend || !metadata) return null;
+
+  const { names, colors, dataKey: sdk } = metadata.series;
+  const { name, color, dataKey: odk } = metadata.overlay;
 
   return (
     <div ref={forwardedRef} className={styles.Legend}>
       <div className={styles.LegendContent}>
-        {customLegend ?? renderLegendItems(metadata)}
+        {customLegend
+        ?? (
+          <ul>
+            {sdk.map((s: string, i: number) => (
+              <li
+                key={s}
+                onMouseOver={() => onMouseOver(s)}
+                onMouseLeave={() => onMouseOver('')}
+                onFocus={() => ({})}
+              >
+                <div>
+                  <Placeholder color={colors[i]} />
+                  <span>
+                    {names[i]}
+                  </span>
+                </div>
+              </li>
+            ))}
+
+            {odk && (
+              <li
+                onMouseOver={() => onMouseOver(odk)}
+                onMouseLeave={() => onMouseOver('')}
+                onFocus={() => ({})}
+              >
+                <div>
+                  <Placeholder color={color} />
+                  <span>
+                    {name}
+                  </span>
+                </div>
+              </li>
+            )}
+          </ul>
+        )}
       </div>
     </div>
   );

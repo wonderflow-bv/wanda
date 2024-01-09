@@ -18,7 +18,7 @@ import { Group } from '@visx/group';
 import { LinePath } from '@visx/shape';
 import _ from 'lodash';
 import { LineChartMetadata } from 'packages/charts/src/types';
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import {
@@ -29,7 +29,7 @@ import {
   getCoordinates, getLinesRenderer, getValueFromObjectByPath,
 } from '../../../utils';
 import {
-  LinesItem,
+  LinesItem, LinesItemBlurred,
 } from './lines.module.css';
 
 export const LinesSeries: React.FC = () => {
@@ -37,7 +37,7 @@ export const LinesSeries: React.FC = () => {
   const { lines: defaultStyle, themes } = useStyleConfigContext();
   const { data, metadata } = useDataContext();
   const { isHorizontal } = useLayoutContext();
-  const { axis } = useCartesianContext();
+  const { axis, overLegend } = useCartesianContext();
 
   const { left, bottom } = axis!;
   const {
@@ -63,6 +63,10 @@ export const LinesSeries: React.FC = () => {
     isHorizontal,
   }), [index, indexAxis, seriesAxis]);
 
+  const dynamicClassName = useCallback((overLegend: string, dataKey: string) => ((overLegend === dataKey || overLegend === '')
+    ? LinesItem
+    : LinesItemBlurred), []);
+
   return (
     <>
       {series.dataKey.map((dataKey: string, di: number) => {
@@ -85,7 +89,7 @@ export const LinesSeries: React.FC = () => {
           ) => (
             <Group
               key={uuid()}
-              className={LinesItem}
+              className={dynamicClassName(overLegend, dataKey)}
             >
               <LinePath
                 data-testid="lines-series"

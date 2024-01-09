@@ -17,6 +17,7 @@
 import { Label } from '@visx/annotation';
 import { Group } from '@visx/group';
 import { LineChartMetadata } from 'packages/charts/src/types';
+import { useCallback } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import {
@@ -29,14 +30,14 @@ import {
   isMarkerLabelVisible,
 } from '../../../utils';
 import {
-  LinesItem,
+  LinesItem, LinesItemBlurred,
 } from './lines.module.css';
 
 export const LinesMarkerLabels: React.FC = () => {
   const theme = useThemeContext();
   const { data, metadata } = useDataContext();
   const { isHorizontal } = useLayoutContext();
-  const { axis, dimension } = useCartesianContext();
+  const { axis, dimension, overLegend } = useCartesianContext();
   const { themes, viewport } = useStyleConfigContext();
 
   const {
@@ -80,6 +81,10 @@ export const LinesMarkerLabels: React.FC = () => {
     isHorizontal,
   });
 
+  const dynamicClassName = useCallback((overLegend: string, dataKey: string) => ((overLegend === dataKey || overLegend === '')
+    ? LinesItem
+    : LinesItemBlurred), []);
+
   if (!hasMarkerLabel) return null;
 
   return (
@@ -87,7 +92,7 @@ export const LinesMarkerLabels: React.FC = () => {
       { series.dataKey.map((k: string, i: number) => (
         <Group
           key={uuid()}
-          className={LinesItem}
+          className={dynamicClassName(overLegend, k)}
         >
           {(showMarkerLabel || series.style?.[i]?.showMarkerLabel)
             && data.map((d: Record<string, unknown>, di: number) => {
@@ -157,6 +162,7 @@ export const LinesMarkerLabels: React.FC = () => {
                   ? (
                     <Label
                       key={uuid()}
+                      className={dynamicClassName(overLegend, overlay.dataKey!)}
                       backgroundFill={background}
                       x={coordinates.x}
                       y={coordinates.y}

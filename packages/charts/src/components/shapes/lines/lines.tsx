@@ -17,9 +17,6 @@
 import { Group } from '@visx/group';
 
 import { useCartesianContext } from '../../../providers/cartesian';
-import {
-  LinesItemGroup,
-} from './lines.module.css';
 import { LinesAverage } from './lines-average';
 import { LinesMarkerLabels } from './lines-marker-labels';
 import { LinesOverlay } from './lines-overlay';
@@ -33,7 +30,7 @@ export const Lines: React.FC = () => {
       top={position.top}
       left={position.left}
     >
-      <Group className={LinesItemGroup} data-testid="lines">
+      <Group data-testid="lines">
         <LinesSeries />
         <LinesOverlay />
         <LinesAverage />

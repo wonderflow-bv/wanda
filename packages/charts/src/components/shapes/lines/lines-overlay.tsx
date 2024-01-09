@@ -18,7 +18,7 @@ import { Group } from '@visx/group';
 import { LinePath } from '@visx/shape';
 import _ from 'lodash';
 import { LineChartMetadata } from 'packages/charts/src/types';
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import {
@@ -29,7 +29,7 @@ import {
   getCoordinates, getLinesRenderer, getValueFromObjectByPath,
 } from '../../../utils';
 import {
-  LinesItem,
+  LinesItem, LinesItemBlurred,
 } from './lines.module.css';
 
 export const LinesOverlay: React.FC = () => {
@@ -37,7 +37,7 @@ export const LinesOverlay: React.FC = () => {
   const { lines: defaultStyle, themes } = useStyleConfigContext();
   const { data, metadata } = useDataContext();
   const { isHorizontal } = useLayoutContext();
-  const { axis } = useCartesianContext();
+  const { axis, overLegend } = useCartesianContext();
 
   const {
     index, renderAs, showMarker, showMarkerLabel, overlay,
@@ -76,13 +76,17 @@ export const LinesOverlay: React.FC = () => {
 
   const segmentStroke = hideMissingDataConnection ? 'transparent' : themes[theme].lines.noData;
 
+  const dynamicClassName = useCallback((overLegend: string, dataKey: string) => ((overLegend === dataKey || overLegend === '')
+    ? LinesItem
+    : LinesItemBlurred), []);
+
   return (
     <>
       {hasOverlay && (
         subPaths.map((subPathData: Array<Record<string, unknown>>, si: number) => (
           <Group
             key={uuid()}
-            className={LinesItem}
+            className={dynamicClassName(overLegend, overlay.dataKey!)}
           >
             <LinePath
               data-testid="lines-overlay"

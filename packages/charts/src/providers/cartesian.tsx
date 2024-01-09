@@ -30,6 +30,7 @@ export type CartesianContextProps = {
     maxHeight: number;
   };
   axis?: CartesianxAxisSystem;
+  overLegend: string;
 };
 
 export type CartesianProviderProps = CartesianContextProps
@@ -46,6 +47,7 @@ const defaultSetting = {
     maxHeight: 600,
   },
   axis: undefined,
+  overLegend: '',
 };
 
 export const CartesianContext = createContext<CartesianContextProps>(defaultSetting);
@@ -55,9 +57,10 @@ export const CartesianProvider: FCChildren<CartesianProviderProps> = ({
   position,
   dimension,
   axis,
+  overLegend,
 }) => (
   <CartesianContext.Provider value={{
-    position, dimension, axis,
+    position, dimension, axis, overLegend,
   }}
   >
     {children}

@@ -21,7 +21,7 @@ import { useSize } from 'ahooks';
 import _ from 'lodash';
 import {
   CSSProperties,
-  useMemo, useRef,
+  useMemo, useRef, useState,
 } from 'react';
 
 import { StyleConfigProvider } from '../../providers';
@@ -155,6 +155,8 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   const cartesianConfig = _.merge(cartesianStyleConfig, styleConfig);
   const { axis: aStyle, legend: lStyle, themes } = cartesianConfig;
   const { from, to } = _.merge(themes[theme].background, background);
+
+  const [overLegend, setOverLegend] = useState<string>('');
 
   const ref = useRef(null);
   const size = useSize(ref);
@@ -321,6 +323,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
                   position={position}
                   dimension={dimension}
                   axis={axisSystem}
+                  overLegend={overLegend}
                 >
                   <Group clipPath="url(#clip-path-cartesian-chart)">
                     {metadata?.type === Charts.LINE_CHART && <Lines />}
@@ -337,6 +340,10 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
             customLegend={customLegend}
             hideLegend={hideLegend}
             ref={refLegend}
+            onMouseOver={(dataKey: string) => {
+              console.log(`over Legend: ${dataKey}`);
+              setOverLegend(dataKey);
+            }}
           />
         )}
       </StyleConfigProvider>
