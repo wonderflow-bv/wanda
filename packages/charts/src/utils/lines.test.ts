@@ -341,7 +341,7 @@ describe('getMarkerLabelProps()', () => {
       anchor: 'start',
       background: 'hsl(220 16% 85%)',
       backgroundProps: {
-        filter: 'opacity(0.7)', rx: 4, ry: 4, x: 4, y: 4,
+        filter: 'opacity(0.7)', rx: 2, ry: 2, x: 4, y: 4,
       },
       fontColor: 'hsl(217 11% 14%)',
       fontSize: 12,
@@ -366,7 +366,7 @@ describe('getMarkerLabelProps()', () => {
       anchor: 'end',
       background: 'hsl(220 16% 85%)',
       backgroundProps: {
-        filter: 'opacity(0.7)', rx: 4, ry: 4, x: -4, y: 4,
+        filter: 'opacity(0.7)', rx: 2, ry: 2, x: -4, y: 4,
       },
       fontColor: 'hsl(217 11% 14%)',
       fontSize: 12,
@@ -391,7 +391,7 @@ describe('getMarkerLabelProps()', () => {
       anchor: 'start',
       background: 'hsl(220 16% 85%)',
       backgroundProps: {
-        filter: 'opacity(0.7)', rx: 4, ry: 4, x: 4, y: -4,
+        filter: 'opacity(0.7)', rx: 2, ry: 2, x: 4, y: -4,
       },
       fontColor: 'hsl(217 11% 14%)',
       fontSize: 12,
@@ -416,7 +416,7 @@ describe('getMarkerLabelProps()', () => {
       anchor: 'start',
       background: 'hsl(220 16% 85%)',
       backgroundProps: {
-        filter: 'opacity(0.7)', rx: 4, ry: 4, x: 6, y: 4,
+        filter: 'opacity(0.7)', rx: 2, ry: 2, x: 6, y: 4,
       },
       fontColor: 'hsl(217 11% 14%)',
       fontSize: 12,
@@ -441,7 +441,7 @@ describe('getMarkerLabelProps()', () => {
       anchor: 'start',
       background: 'hsl(220 16% 85%)',
       backgroundProps: {
-        filter: 'opacity(0.7)', rx: 4, ry: 4, x: 6, y: -4,
+        filter: 'opacity(0.7)', rx: 2, ry: 2, x: 6, y: -4,
       },
       fontColor: 'hsl(217 11% 14%)',
       fontSize: 12,
@@ -466,7 +466,7 @@ describe('getMarkerLabelProps()', () => {
       anchor: 'end',
       background: 'hsl(220 16% 85%)',
       backgroundProps: {
-        filter: 'opacity(0.7)', rx: 4, ry: 4, x: 0, y: 4,
+        filter: 'opacity(0.7)', rx: 2, ry: 2, x: 0, y: 4,
       },
       fontColor: 'hsl(217 11% 14%)',
       fontSize: 12,
