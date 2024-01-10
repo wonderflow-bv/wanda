@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import { TextProps } from '@visx/text';
+
 export type LinesStyleConfig = {
   lineIndicator: {
     strokeWidth: number;
@@ -45,5 +47,8 @@ export type LinesStyleConfig = {
     strokeWidth: number;
     titleFontSize: number;
     titleFontWeight: number;
+    backgroundPadding: number;
+    backgroundProps: React.SVGProps<SVGRectElement> | undefined;
+    titleProps: Partial<TextProps> | undefined;
   };
 }

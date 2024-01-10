@@ -141,8 +141,8 @@ export const getMarkerLabelProps = (
       textAnchor: 'start' as 'middle' | 'start' | 'end' | 'inherit' | undefined,
     },
     backgroundProps: {
-      rx: 4,
-      ry: 4,
+      rx: 2,
+      ry: 2,
       x: 0,
       y: 0,
       filter: 'opacity(0.7)',

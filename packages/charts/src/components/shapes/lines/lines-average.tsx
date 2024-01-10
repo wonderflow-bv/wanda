@@ -43,6 +43,8 @@ export const LinesAverage: React.FC = () => {
   const { maxHeight, maxWidth } = dimension;
 
   const {
+    backgroundPadding,
+    backgroundProps,
     maxLabelWidth,
     opacity,
     pointerEvents,
@@ -50,6 +52,7 @@ export const LinesAverage: React.FC = () => {
     strokeWidth,
     titleFontSize,
     titleFontWeight,
+    titleProps,
   } = defaultStyle.average;
 
   const averageSeries = series.average?.average;
@@ -106,20 +109,20 @@ export const LinesAverage: React.FC = () => {
           />
           {hasLabel && (
             <Label
-              backgroundFill="grey"
+              backgroundFill={themes[theme].lines.average}
               x={coordinates.series.label.x}
               y={coordinates.series.label.y}
-              fontColor="white"
+              fontColor={themes[theme].lines.averageFontColor}
               title={`Average: ${formatAverage(averageSeries!)}`}
               titleFontSize={titleFontSize}
               titleFontWeight={titleFontWeight}
-              titleProps={undefined}
+              titleProps={titleProps}
               showAnchorLine={false}
               horizontalAnchor={isHorizontal ? 'start' : 'middle'}
               verticalAnchor="middle"
               showBackground
-              backgroundPadding={4}
-              backgroundProps={{ rx: 4 }}
+              backgroundPadding={backgroundPadding}
+              backgroundProps={backgroundProps}
               maxWidth={maxLabelWidth}
             />
           )}
@@ -139,20 +142,20 @@ export const LinesAverage: React.FC = () => {
           />
           {hasLabel && (
             <Label
-              backgroundFill="grey"
+              backgroundFill={themes[theme].lines.average}
               x={coordinates.overlay.label.x}
               y={coordinates.overlay.label.y}
-              fontColor="white"
+              fontColor={themes[theme].lines.averageFontColor}
               title={`Average: ${formatAverage(averageOverlay!)}`}
               titleFontSize={titleFontSize}
               titleFontWeight={titleFontWeight}
-              titleProps={undefined}
+              titleProps={titleProps}
               showAnchorLine={false}
               horizontalAnchor={isHorizontal ? 'end' : 'middle'}
               verticalAnchor="middle"
               showBackground
-              backgroundPadding={4}
-              backgroundProps={{ rx: 4 }}
+              backgroundPadding={backgroundPadding}
+              backgroundProps={backgroundProps}
               maxWidth={maxLabelWidth}
             />
           )}

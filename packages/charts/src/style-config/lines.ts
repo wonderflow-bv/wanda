@@ -47,5 +47,8 @@ export const linesStyleConfig: LinesStyleConfig = {
     strokeWidth: 1,
     titleFontSize: 12,
     titleFontWeight: 400,
+    backgroundPadding: 4,
+    backgroundProps: { rx: 2, ry: 2 },
+    titleProps: { dy: -1 },
   },
 };
