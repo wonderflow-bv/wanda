@@ -50,10 +50,10 @@
     justify-content: flex-start;
     gap: 4px;
     font-size: 12px;
+  }
 
-    & :hover {
-      cursor: pointer;
-    }
+  & li:hover {
+    cursor: pointer;
   }
 }
 
