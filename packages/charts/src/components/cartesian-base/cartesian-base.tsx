@@ -48,6 +48,7 @@ import { Loader } from '../loader';
 import { Bars, Lines } from '../shapes';
 import styles from './cartesian-base.module.css';
 import { CartesianBaseAxis } from './cartesian-base-axis';
+import { CartesianBaseBrush } from './cartesian-base-brush';
 import { CartesianBaseGrid } from './cartesian-base-grid';
 import { CartesianBaseLegend } from './cartesian-base-legend';
 
@@ -97,6 +98,10 @@ export type CartesianBaseProps = {
    */
   axis: Record<AxisOrientation, AxisProps | undefined>;
   /**
+   * Set the horizontal brush visibility.
+   */
+  showBrush?: boolean;
+  /**
    * Hide `Legend` when set to `true`.
    */
   hideLegend?: boolean;
@@ -142,6 +147,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   subtitle,
   headings,
   axis,
+  showBrush = false,
   hideLegend = false,
   emptyState,
   emptyStateMessage,
@@ -169,6 +175,8 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
 
   const hasLegend = hasData && !hideLegend && !isLoading;
   const legendHeight = hasLegend ? (sizeLegend?.height ?? 0) : 0;
+
+  const brushHeight = showBrush ? 50 : 0;
 
   const hasHeadings = !!title;
   const headingsHeight = hasHeadings ? hStyle.height : 0;
@@ -210,7 +218,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   const bottomTickLabelOffset = handleVerticalTickLabelOffset(xMax, cartesianConfig, bottom);
 
   const mt = margin.top * (top ? 1 : 2) + headingsHeight + topTickLabelOffset;
-  const mb = margin.bottom * (bottom ? 1 : 2) + legendHeight + bottomTickLabelOffset;
+  const mb = margin.bottom * (bottom ? 1 : 2) + legendHeight + bottomTickLabelOffset + brushHeight;
 
   const yMax = dynamicHeight - mt - mb - hOff;
 
@@ -224,6 +232,23 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
     right: ml + lOff + xMax,
     bottom: mt + tOff + yMax,
     left: ml + lOff,
+  };
+
+  const headingsPosition = {
+    top: headings?.top ?? margin.top,
+    left: headings?.left ?? ml,
+  };
+
+  const loader = {
+    top: margin.top + headingsHeight,
+    left: margin.left,
+    width: dynamicWidth - margin.left - margin.right,
+    height: dynamicHeight - headingsHeight - margin.top - margin.bottom,
+  };
+
+  const brushPosition = {
+    left: position.left,
+    top: position.top + bottomTickLabelOffset + dimension.maxHeight + brushHeight + 15,
   };
 
   const axisSystem = computeAxisSystemProperties(axis, dimension, position);
@@ -277,17 +302,17 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
           <Headings
             title={title}
             subtitle={subtitle}
-            top={headings?.top ?? margin.top}
-            left={headings?.left ?? ml}
+            top={headingsPosition.top}
+            left={headingsPosition.left}
             config={headings?.config}
           />
 
           <Loader
             isLoading={isLoading}
-            top={margin.top + headingsHeight}
-            left={margin.left}
-            width={dynamicWidth - margin.left - margin.right}
-            height={dynamicHeight - headingsHeight - margin.top - margin.bottom}
+            top={loader.top}
+            left={loader.left}
+            width={loader.width}
+            height={loader.height}
           />
 
           {!isLoading && (
@@ -331,13 +356,19 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
                   </Group>
                 </CartesianProvider>
               )}
+
+              <CartesianBaseBrush
+                position={brushPosition}
+                dimension={dimension}
+                isVisible={showBrush}
+              />
             </Group>
           )}
         </svg>
 
         <CartesianBaseLegend
           customLegend={customLegend}
-          hideLegend={!hasLegend}
+          isVisible={hasLegend}
           ref={refLegend}
           onMouseOver={(dataKey: string) => setOverLegend(dataKey)}
         />

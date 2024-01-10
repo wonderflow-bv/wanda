@@ -24,7 +24,7 @@ import styles from './cartesian-base.module.css';
 
 export type CartesianBaseLegendProps = {
   customLegend?: React.ReactNode;
-  hideLegend?: boolean;
+  isVisible?: boolean;
   onMouseOver: (key: string) => void;
 }
 
@@ -32,13 +32,13 @@ export const CartesianBaseLegend: React.ForwardRefExoticComponent<
 CartesianBaseLegendProps & React.RefAttributes<HTMLDivElement>
 > = forwardRef<HTMLDivElement, CartesianBaseLegendProps>(({
   customLegend,
-  hideLegend = false,
+  isVisible = true,
   onMouseOver,
 }: CartesianBaseLegendProps,
 forwardedRef) => {
   const { metadata } = useDataContext();
 
-  if (hideLegend) return null;
+  if (!isVisible) return null;
 
   if (customLegend) {
     return (

@@ -21,6 +21,7 @@ const story: ComponentMeta<typeof LineChart> = {
     showMarkerLabel: false,
     hideMissingDataConnection: false,
     showAverage: false,
+    showBrush: false,
     hideLegend: false,
     hidePadding: false,
     layout: CartesianChartLayout.HORIZONTAL,
