@@ -46,7 +46,7 @@ import { EmptyState } from '../empty-state';
 import { Headings, HeadingsProps } from '../headings';
 import { Loader } from '../loader';
 import { Bars, Lines } from '../shapes';
-import styles from './cartesian-base.module.css';
+import styles, { Unselectable } from './cartesian-base.module.css';
 import { CartesianBaseAxis } from './cartesian-base-axis';
 import { CartesianBaseBrush } from './cartesian-base-brush';
 import { CartesianBaseGrid } from './cartesian-base-grid';
@@ -271,6 +271,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
           width={dynamicWidth}
           height={dynamicHeight}
           viewBox={`0 0 ${dynamicWidth} ${dynamicHeight}`}
+          className={Unselectable}
           {...otherProps}
         >
 
