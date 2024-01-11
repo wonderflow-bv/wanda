@@ -223,35 +223,39 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   const yMax = dynamicHeight - mt - mb - hOff;
 
   const dimension = {
-    maxWidth: xMax,
-    maxHeight: yMax,
+    loader: {
+      width: dynamicWidth - margin.left - margin.right,
+      height: dynamicHeight - headingsHeight - margin.top - margin.bottom,
+    },
+    axis: {
+      maxWidth: xMax,
+      maxHeight: yMax,
+    },
   };
 
   const position = {
-    top: mt + tOff,
-    right: ml + lOff + xMax,
-    bottom: mt + tOff + yMax,
-    left: ml + lOff,
+    headings: {
+      top: headings?.top ?? margin.top,
+      left: headings?.left ?? ml,
+    },
+    loader: {
+      top: margin.top + headingsHeight,
+      left: margin.left,
+    },
+    axis: {
+      top: mt + tOff,
+      right: ml + lOff + xMax,
+      bottom: mt + tOff + yMax,
+      left: ml + lOff,
+    },
+    brush: {
+      left: ml + lOff,
+      top: mt + tOff + bottomTickLabelOffset + dimension.axis.maxHeight + brushHeight,
+
+    },
   };
 
-  const headingsPosition = {
-    top: headings?.top ?? margin.top,
-    left: headings?.left ?? ml,
-  };
-
-  const loader = {
-    top: margin.top + headingsHeight,
-    left: margin.left,
-    width: dynamicWidth - margin.left - margin.right,
-    height: dynamicHeight - headingsHeight - margin.top - margin.bottom,
-  };
-
-  const brushPosition = {
-    left: position.left,
-    top: position.top + bottomTickLabelOffset + dimension.maxHeight + brushHeight + 15,
-  };
-
-  const axisSystem = computeAxisSystemProperties(axis, dimension, position);
+  const axisSystem = computeAxisSystemProperties(axis, dimension.axis, position.axis);
 
   return (
     <div
@@ -280,10 +284,10 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
 
           <RectClipPath
             id="clip-path-cartesian-chart"
-            x={position.left}
-            y={position.top}
-            width={dimension.maxWidth}
-            height={dimension.maxHeight}
+            x={position.axis.left}
+            y={position.axis.top}
+            width={dimension.axis.maxWidth}
+            height={dimension.axis.maxHeight}
           />
 
           <LinearGradient id="cartesian-container" from={from} to={to} />
@@ -302,24 +306,24 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
           <Headings
             title={title}
             subtitle={subtitle}
-            top={headingsPosition.top}
-            left={headingsPosition.left}
+            top={position.headings.top}
+            left={position.headings.left}
             config={headings?.config}
           />
 
           <Loader
             isLoading={isLoading}
-            top={loader.top}
-            left={loader.left}
-            width={loader.width}
-            height={loader.height}
+            top={position.loader.top}
+            left={position.loader.left}
+            width={dimension.loader.width}
+            height={dimension.loader.height}
           />
 
           {!isLoading && (
             <Group clipPath="url(#clip-path-cartesian-container)">
               <CartesianBaseGrid
-                position={position}
-                dimension={dimension}
+                position={position.axis}
+                dimension={dimension.axis}
                 axis={axisSystem}
                 hideRows={!hasData || grid.hideRows}
                 hideColumns={!hasData || grid.hideColumns}
@@ -330,14 +334,14 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
               />
 
               <CartesianBaseAxis
-                dimension={dimension}
+                dimension={dimension.axis}
                 axis={axisSystem}
                 axisConfig={axisConfig}
               />
 
               <EmptyState
-                position={position}
-                dimension={dimension}
+                position={position.axis}
+                dimension={dimension.axis}
                 customEmptyState={emptyState}
                 message={emptyStateMessage}
                 isVisible={hasEmptyState}
@@ -345,8 +349,8 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
 
               {hasData && (
                 <CartesianProvider
-                  position={position}
-                  dimension={dimension}
+                  position={position.axis}
+                  dimension={dimension.axis}
                   axis={axisSystem}
                   overLegend={overLegend}
                 >
@@ -358,8 +362,8 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
               )}
 
               <CartesianBaseBrush
-                position={brushPosition}
-                dimension={dimension}
+                position={position.brush}
+                dimension={dimension.axis}
                 isVisible={showBrush}
               />
             </Group>

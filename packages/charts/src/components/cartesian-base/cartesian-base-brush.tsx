@@ -17,7 +17,7 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
 }) => {
   if (!isVisible) return null;
 
-  return (<rect x={position.left} y={position.top} width={dimension.maxWidth} height={50} fill="orange" />);
+  return (<rect x={position.left} y={position.top} width={dimension.maxWidth} height={50} fill="url(#cartesian-grid-background)" stroke="#999" strokeDasharray="2,3" />);
 };
 
 CartesianBaseBrush.displayName = 'CartesianBaseBrush';
