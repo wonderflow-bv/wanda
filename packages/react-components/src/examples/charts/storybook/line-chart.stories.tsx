@@ -103,10 +103,10 @@ withMultipleSeries.args = {
   },
 };
 
-export const withLabelIndex = Template.bind({});
-withLabelIndex.args = {
+export const withCategoriesOnIndex = Template.bind({});
+withCategoriesOnIndex.args = {
   title: 'Multiple Series',
-  subtitle: 'A line chart with label index',
+  subtitle: 'A line chart with categories on index',
   data: channels,
   index: {
     dataKey: 'channel',
@@ -208,6 +208,17 @@ withVerticalLayout.args = {
   series: {
     dataKey: ['feedback count'],
     label: 'Feedback Count',
+  },
+};
+
+export const withBrush = Template.bind({});
+withBrush.args = {
+  subtitle: 'A trend line chart with brush',
+  showBrush: true,
+  overlay: {
+    dataKey: 'overlay',
+    label: 'TGW',
+    domain: [0, 1],
   },
 };
 
