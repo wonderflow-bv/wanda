@@ -29,7 +29,7 @@ import { CartesianProvider } from '../../providers/cartesian';
 import { useDataContext } from '../../providers/data';
 import { useThemeContext } from '../../providers/theme';
 import { cartesianStyleConfig, headingsStyleConfig as hStyle } from '../../style-config';
-import { AxisOrientation } from '../../types';
+import { AxisConfig, AxisOrientation, CartesianxAxisSystem } from '../../types';
 import {
   AxisProps, CartesianStyleConfig, GridProps, MarginProps,
 } from '../../types/cartesian';
@@ -200,7 +200,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
     top, right, bottom, left,
   } = axis;
 
-  const axisConfig = useMemo(() => computeAxisStyleConfig(axis, aStyle), [aStyle, axis]);
+  const axisConfig: AxisConfig = useMemo(() => computeAxisStyleConfig(axis, aStyle), [aStyle, axis]);
 
   const {
     leftAxisOffset: lOff,
@@ -255,7 +255,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
     },
   };
 
-  const axisSystem = computeAxisSystemProperties(axis, dimension.axis, position.axis);
+  const axisSystem: CartesianxAxisSystem = computeAxisSystemProperties(axis, dimension.axis, position.axis);
 
   return (
     <div
@@ -362,6 +362,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
               )}
 
               <CartesianBaseBrush
+                axisSystem={axisSystem}
                 position={position.brush}
                 dimension={dimension.axis}
                 isVisible={showBrush}
