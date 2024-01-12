@@ -172,10 +172,10 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   const refLegend = useRef(null);
   const sizeLegend = useSize(refLegend);
 
-  const hasData = !!data.length;
+  const hasData = !!brushFilterdData.length;
   const hasEmptyState = !isLoading && !hasData;
 
-  const hasLegend = hasData && !hideLegend && !isLoading;
+  const hasLegend = data && !hideLegend && !isLoading;
   const legendHeight = hasLegend ? (sizeLegend?.height ?? 0) : 0;
 
   const brushHeight = showBrush ? 50 : 0;
