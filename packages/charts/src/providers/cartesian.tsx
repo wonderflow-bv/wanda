@@ -30,7 +30,7 @@ export type CartesianContextProps = {
     maxHeight: number;
   };
   axis?: CartesianxAxisSystem;
-  overLegend: string;
+  hoveredLegendItem: string;
 };
 
 export type CartesianProviderProps = CartesianContextProps
@@ -47,7 +47,7 @@ const defaultSetting = {
     maxHeight: 600,
   },
   axis: undefined,
-  overLegend: '',
+  hoveredLegendItem: '',
 };
 
 export const CartesianContext = createContext<CartesianContextProps>(defaultSetting);
@@ -57,10 +57,10 @@ export const CartesianProvider: FCChildren<CartesianProviderProps> = ({
   position,
   dimension,
   axis,
-  overLegend,
+  hoveredLegendItem,
 }) => (
   <CartesianContext.Provider value={{
-    position, dimension, axis, overLegend,
+    position, dimension, axis, hoveredLegendItem,
   }}
   >
     {children}

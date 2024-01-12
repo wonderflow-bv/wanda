@@ -37,7 +37,7 @@ export const LinesMarkerLabels: React.FC = () => {
   const theme = useThemeContext();
   const { data, metadata } = useDataContext();
   const { isHorizontal } = useLayoutContext();
-  const { axis, dimension, overLegend } = useCartesianContext();
+  const { axis, dimension, hoveredLegendItem: overLegend } = useCartesianContext();
   const { themes, viewport } = useStyleConfigContext();
 
   const {

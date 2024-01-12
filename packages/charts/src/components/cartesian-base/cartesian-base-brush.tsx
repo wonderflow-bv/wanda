@@ -17,10 +17,13 @@
 import { Brush } from '@visx/brush';
 import BaseBrush from '@visx/brush/lib/BaseBrush';
 import { BrushHandleRenderProps } from '@visx/brush/lib/BrushHandle';
+import { Bounds } from '@visx/brush/lib/types';
 import { Group } from '@visx/group';
 import { useRef } from 'react';
 
-import { CartesianxAxisSystem } from '../../types';
+import { useDataContext, useLayoutContext } from '../../providers';
+import { CartesianxAxisSystem, Data } from '../../types';
+import { getPrimitiveFromObjectByPath } from '../../utils';
 
 export type CartesianBaseBrushProps = {
   axisSystem: CartesianxAxisSystem;
@@ -33,6 +36,7 @@ export type CartesianBaseBrushProps = {
     maxHeight: number;
   };
   isVisible?: boolean;
+  onChange: (filteredData: Data) => void;
 }
 
 function BrushHandle({ x, height, isBrushActive }: BrushHandleRenderProps) {
@@ -57,16 +61,57 @@ function BrushHandle({ x, height, isBrushActive }: BrushHandleRenderProps) {
 
 export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
   axisSystem,
-  position,
   dimension,
   isVisible = false,
+  position,
+  onChange,
 }) => {
   const brushRef = useRef<BaseBrush | null>(null);
+  const { isHorizontal } = useLayoutContext();
+  const { data, metadata } = useDataContext();
 
   if (!isVisible) return null;
 
   const paddingTop = 16;
   const brushHeight = 50 - paddingTop;
+
+  const onBrushChange = (domain: Bounds | null) => {
+    if (!domain) return;
+
+    if (isHorizontal) {
+      const { x0, x1, xValues } = domain;
+      const indexAxis = axisSystem.bottom;
+      const indexScaleType = indexAxis!.scaleType;
+      const indexDataKey = metadata!.index;
+
+      let filteredData: Data = data;
+
+      if (indexScaleType === 'label') {
+        filteredData = data.filter((d) => {
+          const value = getPrimitiveFromObjectByPath(d, indexDataKey);
+          return xValues!.includes(value);
+        });
+      }
+
+      if (indexScaleType === 'time') {
+        filteredData = data.filter((d) => {
+          const value = getPrimitiveFromObjectByPath(d, indexDataKey);
+          const toTime = value ? new Date(value).getTime() : 0;
+          return toTime >= x0 && toTime <= x1;
+        });
+      }
+
+      if (indexScaleType === 'linear') {
+        filteredData = data.filter((d) => {
+          const value = getPrimitiveFromObjectByPath(d, indexDataKey);
+          const v = typeof value === 'number' ? value : (x0 - 1);
+          return v >= x0 && v <= x1;
+        });
+      }
+
+      onChange(filteredData);
+    }
+  };
 
   return (
     <Group
@@ -131,7 +176,7 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
         }}
         onBrushStart={undefined}
         onBrushEnd={undefined}
-        onChange={undefined}
+        onChange={onBrushChange}
         onClick={undefined}
         innerRef={brushRef}
         resizeTriggerAreas={['left', 'right']}

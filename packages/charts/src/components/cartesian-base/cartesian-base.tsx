@@ -26,7 +26,7 @@ import {
 
 import { StyleConfigProvider } from '../../providers';
 import { CartesianProvider } from '../../providers/cartesian';
-import { useDataContext } from '../../providers/data';
+import { DataProvider, useDataContext } from '../../providers/data';
 import { useThemeContext } from '../../providers/theme';
 import { cartesianStyleConfig, headingsStyleConfig as hStyle } from '../../style-config';
 import { AxisConfig, AxisOrientation, CartesianxAxisSystem } from '../../types';
@@ -36,6 +36,7 @@ import {
 import { Background } from '../../types/linear-gradient';
 import {
   Charts,
+  Data,
   DeepPartial,
 } from '../../types/main';
 import {
@@ -162,7 +163,8 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   const { axis: aStyle, legend: lStyle, themes } = cartesianConfig;
   const { from, to } = _.merge(themes[theme].background, background);
 
-  const [overLegend, setOverLegend] = useState<string>('');
+  const [brushFilterdData, setBrushFilteredData] = useState<Data>(data);
+  const [hoveredLegendItem, setHoveredLegendItem] = useState<string>('');
 
   const ref = useRef(null);
   const size = useSize(ref);
@@ -353,12 +355,14 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
                   position={position.axis}
                   dimension={dimension.axis}
                   axis={axisSystem}
-                  overLegend={overLegend}
+                  hoveredLegendItem={hoveredLegendItem}
                 >
-                  <Group clipPath="url(#clip-path-cartesian-chart)">
-                    {metadata?.type === Charts.LINE_CHART && <Lines />}
-                    {metadata?.type === Charts.BAR_CHART && <Bars />}
-                  </Group>
+                  <DataProvider data={brushFilterdData} metadata={metadata}>
+                    <Group clipPath="url(#clip-path-cartesian-chart)">
+                      {metadata?.type === Charts.LINE_CHART && <Lines />}
+                      {metadata?.type === Charts.BAR_CHART && <Bars />}
+                    </Group>
+                  </DataProvider>
                 </CartesianProvider>
               )}
 
@@ -367,6 +371,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
                 position={position.brush}
                 dimension={dimension.axis}
                 isVisible={showBrush}
+                onChange={setBrushFilteredData}
               />
             </Group>
           )}
@@ -376,7 +381,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
           customLegend={customLegend}
           isVisible={hasLegend}
           ref={refLegend}
-          onMouseOver={(dataKey: string) => setOverLegend(dataKey)}
+          onMouseOver={(dataKey: string) => setHoveredLegendItem(dataKey)}
         />
       </StyleConfigProvider>
 

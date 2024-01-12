@@ -37,7 +37,7 @@ export const LinesSeries: React.FC = () => {
   const { lines: defaultStyle, themes } = useStyleConfigContext();
   const { data, metadata } = useDataContext();
   const { isHorizontal } = useLayoutContext();
-  const { axis, overLegend } = useCartesianContext();
+  const { axis, hoveredLegendItem: overLegend } = useCartesianContext();
 
   const { left, bottom } = axis!;
   const {
