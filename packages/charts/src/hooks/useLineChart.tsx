@@ -32,7 +32,7 @@ import {
   handleSeriesNames,
 } from '../utils';
 
-export type UseLineChartProps = Except<LineChartProps, 'otherProps'> & { onBrushChange: (filteredData: Data) => void }
+export type UseLineChartProps = Except<LineChartProps, 'otherProps'>
 
 export const useLineChart = ({
   theme = 'light',
@@ -117,11 +117,12 @@ export const useLineChart = ({
     tooltip]);
 
   return {
+    axis,
+    axisFiltered,
     isHorizontal,
     metadata,
     zeroPadding,
-    axis,
-    axisFiltered,
+    brushFilteredData,
     setBrushFilteredData,
   };
 };

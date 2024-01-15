@@ -14,29 +14,22 @@
  * limitations under the License.
  */
 
-import { useMemo, useState } from 'react';
 import { Except } from 'type-fest';
 
+import { useLineChart } from '../../hooks';
 import {
   DataProvider, LayoutProvider,
   ThemeProvider,
 } from '../../providers';
-import { defaultLineChartPalette } from '../../style-config';
 import {
-  CartesianChartLayout, Charts, Data, MarginProps, ThemeVariants,
+  CartesianChartLayout,
+  Data,
+  ThemeVariants,
 } from '../../types';
 import {
-  LineChartIndex, LineChartMetadata, LineChartOverlay, LineChartRenderType, LineChartSeries, LineChartTooltip,
+  LineChartIndex,
+  LineChartOverlay, LineChartRenderType, LineChartSeries, LineChartTooltip,
 } from '../../types/line-chart';
-import {
-  computeAverage,
-  handleChartAxisLayout,
-  handleChartDomainAndScaleType,
-  handleLineChartOverlayColor,
-  handleLineChartSeriesColors,
-  handleOverlayName,
-  handleSeriesNames,
-} from '../../utils';
 import { CartesianBase, CartesianBaseProps } from '../cartesian-base/cartesian-base';
 
 export type LineChartProps = {
@@ -110,69 +103,29 @@ export const LineChart: React.FC<LineChartProps> = ({
   hidePadding = false,
   ...otherProps
 }) => {
-  const [brushFilteredData, setBrushFilteredData] = useState<Data>(data);
-
-  const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
-
-  const { index: i, series: s, overlay: o } = useMemo(
-    () => handleChartDomainAndScaleType(data, index, series, overlay),
-    [data, index, overlay, series],
-  );
-
-  const { index: iFiltered, series: sFiltered, overlay: oFiltered } = useMemo(
-    () => handleChartDomainAndScaleType(brushFilteredData, index, series, overlay),
-    [brushFilteredData, index, overlay, series],
-  );
-
-  const axis = useMemo(() => handleChartAxisLayout(i, s, o), [i, s, o]);
-
-  const axisFiltered = useMemo(() => handleChartAxisLayout(iFiltered, sFiltered, oFiltered),
-    [iFiltered, sFiltered, oFiltered]);
-
-  const palette = useMemo(() => defaultLineChartPalette[theme], [theme]);
-
-  const zeroPadding: MarginProps | undefined = hidePadding
-    ? {
-      top: 0, right: 12, bottom: 0, left: 0,
-    }
-    : undefined;
-
-  const metadata: LineChartMetadata = useMemo(() => ({
-    type: Charts.LINE_CHART,
+  const {
+    axis,
+    axisFiltered,
+    isHorizontal,
+    metadata,
+    zeroPadding,
+    brushFilteredData,
+    setBrushFilteredData,
+  } = useLineChart({
+    theme,
+    layout,
     renderAs,
-    index: index.dataKey,
-    series: {
-      dataKey: series.dataKey,
-      names: handleSeriesNames(series),
-      colors: handleLineChartSeriesColors(series, palette.series),
-      style: series.style,
-      average: computeAverage(data, series.dataKey),
-    },
-    overlay: {
-      dataKey: overlay?.dataKey,
-      name: handleOverlayName(overlay),
-      color: handleLineChartOverlayColor(overlay, palette.overlay),
-      style: overlay?.style,
-      average: overlay?.dataKey ? computeAverage(data, [overlay.dataKey]) : undefined,
-    },
+    data,
+    index,
+    series,
+    overlay,
     tooltip,
     showAverage,
     hideMissingDataConnection,
     showMarker,
     showMarkerLabel,
     hidePadding,
-  }), [renderAs,
-    index.dataKey,
-    series,
-    palette.series,
-    palette.overlay,
-    data, overlay,
-    tooltip,
-    showAverage,
-    hideMissingDataConnection,
-    showMarker,
-    showMarkerLabel,
-    hidePadding]);
+  });
 
   return (
     <ThemeProvider theme={theme}>
