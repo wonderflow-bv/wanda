@@ -37,6 +37,8 @@ describe('<CartesianBase>', () => {
   it('should render the component', () => {
     render(<CartesianBase
       axis={mockedAxis}
+      axisFiltered={mockedAxis}
+      onBrushChange={() => ({})}
     />);
 
     const element = screen.getByTestId('cartesian');
@@ -46,11 +48,13 @@ describe('<CartesianBase>', () => {
   it('should render the component w/o R/B axis', () => {
     render(<CartesianBase
       axis={{ ...mockedAxis, right: undefined, bottom: undefined }}
+      axisFiltered={{ ...mockedAxis, right: undefined, bottom: undefined }}
       title="Title"
       preventResponsive
       margin={{
         top: 0, right: 0, bottom: 0, left: 0,
       }}
+      onBrushChange={() => ({})}
     />);
 
     const element = screen.getByTestId('cartesian');
@@ -60,11 +64,13 @@ describe('<CartesianBase>', () => {
   it('should render the component w props', () => {
     render(<CartesianBase
       axis={{ ...mockedAxis, left: undefined }}
+      axisFiltered={{ ...mockedAxis, left: undefined }}
       title="Title"
       preventResponsive
       margin={{
         top: 12, right: 12, bottom: 12, left: 12,
       }}
+      onBrushChange={() => ({})}
     />);
     const element = screen.getByTestId('cartesian');
     expect(element).toBeDefined();
@@ -73,8 +79,10 @@ describe('<CartesianBase>', () => {
   it('should render the component w/o legend', () => {
     render(<CartesianBase
       axis={{ ...mockedAxis }}
+      axisFiltered={{ ...mockedAxis }}
       title="Title"
       hideLegend
+      onBrushChange={() => ({})}
     />);
     const element = screen.getByTestId('cartesian');
     expect(element).toBeDefined();

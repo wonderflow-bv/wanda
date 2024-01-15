@@ -84,7 +84,7 @@ export type BarChartProps = {
    * Remove the padding from the chart container.
    */
   hidePadding?: boolean;
-} & Except<CartesianBaseProps, 'axis'>
+} & Except<CartesianBaseProps, 'axis' | 'axisFiltered' | 'onBrushChange'>
 
 export const BarChart: React.FC<BarChartProps> = ({
   theme = 'light',
@@ -137,15 +137,17 @@ export const BarChart: React.FC<BarChartProps> = ({
   return (
     <ThemeProvider theme={theme}>
       <LayoutProvider layout={layout}>
-        <DataProvider data={data} metadata={metadata}>
+        <DataProvider data={data} metadata={metadata} filteredData={data}>
           <CartesianBase
+            {...otherProps}
             axis={axis[layout]}
+            axisFiltered={axis[layout]}
             grid={{
               hideRows: !isHorizontal,
               hideColumns: isHorizontal,
             }}
             margin={zeroPadding}
-            {...otherProps}
+            onBrushChange={() => ({})}
           />
         </DataProvider>
       </LayoutProvider>
