@@ -28,7 +28,7 @@ import { StyleConfigProvider } from '../../providers';
 import { CartesianProvider } from '../../providers/cartesian';
 import { DataProvider, useDataContext } from '../../providers/data';
 import { useThemeContext } from '../../providers/theme';
-import { cartesianStyleConfig, headingsStyleConfig as hStyle } from '../../style-config';
+import { cartesianStyleConfig } from '../../style-config';
 import { AxisConfig, AxisOrientation, CartesianxAxisSystem } from '../../types';
 import {
   AxisProps, CartesianStyleConfig, GridProps, MarginProps,
@@ -170,7 +170,9 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   const { metadata, data, filteredData } = useDataContext();
 
   const cartesianConfig = _.merge(cartesianStyleConfig, styleConfig);
-  const { axis: aStyle, legend: lStyle, themes } = cartesianConfig;
+  const {
+    axis: aStyle, legend: lStyle, themes, headings: hStyle,
+  } = cartesianConfig;
   const { from, to } = _.merge(themes[theme].background, background);
 
   const [hoveredLegendItem, setHoveredLegendItem] = useState<string>('');
