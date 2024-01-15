@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { Except } from 'type-fest';
 
 import {
@@ -110,13 +110,24 @@ export const LineChart: React.FC<LineChartProps> = ({
   hidePadding = false,
   ...otherProps
 }: LineChartProps) => {
+  const [brushFilteredData, setBrushFilteredData] = useState<Data>(data);
+
   const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
 
   const { index: i, series: s, overlay: o } = useMemo(
-    () => handleChartDomainAndScaleType(data, index, series, overlay), [data, index, overlay, series],
+    () => handleChartDomainAndScaleType(data, index, series, overlay),
+    [data, index, overlay, series],
+  );
+
+  const { index: iFiltered, series: sFiltered, overlay: oFiltered } = useMemo(
+    () => handleChartDomainAndScaleType(brushFilteredData, index, series, overlay),
+    [brushFilteredData, index, overlay, series],
   );
 
   const axis = useMemo(() => handleChartAxisLayout(i, s, o), [i, s, o]);
+
+  const axisFiltered = useMemo(() => handleChartAxisLayout(iFiltered, sFiltered, oFiltered),
+    [iFiltered, sFiltered, oFiltered]);
 
   const palette = useMemo(() => defaultLineChartPalette[theme], [theme]);
 
@@ -166,15 +177,17 @@ export const LineChart: React.FC<LineChartProps> = ({
   return (
     <ThemeProvider theme={theme}>
       <LayoutProvider layout={layout}>
-        <DataProvider data={data} metadata={metadata}>
+        <DataProvider data={data} metadata={metadata} filteredData={brushFilteredData}>
           <CartesianBase
+            {...otherProps}
             axis={axis[layout]}
+            axisFiltered={axisFiltered[layout]}
             grid={{
               hideRows: !isHorizontal,
               hideColumns: isHorizontal,
             }}
             margin={zeroPadding}
-            {...otherProps}
+            onBrushChange={setBrushFilteredData}
           />
         </DataProvider>
       </LayoutProvider>

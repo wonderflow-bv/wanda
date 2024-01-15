@@ -39,7 +39,7 @@ export type CartesianBaseBrushProps = {
   onChange: (filteredData: Data) => void;
 }
 
-function BrushHandle({ x, height, isBrushActive }: BrushHandleRenderProps) {
+const BrushHandle = ({ x, height, isBrushActive }: BrushHandleRenderProps) => {
   const pathWidth = 8;
   const pathHeight = 15;
   if (!isBrushActive) {
@@ -57,7 +57,7 @@ function BrushHandle({ x, height, isBrushActive }: BrushHandleRenderProps) {
       />
     </Group>
   );
-}
+};
 
 export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
   axisSystem,
@@ -78,9 +78,10 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
   const onBrushChange = (domain: Bounds | null) => {
     if (!domain) return;
 
+    const indexAxis = isHorizontal ? axisSystem.bottom : axisSystem.left;
+    console.log('indexAxis', indexAxis);
     if (isHorizontal) {
       const { x0, x1, xValues } = domain;
-      const indexAxis = axisSystem.bottom;
       const indexScaleType = indexAxis!.scaleType;
       const indexDataKey = metadata!.index;
 

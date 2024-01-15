@@ -428,7 +428,7 @@ export const hasVerticalTickLabel = (
   const isHorizontal = orientation === 'bottom' || orientation === 'top';
 
   const isSmall = _.inRange(width, 0, config.small.maxWidth);
-  const isMedium = _.inRange(width, config.small.maxWidth!, config.medium.maxWidth);
+  const isMedium = _.inRange(width, config.small.maxWidth, config.medium.maxWidth);
 
   if (isHorizontal) {
     if (isLabel) {

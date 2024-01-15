@@ -21,6 +21,7 @@ import { BarChartMetadata } from '../types/bar-chart';
 
 export type DataContextProps = {
   data: Data;
+  filteredData: Data;
   metadata?: LineChartMetadata | BarChartMetadata;
 };
 
@@ -28,6 +29,7 @@ export type DataProviderProps = DataContextProps
 
 const defaultData = {
   data: [],
+  filteredData: [],
   metadata: undefined,
 };
 
@@ -36,9 +38,10 @@ export const DataContext = createContext<DataContextProps>(defaultData);
 export const DataProvider: FCChildren<DataProviderProps> = ({
   children,
   data,
+  filteredData,
   metadata,
 }) => (
-  <DataContext.Provider value={{ data, metadata }}>
+  <DataContext.Provider value={{ data, metadata, filteredData }}>
     {children}
   </DataContext.Provider>
 );

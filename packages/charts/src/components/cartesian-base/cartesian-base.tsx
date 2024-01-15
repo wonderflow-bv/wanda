@@ -99,6 +99,10 @@ export type CartesianBaseProps = {
    */
   axis: Record<AxisOrientation, AxisProps | undefined>;
   /**
+   * Set `Axis System` properties.
+   */
+  axisFiltered: Record<AxisOrientation, AxisProps | undefined>;
+  /**
    * Set the horizontal brush visibility.
    */
   showBrush?: boolean;
@@ -126,6 +130,10 @@ export type CartesianBaseProps = {
    * Set other custom properties.
    */
   otherProps?: Record<string, unknown>;
+  /**
+   *
+   */
+  onBrushChange: (filteredData: Data) => void;
 }
 
 export const CartesianBase: React.FC<CartesianBaseProps> = ({
@@ -148,6 +156,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   subtitle,
   headings,
   axis,
+  axisFiltered,
   showBrush = false,
   hideLegend = false,
   emptyState,
@@ -155,15 +164,15 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   customLegend,
   styleConfig,
   otherProps,
+  onBrushChange,
 }: CartesianBaseProps) => {
   const theme = useThemeContext();
-  const { metadata, data } = useDataContext();
+  const { metadata, data, filteredData } = useDataContext();
 
   const cartesianConfig = _.merge(cartesianStyleConfig, styleConfig);
   const { axis: aStyle, legend: lStyle, themes } = cartesianConfig;
   const { from, to } = _.merge(themes[theme].background, background);
 
-  const [brushFilterdData, setBrushFilteredData] = useState<Data>(data);
   const [hoveredLegendItem, setHoveredLegendItem] = useState<string>('');
 
   const ref = useRef(null);
@@ -172,7 +181,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   const refLegend = useRef(null);
   const sizeLegend = useSize(refLegend);
 
-  const hasData = !!brushFilterdData.length;
+  const hasData = !!filteredData.length;
   const hasEmptyState = !isLoading && !hasData;
 
   const hasLegend = data && !hideLegend && !isLoading;
@@ -257,7 +266,15 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
     },
   };
 
-  const axisSystem: CartesianxAxisSystem = computeAxisSystemProperties(axis, dimension.axis, position.axis);
+  const axisSystem: CartesianxAxisSystem = useMemo(
+    () => computeAxisSystemProperties(axis, dimension.axis, position.axis),
+    [axis, dimension.axis, position.axis],
+  );
+
+  const axisFilteredSystem: CartesianxAxisSystem = useMemo(
+    () => computeAxisSystemProperties(axisFiltered, dimension.axis, position.axis),
+    [axisFiltered, dimension.axis, position.axis],
+  );
 
   return (
     <div
@@ -327,7 +344,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
               <CartesianBaseGrid
                 position={position.axis}
                 dimension={dimension.axis}
-                axis={axisSystem}
+                axis={axisFilteredSystem}
                 hideRows={!hasData || grid.hideRows}
                 hideColumns={!hasData || grid.hideColumns}
                 tickRows={grid.tickRows}
@@ -338,7 +355,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
 
               <CartesianBaseAxis
                 dimension={dimension.axis}
-                axis={axisSystem}
+                axis={axisFilteredSystem}
                 axisConfig={axisConfig}
               />
 
@@ -354,10 +371,10 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
                 <CartesianProvider
                   position={position.axis}
                   dimension={dimension.axis}
-                  axis={axisSystem}
+                  axis={axisFilteredSystem}
                   hoveredLegendItem={hoveredLegendItem}
                 >
-                  <DataProvider data={brushFilterdData} metadata={metadata}>
+                  <DataProvider data={filteredData} metadata={metadata} filteredData={filteredData}>
                     <Group clipPath="url(#clip-path-cartesian-chart)">
                       {metadata?.type === Charts.LINE_CHART && <Lines />}
                       {metadata?.type === Charts.BAR_CHART && <Bars />}
@@ -371,7 +388,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
                 position={position.brush}
                 dimension={dimension.axis}
                 isVisible={showBrush}
-                onChange={setBrushFilteredData}
+                onChange={onBrushChange}
               />
             </Group>
           )}
