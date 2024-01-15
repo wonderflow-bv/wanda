@@ -3,7 +3,7 @@
 }
 
 .LinesItemBlurred {
-  filter: saturate(20%) opacity(0.3) blur(2px);
+  filter: opacity(0.2) blur(2px);
 }
 
 .LinesTooltipContent {
