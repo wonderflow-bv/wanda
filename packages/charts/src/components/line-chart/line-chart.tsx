@@ -92,7 +92,7 @@ export type LineChartProps = {
    * Remove the padding from the chart container.
    */
   hidePadding?: boolean;
-} & Except<CartesianBaseProps, 'axis'>
+} & Except<CartesianBaseProps, 'axis' | 'axisFiltered' | 'onBrushChange'>
 
 export const LineChart: React.FC<LineChartProps> = ({
   theme = 'light',
@@ -109,7 +109,7 @@ export const LineChart: React.FC<LineChartProps> = ({
   showMarkerLabel = false,
   hidePadding = false,
   ...otherProps
-}: LineChartProps) => {
+}) => {
   const [brushFilteredData, setBrushFilteredData] = useState<Data>(data);
 
   const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
