@@ -14,8 +14,5 @@
  * limitations under the License.
  */
 
-export * from './components';
-export * from './hooks';
-export * from './style-config';
-export * from './types';
-export * from './utils';
+export type { UseLineChartProps } from './useLineChart';
+export { useLineChart } from './useLineChart';
