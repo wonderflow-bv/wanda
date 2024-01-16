@@ -19,7 +19,7 @@ import BaseBrush from '@visx/brush/lib/BaseBrush';
 import { BrushHandleRenderProps } from '@visx/brush/lib/BrushHandle';
 import { Bounds } from '@visx/brush/lib/types';
 import { Group } from '@visx/group';
-import { useRef } from 'react';
+import { useCallback, useRef } from 'react';
 
 import { useDataContext, useLayoutContext } from '../../providers';
 import { CartesianxAxisSystem, Data } from '../../types';
@@ -42,6 +42,7 @@ export type CartesianBaseBrushProps = {
 const BrushHandle = ({ x, height, isBrushActive }: BrushHandleRenderProps) => {
   const pathWidth = 8;
   const pathHeight = 15;
+
   if (!isBrushActive) {
     return null;
   }
@@ -69,17 +70,31 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
   const brushRef = useRef<BaseBrush | null>(null);
   const { isHorizontal } = useLayoutContext();
   const { data, metadata } = useDataContext();
+  const { maxWidth } = dimension;
+  const { bottom, left } = axisSystem;
 
-  if (!isVisible) return null;
+  const margin = {
+    top: 0, left: 0, right: 0, bottom: 0,
+  };
 
-  const paddingTop = 16;
-  const brushHeight = 50 - paddingTop;
+  const initialBrushPosition = {
+    start: { x: 0 },
+    end: { x: maxWidth },
+  };
 
-  const onBrushChange = (domain: Bounds | null) => {
+  const selectedBoxStyle = {
+    fill: 'grey',
+    fillOpacity: 0.2,
+    stroke: '#999',
+    strokeWidth: 1,
+    strokeOpacity: 0.8,
+  };
+
+  const onBrushChange = useCallback((domain: Bounds | null) => {
     if (!domain) return;
 
-    const indexAxis = isHorizontal ? axisSystem.bottom : axisSystem.left;
-    console.log('indexAxis', indexAxis);
+    const indexAxis = isHorizontal ? bottom : left;
+
     if (isHorizontal) {
       const { x0, x1, xValues } = domain;
       const indexScaleType = indexAxis!.scaleType;
@@ -112,7 +127,12 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
 
       onChange(filteredData);
     }
-  };
+  }, [bottom, left, data, isHorizontal, metadata, onChange]);
+
+  if (!isVisible) return null;
+
+  const paddingTop = 16;
+  const brushHeight = 50 - paddingTop;
 
   return (
     <Group
@@ -120,22 +140,6 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
       top={position.top + paddingTop}
     >
       <defs>
-        <pattern id="brush_pattern" width="8" height="8" patternUnits="userSpaceOnUse">
-          <path
-            d="M 0,8 l 8,-8 M -2,2 l 4,-4 M 6,10 l 4,-4"
-            stroke="#999"
-            strokeWidth="3"
-            strokeLinecap="square"
-            shapeRendering="auto"
-            opacity={0.1}
-          />
-        </pattern>
-
-        <pattern id="brush_pattern_grid" patternUnits="userSpaceOnUse" width="20" height="20" patternTransform="scale(0.2) rotate(0)">
-          <rect x="0" y="0" width="100%" height="100%" fill="none" />
-          <path d="M 10,-2.55e-7 V 20 Z M -1.1677362e-8,10 H 20 Z" strokeWidth="1" stroke="#999" fill="none" />
-        </pattern>
-
         <pattern id="brush_pattern_lines" patternUnits="userSpaceOnUse" width="20" height="20" patternTransform="scale(.1) rotate(00)">
           <rect x="0" y="0" width="100%" height="100%" fill="url(#cartesian-grid-background)" />
           <path d="M0 10h20z" strokeWidth="1" stroke="#999" fill="none" />
@@ -145,17 +149,7 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
       <rect
         x={0}
         y={0}
-        width={dimension.maxWidth}
-        height={brushHeight}
-        fill="url(#cartesian-grid-background)"
-        stroke="#999"
-        strokeDasharray="2,3"
-      />
-
-      <rect
-        x={0}
-        y={0}
-        width={dimension.maxWidth}
+        width={maxWidth}
         height={brushHeight}
         fill="url(#brush_pattern_lines)"
         stroke="white"
@@ -166,30 +160,23 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
         brushDirection="horizontal"
         brushRegion="chart"
         handleSize={8}
-        width={dimension.maxWidth}
-        height={brushHeight}
-        margin={{
-          top: 0, left: 0, right: 0, bottom: 0,
-        }}
-        initialBrushPosition={{
-          start: { x: 0 },
-          end: { x: dimension.maxWidth },
-        }}
+        innerRef={brushRef}
+        initialBrushPosition={initialBrushPosition}
+        margin={margin}
         onBrushStart={undefined}
         onBrushEnd={undefined}
         onChange={onBrushChange}
         onClick={undefined}
-        innerRef={brushRef}
         resizeTriggerAreas={['left', 'right']}
-        selectedBoxStyle={{
-          fill: 'grey', fillOpacity: 0.2, stroke: '#999', strokeWidth: 1, strokeOpacity: 0.8,
-        }}
+        selectedBoxStyle={selectedBoxStyle}
         xAxisOrientation="bottom"
         yAxisOrientation="left"
-        xScale={axisSystem.bottom?.scale}
-        yScale={axisSystem.left?.scale}
-        useWindowMoveEvents
+        xScale={bottom?.scale}
+        yScale={left?.scale}
         renderBrushHandle={(props: BrushHandleRenderProps) => <BrushHandle {...props} />}
+        useWindowMoveEvents
+        width={maxWidth}
+        height={brushHeight}
       />
     </Group>
   );
