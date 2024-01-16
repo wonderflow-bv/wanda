@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Except } from 'type-fest';
 
 import { LineChartProps } from '../components';
 import { defaultLineChartPalette } from '../style-config';
 import {
-  CartesianChartLayout, Charts, Data, LineChartMetadata, MarginProps,
+  CartesianChartLayout, Charts, Data,
+  MarginProps,
 } from '../types';
 import {
   computeAverage,
@@ -49,7 +50,6 @@ export const useLineChart = ({
   showMarkerLabel = false,
   hidePadding = false,
 }: UseLineChartProps) => {
-  const [metadata, setMetadata] = useState<LineChartMetadata>();
   const [brushFilteredData, setBrushFilteredData] = useState<Data>(data);
 
   const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
@@ -75,45 +75,44 @@ export const useLineChart = ({
   const axisFiltered = useMemo(() => handleChartAxisLayout(iFiltered, sFiltered, oFiltered),
     [iFiltered, sFiltered, oFiltered]);
 
-  useEffect(() => {
-    const palette = defaultLineChartPalette[theme];
+  const palette = defaultLineChartPalette[theme];
 
-    setMetadata({
-      type: Charts.LINE_CHART,
-      renderAs,
-      index: index.dataKey,
-      series: {
-        dataKey: series.dataKey,
-        names: handleSeriesNames(series),
-        colors: handleLineChartSeriesColors(series, palette.series),
-        style: series.style,
-        average: computeAverage(data, series.dataKey),
-      },
-      overlay: {
-        dataKey: overlay?.dataKey,
-        name: handleOverlayName(overlay),
-        color: handleLineChartOverlayColor(overlay, palette.overlay),
-        style: overlay?.style,
-        average: overlay?.dataKey ? computeAverage(data, [overlay.dataKey]) : undefined,
-      },
-      tooltip,
-      showAverage,
-      hideMissingDataConnection,
-      showMarker,
-      showMarkerLabel,
-      hidePadding,
-    });
-  }, [data,
+  const metadata = useMemo(() => ({
+    type: Charts.LINE_CHART,
+    renderAs,
+    index: index.dataKey,
+    series: {
+      dataKey: series.dataKey,
+      names: handleSeriesNames(series),
+      colors: handleLineChartSeriesColors(series, palette.series),
+      style: series.style,
+      average: computeAverage(data, series.dataKey),
+    },
+    overlay: {
+      dataKey: overlay?.dataKey,
+      name: handleOverlayName(overlay),
+      color: handleLineChartOverlayColor(overlay, palette.overlay),
+      style: overlay?.style,
+      average: overlay?.dataKey ? computeAverage(data, [overlay.dataKey]) : undefined,
+    },
+    tooltip,
+    showAverage,
+    hideMissingDataConnection,
+    showMarker,
+    showMarkerLabel,
+    hidePadding,
+  }), [data,
     hideMissingDataConnection,
     hidePadding,
     index.dataKey,
     overlay,
+    palette.overlay,
+    palette.series,
     renderAs,
     series,
     showAverage,
     showMarker,
     showMarkerLabel,
-    theme,
     tooltip]);
 
   return {

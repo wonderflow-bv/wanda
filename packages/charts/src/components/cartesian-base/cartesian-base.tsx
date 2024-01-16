@@ -17,19 +17,12 @@
 import { RectClipPath } from '@visx/clip-path';
 import { LinearGradient } from '@visx/gradient';
 import { Group } from '@visx/group';
-import { useSize } from 'ahooks';
-import _ from 'lodash';
-import {
-  CSSProperties,
-  useMemo, useRef, useState,
-} from 'react';
 
+import { useCartesian } from '../../hooks/useCartesian';
 import { StyleConfigProvider } from '../../providers';
 import { CartesianProvider } from '../../providers/cartesian';
-import { DataProvider, useDataContext } from '../../providers/data';
-import { useThemeContext } from '../../providers/theme';
-import { cartesianStyleConfig } from '../../style-config';
-import { AxisConfig, AxisOrientation, CartesianxAxisSystem } from '../../types';
+import { DataProvider } from '../../providers/data';
+import { AxisOrientation } from '../../types';
 import {
   AxisProps, CartesianStyleConfig, GridProps, MarginProps,
 } from '../../types/cartesian';
@@ -39,10 +32,6 @@ import {
   Data,
   DeepPartial,
 } from '../../types/main';
-import {
-  computeAxisStyleConfig,
-  computeAxisSystemProperties, handleVerticalTickLabelOffset,
-} from '../../utils/axis';
 import { EmptyState } from '../empty-state';
 import { Headings, HeadingsProps } from '../headings';
 import { Loader } from '../loader';
@@ -166,117 +155,43 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   otherProps,
   onBrushChange,
 }: CartesianBaseProps) => {
-  const theme = useThemeContext();
-  const { metadata, data, filteredData } = useDataContext();
-
-  const cartesianConfig = _.merge(cartesianStyleConfig, styleConfig);
   const {
-    axis: aStyle, legend: lStyle, themes, headings: hStyle,
-  } = cartesianConfig;
-  const { from, to } = _.merge(themes[theme].background, background);
-
-  const [hoveredLegendItem, setHoveredLegendItem] = useState<string>('');
-
-  const ref = useRef(null);
-  const size = useSize(ref);
-
-  const refLegend = useRef(null);
-  const sizeLegend = useSize(refLegend);
-
-  const hasData = !!filteredData.length;
-  const hasEmptyState = !isLoading && !hasData;
-
-  const hasLegend = data && !hideLegend && !isLoading;
-  const legendHeight = hasLegend ? (sizeLegend?.height ?? 0) : 0;
-
-  const brushHeight = showBrush ? 50 : 0;
-
-  const hasHeadings = !!title;
-  const headingsHeight = hasHeadings ? hStyle.height : 0;
-
-  const w = size ? size.width : width;
-  const h = size ? size.height : height;
-
-  const dynamicWidth = preventResponsive ? width : w;
-  const dynamicHeight = preventResponsive ? height : h;
-
-  const dynamicStyle: CSSProperties = {
-    '--static-width': `${dynamicWidth}px`,
-    '--static-height': `${dynamicHeight}px`,
-    '--legend-width': `calc(100% - ${margin.left + margin.right}px)`,
-    '--legend-top': `calc(100% - ${legendHeight + margin.bottom}px)`,
-    '--legend-left': `${margin.left}px`,
-    '--legend-padding': lStyle.padding,
-  };
-
-  const {
-    top, right, bottom, left,
-  } = axis;
-
-  const axisConfig: AxisConfig = useMemo(() => computeAxisStyleConfig(axis, aStyle), [aStyle, axis]);
-
-  const {
-    leftAxisOffset: lOff,
-    topAxisOffset: tOff,
-    verticalAxisOffset: vOff,
-    horizontalAxisOffset: hOff,
-  } = axisConfig.offset;
-
-  const mr = margin.right * (right ? 1 : 2);
-  const ml = margin.left * (left ? 1 : 2);
-
-  const xMax = dynamicWidth - ml - mr - vOff;
-
-  const topTickLabelOffset = handleVerticalTickLabelOffset(xMax, cartesianConfig, top);
-  const bottomTickLabelOffset = handleVerticalTickLabelOffset(xMax, cartesianConfig, bottom);
-
-  const mt = margin.top * (top ? 1 : 2) + headingsHeight + topTickLabelOffset;
-  const mb = margin.bottom * (bottom ? 1 : 2) + legendHeight + bottomTickLabelOffset + brushHeight;
-
-  const yMax = dynamicHeight - mt - mb - hOff;
-
-  const dimension = {
-    loader: {
-      width: dynamicWidth - margin.left - margin.right,
-      height: dynamicHeight - headingsHeight - margin.top - margin.bottom,
-    },
-    axis: {
-      maxWidth: xMax,
-      maxHeight: yMax,
-    },
-  };
-
-  const position = {
-    headings: {
-      top: headings?.top ?? margin.top,
-      left: headings?.left ?? ml,
-    },
-    loader: {
-      top: margin.top + headingsHeight,
-      left: margin.left,
-    },
-    axis: {
-      top: mt + tOff,
-      right: ml + lOff + xMax,
-      bottom: mt + tOff + yMax,
-      left: ml + lOff,
-    },
-    brush: {
-      left: ml + lOff,
-      top: mt + tOff + bottomTickLabelOffset + dimension.axis.maxHeight + brushHeight,
-
-    },
-  };
-
-  const axisSystem: CartesianxAxisSystem = useMemo(
-    () => computeAxisSystemProperties(axis, dimension.axis, position.axis),
-    [axis, dimension.axis, position.axis],
-  );
-
-  const axisFilteredSystem: CartesianxAxisSystem = useMemo(
-    () => computeAxisSystemProperties(axisFiltered, dimension.axis, position.axis),
-    [axisFiltered, dimension.axis, position.axis],
-  );
+    axisConfig,
+    axisFilteredSystem,
+    axisSystem,
+    bgFrom,
+    bgTo,
+    cartesianConfig,
+    dimension,
+    dynamicHeight,
+    dynamicWidth,
+    dynamicStyle,
+    hasData,
+    hasLegend,
+    filteredData,
+    hasEmptyState,
+    hoveredLegendItem,
+    metadata,
+    position,
+    ref,
+    refLegend,
+    theme,
+    setHoveredLegendItem,
+  } = useCartesian({
+    axis,
+    axisFiltered,
+    background,
+    headings,
+    height,
+    hideLegend,
+    isLoading,
+    margin,
+    preventResponsive,
+    showBrush,
+    styleConfig,
+    title,
+    width,
+  });
 
   return (
     <div
@@ -312,7 +227,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
             height={dimension.axis.maxHeight}
           />
 
-          <LinearGradient id="cartesian-container" from={from} to={to} />
+          <LinearGradient id="cartesian-container" from={bgFrom} to={bgTo} />
 
           <rect
             x={0}

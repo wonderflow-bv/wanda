@@ -182,13 +182,18 @@ export const useCartesian = ({
   );
 
   return {
-    axisSystem,
+    axisConfig,
     axisFilteredSystem,
+    axisSystem,
     bgFrom,
     bgTo,
-    data,
+    cartesianConfig,
     dimension,
+    dynamicHeight,
+    dynamicWidth,
     dynamicStyle,
+    hasData,
+    hasLegend,
     filteredData,
     hasEmptyState,
     hoveredLegendItem,
