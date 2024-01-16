@@ -19,7 +19,7 @@ import BaseBrush from '@visx/brush/lib/BaseBrush';
 import { BrushHandleRenderProps } from '@visx/brush/lib/BrushHandle';
 import { Bounds } from '@visx/brush/lib/types';
 import { Group } from '@visx/group';
-import { useCallback, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 import { useDataContext, useLayoutContext } from '../../providers';
 import { CartesianxAxisSystem, Data } from '../../types';
@@ -39,7 +39,9 @@ export type CartesianBaseBrushProps = {
   onChange: (filteredData: Data) => void;
 }
 
-const BrushHandle = ({ x, height, isBrushActive }: BrushHandleRenderProps) => {
+const BrushHandle = ({
+  x, height, isBrushActive,
+}: BrushHandleRenderProps) => {
   const pathWidth = 8;
   const pathHeight = 15;
 
@@ -48,7 +50,10 @@ const BrushHandle = ({ x, height, isBrushActive }: BrushHandleRenderProps) => {
   }
 
   return (
-    <Group left={x + pathWidth / 2} top={(height - pathHeight) / 2}>
+    <Group
+      left={x + pathWidth / 2}
+      top={(height - pathHeight) / 2}
+    >
       <path
         fill="#f2f2f2"
         d="M -4.5 0.5 L 3.5 0.5 L 3.5 15.5 L -4.5 15.5 L -4.5 0.5 M -1.5 4 L -1.5 12 M 0.5 4 L 0.5 12"
@@ -68,8 +73,15 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
   onChange,
 }) => {
   const brushRef = useRef<BaseBrush | null>(null);
+
   const { isHorizontal } = useLayoutContext();
   const { data, metadata } = useDataContext();
+
+  useEffect(() => {
+    onChange(data);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isVisible]);
+
   const { maxWidth } = dimension;
   const { bottom, left } = axisSystem;
 

@@ -177,8 +177,8 @@ export const useCartesian = ({
   );
 
   const axisFilteredSystem: CartesianxAxisSystem = useMemo(
-    () => computeAxisSystemProperties(showBrush ? axisFiltered : axis, dimension.axis, position.axis),
-    [axis, axisFiltered, dimension.axis, position.axis, showBrush],
+    () => computeAxisSystemProperties(axisFiltered, dimension.axis, position.axis),
+    [axisFiltered, dimension.axis, position.axis],
   );
 
   return {

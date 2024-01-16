@@ -274,8 +274,8 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   );
 
   const axisFilteredSystem: CartesianxAxisSystem = useMemo(
-    () => computeAxisSystemProperties(showBrush ? axisFiltered : axis, dimension.axis, position.axis),
-    [axis, axisFiltered, dimension.axis, position.axis, showBrush],
+    () => computeAxisSystemProperties(axisFiltered, dimension.axis, position.axis),
+    [axisFiltered, dimension.axis, position.axis],
   );
 
   return (
@@ -376,7 +376,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
                   axis={axisFilteredSystem}
                   hoveredLegendItem={hoveredLegendItem}
                 >
-                  <DataProvider data={showBrush ? filteredData : data} metadata={metadata} filteredData={filteredData}>
+                  <DataProvider data={filteredData} metadata={metadata} filteredData={filteredData}>
                     <Group clipPath="url(#clip-path-cartesian-chart)">
                       {metadata?.type === Charts.LINE_CHART && <Lines />}
                       {metadata?.type === Charts.BAR_CHART && <Bars />}
