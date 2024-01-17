@@ -18,7 +18,7 @@ import { RectClipPath } from '@visx/clip-path';
 import { LinearGradient } from '@visx/gradient';
 import { Group } from '@visx/group';
 
-import { useCartesian } from '../../hooks/useCartesian';
+import { useCartesian } from '../../hooks';
 import { StyleConfigProvider } from '../../providers';
 import { CartesianProvider } from '../../providers/cartesian';
 import { DataProvider } from '../../providers/data';

@@ -30,6 +30,7 @@ import {
   Background, CartesianStyleConfig, CartesianxAxisSystem, DeepPartial, MarginProps,
 } from '../types';
 import { computeAxisStyleConfig, computeAxisSystemProperties, handleVerticalTickLabelOffset } from '../utils';
+import { useSSR } from './useSSR';
 
 export type UseCartesianProps = {
   axis: Record<AxisOrientation, AxisProps | undefined>;
@@ -70,6 +71,7 @@ export const useCartesian = ({
   const theme = useThemeContext();
   const { isHorizontal } = useLayoutContext();
   const { metadata, data, filteredData } = useDataContext();
+  const { isBrowser } = useSSR();
 
   const cartesianConfig = useMemo(() => _.merge(cartesianStyleConfig, styleConfig), [styleConfig]);
   const {
@@ -93,7 +95,11 @@ export const useCartesian = ({
   const hasLegend = data && !hideLegend && !isLoading;
   const legendHeight = hasLegend ? (sizeLegend?.height ?? 0) : 0;
 
-  const brushHeight = showBrush ? 50 : 0;
+  const hasBrush = isBrowser && showBrush;
+  const brushArea = {
+    height: (hasBrush && isHorizontal) ? 50 : 0,
+    width: (hasBrush && !isHorizontal) ? 50 : 0,
+  };
 
   const hasHeadings = !!title;
   const headingsHeight = hasHeadings ? hStyle.height : 0;
@@ -129,13 +135,13 @@ export const useCartesian = ({
   const mr = margin.right * (right ? 1 : 2);
   const ml = margin.left * (left ? 1 : 2);
 
-  const xMax = dynamicWidth - ml - mr - vOff;
+  const xMax = dynamicWidth - ml - mr - vOff - brushArea.width;
 
   const topTickLabelOffset = handleVerticalTickLabelOffset(xMax, cartesianConfig, top);
   const bottomTickLabelOffset = handleVerticalTickLabelOffset(xMax, cartesianConfig, bottom);
 
   const mt = margin.top * (top ? 1 : 2) + headingsHeight + topTickLabelOffset;
-  const mb = margin.bottom * (bottom ? 1 : 2) + legendHeight + bottomTickLabelOffset + brushHeight;
+  const mb = margin.bottom * (bottom ? 1 : 2) + legendHeight + bottomTickLabelOffset + brushArea.height;
 
   const yMax = dynamicHeight - mt - mb - hOff;
 
@@ -167,7 +173,7 @@ export const useCartesian = ({
     },
     brush: {
       top: isHorizontal
-        ? mt + tOff + bottomTickLabelOffset + dimension.axis.maxHeight + brushHeight
+        ? mt + tOff + bottomTickLabelOffset + dimension.axis.maxHeight + brushArea.height
         : mt + tOff,
       left: isHorizontal
         ? ml + lOff

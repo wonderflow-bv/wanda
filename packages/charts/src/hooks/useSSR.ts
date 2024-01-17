@@ -1,5 +1,5 @@
 /*
- * Copyright 2022-2023 Wonderflow Design Team
+ * Copyright 2023 Wonderflow Design Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,8 +14,13 @@
  * limitations under the License.
  */
 
-export type { UseCartesianProps } from './useCartesian';
-export { useCartesian } from './useCartesian';
-export type { UseLineChartProps } from './useLineChart';
-export { useLineChart } from './useLineChart';
-export { useSSR } from './useSSR';
+export const useSSR = () => {
+  const isBrowser = typeof window !== 'undefined'
+    && window.document
+    && window.document.documentElement;
+
+  return {
+    isBrowser: !!isBrowser,
+    isServer: !isBrowser,
+  };
+};

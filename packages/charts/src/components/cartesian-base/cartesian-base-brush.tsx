@@ -19,6 +19,7 @@ import BaseBrush from '@visx/brush/lib/BaseBrush';
 import { BrushHandleRenderProps } from '@visx/brush/lib/BrushHandle';
 import { Bounds, ResizeTriggerAreas } from '@visx/brush/lib/types';
 import { Group } from '@visx/group';
+import _ from 'lodash';
 import { useCallback, useEffect, useRef } from 'react';
 
 import { useDataContext, useLayoutContext } from '../../providers';
@@ -40,16 +41,16 @@ export type CartesianBaseBrushProps = {
 }
 
 const BrushHandle = ({
-  x, y, width, height, isBrushActive,
+  x, y, height, isBrushActive,
 }: BrushHandleRenderProps) => {
   const { isHorizontal } = useLayoutContext();
-  console.log(x, y, width, height);
+
   const pathWidth = 8;
   const pathHeight = 15;
 
   const lPos = isHorizontal ? (x + pathWidth / 2) : (x + pathHeight * 2);
 
-  const tPos = isHorizontal ? (height - pathHeight) / 2 : (height - pathHeight) / 2;
+  const tPos = isHorizontal ? (height - pathHeight) / 2 : (y + pathWidth / 2);
 
   const style = isHorizontal
     ? { cursor: 'col-resize' }
@@ -93,7 +94,18 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
   const { data, metadata } = useDataContext();
 
   useEffect(() => {
-    onChange(data);
+    const dataLen = data.length;
+    const clampPercentage = {
+      min: _.round(dataLen * 0.2),
+      max: _.round(dataLen * 0.8),
+    };
+    const defaultFilterData = data.filter((_, i) => i > clampPercentage.min && i < clampPercentage.max - 1);
+    onChange(defaultFilterData);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible) onChange(data);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isVisible]);
 
@@ -108,7 +120,9 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
   const brushSize = 50 - padding;
   const brushHeight = isHorizontal ? brushSize : maxHeight;
   const brushWidth = isHorizontal ? maxWidth : brushSize;
+
   const topPosition = isHorizontal ? tPos + padding : tPos;
+  const leftPosition = isHorizontal ? lPos : lPos + padding * 2;
 
   const margin = isHorizontal
     ? {
@@ -118,10 +132,15 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
       top: tPos, left: 0, right: 0, bottom: 0,
     };
 
-  const initialBrushPosition = {
-    start: { x: 0 },
-    end: { x: maxWidth },
-  };
+  const initialBrushPosition = isHorizontal
+    ? {
+      start: { x: maxWidth * 0.2 },
+      end: { x: maxWidth * 0.8 },
+    }
+    : {
+      start: { y: maxHeight * 0.2 },
+      end: { y: maxHeight * 0.8 },
+    };
 
   const selectedBoxStyle = {
     fill: 'grey',
@@ -148,12 +167,12 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
 
     const min = isHorizontal ? x0 : y0;
     const max = isHorizontal ? x1 : y1;
-    const values = isHorizontal ? xValues : yValues;
+    const domainValues = isHorizontal ? xValues : yValues;
 
     if (indexScaleType === 'label') {
       filteredData = data.filter((d) => {
         const value = getPrimitiveFromObjectByPath(d, indexDataKey);
-        return values!.includes(value);
+        return domainValues!.includes(value);
       });
     }
 
@@ -180,7 +199,7 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
 
   return (
     <Group
-      left={lPos}
+      left={leftPosition}
       top={topPosition}
     >
       <defs>
