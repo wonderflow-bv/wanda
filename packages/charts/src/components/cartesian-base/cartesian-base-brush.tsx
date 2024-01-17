@@ -17,7 +17,7 @@
 import { Brush } from '@visx/brush';
 import BaseBrush from '@visx/brush/lib/BaseBrush';
 import { BrushHandleRenderProps } from '@visx/brush/lib/BrushHandle';
-import { Bounds } from '@visx/brush/lib/types';
+import { Bounds, ResizeTriggerAreas } from '@visx/brush/lib/types';
 import { Group } from '@visx/group';
 import { useCallback, useEffect, useRef } from 'react';
 
@@ -40,10 +40,24 @@ export type CartesianBaseBrushProps = {
 }
 
 const BrushHandle = ({
-  x, height, isBrushActive,
+  x, y, width, height, isBrushActive,
 }: BrushHandleRenderProps) => {
+  const { isHorizontal } = useLayoutContext();
+  console.log(x, y, width, height);
   const pathWidth = 8;
   const pathHeight = 15;
+
+  const lPos = isHorizontal ? (x + pathWidth / 2) : (x + pathHeight * 2);
+
+  const tPos = isHorizontal ? (height - pathHeight) / 2 : (height - pathHeight) / 2;
+
+  const style = isHorizontal
+    ? { cursor: 'col-resize' }
+    : { cursor: 'row-resize' };
+
+  const transform = isHorizontal
+    ? 'rotate(0)'
+    : 'rotate(90)';
 
   if (!isBrushActive) {
     return null;
@@ -51,15 +65,16 @@ const BrushHandle = ({
 
   return (
     <Group
-      left={x + pathWidth / 2}
-      top={(height - pathHeight) / 2}
+      left={lPos}
+      top={tPos}
     >
       <path
         fill="#f2f2f2"
         d="M -4.5 0.5 L 3.5 0.5 L 3.5 15.5 L -4.5 15.5 L -4.5 0.5 M -1.5 4 L -1.5 12 M 0.5 4 L 0.5 12"
         stroke="#999999"
         strokeWidth="1"
-        style={{ cursor: 'ew-resize' }}
+        style={style}
+        transform={transform}
       />
     </Group>
   );
@@ -83,12 +98,25 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
   }, [isVisible]);
 
   const { bottom, left } = axisSystem;
-  const { maxWidth } = dimension;
+  const { maxWidth, maxHeight } = dimension;
   const { top: tPos, left: lPos } = position;
 
-  const margin = {
-    top: 0, left: lPos, right: 0, bottom: 0,
-  };
+  const brushDirection = isHorizontal ? 'horizontal' : 'vertical';
+  const resizeTriggerAreas: ResizeTriggerAreas[] = isHorizontal ? ['left', 'right'] : ['top', 'bottom'];
+
+  const padding = 16;
+  const brushSize = 50 - padding;
+  const brushHeight = isHorizontal ? brushSize : maxHeight;
+  const brushWidth = isHorizontal ? maxWidth : brushSize;
+  const topPosition = isHorizontal ? tPos + padding : tPos;
+
+  const margin = isHorizontal
+    ? {
+      top: 0, left: lPos, right: 0, bottom: 0,
+    }
+    : {
+      top: tPos, left: 0, right: 0, bottom: 0,
+    };
 
   const initialBrushPosition = {
     start: { x: 0 },
@@ -102,6 +130,8 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
     strokeWidth: 1,
     strokeOpacity: 0.8,
   };
+
+  const patternTransform = `scale(.1) rotate(${isHorizontal ? 0 : 90})`;
 
   const onBrushChange = useCallback((domain: Bounds | null) => {
     if (!domain) return;
@@ -144,16 +174,13 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
 
   if (!isVisible) return null;
 
-  const paddingTop = 16;
-  const brushHeight = 50 - paddingTop;
-
   return (
     <Group
       left={lPos}
-      top={tPos + paddingTop}
+      top={topPosition}
     >
       <defs>
-        <pattern id="brush_pattern_lines" patternUnits="userSpaceOnUse" width="20" height="20" patternTransform="scale(.1) rotate(00)">
+        <pattern id="brush_pattern_lines" patternUnits="userSpaceOnUse" width="20" height="20" patternTransform={patternTransform}>
           <rect x="0" y="0" width="100%" height="100%" fill="url(#cartesian-grid-background)" />
           <path d="M0 10h20z" strokeWidth="1" stroke="#999" fill="none" />
         </pattern>
@@ -162,7 +189,7 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
       <rect
         x={0}
         y={0}
-        width={maxWidth}
+        width={brushWidth}
         height={brushHeight}
         fill="url(#brush_pattern_lines)"
         stroke="white"
@@ -170,7 +197,7 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
       />
 
       <Brush
-        brushDirection="horizontal"
+        brushDirection={brushDirection}
         brushRegion="chart"
         handleSize={8}
         innerRef={brushRef}
@@ -180,7 +207,7 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
         onBrushEnd={undefined}
         onChange={onBrushChange}
         onClick={undefined}
-        resizeTriggerAreas={['left', 'right']}
+        resizeTriggerAreas={resizeTriggerAreas}
         selectedBoxStyle={selectedBoxStyle}
         xAxisOrientation="bottom"
         yAxisOrientation="left"
@@ -188,7 +215,7 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
         yScale={left?.scale}
         renderBrushHandle={(props: BrushHandleRenderProps) => <BrushHandle {...props} />}
         useWindowMoveEvents
-        width={maxWidth}
+        width={brushWidth}
         height={brushHeight}
       />
     </Group>

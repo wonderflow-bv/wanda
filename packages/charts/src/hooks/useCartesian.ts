@@ -21,7 +21,7 @@ import {
 } from 'react';
 
 import { HeadingsProps } from '../components';
-import { useDataContext, useThemeContext } from '../providers';
+import { useDataContext, useLayoutContext, useThemeContext } from '../providers';
 import { cartesianStyleConfig } from '../style-config';
 import {
   AxisConfig,
@@ -68,6 +68,7 @@ export const useCartesian = ({
   width = 800,
 }: UseCartesianProps) => {
   const theme = useThemeContext();
+  const { isHorizontal } = useLayoutContext();
   const { metadata, data, filteredData } = useDataContext();
 
   const cartesianConfig = useMemo(() => _.merge(cartesianStyleConfig, styleConfig), [styleConfig]);
@@ -165,8 +166,12 @@ export const useCartesian = ({
       left: ml + lOff,
     },
     brush: {
-      top: mt + tOff + bottomTickLabelOffset + dimension.axis.maxHeight + brushHeight,
-      left: ml + lOff,
+      top: isHorizontal
+        ? mt + tOff + bottomTickLabelOffset + dimension.axis.maxHeight + brushHeight
+        : mt + tOff,
+      left: isHorizontal
+        ? ml + lOff
+        : ml + lOff + xMax,
     },
   };
 
