@@ -136,40 +136,44 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
   const onBrushChange = useCallback((domain: Bounds | null) => {
     if (!domain) return;
 
+    let filteredData: Data = data;
+
+    const {
+      x0, x1, xValues, y0, y1, yValues,
+    } = domain;
+
     const indexAxis = isHorizontal ? bottom : left;
+    const indexScaleType = indexAxis!.scaleType;
+    const indexDataKey = metadata!.index;
 
-    if (isHorizontal) {
-      const { x0, x1, xValues } = domain;
-      const indexScaleType = indexAxis!.scaleType;
-      const indexDataKey = metadata!.index;
+    const min = isHorizontal ? x0 : y0;
+    const max = isHorizontal ? x1 : y1;
+    const values = isHorizontal ? xValues : yValues;
 
-      let filteredData: Data = data;
-
-      if (indexScaleType === 'label') {
-        filteredData = data.filter((d) => {
-          const value = getPrimitiveFromObjectByPath(d, indexDataKey);
-          return xValues!.includes(value);
-        });
-      }
-
-      if (indexScaleType === 'time') {
-        filteredData = data.filter((d) => {
-          const value = getPrimitiveFromObjectByPath(d, indexDataKey);
-          const toTime = value ? new Date(value).getTime() : 0;
-          return toTime >= x0 && toTime <= x1;
-        });
-      }
-
-      if (indexScaleType === 'linear') {
-        filteredData = data.filter((d) => {
-          const value = getPrimitiveFromObjectByPath(d, indexDataKey);
-          const v = typeof value === 'number' ? value : (x0 - 1);
-          return v >= x0 && v <= x1;
-        });
-      }
-
-      onChange(filteredData);
+    if (indexScaleType === 'label') {
+      filteredData = data.filter((d) => {
+        const value = getPrimitiveFromObjectByPath(d, indexDataKey);
+        return values!.includes(value);
+      });
     }
+
+    if (indexScaleType === 'time') {
+      filteredData = data.filter((d) => {
+        const value = getPrimitiveFromObjectByPath(d, indexDataKey);
+        const toTime = value ? new Date(value).getTime() : 0;
+        return toTime >= min && toTime <= max;
+      });
+    }
+
+    if (indexScaleType === 'linear') {
+      filteredData = data.filter((d) => {
+        const value = getPrimitiveFromObjectByPath(d, indexDataKey);
+        const v = typeof value === 'number' ? value : (min - 1);
+        return v >= min && v <= max;
+      });
+    }
+
+    onChange(filteredData);
   }, [bottom, left, data, isHorizontal, metadata, onChange]);
 
   if (!isVisible) return null;
