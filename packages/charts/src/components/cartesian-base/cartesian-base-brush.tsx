@@ -15,12 +15,16 @@
 */
 
 import { Brush } from '@visx/brush';
-import BaseBrush from '@visx/brush/lib/BaseBrush';
+import BaseBrush, { BaseBrushState, UpdateBrush } from '@visx/brush/lib/BaseBrush';
 import { BrushHandleRenderProps } from '@visx/brush/lib/BrushHandle';
 import { Bounds, ResizeTriggerAreas } from '@visx/brush/lib/types';
 import { Group } from '@visx/group';
 import _ from 'lodash';
-import { useCallback, useEffect, useRef } from 'react';
+import {
+  useCallback, useEffect,
+  useMemo,
+  useRef,
+} from 'react';
 
 import { useDataContext, useLayoutContext } from '../../providers';
 import { CartesianxAxisSystem, Data } from '../../types';
@@ -93,25 +97,47 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
   const { isHorizontal } = useLayoutContext();
   const { data, metadata } = useDataContext();
 
-  useEffect(() => {
-    const dataLen = data.length;
-    const clampPercentage = {
-      min: _.round(dataLen * 0.2),
-      max: _.round(dataLen * 0.8),
-    };
-    const defaultFilterData = data.filter((_, i) => i > clampPercentage.min && i < clampPercentage.max - 1);
-    onChange(defaultFilterData);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (!isVisible) onChange(data);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isVisible]);
-
   const { bottom, left } = axisSystem;
   const { maxWidth, maxHeight } = dimension;
   const { top: tPos, left: lPos } = position;
+
+  const initialBrushRange = {
+    min: 0.2,
+    max: 0.8,
+  };
+
+  const initDataRange = useMemo(() => {
+    const dataLen = data.length;
+
+    const initialDataClamp = {
+      min: _.round(dataLen * initialBrushRange.min),
+      max: _.round(dataLen * initialBrushRange.max),
+    };
+
+    const { min, max } = initialDataClamp;
+
+    return data.filter((_, i) => i > min && i < max - 1);
+  }, [data, initialBrushRange.max, initialBrushRange.min]);
+
+  useEffect(() => {
+    onChange(initDataRange);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const initialBrushPosition = {
+    start: isHorizontal
+      ? { x: (maxWidth * initialBrushRange.min) }
+      : { y: (maxHeight * initialBrushRange.min) },
+    end: isHorizontal
+      ? { x: (maxWidth * initialBrushRange.max) }
+      : { y: (maxHeight * initialBrushRange.max) },
+  };
+
+  useEffect(() => {
+    if (!isVisible) onChange(data);
+    if (isVisible) onChange(initDataRange);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isVisible]);
 
   const brushDirection = isHorizontal ? 'horizontal' : 'vertical';
   const resizeTriggerAreas: ResizeTriggerAreas[] = isHorizontal ? ['left', 'right'] : ['top', 'bottom'];
@@ -132,16 +158,6 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
       top: tPos, left: 0, right: 0, bottom: 0,
     };
 
-  const initialBrushPosition = isHorizontal
-    ? {
-      start: { x: maxWidth * 0.2 },
-      end: { x: maxWidth * 0.8 },
-    }
-    : {
-      start: { y: maxHeight * 0.2 },
-      end: { y: maxHeight * 0.8 },
-    };
-
   const selectedBoxStyle = {
     fill: 'grey',
     fillOpacity: 0.2,
@@ -152,7 +168,36 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
 
   const patternTransform = `scale(.1) rotate(${isHorizontal ? 0 : 90})`;
 
-  const onBrushChange = useCallback((domain: Bounds | null) => {
+  const handleBrushClear = () => {
+    if (brushRef?.current) {
+      onChange(data);
+      brushRef.current.reset();
+    }
+  };
+
+  const handleBrushReset = () => {
+    if (brushRef?.current) {
+      const updater: UpdateBrush = (prevBrush) => {
+        const newExtent = brushRef.current!.getExtent(
+          initialBrushPosition.start,
+          initialBrushPosition.end,
+        );
+
+        const newState: BaseBrushState = {
+          ...prevBrush,
+          start: { y: newExtent.y0, x: newExtent.x0 },
+          end: { y: newExtent.y1, x: newExtent.x1 },
+          extent: newExtent,
+        };
+
+        return newState;
+      };
+
+      brushRef.current.updateBrush(updater);
+    }
+  };
+
+  const handleBrushChange = useCallback((domain: Bounds | null) => {
     if (!domain) return;
 
     let filteredData: Data = data;
@@ -195,6 +240,11 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
     onChange(filteredData);
   }, [bottom, left, data, isHorizontal, metadata, onChange]);
 
+  useEffect(() => {
+    handleBrushReset();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isHorizontal]);
+
   if (!isVisible) return null;
 
   return (
@@ -228,8 +278,8 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
         margin={margin}
         onBrushStart={undefined}
         onBrushEnd={undefined}
-        onChange={onBrushChange}
-        onClick={undefined}
+        onChange={handleBrushChange}
+        onClick={handleBrushClear}
         resizeTriggerAreas={resizeTriggerAreas}
         selectedBoxStyle={selectedBoxStyle}
         xAxisOrientation="bottom"
