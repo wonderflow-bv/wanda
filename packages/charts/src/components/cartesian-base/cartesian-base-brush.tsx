@@ -82,11 +82,12 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isVisible]);
 
-  const { maxWidth } = dimension;
   const { bottom, left } = axisSystem;
+  const { maxWidth } = dimension;
+  const { top: tPos, left: lPos } = position;
 
   const margin = {
-    top: 0, left: 0, right: 0, bottom: 0,
+    top: 0, left: lPos, right: 0, bottom: 0,
   };
 
   const initialBrushPosition = {
@@ -148,8 +149,8 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
 
   return (
     <Group
-      left={position.left}
-      top={position.top + paddingTop}
+      left={lPos}
+      top={tPos + paddingTop}
     >
       <defs>
         <pattern id="brush_pattern_lines" patternUnits="userSpaceOnUse" width="20" height="20" patternTransform="scale(.1) rotate(00)">

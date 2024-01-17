@@ -204,11 +204,11 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
     >
       <StyleConfigProvider styleConfig={cartesianConfig}>
         <svg
+          {...otherProps}
           width={dynamicWidth}
           height={dynamicHeight}
           viewBox={`0 0 ${dynamicWidth} ${dynamicHeight}`}
           className={Unselectable}
-          {...otherProps}
         >
 
           <RectClipPath

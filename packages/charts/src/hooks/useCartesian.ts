@@ -165,9 +165,8 @@ export const useCartesian = ({
       left: ml + lOff,
     },
     brush: {
-      left: ml + lOff,
       top: mt + tOff + bottomTickLabelOffset + dimension.axis.maxHeight + brushHeight,
-
+      left: ml + lOff,
     },
   };
 
