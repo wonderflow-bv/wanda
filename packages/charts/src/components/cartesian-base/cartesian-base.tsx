@@ -166,6 +166,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
     dynamicHeight,
     dynamicWidth,
     dynamicStyle,
+    hasBrush,
     hasData,
     hasLegend,
     filteredData,
@@ -304,7 +305,7 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
                 axisSystem={axisSystem}
                 position={position.brush}
                 dimension={dimension.axis}
-                isVisible={showBrush}
+                isVisible={hasBrush}
                 onChange={onBrushChange}
               />
             </Group>

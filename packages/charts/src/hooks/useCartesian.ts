@@ -75,7 +75,7 @@ export const useCartesian = ({
 
   const cartesianConfig = useMemo(() => _.merge(cartesianStyleConfig, styleConfig), [styleConfig]);
   const {
-    axis: aStyle, legend: lStyle, themes, headings: hStyle,
+    axis: aStyle, legend: lStyle, themes, headings: hStyle, viewport,
   } = cartesianConfig;
   const { from: bgFrom, to: bgTo } = useMemo(
     () => _.merge(themes[theme].background, background), [background, theme, themes],
@@ -95,7 +95,10 @@ export const useCartesian = ({
   const hasLegend = data && !hideLegend && !isLoading;
   const legendHeight = hasLegend ? (sizeLegend?.height ?? 0) : 0;
 
-  const hasBrush = isBrowser && showBrush;
+  const isBrushInViewport = isHorizontal
+    ? Boolean(size && size.width > viewport.medium.maxWidth)
+    : Boolean(size && size.height > viewport.medium.maxHeight);
+  const hasBrush = isBrowser && isBrushInViewport && showBrush;
   const brushArea = {
     height: (hasBrush && isHorizontal) ? 50 : 0,
     width: (hasBrush && !isHorizontal) ? 50 : 0,
@@ -204,6 +207,7 @@ export const useCartesian = ({
     dynamicStyle,
     hasData,
     hasLegend,
+    hasBrush,
     filteredData,
     hasEmptyState,
     hoveredLegendItem,
