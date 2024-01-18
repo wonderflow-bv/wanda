@@ -44,6 +44,20 @@ export type Theme = {
     average: string;
     averageFontColor: string;
   };
+  brush: {
+    handle: {
+      fill: string;
+      stroke: string;
+    };
+    selectedBox: {
+      fill: string;
+      stroke: string;
+    };
+    pattern: {
+      fill: string;
+      stroke: string;
+    };
+  };
 }
 
 export type ThemeVariants = 'light' | 'dark';

@@ -51,6 +51,20 @@ export const themeLight: Theme = {
     average: colorPaletteNeutrals.dimmed8,
     averageFontColor: colorPaletteNeutrals.dimmed0,
   },
+  brush: {
+    handle: {
+      fill: colorPaletteNeutrals.dimmed0,
+      stroke: colorPaletteNeutrals.dimmed4,
+    },
+    selectedBox: {
+      fill: colorPaletteNeutrals.dimmed7,
+      stroke: colorPaletteNeutrals.dimmed4,
+    },
+    pattern: {
+      fill: 'none',
+      stroke: colorPaletteNeutrals.dimmed4,
+    },
+  },
 };
 
 export const themeDark: Theme = {
@@ -86,6 +100,20 @@ export const themeDark: Theme = {
     noData: colorPaletteNeutrals.dimmed7,
     average: colorPaletteNeutrals.dimmed0,
     averageFontColor: colorPaletteNeutrals.dimmed8,
+  },
+  brush: {
+    handle: {
+      fill: colorPaletteNeutrals.dimmed0,
+      stroke: colorPaletteNeutrals.dimmed4,
+    },
+    selectedBox: {
+      fill: colorPaletteNeutrals.dimmed2,
+      stroke: colorPaletteNeutrals.dimmed4,
+    },
+    pattern: {
+      fill: 'none',
+      stroke: colorPaletteNeutrals.dimmed4,
+    },
   },
 };
 

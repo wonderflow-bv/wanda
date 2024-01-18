@@ -26,7 +26,9 @@ import {
   useRef,
 } from 'react';
 
-import { useDataContext, useLayoutContext } from '../../providers';
+import {
+  useDataContext, useLayoutContext, useStyleConfigContext, useThemeContext,
+} from '../../providers';
 import { CartesianxAxisSystem, Data } from '../../types';
 import { getPrimitiveFromObjectByPath } from '../../utils';
 
@@ -48,21 +50,26 @@ const BrushHandle = ({
   x, y, height, isBrushActive,
 }: BrushHandleRenderProps) => {
   const { isHorizontal } = useLayoutContext();
+  const { brush, themes } = useStyleConfigContext();
+  const theme = useThemeContext();
 
   const pathWidth = 8;
   const pathHeight = 15;
 
   const lPos = isHorizontal ? (x + pathWidth / 2) : (x + pathHeight * 2);
-
   const tPos = isHorizontal ? (height - pathHeight) / 2 : (y + pathWidth / 2);
 
-  const style = isHorizontal
-    ? { cursor: 'col-resize' }
-    : { cursor: 'row-resize' };
-
-  const transform = isHorizontal
-    ? 'rotate(0)'
-    : 'rotate(90)';
+  const handleStyle = {
+    stroke: themes[theme].brush.handle.stroke,
+    strokeWidth: brush.handle.strokeWidth,
+    fill: themes[theme].brush.handle.fill,
+    cursor: isHorizontal
+      ? { cursor: 'col-resize' }
+      : { cursor: 'row-resize' },
+    transform: isHorizontal
+      ? 'rotate(0)'
+      : 'rotate(90)',
+  };
 
   if (!isBrushActive) {
     return null;
@@ -74,12 +81,12 @@ const BrushHandle = ({
       top={tPos}
     >
       <path
-        fill="#f2f2f2"
+        fill={handleStyle.fill}
         d="M -4.5 0.5 L 3.5 0.5 L 3.5 15.5 L -4.5 15.5 L -4.5 0.5 M -1.5 4 L -1.5 12 M 0.5 4 L 0.5 12"
-        stroke="#999999"
-        strokeWidth="1"
-        style={style}
-        transform={transform}
+        stroke={handleStyle.stroke}
+        strokeWidth={handleStyle.strokeWidth}
+        style={handleStyle.cursor}
+        transform={handleStyle.transform}
       />
     </Group>
   );
@@ -96,6 +103,8 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
 
   const { isHorizontal } = useLayoutContext();
   const { data, metadata } = useDataContext();
+  const { brush, themes } = useStyleConfigContext();
+  const theme = useThemeContext();
 
   const { bottom, left } = axisSystem;
   const { maxWidth, maxHeight } = dimension;
@@ -159,14 +168,19 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
     };
 
   const selectedBoxStyle = {
-    fill: 'grey',
-    fillOpacity: 0.2,
-    stroke: '#999',
-    strokeWidth: 1,
-    strokeOpacity: 0.8,
+    fill: themes[theme].brush.selectedBox.fill,
+    fillOpacity: brush.selectedBox.fillOpacity,
+    stroke: themes[theme].brush.selectedBox.stroke,
+    strokeWidth: brush.selectedBox.strokeWidth,
+    strokeOpacity: brush.selectedBox.strokeOpacity,
   };
 
-  const patternTransform = `scale(.1) rotate(${isHorizontal ? 0 : 90})`;
+  const patternStyle = {
+    transform: `scale(.1) rotate(${isHorizontal ? 0 : 90})`,
+    strokeWidth: brush.pattern.strokeWidth,
+    stroke: themes[theme].brush.pattern.stroke,
+    fill: themes[theme].brush.pattern.fill,
+  };
 
   const handleBrushClear = () => {
     if (brushRef?.current) {
@@ -253,9 +267,9 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
       top={topPosition}
     >
       <defs>
-        <pattern id="brush_pattern_lines" patternUnits="userSpaceOnUse" width="20" height="20" patternTransform={patternTransform}>
+        <pattern id="brush_pattern_lines" patternUnits="userSpaceOnUse" width="20" height="20" patternTransform={patternStyle.transform}>
           <rect x="0" y="0" width="100%" height="100%" fill="url(#cartesian-grid-background)" />
-          <path d="M0 10h20z" strokeWidth="1" stroke="#999" fill="none" />
+          <path d="M0 10h20z" strokeWidth={patternStyle.strokeWidth} stroke={patternStyle.stroke} fill={patternStyle.fill} />
         </pattern>
       </defs>
 
@@ -265,7 +279,6 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
         width={brushWidth}
         height={brushHeight}
         fill="url(#brush_pattern_lines)"
-        stroke="white"
         style={{ pointerEvents: 'all', cursor: 'move' }}
       />
 

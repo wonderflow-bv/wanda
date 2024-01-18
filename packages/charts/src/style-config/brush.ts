@@ -14,13 +14,18 @@
  * limitations under the License.
  */
 
-export * from './axis';
-export * from './brush';
-export * from './cartesian';
-export * from './colors';
-export * from './grid';
-export * from './headings';
-export * from './linear-gradient';
-export * from './lines';
-export * from './themes';
-export * from './viewport';
+import { BrushElementStyleConfig } from '../types/brush';
+
+export const brushStyleConfig: BrushElementStyleConfig = {
+  handle: {
+    strokeWidth: 1,
+  },
+  selectedBox: {
+    fillOpacity: 0.2,
+    strokeWidth: 1,
+    strokeOpacity: 0.8,
+  },
+  pattern: {
+    strokeWidth: 1,
+  },
+};
