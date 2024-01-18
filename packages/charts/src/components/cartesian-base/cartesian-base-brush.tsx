@@ -59,7 +59,7 @@ const BrushHandle = ({
   const lPos = isHorizontal ? (x + pathWidth / 2) : (x + pathHeight * 2);
   const tPos = isHorizontal ? (height - pathHeight) / 2 : (y + pathWidth / 2);
 
-  const handleStyle = {
+  const style = {
     stroke: themes[theme].brush.handle.stroke,
     strokeWidth: brush.handle.strokeWidth,
     fill: themes[theme].brush.handle.fill,
@@ -81,12 +81,12 @@ const BrushHandle = ({
       top={tPos}
     >
       <path
-        fill={handleStyle.fill}
+        fill={style.fill}
         d="M -4.5 0.5 L 3.5 0.5 L 3.5 15.5 L -4.5 15.5 L -4.5 0.5 M -1.5 4 L -1.5 12 M 0.5 4 L 0.5 12"
-        stroke={handleStyle.stroke}
-        strokeWidth={handleStyle.strokeWidth}
-        style={handleStyle.cursor}
-        transform={handleStyle.transform}
+        stroke={style.stroke}
+        strokeWidth={style.strokeWidth}
+        style={style.cursor}
+        transform={style.transform}
       />
     </Group>
   );
@@ -167,20 +167,29 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
       top: tPos, left: 0, right: 0, bottom: 0,
     };
 
-  const selectedBoxStyle = {
-    fill: themes[theme].brush.selectedBox.fill,
-    fillOpacity: brush.selectedBox.fillOpacity,
-    stroke: themes[theme].brush.selectedBox.stroke,
-    strokeWidth: brush.selectedBox.strokeWidth,
-    strokeOpacity: brush.selectedBox.strokeOpacity,
-  };
-
-  const patternStyle = {
-    transform: `scale(.1) rotate(${isHorizontal ? 0 : 90})`,
-    strokeWidth: brush.pattern.strokeWidth,
-    stroke: themes[theme].brush.pattern.stroke,
-    fill: themes[theme].brush.pattern.fill,
-  };
+  const style = useMemo(() => ({
+    selectedBox: {
+      fill: themes[theme].brush.selectedBox.fill,
+      fillOpacity: brush.selectedBox.fillOpacity,
+      stroke: themes[theme].brush.selectedBox.stroke,
+      strokeWidth: brush.selectedBox.strokeWidth,
+      strokeOpacity: brush.selectedBox.strokeOpacity,
+    },
+    pattern: {
+      transform: `scale(.1) rotate(${isHorizontal ? 0 : 90})`,
+      strokeWidth: brush.pattern.strokeWidth,
+      stroke: themes[theme].brush.pattern.stroke,
+      fill: themes[theme].brush.pattern.fill,
+    },
+  }), [
+    brush.pattern.strokeWidth,
+    brush.selectedBox.fillOpacity,
+    brush.selectedBox.strokeOpacity,
+    brush.selectedBox.strokeWidth,
+    isHorizontal,
+    theme,
+    themes,
+  ]);
 
   const handleBrushClear = () => {
     if (brushRef?.current) {
@@ -267,9 +276,9 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
       top={topPosition}
     >
       <defs>
-        <pattern id="brush_pattern_lines" patternUnits="userSpaceOnUse" width="20" height="20" patternTransform={patternStyle.transform}>
+        <pattern id="brush_pattern_lines" patternUnits="userSpaceOnUse" width="20" height="20" patternTransform={style.pattern.transform}>
           <rect x="0" y="0" width="100%" height="100%" fill="url(#cartesian-grid-background)" />
-          <path d="M0 10h20z" strokeWidth={patternStyle.strokeWidth} stroke={patternStyle.stroke} fill={patternStyle.fill} />
+          <path d="M0 10h20z" strokeWidth={style.pattern.strokeWidth} stroke={style.pattern.stroke} fill={style.pattern.fill} />
         </pattern>
       </defs>
 
@@ -294,7 +303,7 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
         onChange={handleBrushChange}
         onClick={handleBrushClear}
         resizeTriggerAreas={resizeTriggerAreas}
-        selectedBoxStyle={selectedBoxStyle}
+        selectedBoxStyle={style.selectedBox}
         xAxisOrientation="bottom"
         yAxisOrientation="left"
         xScale={bottom?.scale}
