@@ -34,6 +34,8 @@ import { getPrimitiveFromObjectByPath } from '../../utils';
 
 export type CartesianBaseBrushProps = {
   axisSystem: CartesianxAxisSystem;
+  brushSize?: number;
+  padding?: number;
   position: {
     top: number;
     left: number;
@@ -54,9 +56,9 @@ const BrushHandle = ({
   const theme = useThemeContext();
 
   const pathWidth = 8;
-  const pathHeight = 15;
+  const pathHeight = 16;
 
-  const lPos = isHorizontal ? (x + pathWidth / 2) : (x + pathHeight * 2);
+  const lPos = isHorizontal ? (x + pathWidth / 2) : (x + pathHeight * 1.75);
   const tPos = isHorizontal ? (height - pathHeight) / 2 : (y + pathWidth / 2);
 
   const style = {
@@ -94,8 +96,10 @@ const BrushHandle = ({
 
 export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
   axisSystem,
+  brushSize = 32,
   dimension,
   isVisible = false,
+  padding = 16,
   position,
   onChange,
 }) => {
@@ -151,8 +155,6 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
   const brushDirection = isHorizontal ? 'horizontal' : 'vertical';
   const resizeTriggerAreas: ResizeTriggerAreas[] = isHorizontal ? ['left', 'right'] : ['top', 'bottom'];
 
-  const padding = 16;
-  const brushSize = 50 - padding;
   const brushHeight = isHorizontal ? brushSize : maxHeight;
   const brushWidth = isHorizontal ? maxWidth : brushSize;
 

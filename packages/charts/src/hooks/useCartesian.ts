@@ -99,9 +99,13 @@ export const useCartesian = ({
     ? Boolean(size && size.width > viewport.medium.maxWidth)
     : Boolean(size && size.height > viewport.medium.maxHeight);
   const hasBrush = isBrowser && isBrushInViewport && showBrush;
+
+  const brushSize = 32;
+  const brushPadding = 16;
+  const brushTotalArea = brushSize + brushPadding;
   const brushArea = {
-    height: (hasBrush && isHorizontal) ? 50 : 0,
-    width: (hasBrush && !isHorizontal) ? 50 : 0,
+    height: (hasBrush && isHorizontal) ? brushTotalArea : 0,
+    width: (hasBrush && !isHorizontal) ? brushTotalArea : 0,
   };
 
   const hasHeadings = !!title;
@@ -200,6 +204,8 @@ export const useCartesian = ({
     axisSystem,
     bgFrom,
     bgTo,
+    brushSize,
+    brushPadding,
     cartesianConfig,
     dimension,
     dynamicHeight,

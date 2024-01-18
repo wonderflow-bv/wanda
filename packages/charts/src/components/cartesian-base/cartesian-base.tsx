@@ -161,6 +161,8 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
     axisSystem,
     bgFrom,
     bgTo,
+    brushSize,
+    brushPadding,
     cartesianConfig,
     dimension,
     dynamicHeight,
@@ -303,9 +305,11 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
 
               <CartesianBaseBrush
                 axisSystem={axisSystem}
-                position={position.brush}
+                brushSize={brushSize}
                 dimension={dimension.axis}
                 isVisible={hasBrush}
+                padding={brushPadding}
+                position={position.brush}
                 onChange={onBrushChange}
               />
             </Group>
