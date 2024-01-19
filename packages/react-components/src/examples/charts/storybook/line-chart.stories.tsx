@@ -5,7 +5,7 @@ import { Card } from '@/components';
 
 import { CartesianChartLayout, LineChart, LineChartProps } from '../../../../../charts/src';
 import {
-  channels, channelsB, feedbackCount, feedbackCountGaps, proCons,
+  channels, channelsB, feedbackCount, feedbackCountGaps, proCons, products,
 } from '../mock-data';
 import styles from './sb-charts.module.css';
 
@@ -177,6 +177,36 @@ withCustomLineStyle.args = {
         strokeWidth: '1.5',
       },
     ],
+  },
+};
+
+export const withTwelveSeries = Template.bind({});
+withTwelveSeries.args = {
+  data: products,
+  subtitle: 'A trend line chart with twelve series',
+  index: {
+    dataKey: 'date',
+    label: 'Year',
+  },
+  series: {
+    dataKey: [
+      'QN95B Neo QLED 4K TV',
+      'Q800A Neo QLED 4K TV',
+      'Q60A QLED 4K TV',
+      'C2 OLED 4K TV',
+      'G2 OLED Evo 4K TV',
+      'B2 OLED 4K TV',
+      'A95K QD-OLED 4K TV',
+      'X95J LED 4K TV',
+      'X85J LED 4K TV',
+      'R6485Q Mini-LED QLED 4K TV',
+      'S546Q 4K QLED TV',
+      'S435 4K Roku TV',
+    ],
+    label: 'Product Units',
+    tickFormat: (l: any) => `${l}K`,
+    domain: [0, 1000],
+    hideZero: true,
   },
 };
 

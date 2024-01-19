@@ -16,4 +16,5 @@
 
 export * from './channels';
 export * from './feedbackCount';
+export * from './products';
 export * from './prosCons';

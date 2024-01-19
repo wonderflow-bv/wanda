@@ -124,6 +124,7 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
     <Group
       left={pos.left}
       top={pos.top}
+      aria-hidden="false"
     >
       <defs>
         <pattern id="brush_pattern_lines" patternUnits="userSpaceOnUse" width="20" height="20" patternTransform={style.pattern.transform}>

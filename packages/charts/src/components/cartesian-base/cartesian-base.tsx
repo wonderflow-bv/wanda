@@ -198,6 +198,8 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
 
   return (
     <div
+      aria-hidden={false}
+      aria-label="Cartesian Chart"
       className={styles.Wrapper}
       data-theme={theme}
       data-responsive={!preventResponsive}
