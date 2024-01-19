@@ -180,10 +180,13 @@ withCustomLineStyle.args = {
   },
 };
 
-export const withTwelveSeries = Template.bind({});
-withTwelveSeries.args = {
+export const withBrush = Template.bind({});
+withBrush.args = {
   data: products,
   subtitle: 'A trend line chart with twelve series',
+  renderAs: 'lines',
+  showMarker: true,
+  showBrush: true,
   index: {
     dataKey: 'date',
     label: 'Year',
@@ -238,17 +241,6 @@ withVerticalLayout.args = {
   series: {
     dataKey: ['feedback count'],
     label: 'Feedback Count',
-  },
-};
-
-export const withBrush = Template.bind({});
-withBrush.args = {
-  subtitle: 'A trend line chart with brush',
-  showBrush: true,
-  overlay: {
-    dataKey: 'overlay',
-    label: 'TGW',
-    domain: [0, 1],
   },
 };
 
