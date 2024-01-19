@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+export type { UseBrushProps } from './useBrush';
+export { useBrush } from './useBrush';
 export type { UseCartesianProps } from './useCartesian';
 export { useCartesian } from './useCartesian';
 export type { UseLineChartProps } from './useLineChart';

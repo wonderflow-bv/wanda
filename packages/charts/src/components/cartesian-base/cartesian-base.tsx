@@ -120,7 +120,7 @@ export type CartesianBaseProps = {
    */
   otherProps?: Record<string, unknown>;
   /**
-   *
+   * A callback to retrieve data filtered from the brush.
    */
   onBrushChange: (filteredData: Data) => void;
 }
