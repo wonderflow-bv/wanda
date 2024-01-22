@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { forwardRef } from 'react';
 import { Except } from 'type-fest';
 
 import { useLineChart } from '../../hooks';
@@ -87,7 +88,7 @@ export type LineChartProps = {
   hidePadding?: boolean;
 } & Except<CartesianBaseProps, 'axis' | 'axisFiltered' | 'onBrushChange'>
 
-export const LineChart: React.FC<LineChartProps> = ({
+export const LineChart = forwardRef<HTMLElement, LineChartProps>(({
   theme = 'light',
   layout = CartesianChartLayout.HORIZONTAL,
   renderAs = 'curves',
@@ -102,7 +103,7 @@ export const LineChart: React.FC<LineChartProps> = ({
   showMarkerLabel = false,
   hidePadding = false,
   ...otherProps
-}) => {
+}, forwardedRef) => {
   const {
     axis,
     axisFiltered,
@@ -141,11 +142,12 @@ export const LineChart: React.FC<LineChartProps> = ({
             }}
             margin={zeroPadding}
             onBrushChange={setBrushFilteredData}
+            ref={forwardedRef}
           />
         </DataProvider>
       </LayoutProvider>
     </ThemeProvider>
   );
-};
+});
 
 LineChart.displayName = 'LineChart';
