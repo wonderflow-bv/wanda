@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+import '@testing-library/jest-dom';
+
 import { render, screen } from '@testing-library/react';
 
 import { AxisOrientation, AxisProps } from '../../types';

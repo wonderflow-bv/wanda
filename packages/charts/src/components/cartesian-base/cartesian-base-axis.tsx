@@ -56,7 +56,7 @@ export const CartesianBaseAxis: React.FC<CartesianBaseAxisProps> = ({
   const { maxWidth: xMax, maxHeight: yMax } = dimension;
 
   return (
-    <Group>
+    <Group role="group">
       {Object.values(axis)
         .filter((a): a is CartesianAxis => !!a)
         .map((a) => {

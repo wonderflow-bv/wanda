@@ -17,6 +17,7 @@
 import {
   forwardRef,
 } from 'react';
+import { v4 as uuid } from 'uuid';
 
 import { useDataContext } from '../../providers/data';
 import { Placeholder } from '../placeholder';
@@ -55,14 +56,21 @@ forwardedRef) => {
     const { name, color, dataKey: odk } = metadata.overlay;
 
     return (
-      <div ref={forwardedRef} className={styles.Legend}>
+      <div
+        ref={forwardedRef}
+        className={styles.Legend}
+        role="presentation"
+        aria-hidden={!isVisible}
+      >
         <div className={styles.LegendContent}>
           {customLegend
         ?? (
           <ul>
             {sdk.map((s: string, i: number) => (
               <li
-                key={s}
+                key={uuid()}
+                aria-label={s}
+                aria-live="polite"
                 onMouseOver={() => onMouseOver(s)}
                 onMouseLeave={() => onMouseOver('')}
                 onFocus={() => ({})}

@@ -1,22 +1,24 @@
 /*
-* Copyright 2023 Wonderflow Design Team
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright 2023-2024 Wonderflow Design Team
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import { RectClipPath } from '@visx/clip-path';
 import { LinearGradient } from '@visx/gradient';
 import { Group } from '@visx/group';
+import React, { forwardRef } from 'react';
+import { mergeRefs } from 'react-merge-refs';
 
 import { useCartesian } from '../../hooks';
 import { StyleConfigProvider } from '../../providers';
@@ -125,7 +127,7 @@ export type CartesianBaseProps = {
   onBrushChange: (filteredData: Data) => void;
 }
 
-export const CartesianBase: React.FC<CartesianBaseProps> = ({
+export const CartesianBase = forwardRef<HTMLElement, CartesianBaseProps>(({
   width = 800,
   height = 600,
   preventResponsive,
@@ -154,7 +156,8 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   styleConfig,
   otherProps,
   onBrushChange,
-}: CartesianBaseProps) => {
+},
+forwardedRef) => {
   const {
     axisConfig,
     axisFilteredSystem,
@@ -198,14 +201,16 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
 
   return (
     <div
-      aria-hidden={false}
+      aria-atomic="true"
+      aria-hidden="false"
       aria-label="Cartesian Chart"
       className={styles.Wrapper}
-      data-theme={theme}
-      data-responsive={!preventResponsive}
-      ref={ref}
-      style={dynamicStyle}
       data-testid="cartesian"
+      data-responsive={!preventResponsive}
+      data-theme={theme}
+      ref={mergeRefs([ref, forwardedRef])}
+      role="img"
+      style={dynamicStyle}
     >
       <StyleConfigProvider styleConfig={cartesianConfig}>
         <svg
@@ -328,6 +333,6 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
 
     </div>
   );
-};
+});
 
 CartesianBase.displayName = 'CartesianBase';

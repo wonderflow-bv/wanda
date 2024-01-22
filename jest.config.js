@@ -27,7 +27,7 @@ module.exports = {
     },
     {
       displayName: 'charts',
-      roots: ['<rootDir>/packages/charts/src/'],
+      roots: ['<rootDir>/packages/charts/'],
       testEnvironment: 'jsdom',
       moduleNameMapper: {
         '^@/(.*)$': '<rootDir>/packages/charts/src/$1',
