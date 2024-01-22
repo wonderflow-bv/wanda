@@ -40,7 +40,7 @@ export type CartesianBaseBrushProps = {
   onChange: (filteredData: Data) => void;
 }
 
-const BrushHandle = ({
+export const BrushHandle = ({
   x, y, height, isBrushActive,
 }: BrushHandleRenderProps) => {
   const { isHorizontal } = useLayoutContext();
@@ -73,6 +73,7 @@ const BrushHandle = ({
     <Group
       left={lPos}
       top={tPos}
+      data-testid="brush-handle"
     >
       <path
         fill={style.fill}
@@ -125,6 +126,7 @@ export const CartesianBaseBrush: React.FC<CartesianBaseBrushProps> = ({
       left={pos.left}
       top={pos.top}
       aria-hidden="false"
+      data-testid="brush"
     >
       <defs>
         <pattern id="brush_pattern_lines" patternUnits="userSpaceOnUse" width="20" height="20" patternTransform={style.pattern.transform}>

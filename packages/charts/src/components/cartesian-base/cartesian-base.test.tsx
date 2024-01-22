@@ -5,7 +5,8 @@ import { render, screen } from '@testing-library/react';
 
 import { AxisOrientation, AxisProps } from '../../types';
 import { CartesianBase } from './cartesian-base';
-// import { CartesianBaseLegend } from './cartesian-base-legend';
+import { BrushHandle } from './cartesian-base-brush';
+import { CartesianBaseLegend } from './cartesian-base-legend';
 
 global.ResizeObserver = jest.fn().mockImplementation(() => ({
   observe: jest.fn(),
@@ -73,6 +74,7 @@ describe('<CartesianBase>', () => {
       margin={{
         top: 12, right: 12, bottom: 12, left: 12,
       }}
+      showBrush
       onBrushChange={() => ({})}
     />);
     const element = screen.getByTestId('cartesian');
@@ -92,10 +94,23 @@ describe('<CartesianBase>', () => {
   });
 });
 
-// describe('<CartesianBaseLegend>', () => {
-//   it.todo('should render', () => {
-//     render(<CartesianBaseLegend onMouseOver={console.log} />);
-//     const element = screen.getByTestId('cartesian');
-//     expect(element).toBeDefined();
-//   });
-// });
+describe('<CartesianBaseLegend>', () => {
+  it('should render the custom legend if provided', () => {
+    const onMouseOverSpy = jest.fn();
+    const customLegend = <div>Custom legend content</div>;
+    render(<CartesianBaseLegend customLegend={customLegend} onMouseOver={onMouseOverSpy} isVisible />);
+    expect(screen.getByRole('presentation')).toBeDefined();
+  });
+});
+
+describe('<BrushHandle>', () => {
+  it('should render the handle', () => {
+    const { getByTestId } = render(<BrushHandle x={0} y={0} width={100} height={30} isBrushActive className="" />);
+    expect(getByTestId('brush-handle')).toBeDefined();
+  });
+
+  it('should not render when inactive', () => {
+    const { container } = render(<BrushHandle x={0} y={0} width={100} height={30} isBrushActive={false} className="" />);
+    expect(container.innerHTML).toBe('');
+  });
+});

@@ -29,9 +29,7 @@ export type CartesianBaseLegendProps = {
   onMouseOver: (key: string) => void;
 }
 
-export const CartesianBaseLegend: React.ForwardRefExoticComponent<
-CartesianBaseLegendProps & React.RefAttributes<HTMLDivElement>
-> = forwardRef<HTMLDivElement, CartesianBaseLegendProps>(({
+export const CartesianBaseLegend = forwardRef<HTMLDivElement, CartesianBaseLegendProps>(({
   customLegend,
   isVisible = true,
   onMouseOver,
@@ -43,7 +41,7 @@ forwardedRef) => {
 
   if (customLegend) {
     return (
-      <div ref={forwardedRef} className={styles.Legend}>
+      <div ref={forwardedRef} className={styles.Legend} role="presentation">
         <div className={styles.LegendContent}>
           {customLegend}
         </div>
@@ -57,20 +55,20 @@ forwardedRef) => {
 
     return (
       <div
-        ref={forwardedRef}
-        className={styles.Legend}
-        role="presentation"
         aria-hidden={!isVisible}
+        data-testid="legend"
+        className={styles.Legend}
+        ref={forwardedRef}
+        role="presentation"
       >
         <div className={styles.LegendContent}>
-          {customLegend
-        ?? (
           <ul>
             {sdk.map((s: string, i: number) => (
               <li
                 key={uuid()}
                 aria-label={s}
                 aria-live="polite"
+                data-testid="legend-item"
                 onMouseOver={() => onMouseOver(s)}
                 onMouseLeave={() => onMouseOver('')}
                 onFocus={() => ({})}
@@ -99,7 +97,6 @@ forwardedRef) => {
               </li>
             )}
           </ul>
-        )}
         </div>
       </div>
     );
