@@ -111,39 +111,38 @@ describe('useCartesian', () => {
 });
 
 describe('useBrush', () => {
+  const props: UseBrushProps = {
+    axisSystem: {
+      bottom: {
+        domain: ['2001', '2002'],
+        scaleType: 'time',
+        orientation: 'bottom',
+        scale: scaleUtc([0, 1] as any),
+        top: 100,
+        left: 100,
+      },
+      left: {
+        domain: [0, 1],
+        scaleType: 'linear',
+        orientation: 'left',
+        scale: scaleLinear([0, 1] as any),
+        top: 100,
+        left: 100,
+      },
+      top: undefined,
+      right: undefined,
+    },
+    position: {
+      top: 10,
+      left: 10,
+    },
+    dimension: {
+      maxHeight: 100,
+      maxWidth: 100,
+    },
+    onChange: jest.fn(),
+  };
   it('should render data', () => {
-    const props: UseBrushProps = {
-      axisSystem: {
-        bottom: {
-          domain: ['2001', '2002'],
-          scaleType: 'time',
-          orientation: 'bottom',
-          scale: scaleUtc([0, 1] as any),
-          top: 100,
-          left: 100,
-        },
-        left: {
-          domain: [0, 1],
-          scaleType: 'linear',
-          orientation: 'left',
-          scale: scaleLinear([0, 1] as any),
-          top: 100,
-          left: 100,
-        },
-        top: undefined,
-        right: undefined,
-      },
-      position: {
-        top: 10,
-        left: 10,
-      },
-      dimension: {
-        maxHeight: 100,
-        maxWidth: 100,
-      },
-      onChange: jest.fn(),
-    };
-
     const { result } = renderHook(() => useBrush(props));
     const { margin } = result.current;
     const exp = {
@@ -164,3 +163,4 @@ describe('useSSR()', () => {
     expect(result.current.isServer).not.toBe(true);
   });
 });
+
