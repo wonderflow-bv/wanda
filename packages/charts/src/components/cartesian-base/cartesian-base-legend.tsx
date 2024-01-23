@@ -66,7 +66,7 @@ forwardedRef) => {
             {sdk.map((s: string, i: number) => (
               <li
                 key={uuid()}
-                aria-label={s}
+                aria-label={names[i]}
                 aria-live="polite"
                 data-testid="legend-item"
                 onMouseOver={() => onMouseOver(s)}

@@ -40,7 +40,7 @@
     justify-content: flex-start;
     align-items: center;
     list-style: none;
-    gap: 0.15rem 1rem;
+    gap: 0.5rem 1rem;
   }
 
   & li > div {
@@ -49,7 +49,11 @@
     align-items: center;
     justify-content: flex-start;
     gap: 4px;
-    font-size: 12px;
+
+    & span {
+      font-size: 12px;
+      line-height: 1rem;
+    }
   }
 
   & li:hover {
