@@ -63,7 +63,7 @@ export const ModalHeader = forwardRef<HTMLDivElement, ModalHeaderProps>(({
       <Stack vAlign="center" fill={false} hAlign="space-between" direction="row" className={styles.Header} data-border-hidden={isBorderHidden}>
         <div>{children}</div>
         {(onClose && !hideCloseButton) && (
-          <IconButton aria-label="Close Button" onClick={onClose} className={styles.CloseButton} icon="xmark" kind="flat" />
+          <IconButton aria-label="Close Button" onClick={onClose} autoFocus className={styles.CloseButton} icon="xmark" kind="flat" />
         )}
       </Stack>
     </div>

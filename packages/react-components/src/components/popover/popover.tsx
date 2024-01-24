@@ -93,6 +93,10 @@ export type PopoverProps = {
    */
   matchTriggerWidth?: boolean;
   /**
+   * Auto close the popover when clicking inside of it.
+   */
+  closeOnInsideClick?: boolean;
+  /**
    * Set the root element to render the Popover into.
    */
   root?: HTMLElement;
@@ -130,6 +134,7 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
   open,
   disabled,
   closeOnOutsideClick = true,
+  closeOnInsideClick = false,
   className,
   matchTriggerWidth,
   onOpenChange,
@@ -156,11 +161,17 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
     },
   }), [matchTriggerWidth]);
 
+  const handleCloseOnClickInside = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    if (isOpen && closeOnInsideClick) {
+      setIsOpen(false);
+    }
+  };
+
   const {
     getTooltipProps,
     setTooltipRef,
     setTriggerRef,
-    tooltipRef,
     // eslint-disable-next-line @typescript-eslint/naming-convention
     visible,
   } = usePopperTooltip({
@@ -187,8 +198,8 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
     ],
   });
 
-  const isFocusWithin = useFocusWithin(tooltipRef, {
-    onFocus: (e) => {
+  const isFocusWithin = useFocusWithin(popoverContainerRef, {
+    onBlur: (e) => {
       if (e.relatedTarget && visible) {
         setIsOpen(true);
       }
@@ -222,11 +233,14 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
       {isBrowser() && visible && createPortal(
         <AnimatePresence>
           <div
+            aria-hidden
+            data-testid="tooltip"
             ref={setTooltipRef}
             role="tooltip"
             id={seedID('tooltip-content')}
             key={seedID('tooltip-content')}
             {...getTooltipProps({ className: styles.PopUp })}
+            onClick={e => handleCloseOnClickInside(e)}
           >
             <LazyMotion features={domMax}>
               <m.div

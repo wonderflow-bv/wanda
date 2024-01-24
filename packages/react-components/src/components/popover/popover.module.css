@@ -5,6 +5,6 @@
 
   .PopUp {
     inline-size: max-content;
-    z-index: 5;
+    z-index: 4;
   }
 }

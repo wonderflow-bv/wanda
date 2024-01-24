@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useState } from 'react';
 
 import {
-  Button, Card, Elevator, IconButton, Menu, Stack, Textfield,
+  Button, Card, Elevator, IconButton, Menu, Modal, ResponsiveProvider, Stack, Textfield, Tooltip,
 } from '../..';
 import { Popover } from './popover';
 
@@ -13,6 +13,7 @@ const story: ComponentMeta<typeof Popover> = {
     placement: 'auto-start',
     offset: 8,
     closeOnOutsideClick: true,
+    closeOnInsideClick: false,
     matchTriggerWidth: false,
     trigger: <Button>Open Popover</Button>,
   },
@@ -207,3 +208,73 @@ WithCode.args = {
     aria-label="Show some formatted code"
   />,
 };
+
+const WithModalTemplate: ComponentStory<typeof Popover> = (args) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  return (
+    <ResponsiveProvider>
+      <Popover {...args} closeOnInsideClick trigger={<Button>Open Menu</Button>}>
+        <Menu>
+          <Menu.Item
+            autoFocus
+            icon="arrow-right"
+            value="1"
+            onClick={() => setIsOpen(true)}
+          >
+            Open Modal
+          </Menu.Item>
+        </Menu>
+      </Popover>
+
+      <Modal
+        title="A Modal "
+        subtitle="opened from a Popover Menu"
+        overlayColor="dark"
+        hideCloseButton={false}
+        hideHeaderBorder={false}
+        hideFooterBorder={false}
+        alignActionCenter={false}
+        alignContentCenter={false}
+        size="medium"
+        theme="auto"
+        isLoading={false}
+        preventCloseOnClickOutside={false}
+        content={(
+          <div>
+            <p>
+              When
+              {' '}
+              <b>closeOnInsideClick</b>
+              {' '}
+              is true, the Popover will automatically close when a click is triggered inside the area.
+              <Tooltip
+                placement="right-start"
+                delay={500}
+                trigger={(
+                  <IconButton
+                    kind="flat"
+                    icon="circle-info"
+                    dimension="small"
+                    aria-label="Show some formatted code"
+                  />
+                )}
+              >
+                <p>
+                  some extra info in a Tooltip.
+                </p>
+              </Tooltip>
+            </p>
+
+          </div>
+        )}
+        primaryAction={<Button onClick={() => setIsOpen(false)}>Confirm</Button>}
+        secondaryAction={<Button onClick={() => setIsOpen(false)}>Cancel</Button>}
+        isVisible={isOpen}
+        onCloseModal={() => setIsOpen(false)}
+      />
+    </ResponsiveProvider>
+  );
+};
+
+export const closeOnInsideClick = WithModalTemplate.bind({});
