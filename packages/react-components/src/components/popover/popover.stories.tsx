@@ -2,7 +2,8 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useState } from 'react';
 
 import {
-  Button, Card, Elevator, IconButton, Menu, Modal, ResponsiveProvider, Stack, Textfield, Tooltip,
+  Button, Card, Elevator, IconButton, Menu, Modal, ResponsiveProvider, Skeleton,
+  Stack, Textfield, Tooltip,
 } from '../..';
 import { Popover } from './popover';
 
@@ -149,8 +150,6 @@ const ControlledTemplate: ComponentStory<typeof Popover> = (args) => {
 };
 
 export const Controlled = ControlledTemplate.bind({});
-Controlled.args = {
-};
 
 const WithElevatorTemplate: ComponentStory<typeof Popover> = args => (
   <Popover {...args}>
@@ -247,7 +246,7 @@ const WithModalTemplate: ComponentStory<typeof Popover> = (args) => {
               {' '}
               <b>closeOnInsideClick</b>
               {' '}
-              is true, the Popover will automatically close when a click is triggered inside the area.
+              is set to `true`, the Popover will automatically close on click inside the area.
               <Tooltip
                 placement="right-start"
                 delay={500}
@@ -278,3 +277,55 @@ const WithModalTemplate: ComponentStory<typeof Popover> = (args) => {
 };
 
 export const closeOnInsideClick = WithModalTemplate.bind({});
+
+const SkeletonTemplate: ComponentStory<typeof Popover> = (args) => {
+  const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  return (
+    <Popover {...args} placement="right-end">
+      <Menu style={{ minWidth: '250px' }}>
+        {isLoading
+          ? (
+            <Stack hPadding={8}>
+              <Skeleton count={3} height="36px" />
+            </Stack>
+          )
+          : (
+            <>
+
+              <Menu.Item
+                autoFocus
+                icon="arrow-right"
+                value="1"
+              >
+                Sample long menu item
+              </Menu.Item>
+              <Menu.ItemCheckbox
+                onClick={() => setIsChecked(val => !val)}
+                checked={isChecked}
+                icon={isChecked ? 'check' : undefined}
+                value="2"
+              >
+                Checkbox item
+              </Menu.ItemCheckbox>
+              <Menu.Item value="3" icon="right-from-bracket">
+                Item option 3
+              </Menu.Item>
+            </>
+          )
+        }
+        <Menu.Separator />
+        <Menu.Item
+          icon={isLoading ? 'minus' : 'plus'}
+          value="4"
+          onClick={() => setIsLoading(val => !val)}
+        >
+          {isLoading ? 'Switch Off Loader' : 'Switch On Loader'}
+        </Menu.Item>
+      </Menu>
+    </Popover>
+  );
+};
+
+export const withLoader = SkeletonTemplate.bind({});

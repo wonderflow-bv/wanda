@@ -21,7 +21,6 @@ import tkns from '@wonderflow/tokens/platforms/web/tokens.json';
 import { useFocusWithin, useKeyPress } from 'ahooks';
 import clsx from 'clsx';
 import {
-  AnimatePresence,
   domMax,
   LazyMotion,
   m,
@@ -231,24 +230,24 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
         },
       )}
       {isBrowser() && visible && createPortal(
-        <AnimatePresence>
-          <div
-            aria-hidden
-            data-testid="tooltip"
-            ref={setTooltipRef}
-            role="tooltip"
-            id={seedID('tooltip-content')}
-            key={seedID('tooltip-content')}
-            {...getTooltipProps({ className: styles.PopUp })}
-            onClick={e => handleCloseOnClickInside(e)}
-          >
-            <LazyMotion features={domMax}>
-              <m.div
-                variants={PopoverAnimation}
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-              >
+        <div
+          aria-hidden
+          data-testid="tooltip"
+          ref={setTooltipRef}
+          role="tooltip"
+          id={seedID('tooltip-content')}
+          key={seedID('tooltip-content')}
+          {...getTooltipProps({ className: styles.PopUp })}
+          onClick={e => handleCloseOnClickInside(e)}
+        >
+          <LazyMotion features={domMax} strict>
+            <m.div
+              variants={PopoverAnimation}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+            >
+              <div>
                 {Children.map(children, child => isValidElement(child) && cloneElement(
                   child as ReactElement,
                   {
@@ -256,12 +255,11 @@ export const Popover = forwardRef<HTMLDivElement, PropsWithClass<PopoverProps>>(
                     'aria-labelledby': seedID('popover-trigger'),
                   },
                 ))}
-              </m.div>
-            </LazyMotion>
-          </div>
-        </AnimatePresence>, root ?? document.body,
+              </div>
+            </m.div>
+          </LazyMotion>
+        </div>, root ?? document.body,
       )}
-
     </div>
   );
 });

@@ -15,7 +15,9 @@
  */
 
 import clsx from 'clsx';
-import { domMax, LazyMotion, m } from 'framer-motion';
+import {
+  domMax, LazyMotion, m,
+} from 'framer-motion';
 import { forwardRef, SVGAttributes } from 'react';
 
 export type SpinnerProps = SVGAttributes<SVGElement> & {
