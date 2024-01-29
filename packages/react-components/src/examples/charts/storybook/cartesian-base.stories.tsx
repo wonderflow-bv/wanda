@@ -68,7 +68,6 @@ const story: ComponentMeta<typeof CartesianBase> = {
       },
     },
     styleConfig: {},
-    children: undefined,
   },
   argTypes: {
 

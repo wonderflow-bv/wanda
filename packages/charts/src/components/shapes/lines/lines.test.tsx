@@ -26,11 +26,13 @@ const mockMetadata: LineChartMetadata = {
     dataKey: ['a'],
     names: ['A'],
     colors: ['ca'],
+    average: undefined,
   },
   overlay: {
     dataKey: 'b',
     name: 'B',
     color: 'ob',
+    average: undefined,
   },
   hidePadding: true,
 };
@@ -105,9 +107,11 @@ describe('<Lines>', () => {
         <LayoutProvider layout={CartesianChartLayout.HORIZONTAL}>
           <DataProvider
             data={[{ date: 0, a: 1, b: 2 }]}
+            filteredData={[{ date: 0, a: 1, b: 2 }]}
             metadata={mockMetadata}
           >
             <CartesianProvider
+              hoveredLegendItem=""
               position={{
                 top: 24, right: 24, bottom: 24, left: 24,
               }}
@@ -132,6 +136,7 @@ describe('<Lines>', () => {
         <LayoutProvider layout={CartesianChartLayout.VERTICAL}>
           <DataProvider
             data={[{ date: 0, a: 1, b: 2 }]}
+            filteredData={[{ date: 0, a: 1, b: 2 }]}
             metadata={mockMetadata}
           >
             <CartesianProvider
@@ -140,6 +145,7 @@ describe('<Lines>', () => {
               }}
               dimension={{ maxHeight: 600, maxWidth: 800 }}
               axis={mockedAxisSystem}
+              hoveredLegendItem=""
             >
               <Lines />
             </CartesianProvider>
@@ -159,6 +165,7 @@ describe('<Lines>', () => {
         <LayoutProvider layout={CartesianChartLayout.HORIZONTAL}>
           <DataProvider
             data={[{ date: 0, a: 1, b: 2 }]}
+            filteredData={[{ date: 0, a: 1, b: 2 }]}
             metadata={{ ...mockMetadata, showMarkerLabel: true }}
           >
             <CartesianProvider
@@ -167,6 +174,7 @@ describe('<Lines>', () => {
               }}
               dimension={{ maxHeight: 600, maxWidth: 800 }}
               axis={mockedAxisSystem}
+              hoveredLegendItem=""
             >
               <Lines />
             </CartesianProvider>
@@ -190,6 +198,11 @@ describe('<Lines>', () => {
                 { date: 0, a: undefined, b: 2 },
                 { date: 0, a: 1, b: 2 }]
             }
+            filteredData={
+              [{ date: 0, a: 1, b: 2 },
+                { date: 0, a: undefined, b: 2 },
+                { date: 0, a: 1, b: 2 }]
+            }
             metadata={{ ...mockMetadata, hideMissingDataConnection: true }}
           >
             <CartesianProvider
@@ -198,6 +211,7 @@ describe('<Lines>', () => {
               }}
               dimension={{ maxHeight: 600, maxWidth: 800 }}
               axis={mockedAxisSystem}
+              hoveredLegendItem=""
             >
               <Lines />
             </CartesianProvider>
@@ -219,6 +233,11 @@ describe('<Lines>', () => {
                 { date: '01-01-2021', a: 3, b: 4 },
                 { date: '01-01-2022', a: 1, b: 2 }]
             }
+            filteredData={
+              [{ date: '01-01-2020', a: 1, b: 2 },
+                { date: '01-01-2021', a: 3, b: 4 },
+                { date: '01-01-2022', a: 1, b: 2 }]
+            }
             metadata={mockMetadata}
           >
             <CartesianProvider
@@ -227,6 +246,7 @@ describe('<Lines>', () => {
               }}
               dimension={{ maxHeight: 600, maxWidth: 800 }}
               axis={mockedAxisSystem2}
+              hoveredLegendItem=""
             >
               <Lines />
             </CartesianProvider>

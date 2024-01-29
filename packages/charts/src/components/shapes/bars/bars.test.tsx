@@ -23,7 +23,7 @@ const mockMetadata: BarChartMetadata = {
   type: Charts.BAR_CHART,
   index: 'date',
   isStacked: false,
-  sortBy: 'dataKey',
+  sortBy: 'as-is',
   series: {
     dataKey: ['a'],
     names: ['A'],
@@ -79,6 +79,7 @@ describe('<Bars>', () => {
         <LayoutProvider layout={CartesianChartLayout.HORIZONTAL}>
           <DataProvider
             data={[{ date: 0, a: 1, b: 2 }]}
+            filteredData={[{ date: 0, a: 1, b: 2 }]}
             metadata={mockMetadata}
           >
             <CartesianProvider
@@ -87,6 +88,7 @@ describe('<Bars>', () => {
               }}
               dimension={{ maxHeight: 600, maxWidth: 800 }}
               axis={mockedAxisSystem}
+              hoveredLegendItem=""
             >
               <Bars />
             </CartesianProvider>

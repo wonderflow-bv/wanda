@@ -13,10 +13,12 @@ const mockMetadata: LineChartMetadata = {
     dataKey: ['a', 'b'],
     names: ['A', 'B'],
     colors: ['ca', 'cb'],
+    average: undefined,
   },
   overlay: {
     name: '',
     color: '',
+    average: undefined,
   },
   hidePadding: true,
 };
@@ -35,7 +37,11 @@ describe('<Loader>', () => {
 
   it('should render w context', () => {
     const { container } = render(
-      <DataProvider data={[{}, {}]} metadata={mockMetadata}>
+      <DataProvider
+        data={[{}, {}]}
+        filteredData={[{}, {}]}
+        metadata={mockMetadata}
+      >
         <Loader />
       </DataProvider>,
     );
