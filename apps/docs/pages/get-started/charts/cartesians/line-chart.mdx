@@ -8,8 +8,8 @@ export const getStaticProps = () =>
     layout: "chart",
     layoutProps: {
       title: "Line Chart",
-      color: "indigo",
-      subtitle: "A line chart component uses points connected by line segments from left to right to demonstrate changes in value.",
+      color: "purple",
+      subtitle: "A line chart component uses points connected by line segments to demonstrate changes in value.",
       navigation: ChartsNav,
       features: [
         "Keyboard accessible",
@@ -26,103 +26,176 @@ export const getStaticProps = () =>
     }
   });
 
-<LiveArea minHeight="550px">
-  <div>place line chart here</div>
-</LiveArea>
+<Card bordered>
+  <LineChart
+      title='Feedback Count'
+      subtitle='trends from 2014 to 2023'
+      showMarkerLabel
+      data={[
+        {date: '2014', value: 81},
+        {date: '2015', value: 121},
+        {date: '2016', value: 183},
+        {date: '2017', value: 211},
+        {date: '2018', value: 244},
+        {date: '2019', value: 203},
+        {date: '2020', value: 240},
+        {date: '2021', value: 103},
+        {date: '2022', value: 301},
+        {date: '2023', value: 298},
+        ]}
+      index={{dataKey: 'date',
+        label: 'Year',
+      }}
+      series={{
+        dataKey: ['value'],
+        label: 'Feedback Count',
+        rename: (s) => ['Feedback Count'],
+        domain: [0, 350]
+      }}
+    showAverage
+    hidePadding
+    />
+  </Card>
 
 
 ## Anatomy
 
-```tsx lines="1,4-15"
-import { Accordion, AccordionItem } from "@wonderflow/react-components";
+```tsx lines="8-22"
+import { Card } from "@wonderflow/react-components";
+import { LineChart } from "@wonderflow/charts";
+import { data } from "../api/.."
 
 export default () => {
   return (
-    <Accordion defaultOpen="1" showSeparators>
-      <AccordionItem value="1" summary="Item 1">
-        <p>Content 1</p>
-      </AccordionItem>
-      <AccordionItem value="2" summary="Item 2">
-        <p>Content 2</p>
-      </AccordionItem>
-      <AccordionItem value="3" summary="Item 3">
-        <p>Content 3</p>
-      </AccordionItem>
-    </Accordion>
+    <Card>
+      <LineChart
+        title='Feedback Count'
+        subtitle='trends from 2014 to 2023'
+        showMarkerLabel
+        data={data}
+        index={{dataKey: 'date',
+          label: 'Year',
+        }}
+        series={{
+          dataKey: ['value'],
+          label: 'Feedback Count',
+          domain: [0, 350]
+        }}
+        showAverage
+      />
+    </Card>
   );
 };
 ```
 
 ## API Reference
 
-### Accordion
+### LineChart
 
 <PropsTable
   properties={[
     {
-      name: "defaultOpen",
-      type: ["string"],
-      default: "",
-      required: false,
-      description: "Set the item to open by default when the accordion is rendered.",
+      name: "theme",
+      type: ['enum'],
+      typeValue: "'light' | 'dark'",
+      default: "light",
+      description: "Set the theme of the chart. This is set to `light` by default.",
     },
     {
-      name: "showSeparators",
+      name: "layout",
+      type: ['enum'],
+      typeValue: "'vertical' | 'horizontal'",
+      default: "horizontal",
+      description: "Set the layout of the chart. `Index`, `Series` and eventually `Overlay` will be automatically rearranged.",
+    },
+    {
+      name: "data",
+      type: ['Array'],
+      typeValue: "Record<string, unknown>[]",
+      default: "[]",
+      description: "Set the data structure that will be used to render the chart.",
+    },
+    {
+      name: "renderAs",
+      type: ["enum"],
+      typeValue: "'lines' | 'curves' | 'steps'",
+      default: "curves",
+      description: "Set the type of render function used to draw any chart line.",
+    },
+    {
+      name: "index",
+      type: ["LineChartIndex"],
+      typeValue: "Partial<AxisProps> & {dataKey: string;}",
+      default: "",
+      required: true,
+      description: "Set the properties associated with the Index Axis.",
+    },
+    {
+      name: "series",
+      type: ["LineChartSeries"],
+      typeValue: "Partial<AxisProps> & {dataKey: string[]; style?: Array<LineStyle | undefined>; rename?: (...args: any) => string;}",
+      default: "",
+      required: true,
+      description: "Set the properties associated with any Series of lines.",
+    },
+    {
+      name: "overlay",
+      type: ["LineChartOverlay"],
+      typeValue: "Partial<AxisProps> & {dataKey: string; style?: LineStyle; rename?: string;}",
+      default: "",
+      required: false,
+      description: "Set the properties associated with the Overlay Axis.",
+    },
+    {
+      name: "showAverage",
       type: ["boolean"],
       default: "false",
       required: false,
-      description: "how visual separator between accordion items",
-    },
-  ]}
-/>
-
-### AccordionItem
-
-<PropsTable
-  properties={[
-    {
-      name: "value",
-      type: ["string"],
-      default: "",
-      required: true,
-      description: "Assign a value to the single accordion item. This is used to define the default opened item on mount.",
-    },
-{
-      name: "summary",
-      type: ["ReactNode"],
-      default: "",
-      required: true,
-      description: "Define the text to be displayed as the summary of the disclosure. This should generally be a short sentenc and related to the content",
+      description: "Display an average line and label when true.",
     },
     {
-      name: "padding",
+      name: "tooltip",
+      type: ["LineChartTooltip"],
+      typeValue: "{extraSeriesData?: (...args: any) => string; extraOverlayData?: (...args: any) => string; extraContent?:React.ReactNode;}",
+      default: "",
+      required: false,
+      description: "Set extra data or custom content to be displayed in the tooltip.",
+    },
+    {
+      name: "hideMissingDataConnection",
       type: ["boolean"],
-      default: "true",
+      default: "false",
       required: false,
-      description: "Remove or add a padding to align the content with the icon indicator. This is useful when the content inside starts with text and you want to align it summary to improve readability.",
+      description: "Prevent showing a connecting line between points when data is missing.",
     },
     {
-      name: "contentMaxHeight",
-      type: ["string"],
-      default: "",
+      name: "showMarker",
+      type: ["boolean"],
+      default: "false",
       required: false,
-      description: "Set the max height of the content after which the scrollbar will appear.",
+      description: "Show a marker for every single data point.",
     },
     {
-      name: "dimension",
-      type: ['enum'],
-      typeValue: "'small' | 'regular' | 'big'",
-      default: '"regular"',
+      name: "showMarkerLabel",
+      type: ["boolean"],
+      default: "false",
       required: false,
-      description: "Set the dimension of the summary toggle",
+      description: "Show a label and a marker for up to 12 data point on each series of lines.",
     },
     {
-      name: "iconPosition",
-      type: ['enum'],
-      typeValue: "'left' | 'right'",
-      default: '"left"',
+      name: "hidePadding",
+      type: ["boolean"],
+      default: "false",
       required: false,
-      description: "Set the position of the icon indicator. The content padding is automatically applied based on the icon position.",
+      description: "Remove the padding from the chart container.",
+    },
+    {
+      name: "...rest",
+      type: ["CartesianBaseProps"],
+      typeValue: "'Except<CartesianBaseProps, 'axis' | 'axisFiltered' | 'onBrushChange'>'",
+      default: '',
+      required: false,
+      description: "Set any other CartesianBase props except axis, axisFiltered, onBrushChange",
     },
   ]}
 />

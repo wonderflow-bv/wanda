@@ -41,6 +41,7 @@
     "@wonderflow/react-components": "12.8.0",
     "@wonderflow/symbols": "12.8.0",
     "@wonderflow/themes": "12.8.0",
+    "@wonderflow/charts": "12.8.0",
     "ahooks": "3.7.8",
     "bezier-easing-editor": "0.8.0",
     "clsx": "1.2.1",

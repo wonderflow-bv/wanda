@@ -41,4 +41,8 @@
   &[data-gradient-text='red'] {
     background-image: linear-gradient(92deg, #f56a57 0%, #b84521 104.37%);
   }
+
+  &[data-gradient-text='purple'] {
+    background-image: linear-gradient(92deg, #d64d91, #97509b 100%);
+  }
 }

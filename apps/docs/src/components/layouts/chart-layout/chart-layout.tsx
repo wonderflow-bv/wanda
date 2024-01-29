@@ -104,15 +104,6 @@ export const ChartLayout: FCChildren<IPropsComponentLayout> = ({
                 {' '}
                 <Symbol source="arrow-up-right" dimension={12} />
               </a>
-              {/* <a
-              href="https://github.com/wonderflow-bv/wanda/issues/new/choose"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Report an issue
-              {' '}
-              <Symbol source="arrow-up-right" dimension={12} />
-            </a> */}
               {links?.map(link => (
                 <a
                   key={link.url}
