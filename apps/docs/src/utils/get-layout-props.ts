@@ -5,13 +5,14 @@ import { IPropsComponentLayout } from '@/components/layouts/component-layout';
 import { IPropsDocLayout } from '@/components/layouts/doc-layout';
 import { IPropsMDXLayout } from '@/components/layouts/mdx-layout';
 
-type LayoutTypes = 'blank' | 'doc' | 'mdx' | 'component'
+type LayoutTypes = 'blank' | 'doc' | 'mdx' | 'component' | 'chart'
 
 type LayoutProps = {
   blank: IPropsBlankLayout;
   doc: IPropsDocLayout;
   mdx: IPropsMDXLayout;
   component: IPropsComponentLayout;
+  chart: IPropsComponentLayout;
 }
 
 export type PagePropsType<T extends LayoutTypes> = {
