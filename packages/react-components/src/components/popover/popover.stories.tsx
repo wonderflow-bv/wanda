@@ -246,7 +246,7 @@ const WithModalTemplate: ComponentStory<typeof Popover> = (args) => {
               {' '}
               <b>closeOnInsideClick</b>
               {' '}
-              is set to `true`, the Popover will automatically close on click inside the area.
+              is set to `true`, the Popover will automatically close clicking on it.
               <Tooltip
                 placement="right-start"
                 delay={500}
