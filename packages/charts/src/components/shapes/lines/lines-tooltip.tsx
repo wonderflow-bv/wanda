@@ -106,12 +106,8 @@ export const LinesTooltip: React.FC = () => {
 
     const lineIndicatorPos = scale(indexScaleValue as any);
 
-    const tooltipLeft = isHorizontal
-      ? (coords.x + lBound / 8)
-      : coords.x;
-    const tooltipTop = isHorizontal
-      ? coords.y
-      : (coords.y + tBound / 8);
+    const tooltipLeft = ('clientX' in event ? event.clientX : 0) - lBound / 8;
+    const tooltipTop = ('clientY' in event ? event.clientY : 0) - tBound / 8;
 
     const datum = data[indexOfBisectValue];
     const hasSeriesData = series.dataKey.every(s => !_.isNil(getPrimitiveFromObjectByPath(datum, s)));
