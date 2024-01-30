@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-'use client';
-
 export * from './components';
 export * from './hooks';
 export * from './providers';

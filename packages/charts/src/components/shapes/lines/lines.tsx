@@ -16,6 +16,7 @@
 
 import { Group } from '@visx/group';
 
+import { useSSR } from '../../../hooks';
 import { useCartesianContext } from '../../../providers/cartesian';
 import { LinesAverage } from './lines-average';
 import { LinesMarkerLabels } from './lines-marker-labels';
@@ -25,6 +26,8 @@ import { LinesTooltip } from './lines-tooltip';
 
 export const Lines: React.FC = () => {
   const { position } = useCartesianContext();
+  const { isBrowser } = useSSR();
+
   return (
     <Group
       top={position.top}
@@ -36,7 +39,7 @@ export const Lines: React.FC = () => {
         <LinesAverage />
       </Group>
 
-      <LinesTooltip />
+      {isBrowser && <LinesTooltip />}
 
       <LinesMarkerLabels />
 
