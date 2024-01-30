@@ -32,24 +32,24 @@ export const getStaticProps = () =>
       subtitle='trends from 2014 to 2023'
       showMarkerLabel
       data={[
-        {date: '2014', value: 81},
-        {date: '2015', value: 121},
-        {date: '2016', value: 183},
-        {date: '2017', value: 211},
-        {date: '2018', value: 244},
-        {date: '2019', value: 203},
-        {date: '2020', value: 240},
-        {date: '2021', value: 103},
-        {date: '2022', value: 301},
-        {date: '2023', value: 298},
+        {date: '2014', value1: 81, value2: 33},
+        {date: '2015', value1: 121, value2: 72},
+        {date: '2016', value1: 183, value2: 118},
+        {date: '2017', value1: 211, value2: 180},
+        {date: '2018', value1: 244, value2: 143},
+        {date: '2019', value1: 203, value2: 121},
+        {date: '2020', value1: 240, value2: 133},
+        {date: '2021', value1: 103, value2: 174},
+        {date: '2022', value1: 301, value2: 182},
+        {date: '2023', value1: 298, value2: 201},
         ]}
       index={{dataKey: 'date',
         label: 'Year',
       }}
       series={{
-        dataKey: ['value'],
+        dataKey: ['value1', 'value2'],
         label: 'Feedback Count',
-        rename: (s) => ['Feedback Count'],
+        rename: (_, i) => i ? 'ProductB' : 'ProductA',
         domain: [0, 350]
       }}
     showAverage
@@ -60,10 +60,23 @@ export const getStaticProps = () =>
 
 ## Anatomy
 
-```tsx lines="8-22"
+```tsx lines="21-37"
 import { Card } from "@wonderflow/react-components";
 import { LineChart } from "@wonderflow/charts";
 import { data } from "../api/.."
+
+const data = {[
+        {date: '2014', value1: 81, value2: 33},
+        {date: '2015', value1: 121, value2: 72},
+        {date: '2016', value1: 183, value2: 118},
+        {date: '2017', value1: 211, value2: 180},
+        {date: '2018', value1: 244, value2: 143},
+        {date: '2019', value1: 203, value2: 121},
+        {date: '2020', value1: 240, value2: 133},
+        {date: '2021', value1: 103, value2: 174},
+        {date: '2022', value1: 301, value2: 182},
+        {date: '2023', value1: 298, value2: 201},
+        ]}
 
 export default () => {
   return (
@@ -77,11 +90,13 @@ export default () => {
           label: 'Year',
         }}
         series={{
-          dataKey: ['value'],
-          label: 'Feedback Count',
-          domain: [0, 350]
+        dataKey: ['value1', 'value2'],
+        label: 'Feedback Count',
+        rename: (_, i) => i ? 'ProductB' : 'ProductA',
+        domain: [0, 350]
         }}
         showAverage
+        hidePadding
       />
     </Card>
   );
