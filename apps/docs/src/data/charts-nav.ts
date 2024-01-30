@@ -2,24 +2,32 @@ import { NavigationMenu } from 'types/data';
 
 const ChartsNav: NavigationMenu = [
   {
-    title: 'Cartesians',
+    title: 'Cartesian Charts',
     icon: 'bar-chart',
     items: [
       {
         path: '/get-started/charts/cartesians/line-chart',
         label: 'Line Chart',
         target: '',
+        tag: {
+          label: 'beta',
+          color: 'red',
+        },
       },
     ],
   },
   {
-    title: 'Backbone',
+    title: 'Subcomponents',
     icon: 'layer-group',
     items: [
       {
         path: '/get-started/charts/backbone/cartesian-base',
         label: 'CartesianBase',
         target: '',
+        tag: {
+          label: 'beta',
+          color: 'red',
+        },
       },
     ],
   },

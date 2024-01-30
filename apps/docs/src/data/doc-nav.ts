@@ -20,7 +20,7 @@ const DocNav: DocNavType = [
     url: '/get-started/symbols',
   },
   {
-    label: 'Charts',
+    label: 'Data Visualization',
     icon: 'column-chart',
     color: 'purple',
     url: '/get-started/charts/cartesians/line-chart',

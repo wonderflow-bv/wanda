@@ -13,7 +13,10 @@ import remarkMdxCodeMeta from 'remark-mdx-code-meta';
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 });
-const withTm = withTranspileModules(['@wonderflow/react-components', '@wonderflow/charts']);
+const withTm = withTranspileModules([
+  '@wonderflow/react-components',
+  '@wonderflow/charts',
+], { debug: true });
 
 const withMDX = mdx({
   options: {

@@ -37,7 +37,7 @@ export const ChartLayout: FCChildren<IPropsComponentLayout> = ({
     .splice(3, 2)
     .map((e, i) => (i === 0 ? e.replace('-', '') : e))
     .join('-')
-    .replace('backbone-', '')
+    .replace('subcomponents-', '')
     .replace('cartesians-', ''),
   [router]);
 
