@@ -1,6 +1,7 @@
 import ChartsNav from "@/data/charts-nav";
 import { getLayoutProps } from "@/utils/get-layout-props";
-import { PropsTable } from "@/components/doc/props-table";
+// import { PropsTable } from "@/components/doc/props-table";
+import { PropsBlocks } from "@/components/doc/props-blocks";
 import { KeyTable } from "@/components/shared/key-table";
 
 export const getStaticProps = () =>
@@ -12,7 +13,7 @@ export const getStaticProps = () =>
       subtitle: "A line chart component uses points connected by line segments to demonstrate changes in value.",
       navigation: ChartsNav,
       features: [
-        "Keyboard accessible",
+        "Feature rich",
         "Customizable",
         "Multiple sizes",
         "Themes ready",
@@ -26,20 +27,22 @@ export const getStaticProps = () =>
     }
   });
 
-<Card bordered>
+<Card bordered style={{background: 'hsl(217 11% 14%)'}}>
   <LineChart
+      width={700}
+      theme='dark'
       title='Feedback Count'
       subtitle='trends from 2014 to 2023'
       showMarkerLabel
       data={[
         {date: '2014', value1: 81, value2: 33},
         {date: '2015', value1: 121, value2: 72},
-        {date: '2016', value1: 183, value2: 118},
+        {date: '2016', value1: 152, value2: 118},
         {date: '2017', value1: 211, value2: 180},
         {date: '2018', value1: 244, value2: 143},
         {date: '2019', value1: 203, value2: 121},
         {date: '2020', value1: 240, value2: 133},
-        {date: '2021', value1: 103, value2: 174},
+        {date: '2021', value1: 193, value2: 174},
         {date: '2022', value1: 301, value2: 182},
         {date: '2023', value1: 298, value2: 201},
         ]}
@@ -56,7 +59,6 @@ export const getStaticProps = () =>
     hidePadding
     />
   </Card>
-
 
 ## Anatomy
 
@@ -107,26 +109,26 @@ export default () => {
 
 ### LineChart
 
-<PropsTable
+<PropsBlocks
+  description="LineChartProps & Except<CartesianBaseProps, 'axis' | 'axisFiltered' | 'onBrushChange'>"
   properties={[
     {
       name: "theme",
       type: ['enum'],
       typeValue: "'light' | 'dark'",
-      default: "light",
-      description: "Set the theme of the chart. This is set to `light` by default.",
+      default: "'light'",
+      description: "Set the theme of the chart.",
     },
     {
       name: "layout",
       type: ['enum'],
       typeValue: "'vertical' | 'horizontal'",
-      default: "horizontal",
+      default: "'horizontal'",
       description: "Set the layout of the chart. `Index`, `Series` and eventually `Overlay` will be automatically rearranged.",
     },
     {
       name: "data",
-      type: ['Array'],
-      typeValue: "Record<string, unknown>[]",
+      type: ['Array<Record<string, unknown>>'],
       default: "[]",
       description: "Set the data structure that will be used to render the chart.",
     },
@@ -134,13 +136,13 @@ export default () => {
       name: "renderAs",
       type: ["enum"],
       typeValue: "'lines' | 'curves' | 'steps'",
-      default: "curves",
+      default: "'curves'",
       description: "Set the type of render function used to draw any chart line.",
     },
     {
       name: "index",
       type: ["LineChartIndex"],
-      typeValue: "Partial<AxisProps> & {dataKey: string;}",
+      typeValue:`{ dataKey: string } & Partial<AxisProps>`,
       default: "",
       required: true,
       description: "Set the properties associated with the Index Axis.",
@@ -148,7 +150,12 @@ export default () => {
     {
       name: "series",
       type: ["LineChartSeries"],
-      typeValue: "Partial<AxisProps> & {dataKey: string[]; style?: Array<LineStyle | undefined>; rename?: (...args: any) => string;}",
+      typeValue:
+`{
+  dataKey: string[];
+  style?: Array<LineStyle | undefined>;
+  rename?: (...args: any) => string;
+} & Partial<AxisProps>`,
       default: "",
       required: true,
       description: "Set the properties associated with any Series of lines.",
@@ -156,7 +163,12 @@ export default () => {
     {
       name: "overlay",
       type: ["LineChartOverlay"],
-      typeValue: "Partial<AxisProps> & {dataKey: string; style?: LineStyle; rename?: string;}",
+      typeValue:
+`{
+  dataKey: string;
+  style?: LineStyle;
+  rename?: string;
+} & Partial<AxisProps>`,
       default: "",
       required: false,
       description: "Set the properties associated with the Overlay Axis.",
@@ -171,7 +183,12 @@ export default () => {
     {
       name: "tooltip",
       type: ["LineChartTooltip"],
-      typeValue: "{extraSeriesData?: (...args: any) => string; extraOverlayData?: (...args: any) => string; extraContent?:React.ReactNode;}",
+      typeValue:
+`{
+  extraSeriesData?: (...args: any) => string;
+  extraOverlayData?: (...args: any) => string;
+  extraContent?:React.ReactNode;
+}`,
       default: "",
       required: false,
       description: "Set extra data or custom content to be displayed in the tooltip.",
@@ -204,30 +221,6 @@ export default () => {
       required: false,
       description: "Remove the padding from the chart container.",
     },
-    {
-      name: "...rest",
-      type: ["CartesianBaseProps"],
-      typeValue: "'Except<CartesianBaseProps, 'axis' | 'axisFiltered' | 'onBrushChange'>'",
-      default: '',
-      required: false,
-      description: "Set any other CartesianBase props except axis, axisFiltered, onBrushChange",
-    },
   ]}
 />
 
-## Accessibility
-
-Adheres to the [`disclosure` role requirements](https://www.w3.org/TR/wai-aria-practices-1.2/#disclosure).
-
-<KeyTable
-  data={[
-    {
-      name: "tab",
-      description: "Move focus on the next element or outside the component",
-    },
-    {
-      name: "enter",
-      description: "Expand or collapse the selected item",
-    },
-  ]}
-/>

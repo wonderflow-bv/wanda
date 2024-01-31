@@ -1,0 +1,304 @@
+import ChartsNav from "@/data/charts-nav";
+import { getLayoutProps } from "@/utils/get-layout-props";
+// import { PropsTable } from "@/components/doc/props-table";
+import { PropsBlocks } from "@/components/doc/props-blocks";
+import { KeyTable } from "@/components/shared/key-table";
+
+export const getStaticProps = () =>
+  getLayoutProps({
+    layout: "chart",
+    layoutProps: {
+      title: "Cartesian Base",
+      color: "purple",
+      subtitle: "A component that wraps and manage all the cartesian shared features.",
+      navigation: ChartsNav,
+      features: [
+        "Axis and Grid",
+        "Tooltip",
+        "Legend",
+        "Brush",
+      ],
+      links: [
+        {
+          label: "ARIA authoring",
+          url: "https://www.w3.org/WAI/ARIA/apg/patterns/accordion/",
+        },
+      ]
+    }
+  });
+
+<Card bordered style={{background: 'white'}}>
+  <CartesianBase
+    width={700}
+    theme='dark'
+    title='Cartesian Base Component'
+    axis={{
+      top: undefined,
+      right: undefined,
+      bottom: {
+        domain:['1994', '2024'],
+        orientation: 'bottom',
+        label: 'Bottom Axis',
+        scaleType: 'time',
+        hideAxisLine: false,
+        hideTickLabel: false,
+        hideTicks: false,
+      },
+      left: {
+        domain: [0, 1000],
+        orientation: 'left',
+        scaleType: 'linear',
+        label: 'Left Axis',
+        hideAxisLine: false,
+        hideTickLabel: false,
+        hideTicks: false,
+        numTicks: 5,
+      },
+    }}
+    axisFiltered={{
+      top: undefined,
+      right: undefined,
+      bottom: {
+        domain:['1994', '2024'],
+        orientation: 'bottom',
+        label: 'Bottom Axis',
+        scaleType: 'time',
+        hideAxisLine: false,
+        hideTickLabel: false,
+        hideTicks: false,
+      },
+      left: {
+        domain: [0, 1000],
+        orientation: 'left',
+        scaleType: 'linear',
+        label: 'Left Axis',
+        hideAxisLine: false,
+        hideTickLabel: false,
+        hideTicks: false,
+        numTicks: 5,
+      },
+    }}
+    onBrushChange={() => ({})}
+      />
+</Card>
+
+## Anatomy
+
+```tsx lines="31-36"
+import { Card } from "@wonderflow/react-components";
+import { CartesianBase } from "@wonderflow/charts";
+
+const axis = {
+      top: undefined,
+      right: undefined,
+      bottom: {
+        domain:['1994', '2024'],
+        orientation: 'bottom',
+        label: 'Bottom Axis',
+        scaleType: 'time',
+        hideAxisLine: false,
+        hideTickLabel: false,
+        hideTicks: false,
+      },
+      left: {
+        domain: [0, 1000],
+        orientation: 'left',
+        scaleType: 'linear',
+        label: 'Left Axis',
+        hideAxisLine: false,
+        hideTickLabel: false,
+        hideTicks: false,
+        numTicks: 5,
+      },
+    }
+
+export default () => {
+  return (
+    <Card>
+      <CartesianBase
+        title='Cartesian Base Component'
+        axis={axis}
+        axisFiltered={axis}
+        onBrushChange={() => ({})}
+      />
+    </Card>
+  );
+};
+```
+
+## API Reference
+
+### Cartesian Base
+
+<PropsBlocks
+  description="CartesianBaseProps"
+  properties={[
+    {
+      name: "title",
+      type: ['string'],
+      default: "",
+      description: "Set the title in the headings. If no title is set, headings will not be displayed.",
+    },
+    {
+      name: "subtitle",
+      type: ['string'],
+      default: "",
+      description: "Set an optional subtitle in the headings.",
+    },
+    {
+      name: "headings",
+      type: [`Pick<HeadingsProps, 'top'| 'left'| 'config'>`],
+      typeValue:
+`{
+  left?: number | undefined;
+  top?: number | undefined;
+  config?: DeepPartial<HeadingsStyleConfig> | undefined;
+}`,
+      default: "",
+      description: "Set headings custom position and style.",
+    },
+    {
+      name: "width",
+      type: ['number'],
+      default: '800',
+      description: "Set the Cartesian component width.",
+    },
+    {
+      name: "height",
+      type: ['number'],
+      default: '600',
+      description: "Set the Cartesian component height.",
+    },
+    {
+      name: "preventResponsive",
+      type: ['boolean'],
+      default: 'false',
+      description: "If true prevent the chart to be responsive.",
+    },
+    {
+      name: "isLoading",
+      type: ['boolean'],
+      default: 'false',
+      description: "Set the loading state.",
+    },
+    {
+      name: "background",
+      type: ["Background"],
+      typeValue:
+`{
+  from: string;
+  to: string;
+}`,
+      default: "",
+      description: "Set the Cartesian component background `from` and `to` values.",
+    },
+    {
+      name: "margin",
+      type: ["MarginProps"],
+      typeValue:
+`{
+  top: number;
+  right: number;
+  left: number;
+  bottom: number;
+}`,
+      default: "24",
+      description: "Set margin using an object with `top`, `right`, `bottom` and `left` position.",
+    },
+    {
+      name: "grid",
+      type: ["GridProps"],
+      typeValue:
+`{
+  hideRows?: boolean;
+  hideColumns?: boolean;
+  tickRows?: number;
+  tickColumns?: number;
+  background?: Background;
+  otherProps?: Record<string, unknown>;
+}`,
+      default: "",
+      description: "Set `Grid` properties.",
+    },
+    {
+      name: "axis",
+      type: ["Record<AxisOrientation, AxisProps | undefined>"],
+      typeValue:
+`{
+  top: AxisProps | undefined,
+  right: AxisProps | undefined,
+  bottom: AxisProps | undefined,
+  left: AxisProps | undefined,
+}`,
+      default: "",
+      required: true,
+      description: "Set the `Axis System` properties.",
+    },
+    {
+      name: "axisFiltered",
+      type: ["Record<AxisOrientation, AxisProps | undefined>"],
+      typeValue:
+`{
+  top: AxisProps | undefined,
+  right: AxisProps | undefined,
+  bottom: AxisProps | undefined,
+  left: AxisProps | undefined,
+}`,
+      default: "",
+      required: true,
+      description: "Set `Axis System` properties used by the `Brush` component.",
+    },
+    {
+      name: "showBrush",
+      type: ["boolean"],
+      default: "false",
+      required: false,
+      description: "Set the `Brush` visibility.",
+    },
+    {
+      name: "hideLegend",
+      type: ["boolean"],
+      default: "false",
+      required: false,
+      description: "Hide `Legend` when set to `true`.",
+    },
+    {
+      name: "emptyState",
+      type: ["ReactNode"],
+      required: false,
+      description: "Set an optional custom `Empty State` component.",
+    },
+    {
+      name: "emptyStateMessage",
+      type: ["string"],
+      default: "",
+      required: false,
+      description: "Set an optional `Empty State` message to be displayed under the label 'No Data Available'.",
+    },
+    {
+      name: "customLegend",
+      type: ["ReactNode"],
+      required: false,
+      description: "Set a custom `Legend` content.",
+    },
+    {
+      name: "styleConfig",
+      type: ["DeepPartial<CartesianStyleConfig>"],
+      required: false,
+      description: "Set custom styling properties.",
+    },
+    {
+      name: "otherProps",
+      type: ["Record<string, unknown>"],
+      required: false,
+      description: "Set other custom properties.",
+    },
+    {
+      name: "onBrushChange",
+      type: ["(filteredData: Data) => void"],
+      required: true,
+      description: "A callback to retrieve data filtered from the brush.",
+    },
+  ]}
+/>
+

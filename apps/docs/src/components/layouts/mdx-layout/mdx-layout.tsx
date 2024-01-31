@@ -47,6 +47,7 @@ export const MDX_COMPONENTS = {
     },
   }), {}),
   LineChart: (props: Charts.LineChartProps) => <Charts.LineChart {...props} />,
+  CartesianBase: (props: Charts.CartesianBaseProps) => <Charts.CartesianBase {...props} />,
 };
 
 export const MDXLayout: FCChildren<IPropsMDXLayout> = ({

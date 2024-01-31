@@ -58,7 +58,7 @@ export type CartesianBaseProps = {
    */
   headings?: Pick<HeadingsProps, 'top'| 'left'| 'config'>;
   /**
-   * Set the Cartesian component width. 800px is the default value;
+   * Set the Cartesian component width. 800px is the default value.
    */
   width?: number;
   /**
@@ -90,11 +90,11 @@ export type CartesianBaseProps = {
    */
   axis: Record<AxisOrientation, AxisProps | undefined>;
   /**
-   * Set `Axis System` properties.
+   * Set `Axis System` properties used by the `Brush` component.
    */
   axisFiltered: Record<AxisOrientation, AxisProps | undefined>;
   /**
-   * Set the horizontal brush visibility.
+   * Set the `Brush` visibility.
    */
   showBrush?: boolean;
   /**

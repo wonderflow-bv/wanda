@@ -21,7 +21,7 @@ const ChartsNav: NavigationMenu = [
     icon: 'layer-group',
     items: [
       {
-        path: '/get-started/charts/backbone/cartesian-base',
+        path: '/get-started/charts/subcomponents/cartesian-base',
         label: 'CartesianBase',
         target: '',
         tag: {
