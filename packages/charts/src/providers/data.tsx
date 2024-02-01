@@ -50,12 +50,10 @@ export const useDataContext = () => {
   const context = useContext(DataContext);
 
   if (!context) {
-    throw new Error(
-      'useDataContext hook must be used inside DataProvider to access context data.',
-    );
+    console.error('useDataContext() must be used inside DataProvider to access context data.');
   }
 
-  return context;
+  return context ?? defaultData;
 };
 
 DataContext.displayName = 'DataContext';

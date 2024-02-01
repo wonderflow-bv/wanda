@@ -71,12 +71,10 @@ export const useCartesianContext = () => {
   const context = useContext(CartesianContext);
 
   if (!context) {
-    throw new Error(
-      'useCartesianContext hook must be used inside CartesianProvider to access context data.',
-    );
+    console.error('useCartesianContext() must be used inside CartesianProvider to access context data.');
   }
 
-  return context;
+  return context ?? defaultSetting;
 };
 
 CartesianContext.displayName = 'CartesianContext';

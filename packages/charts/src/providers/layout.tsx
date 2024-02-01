@@ -41,13 +41,11 @@ export const useLayoutContext = () => {
   const context = useContext(LayoutContext);
 
   if (!context) {
-    throw new Error(
-      'useLayoutContext hook must be used inside LayoutProvider to access context data.',
-    );
+    console.error('useLayoutContext() must be used inside LayoutProvider to access context data.');
   }
 
   return {
-    context,
+    context: context ?? defaultLayout,
     isHorizontal: context === CartesianChartLayout.HORIZONTAL,
     isVertical: context === CartesianChartLayout.VERTICAL,
   };

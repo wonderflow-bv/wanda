@@ -45,12 +45,10 @@ export const useStyleConfigContext = () => {
   const context = useContext(StyleConfigContext);
 
   if (!context) {
-    throw new Error(
-      'useStyleConfigContext hook must be used inside StyleConfigProvider to access context data.',
-    );
+    console.error('useStyleConfigContext() must be used inside StyleConfigProvider to access context data.');
   }
 
-  return context;
+  return context ?? cartesianStyleConfig;
 };
 
 StyleConfigContext.displayName = 'StyleConfigContext';
