@@ -141,8 +141,8 @@ withNestedData.args = {
     },
   },
   tooltip: {
-    extraSeriesData: series => `${series.percentage}%`,
-    extraOverlayData: overlay => `${overlay.percentage}%`,
+    extraSeriesData: (series: any) => `${series.percentage}%`,
+    extraOverlayData: (overlay: any) => `${overlay.percentage}%`,
     extraContent: <div>some extra content</div>,
   },
   renderAs: 'lines',
@@ -286,15 +286,18 @@ renderAsSteps.args = {
   },
 };
 
-const WithinCardTemplate: ComponentStory<typeof LineChart> = args => (
-  <Card
-    bordered
-    className={styles.Card}
-    style={{ backgroundColor: args.theme === 'dark' ? '#202227' : undefined }}
-  >
-    <LineChart {...args} />
-  </Card>
-);
+const WithinCardTemplate: ComponentStory<typeof LineChart> = (args) => {
+  const { theme } = args;
+  return (
+    <Card
+      bordered
+      className={styles.Card}
+      style={{ backgroundColor: theme === 'dark' ? 'red' : undefined }}
+    >
+      <LineChart {...args} />
+    </Card>
+  );
+};
 
 export const WithinCard = WithinCardTemplate.bind({});
 WithinCard.args = {

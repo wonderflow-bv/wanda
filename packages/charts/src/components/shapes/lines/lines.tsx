@@ -36,11 +36,11 @@ export const Lines: React.FC = () => {
       <Group data-testid="lines">
         <LinesSeries />
         <LinesOverlay />
-        <LinesAverage />
       </Group>
 
       {isBrowser && <LinesTooltip />}
 
+      <LinesAverage />
       <LinesMarkerLabels />
 
     </Group>
