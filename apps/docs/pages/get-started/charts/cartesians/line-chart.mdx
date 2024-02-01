@@ -1,8 +1,8 @@
 import ChartsNav from "@/data/charts-nav";
 import { getLayoutProps } from "@/utils/get-layout-props";
-// import { PropsTable } from "@/components/doc/props-table";
 import { PropsBlocks } from "@/components/doc/props-blocks";
 import { KeyTable } from "@/components/shared/key-table";
+import { LineChartExample } from './line-chart-example';
 
 export const getStaticProps = () =>
   getLayoutProps({
@@ -18,51 +18,15 @@ export const getStaticProps = () =>
         "Multiple sizes",
         "Themes ready",
       ],
-      links: [
-        {
-          label: "ARIA authoring",
-          url: "https://www.w3.org/WAI/ARIA/apg/patterns/accordion/",
-        },
-      ]
+      links: []
     }
   });
 
-<Card bordered style={{background: 'hsl(217 11% 14%)'}}>
-  <LineChart
-      width={700}
-      theme='dark'
-      title='Feedback Count'
-      subtitle='trends from 2014 to 2023'
-      showMarkerLabel
-      data={[
-        {date: '2014', value1: 81, value2: 33},
-        {date: '2015', value1: 121, value2: 72},
-        {date: '2016', value1: 152, value2: 118},
-        {date: '2017', value1: 211, value2: 180},
-        {date: '2018', value1: 244, value2: 143},
-        {date: '2019', value1: 203, value2: 121},
-        {date: '2020', value1: 240, value2: 133},
-        {date: '2021', value1: 193, value2: 174},
-        {date: '2022', value1: 301, value2: 182},
-        {date: '2023', value1: 298, value2: 201},
-        ]}
-      index={{dataKey: 'date',
-        label: 'Year',
-      }}
-      series={{
-        dataKey: ['value1', 'value2'],
-        label: 'Feedback Count',
-        rename: (_, i) => i ? 'ProductB' : 'ProductA',
-        domain: [0, 350]
-      }}
-    showAverage
-    hidePadding
-    />
-  </Card>
+<LineChartExample />
 
 ## Anatomy
 
-```tsx lines="21-37"
+```tsx lines="21-38"
 import { Card } from "@wonderflow/react-components";
 import { LineChart } from "@wonderflow/charts";
 import { data } from "../api/.."
@@ -88,7 +52,8 @@ export default () => {
         subtitle='trends from 2014 to 2023'
         showMarkerLabel
         data={data}
-        index={{dataKey: 'date',
+        index={{
+          dataKey: 'date',
           label: 'Year',
         }}
         series={{
@@ -114,6 +79,7 @@ export default () => {
   properties={[
     {
       name: "theme",
+      typeLink: "/get-started/charts/cartesians/line-chart#prop-theme",
       type: ['enum'],
       typeValue: "'light' | 'dark'",
       default: "'light'",
@@ -121,6 +87,7 @@ export default () => {
     },
     {
       name: "layout",
+      typeLink: "/get-started/charts/cartesians/line-chart#prop-layout",
       type: ['enum'],
       typeValue: "'vertical' | 'horizontal'",
       default: "'horizontal'",
@@ -128,12 +95,14 @@ export default () => {
     },
     {
       name: "data",
+      typeLink: "/get-started/charts/cartesians/line-chart#prop-data",
       type: ['Array<Record<string, unknown>>'],
       default: "[]",
       description: "Set the data structure that will be used to render the chart.",
     },
     {
       name: "renderAs",
+      typeLink: "/get-started/charts/cartesians/line-chart#prop-renderAs",
       type: ["enum"],
       typeValue: "'lines' | 'curves' | 'steps'",
       default: "'curves'",
@@ -141,6 +110,7 @@ export default () => {
     },
     {
       name: "index",
+      typeLink: "/get-started/charts/cartesians/line-chart#prop-index",
       type: ["LineChartIndex"],
       typeValue:`{ dataKey: string } & Partial<AxisProps>`,
       default: "",
@@ -149,6 +119,7 @@ export default () => {
     },
     {
       name: "series",
+      typeLink: "/get-started/charts/cartesians/line-chart#prop-series",
       type: ["LineChartSeries"],
       typeValue:
 `{
@@ -162,6 +133,7 @@ export default () => {
     },
     {
       name: "overlay",
+      typeLink: "/get-started/charts/cartesians/line-chart#prop-overlay",
       type: ["LineChartOverlay"],
       typeValue:
 `{
@@ -175,6 +147,7 @@ export default () => {
     },
     {
       name: "showAverage",
+      typeLink: "/get-started/charts/cartesians/line-chart#prop-showAverage",
       type: ["boolean"],
       default: "false",
       required: false,
@@ -182,6 +155,7 @@ export default () => {
     },
     {
       name: "tooltip",
+      typeLink: "/get-started/charts/cartesians/line-chart#prop-tooltip",
       type: ["LineChartTooltip"],
       typeValue:
 `{
@@ -195,6 +169,7 @@ export default () => {
     },
     {
       name: "hideMissingDataConnection",
+      typeLink: "/get-started/charts/cartesians/line-chart#prop-hideMissingDataConnection",
       type: ["boolean"],
       default: "false",
       required: false,
@@ -202,6 +177,7 @@ export default () => {
     },
     {
       name: "showMarker",
+      typeLink: "/get-started/charts/cartesians/line-chart#prop-showMarker",
       type: ["boolean"],
       default: "false",
       required: false,
@@ -209,6 +185,7 @@ export default () => {
     },
     {
       name: "showMarkerLabel",
+      typeLink: "/get-started/charts/cartesians/line-chart#prop-showMarkerLabel",
       type: ["boolean"],
       default: "false",
       required: false,
@@ -216,6 +193,7 @@ export default () => {
     },
     {
       name: "hidePadding",
+      typeLink: "/get-started/charts/cartesians/line-chart#prop-hidePadding",
       type: ["boolean"],
       default: "false",
       required: false,

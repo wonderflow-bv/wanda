@@ -41,12 +41,10 @@ export const useThemeContext = () => {
   const context = useContext(ThemeContext);
 
   if (!context) {
-    throw new Error(
-      'useThemeContext hook must be used inside ThemeProvider to access context data.',
-    );
+    console.error('useThemeContext hook must be used inside ThemeProvider to access context data.');
   }
 
-  return context;
+  return context ?? defaultTheme;
 };
 
 ThemeContext.displayName = 'ThemeContext';

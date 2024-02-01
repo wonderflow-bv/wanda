@@ -10,8 +10,8 @@ const ChartsNav: NavigationMenu = [
         label: 'Line Chart',
         target: '',
         tag: {
-          label: 'beta',
-          color: 'red',
+          label: 'new',
+          color: 'green',
         },
       },
     ],
@@ -25,8 +25,8 @@ const ChartsNav: NavigationMenu = [
         label: 'CartesianBase',
         target: '',
         tag: {
-          label: 'beta',
-          color: 'red',
+          label: 'new',
+          color: 'green',
         },
       },
     ],

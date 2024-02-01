@@ -1,6 +1,7 @@
 import { Stack, Text } from '@wonderflow/react-components';
 import clsx from 'clsx';
 import { useMemo } from 'react';
+import Refractor from 'react-refractor';
 
 import { PropsBlock } from './props-block';
 import styles from './props-blocks.module.css';
@@ -41,7 +42,11 @@ export const PropsBlocks = ({
       {...otherProps}
     >
 
-      {description && <Text variant="body-3" as="code">{description}</Text>}
+      {description && (
+        <Text variant="body-3">
+          <Refractor language="typescript" value={description} className={styles.Code} />
+        </Text>
+      )}
 
       <Stack rowGap={8} role="rowgroup" style={{ marginTop: '2rem' }}>
         {propertiesSorted.map(item => item.name && (

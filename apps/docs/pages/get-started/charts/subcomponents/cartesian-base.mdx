@@ -1,8 +1,7 @@
 import ChartsNav from "@/data/charts-nav";
 import { getLayoutProps } from "@/utils/get-layout-props";
-// import { PropsTable } from "@/components/doc/props-table";
 import { PropsBlocks } from "@/components/doc/props-blocks";
-import { KeyTable } from "@/components/shared/key-table";
+import { CartesianBaseExample } from './cartesian-base-example'
 
 export const getStaticProps = () =>
   getLayoutProps({
@@ -13,74 +12,17 @@ export const getStaticProps = () =>
       subtitle: "A component that wraps and manage all the cartesian shared features.",
       navigation: ChartsNav,
       features: [
+        "Headings",
         "Axis and Grid",
         "Tooltip",
         "Legend",
         "Brush",
       ],
-      links: [
-        {
-          label: "ARIA authoring",
-          url: "https://www.w3.org/WAI/ARIA/apg/patterns/accordion/",
-        },
-      ]
+      links: []
     }
   });
 
-<Card bordered style={{background: 'white'}}>
-  <CartesianBase
-    width={700}
-    theme='dark'
-    title='Cartesian Base Component'
-    axis={{
-      top: undefined,
-      right: undefined,
-      bottom: {
-        domain:['1994', '2024'],
-        orientation: 'bottom',
-        label: 'Bottom Axis',
-        scaleType: 'time',
-        hideAxisLine: false,
-        hideTickLabel: false,
-        hideTicks: false,
-      },
-      left: {
-        domain: [0, 1000],
-        orientation: 'left',
-        scaleType: 'linear',
-        label: 'Left Axis',
-        hideAxisLine: false,
-        hideTickLabel: false,
-        hideTicks: false,
-        numTicks: 5,
-      },
-    }}
-    axisFiltered={{
-      top: undefined,
-      right: undefined,
-      bottom: {
-        domain:['1994', '2024'],
-        orientation: 'bottom',
-        label: 'Bottom Axis',
-        scaleType: 'time',
-        hideAxisLine: false,
-        hideTickLabel: false,
-        hideTicks: false,
-      },
-      left: {
-        domain: [0, 1000],
-        orientation: 'left',
-        scaleType: 'linear',
-        label: 'Left Axis',
-        hideAxisLine: false,
-        hideTickLabel: false,
-        hideTicks: false,
-        numTicks: 5,
-      },
-    }}
-    onBrushChange={() => ({})}
-      />
-</Card>
+<CartesianBaseExample />
 
 ## Anatomy
 
@@ -135,18 +77,21 @@ export default () => {
   properties={[
     {
       name: "title",
+      typeLink: "/get-started/charts/subcomponents/cartesian-base#prop-title",
       type: ['string'],
       default: "",
       description: "Set the title in the headings. If no title is set, headings will not be displayed.",
     },
     {
       name: "subtitle",
+      typeLink: "/get-started/charts/subcomponents/cartesian-base#prop-subtitle",
       type: ['string'],
       default: "",
       description: "Set an optional subtitle in the headings.",
     },
     {
       name: "headings",
+      typeLink: "/get-started/charts/subcomponents/cartesian-base#prop-headings",
       type: [`Pick<HeadingsProps, 'top'| 'left'| 'config'>`],
       typeValue:
 `{
@@ -159,30 +104,35 @@ export default () => {
     },
     {
       name: "width",
+      typeLink: "/get-started/charts/subcomponents/cartesian-base#prop-width",
       type: ['number'],
       default: '800',
       description: "Set the Cartesian component width.",
     },
     {
       name: "height",
+      typeLink: "/get-started/charts/subcomponents/cartesian-base#prop-height",
       type: ['number'],
       default: '600',
       description: "Set the Cartesian component height.",
     },
     {
       name: "preventResponsive",
+      typeLink: "/get-started/charts/subcomponents/cartesian-base#prop-preventResponsive",
       type: ['boolean'],
       default: 'false',
       description: "If true prevent the chart to be responsive.",
     },
     {
       name: "isLoading",
+      typeLink: "/get-started/charts/subcomponents/cartesian-base#prop-isLoading",
       type: ['boolean'],
       default: 'false',
       description: "Set the loading state.",
     },
     {
       name: "background",
+      typeLink: "/get-started/charts/subcomponents/cartesian-base#prop-background",
       type: ["Background"],
       typeValue:
 `{
@@ -194,6 +144,7 @@ export default () => {
     },
     {
       name: "margin",
+      typeLink: "/get-started/charts/subcomponents/cartesian-base#prop-margin",
       type: ["MarginProps"],
       typeValue:
 `{
@@ -207,6 +158,7 @@ export default () => {
     },
     {
       name: "grid",
+      typeLink: "/get-started/charts/subcomponents/cartesian-base#prop-grid",
       type: ["GridProps"],
       typeValue:
 `{
@@ -222,6 +174,7 @@ export default () => {
     },
     {
       name: "axis",
+      typeLink: "/get-started/charts/subcomponents/cartesian-base#prop-axis",
       type: ["Record<AxisOrientation, AxisProps | undefined>"],
       typeValue:
 `{
@@ -236,6 +189,7 @@ export default () => {
     },
     {
       name: "axisFiltered",
+      typeLink: "/get-started/charts/subcomponents/cartesian-base#prop-axisFiltered",
       type: ["Record<AxisOrientation, AxisProps | undefined>"],
       typeValue:
 `{
@@ -250,6 +204,7 @@ export default () => {
     },
     {
       name: "showBrush",
+      typeLink: "/get-started/charts/subcomponents/cartesian-base#prop-showBrush",
       type: ["boolean"],
       default: "false",
       required: false,
@@ -257,6 +212,7 @@ export default () => {
     },
     {
       name: "hideLegend",
+      typeLink: "/get-started/charts/subcomponents/cartesian-base#prop-hideLegend",
       type: ["boolean"],
       default: "false",
       required: false,
@@ -264,12 +220,14 @@ export default () => {
     },
     {
       name: "emptyState",
+      typeLink: "/get-started/charts/subcomponents/cartesian-base#prop-emptyState",
       type: ["ReactNode"],
       required: false,
       description: "Set an optional custom `Empty State` component.",
     },
     {
       name: "emptyStateMessage",
+      typeLink: "/get-started/charts/subcomponents/cartesian-base#prop-emptyStateMessage",
       type: ["string"],
       default: "",
       required: false,
@@ -277,24 +235,28 @@ export default () => {
     },
     {
       name: "customLegend",
+      typeLink: "/get-started/charts/subcomponents/cartesian-base#prop-customLegend",
       type: ["ReactNode"],
       required: false,
       description: "Set a custom `Legend` content.",
     },
     {
       name: "styleConfig",
+      typeLink: "/get-started/charts/subcomponents/cartesian-base#prop-styleConfig",
       type: ["DeepPartial<CartesianStyleConfig>"],
       required: false,
       description: "Set custom styling properties.",
     },
     {
       name: "otherProps",
+      typeLink: "/get-started/charts/subcomponents/cartesian-base#prop-otherProps",
       type: ["Record<string, unknown>"],
       required: false,
       description: "Set other custom properties.",
     },
     {
       name: "onBrushChange",
+      typeLink: "/get-started/charts/subcomponents/cartesian-base#prop-onBrushChange",
       type: ["(filteredData: Data) => void"],
       required: true,
       description: "A callback to retrieve data filtered from the brush.",

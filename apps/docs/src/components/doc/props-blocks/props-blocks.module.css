@@ -191,3 +191,14 @@
 .Grid {
   grid-template-columns: 7.5rem auto;
 }
+
+
+.LinkButton {
+  display: none;
+}
+
+.Block:hover {
+  & .LinkButton {
+    display: block;
+  }
+}

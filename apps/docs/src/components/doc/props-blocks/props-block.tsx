@@ -8,11 +8,8 @@ import { useRouter } from 'next/router';
 import { Fragment, useCallback, useState } from 'react';
 import Refractor from 'react-refractor';
 
-import { Markdown } from '@/components/shared/markdown';
-
-// import { useDocLayoutContext } from '@/src/hooks/doc-colors';
 import { Prop } from './props-blocks';
-import styled from './props-blocks.module.css';
+import styles from './props-blocks.module.css';
 
 export const PropsBlock = ({
   name,
@@ -25,8 +22,7 @@ export const PropsBlock = ({
 }: Prop) => {
   const [isCopied, setIsCopied] = useState<boolean>(false);
   const router = useRouter();
-  // const { layoutColor } = useDocLayoutContext();
-  console.log(typeLink, isCopied);
+
   const handleCopyLink = useCallback(
     (propName: string) => () => {
       navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_DOMAIN}${router.asPath}#prop-${propName.toLowerCase()}`).then(() => {
@@ -39,7 +35,13 @@ export const PropsBlock = ({
   );
 
   return (
-    <Stack vPadding={8} rowGap={24} className={styled.Block}>
+    <Stack
+      vPadding={8}
+      rowGap={24}
+      className={styles.Block}
+      id={`prop-${name}`}
+      data-props-table-link-copied={isCopied}
+    >
       {name && (
         <Stack direction="row" columnGap={4} fill={false}>
           <div>
@@ -48,18 +50,21 @@ export const PropsBlock = ({
               {required ? '' : '?'}
             </Chip>
           </div>
-          <div>
-            <IconButton
-              dimension="small"
-              kind="flat"
-              onClick={handleCopyLink(name)}
-              icon="link"
-            />
-          </div>
+
+          {typeLink && (
+            <div className={styles.LinkButton}>
+              <IconButton
+                dimension="small"
+                kind="flat"
+                onClick={handleCopyLink(name)}
+                icon="link"
+              />
+            </div>
+          )}
         </Stack>
       )}
 
-      <Grid columns={2} filling={false} rowGap={8} columnGap={4} className={styled.Grid}>
+      <Grid columns={2} filling={false} rowGap={8} columnGap={4} className={styles.Grid}>
 
         {description && (
           <>
@@ -68,7 +73,9 @@ export const PropsBlock = ({
             </Grid.Item>
 
             <Grid.Item>
-              <Text variant="body-3"><Markdown options={{ wrapper: Fragment }}>{description}</Markdown></Text>
+              <Text variant="body-3">
+                {description}
+              </Text>
             </Grid.Item>
           </>
         )}
@@ -85,14 +92,14 @@ export const PropsBlock = ({
                   ? type.map((type, i) => (
                     <Fragment key={type}>
                       {i !== 0 && '|'}
-                      <Text key={type} as="code" variant="body-3">
-                        <Refractor language="typescript" value={type} className={styled.Code} />
+                      <Text key={type} variant="body-3">
+                        <Refractor language="typescript" value={type} className={styles.Code} />
                       </Text>
                     </Fragment>
                   ))
                   : (
-                    <Text as="code" variant="body-3">
-                      <Refractor language="typescript" value={type} className={styled.Code} />
+                    <Text variant="body-3">
+                      <Refractor language="typescript" value={type} className={styles.Code} />
                     </Text>
                   )}
               </Text>
@@ -108,7 +115,7 @@ export const PropsBlock = ({
 
             <Grid.Item>
               <Text variant="body-3">
-                <Refractor language="typescript" value={defaultValue} className={styled.Code} />
+                <Refractor language="typescript" value={defaultValue} className={styles.Code} />
               </Text>
             </Grid.Item>
           </>
@@ -122,7 +129,7 @@ export const PropsBlock = ({
 
             <Grid.Item>
               <Text variant="body-3">
-                <Refractor language="typescript" value={typeValue} className={styled.Code} />
+                <Refractor language="typescript" value={typeValue} className={styles.Code} />
               </Text>
             </Grid.Item>
           </>
