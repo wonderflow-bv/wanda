@@ -219,6 +219,7 @@ forwardedRef) => {
           height={dynamicHeight}
           viewBox={`0 0 ${dynamicWidth} ${dynamicHeight}`}
           className={Unselectable}
+          onMouseOver={() => setHoveredLegendItem('')}
         >
 
           <RectClipPath

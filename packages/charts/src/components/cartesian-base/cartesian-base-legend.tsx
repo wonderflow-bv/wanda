@@ -61,7 +61,11 @@ forwardedRef) => {
         ref={forwardedRef}
         role="presentation"
       >
-        <div className={styles.LegendContent}>
+        <div
+          className={styles.LegendContent}
+          onMouseOut={() => onMouseOver('')}
+          onBlur={() => ({})}
+        >
           <ul>
             {sdk.map((s: string, i: number) => (
               <li
@@ -86,7 +90,9 @@ forwardedRef) => {
               <li
                 onMouseOver={() => onMouseOver(odk)}
                 onMouseLeave={() => onMouseOver('')}
+                onMouseOut={() => onMouseOver('')}
                 onFocus={() => ({})}
+                onBlur={() => ({})}
               >
                 <div>
                   <Placeholder color={color} />
