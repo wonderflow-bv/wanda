@@ -22,6 +22,7 @@ export const ThemeSwitcher: FCClass<ThemeSwitcherProps> = ({
 
   return (
     <Popover
+      closeOnInsideClick
       placement="bottom-start"
       offset={4}
       trigger={(
