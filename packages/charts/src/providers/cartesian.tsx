@@ -71,6 +71,7 @@ export const useCartesianContext = () => {
   const context = useContext(CartesianContext);
 
   if (!context) {
+    // eslint-disable-next-line no-console
     console.error('useCartesianContext() must be used inside CartesianProvider to access context data.');
   }
 
