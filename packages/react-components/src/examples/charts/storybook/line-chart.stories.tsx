@@ -292,7 +292,7 @@ const WithinCardTemplate: ComponentStory<typeof LineChart> = (args) => {
     <Card
       bordered
       className={styles.Card}
-      style={{ backgroundColor: theme === 'dark' ? 'red' : undefined }}
+      style={{ backgroundColor: theme === 'dark' ? '#202227' : undefined }}
     >
       <LineChart {...args} />
     </Card>
