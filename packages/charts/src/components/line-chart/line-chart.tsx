@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Wonderflow Design Team
+ * Copyright 2023-2024 Wonderflow Design Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,28 +14,23 @@
  * limitations under the License.
  */
 
-import { useMemo } from 'react';
+import { forwardRef } from 'react';
 import { Except } from 'type-fest';
 
+import { useLineChart } from '../../hooks';
 import {
   DataProvider, LayoutProvider,
   ThemeProvider,
 } from '../../providers';
-import { defaultLineChartPalette } from '../../style-config';
 import {
-  CartesianChartLayout, Charts, Data, MarginProps, ThemeVariants,
+  CartesianChartLayout,
+  Data,
+  ThemeVariants,
 } from '../../types';
 import {
-  LineChartIndex, LineChartMetadata, LineChartOverlay, LineChartRenderType, LineChartSeries, LineChartTooltip,
+  LineChartIndex,
+  LineChartOverlay, LineChartRenderType, LineChartSeries, LineChartTooltip,
 } from '../../types/line-chart';
-import {
-  handleChartAxisLayout,
-  handleChartDomainAndScaleType,
-  handleOverlayColor,
-  handleOverlayName,
-  handleSeriesColors,
-  handleSeriesNames,
-} from '../../utils';
 import { CartesianBase, CartesianBaseProps } from '../cartesian-base/cartesian-base';
 
 export type LineChartProps = {
@@ -68,6 +63,10 @@ export type LineChartProps = {
    */
   overlay?: LineChartOverlay;
   /**
+   * Display an average line and label when true.
+   */
+  showAverage?: boolean;
+  /**
    * Set extra data or custom content to be displayed in the tooltip.
    */
   tooltip?: LineChartTooltip;
@@ -87,9 +86,9 @@ export type LineChartProps = {
    * Remove the padding from the chart container.
    */
   hidePadding?: boolean;
-} & Except<CartesianBaseProps, 'axis'>
+} & Except<CartesianBaseProps, 'axis' | 'axisFiltered' | 'onBrushChange'>
 
-export const LineChart: React.FC<LineChartProps> = ({
+export const LineChart = forwardRef<HTMLElement, LineChartProps>(({
   theme = 'light',
   layout = CartesianChartLayout.HORIZONTAL,
   renderAs = 'curves',
@@ -98,76 +97,57 @@ export const LineChart: React.FC<LineChartProps> = ({
   series,
   overlay,
   tooltip,
+  showAverage = false,
   hideMissingDataConnection = false,
   showMarker = false,
   showMarkerLabel = false,
   hidePadding = false,
   ...otherProps
-}: LineChartProps) => {
-  const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
-
-  const { index: i, series: s, overlay: o } = useMemo(
-    () => handleChartDomainAndScaleType(data, index, series, overlay), [data, index, overlay, series],
-  );
-
-  const axis = useMemo(() => handleChartAxisLayout(i, s, o), [i, s, o]);
-
-  const palette = useMemo(() => defaultLineChartPalette[theme], [theme]);
-
-  const zeroPadding: MarginProps | undefined = hidePadding ? {
-    top: 0, right: 12, bottom: 0, left: 0,
-  } : undefined;
-
-  const metadata: LineChartMetadata = useMemo(() => ({
-    type: Charts.LINE_CHART,
+}, forwardedRef) => {
+  const {
+    axis,
+    axisFiltered,
+    isHorizontal,
+    metadata,
+    zeroPadding,
+    brushFilteredData,
+    setBrushFilteredData,
+  } = useLineChart({
+    theme,
+    layout,
     renderAs,
-    index: index.dataKey,
-    series: {
-      dataKey: series.dataKey,
-      names: handleSeriesNames(series),
-      colors: handleSeriesColors(series, palette.series),
-      style: series.style,
-    },
-    overlay: {
-      dataKey: overlay?.dataKey,
-      name: handleOverlayName(overlay),
-      color: handleOverlayColor(overlay, palette.overlay),
-      style: overlay?.style,
-    },
+    data,
+    index,
+    series,
+    overlay,
     tooltip,
+    showAverage,
     hideMissingDataConnection,
     showMarker,
     showMarkerLabel,
     hidePadding,
-  }), [renderAs,
-    index.dataKey,
-    series,
-    palette.series,
-    palette.overlay,
-    overlay,
-    tooltip,
-    hideMissingDataConnection,
-    showMarker,
-    showMarkerLabel,
-    hidePadding]);
+  });
 
   return (
     <ThemeProvider theme={theme}>
       <LayoutProvider layout={layout}>
-        <DataProvider data={data} metadata={metadata}>
+        <DataProvider data={data} metadata={metadata} filteredData={brushFilteredData}>
           <CartesianBase
+            {...otherProps}
             axis={axis[layout]}
+            axisFiltered={axisFiltered[layout]}
             grid={{
               hideRows: !isHorizontal,
               hideColumns: isHorizontal,
             }}
             margin={zeroPadding}
-            {...otherProps}
+            onBrushChange={setBrushFilteredData}
+            ref={forwardedRef}
           />
         </DataProvider>
       </LayoutProvider>
     </ThemeProvider>
   );
-};
+});
 
 LineChart.displayName = 'LineChart';

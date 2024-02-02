@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Wonderflow Design Team
+ * Copyright 2023-2024 Wonderflow Design Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,11 @@ import _ from 'lodash';
 import { Except } from 'type-fest';
 
 import {
+  AverageType,
   AxisProps,
-  Data, LineChartIndex, LineChartOverlay, LineChartSeries,
+  Data, LineChartIndex, LineChartOverlay, LineChartSeries, SortingType,
 } from '../types';
+import { BarChartIndex, BarChartOverlay, BarChartSeries } from '../types/bar-chart';
 import { inferScaleTypeFromDomain } from './axis';
 import { formatDate } from './format';
 import {
@@ -28,9 +30,9 @@ import {
   removeNilsFromDomain,
 } from './math';
 
-export const getValueFromObjectByPath = (object: Record<string, any>, path: string) => _.at(object, path)[0];
+export const getValueFromObjectByPath = (object: Record<string, unknown>, path: string) => _.at(object, path)[0];
 
-export const getPrimitiveFromObjectByPath = (object: Record<string, any>, path: string) => {
+export const getPrimitiveFromObjectByPath = (object: Record<string, unknown>, path: string) => {
   const value = getValueFromObjectByPath(object, path);
   return (_.isString(value) || _.isNumber(value)) ? value : undefined;
 };
@@ -52,12 +54,12 @@ export const getLabelFromPath = (path: string) => {
 };
 
 export const getPrimitivesFromObjectArrayByPath = (
-  arr: Array<Record<string, any>>,
+  arr: Array<Record<string, unknown>>,
   path: string,
 ) => arr.map(o => getPrimitiveFromObjectByPath(o, path));
 
-export const removeKeysFromObject = (obj: Record<string, any>, keys: string[]) => {
-  const copy: Record<string, any> = {};
+export const removeKeysFromObject = (obj: Record<string, unknown>, keys: string[]) => {
+  const copy: Record<string, unknown> = {};
   const allKeys = Object.keys(obj);
 
   allKeys.forEach((k: string) => {
@@ -68,10 +70,10 @@ export const removeKeysFromObject = (obj: Record<string, any>, keys: string[]) =
 
 export const handleAxisDomainAndScaleType = (
   data: Data,
-  axis: LineChartIndex | LineChartSeries | LineChartOverlay,
+  axis: LineChartIndex | LineChartSeries | LineChartOverlay | BarChartIndex | BarChartSeries | BarChartOverlay,
 ): Except<AxisProps, 'orientation'> => {
   const hasData = !!data.length;
-  let res: Record<string, any> = {
+  let res: Record<string, unknown> = {
     ...axis,
     hideTickLabel: true,
     domain: [0, 1],
@@ -137,9 +139,9 @@ export const handleAxisDomainAndScaleType = (
 
 export const handleChartDomainAndScaleType = (
   data: Data,
-  index: LineChartIndex,
-  series: LineChartSeries,
-  overlay?: LineChartOverlay,
+  index: LineChartIndex | BarChartIndex,
+  series: LineChartSeries | BarChartSeries,
+  overlay?: LineChartOverlay | BarChartOverlay,
 ) => {
   const i = handleAxisDomainAndScaleType(data, index);
   const s = handleAxisDomainAndScaleType(data, series);
@@ -152,4 +154,44 @@ export const handleChartDomainAndScaleType = (
     series: s,
     overlay: o,
   };
+};
+
+export const sortBy = (
+  datum: Record<string, string | number | undefined | null >,
+  dataKey: string[],
+  sorting: SortingType,
+): string[] => {
+  if (sorting === 'as-is') return dataKey;
+
+  let isAscending = false;
+  let order = ['key', 'value'];
+
+  if (sorting === 'ascending-key' || sorting === 'ascending-value') {
+    isAscending = true;
+  }
+
+  if (sorting === 'descending-value' || sorting === 'ascending-value') {
+    order = ['value', 'key'];
+  }
+
+  const entries = Object.entries(datum).filter(e => dataKey.includes(e[0])).map(e => ({ key: e[0], value: e[1] }));
+  const orderedKeys = _.orderBy(entries, order).map(e => e.key);
+
+  return isAscending ? orderedKeys.reverse() : orderedKeys;
+};
+
+export const computeAverage = (
+  data: Data,
+  dataKeys: string[],
+): AverageType => {
+  const dataKey = dataKeys.map((k: string) => ({
+    name: k,
+    average: _.mean(data
+      .map(d => getPrimitiveFromObjectByPath(d, k))
+      .filter((d): d is number => typeof d === 'number')),
+  }));
+
+  const all = _.mean(dataKey.map(k => k.average));
+
+  return _.isNaN(all) ? undefined : { average: all, dataKey };
 };

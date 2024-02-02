@@ -15,6 +15,7 @@
  */
 
 export * from './axis';
+export * from './bar-chart';
 export * from './cartesian';
 export * from './colors';
 export * from './grid';

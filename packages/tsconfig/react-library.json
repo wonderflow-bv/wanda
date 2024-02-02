@@ -8,8 +8,7 @@
     "target": "ESNext",
     "jsx": "react-jsx",
     "paths": {
-      "@/components": ["packages/react-components/src"],
-      "@/charts": ["packages/charts/src"]
+      "@/components": ["packages/react-components/src"]
     }
   }
 }

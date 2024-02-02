@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Wonderflow Design Team
+ * Copyright 2023-2024 Wonderflow Design Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,10 @@
 
 export type ViewportSize = 'small' | 'medium' | 'large';
 
-export type ViewportSizeConfig = {
-  maxWidth?: number;
-  maxHeight?: number;
+export type ViewportSizeProperties = {
+  maxWidth: number;
+  maxHeight: number;
   numTicks: number;
 }
 
-export type ViewportStyleConfig = Record<ViewportSize, ViewportSizeConfig>
+export type ViewportStyleConfig = Record<'small' | 'medium', ViewportSizeProperties> & Record<'large', Pick<ViewportSizeProperties, 'numTicks'>>

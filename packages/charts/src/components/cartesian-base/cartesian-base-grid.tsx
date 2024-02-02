@@ -39,7 +39,7 @@ export type CartesianBaseGridProps = {
   tickRows?: number;
   tickColumns?: number;
   background?: Background;
-  otherProps?: Record<string, any>;
+  otherProps?: Record<string, unknown>;
 }
 
 export const CartesianBaseGrid: React.FC<CartesianBaseGridProps> = ({

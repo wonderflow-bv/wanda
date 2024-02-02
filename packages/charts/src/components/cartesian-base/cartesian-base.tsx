@@ -1,34 +1,30 @@
 /*
-* Copyright 2023 Wonderflow Design Team
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright 2023-2024 Wonderflow Design Team
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import { RectClipPath } from '@visx/clip-path';
 import { LinearGradient } from '@visx/gradient';
 import { Group } from '@visx/group';
-import { useSize } from 'ahooks';
-import _ from 'lodash';
-import {
-  CSSProperties,
-  useMemo, useRef,
-} from 'react';
+import clsx from 'clsx';
+import React, { forwardRef, SVGProps } from 'react';
+import { mergeRefs } from 'react-merge-refs';
 
+import { useCartesian } from '../../hooks';
 import { StyleConfigProvider } from '../../providers';
 import { CartesianProvider } from '../../providers/cartesian';
-import { useDataContext } from '../../providers/data';
-import { useThemeContext } from '../../providers/theme';
-import { cartesianStyleConfig, headingsStyleConfig as hStyle } from '../../style-config';
+import { DataProvider } from '../../providers/data';
 import { AxisOrientation } from '../../types';
 import {
   AxisProps, CartesianStyleConfig, GridProps, MarginProps,
@@ -36,18 +32,16 @@ import {
 import { Background } from '../../types/linear-gradient';
 import {
   Charts,
+  Data,
   DeepPartial,
 } from '../../types/main';
-import {
-  computeAxisStyleConfig,
-  computeAxisSystemProperties, handleVerticalTickLabelOffset,
-} from '../../utils/axis';
 import { EmptyState } from '../empty-state';
 import { Headings, HeadingsProps } from '../headings';
 import { Loader } from '../loader';
-import { Lines } from '../shapes';
-import styles from './cartesian-base.module.css';
+import { Bars, Lines } from '../shapes';
+import styles, { Unselectable } from './cartesian-base.module.css';
 import { CartesianBaseAxis } from './cartesian-base-axis';
+import { CartesianBaseBrush } from './cartesian-base-brush';
 import { CartesianBaseGrid } from './cartesian-base-grid';
 import { CartesianBaseLegend } from './cartesian-base-legend';
 
@@ -65,7 +59,7 @@ export type CartesianBaseProps = {
    */
   headings?: Pick<HeadingsProps, 'top'| 'left'| 'config'>;
   /**
-   * Set the Cartesian component width. 800px is the default value;
+   * Set the Cartesian component width. 800px is the default value.
    */
   width?: number;
   /**
@@ -97,6 +91,14 @@ export type CartesianBaseProps = {
    */
   axis: Record<AxisOrientation, AxisProps | undefined>;
   /**
+   * Set `Axis System` properties used by the `Brush` component.
+   */
+  axisFiltered: Record<AxisOrientation, AxisProps | undefined>;
+  /**
+   * Set the `Brush` visibility.
+   */
+  showBrush?: boolean;
+  /**
    * Hide `Legend` when set to `true`.
    */
   hideLegend?: boolean;
@@ -117,12 +119,24 @@ export type CartesianBaseProps = {
    */
   styleConfig?: DeepPartial<CartesianStyleConfig>;
   /**
-   * Set other custom properties.
+   * Set SVG custom properties.
    */
-  otherProps?: Record<string, any>;
+  otherProps?: SVGProps<SVGSVGElement>;
+  /**
+   * Set extra class
+   */
+  className?: string;
+  /**
+   * Add some inline style
+   */
+  style?: Record<string, any>;
+  /**
+   * A callback to retrieve data filtered from the brush.
+   */
+  onBrushChange: (filteredData: Data) => void;
 }
 
-export const CartesianBase: React.FC<CartesianBaseProps> = ({
+export const CartesianBase = forwardRef<HTMLElement, CartesianBaseProps>(({
   width = 800,
   height = 600,
   preventResponsive,
@@ -142,105 +156,81 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
   subtitle,
   headings,
   axis,
+  axisFiltered,
+  showBrush = false,
   hideLegend = false,
   emptyState,
   emptyStateMessage,
   customLegend,
   styleConfig,
+  className,
+  style,
   otherProps,
-}: CartesianBaseProps) => {
-  const theme = useThemeContext();
-  const { metadata, data } = useDataContext();
-
-  const cartesianConfig = _.merge(cartesianStyleConfig, styleConfig);
-  const { axis: aStyle, legend: lStyle, themes } = cartesianConfig;
-  const { from, to } = _.merge(themes[theme].background, background);
-
-  const ref = useRef(null);
-  const size = useSize(ref);
-
-  const refLegend = useRef(null);
-  const sizeLegend = useSize(refLegend);
-
-  const hasData = !!data.length;
-  const hasEmptyState = !isLoading && !hasData;
-
-  const hasLegend = hasData && !hideLegend && !isLoading;
-  const legendHeight = hasLegend ? (sizeLegend?.height ?? 0) : 0;
-
-  const hasHeadings = !!title;
-  const headingsHeight = hasHeadings ? hStyle.height : 0;
-
-  const w = size ? size.width : width;
-  const h = size ? size.height : height;
-
-  const dynamicWidth = preventResponsive ? width : w;
-  const dynamicHeight = preventResponsive ? height : h;
-
-  const dynamicStyle: CSSProperties = {
-    '--static-width': `${dynamicWidth}px`,
-    '--static-height': `${dynamicHeight}px`,
-    '--legend-width': `calc(100% - ${margin.left + margin.right}px)`,
-    '--legend-top': `calc(100% - ${legendHeight + margin.bottom}px)`,
-    '--legend-left': `${margin.left}px`,
-    '--legend-padding': lStyle.padding,
-  };
-
+  onBrushChange,
+},
+forwardedRef) => {
   const {
-    top, right, bottom, left,
-  } = axis;
-
-  const axisConfig = useMemo(() => computeAxisStyleConfig(axis, aStyle), [aStyle, axis]);
-
-  const {
-    leftAxisOffset: lOff,
-    topAxisOffset: tOff,
-    verticalAxisOffset: vOff,
-    horizontalAxisOffset: hOff,
-  } = axisConfig.offset;
-
-  const mr = margin.right * (right ? 1 : 2);
-  const ml = margin.left * (left ? 1 : 2);
-
-  const xMax = dynamicWidth - ml - mr - vOff;
-
-  const topTickLabelOffset = handleVerticalTickLabelOffset(xMax, cartesianConfig, top);
-  const bottomTickLabelOffset = handleVerticalTickLabelOffset(xMax, cartesianConfig, bottom);
-
-  const mt = margin.top * (top ? 1 : 2) + headingsHeight + topTickLabelOffset;
-  const mb = margin.bottom * (bottom ? 1 : 2) + legendHeight + bottomTickLabelOffset;
-
-  const yMax = dynamicHeight - mt - mb - hOff;
-
-  const dimension = {
-    maxWidth: xMax,
-    maxHeight: yMax,
-  };
-
-  const position = {
-    top: mt + tOff,
-    right: ml + lOff + xMax,
-    bottom: mt + tOff + yMax,
-    left: ml + lOff,
-  };
-
-  const axisSystem = computeAxisSystemProperties(axis, dimension, position);
+    axisConfig,
+    axisFilteredSystem,
+    axisSystem,
+    bgFrom,
+    bgTo,
+    brushSize,
+    brushPadding,
+    cartesianConfig,
+    dimension,
+    dynamicHeight,
+    dynamicWidth,
+    dynamicStyle,
+    hasBrush,
+    hasData,
+    hasLegend,
+    filteredData,
+    hasEmptyState,
+    hoveredLegendItem,
+    metadata,
+    position,
+    ref,
+    refLegend,
+    theme,
+    setHoveredLegendItem,
+  } = useCartesian({
+    axis,
+    axisFiltered,
+    background,
+    headings,
+    height,
+    hideLegend,
+    isLoading,
+    margin,
+    preventResponsive,
+    showBrush,
+    styleConfig,
+    title,
+    width,
+  });
 
   return (
     <div
-      className={styles.Wrapper}
-      data-theme={theme}
-      data-responsive={!preventResponsive}
-      ref={ref}
-      style={dynamicStyle}
+      aria-atomic="true"
+      aria-hidden="false"
+      aria-label="Cartesian Chart"
+      className={clsx([styles.Wrapper, className])}
       data-testid="cartesian"
+      data-responsive={!preventResponsive}
+      data-theme={theme}
+      ref={mergeRefs([ref, forwardedRef])}
+      role="img"
+      style={{ ...style, ...dynamicStyle }}
     >
       <StyleConfigProvider styleConfig={cartesianConfig}>
         <svg
+          {...otherProps}
           width={dynamicWidth}
           height={dynamicHeight}
           viewBox={`0 0 ${dynamicWidth} ${dynamicHeight}`}
-          {...otherProps}
+          className={Unselectable}
+          onMouseOver={() => setHoveredLegendItem('')}
         >
 
           <RectClipPath
@@ -253,13 +243,13 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
 
           <RectClipPath
             id="clip-path-cartesian-chart"
-            x={position.left}
-            y={position.top}
-            width={dimension.maxWidth}
-            height={dimension.maxHeight}
+            x={position.axis.left}
+            y={position.axis.top}
+            width={dimension.axis.maxWidth}
+            height={dimension.axis.maxHeight}
           />
 
-          <LinearGradient id="cartesian-container" from={from} to={to} />
+          <LinearGradient id="cartesian-container" from={bgFrom} to={bgTo} />
 
           <rect
             x={0}
@@ -275,73 +265,93 @@ export const CartesianBase: React.FC<CartesianBaseProps> = ({
           <Headings
             title={title}
             subtitle={subtitle}
-            top={headings?.top ?? margin.top}
-            left={headings?.left ?? ml}
+            top={position.headings.top}
+            left={position.headings.left}
             config={headings?.config}
+            data-inner-element="Headings"
           />
 
           <Loader
             isLoading={isLoading}
-            top={margin.top + headingsHeight}
-            left={margin.left}
-            width={dynamicWidth - margin.left - margin.right}
-            height={dynamicHeight - headingsHeight - margin.top - margin.bottom}
+            top={position.loader.top}
+            left={position.loader.left}
+            width={dimension.loader.width}
+            height={dimension.loader.height}
+            data-inner-element="Loader"
           />
 
           {!isLoading && (
             <Group clipPath="url(#clip-path-cartesian-container)">
               <CartesianBaseGrid
-                position={position}
-                dimension={dimension}
-                axis={axisSystem}
+                position={position.axis}
+                dimension={dimension.axis}
+                axis={axisFilteredSystem}
                 hideRows={!hasData || grid.hideRows}
                 hideColumns={!hasData || grid.hideColumns}
                 tickRows={grid.tickRows}
                 tickColumns={grid.tickColumns}
                 background={grid.background}
                 otherProps={grid.otherProps}
+                data-inner-element="CartesianBaseGrid"
               />
 
               <CartesianBaseAxis
-                dimension={dimension}
-                axis={axisSystem}
+                dimension={dimension.axis}
+                axis={axisFilteredSystem}
                 axisConfig={axisConfig}
+                data-inner-element="CartesianBaseAxis"
               />
 
               <EmptyState
-                position={position}
-                dimension={dimension}
+                position={position.axis}
+                dimension={dimension.axis}
                 customEmptyState={emptyState}
                 message={emptyStateMessage}
                 isVisible={hasEmptyState}
+                data-inner-element="EmptyState"
               />
 
               {hasData && (
                 <CartesianProvider
-                  position={position}
-                  dimension={dimension}
-                  axis={axisSystem}
+                  position={position.axis}
+                  dimension={dimension.axis}
+                  axis={axisFilteredSystem}
+                  hoveredLegendItem={hoveredLegendItem}
                 >
-                  <Group clipPath="url(#clip-path-cartesian-chart)">
-                    {metadata?.type === Charts.LINE_CHART && <Lines />}
-                  </Group>
+                  <DataProvider data={filteredData} metadata={metadata} filteredData={filteredData}>
+                    <Group clipPath="url(#clip-path-cartesian-chart)">
+                      {metadata?.type === Charts.LINE_CHART && <Lines />}
+                      {metadata?.type === Charts.BAR_CHART && <Bars />}
+                    </Group>
+                  </DataProvider>
                 </CartesianProvider>
               )}
+
+              <CartesianBaseBrush
+                axisSystem={axisSystem}
+                brushSize={brushSize}
+                dimension={dimension.axis}
+                isVisible={hasBrush}
+                padding={brushPadding}
+                position={position.brush}
+                onChange={onBrushChange}
+                data-inner-element="CartesianBaseBrush"
+              />
             </Group>
           )}
         </svg>
 
-        {hasLegend && (
-          <CartesianBaseLegend
-            customLegend={customLegend}
-            hideLegend={hideLegend}
-            ref={refLegend}
-          />
-        )}
+        <CartesianBaseLegend
+          customLegend={customLegend}
+          isVisible={hasLegend}
+          ref={refLegend}
+          onMouseOver={(dataKey: string) => setHoveredLegendItem(dataKey)}
+          data-inner-element="CartesianBaseLegend"
+        />
       </StyleConfigProvider>
 
     </div>
   );
-};
+});
 
 CartesianBase.displayName = 'CartesianBase';

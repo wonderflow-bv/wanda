@@ -5,7 +5,7 @@ import { Card } from '@/components';
 
 // import { CartesianChartLayout, LineChart, LineChartProps } from '../../../../../charts/src';
 import {
-  channels, channelsB, feedbackCount, feedbackCountGaps, proCons,
+  channels, channelsB, feedbackCount, feedbackCountGaps, proCons, products,
 } from '../mock-data';
 import styles from './sb-charts.module.css';
 
@@ -20,6 +20,8 @@ const story: ComponentMeta<typeof LineChart> = {
     showMarker: false,
     showMarkerLabel: false,
     hideMissingDataConnection: false,
+    showAverage: false,
+    showBrush: false,
     hideLegend: false,
     hidePadding: false,
     layout: CartesianChartLayout.HORIZONTAL,
@@ -68,6 +70,12 @@ withOverlay.args = {
   },
 };
 
+export const withAverage = Template.bind({});
+withAverage.args = {
+  subtitle: 'A trend line chart with average',
+  showAverage: true,
+};
+
 export const withMissingData = Template.bind({});
 withMissingData.args = {
   data: feedbackCountGaps,
@@ -95,10 +103,10 @@ withMultipleSeries.args = {
   },
 };
 
-export const withLabelIndex = Template.bind({});
-withLabelIndex.args = {
+export const withCategoriesOnIndex = Template.bind({});
+withCategoriesOnIndex.args = {
   title: 'Multiple Series',
-  subtitle: 'A line chart with label index',
+  subtitle: 'A line chart with categories on index',
   data: channels,
   index: {
     dataKey: 'channel',
@@ -133,8 +141,8 @@ withNestedData.args = {
     },
   },
   tooltip: {
-    extraSeriesData: series => `${series.percentage}%`,
-    extraOverlayData: overlay => `${overlay.percentage}%`,
+    extraSeriesData: (series: any) => `${series.percentage}%`,
+    extraOverlayData: (overlay: any) => `${overlay.percentage}%`,
     extraContent: <div>some extra content</div>,
   },
   renderAs: 'lines',
@@ -169,6 +177,39 @@ withCustomLineStyle.args = {
         strokeWidth: '1.5',
       },
     ],
+  },
+};
+
+export const withBrush = Template.bind({});
+withBrush.args = {
+  data: products,
+  subtitle: 'A trend line chart with twelve series',
+  renderAs: 'lines',
+  showMarker: true,
+  showBrush: true,
+  index: {
+    dataKey: 'date',
+    label: 'Year',
+  },
+  series: {
+    dataKey: [
+      'QN95B Neo QLED 4K TV',
+      'Q800A Neo QLED 4K TV',
+      'Q60A QLED 4K TV',
+      'C2 OLED 4K TV',
+      'G2 OLED Evo 4K TV',
+      'B2 OLED 4K TV',
+      'A95K QD-OLED 4K TV',
+      'X95J LED 4K TV',
+      'X85J LED 4K TV',
+      'R6485Q Mini-LED QLED 4K TV',
+      'S546Q 4K QLED TV',
+      'S435 4K Roku TV',
+    ],
+    label: 'Product Units',
+    tickFormat: (l: any) => `${l}K`,
+    domain: [0, 1000],
+    hideZero: true,
   },
 };
 
@@ -245,14 +286,18 @@ renderAsSteps.args = {
   },
 };
 
-const WithinCardTemplate: ComponentStory<typeof LineChart> = args => (
-  <Card
-    bordered
-    className={styles.Card}
-  >
-    <LineChart {...args} />
-  </Card>
-);
+const WithinCardTemplate: ComponentStory<typeof LineChart> = (args) => {
+  const { theme } = args;
+  return (
+    <Card
+      bordered
+      className={styles.Card}
+      style={{ backgroundColor: theme === 'dark' ? '#202227' : undefined }}
+    >
+      <LineChart {...args} />
+    </Card>
+  );
+};
 
 export const WithinCard = WithinCardTemplate.bind({});
 WithinCard.args = {

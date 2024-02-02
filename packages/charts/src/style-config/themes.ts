@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Wonderflow Design Team
+ * Copyright 2023-2024 Wonderflow Design Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,6 +48,22 @@ export const themeLight: Theme = {
   },
   lines: {
     noData: colorPaletteNeutrals.dimmed1,
+    average: colorPaletteNeutrals.dimmed8,
+    averageFontColor: colorPaletteNeutrals.dimmed0,
+  },
+  brush: {
+    handle: {
+      fill: colorPaletteNeutrals.dimmed0,
+      stroke: colorPaletteNeutrals.dimmed4,
+    },
+    selectedBox: {
+      fill: colorPaletteNeutrals.dimmed7,
+      stroke: colorPaletteNeutrals.dimmed4,
+    },
+    pattern: {
+      fill: 'none',
+      stroke: colorPaletteNeutrals.dimmed4,
+    },
   },
 };
 
@@ -82,6 +98,22 @@ export const themeDark: Theme = {
   },
   lines: {
     noData: colorPaletteNeutrals.dimmed7,
+    average: colorPaletteNeutrals.dimmed0,
+    averageFontColor: colorPaletteNeutrals.dimmed8,
+  },
+  brush: {
+    handle: {
+      fill: colorPaletteNeutrals.dimmed0,
+      stroke: colorPaletteNeutrals.dimmed4,
+    },
+    selectedBox: {
+      fill: colorPaletteNeutrals.dimmed2,
+      stroke: colorPaletteNeutrals.dimmed4,
+    },
+    pattern: {
+      fill: 'none',
+      stroke: colorPaletteNeutrals.dimmed4,
+    },
   },
 };
 

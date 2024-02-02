@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Wonderflow Design Team
+ * Copyright 2023-2024 Wonderflow Design Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,8 @@
 import { Group } from '@visx/group';
 import { LinePath } from '@visx/shape';
 import _ from 'lodash';
-import { useMemo } from 'react';
+import { LineChartMetadata } from 'packages/charts/src/types';
+import { useCallback, useMemo } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import {
@@ -28,7 +29,7 @@ import {
   getCoordinates, getLinesRenderer, getValueFromObjectByPath,
 } from '../../../utils';
 import {
-  LinesItem,
+  LinesItem, LinesItemBlurred,
 } from './lines.module.css';
 
 export const LinesSeries: React.FC = () => {
@@ -36,21 +37,21 @@ export const LinesSeries: React.FC = () => {
   const { lines: defaultStyle, themes } = useStyleConfigContext();
   const { data, metadata } = useDataContext();
   const { isHorizontal } = useLayoutContext();
-  const { axis } = useCartesianContext();
+  const { axis, hoveredLegendItem: overLegend } = useCartesianContext();
 
   const { left, bottom } = axis!;
   const {
     index, renderAs, showMarker, showMarkerLabel,
     series, hideMissingDataConnection,
-  } = metadata!;
+  } = metadata! as LineChartMetadata;
 
   const indexAxis = isHorizontal ? bottom : left;
   const seriesAxis = isHorizontal ? left : bottom;
 
   const renderer = useMemo(() => getLinesRenderer(renderAs, isHorizontal), [isHorizontal, renderAs]);
 
-  const getSeriesCoordinates = (
-    datum: Record<string, any>,
+  const getSeriesCoordinates = useMemo(() => (
+    datum: Record<string, unknown>,
     dataKey: string,
     isHorizontal: boolean,
   ) => getCoordinates({
@@ -60,7 +61,11 @@ export const LinesSeries: React.FC = () => {
     otherAxis: seriesAxis!,
     otherDataKey: dataKey,
     isHorizontal,
-  });
+  }), [index, indexAxis, seriesAxis]);
+
+  const dynamicClassName = useCallback((overLegend: string, dataKey: string) => ((overLegend === dataKey || overLegend === '')
+    ? LinesItem
+    : LinesItemBlurred), []);
 
   return (
     <>
@@ -79,12 +84,12 @@ export const LinesSeries: React.FC = () => {
 
         return (
           subPaths.map((
-            subPathData: Array<Record<string, any>>,
+            subPathData: Array<Record<string, unknown>>,
             si: number,
           ) => (
             <Group
               key={uuid()}
-              className={LinesItem}
+              className={dynamicClassName(overLegend, dataKey)}
             >
               <LinePath
                 data-testid="lines-series"
@@ -102,7 +107,7 @@ export const LinesSeries: React.FC = () => {
                   : defaultStyle.segment.strokeDashArray}
               />
 
-              {hasMarker && subPathData.map((d: Record<string, any>) => (
+              {hasMarker && subPathData.map((d: Record<string, unknown>) => (
                 <circle
                   key={uuid()}
                   r={defaultStyle.marker.radius}

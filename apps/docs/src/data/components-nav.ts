@@ -64,10 +64,6 @@ const ComponentsNav: NavigationMenu = [
       {
         path: '/get-started/components/dialogs/modal',
         label: 'Modal',
-        tag: {
-          color: 'red',
-          label: 'update',
-        },
         target: '',
       },
       {
@@ -238,10 +234,6 @@ const ComponentsNav: NavigationMenu = [
         path: '/get-started/components/typography/text',
         label: 'Text',
         target: '',
-        tag: {
-          color: 'red',
-          label: 'update',
-        },
       },
     ],
   },

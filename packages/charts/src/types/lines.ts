@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Wonderflow Design Team
+ * Copyright 2023-2024 Wonderflow Design Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,6 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+import { TextProps } from '@visx/text';
 
 export type LinesStyleConfig = {
   lineIndicator: {
@@ -36,5 +38,17 @@ export type LinesStyleConfig = {
     radius: number;
     strokeWidth: number;
     strokeOpacity: number;
+  };
+  average: {
+    maxLabelWidth: number;
+    opacity: number;
+    pointerEvents: string;
+    strokeDasharray: string;
+    strokeWidth: number;
+    titleFontSize: number;
+    titleFontWeight: number;
+    backgroundPadding: number;
+    backgroundProps: React.SVGProps<SVGRectElement> | undefined;
+    titleProps: Partial<TextProps> | undefined;
   };
 }

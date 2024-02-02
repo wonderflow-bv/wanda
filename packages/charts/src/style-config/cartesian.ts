@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Wonderflow Design Team
+ * Copyright 2023-2024 Wonderflow Design Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 import { CartesianStyleConfig } from '../types/cartesian';
 import { axisStyleConfig } from './axis';
+import { brushStyleConfig } from './brush';
 import { gridStyleConfig } from './grid';
 import { headingsStyleConfig } from './headings';
 import { legendStyleConfig } from './legend';
@@ -24,11 +25,12 @@ import { themes } from './themes';
 import { viewportStyleConfig } from './viewport';
 
 export const cartesianStyleConfig: CartesianStyleConfig = {
+  axis: axisStyleConfig,
+  brush: brushStyleConfig,
   headings: headingsStyleConfig,
   grid: gridStyleConfig,
-  axis: axisStyleConfig,
   legend: legendStyleConfig,
   lines: linesStyleConfig,
-  viewport: viewportStyleConfig,
   themes,
+  viewport: viewportStyleConfig,
 };

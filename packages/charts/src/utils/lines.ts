@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Wonderflow Design Team
+ * Copyright 2023-2024 Wonderflow Design Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -81,7 +81,7 @@ export const getCoordinates = (
     otherDataKey,
     isHorizontal,
   }: {
-    datum: Record<string, any>;
+    datum: Record<string, unknown>;
     indexAxis: CartesianAxis;
     indexDataKey: string;
     otherAxis: CartesianAxis;
@@ -141,8 +141,8 @@ export const getMarkerLabelProps = (
       textAnchor: 'start' as 'middle' | 'start' | 'end' | 'inherit' | undefined,
     },
     backgroundProps: {
-      rx: 4,
-      ry: 4,
+      rx: 2,
+      ry: 2,
       x: 0,
       y: 0,
       filter: 'opacity(0.7)',
@@ -199,9 +199,9 @@ export const getMarkerLabelProps = (
 };
 
 export const createSubArrays = (
-  arr: Array<Record<string, any>>,
-  condition: (d: Record<string, any>) => boolean,
-) => arr.reduce((acc, cur) => {
+  arr: Array<Record<string, unknown>>,
+  condition: (d: Record<string, unknown>) => boolean,
+) => arr.reduce((acc: Array<Array<Record<string, unknown>>>, cur: Record<string, unknown>) => {
   const items = acc.length;
   const lastIndex = acc.length - 1;
 
@@ -216,11 +216,11 @@ export const createSubArrays = (
   }
 
   return acc;
-}, []) as Array<Array<Record<string, any>>>;
+}, []);
 
 export const createSubPaths = (
   data: Data,
-  condition: (d: Record<string, any>) => boolean,
+  condition: (d: Record<string, unknown>) => boolean,
 ) => {
   const subArray = createSubArrays(data, condition);
 
@@ -228,7 +228,7 @@ export const createSubPaths = (
   if (!subArray[subArray.length - 1].length) subArray.pop();
 
   if (subArray.length > 1) {
-    return subArray.map((a: Array<Record<string, any>>, i: number) => {
+    return subArray.map((a: Array<Record<string, unknown>>, i: number) => {
       const len = a.length;
 
       const prev = i - 1;

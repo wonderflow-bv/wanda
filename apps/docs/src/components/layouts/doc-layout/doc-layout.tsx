@@ -54,8 +54,11 @@ export const DocLayout: FCChildren<IPropsDocLayout> = ({
 
     if (pretitle && isDifferentFromTitle) {
       if (router.asPath.includes('domain-components')) return 'domain components';
+      if (router.asPath.includes('charts')) return 'data visualization';
       return pretitle;
     }
+
+    if (router.asPath.includes('release-notes')) return 'what\'s new';
 
     return 'documentation';
   }, [router, title]);

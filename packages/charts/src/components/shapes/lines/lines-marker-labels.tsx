@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Wonderflow Design Team
+ * Copyright 2023-2024 Wonderflow Design Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,13 @@
 
 import { Label } from '@visx/annotation';
 import { Group } from '@visx/group';
+import { LineChartMetadata } from 'packages/charts/src/types';
+import { useCallback } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import {
-  useCartesianContext, useDataContext, useLayoutContext, useThemeContext,
+  useCartesianContext, useDataContext, useLayoutContext, useStyleConfigContext, useThemeContext,
 } from '../../../providers';
-import { themes } from '../../../style-config';
 import {
   getCoordinates,
   getMarkerLabelProps,
@@ -29,22 +30,25 @@ import {
   isMarkerLabelVisible,
 } from '../../../utils';
 import {
-  LinesItem,
+  LinesItem, LinesItemBlurred,
 } from './lines.module.css';
 
 export const LinesMarkerLabels: React.FC = () => {
   const theme = useThemeContext();
   const { data, metadata } = useDataContext();
   const { isHorizontal } = useLayoutContext();
-  const { axis, dimension } = useCartesianContext();
+  const { axis, dimension, hoveredLegendItem: overLegend } = useCartesianContext();
+  const { themes, viewport } = useStyleConfigContext();
 
   const {
     index, showMarkerLabel, series, overlay,
-  } = metadata!;
+  } = metadata! as LineChartMetadata;
 
   const indexAxis = isHorizontal ? axis!.bottom : axis!.left;
   const seriesAxis = isHorizontal ? axis!.left : axis!.bottom;
   const overlayAxis = isHorizontal ? axis?.right : axis?.top;
+
+  const hasMarkerLabel = dimension.maxWidth > viewport.small.maxWidth;
 
   const hasOverlay = Boolean(overlayAxis && overlay.dataKey);
 
@@ -52,7 +56,7 @@ export const LinesMarkerLabels: React.FC = () => {
   const totalLabels = data.length;
 
   const getSeriesCoordinates = (
-    datum: Record<string, any>,
+    datum: Record<string, unknown>,
     dataKey: string,
     isHorizontal: boolean,
   ) => getCoordinates({
@@ -65,7 +69,7 @@ export const LinesMarkerLabels: React.FC = () => {
   });
 
   const getOverlayCoordinates = (
-    datum: Record<string, any>,
+    datum: Record<string, unknown>,
     dataKey: string,
     isHorizontal: boolean,
   ) => getCoordinates({
@@ -77,15 +81,21 @@ export const LinesMarkerLabels: React.FC = () => {
     isHorizontal,
   });
 
+  const dynamicClassName = useCallback((overLegend: string, dataKey: string) => ((overLegend === dataKey || overLegend === '')
+    ? LinesItem
+    : LinesItemBlurred), []);
+
+  if (!hasMarkerLabel) return null;
+
   return (
     <>
-      {series.dataKey.map((k: string, i: number) => (
+      { series.dataKey.map((k: string, i: number) => (
         <Group
           key={uuid()}
-          className={LinesItem}
+          className={dynamicClassName(overLegend, k)}
         >
           {(showMarkerLabel || series.style?.[i]?.showMarkerLabel)
-            && data.map((d: Record<string, any>, di: number) => {
+            && data.map((d: Record<string, unknown>, di: number) => {
               const isVisible = isMarkerLabelVisible(di, totalLabels);
               const title = `${getPrimitiveFromObjectByPath(d, k) ?? ''}`;
               const coordinates = getSeriesCoordinates(d, k, isHorizontal);
@@ -130,7 +140,7 @@ export const LinesMarkerLabels: React.FC = () => {
       ))}
 
       {hasOverlay && (showMarkerLabel || overlay.style?.showMarkerLabel)
-            && data.map((d: Record<string, any>, di: number) => {
+            && data.map((d: Record<string, unknown>, di: number) => {
               const isVisible = isMarkerLabelVisible(di, totalLabels);
               const title = `${getPrimitiveFromObjectByPath(d, overlay.dataKey!) ?? ''}`;
               const coordinates = getOverlayCoordinates(d, overlay.dataKey!, isHorizontal);
@@ -152,6 +162,7 @@ export const LinesMarkerLabels: React.FC = () => {
                   ? (
                     <Label
                       key={uuid()}
+                      className={dynamicClassName(overLegend, overlay.dataKey!)}
                       backgroundFill={background}
                       x={coordinates.x}
                       y={coordinates.y}

@@ -1,18 +1,18 @@
 /*
-* Copyright 2023 Wonderflow Design Team
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright 2023-2024 Wonderflow Design Team
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/naming-convention */
@@ -106,12 +106,8 @@ export const LinesTooltip: React.FC = () => {
 
     const lineIndicatorPos = scale(indexScaleValue as any);
 
-    const tooltipLeft = isHorizontal
-      ? (coords.x + lBound / 8)
-      : coords.x;
-    const tooltipTop = isHorizontal
-      ? coords.y
-      : (coords.y + tBound / 8);
+    const tooltipLeft = ('clientX' in event ? event.clientX : 0) - lBound / 8;
+    const tooltipTop = ('clientY' in event ? event.clientY : 0) - tBound / 8;
 
     const datum = data[indexOfBisectValue];
     const hasSeriesData = series.dataKey.every(s => !_.isNil(getPrimitiveFromObjectByPath(datum, s)));

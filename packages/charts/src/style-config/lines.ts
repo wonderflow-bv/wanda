@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Wonderflow Design Team
+ * Copyright 2023-2024 Wonderflow Design Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,5 +38,17 @@ export const linesStyleConfig: LinesStyleConfig = {
     radius: 2,
     strokeWidth: 1,
     strokeOpacity: 1,
+  },
+  average: {
+    maxLabelWidth: 200,
+    opacity: 0.8,
+    pointerEvents: 'none',
+    strokeDasharray: '5,2',
+    strokeWidth: 1,
+    titleFontSize: 12,
+    titleFontWeight: 400,
+    backgroundPadding: 4,
+    backgroundProps: { rx: 2, ry: 2 },
+    titleProps: { dy: -1 },
   },
 };

@@ -1,12 +1,16 @@
 
-import { LineChartIndex, LineChartOverlay, LineChartSeries } from '../types';
 import {
+  Data, LineChartIndex, LineChartOverlay, LineChartSeries,
+} from '../types';
+import {
+  computeAverage,
   getLabelFromPath,
   getPrimitiveFromObjectByPath,
   getPrimitivesFromObjectArrayByPath,
   getValueFromObjectByPath,
   handleAxisDomainAndScaleType,
   handleChartDomainAndScaleType,
+  sortBy,
 } from './data';
 
 const data = [
@@ -400,6 +404,128 @@ describe('handleChartDomainAndScaleType()', () => {
       },
       overlay: undefined,
     };
+    expect(res).toStrictEqual(exp);
+  });
+});
+
+describe('sortBy()', () => {
+  it('should return an unmodified array of datakeys', () => {
+    const datum = { a: 2, b: 3, c: 1 };
+    const datakey = ['a', 'b', 'c'];
+    const res = sortBy(datum, datakey, 'as-is');
+    const exp = ['a', 'b', 'c'];
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return alphabetical ordered datakeys', () => {
+    const datum = { a: 2, b: 3, c: 1 };
+    const datakey = ['c', 'a', 'b'];
+    const res = sortBy(datum, datakey, 'descending-key');
+    const exp = ['a', 'b', 'c'];
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return reversed alphabetical ordered datakeys', () => {
+    const datum = { a: 2, b: 3, c: 1 };
+    const datakey = ['c', 'a', 'b'];
+    const res = sortBy(datum, datakey, 'ascending-key');
+    const exp = ['c', 'b', 'a'];
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return keys sorted by descending numerical dataValue', () => {
+    const datum = { a: 2, b: 3, c: 1 };
+    const datakey = ['a', 'b', 'c'];
+    const res = sortBy(datum, datakey, 'descending-value');
+    const exp = ['c', 'a', 'b'];
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return keys sorted by ascending numerical dataValue', () => {
+    const datum = { a: 2, b: 3, c: 1 };
+    const datakey = ['a', 'b', 'c'];
+    const res = sortBy(datum, datakey, 'ascending-value');
+    const exp = ['b', 'a', 'c'];
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return keys sorted by descending alphabetical dataValue', () => {
+    const datum = { a: 'xyz', b: 'jki', c: 'abc' };
+    const datakey = ['b', 'c', 'a'];
+    const res = sortBy(datum, datakey, 'descending-value');
+    const exp = ['c', 'b', 'a'];
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return keys sorted by ascending alphabetical dataValue', () => {
+    const datum = { a: 'xyz', b: 'jki', c: 'abc' };
+    const datakey = ['b', 'c', 'a'];
+    const res = sortBy(datum, datakey, 'ascending-value');
+    const exp = ['a', 'b', 'c'];
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return keys sorted by descending alphabetical dataValue with undefined value', () => {
+    const datum = {
+      a: 'xyz', b: undefined, c: 'abc', d: undefined,
+    };
+    const datakey = ['b', 'c', 'a', 'd'];
+    const res = sortBy(datum, datakey, 'descending-value');
+    const exp = ['c', 'a', 'b', 'd'];
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return keys sorted by descending alphabetical dataValue with undefined value', () => {
+    const datum = {
+      a: 'xyz', b: undefined, c: 'abc', d: undefined,
+    };
+    const datakey = ['b', 'c', 'a', 'd'];
+    const res = sortBy(datum, datakey, 'descending-value');
+    const exp = ['c', 'a', 'b', 'd'];
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return keys sorted by descending alphabetical dataValue with undefined value and less keys', () => {
+    const datum = {
+      a: 'xyz', b: undefined, c: 'abc', d: undefined,
+    };
+    const datakey = ['b', 'c'];
+    const res = sortBy(datum, datakey, 'descending-value');
+    const exp = ['c', 'b'];
+    expect(res).toStrictEqual(exp);
+  });
+});
+
+describe('computeAverage()', () => {
+  it('should return undefined when average is NaN', () => {
+    const data: Data = [];
+    const datakeys: string[] = [];
+    const res = computeAverage(data, datakeys);
+    const exp = undefined;
+    expect(res).toBe(exp);
+  });
+
+  it('should return average for a single dataKey', () => {
+    const data: Data = [{ testA: 3, testB: 5 }, { testA: 1, testB: 2 }];
+    const datakeys: string[] = ['testA'];
+    const res = computeAverage(data, datakeys);
+    const exp = { average: 2, dataKey: [{ name: 'testA', average: 2 }] };
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return average for multiple dataKeys', () => {
+    const data: Data = [{ testA: 3, testB: 5 }, { testA: 1, testB: 3 }];
+    const datakeys: string[] = ['testA', 'testB'];
+    const res = computeAverage(data, datakeys);
+    const exp = { average: 3, dataKey: [{ name: 'testA', average: 2 }, { name: 'testB', average: 4 }] };
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return average for multiple dataKeys with undefined value', () => {
+    const data: Data = [{ testA: 3, testB: 5 }, { testA: 3, testB: 3 }, { testA: undefined, testB: 4 }];
+    const datakeys: string[] = ['testA', 'testB'];
+    const res = computeAverage(data, datakeys);
+    const exp = { average: 3.5, dataKey: [{ name: 'testA', average: 3 }, { name: 'testB', average: 4 }] };
     expect(res).toStrictEqual(exp);
   });
 });

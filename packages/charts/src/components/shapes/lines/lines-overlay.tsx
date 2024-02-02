@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Wonderflow Design Team
+ * Copyright 2023-2024 Wonderflow Design Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,8 @@
 import { Group } from '@visx/group';
 import { LinePath } from '@visx/shape';
 import _ from 'lodash';
-import { useMemo } from 'react';
+import { LineChartMetadata } from 'packages/charts/src/types';
+import { useCallback, useMemo } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import {
@@ -28,7 +29,7 @@ import {
   getCoordinates, getLinesRenderer, getValueFromObjectByPath,
 } from '../../../utils';
 import {
-  LinesItem,
+  LinesItem, LinesItemBlurred,
 } from './lines.module.css';
 
 export const LinesOverlay: React.FC = () => {
@@ -36,12 +37,12 @@ export const LinesOverlay: React.FC = () => {
   const { lines: defaultStyle, themes } = useStyleConfigContext();
   const { data, metadata } = useDataContext();
   const { isHorizontal } = useLayoutContext();
-  const { axis } = useCartesianContext();
+  const { axis, hoveredLegendItem: overLegend } = useCartesianContext();
 
   const {
     index, renderAs, showMarker, showMarkerLabel, overlay,
     hideMissingDataConnection,
-  } = metadata!;
+  } = metadata! as LineChartMetadata;
 
   const indexAxis = isHorizontal ? axis!.bottom! : axis!.left!;
   const overlayAxis = isHorizontal ? axis?.right : axis?.top;
@@ -51,7 +52,7 @@ export const LinesOverlay: React.FC = () => {
   const renderer = useMemo(() => getLinesRenderer(renderAs, isHorizontal), [isHorizontal, renderAs]);
 
   const getOverlayCoordinates = useMemo(() => (
-    datum: Record<string, any>,
+    datum: Record<string, unknown>,
     dataKey: string,
     isHorizontal: boolean,
   ) => getCoordinates({
@@ -75,13 +76,17 @@ export const LinesOverlay: React.FC = () => {
 
   const segmentStroke = hideMissingDataConnection ? 'transparent' : themes[theme].lines.noData;
 
+  const dynamicClassName = useCallback((overLegend: string, dataKey: string) => ((overLegend === dataKey || overLegend === '')
+    ? LinesItem
+    : LinesItemBlurred), []);
+
   return (
     <>
       {hasOverlay && (
-        subPaths.map((subPathData: Array<Record<string, any>>, si: number) => (
+        subPaths.map((subPathData: Array<Record<string, unknown>>, si: number) => (
           <Group
             key={uuid()}
-            className={LinesItem}
+            className={dynamicClassName(overLegend, overlay.dataKey!)}
           >
             <LinePath
               data-testid="lines-overlay"
@@ -95,7 +100,7 @@ export const LinesOverlay: React.FC = () => {
               strokeDasharray={si % 2 === 0 ? overlay.style?.strokeDasharray : defaultStyle.segment.strokeDashArray}
             />
 
-            {hasMarker && subPathData.map((d: Record<string, any>) => (
+            {hasMarker && subPathData.map((d: Record<string, unknown>) => (
               <circle
                 key={uuid()}
                 r={defaultStyle.marker.radius}

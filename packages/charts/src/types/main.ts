@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Wonderflow Design Team
+ * Copyright 2023-2024 Wonderflow Design Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ export type DeepPartial<T> = {
 
 export type ValidTypeOf = 'undefined'| 'object'| 'boolean'| 'number'| 'string'| 'function'| 'symbol'| 'bigint';
 
-export type Data = Array<Record<string, any>>;
+export type Data = Array<Record<string, unknown>>;
 
 export enum Charts {
   LINE_CHART = 'LINE_CHART',
@@ -28,3 +28,13 @@ export enum Charts {
 }
 
 export type ScaleType = 'linear' | 'label' | 'time';
+
+export type SortingType = 'descending-key' | 'ascending-key' | 'descending-value' | 'ascending-value' | 'as-is';
+
+export type AverageType = {
+  average: number;
+  dataKey: Array<{
+    name: string;
+    average: number;
+  }> ;
+} | undefined

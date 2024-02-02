@@ -1,4 +1,5 @@
 import { MDXProvider } from '@mdx-js/react';
+import * as Charts from '@wonderflow/charts';
 import type {
   GridItemProps,
   ListItemProps, ListProps, MenuItemCheckboxProps, MenuItemProps, SeparatorProps, TextProps,
@@ -45,6 +46,8 @@ export const MDX_COMPONENTS = {
       return <Component {...props} />;
     },
   }), {}),
+  LineChart: (props: Charts.LineChartProps) => <Charts.LineChart {...props} />,
+  CartesianBase: (props: Charts.CartesianBaseProps) => <Charts.CartesianBase {...props} />,
 };
 
 export const MDXLayout: FCChildren<IPropsMDXLayout> = ({

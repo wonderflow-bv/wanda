@@ -1,0 +1,204 @@
+/* stylelint-disable selector-pseudo-class-no-unknown, selector-class-pattern */
+
+@import '@wonderflow/react-components/core/utils/vibrancy.css';
+@import '@wonderflow/react-components/core/utils/media.css';
+
+:where(.Code) {
+
+  @mixin vibrancy;
+
+  position: relative;
+  display: grid;
+  border-radius: token(--radius-8);
+
+  @supports not (backdrop-filter: blur(0)) {
+    background-color: var(--dimmed-0);
+  }
+
+  & code[class*='language-'],
+  & pre[class*='language-'] {
+    overflow: auto;
+    overscroll-behavior: contain;
+    border-radius: token(--radius-8);
+    color: var(--global-foreground);
+    background: none;
+    font-family: token(--wds-font-family-mono);
+    text-align: left;
+    white-space: pre;
+    letter-spacing: 0.7px;
+    line-height: 1.5;
+    font-size: 1em;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    tab-size: 4;
+    hyphens: none;
+
+    @media (--from-medium) {
+      font-size: 1em;
+    }
+  }
+
+  & *::selection {
+    background-color: var(--dimmed-3);
+    color: inherit;
+    text-shadow: none;
+  }
+
+  /* Code blocks */
+  & pre[class*='language-'] {
+    margin: 0;
+    overflow: auto;
+    padding: token(--space-24);
+    max-height: var(--max-height);
+
+    @nest [data-code-block-has-toolbar='true'] & {
+      padding-top: 0;
+      margin-top: calc(token(--space-32) + token(--space-4));
+    }
+  }
+
+  & code[class*='language-'] {
+    padding-left: 0;
+  }
+
+  /* Inline code */
+  & :not(pre) > code[class*='language-'] {
+    padding: 0.1em;
+    border-radius: 0.3em;
+    white-space: normal;
+  }
+
+  & :global {
+    & .token:is(.changed) {
+      color: var(--highlight-blue-foreground);
+      font-style: italic;
+    }
+
+    & .token:is(.deleted) {
+      color: var(--highlight-red-foreground);
+      background-color: var(--highlight-red-background);
+      font-style: italic;
+    }
+
+    & .token:is(.attr-name) {
+      color: var(--global-foreground);
+      font-style: italic;
+    }
+
+    & .token:is(.inserted) {
+      color: var(--highlight-green-foreground);
+      background-color: var(--highlight-green-background);
+      font-style: italic;
+    }
+
+    & .token:is(.comment, .block-comment, .prolog, .cdata) {
+      color: var(--dimmed-5);
+    }
+
+    & .token:is(.string, .attr-value, .regex, .variable, .url) {
+      color: var(--highlight-green-foreground);
+    }
+
+    & .token:is(.variable) {
+      color: var(--global-foreground);
+    }
+
+    & .token:is(.number, .symbol) {
+      color: var(--highlight-yellow-foreground);
+    }
+
+    & .token:is(.entity) {
+      color: var(--highlight-cyan-foreground);
+    }
+
+    & .token:is(.punctuation) {
+      color: var(--highlight-gray-foreground);
+    }
+
+    & .token:is(.operator) {
+      color: var(--highlight-purple-foreground);
+    }
+
+    & .token:is(.script-punctuation) {
+      color: var(--highlight-cyan-foreground);
+    }
+
+    & .token:is(.builtin, .char) {
+      color: var(--highlight-cyan-foreground);
+    }
+
+    & .token:is(.function) {
+      color: var(--highlight-yellow-foreground);
+    }
+
+    & .token:is(.function-name, .constant) {
+      color: var(--highlight-blue-foreground);
+    }
+
+    & .token:is(.selector, .doctype) {
+      color: var(--global-foreground);
+    }
+
+    & .token:is(.class-name) {
+      color: var(--highlight-cyan-foreground);
+    }
+
+    & .token:is(.tag) {
+      color: var(--highlight-green-foreground);
+    }
+
+    & .token:is(.namespace) {
+      color: var(--dimmed-8);
+    }
+
+    & .token:is(.boolean, .important) {
+      color: var(--highlight-purple-foreground);
+    }
+
+    & .token:is(.property) {
+      color: var(--highlight-cyan-foreground);
+    }
+
+    & .token:is(.keyword, .atrule) {
+      color: hsl(token(--color-indigo-40));
+    }
+
+    & .token:is(.rule) {
+      color: var(--highlight-red-foreground);
+    }
+
+    & .token:is(.important, .bold) {
+      font-weight: bold;
+    }
+
+    & .token.italic {
+      font-style: italic;
+    }
+
+    & .token.entity {
+      cursor: help;
+    }
+  }
+
+  &[data-code-block-has-highlight='true'] code[class*='language-'] > *:not(:global(.refractor-marker)) {
+    opacity: 50%;
+    filter: saturate(0);
+  }
+}
+
+
+.Grid {
+  grid-template-columns: 7.5rem auto;
+}
+
+
+.LinkButton {
+  display: none;
+}
+
+.Block:hover {
+  & .LinkButton {
+    display: block;
+  }
+}

@@ -17,70 +17,98 @@
 import {
   forwardRef,
 } from 'react';
+import { v4 as uuid } from 'uuid';
 
 import { useDataContext } from '../../providers/data';
-import { LineChartMetadata } from '../../types';
 import { Placeholder } from '../placeholder';
 import styles from './cartesian-base.module.css';
 
 export type CartesianBaseLegendProps = {
   customLegend?: React.ReactNode;
-  hideLegend?: boolean;
+  isVisible?: boolean;
+  onMouseOver: (key: string) => void;
 }
 
-const renderLegendItems = (metadata?: LineChartMetadata) => {
+export const CartesianBaseLegend = forwardRef<HTMLDivElement, CartesianBaseLegendProps>(({
+  customLegend,
+  isVisible = true,
+  onMouseOver,
+}: CartesianBaseLegendProps,
+forwardedRef) => {
+  const { metadata } = useDataContext();
+
+  if (!isVisible) return null;
+
+  if (customLegend) {
+    return (
+      <div ref={forwardedRef} className={styles.Legend} role="presentation">
+        <div className={styles.LegendContent}>
+          {customLegend}
+        </div>
+      </div>
+    );
+  }
+
   if (metadata) {
     const { names, colors, dataKey: sdk } = metadata.series;
     const { name, color, dataKey: odk } = metadata.overlay;
 
     return (
-      <ul>
-        {sdk.map((s: string, i: number) => (
-          <li key={s}>
-            <div>
-              <Placeholder color={colors[i]} />
-              <span>
-                {names[i]}
-              </span>
-            </div>
-          </li>
-        ))}
+      <div
+        aria-hidden={!isVisible}
+        data-testid="legend"
+        className={styles.Legend}
+        ref={forwardedRef}
+        role="presentation"
+      >
+        <div
+          className={styles.LegendContent}
+          onMouseOut={() => onMouseOver('')}
+          onBlur={() => ({})}
+        >
+          <ul>
+            {sdk.map((s: string, i: number) => (
+              <li
+                key={uuid()}
+                aria-label={names[i]}
+                aria-live="polite"
+                data-testid="legend-item"
+                onMouseOver={() => onMouseOver(s)}
+                onMouseLeave={() => onMouseOver('')}
+                onFocus={() => ({})}
+              >
+                <div>
+                  <Placeholder color={colors[i]} />
+                  <span>
+                    {names[i]}
+                  </span>
+                </div>
+              </li>
+            ))}
 
-        {odk && (
-          <li>
-            <div>
-              <Placeholder color={color} />
-              <span>
-                {name}
-              </span>
-            </div>
-          </li>
-        )}
-      </ul>
+            {odk && (
+              <li
+                onMouseOver={() => onMouseOver(odk)}
+                onMouseLeave={() => onMouseOver('')}
+                onMouseOut={() => onMouseOver('')}
+                onFocus={() => ({})}
+                onBlur={() => ({})}
+              >
+                <div>
+                  <Placeholder color={color} />
+                  <span>
+                    {name}
+                  </span>
+                </div>
+              </li>
+            )}
+          </ul>
+        </div>
+      </div>
     );
   }
 
   return null;
-};
-
-export const CartesianBaseLegend: React.ForwardRefExoticComponent<
-CartesianBaseLegendProps & React.RefAttributes<HTMLDivElement>
-> = forwardRef<HTMLDivElement, CartesianBaseLegendProps>(({
-  customLegend,
-  hideLegend = false,
-}: CartesianBaseLegendProps,
-forwardedRef) => {
-  const { metadata } = useDataContext();
-
-  if (hideLegend) return null;
-
-  return (
-    <div ref={forwardedRef} className={styles.Legend}>
-      <div className={styles.LegendContent}>
-        {customLegend ?? renderLegendItems(metadata)}
-      </div>
-    </div>
-  );
 });
 
 CartesianBaseLegend.displayName = 'CartesianBaseLegend';

@@ -14,6 +14,7 @@ import { ThemeProvider } from 'next-themes';
 import { useEffect } from 'react';
 
 import { BlankLayout } from '@/components/layouts/blank-layout';
+import { ChartLayout } from '@/components/layouts/chart-layout';
 import { ComponentLayout } from '@/components/layouts/component-layout';
 import { DocLayout } from '@/components/layouts/doc-layout';
 import { MDXLayout } from '@/components/layouts/mdx-layout';
@@ -26,6 +27,7 @@ const LAYOUTS = {
   doc: DocLayout,
   mdx: MDXLayout,
   component: ComponentLayout,
+  chart: ChartLayout,
 };
 
 const Providers: FCChildren = ({ children }) => (

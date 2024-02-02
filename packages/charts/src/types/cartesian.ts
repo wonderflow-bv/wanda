@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Wonderflow Design Team
+ * Copyright 2023-2024 Wonderflow Design Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import { TickFormatter } from '@visx/axis';
 import { NumberValue } from '@visx/vendor/d3-scale';
 
 import { AxisElementsStyleConfig, AxisOrientation } from './axis';
+import { BrushElementStyleConfig } from './brush';
 import { GridStyleConfig } from './grid';
 import { HeadingsStyleConfig } from './headings';
 import { LegendStyleConfig } from './legend';
@@ -69,11 +70,12 @@ export type AxisProps = {
 }
 
 export type CartesianStyleConfig = {
+  axis: AxisElementsStyleConfig;
+  brush: BrushElementStyleConfig;
   headings: HeadingsStyleConfig;
   grid: GridStyleConfig;
-  axis: AxisElementsStyleConfig;
   lines: LinesStyleConfig;
   legend: LegendStyleConfig;
-  viewport: ViewportStyleConfig;
   themes: Themes;
+  viewport: ViewportStyleConfig;
 }
