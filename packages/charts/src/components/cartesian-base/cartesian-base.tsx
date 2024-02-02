@@ -17,7 +17,8 @@
 import { RectClipPath } from '@visx/clip-path';
 import { LinearGradient } from '@visx/gradient';
 import { Group } from '@visx/group';
-import React, { forwardRef } from 'react';
+import clsx from 'clsx';
+import React, { forwardRef, SVGProps } from 'react';
 import { mergeRefs } from 'react-merge-refs';
 
 import { useCartesian } from '../../hooks';
@@ -118,9 +119,17 @@ export type CartesianBaseProps = {
    */
   styleConfig?: DeepPartial<CartesianStyleConfig>;
   /**
-   * Set other custom properties.
+   * Set SVG custom properties.
    */
-  otherProps?: Record<string, unknown>;
+  otherProps?: SVGProps<SVGSVGElement>;
+  /**
+   * Set extra class
+   */
+  className?: string;
+  /**
+   * Add some inline style
+   */
+  style?: Record<string, any>;
   /**
    * A callback to retrieve data filtered from the brush.
    */
@@ -154,6 +163,8 @@ export const CartesianBase = forwardRef<HTMLElement, CartesianBaseProps>(({
   emptyStateMessage,
   customLegend,
   styleConfig,
+  className,
+  style,
   otherProps,
   onBrushChange,
 },
@@ -204,13 +215,13 @@ forwardedRef) => {
       aria-atomic="true"
       aria-hidden="false"
       aria-label="Cartesian Chart"
-      className={styles.Wrapper}
+      className={clsx([styles.Wrapper, className])}
       data-testid="cartesian"
       data-responsive={!preventResponsive}
       data-theme={theme}
       ref={mergeRefs([ref, forwardedRef])}
       role="img"
-      style={dynamicStyle}
+      style={{ ...style, ...dynamicStyle }}
     >
       <StyleConfigProvider styleConfig={cartesianConfig}>
         <svg
@@ -257,6 +268,7 @@ forwardedRef) => {
             top={position.headings.top}
             left={position.headings.left}
             config={headings?.config}
+            data-inner-element="Headings"
           />
 
           <Loader
@@ -265,6 +277,7 @@ forwardedRef) => {
             left={position.loader.left}
             width={dimension.loader.width}
             height={dimension.loader.height}
+            data-inner-element="Loader"
           />
 
           {!isLoading && (
@@ -279,12 +292,14 @@ forwardedRef) => {
                 tickColumns={grid.tickColumns}
                 background={grid.background}
                 otherProps={grid.otherProps}
+                data-inner-element="CartesianBaseGrid"
               />
 
               <CartesianBaseAxis
                 dimension={dimension.axis}
                 axis={axisFilteredSystem}
                 axisConfig={axisConfig}
+                data-inner-element="CartesianBaseAxis"
               />
 
               <EmptyState
@@ -293,6 +308,7 @@ forwardedRef) => {
                 customEmptyState={emptyState}
                 message={emptyStateMessage}
                 isVisible={hasEmptyState}
+                data-inner-element="EmptyState"
               />
 
               {hasData && (
@@ -319,6 +335,7 @@ forwardedRef) => {
                 padding={brushPadding}
                 position={position.brush}
                 onChange={onBrushChange}
+                data-inner-element="CartesianBaseBrush"
               />
             </Group>
           )}
@@ -329,6 +346,7 @@ forwardedRef) => {
           isVisible={hasLegend}
           ref={refLegend}
           onMouseOver={(dataKey: string) => setHoveredLegendItem(dataKey)}
+          data-inner-element="CartesianBaseLegend"
         />
       </StyleConfigProvider>
 

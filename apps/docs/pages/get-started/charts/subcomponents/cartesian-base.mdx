@@ -76,6 +76,22 @@ export default () => {
   description="CartesianBaseProps"
   properties={[
     {
+      name: "className",
+      typeLink: "/get-started/charts/subcomponents/cartesian-base#className",
+      type: ['string'],
+      typeValue: "",
+      default: "",
+      description: "Set custom class.",
+    },
+    {
+      name: "style",
+      typeLink: "/get-started/charts/subcomponents/cartesian-base#style",
+      type: ['Record<string, any>'],
+      typeValue: "",
+      default: "",
+      description: "Set custom inline style.",
+    },
+    {
       name: "title",
       typeLink: "/get-started/charts/subcomponents/cartesian-base#prop-title",
       type: ['string'],
@@ -250,9 +266,9 @@ export default () => {
     {
       name: "otherProps",
       typeLink: "/get-started/charts/subcomponents/cartesian-base#prop-otherProps",
-      type: ["Record<string, unknown>"],
+      type: ["SVGProps<SVGSVGElement>"],
       required: false,
-      description: "Set other custom properties.",
+      description: "Set SVG custom properties.",
     },
     {
       name: "onBrushChange",

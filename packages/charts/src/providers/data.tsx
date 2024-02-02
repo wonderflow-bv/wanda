@@ -50,6 +50,7 @@ export const useDataContext = () => {
   const context = useContext(DataContext);
 
   if (!context) {
+    // eslint-disable-next-line no-console
     console.error('useDataContext() must be used inside DataProvider to access context data.');
   }
 

@@ -45,6 +45,7 @@ export const useStyleConfigContext = () => {
   const context = useContext(StyleConfigContext);
 
   if (!context) {
+    // eslint-disable-next-line no-console
     console.error('useStyleConfigContext() must be used inside StyleConfigProvider to access context data.');
   }
 

@@ -41,6 +41,7 @@ export const useLayoutContext = () => {
   const context = useContext(LayoutContext);
 
   if (!context) {
+    // eslint-disable-next-line no-console
     console.error('useLayoutContext() must be used inside LayoutProvider to access context data.');
   }
 

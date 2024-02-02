@@ -2,6 +2,14 @@
   "extends": "tsconfig/react-library.json",
   "compilerOptions": {
     "outDir": "dist",
+    "paths": {
+      "@/components": ["packages/charts/src/components"],
+      "@/hooks": ["packages/charts/src/hooks"],
+      "@/providers": ["packages/charts/src/providers"],
+      "@/styleConfig": ["packages/charts/src/style-config"],
+      "@/types": ["packages/charts/src/types"],
+      "@/utils": ["packages/charts/src/utils"],
+    }
   },
   "exclude": ["dist", "build"],
   "include": ["src", "types", "scr/types"]
