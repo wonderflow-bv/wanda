@@ -1,5 +1,12 @@
 # @wonderflow/react-components
 
+## 12.9.0
+
+### Minor Changes
+
+- 4451fef: Removed AnimatePresence from `Spinner`component which was causing the browser to not respond in certain contexts (e.g. Spinner inside Popover).
+- c2d8814: Add a `closeOnInsideClick` prop to the `Popover` component and fixed the z-index value
+
 ## 12.8.0
 
 ### Patch Changes
