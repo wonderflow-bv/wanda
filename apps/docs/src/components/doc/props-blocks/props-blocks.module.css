@@ -188,10 +188,15 @@
 }
 
 
-.Grid {
+/* .Grid {
   grid-template-columns: 7.5rem auto;
-}
+} */
 
+.Block {
+  & ul {
+    grid-template-columns: 7.5rem auto;
+  }
+}
 
 .LinkButton {
   display: none;

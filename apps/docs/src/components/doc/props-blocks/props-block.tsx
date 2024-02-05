@@ -64,7 +64,7 @@ export const PropsBlock = ({
         </Stack>
       )}
 
-      <Grid columns={2} filling={false} rowGap={8} columnGap={4} className={styles.Grid}>
+      <Grid columns={2} filling={false} rowGap={8} columnGap={4}>
 
         {description && (
           <>
