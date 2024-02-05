@@ -13,5 +13,7 @@
 
   & > div > * {
     margin: 0 token(--space-8);
+    gap: 1rem;
   }
 }
+
