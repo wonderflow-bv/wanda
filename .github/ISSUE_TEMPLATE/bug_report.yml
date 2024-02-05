@@ -45,7 +45,7 @@ body:
     attributes:
       label: Relevant log output
       description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
-      render: shell
+      render: Shell
   - type: checkboxes
     id: coc
     attributes:
@@ -61,4 +61,4 @@ body:
       description: You confirm that you assigned this issues to Wanda project. Issues without project assignment will NOT be considered.
       options:
         - label: I've assigned Wanda Design System project from the sidebar on the right.
-          required: true          
+          required: true
