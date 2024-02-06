@@ -14,7 +14,7 @@ describe('<LineChart>', () => {
       data={[{ date: 'a', value: 1 }, { date: 'b', value: 2 }]}
       index={{ dataKey: 'date' }}
       series={{ dataKey: ['value'] }}
-      overlay={{ dataKey: 'value' }}
+      overlay={{ dataKey: ['value'] }}
       title="Title"
     />);
 
@@ -27,7 +27,7 @@ describe('<LineChart>', () => {
       data={[{ date: 'a', value: 1 }, { date: 'b', value: 2 }]}
       index={{ dataKey: 'date' }}
       series={{ dataKey: ['value'] }}
-      overlay={{ dataKey: 'value' }}
+      overlay={{ dataKey: ['value'] }}
       hidePadding
       hideLegend
     />);
