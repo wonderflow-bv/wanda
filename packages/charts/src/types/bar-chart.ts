@@ -56,10 +56,10 @@ export type BarChartMetadata = {
     style?: Array<BarStyle | undefined>;
   };
   overlay: {
-    dataKey?: string;
-    name: string;
-    color: string;
-    style?: BarStyle;
+    dataKey?: string[];
+    names: string[] | undefined;
+    colors: Array<string | undefined> | undefined;
+    style?: Array<BarStyle | undefined>;
   };
   tooltip?: BarChartTooltip;
   hideMissingDataConnection?: boolean;

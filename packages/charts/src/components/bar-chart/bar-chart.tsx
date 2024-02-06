@@ -21,19 +21,18 @@ import {
   DataProvider, LayoutProvider,
   ThemeProvider,
 } from '../../providers';
-import { defaultLineChartPalette } from '../../style-config';
+import { defaultShapesPalette } from '../../style-config';
 import {
   CartesianChartLayout, Charts, Data, MarginProps, SortingType, ThemeVariants,
 } from '../../types';
 import {
-  BarChartIndex, BarChartMetadata, BarChartOverlay, BarChartSeries, BarChartTooltip,
+  BarChartIndex, BarChartMetadata,
+  BarChartSeries, BarChartTooltip,
 } from '../../types/bar-chart';
 import {
-  handleBarChartOverlayColor,
   handleBarChartSeriesColors,
   handleChartAxisLayout,
   handleChartDomainAndScaleType,
-  handleOverlayName,
   handleSeriesNames,
 } from '../../utils';
 import { CartesianBase, CartesianBaseProps } from '../cartesian-base/cartesian-base';
@@ -75,7 +74,7 @@ export type BarChartProps = {
   /**
    * Set the properties associated with the Overlay Axis.
    */
-  overlay?: BarChartOverlay;
+  overlay?: BarChartSeries;
   /**
    * Set extra data or custom content to be displayed in the tooltip.
    */
@@ -107,7 +106,7 @@ export const BarChart: React.FC<BarChartProps> = ({
 
   const axis = useMemo(() => handleChartAxisLayout(i, s, o), [i, s, o]);
 
-  const palette = useMemo(() => defaultLineChartPalette[theme], [theme]);
+  const palette = useMemo(() => defaultShapesPalette[theme], [theme]);
 
   const zeroPadding: MarginProps | undefined = hidePadding ? {
     top: 0, right: 12, bottom: 0, left: 0,
@@ -121,18 +120,18 @@ export const BarChart: React.FC<BarChartProps> = ({
     series: {
       dataKey: series.dataKey,
       names: handleSeriesNames(series),
-      colors: handleBarChartSeriesColors(series, palette.series),
+      colors: handleBarChartSeriesColors(series, palette),
       style: series.style,
     },
     overlay: {
       dataKey: overlay?.dataKey,
-      name: handleOverlayName(overlay),
-      color: handleBarChartOverlayColor(overlay, palette.overlay),
+      names: overlay ? handleSeriesNames(overlay) : undefined,
+      colors: overlay ? handleBarChartSeriesColors(overlay, palette.reverse()) : undefined,
       style: overlay?.style,
     },
     tooltip,
     hidePadding,
-  }), [isStacked, sortBy, index.dataKey, series, palette.series, palette.overlay, overlay, tooltip, hidePadding]);
+  }), [isStacked, sortBy, index.dataKey, series, palette, overlay, tooltip, hidePadding]);
 
   return (
     <ThemeProvider theme={theme}>

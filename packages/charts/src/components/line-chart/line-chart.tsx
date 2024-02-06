@@ -29,7 +29,7 @@ import {
 } from '../../types';
 import {
   LineChartIndex,
-  LineChartOverlay, LineChartRenderType, LineChartSeries, LineChartTooltip,
+  LineChartRenderType, LineChartSeries, LineChartTooltip,
 } from '../../types/line-chart';
 import { CartesianBase, CartesianBaseProps } from '../cartesian-base/cartesian-base';
 
@@ -61,7 +61,7 @@ export type LineChartProps = {
   /**
    * Set the properties associated with the Overlay Axis.
    */
-  overlay?: LineChartOverlay;
+  overlay?: LineChartSeries;
   /**
    * Display an average line and label when true.
    */

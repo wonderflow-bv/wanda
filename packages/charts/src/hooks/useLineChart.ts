@@ -18,18 +18,17 @@ import { useMemo, useState } from 'react';
 import { Except } from 'type-fest';
 
 import { LineChartProps } from '../components';
-import { defaultLineChartPalette } from '../style-config';
+import { defaultShapesPalette } from '../style-config';
 import {
   CartesianChartLayout, Charts, Data,
+  LineChartMetadata,
   MarginProps,
 } from '../types';
 import {
   computeAverage,
   handleChartAxisLayout,
   handleChartDomainAndScaleType,
-  handleLineChartOverlayColor,
   handleLineChartSeriesColors,
-  handleOverlayName,
   handleSeriesNames,
 } from '../utils';
 
@@ -75,25 +74,25 @@ export const useLineChart = ({
   const axisFiltered = useMemo(() => handleChartAxisLayout(iFiltered, sFiltered, oFiltered),
     [iFiltered, sFiltered, oFiltered]);
 
-  const palette = defaultLineChartPalette[theme];
+  const palette = defaultShapesPalette[theme];
 
-  const metadata = useMemo(() => ({
+  const metadata: LineChartMetadata = useMemo(() => ({
     type: Charts.LINE_CHART,
     renderAs,
     index: index.dataKey,
     series: {
       dataKey: series.dataKey,
       names: handleSeriesNames(series),
-      colors: handleLineChartSeriesColors(series, palette.series),
+      colors: handleLineChartSeriesColors(series, palette),
       style: series.style,
       average: computeAverage(data, series.dataKey),
     },
     overlay: {
       dataKey: overlay?.dataKey,
-      name: handleOverlayName(overlay),
-      color: handleLineChartOverlayColor(overlay, palette.overlay),
+      names: overlay ? handleSeriesNames(overlay) : undefined,
+      colors: overlay ? handleLineChartSeriesColors(overlay, palette.reverse()) : undefined,
       style: overlay?.style,
-      average: overlay?.dataKey ? computeAverage(data, [overlay.dataKey]) : undefined,
+      average: overlay?.dataKey ? computeAverage(data, overlay.dataKey) : undefined,
     },
     tooltip,
     showAverage,
@@ -101,13 +100,13 @@ export const useLineChart = ({
     showMarker,
     showMarkerLabel,
     hidePadding,
-  }), [data,
+  }), [
+    data,
     hideMissingDataConnection,
     hidePadding,
     index.dataKey,
     overlay,
-    palette.overlay,
-    palette.series,
+    palette,
     renderAs,
     series,
     showAverage,

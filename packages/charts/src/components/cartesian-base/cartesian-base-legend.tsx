@@ -50,8 +50,8 @@ forwardedRef) => {
   }
 
   if (metadata) {
-    const { names, colors, dataKey: sdk } = metadata.series;
-    const { name, color, dataKey: odk } = metadata.overlay;
+    const { names: sn, colors: sc, dataKey: sdk } = metadata.series;
+    const { names: on, colors: oc, dataKey: odk } = metadata.overlay;
 
     return (
       <div
@@ -70,38 +70,44 @@ forwardedRef) => {
             {sdk.map((s: string, i: number) => (
               <li
                 key={uuid()}
-                aria-label={names[i]}
+                aria-label={sn[i]}
                 aria-live="polite"
                 data-testid="legend-item"
                 onMouseOver={() => onMouseOver(s)}
-                onMouseLeave={() => onMouseOver('')}
-                onFocus={() => ({})}
-              >
-                <div>
-                  <Placeholder color={colors[i]} />
-                  <span>
-                    {names[i]}
-                  </span>
-                </div>
-              </li>
-            ))}
-
-            {odk && (
-              <li
-                onMouseOver={() => onMouseOver(odk)}
                 onMouseLeave={() => onMouseOver('')}
                 onMouseOut={() => onMouseOver('')}
                 onFocus={() => ({})}
                 onBlur={() => ({})}
               >
                 <div>
-                  <Placeholder color={color} />
+                  <Placeholder color={sc[i]} />
                   <span>
-                    {name}
+                    {sn[i]}
                   </span>
                 </div>
               </li>
-            )}
+            ))}
+
+            {odk?.map((s: string, i: number) => (
+              <li
+                key={uuid()}
+                aria-label={on![i]}
+                aria-live="polite"
+                data-testid="overlay-legend-item"
+                onMouseOver={() => onMouseOver(s)}
+                onMouseLeave={() => onMouseOver('')}
+                onMouseOut={() => onMouseOver('')}
+                onFocus={() => ({})}
+                onBlur={() => ({})}
+              >
+                <div>
+                  <Placeholder color={oc![i]} />
+                  <span>
+                    {on![i]}
+                  </span>
+                </div>
+              </li>
+            ))}
           </ul>
         </div>
       </div>

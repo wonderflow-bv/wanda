@@ -19,13 +19,13 @@ import { createContext, useContext } from 'react';
 import { Data, LineChartMetadata } from '../types';
 import { BarChartMetadata } from '../types/bar-chart';
 
-export type DataContextProps = {
+export type DataContextProps<T extends LineChartMetadata | BarChartMetadata> = {
   data: Data;
   filteredData: Data;
-  metadata?: LineChartMetadata | BarChartMetadata;
+  metadata?: T;
 };
 
-export type DataProviderProps = DataContextProps
+export type DataProviderProps = DataContextProps<LineChartMetadata | BarChartMetadata>
 
 const defaultData = {
   data: [],
@@ -33,7 +33,7 @@ const defaultData = {
   metadata: undefined,
 };
 
-export const DataContext = createContext<DataContextProps>(defaultData);
+export const DataContext = createContext<DataContextProps<LineChartMetadata | BarChartMetadata>>(defaultData);
 
 export const DataProvider: FCChildren<DataProviderProps> = ({
   children,

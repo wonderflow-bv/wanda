@@ -62,10 +62,10 @@ export type LineChartMetadata = {
     average: AverageType;
   };
   overlay: {
-    dataKey?: string;
-    name: string;
-    color: string;
-    style?: LineStyle;
+    dataKey?: string[];
+    names: string[] | undefined;
+    colors: Array<string | undefined> | undefined;
+    style?: Array<LineStyle | undefined>;
     average: AverageType;
   };
   tooltip?: LineChartTooltip;

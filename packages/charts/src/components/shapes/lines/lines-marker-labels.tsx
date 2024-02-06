@@ -139,11 +139,16 @@ export const LinesMarkerLabels: React.FC = () => {
         </Group>
       ))}
 
-      {hasOverlay && (showMarkerLabel || overlay.style?.showMarkerLabel)
+      {hasOverlay && overlay.dataKey?.map((k: string, i: number) => (
+        <Group
+          key={uuid()}
+          className={dynamicClassName(overLegend, k)}
+        >
+          {(showMarkerLabel || overlay.style?.[i]?.showMarkerLabel)
             && data.map((d: Record<string, unknown>, di: number) => {
               const isVisible = isMarkerLabelVisible(di, totalLabels);
-              const title = `${getPrimitiveFromObjectByPath(d, overlay.dataKey!) ?? ''}`;
-              const coordinates = getOverlayCoordinates(d, overlay.dataKey!, isHorizontal);
+              const title = `${getPrimitiveFromObjectByPath(d, k) ?? ''}`;
+              const coordinates = getOverlayCoordinates(d, k, isHorizontal);
               const markerLabelProps = getMarkerLabelProps(coordinates, dimension, isHorizontal, themeConfig);
               const {
                 background,
@@ -161,8 +166,9 @@ export const LinesMarkerLabels: React.FC = () => {
                 isVisible
                   ? (
                     <Label
+                      data-testid="overlay-lines-marker-label"
                       key={uuid()}
-                      className={dynamicClassName(overLegend, overlay.dataKey!)}
+                      className={dynamicClassName(overLegend, k)}
                       backgroundFill={background}
                       x={coordinates.x}
                       y={coordinates.y}
@@ -181,6 +187,8 @@ export const LinesMarkerLabels: React.FC = () => {
                   ) : null
               );
             })}
+        </Group>
+      ))}
     </>
   );
 };

@@ -20,9 +20,10 @@ import { Except } from 'type-fest';
 import {
   AverageType,
   AxisProps,
-  Data, LineChartIndex, LineChartOverlay, LineChartSeries, SortingType,
+  Data, LineChartIndex,
+  LineChartSeries, SortingType,
 } from '../types';
-import { BarChartIndex, BarChartOverlay, BarChartSeries } from '../types/bar-chart';
+import { BarChartIndex, BarChartSeries } from '../types/bar-chart';
 import { inferScaleTypeFromDomain } from './axis';
 import { formatDate } from './format';
 import {
@@ -68,10 +69,11 @@ export const removeKeysFromObject = (obj: Record<string, unknown>, keys: string[
   return copy;
 };
 
-export const handleAxisDomainAndScaleType = (
-  data: Data,
-  axis: LineChartIndex | LineChartSeries | LineChartOverlay | BarChartIndex | BarChartSeries | BarChartOverlay,
-): Except<AxisProps, 'orientation'> => {
+export const handleAxisDomainAndScaleType = <
+T extends LineChartIndex
+| LineChartSeries
+| BarChartIndex
+| BarChartSeries>(data: Data, axis: T): Except<AxisProps, 'orientation'> => {
   const hasData = !!data.length;
   let res: Record<string, unknown> = {
     ...axis,
@@ -137,12 +139,14 @@ export const handleAxisDomainAndScaleType = (
   return removeKeysFromObject(res, ['dataKey', 'style', 'rename']) as Except<AxisProps, 'orientation'>;
 };
 
-export const handleChartDomainAndScaleType = (
-  data: Data,
-  index: LineChartIndex | BarChartIndex,
-  series: LineChartSeries | BarChartSeries,
-  overlay?: LineChartOverlay | BarChartOverlay,
-) => {
+export const handleChartDomainAndScaleType = <
+T extends LineChartIndex | BarChartIndex,
+U extends LineChartSeries | BarChartSeries>(
+    data: Data,
+    index: T,
+    series: U,
+    overlay?: U,
+  ) => {
   const i = handleAxisDomainAndScaleType(data, index);
   const s = handleAxisDomainAndScaleType(data, series);
   const o = overlay
