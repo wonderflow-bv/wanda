@@ -74,7 +74,8 @@ export const useLineChart = ({
   const axisFiltered = useMemo(() => handleChartAxisLayout(iFiltered, sFiltered, oFiltered),
     [iFiltered, sFiltered, oFiltered]);
 
-  const palette = colorPaletteDefault[theme];
+  const paletteSeries = colorPaletteDefault[theme];
+  const paletteOverlay = useMemo(() => [...paletteSeries.slice(6), ...paletteSeries.slice(0, 6)], [paletteSeries]);
 
   const metadata: LineChartMetadata = useMemo(() => ({
     type: Charts.LINE_CHART,
@@ -83,14 +84,14 @@ export const useLineChart = ({
     series: {
       dataKey: series.dataKey,
       names: handleSeriesNames(series),
-      colors: handleLineChartSeriesColors(series, palette),
+      colors: handleLineChartSeriesColors(series, paletteSeries),
       style: series.style,
       average: computeAverage(data, series.dataKey),
     },
     overlay: {
       dataKey: overlay?.dataKey,
       names: overlay ? handleSeriesNames(overlay) : undefined,
-      colors: overlay ? handleLineChartSeriesColors(overlay, palette.reverse()) : undefined,
+      colors: overlay ? handleLineChartSeriesColors(overlay, paletteOverlay) : undefined,
       style: overlay?.style,
       average: overlay?.dataKey ? computeAverage(data, overlay.dataKey) : undefined,
     },
@@ -106,7 +107,8 @@ export const useLineChart = ({
     hidePadding,
     index.dataKey,
     overlay,
-    palette,
+    paletteOverlay,
+    paletteSeries,
     renderAs,
     series,
     showAverage,
