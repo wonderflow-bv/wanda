@@ -1,9 +1,9 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { CartesianChartLayout, LineChart, LineChartProps } from '@wonderflow/charts';
 
+// import { CartesianChartLayout, LineChart, LineChartProps } from '@wonderflow/charts';
 import { Card } from '@/components';
 
-// import { CartesianChartLayout, LineChart, LineChartProps } from '../../../../../charts/src';
+import { CartesianChartLayout, LineChart, LineChartProps } from '../../../../../charts/src';
 import {
   channels, channelsB, feedbackCount, feedbackCountGaps, proCons, products,
 } from '../mock-data';
@@ -65,7 +65,16 @@ export const withOverlay = Template.bind({});
 withOverlay.args = {
   subtitle: 'A trend line chart with overlay',
   overlay: {
-    dataKey: 'overlay',
+    dataKey: ['overlay'],
+    label: 'Overlay',
+  },
+};
+
+export const withMultipleOverlay = Template.bind({});
+withMultipleOverlay.args = {
+  subtitle: 'A trend line chart with overlay',
+  overlay: {
+    dataKey: ['overlay', 'overlayB'],
     label: 'Overlay',
   },
 };
@@ -81,7 +90,7 @@ withMissingData.args = {
   data: feedbackCountGaps,
   subtitle: 'A trend line chart with null values',
   overlay: {
-    dataKey: 'overlay',
+    dataKey: ['overlay'],
     label: 'Overlay',
   },
 };
@@ -133,12 +142,12 @@ withNestedData.args = {
     rename: (_: string, i: number) => Array(i + 1).fill('⭐').join(),
   },
   overlay: {
-    dataKey: 'overlay.value',
+    dataKey: ['overlay.value'],
     label: 'TGW',
     domain: [0, 5],
-    style: {
+    style: [{
       strokeDasharray: '2 4',
-    },
+    }],
   },
   tooltip: {
     extraSeriesData: (series: any) => `${series.percentage}%`,
@@ -231,7 +240,7 @@ export const withVerticalLayout = Template.bind({});
 withVerticalLayout.args = {
   layout: CartesianChartLayout.VERTICAL,
   overlay: {
-    dataKey: 'overlay',
+    dataKey: ['overlay'],
     label: 'Overlay',
   },
   index: {
