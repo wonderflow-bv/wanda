@@ -35,19 +35,19 @@ import {
 export const LinesOverlay: React.FC = () => {
   const theme = useThemeContext();
   const { lines: defaultStyle, themes } = useStyleConfigContext();
-  const { data, metadata } = useDataContext();
+  const { data, metadata } = useDataContext<LineChartMetadata>();
   const { isHorizontal } = useLayoutContext();
   const { axis, hoveredLegendItem: overLegend } = useCartesianContext();
 
   const {
     index, renderAs, showMarker, showMarkerLabel, overlay,
     hideMissingDataConnection,
-  } = metadata! as LineChartMetadata;
+  } = metadata!;
 
   const indexAxis = isHorizontal ? axis!.bottom! : axis!.left!;
   const overlayAxis = isHorizontal ? axis?.right : axis?.top;
 
-  const hasOverlay = Boolean(overlayAxis && overlay.dataKey);
+  const hasOverlay = Boolean(overlayAxis && overlay.dataKey && overlay.dataKey.length);
 
   const renderer = useMemo(() => getLinesRenderer(renderAs, isHorizontal), [isHorizontal, renderAs]);
 
@@ -64,57 +64,68 @@ export const LinesOverlay: React.FC = () => {
     isHorizontal,
   }), [index, indexAxis, overlayAxis]);
 
-  const subPaths = useMemo(() => createSubPaths(
-    data,
-    d => hasOverlay && _.isNil(getValueFromObjectByPath(d, overlay.dataKey!)),
-  ), [data, hasOverlay, overlay.dataKey]);
-
-  const hasMarker = Boolean(showMarker
-  || showMarkerLabel
-  || overlay.style?.showMarker
-  || overlay.style?.showMarkerLabel);
-
-  const segmentStroke = hideMissingDataConnection ? 'transparent' : themes[theme].lines.noData;
-
   const dynamicClassName = useCallback((overLegend: string, dataKey: string) => ((overLegend === dataKey || overLegend === '')
     ? LinesItem
     : LinesItemBlurred), []);
 
+  if (!hasOverlay) return null;
+
   return (
     <>
-      {hasOverlay && (
-        subPaths.map((subPathData: Array<Record<string, unknown>>, si: number) => (
-          <Group
-            key={uuid()}
-            className={dynamicClassName(overLegend, overlay.dataKey!)}
-          >
-            <LinePath
-              data-testid="lines-overlay"
-              data={subPathData}
-              curve={renderer}
-              x={datum => getOverlayCoordinates(datum, overlay.dataKey!, isHorizontal).x as any}
-              y={datum => getOverlayCoordinates(datum, overlay.dataKey!, isHorizontal).y as any}
-              stroke={si % 2 === 0 ? overlay.color : segmentStroke}
-              strokeWidth={overlay.style?.strokeWidth ?? defaultStyle.path.strokeWidth}
-              strokeOpacity={overlay.style?.strokeOpacity ?? defaultStyle.path.strokeOpacity}
-              strokeDasharray={si % 2 === 0 ? overlay.style?.strokeDasharray : defaultStyle.segment.strokeDashArray}
-            />
+      {overlay.dataKey!.map((dataKey: string, di: number) => {
+        const subPaths = createSubPaths(
+          data,
+          d => _.isNil(getValueFromObjectByPath(d, dataKey)),
+        );
 
-            {hasMarker && subPathData.map((d: Record<string, unknown>) => (
-              <circle
+        const hasMarker = Boolean(showMarker
+          || showMarkerLabel
+          || overlay.style?.[di]?.showMarker
+          || overlay.style?.[di]?.showMarkerLabel);
+
+        const segmentStroke = hideMissingDataConnection ? 'transparent' : themes[theme].lines.noData;
+
+        return (
+          subPaths.map((subPathData: Array<Record<string, unknown>>,
+            si: number) => (
+              <Group
                 key={uuid()}
-                r={defaultStyle.marker.radius}
-                cx={getOverlayCoordinates(d, overlay.dataKey!, isHorizontal).x}
-                cy={getOverlayCoordinates(d, overlay.dataKey!, isHorizontal).y}
-                stroke={overlay.color}
-                fill={themes[theme].marker.fill}
-                strokeWidth={overlay.style?.strokeWidth ?? defaultStyle.marker.strokeWidth}
-                strokeOpacity={overlay.style?.strokeOpacity ?? defaultStyle.marker.strokeOpacity}
-              />
-            ))}
-          </Group>
-        ))
-      )}
+                className={dynamicClassName(overLegend, dataKey)}
+              >
+                <LinePath
+                  data-testid="lines-overlay"
+                  data={subPathData}
+                  curve={renderer}
+                  x={datum => getOverlayCoordinates(datum, dataKey, isHorizontal).x as any}
+                  y={datum => getOverlayCoordinates(datum, dataKey, isHorizontal).y as any}
+                  stroke={si % 2 === 0
+                    ? overlay.colors?.[di]
+                    : segmentStroke}
+                  strokeWidth={overlay.style?.[di]?.strokeWidth ?? defaultStyle.path.strokeWidth}
+                  strokeOpacity={overlay.style?.[di]?.strokeOpacity ?? defaultStyle.path.strokeOpacity}
+                  strokeDasharray={si % 2 === 0
+                    ? overlay.style?.[di]?.strokeDasharray
+                    : defaultStyle.segment.strokeDashArray}
+                />
+
+                {hasMarker && subPathData.map((d: Record<string, unknown>) => (
+                  <circle
+                    key={uuid()}
+                    r={defaultStyle.marker.radius}
+                    cx={getOverlayCoordinates(d, dataKey, isHorizontal).x}
+                    cy={getOverlayCoordinates(d, dataKey, isHorizontal).y}
+                    stroke={overlay.colors![di]}
+                    fill={themes[theme].marker.fill}
+                    strokeWidth={overlay.style?.[di]?.strokeWidth ?? defaultStyle.marker.strokeWidth}
+                    strokeOpacity={overlay.style?.[di]?.strokeOpacity ?? defaultStyle.marker.strokeOpacity}
+                  />
+                ))}
+              </Group>
+          ))
+        );
+      })
+
+      }
     </>
   );
 };

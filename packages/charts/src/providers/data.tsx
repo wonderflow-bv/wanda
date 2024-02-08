@@ -19,21 +19,23 @@ import { createContext, useContext } from 'react';
 import { Data, LineChartMetadata } from '../types';
 import { BarChartMetadata } from '../types/bar-chart';
 
-export type DataContextProps<T extends LineChartMetadata | BarChartMetadata> = {
+type SupportedMetadata = LineChartMetadata | BarChartMetadata;
+
+export type DataContextProps<T extends SupportedMetadata> = {
   data: Data;
   filteredData: Data;
   metadata?: T;
 };
 
-export type DataProviderProps = DataContextProps<LineChartMetadata | BarChartMetadata>
+export type DataProviderProps = DataContextProps<SupportedMetadata>
 
-const defaultData = {
+const defaultData: DataContextProps<SupportedMetadata> = {
   data: [],
   filteredData: [],
   metadata: undefined,
 };
 
-export const DataContext = createContext<DataContextProps<LineChartMetadata | BarChartMetadata>>(defaultData);
+export const DataContext = createContext<DataContextProps<SupportedMetadata>>(defaultData);
 
 export const DataProvider: FCChildren<DataProviderProps> = ({
   children,
@@ -46,7 +48,8 @@ export const DataProvider: FCChildren<DataProviderProps> = ({
   </DataContext.Provider>
 );
 
-export const useDataContext = () => {
+export function useDataContext <
+T extends SupportedMetadata>(): DataContextProps<T> {
   const context = useContext(DataContext);
 
   if (!context) {
@@ -54,8 +57,9 @@ export const useDataContext = () => {
     console.error('useDataContext() must be used inside DataProvider to access context data.');
   }
 
-  return context ?? defaultData;
-};
+  const typedContext = context as DataContextProps<T>;
+  return typedContext ?? defaultData;
+}
 
 DataContext.displayName = 'DataContext';
 DataProvider.displayName = 'DataProvider';

@@ -27,7 +27,7 @@ import { LineChartMetadata } from '../../../types';
 export const LinesAverage: React.FC = () => {
   const theme = useThemeContext();
   const { lines: defaultStyle, themes, viewport } = useStyleConfigContext();
-  const { metadata } = useDataContext();
+  const { metadata } = useDataContext<LineChartMetadata>();
   const { isHorizontal } = useLayoutContext();
   const { axis, dimension } = useCartesianContext();
 
@@ -38,7 +38,7 @@ export const LinesAverage: React.FC = () => {
   const seriesAxis = isHorizontal ? left : bottom;
   const overlayAxis = isHorizontal ? right : top;
 
-  const { showAverage, series, overlay } = metadata! as LineChartMetadata;
+  const { showAverage, series, overlay } = metadata!;
 
   const { maxHeight, maxWidth } = dimension;
 

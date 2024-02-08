@@ -35,7 +35,7 @@ import {
 export const LinesSeries: React.FC = () => {
   const theme = useThemeContext();
   const { lines: defaultStyle, themes } = useStyleConfigContext();
-  const { data, metadata } = useDataContext();
+  const { data, metadata } = useDataContext<LineChartMetadata>();
   const { isHorizontal } = useLayoutContext();
   const { axis, hoveredLegendItem: overLegend } = useCartesianContext();
 
@@ -43,7 +43,7 @@ export const LinesSeries: React.FC = () => {
   const {
     index, renderAs, showMarker, showMarkerLabel,
     series, hideMissingDataConnection,
-  } = metadata! as LineChartMetadata;
+  } = metadata!;
 
   const indexAxis = isHorizontal ? bottom : left;
   const seriesAxis = isHorizontal ? left : bottom;

@@ -1,7 +1,7 @@
-import { defaultLineChartPalette } from '../style-config';
+import { colorPaletteDefault } from '../style-config/colors';
 import { LineChartOverlay, LineChartSeries } from '../types';
 import {
-  handleLineChartOverlayColor, handleLineChartSeriesColors, handleOverlayName, handleSeriesNames,
+  handleLineChartSeriesColors, handleOverlayName, handleSeriesNames,
 } from './metadata';
 
 describe('handleSeriesNames()', () => {
@@ -26,7 +26,7 @@ describe('handleSeriesNames()', () => {
 });
 
 describe('handleLineChartSeriesColors()', () => {
-  const colors = defaultLineChartPalette.light.series;
+  const colors = colorPaletteDefault.light;
 
   it('should return custom styled color', () => {
     const series: LineChartSeries = {
@@ -95,24 +95,24 @@ describe('handleOverlayName()', () => {
 });
 
 describe('handleLineChartOverlayColor()', () => {
-  const colors = defaultLineChartPalette.light.overlay;
+  const colors = colorPaletteDefault.light;
 
   it('should return the default color', () => {
-    const overlay: LineChartOverlay = {
-      dataKey: 'test',
+    const overlay: LineChartSeries = {
+      dataKey: ['test'],
     };
-    const res = handleLineChartOverlayColor(overlay, colors);
-    const exp = 'hsl(14 63% 53%)';
+    const res = handleLineChartSeriesColors(overlay, colors);
+    const exp = ['hsl(149 83% 35%)'];
     expect(res).toStrictEqual(exp);
   });
 
   it('should return a custom styled color', () => {
-    const overlay: LineChartOverlay = {
-      dataKey: 'test',
-      style: { stroke: 'salmon' },
+    const overlay: LineChartSeries = {
+      dataKey: ['test'],
+      style: [{ stroke: 'salmon' }],
     };
-    const res = handleLineChartOverlayColor(overlay, colors);
-    const exp = 'salmon';
+    const res = handleLineChartSeriesColors(overlay, colors);
+    const exp = ['salmon'];
     expect(res).toStrictEqual(exp);
   });
 });

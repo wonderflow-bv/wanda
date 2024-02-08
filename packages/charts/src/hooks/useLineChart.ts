@@ -18,7 +18,7 @@ import { useMemo, useState } from 'react';
 import { Except } from 'type-fest';
 
 import { LineChartProps } from '../components';
-import { defaultShapesPalette } from '../style-config';
+import { colorPaletteDefault } from '../style-config';
 import {
   CartesianChartLayout, Charts, Data,
   LineChartMetadata,
@@ -74,7 +74,7 @@ export const useLineChart = ({
   const axisFiltered = useMemo(() => handleChartAxisLayout(iFiltered, sFiltered, oFiltered),
     [iFiltered, sFiltered, oFiltered]);
 
-  const palette = defaultShapesPalette[theme];
+  const palette = colorPaletteDefault[theme];
 
   const metadata: LineChartMetadata = useMemo(() => ({
     type: Charts.LINE_CHART,

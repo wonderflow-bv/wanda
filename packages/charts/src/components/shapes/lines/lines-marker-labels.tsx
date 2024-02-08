@@ -35,14 +35,14 @@ import {
 
 export const LinesMarkerLabels: React.FC = () => {
   const theme = useThemeContext();
-  const { data, metadata } = useDataContext();
+  const { data, metadata } = useDataContext<LineChartMetadata>();
   const { isHorizontal } = useLayoutContext();
   const { axis, dimension, hoveredLegendItem: overLegend } = useCartesianContext();
   const { themes, viewport } = useStyleConfigContext();
 
   const {
     index, showMarkerLabel, series, overlay,
-  } = metadata! as LineChartMetadata;
+  } = metadata!;
 
   const indexAxis = isHorizontal ? axis!.bottom : axis!.left;
   const seriesAxis = isHorizontal ? axis!.left : axis!.bottom;

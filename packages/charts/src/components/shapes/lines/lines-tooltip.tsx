@@ -26,6 +26,8 @@ import _ from 'lodash';
 import { useCallback } from 'react';
 import { v4 as uuid } from 'uuid';
 
+import { LineChartMetadata } from '@/types';
+
 import {
   useCartesianContext, useDataContext, useLayoutContext, useStyleConfigContext, useThemeContext,
 } from '../../../providers';
@@ -46,7 +48,7 @@ import {
 export const LinesTooltip: React.FC = () => {
   const theme = useThemeContext();
   const { lines: defaultStyle } = useStyleConfigContext();
-  const { data, metadata } = useDataContext();
+  const { data, metadata } = useDataContext<LineChartMetadata>();
   const { isHorizontal } = useLayoutContext();
   const { axis, dimension } = useCartesianContext();
   const { maxHeight: yMax, maxWidth: xMax } = dimension;
@@ -56,13 +58,13 @@ export const LinesTooltip: React.FC = () => {
   } = axis;
   const {
     index, tooltip, series, overlay,
-  } = metadata!;
+  } = metadata;
 
   const indexAxis = isHorizontal ? bottom : left;
   const seriesAxis = isHorizontal ? left : bottom;
   const overlayAxis = isHorizontal ? right : top;
 
-  const hasOverlay = Boolean(overlayAxis && overlay.dataKey);
+  const hasOverlay = Boolean(overlayAxis && overlay.dataKey && overlay.dataKey.length);
 
   const {
     tooltipLeft,
@@ -182,20 +184,23 @@ export const LinesTooltip: React.FC = () => {
               )
             ))}
 
-            {hasOverlay && tooltipData.data[overlay.dataKey] && (
-              <circle
-                r={defaultStyle.dataPoint.radius}
-                cx={isHorizontal
-                  ? tooltipData.lineIndicatorPos
-                  : overlayAxis?.scale(getPrimitiveFromObjectByPath(tooltipData.data, overlay.dataKey))}
-                cy={isHorizontal
-                  ? overlayAxis?.scale(getPrimitiveFromObjectByPath(tooltipData.data, overlay.dataKey))
-                  : tooltipData.lineIndicatorPos}
-                stroke={overlay.color}
-                fill={overlay.color}
-                strokeWidth={defaultStyle.dataPoint.strokeWidth}
-              />
-            )}
+            {hasOverlay && overlay.dataKey.map((dataKey: string, di: number) => (
+              tooltipData.data[dataKey] && (
+                <circle
+                  key={uuid()}
+                  r={defaultStyle.dataPoint.radius}
+                  cx={isHorizontal
+                    ? tooltipData.lineIndicatorPos
+                    : overlayAxis.scale(getPrimitiveFromObjectByPath(tooltipData.data, dataKey))}
+                  cy={isHorizontal
+                    ? overlayAxis.scale(getPrimitiveFromObjectByPath(tooltipData.data, dataKey))
+                    : tooltipData.lineIndicatorPos}
+                  stroke={overlay.colors[di]}
+                  fill={overlay.colors[di]}
+                  strokeWidth={defaultStyle.dataPoint.strokeWidth}
+                />
+              )
+            ))}
           </Group>
 
           <Tooltip
@@ -242,21 +247,19 @@ export const LinesTooltip: React.FC = () => {
                   </li>
                 ))}
 
-                {hasOverlay && (
-                  <li>
+                {hasOverlay && overlay.dataKey.map((dataKey: string, di: number) => (
+                  <li key={uuid()}>
                     <div className={LinesTooltipItem}>
-                      <Placeholder color={overlay.color} />
+                      <Placeholder color={overlay.colors[di]} />
                       <span>
-                        {overlay.name}
+                        {series.names[di]}
                       </span>
                     </div>
 
                     <div>
-                      {tooltip?.extraOverlayData && (
+                      {tooltip?.extraSeriesData && (
                         <p>
-                          {tooltip.extraOverlayData(
-                            _.at(tooltipData.data, getLabelFromPath(overlay.dataKey!))[0],
-                          )}
+                          {tooltip.extraSeriesData(_.at(tooltipData.data, getLabelFromPath(dataKey))[0])}
                         </p>
                       )}
                     </div>
@@ -264,12 +267,12 @@ export const LinesTooltip: React.FC = () => {
                     <div>
                       <p>
                         <b>
-                          {`${getPrimitiveFromObjectByPath(tooltipData.data, overlay.dataKey!) ?? 'n/a'}`}
+                          {`${getPrimitiveFromObjectByPath(tooltipData.data, dataKey) ?? 'n/a'}`}
                         </b>
                       </p>
                     </div>
                   </li>
-                )}
+                ))}
               </ul>
             </div>
 

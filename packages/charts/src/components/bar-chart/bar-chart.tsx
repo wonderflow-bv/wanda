@@ -21,7 +21,7 @@ import {
   DataProvider, LayoutProvider,
   ThemeProvider,
 } from '../../providers';
-import { defaultShapesPalette } from '../../style-config';
+import { colorPaletteDefault } from '../../style-config';
 import {
   CartesianChartLayout, Charts, Data, MarginProps, SortingType, ThemeVariants,
 } from '../../types';
@@ -106,7 +106,7 @@ export const BarChart: React.FC<BarChartProps> = ({
 
   const axis = useMemo(() => handleChartAxisLayout(i, s, o), [i, s, o]);
 
-  const palette = useMemo(() => defaultShapesPalette[theme], [theme]);
+  const palette = useMemo(() => colorPaletteDefault[theme], [theme]);
 
   const zeroPadding: MarginProps | undefined = hidePadding ? {
     top: 0, right: 12, bottom: 0, left: 0,

@@ -241,7 +241,7 @@ export const colorPaletteNeutrals: Record<NeutralsColorNames, string> = {
   dimmed9: colors.primary[90],
 };
 
-export const defaultShapesPalette: Record<ThemeVariants, string[]> = {
+export const colorPaletteDefault: Record<ThemeVariants, string[]> = {
   light: [
     colors.green[40],
     colors.red[30],
@@ -270,44 +270,4 @@ export const defaultShapesPalette: Record<ThemeVariants, string[]> = {
     colors.indigo[30],
     colors.mint[30],
   ],
-};
-
-export const defaultLineChartPalette: Record<ThemeVariants, {
-  overlay: string;
-  series: string[];
-}> = {
-  light: {
-    overlay: colors.salmon[50],
-    series: [
-      colors.green[40],
-      colors.red[30],
-      colors.blue[40],
-      colors.yellow[40],
-      colors.magenta[40],
-      colors.cyan[40],
-      colors.violet[40],
-      colors.salmon[40],
-      colors.purple[40],
-      colors.dipsy[40],
-      colors.indigo[40],
-      colors.mint[40],
-    ],
-  },
-  dark: {
-    overlay: colors.salmon[30],
-    series: [
-      colors.green[20],
-      colors.red[20],
-      colors.blue[20],
-      colors.yellow[20],
-      colors.magenta[30],
-      colors.cyan[20],
-      colors.violet[20],
-      colors.salmon[20],
-      colors.purple[30],
-      colors.dipsy[20],
-      colors.indigo[30],
-      colors.mint[30],
-    ],
-  },
 };
