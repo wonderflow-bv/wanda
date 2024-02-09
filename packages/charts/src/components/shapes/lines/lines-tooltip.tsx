@@ -252,7 +252,7 @@ export const LinesTooltip: React.FC = () => {
                     <div className={LinesTooltipItem}>
                       <Placeholder color={overlay.colors[di]} />
                       <span>
-                        {series.names[di]}
+                        {overlay.names[di]}
                       </span>
                     </div>
 
