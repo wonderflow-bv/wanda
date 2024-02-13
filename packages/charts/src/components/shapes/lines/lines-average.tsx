@@ -64,7 +64,8 @@ export const LinesAverage: React.FC = () => {
   const hasAverageSeries = Boolean(showAverage && averageSeries);
   const hasAverageOverlay = Boolean(showAverage && averageOverlay);
 
-  const hasLabel = dimension.maxWidth > viewport.small.maxWidth;
+  const hasAverageSeriesLabel = (dimension.maxWidth > viewport.small.maxWidth) && hasAverageSeries;
+  const hasAverageOverlayLabel = (dimension.maxWidth > viewport.small.maxWidth) && hasAverageOverlay;
 
   const coordinates = useMemo(() => (isHorizontal
     ? {
@@ -95,73 +96,71 @@ export const LinesAverage: React.FC = () => {
   const formatAverage = (value: number) => value.toFixed(2);
 
   return (
-    <>
+    <Group>
       {hasAverageSeries && (
-        <Group>
-          <Line
-            from={coordinates.series.from}
-            to={coordinates.series.to}
-            stroke={themes[theme].lines.average}
-            strokeWidth={strokeWidth}
-            pointerEvents={pointerEvents}
-            strokeDasharray={strokeDasharray}
-            opacity={opacity}
-          />
-          {hasLabel && (
-            <Label
-              backgroundFill={themes[theme].lines.average}
-              x={coordinates.series.label.x}
-              y={coordinates.series.label.y}
-              fontColor={themes[theme].lines.averageFontColor}
-              title={`Average: ${formatAverage(averageSeries!)}`}
-              titleFontSize={titleFontSize}
-              titleFontWeight={titleFontWeight}
-              titleProps={titleProps}
-              showAnchorLine={false}
-              horizontalAnchor={isHorizontal ? 'start' : 'middle'}
-              verticalAnchor="middle"
-              showBackground
-              backgroundPadding={backgroundPadding}
-              backgroundProps={backgroundProps}
-              maxWidth={maxLabelWidth}
-            />
-          )}
-        </Group>
+        <Line
+          from={coordinates.series.from}
+          to={coordinates.series.to}
+          stroke={themes[theme].lines.average}
+          strokeWidth={strokeWidth}
+          pointerEvents={pointerEvents}
+          strokeDasharray={strokeDasharray}
+          opacity={opacity}
+        />
       )}
 
       {hasAverageOverlay && (
-        <Group>
-          <Line
-            from={coordinates.overlay.from}
-            to={coordinates.overlay.to}
-            stroke={themes[theme].lines.average}
-            strokeWidth={strokeWidth}
-            pointerEvents={pointerEvents}
-            strokeDasharray={strokeDasharray}
-            opacity={opacity}
-          />
-          {hasLabel && (
-            <Label
-              backgroundFill={themes[theme].lines.average}
-              x={coordinates.overlay.label.x}
-              y={coordinates.overlay.label.y}
-              fontColor={themes[theme].lines.averageFontColor}
-              title={`Average: ${formatAverage(averageOverlay!)}`}
-              titleFontSize={titleFontSize}
-              titleFontWeight={titleFontWeight}
-              titleProps={titleProps}
-              showAnchorLine={false}
-              horizontalAnchor={isHorizontal ? 'end' : 'middle'}
-              verticalAnchor="middle"
-              showBackground
-              backgroundPadding={backgroundPadding}
-              backgroundProps={backgroundProps}
-              maxWidth={maxLabelWidth}
-            />
-          )}
-        </Group>
+        <Line
+          from={coordinates.overlay.from}
+          to={coordinates.overlay.to}
+          stroke={themes[theme].lines.average}
+          strokeWidth={strokeWidth}
+          pointerEvents={pointerEvents}
+          strokeDasharray={strokeDasharray}
+          opacity={opacity}
+        />
       )}
-    </>
+
+      {hasAverageSeriesLabel && (
+        <Label
+          backgroundFill={themes[theme].lines.average}
+          x={coordinates.series.label.x}
+          y={coordinates.series.label.y}
+          fontColor={themes[theme].lines.averageFontColor}
+          title={`Average: ${formatAverage(averageSeries!)}`}
+          titleFontSize={titleFontSize}
+          titleFontWeight={titleFontWeight}
+          titleProps={titleProps}
+          showAnchorLine={false}
+          horizontalAnchor={isHorizontal ? 'start' : 'middle'}
+          verticalAnchor="middle"
+          showBackground
+          backgroundPadding={backgroundPadding}
+          backgroundProps={backgroundProps}
+          maxWidth={maxLabelWidth}
+        />
+      )}
+
+      {hasAverageOverlayLabel && (
+        <Label
+          backgroundFill={themes[theme].lines.average}
+          x={coordinates.overlay.label.x}
+          y={coordinates.overlay.label.y}
+          fontColor={themes[theme].lines.averageFontColor}
+          title={`Average: ${formatAverage(averageOverlay!)}`}
+          titleFontSize={titleFontSize}
+          titleFontWeight={titleFontWeight}
+          titleProps={titleProps}
+          showAnchorLine={false}
+          horizontalAnchor={isHorizontal ? 'end' : 'middle'}
+          verticalAnchor="middle"
+          showBackground
+          backgroundPadding={backgroundPadding}
+          backgroundProps={backgroundProps}
+          maxWidth={maxLabelWidth}
+        />
+      )}
+    </Group>
   );
 };
 
