@@ -86,6 +86,16 @@ withAverage.args = {
   showAverage: true,
 };
 
+export const withTrendline = Template.bind({});
+withTrendline.args = {
+  subtitle: 'A trend line chart with overlay and trendlines',
+  overlay: {
+    dataKey: ['overlay'],
+    label: 'Overlay',
+  },
+  showTrendline: true,
+};
+
 export const withMissingData = Template.bind({});
 withMissingData.args = {
   data: feedbackCountGaps,
