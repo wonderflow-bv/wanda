@@ -551,6 +551,8 @@ describe('computeTrendline()', () => {
         r: 1, r2: 1, chi2: 0, rmsd: 0,
       },
       trendline: [0.5, 1, 1.5, 2, 2.5],
+      from: 0.5,
+      to: 2.5,
     }];
 
     expect(res).toStrictEqual(exp);
@@ -583,6 +585,8 @@ describe('computeTrendline()', () => {
         1.45,
         1.25,
         1.05],
+      from: 1.85,
+      to: 1.05,
     }];
 
     expect(res).toStrictEqual(exp);
