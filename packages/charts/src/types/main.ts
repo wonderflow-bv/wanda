@@ -38,3 +38,12 @@ export type AverageType = {
     average: number;
   }> ;
 } | undefined
+
+export type TrendlineType = {
+  name: string;
+  slope: number;
+  intercept: number;
+  coefficients: number[];
+  score: Record<('r' | 'r2' | 'chi2' | 'rmsd'), number>;
+  trendline: number[];
+}

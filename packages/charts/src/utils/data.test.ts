@@ -1,9 +1,10 @@
 
 import {
-  Data, LineChartIndex, LineChartOverlay, LineChartSeries,
+  Data, LineChartIndex, LineChartSeries, TrendlineType,
 } from '../types';
 import {
   computeAverage,
+  computeTrendline,
   getLabelFromPath,
   getPrimitiveFromObjectByPath,
   getPrimitivesFromObjectArrayByPath,
@@ -350,7 +351,7 @@ describe('handleChartDomainAndScaleType()', () => {
       }];
     const index: LineChartIndex = { dataKey: 'date' };
     const series: LineChartSeries = { dataKey: ['value', 'percentage'] };
-    const overlay: LineChartOverlay = { dataKey: 'overlay' };
+    const overlay: LineChartSeries = { dataKey: ['overlay'] };
     const res = handleChartDomainAndScaleType(data, index, series, overlay);
     const exp = {
       index: {
@@ -526,6 +527,64 @@ describe('computeAverage()', () => {
     const datakeys: string[] = ['testA', 'testB'];
     const res = computeAverage(data, datakeys);
     const exp = { average: 3.5, dataKey: [{ name: 'testA', average: 3 }, { name: 'testB', average: 4 }] };
+    expect(res).toStrictEqual(exp);
+  });
+});
+
+describe('computeTrendline()', () => {
+  it('should return values for single data key', () => {
+    const data: Data = [
+      { datakey: 0.5 },
+      { datakey: 1 },
+      { datakey: 1.5 },
+      { datakey: 2 },
+      { datakey: 2.5 },
+    ];
+
+    const res = computeTrendline(data, ['datakey']);
+    const exp: TrendlineType[] = [{
+      name: 'datakey',
+      slope: 0.5,
+      intercept: 0.5,
+      coefficients: [0.5, 0.5],
+      score: {
+        r: 1, r2: 1, chi2: 0, rmsd: 0,
+      },
+      trendline: [0.5, 1, 1.5, 2, 2.5],
+    }];
+
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return values for single data key', () => {
+    const data: Data = [
+      { datakey: 1 },
+      { datakey: 3 },
+      { datakey: 0.5 },
+      { datakey: 2.5 },
+      { datakey: 0.25 },
+    ];
+
+    const res = computeTrendline(data, ['datakey']);
+    const exp: TrendlineType[] = [{
+      name: 'datakey',
+      slope: -0.2,
+      intercept: 1.85,
+      coefficients: [1.85, -0.2],
+      score: {
+        r: 0.26,
+        r2: 0.07,
+        chi2: 6.32,
+        rmsd: 1.06,
+      },
+      trendline: [
+        1.85,
+        1.65,
+        1.45,
+        1.25,
+        1.05],
+    }];
+
     expect(res).toStrictEqual(exp);
   });
 });

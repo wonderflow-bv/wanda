@@ -15,17 +15,18 @@
  */
 
 import _ from 'lodash';
+import { SimpleLinearRegression } from 'ml-regression-simple-linear';
 import { Except } from 'type-fest';
 
 import {
   AverageType,
   AxisProps,
   Data, LineChartIndex,
-  LineChartSeries, SortingType,
+  LineChartSeries, SortingType, TrendlineType,
 } from '../types';
 import { BarChartIndex, BarChartSeries } from '../types/bar-chart';
 import { inferScaleTypeFromDomain } from './axis';
-import { formatDate } from './format';
+import { formatDate, maxPrecision } from './format';
 import {
   getMinMaxDate, getMinMaxNumber,
   removeNilsFromDomain,
@@ -199,3 +200,39 @@ export const computeAverage = (
 
   return _.isNaN(all) ? undefined : { average: all, dataKey };
 };
+
+export const computeTrendline = (
+  data: Data,
+  dataKeys: string[],
+): TrendlineType[] => dataKeys.map((k) => {
+  const dataPoints = data
+    .map(d => getPrimitiveFromObjectByPath(d, k))
+    .filter((d): d is number => typeof d === 'number');
+
+  const index = Array(dataPoints.length).fill('').map((_, i) => i);
+
+  const regression = new SimpleLinearRegression(index, dataPoints);
+
+  const { slope, intercept, coefficients } = regression;
+
+  const score = regression.score(index, dataPoints);
+
+  const trendline = data.map((_, i: number) => {
+    const val = slope * i + intercept;
+    return maxPrecision(val, 2);
+  });
+
+  return {
+    name: k,
+    slope: maxPrecision(slope, 2),
+    intercept: maxPrecision(intercept, 2),
+    coefficients: coefficients.map(c => maxPrecision(c, 2)),
+    score: {
+      r: maxPrecision(score.r, 2),
+      r2: maxPrecision(score.r2, 2),
+      chi2: maxPrecision(score.chi2, 2),
+      rmsd: maxPrecision(score.rmsd, 2),
+    },
+    trendline,
+  };
+});

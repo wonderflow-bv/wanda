@@ -67,6 +67,10 @@ export type LineChartProps = {
    */
   showAverage?: boolean;
   /**
+   * Display a trend line for every single line when true.
+   */
+  showTrend?: boolean;
+  /**
    * Set extra data or custom content to be displayed in the tooltip.
    */
   tooltip?: LineChartTooltip;
@@ -98,6 +102,7 @@ export const LineChart = forwardRef<HTMLElement, LineChartProps>(({
   overlay,
   tooltip,
   showAverage = false,
+  showTrend = false,
   hideMissingDataConnection = false,
   showMarker = false,
   showMarkerLabel = false,
@@ -122,6 +127,7 @@ export const LineChart = forwardRef<HTMLElement, LineChartProps>(({
     overlay,
     tooltip,
     showAverage,
+    showTrend,
     hideMissingDataConnection,
     showMarker,
     showMarkerLabel,

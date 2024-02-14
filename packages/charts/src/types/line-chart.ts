@@ -60,6 +60,7 @@ export type LineChartMetadata = {
     colors: Array<string | undefined>;
     style?: Array<LineStyle | undefined>;
     average: AverageType;
+    trend: any[];
   };
   overlay: {
     dataKey?: string[];
@@ -67,9 +68,11 @@ export type LineChartMetadata = {
     colors: Array<string | undefined> | undefined;
     style?: Array<LineStyle | undefined>;
     average: AverageType;
+    trend: any[] | undefined;
   };
   tooltip?: LineChartTooltip;
   showAverage?: boolean;
+  showTrend?: boolean;
   hideMissingDataConnection?: boolean;
   showMarker?: boolean;
   showMarkerLabel?: boolean;

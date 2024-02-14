@@ -66,3 +66,5 @@ export const truncate = (
     omission: axisStyleConfig.formatting.omission,
   },
 ) => _.truncate(text, options);
+
+export const maxPrecision = (value: number, precision: number) => _.round(value, precision);
