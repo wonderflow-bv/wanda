@@ -51,4 +51,10 @@ export const linesStyleConfig: LinesStyleConfig = {
     backgroundProps: { rx: 2, ry: 2 },
     titleProps: { dy: -1 },
   },
+  trendline: {
+    opacity: 1,
+    pointerEvents: 'none',
+    strokeDasharray: '5,2',
+    strokeWidth: 1,
+  },
 };

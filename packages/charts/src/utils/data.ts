@@ -188,7 +188,7 @@ export const sortBy = (
 export const computeAverage = (
   data: Data,
   dataKeys: string[],
-): AverageType => {
+): AverageType | undefined => {
   const dataKey = dataKeys.map((k: string) => ({
     name: k,
     average: _.mean(data
@@ -198,7 +198,7 @@ export const computeAverage = (
 
   const all = _.mean(dataKey.map(k => k.average));
 
-  return _.isNaN(all) ? undefined : { average: all, dataKey };
+  return _.isNaN(all) ? undefined : { average: maxPrecision(all, 2), dataKey };
 };
 
 export const computeTrendline = (
@@ -222,6 +222,9 @@ export const computeTrendline = (
     return maxPrecision(val, 2);
   });
 
+  const from = trendline[0];
+  const to = trendline[trendline.length - 1];
+
   return {
     name: k,
     slope: maxPrecision(slope, 2),
@@ -234,5 +237,7 @@ export const computeTrendline = (
       rmsd: maxPrecision(score.rmsd, 2),
     },
     trendline,
+    from,
+    to,
   };
 });

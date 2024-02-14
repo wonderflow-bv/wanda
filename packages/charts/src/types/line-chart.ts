@@ -15,7 +15,7 @@
  */
 
 import { AxisProps } from './cartesian';
-import { AverageType, Charts } from './main';
+import { AverageType, Charts, TrendlineType } from './main';
 
 export type LineChartIndex = Partial<AxisProps> & {
   dataKey: string;
@@ -59,20 +59,20 @@ export type LineChartMetadata = {
     names: string[];
     colors: Array<string | undefined>;
     style?: Array<LineStyle | undefined>;
-    average: AverageType;
-    trend: any[];
+    average: AverageType | undefined;
+    trendline: TrendlineType[] | undefined;
   };
   overlay: {
     dataKey?: string[];
     names: string[] | undefined;
     colors: Array<string | undefined> | undefined;
     style?: Array<LineStyle | undefined>;
-    average: AverageType;
-    trend: any[] | undefined;
+    average: AverageType | undefined;
+    trendline: TrendlineType[] | undefined;
   };
   tooltip?: LineChartTooltip;
   showAverage?: boolean;
-  showTrend?: boolean;
+  showTrendline?: boolean;
   hideMissingDataConnection?: boolean;
   showMarker?: boolean;
   showMarkerLabel?: boolean;

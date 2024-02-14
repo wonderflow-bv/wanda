@@ -93,8 +93,6 @@ export const LinesAverage: React.FC = () => {
       },
     }), [isHorizontal, averageSeriesScale, maxWidth, averageOverlayScale, maxHeight]);
 
-  const formatAverage = (value: number) => value.toFixed(2);
-
   return (
     <Group>
       {hasAverageSeries && (
@@ -127,7 +125,7 @@ export const LinesAverage: React.FC = () => {
           x={coordinates.series.label.x}
           y={coordinates.series.label.y}
           fontColor={themes[theme].lines.averageFontColor}
-          title={`Average: ${formatAverage(averageSeries!)}`}
+          title={`Average: ${averageSeries!}`}
           titleFontSize={titleFontSize}
           titleFontWeight={titleFontWeight}
           titleProps={titleProps}
@@ -147,7 +145,7 @@ export const LinesAverage: React.FC = () => {
           x={coordinates.overlay.label.x}
           y={coordinates.overlay.label.y}
           fontColor={themes[theme].lines.averageFontColor}
-          title={`Average: ${formatAverage(averageOverlay!)}`}
+          title={`Average: ${averageOverlay!}`}
           titleFontSize={titleFontSize}
           titleFontWeight={titleFontWeight}
           titleProps={titleProps}

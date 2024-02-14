@@ -51,4 +51,10 @@ export type LinesStyleConfig = {
     backgroundProps: React.SVGProps<SVGRectElement> | undefined;
     titleProps: Partial<TextProps> | undefined;
   };
+  trendline: {
+    opacity: number;
+    pointerEvents: string;
+    strokeDasharray: string;
+    strokeWidth: number;
+  };
 }

@@ -37,7 +37,7 @@ export type AverageType = {
     name: string;
     average: number;
   }> ;
-} | undefined
+}
 
 export type TrendlineType = {
   name: string;
@@ -46,4 +46,6 @@ export type TrendlineType = {
   coefficients: number[];
   score: Record<('r' | 'r2' | 'chi2' | 'rmsd'), number>;
   trendline: number[];
+  from: number;
+  to: number;
 }

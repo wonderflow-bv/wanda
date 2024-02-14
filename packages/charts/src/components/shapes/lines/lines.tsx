@@ -23,6 +23,7 @@ import { LinesMarkerLabels } from './lines-marker-labels';
 import { LinesOverlay } from './lines-overlay';
 import { LinesSeries } from './lines-series';
 import { LinesTooltip } from './lines-tooltip';
+import { LinesTrendline } from './lines-trendline';
 
 export const Lines: React.FC = () => {
   const { position } = useCartesianContext();
@@ -34,6 +35,7 @@ export const Lines: React.FC = () => {
       left={position.left}
     >
       <Group data-testid="lines">
+        <LinesTrendline />
         <LinesSeries />
         <LinesOverlay />
       </Group>
