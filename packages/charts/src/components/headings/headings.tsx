@@ -101,9 +101,10 @@ export const Headings: React.FC<HeadingsProps> = ({
   const { title: t, subtitle: s } = mergeStyle;
 
   const hasMenu = Boolean(menu && isBrowser);
+  const hasMarginRigth = (margin && margin.right >= 24);
 
   const buttonSize = 24;
-  const padding = (margin && margin.right >= 24) ? margin.right : 0;
+  const padding = hasMarginRigth ? margin.right : 0;
   const buttonLeft = width - buttonSize - padding;
   const { foreground: fg, background: bg, hover } = themes[theme].headings.button;
 
@@ -118,7 +119,7 @@ export const Headings: React.FC<HeadingsProps> = ({
     zIndex: 10,
   });
 
-  const tLeft = width;
+  const tLeft = width + (hasMarginRigth ? 0 : buttonSize);
   const tTop = top + buttonSize * 1.5;
 
   const handleTooltip = useCallback(() => {
@@ -190,7 +191,7 @@ export const Headings: React.FC<HeadingsProps> = ({
 
       )}
 
-      {hasMenu && isOpen && (
+      {hasMenu && true && (
         <TooltipInPortal
           key={uuid()}
           left={tLeft}
