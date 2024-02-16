@@ -67,7 +67,7 @@ export const LinesTooltip: React.FC = () => {
     top, right, bottom, left,
   } = axis;
   const {
-    index, tooltip, series, overlay,
+    index, tooltip, series, overlay, preventTooltipDisplay,
   } = metadata;
 
   const indexAxis = isHorizontal ? bottom : left;
@@ -139,7 +139,7 @@ export const LinesTooltip: React.FC = () => {
     });
   }, [indexAxis, containerBounds, isHorizontal, data, series.dataKey, overlay.dataKey, showTooltip]);
 
-  const hasTooltip = Boolean(tooltipData?.data && !preventTooltipOpening);
+  const hasTooltip = Boolean(tooltipData?.data && !preventTooltipOpening && !preventTooltipDisplay);
 
   return (
     <>

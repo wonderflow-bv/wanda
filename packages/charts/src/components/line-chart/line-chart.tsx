@@ -51,29 +51,33 @@ export type LineChartProps = {
    */
   renderAs?: LineChartRenderType;
   /**
-   * Set the properties associated with the Index Axis.
+   * Set the properties associated with the `Index` axis.
    */
   index: LineChartIndex;
   /**
-   * Set the properties associated with any Series of lines.
+   * Set properties associated with any `Series` of lines.
    */
   series: LineChartSeries;
   /**
-   * Set the properties associated with the Overlay Axis.
+   * Set properties associated with the `Overlay` axis.
    */
   overlay?: LineChartSeries;
   /**
-   * Display an average line and label when true.
+   * Display an average line and label when `true`.
    */
   showAverage?: boolean;
   /**
-   * Display a trend line for every single line when true.
+   * Display a trend line for every single line when `true`.
    */
   showTrendline?: boolean;
   /**
-   * Set extra data or custom content to be displayed in the tooltip.
+   * Set extra data or custom content to be displayed in the `tooltip`.
    */
   tooltip?: LineChartTooltip;
+  /**
+   * Prevent from displaying the tooltip on the chart when `true`.
+   */
+  preventTooltipDisplay?: boolean;
   /**
    * Prevent showing a connecting line between points when data is missing.
    */
@@ -101,12 +105,13 @@ export const LineChart = forwardRef<HTMLElement, LineChartProps>(({
   series,
   overlay,
   tooltip,
+  preventTooltipDisplay = false,
   showAverage = false,
   showTrendline = false,
+  hidePadding = false,
   hideMissingDataConnection = false,
   showMarker = false,
   showMarkerLabel = false,
-  hidePadding = false,
   ...otherProps
 }, forwardedRef) => {
   const {
@@ -126,12 +131,13 @@ export const LineChart = forwardRef<HTMLElement, LineChartProps>(({
     series,
     overlay,
     tooltip,
+    preventTooltipDisplay,
+    hidePadding,
     showAverage,
     showTrendline,
     hideMissingDataConnection,
     showMarker,
     showMarkerLabel,
-    hidePadding,
   });
 
   return (

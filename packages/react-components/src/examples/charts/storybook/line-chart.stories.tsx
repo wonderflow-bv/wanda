@@ -42,7 +42,6 @@ const story: ComponentMeta<typeof LineChart> = {
   args: {
     title: 'Line Charts',
     subtitle: 'A trend line chart',
-    preventResponsive: false,
     isLoading: false,
     showMarker: false,
     showMarkerLabel: false,
@@ -52,6 +51,8 @@ const story: ComponentMeta<typeof LineChart> = {
     hideMissingDataConnection: false,
     hideLegend: false,
     hidePadding: false,
+    preventTooltipDisplay: false,
+    preventResponsive: false,
     layout: CartesianChartLayout.HORIZONTAL,
     renderAs: 'curves',
     theme: 'light',

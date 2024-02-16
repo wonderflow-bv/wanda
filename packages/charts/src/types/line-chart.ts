@@ -71,6 +71,7 @@ export type LineChartMetadata = {
     trendline: TrendlineType[] | undefined;
   };
   tooltip?: LineChartTooltip;
+  hideTooltip?: boolean;
   showAverage?: boolean;
   showTrendline?: boolean;
   hideMissingDataConnection?: boolean;

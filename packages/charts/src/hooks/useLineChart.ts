@@ -44,6 +44,7 @@ export const useLineChart = ({
   series,
   overlay,
   tooltip,
+  preventTooltipDisplay = false,
   showAverage = false,
   showTrendline = false,
   hideMissingDataConnection = false,
@@ -100,6 +101,7 @@ export const useLineChart = ({
       trendline: (overlay?.dataKey && showTrendline) ? computeTrendline(data, overlay.dataKey) : undefined,
     },
     tooltip,
+    preventTooltipDisplay,
     showAverage,
     showTrendline,
     hideMissingDataConnection,
@@ -120,7 +122,9 @@ export const useLineChart = ({
     showTrendline,
     showMarker,
     showMarkerLabel,
-    tooltip]);
+    tooltip,
+    preventTooltipDisplay,
+  ]);
 
   return {
     axis,
