@@ -16,12 +16,16 @@
 
 import { Group } from '@visx/group';
 import { Text } from '@visx/text';
+import { defaultStyles, useTooltip, useTooltipInPortal } from '@visx/tooltip';
 import _ from 'lodash';
-import { useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
+import { v4 as uuid } from 'uuid';
 
+import { useSSR } from '../../hooks/useSSR';
 import { useStyleConfigContext, useThemeContext } from '../../providers';
-import { HeadingsStyleConfig } from '../../types';
+import { HeadingsStyleConfig, MarginProps } from '../../types';
 import { DeepPartial } from '../../types/main';
+import styles from './headings.module.css';
 
 export type HeadingsProps = {
   /**
@@ -41,6 +45,18 @@ export type HeadingsProps = {
    */
   left?: number;
   /**
+   * Set margin using an object with `top`, `right`, `bottom` and `left` position.
+   */
+  margin?: MarginProps;
+  /**
+   * Set the max width of the component.
+   */
+  width?: number;
+  /**
+   * Set the content of the menu popup.
+   */
+  menu?: React.ReactNode;
+  /**
    * Set custom headings style attributes.
    */
   config?: DeepPartial<HeadingsStyleConfig>;
@@ -51,51 +67,149 @@ export const Headings: React.FC<HeadingsProps> = ({
   subtitle,
   top = 0,
   left = 0,
-
+  width = 800,
+  margin,
+  menu,
   config,
 }: HeadingsProps) => {
   const theme = useThemeContext();
   const { headings, themes } = useStyleConfigContext();
+  const { isBrowser } = useSSR();
+
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const mergeStyle: HeadingsStyleConfig = useMemo(() => (_.merge(headings, config)),
     [headings, config]);
 
+  const menuStyle = {
+    ...defaultStyles,
+    backdropFilter: 'unset',
+    background: 'transparent',
+    borderRadius: 'unset',
+    border: '1px solid red',
+    boxShadow: 'unset',
+    color: 'unset',
+    lineHeight: 'unset',
+    overflow: 'none',
+    minWidth: '100px',
+    minHeight: '10px',
+    maxWidth: '350px',
+    maxHeight: 'unset',
+    pointerEvents: 'none',
+  };
+
   const { title: t, subtitle: s } = mergeStyle;
 
-  if (!title) return null;
+  const hasMenu = Boolean(menu && isBrowser);
+
+  const buttonSize = 24;
+  const padding = (margin && margin.right >= 24) ? margin.right : 0;
+  const buttonLeft = width - buttonSize - padding;
+  const { foreground: fg, background: bg, hover } = themes[theme].headings.button;
+
+  const {
+    showTooltip,
+  } = useTooltip<React.ReactNode>();
+
+  const { containerRef, TooltipInPortal } = useTooltipInPortal({
+    detectBounds: true,
+    scroll: true,
+    debounce: 500,
+    zIndex: 10,
+  });
+
+  const tLeft = width;
+  const tTop = top + buttonSize * 1.5;
+
+  const handleTooltip = useCallback(() => {
+    showTooltip({
+      tooltipLeft: tLeft,
+      tooltipTop: tTop,
+      tooltipData: menu,
+    });
+  }, [menu, showTooltip, tLeft, tTop]);
+
+  if (!title && !menu) return null;
 
   return (
-    <Group top={top} left={left}>
-      <Text
-        data-testid="headings"
-        fontFamily={mergeStyle.fontFamily}
-        fill={themes[theme].headings.title}
-        fontSize={t.fontSize}
-        fontWeight={t.fontWeight}
-        lineHeight={t.lineHeight}
-        textAnchor={t.textAnchor}
-        verticalAnchor={t.verticalAnchor}
-        x={t.x}
-        y={t.y}
-        dy={4}
-      >
-        {title}
-      </Text>
-      <Text
-        fontFamily={mergeStyle.fontFamily}
-        fill={themes[theme].headings.subtitle}
-        fontSize={s.fontSize}
-        fontWeight={s.fontWeight}
-        lineHeight={s.lineHeight}
-        textAnchor={s.textAnchor}
-        verticalAnchor={s.verticalAnchor}
-        x={s.x}
-        y={s.y}
-        dy={4}
-      >
-        {subtitle}
-      </Text>
-    </Group>
+    <>
+      {title && (
+        <Group top={top} left={left}>
+          <Text
+            data-testid="headings"
+            fontFamily={mergeStyle.fontFamily}
+            fill={themes[theme].headings.title}
+            fontSize={t.fontSize}
+            fontWeight={t.fontWeight}
+            lineHeight={t.lineHeight}
+            textAnchor={t.textAnchor}
+            verticalAnchor={t.verticalAnchor}
+            x={t.x}
+            y={t.y}
+            dy={4}
+          >
+            {title}
+          </Text>
+          <Text
+            fontFamily={mergeStyle.fontFamily}
+            fill={themes[theme].headings.subtitle}
+            fontSize={s.fontSize}
+            fontWeight={s.fontWeight}
+            lineHeight={s.lineHeight}
+            textAnchor={s.textAnchor}
+            verticalAnchor={s.verticalAnchor}
+            x={s.x}
+            y={s.y}
+            dy={4}
+          >
+            {subtitle}
+          </Text>
+        </Group>
+      )}
+
+      {hasMenu && (
+        <Group
+          top={top}
+          left={buttonLeft}
+          className={styles.Menu}
+          aria-label="Chart Menu"
+          ref={containerRef}
+          onClick={() => {
+            handleTooltip();
+            setIsOpen(prev => !prev);
+          }}
+        >
+          <svg width={buttonSize} height={buttonSize} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <circle cx={buttonSize / 2} cy={buttonSize / 2} r={buttonSize / 2} fill={bg} />
+            <circle cx={buttonSize / 2} cy={buttonSize / 2} r={buttonSize / 2} fill={hover} className={styles.Hover} />
+            <g transform="scale(0.75 0.75) translate(4 4)">
+              <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2Zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2Zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2Z" fill={fg} />
+            </g>
+          </svg>
+        </Group>
+
+      )}
+
+      {hasMenu && isOpen && (
+        <TooltipInPortal
+          key={uuid()}
+          left={tLeft}
+          top={tTop}
+          style={{
+            ...menuStyle,
+          }}
+          aria-expanded={isOpen}
+        >
+          <div
+            data-inner-component="ChartMenu"
+            role="menu"
+            aria-live="polite"
+          >
+            {menu}
+          </div>
+        </TooltipInPortal>
+      )}
+    </>
   );
 };
 

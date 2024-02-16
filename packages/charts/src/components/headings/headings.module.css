@@ -1,0 +1,13 @@
+.Menu {
+  .Hover {
+    visibility: hidden;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:hover .Hover {
+    visibility: visible;
+  }
+}

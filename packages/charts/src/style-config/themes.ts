@@ -25,6 +25,11 @@ export const themeLight: Theme = {
   headings: {
     title: colorPaletteNeutrals.dimmed9,
     subtitle: colorPaletteNeutrals.dimmed7,
+    button: {
+      background: 'hsl(220 16% 85% / 40%)',
+      hover: 'hsl(221 10% 56% / 40%)',
+      foreground: 'hsl(0 0% 0%)',
+    },
   },
   axis: {
     label: colorPaletteNeutrals.dimmed8,
@@ -75,6 +80,11 @@ export const themeDark: Theme = {
   headings: {
     title: colorPaletteNeutrals.dimmed0,
     subtitle: colorPaletteNeutrals.dimmed2,
+    button: {
+      background: 'hsl(0 0% 7% / 80%)',
+      hover: 'hsl(0 0% 11% / 80%)',
+      foreground: 'hsl(0 0% 100%)',
+    },
   },
   axis: {
     label: colorPaletteNeutrals.dimmed2,

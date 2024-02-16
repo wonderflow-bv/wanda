@@ -21,6 +21,11 @@ export type Theme = {
   headings: {
     title: string;
     subtitle: string;
+    button: {
+      background: string;
+      hover: string;
+      foreground: string;
+    };
   };
   axis: {
     label: string;

@@ -45,6 +45,16 @@ import {
   NoData,
 } from './lines.module.css';
 
+type TooltipData = {
+  coords: {
+    x: number;
+    y: number;
+  };
+  data: Record<string, unknown>;
+  hasData: any;
+  lineIndicatorPos: any;
+}
+
 export const LinesTooltip: React.FC = () => {
   const theme = useThemeContext();
   const { lines: defaultStyle } = useStyleConfigContext();
@@ -73,13 +83,13 @@ export const LinesTooltip: React.FC = () => {
     tooltipData,
     hideTooltip,
     showTooltip,
-  } = useTooltip();
+  } = useTooltip<TooltipData>();
 
   const { containerRef, containerBounds } = useTooltipInPortal({
     detectBounds: true,
     scroll: true,
     debounce: 500,
-    zIndex: 10,
+    zIndex: 4,
   });
 
   const handleTooltip = useCallback((event: React.MouseEvent<ownerSVGElement>) => {
@@ -115,7 +125,7 @@ export const LinesTooltip: React.FC = () => {
     const hasSeriesData = series.dataKey.every(s => !_.isNil(getPrimitiveFromObjectByPath(datum, s)));
     const hasOverlayData = !_.isNil(getPrimitiveFromObjectByPath(datum, overlay.dataKey!));
 
-    const tooltipData = {
+    const tooltipData: TooltipData = {
       coords,
       data: datum,
       hasData: hasSeriesData || hasOverlayData,

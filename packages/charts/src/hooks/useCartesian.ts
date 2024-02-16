@@ -45,6 +45,7 @@ export type UseCartesianProps = {
   showBrush?: boolean;
   styleConfig?: DeepPartial<CartesianStyleConfig>;
   title?: string;
+  menu?: React.ReactNode;
   width?: number;
 }
 
@@ -66,6 +67,7 @@ export const useCartesian = ({
   showBrush = false,
   styleConfig,
   title,
+  menu,
   width = 800,
 }: UseCartesianProps) => {
   const theme = useThemeContext();
@@ -108,7 +110,7 @@ export const useCartesian = ({
     width: (hasBrush && !isHorizontal) ? brushTotalArea : 0,
   };
 
-  const hasHeadings = !!title;
+  const hasHeadings = Boolean(title || menu);
   const headingsHeight = hasHeadings ? hStyle.height : 0;
 
   const w = size ? size.width : width;

@@ -59,6 +59,10 @@ export type CartesianBaseProps = {
    */
   headings?: Pick<HeadingsProps, 'top'| 'left'| 'config'>;
   /**
+   * Set the content for the popup menu.
+   */
+  menu?: React.ReactNode;
+  /**
    * Set the Cartesian component width. 800px is the default value.
    */
   width?: number;
@@ -155,6 +159,7 @@ export const CartesianBase = forwardRef<HTMLElement, CartesianBaseProps>(({
   title,
   subtitle,
   headings,
+  menu,
   axis,
   axisFiltered,
   showBrush = false,
@@ -207,6 +212,7 @@ forwardedRef) => {
     showBrush,
     styleConfig,
     title,
+    menu,
     width,
   });
 
@@ -267,6 +273,9 @@ forwardedRef) => {
             subtitle={subtitle}
             top={position.headings.top}
             left={position.headings.left}
+            width={dynamicWidth}
+            margin={margin}
+            menu={menu}
             config={headings?.config}
             data-inner-element="Headings"
           />

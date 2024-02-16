@@ -38,6 +38,7 @@ const story: ComponentMeta<typeof LineChart> = {
       label: 'Feedback Count',
     },
     overlay: undefined,
+    menu: undefined,
   },
   argTypes: {
     layout: {
@@ -270,6 +271,11 @@ withNoData.args = {
   title: 'Line Charts',
   subtitle: 'A trend line chart w/o data',
   emptyStateMessage: 'Please select items from the right menu to render the chart.',
+};
+
+export const WithMenu = Template.bind({});
+WithMenu.args = {
+  menu: 'drop some content here',
 };
 
 export const renderAsLines = Template.bind({});
