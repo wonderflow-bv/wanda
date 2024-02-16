@@ -60,7 +60,7 @@ export const LinesTooltip: React.FC = () => {
   const { lines: defaultStyle } = useStyleConfigContext();
   const { data, metadata } = useDataContext<LineChartMetadata>();
   const { isHorizontal } = useLayoutContext();
-  const { axis, dimension } = useCartesianContext();
+  const { axis, dimension, preventTooltipOpening } = useCartesianContext();
   const { maxHeight: yMax, maxWidth: xMax } = dimension;
 
   const {
@@ -139,6 +139,8 @@ export const LinesTooltip: React.FC = () => {
     });
   }, [indexAxis, containerBounds, isHorizontal, data, series.dataKey, overlay.dataKey, showTooltip]);
 
+  const hasTooltip = Boolean(tooltipData?.data && !preventTooltipOpening);
+
   return (
     <>
       <rect
@@ -157,7 +159,7 @@ export const LinesTooltip: React.FC = () => {
         onMouseLeave={hideTooltip}
       />
 
-      {tooltipData?.data && (
+      {hasTooltip && (
         <>
           <Group>
             <Line

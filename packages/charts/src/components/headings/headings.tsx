@@ -60,6 +60,11 @@ export type HeadingsProps = {
    * Set custom headings style attributes.
    */
   config?: DeepPartial<HeadingsStyleConfig>;
+  /**
+   * This callback is used to inform about the menu state
+   * in order to prevent both menu and tooltip to be open at the same time
+   */
+  onMenuOpen: (isOpen: boolean) => void;
 }
 
 export const Headings: React.FC<HeadingsProps> = ({
@@ -71,6 +76,7 @@ export const Headings: React.FC<HeadingsProps> = ({
   margin,
   menu,
   config,
+  onMenuOpen,
 }: HeadingsProps) => {
   const theme = useThemeContext();
   const { headings, themes } = useStyleConfigContext();
@@ -178,6 +184,7 @@ export const Headings: React.FC<HeadingsProps> = ({
           onClick={() => {
             handleTooltip();
             setIsOpen(prev => !prev);
+            onMenuOpen(!isOpen);
           }}
         >
           <svg width={buttonSize} height={buttonSize} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -196,9 +203,7 @@ export const Headings: React.FC<HeadingsProps> = ({
           key={uuid()}
           left={tLeft}
           top={tTop}
-          style={{
-            ...menuStyle,
-          }}
+          style={menuStyle}
           aria-expanded={isOpen}
         >
           <div

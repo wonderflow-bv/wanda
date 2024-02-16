@@ -193,12 +193,14 @@ forwardedRef) => {
     filteredData,
     hasEmptyState,
     hoveredLegendItem,
+    isMenuOpen,
     metadata,
     position,
     ref,
     refLegend,
     theme,
     setHoveredLegendItem,
+    setIsMenuOpen,
   } = useCartesian({
     axis,
     axisFiltered,
@@ -277,6 +279,7 @@ forwardedRef) => {
             margin={margin}
             menu={menu}
             config={headings?.config}
+            onMenuOpen={setIsMenuOpen}
             data-inner-element="Headings"
           />
 
@@ -326,6 +329,7 @@ forwardedRef) => {
                   dimension={dimension.axis}
                   axis={axisFilteredSystem}
                   hoveredLegendItem={hoveredLegendItem}
+                  preventTooltipOpening={isMenuOpen}
                 >
                   <DataProvider data={filteredData} metadata={metadata} filteredData={filteredData}>
                     <Group clipPath="url(#clip-path-cartesian-chart)">

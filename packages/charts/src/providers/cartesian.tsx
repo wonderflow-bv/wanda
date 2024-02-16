@@ -31,6 +31,7 @@ export type CartesianContextProps = {
   };
   axis?: CartesianxAxisSystem;
   hoveredLegendItem: string;
+  preventTooltipOpening: boolean;
 };
 
 export type CartesianProviderProps = CartesianContextProps
@@ -48,6 +49,7 @@ const defaultSetting = {
   },
   axis: undefined,
   hoveredLegendItem: '',
+  preventTooltipOpening: false,
 };
 
 export const CartesianContext = createContext<CartesianContextProps>(defaultSetting);
@@ -58,9 +60,10 @@ export const CartesianProvider: FCChildren<CartesianProviderProps> = ({
   dimension,
   axis,
   hoveredLegendItem,
+  preventTooltipOpening,
 }) => (
   <CartesianContext.Provider value={{
-    position, dimension, axis, hoveredLegendItem,
+    position, dimension, axis, hoveredLegendItem, preventTooltipOpening,
   }}
   >
     {children}

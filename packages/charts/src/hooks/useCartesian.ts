@@ -84,6 +84,7 @@ export const useCartesian = ({
   );
 
   const [hoveredLegendItem, setHoveredLegendItem] = useState<string>('');
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const ref = useRef<HTMLDivElement>(null);
   const size = useSize(ref);
@@ -219,11 +220,13 @@ export const useCartesian = ({
     filteredData,
     hasEmptyState,
     hoveredLegendItem,
+    isMenuOpen,
     metadata,
     position,
     ref,
     refLegend,
     theme,
     setHoveredLegendItem,
+    setIsMenuOpen,
   };
 };
