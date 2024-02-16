@@ -2,6 +2,12 @@ import { render, screen } from '@testing-library/react';
 
 import { Headings } from './headings';
 
+global.ResizeObserver = jest.fn().mockImplementation(() => ({
+  observe: jest.fn(),
+  unobserve: jest.fn(),
+  disconnect: jest.fn(),
+}));
+
 describe('<Headings>', () => {
   it('should render the component', () => {
     render(<Headings title="Title" />);
