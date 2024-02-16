@@ -17,8 +17,11 @@
 import { Group } from '@visx/group';
 import { Text } from '@visx/text';
 import { defaultStyles, useTooltip, useTooltipInPortal } from '@visx/tooltip';
+import { useClickAway } from 'ahooks';
 import _ from 'lodash';
-import React, { useCallback, useMemo, useState } from 'react';
+import React, {
+  useCallback, useMemo, useRef, useState,
+} from 'react';
 import { v4 as uuid } from 'uuid';
 
 import { useSSR } from '../../hooks/useSSR';
@@ -84,6 +87,8 @@ export const Headings: React.FC<HeadingsProps> = ({
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
+  const menuRef = useRef<HTMLDivElement>(null);
+
   const mergeStyle: HeadingsStyleConfig = useMemo(() => (_.merge(headings, config)),
     [headings, config]);
 
@@ -107,10 +112,10 @@ export const Headings: React.FC<HeadingsProps> = ({
   const { title: t, subtitle: s } = mergeStyle;
 
   const hasMenu = Boolean(menu && isBrowser);
-  const hasMarginRigth = (margin && margin.right >= 24);
+  const hasMarginRight = (margin && margin.right >= 24);
 
   const buttonSize = 24;
-  const padding = hasMarginRigth ? margin.right : 0;
+  const padding = hasMarginRight ? margin.right : 0;
   const buttonLeft = width - buttonSize - padding;
   const { foreground: fg, background: bg, hover } = themes[theme].headings.button;
 
@@ -122,10 +127,10 @@ export const Headings: React.FC<HeadingsProps> = ({
     detectBounds: true,
     scroll: true,
     debounce: 500,
-    zIndex: 10,
+    zIndex: 4,
   });
 
-  const tLeft = width + (hasMarginRigth ? 0 : buttonSize);
+  const tLeft = width + (hasMarginRight ? 0 : buttonSize);
   const tTop = top + buttonSize * 1.5;
 
   const handleTooltip = useCallback(() => {
@@ -135,6 +140,24 @@ export const Headings: React.FC<HeadingsProps> = ({
       tooltipData: menu,
     });
   }, [menu, showTooltip, tLeft, tTop]);
+
+  const handleTooltipOpening = () => {
+    handleTooltip();
+    setIsOpen(prev => !prev);
+    onMenuOpen(!isOpen);
+  };
+
+  const counter = useRef(0);
+
+  useClickAway(() => {
+    if (counter.current) {
+      setIsOpen(false);
+      onMenuOpen(false);
+      counter.current = 0;
+    } else {
+      counter.current = 1;
+    }
+  }, menuRef);
 
   if (!title && !menu) return null;
 
@@ -179,23 +202,34 @@ export const Headings: React.FC<HeadingsProps> = ({
           top={top}
           left={buttonLeft}
           className={styles.Menu}
-          aria-label="Chart Menu"
           ref={containerRef}
-          onClick={() => {
-            handleTooltip();
-            setIsOpen(prev => !prev);
-            onMenuOpen(!isOpen);
-          }}
+          onClick={handleTooltipOpening}
         >
-          <svg width={buttonSize} height={buttonSize} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <circle cx={buttonSize / 2} cy={buttonSize / 2} r={buttonSize / 2} fill={bg} />
-            <circle cx={buttonSize / 2} cy={buttonSize / 2} r={buttonSize / 2} fill={hover} className={styles.Hover} />
+          <svg
+            width={buttonSize}
+            height={buttonSize}
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-label="Chart Menu"
+          >
+            <circle
+              cx={buttonSize / 2}
+              cy={buttonSize / 2}
+              r={buttonSize / 2}
+              fill={bg}
+            />
+            <circle
+              cx={buttonSize / 2}
+              cy={buttonSize / 2}
+              r={buttonSize / 2}
+              fill={hover}
+              className={styles.Hover}
+            />
             <g transform="scale(0.75 0.75) translate(4 4)">
               <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2Zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2Zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2Z" fill={fg} />
             </g>
           </svg>
         </Group>
-
       )}
 
       {hasMenu && isOpen && (
@@ -210,6 +244,7 @@ export const Headings: React.FC<HeadingsProps> = ({
             data-inner-component="ChartMenu"
             role="menu"
             aria-live="polite"
+            ref={menuRef}
           >
             {menu}
           </div>
