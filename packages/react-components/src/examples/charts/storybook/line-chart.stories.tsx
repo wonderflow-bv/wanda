@@ -1,13 +1,40 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 // import { CartesianChartLayout, LineChart, LineChartProps } from '@wonderflow/charts';
-import { Card } from '@/components';
+import { Card, Menu } from '@/components';
 
 import { CartesianChartLayout, LineChart, LineChartProps } from '../../../../../charts/src';
 import {
   channels, channelsB, feedbackCount, feedbackCountGaps, proCons, products,
 } from '../mock-data';
 import styles from './sb-charts.module.css';
+
+const FakeMenu = (
+  <Menu>
+    <Menu.Item
+      autoFocus
+      icon="arrow-right"
+      value="1"
+      description={<>this is my description</>}
+    >
+      Sample long menu item
+    </Menu.Item>
+    <Menu.ItemCheckbox
+      onClick={() => ({})}
+      checked
+      icon="check"
+      value="2"
+    >
+      Checkbox item
+    </Menu.ItemCheckbox>
+    <Menu.Item value="3" icon="right-from-bracket">
+      Item option 3
+    </Menu.Item>
+    <Menu.Separator />
+    <Menu.Item value="4" icon="arrow-down-to-bracket">Even shorter</Menu.Item>
+    <Menu.Item value="5" disabled>Really?</Menu.Item>
+  </Menu>
+);
 
 const story: ComponentMeta<typeof LineChart> = {
   title: 'Charts/Line Chart',
@@ -275,7 +302,7 @@ withNoData.args = {
 
 export const WithMenu = Template.bind({});
 WithMenu.args = {
-  menu: 'drop some content here',
+  menu: FakeMenu,
 };
 
 export const renderAsLines = Template.bind({});

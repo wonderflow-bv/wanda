@@ -86,7 +86,7 @@ export const Headings: React.FC<HeadingsProps> = ({
     backdropFilter: 'unset',
     background: 'transparent',
     borderRadius: 'unset',
-    border: '1px solid red',
+    border: 'unset',
     boxShadow: 'unset',
     color: 'unset',
     lineHeight: 'unset',
@@ -95,7 +95,7 @@ export const Headings: React.FC<HeadingsProps> = ({
     minHeight: '10px',
     maxWidth: '350px',
     maxHeight: 'unset',
-    pointerEvents: 'none',
+    pointerEvents: 'unset',
   };
 
   const { title: t, subtitle: s } = mergeStyle;
@@ -191,7 +191,7 @@ export const Headings: React.FC<HeadingsProps> = ({
 
       )}
 
-      {hasMenu && true && (
+      {hasMenu && isOpen && (
         <TooltipInPortal
           key={uuid()}
           left={tLeft}
