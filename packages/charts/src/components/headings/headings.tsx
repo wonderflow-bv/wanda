@@ -249,6 +249,7 @@ export const Headings: React.FC<HeadingsProps> = ({
           aria-expanded={isOpen}
         >
           <div
+            className="ChartMenu"
             data-inner-component="ChartMenu"
             role="menu"
             aria-live="polite"

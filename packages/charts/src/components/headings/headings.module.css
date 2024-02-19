@@ -3,6 +3,10 @@
     visibility: hidden;
   }
 
+  &:active {
+    outline: none;
+  }
+
   &:hover {
     cursor: pointer;
   }
@@ -10,8 +14,12 @@
   &:hover .ActiveArea {
     visibility: visible;
   }
+}
 
-  &:focus .ActiveArea {
-    outline: 2px solid red;
+@media print {
+  .Menu,
+  .ActiveArea,
+  .ChartMenu {
+    visibility: hidden;
   }
 }
