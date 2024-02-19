@@ -212,6 +212,7 @@ export const Headings: React.FC<HeadingsProps> = ({
           focusable
           tabIndex={0}
           onKeyDown={e => handleKeyDown(e)}
+          data-testid="menu-button"
         >
           <svg
             width={buttonSize}
@@ -254,6 +255,7 @@ export const Headings: React.FC<HeadingsProps> = ({
             role="menu"
             aria-live="polite"
             ref={menuRef}
+            data-testid="menu"
           >
             {menu}
           </div>
