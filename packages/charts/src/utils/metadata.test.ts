@@ -1,7 +1,7 @@
 import { colorPaletteDefault } from '../style-config/colors';
-import { LineChartOverlay, LineChartSeries } from '../types';
+import { LineChartSeries } from '../types';
 import {
-  handleLineChartSeriesColors, handleOverlayName, handleSeriesNames,
+  handleLineChartSeriesColors, handleSeriesNames,
 } from './metadata';
 
 describe('handleSeriesNames()', () => {
@@ -57,62 +57,3 @@ describe('handleLineChartSeriesColors()', () => {
   });
 });
 
-describe('handleOverlayName()', () => {
-  it('should return default formatted datakey', () => {
-    const overlay: LineChartOverlay = {
-      dataKey: 'test',
-    };
-    const res = handleOverlayName(overlay);
-    const exp = 'Test';
-    expect(res).toStrictEqual(exp);
-  });
-
-  it('should return preferred formatted labels', () => {
-    const overlay: LineChartOverlay = {
-      dataKey: 'test',
-      label: 'best',
-    };
-    const res = handleOverlayName(overlay);
-    const exp = 'Best';
-    expect(res).toStrictEqual(exp);
-  });
-
-  it('should return renamed labels', () => {
-    const overlay: LineChartOverlay = {
-      dataKey: 'test',
-      rename: 'fest',
-    };
-    const res = handleOverlayName(overlay);
-    const exp = 'fest';
-    expect(res).toStrictEqual(exp);
-  });
-
-  it('should return empty string w/o overlay', () => {
-    const res = handleOverlayName(undefined);
-    const exp = '';
-    expect(res).toStrictEqual(exp);
-  });
-});
-
-describe('handleLineChartOverlayColor()', () => {
-  const colors = colorPaletteDefault.light;
-
-  it('should return the default color', () => {
-    const overlay: LineChartSeries = {
-      dataKey: ['test'],
-    };
-    const res = handleLineChartSeriesColors(overlay, colors);
-    const exp = ['hsl(149 83% 35%)'];
-    expect(res).toStrictEqual(exp);
-  });
-
-  it('should return a custom styled color', () => {
-    const overlay: LineChartSeries = {
-      dataKey: ['test'],
-      style: [{ stroke: 'salmon' }],
-    };
-    const res = handleLineChartSeriesColors(overlay, colors);
-    const exp = ['salmon'];
-    expect(res).toStrictEqual(exp);
-  });
-});

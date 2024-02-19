@@ -16,12 +16,14 @@
 
 import _ from 'lodash';
 
-import { LineChartOverlay, LineChartSeries } from '../types';
-import { BarChartOverlay, BarChartSeries } from '../types/bar-chart';
+import { LineChartSeries } from '../types';
+import { BarChartSeries } from '../types/bar-chart';
 import { getLabelFromPath } from './data';
 
+type ChartSeries = LineChartSeries | BarChartSeries;
+
 export const handleSeriesNames = (
-  series: LineChartSeries | BarChartSeries,
+  series: ChartSeries,
 ) => series.dataKey.map((s: string, i: number) => {
   const renamed = series.rename ? series.rename(s, i) : getLabelFromPath(s);
   return _.startCase(renamed);
@@ -44,24 +46,3 @@ export const handleBarChartSeriesColors = (
     ? series.style[i]?.fill
     : palette[i % palette.length]
 ));
-
-export const handleOverlayName = (overlay: LineChartOverlay | BarChartOverlay |undefined) => {
-  if (overlay) {
-    const { rename, label, dataKey } = overlay;
-    if (rename) return rename;
-    if (label) return _.startCase(label);
-    return _.startCase(dataKey);
-  }
-
-  return '';
-};
-
-export const handleLineChartOverlayColor = (
-  overlay: LineChartOverlay | undefined,
-  palette: string,
-) => overlay?.style?.stroke ?? palette;
-
-export const handleBarChartOverlayColor = (
-  overlay: BarChartOverlay | undefined,
-  palette: string,
-) => overlay?.style?.fill ?? palette;

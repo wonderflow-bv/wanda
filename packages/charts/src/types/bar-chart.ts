@@ -15,7 +15,9 @@
  */
 
 import { AxisProps } from './cartesian';
-import { Charts, SortingType } from './main';
+import {
+  AverageType, Charts, SortingType, TrendlineType,
+} from './main';
 
 export type BarChartIndex = Partial<AxisProps> & {
   dataKey: string;
@@ -42,6 +44,7 @@ export type BarChartTooltip = {
 
 export type BarStyle = {
   fill?: string;
+  showLabel?: boolean;
 }
 
 export type BarChartMetadata = {
@@ -54,56 +57,21 @@ export type BarChartMetadata = {
     names: string[];
     colors: Array<string | undefined>;
     style?: Array<BarStyle | undefined>;
+    average: AverageType | undefined;
+    trendline: TrendlineType[] | undefined;
   };
   overlay: {
     dataKey?: string[];
     names: string[] | undefined;
     colors: Array<string | undefined> | undefined;
     style?: Array<BarStyle | undefined>;
+    average: AverageType | undefined;
+    trendline: TrendlineType[] | undefined;
   };
   tooltip?: BarChartTooltip;
-  hideMissingDataConnection?: boolean;
-  showMarker?: boolean;
-  showMarkerLabel?: boolean;
+  preventTooltipDisplay?: boolean;
+  showLabel?: boolean;
+  showAverage?: boolean;
+  showTrendline?: boolean;
   hidePadding?: boolean;
 }
-
-// const dataStructure = [
-//   {
-//     product: 'productA',
-//     continents: [
-//       {
-//         name: 'europe',
-//         value: 100,
-//         countries: [
-//           {
-//             name: 'italy',
-//             value: 100,
-//           },
-//           {
-//             name: 'france',
-//             value: 100,
-//           },
-//         ],
-//       },
-//       {
-//         name: 'africa',
-//         value: 100,
-//         countries: [
-//           {
-//             name: 'algeria',
-//             value: 100,
-//           },
-//           {
-//             name: 'tunisia',
-//             value: 100,
-//           },
-//         ],
-//       },
-//     ],
-//   },
-// ];
-
-// const index = dataStructure[0].product; // 'product'
-// const series = dataStructure[0].continents[0].value; // 'continents[x].value'
-// const groupBy = dataStructure[0].continents[0].name; // 'continents[x].name'
