@@ -17,7 +17,7 @@
 import { Group } from '@visx/group';
 import { Text } from '@visx/text';
 import { defaultStyles, useTooltip, useTooltipInPortal } from '@visx/tooltip';
-import { useClickAway } from 'ahooks';
+import { useClickAway, useKeyPress } from 'ahooks';
 import _ from 'lodash';
 import React, {
   useCallback, useMemo, useRef, useState,
@@ -88,26 +88,10 @@ export const Headings: React.FC<HeadingsProps> = ({
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const menuRef = useRef<HTMLDivElement>(null);
+  const menuStyle = { ...defaultStyles, ...headings.menu };
 
   const mergeStyle: HeadingsStyleConfig = useMemo(() => (_.merge(headings, config)),
     [headings, config]);
-
-  const menuStyle = {
-    ...defaultStyles,
-    backdropFilter: 'unset',
-    background: 'transparent',
-    borderRadius: 'unset',
-    border: 'unset',
-    boxShadow: 'unset',
-    color: 'unset',
-    lineHeight: 'unset',
-    overflow: 'none',
-    minWidth: '100px',
-    minHeight: '10px',
-    maxWidth: '350px',
-    maxHeight: 'unset',
-    pointerEvents: 'unset',
-  };
 
   const { title: t, subtitle: s } = mergeStyle;
 
@@ -117,11 +101,10 @@ export const Headings: React.FC<HeadingsProps> = ({
   const buttonSize = 24;
   const padding = hasMarginRight ? margin.right : 0;
   const buttonLeft = width - buttonSize - padding;
+
   const { foreground: fg, background: bg, hover } = themes[theme].headings.button;
 
-  const {
-    showTooltip,
-  } = useTooltip<React.ReactNode>();
+  const { showTooltip } = useTooltip<React.ReactNode>();
 
   const { containerRef, TooltipInPortal } = useTooltipInPortal({
     detectBounds: true,
@@ -141,18 +124,40 @@ export const Headings: React.FC<HeadingsProps> = ({
     });
   }, [menu, showTooltip, tLeft, tTop]);
 
-  const handleTooltipOpening = () => {
+  const handleTooltipToggle = () => {
     handleTooltip();
     setIsOpen(prev => !prev);
     onMenuOpen(!isOpen);
   };
 
+  const handleTooltipOpen = () => {
+    handleTooltip();
+    setIsOpen(true);
+    onMenuOpen(true);
+  };
+
+  const handleTooltipClose = () => {
+    handleTooltip();
+    setIsOpen(false);
+    onMenuOpen(false);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<SVGGElement>) => {
+    if (hasMenu
+      && !isOpen
+      && (event.key === 'Enter' || event.key === 'ArrowDown')
+    ) handleTooltipOpen();
+  };
+
+  useKeyPress('Esc', () => {
+    if (hasMenu && isOpen) handleTooltipClose();
+  });
+
   const counter = useRef(0);
 
   useClickAway(() => {
     if (counter.current) {
-      setIsOpen(false);
-      onMenuOpen(false);
+      handleTooltipClose();
       counter.current = 0;
     } else {
       counter.current = 1;
@@ -203,7 +208,10 @@ export const Headings: React.FC<HeadingsProps> = ({
           left={buttonLeft}
           className={styles.Menu}
           ref={containerRef}
-          onClick={handleTooltipOpening}
+          onClick={handleTooltipToggle}
+          focusable
+          tabIndex={0}
+          onKeyDown={e => handleKeyDown(e)}
         >
           <svg
             width={buttonSize}
@@ -223,7 +231,7 @@ export const Headings: React.FC<HeadingsProps> = ({
               cy={buttonSize / 2}
               r={buttonSize / 2}
               fill={hover}
-              className={styles.Hover}
+              className={styles.ActiveArea}
             />
             <g transform="scale(0.75 0.75) translate(4 4)">
               <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2Zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2Zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2Z" fill={fg} />

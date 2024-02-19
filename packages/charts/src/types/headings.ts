@@ -39,4 +39,19 @@ export type HeadingsStyleConfig = {
     x: number;
     y: number;
   };
+  menu: {
+    backdropFilter: string;
+    background: string;
+    borderRadius: string;
+    border: string;
+    boxShadow: string;
+    color: string;
+    lineHeight: string;
+    overflow: string;
+    minWidth: string;
+    minHeight: string;
+    maxWidth: string;
+    maxHeight: string;
+    pointerEvents: string;
+  };
 }

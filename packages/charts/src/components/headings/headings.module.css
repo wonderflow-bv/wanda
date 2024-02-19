@@ -1,5 +1,5 @@
 .Menu {
-  .Hover {
+  .ActiveArea {
     visibility: hidden;
   }
 
@@ -7,7 +7,11 @@
     cursor: pointer;
   }
 
-  &:hover .Hover {
+  &:hover .ActiveArea {
     visibility: visible;
+  }
+
+  &:focus .ActiveArea {
+    outline: 2px solid red;
   }
 }

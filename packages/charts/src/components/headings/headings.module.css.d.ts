@@ -1,6 +1,6 @@
 declare const styles: {
   readonly "Menu": string;
-  readonly "Hover": string;
+  readonly "ActiveArea": string;
 };
 export = styles;
 
