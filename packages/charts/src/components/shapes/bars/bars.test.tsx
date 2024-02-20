@@ -28,11 +28,15 @@ const mockMetadata: BarChartMetadata = {
     dataKey: ['a'],
     names: ['A'],
     colors: ['ca'],
+    average: undefined,
+    trendline: undefined,
   },
   overlay: {
-    dataKey: 'b',
-    name: 'B',
-    color: 'ob',
+    dataKey: ['b'],
+    names: ['B'],
+    colors: ['ob'],
+    average: undefined,
+    trendline: undefined,
   },
   hidePadding: true,
 };
@@ -89,6 +93,7 @@ describe('<Bars>', () => {
               dimension={{ maxHeight: 600, maxWidth: 800 }}
               axis={mockedAxisSystem}
               hoveredLegendItem=""
+              preventTooltipOpening
             >
               <Bars />
             </CartesianProvider>
