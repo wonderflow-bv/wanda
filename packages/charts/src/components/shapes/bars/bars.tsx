@@ -20,6 +20,7 @@ import { useCartesianContext } from '../../../providers';
 import {
   BarsItemGroup,
 } from './bars.module.css';
+import { BarsSeries } from './bars-series';
 
 export const Bars: React.FC = () => {
   const { position } = useCartesianContext();
@@ -29,8 +30,7 @@ export const Bars: React.FC = () => {
       left={position.left}
     >
       <Group className={BarsItemGroup} data-testid="bars">
-        {/* <LinesSeries />
-        <LinesOverlay /> */}
+        <BarsSeries />
       </Group>
 
       {/* <LinesTooltip />
