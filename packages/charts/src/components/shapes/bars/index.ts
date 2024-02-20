@@ -15,3 +15,4 @@
  */
 
 export { Bars } from './bars';
+export { BarsSeries } from './bars-series';

@@ -16,7 +16,7 @@
 
 import { Group } from '@visx/group';
 
-import { useCartesianContext } from '../../../providers/cartesian';
+import { useCartesianContext } from '../../../providers';
 import {
   BarsItemGroup,
 } from './bars.module.css';
