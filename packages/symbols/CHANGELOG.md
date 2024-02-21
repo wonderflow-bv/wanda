@@ -1,5 +1,11 @@
 # @wonderflow/symbols
 
+## 12.10.0
+
+### Minor Changes
+
+- df4eb4b: Add new `floppy-disk` icon.
+
 ## 12.9.0
 
 ## 12.8.0
