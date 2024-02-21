@@ -43,7 +43,7 @@ export const PropsBlocks = ({
     >
 
       {description && (
-        <Text variant="body-3">
+        <Text variant="body-2">
           <Refractor language="typescript" value={description} className={styles.Code} />
         </Text>
       )}

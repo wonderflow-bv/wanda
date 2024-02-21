@@ -26,6 +26,10 @@
   }
 }
 
+.Tools div[data-inner-element='Content'] {
+  overflow: visible;
+}
+
 .RadioButton {
   border-radius: token(--radius-8);
   background: var(--global-vibrancy-background);
