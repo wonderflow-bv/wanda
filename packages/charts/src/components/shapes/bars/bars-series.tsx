@@ -1,5 +1,5 @@
 import { Group } from '@visx/group';
-import { scaleBand, scaleUtc } from '@visx/scale';
+import { scaleBand, scaleLinear } from '@visx/scale';
 import { BarGroup } from '@visx/shape';
 import _ from 'lodash';
 
@@ -22,15 +22,30 @@ export const BarsSeries = () => {
   const { series, index } = metadata!;
 
   const indexAxis = isHorizontal ? bottom : left;
-  const seriesAxis = isHorizontal ? left : bottom;
+  // const seriesAxis = isHorizontal ? left : bottom;
 
   indexAxis?.scale.rangeRound([0, dimension.maxWidth]);
 
-  const scaleX0 = scaleUtc<string>({
-    domain: data.map((d: any) => new Date(d[index])),
+  const scaleX0 = scaleBand<string>({
+    domain: data.map((d: any) => d[index]),
+    padding: 0.1,
   }) as any;
+  scaleX0.rangeRound([0, dimension.maxWidth]);
 
-  console.log('scaleX0', scaleX0.domain());
+  const scaleX1 = scaleBand<string>({
+    domain: series.dataKey,
+    padding: 0.1,
+  });
+  scaleX1.rangeRound([0, scaleX0.bandwidth()]);
+
+  const scaleY = scaleLinear<number>({
+    domain: [0,
+      Math.max(
+        ...data.map(d => Math.max(...series.dataKey.map(key => Number(d[key])))),
+      ),
+    ],
+  });
+  scaleY.range([dimension.maxHeight, 0]);
 
   return (
     <BarGroup
@@ -38,12 +53,9 @@ export const BarsSeries = () => {
       keys={series.dataKey}
       height={dimension.maxHeight}
       x0={(d: Record<string, any>) => d[index]}
-      x0Scale={indexAxis!.scale as any}
-      x1Scale={scaleBand<string>({
-        domain: series.dataKey,
-        padding: 0.1,
-      })}
-      yScale={seriesAxis!.scale as any}
+      x0Scale={scaleX0}
+      x1Scale={scaleX1}
+      yScale={scaleY}
       color={(_, i) => series.colors[i]!}
     >
       {barGroups => barGroups.map((barGroup) => {
