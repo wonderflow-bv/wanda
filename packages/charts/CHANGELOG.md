@@ -1,5 +1,7 @@
 # @wonderflow/charts
 
+## 12.10.0
+
 ## 12.9.0
 
 ### Minor Changes
