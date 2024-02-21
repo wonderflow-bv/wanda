@@ -69,11 +69,11 @@ export const PropsBlock = ({
         {description && (
           <>
             <Grid.Item>
-              <Text variant="body-3"><b>Description</b></Text>
+              <Text variant="body-2"><b>Description</b></Text>
             </Grid.Item>
 
             <Grid.Item>
-              <Text variant="body-3">
+              <Text variant="body-2">
                 {description}
               </Text>
             </Grid.Item>
@@ -83,22 +83,22 @@ export const PropsBlock = ({
         {type && (
           <>
             <Grid.Item>
-              <Text variant="body-3"><b>Type</b></Text>
+              <Text variant="body-2"><b>Type</b></Text>
             </Grid.Item>
 
             <Grid.Item>
-              <Text variant="body-3">
+              <Text variant="body-2">
                 {Array.isArray(type)
                   ? type.map((type, i) => (
                     <Fragment key={type}>
                       {i !== 0 && '|'}
-                      <Text key={type} variant="body-3">
+                      <Text key={type} variant="body-2">
                         <Refractor language="typescript" value={type} className={styles.Code} />
                       </Text>
                     </Fragment>
                   ))
                   : (
-                    <Text variant="body-3">
+                    <Text variant="body-2">
                       <Refractor language="typescript" value={type} className={styles.Code} />
                     </Text>
                   )}
@@ -110,11 +110,11 @@ export const PropsBlock = ({
         {defaultValue && (
           <>
             <Grid.Item>
-              <Text variant="body-3"><b>Default</b></Text>
+              <Text variant="body-2"><b>Default</b></Text>
             </Grid.Item>
 
             <Grid.Item>
-              <Text variant="body-3">
+              <Text variant="body-2">
                 <Refractor language="typescript" value={defaultValue} className={styles.Code} />
               </Text>
             </Grid.Item>
@@ -124,11 +124,11 @@ export const PropsBlock = ({
         {typeValue && (
           <>
             <Grid.Item>
-              <Text variant="body-3"><b>Value</b></Text>
+              <Text variant="body-2"><b>Value</b></Text>
             </Grid.Item>
 
             <Grid.Item>
-              <Text variant="body-3">
+              <Text variant="body-2">
                 <Refractor language="typescript" value={typeValue} className={styles.Code} />
               </Text>
             </Grid.Item>
