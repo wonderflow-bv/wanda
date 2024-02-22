@@ -1,6 +1,6 @@
 import { Group } from '@visx/group';
-import { scaleBand, scaleLinear } from '@visx/scale';
-import { Bar, BarGroup } from '@visx/shape';
+import { scaleBand } from '@visx/scale';
+import { Bar, BarGroup, BarGroupHorizontal } from '@visx/shape';
 import _ from 'lodash';
 
 import {
@@ -15,37 +15,61 @@ export const BarsSeries = () => {
   const { isHorizontal } = useLayoutContext();
   const { axis, hoveredLegendItem: overLegend, dimension } = useCartesianContext();
 
-  console.log(dimension, theme, themes, overLegend);
+  console.log(theme, themes, overLegend);
 
   const { left, bottom } = axis!;
 
   const { series, index } = metadata!;
 
-  const indexAxis = isHorizontal ? bottom : left;
-  // const seriesAxis = isHorizontal ? left : bottom;
+  // const indexAxis = isHorizontal ? bottom : left;
+  const seriesAxis = isHorizontal ? left : bottom;
 
-  indexAxis?.scale.rangeRound([0, dimension.maxWidth]);
-
-  const scaleX0 = scaleBand<string>({
+  const scaleXY0 = scaleBand<string>({
     domain: data.map((d: any) => d[index]),
     paddingOuter: 1,
     paddingInner: 0.1,
   });
-  scaleX0.rangeRound([0, dimension.maxWidth]);
 
-  const scaleX1 = scaleBand<string>({
+  scaleXY0.rangeRound((isHorizontal ? [0, dimension.maxWidth] : [dimension.maxHeight, 0]));
+
+  const scaleXY1 = scaleBand<string>({
     domain: series.dataKey,
   });
-  scaleX1.rangeRound([0, scaleX0.bandwidth()]);
 
-  const scaleY = scaleLinear<number>({
-    domain: [0,
-      Math.max(
-        ...data.map(d => Math.max(...series.dataKey.map(key => Number(d[key])))),
-      ),
-    ],
-  });
-  scaleY.range([dimension.maxHeight, 0]);
+  scaleXY1.rangeRound([0, scaleXY0.bandwidth()]);
+
+  if (!isHorizontal) {
+    return (
+      <BarGroupHorizontal
+        data={data}
+        keys={series.dataKey}
+        width={dimension.maxWidth}
+        y0={(d: Record<string, any>) => d[index]}
+        y0Scale={scaleXY0}
+        y1Scale={scaleXY1}
+        xScale={seriesAxis!.scale}
+        color={(_, i) => series.colors[i]!}
+      >
+        {barGroups => barGroups.map(barGroup => (
+          <Group key={_.uniqueId()} top={barGroup.y0}>
+            {barGroup.bars.map(bar => (
+              <Bar
+                key={_.uniqueId()}
+                x={bar.x}
+                y={bar.y}
+                width={bar.width}
+                height={bar.height}
+                fill={bar.color}
+                rx={4}
+                onClick={() => ({})}
+              />
+            ))}
+          </Group>
+        ))
+          }
+      </BarGroupHorizontal>
+    );
+  }
 
   return (
     <BarGroup
@@ -53,9 +77,9 @@ export const BarsSeries = () => {
       keys={series.dataKey}
       height={dimension.maxHeight}
       x0={(d: Record<string, any>) => d[index]}
-      x0Scale={scaleX0}
-      x1Scale={scaleX1}
-      yScale={scaleY}
+      x0Scale={scaleXY0}
+      x1Scale={scaleXY1}
+      yScale={seriesAxis!.scale}
       color={(_, i) => series.colors[i]!}
     >
       {barGroups => barGroups.map(barGroup => (
@@ -73,8 +97,7 @@ export const BarsSeries = () => {
             />
           ))}
         </Group>
-      ))
-          }
+      ))}
     </BarGroup>
   );
 };
