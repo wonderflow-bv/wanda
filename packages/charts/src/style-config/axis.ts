@@ -51,7 +51,7 @@ export const axisStyleConfig: AxisElementsStyleConfig = {
   top: {
     tickLabelProps: {
       dy: -12,
-      dominantBaseline: 'auto',
+      dominantBaseline: 'middle',
     },
     labelProps: {
       dominantBaseline: 'auto',
@@ -70,7 +70,7 @@ export const axisStyleConfig: AxisElementsStyleConfig = {
   bottom: {
     tickLabelProps: {
       dy: 4,
-      dominantBaseline: 'auto',
+      dominantBaseline: 'middle',
     },
     labelProps: {
       dominantBaseline: 'auto',

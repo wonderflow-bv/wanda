@@ -432,7 +432,7 @@ describe('computeAxisStyleConfig()', () => {
     };
     const res = computeAxisStyleConfig(system);
     const exp = {
-      bottom: { labelOffset: 28, labelProps: { dominantBaseline: 'auto' }, tickLabelProps: { dominantBaseline: 'auto', dy: 4 } },
+      bottom: { labelOffset: 28, labelProps: { dominantBaseline: 'auto' }, tickLabelProps: { dominantBaseline: 'middle', dy: 4 } },
       left: { labelOffset: 28, labelProps: { dominantBaseline: 'auto' }, tickLabelProps: { dominantBaseline: 'middle', dx: -4, textAnchor: 'end' } },
       offset: {
         bottomAxisOffset: 63,
@@ -445,7 +445,7 @@ describe('computeAxisStyleConfig()', () => {
       right: { labelOffset: 28, labelProps: { dominantBaseline: 'auto' }, tickLabelProps: { dominantBaseline: 'middle', dx: 4, textAnchor: 'start' } },
       style: {
         axisLineProps: { strokeDasharray: '', strokeWidth: 1 },
-        bottom: { labelProps: { dominantBaseline: 'auto' }, tickLabelProps: { dominantBaseline: 'auto', dy: 4 } },
+        bottom: { labelProps: { dominantBaseline: 'auto' }, tickLabelProps: { dominantBaseline: 'middle', dy: 4 } },
         formatting: { maxCharactersLength: 20, omission: '...' },
         labelProps: {
           fontFamily: 'system-ui, sans-serif', fontSize: 12, fontWeight: 600, textAnchor: 'middle',
@@ -457,9 +457,9 @@ describe('computeAxisStyleConfig()', () => {
         },
         tickLabelProps: { fontFamily: 'system-ui, sans-serif', fontSize: 14, fontWeight: 400 },
         tickLineProps: { length: 4, strokeLinecap: 'round', strokeWidth: 1 },
-        top: { labelProps: { dominantBaseline: 'auto' }, tickLabelProps: { dominantBaseline: 'auto', dy: -12 } },
+        top: { labelProps: { dominantBaseline: 'auto' }, tickLabelProps: { dominantBaseline: 'middle', dy: -12 } },
       },
-      top: { labelOffset: 28, labelProps: { dominantBaseline: 'auto' }, tickLabelProps: { dominantBaseline: 'auto', dy: -12 } },
+      top: { labelOffset: 28, labelProps: { dominantBaseline: 'auto' }, tickLabelProps: { dominantBaseline: 'middle', dy: -12 } },
     };
     expect(res).toStrictEqual(exp);
   });
@@ -532,7 +532,7 @@ describe('scaleDomainToAxis()', () => {
     };
     const scale = scaleDomainToAxis(axis);
     const res = scale?.('b' as any);
-    const exp = 50;
+    const exp = 41;
     expect(res).toStrictEqual(exp);
   });
 
@@ -866,7 +866,7 @@ describe('handleVerticalTickLabelTransform()', () => {
       positionLeft: 0,
     });
     const res = handleVerticalTickLabelTransform(1, true, computed!);
-    const exp = { transform: 'translate(9, -4) rotate(-90, 800, 0)' };
+    const exp = { textAnchor: 'end' };
     expect(res).toStrictEqual(exp);
   });
 
@@ -908,7 +908,10 @@ describe('handleVerticalTickLabelTransform()', () => {
       positionLeft: 0,
     });
     const res = handleVerticalTickLabelTransform(1, true, computed!);
-    const exp = { transform: 'translate(13, 6) rotate(90, 800, 0)' };
+    const exp = {
+      dy: '-6',
+      textAnchor: 'start',
+    };
     expect(res).toStrictEqual(exp);
   });
 

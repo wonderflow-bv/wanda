@@ -19,6 +19,7 @@ import {
   TickFormatter,
 } from '@visx/axis';
 import { Group } from '@visx/group';
+import { Text } from '@visx/text';
 import {
   NumberValue,
 } from '@visx/vendor/d3-scale';
@@ -75,22 +76,21 @@ export const CartesianBaseAxis: React.FC<CartesianBaseAxisProps> = ({
           const labelOffset = orientation.labelOffset + handleVerticalTickLabelOffset(xMax, styleConfig, a);
           const tickFormat = handleTickFormat(a) as TickFormat;
 
+          const getTickLabelProps = (v: string | NumberValue | Date) => ({
+            ...tickLabelProps,
+            ...orientation.tickLabelProps,
+            ...handleVerticalTickLabelTransform(v, isVertical, a),
+            fill: tickLabel,
+          });
+
           return (
             <Axis
               {...a}
               key={uuid()}
               numTicks={numTicks}
               tickLength={tickLineProps.length}
-              tickLabelProps={v => ({
-                ...tickLabelProps,
-                ...orientation.tickLabelProps,
-                ...handleVerticalTickLabelTransform(v, isVertical, a),
-                fill: tickLabel,
-              })}
-              tickLineProps={{
-                ...tickLineProps,
-                stroke: tick,
-              }}
+              tickLabelProps={getTickLabelProps}
+              tickLineProps={{ ...tickLineProps, stroke: tick }}
               tickFormat={tickFormat}
               label={a.label}
               labelOffset={labelOffset}
@@ -102,6 +102,25 @@ export const CartesianBaseAxis: React.FC<CartesianBaseAxisProps> = ({
               stroke={line}
               strokeDasharray={axisLineProps.strokeDasharray}
               strokeWidth={axisLineProps.strokeWidth}
+              tickComponent={t => (
+                <Text
+                  x={t.x}
+                  y={t.y}
+                  transform={`rotate(${isVertical ? 90 : 0} ${t.x} ${t.y})`}
+                  fontFamily={t.fontFamily}
+                  fontSize={t.fontSize}
+                  fontWeight={t.fontWeight}
+                  textAnchor={t.textAnchor}
+                  verticalAnchor={t.verticalAnchor}
+                  fill={t.fill}
+                  dominantBaseline={t.dominantBaseline}
+                  dx={t.dx}
+                  dy={t.dy}
+                  width={160}
+                >
+                  {t.formattedValue}
+                </Text>
+              )}
             />
           );
         })}

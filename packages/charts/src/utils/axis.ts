@@ -453,14 +453,15 @@ export const handleVerticalTickLabelTransform = (
   isVertical: boolean,
   axis: CartesianAxis,
 ) => {
-  const { orientation, scale } = axis;
+  const { orientation } = axis;
 
   let res = {};
 
   if (orientation === 'bottom') {
     if (isVertical) {
       res = {
-        transform: `translate(13, 6) rotate(90, ${scale(t) ?? 0}, 0)`,
+        dy: '-6',
+        textAnchor: 'start',
       };
     } else {
       res = { transform: '', textAnchor: 'middle' };
@@ -470,7 +471,7 @@ export const handleVerticalTickLabelTransform = (
   if (orientation === 'top') {
     if (isVertical) {
       res = {
-        transform: `translate(9, -4) rotate(-90, ${scale(t) ?? 0}, 0)`,
+        textAnchor: 'end',
       };
     } else {
       res = { transform: '', textAnchor: 'middle' };
