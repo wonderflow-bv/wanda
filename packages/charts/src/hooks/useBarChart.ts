@@ -20,6 +20,7 @@ import { Except } from 'type-fest';
 import { BarChartProps } from '../components';
 import { colorPaletteDefault } from '../style-config';
 import {
+  BarChartIndex,
   BarChartMetadata,
   CartesianChartLayout, Charts, Data,
   MarginProps,
@@ -55,13 +56,20 @@ export const useBarChart = ({
 
   const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
 
+  const uIndex: BarChartIndex = useMemo(() => ({
+    ...index,
+    scaleType: 'label',
+    paddingOuter: 1,
+    round: true,
+  }), [index]);
+
   const { index: i, series: s, overlay: o } = useMemo(
-    () => handleChartDomainAndScaleType(data, index, series, overlay), [data, index, overlay, series],
+    () => handleChartDomainAndScaleType(data, uIndex, series, overlay), [data, uIndex, overlay, series],
   );
 
   const { index: iFiltered, series: sFiltered, overlay: oFiltered } = useMemo(
-    () => handleChartDomainAndScaleType(brushFilteredData, index, series, overlay),
-    [brushFilteredData, index, overlay, series],
+    () => handleChartDomainAndScaleType(brushFilteredData, uIndex, series, overlay),
+    [brushFilteredData, uIndex, overlay, series],
   );
 
   const axis = useMemo(() => handleChartAxisLayout(i, s, o), [i, s, o]);

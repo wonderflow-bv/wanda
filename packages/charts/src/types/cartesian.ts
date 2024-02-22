@@ -60,6 +60,7 @@ export type AxisProps = {
   clamp?: boolean;
   paddingInner?: number;
   paddingOuter?: number;
+  padding?: number;
   numTicks?: number;
   hideTicks?: boolean;
   hideTickLabel?: boolean;

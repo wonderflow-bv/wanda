@@ -1,6 +1,6 @@
 import { Group } from '@visx/group';
 import { scaleBand, scaleLinear } from '@visx/scale';
-import { BarGroup } from '@visx/shape';
+import { Bar, BarGroup } from '@visx/shape';
 import _ from 'lodash';
 
 import {
@@ -28,13 +28,13 @@ export const BarsSeries = () => {
 
   const scaleX0 = scaleBand<string>({
     domain: data.map((d: any) => d[index]),
-    padding: 0.1,
-  }) as any;
+    paddingOuter: 1,
+    paddingInner: 0.1,
+  });
   scaleX0.rangeRound([0, dimension.maxWidth]);
 
   const scaleX1 = scaleBand<string>({
     domain: series.dataKey,
-    padding: 0.1,
   });
   scaleX1.rangeRound([0, scaleX0.bandwidth()]);
 
@@ -58,26 +58,22 @@ export const BarsSeries = () => {
       yScale={scaleY}
       color={(_, i) => series.colors[i]!}
     >
-      {barGroups => barGroups.map((barGroup) => {
-        console.log('barGroup', barGroup);
-
-        return (
-          <Group key={_.uniqueId()} left={barGroup.x0}>
-            {barGroup.bars.map(bar => (
-              <rect
-                key={_.uniqueId()}
-                x={bar.x}
-                y={bar.y}
-                width={bar.width}
-                height={bar.height}
-                fill={bar.color}
-                rx={4}
-                onClick={() => ({})}
-              />
-            ))}
-          </Group>
-        );
-      })
+      {barGroups => barGroups.map(barGroup => (
+        <Group key={_.uniqueId()} left={barGroup.x0}>
+          {barGroup.bars.map(bar => (
+            <Bar
+              key={_.uniqueId()}
+              x={bar.x}
+              y={bar.y}
+              width={bar.width}
+              height={bar.height}
+              fill={bar.color}
+              rx={4}
+              onClick={() => ({})}
+            />
+          ))}
+        </Group>
+      ))
           }
     </BarGroup>
   );

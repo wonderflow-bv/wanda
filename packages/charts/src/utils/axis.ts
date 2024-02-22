@@ -333,8 +333,9 @@ export const scaleDomainToAxis = (axis: Except<AxisProps, 'orientation'>) => {
     clamp,
     nice,
     round = true,
-    paddingInner,
-    paddingOuter,
+    padding = undefined,
+    paddingInner = 0.1,
+    paddingOuter = 1,
   } = axis;
 
   const hasData = domain.length && range?.length && scaleType;
@@ -344,8 +345,10 @@ export const scaleDomainToAxis = (axis: Except<AxisProps, 'orientation'>) => {
       return scaleBand({
         domain: domain.map(v => `${v}`),
         range,
-        paddingInner: paddingInner ?? 1,
-        paddingOuter: paddingOuter ?? 1,
+        paddingInner,
+        paddingOuter,
+        padding,
+        round,
       });
     }
 
