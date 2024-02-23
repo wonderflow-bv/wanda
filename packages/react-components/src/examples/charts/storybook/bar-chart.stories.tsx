@@ -3,7 +3,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 // import { CartesianChartLayout, BarChart, BarChartProps } from '@wonderflow/charts';
 import { BarChart, BarChartProps, CartesianChartLayout } from '../../../../../charts/src';
 import {
-  feedbackCount,
+  feedbackCount, proCons,
 } from '../mock-data';
 
 const story: ComponentMeta<typeof BarChart> = {
@@ -59,3 +59,29 @@ const Template: ComponentStory<typeof BarChart> = (args: BarChartProps) => <BarC
 
 export const Default = Template.bind({});
 Default.args = {};
+
+export const withOverlay = Template.bind({});
+withOverlay.args = {
+  subtitle: 'A bar chart with overlay',
+  overlay: {
+    dataKey: ['overlay'],
+    label: 'Overlay',
+  },
+};
+
+export const withMultipleSeries = Template.bind({});
+withMultipleSeries.args = {
+  title: 'Multiple Series',
+  subtitle: 'A bar chart with multiple series',
+  data: proCons,
+  index: {
+    dataKey: 'date',
+    label: 'Time',
+  },
+  series: {
+    domain: [0, 140],
+    dataKey: ['positive', 'negative', 'neutral'],
+    label: 'Pros & cons',
+    style: [undefined, undefined, { fill: 'gray' }],
+  },
+};

@@ -15,4 +15,5 @@
  */
 
 export { Bars } from './bars';
+export { BarsOverlay } from './bars-overlay';
 export { BarsSeries } from './bars-series';

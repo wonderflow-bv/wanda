@@ -20,6 +20,7 @@ import { useCartesianContext } from '../../../providers';
 import {
   BarsItemGroup,
 } from './bars.module.css';
+import { BarsOverlay } from './bars-overlay';
 import { BarsSeries } from './bars-series';
 
 export const Bars: React.FC = () => {
@@ -31,6 +32,7 @@ export const Bars: React.FC = () => {
     >
       <Group className={BarsItemGroup} data-testid="bars">
         <BarsSeries />
+        <BarsOverlay />
       </Group>
 
       {/* <LinesTooltip />
