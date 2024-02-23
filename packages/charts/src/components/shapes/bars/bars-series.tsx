@@ -17,9 +17,13 @@ export const BarsSeries = () => {
 
   console.log(theme, themes, overLegend);
 
-  const { left, bottom } = axis!;
+  const {
+    left, bottom, right, top,
+  } = axis!;
 
-  const { series, index } = metadata!;
+  const { series, index, overlay } = metadata!;
+
+  const hasOverlay = Boolean(overlay && (right || top));
 
   // const indexAxis = isHorizontal ? bottom : left;
   const seriesAxis = isHorizontal ? left : bottom;
@@ -32,8 +36,10 @@ export const BarsSeries = () => {
 
   scaleXY0.rangeRound((isHorizontal ? [0, dimension.maxWidth] : [dimension.maxHeight, 0]));
 
+  const combinedDataKeys = hasOverlay ? [...series.dataKey, ...overlay.dataKey!] : series.dataKey;
+
   const scaleXY1 = scaleBand<string>({
-    domain: series.dataKey,
+    domain: combinedDataKeys,
   });
 
   scaleXY1.rangeRound([0, scaleXY0.bandwidth()]);
@@ -82,22 +88,26 @@ export const BarsSeries = () => {
       yScale={seriesAxis!.scale}
       color={(_, i) => series.colors[i]!}
     >
-      {barGroups => barGroups.map(barGroup => (
-        <Group key={_.uniqueId()} left={barGroup.x0}>
-          {barGroup.bars.map(bar => (
-            <Bar
-              key={_.uniqueId()}
-              x={bar.x}
-              y={bar.y}
-              width={bar.width}
-              height={bar.height}
-              fill={bar.color}
-              rx={4}
-              onClick={() => ({})}
-            />
-          ))}
-        </Group>
-      ))}
+      {barGroups => barGroups.map((barGroup) => {
+        console.log('barGroup', barGroup);
+
+        return (
+          <Group key={_.uniqueId()} left={barGroup.x0}>
+            {barGroup.bars.map(bar => (
+              <Bar
+                key={_.uniqueId()}
+                x={bar.x}
+                y={bar.y}
+                width={bar.width}
+                height={bar.height}
+                fill={bar.color}
+                rx={4}
+                onClick={() => ({})}
+              />
+            ))}
+          </Group>
+        );
+      })}
     </BarGroup>
   );
 };

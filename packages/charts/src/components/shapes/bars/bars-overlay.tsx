@@ -19,7 +19,7 @@ export const BarsOverlay = () => {
 
   const { right, top } = axis!;
 
-  const { overlay, index } = metadata!;
+  const { overlay, index, series } = metadata!;
 
   // const indexAxis = isHorizontal ? bottom : left;
 
@@ -30,13 +30,15 @@ export const BarsOverlay = () => {
   const scaleXY0 = scaleBand<string>({
     domain: data.map((d: any) => d[index]),
     paddingOuter: 1,
-    paddingInner: 0.7,
+    paddingInner: 0.1,
   });
 
   scaleXY0.rangeRound((isHorizontal ? [0, dimension.maxWidth] : [dimension.maxHeight, 0]));
 
+  const combinedDataKeys = hasOverlay ? [...series.dataKey, ...overlay.dataKey!] : series.dataKey;
+
   const scaleXY1 = scaleBand<string>({
-    domain: overlay.dataKey,
+    domain: combinedDataKeys,
   });
 
   scaleXY1.rangeRound([0, scaleXY0.bandwidth()]);
@@ -60,7 +62,7 @@ export const BarsOverlay = () => {
                 key={_.uniqueId()}
                 x={bar.x}
                 y={bar.y}
-                width={bar.width}
+                width={bar.width / 2}
                 height={bar.height}
                 fill={bar.color}
                 rx={4}
