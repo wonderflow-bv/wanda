@@ -17,6 +17,7 @@
 import { Group } from '@visx/group';
 
 import { useCartesianContext } from '../../../providers';
+import { BarsAverage } from './bars-average';
 import { BarsOverlay } from './bars-overlay';
 import { BarsSeries } from './bars-series';
 import { BarsTrendline } from './bars-trendline';
@@ -33,6 +34,8 @@ export const Bars: React.FC = () => {
         <BarsSeries />
         <BarsOverlay />
       </Group>
+
+      <BarsAverage />
 
     </Group>
   );

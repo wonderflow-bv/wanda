@@ -15,6 +15,7 @@
  */
 
 export { Bars } from './bars';
+export { BarsAverage } from './bars-average';
 export { BarsOverlay } from './bars-overlay';
 export { BarsSeries } from './bars-series';
 export { BarsTrendline } from './bars-trendline';
