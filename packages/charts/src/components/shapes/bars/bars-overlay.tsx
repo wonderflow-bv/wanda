@@ -30,7 +30,7 @@ export const BarsOverlay = () => {
   const scaleXY0 = scaleBand<string>({
     domain: data.map((d: any) => d[index]),
     paddingOuter: 1,
-    paddingInner: 0.1,
+    paddingInner: 0.7,
   });
 
   scaleXY0.rangeRound((isHorizontal ? [0, dimension.maxWidth] : [dimension.maxHeight, 0]));
@@ -51,7 +51,7 @@ export const BarsOverlay = () => {
         y0Scale={scaleXY0}
         y1Scale={scaleXY1}
         xScale={overlayAxis!.scale}
-        color={(_, i) => overlay.colors?.[i] ?? 'black'}
+        color={(_, i) => overlay.colors![i]}
       >
         {barGroups => barGroups.map(barGroup => (
           <Group key={_.uniqueId()} top={barGroup.y0}>
@@ -83,7 +83,7 @@ export const BarsOverlay = () => {
       x0Scale={scaleXY0}
       x1Scale={scaleXY1}
       yScale={overlayAxis!.scale}
-      color={(_, i) => overlay.colors?.[i] ?? 'black'}
+      color={(_, i) => overlay.colors![i]}
     >
       {barGroups => barGroups.map(barGroup => (
         <Group key={_.uniqueId()} left={barGroup.x0}>

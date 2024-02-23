@@ -33,16 +33,12 @@ export const handleLineChartSeriesColors = (
   series: LineChartSeries,
   palette: string[],
 ) => series.dataKey.map((_: string, i: number) => (
-  series.style?.[i]
-    ? series.style[i]?.stroke
-    : palette[i % palette.length]
+  series.style?.[i]?.stroke ?? palette[i % palette.length]
 ));
 
 export const handleBarChartSeriesColors = (
   series: BarChartSeries,
   palette: string[],
 ) => series.dataKey.map((_: string, i: number) => (
-  series.style?.[i]
-    ? series.style[i]?.fill
-    : palette[i % palette.length]
+  series.style?.[i]?.fill ?? palette[i % palette.length]
 ));

@@ -55,7 +55,7 @@ export type BarChartMetadata = {
   series: {
     dataKey: string[];
     names: string[];
-    colors: Array<string | undefined>;
+    colors: string[];
     style?: Array<BarStyle | undefined>;
     average: AverageType | undefined;
     trendline: TrendlineType[] | undefined;
@@ -63,7 +63,7 @@ export type BarChartMetadata = {
   overlay: {
     dataKey?: string[];
     names: string[] | undefined;
-    colors: Array<string | undefined> | undefined;
+    colors: string[] | undefined;
     style?: Array<BarStyle | undefined>;
     average: AverageType | undefined;
     trendline: TrendlineType[] | undefined;
