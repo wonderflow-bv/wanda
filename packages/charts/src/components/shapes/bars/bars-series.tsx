@@ -2,11 +2,13 @@ import { Group } from '@visx/group';
 import { scaleBand } from '@visx/scale';
 import { Bar, BarGroup, BarGroupHorizontal } from '@visx/shape';
 import _ from 'lodash';
+import { useCallback } from 'react';
 
 import {
   useCartesianContext, useDataContext, useLayoutContext, useStyleConfigContext, useThemeContext,
 } from '../../../providers';
 import { BarChartMetadata } from '../../../types';
+import { BarsItem, BarsItemBlurred } from './bars.module.css';
 
 export const BarsSeries = () => {
   const theme = useThemeContext();
@@ -44,6 +46,10 @@ export const BarsSeries = () => {
 
   scaleXY1.rangeRound([0, scaleXY0.bandwidth()]);
 
+  const dynamicClassName = useCallback((overLegend: string, dataKey: string) => ((overLegend === dataKey || overLegend === '')
+    ? BarsItem
+    : BarsItemBlurred), []);
+
   if (!isHorizontal) {
     return (
       <BarGroupHorizontal
@@ -60,6 +66,7 @@ export const BarsSeries = () => {
           <Group key={_.uniqueId()} top={barGroup.y0}>
             {barGroup.bars.map(bar => (
               <Bar
+                className={dynamicClassName(overLegend, bar.key)}
                 key={_.uniqueId()}
                 x={bar.x}
                 y={bar.y}
@@ -95,6 +102,7 @@ export const BarsSeries = () => {
           <Group key={_.uniqueId()} left={barGroup.x0}>
             {barGroup.bars.map(bar => (
               <Bar
+                className={dynamicClassName(overLegend, bar.key)}
                 key={_.uniqueId()}
                 x={bar.x}
                 y={bar.y}

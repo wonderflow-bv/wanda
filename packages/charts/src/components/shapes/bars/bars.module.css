@@ -1,3 +1,7 @@
-.BarsItemGroup {
-  filter: saturate(100%);
+.BarsItem {
+  filter: saturate(100%) opacity(1);
+}
+
+.BarsItemBlurred {
+  filter: opacity(0.2) blur(2px);
 }

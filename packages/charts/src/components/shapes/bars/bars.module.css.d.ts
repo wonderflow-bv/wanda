@@ -1,5 +1,6 @@
 declare const styles: {
-  readonly "BarsItemGroup": string;
+  readonly "BarsItem": string;
+  readonly "BarsItemBlurred": string;
 };
 export = styles;
 

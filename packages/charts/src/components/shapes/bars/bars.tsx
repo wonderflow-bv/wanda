@@ -17,9 +17,6 @@
 import { Group } from '@visx/group';
 
 import { useCartesianContext } from '../../../providers';
-import {
-  BarsItemGroup,
-} from './bars.module.css';
 import { BarsOverlay } from './bars-overlay';
 import { BarsSeries } from './bars-series';
 
@@ -30,14 +27,11 @@ export const Bars: React.FC = () => {
       top={position.top}
       left={position.left}
     >
-      <Group className={BarsItemGroup} data-testid="bars">
+      <Group data-testid="bars">
         <BarsSeries />
         <BarsOverlay />
       </Group>
 
-      {/* <LinesTooltip />
-
-      <LinesMarkerLabels /> */}
     </Group>
   );
 };

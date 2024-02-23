@@ -2,11 +2,13 @@ import { Group } from '@visx/group';
 import { scaleBand } from '@visx/scale';
 import { Bar, BarGroup, BarGroupHorizontal } from '@visx/shape';
 import _ from 'lodash';
+import { useCallback } from 'react';
 
 import {
   useCartesianContext, useDataContext, useLayoutContext, useStyleConfigContext, useThemeContext,
 } from '../../../providers';
 import { BarChartMetadata } from '../../../types';
+import { BarsItem, BarsItemBlurred } from './bars.module.css';
 
 export const BarsOverlay = () => {
   const theme = useThemeContext();
@@ -21,7 +23,9 @@ export const BarsOverlay = () => {
 
   const { overlay, index, series } = metadata!;
 
-  // const indexAxis = isHorizontal ? bottom : left;
+  const dynamicClassName = useCallback((overLegend: string, dataKey: string) => ((overLegend === dataKey || overLegend === '')
+    ? BarsItem
+    : BarsItemBlurred), []);
 
   const overlayAxis = isHorizontal ? right : top;
   const hasOverlay = Boolean(overlayAxis);
@@ -59,6 +63,7 @@ export const BarsOverlay = () => {
           <Group key={_.uniqueId()} top={barGroup.y0}>
             {barGroup.bars.map(bar => (
               <Bar
+                className={dynamicClassName(overLegend, bar.key)}
                 key={_.uniqueId()}
                 x={bar.x}
                 y={bar.y}
@@ -91,6 +96,7 @@ export const BarsOverlay = () => {
         <Group key={_.uniqueId()} left={barGroup.x0}>
           {barGroup.bars.map(bar => (
             <Bar
+              className={dynamicClassName(overLegend, bar.key)}
               key={_.uniqueId()}
               x={bar.x}
               y={bar.y}
