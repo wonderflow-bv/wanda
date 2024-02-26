@@ -8,6 +8,7 @@ import {
   useCartesianContext, useDataContext, useLayoutContext, useStyleConfigContext, useThemeContext,
 } from '../../../providers';
 import { BarChartMetadata } from '../../../types';
+import { sortBarsBy } from '../../../utils';
 import { BarsItem, BarsItemBlurred } from './bars.module.css';
 
 export const BarsOverlay = () => {
@@ -21,7 +22,9 @@ export const BarsOverlay = () => {
 
   const { right, top } = axis!;
 
-  const { overlay, index, series } = metadata!;
+  const {
+    overlay, index, series, sortBy,
+  } = metadata!;
 
   const dynamicClassName = useCallback((overLegend: string, dataKey: string) => ((overLegend === dataKey || overLegend === '')
     ? BarsItem
@@ -59,23 +62,27 @@ export const BarsOverlay = () => {
         xScale={overlayAxis!.scale}
         color={(_, i) => overlay.colors![i]}
       >
-        {barGroups => barGroups.map(barGroup => (
-          <Group key={_.uniqueId()} top={barGroup.y0}>
-            {barGroup.bars.map(bar => (
-              <Bar
-                className={dynamicClassName(overLegend, bar.key)}
-                key={_.uniqueId()}
-                x={bar.x}
-                y={bar.y}
-                width={bar.width / 2}
-                height={bar.height}
-                fill={bar.color}
-                rx={4}
-                onClick={() => ({})}
-              />
-            ))}
-          </Group>
-        ))
+        {barGroups => barGroups.map((barGroup) => {
+          const sortedBars = sortBarsBy(barGroup.bars, sortBy, isHorizontal);
+
+          return (
+            <Group key={_.uniqueId()} top={barGroup.y0}>
+              {sortedBars.map(bar => (
+                <Bar
+                  className={dynamicClassName(overLegend, bar.key)}
+                  key={_.uniqueId()}
+                  x={bar.x}
+                  y={bar.y}
+                  width={bar.width / 2}
+                  height={bar.height}
+                  fill={bar.color}
+                  rx={4}
+                  onClick={() => ({})}
+                />
+              ))}
+            </Group>
+          );
+        })
           }
       </BarGroupHorizontal>
     );
@@ -92,23 +99,27 @@ export const BarsOverlay = () => {
       yScale={overlayAxis!.scale}
       color={(_, i) => overlay.colors![i]}
     >
-      {barGroups => barGroups.map(barGroup => (
-        <Group key={_.uniqueId()} left={barGroup.x0}>
-          {barGroup.bars.map(bar => (
-            <Bar
-              className={dynamicClassName(overLegend, bar.key)}
-              key={_.uniqueId()}
-              x={bar.x}
-              y={bar.y}
-              width={bar.width}
-              height={bar.height}
-              fill={bar.color}
-              rx={4}
-              onClick={() => ({})}
-            />
-          ))}
-        </Group>
-      ))}
+      {barGroups => barGroups.map((barGroup) => {
+        const sortedBars = sortBarsBy(barGroup.bars, sortBy, isHorizontal);
+
+        return (
+          <Group key={_.uniqueId()} left={barGroup.x0}>
+            {sortedBars.map(bar => (
+              <Bar
+                className={dynamicClassName(overLegend, bar.key)}
+                key={_.uniqueId()}
+                x={bar.x}
+                y={bar.y}
+                width={bar.width}
+                height={bar.height}
+                fill={bar.color}
+                rx={4}
+                onClick={() => ({})}
+              />
+            ))}
+          </Group>
+        );
+      })}
     </BarGroup>
   );
 };
