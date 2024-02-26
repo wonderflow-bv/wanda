@@ -161,28 +161,47 @@ U extends LineChartSeries | BarChartSeries>(
   };
 };
 
-export const sortBy = (
-  datum: Record<string, string | number | undefined | null >,
-  dataKey: string[],
+export const sortBarsBy = (
+  bars: Array<{ color: string;
+    height: number;
+    index: number;
+    key: string;
+    value: number;
+    width: number;
+    x: number;
+    y: number; }>,
   sorting: SortingType,
-): string[] => {
-  if (sorting === 'as-is') return dataKey;
+  isHorizontal: boolean,
+) => {
+  type BarsData = typeof bars;
 
-  let isAscending = false;
-  let order = ['key', 'value'];
+  let res: BarsData = [];
+  let isReverse = false;
 
-  if (sorting === 'ascending-key' || sorting === 'ascending-value') {
-    isAscending = true;
+  if (sorting === 'as-is') res = bars;
+  if (sorting === 'ascending-key' || sorting === 'ascending-value') isReverse = true;
+
+  if (sorting.includes('key')) {
+    const withSort = _.sortBy(bars, 'key');
+    const withReverse = isReverse ? _.reverse(withSort) : withSort;
+
+    res = withReverse.map((el, i) => {
+      const { x, y } = bars[i];
+      return isHorizontal ? ({ ...el, x }) : ({ ...el, x, y });
+    });
   }
 
-  if (sorting === 'descending-value' || sorting === 'ascending-value') {
-    order = ['value', 'key'];
+  if (sorting.includes('value')) {
+    const withSort = _.sortBy(bars, 'value');
+    const withReverse = isReverse ? _.reverse(withSort) : withSort;
+
+    res = withReverse.map((el, i) => {
+      const { x, y } = bars[i];
+      return isHorizontal ? ({ ...el, x }) : ({ ...el, x, y });
+    });
   }
 
-  const entries = Object.entries(datum).filter(e => dataKey.includes(e[0])).map(e => ({ key: e[0], value: e[1] }));
-  const orderedKeys = _.orderBy(entries, order).map(e => e.key);
-
-  return isAscending ? orderedKeys.reverse() : orderedKeys;
+  return res;
 };
 
 export const computeAverage = (

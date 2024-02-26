@@ -10,6 +10,7 @@
 
   &[data-responsive='true'] {
     display: flex;
+    flex-grow: 1;
     height: inherit;
     justify-content: center;
     width: inherit;
