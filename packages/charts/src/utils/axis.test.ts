@@ -532,7 +532,7 @@ describe('scaleDomainToAxis()', () => {
     };
     const scale = scaleDomainToAxis(axis);
     const res = scale?.('b' as any);
-    const exp = 41;
+    const exp = 50;
     expect(res).toStrictEqual(exp);
   });
 

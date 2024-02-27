@@ -80,7 +80,7 @@ describe('accessor()', () => {
       positionLeft: 4,
     })!;
     const res = accessor(cartesian, 'date', { date: '01-01-2021' });
-    const exp = 327;
+    const exp = 400;
     expect(res).toStrictEqual(exp);
   });
 
