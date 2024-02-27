@@ -16,6 +16,7 @@
 
 import { Group } from '@visx/group';
 import { Line } from '@visx/shape';
+import _ from 'lodash';
 import { useCallback } from 'react';
 
 import {
@@ -92,6 +93,7 @@ export const LinesTrendline: React.FC = () => {
 
         return (
           <Line
+            key={_.uniqueId()}
             className={dynamicClassName(overLegend, series.dataKey[i])}
             from={coordinates.from}
             to={coordinates.to}
@@ -112,6 +114,7 @@ export const LinesTrendline: React.FC = () => {
 
         return (
           <Line
+            key={_.uniqueId()}
             className={dynamicClassName(overLegend, overlay.dataKey![i])}
             from={coordinates.from}
             to={coordinates.to}

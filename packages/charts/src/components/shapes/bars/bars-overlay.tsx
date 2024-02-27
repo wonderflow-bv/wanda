@@ -5,20 +5,16 @@ import _ from 'lodash';
 import { useCallback } from 'react';
 
 import {
-  useCartesianContext, useDataContext, useLayoutContext, useStyleConfigContext, useThemeContext,
+  useCartesianContext, useDataContext, useLayoutContext,
 } from '../../../providers';
 import { BarChartMetadata } from '../../../types';
 import { sortBarsBy } from '../../../utils';
 import { BarsItem, BarsItemBlurred } from './bars.module.css';
 
 export const BarsOverlay = () => {
-  const theme = useThemeContext();
-  const { themes } = useStyleConfigContext();
   const { data, metadata } = useDataContext<BarChartMetadata>();
   const { isHorizontal } = useLayoutContext();
   const { axis, hoveredLegendItem: overLegend, dimension } = useCartesianContext();
-
-  console.log(theme, themes, overLegend);
 
   const { right, top } = axis!;
 
@@ -34,6 +30,8 @@ export const BarsOverlay = () => {
   const hasOverlay = Boolean(overlayAxis);
   if (!hasOverlay) return null;
 
+  const X0Y0 = (d: Record<string, any>) => d[index];
+
   const scaleXY0 = scaleBand<string>({
     domain: data.map((d: any) => d[index]),
     paddingOuter: 1,
@@ -44,9 +42,7 @@ export const BarsOverlay = () => {
 
   const combinedDataKeys = hasOverlay ? [...series.dataKey, ...overlay.dataKey!] : series.dataKey;
 
-  const scaleXY1 = scaleBand<string>({
-    domain: combinedDataKeys,
-  });
+  const scaleXY1 = scaleBand<string>({ domain: combinedDataKeys });
 
   scaleXY1.rangeRound([0, scaleXY0.bandwidth()]);
 
@@ -56,7 +52,7 @@ export const BarsOverlay = () => {
         data={data}
         keys={overlay.dataKey!}
         width={dimension.maxWidth}
-        y0={(d: Record<string, any>) => d[index]}
+        y0={X0Y0}
         y0Scale={scaleXY0}
         y1Scale={scaleXY1}
         xScale={overlayAxis!.scale}
@@ -93,7 +89,7 @@ export const BarsOverlay = () => {
       data={data}
       keys={overlay.dataKey!}
       height={dimension.maxHeight}
-      x0={(d: Record<string, any>) => d[index]}
+      x0={X0Y0}
       x0Scale={scaleXY0}
       x1Scale={scaleXY1}
       yScale={overlayAxis!.scale}

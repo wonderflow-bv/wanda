@@ -4,21 +4,15 @@ import { Bar, BarGroup, BarGroupHorizontal } from '@visx/shape';
 import _ from 'lodash';
 import { useCallback } from 'react';
 
-import {
-  useCartesianContext, useDataContext, useLayoutContext, useStyleConfigContext, useThemeContext,
-} from '../../../providers';
+import { useCartesianContext, useDataContext, useLayoutContext } from '../../../providers';
 import { BarChartMetadata } from '../../../types';
 import { sortBarsBy } from '../../../utils';
 import { BarsItem, BarsItemBlurred } from './bars.module.css';
 
 export const BarsSeries = () => {
-  const theme = useThemeContext();
-  const { themes } = useStyleConfigContext();
   const { data, metadata } = useDataContext<BarChartMetadata>();
   const { isHorizontal } = useLayoutContext();
   const { axis, hoveredLegendItem: overLegend, dimension } = useCartesianContext();
-
-  console.log(theme, themes, overLegend);
 
   const {
     left, bottom, right, top,
@@ -32,6 +26,8 @@ export const BarsSeries = () => {
 
   const seriesAxis = isHorizontal ? left : bottom;
 
+  const X0Y0 = (d: Record<string, any>) => d[index];
+
   const scaleXY0 = scaleBand<string>({
     domain: data.map((d: any) => d[index]),
     paddingOuter: 1,
@@ -42,9 +38,7 @@ export const BarsSeries = () => {
 
   const combinedDataKeys = hasOverlay ? [...series.dataKey, ...overlay.dataKey!] : series.dataKey;
 
-  const scaleXY1 = scaleBand<string>({
-    domain: combinedDataKeys,
-  });
+  const scaleXY1 = scaleBand<string>({ domain: combinedDataKeys });
 
   scaleXY1.rangeRound([0, scaleXY0.bandwidth()]);
 
@@ -58,11 +52,11 @@ export const BarsSeries = () => {
         data={data}
         keys={series.dataKey}
         width={dimension.maxWidth}
-        y0={(d: Record<string, any>) => d[index]}
+        y0={X0Y0}
         y0Scale={scaleXY0}
         y1Scale={scaleXY1}
         xScale={seriesAxis!.scale}
-        color={(_, i) => series.colors[i]!}
+        color={(_, i) => series.colors[i]}
       >
         {barGroups => barGroups.map((barGroup) => {
           const sortedBars = sortBarsBy(barGroup.bars, sortBy, isHorizontal);
@@ -95,7 +89,7 @@ export const BarsSeries = () => {
       data={data}
       keys={series.dataKey}
       height={dimension.maxHeight}
-      x0={(d: Record<string, any>) => d[index]}
+      x0={X0Y0}
       x0Scale={scaleXY0}
       x1Scale={scaleXY1}
       yScale={seriesAxis!.scale}
