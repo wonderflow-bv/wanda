@@ -3,6 +3,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 // import { CartesianChartLayout, BarChart, BarChartProps } from '@wonderflow/charts';
 import { BarChart, BarChartProps, CartesianChartLayout } from '../../../../../charts/src';
 import {
+  channels,
   feedbackCount, proCons,
 } from '../mock-data';
 
@@ -118,4 +119,19 @@ withTrendline.args = {
     domain: [0, 1],
   },
   showTrendline: true,
+};
+
+export const withCategoriesOnIndex = Template.bind({});
+withCategoriesOnIndex.args = {
+  title: 'Multiple Series',
+  subtitle: 'A line chart with categories on index',
+  data: channels,
+  index: {
+    dataKey: 'channel',
+    label: 'Channels',
+  },
+  series: {
+    dataKey: ['1 star', '2 stars', '3 stars', '4 stars', '5 stars'],
+    label: 'Feedback count',
+  },
 };

@@ -59,6 +59,7 @@ export const useBarChart = ({
   const uIndex: BarChartIndex = useMemo(() => ({
     ...index,
     scaleType: 'label',
+    paddingInner: 0.1,
     paddingOuter: 1,
     round: true,
   }), [index]);

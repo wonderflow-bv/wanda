@@ -334,7 +334,7 @@ export const scaleDomainToAxis = (axis: Except<AxisProps, 'orientation'>) => {
     nice,
     round = true,
     padding = undefined,
-    paddingInner = 0.1,
+    paddingInner = 1,
     paddingOuter = 1,
   } = axis;
 

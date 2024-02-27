@@ -21,7 +21,7 @@ export const channels = [
     '2 stars': 51,
     '3 stars': 66,
     '4 stars': 157,
-    '5 stars': 1500,
+    '5 stars': 150,
   },
   {
     channel: 'amazon.co.uk',
@@ -37,7 +37,7 @@ export const channels = [
     '2 stars': 284,
     '3 stars': 370,
     '4 stars': 866,
-    '5 stars': 8302,
+    '5 stars': 830,
   },
   {
     channel: 'amazon.com.au',
@@ -101,7 +101,7 @@ export const channels = [
     '2 stars': 236,
     '3 stars': 529,
     '4 stars': 3217,
-    '5 stars': 35541,
+    '5 stars': 3554,
   },
   {
     channel: 'bestbuy.ca',
@@ -109,7 +109,7 @@ export const channels = [
     '2 stars': 242,
     '3 stars': 562,
     '4 stars': 3548,
-    '5 stars': 38635,
+    '5 stars': 3863,
   },
   {
     channel: 'canadiantire.ca',
@@ -117,7 +117,7 @@ export const channels = [
     '2 stars': 193,
     '3 stars': 468,
     '4 stars': 3108,
-    '5 stars': 34484,
+    '5 stars': 3448,
   },
   {
     channel: 'darty.com',
@@ -133,7 +133,7 @@ export const channels = [
     '2 stars': 181,
     '3 stars': 452,
     '4 stars': 2984,
-    '5 stars': 33501,
+    '5 stars': 3350,
   },
   {
     channel: 'otto.de',
@@ -157,7 +157,7 @@ export const channels = [
     '2 stars': 206,
     '3 stars': 484,
     '4 stars': 3264,
-    '5 stars': 36357,
+    '5 stars': 3635,
   },
   {
     channel: 'wayfair.com',
@@ -165,7 +165,7 @@ export const channels = [
     '2 stars': 64,
     '3 stars': 120,
     '4 stars': 588,
-    '5 stars': 7663,
+    '5 stars': 766,
   },
 ];
 
