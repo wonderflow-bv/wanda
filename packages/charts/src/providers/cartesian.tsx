@@ -29,7 +29,7 @@ export type CartesianContextProps = {
     maxWidth: number;
     maxHeight: number;
   };
-  axis?: CartesianxAxisSystem;
+  axis: CartesianxAxisSystem;
   hoveredLegendItem: string;
   preventTooltipOpening: boolean;
 };
@@ -47,7 +47,12 @@ const defaultSetting = {
     maxWidth: 800,
     maxHeight: 600,
   },
-  axis: undefined,
+  axis: {
+    top: undefined,
+    right: undefined,
+    bottom: undefined,
+    left: undefined,
+  },
   hoveredLegendItem: '',
   preventTooltipOpening: false,
 };

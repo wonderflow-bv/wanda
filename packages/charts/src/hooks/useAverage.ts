@@ -2,8 +2,8 @@ import { useMemo } from 'react';
 
 import {
   useCartesianContext, useDataContext, useLayoutContext, useStyleConfigContext,
-} from '../providers';
-import { CartesianChartMetadata } from '../types';
+} from '@/providers';
+import { CartesianChartMetadata } from '@/types';
 
 export const useAverage = <T extends CartesianChartMetadata>() => {
   const { lines: defaultStyle, viewport } = useStyleConfigContext();
@@ -13,12 +13,12 @@ export const useAverage = <T extends CartesianChartMetadata>() => {
 
   const {
     top, right, bottom, left,
-  } = axis!;
+  } = axis;
 
   const seriesAxis = isHorizontal ? left : bottom;
   const overlayAxis = isHorizontal ? right : top;
 
-  const { showAverage, series, overlay } = metadata!;
+  const { showAverage, series, overlay } = metadata as CartesianChartMetadata;
 
   const { maxHeight, maxWidth } = dimension;
 
@@ -35,11 +35,11 @@ export const useAverage = <T extends CartesianChartMetadata>() => {
     titleProps,
   } = defaultStyle.average;
 
-  const averageSeries = series.average?.average;
-  const averageOverlay = overlay.average?.average;
+  const averageSeries: any = series.average?.average;
+  const averageOverlay: any = overlay.average?.average;
 
-  const averageSeriesScale = seriesAxis!.scale(averageSeries as any) ?? 0;
-  const averageOverlayScale = (overlayAxis && averageOverlay) ? overlayAxis.scale(averageOverlay as any) : 0;
+  const averageSeriesScale = (seriesAxis && averageSeries) ? seriesAxis.scale(averageSeries) : 0;
+  const averageOverlayScale = (overlayAxis && averageOverlay) ? overlayAxis.scale(averageOverlay) : 0;
 
   const hasAverageSeries = Boolean(showAverage && averageSeries);
   const hasAverageOverlay = Boolean(showAverage && averageOverlay);

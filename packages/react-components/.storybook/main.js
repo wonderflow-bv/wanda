@@ -44,6 +44,12 @@ module.exports = {
   },
   webpackFinal: async (config) => {
     config.resolve.alias['@/components'] = path.resolve(__dirname, '../src/');
+    config.resolve.alias['@/charts-components'] = path.resolve(__dirname, '../../charts/src/');
+    config.resolve.alias['@/hooks'] = path.resolve(__dirname, '../../charts/src/');
+    config.resolve.alias['@/providers'] = path.resolve(__dirname, '../../charts/src/');
+    config.resolve.alias['@/styleConfig'] = path.resolve(__dirname, '../../charts/src/');
+    config.resolve.alias['@/types'] = path.resolve(__dirname, '../../charts/src/');
+    config.resolve.alias['@/utils'] = path.resolve(__dirname, '../../charts/src/');
     return config;
   },
   framework: '@storybook/react',
