@@ -97,6 +97,7 @@ export const useBarChart = ({
       style: series.style,
       average: showAverage ? computeAverage(data, series.dataKey) : undefined,
       trendline: showTrendline ? computeTrendline(data, series.dataKey) : undefined,
+      hasBackground: series.hasBackground,
     },
     overlay: {
       dataKey: overlay?.dataKey,
@@ -105,6 +106,7 @@ export const useBarChart = ({
       style: overlay?.style,
       average: (overlay?.dataKey && showAverage) ? computeAverage(data, overlay.dataKey) : undefined,
       trendline: (overlay?.dataKey && showTrendline) ? computeTrendline(data, overlay.dataKey) : undefined,
+      hasBackground: overlay?.hasBackground,
     },
     tooltip,
     preventTooltipDisplay,

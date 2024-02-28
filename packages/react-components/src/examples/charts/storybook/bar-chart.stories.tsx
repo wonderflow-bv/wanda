@@ -135,3 +135,18 @@ withCategoriesOnIndex.args = {
     label: 'Feedback count',
   },
 };
+
+export const withBackground = Template.bind({});
+withBackground.args = {
+  subtitle: 'A bar chart with bars background color',
+  series: {
+    dataKey: ['feedback count'],
+    label: 'Feedback Count',
+    hasBackground: true,
+  },
+  overlay: {
+    dataKey: ['overlay'],
+    label: 'Overlay',
+    hasBackground: true,
+  },
+};

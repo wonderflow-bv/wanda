@@ -1,46 +1,29 @@
 import { Group } from '@visx/group';
-import { scaleBand } from '@visx/scale';
 import { Bar, BarGroup, BarGroupHorizontal } from '@visx/shape';
 import _ from 'lodash';
 import { useCallback } from 'react';
 
-import { useCartesianContext, useDataContext, useLayoutContext } from '../../../providers';
-import { BarChartMetadata } from '../../../types';
+import { useBars } from '@/hooks';
+
+import { useCartesianContext } from '../../../providers';
 import { sortBarsBy } from '../../../utils';
 import { BarsItem, BarsItemBlurred } from './bars.module.css';
 
 export const BarsSeries = () => {
-  const { data, metadata } = useDataContext<BarChartMetadata>();
-  const { isHorizontal } = useLayoutContext();
-  const { axis, hoveredLegendItem: overLegend, dimension } = useCartesianContext();
-
+  const { hoveredLegendItem: overLegend } = useCartesianContext();
   const {
-    left, bottom, right, top,
-  } = axis;
-
-  const {
-    series, index, overlay, sortBy,
-  } = metadata!;
-
-  const hasOverlay = Boolean(overlay && (right || top));
-
-  const seriesAxis = isHorizontal ? left : bottom;
-
-  const X0Y0 = (d: Record<string, any>) => d[index];
-
-  const scaleXY0 = scaleBand<string>({
-    domain: data.map((d: any) => d[index]),
-    paddingOuter: 1,
-    paddingInner: 0.1,
-  });
-
-  scaleXY0.rangeRound((isHorizontal ? [0, dimension.maxWidth] : [dimension.maxHeight, 0]));
-
-  const combinedDataKeys = hasOverlay ? [...series.dataKey, ...overlay.dataKey!] : series.dataKey;
-
-  const scaleXY1 = scaleBand<string>({ domain: combinedDataKeys });
-
-  scaleXY1.rangeRound([0, scaleXY0.bandwidth()]);
+    data,
+    isHorizontal,
+    series,
+    sortBy,
+    hasBackground,
+    seriesAxis,
+    maxWidth,
+    maxHeight,
+    X0Y0,
+    scaleXY0,
+    scaleXY1,
+  } = useBars();
 
   const dynamicClassName = useCallback((overLegend: string, dataKey: string) => ((overLegend === dataKey || overLegend === '')
     ? BarsItem
@@ -51,11 +34,11 @@ export const BarsSeries = () => {
       <BarGroupHorizontal
         data={data}
         keys={series.dataKey}
-        width={dimension.maxWidth}
+        width={maxWidth}
         y0={X0Y0}
         y0Scale={scaleXY0}
         y1Scale={scaleXY1}
-        xScale={seriesAxis!.scale}
+        xScale={seriesAxis.scale}
         color={(_, i) => series.colors[i]}
       >
         {barGroups => barGroups.map((barGroup) => {
@@ -64,17 +47,33 @@ export const BarsSeries = () => {
           return (
             <Group key={_.uniqueId()} top={barGroup.y0}>
               {sortedBars.map(bar => (
-                <Bar
-                  className={dynamicClassName(overLegend, bar.key)}
+                <Group
                   key={_.uniqueId()}
-                  x={bar.x}
-                  y={bar.y}
-                  width={bar.width}
-                  height={bar.height}
-                  fill={bar.color}
-                  rx={4}
-                  onClick={() => ({})}
-                />
+                >
+
+                  {hasBackground && (
+                    <Bar
+                      className={dynamicClassName(overLegend, bar.key)}
+                      x={0}
+                      y={bar.y}
+                      width={maxWidth}
+                      height={bar.height}
+                      fill="lightGrey"
+                      rx={0}
+                    />
+                  )}
+
+                  <Bar
+                    className={dynamicClassName(overLegend, bar.key)}
+                    x={bar.x}
+                    y={bar.y}
+                    width={bar.width}
+                    height={bar.height}
+                    fill={bar.color}
+                    rx={4}
+                    onClick={() => ({})}
+                  />
+                </Group>
               ))}
             </Group>
           );
@@ -88,11 +87,11 @@ export const BarsSeries = () => {
     <BarGroup
       data={data}
       keys={series.dataKey}
-      height={dimension.maxHeight}
+      height={maxHeight}
       x0={X0Y0}
       x0Scale={scaleXY0}
       x1Scale={scaleXY1}
-      yScale={seriesAxis!.scale}
+      yScale={seriesAxis.scale}
       color={(_, i) => series.colors[i]!}
     >
       {barGroups => barGroups.map((barGroup) => {
@@ -101,17 +100,33 @@ export const BarsSeries = () => {
         return (
           <Group key={_.uniqueId()} left={barGroup.x0}>
             {sortedBars.map(bar => (
-              <Bar
-                className={dynamicClassName(overLegend, bar.key)}
+              <Group
                 key={_.uniqueId()}
-                x={bar.x}
-                y={bar.y}
-                width={bar.width}
-                height={bar.height}
-                fill={bar.color}
-                rx={4}
-                onClick={() => ({})}
-              />
+              >
+                {hasBackground && (
+                  <Bar
+                    className={dynamicClassName(overLegend, bar.key)}
+                    x={bar.x}
+                    y={0}
+                    width={bar.width}
+                    height={maxHeight}
+                    fill="lightGrey"
+                    rx={0}
+                  />
+                )}
+
+                <Bar
+                  className={dynamicClassName(overLegend, bar.key)}
+                  key={_.uniqueId()}
+                  x={bar.x}
+                  y={bar.y}
+                  width={bar.width}
+                  height={bar.height}
+                  fill={bar.color}
+                  rx={4}
+                  onClick={() => ({})}
+                />
+              </Group>
             ))}
           </Group>
         );

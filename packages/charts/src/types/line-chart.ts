@@ -21,12 +21,6 @@ export type LineChartIndex = Partial<AxisProps> & {
   dataKey: string;
 };
 
-export type LineChartOverlay = Partial<AxisProps> & {
-  dataKey: string;
-  style?: LineStyle;
-  rename?: string;
-};
-
 export type LineChartSeries = Partial<AxisProps> & {
   dataKey: string[];
   style?: Array<LineStyle | undefined>;

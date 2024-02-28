@@ -23,17 +23,12 @@ export type BarChartIndex = Partial<AxisProps> & {
   dataKey: string;
 };
 
-export type BarChartOverlay = Partial<AxisProps> & {
-  dataKey: string;
-  style?: BarStyle;
-  rename?: string;
-};
-
 export type BarChartSeries = Partial<AxisProps> & {
   dataKey: string[];
-  groupBy?: string[];
+  // groupBy?: string[]; TODO: this is a temporary prop waiting to manage breakdown 3;
   style?: Array<BarStyle | undefined>;
   rename?: (...args: any) => string;
+  hasBackground?: boolean;
 };
 
 export type BarChartTooltip = {
@@ -59,6 +54,7 @@ export type BarChartMetadata = {
     style?: Array<BarStyle | undefined>;
     average: AverageType | undefined;
     trendline: TrendlineType[] | undefined;
+    hasBackground?: boolean;
   };
   overlay: {
     dataKey?: string[];
@@ -67,6 +63,7 @@ export type BarChartMetadata = {
     style?: Array<BarStyle | undefined>;
     average: AverageType | undefined;
     trendline: TrendlineType[] | undefined;
+    hasBackground?: boolean;
   };
   tooltip?: BarChartTooltip;
   preventTooltipDisplay?: boolean;
