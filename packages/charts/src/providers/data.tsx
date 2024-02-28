@@ -16,26 +16,23 @@
 
 import { createContext, useContext } from 'react';
 
-import { Data, LineChartMetadata } from '../types';
-import { BarChartMetadata } from '../types/bar-chart';
+import { CartesianChartMetadata, Data } from '../types';
 
-type SupportedMetadata = LineChartMetadata | BarChartMetadata;
-
-export type DataContextProps<T extends SupportedMetadata> = {
+export type DataContextProps<T extends CartesianChartMetadata> = {
   data: Data;
   filteredData: Data;
   metadata?: T;
 };
 
-export type DataProviderProps = DataContextProps<SupportedMetadata>
+export type DataProviderProps = DataContextProps<CartesianChartMetadata>
 
-const defaultData: DataContextProps<SupportedMetadata> = {
+const defaultData: DataContextProps<CartesianChartMetadata> = {
   data: [],
   filteredData: [],
   metadata: undefined,
 };
 
-export const DataContext = createContext<DataContextProps<SupportedMetadata>>(defaultData);
+export const DataContext = createContext<DataContextProps<CartesianChartMetadata>>(defaultData);
 
 export const DataProvider: FCChildren<DataProviderProps> = ({
   children,
@@ -49,7 +46,7 @@ export const DataProvider: FCChildren<DataProviderProps> = ({
 );
 
 export function useDataContext <
-T extends SupportedMetadata>(): DataContextProps<T> {
+T extends CartesianChartMetadata>(): DataContextProps<T> {
   const context = useContext(DataContext);
 
   if (!context) {

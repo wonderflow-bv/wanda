@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+import { BarChartMetadata } from './bar-chart';
+import { LineChartMetadata } from './line-chart';
+
 export type DeepPartial<T> = {
   [P in keyof T]?: DeepPartial<T[P]>;
 };
@@ -26,6 +29,8 @@ export enum Charts {
   LINE_CHART = 'LINE_CHART',
   BAR_CHART = 'BAR_CHART',
 }
+
+export type CartesianChartMetadata = LineChartMetadata | BarChartMetadata;
 
 export type ScaleType = 'linear' | 'label' | 'time';
 

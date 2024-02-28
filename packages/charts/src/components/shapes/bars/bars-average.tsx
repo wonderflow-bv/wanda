@@ -17,30 +17,26 @@
 import { Label } from '@visx/annotation';
 import { Group } from '@visx/group';
 import { Line } from '@visx/shape';
-import { useMemo } from 'react';
 
+import { useAverage } from '../../../hooks';
 import {
-  useCartesianContext, useDataContext, useLayoutContext, useStyleConfigContext, useThemeContext,
+  useLayoutContext, useStyleConfigContext, useThemeContext,
 } from '../../../providers';
-import { LineChartMetadata } from '../../../types';
 
 export const BarsAverage: React.FC = () => {
   const theme = useThemeContext();
-  const { lines: defaultStyle, themes, viewport } = useStyleConfigContext();
-  const { metadata } = useDataContext<LineChartMetadata>();
+  const { themes } = useStyleConfigContext();
   const { isHorizontal } = useLayoutContext();
-  const { axis, dimension } = useCartesianContext();
-
   const {
-    top, right, bottom, left,
-  } = axis!;
-
-  const seriesAxis = isHorizontal ? left : bottom;
-  const overlayAxis = isHorizontal ? right : top;
-
-  const { showAverage, series, overlay } = metadata!;
-
-  const { maxHeight, maxWidth } = dimension;
+    averageSeries,
+    averageOverlay,
+    hasAverageSeries,
+    hasAverageOverlay,
+    hasAverageOverlayLabel,
+    hasAverageSeriesLabel,
+    coordinates,
+    style,
+  } = useAverage();
 
   const {
     backgroundPadding,
@@ -53,45 +49,7 @@ export const BarsAverage: React.FC = () => {
     titleFontSize,
     titleFontWeight,
     titleProps,
-  } = defaultStyle.average;
-
-  const averageSeries = series.average?.average;
-  const averageOverlay = overlay.average?.average;
-
-  const averageSeriesScale = seriesAxis!.scale(averageSeries as any) ?? 0;
-  const averageOverlayScale = (overlayAxis && averageOverlay) ? overlayAxis.scale(averageOverlay as any) : 0;
-
-  const hasAverageSeries = Boolean(showAverage && averageSeries);
-  const hasAverageOverlay = Boolean(showAverage && averageOverlay);
-
-  const hasAverageSeriesLabel = (dimension.maxWidth > viewport.small.maxWidth) && hasAverageSeries;
-  const hasAverageOverlayLabel = (dimension.maxWidth > viewport.small.maxWidth) && hasAverageOverlay;
-
-  const coordinates = useMemo(() => (isHorizontal
-    ? {
-      series: {
-        from: { x: 0, y: averageSeriesScale },
-        to: { x: maxWidth, y: averageSeriesScale },
-        label: { x: 4, y: averageSeriesScale },
-      },
-      overlay: {
-        from: { x: 0, y: averageOverlayScale },
-        to: { x: maxWidth, y: averageOverlayScale },
-        label: { x: maxWidth - 4, y: averageOverlayScale },
-      },
-    }
-    : {
-      series: {
-        from: { x: averageSeriesScale, y: 0 },
-        to: { x: averageSeriesScale, y: maxHeight },
-        label: { x: averageSeriesScale, y: maxHeight - 16 },
-      },
-      overlay: {
-        from: { x: averageOverlayScale ?? 0, y: 0 },
-        to: { x: averageOverlayScale ?? 0, y: maxHeight },
-        label: { x: averageOverlayScale, y: 16 },
-      },
-    }), [isHorizontal, averageSeriesScale, maxWidth, averageOverlayScale, maxHeight]);
+  } = style;
 
   return (
     <Group>

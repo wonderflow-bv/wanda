@@ -3,11 +3,9 @@ import { useMemo } from 'react';
 import {
   useCartesianContext, useDataContext, useLayoutContext, useStyleConfigContext,
 } from '../providers';
-import { BarChartMetadata, LineChartMetadata } from '../types';
+import { CartesianChartMetadata } from '../types';
 
-type SupportedChartMetadata = LineChartMetadata | BarChartMetadata;
-
-export const useAverage = <T extends SupportedChartMetadata>() => {
+export const useAverage = <T extends CartesianChartMetadata>() => {
   const { lines: defaultStyle, viewport } = useStyleConfigContext();
   const { metadata } = useDataContext<T>();
   const { isHorizontal } = useLayoutContext();
@@ -77,6 +75,10 @@ export const useAverage = <T extends SupportedChartMetadata>() => {
     }), [isHorizontal, averageSeriesScale, maxWidth, averageOverlayScale, maxHeight]);
 
   return {
+    averageSeries,
+    averageOverlay,
+    hasAverageSeries,
+    hasAverageOverlay,
     hasAverageSeriesLabel,
     hasAverageOverlayLabel,
     coordinates,

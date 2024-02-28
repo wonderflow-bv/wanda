@@ -14,11 +14,13 @@ const mockMetadata: LineChartMetadata = {
     names: ['A', 'B'],
     colors: ['ca', 'cb'],
     average: undefined,
+    trendline: undefined,
   },
   overlay: {
-    name: '',
-    color: '',
+    names: [''],
+    colors: [''],
     average: undefined,
+    trendline: undefined,
   },
   hidePadding: true,
 };

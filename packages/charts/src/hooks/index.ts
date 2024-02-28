@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+export { useAverage } from './useAverage';
 export type { UseBrushProps } from './useBrush';
 export { useBrush } from './useBrush';
 export type { UseCartesianProps } from './useCartesian';
