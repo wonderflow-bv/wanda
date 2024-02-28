@@ -353,8 +353,22 @@ export const scaleDomainToAxis = (axis: Except<AxisProps, 'orientation'>) => {
     }
 
     if (scaleType === 'linear') {
+      const minMax = getMinMaxNumber(domain.map(v => Number(v)));
+      const hasOnlyPositiveDomain = Boolean(minMax?.every(e => e > 0));
+      const hasOnlyNegativeDomain = Boolean(minMax?.every(e => e < 0));
+
+      let formattedDomain = minMax;
+
+      if (hasOnlyPositiveDomain) {
+        formattedDomain = [0, minMax![1]];
+      }
+
+      if (hasOnlyNegativeDomain) {
+        formattedDomain = [minMax![0], 0];
+      }
+
       return scaleLinear({
-        domain: getMinMaxNumber(domain.map(v => Number(v))),
+        domain: formattedDomain,
         range,
         round,
         nice,

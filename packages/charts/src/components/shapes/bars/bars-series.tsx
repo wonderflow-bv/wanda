@@ -16,7 +16,7 @@ export const BarsSeries = () => {
 
   const {
     left, bottom, right, top,
-  } = axis!;
+  } = axis;
 
   const {
     series, index, overlay, sortBy,
