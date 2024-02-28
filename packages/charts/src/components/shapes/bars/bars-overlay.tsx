@@ -16,7 +16,7 @@ export const BarsOverlay = () => {
   const { isHorizontal } = useLayoutContext();
   const { axis, hoveredLegendItem: overLegend, dimension } = useCartesianContext();
 
-  const { right, top } = axis!;
+  const { right, top } = axis;
 
   const {
     overlay, index, series, sortBy,

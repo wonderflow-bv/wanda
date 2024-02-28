@@ -19,75 +19,45 @@ import { Line } from '@visx/shape';
 import _ from 'lodash';
 import { useCallback } from 'react';
 
+import { useTrendline } from '@/hooks';
+
 import {
-  useCartesianContext, useDataContext, useLayoutContext, useStyleConfigContext,
+  useCartesianContext,
 } from '../../../providers';
-import { BarChartMetadata, TrendlineType } from '../../../types';
+import { TrendlineType } from '../../../types';
 import {
   BarsItem, BarsItemBlurred,
 } from './bars.module.css';
 
 export const BarsTrendline: React.FC = () => {
-  const { lines: defaultStyle } = useStyleConfigContext();
-  const { metadata } = useDataContext<BarChartMetadata>();
-  const { isHorizontal } = useLayoutContext();
-  const { axis, dimension, hoveredLegendItem: overLegend } = useCartesianContext();
-
+  const { hoveredLegendItem: overLegend } = useCartesianContext();
   const {
-    top, right, bottom, left,
-  } = axis!;
-
-  const seriesAxis = isHorizontal ? left : bottom;
-  const overlayAxis = isHorizontal ? right : top;
-
-  const { showTrendline, series, overlay } = metadata!;
-
-  const { maxHeight, maxWidth } = dimension;
+    series,
+    overlay,
+    seriesAxis,
+    overlayAxis,
+    hasTrendlineSeries,
+    hasTrendlineOverlay,
+    getCoordinates,
+    style,
+  } = useTrendline();
 
   const {
     opacity,
     pointerEvents,
     strokeDasharray,
     strokeWidth,
-  } = defaultStyle.trendline;
-
-  const trendlineSeries = series.trendline;
-  const trendlineOverlay = overlay.trendline;
-
-  const hasTrendlineSeries = Boolean(showTrendline && trendlineSeries?.length);
-  const hasTrendlineOverlay = Boolean(showTrendline && trendlineOverlay?.length);
+  } = style;
 
   const dynamicClassName = useCallback((overLegend: string, dataKey: string) => ((overLegend === dataKey || overLegend === '')
     ? BarsItem
     : BarsItemBlurred), []);
 
-  const getCoordinates = useCallback((from: number, to: number) => (isHorizontal
-    ? {
-      from: {
-        x: 0,
-        y: from,
-      },
-      to: {
-        x: maxWidth,
-        y: to,
-      },
-    }
-    : {
-      from: {
-        x: to,
-        y: 0,
-      },
-      to: {
-        x: from,
-        y: maxHeight,
-      },
-    }), [isHorizontal, maxHeight, maxWidth]);
-
   return (
     <Group>
       {hasTrendlineSeries && series.trendline!.map((t: TrendlineType, i: number) => {
-        const from = seriesAxis!.scale(t.from as any) ?? 0;
-        const to = seriesAxis!.scale(t.to as any) ?? 0;
+        const from = seriesAxis?.scale(t.from as any) ?? 0;
+        const to = seriesAxis?.scale(t.to as any) ?? 0;
 
         const coordinates = getCoordinates(from, to);
 
@@ -107,8 +77,8 @@ export const BarsTrendline: React.FC = () => {
       })}
 
       {hasTrendlineOverlay && overlay.trendline!.map((t: TrendlineType, i: number) => {
-        const from = overlayAxis!.scale(t.from as any) ?? 0;
-        const to = overlayAxis!.scale(t.to as any) ?? 0;
+        const from = overlayAxis?.scale(t.from as any) ?? 0;
+        const to = overlayAxis?.scale(t.to as any) ?? 0;
 
         const coordinates = getCoordinates(from, to);
 

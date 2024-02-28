@@ -18,7 +18,7 @@ export const useAverage = <T extends CartesianChartMetadata>() => {
   const seriesAxis = isHorizontal ? left : bottom;
   const overlayAxis = isHorizontal ? right : top;
 
-  const { showAverage, series, overlay } = metadata as CartesianChartMetadata;
+  const { showAverage, series, overlay } = metadata as T;
 
   const { maxHeight, maxWidth } = dimension;
 
