@@ -1,5 +1,7 @@
 # @wonderflow/symbols
 
+## 12.11.0
+
 ## 12.10.0
 
 ### Minor Changes
