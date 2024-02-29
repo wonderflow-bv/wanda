@@ -26,3 +26,12 @@ export type BarsStyleConfig = {
     rx: number;
   };
 }
+
+export type Bar = { color: string;
+  height: number;
+  index: number;
+  key: string;
+  value: number;
+  width: number;
+  x: number;
+  y: number; }

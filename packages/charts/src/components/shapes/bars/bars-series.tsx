@@ -99,6 +99,12 @@ export const BarsSeries = () => {
     >
       {barGroups => barGroups.map((barGroup) => {
         const sortedBars = sortBarsBy(barGroup.bars, sortBy, isHorizontal);
+        // TODO: use this to represent values from/to zero
+        // const min = _.min(seriesAxis.domain);
+        // const max = _.max(seriesAxis.domain);
+        // const diffNegative = seriesAxis.scale(min) - seriesAxis.scale(0);
+        // const diffPositive = seriesAxis.scale(0) - seriesAxis.scale(max);
+        // console.log(min, max, diffNegative, diffPositive);
 
         return (
           <Group key={_.uniqueId()} left={barGroup.x0}>

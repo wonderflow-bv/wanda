@@ -21,6 +21,7 @@ import { Except } from 'type-fest';
 import {
   AverageType,
   AxisProps,
+  Bar,
   Data, LineChartIndex,
   LineChartSeries, SortingType, TrendlineType,
 } from '../types';
@@ -162,14 +163,7 @@ U extends LineChartSeries | BarChartSeries>(
 };
 
 export const sortBarsBy = (
-  bars: Array<{ color: string;
-    height: number;
-    index: number;
-    key: string;
-    value: number;
-    width: number;
-    x: number;
-    y: number; }>,
+  bars: Bar[],
   sorting: SortingType,
   isHorizontal: boolean,
 ) => {
