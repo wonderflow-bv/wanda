@@ -6,13 +6,15 @@ import { useCallback } from 'react';
 import { useBars } from '@/hooks';
 
 import {
-  useCartesianContext,
+  useCartesianContext, useStyleConfigContext, useThemeContext,
 } from '../../../providers';
 import { sortBarsBy } from '../../../utils';
 import { BarsItem, BarsItemBlurred } from './bars.module.css';
 
 export const BarsOverlay = () => {
   const { hoveredLegendItem: overLegend } = useCartesianContext();
+  const theme = useThemeContext();
+  const { themes } = useStyleConfigContext();
 
   const {
     data,
@@ -31,6 +33,7 @@ export const BarsOverlay = () => {
   } = useBars();
 
   const { bar: barStyle, background } = style;
+  const bgColor = themes[theme].bars.backgroundColor;
 
   const dynamicClassName = useCallback((overLegend: string, dataKey: string) => ((overLegend === dataKey || overLegend === '')
     ? BarsItem
@@ -64,7 +67,7 @@ export const BarsOverlay = () => {
                       y={bar.y}
                       width={maxWidth}
                       height={bar.height}
-                      fill="lightGrey"
+                      fill={bgColor}
                       rx={background.rx}
                     />
                   )}
@@ -114,7 +117,7 @@ export const BarsOverlay = () => {
                     y={0}
                     width={bar.width}
                     height={maxHeight}
-                    fill="lightGrey"
+                    fill={bgColor}
                     rx={background.rx}
                   />
                 )}

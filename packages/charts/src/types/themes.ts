@@ -49,6 +49,9 @@ export type Theme = {
     average: string;
     averageFontColor: string;
   };
+  bars: {
+    backgroundColor: string;
+  };
   brush: {
     handle: {
       fill: string;

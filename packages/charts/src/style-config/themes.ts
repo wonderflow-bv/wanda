@@ -56,6 +56,9 @@ export const themeLight: Theme = {
     average: colorPaletteNeutrals.dimmed8,
     averageFontColor: colorPaletteNeutrals.dimmed0,
   },
+  bars: {
+    backgroundColor: colorPaletteNeutrals.dimmed1,
+  },
   brush: {
     handle: {
       fill: colorPaletteNeutrals.dimmed0,
@@ -110,6 +113,9 @@ export const themeDark: Theme = {
     noData: colorPaletteNeutrals.dimmed7,
     average: colorPaletteNeutrals.dimmed0,
     averageFontColor: colorPaletteNeutrals.dimmed8,
+  },
+  bars: {
+    backgroundColor: colorPaletteNeutrals.dimmed6,
   },
   brush: {
     handle: {
