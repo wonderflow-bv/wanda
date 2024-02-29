@@ -27,7 +27,10 @@ export const BarsOverlay = () => {
     X0Y0,
     scaleXY0,
     scaleXY1,
+    style,
   } = useBars();
+
+  const { bar: barStyle, background } = style;
 
   const dynamicClassName = useCallback((overLegend: string, dataKey: string) => ((overLegend === dataKey || overLegend === '')
     ? BarsItem
@@ -62,7 +65,7 @@ export const BarsOverlay = () => {
                       width={maxWidth}
                       height={bar.height}
                       fill="lightGrey"
-                      rx={0}
+                      rx={background.rx}
                     />
                   )}
 
@@ -73,7 +76,7 @@ export const BarsOverlay = () => {
                     width={bar.width}
                     height={bar.height}
                     fill={bar.color}
-                    rx={4}
+                    rx={barStyle.rx}
                     onClick={() => ({})}
                   />
                 </Group>
@@ -112,7 +115,7 @@ export const BarsOverlay = () => {
                     width={bar.width}
                     height={maxHeight}
                     fill="lightGrey"
-                    rx={0}
+                    rx={background.rx}
                   />
                 )}
 
@@ -123,7 +126,7 @@ export const BarsOverlay = () => {
                   width={bar.width}
                   height={bar.height}
                   fill={bar.color}
-                  rx={4}
+                  rx={barStyle.rx}
                   onClick={() => ({})}
                 />
               </Group>

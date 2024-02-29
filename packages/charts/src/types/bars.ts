@@ -14,19 +14,13 @@
  * limitations under the License.
  */
 
-export * from './axis';
-export * from './bar-chart';
-export * from './bars';
-export * from './brush';
-export * from './cartesian';
-export * from './colors';
-export * from './grid';
-export * from './headings';
-export * from './legend';
-export * from './line-chart';
-export * from './linear-gradient';
-export * from './lines';
-export * from './main';
-export * from './themes';
-export * from './tooltip';
-export * from './viewport';
+export type BarsStyleConfig = {
+  paddingOuter: number;
+  paddingInner: number;
+  bar: {
+    rx: number;
+  };
+  background: {
+    rx: number;
+  };
+}

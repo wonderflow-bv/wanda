@@ -23,7 +23,10 @@ export const BarsSeries = () => {
     X0Y0,
     scaleXY0,
     scaleXY1,
+    style,
   } = useBars();
+
+  const { bar: barStyle, background } = style;
 
   const dynamicClassName = useCallback((overLegend: string, dataKey: string) => ((overLegend === dataKey || overLegend === '')
     ? BarsItem
@@ -47,10 +50,7 @@ export const BarsSeries = () => {
           return (
             <Group key={_.uniqueId()} top={barGroup.y0}>
               {sortedBars.map(bar => (
-                <Group
-                  key={_.uniqueId()}
-                >
-
+                <Group key={_.uniqueId()}>
                   {hasBackground && (
                     <Bar
                       className={dynamicClassName(overLegend, bar.key)}
@@ -59,7 +59,7 @@ export const BarsSeries = () => {
                       width={maxWidth}
                       height={bar.height}
                       fill="lightGrey"
-                      rx={0}
+                      rx={background.rx}
                     />
                   )}
 
@@ -70,7 +70,7 @@ export const BarsSeries = () => {
                     width={bar.width}
                     height={bar.height}
                     fill={bar.color}
-                    rx={4}
+                    rx={barStyle.rx}
                     onClick={() => ({})}
                   />
                 </Group>
@@ -100,9 +100,7 @@ export const BarsSeries = () => {
         return (
           <Group key={_.uniqueId()} left={barGroup.x0}>
             {sortedBars.map(bar => (
-              <Group
-                key={_.uniqueId()}
-              >
+              <Group key={_.uniqueId()}>
                 {hasBackground && (
                   <Bar
                     className={dynamicClassName(overLegend, bar.key)}
@@ -111,7 +109,7 @@ export const BarsSeries = () => {
                     width={bar.width}
                     height={maxHeight}
                     fill="lightGrey"
-                    rx={0}
+                    rx={background.rx}
                   />
                 )}
 
@@ -123,7 +121,7 @@ export const BarsSeries = () => {
                   width={bar.width}
                   height={bar.height}
                   fill={bar.color}
-                  rx={4}
+                  rx={barStyle.rx}
                   onClick={() => ({})}
                 />
               </Group>

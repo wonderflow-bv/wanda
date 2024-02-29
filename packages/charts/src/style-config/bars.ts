@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Wonderflow Design Team
+ * Copyright 2023-2024 Wonderflow Design Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,15 @@
  * limitations under the License.
  */
 
-export * from './axis';
-export * from './bar-chart';
-export * from './bars';
-export * from './brush';
-export * from './cartesian';
-export * from './colors';
-export * from './grid';
-export * from './headings';
-export * from './legend';
-export * from './line-chart';
-export * from './linear-gradient';
-export * from './lines';
-export * from './main';
-export * from './themes';
-export * from './tooltip';
-export * from './viewport';
+import { BarsStyleConfig } from '../types/bars';
+
+export const barsStyleConfig: BarsStyleConfig = {
+  paddingOuter: 1,
+  paddingInner: 0.1,
+  bar: {
+    rx: 4,
+  },
+  background: {
+    rx: 0,
+  },
+};

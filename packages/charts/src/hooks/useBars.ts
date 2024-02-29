@@ -1,12 +1,15 @@
 import { scaleBand } from '@visx/scale';
 
-import { useCartesianContext, useDataContext, useLayoutContext } from '@/providers';
+import {
+  useCartesianContext, useDataContext, useLayoutContext, useStyleConfigContext,
+} from '@/providers';
 import { BarChartMetadata, CartesianAxis } from '@/types';
 
 export const useBars = () => {
   const { data, metadata } = useDataContext<BarChartMetadata>();
   const { isHorizontal } = useLayoutContext();
   const { axis, dimension } = useCartesianContext();
+  const { bars } = useStyleConfigContext();
 
   const {
     left, bottom, right, top,
@@ -30,12 +33,19 @@ export const useBars = () => {
     ? right as CartesianAxis
     : top as CartesianAxis;
 
+  const {
+    paddingInner,
+    paddingOuter,
+    bar,
+    background,
+  } = bars;
+
   const X0Y0 = (d: Record<string, any>) => d[index];
 
   const scaleXY0 = scaleBand<string>({
     domain: data.map((d: any) => d[index]),
-    paddingOuter: 1,
-    paddingInner: 0.1,
+    paddingOuter,
+    paddingInner,
   });
 
   scaleXY0.rangeRound((isHorizontal ? [0, maxWidth] : [maxHeight, 0]));
@@ -61,5 +71,9 @@ export const useBars = () => {
     X0Y0,
     scaleXY0,
     scaleXY1,
+    style: {
+      bar,
+      background,
+    },
   };
 };

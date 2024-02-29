@@ -16,6 +16,7 @@
 
 import { CartesianStyleConfig } from '../types/cartesian';
 import { axisStyleConfig } from './axis';
+import { barsStyleConfig } from './bars';
 import { brushStyleConfig } from './brush';
 import { gridStyleConfig } from './grid';
 import { headingsStyleConfig } from './headings';
@@ -26,6 +27,7 @@ import { viewportStyleConfig } from './viewport';
 
 export const cartesianStyleConfig: CartesianStyleConfig = {
   axis: axisStyleConfig,
+  bars: barsStyleConfig,
   brush: brushStyleConfig,
   headings: headingsStyleConfig,
   grid: gridStyleConfig,
