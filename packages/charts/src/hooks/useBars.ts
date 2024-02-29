@@ -36,6 +36,8 @@ export const useBars = () => {
   const {
     paddingInner,
     paddingOuter,
+    paddingInnerGroup,
+    paddingOuterGroup,
     bar,
     background,
   } = bars;
@@ -52,7 +54,11 @@ export const useBars = () => {
 
   const combinedDataKeys = hasOverlay ? [...series.dataKey, ...overlay.dataKey!] : series.dataKey;
 
-  const scaleXY1 = scaleBand<string>({ domain: combinedDataKeys });
+  const scaleXY1 = scaleBand<string>({
+    domain: combinedDataKeys,
+    paddingInner: paddingInnerGroup,
+    paddingOuter: paddingOuterGroup,
+  });
 
   scaleXY1.rangeRound([0, scaleXY0.bandwidth()]);
 

@@ -17,6 +17,8 @@
 export type BarsStyleConfig = {
   paddingOuter: number;
   paddingInner: number;
+  paddingOuterGroup: number;
+  paddingInnerGroup: number;
   bar: {
     rx: number;
   };

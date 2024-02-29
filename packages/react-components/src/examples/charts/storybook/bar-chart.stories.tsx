@@ -34,6 +34,7 @@ const story: ComponentMeta<typeof BarChart> = {
     series: {
       dataKey: ['feedback count'],
       label: 'Feedback Count',
+      domain: [-2000, 12000],
     },
     overlay: undefined,
     menu: undefined,
