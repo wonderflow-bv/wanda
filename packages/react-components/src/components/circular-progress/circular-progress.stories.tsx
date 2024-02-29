@@ -10,6 +10,7 @@ const story: ComponentMeta<typeof CircularProgress> = {
     max: 100,
     dimension: 'regular',
     showProgress: true,
+    showPercentSign: false,
   },
   argTypes: {
     value: {

@@ -16,4 +16,12 @@ describe('<CircularProgress>', () => {
     );
     expect(container).not.toBeNull();
   });
+
+  test(' it should render percent sign', () => {
+    const { container } = render(
+      <CircularProgress value={10} showPercentSign />,
+    );
+    expect(document.querySelector('[data-circular-progress="10%"]')).toBeDefined();
+    expect(container).not.toBeNull();
+  });
 });

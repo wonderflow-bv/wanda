@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 12.11.0
+
+### Minor Changes
+
+- a48c0af: Add `showPercentSign` prop to `Circular Progress` to conditionally display the symbol next to the value
+
 ## 12.10.0
 
 ## 12.9.0
