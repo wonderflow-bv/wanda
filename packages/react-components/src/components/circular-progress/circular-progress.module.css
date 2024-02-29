@@ -28,7 +28,7 @@
     &[data-circular-progress-dimension='big'] {
       --track-size: 16px;
 
-      font-size: token(--wds-wds-font-size-40);
+      font-size: token(--wds-font-size-40);
       inline-size: token(--space-184);
     }
 
@@ -40,7 +40,7 @@
       left: 0;
       right: 0;
       border-radius: 50%;
-      z-index: -1;
+      z-index: 0;
       background:
         conic-gradient(
           var(--progress-color, var(--cta-default)),

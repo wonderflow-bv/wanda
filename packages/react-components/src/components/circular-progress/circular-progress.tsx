@@ -41,6 +41,10 @@ export type CircularProgressProps = {
    * Show or hide the progress value.
    */
   showProgress?: boolean;
+  /**
+   * Show or hide the percent sign next to the value.
+   */
+  showPercentSign?: boolean;
 }
 
 export const CircularProgress = forwardRef<HTMLDivElement, PropsWithClass<CircularProgressProps>>(({
@@ -49,6 +53,7 @@ export const CircularProgress = forwardRef<HTMLDivElement, PropsWithClass<Circul
   max = 100,
   dimension = 'regular',
   showProgress,
+  showPercentSign = false,
   style,
   ...otherProps
 }, forwardedRef) => {
@@ -56,6 +61,8 @@ export const CircularProgress = forwardRef<HTMLDivElement, PropsWithClass<Circul
     () => (value ? Math.round((100 * value) / max) : 0),
     [max, value],
   );
+
+  const sign = showPercentSign ? '%' : '';
 
   const clamp = useMemo(() => (num: number, min: number, max: number) => Math.min(Math.max(num, min), max), []);
 
@@ -71,7 +78,7 @@ export const CircularProgress = forwardRef<HTMLDivElement, PropsWithClass<Circul
       aria-valuemin={0}
       aria-valuemax={max}
       className={clsx(styles.CircularProgress, className)}
-      data-circular-progress={clamp(getPercentage(), 0, 100)}
+      data-circular-progress={`${clamp(getPercentage(), 0, 100)}${sign}`}
       data-circular-progress-dimension={dimension}
       data-circular-progress-show-progress={showProgress}
       style={{ ...dynamicStyle, ...style }}
