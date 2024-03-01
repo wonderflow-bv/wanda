@@ -23,8 +23,10 @@ export const barsStyleConfig: BarsStyleConfig = {
   paddingOuterGroup: 0,
   bar: {
     rx: 4,
+    opacity: 1,
   },
   background: {
     rx: 0,
+    opacity: 0.7,
   },
 };

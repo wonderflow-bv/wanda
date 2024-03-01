@@ -21,9 +21,11 @@ export type BarsStyleConfig = {
   paddingInnerGroup: number;
   bar: {
     rx: number;
+    opacity: number;
   };
   background: {
     rx: number;
+    opacity: number;
   };
 }
 

@@ -68,6 +68,7 @@ export const BarsOverlay = () => {
                       width={maxWidth}
                       height={bar.height}
                       fill={bgColor}
+                      opacity={background.opacity}
                       rx={background.rx}
                     />
                   )}
@@ -80,6 +81,7 @@ export const BarsOverlay = () => {
                     height={bar.height}
                     fill={bar.color}
                     rx={barStyle.rx}
+                    opacity={barStyle.opacity}
                     onClick={() => ({})}
                   />
                 </Group>
@@ -118,6 +120,7 @@ export const BarsOverlay = () => {
                     width={bar.width}
                     height={maxHeight}
                     fill={bgColor}
+                    opacity={background.opacity}
                     rx={background.rx}
                   />
                 )}
@@ -129,6 +132,7 @@ export const BarsOverlay = () => {
                   width={bar.width}
                   height={bar.height}
                   fill={bar.color}
+                  opacity={barStyle.opacity}
                   rx={barStyle.rx}
                   onClick={() => ({})}
                 />

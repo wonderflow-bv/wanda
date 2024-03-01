@@ -62,6 +62,7 @@ export const BarsSeries = () => {
                       width={maxWidth}
                       height={bar.height}
                       fill={bgColor}
+                      opacity={background.opacity}
                       rx={background.rx}
                     />
                   )}
@@ -74,6 +75,7 @@ export const BarsSeries = () => {
                     height={bar.height}
                     fill={bar.color}
                     rx={barStyle.rx}
+                    opacity={barStyle.opacity}
                     onClick={() => ({})}
                   />
                 </Group>
@@ -118,6 +120,7 @@ export const BarsSeries = () => {
                     width={bar.width}
                     height={maxHeight}
                     fill={bgColor}
+                    opacity={background.opacity}
                     rx={background.rx}
                   />
                 )}
@@ -130,6 +133,7 @@ export const BarsSeries = () => {
                   width={bar.width}
                   height={bar.height}
                   fill={bar.color}
+                  opacity={barStyle.opacity}
                   rx={barStyle.rx}
                   onClick={() => ({})}
                 />
