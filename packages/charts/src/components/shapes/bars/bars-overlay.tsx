@@ -21,7 +21,7 @@ export const BarsOverlay = () => {
     isHorizontal,
     overlay,
     sortBy,
-    hasBackground,
+    hasBackgroundOverlay,
     overlayAxis,
     hasOverlay,
     maxWidth,
@@ -60,7 +60,7 @@ export const BarsOverlay = () => {
             <Group key={_.uniqueId()} top={barGroup.y0}>
               {sortedBars.map(bar => (
                 <Group key={_.uniqueId()}>
-                  {hasBackground && (
+                  {hasBackgroundOverlay && (
                     <Bar
                       className={dynamicClassName(overLegend, bar.key)}
                       x={0}
@@ -112,7 +112,7 @@ export const BarsOverlay = () => {
           <Group key={_.uniqueId()} left={barGroup.x0}>
             {sortedBars.map(bar => (
               <Group key={_.uniqueId()}>
-                {hasBackground && (
+                { hasBackgroundOverlay && (
                   <Bar
                     className={dynamicClassName(overLegend, bar.key)}
                     x={bar.x}

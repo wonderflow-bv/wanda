@@ -49,7 +49,8 @@ export const useBarChart = ({
   preventTooltipDisplay = false,
   showAverage = false,
   showTrendline = false,
-  showLabel,
+  showLabel = false,
+  showBackground = false,
   hidePadding = false,
 }: UseBarChartProps) => {
   const [brushFilteredData, setBrushFilteredData] = useState<Data>(data);
@@ -97,7 +98,7 @@ export const useBarChart = ({
       style: series.style,
       average: showAverage ? computeAverage(data, series.dataKey) : undefined,
       trendline: showTrendline ? computeTrendline(data, series.dataKey) : undefined,
-      hasBackground: series.hasBackground,
+      showBackground: series.showBackground,
     },
     overlay: {
       dataKey: overlay?.dataKey,
@@ -106,13 +107,14 @@ export const useBarChart = ({
       style: overlay?.style,
       average: (overlay?.dataKey && showAverage) ? computeAverage(data, overlay.dataKey) : undefined,
       trendline: (overlay?.dataKey && showTrendline) ? computeTrendline(data, overlay.dataKey) : undefined,
-      hasBackground: overlay?.hasBackground,
+      showBackground: overlay?.showBackground,
     },
     tooltip,
     preventTooltipDisplay,
     showAverage,
     showTrendline,
     showLabel,
+    showBackground,
     hidePadding,
   }), [
     isStacked,
@@ -128,6 +130,7 @@ export const useBarChart = ({
     tooltip,
     preventTooltipDisplay,
     showLabel,
+    showBackground,
     hidePadding]);
 
   return {

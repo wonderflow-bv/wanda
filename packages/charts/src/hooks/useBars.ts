@@ -18,10 +18,11 @@ export const useBars = () => {
   const { maxWidth, maxHeight } = dimension;
 
   const {
-    series, index, overlay, sortBy,
+    series, index, overlay, sortBy, showBackground: hasBackground,
   } = metadata as BarChartMetadata;
 
-  const { hasBackground } = series;
+  const { showBackground: hasBackgroundSeries } = series;
+  const { showBackground: hasBackgroundOverlay } = overlay;
 
   const seriesAxis = isHorizontal
     ? left as CartesianAxis
@@ -68,7 +69,8 @@ export const useBars = () => {
     series,
     overlay,
     sortBy,
-    hasBackground,
+    hasBackgroundSeries: (hasBackgroundSeries || hasBackground),
+    hasBackgroundOverlay: (hasBackgroundOverlay || hasBackground),
     seriesAxis,
     overlayAxis,
     hasOverlay,

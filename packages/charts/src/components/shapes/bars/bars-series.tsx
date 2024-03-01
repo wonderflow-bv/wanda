@@ -18,7 +18,7 @@ export const BarsSeries = () => {
     isHorizontal,
     series,
     sortBy,
-    hasBackground,
+    hasBackgroundSeries,
     seriesAxis,
     maxWidth,
     maxHeight,
@@ -54,7 +54,7 @@ export const BarsSeries = () => {
             <Group key={_.uniqueId()} top={barGroup.y0}>
               {sortedBars.map(bar => (
                 <Group key={_.uniqueId()}>
-                  {hasBackground && (
+                  {hasBackgroundSeries && (
                     <Bar
                       className={dynamicClassName(overLegend, bar.key)}
                       x={0}
@@ -112,7 +112,7 @@ export const BarsSeries = () => {
           <Group key={_.uniqueId()} left={barGroup.x0}>
             {sortedBars.map(bar => (
               <Group key={_.uniqueId()}>
-                {hasBackground && (
+                {hasBackgroundSeries && (
                   <Bar
                     className={dynamicClassName(overLegend, bar.key)}
                     x={bar.x}

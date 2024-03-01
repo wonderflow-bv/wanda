@@ -20,6 +20,7 @@ const story: ComponentMeta<typeof BarChart> = {
     showAverage: false,
     showTrendline: false,
     showBrush: false,
+    showBackground: false,
     hideLegend: false,
     hidePadding: false,
     preventTooltipDisplay: false,
@@ -143,11 +144,11 @@ withBackground.args = {
   series: {
     dataKey: ['feedback count'],
     label: 'Feedback Count',
-    hasBackground: true,
+    showBackground: true,
   },
   overlay: {
     dataKey: ['overlay'],
     label: 'Overlay',
-    hasBackground: true,
+    showBackground: true,
   },
 };

@@ -79,6 +79,10 @@ export type BarChartProps = {
    */
   showTrendline?: boolean;
   /**
+   * Display a background color behind the bars to highlight the entire possible occupancy area.
+   */
+  showBackground?: boolean;
+  /**
    * Set extra data or custom content to be displayed in the tooltip.
    */
   tooltip?: BarChartTooltip;
@@ -109,7 +113,8 @@ export const BarChart: React.FC<BarChartProps> = ({
   preventTooltipDisplay = false,
   showAverage = false,
   showTrendline = false,
-  showLabel,
+  showLabel = false,
+  showBackground = false,
   hidePadding = false,
   ...otherProps
 }: BarChartProps) => {
@@ -135,6 +140,7 @@ export const BarChart: React.FC<BarChartProps> = ({
     showAverage,
     showTrendline,
     showLabel,
+    showBackground,
     hidePadding,
   });
 
