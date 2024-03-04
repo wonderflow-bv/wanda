@@ -18,7 +18,7 @@ import { BarsStyleConfig } from '../types/bars';
 
 export const barsStyleConfig: BarsStyleConfig = {
   paddingOuter: 1,
-  paddingInner: 0.1,
+  paddingInner: 0.2,
   paddingInnerGroup: 0.1,
   paddingOuterGroup: 0,
   bar: {

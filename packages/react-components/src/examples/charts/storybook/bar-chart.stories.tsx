@@ -6,6 +6,7 @@ import {
   channels,
   feedbackCount, proCons,
 } from '../mock-data';
+import { positiveNegative } from '../mock-data/positiveNegative';
 
 const story: ComponentMeta<typeof BarChart> = {
   title: 'Charts/Bar Chart',
@@ -150,5 +151,21 @@ withBackground.args = {
     dataKey: ['overlay'],
     label: 'Overlay',
     showBackground: true,
+  },
+};
+
+export const PositiveAndNegative = Template.bind({});
+PositiveAndNegative.args = {
+  subtitle: 'A bar chart with positive and negative values',
+  data: positiveNegative,
+  series: {
+    dataKey: ['feedback count'],
+    label: 'Feedback Count',
+    domain: [-12000, 12000],
+  },
+  overlay: {
+    dataKey: ['overlay'],
+    label: 'Overlay',
+    domain: [-1, 1],
   },
 };

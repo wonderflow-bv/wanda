@@ -4,6 +4,7 @@ import _ from 'lodash';
 import { useCallback } from 'react';
 
 import { useBars } from '@/hooks';
+import { getBarSizeAndPosition } from '@/utils';
 
 import {
   useCartesianContext, useStyleConfigContext, useThemeContext,
@@ -58,34 +59,38 @@ export const BarsOverlay = () => {
 
           return (
             <Group key={_.uniqueId()} top={barGroup.y0}>
-              {sortedBars.map(bar => (
-                <Group key={_.uniqueId()}>
-                  {hasBackgroundOverlay && (
+              {sortedBars.map((bar) => {
+                const { x, width } = getBarSizeAndPosition(bar, overlayAxis, isHorizontal);
+
+                return (
+                  <Group key={_.uniqueId()}>
+                    {hasBackgroundOverlay && (
+                      <Bar
+                        className={dynamicClassName(overLegend, bar.key)}
+                        x={0}
+                        y={bar.y}
+                        width={maxWidth}
+                        height={bar.height}
+                        fill={bgColor}
+                        opacity={background.opacity}
+                        rx={background.rx}
+                      />
+                    )}
+
                     <Bar
                       className={dynamicClassName(overLegend, bar.key)}
-                      x={0}
+                      x={x}
                       y={bar.y}
-                      width={maxWidth}
+                      width={width}
                       height={bar.height}
-                      fill={bgColor}
-                      opacity={background.opacity}
-                      rx={background.rx}
+                      fill={bar.color}
+                      rx={barStyle.rx}
+                      opacity={barStyle.opacity}
+                      onClick={() => ({})}
                     />
-                  )}
-
-                  <Bar
-                    className={dynamicClassName(overLegend, bar.key)}
-                    x={bar.x}
-                    y={bar.y}
-                    width={bar.width}
-                    height={bar.height}
-                    fill={bar.color}
-                    rx={barStyle.rx}
-                    opacity={barStyle.opacity}
-                    onClick={() => ({})}
-                  />
-                </Group>
-              ))}
+                  </Group>
+                );
+              })}
             </Group>
           );
         })
@@ -110,34 +115,38 @@ export const BarsOverlay = () => {
 
         return (
           <Group key={_.uniqueId()} left={barGroup.x0}>
-            {sortedBars.map(bar => (
-              <Group key={_.uniqueId()}>
-                { hasBackgroundOverlay && (
+            {sortedBars.map((bar) => {
+              const { y, height } = getBarSizeAndPosition(bar, overlayAxis, isHorizontal);
+
+              return (
+                <Group key={_.uniqueId()}>
+                  { hasBackgroundOverlay && (
+                    <Bar
+                      className={dynamicClassName(overLegend, bar.key)}
+                      x={bar.x}
+                      y={0}
+                      width={bar.width}
+                      height={maxHeight}
+                      fill={bgColor}
+                      opacity={background.opacity}
+                      rx={background.rx}
+                    />
+                  )}
+
                   <Bar
                     className={dynamicClassName(overLegend, bar.key)}
                     x={bar.x}
-                    y={0}
+                    y={y}
                     width={bar.width}
-                    height={maxHeight}
-                    fill={bgColor}
-                    opacity={background.opacity}
-                    rx={background.rx}
+                    height={height}
+                    fill={bar.color}
+                    opacity={barStyle.opacity}
+                    rx={barStyle.rx}
+                    onClick={() => ({})}
                   />
-                )}
-
-                <Bar
-                  className={dynamicClassName(overLegend, bar.key)}
-                  x={bar.x}
-                  y={bar.y}
-                  width={bar.width}
-                  height={bar.height}
-                  fill={bar.color}
-                  opacity={barStyle.opacity}
-                  rx={barStyle.rx}
-                  onClick={() => ({})}
-                />
-              </Group>
-            ))}
+                </Group>
+              );
+            })}
           </Group>
         );
       })}

@@ -15,6 +15,7 @@
  */
 
 export * from './axis';
+export * from './bars';
 export * from './colors';
 export * from './data';
 export * from './format';
