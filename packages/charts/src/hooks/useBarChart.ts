@@ -45,6 +45,8 @@ export const useBarChart = ({
   index,
   series,
   overlay,
+  reverseIndex = false,
+  mirrorDomains = false,
   tooltip,
   preventTooltipDisplay = false,
   showAverage = false,
@@ -57,6 +59,9 @@ export const useBarChart = ({
 
   const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
 
+  const hasIndexReversed = !isHorizontal && reverseIndex;
+  const hasMirroredDomains = Boolean(mirrorDomains);
+
   const uIndex: BarChartIndex = useMemo(() => ({
     ...index,
     scaleType: 'label',
@@ -66,12 +71,25 @@ export const useBarChart = ({
   }), [index]);
 
   const { index: i, series: s, overlay: o } = useMemo(
-    () => handleChartDomainAndScaleType(data, uIndex, series, overlay), [data, uIndex, overlay, series],
+    () => handleChartDomainAndScaleType(
+      data,
+      uIndex,
+      series,
+      overlay,
+      { hasIndexReversed, hasMirroredDomains },
+    ),
+    [data, uIndex, overlay, series, hasIndexReversed, hasMirroredDomains],
   );
 
   const { index: iFiltered, series: sFiltered, overlay: oFiltered } = useMemo(
-    () => handleChartDomainAndScaleType(brushFilteredData, uIndex, series, overlay),
-    [brushFilteredData, uIndex, overlay, series],
+    () => handleChartDomainAndScaleType(
+      brushFilteredData,
+      uIndex,
+      series,
+      overlay,
+      { hasIndexReversed, hasMirroredDomains },
+    ),
+    [brushFilteredData, uIndex, overlay, series, hasIndexReversed, hasMirroredDomains],
   );
 
   const axis = useMemo(() => handleChartAxisLayout(i, s, o), [i, s, o]);

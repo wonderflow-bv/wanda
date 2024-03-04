@@ -28,6 +28,8 @@ const story: ComponentMeta<typeof BarChart> = {
     preventResponsive: false,
     layout: CartesianChartLayout.HORIZONTAL,
     theme: 'light',
+    reverseIndex: false,
+    mirrorDomains: false,
     data: feedbackCount,
     index: {
       dataKey: 'date',
@@ -161,11 +163,10 @@ PositiveAndNegative.args = {
   series: {
     dataKey: ['feedback count'],
     label: 'Feedback Count',
-    domain: [-12000, 12000],
   },
   overlay: {
     dataKey: ['overlay'],
     label: 'Overlay',
-    domain: [-1, 1],
   },
+  mirrorDomains: true,
 };

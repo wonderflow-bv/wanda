@@ -71,11 +71,33 @@ export const removeKeysFromObject = (obj: Record<string, unknown>, keys: string[
   return copy;
 };
 
+export const mirrorDomain = (domain: Array<NonNullable<string | number>>) => {
+  const max = _.max(domain) ?? 0;
+  const min = _.min(domain) ?? 0;
+
+  if (typeof max === 'number' && typeof min === 'number') {
+    const absMax = Math.abs(max);
+    const absMin = Math.abs(min);
+
+    const absMinMax = _.max([absMax, absMin]);
+
+    return [-absMinMax!, absMinMax];
+  }
+
+  return domain;
+};
+
 export const handleAxisDomainAndScaleType = <
 T extends LineChartIndex
 | LineChartSeries
 | BarChartIndex
-| BarChartSeries>(data: Data, axis: T): Except<AxisProps, 'orientation'> => {
+| BarChartSeries>(
+    data: Data,
+    axis: T,
+    config?: {
+      hasIndexReversed?: boolean;
+      hasMirroredDomains?: boolean;
+    }): Except<AxisProps, 'orientation'> => {
   const hasData = !!data.length;
   let res: Record<string, unknown> = {
     ...axis,
@@ -131,9 +153,12 @@ T extends LineChartIndex
       }
     }
 
+    const reversed = config?.hasIndexReversed ? ownDomain.reverse() : ownDomain;
+    const mirrored = config?.hasMirroredDomains ? mirrorDomain(reversed) : reversed;
+
     res = {
       ...axis,
-      domain: ownDomain,
+      domain: mirrored,
       scaleType: st,
     };
   }
@@ -148,11 +173,15 @@ U extends LineChartSeries | BarChartSeries>(
     index: T,
     series: U,
     overlay?: U,
+    config?: {
+      hasIndexReversed?: boolean;
+      hasMirroredDomains?: boolean;
+    },
   ) => {
-  const i = handleAxisDomainAndScaleType(data, index);
-  const s = handleAxisDomainAndScaleType(data, series);
+  const i = handleAxisDomainAndScaleType(data, index, { hasIndexReversed: config?.hasIndexReversed });
+  const s = handleAxisDomainAndScaleType(data, series, { hasMirroredDomains: config?.hasMirroredDomains });
   const o = overlay
-    ? handleAxisDomainAndScaleType(data, overlay)
+    ? handleAxisDomainAndScaleType(data, overlay, { hasMirroredDomains: config?.hasMirroredDomains })
     : undefined;
 
   return {

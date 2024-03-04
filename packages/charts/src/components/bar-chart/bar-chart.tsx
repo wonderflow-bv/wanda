@@ -58,6 +58,20 @@ export type BarChartProps = {
    * 'as-is': as set in series/overlay dataKey;
    */
   sortBy?: SortingType;
+
+  /**
+   * By default, the data will grow from the lower left Cartesian origin ({x:0, y:0})
+   * in both the horizontal and vertical layouts, so that the values will increase upward and rightward.
+   * By setting this parameter `true`,
+   * the order of the index will be reversed, but only in the vertical layout (left axis).
+   */
+  reverseIndex?: boolean;
+  /**
+   * When set to 'true' zero will be in the middle of the axis and
+   * the min/max domain value will be derived from the min/max data value or
+   * min/max value of custom domain.
+   */
+  mirrorDomains?: boolean;
   /**
    * Set the properties associated with the Index Axis.
    */
@@ -109,6 +123,8 @@ export const BarChart: React.FC<BarChartProps> = ({
   index,
   series,
   overlay,
+  reverseIndex,
+  mirrorDomains,
   tooltip,
   preventTooltipDisplay = false,
   showAverage = false,
@@ -132,6 +148,8 @@ export const BarChart: React.FC<BarChartProps> = ({
     isStacked,
     sortBy,
     data,
+    reverseIndex,
+    mirrorDomains,
     index,
     series,
     overlay,
