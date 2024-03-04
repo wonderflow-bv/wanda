@@ -9,8 +9,6 @@ export const getBarSize = (bar: Bar, axis: CartesianAxis, isHorizontal: boolean)
   const scaleMin = axis.scale(min as any) ?? 0;
   const diffNegative = scaleMin - scaleZero;
 
-  console.log(bar.width, bar.width + diffNegative);
-
   if (isHorizontal) {
     return (bar.value >= 0)
       ? (bar.height - diffNegative)
