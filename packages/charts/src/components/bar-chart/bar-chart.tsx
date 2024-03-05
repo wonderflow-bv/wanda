@@ -50,15 +50,16 @@ export type BarChartProps = {
    */
   isStacked?: boolean;
   /**
-   * Set the order data should be sorted by:
+   * Set how data should be sorted by:
    * 'descending-key': dataKey alphabetical order;
-   * 'ascending-key': reverse dataKey alphabetical order;
+   * 'ascending-key': dataKey reverse alphabetical order;
    * 'descending-value': by data value;
    * 'ascending-value': by reverse data value;
    * 'as-is': as set in series/overlay dataKey;
+   * Values organized on different axis will be independent one from another
+   * and will be treated like independent groups sorted by the same logic.
    */
   sortBy?: SortingType;
-
   /**
    * By default, the data will grow from the lower left Cartesian origin ({x:0, y:0})
    * in both the horizontal and vertical layouts, so that the values will increase upward and rightward.
@@ -112,6 +113,11 @@ export type BarChartProps = {
    * Remove the padding from the chart container.
    */
   hidePadding?: boolean;
+  /**
+   * When set to `true`, bars will resize up to the max dimension on the horizontal layout,
+   * while they will have fixed size but affecting the total height of the chart on the vertical layout.
+   */
+  fixedBarSize?: boolean;
 } & Except<CartesianBaseProps, 'axis' | 'axisFiltered' | 'onBrushChange'>
 
 export const BarChart: React.FC<BarChartProps> = ({
@@ -132,6 +138,7 @@ export const BarChart: React.FC<BarChartProps> = ({
   showLabel = false,
   showBackground = false,
   hidePadding = false,
+  fixedBarSize = false,
   ...otherProps
 }: BarChartProps) => {
   const {
@@ -160,6 +167,7 @@ export const BarChart: React.FC<BarChartProps> = ({
     showLabel,
     showBackground,
     hidePadding,
+    fixedBarSize,
   });
 
   return (

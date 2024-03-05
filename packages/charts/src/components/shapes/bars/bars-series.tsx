@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { useCallback } from 'react';
 
 import { useBars } from '@/hooks';
-import { getBarSizeAndPosition, sortBarsBy } from '@/utils';
+import { getBarSizeAndPosition, getBarThickness, sortBarsBy } from '@/utils';
 
 import { useCartesianContext, useStyleConfigContext, useThemeContext } from '../../../providers';
 import { BarsItem, BarsItemBlurred } from './bars.module.css';
@@ -26,9 +26,10 @@ export const BarsSeries = () => {
     scaleXY0,
     scaleXY1,
     style,
+    fixedBarSize,
   } = useBars();
 
-  const { bar: barStyle, background } = style;
+  const { bar: barStyle, background, maxSize } = style;
   const bgColor = themes[theme].bars.backgroundColor;
 
   const dynamicClassName = useCallback((overLegend: string, dataKey: string) => ((overLegend === dataKey || overLegend === '')
@@ -54,6 +55,7 @@ export const BarsSeries = () => {
             <Group key={_.uniqueId()} top={barGroup.y0}>
               {sortedBars.map((bar) => {
                 const { x, width } = getBarSizeAndPosition(bar, seriesAxis, isHorizontal);
+                const thickness = getBarThickness(bar.height, maxSize, fixedBarSize);
 
                 return (
                   <Group key={_.uniqueId()}>
@@ -63,7 +65,7 @@ export const BarsSeries = () => {
                         x={0}
                         y={bar.y}
                         width={maxWidth}
-                        height={bar.height}
+                        height={thickness}
                         fill={bgColor}
                         opacity={background.opacity}
                         rx={background.rx}
@@ -75,7 +77,7 @@ export const BarsSeries = () => {
                       x={x}
                       y={bar.y}
                       width={width}
-                      height={bar.height}
+                      height={thickness}
                       fill={bar.color}
                       rx={barStyle.rx}
                       opacity={barStyle.opacity}
@@ -110,6 +112,7 @@ export const BarsSeries = () => {
           <Group key={_.uniqueId()} left={barGroup.x0}>
             {sortedBars.map((bar) => {
               const { y, height } = getBarSizeAndPosition(bar, seriesAxis, isHorizontal);
+              const thickness = getBarThickness(bar.width, maxSize, fixedBarSize);
 
               return (
                 <Group key={_.uniqueId()}>
@@ -118,7 +121,7 @@ export const BarsSeries = () => {
                       className={dynamicClassName(overLegend, bar.key)}
                       x={bar.x}
                       y={0}
-                      width={bar.width}
+                      width={thickness}
                       height={maxHeight}
                       fill={bgColor}
                       opacity={background.opacity}
@@ -131,7 +134,7 @@ export const BarsSeries = () => {
                     key={_.uniqueId()}
                     x={bar.x}
                     y={y}
-                    width={bar.width}
+                    width={thickness}
                     height={height}
                     fill={bar.color}
                     opacity={barStyle.opacity}

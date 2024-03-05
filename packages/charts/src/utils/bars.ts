@@ -44,3 +44,15 @@ export const getBarSizeAndPosition = (bar: Bar, axis: CartesianAxis, isHorizonta
     height: isHorizontal ? size : undefined,
   };
 };
+
+export const getBarThickness = (
+  thickness: number,
+  maxSize: number,
+  fixedBarSize: boolean,
+) => {
+  if (fixedBarSize) {
+    return _.clamp(thickness, 2, maxSize);
+  }
+
+  return thickness;
+};

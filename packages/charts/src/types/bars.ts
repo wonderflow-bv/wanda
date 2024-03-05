@@ -15,6 +15,7 @@
  */
 
 export type BarsStyleConfig = {
+  maxSize: number;
   paddingOuter: number;
   paddingInner: number;
   paddingOuterGroup: number;

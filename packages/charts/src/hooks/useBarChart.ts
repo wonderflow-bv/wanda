@@ -54,6 +54,7 @@ export const useBarChart = ({
   showLabel = false,
   showBackground = false,
   hidePadding = false,
+  fixedBarSize = false,
 }: UseBarChartProps) => {
   const [brushFilteredData, setBrushFilteredData] = useState<Data>(data);
 
@@ -137,6 +138,7 @@ export const useBarChart = ({
     hidePadding,
     hasMirroredDomains,
     hasIndexReversed,
+    fixedBarSize,
   }), [
     isStacked,
     sortBy,
@@ -155,6 +157,7 @@ export const useBarChart = ({
     hidePadding,
     hasMirroredDomains,
     hasIndexReversed,
+    fixedBarSize,
   ]);
 
   return {

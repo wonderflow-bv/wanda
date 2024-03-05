@@ -19,7 +19,13 @@ export const useBars = () => {
   const { maxWidth, maxHeight } = dimension;
 
   const {
-    series, index, overlay, sortBy, showBackground: hasBackground, hasIndexReversed,
+    series,
+    index,
+    overlay,
+    sortBy,
+    showBackground: hasBackground,
+    hasIndexReversed,
+    fixedBarSize,
   } = metadata as BarChartMetadata;
 
   const reversedData = [...data].reverse();
@@ -39,6 +45,7 @@ export const useBars = () => {
     : top as CartesianAxis;
 
   const {
+    maxSize,
     paddingInner,
     paddingOuter,
     paddingInnerGroup,
@@ -85,9 +92,11 @@ export const useBars = () => {
     X0Y0,
     scaleXY0,
     scaleXY1,
+    fixedBarSize: Boolean(fixedBarSize),
     style: {
       bar,
       background,
+      maxSize,
     },
   };
 };
