@@ -18,8 +18,10 @@ export const useBars = () => {
   const { maxWidth, maxHeight } = dimension;
 
   const {
-    series, index, overlay, sortBy, showBackground: hasBackground,
+    series, index, overlay, sortBy, showBackground: hasBackground, hasIndexReversed,
   } = metadata as BarChartMetadata;
+
+  const directionalData = hasIndexReversed ? [...data.reverse()] : data;
 
   const { showBackground: hasBackgroundSeries } = series;
   const { showBackground: hasBackgroundOverlay } = overlay;
@@ -64,7 +66,7 @@ export const useBars = () => {
   scaleXY1.rangeRound([0, scaleXY0.bandwidth()]);
 
   return {
-    data,
+    data: directionalData,
     isHorizontal,
     series,
     overlay,

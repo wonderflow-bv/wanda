@@ -134,6 +134,8 @@ export const useBarChart = ({
     showLabel,
     showBackground,
     hidePadding,
+    hasMirroredDomains,
+    hasIndexReversed,
   }), [
     isStacked,
     sortBy,
@@ -149,7 +151,10 @@ export const useBarChart = ({
     preventTooltipDisplay,
     showLabel,
     showBackground,
-    hidePadding]);
+    hidePadding,
+    hasMirroredDomains,
+    hasIndexReversed,
+  ]);
 
   return {
     axis,
