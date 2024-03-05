@@ -157,7 +157,8 @@ T extends LineChartIndex
       }
     }
 
-    const reversed = isReversed ? [...ownDomain].reverse() : ownDomain;
+    const ownDomainReversed = [...ownDomain].reverse();
+    const reversed = isReversed ? ownDomainReversed : ownDomain;
     const mirrored = isMirrored ? mirrorDomain(reversed) : reversed;
 
     res = {

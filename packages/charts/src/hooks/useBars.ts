@@ -1,4 +1,5 @@
 import { scaleBand } from '@visx/scale';
+import { useMemo } from 'react';
 
 import {
   useCartesianContext, useDataContext, useLayoutContext, useStyleConfigContext,
@@ -21,7 +22,8 @@ export const useBars = () => {
     series, index, overlay, sortBy, showBackground: hasBackground, hasIndexReversed,
   } = metadata as BarChartMetadata;
 
-  const directionalData = hasIndexReversed ? [...data.reverse()] : data;
+  const reversedData = [...data].reverse();
+  const updatedData = hasIndexReversed ? reversedData : data;
 
   const { showBackground: hasBackgroundSeries } = series;
   const { showBackground: hasBackgroundOverlay } = overlay;
@@ -48,14 +50,16 @@ export const useBars = () => {
   const X0Y0 = (d: Record<string, any>) => d[index];
 
   const scaleXY0 = scaleBand<string>({
-    domain: data.map((d: any) => d[index]),
+    domain: updatedData.map((d: any) => d[index]),
     paddingOuter,
     paddingInner,
   });
 
   scaleXY0.rangeRound((isHorizontal ? [0, maxWidth] : [maxHeight, 0]));
 
-  const combinedDataKeys = hasOverlay ? [...series.dataKey, ...overlay.dataKey!] : series.dataKey;
+  const combinedDataKeys = useMemo(() => (hasOverlay
+    ? [...series.dataKey, ...overlay.dataKey!]
+    : series.dataKey), [hasOverlay, overlay.dataKey, series.dataKey]);
 
   const scaleXY1 = scaleBand<string>({
     domain: combinedDataKeys,
@@ -66,7 +70,7 @@ export const useBars = () => {
   scaleXY1.rangeRound([0, scaleXY0.bandwidth()]);
 
   return {
-    data: directionalData,
+    data: updatedData,
     isHorizontal,
     series,
     overlay,
