@@ -98,7 +98,8 @@ T extends LineChartIndex
       hasIndexReversed?: boolean;
       hasMirroredDomains?: boolean;
     }): Except<AxisProps, 'orientation'> => {
-  const hasData = !!data.length;
+  const hasData = Boolean(data.length);
+
   let res: Record<string, unknown> = {
     ...axis,
     hideTickLabel: true,
@@ -108,6 +109,8 @@ T extends LineChartIndex
 
   if (hasData) {
     const { scaleType, dataKey, domain } = axis;
+    const isReversed = config?.hasIndexReversed;
+    const isMirrored = config?.hasMirroredDomains;
 
     const keys = typeof dataKey === 'string' ? [dataKey] : dataKey;
     const primitivesFromArray = keys.map((k: string) => getPrimitivesFromObjectArrayByPath(data, k));
@@ -115,7 +118,8 @@ T extends LineChartIndex
 
     let ownDomain = removeNilsFromDomain(domainData);
     const st = inferScaleTypeFromDomain(domainData, scaleType);
-    const hasCustomDomain = !!domain?.length;
+
+    const hasCustomDomain = !!(domain?.length);
 
     if (hasCustomDomain) {
       if (st === 'time') {
@@ -153,8 +157,8 @@ T extends LineChartIndex
       }
     }
 
-    const reversed = config?.hasIndexReversed ? ownDomain.reverse() : ownDomain;
-    const mirrored = config?.hasMirroredDomains ? mirrorDomain(reversed) : reversed;
+    const reversed = isReversed ? [...ownDomain].reverse() : ownDomain;
+    const mirrored = isMirrored ? mirrorDomain(reversed) : reversed;
 
     res = {
       ...axis,
@@ -178,10 +182,13 @@ U extends LineChartSeries | BarChartSeries>(
       hasMirroredDomains?: boolean;
     },
   ) => {
-  const i = handleAxisDomainAndScaleType(data, index, { hasIndexReversed: config?.hasIndexReversed });
-  const s = handleAxisDomainAndScaleType(data, series, { hasMirroredDomains: config?.hasMirroredDomains });
+  const isReversed = config?.hasIndexReversed;
+  const isMirrored = config?.hasMirroredDomains;
+
+  const i = handleAxisDomainAndScaleType(data, index, { hasIndexReversed: isReversed });
+  const s = handleAxisDomainAndScaleType(data, series, { hasMirroredDomains: isMirrored });
   const o = overlay
-    ? handleAxisDomainAndScaleType(data, overlay, { hasMirroredDomains: config?.hasMirroredDomains })
+    ? handleAxisDomainAndScaleType(data, overlay, { hasMirroredDomains: isMirrored })
     : undefined;
 
   return {
