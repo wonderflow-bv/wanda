@@ -39,11 +39,14 @@ export const LinesSeries: React.FC = () => {
   const { isHorizontal } = useLayoutContext();
   const { axis, hoveredLegendItem: overLegend } = useCartesianContext();
 
-  const { left, bottom } = axis!;
+  const { left, bottom } = axis;
   const {
     index, renderAs, showMarker, showMarkerLabel,
-    series, hideMissingDataConnection,
+    series, hideMissingDataConnection, hasIndexReversed,
   } = metadata!;
+
+  const reversedData = [...data].reverse();
+  const updatedData = hasIndexReversed ? reversedData : data;
 
   const indexAxis = isHorizontal ? bottom : left;
   const seriesAxis = isHorizontal ? left : bottom;
@@ -71,7 +74,7 @@ export const LinesSeries: React.FC = () => {
     <>
       {series.dataKey.map((dataKey: string, di: number) => {
         const subPaths = createSubPaths(
-          data,
+          updatedData,
           d => _.isNil(getValueFromObjectByPath(d, dataKey)),
         );
 

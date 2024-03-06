@@ -67,8 +67,11 @@ export const LinesTooltip: React.FC = () => {
     top, right, bottom, left,
   } = axis;
   const {
-    index, tooltip, series, overlay, preventTooltipDisplay,
+    index, tooltip, series, overlay, preventTooltipDisplay, hasIndexReversed,
   } = metadata;
+
+  const reversedData = [...data].reverse();
+  const updatedData = hasIndexReversed ? reversedData : data;
 
   const indexAxis = isHorizontal ? bottom : left;
   const seriesAxis = isHorizontal ? left : bottom;
@@ -121,7 +124,7 @@ export const LinesTooltip: React.FC = () => {
     const tooltipLeft = ('clientX' in event ? event.clientX : 0) - lBound / 8;
     const tooltipTop = ('clientY' in event ? event.clientY : 0) - tBound / 8;
 
-    const datum = data[indexOfBisectValue];
+    const datum = updatedData[indexOfBisectValue];
     const hasSeriesData = series.dataKey.every(s => !_.isNil(getPrimitiveFromObjectByPath(datum, s)));
     const hasOverlayData = !_.isNil(getPrimitiveFromObjectByPath(datum, overlay.dataKey!));
 
@@ -137,7 +140,7 @@ export const LinesTooltip: React.FC = () => {
       tooltipTop,
       tooltipData,
     });
-  }, [indexAxis, containerBounds, isHorizontal, data, series.dataKey, overlay.dataKey, showTooltip]);
+  }, [indexAxis, containerBounds, isHorizontal, updatedData, series.dataKey, overlay.dataKey, showTooltip]);
 
   const hasTooltip = Boolean(tooltipData?.data && !preventTooltipOpening && !preventTooltipDisplay);
 

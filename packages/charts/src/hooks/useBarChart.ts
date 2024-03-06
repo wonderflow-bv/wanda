@@ -166,9 +166,9 @@ export const useBarChart = ({
   ]);
 
   const hasVerticalFixedBarSize = Boolean(fixedBarSize && !isHorizontal);
-  const fixedHeight = hasVerticalFixedBarSize
+  const fixedHeight = useMemo(() => (hasVerticalFixedBarSize
     ? getHeightForVerticalChartWithFixedBarSize(barsStyleConfig, data, metadata)
-    : undefined;
+    : undefined), [barsStyleConfig, data, hasVerticalFixedBarSize, metadata]);
 
   return {
     axis,

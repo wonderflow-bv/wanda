@@ -56,6 +56,8 @@ const story: ComponentMeta<typeof LineChart> = {
     layout: CartesianChartLayout.HORIZONTAL,
     renderAs: 'curves',
     theme: 'light',
+    mirrorDomains: false,
+    reverseIndex: false,
     data: feedbackCount,
     index: {
       dataKey: 'date',

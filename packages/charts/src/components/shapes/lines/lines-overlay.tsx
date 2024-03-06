@@ -41,10 +41,13 @@ export const LinesOverlay: React.FC = () => {
 
   const {
     index, renderAs, showMarker, showMarkerLabel, overlay,
-    hideMissingDataConnection,
+    hideMissingDataConnection, hasIndexReversed,
   } = metadata!;
 
-  const indexAxis = isHorizontal ? axis!.bottom! : axis!.left!;
+  const reversedData = [...data].reverse();
+  const updatedData = hasIndexReversed ? reversedData : data;
+
+  const indexAxis = isHorizontal ? axis.bottom! : axis.left!;
   const overlayAxis = isHorizontal ? axis?.right : axis?.top;
 
   const hasOverlay = Boolean(overlayAxis && overlay.dataKey && overlay.dataKey.length);
@@ -74,7 +77,7 @@ export const LinesOverlay: React.FC = () => {
     <>
       {overlay.dataKey!.map((dataKey: string, di: number) => {
         const subPaths = createSubPaths(
-          data,
+          updatedData,
           d => _.isNil(getValueFromObjectByPath(d, dataKey)),
         );
 

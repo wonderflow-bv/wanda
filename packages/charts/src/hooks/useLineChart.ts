@@ -39,6 +39,8 @@ export const useLineChart = ({
   theme = 'light',
   layout = CartesianChartLayout.HORIZONTAL,
   renderAs = 'curves',
+  reverseIndex,
+  mirrorDomains,
   data = [],
   index,
   series,
@@ -56,6 +58,11 @@ export const useLineChart = ({
 
   const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
 
+  const hasIndexReversed = !isHorizontal && reverseIndex;
+
+  const hasMirroredDomains = Boolean(mirrorDomains);
+  const config = useMemo(() => ({ hasIndexReversed, hasMirroredDomains }), [hasIndexReversed, hasMirroredDomains]);
+
   const zeroPadding: MarginProps | undefined = hidePadding
     ? {
       top: 0, right: 12, bottom: 0, left: 0,
@@ -63,13 +70,13 @@ export const useLineChart = ({
     : undefined;
 
   const { index: i, series: s, overlay: o } = useMemo(
-    () => handleChartDomainAndScaleType(data, index, series, overlay),
-    [data, index, overlay, series],
+    () => handleChartDomainAndScaleType(data, index, series, overlay, config),
+    [data, index, overlay, series, config],
   );
 
   const { index: iFiltered, series: sFiltered, overlay: oFiltered } = useMemo(
-    () => handleChartDomainAndScaleType(brushFilteredData, index, series, overlay),
-    [brushFilteredData, index, overlay, series],
+    () => handleChartDomainAndScaleType(brushFilteredData, index, series, overlay, config),
+    [brushFilteredData, index, overlay, series, config],
   );
 
   const axis = useMemo(() => handleChartAxisLayout(i, s, o), [i, s, o]);
@@ -108,6 +115,8 @@ export const useLineChart = ({
     showMarker,
     showMarkerLabel,
     hidePadding,
+    hasIndexReversed,
+    hasMirroredDomains,
   }), [
     data,
     hideMissingDataConnection,
@@ -124,6 +133,8 @@ export const useLineChart = ({
     showMarkerLabel,
     tooltip,
     preventTooltipDisplay,
+    hasIndexReversed,
+    hasMirroredDomains,
   ]);
 
   return {
