@@ -18,6 +18,7 @@ import { useMemo, useState } from 'react';
 import { Except } from 'type-fest';
 
 import { BarChartProps } from '../components';
+import { useStyleConfigContext } from '../providers/style-config';
 import { colorPaletteDefault } from '../style-config';
 import {
   BarChartIndex,
@@ -28,6 +29,7 @@ import {
 import {
   computeAverage,
   computeTrendline,
+  getHeightForVerticalChartWithFixedBarSize,
   handleBarChartSeriesColors,
   handleChartAxisLayout,
   handleChartDomainAndScaleType,
@@ -39,6 +41,7 @@ export type UseBarChartProps = Except<BarChartProps, 'otherProps'>
 export const useBarChart = ({
   theme = 'light',
   layout = CartesianChartLayout.HORIZONTAL,
+  height,
   isStacked = false,
   sortBy = 'as-is',
   data = [],
@@ -56,6 +59,7 @@ export const useBarChart = ({
   hidePadding = false,
   fixedBarSize = false,
 }: UseBarChartProps) => {
+  const { bars: barsStyleConfig } = useStyleConfigContext();
   const [brushFilteredData, setBrushFilteredData] = useState<Data>(data);
 
   const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
@@ -69,6 +73,7 @@ export const useBarChart = ({
   }), [index]);
 
   const hasIndexReversed = !isHorizontal && reverseIndex;
+
   const hasMirroredDomains = Boolean(mirrorDomains);
   const config = useMemo(() => ({ hasIndexReversed, hasMirroredDomains }), [hasIndexReversed, hasMirroredDomains]);
 
@@ -160,9 +165,15 @@ export const useBarChart = ({
     fixedBarSize,
   ]);
 
+  const hasVerticalFixedBarSize = Boolean(fixedBarSize && !isHorizontal);
+  const fixedHeight = hasVerticalFixedBarSize
+    ? getHeightForVerticalChartWithFixedBarSize(barsStyleConfig, data, metadata)
+    : undefined;
+
   return {
     axis,
     axisFiltered,
+    fixedHeight: height ?? fixedHeight,
     isHorizontal,
     metadata,
     zeroPadding,

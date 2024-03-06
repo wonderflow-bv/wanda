@@ -42,6 +42,7 @@ export type UseCartesianProps = {
   isLoading?: boolean;
   margin?: MarginProps;
   preventResponsive?: boolean;
+  overrideInnerHeight?: number;
   showBrush?: boolean;
   styleConfig?: DeepPartial<CartesianStyleConfig>;
   title?: string;
@@ -64,6 +65,7 @@ export const useCartesian = ({
     left: 24,
   },
   preventResponsive = false,
+  overrideInnerHeight,
   showBrush = false,
   styleConfig,
   title,
@@ -115,7 +117,7 @@ export const useCartesian = ({
   const headingsHeight = hasHeadings ? hStyle.height : 0;
 
   const w = size ? size.width : width;
-  const h = size ? size.height : height;
+  const h = size ? (overrideInnerHeight ?? size.height) : height;
 
   const dynamicWidth = preventResponsive ? width : w;
   const dynamicHeight = preventResponsive ? height : h;

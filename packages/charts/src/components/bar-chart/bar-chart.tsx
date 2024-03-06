@@ -123,6 +123,7 @@ export type BarChartProps = {
 export const BarChart: React.FC<BarChartProps> = ({
   theme = 'light',
   layout = CartesianChartLayout.HORIZONTAL,
+  height,
   isStacked = false,
   sortBy = 'as-is',
   data = [],
@@ -144,6 +145,7 @@ export const BarChart: React.FC<BarChartProps> = ({
   const {
     axis,
     axisFiltered,
+    fixedHeight,
     isHorizontal,
     metadata,
     zeroPadding,
@@ -152,6 +154,7 @@ export const BarChart: React.FC<BarChartProps> = ({
   } = useBarChart({
     theme,
     layout,
+    height,
     isStacked,
     sortBy,
     data,
@@ -184,6 +187,7 @@ export const BarChart: React.FC<BarChartProps> = ({
             }}
             margin={zeroPadding}
             onBrushChange={setBrushFilteredData}
+            overrideInnerHeight={fixedHeight}
           />
         </DataProvider>
       </LayoutProvider>

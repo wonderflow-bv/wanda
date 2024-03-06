@@ -1,7 +1,9 @@
 import _ from 'lodash';
 
 import { CartesianAxis } from '../types/axis';
-import { Bar } from '../types/bars';
+import { BarChartMetadata } from '../types/bar-chart';
+import { Bar, BarsStyleConfig } from '../types/bars';
+import { Data } from '../types/main';
 
 export const getBarSize = (bar: Bar, axis: CartesianAxis, isHorizontal: boolean) => {
   const min = _.min(axis.domain);
@@ -55,4 +57,29 @@ export const getBarThickness = (
   }
 
   return thickness;
+};
+
+export const getHeightForVerticalChartWithFixedBarSize = (
+  config: BarsStyleConfig,
+  data: Data,
+  metadata: BarChartMetadata,
+) => {
+  const { series, overlay } = metadata;
+
+  const indexLen = data.length;
+
+  const seriesBarsNum = series.dataKey.length;
+  const overlayBarsNum = overlay.dataKey?.length ?? 0;
+  const totalBarsNum = seriesBarsNum + overlayBarsNum;
+
+  const {
+    maxSize, paddingInnerGroup, paddingOuterGroup, paddingInner, paddingOuter,
+  } = config;
+
+  const barGroup = totalBarsNum * maxSize * (1 + paddingInnerGroup) * (1 + paddingOuterGroup);
+  const allGroups = (indexLen + 2) * barGroup * (1 + paddingInner) + barGroup * (2 + paddingOuter);
+
+  const h = _.round(allGroups);
+
+  return h;
 };

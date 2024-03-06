@@ -170,3 +170,15 @@ PositiveAndNegative.args = {
   },
   mirrorDomains: true,
 };
+
+export const withVerticalFixedBars = Template.bind({});
+withVerticalFixedBars.args = {
+  subtitle: 'A bar chart with vertical fixed thickness bars',
+  overlay: {
+    dataKey: ['overlay'],
+    label: 'Overlay',
+    domain: [0, 1],
+  },
+  fixedBarSize: true,
+  layout: CartesianChartLayout.VERTICAL,
+};

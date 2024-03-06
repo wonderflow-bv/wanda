@@ -119,6 +119,12 @@ export type CartesianBaseProps = {
    */
   customLegend?: React.ReactNode;
   /**
+   * This value is used to override the dynamic height of the chart.
+   * It is intended as axis or grid dimension and it is different from the height property
+   * which computes all the subcomponent size.
+   */
+  overrideInnerHeight?: number;
+  /**
    * Set custom styling properties.
    */
   styleConfig?: DeepPartial<CartesianStyleConfig>;
@@ -167,6 +173,7 @@ export const CartesianBase = forwardRef<HTMLElement, CartesianBaseProps>(({
   emptyState,
   emptyStateMessage,
   customLegend,
+  overrideInnerHeight,
   styleConfig,
   className,
   style,
@@ -211,6 +218,7 @@ forwardedRef) => {
     isLoading,
     margin,
     preventResponsive,
+    overrideInnerHeight,
     showBrush,
     styleConfig,
     title,
