@@ -17,16 +17,18 @@
 import { Group } from '@visx/group';
 import { LinePath } from '@visx/shape';
 import _ from 'lodash';
-import { LineChartMetadata } from 'packages/charts/src/types';
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 import { v4 as uuid } from 'uuid';
 
+import { useLines } from '@/hooks';
+
 import {
-  useCartesianContext, useDataContext, useLayoutContext, useStyleConfigContext, useThemeContext,
+  useCartesianContext,
+  useStyleConfigContext, useThemeContext,
 } from '../../../providers';
 import {
   createSubPaths,
-  getCoordinates, getLinesRenderer, getValueFromObjectByPath,
+  getValueFromObjectByPath,
 } from '../../../utils';
 import {
   LinesItem, LinesItemBlurred,
@@ -35,36 +37,17 @@ import {
 export const LinesSeries: React.FC = () => {
   const theme = useThemeContext();
   const { lines: defaultStyle, themes } = useStyleConfigContext();
-  const { data, metadata } = useDataContext<LineChartMetadata>();
-  const { isHorizontal } = useLayoutContext();
-  const { axis, hoveredLegendItem: overLegend } = useCartesianContext();
-
-  const { left, bottom } = axis;
+  const { hoveredLegendItem: overLegend } = useCartesianContext();
   const {
-    index, renderAs, showMarker, showMarkerLabel,
-    series, hideMissingDataConnection, hasIndexReversed,
-  } = metadata!;
-
-  const reversedData = [...data].reverse();
-  const updatedData = hasIndexReversed ? reversedData : data;
-
-  const indexAxis = isHorizontal ? bottom : left;
-  const seriesAxis = isHorizontal ? left : bottom;
-
-  const renderer = useMemo(() => getLinesRenderer(renderAs, isHorizontal), [isHorizontal, renderAs]);
-
-  const getSeriesCoordinates = useMemo(() => (
-    datum: Record<string, unknown>,
-    dataKey: string,
-    isHorizontal: boolean,
-  ) => getCoordinates({
-    datum,
-    indexAxis: indexAxis!,
-    indexDataKey: index,
-    otherAxis: seriesAxis!,
-    otherDataKey: dataKey,
+    hideMissingDataConnection,
     isHorizontal,
-  }), [index, indexAxis, seriesAxis]);
+    getSeriesCoordinates,
+    updatedData,
+    renderer,
+    series,
+    showMarker,
+    showMarkerLabel,
+  } = useLines();
 
   const dynamicClassName = useCallback((overLegend: string, dataKey: string) => ((overLegend === dataKey || overLegend === '')
     ? LinesItem

@@ -17,16 +17,18 @@
 import { Group } from '@visx/group';
 import { LinePath } from '@visx/shape';
 import _ from 'lodash';
-import { LineChartMetadata } from 'packages/charts/src/types';
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 import { v4 as uuid } from 'uuid';
 
+import { useLines } from '@/hooks';
+
 import {
-  useCartesianContext, useDataContext, useLayoutContext, useStyleConfigContext, useThemeContext,
+  useCartesianContext,
+  useStyleConfigContext, useThemeContext,
 } from '../../../providers';
 import {
   createSubPaths,
-  getCoordinates, getLinesRenderer, getValueFromObjectByPath,
+  getValueFromObjectByPath,
 } from '../../../utils';
 import {
   LinesItem, LinesItemBlurred,
@@ -35,37 +37,19 @@ import {
 export const LinesOverlay: React.FC = () => {
   const theme = useThemeContext();
   const { lines: defaultStyle, themes } = useStyleConfigContext();
-  const { data, metadata } = useDataContext<LineChartMetadata>();
-  const { isHorizontal } = useLayoutContext();
-  const { axis, hoveredLegendItem: overLegend } = useCartesianContext();
+  const { hoveredLegendItem: overLegend } = useCartesianContext();
 
   const {
-    index, renderAs, showMarker, showMarkerLabel, overlay,
-    hideMissingDataConnection, hasIndexReversed,
-  } = metadata!;
-
-  const reversedData = [...data].reverse();
-  const updatedData = hasIndexReversed ? reversedData : data;
-
-  const indexAxis = isHorizontal ? axis.bottom! : axis.left!;
-  const overlayAxis = isHorizontal ? axis?.right : axis?.top;
-
-  const hasOverlay = Boolean(overlayAxis && overlay.dataKey && overlay.dataKey.length);
-
-  const renderer = useMemo(() => getLinesRenderer(renderAs, isHorizontal), [isHorizontal, renderAs]);
-
-  const getOverlayCoordinates = useMemo(() => (
-    datum: Record<string, unknown>,
-    dataKey: string,
-    isHorizontal: boolean,
-  ) => getCoordinates({
-    datum,
-    indexAxis,
-    indexDataKey: index,
-    otherAxis: overlayAxis!,
-    otherDataKey: dataKey,
+    getOverlayCoordinates,
+    hasOverlay,
+    hideMissingDataConnection,
     isHorizontal,
-  }), [index, indexAxis, overlayAxis]);
+    overlay,
+    renderer,
+    showMarker,
+    showMarkerLabel,
+    updatedData,
+  } = useLines();
 
   const dynamicClassName = useCallback((overLegend: string, dataKey: string) => ((overLegend === dataKey || overLegend === '')
     ? LinesItem

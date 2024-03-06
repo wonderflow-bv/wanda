@@ -26,10 +26,11 @@ import _ from 'lodash';
 import { useCallback } from 'react';
 import { v4 as uuid } from 'uuid';
 
-import { LineChartMetadata } from '@/types';
+import { useLines } from '@/hooks';
+import { CartesianAxis } from '@/types';
 
 import {
-  useCartesianContext, useDataContext, useLayoutContext, useStyleConfigContext, useThemeContext,
+  useStyleConfigContext, useThemeContext,
 } from '../../../providers';
 import { tooltipTheme } from '../../../style-config/tooltip';
 import {
@@ -58,26 +59,23 @@ type TooltipData = {
 export const LinesTooltip: React.FC = () => {
   const theme = useThemeContext();
   const { lines: defaultStyle } = useStyleConfigContext();
-  const { data, metadata } = useDataContext<LineChartMetadata>();
-  const { isHorizontal } = useLayoutContext();
-  const { axis, dimension, preventTooltipOpening } = useCartesianContext();
-  const { maxHeight: yMax, maxWidth: xMax } = dimension;
 
   const {
-    top, right, bottom, left,
-  } = axis;
-  const {
-    index, tooltip, series, overlay, preventTooltipDisplay, hasIndexReversed,
-  } = metadata;
-
-  const reversedData = [...data].reverse();
-  const updatedData = hasIndexReversed ? reversedData : data;
-
-  const indexAxis = isHorizontal ? bottom : left;
-  const seriesAxis = isHorizontal ? left : bottom;
-  const overlayAxis = isHorizontal ? right : top;
-
-  const hasOverlay = Boolean(overlayAxis && overlay.dataKey && overlay.dataKey.length);
+    index,
+    tooltip,
+    series,
+    overlay,
+    preventTooltipDisplay,
+    isHorizontal,
+    maxHeight: yMax,
+    maxWidth: xMax,
+    preventTooltipOpening,
+    updatedData,
+    hasOverlay,
+    indexAxis,
+    seriesAxis,
+    overlayAxis,
+  } = useLines();
 
   const {
     tooltipLeft,
@@ -98,7 +96,7 @@ export const LinesTooltip: React.FC = () => {
   const handleTooltip = useCallback((event: React.MouseEvent<ownerSVGElement>) => {
     const {
       scaleType, domain, scale,
-    } = indexAxis;
+    } = indexAxis as CartesianAxis;
     const { top: tBound, left: lBound } = containerBounds;
 
     const hiddenPos = { x: -999, y: -999 };
@@ -111,7 +109,7 @@ export const LinesTooltip: React.FC = () => {
 
     const indexOfBisectValue = scaleType === 'label'
       ? domain.indexOf(accessorInvertValue as string)
-      : bisectIndex(domain, accessorInvertValue, 0) - 1;
+      : bisectIndex(domain, accessorInvertValue as any, 0) - 1;
 
     const domainIndexValue = domain[indexOfBisectValue];
 
@@ -125,8 +123,9 @@ export const LinesTooltip: React.FC = () => {
     const tooltipTop = ('clientY' in event ? event.clientY : 0) - tBound / 8;
 
     const datum = updatedData[indexOfBisectValue];
+
     const hasSeriesData = series.dataKey.every(s => !_.isNil(getPrimitiveFromObjectByPath(datum, s)));
-    const hasOverlayData = !_.isNil(getPrimitiveFromObjectByPath(datum, overlay.dataKey!));
+    const hasOverlayData = overlay.dataKey?.every(s => !_.isNil(getPrimitiveFromObjectByPath(datum, s)));
 
     const tooltipData: TooltipData = {
       coords,
@@ -151,13 +150,13 @@ export const LinesTooltip: React.FC = () => {
         data-testid="transparent-overlay-layer"
         x={-5}
         y={-5}
-        width={xMax + 10}
-        height={yMax + 10}
+        width={Number(xMax) + 10}
+        height={Number(yMax) + 10}
         fill="transparent"
         ref={containerRef}
         onMouseMove={e => handleTooltip(e)}
-        onTouchMove={e => handleTooltip(e)}
-        onTouchStart={e => handleTooltip(e)}
+        onTouchMove={e => handleTooltip(e as any)}
+        onTouchStart={e => handleTooltip(e as any)}
         onMouseOut={hideTooltip}
         onMouseLeave={hideTooltip}
       />
@@ -167,12 +166,12 @@ export const LinesTooltip: React.FC = () => {
           <Group>
             <Line
               from={{
-                x: isHorizontal ? tooltipData.lineIndicatorPos : 0,
-                y: isHorizontal ? 0 : tooltipData.lineIndicatorPos,
+                x: isHorizontal ? tooltipData?.lineIndicatorPos : 0,
+                y: isHorizontal ? 0 : tooltipData?.lineIndicatorPos,
               }}
               to={{
-                x: isHorizontal ? tooltipData.lineIndicatorPos : xMax,
-                y: isHorizontal ? yMax : tooltipData.lineIndicatorPos,
+                x: isHorizontal ? tooltipData?.lineIndicatorPos : xMax,
+                y: isHorizontal ? yMax : tooltipData?.lineIndicatorPos,
               }}
               stroke={tooltipTheme[theme].lineIndicatorStroke}
               strokeWidth={defaultStyle.lineIndicator.strokeWidth}
@@ -182,15 +181,15 @@ export const LinesTooltip: React.FC = () => {
             />
 
             {series.dataKey.map((dataKey: string, di: number) => (
-              tooltipData.data[dataKey] && (
+              tooltipData?.data[dataKey] && (
                 <circle
                   key={uuid()}
                   r={defaultStyle.dataPoint.radius}
                   cx={isHorizontal
                     ? tooltipData.lineIndicatorPos
-                    : seriesAxis.scale(getPrimitiveFromObjectByPath(tooltipData.data, dataKey))}
+                    : seriesAxis?.scale(getPrimitiveFromObjectByPath(tooltipData.data, dataKey) as any)}
                   cy={isHorizontal
-                    ? seriesAxis.scale(getPrimitiveFromObjectByPath(tooltipData.data, dataKey))
+                    ? seriesAxis?.scale(getPrimitiveFromObjectByPath(tooltipData.data, dataKey) as any)
                     : tooltipData.lineIndicatorPos}
                   stroke={series.colors[di]}
                   fill={series.colors[di]}
@@ -199,19 +198,19 @@ export const LinesTooltip: React.FC = () => {
               )
             ))}
 
-            {hasOverlay && overlay.dataKey.map((dataKey: string, di: number) => (
-              tooltipData.data[dataKey] && (
+            {hasOverlay && overlay.dataKey?.map((dataKey: string, di: number) => (
+              tooltipData?.data[dataKey] && (
                 <circle
                   key={uuid()}
                   r={defaultStyle.dataPoint.radius}
                   cx={isHorizontal
                     ? tooltipData.lineIndicatorPos
-                    : overlayAxis.scale(getPrimitiveFromObjectByPath(tooltipData.data, dataKey))}
+                    : overlayAxis?.scale(getPrimitiveFromObjectByPath(tooltipData.data, dataKey) as any)}
                   cy={isHorizontal
-                    ? overlayAxis.scale(getPrimitiveFromObjectByPath(tooltipData.data, dataKey))
+                    ? overlayAxis?.scale(getPrimitiveFromObjectByPath(tooltipData.data, dataKey) as any)
                     : tooltipData.lineIndicatorPos}
-                  stroke={overlay.colors[di]}
-                  fill={overlay.colors[di]}
+                  stroke={overlay.colors?.[di]}
+                  fill={overlay.colors?.[di]}
                   strokeWidth={defaultStyle.dataPoint.strokeWidth}
                 />
               )
@@ -227,9 +226,9 @@ export const LinesTooltip: React.FC = () => {
             <div className={LinesTooltipContent} data-testid="tooltip">
               <p>
                 <b>
-                  { indexAxis.tickFormat
-                    ? indexAxis.tickFormat(getPrimitiveFromObjectByPath(tooltipData.data, index) ?? '')
-                    : getPrimitiveFromObjectByPath(tooltipData.data, index) ?? ''
+                  { indexAxis?.tickFormat
+                    ? indexAxis.tickFormat(getPrimitiveFromObjectByPath(tooltipData?.data, index) ?? '')
+                    : getPrimitiveFromObjectByPath(tooltipData?.data as any, index) ?? ''
                 }
                 </b>
               </p>
@@ -247,7 +246,7 @@ export const LinesTooltip: React.FC = () => {
                     <div>
                       {tooltip?.extraSeriesData && (
                         <p>
-                          {tooltip.extraSeriesData(_.at(tooltipData.data, getLabelFromPath(dataKey))[0])}
+                          {tooltip.extraSeriesData(_.at(tooltipData?.data, getLabelFromPath(dataKey))[0])}
                         </p>
                       )}
                     </div>
@@ -255,26 +254,26 @@ export const LinesTooltip: React.FC = () => {
                     <div>
                       <p>
                         <b>
-                          {`${getPrimitiveFromObjectByPath(tooltipData.data, dataKey) ?? 'n/a'}`}
+                          {`${getPrimitiveFromObjectByPath(tooltipData?.data as any, dataKey) ?? 'n/a'}`}
                         </b>
                       </p>
                     </div>
                   </li>
                 ))}
 
-                {hasOverlay && overlay.dataKey.map((dataKey: string, di: number) => (
+                {hasOverlay && overlay.dataKey?.map((dataKey: string, di: number) => (
                   <li key={uuid()}>
                     <div className={LinesTooltipItem}>
-                      <Placeholder color={overlay.colors[di]} />
+                      <Placeholder color={overlay.colors?.[di]} />
                       <span>
-                        {overlay.names[di]}
+                        {overlay.names?.[di]}
                       </span>
                     </div>
 
                     <div>
                       {tooltip?.extraSeriesData && (
                         <p>
-                          {tooltip.extraSeriesData(_.at(tooltipData.data, getLabelFromPath(dataKey))[0])}
+                          {tooltip.extraSeriesData(_.at(tooltipData?.data, getLabelFromPath(dataKey))[0])}
                         </p>
                       )}
                     </div>
@@ -282,7 +281,7 @@ export const LinesTooltip: React.FC = () => {
                     <div>
                       <p>
                         <b>
-                          {`${getPrimitiveFromObjectByPath(tooltipData.data, dataKey) ?? 'n/a'}`}
+                          {`${getPrimitiveFromObjectByPath(tooltipData?.data as any, dataKey) ?? 'n/a'}`}
                         </b>
                       </p>
                     </div>
@@ -291,14 +290,14 @@ export const LinesTooltip: React.FC = () => {
               </ul>
             </div>
 
-            { (tooltip?.extraContent || !tooltipData.hasData) && (
+            { (tooltip?.extraContent || !tooltipData?.hasData) && (
               <div
                 className={ExtraContent}
                 style={{ borderColor: tooltipTheme[theme].separatorStroke }}
               >
                 {tooltip?.extraContent && tooltip.extraContent}
 
-                {!tooltipData.hasData && <p className={NoData}>No data available</p>}
+                {!tooltipData?.hasData && <p className={NoData}>No data available</p>}
               </div>
             )}
           </Tooltip>

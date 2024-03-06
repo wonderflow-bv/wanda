@@ -22,5 +22,6 @@ export type { UseCartesianProps } from './useCartesian';
 export { useCartesian } from './useCartesian';
 export type { UseLineChartProps } from './useLineChart';
 export { useLineChart } from './useLineChart';
+export { useLines } from './useLines';
 export { useSSR } from './useSSR';
 export { useTrendline } from './useTrendline';
