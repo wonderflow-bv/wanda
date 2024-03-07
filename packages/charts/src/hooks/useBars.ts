@@ -20,7 +20,7 @@ import { useMemo } from 'react';
 import {
   useCartesianContext, useDataContext, useLayoutContext, useStyleConfigContext,
 } from '@/providers';
-import { BarChartMetadata, CartesianAxis } from '@/types';
+import { Bar, BarChartMetadata, CartesianAxis } from '@/types';
 
 export const useBars = () => {
   const { data, metadata } = useDataContext<BarChartMetadata>();
@@ -92,12 +92,24 @@ export const useBars = () => {
 
   scaleXY1.rangeRound([0, scaleXY0.bandwidth()]);
 
+  const handleEvents = (event: React.SyntheticEvent, bar: Bar) => {
+    const { key, value } = bar;
+    if (event.type === 'mouseover') {
+      console.log('hover', key, value);
+    }
+
+    if (event.type === 'click') {
+      console.log('click', key, value);
+    }
+  };
+
   return {
     data: updatedData,
     isHorizontal,
     series,
     overlay,
     sortBy,
+    handleEvents,
     hasBackgroundSeries: (hasBackgroundSeries || hasBackground),
     hasBackgroundOverlay: (hasBackgroundOverlay || hasBackground),
     seriesAxis,

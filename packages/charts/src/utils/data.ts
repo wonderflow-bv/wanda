@@ -151,6 +151,7 @@ T extends LineChartIndex
       }
     } else if (st === 'linear') {
       const minMaxNum = getMinMaxNumber(ownDomain as number[]);
+
       if (minMaxNum) {
         const [min, max] = minMaxNum;
         ownDomain = [min, _.ceil(max * 1.05)];
