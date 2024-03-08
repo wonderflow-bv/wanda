@@ -39,7 +39,6 @@ export const BarsOverlay = () => {
     overlay,
     sortBy,
     hasBackgroundOverlay,
-    handleEvents,
     overlayAxis,
     hasOverlay,
     maxWidth,
@@ -105,8 +104,7 @@ export const BarsOverlay = () => {
                       fill={bar.color}
                       rx={barStyle.rx}
                       opacity={barStyle.opacity}
-                      onClick={e => handleEvents(e, bar)}
-                      onMouseOver={e => handleEvents(e, bar)}
+                      onClick={() => ({})}
                     />
                   </Group>
                 );
@@ -163,8 +161,7 @@ export const BarsOverlay = () => {
                     fill={bar.color}
                     opacity={barStyle.opacity}
                     rx={barStyle.rx}
-                    onClick={e => handleEvents(e, bar)}
-                    onMouseOver={e => handleEvents(e, bar)}
+                    onClick={() => ({})}
                   />
                 </Group>
               );

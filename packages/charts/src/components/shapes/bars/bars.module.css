@@ -5,3 +5,51 @@
 .BarsItemBlurred {
   filter: opacity(0.2) blur(2px);
 }
+
+.BarsTooltipContent {
+  display: block;
+  padding: 0 1rem 0.5rem;
+
+  & p {
+    font-size: 12px;
+  }
+
+  & ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+  }
+
+  & li {
+    display: grid;
+    grid-template-columns: 1fr auto 0.5fr;
+    grid-template-rows: 1fr;
+    grid-gap: 8px 4px;
+
+    & div:nth-child(n + 2) {
+      text-align: right;
+    }
+  }
+}
+
+.BarsTooltipItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4px;
+  font-size: 12px;
+}
+
+.ExtraContent {
+  padding: 0.25rem 1rem;
+  border-width: 1px;
+  border-style: solid;
+  border-right: none;
+  border-bottom: none;
+  border-left: none;
+}
+
+.NoData {
+  font-size: 12px;
+}

@@ -35,7 +35,6 @@ export const BarsSeries = () => {
     series,
     sortBy,
     hasBackgroundSeries,
-    handleEvents,
     seriesAxis,
     maxWidth,
     maxHeight,
@@ -98,8 +97,7 @@ export const BarsSeries = () => {
                       fill={bar.color}
                       rx={barStyle.rx}
                       opacity={barStyle.opacity}
-                      onClick={e => handleEvents(e, bar)}
-                      onMouseOver={e => handleEvents(e, bar)}
+                      onClick={() => ({})}
                     />
                   </Group>
                 );
@@ -157,8 +155,7 @@ export const BarsSeries = () => {
                     fill={bar.color}
                     opacity={barStyle.opacity}
                     rx={barStyle.rx}
-                    onClick={e => handleEvents(e, bar)}
-                    onMouseOver={e => handleEvents(e, bar)}
+                    onClick={() => ({})}
                   />
                 </Group>
               );
