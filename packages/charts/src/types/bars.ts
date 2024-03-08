@@ -28,6 +28,9 @@ export type BarsStyleConfig = {
     rx: number;
     opacity: number;
   };
+  overlay: {
+    opacity: number;
+  };
 }
 
 export type Bar = { color: string;

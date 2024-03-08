@@ -26,6 +26,7 @@ import { v4 as uuid } from 'uuid';
 
 import { useBars } from '@/hooks';
 import {
+  useStyleConfigContext,
   useThemeContext,
 } from '@/providers';
 import { CartesianAxis } from '@/types';
@@ -51,11 +52,13 @@ type TooltipData = {
   };
   data: Record<string, unknown>;
   hasData: any;
-  lineIndicatorPos: any;
+  barIndicatorPos: number;
+  barIndicatorSize: number;
 }
 
 export const BarsTooltip: React.FC = () => {
   const theme = useThemeContext();
+  const { bars, themes } = useStyleConfigContext();
 
   const {
     data: updatedData,
@@ -71,6 +74,7 @@ export const BarsTooltip: React.FC = () => {
     preventTooltipDisplay,
     preventTooltipOpening,
     tooltip,
+    scaleXY0,
   } = useBars();
 
   const {
@@ -91,7 +95,7 @@ export const BarsTooltip: React.FC = () => {
 
   const handleTooltip = useCallback((event: React.MouseEvent<ownerSVGElement>) => {
     const {
-      scaleType, domain, scale,
+      scaleType, domain,
     } = indexAxis as CartesianAxis;
     const { top: tBound, left: lBound } = containerBounds;
 
@@ -113,7 +117,8 @@ export const BarsTooltip: React.FC = () => {
       ? accessorInvertValue
       : new Date(domainIndexValue);
 
-    const lineIndicatorPos = scale(indexScaleValue as any);
+    const barIndicatorPos = scaleXY0(indexScaleValue as any) ?? -999;
+    const barIndicatorSize = scaleXY0.bandwidth();
 
     const tooltipLeft = ('clientX' in event ? event.clientX : 0) - lBound / 8;
     const tooltipTop = ('clientY' in event ? event.clientY : 0) - tBound / 8;
@@ -127,7 +132,8 @@ export const BarsTooltip: React.FC = () => {
       coords,
       data: datum,
       hasData: hasSeriesData || hasOverlayData,
-      lineIndicatorPos,
+      barIndicatorPos,
+      barIndicatorSize,
     };
 
     showTooltip({
@@ -135,12 +141,25 @@ export const BarsTooltip: React.FC = () => {
       tooltipTop,
       tooltipData,
     });
-  }, [indexAxis, containerBounds, isHorizontal, updatedData, series.dataKey, overlay.dataKey, showTooltip]);
+  }, [indexAxis, containerBounds, isHorizontal, scaleXY0, updatedData, series.dataKey, overlay.dataKey, showTooltip]);
 
   const hasTooltip = Boolean(tooltipData?.data && !preventTooltipOpening && !preventTooltipDisplay);
 
   return (
     <>
+      {hasTooltip && (
+        <rect
+          data-testid="overlay-rect"
+          x={isHorizontal ? tooltipData?.barIndicatorPos : 0}
+          y={isHorizontal ? 0 : tooltipData?.barIndicatorPos}
+          width={isHorizontal ? tooltipData?.barIndicatorSize : xMax}
+          height={isHorizontal ? yMax : tooltipData?.barIndicatorSize}
+          fill={themes[theme].bars.overlayColor}
+          fillOpacity={bars.overlay.opacity}
+          filter="url(#filter_multiply)"
+        />
+      )}
+
       <rect
         id="transparent-overlay-layer"
         data-testid="transparent-overlay-layer"

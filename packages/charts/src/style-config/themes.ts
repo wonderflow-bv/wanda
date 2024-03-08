@@ -58,6 +58,7 @@ export const themeLight: Theme = {
   },
   bars: {
     backgroundColor: colorPaletteNeutrals.dimmed1,
+    overlayColor: colorPaletteNeutrals.dimmed1,
   },
   brush: {
     handle: {
@@ -116,6 +117,7 @@ export const themeDark: Theme = {
   },
   bars: {
     backgroundColor: colorPaletteNeutrals.dimmed6,
+    overlayColor: colorPaletteNeutrals.dimmed6,
   },
   brush: {
     handle: {

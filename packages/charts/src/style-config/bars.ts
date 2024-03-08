@@ -30,4 +30,7 @@ export const barsStyleConfig: BarsStyleConfig = {
     rx: 0,
     opacity: 0.7,
   },
+  overlay: {
+    opacity: 0.3,
+  },
 };

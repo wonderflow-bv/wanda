@@ -267,6 +267,12 @@ forwardedRef) => {
 
           <LinearGradient id="cartesian-container" from={bgFrom} to={bgTo} />
 
+          <defs>
+            <filter id="filter_multiply" filterUnits="objectBoundingBox" x="0%" y="0%" width="100%" height="100%">
+              <feBlend in="SourceGraphic" mode="multiply" />
+            </filter>
+          </defs>
+
           <rect
             x={0}
             y={0}

@@ -51,6 +51,7 @@ export type Theme = {
   };
   bars: {
     backgroundColor: string;
+    overlayColor: string;
   };
   brush: {
     handle: {
