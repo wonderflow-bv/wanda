@@ -200,6 +200,36 @@ U extends LineChartSeries | BarChartSeries>(
   };
 };
 
+export const extractBarValueFromNestedKey = (
+  barGroup: any,
+  index: number,
+  data: Data,
+  scale: (value: any) => number | undefined,
+  maxSize: number,
+  isHorizontal: boolean,
+) => barGroup.bars.map((bar: Bar) => {
+  if (!bar.value) {
+    const newValue = getPrimitiveFromObjectByPath(data[index], bar.key);
+    const scaled = scale(newValue) ?? 0;
+    if (isHorizontal) {
+      return {
+        ...bar,
+        value: newValue,
+        height: maxSize - scaled,
+        y: scaled,
+      };
+    }
+
+    return {
+      ...bar,
+      value: newValue,
+      width: scaled,
+    };
+  }
+
+  return bar;
+});
+
 export const sortBarsBy = (
   bars: Bar[],
   sorting: SortingType,
@@ -211,6 +241,7 @@ export const sortBarsBy = (
   let isReverse = false;
 
   if (sorting === 'as-is') res = bars;
+
   if (sorting === 'ascending-key' || sorting === 'ascending-value') isReverse = true;
 
   if (sorting.includes('key')) {

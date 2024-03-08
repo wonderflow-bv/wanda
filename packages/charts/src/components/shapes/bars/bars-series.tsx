@@ -20,7 +20,11 @@ import _ from 'lodash';
 import { useCallback } from 'react';
 
 import { useBars } from '@/hooks';
-import { getBarSizeAndPosition, getBarThickness, sortBarsBy } from '@/utils';
+import {
+  extractBarValueFromNestedKey,
+  getBarSizeAndPosition, getBarThickness,
+  sortBarsBy,
+} from '@/utils';
 
 import { useCartesianContext, useStyleConfigContext, useThemeContext } from '../../../providers';
 import { BarsItem, BarsItemBlurred } from './bars.module.css';
@@ -64,8 +68,9 @@ export const BarsSeries = () => {
         xScale={seriesAxis.scale}
         color={(_, i) => series.colors[i]}
       >
-        {barGroups => barGroups.map((barGroup) => {
-          const sortedBars = sortBarsBy(barGroup.bars, sortBy, isHorizontal);
+        {barGroups => barGroups.map((barGroup, i) => {
+          const updatedBars = extractBarValueFromNestedKey(barGroup, i, data, seriesAxis.scale, maxWidth, isHorizontal);
+          const sortedBars = sortBarsBy(updatedBars, sortBy, isHorizontal);
 
           return (
             <Group key={_.uniqueId()} top={barGroup.y0}>
@@ -121,9 +126,10 @@ export const BarsSeries = () => {
       yScale={seriesAxis.scale}
       color={(_, i) => series.colors[i]!}
     >
-      {barGroups => barGroups.map((barGroup) => {
-        const sortedBars = sortBarsBy(barGroup.bars, sortBy, isHorizontal);
-
+      {barGroups => barGroups.map((barGroup, i) => {
+        const updatedBars = extractBarValueFromNestedKey(barGroup, i, data, seriesAxis.scale, maxHeight, isHorizontal);
+        const sortedBars = sortBarsBy(updatedBars, sortBy, isHorizontal);
+        console.log(updatedBars);
         return (
           <Group key={_.uniqueId()} left={barGroup.x0}>
             {sortedBars.map((bar) => {

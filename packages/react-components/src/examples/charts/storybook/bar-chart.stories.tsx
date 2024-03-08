@@ -4,6 +4,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { BarChart, BarChartProps, CartesianChartLayout } from '../../../../../charts/src';
 import {
   channels,
+  channelsB,
   feedbackCount, proCons,
 } from '../mock-data';
 import { positiveNegative } from '../mock-data/positiveNegative';
@@ -138,6 +139,33 @@ withCategoriesOnIndex.args = {
   series: {
     dataKey: ['1 star', '2 stars', '3 stars', '4 stars', '5 stars'],
     label: 'Feedback count',
+  },
+};
+
+export const withNestedData = Template.bind({});
+withNestedData.args = {
+  title: 'Multiple Series',
+  subtitle: 'A bar chart rendered from nested data',
+  data: channelsB,
+  index: {
+    dataKey: 'channel',
+    label: 'Channels',
+  },
+  series: {
+    dataKey: ['1 star.value', '2 stars.value', '3 stars.value', '4 stars.value', '5 stars.value'],
+    label: 'Feedback count',
+    domain: [0, 4000],
+  },
+  overlay: {
+    dataKey: ['overlay.value'],
+    rename: _ => 'Some KPI',
+    label: 'Some KPI',
+    domain: [0, 5],
+  },
+  tooltip: {
+    extraSeriesData: (series: any) => `${series.percentage}%`,
+    extraOverlayData: (overlay: any) => `${overlay.percentage}%`,
+    extraContent: <div>some extra content</div>,
   },
 };
 

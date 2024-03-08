@@ -20,7 +20,7 @@ import _ from 'lodash';
 import { useCallback } from 'react';
 
 import { useBars } from '@/hooks';
-import { getBarSizeAndPosition, getBarThickness } from '@/utils';
+import { extractBarValueFromNestedKey, getBarSizeAndPosition, getBarThickness } from '@/utils';
 
 import {
   useCartesianContext, useStyleConfigContext, useThemeContext,
@@ -71,8 +71,11 @@ export const BarsOverlay = () => {
         xScale={overlayAxis.scale}
         color={(_, i) => overlay.colors![i]}
       >
-        {barGroups => barGroups.map((barGroup) => {
-          const sortedBars = sortBarsBy(barGroup.bars, sortBy, isHorizontal);
+        {barGroups => barGroups.map((barGroup, i) => {
+          const updatedBars = extractBarValueFromNestedKey(
+            barGroup, i, data, overlayAxis.scale, maxWidth, isHorizontal,
+          );
+          const sortedBars = sortBarsBy(updatedBars, sortBy, isHorizontal);
 
           return (
             <Group key={_.uniqueId()} top={barGroup.y0}>
@@ -128,8 +131,9 @@ export const BarsOverlay = () => {
       yScale={overlayAxis.scale}
       color={(_, i) => overlay.colors![i]}
     >
-      {barGroups => barGroups.map((barGroup) => {
-        const sortedBars = sortBarsBy(barGroup.bars, sortBy, isHorizontal);
+      {barGroups => barGroups.map((barGroup, i) => {
+        const updatedBars = extractBarValueFromNestedKey(barGroup, i, data, overlayAxis.scale, maxHeight, isHorizontal);
+        const sortedBars = sortBarsBy(updatedBars, sortBy, isHorizontal);
 
         return (
           <Group key={_.uniqueId()} left={barGroup.x0}>
