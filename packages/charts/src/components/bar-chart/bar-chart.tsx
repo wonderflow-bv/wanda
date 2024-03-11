@@ -39,6 +39,7 @@ export type BarChartProps = {
   theme?: ThemeVariants;
   /**
    * Set the layout of the chart. `Index`, `Series` and eventually `Overlay` will be automatically rearranged.
+   * Layout is Horizontal when Index is on the bottom axis, and is Vertical when index is on the left one.
    */
   layout?: CartesianChartLayout;
   /**
@@ -77,7 +78,7 @@ export type BarChartProps = {
    */
   showAverage?: boolean;
   /**
-   * Display a trend line for every single set of bars when `true`.
+   * Display a trend line for every single series of bars when `true`.
    */
   showTrendline?: boolean;
   /**

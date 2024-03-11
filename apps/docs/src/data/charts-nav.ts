@@ -14,6 +14,15 @@ const ChartsNav: NavigationMenu = [
           color: 'green',
         },
       },
+      {
+        path: '/get-started/charts/cartesians/bar-chart',
+        label: 'Bar Chart',
+        target: '',
+        tag: {
+          label: 'new',
+          color: 'green',
+        },
+      },
     ],
   },
   {

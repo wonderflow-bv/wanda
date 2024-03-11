@@ -119,22 +119,26 @@ export type CartesianBaseProps = {
    */
   customLegend?: React.ReactNode;
   /**
-   * By default, the data will grow from the lower left Cartesian origin ({x:0, y:0})
-   * in both the horizontal and vertical layouts, so that the values will increase upward and rightward.
-   * By setting this parameter `true`,
-   * the order of the index will be reversed, but only in the vertical layout (left axis).
+   * By default, the data will grow from the lower left Cartesian
+   * origin ({x:0, y:0}) in both the horizontal and vertical
+   * layouts, so that the values will increase upward and
+   * rightward. By setting this parameter `true`, the order of the
+   * index will be reversed, but only in the vertical layout (left
+   * axis).
    */
   reverseIndex?: boolean;
   /**
    * When set to 'true' zero will be in the middle of the axis and
-   * the min/max domain value will be derived from the min/max data value or
-   * min/max value of custom domain.
+   * the positive and negative domain value will equal to +/- the
+   * max absolute value (eg. [10, -100] will be [100, -100]).
    */
   mirrorDomains?: boolean;
   /**
-   * This value is used to override the dynamic height of the chart.
-   * It is intended as axis or grid dimension and it is different from the height property
-   * which computes all the subcomponent size.
+   * This value is used to override the dynamic height of the
+   * chart, intended as the dimension of axis and grid. It is
+   * different from the height property which computes all the
+   * subcomponents dimension and is equal to the total external
+   * chart height.
    */
   overrideInnerHeight?: number;
   /**

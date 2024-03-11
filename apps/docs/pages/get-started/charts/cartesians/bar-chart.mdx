@@ -8,9 +8,9 @@ export const getStaticProps = () =>
   getLayoutProps({
     layout: "chart",
     layoutProps: {
-      title: "Line Chart",
+      title: "Bar Chart",
       color: "purple",
-      subtitle: "A line chart component uses points connected by line segments to demonstrate changes in value.",
+      subtitle: "A bar chart component is useful for comparing different categories of data at a glance.",
       navigation: ChartsNav,
       features: [
         "Feature rich",
@@ -72,16 +72,16 @@ export default () => {
 
 ## API Reference
 
-### LineChart
+### BarChart
 
 <PropsBlocks
   description={`
-  LineChartProps
+  BarChartProps
   & Except<CartesianBaseProps, 'axis' | 'axisFiltered' | 'onBrushChange'>`}
   properties={[
     {
       name: "theme",
-      typeLink: "/get-started/charts/cartesians/line-chart#prop-theme",
+      typeLink: "/get-started/charts/cartesians/bar-chart#prop-theme",
       type: ['ThemeVariants'],
       typeValue: "'light' | 'dark'",
       default: "'light'",
@@ -89,7 +89,7 @@ export default () => {
     },
     {
       name: "layout",
-      typeLink: "/get-started/charts/cartesians/line-chart#prop-layout",
+      typeLink: "/get-started/charts/cartesians/bar-chart#prop-layout",
       type: ['CartesianChartLayout'],
       typeValue: "'vertical' | 'horizontal'",
       default: "'horizontal'",
@@ -97,23 +97,29 @@ export default () => {
     },
     {
       name: "data",
-      typeLink: "/get-started/charts/cartesians/line-chart#prop-data",
+      typeLink: "/get-started/charts/cartesians/bar-chart#prop-data",
       type: ['Array<Record<string, any>>'],
       default: "[]",
       description: "Set the data structure that will be used to render the chart.",
     },
     {
-      name: "renderAs",
-      typeLink: "/get-started/charts/cartesians/line-chart#prop-renderAs",
-      type: ["enum"],
-      typeValue: "'lines' | 'curves' | 'steps'",
-      default: "'curves'",
-      description: "Set the type of render function used to draw any chart line.",
+      name: "sortBy",
+      typeLink: "/get-started/charts/cartesians/bar-chart#sortBy",
+      type: ['SortingType'],
+      typeValue: "'as-is' | 'descending-key' | 'ascending-key' | 'descending-value' | 'ascending-value'",
+      default: "as-is",
+      description: `Set how data should be sorted by:
+      [descending-key]: dataKey alphabetical order,
+      [ascending-key]: dataKey reverse alphabetical order,
+      [descending-value]: by data value,
+      [ascending-value]: by reverse data value,
+      [as-is]: as set in series/overlay dataKey,
+      Values organized on different axis will be independent one from another and will be treated like independent groups sorted by the same logic.`,
     },
     {
       name: "index",
-      typeLink: "/get-started/charts/cartesians/line-chart#prop-index",
-      type: ["LineChartIndex"],
+      typeLink: "/get-started/charts/cartesians/bar-chart#prop-index",
+      type: ["BarChartIndex"],
       typeValue:`{ dataKey: string } & Partial<AxisProps>`,
       default: "",
       required: true,
@@ -121,27 +127,29 @@ export default () => {
     },
     {
       name: "series",
-      typeLink: "/get-started/charts/cartesians/line-chart#prop-series",
-      type: ["LineChartSeries"],
+      typeLink: "/get-started/charts/cartesians/bar-chart#prop-series",
+      type: ["BarChartSeries"],
       typeValue:
 `{
   dataKey: string[];
   style?: Array<LineStyle | undefined>;
   rename?: (...args: any) => string;
+  showBackground?: boolean | undefined;
 } & Partial<AxisProps>`,
       default: "",
       required: true,
-      description: "Set the properties associated with any Series of lines.",
+      description: "Set the properties associated with any Series of bars.",
     },
     {
       name: "overlay",
-      typeLink: "/get-started/charts/cartesians/line-chart#prop-overlay",
-      type: ["LineChartSeries"],
+      typeLink: "/get-started/charts/cartesians/bar-chart#prop-overlay",
+      type: ["BarChartSeries"],
       typeValue:
 `{
   dataKey: string[];
   style?: Array<LineStyle | undefined>;
   rename?: (...args: any) => string;
+  showBackground?: boolean | undefined;
 } & Partial<AxisProps>`,
       default: "",
       required: false,
@@ -149,7 +157,7 @@ export default () => {
     },
     {
       name: "showAverage",
-      typeLink: "/get-started/charts/cartesians/line-chart#prop-showAverage",
+      typeLink: "/get-started/charts/cartesians/bar-chart#prop-showAverage",
       type: ["boolean"],
       default: "false",
       required: false,
@@ -157,15 +165,23 @@ export default () => {
     },
     {
       name: "showTrendline",
-      typeLink: "/get-started/charts/cartesians/line-chart#prop-showTrendline",
+      typeLink: "/get-started/charts/cartesians/bar-chart#prop-showTrendline",
       type: ["boolean"],
       default: "false",
       required: false,
-      description: "Display a trend line for every single line when `true`.",
+      description: "Display a trend line for every single series of bars when `true`.",
+    },
+    {
+      name: "showBackground",
+      typeLink: "/get-started/charts/cartesians/bar-chart#prop-showBackground",
+      type: ["boolean"],
+      default: "false",
+      required: false,
+      description: "Display a background color behind the bars to highlight the entire possible occupancy area.",
     },
     {
       name: "preventTooltipDisplay",
-      typeLink: "/get-started/charts/cartesians/line-chart#prop-preventTooltipDisplay",
+      typeLink: "/get-started/charts/cartesians/bar-chart#prop-preventTooltipDisplay",
       type: ["boolean"],
       default: "false",
       required: false,
@@ -173,8 +189,8 @@ export default () => {
     },
     {
       name: "tooltip",
-      typeLink: "/get-started/charts/cartesians/line-chart#prop-tooltip",
-      type: ["LineChartTooltip"],
+      typeLink: "/get-started/charts/cartesians/bar-chart#prop-tooltip",
+      type: ["BarChartTooltip"],
       typeValue:
 `{
   extraSeriesData?: (...args: any) => string;
@@ -186,32 +202,8 @@ export default () => {
       description: "Set extra data or custom content to be displayed in the tooltip.",
     },
     {
-      name: "hideMissingDataConnection",
-      typeLink: "/get-started/charts/cartesians/line-chart#prop-hideMissingDataConnection",
-      type: ["boolean"],
-      default: "false",
-      required: false,
-      description: "Prevent showing a connecting line between points when data is missing.",
-    },
-    {
-      name: "showMarker",
-      typeLink: "/get-started/charts/cartesians/line-chart#prop-showMarker",
-      type: ["boolean"],
-      default: "false",
-      required: false,
-      description: "Show a marker for every single data point.",
-    },
-    {
-      name: "showMarkerLabel",
-      typeLink: "/get-started/charts/cartesians/line-chart#prop-showMarkerLabel",
-      type: ["boolean"],
-      default: "false",
-      required: false,
-      description: "Show a label and a marker for up to 12 data point on each series of lines.",
-    },
-    {
       name: "hidePadding",
-      typeLink: "/get-started/charts/cartesians/line-chart#prop-hidePadding",
+      typeLink: "/get-started/charts/cartesians/bar-chart#prop-hidePadding",
       type: ["boolean"],
       default: "false",
       required: false,
