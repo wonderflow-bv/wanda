@@ -81,6 +81,7 @@ describe('<ProductCard>', () => {
   });
 
   test('it should render properly with on click', () => {
+    const spyOnClick = jest.fn();
     const { container } = render(
       <ProductCard
         title="title"
@@ -90,7 +91,7 @@ describe('<ProductCard>', () => {
         rating={1.2}
         feedbackCount={1.2}
         votesCount={1.2}
-        onClick={() => console.log('clicked')}
+        onClick={spyOnClick}
       />,
     );
 
@@ -98,6 +99,7 @@ describe('<ProductCard>', () => {
   });
 
   test('it should render properly with children', () => {
+    const spyOnClick = jest.fn();
     const { container } = render(
       <ProductCard
         title="title"
@@ -107,7 +109,7 @@ describe('<ProductCard>', () => {
         rating={1.2}
         feedbackCount={1.2}
         votesCount={1.2}
-        onClick={() => console.log('clicked')}
+        onClick={spyOnClick}
         footer={<div>some content</div>}
       >
         <div>some content</div>

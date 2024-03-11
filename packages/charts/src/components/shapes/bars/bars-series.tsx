@@ -48,7 +48,7 @@ export const BarsSeries = () => {
     style,
     fixedBarSize,
   } = useBars();
-  console.log(seriesAxis);
+
   const { bar: barStyle, background, maxSize } = style;
   const bgColor = themes[theme].bars.backgroundColor;
 
