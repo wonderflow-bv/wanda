@@ -119,6 +119,19 @@ export type CartesianBaseProps = {
    */
   customLegend?: React.ReactNode;
   /**
+   * By default, the data will grow from the lower left Cartesian origin ({x:0, y:0})
+   * in both the horizontal and vertical layouts, so that the values will increase upward and rightward.
+   * By setting this parameter `true`,
+   * the order of the index will be reversed, but only in the vertical layout (left axis).
+   */
+  reverseIndex?: boolean;
+  /**
+   * When set to 'true' zero will be in the middle of the axis and
+   * the min/max domain value will be derived from the min/max data value or
+   * min/max value of custom domain.
+   */
+  mirrorDomains?: boolean;
+  /**
    * This value is used to override the dynamic height of the chart.
    * It is intended as axis or grid dimension and it is different from the height property
    * which computes all the subcomponent size.
@@ -173,6 +186,8 @@ export const CartesianBase = forwardRef<HTMLElement, CartesianBaseProps>(({
   emptyState,
   emptyStateMessage,
   customLegend,
+  reverseIndex,
+  mirrorDomains,
   overrideInnerHeight,
   styleConfig,
   className,
@@ -197,6 +212,9 @@ forwardedRef) => {
     hasBrush,
     hasData,
     hasLegend,
+    hasReversedIndex,
+    hasMirroredDomainsHorizontal,
+    hasMirroredDomainsVertical,
     filteredData,
     hasEmptyState,
     hoveredLegendItem,
@@ -218,6 +236,8 @@ forwardedRef) => {
     isLoading,
     margin,
     preventResponsive,
+    reverseIndex,
+    mirrorDomains,
     overrideInnerHeight,
     showBrush,
     styleConfig,
@@ -344,6 +364,9 @@ forwardedRef) => {
                   axis={axisFilteredSystem}
                   hoveredLegendItem={hoveredLegendItem}
                   preventTooltipOpening={isMenuOpen}
+                  hasReversedIndex={hasReversedIndex}
+                  hasMirroredDomainsHorizontal={hasMirroredDomainsHorizontal}
+                  hasMirroredDomainsVertical={hasMirroredDomainsVertical}
                 >
                   <DataProvider data={filteredData} metadata={metadata} filteredData={filteredData}>
                     <Group clipPath="url(#clip-path-cartesian-chart)">

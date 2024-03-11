@@ -83,7 +83,7 @@ export const BarsAverage: React.FC = () => {
           x={coordinates.series.label.x}
           y={coordinates.series.label.y}
           fontColor={themes[theme].lines.averageFontColor}
-          title={`Average: ${averageSeries!}`}
+          title={`Average: ${averageSeries}`}
           titleFontSize={titleFontSize}
           titleFontWeight={titleFontWeight}
           titleProps={titleProps}
@@ -103,7 +103,7 @@ export const BarsAverage: React.FC = () => {
           x={coordinates.overlay.label.x}
           y={coordinates.overlay.label.y}
           fontColor={themes[theme].lines.averageFontColor}
-          title={`Average: ${averageOverlay!}`}
+          title={`Average: ${averageOverlay}`}
           titleFontSize={titleFontSize}
           titleFontWeight={titleFontWeight}
           titleProps={titleProps}

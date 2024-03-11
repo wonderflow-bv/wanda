@@ -48,8 +48,6 @@ export const useBarChart = ({
   index,
   series,
   overlay,
-  reverseIndex = false,
-  mirrorDomains = false,
   tooltip,
   preventTooltipDisplay = false,
   showAverage = false,
@@ -72,20 +70,14 @@ export const useBarChart = ({
     round: true,
   }), [index]);
 
-  const hasIndexReversed = !isHorizontal && reverseIndex;
-
-  const hasMirroredDomains = Boolean(mirrorDomains);
-  const config = useMemo(() => ({ hasIndexReversed, hasMirroredDomains }), [hasIndexReversed, hasMirroredDomains]);
-
   const { index: i, series: s, overlay: o } = useMemo(
     () => handleChartDomainAndScaleType(
       data,
       uIndex,
       series,
       overlay,
-      config,
     ),
-    [data, uIndex, overlay, series, config],
+    [data, uIndex, overlay, series],
   );
 
   const { index: iFiltered, series: sFiltered, overlay: oFiltered } = useMemo(
@@ -94,9 +86,8 @@ export const useBarChart = ({
       uIndex,
       series,
       overlay,
-      config,
     ),
-    [brushFilteredData, uIndex, overlay, series, config],
+    [brushFilteredData, uIndex, overlay, series],
   );
 
   const axis = useMemo(() => handleChartAxisLayout(i, s, o), [i, s, o]);
@@ -141,8 +132,6 @@ export const useBarChart = ({
     showLabel,
     showBackground,
     hidePadding,
-    hasMirroredDomains,
-    hasIndexReversed,
     fixedBarSize,
   }), [
     isStacked,
@@ -160,8 +149,6 @@ export const useBarChart = ({
     showLabel,
     showBackground,
     hidePadding,
-    hasMirroredDomains,
-    hasIndexReversed,
     fixedBarSize,
   ]);
 

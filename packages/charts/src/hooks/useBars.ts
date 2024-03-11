@@ -25,7 +25,9 @@ import { BarChartMetadata, CartesianAxis } from '@/types';
 export const useBars = () => {
   const { data, metadata } = useDataContext<BarChartMetadata>();
   const { isHorizontal } = useLayoutContext();
-  const { axis, dimension, preventTooltipOpening } = useCartesianContext();
+  const {
+    axis, dimension, preventTooltipOpening, hasReversedIndex,
+  } = useCartesianContext();
   const { bars } = useStyleConfigContext();
 
   const {
@@ -40,14 +42,10 @@ export const useBars = () => {
     overlay,
     sortBy,
     showBackground: hasBackground,
-    hasIndexReversed,
     fixedBarSize,
     preventTooltipDisplay,
     tooltip,
   } = metadata as BarChartMetadata;
-
-  const reversedData = [...data].reverse();
-  const updatedData = hasIndexReversed ? reversedData : data;
 
   const { showBackground: hasBackgroundSeries } = series;
   const { showBackground: hasBackgroundOverlay } = overlay;
@@ -77,7 +75,7 @@ export const useBars = () => {
   const X0Y0 = (d: Record<string, any>) => d[index];
 
   const scaleXY0 = scaleBand<string>({
-    domain: updatedData.map((d: any) => d[index]),
+    domain: hasReversedIndex ? data.map(X0Y0).reverse() : data.map(X0Y0),
     paddingOuter,
     paddingInner,
   });
@@ -97,7 +95,7 @@ export const useBars = () => {
   scaleXY1.rangeRound([0, scaleXY0.bandwidth()]);
 
   return {
-    data: updatedData,
+    data,
     isHorizontal,
     index,
     series,

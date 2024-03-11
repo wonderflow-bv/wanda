@@ -99,3 +99,4 @@ export const getHeightForVerticalChartWithFixedBarSize = (
 
   return h;
 };
+

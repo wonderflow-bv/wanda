@@ -40,6 +40,7 @@ import {
   HorizontalAxisOffsetConfig,
   VerticalAxisoffsetConfig,
 } from '../types/axis';
+import { mirrorDomain } from './data';
 import { truncate } from './format';
 import {
   getMaxCharactersNum,
@@ -338,7 +339,7 @@ export const scaleDomainToAxis = (axis: Except<AxisProps, 'orientation'>) => {
     paddingOuter = 1,
   } = axis;
 
-  const hasData = domain.length && range?.length && scaleType;
+  const hasData = Boolean(domain.length && range?.length && scaleType);
 
   if (hasData) {
     if (scaleType === 'label') {
@@ -529,6 +530,7 @@ export const computeAxisProperties = ({
   positionRight,
   positionBottom,
   positionLeft,
+  config,
 }: {
   axis?: AxisProps;
   maxRangeX: number;
@@ -537,45 +539,71 @@ export const computeAxisProperties = ({
   positionRight: number;
   positionBottom: number;
   positionLeft: number;
+  config: {
+    hasReversedIndex: boolean;
+    hasMirroredDomainsHorizontal: boolean;
+    hasMirroredDomainsVertical: boolean;
+  };
 }): CartesianAxis | undefined => {
   if (axis) {
     const { orientation } = axis;
+    const { hasMirroredDomainsHorizontal, hasMirroredDomainsVertical, hasReversedIndex } = config;
 
     if (orientation === 'top') {
+      const mirrored = mirrorDomain(axis.domain);
+      const domain: any = hasMirroredDomainsVertical ? mirrored : axis.domain;
+
       return {
         ...axis,
         orientation,
-        scale: scaleDomainToAxis({ ...axis, range: [0, maxRangeX] })!,
+        domain,
+        scale: scaleDomainToAxis({ ...axis, range: [0, maxRangeX], domain })!,
         top: positionTop,
         left: positionLeft,
       };
     }
 
     if (orientation === 'right') {
+      const mirrored = mirrorDomain(axis.domain);
+      const domain: any = hasMirroredDomainsHorizontal ? mirrored : axis.domain;
+
       return {
         ...axis,
         orientation,
-        scale: scaleDomainToAxis({ ...axis, range: [maxRangeY, 0] })!,
+        domain,
+        scale: scaleDomainToAxis({ ...axis, range: [maxRangeY, 0], domain })!,
         top: positionTop,
         left: positionRight,
       };
     }
 
     if (orientation === 'bottom') {
+      const mirrored = mirrorDomain(axis.domain);
+      const domain: any = hasMirroredDomainsVertical ? mirrored : axis.domain;
+
       return {
         ...axis,
         orientation,
-        scale: scaleDomainToAxis({ ...axis, range: [0, maxRangeX] })!,
+        domain,
+        scale: scaleDomainToAxis({ ...axis, range: [0, maxRangeX], domain })!,
         top: positionBottom,
         left: positionLeft,
       };
     }
 
     if (orientation === 'left') {
+      const reversed = [0, maxRangeY];
+      const regular = [maxRangeY, 0];
+      const range: any = hasReversedIndex ? reversed : regular;
+
+      const mirrored = mirrorDomain(axis.domain);
+      const domain: any = hasMirroredDomainsHorizontal ? mirrored : axis.domain;
+
       return {
         ...axis,
         orientation,
-        scale: scaleDomainToAxis({ ...axis, range: [maxRangeY, 0] })!,
+        domain,
+        scale: scaleDomainToAxis({ ...axis, range, domain })!,
         top: positionTop,
         left: positionLeft,
       };
@@ -597,6 +625,11 @@ export const computeAxisSystemProperties = (
     bottom: number;
     left: number;
   },
+  config: {
+    hasReversedIndex: boolean;
+    hasMirroredDomainsHorizontal: boolean;
+    hasMirroredDomainsVertical: boolean;
+  },
 ) => {
   const shared = {
     maxRangeX: dimension.maxWidth,
@@ -609,18 +642,22 @@ export const computeAxisSystemProperties = (
 
   const t = computeAxisProperties({
     axis: axis.top,
+    config,
     ...shared,
   });
   const r = computeAxisProperties({
     axis: axis.right,
+    config,
     ...shared,
   });
   const b = computeAxisProperties({
     axis: axis.bottom,
+    config,
     ...shared,
   });
   const l = computeAxisProperties({
     axis: axis.left,
+    config,
     ...shared,
   });
 

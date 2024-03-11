@@ -48,7 +48,7 @@ export const BarsSeries = () => {
     style,
     fixedBarSize,
   } = useBars();
-
+  console.log(seriesAxis);
   const { bar: barStyle, background, maxSize } = style;
   const bgColor = themes[theme].bars.backgroundColor;
 
@@ -129,7 +129,7 @@ export const BarsSeries = () => {
       {barGroups => barGroups.map((barGroup, i) => {
         const updatedBars = extractBarValueFromNestedKey(barGroup, i, data, seriesAxis.scale, maxHeight, isHorizontal);
         const sortedBars = sortBarsBy(updatedBars, sortBy, isHorizontal);
-        console.log(updatedBars);
+
         return (
           <Group key={_.uniqueId()} left={barGroup.x0}>
             {sortedBars.map((bar) => {

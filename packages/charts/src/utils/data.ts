@@ -93,11 +93,7 @@ T extends LineChartIndex
 | BarChartIndex
 | BarChartSeries>(
     data: Data,
-    axis: T,
-    config?: {
-      hasIndexReversed?: boolean;
-      hasMirroredDomains?: boolean;
-    }): Except<AxisProps, 'orientation'> => {
+    axis: T): Except<AxisProps, 'orientation'> => {
   const hasData = Boolean(data.length);
 
   let res: Record<string, unknown> = {
@@ -109,8 +105,6 @@ T extends LineChartIndex
 
   if (hasData) {
     const { scaleType, dataKey, domain } = axis;
-    const isReversed = config?.hasIndexReversed;
-    const isMirrored = config?.hasMirroredDomains;
 
     const keys = typeof dataKey === 'string' ? [dataKey] : dataKey;
     const primitivesFromArray = keys.map((k: string) => getPrimitivesFromObjectArrayByPath(data, k));
@@ -158,13 +152,9 @@ T extends LineChartIndex
       }
     }
 
-    const ownDomainReversed = [...ownDomain].reverse();
-    const reversed = isReversed ? ownDomainReversed : ownDomain;
-    const mirrored = isMirrored ? mirrorDomain(reversed) : reversed;
-
     res = {
       ...axis,
-      domain: mirrored,
+      domain: ownDomain,
       scaleType: st,
     };
   }
@@ -179,18 +169,11 @@ U extends LineChartSeries | BarChartSeries>(
     index: T,
     series: U,
     overlay?: U,
-    config?: {
-      hasIndexReversed?: boolean;
-      hasMirroredDomains?: boolean;
-    },
   ) => {
-  const isReversed = config?.hasIndexReversed;
-  const isMirrored = config?.hasMirroredDomains;
-
-  const i = handleAxisDomainAndScaleType(data, index, { hasIndexReversed: isReversed });
-  const s = handleAxisDomainAndScaleType(data, series, { hasMirroredDomains: isMirrored });
+  const i = handleAxisDomainAndScaleType(data, index);
+  const s = handleAxisDomainAndScaleType(data, series);
   const o = overlay
-    ? handleAxisDomainAndScaleType(data, overlay, { hasMirroredDomains: isMirrored })
+    ? handleAxisDomainAndScaleType(data, overlay)
     : undefined;
 
   return {

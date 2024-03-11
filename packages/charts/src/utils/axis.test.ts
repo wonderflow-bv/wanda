@@ -550,6 +550,12 @@ describe('scaleDomainToAxis()', () => {
 });
 
 describe('handleTickFormat()', () => {
+  const config = {
+    hasReversedIndex: false,
+    hasMirroredDomainsHorizontal: false,
+    hasMirroredDomainsVertical: false,
+  };
+
   it('should return the same value w/o tickFormat', () => {
     const axis: AxisProps = {
       domain: [0, 1],
@@ -565,6 +571,7 @@ describe('handleTickFormat()', () => {
       positionRight: 0,
       positionBottom: 0,
       positionLeft: 0,
+      config,
     });
     const func = handleTickFormat(computed!);
     const res = func(1, 1);
@@ -587,6 +594,7 @@ describe('handleTickFormat()', () => {
       positionRight: 0,
       positionBottom: 0,
       positionLeft: 0,
+      config,
     });
     const func = handleTickFormat(computed!);
     const res = func(1, 1);
@@ -610,6 +618,7 @@ describe('handleTickFormat()', () => {
       positionRight: 0,
       positionBottom: 0,
       positionLeft: 0,
+      config,
     });
     const func = handleTickFormat(computed!);
     const res = func(1, 1);
@@ -633,6 +642,7 @@ describe('handleTickFormat()', () => {
       positionRight: 0,
       positionBottom: 0,
       positionLeft: 0,
+      config,
     });
     const func = handleTickFormat(computed!);
     const res = func('1234567890123456789012345', 1);
@@ -656,6 +666,7 @@ describe('handleTickFormat()', () => {
       positionRight: 0,
       positionBottom: 0,
       positionLeft: 0,
+      config,
     });
     const func = handleTickFormat(computed!);
     const res = func('1234567890123456789012345', 1);
@@ -679,6 +690,7 @@ describe('handleTickFormat()', () => {
       positionRight: 0,
       positionBottom: 0,
       positionLeft: 0,
+      config,
     });
     const func = handleTickFormat(computed!);
     const res = func('01-01-2023', 1);
@@ -688,6 +700,12 @@ describe('handleTickFormat()', () => {
 });
 
 describe('handleNumberOfTicks()', () => {
+  const config = {
+    hasReversedIndex: false,
+    hasMirroredDomainsHorizontal: false,
+    hasMirroredDomainsVertical: false,
+  };
+
   it('should return 10 fro large size', () => {
     const axis: AxisProps = {
       domain: [0, 1],
@@ -703,6 +721,7 @@ describe('handleNumberOfTicks()', () => {
       positionRight: 0,
       positionBottom: 0,
       positionLeft: 0,
+      config,
     });
     const res = handleNumberOfTicks(
       800,
@@ -729,6 +748,7 @@ describe('handleNumberOfTicks()', () => {
       positionRight: 0,
       positionBottom: 0,
       positionLeft: 0,
+      config,
     });
     const res = handleNumberOfTicks(
       400,
@@ -755,6 +775,7 @@ describe('handleNumberOfTicks()', () => {
       positionRight: 0,
       positionBottom: 0,
       positionLeft: 0,
+      config,
     });
     const res = handleNumberOfTicks(
       200,
@@ -849,6 +870,12 @@ describe('hasVerticalTickLabel()', () => {
 });
 
 describe('handleVerticalTickLabelTransform()', () => {
+  const config = {
+    hasReversedIndex: false,
+    hasMirroredDomainsHorizontal: false,
+    hasMirroredDomainsVertical: false,
+  };
+
   it('should return style for top axis', () => {
     const axis: AxisProps = {
       domain: [0, 1],
@@ -864,6 +891,7 @@ describe('handleVerticalTickLabelTransform()', () => {
       positionRight: 0,
       positionBottom: 0,
       positionLeft: 0,
+      config,
     });
     const res = handleVerticalTickLabelTransform(1, true, computed!);
     const exp = { textAnchor: 'end' };
@@ -885,6 +913,7 @@ describe('handleVerticalTickLabelTransform()', () => {
       positionRight: 0,
       positionBottom: 0,
       positionLeft: 0,
+      config,
     });
     const res = handleVerticalTickLabelTransform(1, false, computed!);
     const exp = { transform: '', textAnchor: 'middle' };
@@ -906,6 +935,7 @@ describe('handleVerticalTickLabelTransform()', () => {
       positionRight: 0,
       positionBottom: 0,
       positionLeft: 0,
+      config,
     });
     const res = handleVerticalTickLabelTransform(1, true, computed!);
     const exp = {
@@ -930,6 +960,7 @@ describe('handleVerticalTickLabelTransform()', () => {
       positionRight: 0,
       positionBottom: 0,
       positionLeft: 0,
+      config,
     });
     const res = handleVerticalTickLabelTransform(1, false, computed!);
     const exp = { transform: '', textAnchor: 'middle' };
@@ -951,6 +982,7 @@ describe('handleVerticalTickLabelTransform()', () => {
       positionRight: 0,
       positionBottom: 0,
       positionLeft: 0,
+      config,
     });
     const res = handleVerticalTickLabelTransform(1, true, computed!);
     const exp = { };
@@ -1001,6 +1033,12 @@ describe('handleVerticalTickLabelOffset()', () => {
 });
 
 describe('computeAxisProperties()', () => {
+  const config = {
+    hasReversedIndex: false,
+    hasMirroredDomainsHorizontal: false,
+    hasMirroredDomainsVertical: false,
+  };
+
   it('should return properties for top axis', () => {
     const axis: AxisProps = {
       domain: [0, 1],
@@ -1015,6 +1053,7 @@ describe('computeAxisProperties()', () => {
       positionRight: 2,
       positionBottom: 3,
       positionLeft: 4,
+      config,
     });
     expect(res!.scale).toBeDefined();
   });
@@ -1033,6 +1072,7 @@ describe('computeAxisProperties()', () => {
       positionRight: 2,
       positionBottom: 3,
       positionLeft: 4,
+      config,
     });
     expect(res!.scale).toBeDefined();
   });
@@ -1051,6 +1091,7 @@ describe('computeAxisProperties()', () => {
       positionRight: 2,
       positionBottom: 3,
       positionLeft: 4,
+      config,
     });
     expect(res!.scale).toBeDefined();
   });
@@ -1069,6 +1110,7 @@ describe('computeAxisProperties()', () => {
       positionRight: 2,
       positionBottom: 3,
       positionLeft: 4,
+      config,
     });
     expect(res!.scale).toBeDefined();
   });
@@ -1083,12 +1125,18 @@ describe('computeAxisProperties()', () => {
       positionRight: 2,
       positionBottom: 3,
       positionLeft: 4,
+      config,
     });
     expect(res).toBeUndefined();
   });
 });
 
 describe('computeAxisSystemProperties()', () => {
+  const config = {
+    hasReversedIndex: false,
+    hasMirroredDomainsHorizontal: false,
+    hasMirroredDomainsVertical: false,
+  };
   it('should return', () => {
     const axis: Record<AxisOrientation, AxisProps | undefined> = {
       top: {
@@ -1118,6 +1166,7 @@ describe('computeAxisSystemProperties()', () => {
       {
         top: 1, right: 2, bottom: 3, left: 4,
       },
+      config,
     );
     expect(res.top!.scale).toBeDefined();
     expect(res.right!.scale).toBeDefined();

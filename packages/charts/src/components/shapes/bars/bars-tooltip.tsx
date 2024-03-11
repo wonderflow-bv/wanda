@@ -61,7 +61,7 @@ export const BarsTooltip: React.FC = () => {
   const { bars, themes } = useStyleConfigContext();
 
   const {
-    data: updatedData,
+    data,
     hasOverlay,
     isHorizontal,
     index,
@@ -95,7 +95,8 @@ export const BarsTooltip: React.FC = () => {
 
   const handleTooltip = useCallback((event: React.MouseEvent<ownerSVGElement>) => {
     const {
-      scaleType, domain,
+      scaleType,
+      domain,
     } = indexAxis as CartesianAxis;
     const { top: tBound, left: lBound } = containerBounds;
 
@@ -105,7 +106,7 @@ export const BarsTooltip: React.FC = () => {
 
     const coords = localPoint(event.target.ownerSVGElement, event) ?? hiddenPos;
 
-    const accessorInvertValue = accessorInvert(indexAxis, coords[xy]);
+    const accessorInvertValue = accessorInvert({ ...indexAxis, domain: scaleXY0.domain() }, coords[xy]);
 
     const indexOfBisectValue = scaleType === 'label'
       ? domain.indexOf(accessorInvertValue as string)
@@ -123,7 +124,7 @@ export const BarsTooltip: React.FC = () => {
     const tooltipLeft = ('clientX' in event ? event.clientX : 0) - lBound / 8;
     const tooltipTop = ('clientY' in event ? event.clientY : 0) - tBound / 8;
 
-    const datum = updatedData[indexOfBisectValue];
+    const datum = data[indexOfBisectValue];
 
     const hasSeriesData = series.dataKey.every(s => !_.isNil(getPrimitiveFromObjectByPath(datum, s)));
     const hasOverlayData = overlay.dataKey?.every(s => !_.isNil(getPrimitiveFromObjectByPath(datum, s)));
@@ -141,7 +142,7 @@ export const BarsTooltip: React.FC = () => {
       tooltipTop,
       tooltipData,
     });
-  }, [indexAxis, containerBounds, isHorizontal, scaleXY0, updatedData, series.dataKey, overlay.dataKey, showTooltip]);
+  }, [indexAxis, containerBounds, isHorizontal, scaleXY0, data, series.dataKey, overlay.dataKey, showTooltip]);
 
   const hasTooltip = Boolean(tooltipData?.data && !preventTooltipOpening && !preventTooltipDisplay);
 

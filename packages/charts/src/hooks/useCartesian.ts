@@ -42,6 +42,8 @@ export type UseCartesianProps = {
   isLoading?: boolean;
   margin?: MarginProps;
   preventResponsive?: boolean;
+  reverseIndex?: boolean;
+  mirrorDomains?: boolean;
   overrideInnerHeight?: number;
   showBrush?: boolean;
   styleConfig?: DeepPartial<CartesianStyleConfig>;
@@ -65,6 +67,8 @@ export const useCartesian = ({
     left: 24,
   },
   preventResponsive = false,
+  reverseIndex = false,
+  mirrorDomains = false,
   overrideInnerHeight,
   showBrush = false,
   styleConfig,
@@ -193,14 +197,20 @@ export const useCartesian = ({
     },
   };
 
+  const config = useMemo(() => ({
+    hasReversedIndex: Boolean(reverseIndex && !isHorizontal),
+    hasMirroredDomainsHorizontal: Boolean(mirrorDomains && isHorizontal), // will affect Left/Right axis
+    hasMirroredDomainsVertical: Boolean(mirrorDomains && !isHorizontal), // will affect Top/Bottom axis
+  }), [isHorizontal, mirrorDomains, reverseIndex]);
+
   const axisSystem: CartesianxAxisSystem = useMemo(
-    () => computeAxisSystemProperties(axis, dimension.axis, position.axis),
-    [axis, dimension.axis, position.axis],
+    () => computeAxisSystemProperties(axis, dimension.axis, position.axis, config),
+    [axis, dimension.axis, position.axis, config],
   );
 
   const axisFilteredSystem: CartesianxAxisSystem = useMemo(
-    () => computeAxisSystemProperties(axisFiltered, dimension.axis, position.axis),
-    [axisFiltered, dimension.axis, position.axis],
+    () => computeAxisSystemProperties(axisFiltered, dimension.axis, position.axis, config),
+    [axisFiltered, dimension.axis, position.axis, config],
   );
 
   return {
@@ -219,6 +229,9 @@ export const useCartesian = ({
     hasData,
     hasLegend,
     hasBrush,
+    hasReversedIndex: config.hasReversedIndex,
+    hasMirroredDomainsHorizontal: config.hasMirroredDomainsHorizontal,
+    hasMirroredDomainsVertical: config.hasMirroredDomainsVertical,
     filteredData,
     hasEmptyState,
     hoveredLegendItem,

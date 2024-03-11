@@ -72,7 +72,5 @@ export type BarChartMetadata = {
   showTrendline?: boolean;
   showBackground?: boolean;
   hidePadding?: boolean;
-  hasMirroredDomains?: boolean;
-  hasIndexReversed?: boolean;
   fixedBarSize?: boolean;
 }

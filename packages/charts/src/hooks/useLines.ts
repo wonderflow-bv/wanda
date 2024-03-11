@@ -29,12 +29,9 @@ export const useLines = () => {
 
   const {
     index, series, renderAs, showMarker, showMarkerLabel, overlay,
-    hideMissingDataConnection, hasIndexReversed, preventTooltipDisplay,
+    hideMissingDataConnection, preventTooltipDisplay,
     tooltip,
   } = metadata as LineChartMetadata;
-
-  const reversedData = [...data].reverse();
-  const updatedData = hasIndexReversed ? reversedData : data;
 
   const {
     top, right, left, bottom,
@@ -95,6 +92,6 @@ export const useLines = () => {
     showMarker,
     showMarkerLabel,
     tooltip,
-    updatedData,
+    data,
   };
 };

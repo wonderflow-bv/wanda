@@ -42,7 +42,7 @@ export const LinesSeries: React.FC = () => {
     hideMissingDataConnection,
     isHorizontal,
     getSeriesCoordinates,
-    updatedData,
+    data,
     renderer,
     series,
     showMarker,
@@ -57,7 +57,7 @@ export const LinesSeries: React.FC = () => {
     <>
       {series.dataKey.map((dataKey: string, di: number) => {
         const subPaths = createSubPaths(
-          updatedData,
+          data,
           d => _.isNil(getValueFromObjectByPath(d, dataKey)),
         );
 

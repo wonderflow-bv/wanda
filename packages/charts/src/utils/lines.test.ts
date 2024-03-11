@@ -18,6 +18,12 @@ import {
 } from './lines';
 
 describe('accessor()', () => {
+  const config = {
+    hasReversedIndex: false,
+    hasMirroredDomainsHorizontal: false,
+    hasMirroredDomainsVertical: false,
+  };
+
   it('should return an integer for linear scale', () => {
     const axis: AxisProps = {
       domain: [0, 100],
@@ -34,6 +40,7 @@ describe('accessor()', () => {
       positionRight: 2,
       positionBottom: 3,
       positionLeft: 4,
+      config,
     })!;
     const res = accessor(cartesian, 'value', { value: 50 });
     const exp = 400;
@@ -56,6 +63,7 @@ describe('accessor()', () => {
       positionRight: 2,
       positionBottom: 3,
       positionLeft: 4,
+      config,
     })!;
     const res = accessor(cartesian, 'date', { date: '01-01-2021' });
     const exp = 401;
@@ -78,6 +86,7 @@ describe('accessor()', () => {
       positionRight: 2,
       positionBottom: 3,
       positionLeft: 4,
+      config,
     })!;
     const res = accessor(cartesian, 'date', { date: '01-01-2021' });
     const exp = 400;
@@ -100,6 +109,7 @@ describe('accessor()', () => {
       positionRight: 2,
       positionBottom: 3,
       positionLeft: 4,
+      config,
     })!;
     const res = accessor(cartesian, 'date', { date: undefined });
     const exp = undefined;
@@ -108,6 +118,11 @@ describe('accessor()', () => {
 });
 
 describe('accessorInvert()', () => {
+  const config = {
+    hasReversedIndex: false,
+    hasMirroredDomainsHorizontal: false,
+    hasMirroredDomainsVertical: false,
+  };
   it('should return the correct value from domain - top axis', () => {
     const axis: AxisProps = {
       domain: [0, 100],
@@ -124,6 +139,7 @@ describe('accessorInvert()', () => {
       positionRight: 2,
       positionBottom: 3,
       positionLeft: 4,
+      config,
     })!;
     const res = accessorInvert(cartesian, 400);
     const exp = 49.5;
@@ -146,6 +162,7 @@ describe('accessorInvert()', () => {
       positionRight: 2,
       positionBottom: 3,
       positionLeft: 4,
+      config,
     })!;
     const res = accessorInvert(cartesian, 300) as number;
     const exp = 50;
@@ -168,6 +185,7 @@ describe('accessorInvert()', () => {
       positionRight: 2,
       positionBottom: 3,
       positionLeft: 4,
+      config,
     })!;
     const res = accessorInvert(cartesian, 400);
     const exp = 'c';
@@ -190,6 +208,7 @@ describe('accessorInvert()', () => {
       positionRight: 2,
       positionBottom: 3,
       positionLeft: 4,
+      config,
     })!;
     const res = accessorInvert(cartesian, 350);
     const exp = 'b';
@@ -229,6 +248,11 @@ describe('getCoordinates()', () => {
     scaleType: 'linear',
     orientation: 'left',
   };
+  const config = {
+    hasReversedIndex: false,
+    hasMirroredDomainsHorizontal: false,
+    hasMirroredDomainsVertical: false,
+  };
   const i = computeAxisProperties({
     axis: indexAxis,
     maxRangeX: 800,
@@ -237,6 +261,7 @@ describe('getCoordinates()', () => {
     positionRight: 2,
     positionBottom: 3,
     positionLeft: 4,
+    config,
   })!;
   const s = computeAxisProperties({
     axis: seriesAxis,
@@ -246,6 +271,7 @@ describe('getCoordinates()', () => {
     positionRight: 2,
     positionBottom: 3,
     positionLeft: 4,
+    config,
   })!;
 
   it('should return data - horizontal', () => {

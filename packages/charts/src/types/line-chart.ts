@@ -73,6 +73,4 @@ export type LineChartMetadata = {
   showMarker?: boolean;
   showMarkerLabel?: boolean;
   hidePadding?: boolean;
-  hasIndexReversed?: boolean;
-  hasMirroredDomains?: boolean;
 }

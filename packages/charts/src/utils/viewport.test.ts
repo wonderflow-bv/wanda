@@ -4,6 +4,12 @@ import { computeAxisProperties } from './axis';
 import { manageViewport } from './viewport';
 
 describe('manageViewport()', () => {
+  const config = {
+    hasReversedIndex: false,
+    hasMirroredDomainsHorizontal: false,
+    hasMirroredDomainsVertical: false,
+  };
+
   it('should return correct number of ticks - horizontal/linear', () => {
     const axis: AxisProps = {
       domain: [0, 1],
@@ -18,6 +24,7 @@ describe('manageViewport()', () => {
       positionRight: 2,
       positionBottom: 3,
       positionLeft: 4,
+      config,
     })!;
     const res = manageViewport(800, 600, cartesian, viewportStyleConfig);
     const exp = { numTicks: 10 };
@@ -38,6 +45,7 @@ describe('manageViewport()', () => {
       positionRight: 2,
       positionBottom: 3,
       positionLeft: 4,
+      config,
     })!;
     const res = manageViewport(800, 600, cartesian, viewportStyleConfig);
     const exp = { numTicks: 2 };
@@ -59,6 +67,7 @@ describe('manageViewport()', () => {
       positionRight: 2,
       positionBottom: 3,
       positionLeft: 4,
+      config,
     })!;
     const res = manageViewport(800, 600, cartesian, viewportStyleConfig);
     const exp = { numTicks: 10 };

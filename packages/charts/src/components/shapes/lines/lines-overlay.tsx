@@ -48,7 +48,7 @@ export const LinesOverlay: React.FC = () => {
     renderer,
     showMarker,
     showMarkerLabel,
-    updatedData,
+    data,
   } = useLines();
 
   const dynamicClassName = useCallback((overLegend: string, dataKey: string) => ((overLegend === dataKey || overLegend === '')
@@ -61,7 +61,7 @@ export const LinesOverlay: React.FC = () => {
     <>
       {overlay.dataKey!.map((dataKey: string, di: number) => {
         const subPaths = createSubPaths(
-          updatedData,
+          data,
           d => _.isNil(getValueFromObjectByPath(d, dataKey)),
         );
 
