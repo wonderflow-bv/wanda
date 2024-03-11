@@ -58,7 +58,7 @@ export const themeLight: Theme = {
   },
   bars: {
     backgroundColor: colorPaletteNeutrals.dimmed1,
-    overlayColor: colorPaletteNeutrals.white,
+    overlayColor: colorPaletteNeutrals.dimmed1,
   },
   brush: {
     handle: {

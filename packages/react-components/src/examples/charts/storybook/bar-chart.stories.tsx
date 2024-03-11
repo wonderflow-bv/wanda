@@ -1,13 +1,16 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
+import { Card } from '@/components';
+
 // import { CartesianChartLayout, BarChart, BarChartProps } from '@wonderflow/charts';
 import { BarChart, BarChartProps, CartesianChartLayout } from '../../../../../charts/src';
 import {
   channels,
   channelsB,
-  feedbackCount, proCons,
+  feedbackCount, feedbackCountGaps, proCons,
 } from '../mock-data';
 import { positiveNegative } from '../mock-data/positiveNegative';
+import styles from './sb-charts.module.css';
 
 const story: ComponentMeta<typeof BarChart> = {
   title: 'Charts/Bar Chart',
@@ -209,4 +212,60 @@ withVerticalFixedBars.args = {
   },
   fixedBarSize: true,
   layout: CartesianChartLayout.VERTICAL,
+};
+
+export const withMissingData = Template.bind({});
+withMissingData.args = {
+  data: feedbackCountGaps,
+  subtitle: 'A bar line chart with null values',
+  overlay: {
+    dataKey: ['overlay'],
+    label: 'Overlay',
+  },
+};
+
+export const withCustomBarStyle = Template.bind({});
+withCustomBarStyle.args = {
+  title: 'Multiple Series',
+  subtitle: 'A bar chart with multiple series and custom colors',
+  data: proCons,
+  index: {
+    dataKey: 'date',
+    label: 'Time',
+  },
+  series: {
+    dataKey: ['positive', 'negative', 'neutral'],
+    label: 'Pros & cons',
+    style: [
+      {
+        fill: 'slateGray',
+      },
+      {
+        fill: 'salmon',
+      },
+      {
+        fill: 'lightBlue',
+      },
+    ],
+  },
+};
+
+const WithinCardTemplate: ComponentStory<typeof BarChart> = (args) => {
+  const { theme } = args;
+  return (
+    <Card
+      bordered
+      className={styles.Card}
+      style={{ backgroundColor: theme === 'dark' ? '#202227' : undefined }}
+    >
+      <BarChart {...args} />
+    </Card>
+  );
+};
+
+export const WithinCard = WithinCardTemplate.bind({});
+WithinCard.args = {
+  subtitle: 'A bar chart within a card 75vh and width 100%',
+  hidePadding: true,
+  theme: 'dark',
 };
