@@ -25,7 +25,7 @@ export const useTrendline = < T extends CartesianChartMetadata>() => {
   const { lines: defaultStyle } = useStyleConfigContext();
   const { metadata } = useDataContext<T>();
   const { isHorizontal } = useLayoutContext();
-  const { axis, dimension } = useCartesianContext();
+  const { axis, dimension, hasReversedIndex } = useCartesianContext();
 
   const {
     top, right, bottom, left,
@@ -51,18 +51,34 @@ export const useTrendline = < T extends CartesianChartMetadata>() => {
   const hasTrendlineSeries = Boolean(showTrendline && trendlineSeries?.length);
   const hasTrendlineOverlay = Boolean(showTrendline && trendlineOverlay?.length);
 
-  const getCoordinates = useCallback((from: number, to: number) => (isHorizontal
-    ? {
-      from: {
-        x: 0,
-        y: from,
-      },
-      to: {
-        x: maxWidth,
-        y: to,
-      },
+  const getCoordinates = useCallback((from: number, to: number) => {
+    if (isHorizontal) {
+      return ({
+        from: {
+          x: 0,
+          y: from,
+        },
+        to: {
+          x: maxWidth,
+          y: to,
+        },
+      });
     }
-    : {
+
+    if (hasReversedIndex) {
+      return ({
+        from: {
+          x: from,
+          y: 0,
+        },
+        to: {
+          x: to,
+          y: maxHeight,
+        },
+      });
+    }
+
+    return ({
       from: {
         x: to,
         y: 0,
@@ -71,7 +87,8 @@ export const useTrendline = < T extends CartesianChartMetadata>() => {
         x: from,
         y: maxHeight,
       },
-    }), [isHorizontal, maxHeight, maxWidth]);
+    });
+  }, [isHorizontal, maxHeight, maxWidth, hasReversedIndex]);
 
   return {
     series,
