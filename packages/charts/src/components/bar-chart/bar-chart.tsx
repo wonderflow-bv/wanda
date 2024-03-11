@@ -102,8 +102,8 @@ export type BarChartProps = {
    */
   hidePadding?: boolean;
   /**
-   * When set to `true`, bars will resize up to the max dimension on the horizontal layout,
-   * while they will have fixed size but affecting the total height of the chart on the vertical layout.
+   * If set to `true`, in the horizontal layout the bars resize up to the maximum thickness (default 24px),
+   * while in the vertical layout they have a fixed thickness, forcing the graph to resize in height.
    */
   fixedBarSize?: boolean;
 } & Except<CartesianBaseProps, 'axis' | 'axisFiltered' | 'onBrushChange'>
