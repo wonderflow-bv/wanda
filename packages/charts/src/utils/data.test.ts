@@ -5,12 +5,15 @@ import {
 import {
   computeAverage,
   computeTrendline,
+  extractBarValueFromNestedKey,
   getLabelFromPath,
   getPrimitiveFromObjectByPath,
   getPrimitivesFromObjectArrayByPath,
   getValueFromObjectByPath,
   handleAxisDomainAndScaleType,
   handleChartDomainAndScaleType,
+  mirrorDomain,
+  sortBarsBy,
 } from './data';
 
 const data = [
@@ -500,6 +503,132 @@ describe('computeTrendline()', () => {
       to: 1.05,
     }];
 
+    expect(res).toStrictEqual(exp);
+  });
+});
+
+describe('extractBarValueFromNestedKey()', () => {
+  const barGroup = {
+    bars: [{
+      color: 'red',
+      height: 60,
+      index: 1,
+      key: 'name.test',
+      value: undefined,
+      width: 24,
+      x: 20,
+      y: 35,
+    }],
+  };
+
+  const data = [{ name: { test: 15 } }];
+  const scale = () => 10;
+
+  it('should return for horizontal layout', () => {
+    const res = extractBarValueFromNestedKey(barGroup, 0, data, scale, 24, true);
+    expect(res).toStrictEqual([{
+      color: 'red',
+      height: 14,
+      index: 1,
+      key: 'name.test',
+      value: 15,
+      width: 24,
+      x: 20,
+      y: 10,
+    }]);
+  });
+
+  it('should return for vertical layout', () => {
+    const res = extractBarValueFromNestedKey(barGroup, 0, data, scale, 24, false);
+    expect(res).toStrictEqual([{
+      color: 'red',
+      height: 60,
+      index: 1,
+      key: 'name.test',
+      value: 15,
+      width: 10,
+      x: 20,
+      y: 35,
+    }]);
+  });
+});
+
+describe('sortBarsBy()', () => {
+  const bars = [
+    {
+      color: 'red',
+      height: 60,
+      index: 1,
+      key: 'A',
+      value: 20,
+      width: 24,
+      x: 20,
+      y: 35,
+    },
+    {
+      color: 'red',
+      height: 60,
+      index: 1,
+      key: 'B',
+      value: 10,
+      width: 24,
+      x: 20,
+      y: 35,
+    }];
+  it('should return same order for "as-is"', () => {
+    const res = sortBarsBy(bars, 'as-is', true);
+    const exp = { key: 'A', value: 20 };
+    expect(res[0].key).toStrictEqual(exp.key);
+    expect(res[0].value).toStrictEqual(exp.value);
+  });
+
+  it('should return right order for "descending-key"', () => {
+    const res = sortBarsBy(bars, 'descending-key', true);
+    expect(res[0].key).toStrictEqual('A');
+    expect(res[1].key).toStrictEqual('B');
+  });
+
+  it('should return right order for "ascending-key"', () => {
+    const res = sortBarsBy(bars, 'ascending-key', true);
+    expect(res[0].key).toStrictEqual('B');
+    expect(res[1].key).toStrictEqual('A');
+  });
+
+  it('should return right order for "descending-value"', () => {
+    const res = sortBarsBy(bars, 'descending-value', true);
+    expect(res[0].value).toStrictEqual(10);
+    expect(res[1].value).toStrictEqual(20);
+  });
+
+  it('should return right order for "ascending-value"', () => {
+    const res = sortBarsBy(bars, 'ascending-value', true);
+    expect(res[0].value).toStrictEqual(20);
+    expect(res[1].value).toStrictEqual(10);
+  });
+
+  it('should return right order for "descending-key"', () => {
+    const res = sortBarsBy(bars, 'descending-key', false);
+    expect(res[0].key).toStrictEqual('A');
+    expect(res[1].key).toStrictEqual('B');
+  });
+});
+
+describe('mirrorDomain()', () => {
+  it('should return the right mirrored domain for numbers', () => {
+    const res = mirrorDomain([0, 100]);
+    const exp = [-100, 100];
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return the same domain for other than number', () => {
+    const res = mirrorDomain(['0', '100']);
+    const exp = ['0', '100'];
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return 0,0 for NaN values', () => {
+    const res = mirrorDomain([NaN, NaN]);
+    const exp = [-0, 0];
     expect(res).toStrictEqual(exp);
   });
 });
