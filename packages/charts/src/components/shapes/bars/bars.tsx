@@ -37,8 +37,8 @@ export const Bars: React.FC = () => {
     >
       <Group data-testid="bars">
         <BarsTrendline />
-        <BarsSeries />
-        <BarsOverlay />
+        <BarsSeries data-testid="bars-series" />
+        <BarsOverlay data-testid="bars-overlay" />
       </Group>
 
       {isBrowser && <BarsTooltip />}

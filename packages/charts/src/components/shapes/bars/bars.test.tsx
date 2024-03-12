@@ -29,16 +29,36 @@ const mockMetadata: BarChartMetadata = {
     names: ['A'],
     colors: ['ca'],
     average: undefined,
-    trendline: undefined,
+    trendline: [{
+      name: 'A',
+      slope: 1,
+      intercept: 1,
+      coefficients: [1],
+      score: { r: 1 } as any,
+      trendline: [1],
+      from: 1,
+      to: 1,
+    }],
   },
   overlay: {
     dataKey: ['b'],
     names: ['B'],
     colors: ['ob'],
     average: undefined,
-    trendline: undefined,
+    trendline: [{
+      name: 'A',
+      slope: 1,
+      intercept: 1,
+      coefficients: [1],
+      score: { r: 1 } as any,
+      trendline: [1],
+      from: 1,
+      to: 1,
+    }],
   },
   hidePadding: true,
+  showAverage: true,
+  showTrendline: true,
 };
 
 const mockedAxisSystem: CartesianxAxisSystem | undefined = {
@@ -60,7 +80,7 @@ const mockedAxisSystem: CartesianxAxisSystem | undefined = {
   },
   bottom: {
     domain: ['01-01-2020', '01-01-2024'],
-    scaleType: 'time',
+    scaleType: 'label',
     orientation: 'bottom',
     top: 600,
     left: 0,
@@ -77,7 +97,7 @@ const mockedAxisSystem: CartesianxAxisSystem | undefined = {
 };
 
 describe('<Bars>', () => {
-  it.skip('should render the component', () => {
+  it('should render the component', () => {
     render(
       <ThemeProvider theme="light">
         <LayoutProvider layout={CartesianChartLayout.HORIZONTAL}>
@@ -87,13 +107,16 @@ describe('<Bars>', () => {
             metadata={mockMetadata}
           >
             <CartesianProvider
+              hoveredLegendItem=""
               position={{
                 top: 24, right: 24, bottom: 24, left: 24,
               }}
               dimension={{ maxHeight: 600, maxWidth: 800 }}
               axis={mockedAxisSystem}
-              hoveredLegendItem=""
-              preventTooltipOpening
+              preventTooltipOpening={false}
+              hasReversedIndex={false}
+              hasMirroredDomainsHorizontal={false}
+              hasMirroredDomainsVertical={false}
             >
               <Bars />
             </CartesianProvider>
@@ -101,7 +124,39 @@ describe('<Bars>', () => {
         </LayoutProvider>
       </ThemeProvider>,
     );
-    const element = screen.getByTestId('bars');
-    expect(element).toBeDefined();
+
+    const elementBarsGroup = screen.getByTestId('bars');
+    expect(elementBarsGroup).toBeDefined();
+  });
+  it('should render the component with vertical layout', () => {
+    render(
+      <ThemeProvider theme="light">
+        <LayoutProvider layout={CartesianChartLayout.VERTICAL}>
+          <DataProvider
+            data={[{ date: 0, a: 1, b: 2 }]}
+            filteredData={[{ date: 0, a: 1, b: 2 }]}
+            metadata={mockMetadata}
+          >
+            <CartesianProvider
+              hoveredLegendItem=""
+              position={{
+                top: 24, right: 24, bottom: 24, left: 24,
+              }}
+              dimension={{ maxHeight: 600, maxWidth: 800 }}
+              axis={mockedAxisSystem}
+              preventTooltipOpening={false}
+              hasReversedIndex={false}
+              hasMirroredDomainsHorizontal={false}
+              hasMirroredDomainsVertical={false}
+            >
+              <Bars />
+            </CartesianProvider>
+          </DataProvider>
+        </LayoutProvider>
+      </ThemeProvider>,
+    );
+
+    const elementBarsGroup = screen.getByTestId('bars');
+    expect(elementBarsGroup).toBeDefined();
   });
 });

@@ -27,16 +27,35 @@ const mockMetadata: LineChartMetadata = {
     names: ['A'],
     colors: ['ca'],
     average: undefined,
-    trendline: undefined,
+    trendline: [{
+      name: 'A',
+      slope: 1,
+      intercept: 1,
+      coefficients: [1],
+      score: { r: 1 } as any,
+      trendline: [1],
+      from: 1,
+      to: 1,
+    }],
   },
   overlay: {
     dataKey: ['b'],
     names: ['B'],
     colors: ['ob'],
     average: undefined,
-    trendline: undefined,
+    trendline: [{
+      name: 'B',
+      slope: 1,
+      intercept: 1,
+      coefficients: [1],
+      score: { r: 1 } as any,
+      trendline: [1],
+      from: 1,
+      to: 1,
+    }],
   },
   hidePadding: true,
+  showTrendline: true,
 };
 
 const mockedAxisSystem: CartesianxAxisSystem | undefined = {
@@ -119,6 +138,10 @@ describe('<Lines>', () => {
               }}
               dimension={{ maxHeight: 600, maxWidth: 800 }}
               axis={mockedAxisSystem}
+              preventTooltipOpening={false}
+              hasReversedIndex={false}
+              hasMirroredDomainsHorizontal={false}
+              hasMirroredDomainsVertical={false}
             >
               <Lines />
             </CartesianProvider>
@@ -148,6 +171,10 @@ describe('<Lines>', () => {
               dimension={{ maxHeight: 600, maxWidth: 800 }}
               axis={mockedAxisSystem}
               hoveredLegendItem=""
+              preventTooltipOpening={false}
+              hasReversedIndex={false}
+              hasMirroredDomainsHorizontal={false}
+              hasMirroredDomainsVertical={false}
             >
               <Lines />
             </CartesianProvider>
@@ -177,6 +204,10 @@ describe('<Lines>', () => {
               dimension={{ maxHeight: 600, maxWidth: 800 }}
               axis={mockedAxisSystem}
               hoveredLegendItem=""
+              preventTooltipOpening={false}
+              hasReversedIndex={false}
+              hasMirroredDomainsHorizontal={false}
+              hasMirroredDomainsVertical={false}
             >
               <Lines />
             </CartesianProvider>
@@ -214,6 +245,10 @@ describe('<Lines>', () => {
               dimension={{ maxHeight: 600, maxWidth: 800 }}
               axis={mockedAxisSystem}
               hoveredLegendItem=""
+              preventTooltipOpening={false}
+              hasReversedIndex={false}
+              hasMirroredDomainsHorizontal={false}
+              hasMirroredDomainsVertical={false}
             >
               <Lines />
             </CartesianProvider>
@@ -249,6 +284,10 @@ describe('<Lines>', () => {
               dimension={{ maxHeight: 600, maxWidth: 800 }}
               axis={mockedAxisSystem2}
               hoveredLegendItem=""
+              preventTooltipOpening={false}
+              hasReversedIndex={false}
+              hasMirroredDomainsHorizontal={false}
+              hasMirroredDomainsVertical={false}
             >
               <Lines />
             </CartesianProvider>
