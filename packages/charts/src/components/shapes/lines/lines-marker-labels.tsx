@@ -44,8 +44,8 @@ export const LinesMarkerLabels: React.FC = () => {
     index, showMarkerLabel, series, overlay,
   } = metadata!;
 
-  const indexAxis = isHorizontal ? axis!.bottom : axis!.left;
-  const seriesAxis = isHorizontal ? axis!.left : axis!.bottom;
+  const indexAxis = isHorizontal ? axis.bottom : axis.left;
+  const seriesAxis = isHorizontal ? axis.left : axis.bottom;
   const overlayAxis = isHorizontal ? axis?.right : axis?.top;
 
   const hasMarkerLabel = dimension.maxWidth > viewport.small.maxWidth;

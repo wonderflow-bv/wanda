@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
+import { CartesianChartLayout } from '../../types/cartesian';
 import { BarChart } from './bar-chart';
 
 global.ResizeObserver = jest.fn().mockImplementation(() => ({
@@ -16,6 +17,12 @@ describe('<BarChart>', () => {
       series={{ dataKey: ['value'] }}
       overlay={{ dataKey: ['value'] }}
       title="Title"
+      subtitle="test"
+      sortBy="as-is"
+      showAverage
+      showTrendline
+      fixedBarSize
+      layout={CartesianChartLayout.HORIZONTAL}
     />);
 
     const element = screen.getByTestId('cartesian');
