@@ -10,7 +10,7 @@ global.ResizeObserver = jest.fn().mockImplementation(() => ({
 }));
 
 describe('<BarChart>', () => {
-  it.skip('should render the component', () => {
+  it('should render the component', () => {
     render(<BarChart
       data={[{ date: 'a', value: 1 }, { date: 'b', value: 2 }]}
       index={{ dataKey: 'date' }}
@@ -23,6 +23,23 @@ describe('<BarChart>', () => {
       showTrendline
       fixedBarSize
       layout={CartesianChartLayout.HORIZONTAL}
+    />);
+
+    const element = screen.getByTestId('cartesian');
+    expect(element).toBeDefined();
+  });
+
+  it('should render the component with props', () => {
+    render(<BarChart
+      data={[{ date: 'a', value: 1 }, { date: 'b', value: 2 }]}
+      index={{ dataKey: 'date' }}
+      series={{ dataKey: ['value'] }}
+      overlay={{ dataKey: ['value'] }}
+      title="Title"
+      subtitle="test"
+      theme="dark"
+      sortBy="descending-value"
+      layout={CartesianChartLayout.VERTICAL}
     />);
 
     const element = screen.getByTestId('cartesian');
