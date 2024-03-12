@@ -66,7 +66,7 @@ export const Loader = ({
         />
 
         {isLineChart && (<LineChartLoader width={width} height={height} />)}
-        {isBarChart && (<BarChartLoader />)}
+        {isBarChart && (<BarChartLoader width={width} height={height} />)}
       </Group>
     </Group>
   );
