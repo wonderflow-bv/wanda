@@ -28,20 +28,30 @@ import { BarsTrendline } from './bars-trendline';
 export const Bars: React.FC = () => {
   const { position } = useCartesianContext();
   const { top, left } = position;
-  const { isBrowser } = useSSR();
+  const { isBrowser, isServer } = useSSR();
 
   return (
     <Group
       top={top}
       left={left}
     >
-      <Group data-testid="bars">
-        <BarsTrendline />
-        <BarsSeries data-testid="bars-series" />
-        <BarsOverlay data-testid="bars-overlay" />
-      </Group>
+      {isServer && (
+        <Group data-testid="bars">
+          <BarsTrendline />
+          <BarsSeries data-testid="bars-series" />
+          <BarsOverlay data-testid="bars-overlay" />
+        </Group>
+      )}
 
-      {isBrowser && <BarsTooltip />}
+      {isBrowser && (
+        <BarsTooltip>
+          <Group data-testid="bars">
+            <BarsTrendline />
+            <BarsSeries data-testid="bars-series" />
+            <BarsOverlay data-testid="bars-overlay" />
+          </Group>
+        </BarsTooltip>
+      )}
 
       <BarsAverage />
 

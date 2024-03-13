@@ -56,7 +56,7 @@ type TooltipData = {
   barIndicatorSize: number;
 }
 
-export const BarsTooltip: React.FC = () => {
+export const BarsTooltip: React.FC = ({ children }: { children: React.ReactNode }) => {
   const theme = useThemeContext();
   const { bars, themes } = useStyleConfigContext();
 
@@ -149,35 +149,17 @@ export const BarsTooltip: React.FC = () => {
   return (
     <>
       {hasTooltip && (
-        <>
-          <rect
-            x={0}
-            y={0}
-            width={isHorizontal ? tooltipData?.barIndicatorPos : xMax}
-            height={isHorizontal ? yMax : tooltipData?.barIndicatorPos}
-            fill={themes[theme].bars.overlayColor}
-            fillOpacity={bars.overlay.opacity}
-            filter="url(#filter_multiply)"
-          />
-          <rect
-            x={isHorizontal
-              ? Number(tooltipData?.barIndicatorPos) + Number(tooltipData?.barIndicatorSize)
-              : 0}
-            y={isHorizontal
-              ? 0
-              : Number(tooltipData?.barIndicatorPos) + Number(tooltipData?.barIndicatorSize)}
-            width={isHorizontal
-              ? xMax - Number(tooltipData?.barIndicatorPos) - Number(tooltipData?.barIndicatorSize)
-              : xMax}
-            height={isHorizontal
-              ? yMax
-              : yMax - -Number(tooltipData?.barIndicatorPos) - Number(tooltipData?.barIndicatorSize)}
-            fill={themes[theme].bars.overlayColor}
-            fillOpacity={bars.overlay.opacity}
-            filter="url(#filter_multiply)"
-          />
-        </>
+        <rect
+          x={isHorizontal ? tooltipData?.barIndicatorPos : 0}
+          y={isHorizontal ? 0 : tooltipData?.barIndicatorPos}
+          width={isHorizontal ? tooltipData?.barIndicatorSize : xMax}
+          height={isHorizontal ? yMax : tooltipData?.barIndicatorSize}
+          fill={themes[theme].bars.overlayColor}
+          fillOpacity={bars.overlay.opacity}
+        />
       )}
+
+      {children}
 
       <rect
         id="transparent-overlay-layer"
