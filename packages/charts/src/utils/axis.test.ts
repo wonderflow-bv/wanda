@@ -5,6 +5,7 @@ import {
   AxisOffsetProps, AxisOrientation, AxisProps,
 } from '../types';
 import {
+  clampLinearDomain,
   computeAxisOffset,
   computeAxisProperties,
   computeAxisStyleConfig,
@@ -1219,6 +1220,24 @@ describe('handleChartAxisLayout()', () => {
         bottom: { domain: [0, 1], orientation: 'bottom', scaleType: 'linear' }, left: { domain: [0, 1], orientation: 'left', scaleType: 'linear' }, right: undefined, top: undefined,
       },
     };
+    expect(res).toStrictEqual(exp);
+  });
+});
+
+describe('clampLinearDomain()', () => {
+  it('should return [0,max] for positive only values', () => {
+    const res = clampLinearDomain([10, 100]);
+    const exp = [0, 100];
+    expect(res).toStrictEqual(exp);
+  });
+  it('should return [0,max] for negative only values', () => {
+    const res = clampLinearDomain([-10, -100]);
+    const exp = [-100, 0];
+    expect(res).toStrictEqual(exp);
+  });
+  it('should return domain for both positive and negative values', () => {
+    const res = clampLinearDomain([-10, 100]);
+    const exp = [-10, 100];
     expect(res).toStrictEqual(exp);
   });
 });
