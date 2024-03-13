@@ -9,7 +9,7 @@ import {
 } from '../mock-data';
 import styles from './sb-charts.module.css';
 
-const FakeMenu = (
+export const FakeMenu = (
   <Menu>
     <Menu.Item
       autoFocus

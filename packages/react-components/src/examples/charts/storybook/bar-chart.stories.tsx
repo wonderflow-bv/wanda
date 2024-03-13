@@ -7,9 +7,10 @@ import { BarChart, BarChartProps, CartesianChartLayout } from '../../../../../ch
 import {
   channels,
   channelsB,
-  feedbackCount, feedbackCountGaps, proCons,
+  feedbackCount, feedbackCountGaps, proCons, products,
 } from '../mock-data';
 import { positiveNegative } from '../mock-data/positiveNegative';
+import { FakeMenu } from './line-chart.stories';
 import styles from './sb-charts.module.css';
 
 const story: ComponentMeta<typeof BarChart> = {
@@ -19,9 +20,9 @@ const story: ComponentMeta<typeof BarChart> = {
     title: 'Bar Chart',
     subtitle: 'A simple bar chart',
     sortBy: 'as-is',
-    isStacked: false,
+    // isStacked: false,
+    // showLabel: false,
     isLoading: false,
-    showLabel: false,
     showAverage: false,
     showTrendline: false,
     showBrush: false,
@@ -248,6 +249,44 @@ withCustomBarStyle.args = {
       },
     ],
   },
+};
+
+export const withBrush = Template.bind({});
+withBrush.args = {
+  data: products,
+  subtitle: 'A bar chart with twelve series',
+  sortBy: 'descending-value',
+  showBackground: true,
+  showBrush: true,
+  index: {
+    dataKey: 'date',
+    label: 'Year',
+  },
+  series: {
+    dataKey: [
+      'QN95B Neo QLED 4K TV',
+      'Q800A Neo QLED 4K TV',
+      'Q60A QLED 4K TV',
+      'C2 OLED 4K TV',
+      'G2 OLED Evo 4K TV',
+      'B2 OLED 4K TV',
+      'A95K QD-OLED 4K TV',
+      'X95J LED 4K TV',
+      'X85J LED 4K TV',
+      'R6485Q Mini-LED QLED 4K TV',
+      'S546Q 4K QLED TV',
+      'S435 4K Roku TV',
+    ],
+    label: 'Product Units',
+    tickFormat: (l: any) => `${l}K`,
+    domain: [0, 1000],
+    hideZero: true,
+  },
+};
+
+export const WithMenu = Template.bind({});
+WithMenu.args = {
+  menu: FakeMenu,
 };
 
 const WithinCardTemplate: ComponentStory<typeof BarChart> = (args) => {
