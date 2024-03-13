@@ -47,7 +47,7 @@ export const LineChartExample = () => {
           rename: (_, i) => (i ? 'ProductB' : 'ProductA'),
           domain: [0, 350],
         }}
-        showAverage
+        showTrendline
         hidePadding
       />
     </Card>

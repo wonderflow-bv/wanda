@@ -1,9 +1,9 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { BarChart, BarChartProps, CartesianChartLayout } from '@wonderflow/charts';
 
 import { Card } from '@/components';
 
-// import { CartesianChartLayout, BarChart, BarChartProps } from '@wonderflow/charts';
-import { BarChart, BarChartProps, CartesianChartLayout } from '../../../../../charts/src';
+// import { BarChart, BarChartProps, CartesianChartLayout } from '../../../../../charts/src';
 import {
   channels,
   channelsB,

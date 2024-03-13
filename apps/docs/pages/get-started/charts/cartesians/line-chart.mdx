@@ -26,7 +26,7 @@ export const getStaticProps = () =>
 
 ## Anatomy
 
-```tsx lines="21-38"
+```tsx lines="2, 21-38"
 import { Card } from "@wonderflow/react-components";
 import { LineChart } from "@wonderflow/charts";
 import { data } from "../api/.."
@@ -62,7 +62,7 @@ export default () => {
         rename: (_, i) => i ? 'ProductB' : 'ProductA',
         domain: [0, 350]
         }}
-        showAverage
+        showTrendline
         hidePadding
       />
     </Card>

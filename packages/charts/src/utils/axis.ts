@@ -467,7 +467,7 @@ export const hasVerticalTickLabel = (
 };
 
 export const handleVerticalTickLabelTransform = (
-  t: any,
+  _: any,
   isVertical: boolean,
   axis: CartesianAxis,
 ) => {

@@ -2,7 +2,7 @@ import ChartsNav from "@/data/charts-nav";
 import { getLayoutProps } from "@/utils/get-layout-props";
 import { PropsBlocks } from "@/components/doc/props-blocks";
 import { KeyTable } from "@/components/shared/key-table";
-import { LineChartExample } from '../../../../src/examples/line-chart-example';
+import { BarChartExample } from '../../../../src/examples/bar-chart-example';
 
 export const getStaticProps = () =>
   getLayoutProps({
@@ -22,74 +22,37 @@ export const getStaticProps = () =>
     }
   });
 
-<LineChartExample />
+<BarChartExample />
 
 ## Anatomy
 
-```tsx lines="21-38"
+```tsx lines="2, 19-42"
 import { Card } from "@wonderflow/react-components";
 import { BarChart } from "@wonderflow/charts";
 import { data } from "../api/.."
 
 const data = [
-        {
-    continent: 'Europe',
-    'QN95B Neo QLED 4K TV': 875,
-    'Q800A Neo QLED 4K TV': 715,
-    'Q60A QLED 4K TV': 184,
-    'C2 OLED 4K TV': 428,
-    'G2 OLED Evo 4K TV': 137,
-    'B2 OLED 4K TV': 117,
-    'A95K QD-OLED 4K TV': 738,
-    'X95J LED 4K TV': 811,
-    'X85J LED 4K TV': 101,
-    'R6485Q Mini-LED QLED 4K TV': 47,
-    'S546Q 4K QLED TV': 698,
-    'S435 4K Roku TV': 308,
-  },
-  {
-    continent: 'America',
-    'QN95B Neo QLED 4K TV': 859,
-    'Q800A Neo QLED 4K TV': 507,
-    'Q60A QLED 4K TV': 123,
-    'C2 OLED 4K TV': 322,
-    'G2 OLED Evo 4K TV': 146,
-    'B2 OLED 4K TV': 132,
-    'A95K QD-OLED 4K TV': 605,
-    'X95J LED 4K TV': 768,
-    'X85J LED 4K TV': 224,
-    'R6485Q Mini-LED QLED 4K TV': 61,
-    'S546Q 4K QLED TV': 741,
-    'S435 4K Roku TV': 259,
-  },
-  {
-    continent: 'Asia',
-    'QN95B Neo QLED 4K TV': 633,
-    'Q800A Neo QLED 4K TV': 413,
-    'Q60A QLED 4K TV': 237,
-    'C2 OLED 4K TV': 384,
-    'G2 OLED Evo 4K TV': 144,
-    'B2 OLED 4K TV': 530,
-    'A95K QD-OLED 4K TV': 833,
-    'X95J LED 4K TV': 605,
-    'X85J LED 4K TV': 316,
-    'R6485Q Mini-LED QLED 4K TV': 92,
-    'S546Q 4K QLED TV': 616,
-    'S435 4K Roku TV': 184,
-  },
-        ]
+         {
+      continent: 'Europe',
+      'QN95B Neo QLED 4K TV': 875,
+      'Q800A Neo QLED 4K TV': 715,
+      'Q60A QLED 4K TV': 184,
+      'C2 OLED 4K TV': 428,
+      'G2 OLED Evo 4K TV': 137,
+      'B2 OLED 4K TV': 117,
+    }, ...]
 
 export default () => {
   return (
     <Card>
       <BarChart
-        title='Products Performance'
-        subtitle='trends by Europe/America/Asia'
-        layout='vertical'
+        title="Products performance"
+        subtitle="trends by Europe/America/Asia"
         data={data}
+        sortBy="descending-value"
         index={{
           dataKey: 'continent',
-          label: 'Year',
+          label: 'Continent',
         }}
         series={{
           dataKey: [
@@ -99,17 +62,12 @@ export default () => {
             'C2 OLED 4K TV',
             'G2 OLED Evo 4K TV',
             'B2 OLED 4K TV',
-            'A95K QD-OLED 4K TV',
-            'X95J LED 4K TV',
-            'X85J LED 4K TV',
-            'R6485Q Mini-LED QLED 4K TV',
-            'S546Q 4K QLED TV',
-            'S435 4K Roku TV'],
-          label: 'Products Code',
+          ],
+          label: 'Product Units',
+          domain: [0, 1000],
+          hideZero: true,
         }}
-        showTrendline
-        reverseIndex
-        hidePadding
+        showAverage
       />
     </Card>
   );
@@ -263,6 +221,4 @@ export default () => {
       required: false,
       description: "If set to `true`, in the horizontal layout the bars resize up to the maximum thickness (default 24px), while in the vertical layout they have a fixed thickness, forcing the graph to resize in height.",
     },
-  ]}
-/>
-
+  ]}/>

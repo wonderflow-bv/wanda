@@ -1,9 +1,9 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { CartesianBase } from '@wonderflow/charts';
 
-// import { CartesianBase } from '@wonderflow/charts';
 import { InfoState, Stack } from '@/components';
 
-import { CartesianBase } from '../../../../../charts/src';
+// import { CartesianBase } from '../../../../../charts/src';
 import styles from './sb-charts.module.css';
 
 const story: ComponentMeta<typeof CartesianBase> = {
