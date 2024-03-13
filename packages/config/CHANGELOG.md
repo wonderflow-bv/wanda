@@ -1,5 +1,11 @@
 # @wonderflow/config
 
+## 13.0.0
+
+### Patch Changes
+
+- @wonderflow/tokens@13.0.0
+
 ## 12.11.0
 
 ### Patch Changes
