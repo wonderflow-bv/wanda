@@ -20,9 +20,11 @@ import { CartesianAxis } from '../types/axis';
 import { BarChartMetadata } from '../types/bar-chart';
 import { Bar, BarsStyleConfig } from '../types/bars';
 import { Data } from '../types/main';
+import { clampLinearDomain } from './axis';
 
 export const getBarSize = (bar: Bar, axis: CartesianAxis, isHorizontal: boolean) => {
-  const min = _.min(axis.domain);
+  const clampedDomain = clampLinearDomain(axis.domain as number[]);
+  const min = _.min(clampedDomain);
   const scaleZero = axis.scale(0 as any) ?? 0;
   const scaleMin = axis.scale(min as any) ?? 0;
   const diffNegative = scaleMin - scaleZero;
