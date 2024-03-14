@@ -137,7 +137,8 @@ export default () => {
 `{
   dataKey: string[];
   style?: Array<LineStyle | undefined>;
-  rename?: (...args: any) => string;
+  rename?: (dataKey: string, index?: number) => string;
+  extraData?: (datum: Record<string, any>) => string;
   showBackground?: boolean | undefined;
 } & Partial<AxisProps>`,
       default: "",
@@ -152,7 +153,8 @@ export default () => {
 `{
   dataKey: string[];
   style?: Array<LineStyle | undefined>;
-  rename?: (...args: any) => string;
+  rename?: (dataKey: string, index?: number) => string;
+  extraData?: (datum: Record<string, any>) => string;
   showBackground?: boolean | undefined;
 } & Partial<AxisProps>`,
       default: "",
@@ -192,18 +194,12 @@ export default () => {
       description: "Prevent from displaying the tooltip on the chart when `true`.",
     },
     {
-      name: "tooltip",
-      typeLink: "/get-started/charts/cartesians/bar-chart#prop-tooltip",
-      type: ["BarChartTooltip"],
-      typeValue:
-`{
-  extraSeriesData?: (...args: any) => string;
-  extraOverlayData?: (...args: any) => string;
-  extraContent?:React.ReactNode;
-}`,
+      name: "tooltipExtraContent",
+      typeLink: "/get-started/charts/cartesians/line-chart#tooltipExtraContent",
+      type: ["ReactNode"],
       default: "",
       required: false,
-      description: "Set extra data or custom content to be displayed in the tooltip.",
+      description: "Set extra custom content to be displayed below the default information.",
     },
     {
       name: "hidePadding",
