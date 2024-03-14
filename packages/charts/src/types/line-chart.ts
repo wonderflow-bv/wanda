@@ -24,13 +24,8 @@ export type LineChartIndex = Partial<AxisProps> & {
 export type LineChartSeries = Partial<AxisProps> & {
   dataKey: string[];
   style?: Array<LineStyle | undefined>;
-  rename?: (...args: any) => string;
-};
-
-export type LineChartTooltip = {
-  extraSeriesData?: (...args: any) => string;
-  extraOverlayData?: (...args: any) => string;
-  extraContent?: React.ReactNode;
+  rename?: (dataKey: string, index?: number) => string;
+  extraData?: (datum: Record<string, any>) => string;
 };
 
 export type LineChartRenderType = 'lines' | 'curves' | 'steps';
@@ -50,6 +45,7 @@ export type LineChartMetadata = {
   index: string;
   series: {
     dataKey: string[];
+    extraData?: (datum: Record<string, any>) => string;
     names: string[];
     colors: Array<string | undefined>;
     style?: Array<LineStyle | undefined>;
@@ -58,13 +54,14 @@ export type LineChartMetadata = {
   };
   overlay: {
     dataKey?: string[];
+    extraData?: (datum: Record<string, any>) => string;
     names: string[] | undefined;
     colors: Array<string | undefined> | undefined;
     style?: Array<LineStyle | undefined>;
     average: AverageType | undefined;
     trendline: TrendlineType[] | undefined;
   };
-  tooltip?: LineChartTooltip;
+  tooltipExtraContent?: React.ReactNode;
   preventTooltipDisplay?: boolean;
   hideTooltip?: boolean;
   showAverage?: boolean;

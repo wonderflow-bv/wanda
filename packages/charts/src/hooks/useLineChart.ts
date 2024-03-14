@@ -43,7 +43,7 @@ export const useLineChart = ({
   index,
   series,
   overlay,
-  tooltip,
+  tooltipExtraContent,
   preventTooltipDisplay = false,
   showAverage = false,
   showTrendline = false,
@@ -86,6 +86,7 @@ export const useLineChart = ({
     index: index.dataKey,
     series: {
       dataKey: series.dataKey,
+      extraData: series.extraData,
       names: handleSeriesNames(series),
       colors: handleLineChartSeriesColors(series, paletteSeries),
       style: series.style,
@@ -94,13 +95,14 @@ export const useLineChart = ({
     },
     overlay: {
       dataKey: overlay?.dataKey,
+      extraData: overlay?.extraData,
       names: overlay ? handleSeriesNames(overlay) : undefined,
       colors: overlay ? handleLineChartSeriesColors(overlay, paletteOverlay) : undefined,
       style: overlay?.style,
       average: (overlay?.dataKey && showAverage) ? computeAverage(data, overlay.dataKey) : undefined,
       trendline: (overlay?.dataKey && showTrendline) ? computeTrendline(data, overlay.dataKey) : undefined,
     },
-    tooltip,
+    tooltipExtraContent,
     preventTooltipDisplay,
     showAverage,
     showTrendline,
@@ -122,7 +124,7 @@ export const useLineChart = ({
     showTrendline,
     showMarker,
     showMarkerLabel,
-    tooltip,
+    tooltipExtraContent,
     preventTooltipDisplay,
   ]);
 

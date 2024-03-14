@@ -267,6 +267,7 @@ describe('useBarChart()', () => {
       isStacked: false,
       overlay: {
         average: undefined,
+        extraData: undefined,
         colors: undefined,
         dataKey: undefined,
         names: undefined,
@@ -294,6 +295,7 @@ describe('useBarChart()', () => {
         names: [
           'Value',
         ],
+        extraData: undefined,
         showBackground: undefined,
         style: undefined,
         trendline: undefined,
@@ -304,7 +306,7 @@ describe('useBarChart()', () => {
       showTrendline: false,
       sortBy: 'as-is',
       type: 'BAR_CHART',
-      tooltip: undefined,
+      tooltipExtraContent: undefined,
     };
     expect(metadata).toStrictEqual(res);
   });

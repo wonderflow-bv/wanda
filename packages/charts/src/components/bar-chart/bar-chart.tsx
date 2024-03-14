@@ -28,7 +28,7 @@ import {
 } from '../../types';
 import {
   BarChartIndex,
-  BarChartSeries, BarChartTooltip,
+  BarChartSeries,
 } from '../../types/bar-chart';
 import { CartesianBase, CartesianBaseProps } from '../cartesian-base/cartesian-base';
 
@@ -86,9 +86,9 @@ export type BarChartProps = {
    */
   showBackground?: boolean;
   /**
-   * Set extra data or custom content to be displayed in the tooltip.
+   * Set custom content to be displayed in the tooltip below the default information.
    */
-  tooltip?: BarChartTooltip;
+  tooltipExtraContent?: React.ReactNode;
   /**
    * Prevent from displaying the tooltip on the chart when `true`.
    */
@@ -118,7 +118,7 @@ export const BarChart: React.FC<BarChartProps> = ({
   index,
   series,
   overlay,
-  tooltip,
+  tooltipExtraContent,
   preventTooltipDisplay = false,
   showAverage = false,
   showTrendline = false,
@@ -147,7 +147,7 @@ export const BarChart: React.FC<BarChartProps> = ({
     index,
     series,
     overlay,
-    tooltip,
+    tooltipExtraContent,
     preventTooltipDisplay,
     showAverage,
     showTrendline,

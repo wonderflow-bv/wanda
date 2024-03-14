@@ -44,7 +44,7 @@ export const useBars = () => {
     showBackground: hasBackground,
     fixedBarSize,
     preventTooltipDisplay,
-    tooltip,
+    tooltipExtraContent,
   } = metadata as BarChartMetadata;
 
   const { showBackground: hasBackgroundSeries } = series;
@@ -120,6 +120,6 @@ export const useBars = () => {
     },
     preventTooltipOpening,
     preventTooltipDisplay,
-    tooltip,
+    tooltipExtraContent,
   };
 };

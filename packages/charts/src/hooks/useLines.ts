@@ -29,8 +29,7 @@ export const useLines = () => {
 
   const {
     index, series, renderAs, showMarker, showMarkerLabel, overlay,
-    hideMissingDataConnection, preventTooltipDisplay,
-    tooltip,
+    hideMissingDataConnection, preventTooltipDisplay, tooltipExtraContent,
   } = metadata as LineChartMetadata;
 
   const {
@@ -91,7 +90,7 @@ export const useLines = () => {
     series,
     showMarker,
     showMarkerLabel,
-    tooltip,
+    tooltipExtraContent,
     data,
   };
 };

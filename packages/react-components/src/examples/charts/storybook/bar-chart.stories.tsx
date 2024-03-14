@@ -157,20 +157,18 @@ withNestedData.args = {
   },
   series: {
     dataKey: ['1 star.value', '2 stars.value', '3 stars.value', '4 stars.value', '5 stars.value'],
+    extraData: (datum: Record<string, any>) => `${datum.percentage}%`,
     label: 'Feedback count',
     domain: [0, 4000],
   },
   overlay: {
     dataKey: ['overlay.value'],
+    extraData: (datum: Record<string, any>) => `${datum.percentage}%`,
     rename: _ => 'Some KPI',
     label: 'Some KPI',
     domain: [0, 5],
   },
-  tooltip: {
-    extraSeriesData: (series: any) => `${series.percentage}%`,
-    extraOverlayData: (overlay: any) => `${overlay.percentage}%`,
-    extraContent: <div>some extra content</div>,
-  },
+  tooltipExtraContent: <div>some extra content</div>,
 };
 
 export const withBackground = Template.bind({});

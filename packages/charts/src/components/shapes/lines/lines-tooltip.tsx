@@ -62,7 +62,7 @@ export const LinesTooltip: React.FC = () => {
 
   const {
     index,
-    tooltip,
+    tooltipExtraContent,
     series,
     overlay,
     preventTooltipDisplay,
@@ -244,9 +244,9 @@ export const LinesTooltip: React.FC = () => {
                     </div>
 
                     <div>
-                      {tooltip?.extraSeriesData && (
+                      {series?.extraData && (
                         <p>
-                          {tooltip.extraSeriesData(_.at(tooltipData?.data, getLabelFromPath(dataKey))[0])}
+                          {series.extraData(_.at(tooltipData?.data, getLabelFromPath(dataKey))[0])}
                         </p>
                       )}
                     </div>
@@ -271,9 +271,9 @@ export const LinesTooltip: React.FC = () => {
                     </div>
 
                     <div>
-                      {tooltip?.extraSeriesData && (
+                      {overlay?.extraData && (
                         <p>
-                          {tooltip.extraSeriesData(_.at(tooltipData?.data, getLabelFromPath(dataKey))[0])}
+                          {overlay.extraData(_.at(tooltipData?.data, getLabelFromPath(dataKey))[0])}
                         </p>
                       )}
                     </div>
@@ -290,12 +290,12 @@ export const LinesTooltip: React.FC = () => {
               </ul>
             </div>
 
-            { (tooltip?.extraContent || !tooltipData?.hasData) && (
+            { (tooltipExtraContent || !tooltipData?.hasData) && (
               <div
                 className={ExtraContent}
                 style={{ borderColor: tooltipTheme[theme].separatorStroke }}
               >
-                {tooltip?.extraContent && tooltip.extraContent}
+                {tooltipExtraContent}
 
                 {!tooltipData?.hasData && <p className={NoData}>No data available</p>}
               </div>

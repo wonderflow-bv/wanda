@@ -180,22 +180,20 @@ withNestedData.args = {
   },
   series: {
     dataKey: ['1 star.value', '2 stars.value', '3 stars.value', '4 stars.value', '5 stars.value'],
+    extraData: (datum: Record<string, any>) => `${datum.percentage}%`,
     label: 'Feedback count',
-    rename: (_: string, i: number) => Array(i + 1).fill('⭐').join(),
+    rename: (_, i) => Array(i! + 1).fill('⭐').join(),
   },
   overlay: {
     dataKey: ['overlay.value'],
+    extraData: (datum: Record<string, any>) => `${datum.percentage}%`,
     label: 'TGW',
     domain: [0, 5],
     style: [{
       strokeDasharray: '2 4',
     }],
   },
-  tooltip: {
-    extraSeriesData: (series: any) => `${series.percentage}%`,
-    extraOverlayData: (overlay: any) => `${overlay.percentage}%`,
-    extraContent: <div>some extra content</div>,
-  },
+  tooltipExtraContent: <div>some extra content</div>,
   renderAs: 'lines',
   layout: CartesianChartLayout.VERTICAL,
   showMarker: true,

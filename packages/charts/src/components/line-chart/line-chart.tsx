@@ -29,7 +29,7 @@ import {
 } from '../../types';
 import {
   LineChartIndex,
-  LineChartRenderType, LineChartSeries, LineChartTooltip,
+  LineChartRenderType, LineChartSeries,
 } from '../../types/line-chart';
 import { CartesianBase, CartesianBaseProps } from '../cartesian-base/cartesian-base';
 
@@ -71,9 +71,9 @@ export type LineChartProps = {
    */
   showTrendline?: boolean;
   /**
-   * Set extra data or custom content to be displayed in the `tooltip`.
+   * Set custom content to be displayed in the tooltip below the default information.
    */
-  tooltip?: LineChartTooltip;
+  tooltipExtraContent?: React.ReactNode;
   /**
    * Prevent from displaying the tooltip on the chart when `true`.
    */
@@ -104,7 +104,7 @@ export const LineChart = forwardRef<HTMLElement, LineChartProps>(({
   index,
   series,
   overlay,
-  tooltip,
+  tooltipExtraContent,
   preventTooltipDisplay = false,
   showAverage = false,
   showTrendline = false,
@@ -130,7 +130,7 @@ export const LineChart = forwardRef<HTMLElement, LineChartProps>(({
     index,
     series,
     overlay,
-    tooltip,
+    tooltipExtraContent,
     preventTooltipDisplay,
     hidePadding,
     showAverage,

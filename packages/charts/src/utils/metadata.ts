@@ -22,17 +22,17 @@ import { getLabelFromPath } from './data';
 
 type ChartSeries = LineChartSeries | BarChartSeries;
 
-export const handleSeriesNames = (
-  series: ChartSeries,
-) => series.dataKey.map((s: string, i: number) => {
-  const renamed = series.rename ? series.rename(s, i) : getLabelFromPath(s);
-  return _.startCase(renamed);
-});
+export const handleSeriesNames = <T extends ChartSeries>(
+  series: T,
+): string[] => series.dataKey.map((s: string, i: number) => {
+    const renamed = series.rename ? series.rename(s, i) : getLabelFromPath(s);
+    return _.startCase(renamed);
+  });
 
 export const handleLineChartSeriesColors = (
   series: LineChartSeries,
   palette: string[],
-) => series.dataKey.map((_: string, i: number) => (
+): string[] => series.dataKey.map((_: string, i: number) => (
   series.style?.[i]?.stroke ?? palette[i % palette.length]
 ));
 
