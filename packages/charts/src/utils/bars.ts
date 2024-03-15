@@ -105,7 +105,7 @@ export const getHeightForVerticalChartWithFixedBarSize = (
 export const getDomainStackSeries = (data: Data, dataKeys: string[]) => {
   const domainStackSum = data.map((datum) => {
     const values: number[] = [];
-    dataKeys.forEach(k => values.push(datum[k]));
+    dataKeys.forEach(k => values.push(_.at(datum, k)[0]));
     return _.sum(values);
   });
 
