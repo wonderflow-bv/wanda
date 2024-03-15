@@ -20,7 +20,7 @@ const story: ComponentMeta<typeof BarChart> = {
     title: 'Bar Chart',
     subtitle: 'A simple bar chart',
     sortBy: 'as-is',
-    // isStacked: false,
+    isStacked: false,
     // showLabel: false,
     isLoading: false,
     showAverage: false,
@@ -114,6 +114,24 @@ withMultipleSeries.args = {
   },
 };
 
+export const withMultipleSeriesStack = Template.bind({});
+withMultipleSeriesStack.args = {
+  title: 'Multiple Series',
+  subtitle: 'A group bar chart',
+  isStacked: true,
+  data: proCons,
+  index: {
+    dataKey: 'date',
+    label: 'Time',
+  },
+  series: {
+    domain: [0, 140],
+    dataKey: ['positive', 'negative', 'neutral'],
+    label: 'Pros & cons',
+    style: [undefined, undefined, { fill: 'gray' }],
+  },
+};
+
 export const withAverage = Template.bind({});
 withAverage.args = {
   subtitle: 'A bar chart with average',
@@ -168,6 +186,32 @@ withNestedData.args = {
     label: 'Some KPI',
     domain: [0, 5],
   },
+  tooltipExtraContent: <div>some extra content</div>,
+};
+
+export const stackedNestedData = Template.bind({});
+stackedNestedData.args = {
+  title: 'Stacked Bar Chart',
+  subtitle: 'A chart rendered with stacked bars',
+  data: channelsB,
+  isStacked: true,
+  index: {
+    dataKey: 'channel',
+    label: 'Channels',
+  },
+  series: {
+    dataKey: ['1 star.value', '2 stars.value', '3 stars.value', '4 stars.value', '5 stars.value'],
+    extraData: (datum: Record<string, any>) => `${datum.percentage}%`,
+    label: 'Feedback count',
+    domain: [0, 4000],
+  },
+  // overlay: {
+  //   dataKey: ['overlay.value'],
+  //   extraData: (datum: Record<string, any>) => `${datum.percentage}%`,
+  //   rename: _ => 'Some KPI',
+  //   label: 'Some KPI',
+  //   domain: [0, 5],
+  // },
   tooltipExtraContent: <div>some extra content</div>,
 };
 

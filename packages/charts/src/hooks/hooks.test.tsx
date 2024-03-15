@@ -34,6 +34,7 @@ const wrapper = ({ children }: { children: any }) => (
             showBackground: undefined,
             style: undefined,
             trendline: undefined,
+            extraData: undefined,
           },
           preventTooltipDisplay: false,
           series: {
@@ -58,6 +59,7 @@ const wrapper = ({ children }: { children: any }) => (
             showBackground: undefined,
             style: undefined,
             trendline: undefined,
+            extraData: undefined,
           },
           showAverage: true,
           showBackground: true,
@@ -65,7 +67,7 @@ const wrapper = ({ children }: { children: any }) => (
           showTrendline: false,
           sortBy: 'as-is',
           type: Charts.BAR_CHART,
-          tooltip: undefined,
+          tooltipExtraContent: undefined,
         }}
         filteredData={[{ date: '2022', value: 100 }, { date: '2023', value: 90 }]}
       >

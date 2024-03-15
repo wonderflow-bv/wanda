@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import { scaleBand } from '@visx/scale';
-import { useMemo } from 'react';
+import { scaleBand, scaleLinear, scaleOrdinal } from '@visx/scale';
+import { useCallback, useMemo } from 'react';
 
 import {
   useCartesianContext, useDataContext, useLayoutContext, useStyleConfigContext,
@@ -40,6 +40,7 @@ export const useBars = () => {
     series,
     index,
     overlay,
+    isStacked,
     sortBy,
     showBackground: hasBackground,
     fixedBarSize,
@@ -50,7 +51,9 @@ export const useBars = () => {
   const { showBackground: hasBackgroundSeries } = series;
   const { showBackground: hasBackgroundOverlay } = overlay;
 
-  const indexAxis = isHorizontal ? bottom : left;
+  const indexAxis = isHorizontal
+    ? bottom as CartesianAxis
+    : left as CartesianAxis;
 
   const seriesAxis = isHorizontal
     ? left as CartesianAxis
@@ -72,7 +75,7 @@ export const useBars = () => {
     background,
   } = bars;
 
-  const X0Y0 = (d: Record<string, any>) => d[index];
+  const X0Y0 = useCallback((d: Record<string, any>) => d[index], [index]);
 
   const scaleXY0 = scaleBand<string>({
     domain: hasReversedIndex ? data.map(X0Y0).reverse() : data.map(X0Y0),
@@ -94,9 +97,31 @@ export const useBars = () => {
 
   scaleXY1.rangeRound([0, scaleXY0.bandwidth()]);
 
+  const scaleColorStackSeries = useMemo(() => scaleOrdinal({
+    domain: series.dataKey,
+    range: series.colors,
+  }), [series.colors, series.dataKey]);
+
+  const scaleColorStackOverlay = useMemo(() => scaleOrdinal({
+    domain: overlay.dataKey,
+    range: overlay.colors,
+  }), [overlay.colors, overlay.dataKey]);
+
+  const domain = useMemo(() => seriesAxis?.domain ?? [0, 1], [seriesAxis]) as number[];
+
+  const scaleStackSeries = useMemo(() => scaleLinear({
+    domain,
+    nice: true,
+  }), [domain]);
+
+  const [min, max] = domain;
+
+  scaleStackSeries.rangeRound((isHorizontal ? [maxHeight, max] : [min, maxHeight]));
+
   return {
     data,
     isHorizontal,
+    isStacked,
     index,
     series,
     overlay,
@@ -120,6 +145,9 @@ export const useBars = () => {
     },
     preventTooltipOpening,
     preventTooltipDisplay,
+    scaleColorStackSeries,
+    scaleColorStackOverlay,
+    scaleStackSeries,
     tooltipExtraContent,
   };
 };

@@ -16,12 +16,13 @@
 
 import { Group } from '@visx/group';
 
-import { useSSR } from '@/hooks';
+import { useBars, useSSR } from '@/hooks';
 
 import { useCartesianContext } from '../../../providers';
 import { BarsAverage } from './bars-average';
 import { BarsOverlay } from './bars-overlay';
 import { BarsSeries } from './bars-series';
+import { BarsStackSeries } from './bars-stack-series';
 import { BarsTooltip } from './bars-tooltip';
 import { BarsTrendline } from './bars-trendline';
 
@@ -29,6 +30,7 @@ export const Bars: React.FC = () => {
   const { position } = useCartesianContext();
   const { top, left } = position;
   const { isBrowser, isServer } = useSSR();
+  const { isStacked } = useBars();
 
   return (
     <Group
@@ -47,7 +49,10 @@ export const Bars: React.FC = () => {
         <BarsTooltip>
           <Group data-testid="bars">
             <BarsTrendline />
-            <BarsSeries data-testid="bars-series" />
+            {isStacked
+              ? <BarsStackSeries data-testid="bars-stack-series" />
+              : <BarsSeries data-testid="bars-series" />
+            }
             <BarsOverlay data-testid="bars-overlay" />
           </Group>
         </BarsTooltip>
