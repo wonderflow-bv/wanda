@@ -22,10 +22,11 @@ import {
   AverageType,
   AxisProps,
   Bar,
-  Data, LineChartIndex,
-  LineChartSeries, SortingType, TrendlineType,
+  ChartIndex,
+  ChartSeries,
+  Data,
+  SortingType, TrendlineType,
 } from '../types';
-import { BarChartIndex, BarChartSeries } from '../types/bar-chart';
 import { inferScaleTypeFromDomain } from './axis';
 import { formatDate, maxPrecision } from './format';
 import {
@@ -88,10 +89,7 @@ export const mirrorDomain = (domain: Array<NonNullable<string | number>>) => {
 };
 
 export const handleAxisDomainAndScaleType = <
-T extends LineChartIndex
-| LineChartSeries
-| BarChartIndex
-| BarChartSeries>(
+T extends ChartIndex | ChartSeries>(
     data: Data,
     axis: T): Except<AxisProps, 'orientation'> => {
   const hasData = Boolean(data.length);
@@ -163,8 +161,8 @@ T extends LineChartIndex
 };
 
 export const handleChartDomainAndScaleType = <
-T extends LineChartIndex | BarChartIndex,
-U extends LineChartSeries | BarChartSeries>(
+T extends ChartIndex,
+U extends ChartSeries>(
     data: Data,
     index: T,
     series: U,

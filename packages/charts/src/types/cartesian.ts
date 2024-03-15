@@ -18,11 +18,13 @@ import { TickFormatter } from '@visx/axis';
 import { NumberValue } from '@visx/vendor/d3-scale';
 
 import { AxisElementsStyleConfig, AxisOrientation } from './axis';
+import { BarChartIndex, BarChartSeries } from './bar-chart';
 import { BarsStyleConfig } from './bars';
 import { BrushElementStyleConfig } from './brush';
 import { GridStyleConfig } from './grid';
 import { HeadingsStyleConfig } from './headings';
 import { LegendStyleConfig } from './legend';
+import { LineChartIndex, LineChartSeries } from './line-chart';
 import { Background } from './linear-gradient';
 import { LinesStyleConfig } from './lines';
 import { ScaleType } from './main';
@@ -82,3 +84,6 @@ export type CartesianStyleConfig = {
   themes: Themes;
   viewport: ViewportStyleConfig;
 }
+
+export type ChartSeries = LineChartSeries | BarChartSeries;
+export type ChartIndex = LineChartIndex | BarChartIndex;

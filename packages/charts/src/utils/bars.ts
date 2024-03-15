@@ -102,3 +102,14 @@ export const getHeightForVerticalChartWithFixedBarSize = (
   return h;
 };
 
+export const getDomainStackSeries = (data: Data, dataKeys: string[]) => {
+  const domainStackSum = data.map((datum) => {
+    const values: number[] = [];
+    dataKeys.forEach(k => values.push(datum[k]));
+    return _.sum(values);
+  });
+
+  const domainStackSeries = [_.min(domainStackSum)!, _.max(domainStackSum)!];
+
+  return clampLinearDomain(domainStackSeries);
+};

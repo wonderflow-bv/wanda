@@ -22,6 +22,8 @@ import {
 } from '@/providers';
 import { BarChartMetadata, CartesianAxis } from '@/types';
 
+import { getDomainStackSeries } from '../utils/bars';
+
 export const useBars = () => {
   const { data, metadata } = useDataContext<BarChartMetadata>();
   const { isHorizontal } = useLayoutContext();
@@ -107,16 +109,19 @@ export const useBars = () => {
     range: overlay.colors,
   }), [overlay.colors, overlay.dataKey]);
 
-  const domain = useMemo(() => seriesAxis?.domain ?? [0, 1], [seriesAxis]) as number[];
-
   const scaleStackSeries = useMemo(() => scaleLinear({
-    domain,
+    domain: getDomainStackSeries(data, series.dataKey),
     nice: true,
-  }), [domain]);
+  }), [data, series.dataKey]);
 
-  const [min, max] = domain;
+  scaleStackSeries.rangeRound((isHorizontal ? [maxHeight, 0] : [0, maxWidth]));
 
-  scaleStackSeries.rangeRound((isHorizontal ? [maxHeight, max] : [min, maxHeight]));
+  const scaleStackOverlay = useMemo(() => overlay.dataKey && scaleLinear({
+    domain: getDomainStackSeries(data, overlay.dataKey),
+    nice: true,
+  }), [data, overlay.dataKey]);
+
+  scaleStackOverlay?.rangeRound((isHorizontal ? [maxHeight, 0] : [0, maxWidth]));
 
   return {
     data,
@@ -148,6 +153,7 @@ export const useBars = () => {
     scaleColorStackSeries,
     scaleColorStackOverlay,
     scaleStackSeries,
+    scaleStackOverlay,
     tooltipExtraContent,
   };
 };

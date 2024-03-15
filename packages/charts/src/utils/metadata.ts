@@ -16,11 +16,9 @@
 
 import _ from 'lodash';
 
-import { LineChartSeries } from '../types';
+import { ChartSeries, LineChartSeries } from '../types';
 import { BarChartSeries } from '../types/bar-chart';
 import { getLabelFromPath } from './data';
-
-type ChartSeries = LineChartSeries | BarChartSeries;
 
 export const handleSeriesNames = <T extends ChartSeries>(
   series: T,
