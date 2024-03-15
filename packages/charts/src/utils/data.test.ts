@@ -11,7 +11,7 @@ import {
   getPrimitivesFromObjectArrayByPath,
   getValueFromObjectByPath,
   handleAxisDomainAndScaleType,
-  handleChartDomainAndScaleType,
+  handleLineChartDomainAndScaleType,
   mirrorDomain,
   sortBarsBy,
 } from './data';
@@ -248,7 +248,7 @@ describe('handleAxisDomainAndScaleType()', () => {
     const res = handleAxisDomainAndScaleType(data, axis);
     const exp = {
       scaleType: 'linear',
-      domain: [3, 105],
+      domain: [0, 105],
     };
     expect(res).toStrictEqual(exp);
   });
@@ -354,18 +354,18 @@ describe('handleChartDomainAndScaleType()', () => {
     const index: LineChartIndex = { dataKey: 'date' };
     const series: LineChartSeries = { dataKey: ['value', 'percentage'] };
     const overlay: LineChartSeries = { dataKey: ['overlay'] };
-    const res = handleChartDomainAndScaleType(data, index, series, overlay);
+    const res = handleLineChartDomainAndScaleType(data, index, series, overlay);
     const exp = {
       index: {
         domain: ['01-01-2000', '01-01-2010', '01-01-2020'],
         scaleType: 'time',
       },
       series: {
-        domain: [20, 105],
+        domain: [0, 105],
         scaleType: 'linear',
       },
       overlay: {
-        domain: [12, 30],
+        domain: [0, 30],
         scaleType: 'linear',
       },
     };
@@ -395,14 +395,14 @@ describe('handleChartDomainAndScaleType()', () => {
     const index: LineChartIndex = { dataKey: 'date' };
     const series: LineChartSeries = { dataKey: ['value', 'percentage'] };
     const overlay = undefined;
-    const res = handleChartDomainAndScaleType(data, index, series, overlay);
+    const res = handleLineChartDomainAndScaleType(data, index, series, overlay);
     const exp = {
       index: {
         domain: ['01-01-2000', '01-01-2010', '01-01-2020'],
         scaleType: 'time',
       },
       series: {
-        domain: [20, 105],
+        domain: [0, 105],
         scaleType: 'linear',
       },
       overlay: undefined,

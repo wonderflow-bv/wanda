@@ -18,16 +18,22 @@ import _ from 'lodash';
 import { SimpleLinearRegression } from 'ml-regression-simple-linear';
 import { Except } from 'type-fest';
 
+import { barsStyleConfig } from '../style-config/bars';
 import {
   AverageType,
   AxisProps,
   Bar,
+  BarChartIndex,
+  BarChartSeries,
   ChartIndex,
   ChartSeries,
   Data,
+  LineChartIndex,
+  LineChartSeries,
   SortingType, TrendlineType,
 } from '../types';
-import { inferScaleTypeFromDomain } from './axis';
+import { clampLinearDomain, inferScaleTypeFromDomain } from './axis';
+import { getDomainStackSeries } from './bars';
 import { formatDate, maxPrecision } from './format';
 import {
   getMinMaxDate, getMinMaxNumber,
@@ -91,7 +97,8 @@ export const mirrorDomain = (domain: Array<NonNullable<string | number>>) => {
 export const handleAxisDomainAndScaleType = <
 T extends ChartIndex | ChartSeries>(
     data: Data,
-    axis: T): Except<AxisProps, 'orientation'> => {
+    axis: T,
+    isStacked?: boolean): Except<AxisProps, 'orientation'> => {
   const hasData = Boolean(data.length);
 
   let res: Record<string, unknown> = {
@@ -108,7 +115,10 @@ T extends ChartIndex | ChartSeries>(
     const primitivesFromArray = keys.map((k: string) => getPrimitivesFromObjectArrayByPath(data, k));
     const domainData = _.flattenDeep(primitivesFromArray);
 
-    let ownDomain = removeNilsFromDomain(domainData);
+    let ownDomain = isStacked
+      ? removeNilsFromDomain(getDomainStackSeries(data, keys)!)
+      : removeNilsFromDomain(domainData);
+
     const st = inferScaleTypeFromDomain(domainData, scaleType);
 
     const hasCustomDomain = !!(domain?.length);
@@ -145,8 +155,15 @@ T extends ChartIndex | ChartSeries>(
       const minMaxNum = getMinMaxNumber(ownDomain as number[]);
 
       if (minMaxNum) {
-        const [min, max] = minMaxNum;
-        ownDomain = [min, _.ceil(max * 1.05)];
+        const clamped = clampLinearDomain(minMaxNum) as number[];
+
+        const [min, max] = clamped;
+
+        const extra = 1.05;
+
+        if (min === 0 && max > 0) ownDomain = [min, _.ceil(max * extra)];
+        if (min < 0 && max === 0) ownDomain = [_.floor(min * extra), max];
+        ownDomain = [_.floor(min * extra), _.ceil(max * extra)];
       }
     }
 
@@ -160,9 +177,9 @@ T extends ChartIndex | ChartSeries>(
   return removeKeysFromObject(res, ['dataKey', 'style', 'rename']) as Except<AxisProps, 'orientation'>;
 };
 
-export const handleChartDomainAndScaleType = <
-T extends ChartIndex,
-U extends ChartSeries>(
+export const handleLineChartDomainAndScaleType = <
+T extends LineChartIndex,
+U extends LineChartSeries>(
     data: Data,
     index: T,
     series: U,
@@ -172,6 +189,36 @@ U extends ChartSeries>(
   const s = handleAxisDomainAndScaleType(data, series);
   const o = overlay
     ? handleAxisDomainAndScaleType(data, overlay)
+    : undefined;
+
+  return {
+    index: i,
+    series: s,
+    overlay: o,
+  };
+};
+
+export const handleBarChartDomainAndScaleType = <
+T extends BarChartIndex,
+U extends BarChartSeries>(
+    data: Data,
+    index: T,
+    series: U,
+    overlay?: U,
+    isStacked?: boolean,
+  ) => {
+  const indexOverride: T = {
+    ...index,
+    scaleType: 'label',
+    paddingInner: barsStyleConfig.paddingInner,
+    paddingOuter: barsStyleConfig.paddingOuter,
+    round: true,
+  };
+
+  const i = handleAxisDomainAndScaleType(data, indexOverride);
+  const s = handleAxisDomainAndScaleType(data, series, isStacked);
+  const o = overlay
+    ? handleAxisDomainAndScaleType(data, overlay, isStacked)
     : undefined;
 
   return {

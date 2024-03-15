@@ -28,7 +28,7 @@ import {
   computeAverage,
   computeTrendline,
   handleChartAxisLayout,
-  handleChartDomainAndScaleType,
+  handleLineChartDomainAndScaleType,
   handleLineChartSeriesColors,
   handleSeriesNames,
 } from '../utils';
@@ -63,12 +63,12 @@ export const useLineChart = ({
     : undefined;
 
   const { index: i, series: s, overlay: o } = useMemo(
-    () => handleChartDomainAndScaleType(data, index, series, overlay),
+    () => handleLineChartDomainAndScaleType(data, index, series, overlay),
     [data, index, overlay, series],
   );
 
   const { index: iFiltered, series: sFiltered, overlay: oFiltered } = useMemo(
-    () => handleChartDomainAndScaleType(brushFilteredData, index, series, overlay),
+    () => handleLineChartDomainAndScaleType(brushFilteredData, index, series, overlay),
     [brushFilteredData, index, overlay, series],
   );
 

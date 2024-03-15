@@ -18,7 +18,7 @@ import { BarsStyleConfig } from '../types/bars';
 
 export const barsStyleConfig: BarsStyleConfig = {
   maxSize: 24,
-  paddingOuter: 1,
+  paddingOuter: 0.5,
   paddingInner: 0.2,
   paddingInnerGroup: 0.1,
   paddingOuterGroup: 0,

@@ -21,7 +21,6 @@ import { BarChartProps } from '../components';
 import { useStyleConfigContext } from '../providers/style-config';
 import { colorPaletteDefault } from '../style-config';
 import {
-  BarChartIndex,
   BarChartMetadata,
   CartesianChartLayout, Charts, Data,
   MarginProps,
@@ -30,9 +29,9 @@ import {
   computeAverage,
   computeTrendline,
   getHeightForVerticalChartWithFixedBarSize,
+  handleBarChartDomainAndScaleType,
   handleBarChartSeriesColors,
   handleChartAxisLayout,
-  handleChartDomainAndScaleType,
   handleSeriesNames,
 } from '../utils';
 
@@ -62,32 +61,26 @@ export const useBarChart = ({
 
   const isHorizontal = layout === CartesianChartLayout.HORIZONTAL;
 
-  const uIndex: BarChartIndex = useMemo(() => ({
-    ...index,
-    scaleType: 'label',
-    paddingInner: 0.1,
-    paddingOuter: 1,
-    round: true,
-  }), [index]);
-
   const { index: i, series: s, overlay: o } = useMemo(
-    () => handleChartDomainAndScaleType(
+    () => handleBarChartDomainAndScaleType(
       data,
-      uIndex,
+      index,
       series,
       overlay,
+      isStacked,
     ),
-    [data, uIndex, overlay, series],
+    [data, index, overlay, series, isStacked],
   );
 
   const { index: iFiltered, series: sFiltered, overlay: oFiltered } = useMemo(
-    () => handleChartDomainAndScaleType(
+    () => handleBarChartDomainAndScaleType(
       brushFilteredData,
-      uIndex,
+      index,
       series,
       overlay,
+      isStacked,
     ),
-    [brushFilteredData, uIndex, overlay, series],
+    [brushFilteredData, index, overlay, series, isStacked],
   );
 
   const axis = useMemo(() => handleChartAxisLayout(i, s, o), [i, s, o]);
