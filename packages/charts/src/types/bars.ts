@@ -33,7 +33,8 @@ export type BarsStyleConfig = {
   };
 }
 
-export type Bar = { color: string;
+export type Bar = {
+  color: string;
   height: number;
   index: number;
   key: string;
@@ -41,3 +42,18 @@ export type Bar = { color: string;
   width: number;
   x: number;
   y: number; }
+
+export type BarStackBar = {
+  bar: [number | typeof NaN, number | typeof NaN, Record<string, any>];
+  color: string;
+  height: number;
+  index: number;
+  key: string;
+  width: number;
+  x: number;
+  y: number;
+}
+
+export type BarStack = {
+  bars: BarStackBar[];
+}

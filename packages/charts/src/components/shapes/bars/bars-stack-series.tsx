@@ -21,6 +21,7 @@ import { useCallback } from 'react';
 
 import { useBars } from '@/hooks';
 import {
+  extractStackBarValueFromNestedKey,
   getBarThickness,
 } from '@/utils';
 
@@ -62,10 +63,13 @@ export const BarsStackSeries = () => {
         color={scaleColorStackSeries}
       >
         {barStacks => barStacks.map((barStack) => {
-          console.log('barStack', barStack.bars);
+          const updatedBars = extractStackBarValueFromNestedKey(
+            barStack as any, data, scaleStackSeries as any, scaleXY0, isHorizontal,
+          );
+
           return (
             <Group key={_.uniqueId()}>
-              {barStack.bars.map((bar) => {
+              {updatedBars.bars.map((bar: any) => {
                 // const { x, width } = getBarSizeAndPosition(bar, seriesAxis, isHorizontal);
                 const thickness = getBarThickness(bar.height, maxSize, fixedBarSize);
                 // console.log(sortedBars);
@@ -104,10 +108,17 @@ export const BarsStackSeries = () => {
       color={scaleColorStackSeries}
     >
       {barStacks => barStacks.map((barStack) => {
-        console.log('barStack', barStack.bars);
+        const updatedBars = extractStackBarValueFromNestedKey(
+          barStack as any,
+          data,
+          scaleXY0,
+          scaleStackSeries as any,
+          isHorizontal,
+        );
+
         return (
           <Group key={_.uniqueId()}>
-            {barStack.bars.map((bar) => {
+            {updatedBars.bars.map((bar: any) => {
               const thickness = getBarThickness(bar.width, maxSize, fixedBarSize);
 
               return (

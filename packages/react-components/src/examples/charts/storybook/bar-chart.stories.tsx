@@ -200,7 +200,11 @@ stackBarsNestedData.args = {
     label: 'Channels',
   },
   series: {
-    dataKey: ['1 star.value', '2 stars.value', '3 stars.value', '4 stars.value', '5 stars.value'],
+    dataKey: [
+      '1 star.value',
+      // '2 stars.value',
+    // '3 stars.value', '4 stars.value', '5 stars.value'
+    ],
     extraData: (datum: Record<string, any>) => `${datum.percentage}%`,
     label: 'Feedback count',
     domain: [0, 4000],

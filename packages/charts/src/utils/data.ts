@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { ScaleBand, ScaleLinear } from '@visx/vendor/d3-scale';
 import _ from 'lodash';
 import { SimpleLinearRegression } from 'ml-regression-simple-linear';
 import { Except } from 'type-fest';
@@ -25,6 +26,7 @@ import {
   Bar,
   BarChartIndex,
   BarChartSeries,
+  BarStack,
   ChartIndex,
   ChartSeries,
   Data,
@@ -258,6 +260,59 @@ export const extractBarValueFromNestedKey = (
   return bar;
 });
 
+export const extractStackBarValueFromNestedKey = (
+  barStack: BarStack,
+  data: Data,
+  xScale: ScaleBand<string> | ScaleLinear<number, number>,
+  yScale: ScaleBand<string> | ScaleLinear<number, number>,
+  isHorizontal: boolean,
+) => {
+  const hasMissingValue = barStack.bars.some(el => _.isNaN(el.bar[0]) || _.isNaN(el.bar[1]));
+
+  if (hasMissingValue) {
+    const nestedBars = barStack.bars.map((stackbar) => {
+      const { key, index } = stackbar;
+
+      const v0 = getPrimitiveFromObjectByPath(data[index], key) ?? 0;
+      const v1 = getPrimitiveFromObjectByPath(data[index + 1], key) ?? 0;
+
+      if (isHorizontal) {
+        const y0 = yScale('0' as any) ?? 0;
+        const h0 = yScale(v0 as any) ?? 0;
+        const h1 = yScale(v1 as any) ?? 0;
+
+        const barHeight = y0 - h0;
+
+        return ({
+          ...stackbar,
+          bar: [h0, h1],
+          height: barHeight,
+          y: h0,
+        });
+      }
+
+      const x0 = xScale('0' as any) ?? 0;
+      const w0 = xScale(v0 as any) ?? 0;
+      const w1 = xScale(v1 as any) ?? 0;
+
+      const barWidth = w0;
+
+      return {
+        ...stackbar,
+        bar: [w0, w1],
+        width: barWidth,
+        x: x0,
+      };
+    });
+
+    console.log('value:', nestedBars);
+
+    return ({ ...barStack, bars: nestedBars });
+  }
+
+  return barStack;
+};
+
 export const sortBarsBy = (
   bars: Bar[],
   sorting: SortingType,
@@ -351,3 +406,4 @@ export const computeTrendline = (
     to,
   };
 });
+
