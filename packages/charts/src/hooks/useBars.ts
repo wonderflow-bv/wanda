@@ -15,6 +15,7 @@
  */
 
 import { scaleBand, scaleLinear, scaleOrdinal } from '@visx/scale';
+import _ from 'lodash';
 import { useCallback, useMemo } from 'react';
 
 import {
@@ -77,7 +78,7 @@ export const useBars = () => {
     background,
   } = bars;
 
-  const X0Y0 = useCallback((d: Record<string, any>) => d[index], [index]);
+  const X0Y0 = useCallback((d: Record<string, any>) => _.at(d, index)[0], [index]);
 
   const scaleXY0 = scaleBand<string>({
     domain: hasReversedIndex ? data.map(X0Y0).reverse() : data.map(X0Y0),
