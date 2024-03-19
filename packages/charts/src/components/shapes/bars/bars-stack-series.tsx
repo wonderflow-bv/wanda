@@ -62,9 +62,15 @@ export const BarsStackSeries = () => {
         xScale={scaleStackSeries as any}
         color={scaleColorStackSeries}
       >
-        {barStacks => barStacks.map((barStack) => {
+        {barStacks => barStacks.map((barStack, index) => {
           const updatedBars = extractStackBarValueFromNestedKey(
-            barStack as any, data, scaleStackSeries as any, scaleXY0, isHorizontal,
+            barStack as any,
+            index,
+            series.dataKey,
+            data,
+            scaleStackSeries as any,
+            scaleXY0,
+            isHorizontal,
           );
 
           return (
@@ -107,9 +113,11 @@ export const BarsStackSeries = () => {
       yScale={scaleStackSeries as any}
       color={scaleColorStackSeries}
     >
-      {barStacks => barStacks.map((barStack) => {
+      {barStacks => barStacks.map((barStack, index) => {
         const updatedBars = extractStackBarValueFromNestedKey(
           barStack as any,
+          index,
+          series.dataKey,
           data,
           scaleXY0,
           scaleStackSeries as any,

@@ -44,7 +44,7 @@ export type Bar = {
   y: number; }
 
 export type BarStackBar = {
-  bar: [number | typeof NaN, number | typeof NaN, Record<string, any>];
+  bar: [number | typeof NaN, number | typeof NaN];
   color: string;
   height: number;
   index: number;

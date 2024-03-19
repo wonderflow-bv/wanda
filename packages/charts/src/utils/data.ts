@@ -262,6 +262,8 @@ export const extractBarValueFromNestedKey = (
 
 export const extractStackBarValueFromNestedKey = (
   barStack: BarStack,
+  index: number,
+  dataKey: string[],
   data: Data,
   xScale: ScaleBand<string> | ScaleLinear<number, number>,
   yScale: ScaleBand<string> | ScaleLinear<number, number>,
@@ -271,41 +273,56 @@ export const extractStackBarValueFromNestedKey = (
 
   if (hasMissingValue) {
     const nestedBars = barStack.bars.map((stackbar) => {
-      const { key, index } = stackbar;
+      const { index: i } = stackbar;
 
-      const v0 = getPrimitiveFromObjectByPath(data[index], key) ?? 0;
-      const v1 = getPrimitiveFromObjectByPath(data[index + 1], key) ?? 0;
+      const v0 = (index === 0)
+        ? 0
+        : getPrimitiveFromObjectByPath(data[i], dataKey[index - 1]) ?? 0;
+
+      const v1 = getPrimitiveFromObjectByPath(data[i], dataKey[index]) ?? 0;
+
+      const nestedBarValues = [v0, v1];
 
       if (isHorizontal) {
-        const y0 = yScale('0' as any) ?? 0;
-        const h0 = yScale(v0 as any) ?? 0;
+        const y0 = yScale(0 as any) ?? 0;
         const h1 = yScale(v1 as any) ?? 0;
 
-        const barHeight = y0 - h0;
+        const barHeight = y0 - h1;
+
+        const barY = dataKey.slice(0, index + 1).reduce((acc, cur) => {
+          const v = getPrimitiveFromObjectByPath(data[i], cur) ?? 0;
+          const h = yScale(v as any) ?? 0;
+          const s = y0 - h;
+          return acc - s;
+        }, y0);
 
         return ({
           ...stackbar,
-          bar: [h0, h1],
+          bar: nestedBarValues,
           height: barHeight,
-          y: h0,
+          y: barY,
         });
       }
 
-      const x0 = xScale('0' as any) ?? 0;
-      const w0 = xScale(v0 as any) ?? 0;
+      const x0 = xScale(0 as any) ?? 0;
       const w1 = xScale(v1 as any) ?? 0;
 
-      const barWidth = w0;
+      const barWidth = w1 - x0;
+
+      const barX = dataKey.slice(0, index).reduce((acc, cur) => {
+        const v = getPrimitiveFromObjectByPath(data[i], cur) ?? 0;
+        const h = xScale(v as any) ?? 0;
+        const s = h;
+        return acc + s;
+      }, x0);
 
       return {
         ...stackbar,
-        bar: [w0, w1],
+        bar: nestedBarValues,
         width: barWidth,
-        x: x0,
+        x: barX,
       };
     });
-
-    console.log('value:', nestedBars);
 
     return ({ ...barStack, bars: nestedBars });
   }
