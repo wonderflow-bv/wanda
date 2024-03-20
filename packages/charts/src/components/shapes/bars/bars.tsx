@@ -22,6 +22,7 @@ import { useCartesianContext } from '../../../providers';
 import { BarsAverage } from './bars-average';
 import { BarsOverlay } from './bars-overlay';
 import { BarsSeries } from './bars-series';
+import { BarsStackOverlay } from './bars-stack-overlay';
 import { BarsStackSeries } from './bars-stack-series';
 import { BarsTooltip } from './bars-tooltip';
 import { BarsTrendline } from './bars-trendline';
@@ -41,8 +42,15 @@ export const Bars: React.FC = () => {
         <Group data-testid="bars">
           <BarsTrendline />
 
-          <BarsSeries data-testid="bars-series" />
-          <BarsOverlay data-testid="bars-overlay" />
+          {isStacked
+            ? <BarsStackSeries data-testid="bars-stack-series" />
+            : <BarsSeries data-testid="bars-series" />
+            }
+
+          {isStacked
+            ? <BarsStackOverlay data-testid="bars-overlay" />
+            : <BarsOverlay data-testid="bars-overlay" />
+            }
         </Group>
       )}
 
@@ -55,7 +63,11 @@ export const Bars: React.FC = () => {
               ? <BarsStackSeries data-testid="bars-stack-series" />
               : <BarsSeries data-testid="bars-series" />
             }
-            <BarsOverlay data-testid="bars-overlay" />
+
+            {isStacked
+              ? <BarsStackOverlay data-testid="bars-overlay" />
+              : <BarsOverlay data-testid="bars-overlay" />
+            }
           </Group>
         </BarsTooltip>
       )}

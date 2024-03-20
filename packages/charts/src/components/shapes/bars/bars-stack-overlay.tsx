@@ -22,19 +22,19 @@ import { useCallback } from 'react';
 import { useBars } from '@/hooks';
 import {
   extractStackBarValueFromNestedKey,
-  getStackBarIndexPositionSeries,
+  getStackBarIndexPositionOverlay,
   getStackBarThickness,
 } from '@/utils';
 
 import { useCartesianContext } from '../../../providers';
 import { BarsItem, BarsItemBlurred } from './bars.module.css';
 
-export const BarsStackSeries = () => {
+export const BarsStackOverlay = () => {
   const { hoveredLegendItem: overLegend } = useCartesianContext();
   const {
     data,
     isHorizontal,
-    series,
+    overlay,
     // sortBy,
     maxWidth,
     maxHeight,
@@ -42,8 +42,8 @@ export const BarsStackSeries = () => {
     scaleXY0,
     style,
     fixedBarSize,
-    scaleColorStackSeries,
-    scaleStackSeries,
+    scaleColorStackOverlay,
+    scaleStackOverlay,
     hasOverlay,
   } = useBars();
 
@@ -53,24 +53,26 @@ export const BarsStackSeries = () => {
     ? BarsItem
     : BarsItemBlurred), []);
 
+  if (!hasOverlay) return null;
+
   if (!isHorizontal) {
     return (
       <BarStackHorizontal
         data={data}
-        keys={series.dataKey}
+        keys={overlay.dataKey}
         height={maxHeight}
         y={X0Y0}
         yScale={scaleXY0}
-        xScale={scaleStackSeries as any}
-        color={scaleColorStackSeries}
+        xScale={scaleStackOverlay as any}
+        color={scaleColorStackOverlay}
       >
         {barStacks => barStacks.map((barStack, index) => {
           const updatedStack = extractStackBarValueFromNestedKey(
             barStack as any,
             index,
-            series.dataKey,
+            overlay.dataKey!,
             data,
-            scaleStackSeries as any,
+            scaleStackOverlay as any,
             scaleXY0,
             isHorizontal,
           );
@@ -79,7 +81,7 @@ export const BarsStackSeries = () => {
             <Group key={_.uniqueId()}>
               {updatedStack.bars.map((bar: any) => {
                 const thickness = getStackBarThickness(bar.height, maxSize, fixedBarSize, hasOverlay);
-                const yPos = getStackBarIndexPositionSeries(bar, thickness, hasOverlay, isHorizontal);
+                const yPos = getStackBarIndexPositionOverlay(bar, thickness, isHorizontal);
 
                 return (
                   <Group key={_.uniqueId()}>
@@ -108,21 +110,21 @@ export const BarsStackSeries = () => {
   return (
     <BarStack
       data={data}
-      keys={series.dataKey}
+      keys={overlay.dataKey}
       width={maxWidth}
       x={X0Y0}
       xScale={scaleXY0}
-      yScale={scaleStackSeries as any}
-      color={scaleColorStackSeries}
+      yScale={scaleStackOverlay as any}
+      color={scaleColorStackOverlay}
     >
       {barStacks => barStacks.map((barStack, index) => {
         const updatedStack = extractStackBarValueFromNestedKey(
           barStack as any,
           index,
-          series.dataKey,
+          overlay.dataKey!,
           data,
           scaleXY0,
-          scaleStackSeries as any,
+          scaleStackOverlay as any,
           isHorizontal,
         );
 
@@ -130,7 +132,7 @@ export const BarsStackSeries = () => {
           <Group key={_.uniqueId()}>
             {updatedStack.bars.map((bar: any) => {
               const thickness = getStackBarThickness(bar.width, maxSize, fixedBarSize, hasOverlay);
-              const xPos = getStackBarIndexPositionSeries(bar, thickness, hasOverlay, isHorizontal);
+              const xPos = getStackBarIndexPositionOverlay(bar, thickness, isHorizontal);
 
               return (
                 <Group key={_.uniqueId()}>
@@ -156,5 +158,5 @@ export const BarsStackSeries = () => {
   );
 };
 
-BarsStackSeries.displayName = 'BarsStackSeries';
+BarsStackOverlay.displayName = 'BarsStackOverlay';
 

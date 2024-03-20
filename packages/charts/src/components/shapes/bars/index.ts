@@ -18,6 +18,7 @@ export { Bars } from './bars';
 export { BarsAverage } from './bars-average';
 export { BarsOverlay } from './bars-overlay';
 export { BarsSeries } from './bars-series';
+export { BarsStackOverlay } from './bars-stack-overlay';
 export { BarsStackSeries } from './bars-stack-series';
 export { BarsTooltip } from './bars-tooltip';
 export { BarsTrendline } from './bars-trendline';

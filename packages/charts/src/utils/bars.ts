@@ -77,7 +77,12 @@ export const getBarThickness = (
   return thickness;
 };
 
-export const getStackBarIndexPosition = (bar: Bar, thickness: number, hasOverlay: boolean, isHorizontal: boolean) => {
+export const getStackBarIndexPositionSeries = (
+  bar: Bar,
+  thickness: number,
+  hasOverlay: boolean,
+  isHorizontal: boolean,
+) => {
   const {
     width, height, x, y,
   } = bar;
@@ -108,6 +113,44 @@ export const getStackBarIndexPosition = (bar: Bar, thickness: number, hasOverlay
     if (hasOverlay) yPos -= thickness / 2;
   } else if (hasOverlay) {
     yPos -= (height / 2);
+  }
+
+  return yPos;
+};
+
+export const getStackBarIndexPositionOverlay = (
+  bar: Bar,
+  thickness: number,
+  isHorizontal: boolean,
+) => {
+  const {
+    width, height, x, y,
+  } = bar;
+
+  if (isHorizontal) {
+    const hasCustomWidth = width !== thickness;
+    let xPos = x;
+
+    if (hasCustomWidth) {
+      const diff = (width - thickness) / 2;
+      xPos += diff;
+      xPos += thickness / 2;
+    } else {
+      xPos += (width / 2);
+    }
+
+    return xPos;
+  }
+
+  const hasCustomHeight = height !== thickness;
+  let yPos = y;
+
+  if (hasCustomHeight) {
+    const diff = (height - thickness) / 2;
+    yPos += diff;
+    yPos += thickness / 2;
+  } else {
+    yPos += (height / 2);
   }
 
   return yPos;
