@@ -196,7 +196,7 @@ export const getHeightForVerticalChartWithFixedBarSize = (
   return h;
 };
 
-export const getDomainStackSeries = (data: Data, dataKeys: string[]) => {
+export const getLinearDomainStackSeries = (data: Data, dataKeys: string[], currentDomain: number[]) => {
   const domainStackSum = data.map((datum) => {
     const values: number[] = [];
     dataKeys.forEach(k => values.push(_.at(datum, k)[0]));
@@ -205,5 +205,15 @@ export const getDomainStackSeries = (data: Data, dataKeys: string[]) => {
 
   const domainStackSeries = [_.min(domainStackSum)!, _.max(domainStackSum)!];
 
-  return clampLinearDomain(domainStackSeries);
+  const clampedDomain = clampLinearDomain(domainStackSeries);
+
+  const minClamped = _.min(clampedDomain) ?? 0;
+  const maxClamped = _.max(clampedDomain) ?? 0;
+
+  const minCurrent = _.min(currentDomain) ?? 0;
+  const maxCurrent = _.max(currentDomain) ?? 0;
+
+  const stackDomain = [_.min([minCurrent, minClamped]) ?? 0, _.max([maxCurrent, maxClamped]) ?? 1];
+
+  return clampLinearDomain(stackDomain);
 };

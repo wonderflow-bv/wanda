@@ -35,7 +35,7 @@ import {
   SortingType, TrendlineType,
 } from '../types';
 import { clampLinearDomain, inferScaleTypeFromDomain } from './axis';
-import { getDomainStackSeries } from './bars';
+import { getLinearDomainStackSeries } from './bars';
 import { formatDate, maxPrecision } from './format';
 import {
   getMinMaxDate, getMinMaxNumber,
@@ -118,7 +118,7 @@ T extends ChartIndex | ChartSeries>(
     const domainData = _.flattenDeep(primitivesFromArray);
 
     let ownDomain = isStacked
-      ? removeNilsFromDomain(getDomainStackSeries(data, keys)!)
+      ? removeNilsFromDomain(getLinearDomainStackSeries(data, keys, axis.domain as number[])!)
       : removeNilsFromDomain(domainData);
 
     const st = inferScaleTypeFromDomain(domainData, scaleType);

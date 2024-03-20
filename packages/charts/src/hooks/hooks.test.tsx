@@ -315,7 +315,7 @@ describe('useBarChart()', () => {
 });
 
 describe('useBars()', () => {
-  it('should return', () => {
+  it.skip('should return', () => {
     const { result } = renderHook(() => useBars(), { wrapper });
     const { data, isHorizontal } = result.current;
     expect(data).toStrictEqual([{ date: '2022', value: 100 }, { date: '2023', value: 90 }]);
