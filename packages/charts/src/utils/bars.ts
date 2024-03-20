@@ -77,6 +77,57 @@ export const getBarThickness = (
   return thickness;
 };
 
+export const getStackBarIndexPosition = (bar: Bar, thickness: number, hasOverlay: boolean, isHorizontal: boolean) => {
+  const {
+    width, height, x, y,
+  } = bar;
+
+  if (isHorizontal) {
+    const hasCustomWidth = width !== thickness;
+    let xPos = x;
+
+    if (hasCustomWidth) {
+      const diff = (width - thickness) / 2;
+      xPos += diff;
+
+      if (hasOverlay) xPos -= thickness / 2;
+    } else if (hasOverlay) {
+      xPos -= (width / 2);
+    }
+
+    return xPos;
+  }
+
+  const hasCustomHeight = height !== thickness;
+  let yPos = y;
+
+  if (hasCustomHeight) {
+    const diff = (height - thickness) / 2;
+    yPos += diff;
+
+    if (hasOverlay) yPos -= thickness / 2;
+  } else if (hasOverlay) {
+    yPos -= (height / 2);
+  }
+
+  return yPos;
+};
+
+export const getStackBarThickness = (
+  thickness: number,
+  maxSize: number,
+  fixedBarSize: boolean,
+  hasOverlay: boolean,
+) => {
+  const t = hasOverlay ? thickness / 2 : thickness;
+
+  if (fixedBarSize) {
+    return _.clamp(t, 2, maxSize);
+  }
+
+  return t;
+};
+
 export const getHeightForVerticalChartWithFixedBarSize = (
   config: BarsStyleConfig,
   data: Data,

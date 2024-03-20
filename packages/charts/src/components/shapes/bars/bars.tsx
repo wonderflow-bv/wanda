@@ -40,6 +40,7 @@ export const Bars: React.FC = () => {
       {isServer && (
         <Group data-testid="bars">
           <BarsTrendline />
+
           <BarsSeries data-testid="bars-series" />
           <BarsOverlay data-testid="bars-overlay" />
         </Group>
@@ -49,6 +50,7 @@ export const Bars: React.FC = () => {
         <BarsTooltip>
           <Group data-testid="bars">
             <BarsTrendline />
+
             {isStacked
               ? <BarsStackSeries data-testid="bars-stack-series" />
               : <BarsSeries data-testid="bars-series" />

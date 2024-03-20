@@ -22,7 +22,8 @@ import { useCallback } from 'react';
 import { useBars } from '@/hooks';
 import {
   extractStackBarValueFromNestedKey,
-  getBarThickness,
+  getStackBarIndexPosition,
+  getStackBarThickness,
 } from '@/utils';
 
 import { useCartesianContext } from '../../../providers';
@@ -43,6 +44,7 @@ export const BarsStackSeries = () => {
     fixedBarSize,
     scaleColorStackSeries,
     scaleStackSeries,
+    hasOverlay,
   } = useBars();
 
   const { bar: barStyle, maxSize } = style;
@@ -63,7 +65,7 @@ export const BarsStackSeries = () => {
         color={scaleColorStackSeries}
       >
         {barStacks => barStacks.map((barStack, index) => {
-          const updatedBars = extractStackBarValueFromNestedKey(
+          const updatedStack = extractStackBarValueFromNestedKey(
             barStack as any,
             index,
             series.dataKey,
@@ -75,16 +77,16 @@ export const BarsStackSeries = () => {
 
           return (
             <Group key={_.uniqueId()}>
-              {updatedBars.bars.map((bar: any) => {
-                // const { x, width } = getBarSizeAndPosition(bar, seriesAxis, isHorizontal);
-                const thickness = getBarThickness(bar.height, maxSize, fixedBarSize);
-                // console.log(sortedBars);
+              {updatedStack.bars.map((bar: any) => {
+                const thickness = getStackBarThickness(bar.height, maxSize, fixedBarSize, hasOverlay);
+                const yPos = getStackBarIndexPosition(bar, thickness, hasOverlay, isHorizontal);
+
                 return (
                   <Group key={_.uniqueId()}>
                     <Bar
                       className={dynamicClassName(overLegend, bar.key)}
                       x={bar.x}
-                      y={bar.y}
+                      y={yPos}
                       width={bar.width}
                       height={thickness}
                       fill={bar.color}
@@ -114,7 +116,7 @@ export const BarsStackSeries = () => {
       color={scaleColorStackSeries}
     >
       {barStacks => barStacks.map((barStack, index) => {
-        const updatedBars = extractStackBarValueFromNestedKey(
+        const updatedStack = extractStackBarValueFromNestedKey(
           barStack as any,
           index,
           series.dataKey,
@@ -126,15 +128,16 @@ export const BarsStackSeries = () => {
 
         return (
           <Group key={_.uniqueId()}>
-            {updatedBars.bars.map((bar: any) => {
-              const thickness = getBarThickness(bar.width, maxSize, fixedBarSize);
+            {updatedStack.bars.map((bar: any) => {
+              const thickness = getStackBarThickness(bar.width, maxSize, fixedBarSize, hasOverlay);
+              const xPos = getStackBarIndexPosition(bar, thickness, hasOverlay, isHorizontal);
 
               return (
                 <Group key={_.uniqueId()}>
                   <Bar
                     className={dynamicClassName(overLegend, bar.key)}
                     key={_.uniqueId()}
-                    x={bar.x}
+                    x={xPos}
                     y={bar.y}
                     width={thickness}
                     height={bar.height}
