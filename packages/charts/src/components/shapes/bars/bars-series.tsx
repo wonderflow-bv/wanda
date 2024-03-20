@@ -153,7 +153,6 @@ export const BarsSeries = () => {
 
                   <Bar
                     className={dynamicClassName(overLegend, bar.key)}
-                    key={_.uniqueId()}
                     x={x}
                     y={y}
                     width={thickness}

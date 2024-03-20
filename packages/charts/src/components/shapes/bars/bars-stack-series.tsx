@@ -136,7 +136,6 @@ export const BarsStackSeries = () => {
                 <Group key={_.uniqueId()}>
                   <Bar
                     className={dynamicClassName(overLegend, bar.key)}
-                    key={_.uniqueId()}
                     x={xPos}
                     y={bar.y}
                     width={thickness}
