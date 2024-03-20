@@ -14,13 +14,13 @@ import { FakeMenu } from './line-chart.stories';
 import styles from './sb-charts.module.css';
 
 const story: ComponentMeta<typeof BarChart> = {
-  title: 'Charts/Bar Chart',
+  title: 'Charts/Stack Bar Chart',
   component: BarChart,
   args: {
     title: 'Bar Chart',
     subtitle: 'A simple bar chart',
     sortBy: 'as-is',
-    isStacked: false,
+    isStacked: true,
     // showLabel: false,
     isLoading: false,
     showAverage: false,
@@ -102,6 +102,7 @@ withMultipleSeries.args = {
   title: 'Multiple Series',
   subtitle: 'A group bar chart',
   data: proCons,
+  showTrendline: true,
   index: {
     dataKey: 'date',
     label: 'Time',
@@ -112,23 +113,6 @@ withMultipleSeries.args = {
     label: 'Pros & cons',
     style: [undefined, undefined, { fill: 'gray' }],
   },
-};
-
-export const withAverage = Template.bind({});
-withAverage.args = {
-  subtitle: 'A bar chart with average',
-  showAverage: true,
-};
-
-export const withTrendline = Template.bind({});
-withTrendline.args = {
-  subtitle: 'A bar chart with overlay and trendlines',
-  overlay: {
-    dataKey: ['overlay'],
-    label: 'Overlay',
-    domain: [0, 1],
-  },
-  showTrendline: true,
 };
 
 export const withCategoriesOnIndex = Template.bind({});
@@ -151,6 +135,7 @@ withNestedData.args = {
   title: 'Multiple Series',
   subtitle: 'A bar chart rendered from nested data',
   data: channelsB,
+  showAverage: true,
   index: {
     dataKey: 'channel',
     label: 'Channels',
