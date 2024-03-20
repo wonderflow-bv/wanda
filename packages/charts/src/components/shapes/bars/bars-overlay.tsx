@@ -81,7 +81,7 @@ export const BarsOverlay = () => {
             <Group key={_.uniqueId()} top={barGroup.y0}>
               {sortedBars.map((bar) => {
                 const thickness = getBarThickness(bar.height, maxSize, fixedBarSize);
-                const { x, width } = getBarSizeAndPosition(bar, overlayAxis, isHorizontal);
+                const { x, y, width } = getBarSizeAndPosition(bar, overlayAxis, thickness, isHorizontal);
 
                 return (
                   <Group key={_.uniqueId()}>
@@ -101,7 +101,7 @@ export const BarsOverlay = () => {
                     <Bar
                       className={dynamicClassName(overLegend, bar.key)}
                       x={x}
-                      y={bar.y}
+                      y={y}
                       width={width}
                       height={thickness}
                       fill={bar.color}
@@ -139,7 +139,7 @@ export const BarsOverlay = () => {
           <Group key={_.uniqueId()} left={barGroup.x0}>
             {sortedBars.map((bar) => {
               const thickness = getBarThickness(bar.width, maxSize, fixedBarSize);
-              const { y, height } = getBarSizeAndPosition(bar, overlayAxis, isHorizontal);
+              const { x, y, height } = getBarSizeAndPosition(bar, overlayAxis, thickness, isHorizontal);
 
               return (
                 <Group key={_.uniqueId()}>
@@ -158,7 +158,7 @@ export const BarsOverlay = () => {
 
                   <Bar
                     className={dynamicClassName(overLegend, bar.key)}
-                    x={bar.x}
+                    x={x}
                     y={y}
                     width={thickness}
                     height={height}

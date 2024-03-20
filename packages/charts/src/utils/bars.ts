@@ -54,12 +54,51 @@ export const getBarPosition = (bar: Bar, axis: CartesianAxis, isHorizontal: bool
     : bar.width;
 };
 
-export const getBarSizeAndPosition = (bar: Bar, axis: CartesianAxis, isHorizontal: boolean) => {
+export const getBarIndexPositionSeries = (
+  bar: Bar,
+  thickness: number,
+  isHorizontal: boolean,
+) => {
+  const {
+    width, height, x, y,
+  } = bar;
+
+  if (isHorizontal) {
+    const hasCustomWidth = width !== thickness;
+    let xPos = x;
+
+    if (hasCustomWidth) {
+      const diff = (width - thickness) / 2;
+      xPos += diff;
+    }
+
+    return xPos;
+  }
+
+  const hasCustomHeight = height !== thickness;
+  let yPos = y;
+
+  if (hasCustomHeight) {
+    const diff = (height - thickness) / 2;
+    yPos += diff;
+  }
+
+  return yPos;
+};
+
+export const getBarSizeAndPosition = (
+  bar: Bar,
+  axis: CartesianAxis,
+  thickness: number,
+  isHorizontal: boolean,
+) => {
   const size = getBarSize(bar, axis, isHorizontal);
   const position = getBarPosition(bar, axis, isHorizontal);
+  const indexPosition = getBarIndexPositionSeries(bar, thickness, isHorizontal);
+
   return {
-    x: isHorizontal ? undefined : position,
-    y: isHorizontal ? position : undefined,
+    x: isHorizontal ? indexPosition : position,
+    y: isHorizontal ? position : indexPosition,
     width: isHorizontal ? undefined : size,
     height: isHorizontal ? size : undefined,
   };
