@@ -26,11 +26,14 @@ import {
   getStackBarThickness,
 } from '@/utils';
 
-import { useCartesianContext } from '../../../providers';
+import { useCartesianContext, useStyleConfigContext, useThemeContext } from '../../../providers';
 import { BarsItem, BarsItemBlurred } from './bars.module.css';
 
 export const BarsStackSeries = () => {
   const { hoveredLegendItem: overLegend } = useCartesianContext();
+  const theme = useThemeContext();
+  const { themes } = useStyleConfigContext();
+
   const {
     data,
     isHorizontal,
@@ -45,9 +48,11 @@ export const BarsStackSeries = () => {
     scaleColorStackSeries,
     scaleStackSeries,
     hasOverlay,
+    hasBackgroundSeries,
   } = useBars();
 
-  const { bar: barStyle, maxSize } = style;
+  const { bar: barStyle, maxSize, background } = style;
+  const bgColor = themes[theme].bars.backgroundColor;
 
   const dynamicClassName = useCallback((overLegend: string, dataKey: string) => ((overLegend === dataKey || overLegend === '')
     ? BarsItem
@@ -83,6 +88,19 @@ export const BarsStackSeries = () => {
 
                 return (
                   <Group key={_.uniqueId()}>
+                    {(hasBackgroundSeries && index === 0) && (
+                      <Bar
+                        className={dynamicClassName(overLegend, bar.key)}
+                        x={0}
+                        y={bar.y}
+                        width={maxWidth}
+                        height={thickness}
+                        fill={bgColor}
+                        opacity={background.opacity}
+                        rx={background.rx}
+                      />
+                    )}
+
                     <Bar
                       className={dynamicClassName(overLegend, bar.key)}
                       x={bar.x}
@@ -134,6 +152,19 @@ export const BarsStackSeries = () => {
 
               return (
                 <Group key={_.uniqueId()}>
+                  {(hasBackgroundSeries && index === 0) && (
+                    <Bar
+                      className={dynamicClassName(overLegend, bar.key)}
+                      x={bar.x}
+                      y={0}
+                      width={thickness}
+                      height={maxHeight}
+                      fill={bgColor}
+                      opacity={background.opacity}
+                      rx={background.rx}
+                    />
+                  )}
+
                   <Bar
                     className={dynamicClassName(overLegend, bar.key)}
                     x={xPos}
