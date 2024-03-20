@@ -66,6 +66,8 @@ export const BarsTooltip: React.FC = ({ children }: { children: React.ReactNode 
     isHorizontal,
     index,
     indexAxis,
+    isStacked,
+    // fixedBarSize,
     maxWidth: xMax,
     maxHeight: yMax,
     overlay,
@@ -120,6 +122,9 @@ export const BarsTooltip: React.FC = ({ children }: { children: React.ReactNode 
     const barIndicatorPos = scaleXY0(indexScaleValue as any) ?? -999;
     const barIndicatorSize = scaleXY0.bandwidth();
 
+    const barStackIndicatorPos = hasOverlay ? barIndicatorPos - 1 : barIndicatorPos;
+    const barStackIndicatorSize = hasOverlay ? Number(barIndicatorSize) + 2 : barIndicatorSize;
+
     const tooltipLeft = ('clientX' in event ? event.clientX : 0) - lBound / 8;
     const tooltipTop = ('clientY' in event ? event.clientY : 0) - tBound / 8;
 
@@ -132,8 +137,8 @@ export const BarsTooltip: React.FC = ({ children }: { children: React.ReactNode 
       coords,
       data: datum,
       hasData: hasSeriesData || hasOverlayData,
-      barIndicatorPos,
-      barIndicatorSize,
+      barIndicatorPos: isStacked ? barStackIndicatorPos : barIndicatorPos,
+      barIndicatorSize: isStacked ? barStackIndicatorSize : barIndicatorSize,
     };
 
     showTooltip({
@@ -141,7 +146,16 @@ export const BarsTooltip: React.FC = ({ children }: { children: React.ReactNode 
       tooltipTop,
       tooltipData,
     });
-  }, [indexAxis, containerBounds, isHorizontal, scaleXY0, data, series.dataKey, overlay.dataKey, showTooltip]);
+  }, [indexAxis,
+    containerBounds,
+    isHorizontal,
+    scaleXY0,
+    hasOverlay,
+    data,
+    series.dataKey,
+    overlay.dataKey,
+    isStacked,
+    showTooltip]);
 
   const hasTooltip = Boolean(tooltipData?.data && !preventTooltipOpening && !preventTooltipDisplay);
 

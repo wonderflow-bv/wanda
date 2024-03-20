@@ -95,9 +95,9 @@ export const getStackBarIndexPositionSeries = (
       const diff = (width - thickness) / 2;
       xPos += diff;
 
-      if (hasOverlay) xPos -= thickness / 2;
+      if (hasOverlay) xPos -= (thickness / 2 + 1);
     } else if (hasOverlay) {
-      xPos -= (width / 2);
+      xPos -= (width / 2 + 1);
     }
 
     return xPos;
@@ -110,9 +110,9 @@ export const getStackBarIndexPositionSeries = (
     const diff = (height - thickness) / 2;
     yPos += diff;
 
-    if (hasOverlay) yPos -= thickness / 2;
+    if (hasOverlay) yPos -= (thickness / 2 + 1);
   } else if (hasOverlay) {
-    yPos -= (height / 2);
+    yPos -= (height / 2 + 1);
   }
 
   return yPos;
@@ -134,9 +134,9 @@ export const getStackBarIndexPositionOverlay = (
     if (hasCustomWidth) {
       const diff = (width - thickness) / 2;
       xPos += diff;
-      xPos += thickness / 2;
+      xPos += thickness / 2 + 1;
     } else {
-      xPos += (width / 2);
+      xPos += (width / 2) + 1;
     }
 
     return xPos;
@@ -148,9 +148,9 @@ export const getStackBarIndexPositionOverlay = (
   if (hasCustomHeight) {
     const diff = (height - thickness) / 2;
     yPos += diff;
-    yPos += thickness / 2;
+    yPos += (thickness / 2 + 1);
   } else {
-    yPos += (height / 2);
+    yPos += (height / 2 + 1);
   }
 
   return yPos;
@@ -162,7 +162,7 @@ export const getStackBarThickness = (
   fixedBarSize: boolean,
   hasOverlay: boolean,
 ) => {
-  const t = hasOverlay ? thickness / 2 : thickness;
+  const t = hasOverlay ? (thickness - 1) / 2 : thickness;
 
   if (fixedBarSize) {
     return _.clamp(t, 2, maxSize);

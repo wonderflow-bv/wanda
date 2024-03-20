@@ -75,8 +75,8 @@ export const BarsSeries = () => {
           return (
             <Group key={_.uniqueId()} top={barGroup.y0}>
               {sortedBars.map((bar) => {
-                const { x, width } = getBarSizeAndPosition(bar, seriesAxis, isHorizontal);
                 const thickness = getBarThickness(bar.height, maxSize, fixedBarSize);
+                const { x, width } = getBarSizeAndPosition(bar, seriesAxis, isHorizontal);
 
                 return (
                   <Group key={_.uniqueId()}>
@@ -133,8 +133,8 @@ export const BarsSeries = () => {
         return (
           <Group key={_.uniqueId()} left={barGroup.x0}>
             {sortedBars.map((bar) => {
-              const { y, height } = getBarSizeAndPosition(bar, seriesAxis, isHorizontal);
               const thickness = getBarThickness(bar.width, maxSize, fixedBarSize);
+              const { y, height } = getBarSizeAndPosition(bar, seriesAxis, isHorizontal);
 
               return (
                 <Group key={_.uniqueId()}>

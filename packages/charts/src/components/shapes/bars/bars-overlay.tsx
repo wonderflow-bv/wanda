@@ -80,8 +80,8 @@ export const BarsOverlay = () => {
           return (
             <Group key={_.uniqueId()} top={barGroup.y0}>
               {sortedBars.map((bar) => {
-                const { x, width } = getBarSizeAndPosition(bar, overlayAxis, isHorizontal);
                 const thickness = getBarThickness(bar.height, maxSize, fixedBarSize);
+                const { x, width } = getBarSizeAndPosition(bar, overlayAxis, isHorizontal);
 
                 return (
                   <Group key={_.uniqueId()}>
@@ -138,8 +138,8 @@ export const BarsOverlay = () => {
         return (
           <Group key={_.uniqueId()} left={barGroup.x0}>
             {sortedBars.map((bar) => {
-              const { y, height } = getBarSizeAndPosition(bar, overlayAxis, isHorizontal);
               const thickness = getBarThickness(bar.width, maxSize, fixedBarSize);
+              const { y, height } = getBarSizeAndPosition(bar, overlayAxis, isHorizontal);
 
               return (
                 <Group key={_.uniqueId()}>
