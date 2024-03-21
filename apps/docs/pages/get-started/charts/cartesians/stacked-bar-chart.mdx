@@ -2,15 +2,15 @@ import ChartsNav from "@/data/charts-nav";
 import { getLayoutProps } from "@/utils/get-layout-props";
 import { PropsBlocks } from "@/components/doc/props-blocks";
 import { KeyTable } from "@/components/shared/key-table";
-import { BarChartExample } from '../../../../src/examples/bar-chart-example';
+import { StackedBarChartExample } from '../../../../src/examples/stacked-bar-chart-example';
 
 export const getStaticProps = () =>
   getLayoutProps({
     layout: "chart",
     layoutProps: {
-      title: "Bar Chart",
+      title: "Stacked Bar Chart",
       color: "purple",
-      subtitle: "A bar chart component is useful for comparing different categories of data at a glance.",
+      subtitle: "An extension of the standard bar chart where each bar is divided into a number of sub items stacked end to end.",
       navigation: ChartsNav,
       features: [
         "Feature rich",
@@ -22,7 +22,7 @@ export const getStaticProps = () =>
     }
   });
 
-<BarChartExample />
+<StackedBarChartExample />
 
 ## Anatomy
 
@@ -50,6 +50,7 @@ export default () => {
         subtitle="trends by Europe/America/Asia"
         data={data}
         sortBy="descending-value"
+        isStacked={true}
         index={{
           dataKey: 'continent',
           label: 'Continent',
@@ -112,14 +113,7 @@ export default () => {
       type: ['SortingType'],
       typeValue: "'as-is' | 'descending-key' | 'ascending-key' | 'descending-value' | 'ascending-value'",
       default: "as-is",
-      description: `Set how data should be sorted by:
-      [descending-key]: dataKey alphabetical order,
-      [ascending-key]: dataKey reverse alphabetical order,
-      [descending-value]: by data value,
-      [ascending-value]: by reverse data value,
-      [as-is]: as set in series/overlay dataKey,
-      Values organized on different axis will be independent one from another and will be treated like independent groups sorted by the same logic.
-      Stacked Bar Charts will only allow ascending and descending sorting along with the default as-is option.
+      description: `Set how data should be sorted by. Stacked Bar Charts will only allow ascending ([ascending-key] or [ascending-value]) and descending ([descending-key] or [descending-value]) sorting along with the default as-is option.
       `,
     },
     {
@@ -225,6 +219,6 @@ export default () => {
       type: ["boolean"],
       default: "false",
       required: false,
-      description: "If true bars get stacked one upon the other.",
+      description: "If true bars render stacked one upon the other.",
     },
   ]}/>

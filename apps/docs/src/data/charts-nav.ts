@@ -19,6 +19,15 @@ const ChartsNav: NavigationMenu = [
         label: 'Bar Chart',
         target: '',
         tag: {
+          label: 'update',
+          color: 'red',
+        },
+      },
+      {
+        path: '/get-started/charts/cartesians/stacked-bar-chart',
+        label: 'Stacked Chart',
+        target: '',
+        tag: {
           label: 'new',
           color: 'green',
         },
