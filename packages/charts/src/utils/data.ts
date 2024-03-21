@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { ScaleBand, ScaleLinear } from '@visx/vendor/d3-scale';
 import _ from 'lodash';
 import { SimpleLinearRegression } from 'ml-regression-simple-linear';
 import { Except } from 'type-fest';
@@ -26,7 +25,6 @@ import {
   Bar,
   BarChartIndex,
   BarChartSeries,
-  BarStack,
   ChartIndex,
   ChartSeries,
   Data,
@@ -260,76 +258,6 @@ export const extractBarValueFromNestedKey = (
 
   return bar;
 });
-
-export const extractStackBarValueFromNestedKey = (
-  barStack: BarStack,
-  index: number,
-  dataKey: string[],
-  data: Data,
-  xScale: ScaleBand<string> | ScaleLinear<number, number>,
-  yScale: ScaleBand<string> | ScaleLinear<number, number>,
-  isHorizontal: boolean,
-) => {
-  const hasMissingValue = barStack.bars.some(el => _.isNaN(el.bar[0]) || _.isNaN(el.bar[1]));
-
-  if (hasMissingValue) {
-    const nestedBars = barStack.bars.map((stackbar) => {
-      const { index: i } = stackbar;
-
-      const v0 = (index === 0)
-        ? 0
-        : getPrimitiveFromObjectByPath(data[i], dataKey[index - 1]) ?? 0;
-
-      const v1 = getPrimitiveFromObjectByPath(data[i], dataKey[index]) ?? 0;
-
-      const nestedBarValues = [v0, v1];
-
-      if (isHorizontal) {
-        const y0 = yScale(0 as any) ?? 0;
-        const h1 = yScale(v1 as any) ?? 0;
-
-        const barHeight = y0 - h1;
-
-        const barY = dataKey.slice(0, index + 1).reduce((acc, cur) => {
-          const v = getPrimitiveFromObjectByPath(data[i], cur) ?? 0;
-          const h = yScale(v as any) ?? 0;
-          const s = y0 - h;
-          return acc - s;
-        }, y0);
-
-        return ({
-          ...stackbar,
-          bar: nestedBarValues,
-          height: barHeight,
-          y: barY,
-        });
-      }
-
-      const x0 = xScale(0 as any) ?? 0;
-      const w1 = xScale(v1 as any) ?? 0;
-
-      const barWidth = w1 - x0;
-
-      const barX = dataKey.slice(0, index).reduce((acc, cur) => {
-        const v = getPrimitiveFromObjectByPath(data[i], cur) ?? 0;
-        const h = xScale(v as any) ?? 0;
-        const s = h;
-        return acc + s;
-      }, x0);
-
-      return {
-        ...stackbar,
-        bar: nestedBarValues,
-        width: barWidth,
-        x: barX,
-      };
-    });
-
-    return ({ ...barStack, bars: nestedBars });
-  }
-
-  return barStack;
-};
 
 export const sortBarsBy = (
   bars: Bar[],
