@@ -67,7 +67,6 @@ export const BarsTooltip: React.FC = ({ children }: { children: React.ReactNode 
     index,
     indexAxis,
     isStacked,
-    // fixedBarSize,
     maxWidth: xMax,
     maxHeight: yMax,
     overlay,
@@ -97,8 +96,10 @@ export const BarsTooltip: React.FC = ({ children }: { children: React.ReactNode 
   const handleTooltip = useCallback((event: React.MouseEvent<ownerSVGElement>) => {
     const {
       scaleType,
-      domain,
     } = indexAxis as CartesianAxis;
+
+    const domain = scaleXY0.domain();
+
     const { top: tBound, left: lBound } = containerBounds;
 
     const hiddenPos = { x: -999, y: -999 };
@@ -107,7 +108,7 @@ export const BarsTooltip: React.FC = ({ children }: { children: React.ReactNode 
 
     const coords = localPoint(event.target.ownerSVGElement, event) ?? hiddenPos;
 
-    const accessorInvertValue = accessorInvert({ ...indexAxis, domain: scaleXY0.domain() }, coords[xy]);
+    const accessorInvertValue = accessorInvert({ ...indexAxis, domain }, coords[xy]);
 
     const indexOfBisectValue = scaleType === 'label'
       ? domain.indexOf(accessorInvertValue as string)
