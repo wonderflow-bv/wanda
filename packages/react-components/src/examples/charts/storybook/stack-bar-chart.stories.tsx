@@ -18,7 +18,7 @@ const story: ComponentMeta<typeof BarChart> = {
   component: BarChart,
   args: {
     title: 'Stacked Bar Chart',
-    subtitle: 'A simple bar chart',
+    subtitle: 'with a single series od data',
     sortBy: 'as-is',
     isStacked: true,
     // showLabel: false,
@@ -73,7 +73,7 @@ Default.args = {};
 
 export const withOverlay = Template.bind({});
 withOverlay.args = {
-  subtitle: 'A bar chart with overlay',
+  subtitle: 'with a series and one overlay',
   overlay: {
     dataKey: ['overlay'],
     label: 'Overlay',
@@ -82,7 +82,7 @@ withOverlay.args = {
 
 export const withMultipleOverlay = Template.bind({});
 withMultipleOverlay.args = {
-  subtitle: 'A group bar chart with one series and two overlay',
+  subtitle: 'with one series and two overlay',
   series: {
     dataKey: ['feedback count'],
     label: 'Feedback Count',
@@ -99,8 +99,7 @@ withMultipleOverlay.args = {
 
 export const withMultipleSeries = Template.bind({});
 withMultipleSeries.args = {
-  title: 'Multiple Series',
-  subtitle: 'A group bar chart',
+  subtitle: 'with multiple series and trendlines',
   data: proCons,
   showTrendline: true,
   index: {
@@ -117,8 +116,7 @@ withMultipleSeries.args = {
 
 export const withCategoriesOnIndex = Template.bind({});
 withCategoriesOnIndex.args = {
-  title: 'Multiple Series',
-  subtitle: 'A line chart with categories on index',
+  subtitle: 'with categories on index axis',
   data: channels,
   index: {
     dataKey: 'channel',
@@ -126,14 +124,13 @@ withCategoriesOnIndex.args = {
   },
   series: {
     dataKey: ['1 star', '2 stars', '3 stars', '4 stars', '5 stars'],
-    label: 'Feedback count',
+    label: 'Stars count',
   },
 };
 
 export const withNestedData = Template.bind({});
 withNestedData.args = {
-  title: 'Multiple Series',
-  subtitle: 'A bar chart rendered from nested data',
+  subtitle: 'rendered from nested data, showing average lines and values',
   data: channelsB,
   showAverage: true,
   index: {
@@ -143,14 +140,14 @@ withNestedData.args = {
   series: {
     dataKey: ['1 star.value', '2 stars.value', '3 stars.value', '4 stars.value', '5 stars.value'],
     extraData: (datum: Record<string, any>) => `${datum.percentage}%`,
-    label: 'Feedback count',
+    label: 'Stars count',
     domain: [0, 4000],
   },
   overlay: {
     dataKey: ['overlay.value'],
     extraData: (datum: Record<string, any>) => `${datum.percentage}%`,
-    rename: _ => 'Some KPI',
-    label: 'Some KPI',
+    rename: _ => 'Fanta KPI',
+    label: 'Fanta KPI',
     domain: [0, 5],
   },
   tooltipExtraContent: <div>some extra content</div>,
@@ -158,22 +155,58 @@ withNestedData.args = {
 
 export const withBackground = Template.bind({});
 withBackground.args = {
-  subtitle: 'A bar chart with bars background color',
-  series: {
-    dataKey: ['feedback count'],
-    label: 'Feedback Count',
-    showBackground: true,
+  subtitle: 'with a background',
+  data: proCons,
+  showBackground: true,
+  index: {
+    dataKey: 'date',
+    label: 'Time',
   },
-  overlay: {
-    dataKey: ['overlay'],
-    label: 'Overlay',
-    showBackground: true,
+  series: {
+    domain: [0, 140],
+    dataKey: ['positive', 'negative', 'neutral'],
+    label: 'Pros & cons',
+    style: [undefined, undefined, { fill: 'gray' }],
+  },
+};
+
+export const withAscendingOrder = Template.bind({});
+withAscendingOrder.args = {
+  subtitle: 'with values sorted in ascending order',
+  data: proCons,
+  sortBy: 'ascending-value',
+  index: {
+    dataKey: 'date',
+    label: 'Time',
+  },
+  series: {
+    domain: [0, 140],
+    dataKey: ['positive', 'negative', 'neutral'],
+    label: 'Pros & cons',
+    style: [undefined, undefined, { fill: 'gray' }],
+  },
+};
+
+export const withDescendingOrder = Template.bind({});
+withDescendingOrder.args = {
+  subtitle: 'with values sorted in descending order',
+  data: proCons,
+  sortBy: 'descending-value',
+  index: {
+    dataKey: 'date',
+    label: 'Time',
+  },
+  series: {
+    domain: [0, 140],
+    dataKey: ['positive', 'negative', 'neutral'],
+    label: 'Pros & cons',
+    style: [undefined, undefined, { fill: 'gray' }],
   },
 };
 
 export const PositiveAndNegative = Template.bind({});
 PositiveAndNegative.args = {
-  subtitle: 'A bar chart with positive and negative values',
+  subtitle: 'with positive and negative values and mirrored domains',
   data: positiveNegative,
   series: {
     dataKey: ['feedback count'],
@@ -188,7 +221,7 @@ PositiveAndNegative.args = {
 
 export const withVerticalFixedBars = Template.bind({});
 withVerticalFixedBars.args = {
-  subtitle: 'A bar chart with vertical fixed thickness bars',
+  subtitle: 'with vertical layout and fixed thickness bars',
   overlay: {
     dataKey: ['overlay'],
     label: 'Overlay',
@@ -201,7 +234,7 @@ withVerticalFixedBars.args = {
 export const withMissingData = Template.bind({});
 withMissingData.args = {
   data: feedbackCountGaps,
-  subtitle: 'A bar line chart with null values',
+  subtitle: 'with missing values',
   overlay: {
     dataKey: ['overlay'],
     label: 'Overlay',
@@ -210,8 +243,7 @@ withMissingData.args = {
 
 export const withCustomBarStyle = Template.bind({});
 withCustomBarStyle.args = {
-  title: 'Multiple Series',
-  subtitle: 'A bar chart with multiple series and custom colors',
+  subtitle: 'with multiple series and custom colors',
   data: proCons,
   index: {
     dataKey: 'date',
@@ -237,7 +269,7 @@ withCustomBarStyle.args = {
 export const withBrush = Template.bind({});
 withBrush.args = {
   data: products,
-  subtitle: 'A bar chart with twelve series',
+  subtitle: 'with brush and twelve series, one for each color of the default theme',
   sortBy: 'descending-value',
   showBackground: true,
   showBrush: true,
@@ -269,6 +301,27 @@ withBrush.args = {
 
 export const WithMenu = Template.bind({});
 WithMenu.args = {
+  subtitle: 'with custom style and menu',
+  data: proCons,
+  index: {
+    dataKey: 'date',
+    label: 'Time',
+  },
+  series: {
+    dataKey: ['positive', 'negative', 'neutral'],
+    label: 'Pros & cons',
+    style: [
+      {
+        fill: 'slateGray',
+      },
+      {
+        fill: 'salmon',
+      },
+      {
+        fill: 'lightBlue',
+      },
+    ],
+  },
   menu: FakeMenu,
 };
 
@@ -287,7 +340,19 @@ const WithinCardTemplate: ComponentStory<typeof BarChart> = (args) => {
 
 export const WithinCard = WithinCardTemplate.bind({});
 WithinCard.args = {
-  subtitle: 'A bar chart within a card 75vh and width 100%',
+  subtitle: 'within a card 75vh and width 100%',
+  series: {
+    dataKey: ['feedback count'],
+    label: 'Feedback Count',
+    domain: [0, 12000],
+  },
+  overlay: {
+    dataKey: ['overlay', 'overlayB'],
+    rename: ((o, i) => (i === 0 ? 'OverlayA' : o)),
+    label: 'Overlay',
+    domain: [0, 1],
+  },
+  data: feedbackCount.slice(10, 15),
   hidePadding: true,
   theme: 'dark',
 };
