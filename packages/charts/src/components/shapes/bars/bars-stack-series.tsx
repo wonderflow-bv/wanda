@@ -21,7 +21,7 @@ import { useCallback } from 'react';
 
 import { useBars } from '@/hooks';
 import {
-  extractStackBarValueFromNestedKey,
+  getPrimitiveFromObjectByPath,
   getStackBarIndexPositionSeries,
   getStackBarThickness,
 } from '@/utils';
@@ -38,7 +38,7 @@ export const BarsStackSeries = () => {
     data,
     isHorizontal,
     series,
-    // sortBy,
+    sortStackBy,
     maxWidth,
     maxHeight,
     X0Y0,
@@ -68,56 +68,46 @@ export const BarsStackSeries = () => {
         xScale={scaleStackSeries as any}
         yScale={scaleXY0}
         color={scaleColorStackSeries}
+        value={(d, k) => getPrimitiveFromObjectByPath(d, k) as any}
+        order={sortStackBy}
       >
-        {barStacks => barStacks.map((barStack, index) => {
-          const updatedStack = extractStackBarValueFromNestedKey(
-            barStack as any,
-            index,
-            series.dataKey,
-            data,
-            scaleStackSeries as any,
-            scaleXY0,
-            isHorizontal,
-          );
+        {barStacks => barStacks.map((barStack, index) => (
+          <Group key={_.uniqueId()}>
+            {barStack.bars.map((bar: any) => {
+              const thickness = getStackBarThickness(bar.height, maxSize, fixedBarSize, hasOverlay);
+              const yPos = getStackBarIndexPositionSeries(bar, thickness, hasOverlay, isHorizontal);
 
-          return (
-            <Group key={_.uniqueId()}>
-              {updatedStack.bars.map((bar: any) => {
-                const thickness = getStackBarThickness(bar.height, maxSize, fixedBarSize, hasOverlay);
-                const yPos = getStackBarIndexPositionSeries(bar, thickness, hasOverlay, isHorizontal);
-
-                return (
-                  <Group key={_.uniqueId()}>
-                    {(hasBackgroundSeries && index === 0) && (
-                      <Bar
-                        className={dynamicClassName(overLegend, bar.key)}
-                        x={0}
-                        y={bar.y}
-                        width={maxWidth}
-                        height={thickness}
-                        fill={bgColor}
-                        opacity={background.opacity}
-                        rx={background.rx}
-                      />
-                    )}
-
+              return (
+                <Group key={_.uniqueId()}>
+                  {(hasBackgroundSeries && index === 0) && (
                     <Bar
                       className={dynamicClassName(overLegend, bar.key)}
-                      x={bar.x}
-                      y={yPos}
-                      width={bar.width}
+                      x={0}
+                      y={bar.y}
+                      width={maxWidth}
                       height={thickness}
-                      fill={bar.color}
-                      rx={0}
-                      opacity={barStyle.opacity}
-                      onClick={() => ({})}
+                      fill={bgColor}
+                      opacity={background.opacity}
+                      rx={background.rx}
                     />
-                  </Group>
-                );
-              })}
-            </Group>
-          );
-        })
+                  )}
+
+                  <Bar
+                    className={dynamicClassName(overLegend, bar.key)}
+                    x={bar.x}
+                    y={yPos}
+                    width={bar.width}
+                    height={thickness}
+                    fill={bar.color}
+                    rx={0}
+                    opacity={barStyle.opacity}
+                    onClick={() => ({})}
+                  />
+                </Group>
+              );
+            })}
+          </Group>
+        ))
           }
       </BarStackHorizontal>
     );
@@ -132,56 +122,46 @@ export const BarsStackSeries = () => {
       xScale={scaleXY0}
       yScale={scaleStackSeries as any}
       color={scaleColorStackSeries}
+      value={(d, k) => getPrimitiveFromObjectByPath(d, k) as any}
+      order={sortStackBy}
     >
-      {barStacks => barStacks.map((barStack, index) => {
-        const updatedStack = extractStackBarValueFromNestedKey(
-          barStack as any,
-          index,
-          series.dataKey,
-          data,
-          scaleXY0,
-          scaleStackSeries as any,
-          isHorizontal,
-        );
+      {barStacks => barStacks.map((barStack, index) => (
+        <Group key={_.uniqueId()}>
+          {barStack.bars.map((bar: any) => {
+            const thickness = getStackBarThickness(bar.width, maxSize, fixedBarSize, hasOverlay);
+            const xPos = getStackBarIndexPositionSeries(bar, thickness, hasOverlay, isHorizontal);
 
-        return (
-          <Group key={_.uniqueId()}>
-            {updatedStack.bars.map((bar: any) => {
-              const thickness = getStackBarThickness(bar.width, maxSize, fixedBarSize, hasOverlay);
-              const xPos = getStackBarIndexPositionSeries(bar, thickness, hasOverlay, isHorizontal);
-
-              return (
-                <Group key={_.uniqueId()}>
-                  {(hasBackgroundSeries && index === 0) && (
-                    <Bar
-                      className={dynamicClassName(overLegend, bar.key)}
-                      x={bar.x}
-                      y={0}
-                      width={thickness}
-                      height={maxHeight}
-                      fill={bgColor}
-                      opacity={background.opacity}
-                      rx={background.rx}
-                    />
-                  )}
-
+            return (
+              <Group key={_.uniqueId()}>
+                {(hasBackgroundSeries && index === 0) && (
                   <Bar
                     className={dynamicClassName(overLegend, bar.key)}
-                    x={xPos}
-                    y={bar.y}
+                    x={bar.x}
+                    y={0}
                     width={thickness}
-                    height={bar.height}
-                    fill={bar.color}
-                    opacity={barStyle.opacity}
-                    rx={0}
-                    onClick={() => ({})}
+                    height={maxHeight}
+                    fill={bgColor}
+                    opacity={background.opacity}
+                    rx={background.rx}
                   />
-                </Group>
-              );
-            })}
-          </Group>
-        );
-      })}
+                )}
+
+                <Bar
+                  className={dynamicClassName(overLegend, bar.key)}
+                  x={xPos}
+                  y={bar.y}
+                  width={thickness}
+                  height={bar.height}
+                  fill={bar.color}
+                  opacity={barStyle.opacity}
+                  rx={0}
+                  onClick={() => ({})}
+                />
+              </Group>
+            );
+          })}
+        </Group>
+      ))}
     </BarStack>
   );
 };

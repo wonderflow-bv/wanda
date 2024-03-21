@@ -21,7 +21,7 @@ import { useCallback } from 'react';
 
 import { useBars } from '@/hooks';
 import {
-  extractStackBarValueFromNestedKey,
+  getPrimitiveFromObjectByPath,
   getStackBarIndexPositionOverlay,
   getStackBarThickness,
 } from '@/utils';
@@ -38,7 +38,7 @@ export const BarsStackOverlay = () => {
     data,
     isHorizontal,
     overlay,
-    // sortBy,
+    sortStackBy,
     maxWidth,
     maxHeight,
     X0Y0,
@@ -70,56 +70,46 @@ export const BarsStackOverlay = () => {
         yScale={scaleXY0}
         xScale={scaleStackOverlay as any}
         color={scaleColorStackOverlay}
+        value={(d, k) => getPrimitiveFromObjectByPath(d, k) as any}
+        order={sortStackBy}
       >
-        {barStacks => barStacks.map((barStack, index) => {
-          const updatedStack = extractStackBarValueFromNestedKey(
-            barStack as any,
-            index,
-            overlay.dataKey!,
-            data,
-            scaleStackOverlay as any,
-            scaleXY0,
-            isHorizontal,
-          );
+        {barStacks => barStacks.map((barStack, index) => (
+          <Group key={_.uniqueId()}>
+            {barStack.bars.map((bar: any) => {
+              const thickness = getStackBarThickness(bar.height, maxSize, fixedBarSize, hasOverlay);
+              const yPos = getStackBarIndexPositionOverlay(bar, thickness, isHorizontal);
 
-          return (
-            <Group key={_.uniqueId()}>
-              {updatedStack.bars.map((bar: any) => {
-                const thickness = getStackBarThickness(bar.height, maxSize, fixedBarSize, hasOverlay);
-                const yPos = getStackBarIndexPositionOverlay(bar, thickness, isHorizontal);
-
-                return (
-                  <Group key={_.uniqueId()}>
-                    {(hasBackgroundOverlay && index === 0) && (
-                      <Bar
-                        className={dynamicClassName(overLegend, bar.key)}
-                        x={0}
-                        y={yPos}
-                        width={maxWidth}
-                        height={thickness}
-                        fill={bgColor}
-                        opacity={background.opacity}
-                        rx={background.rx}
-                      />
-                    )}
-
+              return (
+                <Group key={_.uniqueId()}>
+                  {(hasBackgroundOverlay && index === 0) && (
                     <Bar
                       className={dynamicClassName(overLegend, bar.key)}
-                      x={bar.x}
+                      x={0}
                       y={yPos}
-                      width={bar.width}
+                      width={maxWidth}
                       height={thickness}
-                      fill={bar.color}
-                      rx={0}
-                      opacity={barStyle.opacity}
-                      onClick={() => ({})}
+                      fill={bgColor}
+                      opacity={background.opacity}
+                      rx={background.rx}
                     />
-                  </Group>
-                );
-              })}
-            </Group>
-          );
-        })
+                  )}
+
+                  <Bar
+                    className={dynamicClassName(overLegend, bar.key)}
+                    x={bar.x}
+                    y={yPos}
+                    width={bar.width}
+                    height={thickness}
+                    fill={bar.color}
+                    rx={0}
+                    opacity={barStyle.opacity}
+                    onClick={() => ({})}
+                  />
+                </Group>
+              );
+            })}
+          </Group>
+        ))
           }
       </BarStackHorizontal>
     );
@@ -134,56 +124,46 @@ export const BarsStackOverlay = () => {
       xScale={scaleXY0}
       yScale={scaleStackOverlay as any}
       color={scaleColorStackOverlay}
+      value={(d, k) => getPrimitiveFromObjectByPath(d, k) as any}
+      order={sortStackBy}
     >
-      {barStacks => barStacks.map((barStack, index) => {
-        const updatedStack = extractStackBarValueFromNestedKey(
-          barStack as any,
-          index,
-          overlay.dataKey!,
-          data,
-          scaleXY0,
-          scaleStackOverlay as any,
-          isHorizontal,
-        );
+      {barStacks => barStacks.map((barStack, index) => (
+        <Group key={_.uniqueId()}>
+          {barStack.bars.map((bar: any) => {
+            const thickness = getStackBarThickness(bar.width, maxSize, fixedBarSize, hasOverlay);
+            const xPos = getStackBarIndexPositionOverlay(bar, thickness, isHorizontal);
 
-        return (
-          <Group key={_.uniqueId()}>
-            {updatedStack.bars.map((bar: any) => {
-              const thickness = getStackBarThickness(bar.width, maxSize, fixedBarSize, hasOverlay);
-              const xPos = getStackBarIndexPositionOverlay(bar, thickness, isHorizontal);
-
-              return (
-                <Group key={_.uniqueId()}>
-                  {(hasBackgroundOverlay && index === 0) && (
-                    <Bar
-                      className={dynamicClassName(overLegend, bar.key)}
-                      x={xPos}
-                      y={0}
-                      width={thickness}
-                      height={maxHeight}
-                      fill={bgColor}
-                      opacity={background.opacity}
-                      rx={background.rx}
-                    />
-                  )}
-
+            return (
+              <Group key={_.uniqueId()}>
+                {(hasBackgroundOverlay && index === 0) && (
                   <Bar
                     className={dynamicClassName(overLegend, bar.key)}
                     x={xPos}
-                    y={bar.y}
+                    y={0}
                     width={thickness}
-                    height={bar.height}
-                    fill={bar.color}
-                    opacity={barStyle.opacity}
-                    rx={0}
-                    onClick={() => ({})}
+                    height={maxHeight}
+                    fill={bgColor}
+                    opacity={background.opacity}
+                    rx={background.rx}
                   />
-                </Group>
-              );
-            })}
-          </Group>
-        );
-      })}
+                )}
+
+                <Bar
+                  className={dynamicClassName(overLegend, bar.key)}
+                  x={xPos}
+                  y={bar.y}
+                  width={thickness}
+                  height={bar.height}
+                  fill={bar.color}
+                  opacity={barStyle.opacity}
+                  rx={0}
+                  onClick={() => ({})}
+                />
+              </Group>
+            );
+          })}
+        </Group>
+      ))}
     </BarStack>
   );
 };

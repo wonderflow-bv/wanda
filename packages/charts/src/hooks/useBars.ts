@@ -122,6 +122,12 @@ export const useBars = () => {
 
   scaleStackOverlay?.rangeRound((isHorizontal ? [maxHeight, 0] : [0, maxWidth]));
 
+  const sortStackBy = useMemo(() => {
+    if (sortBy.includes('descending')) return 'descending' as const;
+    if (sortBy.includes('ascending')) return 'ascending' as const;
+    return 'none' as const;
+  }, [sortBy]);
+
   return {
     data,
     isHorizontal,
@@ -130,6 +136,7 @@ export const useBars = () => {
     series,
     overlay,
     sortBy,
+    sortStackBy,
     hasBackgroundSeries: (hasBackgroundSeries || hasBackground),
     hasBackgroundOverlay: (hasBackgroundOverlay || hasBackground),
     indexAxis,
