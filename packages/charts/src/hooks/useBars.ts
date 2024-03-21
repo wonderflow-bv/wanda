@@ -112,14 +112,12 @@ export const useBars = () => {
 
   const scaleStackSeries = useMemo(() => scaleLinear({
     domain: getLinearDomainStackSeries(data, series.dataKey, seriesAxis.domain as number[]),
-    nice: true,
   }), [data, series.dataKey, seriesAxis.domain]);
 
   scaleStackSeries.rangeRound((isHorizontal ? [maxHeight, 0] : [0, maxWidth]));
 
   const scaleStackOverlay = useMemo(() => (overlayAxis && overlay.dataKey) && scaleLinear({
     domain: getLinearDomainStackSeries(data, overlay.dataKey, overlayAxis.domain as number[]),
-    nice: true,
   }), [data, overlay.dataKey, overlayAxis]);
 
   scaleStackOverlay?.rangeRound((isHorizontal ? [maxHeight, 0] : [0, maxWidth]));

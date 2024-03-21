@@ -65,8 +65,8 @@ export const BarsStackSeries = () => {
         keys={series.dataKey}
         height={maxHeight}
         y={X0Y0}
-        yScale={scaleXY0}
         xScale={scaleStackSeries as any}
+        yScale={scaleXY0}
         color={scaleColorStackSeries}
       >
         {barStacks => barStacks.map((barStack, index) => {

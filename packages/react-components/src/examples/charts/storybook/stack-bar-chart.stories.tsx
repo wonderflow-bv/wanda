@@ -14,10 +14,10 @@ import { FakeMenu } from './line-chart.stories';
 import styles from './sb-charts.module.css';
 
 const story: ComponentMeta<typeof BarChart> = {
-  title: 'Charts/Stack Bar Chart',
+  title: 'Charts/Stacked Bar Chart',
   component: BarChart,
   args: {
-    title: 'Bar Chart',
+    title: 'Stacked Bar Chart',
     subtitle: 'A simple bar chart',
     sortBy: 'as-is',
     isStacked: true,

@@ -100,7 +100,8 @@ export const handleAxisDomainAndScaleType = <
 T extends ChartIndex | ChartSeries>(
     data: Data,
     axis: T,
-    isStacked?: boolean): Except<AxisProps, 'orientation'> => {
+    isStacked?: boolean,
+  ): Except<AxisProps, 'orientation'> => {
   const hasData = Boolean(data.length);
 
   let res: Record<string, unknown> = {
@@ -118,7 +119,7 @@ T extends ChartIndex | ChartSeries>(
     const domainData = _.flattenDeep(primitivesFromArray);
 
     let ownDomain = isStacked
-      ? removeNilsFromDomain(getLinearDomainStackSeries(data, keys, axis.domain as number[])!)
+      ? removeNilsFromDomain(getLinearDomainStackSeries(data, keys, domainData as number[])!)
       : removeNilsFromDomain(domainData);
 
     const st = inferScaleTypeFromDomain(domainData, scaleType);
