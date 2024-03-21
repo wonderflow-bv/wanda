@@ -70,8 +70,9 @@ export const BarsStackOverlay = () => {
         yScale={scaleXY0}
         xScale={scaleStackOverlay as any}
         color={scaleColorStackOverlay}
-        value={(d, k) => getPrimitiveFromObjectByPath(d, k) as any}
+        value={(d, k) => getPrimitiveFromObjectByPath(d, k) ?? 0 as any}
         order={sortStackBy}
+        offset="diverging"
       >
         {barStacks => barStacks.map((barStack, index) => (
           <Group key={_.uniqueId()}>
@@ -124,8 +125,9 @@ export const BarsStackOverlay = () => {
       xScale={scaleXY0}
       yScale={scaleStackOverlay as any}
       color={scaleColorStackOverlay}
-      value={(d, k) => getPrimitiveFromObjectByPath(d, k) as any}
+      value={(d, k) => getPrimitiveFromObjectByPath(d, k) ?? 0 as any}
       order={sortStackBy}
+      offset="diverging"
     >
       {barStacks => barStacks.map((barStack, index) => (
         <Group key={_.uniqueId()}>

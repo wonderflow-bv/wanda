@@ -68,8 +68,9 @@ export const BarsStackSeries = () => {
         xScale={scaleStackSeries as any}
         yScale={scaleXY0}
         color={scaleColorStackSeries}
-        value={(d, k) => getPrimitiveFromObjectByPath(d, k) as any}
+        value={(d, k) => getPrimitiveFromObjectByPath(d, k) ?? 0 as any}
         order={sortStackBy}
+        offset="diverging"
       >
         {barStacks => barStacks.map((barStack, index) => (
           <Group key={_.uniqueId()}>
@@ -122,8 +123,9 @@ export const BarsStackSeries = () => {
       xScale={scaleXY0}
       yScale={scaleStackSeries as any}
       color={scaleColorStackSeries}
-      value={(d, k) => getPrimitiveFromObjectByPath(d, k) as any}
+      value={(d, k) => getPrimitiveFromObjectByPath(d, k) ?? 0 as any}
       order={sortStackBy}
+      offset="diverging"
     >
       {barStacks => barStacks.map((barStack, index) => (
         <Group key={_.uniqueId()}>
