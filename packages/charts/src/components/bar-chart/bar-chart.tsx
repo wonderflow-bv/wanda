@@ -131,11 +131,12 @@ export const BarChart: React.FC<BarChartProps> = ({
   const {
     axis,
     axisFiltered,
+    barChartLabelsMaxSize,
+    brushFilteredData,
     fixedHeight,
     isHorizontal,
     metadata,
     zeroPadding,
-    brushFilteredData,
     setBrushFilteredData,
   } = useBarChart({
     theme,
@@ -172,6 +173,7 @@ export const BarChart: React.FC<BarChartProps> = ({
             margin={zeroPadding}
             onBrushChange={setBrushFilteredData}
             overrideInnerHeight={fixedHeight}
+            barChartLabelsMaxSize={barChartLabelsMaxSize}
           />
         </DataProvider>
       </LayoutProvider>

@@ -309,6 +309,7 @@ describe('useBarChart()', () => {
       sortBy: 'as-is',
       type: 'BAR_CHART',
       tooltipExtraContent: undefined,
+      barChartLabelsMaxSize: 0,
     };
     expect(metadata).toStrictEqual(res);
   });

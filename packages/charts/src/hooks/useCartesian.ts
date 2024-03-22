@@ -45,6 +45,7 @@ export type UseCartesianProps = {
   reverseIndex?: boolean;
   mirrorDomains?: boolean;
   overrideInnerHeight?: number;
+  barChartLabelsMaxSize?: number;
   showBrush?: boolean;
   styleConfig?: DeepPartial<CartesianStyleConfig>;
   title?: string;
@@ -70,6 +71,7 @@ export const useCartesian = ({
   reverseIndex = false,
   mirrorDomains = false,
   overrideInnerHeight,
+  barChartLabelsMaxSize,
   showBrush = false,
   styleConfig,
   title,
@@ -151,7 +153,9 @@ export const useCartesian = ({
   const mr = margin.right * (right ? 1 : 2);
   const ml = margin.left * (left ? 1 : 2);
 
-  const xMax = dynamicWidth - ml - mr - vOff - brushArea.width;
+  const barChartLabelsSize = (barChartLabelsMaxSize !== undefined && !isHorizontal) ? barChartLabelsMaxSize : 0;
+
+  const xMax = dynamicWidth - ml - mr - vOff - brushArea.width - barChartLabelsSize;
 
   const topTickLabelOffset = handleVerticalTickLabelOffset(xMax, cartesianConfig, top);
   const bottomTickLabelOffset = handleVerticalTickLabelOffset(xMax, cartesianConfig, bottom);

@@ -21,7 +21,7 @@ const story: ComponentMeta<typeof BarChart> = {
     subtitle: 'A simple bar chart',
     sortBy: 'as-is',
     isStacked: false,
-    // showLabel: false,
+    showLabel: false,
     isLoading: false,
     showAverage: false,
     showTrendline: false,

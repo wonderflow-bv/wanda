@@ -57,3 +57,16 @@ export type BarStackBar = {
 export type BarStack = {
   bars: BarStackBar[];
 }
+
+export type BarChartLabel = {
+  datakey?: string;
+  data?: Record<string, any>;
+  value: string | number;
+  extraData: string;
+  length: number;
+}
+
+export type BarChartLabels = {
+  series: BarChartLabel[][];
+  overlay: BarChartLabel[][] | undefined;
+}

@@ -142,6 +142,11 @@ export type CartesianBaseProps = {
    */
   overrideInnerHeight?: number;
   /**
+   * This value is used to compute the space necessary to store the labels
+   * on the far right side of the grid, when the bar chart has a vertical layout.
+   */
+  barChartLabelsMaxSize?: number;
+  /**
    * Set custom styling properties.
    */
   styleConfig?: DeepPartial<CartesianStyleConfig>;
@@ -193,6 +198,7 @@ export const CartesianBase = forwardRef<HTMLElement, CartesianBaseProps>(({
   reverseIndex,
   mirrorDomains,
   overrideInnerHeight,
+  barChartLabelsMaxSize,
   styleConfig,
   className,
   style,
@@ -243,6 +249,7 @@ forwardedRef) => {
     reverseIndex,
     mirrorDomains,
     overrideInnerHeight,
+    barChartLabelsMaxSize,
     showBrush,
     styleConfig,
     title,

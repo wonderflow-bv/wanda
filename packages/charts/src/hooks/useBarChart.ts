@@ -28,6 +28,9 @@ import {
 import {
   computeAverage,
   computeTrendline,
+  getBarChartLabels,
+  getBarChartLabelsMaxLength,
+  getBarChartLabelsMaxSize,
   getHeightForVerticalChartWithFixedBarSize,
   handleBarChartDomainAndScaleType,
   handleBarChartSeriesColors,
@@ -95,6 +98,16 @@ export const useBarChart = ({
     top: 0, right: 12, bottom: 0, left: 0,
   } : undefined;
 
+  const barChartLabelsMaxSize = useMemo(() => {
+    if (!isStacked && showLabel) {
+      const barChartLabel = getBarChartLabels(data, series, overlay);
+      const barChartMaxLength = getBarChartLabelsMaxLength(barChartLabel);
+      return getBarChartLabelsMaxSize(barChartMaxLength!);
+    }
+
+    return 0;
+  }, [data, isStacked, overlay, series, showLabel]);
+
   const metadata: BarChartMetadata = useMemo(() => ({
     type: Charts.BAR_CHART,
     isStacked,
@@ -128,6 +141,7 @@ export const useBarChart = ({
     showBackground,
     hidePadding,
     fixedBarSize,
+    barChartLabelsMaxSize,
   }), [
     isStacked,
     sortBy,
@@ -145,6 +159,7 @@ export const useBarChart = ({
     showBackground,
     hidePadding,
     fixedBarSize,
+    barChartLabelsMaxSize,
   ]);
 
   const hasVerticalFixedBarSize = Boolean(fixedBarSize && !isHorizontal);
@@ -156,11 +171,12 @@ export const useBarChart = ({
   return {
     axis,
     axisFiltered,
+    barChartLabelsMaxSize,
+    brushFilteredData,
     fixedHeight: height ?? fixedHeight,
     isHorizontal,
     metadata,
     zeroPadding,
-    brushFilteredData,
     setBrushFilteredData,
   };
 };

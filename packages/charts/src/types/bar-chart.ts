@@ -69,4 +69,5 @@ export type BarChartMetadata = {
   showBackground?: boolean;
   hidePadding?: boolean;
   fixedBarSize?: boolean;
+  barChartLabelsMaxSize: number;
 }

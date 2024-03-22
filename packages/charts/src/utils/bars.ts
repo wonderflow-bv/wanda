@@ -16,11 +16,15 @@
 
 import _ from 'lodash';
 
+import { axisStyleConfig } from '../style-config/axis';
 import { CartesianAxis } from '../types/axis';
-import { BarChartMetadata } from '../types/bar-chart';
-import { Bar, BarsStyleConfig } from '../types/bars';
+import { BarChartMetadata, BarChartSeries } from '../types/bar-chart';
+import {
+  Bar, BarChartLabel, BarChartLabels, BarsStyleConfig,
+} from '../types/bars';
 import { Data } from '../types/main';
 import { clampLinearDomain } from './axis';
+import { getLabelFromPath, getPrimitiveFromObjectByPath } from './data';
 
 export const getBarSize = (bar: Bar, axis: CartesianAxis, isHorizontal: boolean) => {
   const clampedDomain = clampLinearDomain(axis.domain as number[]);
@@ -257,4 +261,52 @@ export const getLinearDomainStackSeries = (data: Data, dataKeys: string[], curre
   const stackDomain = [_.min([minCurrent, minClamped]) ?? 0, _.max([maxCurrent, maxClamped]) ?? 0];
 
   return clampLinearDomain(stackDomain);
+};
+
+export const getBarChartLabels = (
+  data: Data,
+  series: BarChartSeries,
+  overlay?: BarChartSeries,
+): BarChartLabels => {
+  const seriesLabels = data.map(datum => series.dataKey.map((k) => {
+    const value = getPrimitiveFromObjectByPath(datum, k) ?? '';
+    const extraData = series.extraData?.(_.at(datum, getLabelFromPath(k))[0]) ?? '';
+    const { length } = (`${value} ${extraData}`);
+
+    return ({
+      value,
+      extraData,
+      length,
+    });
+  }));
+
+  const overlayLabels = overlay
+    ? data.map(datum => overlay.dataKey.map((k) => {
+      const value = getPrimitiveFromObjectByPath(datum, k) ?? '';
+      const extraData = overlay.extraData?.(_.at(datum, getLabelFromPath(k))[0]) ?? '';
+      const { length } = (`${value} ${extraData}`);
+
+      return ({
+        value,
+        extraData,
+        length,
+      });
+    }))
+    : undefined;
+
+  return { series: seriesLabels, overlay: overlayLabels };
+};
+
+export const getBarChartLabelsMaxLength = (labels: BarChartLabels) => {
+  const { series, overlay } = labels;
+  const flatSeries = _.flattenDeep<BarChartLabel>(series) as BarChartLabel[];
+  const flatOverlay = overlay ? _.flattenDeep<BarChartLabel>(overlay) as BarChartLabel[] : [];
+  const lengths = flatSeries.concat(flatOverlay).map(el => el.length);
+  return _.max(lengths);
+};
+
+export const getBarChartLabelsMaxSize = (length: number) => {
+  const charSize = axisStyleConfig.spacing.labelCharExtimatedWidth;
+  const extraSpace = 1.20;
+  return Math.round(length * charSize * extraSpace);
 };
