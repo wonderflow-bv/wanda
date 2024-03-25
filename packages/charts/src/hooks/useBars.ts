@@ -50,6 +50,7 @@ export const useBars = () => {
     fixedBarSize,
     preventTooltipDisplay,
     tooltipExtraContent,
+    barChartLabelsMaxSize,
   } = metadata as BarChartMetadata;
 
   const { showBackground: hasBackgroundSeries } = series;
@@ -163,5 +164,6 @@ export const useBars = () => {
       maxSize,
     },
     tooltipExtraContent,
+    barChartLabelsMaxSize,
   };
 };

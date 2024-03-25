@@ -31,6 +31,16 @@ export type BarsStyleConfig = {
   overlay: {
     opacity: number;
   };
+  label: {
+    alignmentBaseline: 'alphabetic' | 'hanging' | 'ideographic' | 'mathematical' | 'auto' | 'baseline' | 'before-edge' | 'text-before-edge' | 'middle' | 'central' | 'after-edge' | 'text-after-edge' | 'inherit' | undefined;
+    fontSize: number;
+    fontFamily: string;
+    fontWeight: number;
+    fontWeightValue: number;
+    fillOpacity: number;
+    rx: number;
+    height: number;
+  };
 }
 
 export type Bar = {

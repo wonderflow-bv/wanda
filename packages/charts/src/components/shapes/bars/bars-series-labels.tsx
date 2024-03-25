@@ -33,8 +33,9 @@ import { BarsItem, BarsItemBlurred } from './bars.module.css';
 export const BarsSeriesLabels = () => {
   const { hoveredLegendItem: overLegend } = useCartesianContext();
   const theme = useThemeContext();
-  const { themes, axis } = useStyleConfigContext();
+  const { themes, bars } = useStyleConfigContext();
   const {
+    barChartLabelsMaxSize,
     data,
     isHorizontal,
     fixedBarSize,
@@ -51,7 +52,9 @@ export const BarsSeriesLabels = () => {
   } = useBars();
 
   const { maxSize } = style;
-  const { fontFamily, fontWeight, fontSize } = axis.tickLabelProps;
+  const {
+    fontFamily, fontWeight, fontSize, alignmentBaseline, fontWeightValue, height, fillOpacity, rx,
+  } = bars.label;
 
   const dynamicClassName = useCallback((overLegend: string, dataKey: string) => ((overLegend === dataKey || overLegend === '')
     ? BarsItem
@@ -79,7 +82,7 @@ export const BarsSeriesLabels = () => {
                 const thickness = getBarThickness(bar.height, maxSize, fixedBarSize);
                 const { y } = getBarSizeAndPosition(bar, seriesAxis, thickness, isHorizontal);
                 const xShifted = Number(maxWidth) + 16;
-                const yShifted = Number(y) + Number(thickness - 4);
+                const yShifted = Number(y) + Number(thickness / 2) + 4;
 
                 return (
                   <Group key={_.uniqueId()}>
@@ -92,8 +95,9 @@ export const BarsSeriesLabels = () => {
                           fontWeight={fontWeight}
                           fontFamily={fontFamily}
                           fill={themes[theme].axis.tickLabel}
+                          alignmentBaseline={alignmentBaseline}
                         >
-                          <tspan fontWeight={axis.labelProps.fontWeight}>{bar.value}</tspan>
+                          <tspan fontWeight={fontWeightValue}>{bar.value}</tspan>
                           {
                             series.extraData && (
                               <>
@@ -138,20 +142,35 @@ export const BarsSeriesLabels = () => {
             {sortedBars.map((bar, j) => {
               const thickness = getBarThickness(bar.width, maxSize, fixedBarSize);
               const { x } = getBarSizeAndPosition(bar, seriesAxis, thickness, isHorizontal);
+              const xPosText = Number(x) + Number(thickness) / 2;
+              const yPosText = maxHeight - bar.height - 8;
+              const xPosRect = (Number(x) + Number(thickness) / 2) - (barChartLabelsMaxSize / 2);
+              const yPosRect = yPosText - 14;
 
               return (
                 <Group key={_.uniqueId()}>
                   {showLabel && (
                     <Group className={dynamicClassName(overLegend, bar.key)}>
+                      <rect
+                        x={xPosRect}
+                        y={yPosRect}
+                        width={barChartLabelsMaxSize}
+                        height={height}
+                        fill={themes[theme].markerLabel.background}
+                        fillOpacity={fillOpacity}
+                        rx={rx}
+                      />
                       <text
-                        x={x}
-                        y={maxHeight - bar.height - 8}
+                        x={xPosText}
+                        y={yPosText}
                         fontSize={fontSize}
                         fontWeight={fontWeight}
                         fontFamily={fontFamily}
                         fill={themes[theme].axis.tickLabel}
+                        alignmentBaseline={alignmentBaseline}
+                        textAnchor="middle"
                       >
-                        <tspan fontWeight={axis.labelProps.fontWeight}>{bar.value}</tspan>
+                        <tspan fontWeight={fontWeightValue}>{bar.value}</tspan>
                         {
                             series.extraData && (
                               <>
@@ -163,6 +182,7 @@ export const BarsSeriesLabels = () => {
                             )
                           }
                       </text>
+
                     </Group>
                   )}
                 </Group>

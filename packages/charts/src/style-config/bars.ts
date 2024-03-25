@@ -33,4 +33,14 @@ export const barsStyleConfig: BarsStyleConfig = {
   overlay: {
     opacity: 0.7,
   },
+  label: {
+    alignmentBaseline: 'baseline',
+    fontSize: 12,
+    fontFamily: 'system-ui',
+    fontWeight: 400,
+    fontWeightValue: 600,
+    fillOpacity: 0.8,
+    rx: 4,
+    height: 18,
+  },
 };
