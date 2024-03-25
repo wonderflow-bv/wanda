@@ -63,6 +63,7 @@ export const BarsTooltip: React.FC = ({ children }: { children: React.ReactNode 
   const {
     data,
     hasOverlay,
+    hasReversedIndex,
     isHorizontal,
     index,
     indexAxis,
@@ -129,7 +130,7 @@ export const BarsTooltip: React.FC = ({ children }: { children: React.ReactNode 
     const tooltipLeft = ('clientX' in event ? event.clientX : 0) - lBound / 8;
     const tooltipTop = ('clientY' in event ? event.clientY : 0) - tBound / 8;
 
-    const datum = data[indexOfBisectValue];
+    const datum = hasReversedIndex ? data.at(-(indexOfBisectValue - 1)) : data[indexOfBisectValue];
 
     const hasSeriesData = series.dataKey.every(s => !_.isNil(getPrimitiveFromObjectByPath(datum, s)));
     const hasOverlayData = overlay.dataKey?.every(s => !_.isNil(getPrimitiveFromObjectByPath(datum, s)));
@@ -148,10 +149,11 @@ export const BarsTooltip: React.FC = ({ children }: { children: React.ReactNode 
       tooltipData,
     });
   }, [indexAxis,
+    scaleXY0,
     containerBounds,
     isHorizontal,
-    scaleXY0,
     hasOverlay,
+    hasReversedIndex,
     data,
     series.dataKey,
     overlay.dataKey,

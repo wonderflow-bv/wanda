@@ -82,11 +82,11 @@ export const useBars = () => {
 
   const X0Y0 = useCallback((d: Record<string, any>) => (`${getPrimitiveFromObjectByPath(d, index)}`), [index]);
 
-  const scaleXY0 = scaleBand<string>({
+  const scaleXY0 = useMemo(() => scaleBand<string>({
     domain: hasReversedIndex ? data.map(X0Y0).reverse() : data.map(X0Y0),
     paddingOuter,
     paddingInner,
-  });
+  }), [X0Y0, data, hasReversedIndex, paddingInner, paddingOuter]);
 
   scaleXY0.rangeRound((isHorizontal ? [0, maxWidth] : [maxHeight, 0]));
 
@@ -94,11 +94,11 @@ export const useBars = () => {
     ? [...series.dataKey, ...overlay.dataKey!]
     : series.dataKey), [hasOverlay, overlay.dataKey, series.dataKey]);
 
-  const scaleXY1 = scaleBand<string>({
+  const scaleXY1 = useMemo(() => scaleBand<string>({
     domain: combinedDataKeys,
     paddingInner: paddingInnerGroup,
     paddingOuter: paddingOuterGroup,
-  });
+  }), [combinedDataKeys, paddingInnerGroup, paddingOuterGroup]);
 
   scaleXY1.rangeRound([0, scaleXY0.bandwidth()]);
 
@@ -141,6 +141,7 @@ export const useBars = () => {
     sortStackBy,
     hasBackgroundSeries: (hasBackgroundSeries || hasBackground),
     hasBackgroundOverlay: (hasBackgroundOverlay || hasBackground),
+    hasReversedIndex,
     indexAxis,
     seriesAxis,
     overlayAxis,
