@@ -108,7 +108,7 @@ export const BarsOverlayLabels = () => {
                           {
                             overlay.extraData && (
                               <>
-                                <tspan>{' '}</tspan>
+                                <tspan>{' - '}</tspan>
                                 <tspan>
                                   {overlay.extraData(_.at(data[i], getLabelFromPath(overlay.dataKey![j]))[0])}
                                 </tspan>
@@ -181,7 +181,7 @@ export const BarsOverlayLabels = () => {
                         {
                             overlay.extraData && (
                               <>
-                                <tspan>{' '}</tspan>
+                                <tspan>{' - '}</tspan>
                                 <tspan>
                                   {overlay.extraData(_.at(data[i], getLabelFromPath(overlay.dataKey![j]))[0])}
                                 </tspan>

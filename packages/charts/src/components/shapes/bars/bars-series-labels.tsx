@@ -101,7 +101,7 @@ export const BarsSeriesLabels = () => {
                           {
                             series.extraData && (
                               <>
-                                <tspan>{' '}</tspan>
+                                <tspan>{' - '}</tspan>
                                 <tspan>
                                   {series.extraData(_.at(data[i], getLabelFromPath(series.dataKey[j]))[0])}
                                 </tspan>
@@ -174,7 +174,7 @@ export const BarsSeriesLabels = () => {
                         {
                             series.extraData && (
                               <>
-                                <tspan>{' '}</tspan>
+                                <tspan>{' - '}</tspan>
                                 <tspan>
                                   {series.extraData(_.at(data[i], getLabelFromPath(series.dataKey[j]))[0])}
                                 </tspan>
