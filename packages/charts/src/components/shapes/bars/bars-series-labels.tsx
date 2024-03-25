@@ -1,0 +1,179 @@
+/*
+ * Copyright 2024 Wonderflow Design Team
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import { Group } from '@visx/group';
+import { BarGroup, BarGroupHorizontal } from '@visx/shape';
+import _ from 'lodash';
+import { useCallback } from 'react';
+
+import { useBars } from '@/hooks';
+import {
+  extractBarValueFromNestedKey,
+  getBarSizeAndPosition, getBarThickness,
+  getLabelFromPath,
+  sortBarsBy,
+} from '@/utils';
+
+import { useCartesianContext, useStyleConfigContext, useThemeContext } from '../../../providers';
+import { BarsItem, BarsItemBlurred } from './bars.module.css';
+
+export const BarsSeriesLabels = () => {
+  const { hoveredLegendItem: overLegend } = useCartesianContext();
+  const theme = useThemeContext();
+  const { themes, axis } = useStyleConfigContext();
+  const {
+    data,
+    isHorizontal,
+    fixedBarSize,
+    maxWidth,
+    maxHeight,
+    scaleXY0,
+    scaleXY1,
+    series,
+    showLabel,
+    sortBy,
+    seriesAxis,
+    style,
+    X0Y0,
+  } = useBars();
+
+  const { maxSize } = style;
+  const { fontFamily, fontWeight, fontSize } = axis.tickLabelProps;
+
+  const dynamicClassName = useCallback((overLegend: string, dataKey: string) => ((overLegend === dataKey || overLegend === '')
+    ? BarsItem
+    : BarsItemBlurred), []);
+
+  if (!isHorizontal) {
+    return (
+      <BarGroupHorizontal
+        data={data}
+        keys={series.dataKey}
+        width={maxWidth}
+        y0={X0Y0}
+        y0Scale={scaleXY0}
+        y1Scale={scaleXY1}
+        xScale={seriesAxis.scale}
+        color={(_, i) => series.colors[i]}
+      >
+        {barGroups => barGroups.map((barGroup, i) => {
+          const updatedBars = extractBarValueFromNestedKey(barGroup, i, data, seriesAxis.scale, maxWidth, isHorizontal);
+          const sortedBars = sortBarsBy(updatedBars, sortBy, isHorizontal);
+
+          return (
+            <Group key={_.uniqueId()} top={barGroup.y0}>
+              {sortedBars.map((bar, j) => {
+                const thickness = getBarThickness(bar.height, maxSize, fixedBarSize);
+                const { y } = getBarSizeAndPosition(bar, seriesAxis, thickness, isHorizontal);
+                const xShifted = Number(maxWidth) + 16;
+                const yShifted = Number(y) + Number(thickness - 4);
+
+                return (
+                  <Group key={_.uniqueId()}>
+                    {showLabel && (
+                      <Group className={dynamicClassName(overLegend, bar.key)}>
+                        <text
+                          x={xShifted}
+                          y={yShifted}
+                          fontSize={fontSize}
+                          fontWeight={fontWeight}
+                          fontFamily={fontFamily}
+                          fill={themes[theme].axis.tickLabel}
+                        >
+                          <tspan fontWeight={axis.labelProps.fontWeight}>{bar.value}</tspan>
+                          {
+                            series.extraData && (
+                              <>
+                                <tspan>{' '}</tspan>
+                                <tspan>
+                                  {series.extraData(_.at(data[i], getLabelFromPath(series.dataKey[j]))[0])}
+                                </tspan>
+                              </>
+                            )
+                          }
+                        </text>
+                      </Group>
+                    )}
+                  </Group>
+                );
+              })}
+            </Group>
+          );
+        })
+          }
+      </BarGroupHorizontal>
+    );
+  }
+
+  return (
+    <BarGroup
+      data={data}
+      keys={series.dataKey}
+      height={maxHeight}
+      x0={X0Y0}
+      x0Scale={scaleXY0}
+      x1Scale={scaleXY1}
+      yScale={seriesAxis.scale}
+      color={(_, i) => series.colors[i]!}
+    >
+      {barGroups => barGroups.map((barGroup, i) => {
+        const updatedBars = extractBarValueFromNestedKey(barGroup, i, data, seriesAxis.scale, maxHeight, isHorizontal);
+        const sortedBars = sortBarsBy(updatedBars, sortBy, isHorizontal);
+
+        return (
+          <Group key={_.uniqueId()} left={barGroup.x0}>
+            {sortedBars.map((bar, j) => {
+              const thickness = getBarThickness(bar.width, maxSize, fixedBarSize);
+              const { x } = getBarSizeAndPosition(bar, seriesAxis, thickness, isHorizontal);
+
+              return (
+                <Group key={_.uniqueId()}>
+                  {showLabel && (
+                    <Group className={dynamicClassName(overLegend, bar.key)}>
+                      <text
+                        x={x}
+                        y={maxHeight - bar.height - 8}
+                        fontSize={fontSize}
+                        fontWeight={fontWeight}
+                        fontFamily={fontFamily}
+                        fill={themes[theme].axis.tickLabel}
+                      >
+                        <tspan fontWeight={axis.labelProps.fontWeight}>{bar.value}</tspan>
+                        {
+                            series.extraData && (
+                              <>
+                                <tspan>{' '}</tspan>
+                                <tspan>
+                                  {series.extraData(_.at(data[i], getLabelFromPath(series.dataKey[j]))[0])}
+                                </tspan>
+                              </>
+                            )
+                          }
+                      </text>
+                    </Group>
+                  )}
+                </Group>
+              );
+            })}
+          </Group>
+        );
+      })}
+    </BarGroup>
+  );
+};
+
+BarsSeriesLabels.displayName = 'BarSeriesLabels';
+

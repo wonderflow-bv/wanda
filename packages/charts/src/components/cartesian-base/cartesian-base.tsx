@@ -380,7 +380,7 @@ forwardedRef) => {
                   hasMirroredDomainsVertical={hasMirroredDomainsVertical}
                 >
                   <DataProvider data={filteredData} metadata={metadata} filteredData={filteredData}>
-                    <Group clipPath="url(#clip-path-cartesian-chart)">
+                    <Group>
                       {metadata?.type === Charts.LINE_CHART && <Lines />}
                       {metadata?.type === Charts.BAR_CHART && <Bars />}
                     </Group>

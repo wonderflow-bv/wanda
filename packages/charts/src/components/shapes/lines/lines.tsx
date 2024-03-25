@@ -30,21 +30,23 @@ export const Lines: React.FC = () => {
   const { isBrowser } = useSSR();
 
   return (
-    <Group
-      top={position.top}
-      left={position.left}
-    >
-      <Group data-testid="lines">
-        <LinesTrendline />
-        <LinesSeries />
-        <LinesOverlay />
+    <Group clipPath="url(#clip-path-cartesian-chart)">
+      <Group
+        top={position.top}
+        left={position.left}
+      >
+        <Group data-testid="lines">
+          <LinesTrendline />
+          <LinesSeries />
+          <LinesOverlay />
+        </Group>
+
+        {isBrowser && <LinesTooltip />}
+
+        <LinesAverage />
+        <LinesMarkerLabels />
+
       </Group>
-
-      {isBrowser && <LinesTooltip />}
-
-      <LinesAverage />
-      <LinesMarkerLabels />
-
     </Group>
   );
 };

@@ -46,6 +46,7 @@ export const useBars = () => {
     isStacked,
     sortBy,
     showBackground: hasBackground,
+    showLabel,
     fixedBarSize,
     preventTooltipDisplay,
     tooltipExtraContent,
@@ -149,17 +150,18 @@ export const useBars = () => {
     scaleXY0,
     scaleXY1,
     fixedBarSize: Boolean(fixedBarSize),
-    style: {
-      bar,
-      background,
-      maxSize,
-    },
     preventTooltipOpening,
     preventTooltipDisplay,
     scaleColorStackSeries,
     scaleColorStackOverlay,
     scaleStackSeries,
     scaleStackOverlay,
+    showLabel,
+    style: {
+      bar,
+      background,
+      maxSize,
+    },
     tooltipExtraContent,
   };
 };
