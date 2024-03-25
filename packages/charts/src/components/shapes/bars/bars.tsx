@@ -21,6 +21,7 @@ import { useBars, useSSR } from '@/hooks';
 import { useCartesianContext } from '../../../providers';
 import { BarsAverage } from './bars-average';
 import { BarsOverlay } from './bars-overlay';
+import { BarsOverlayLabels } from './bars-overlay-labels';
 import { BarsSeries } from './bars-series';
 import { BarsSeriesLabels } from './bars-series-labels';
 import { BarsStackOverlay } from './bars-stack-overlay';
@@ -86,6 +87,7 @@ export const Bars: React.FC = () => {
       >
 
         <BarsSeriesLabels />
+        <BarsOverlayLabels />
       </Group>
     </>
   );

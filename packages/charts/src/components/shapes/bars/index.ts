@@ -17,6 +17,7 @@
 export { Bars } from './bars';
 export { BarsAverage } from './bars-average';
 export { BarsOverlay } from './bars-overlay';
+export { BarsOverlayLabels } from './bars-overlay-labels';
 export { BarsSeries } from './bars-series';
 export { BarsSeriesLabels } from './bars-series-labels';
 export { BarsStackOverlay } from './bars-stack-overlay';
