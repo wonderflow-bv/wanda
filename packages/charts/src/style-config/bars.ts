@@ -39,7 +39,7 @@ export const barsStyleConfig: BarsStyleConfig = {
     fontFamily: 'system-ui',
     fontWeight: 400,
     fontWeightValue: 600,
-    fillOpacity: 0.8,
+    fillOpacity: 0.7,
     rx: 4,
     height: 18,
   },
