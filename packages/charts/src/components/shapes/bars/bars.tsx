@@ -25,7 +25,9 @@ import { BarsOverlayLabels } from './bars-overlay-labels';
 import { BarsSeries } from './bars-series';
 import { BarsSeriesLabels } from './bars-series-labels';
 import { BarsStackOverlay } from './bars-stack-overlay';
+import { BarsStackOverlayLabels } from './bars-stack-overlay-labels';
 import { BarsStackSeries } from './bars-stack-series';
+import { BarsStackSeriesLabels } from './bars-stack-series-labels';
 import { BarsTooltip } from './bars-tooltip';
 import { BarsTrendline } from './bars-trendline';
 
@@ -86,8 +88,19 @@ export const Bars: React.FC = () => {
         left={left}
       >
 
-        <BarsSeriesLabels />
-        <BarsOverlayLabels />
+        {isStacked
+          ? (
+            <Group>
+              <BarsStackSeriesLabels />
+              <BarsStackOverlayLabels />
+            </Group>
+          )
+          : (
+            <Group>
+              <BarsSeriesLabels />
+              <BarsOverlayLabels />
+            </Group>
+          )}
       </Group>
     </>
   );

@@ -67,8 +67,8 @@ export const BarsStackOverlay = () => {
         keys={overlay.dataKey}
         height={maxHeight}
         y={X0Y0}
-        yScale={scaleXY0}
         xScale={scaleStackOverlay as any}
+        yScale={scaleXY0}
         color={scaleColorStackOverlay}
         value={(d, k) => getPrimitiveFromObjectByPath(d, k) ?? 0 as any}
         order={sortStackBy}

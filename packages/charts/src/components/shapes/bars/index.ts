@@ -21,6 +21,8 @@ export { BarsOverlayLabels } from './bars-overlay-labels';
 export { BarsSeries } from './bars-series';
 export { BarsSeriesLabels } from './bars-series-labels';
 export { BarsStackOverlay } from './bars-stack-overlay';
+export { BarsStackOverlayLabels } from './bars-stack-overlay-labels';
 export { BarsStackSeries } from './bars-stack-series';
+export { BarsStackSeriesLabels } from './bars-stack-series-labels';
 export { BarsTooltip } from './bars-tooltip';
 export { BarsTrendline } from './bars-trendline';

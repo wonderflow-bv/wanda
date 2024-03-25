@@ -21,7 +21,7 @@ const story: ComponentMeta<typeof BarChart> = {
     subtitle: 'with a single series od data',
     sortBy: 'as-is',
     isStacked: true,
-    // showLabel: false,
+    showLabel: false,
     isLoading: false,
     showAverage: false,
     showTrendline: false,
