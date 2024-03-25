@@ -197,7 +197,7 @@ export const useCartesian = ({
         : mt + tOff,
       left: isHorizontal
         ? ml + lOff
-        : ml + lOff + xMax,
+        : ml + lOff + xMax + barChartLabelsSize,
     },
   };
 
