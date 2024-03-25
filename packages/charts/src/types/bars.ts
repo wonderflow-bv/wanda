@@ -80,3 +80,9 @@ export type BarChartLabels = {
   series: BarChartLabel[][];
   overlay: BarChartLabel[][] | undefined;
 }
+
+export type BarStackContent = {
+  value: string | number;
+  separator: string;
+  extra: string;
+}

@@ -21,7 +21,8 @@ import { useCallback } from 'react';
 
 import { useBars } from '@/hooks';
 import {
-  getLabelFromPath,
+  getLabelContent,
+  getLabelMorphology,
   getPrimitiveFromObjectByPath,
   getStackBarIndexPositionSeries,
   getStackBarThickness,
@@ -81,39 +82,33 @@ export const BarsStackSeriesLabels = () => {
             {barStack.bars.map((bar: any, j) => {
               const thickness = getStackBarThickness(bar.height, maxSize, fixedBarSize, hasOverlay);
               const yPos = getStackBarIndexPositionSeries(bar, thickness, hasOverlay, isHorizontal);
+              const { value, separator, extra } = getLabelContent(data[j], series.dataKey, series.extraData, index);
 
-              const value = getPrimitiveFromObjectByPath(bar.bar.data, series.dataKey[index]) ?? '';
-              const separator = ' - ';
-              const extra = series.extraData
-                ? series.extraData(_.at(data[j], getLabelFromPath(series.dataKey[index]))[0])
-                : '';
-              const len = series.extraData
-                ? (`${value}${separator}${extra}`).length
-                : String(`${value}`).length;
-              const labelSize = Math.round(len * 1.1 * 8);
-
-              const xPosRect = Number(bar.x) + Number(bar.width) + 8;
-              const yPosRect = Number(yPos) + 3;
-
-              const xPosText = xPosRect + labelSize / 2;
-              const yPosText = yPosRect + 13;
+              const { rect, text } = getLabelMorphology(
+                bar,
+                series.extraData,
+                { value, separator, extra },
+                thickness,
+                { x: undefined, y: yPos },
+                isHorizontal,
+              );
 
               return (
                 <Group key={_.uniqueId()}>
                   {showLabel && (
                     <Group className={dynamicClassName(overLegend, bar.key)}>
                       <rect
-                        x={xPosRect}
-                        y={yPosRect}
-                        width={labelSize}
+                        x={rect.x}
+                        y={rect.y}
+                        width={rect.width}
                         height={height}
                         fill={themes[theme].markerLabel.background}
                         fillOpacity={fillOpacity}
                         rx={rx}
                       />
                       <text
-                        x={xPosText}
-                        y={yPosText}
+                        x={text.x}
+                        y={text.y}
                         fontSize={fontSize}
                         fontWeight={fontWeight}
                         fontFamily={fontFamily}
@@ -164,38 +159,33 @@ export const BarsStackSeriesLabels = () => {
             const thickness = getStackBarThickness(bar.width, maxSize, fixedBarSize, hasOverlay);
             const xPos = getStackBarIndexPositionSeries(bar, thickness, hasOverlay, isHorizontal);
 
-            const value = getPrimitiveFromObjectByPath(bar.bar.data, series.dataKey[index]) ?? '';
-            const separator = ' - ';
-            const extra = series.extraData
-              ? series.extraData(_.at(data[j], getLabelFromPath(series.dataKey[index]))[0])
-              : '';
-            const len = series.extraData
-              ? (`${value}${separator}${extra}`).length
-              : String(`${value}`).length;
-            const labelSize = Math.round(len * 1.1 * 8);
+            const { value, separator, extra } = getLabelContent(data[j], series.dataKey, series.extraData, index);
 
-            const xPosRect = (Number(xPos) + (Number(thickness) - labelSize) / 2);
-            const yPosRect = Number(bar.y) - 24;
-
-            const xPosText = Number(xPos) + Number(thickness) / 2;
-            const yPosText = Number(bar.y) - 10;
+            const { rect, text } = getLabelMorphology(
+              bar,
+              series.extraData,
+              { value, separator, extra },
+              thickness,
+              { x: xPos, y: undefined },
+              isHorizontal,
+            );
 
             return (
               <Group key={_.uniqueId()}>
                 {showLabel && (
                   <Group className={dynamicClassName(overLegend, bar.key)}>
                     <rect
-                      x={xPosRect}
-                      y={yPosRect}
-                      width={labelSize}
+                      x={rect.x}
+                      y={rect.y}
+                      width={rect.width}
                       height={height}
                       fill={themes[theme].markerLabel.background}
                       fillOpacity={fillOpacity}
                       rx={rx}
                     />
                     <text
-                      x={xPosText}
-                      y={yPosText}
+                      x={text.x}
+                      y={text.y}
                       fontSize={fontSize}
                       fontWeight={fontWeight}
                       fontFamily={fontFamily}

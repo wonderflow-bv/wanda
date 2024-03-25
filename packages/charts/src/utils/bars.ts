@@ -21,6 +21,7 @@ import { CartesianAxis } from '../types/axis';
 import { BarChartMetadata, BarChartSeries } from '../types/bar-chart';
 import {
   Bar, BarChartLabel, BarChartLabels, BarsStyleConfig,
+  BarStackContent,
 } from '../types/bars';
 import { Data } from '../types/main';
 import { clampLinearDomain } from './axis';
@@ -309,4 +310,65 @@ export const getBarChartLabelsMaxSize = (length: number) => {
   const charSize = axisStyleConfig.spacing.labelCharExtimatedWidth;
   const extraSpace = 1.20;
   return Math.round(length * charSize * extraSpace);
+};
+
+export const getLabelContent = (
+  datum: Record<string, any>,
+  dataKey: string[],
+  extraData: ((datum: Record<string, any>) => string) | undefined,
+  index: number,
+): BarStackContent => {
+  const value = getPrimitiveFromObjectByPath(datum, dataKey[index]) ?? '';
+  const separator = ' - ';
+  const extra = extraData
+    ? extraData(_.at(datum, getLabelFromPath(dataKey[index]))[0])
+    : '';
+
+  return { value, separator, extra };
+};
+
+export const getLabelMorphology = (
+  bar: Record<string, any>,
+  extraData: ((datum: Record<string, any>) => string) | undefined,
+  content: BarStackContent,
+  thickness: number,
+  position: { x: number | undefined; y: number | undefined },
+  isHorizontal: boolean,
+) => {
+  let xPosRect; let yPosRect; let xPosText; let
+    yPosText;
+  const { value, separator, extra } = content;
+  const { x, y } = position;
+
+  const len = extraData
+    ? (`${value}${separator}${extra}`).length
+    : String(`${value}`).length;
+
+  const labelSize = Math.round(len * 1.1 * 8);
+
+  if (!isHorizontal) {
+    xPosRect = Number(bar.x) + Number(bar.width) + 8;
+    yPosRect = Number(y) + 3;
+
+    xPosText = xPosRect + labelSize / 2;
+    yPosText = yPosRect + 13;
+  } else {
+    xPosRect = (Number(x) + (Number(thickness) - labelSize) / 2);
+    yPosRect = Number(bar.y) - 24;
+
+    xPosText = Number(x) + Number(thickness) / 2;
+    yPosText = Number(bar.y) - 10;
+  }
+
+  return {
+    rect: {
+      x: xPosRect,
+      y: yPosRect,
+      width: labelSize,
+    },
+    text: {
+      x: xPosText,
+      y: yPosText,
+    },
+  };
 };
