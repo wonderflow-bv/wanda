@@ -48,6 +48,7 @@ export const BarsOverlayLabels = () => {
     showLabel,
     sortBy,
     hasOverlay,
+    hasLabel,
     overlay,
     overlayAxis,
     style,
@@ -63,7 +64,7 @@ export const BarsOverlayLabels = () => {
     ? BarsItem
     : BarsItemBlurred), []);
 
-  if (!hasOverlay) return null;
+  if (!hasOverlay || !hasLabel) return null;
 
   if (isVertical) {
     return (

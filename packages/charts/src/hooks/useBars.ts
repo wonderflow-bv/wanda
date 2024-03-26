@@ -31,7 +31,9 @@ export const useBars = () => {
   const {
     axis, dimension, preventTooltipOpening, hasReversedIndex,
   } = useCartesianContext();
-  const { bars } = useStyleConfigContext();
+  const { bars, viewport } = useStyleConfigContext();
+
+  const hasLabel = dimension.maxWidth > viewport.small.maxWidth && dimension.maxHeight > viewport.small.maxHeight;
 
   const {
     left, bottom, right, top,
@@ -140,6 +142,7 @@ export const useBars = () => {
     overlay,
     sortBy,
     sortStackBy,
+    hasLabel,
     hasBackgroundSeries: (hasBackgroundSeries || hasBackground),
     hasBackgroundOverlay: (hasBackgroundOverlay || hasBackground),
     hasReversedIndex,

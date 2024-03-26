@@ -47,6 +47,7 @@ export const BarsSeriesLabels = () => {
     scaleXY1,
     series,
     showLabel,
+    hasLabel,
     sortBy,
     seriesAxis,
     style,
@@ -61,6 +62,8 @@ export const BarsSeriesLabels = () => {
   const dynamicClassName = useCallback((overLegend: string, dataKey: string) => ((overLegend === dataKey || overLegend === '')
     ? BarsItem
     : BarsItemBlurred), []);
+
+  if (!hasLabel) return null;
 
   if (isVertical) {
     return (

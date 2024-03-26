@@ -52,6 +52,7 @@ export const BarsStackSeriesLabels = () => {
     scaleColorStackSeries,
     scaleStackSeries,
     hasOverlay,
+    hasLabel,
   } = useBars();
 
   const { maxSize } = style;
@@ -63,6 +64,8 @@ export const BarsStackSeriesLabels = () => {
   const dynamicClassName = useCallback((overLegend: string, dataKey: string) => ((overLegend === dataKey || overLegend === '')
     ? BarsItem
     : BarsItemBlurred), []);
+
+  if (!hasLabel) return null;
 
   if (isVertical) {
     return (

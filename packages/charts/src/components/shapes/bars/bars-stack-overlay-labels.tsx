@@ -51,6 +51,7 @@ export const BarsStackOverlayLabels = () => {
     scaleColorStackOverlay,
     scaleStackOverlay,
     hasOverlay,
+    hasLabel,
     overlay,
   } = useBars();
 
@@ -64,7 +65,7 @@ export const BarsStackOverlayLabels = () => {
     ? BarsItem
     : BarsItemBlurred), []);
 
-  if (!hasOverlay) return null;
+  if (!hasOverlay || !hasLabel) return null;
 
   if (isVertical) {
     return (
