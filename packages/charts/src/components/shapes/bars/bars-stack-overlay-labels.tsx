@@ -17,7 +17,6 @@
 import { Group } from '@visx/group';
 import { BarStack, BarStackHorizontal } from '@visx/shape';
 import _ from 'lodash';
-import { useCallback } from 'react';
 
 import { useBars } from '@/hooks';
 import {
@@ -28,13 +27,11 @@ import {
   getStackBarThickness,
 } from '@/utils';
 
-import { useCartesianContext, useStyleConfigContext, useThemeContext } from '../../../providers';
-import { BarsItem, BarsItemBlurred } from './bars.module.css';
+import { useStyleConfigContext } from '../../../providers';
+import { BarsLabel } from './bars-label';
 
 export const BarsStackOverlayLabels = () => {
-  const { hoveredLegendItem: overLegend } = useCartesianContext();
-  const theme = useThemeContext();
-  const { themes, bars } = useStyleConfigContext();
+  const { bars } = useStyleConfigContext();
 
   const {
     data,
@@ -57,13 +54,7 @@ export const BarsStackOverlayLabels = () => {
 
   const { maxSize } = style;
 
-  const {
-    fontFamily, fontWeight, fontSize, alignmentBaseline, fontWeightValue, height, fillOpacity, rx,
-  } = bars.label;
-
-  const dynamicClassName = useCallback((overLegend: string, dataKey: string) => ((overLegend === dataKey || overLegend === '')
-    ? BarsItem
-    : BarsItemBlurred), []);
+  const { fontWeight, fontWeightValue } = bars.label;
 
   if (!hasOverlay || !hasLabel) return null;
 
@@ -109,39 +100,15 @@ export const BarsStackOverlayLabels = () => {
               return (
                 <Group key={_.uniqueId()}>
                   {showLabel && (
-                    <Group className={dynamicClassName(overLegend, bar.key)}>
-                      <rect
-                        x={rect.x}
-                        y={rect.y}
-                        width={rect.width}
-                        height={height}
-                        fill={themes[theme].markerLabel.background}
-                        fillOpacity={fillOpacity}
-                        rx={rx}
-                      />
-                      <text
-                        x={text.x}
-                        y={text.y}
-                        fontSize={fontSize}
-                        fontWeight={fontWeight}
-                        fontFamily={fontFamily}
-                        fill={themes[theme].axis.tickLabel}
-                        alignmentBaseline={alignmentBaseline}
-                        textAnchor="middle"
-                      >
-                        <tspan fontWeight={weigth}>{value}</tspan>
-                        {
-                            overlay.extraData && (
-                              <>
-                                <tspan>{separator}</tspan>
-                                <tspan>
-                                  {extra}
-                                </tspan>
-                              </>
-                            )
-                          }
-                      </text>
-                    </Group>
+                    <BarsLabel
+                      wrapper={{ ...rect }}
+                      text={text}
+                      value={value}
+                      separator={separator}
+                      extraData={extra}
+                      fontWeightValue={weigth}
+                      dataKey={bar.key}
+                    />
                   )}
                 </Group>
               );
@@ -194,39 +161,15 @@ export const BarsStackOverlayLabels = () => {
             return (
               <Group key={_.uniqueId()}>
                 {showLabel && (
-                  <Group className={dynamicClassName(overLegend, bar.key)}>
-                    <rect
-                      x={rect.x}
-                      y={rect.y}
-                      width={rect.width}
-                      height={height}
-                      fill={themes[theme].markerLabel.background}
-                      fillOpacity={fillOpacity}
-                      rx={rx}
-                    />
-                    <text
-                      x={text.x}
-                      y={text.y}
-                      fontSize={fontSize}
-                      fontWeight={fontWeight}
-                      fontFamily={fontFamily}
-                      fill={themes[theme].axis.tickLabel}
-                      alignmentBaseline={alignmentBaseline}
-                      textAnchor="middle"
-                    >
-                      <tspan fontWeight={weigth}>{value}</tspan>
-                      {
-                            overlay.extraData && (
-                              <>
-                                <tspan>{separator}</tspan>
-                                <tspan>
-                                  {extra}
-                                </tspan>
-                              </>
-                            )
-                          }
-                    </text>
-                  </Group>
+                  <BarsLabel
+                    wrapper={{ ...rect }}
+                    text={text}
+                    value={value}
+                    separator={separator}
+                    extraData={extra}
+                    fontWeightValue={weigth}
+                    dataKey={bar.key}
+                  />
                 )}
               </Group>
             );
