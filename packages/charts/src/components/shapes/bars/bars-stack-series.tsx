@@ -37,6 +37,7 @@ export const BarsStackSeries = () => {
   const {
     data,
     isHorizontal,
+    isVertical,
     series,
     sortStackBy,
     maxWidth,
@@ -58,7 +59,7 @@ export const BarsStackSeries = () => {
     ? BarsItem
     : BarsItemBlurred), []);
 
-  if (!isHorizontal) {
+  if (isVertical) {
     return (
       <BarStackHorizontal
         data={data}

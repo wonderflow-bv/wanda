@@ -21,10 +21,10 @@ import { useCallback } from 'react';
 
 import { useBars } from '@/hooks';
 import {
-  getLabelContent,
-  getLabelMorphology,
   getPrimitiveFromObjectByPath,
   getStackBarIndexPositionSeries,
+  getStackBarLabelContent,
+  getStackBarLabelMorphology,
   getStackBarThickness,
 } from '@/utils';
 
@@ -39,6 +39,7 @@ export const BarsStackSeriesLabels = () => {
   const {
     data,
     isHorizontal,
+    isVertical,
     series,
     sortStackBy,
     maxWidth,
@@ -63,7 +64,7 @@ export const BarsStackSeriesLabels = () => {
     ? BarsItem
     : BarsItemBlurred), []);
 
-  if (!isHorizontal) {
+  if (isVertical) {
     return (
       <BarStackHorizontal
         data={data}
@@ -82,9 +83,9 @@ export const BarsStackSeriesLabels = () => {
             {barStack.bars.map((bar: any, j) => {
               const thickness = getStackBarThickness(bar.height, maxSize, fixedBarSize, hasOverlay);
               const yPos = getStackBarIndexPositionSeries(bar, thickness, hasOverlay, isHorizontal);
-              const { value, separator, extra } = getLabelContent(data[j], series.dataKey, series.extraData, i);
+              const { value, separator, extra } = getStackBarLabelContent(data[j], series.dataKey, series.extraData, i);
 
-              const { rect, text } = getLabelMorphology(
+              const { rect, text } = getStackBarLabelMorphology(
                 bar,
                 series.extraData,
                 { value, separator, extra },
@@ -160,9 +161,9 @@ export const BarsStackSeriesLabels = () => {
             const thickness = getStackBarThickness(bar.width, maxSize, fixedBarSize, hasOverlay);
             const xPos = getStackBarIndexPositionSeries(bar, thickness, hasOverlay, isHorizontal);
 
-            const { value, separator, extra } = getLabelContent(data[j], series.dataKey, series.extraData, i);
+            const { value, separator, extra } = getStackBarLabelContent(data[j], series.dataKey, series.extraData, i);
 
-            const { rect, text } = getLabelMorphology(
+            const { rect, text } = getStackBarLabelMorphology(
               bar,
               series.extraData,
               { value, separator, extra },

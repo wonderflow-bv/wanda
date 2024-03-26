@@ -21,10 +21,10 @@ import { useCallback } from 'react';
 
 import { useBars } from '@/hooks';
 import {
-  getLabelContent,
-  getLabelMorphology,
   getPrimitiveFromObjectByPath,
   getStackBarIndexPositionOverlay,
+  getStackBarLabelContent,
+  getStackBarLabelMorphology,
   getStackBarThickness,
 } from '@/utils';
 
@@ -39,6 +39,7 @@ export const BarsStackOverlayLabels = () => {
   const {
     data,
     isHorizontal,
+    isVertical,
     sortStackBy,
     maxWidth,
     maxHeight,
@@ -65,7 +66,7 @@ export const BarsStackOverlayLabels = () => {
 
   if (!hasOverlay) return null;
 
-  if (!isHorizontal) {
+  if (isVertical) {
     return (
       <BarStackHorizontal
         data={data}
@@ -85,9 +86,14 @@ export const BarsStackOverlayLabels = () => {
               const thickness = getStackBarThickness(bar.height, maxSize, fixedBarSize, hasOverlay);
               const yPos = getStackBarIndexPositionOverlay(bar, thickness, isHorizontal);
 
-              const { value, separator, extra } = getLabelContent(data[j], overlay.dataKey!, overlay.extraData, i);
+              const { value, separator, extra } = getStackBarLabelContent(
+                data[j],
+                overlay.dataKey!,
+                overlay.extraData,
+                i,
+              );
 
-              const { rect, text } = getLabelMorphology(
+              const { rect, text } = getStackBarLabelMorphology(
                 bar,
                 overlay.extraData,
                 { value, separator, extra },
@@ -163,9 +169,14 @@ export const BarsStackOverlayLabels = () => {
             const thickness = getStackBarThickness(bar.width, maxSize, fixedBarSize, hasOverlay);
             const xPos = getStackBarIndexPositionOverlay(bar, thickness, isHorizontal);
 
-            const { value, separator, extra } = getLabelContent(data[j], overlay.dataKey!, overlay.extraData, i);
+            const { value, separator, extra } = getStackBarLabelContent(
+              data[j],
+              overlay.dataKey!,
+              overlay.extraData,
+              i,
+            );
 
-            const { rect, text } = getLabelMorphology(
+            const { rect, text } = getStackBarLabelMorphology(
               bar,
               overlay.extraData,
               { value, separator, extra },

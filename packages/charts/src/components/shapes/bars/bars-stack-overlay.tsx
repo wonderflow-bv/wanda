@@ -37,6 +37,7 @@ export const BarsStackOverlay = () => {
   const {
     data,
     isHorizontal,
+    isVertical,
     overlay,
     sortStackBy,
     maxWidth,
@@ -60,7 +61,7 @@ export const BarsStackOverlay = () => {
 
   if (!hasOverlay) return null;
 
-  if (!isHorizontal) {
+  if (isVertical) {
     return (
       <BarStackHorizontal
         data={data}

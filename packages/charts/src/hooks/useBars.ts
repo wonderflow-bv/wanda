@@ -27,7 +27,7 @@ import { getLinearDomainStackSeries } from '../utils/bars';
 
 export const useBars = () => {
   const { data, metadata } = useDataContext<BarChartMetadata>();
-  const { isHorizontal } = useLayoutContext();
+  const { isHorizontal, isVertical } = useLayoutContext();
   const {
     axis, dimension, preventTooltipOpening, hasReversedIndex,
   } = useCartesianContext();
@@ -133,6 +133,7 @@ export const useBars = () => {
   return {
     data,
     isHorizontal,
+    isVertical,
     isStacked,
     index,
     series,

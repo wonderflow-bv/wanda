@@ -313,7 +313,7 @@ export const getBarChartLabelsMaxSize = (length: number) => {
   return Math.round(length * charSize * extraSpace);
 };
 
-export const getLabelContent = (
+export const getStackBarLabelContent = (
   datum: Record<string, any>,
   dataKey: string[],
   extraData: ((datum: Record<string, any>) => string) | undefined,
@@ -328,7 +328,7 @@ export const getLabelContent = (
   return { value, separator, extra };
 };
 
-export const getLabelMorphology = (
+export const getStackBarLabelMorphology = (
   bar: Record<string, any>,
   extraData: ((datum: Record<string, any>) => string) | undefined,
   content: BarStackContent,
