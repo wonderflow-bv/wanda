@@ -23,7 +23,14 @@ import { getLabelFromPath } from './data';
 export const handleSeriesNames = <T extends ChartSeries>(
   series: T,
 ): string[] => series.dataKey.map((s: string, i: number) => {
+    const hasAxisLabel = Boolean(series.label);
+    const hasSingleKey = series.dataKey.length === 1;
+    const hasRenaming = Boolean(series.rename);
+
+    if (hasSingleKey && hasAxisLabel && !hasRenaming) return _.startCase(series.label);
+
     const renamed = series.rename ? series.rename(s, i) : getLabelFromPath(s);
+
     return _.startCase(renamed);
   });
 
