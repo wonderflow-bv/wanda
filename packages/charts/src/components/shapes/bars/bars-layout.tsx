@@ -41,31 +41,21 @@ export const BarsLayout: React.FC = () => {
         ? (
           <>
             <BarsStackSeries data-testid="bars-stack-series" />
-            <BarsStackSeriesLabels />
-          </>
-        )
-        : (
-          <>
-            <BarsSeries data-testid="bars-series" />
-            {isHorizontal && <BarsSeriesLabels />}
-          </>
-        )
-                }
-
-      {isStacked
-        ? (
-          <>
             <BarsStackOverlay data-testid="bars-overlay" />
+            <BarsStackSeriesLabels />
             <BarsStackOverlayLabels />
           </>
         )
         : (
           <>
+            <BarsSeries data-testid="bars-series" />
             <BarsOverlay data-testid="bars-overlay" />
+            {isHorizontal && <BarsSeriesLabels />}
             {isHorizontal && <BarsOverlayLabels />}
           </>
         )
-                }
+      }
+
     </Group>
   );
 };

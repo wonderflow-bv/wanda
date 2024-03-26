@@ -52,6 +52,8 @@ export const Bars: React.FC = () => {
         </Group>
       </Group>
 
+      {/** the following block is not affected by clip-path-cartesian-chart */}
+
       {(!isStacked && isVertical) && (
         <Group
           top={top}

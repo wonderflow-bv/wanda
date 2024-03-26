@@ -22,8 +22,9 @@ import { useCallback } from 'react';
 import { useBars } from '@/hooks';
 import {
   extractBarValueFromNestedKey,
+  getBarLabelContent,
+  getBarLabelMorphology,
   getBarSizeAndPosition, getBarThickness,
-  getLabelFromPath,
   sortBarsBy,
 } from '@/utils';
 
@@ -38,15 +39,14 @@ export const BarsOverlayLabels = () => {
     barChartLabelsMaxSize,
     data,
     isHorizontal,
+    isVertical,
     fixedBarSize,
     maxWidth,
     maxHeight,
     scaleXY0,
     scaleXY1,
-    // series,
     showLabel,
     sortBy,
-    // seriesAxis,
     hasOverlay,
     overlay,
     overlayAxis,
@@ -65,7 +65,7 @@ export const BarsOverlayLabels = () => {
 
   if (!hasOverlay) return null;
 
-  if (!isHorizontal) {
+  if (isVertical) {
     return (
       <BarGroupHorizontal
         data={data}
@@ -88,29 +88,45 @@ export const BarsOverlayLabels = () => {
               {sortedBars.map((bar, j) => {
                 const thickness = getBarThickness(bar.height, maxSize, fixedBarSize);
                 const { y } = getBarSizeAndPosition(bar, overlayAxis, thickness, isHorizontal);
-                const xShifted = Number(maxWidth) + 16;
-                const yShifted = Number(y) + Number(thickness / 2) + 4;
+
+                const { value, separator, extra } = getBarLabelContent(
+                  data[i],
+                  bar,
+                  overlay.dataKey![j],
+                  overlay.extraData,
+                );
+
+                const { text } = getBarLabelMorphology(
+                  bar,
+                  overlay.extraData,
+                  { value, separator, extra },
+                  barChartLabelsMaxSize,
+                  thickness,
+                  { x: undefined, y },
+                  { xMax: maxWidth, yMax: maxHeight },
+                  isHorizontal,
+                );
 
                 return (
                   <Group key={_.uniqueId()}>
                     {showLabel && (
                       <Group className={dynamicClassName(overLegend, bar.key)}>
                         <text
-                          x={xShifted}
-                          y={yShifted}
+                          x={text.x}
+                          y={text.y}
                           fontSize={fontSize}
                           fontWeight={fontWeight}
                           fontFamily={fontFamily}
                           fill={themes[theme].axis.tickLabel}
                           alignmentBaseline={alignmentBaseline}
                         >
-                          <tspan fontWeight={fontWeightValue}>{bar.value}</tspan>
+                          <tspan fontWeight={fontWeightValue}>{value}</tspan>
                           {
                             overlay.extraData && (
                               <>
-                                <tspan>{' - '}</tspan>
+                                <tspan>{separator}</tspan>
                                 <tspan>
-                                  {overlay.extraData(_.at(data[i], getLabelFromPath(overlay.dataKey![j]))[0])}
+                                  {extra}
                                 </tspan>
                               </>
                             )
@@ -149,27 +165,41 @@ export const BarsOverlayLabels = () => {
             {sortedBars.map((bar, j) => {
               const thickness = getBarThickness(bar.width, maxSize, fixedBarSize);
               const { x } = getBarSizeAndPosition(bar, overlayAxis, thickness, isHorizontal);
-              const xPosText = Number(x) + Number(thickness) / 2;
-              const yPosText = maxHeight - bar.height - 8;
-              const xPosRect = (Number(x) + Number(thickness) / 2) - (barChartLabelsMaxSize / 2);
-              const yPosRect = yPosText - 14;
+
+              const { value, separator, extra } = getBarLabelContent(
+                data[i],
+                bar,
+                overlay.dataKey![j],
+                overlay.extraData,
+              );
+
+              const { rect, text } = getBarLabelMorphology(
+                bar,
+                overlay.extraData,
+                { value, separator, extra },
+                barChartLabelsMaxSize,
+                thickness,
+                { x, y: undefined },
+                { xMax: maxWidth, yMax: maxHeight },
+                isHorizontal,
+              );
 
               return (
                 <Group key={_.uniqueId()}>
                   {showLabel && (
                     <Group className={dynamicClassName(overLegend, bar.key)}>
                       <rect
-                        x={xPosRect}
-                        y={yPosRect}
-                        width={barChartLabelsMaxSize}
+                        x={rect.x}
+                        y={rect.y}
+                        width={rect.width}
                         height={height}
                         fill={themes[theme].markerLabel.background}
                         fillOpacity={fillOpacity}
                         rx={rx}
                       />
                       <text
-                        x={xPosText}
-                        y={yPosText}
+                        x={text.x}
+                        y={text.y}
                         fontSize={fontSize}
                         fontWeight={fontWeight}
                         fontFamily={fontFamily}
@@ -177,13 +207,13 @@ export const BarsOverlayLabels = () => {
                         alignmentBaseline={alignmentBaseline}
                         textAnchor="middle"
                       >
-                        <tspan fontWeight={fontWeightValue}>{bar.value}</tspan>
+                        <tspan fontWeight={fontWeightValue}>{value}</tspan>
                         {
                             overlay.extraData && (
                               <>
-                                <tspan>{' - '}</tspan>
+                                <tspan>{separator}</tspan>
                                 <tspan>
-                                  {overlay.extraData(_.at(data[i], getLabelFromPath(overlay.dataKey![j]))[0])}
+                                  {extra}
                                 </tspan>
                               </>
                             )

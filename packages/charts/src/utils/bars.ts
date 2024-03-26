@@ -313,6 +313,79 @@ export const getBarChartLabelsMaxSize = (length: number) => {
   return Math.round(length * charSize * extraSpace);
 };
 
+export const getBarLabelContent = (
+  datum: Record<string, any>,
+  bar: Record<string, any>,
+  dataKey: string,
+  extraData: ((datum: Record<string, any>) => string) | undefined,
+) => {
+  const { value } = bar;
+  const separator = ' - ';
+  const extra = extraData
+    ? extraData(_.at(datum, getLabelFromPath(dataKey))[0])
+    : '';
+
+  return {
+    value,
+    separator,
+    extra,
+  };
+};
+
+export const getBarLabelMorphology = (
+  bar: Record<string, any>,
+  extraData: ((datum: Record<string, any>) => string) | undefined,
+  content: BarStackContent,
+  barChartLabelsMaxSize: number,
+  thickness: number,
+  position: { x: number | undefined; y: number | undefined },
+  dimension: { xMax: number; yMax: number },
+  isHorizontal: boolean,
+) => {
+  const { xMax, yMax } = dimension;
+  const { x, y } = position;
+  const { value, separator, extra } = content;
+
+  const len = extraData
+    ? (`${value}${separator}${extra}`).length
+    : String(`${value}`).length;
+
+  const labelHeight = barsStyleConfig.label.height;
+  const labelWidth = Math.round(len * 1.2 * 8);
+
+  const width = _.clamp(labelWidth, labelHeight, labelWidth);
+
+  let xPosRect;
+  let yPosRect;
+  let xPosText;
+  let yPosText;
+
+  if (isHorizontal) {
+    xPosText = Number(x) + Number(thickness) / 2;
+    const yText = yMax - bar.height - 8;
+    yPosText = _.clamp(yText, labelHeight, yMax);
+
+    xPosRect = xPosText - (width / 2);
+    yPosRect = yPosText - 13;
+  } else {
+    const padding = 16;
+    xPosText = Number(xMax) + padding;
+    yPosText = Number(y) + Number(thickness / 2) + 4;
+  }
+
+  return {
+    text: {
+      x: xPosText,
+      y: yPosText,
+    },
+    rect: {
+      x: xPosRect,
+      y: yPosRect,
+      width: isHorizontal ? width : barChartLabelsMaxSize,
+    },
+  };
+};
+
 export const getStackBarLabelContent = (
   datum: Record<string, any>,
   dataKey: string[],
@@ -337,8 +410,11 @@ export const getStackBarLabelMorphology = (
   dimension: { xMax: number; yMax: number },
   isHorizontal: boolean,
 ) => {
-  let xPosRect; let yPosRect; let xPosText; let
-    yPosText;
+  let xPosRect;
+  let yPosRect;
+  let xPosText;
+  let yPosText;
+
   const { value, separator, extra } = content;
   const { x, y } = position;
   const { xMax, yMax } = dimension;
