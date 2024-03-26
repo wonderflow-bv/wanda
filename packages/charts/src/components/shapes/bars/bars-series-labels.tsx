@@ -105,6 +105,8 @@ export const BarsSeriesLabels = () => {
                   isHorizontal,
                 );
 
+                const weigth = series.extraData ? fontWeightValue : fontWeight;
+
                 return (
                   <Group key={_.uniqueId()}>
                     {showLabel && (
@@ -118,7 +120,7 @@ export const BarsSeriesLabels = () => {
                           fill={themes[theme].axis.tickLabel}
                           alignmentBaseline={alignmentBaseline}
                         >
-                          <tspan fontWeight={fontWeightValue}>{value}</tspan>
+                          <tspan fontWeight={weigth}>{value}</tspan>
                           {
                             series.extraData && (
                               <>
@@ -182,6 +184,8 @@ export const BarsSeriesLabels = () => {
                 isHorizontal,
               );
 
+              const weigth = series.extraData ? fontWeightValue : fontWeight;
+
               return (
                 <Group key={_.uniqueId()}>
                   {showLabel && (
@@ -205,7 +209,7 @@ export const BarsSeriesLabels = () => {
                         alignmentBaseline={alignmentBaseline}
                         textAnchor="middle"
                       >
-                        <tspan fontWeight={fontWeightValue}>{value}</tspan>
+                        <tspan fontWeight={weigth}>{value}</tspan>
                         {
                             series.extraData && (
                               <>

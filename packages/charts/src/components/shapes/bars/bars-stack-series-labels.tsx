@@ -98,6 +98,8 @@ export const BarsStackSeriesLabels = () => {
                 isHorizontal,
               );
 
+              const weigth = series.extraData ? fontWeightValue : fontWeight;
+
               return (
                 <Group key={_.uniqueId()}>
                   {showLabel && (
@@ -121,7 +123,7 @@ export const BarsStackSeriesLabels = () => {
                         alignmentBaseline={alignmentBaseline}
                         textAnchor="middle"
                       >
-                        <tspan fontWeight={fontWeightValue}>{value}</tspan>
+                        <tspan fontWeight={weigth}>{value}</tspan>
                         {
                             series.extraData && (
                               <>
@@ -176,6 +178,8 @@ export const BarsStackSeriesLabels = () => {
               isHorizontal,
             );
 
+            const weigth = series.extraData ? fontWeightValue : fontWeight;
+
             return (
               <Group key={_.uniqueId()}>
                 {showLabel && (
@@ -199,7 +203,7 @@ export const BarsStackSeriesLabels = () => {
                       alignmentBaseline={alignmentBaseline}
                       textAnchor="middle"
                     >
-                      <tspan fontWeight={fontWeightValue}>{value}</tspan>
+                      <tspan fontWeight={weigth}>{value}</tspan>
                       {
                             series.extraData && (
                               <>

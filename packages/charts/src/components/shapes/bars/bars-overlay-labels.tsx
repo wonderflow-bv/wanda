@@ -108,6 +108,8 @@ export const BarsOverlayLabels = () => {
                   isHorizontal,
                 );
 
+                const weigth = overlay.extraData ? fontWeightValue : fontWeight;
+
                 return (
                   <Group key={_.uniqueId()}>
                     {showLabel && (
@@ -121,7 +123,7 @@ export const BarsOverlayLabels = () => {
                           fill={themes[theme].axis.tickLabel}
                           alignmentBaseline={alignmentBaseline}
                         >
-                          <tspan fontWeight={fontWeightValue}>{value}</tspan>
+                          <tspan fontWeight={weigth}>{value}</tspan>
                           {
                             overlay.extraData && (
                               <>
@@ -185,6 +187,8 @@ export const BarsOverlayLabels = () => {
                 isHorizontal,
               );
 
+              const weigth = overlay.extraData ? fontWeightValue : fontWeight;
+
               return (
                 <Group key={_.uniqueId()}>
                   {showLabel && (
@@ -208,7 +212,7 @@ export const BarsOverlayLabels = () => {
                         alignmentBaseline={alignmentBaseline}
                         textAnchor="middle"
                       >
-                        <tspan fontWeight={fontWeightValue}>{value}</tspan>
+                        <tspan fontWeight={weigth}>{value}</tspan>
                         {
                             overlay.extraData && (
                               <>
