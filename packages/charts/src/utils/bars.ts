@@ -334,29 +334,34 @@ export const getLabelMorphology = (
   content: BarStackContent,
   thickness: number,
   position: { x: number | undefined; y: number | undefined },
+  dimension: { xMax: number; yMax: number },
   isHorizontal: boolean,
 ) => {
   let xPosRect; let yPosRect; let xPosText; let
     yPosText;
   const { value, separator, extra } = content;
   const { x, y } = position;
+  const { xMax, yMax } = dimension;
 
   const len = extraData
     ? (`${value}${separator}${extra}`).length
     : String(`${value}`).length;
 
   const labelHeight = barsStyleConfig.label.height;
-  const labelWidth = Math.round(len * 1.1 * 8);
+  const labelWidth = Math.round(len * 1.2 * 8);
+
   const width = _.clamp(labelWidth, labelHeight, labelWidth);
 
   if (isHorizontal) {
     xPosRect = (Number(x) + (Number(thickness) - width) / 2);
-    yPosRect = Number(bar.y) + (Number(bar.height) - labelHeight) / 2;
+    const yRect = Number(bar.y) + (Number(bar.height) - labelHeight) / 2;
+    yPosRect = _.clamp(yRect, labelHeight, yMax - labelHeight);
 
     xPosText = Number(x) + Number(thickness) / 2;
     yPosText = yPosRect + 13;
   } else {
-    xPosRect = Number(bar.x) + (Number(bar.width) - width) / 2;
+    const xRect = Number(bar.x) + (Number(bar.width) - width) / 2;
+    xPosRect = _.clamp(xRect, 0, xMax - labelWidth);
     yPosRect = Number(y) + (thickness - labelHeight) / 2;
 
     xPosText = xPosRect + width / 2;

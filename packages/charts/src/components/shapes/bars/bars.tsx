@@ -18,20 +18,15 @@ import { Group } from '@visx/group';
 
 import { useBars, useSSR } from '@/hooks';
 
-import { useCartesianContext } from '../../../providers';
+import { useCartesianContext, useLayoutContext } from '../../../providers';
 import { BarsAverage } from './bars-average';
-import { BarsOverlay } from './bars-overlay';
+import { BarsLayout } from './bars-layout';
 import { BarsOverlayLabels } from './bars-overlay-labels';
-import { BarsSeries } from './bars-series';
 import { BarsSeriesLabels } from './bars-series-labels';
-import { BarsStackOverlay } from './bars-stack-overlay';
-import { BarsStackOverlayLabels } from './bars-stack-overlay-labels';
-import { BarsStackSeries } from './bars-stack-series';
-import { BarsStackSeriesLabels } from './bars-stack-series-labels';
 import { BarsTooltip } from './bars-tooltip';
-import { BarsTrendline } from './bars-trendline';
 
 export const Bars: React.FC = () => {
+  const { isVertical } = useLayoutContext();
   const { position } = useCartesianContext();
   const { top, left } = position;
   const { isBrowser, isServer } = useSSR();
@@ -44,37 +39,11 @@ export const Bars: React.FC = () => {
           top={top}
           left={left}
         >
-          {isServer && (
-            <Group data-testid="bars">
-              <BarsTrendline />
-
-              {isStacked
-                ? <BarsStackSeries data-testid="bars-stack-series" />
-                : <BarsSeries data-testid="bars-series" />
-            }
-
-              {isStacked
-                ? <BarsStackOverlay data-testid="bars-overlay" />
-                : <BarsOverlay data-testid="bars-overlay" />
-            }
-            </Group>
-          )}
+          {isServer && <BarsLayout />}
 
           {isBrowser && (
             <BarsTooltip>
-              <Group data-testid="bars">
-                <BarsTrendline />
-
-                {isStacked
-                  ? <BarsStackSeries data-testid="bars-stack-series" />
-                  : <BarsSeries data-testid="bars-series" />
-            }
-
-                {isStacked
-                  ? <BarsStackOverlay data-testid="bars-overlay" />
-                  : <BarsOverlay data-testid="bars-overlay" />
-            }
-              </Group>
+              <BarsLayout />
             </BarsTooltip>
           )}
 
@@ -83,25 +52,15 @@ export const Bars: React.FC = () => {
         </Group>
       </Group>
 
-      <Group
-        top={top}
-        left={left}
-      >
-
-        {isStacked
-          ? (
-            <Group>
-              <BarsStackSeriesLabels />
-              <BarsStackOverlayLabels />
-            </Group>
-          )
-          : (
-            <Group>
-              <BarsSeriesLabels />
-              <BarsOverlayLabels />
-            </Group>
-          )}
-      </Group>
+      {(!isStacked && isVertical) && (
+        <Group
+          top={top}
+          left={left}
+        >
+          <BarsSeriesLabels />
+          <BarsOverlayLabels />
+        </Group>
+      )}
     </>
   );
 };

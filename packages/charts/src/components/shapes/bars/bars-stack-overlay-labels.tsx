@@ -79,13 +79,13 @@ export const BarsStackOverlayLabels = () => {
         order={sortStackBy}
         offset="diverging"
       >
-        {barStacks => barStacks.map((barStack, index) => (
+        {barStacks => barStacks.map((barStack, i) => (
           <Group key={_.uniqueId()}>
             {barStack.bars.map((bar: any, j) => {
               const thickness = getStackBarThickness(bar.height, maxSize, fixedBarSize, hasOverlay);
               const yPos = getStackBarIndexPositionOverlay(bar, thickness, isHorizontal);
 
-              const { value, separator, extra } = getLabelContent(data[j], overlay.dataKey!, overlay.extraData, index);
+              const { value, separator, extra } = getLabelContent(data[j], overlay.dataKey!, overlay.extraData, i);
 
               const { rect, text } = getLabelMorphology(
                 bar,
@@ -93,6 +93,7 @@ export const BarsStackOverlayLabels = () => {
                 { value, separator, extra },
                 thickness,
                 { x: undefined, y: yPos },
+                { xMax: maxWidth, yMax: maxHeight },
                 isHorizontal,
               );
 
@@ -156,13 +157,13 @@ export const BarsStackOverlayLabels = () => {
       order={sortStackBy}
       offset="diverging"
     >
-      {barStacks => barStacks.map((barStack, index) => (
+      {barStacks => barStacks.map((barStack, i) => (
         <Group key={_.uniqueId()}>
           {barStack.bars.map((bar: any, j: number) => {
             const thickness = getStackBarThickness(bar.width, maxSize, fixedBarSize, hasOverlay);
             const xPos = getStackBarIndexPositionOverlay(bar, thickness, isHorizontal);
 
-            const { value, separator, extra } = getLabelContent(data[j], overlay.dataKey!, overlay.extraData, index);
+            const { value, separator, extra } = getLabelContent(data[j], overlay.dataKey!, overlay.extraData, i);
 
             const { rect, text } = getLabelMorphology(
               bar,
@@ -170,6 +171,7 @@ export const BarsStackOverlayLabels = () => {
               { value, separator, extra },
               thickness,
               { x: xPos, y: undefined },
+              { xMax: maxWidth, yMax: maxHeight },
               isHorizontal,
             );
 
