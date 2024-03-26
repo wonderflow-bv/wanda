@@ -17,6 +17,7 @@
 import _ from 'lodash';
 
 import { axisStyleConfig } from '../style-config/axis';
+import { barsStyleConfig } from '../style-config/bars';
 import { CartesianAxis } from '../types/axis';
 import { BarChartMetadata, BarChartSeries } from '../types/bar-chart';
 import {
@@ -344,27 +345,29 @@ export const getLabelMorphology = (
     ? (`${value}${separator}${extra}`).length
     : String(`${value}`).length;
 
-  const labelSize = Math.round(len * 1.1 * 8);
+  const labelHeight = barsStyleConfig.label.height;
+  const labelWidth = Math.round(len * 1.1 * 8);
+  const width = _.clamp(labelWidth, labelHeight, labelWidth);
 
-  if (!isHorizontal) {
-    xPosRect = Number(bar.x) + Number(bar.width) + 8;
-    yPosRect = Number(y) + 3;
-
-    xPosText = xPosRect + labelSize / 2;
-    yPosText = yPosRect + 13;
-  } else {
-    xPosRect = (Number(x) + (Number(thickness) - labelSize) / 2);
-    yPosRect = Number(bar.y) - 24;
+  if (isHorizontal) {
+    xPosRect = (Number(x) + (Number(thickness) - width) / 2);
+    yPosRect = Number(bar.y) + (Number(bar.height) - labelHeight) / 2;
 
     xPosText = Number(x) + Number(thickness) / 2;
-    yPosText = Number(bar.y) - 10;
+    yPosText = yPosRect + 13;
+  } else {
+    xPosRect = Number(bar.x) + (Number(bar.width) - width) / 2;
+    yPosRect = Number(y) + (thickness - labelHeight) / 2;
+
+    xPosText = xPosRect + width / 2;
+    yPosText = yPosRect + 13;
   }
 
   return {
     rect: {
       x: xPosRect,
       y: yPosRect,
-      width: labelSize,
+      width,
     },
     text: {
       x: xPosText,
