@@ -351,7 +351,7 @@ describe('isMarkerLabelVisible()', () => {
 
   it('should return true w/o maxLabel', () => {
     const isVisible = isMarkerLabelVisible(19, 20);
-    expect(isVisible).not.toBeTruthy();
+    expect(isVisible).toBeTruthy();
   });
 });
 
