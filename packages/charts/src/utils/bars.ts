@@ -26,7 +26,7 @@ import {
 } from '../types/bars';
 import { Data } from '../types/main';
 import { clampLinearDomain } from './axis';
-import { getLabelFromPath, getPrimitiveFromObjectByPath } from './data';
+import { getDataKeyParentObject, getPrimitiveFromObjectByPath } from './data';
 
 export const getBarSize = (bar: Bar, axis: CartesianAxis, isHorizontal: boolean) => {
   const clampedDomain = clampLinearDomain(axis.domain as number[]);
@@ -272,7 +272,7 @@ export const getBarChartLabels = (
 ): BarChartLabels => {
   const seriesLabels = data.map(datum => series.dataKey.map((k) => {
     const value = getPrimitiveFromObjectByPath(datum, k) ?? '';
-    const extraData = series.extraData?.(_.at(datum, getLabelFromPath(k))[0]) ?? '';
+    const extraData = series.extraData?.(getDataKeyParentObject(datum, k)) ?? '';
     const { length } = (`${value} ${extraData}`);
 
     return ({
@@ -285,7 +285,7 @@ export const getBarChartLabels = (
   const overlayLabels = overlay
     ? data.map(datum => overlay.dataKey.map((k) => {
       const value = getPrimitiveFromObjectByPath(datum, k) ?? '';
-      const extraData = overlay.extraData?.(_.at(datum, getLabelFromPath(k))[0]) ?? '';
+      const extraData = overlay.extraData?.(getDataKeyParentObject(datum, k)) ?? '';
       const { length } = (`${value} ${extraData}`);
 
       return ({
@@ -321,8 +321,9 @@ export const getBarLabelContent = (
 ) => {
   const { value } = bar;
   const separator = ' - ';
+  const parentObj = getDataKeyParentObject(datum, dataKey);
   const extra = extraData
-    ? extraData(_.at(datum, getLabelFromPath(dataKey))[0])
+    ? extraData(parentObj)
     : '';
 
   return {
@@ -394,8 +395,9 @@ export const getStackBarLabelContent = (
 ): BarStackContent => {
   const value = getPrimitiveFromObjectByPath(datum, dataKey[index]) ?? '';
   const separator = ' - ';
+  const parentObj = getDataKeyParentObject(datum, dataKey[index]);
   const extra = extraData
-    ? extraData(_.at(datum, getLabelFromPath(dataKey[index]))[0])
+    ? extraData(parentObj)
     : '';
 
   return { value, separator, extra };

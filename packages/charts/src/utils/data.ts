@@ -353,3 +353,11 @@ export const computeTrendline = (
   };
 });
 
+export const getDataKeyParentObject = (
+  datum: Record<string, any>,
+  dataKey: string,
+) => {
+  const labelFromPath = getLabelFromPath(dataKey);
+  if (labelFromPath === dataKey) return datum;
+  return _.at(datum, labelFromPath)[0];
+};

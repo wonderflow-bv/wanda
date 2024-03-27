@@ -6,6 +6,7 @@ import {
   computeAverage,
   computeTrendline,
   extractBarValueFromNestedKey,
+  getDataKeyParentObject,
   getLabelFromPath,
   getPrimitiveFromObjectByPath,
   getPrimitivesFromObjectArrayByPath,
@@ -629,6 +630,24 @@ describe('mirrorDomain()', () => {
   it('should return 0,0 for NaN values', () => {
     const res = mirrorDomain([NaN, NaN]);
     const exp = [-0, 0];
+    expect(res).toStrictEqual(exp);
+  });
+});
+
+describe('getDataKeyParentObject()', () => {
+  it('should return datum', () => {
+    const datum = { key: 1, extra: 2 };
+    const datakey = 'key';
+    const res = getDataKeyParentObject(datum, datakey);
+    const exp = datum;
+    expect(res).toStrictEqual(exp);
+  });
+
+  it('should return parent object', () => {
+    const datum = { nested: { key: 1, extra: 2 } };
+    const datakey = 'nested.key';
+    const res = getDataKeyParentObject(datum, datakey);
+    const exp = { key: 1, extra: 2 };
     expect(res).toStrictEqual(exp);
   });
 });

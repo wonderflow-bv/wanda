@@ -30,14 +30,14 @@ import {
   useThemeContext,
 } from '@/providers';
 import { CartesianAxis } from '@/types';
-
-import { tooltipTheme } from '../../../style-config/tooltip';
 import {
   accessorInvert,
   bisectIndex,
-  getLabelFromPath,
+  getDataKeyParentObject,
   getPrimitiveFromObjectByPath,
-} from '../../../utils';
+} from '@/utils';
+
+import { tooltipTheme } from '../../../style-config/tooltip';
 import { Placeholder } from '../../placeholder';
 import { Tooltip } from '../../tooltip';
 import {
@@ -121,7 +121,7 @@ export const BarsTooltip: React.FC = ({ children }: { children: React.ReactNode 
       ? accessorInvertValue
       : new Date(domainIndexValue);
 
-    const barIndicatorPos = scaleXY0(indexScaleValue as any) ?? -999;
+    const barIndicatorPos = scaleXY0(indexScaleValue) ?? -999;
     const barIndicatorSize = scaleXY0.bandwidth();
 
     const barStackIndicatorPos = hasOverlay ? barIndicatorPos - 1 : barIndicatorPos;
@@ -223,7 +223,7 @@ export const BarsTooltip: React.FC = ({ children }: { children: React.ReactNode 
                       <div>
                         {series?.extraData && (
                           <p>
-                            {series.extraData(_.at(tooltipData?.data, getLabelFromPath(dataKey))[0])}
+                            {series.extraData(getDataKeyParentObject(tooltipData?.data, dataKey))}
                           </p>
                         )}
                       </div>
@@ -250,7 +250,7 @@ export const BarsTooltip: React.FC = ({ children }: { children: React.ReactNode 
                       <div>
                         {overlay?.extraData && (
                           <p>
-                            {overlay.extraData(_.at(tooltipData?.data, getLabelFromPath(dataKey))[0])}
+                            {overlay.extraData(getDataKeyParentObject(tooltipData?.data, dataKey))}
                           </p>
                         )}
                       </div>

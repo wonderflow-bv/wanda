@@ -28,17 +28,17 @@ import { v4 as uuid } from 'uuid';
 
 import { useLines } from '@/hooks';
 import { CartesianAxis } from '@/types';
+import {
+  accessorInvert,
+  bisectIndex,
+  getDataKeyParentObject,
+  getPrimitiveFromObjectByPath,
+} from '@/utils';
 
 import {
   useStyleConfigContext, useThemeContext,
 } from '../../../providers';
 import { tooltipTheme } from '../../../style-config/tooltip';
-import {
-  accessorInvert,
-  bisectIndex,
-  getLabelFromPath,
-  getPrimitiveFromObjectByPath,
-} from '../../../utils';
 import { Placeholder } from '../../placeholder';
 import { Tooltip } from '../../tooltip';
 import {
@@ -117,7 +117,7 @@ export const LinesTooltip: React.FC = () => {
       ? accessorInvertValue
       : new Date(domainIndexValue);
 
-    const lineIndicatorPos = scale(indexScaleValue as any);
+    const lineIndicatorPos = scale(indexScaleValue);
 
     const tooltipLeft = ('clientX' in event ? event.clientX : 0) - lBound / 8;
     const tooltipTop = ('clientY' in event ? event.clientY : 0) - tBound / 8;
@@ -246,7 +246,7 @@ export const LinesTooltip: React.FC = () => {
                     <div>
                       {series?.extraData && (
                         <p>
-                          {series.extraData(_.at(tooltipData?.data, getLabelFromPath(dataKey))[0])}
+                          {series.extraData(getDataKeyParentObject(tooltipData?.data, dataKey))}
                         </p>
                       )}
                     </div>
@@ -273,7 +273,7 @@ export const LinesTooltip: React.FC = () => {
                     <div>
                       {overlay?.extraData && (
                         <p>
-                          {overlay.extraData(_.at(tooltipData?.data, getLabelFromPath(dataKey))[0])}
+                          {overlay.extraData(getDataKeyParentObject(tooltipData?.data, dataKey))}
                         </p>
                       )}
                     </div>
