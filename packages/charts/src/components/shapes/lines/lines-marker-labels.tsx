@@ -25,6 +25,7 @@ import {
 } from '../../../providers';
 import {
   getCoordinates,
+  getDataKeyParentObject,
   getMarkerLabelProps,
   getPrimitiveFromObjectByPath,
   isMarkerLabelVisible,
@@ -56,7 +57,7 @@ export const LinesMarkerLabels: React.FC = () => {
   const totalLabels = data.length;
 
   const getSeriesCoordinates = (
-    datum: Record<string, unknown>,
+    datum: Record<string, any>,
     dataKey: string,
     isHorizontal: boolean,
   ) => getCoordinates({
@@ -69,7 +70,7 @@ export const LinesMarkerLabels: React.FC = () => {
   });
 
   const getOverlayCoordinates = (
-    datum: Record<string, unknown>,
+    datum: Record<string, any>,
     dataKey: string,
     isHorizontal: boolean,
   ) => getCoordinates({
@@ -95,11 +96,16 @@ export const LinesMarkerLabels: React.FC = () => {
           className={dynamicClassName(overLegend, k)}
         >
           {(showMarkerLabel || series.style?.[i]?.showMarkerLabel)
-            && data.map((d: Record<string, unknown>, di: number) => {
+            && data.map((d: Record<string, any>, di: number) => {
               const isVisible = isMarkerLabelVisible(di, totalLabels);
-              const title = `${getPrimitiveFromObjectByPath(d, k) ?? ''}`;
+
+              const value = `${getPrimitiveFromObjectByPath(d, k) ?? ''}`;
+              const extra = series.extraData ? series.extraData(getDataKeyParentObject(d, k)) : '';
+              const title = series.extraData ? `${value} - ${extra}` : `${value}`;
+
               const coordinates = getSeriesCoordinates(d, k, isHorizontal);
               const markerLabelProps = getMarkerLabelProps(coordinates, dimension, isHorizontal, themeConfig);
+
               const {
                 background,
                 fontColor,
@@ -145,11 +151,16 @@ export const LinesMarkerLabels: React.FC = () => {
           className={dynamicClassName(overLegend, k)}
         >
           {(showMarkerLabel || overlay.style?.[i]?.showMarkerLabel)
-            && data.map((d: Record<string, unknown>, di: number) => {
+            && data.map((d: Record<string, any>, di: number) => {
               const isVisible = isMarkerLabelVisible(di, totalLabels);
-              const title = `${getPrimitiveFromObjectByPath(d, k) ?? ''}`;
+
+              const value = `${getPrimitiveFromObjectByPath(d, k) ?? ''}`;
+              const extra = overlay.extraData ? overlay.extraData(getDataKeyParentObject(d, k)) : '';
+              const title = overlay.extraData ? `${value} - ${extra}` : `${value}`;
+
               const coordinates = getOverlayCoordinates(d, k, isHorizontal);
               const markerLabelProps = getMarkerLabelProps(coordinates, dimension, isHorizontal, themeConfig);
+
               const {
                 background,
                 fontColor,

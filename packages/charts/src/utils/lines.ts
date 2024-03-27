@@ -106,11 +106,15 @@ export const getLinesRenderer = (renderAs: LineChartRenderType | undefined, isHo
   return whichStep;
 };
 
-export const isMarkerLabelVisible = (index: number, totalLabels: number, maxLabels = 12) => {
+export const isMarkerLabelVisible = (index: number, totalLabels: number, maxLabels = 24) => {
+  if (totalLabels <= maxLabels) return true;
+
   const divider = maxLabels > 1 ? maxLabels : 1;
   const step = Math.ceil(totalLabels / divider);
   const half = Math.round(totalLabels / 2);
+
   const leftIndex = [];
+
   for (let i = 0; i < half; i += step) leftIndex.push(i);
   const rightIndex = leftIndex.map(e => totalLabels - e);
   const allIndex = leftIndex.concat(rightIndex).sort((a, b) => a - b);
