@@ -182,7 +182,7 @@ withNestedData.args = {
     dataKey: ['1 star.value', '2 stars.value', '3 stars.value', '4 stars.value', '5 stars.value'],
     extraData: (datum: Record<string, any>) => `${datum.percentage}%`,
     label: 'Feedback count',
-    rename: (_: string, i: number) => Array((i ?? 0) + 1).fill('⭐').join(),
+    rename: (_: string, i: number | undefined) => Array((i ?? 0) + 1).fill('⭐').join(),
   },
   overlay: {
     dataKey: ['overlay.value'],

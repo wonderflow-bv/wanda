@@ -44,7 +44,7 @@ export const LineChartExample = () => {
         series={{
           dataKey: ['value1', 'value2'],
           label: 'Feedback Count',
-          rename: (_, i) => (i ? 'ProductB' : 'ProductA'),
+          rename: (_: string, i: number) => (i ? 'ProductB' : 'ProductA'),
           domain: [0, 350],
         }}
         showTrendline
