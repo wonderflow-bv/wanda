@@ -34,16 +34,19 @@ export const getBarSize = (bar: Bar, axis: CartesianAxis, isHorizontal: boolean)
   const scaleZero = axis.scale(0 as any) ?? 0;
   const scaleMin = axis.scale(min as any) ?? 0;
   const diffNegative = scaleMin - scaleZero;
+  let size;
 
   if (isHorizontal) {
-    return (bar.value >= 0)
+    size = (bar.value >= 0)
       ? (bar.height - diffNegative)
       : (diffNegative - bar.height);
+  } else {
+    size = (bar.value >= 0)
+      ? (bar.width + diffNegative)
+      : Math.abs(bar.width + diffNegative);
   }
 
-  return (bar.value >= 0)
-    ? (bar.width + diffNegative)
-    : Math.abs(bar.width + diffNegative);
+  return _.clamp(size, 0, size);
 };
 
 export const getBarPosition = (bar: Bar, axis: CartesianAxis, isHorizontal: boolean) => {
