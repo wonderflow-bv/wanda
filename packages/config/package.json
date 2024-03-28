@@ -44,7 +44,7 @@
     "postcss-replace": "2.0.1"
   },
   "devDependencies": {
-    "@types/flat": "5.0.2",
+    "@types/flat": "5.0.5",
     "@typescript-eslint/eslint-plugin": "5.39.0",
     "@typescript-eslint/parser": "5.39.0",
     "@wonderflow/eslint-config": "1.1.11",
