@@ -20,7 +20,7 @@ describe('handleSeriesNames()', () => {
       rename: k => k.replace('test', 'item'),
     };
     const res = handleSeriesNames(series);
-    const exp = ['Index 01', 'Index 52'];
+    const exp = ['Item 1', 'Item 2'];
     expect(res).toStrictEqual(exp);
   });
 });
