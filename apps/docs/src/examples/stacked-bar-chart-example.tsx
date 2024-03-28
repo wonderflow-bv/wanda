@@ -1,4 +1,4 @@
-import { BarChart } from '@wonderflow/charts';
+import { BarChart, CartesianChartLayout } from '@wonderflow/charts';
 import { Card } from '@wonderflow/react-components';
 import { useTheme } from 'next-themes';
 import { useMemo } from 'react';
@@ -69,7 +69,9 @@ export const StackedBarChartExample = () => {
     <Card bordered style={{ backgroundColor: mode === 'dark' ? '#202227' : undefined }}>
       <BarChart
         width={700}
+        height={400}
         theme={mode}
+        layout={CartesianChartLayout.VERTICAL}
         isStacked
         title="Products performance"
         subtitle="trends by Europe/America/Asia"
@@ -78,6 +80,7 @@ export const StackedBarChartExample = () => {
         index={{
           dataKey: 'continent',
           label: 'Continent',
+          hideAxisLine: true,
         }}
         series={{
           dataKey: [
@@ -85,21 +88,15 @@ export const StackedBarChartExample = () => {
             'Q800A Neo QLED 4K TV',
             'Q60A QLED 4K TV',
             'C2 OLED 4K TV',
-            'G2 OLED Evo 4K TV',
-            'B2 OLED 4K TV',
-            // 'A95K QD-OLED 4K TV',
-            // 'X95J LED 4K TV',
-            // 'X85J LED 4K TV',
-            // 'R6485Q Mini-LED QLED 4K TV',
-            // 'S546Q 4K QLED TV',
-            // 'S435 4K Roku TV',
           ],
           label: 'Product Units',
-          tickFormat: (l: any) => (Number(l) >= 1000 ? `${Number(l / 1000)}M` : `${l}K`),
-          domain: [0, 1000],
           hideZero: true,
+          hideAxisLine: true,
+          hideTicks: true,
         }}
-        showAverage
+        showLabel
+        fixedBarSize
+        preventTooltipDisplay
         hidePadding
       />
     </Card>
