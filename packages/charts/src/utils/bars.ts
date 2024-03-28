@@ -366,7 +366,8 @@ export const getBarLabelMorphology = (
 
   if (isHorizontal) {
     xPosText = Number(x) + Number(thickness) / 2;
-    const yText = yMax - bar.height - 8;
+    const extraY = Number(value) >= 0 ? -8 : 16;
+    const yText = yMax - bar.height + extraY;
     yPosText = _.clamp(yText, labelHeight, yMax);
 
     xPosRect = xPosText - (width / 2);
