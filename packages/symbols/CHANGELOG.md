@@ -1,5 +1,11 @@
 # @wonderflow/symbols
 
+## 14.0.0
+
+### Minor Changes
+
+- 05b27c5: - Add new `birthday-cake` icon.
+
 ## 13.0.0
 
 ## 12.11.0

@@ -1,5 +1,16 @@
 # @wonderflow/charts
 
+## 14.0.0
+
+### Major Changes
+
+- 23bc966: - Change series extra data handling, now centralized in series/overlay configuration;
+  - Remove `tooltip`configuration props from `LineChart` and `BarChart` in favor of `tooltipExtraContent`;
+
+### Minor Changes
+
+- 60db7cc: - Add `Stacked Bar Chart` with full functionalities and `labels` to all Bar Charts.
+
 ## 13.0.0
 
 ### Major Changes
