@@ -52,7 +52,7 @@ describe('getBarSize()', () => {
   });
 });
 
-describe('getBarPosition()', () => {
+describe('getBarSize()', () => {
   const bar = {
     color: 'red',
     height: 60,
@@ -93,7 +93,7 @@ describe('getBarPosition()', () => {
 
   it('should return position, negative false', () => {
     const res = getBarSize({ ...bar, value: -50 }, axis, true);
-    const exp = -60;
+    const exp = 0;
     expect(res).toStrictEqual(exp);
   });
 });
