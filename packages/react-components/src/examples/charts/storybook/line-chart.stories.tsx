@@ -1,9 +1,9 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { CartesianChartLayout, LineChart, LineChartProps } from '@wonderflow/charts';
 
-// import { CartesianChartLayout, LineChart, LineChartProps } from '@wonderflow/charts';
 import { Card, Menu } from '@/components';
 
-import { CartesianChartLayout, LineChart, LineChartProps } from '../../../../../charts/src';
+// import { CartesianChartLayout, LineChart, LineChartProps } from '../../../../../charts/src';
 import {
   channels, channelsB, feedbackCount, feedbackCountGaps, proCons, products,
 } from '../mock-data';
@@ -182,7 +182,7 @@ withNestedData.args = {
     dataKey: ['1 star.value', '2 stars.value', '3 stars.value', '4 stars.value', '5 stars.value'],
     extraData: (datum: Record<string, any>) => `${datum.percentage}%`,
     label: 'Feedback count',
-    rename: (_, i) => Array(i! + 1).fill('⭐').join(),
+    rename: (_: string, i: number) => Array((i ?? 0) + 1).fill('⭐').join(),
   },
   overlay: {
     dataKey: ['overlay.value'],

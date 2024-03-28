@@ -17,7 +17,7 @@ describe('handleSeriesNames()', () => {
   it('should return renamed labels', () => {
     const series: LineChartSeries = {
       dataKey: ['test1', 'test2'],
-      rename: (k, i) => k.replace('test', `index ${i * 5}`),
+      rename: k => k.replace('test', 'item'),
     };
     const res = handleSeriesNames(series);
     const exp = ['Index 01', 'Index 52'];
