@@ -1,5 +1,11 @@
 # @wonderflow/charts
 
+## 14.0.2
+
+### Patch Changes
+
+- 43638ef: Update babel deps
+
 ## 14.0.1
 
 ### Patch Changes
