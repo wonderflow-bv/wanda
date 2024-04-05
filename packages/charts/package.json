@@ -59,7 +59,7 @@
     "react-dom": ">=17.0"
   },
   "devDependencies": {
-    "@babel/core": "7.24.3",
+    "@babel/core": "7.24.4",
     "@babel/preset-typescript": "7.24.1",
     "@types/d3": "7.4.3",
     "@types/lodash": "4.17.0",
