@@ -38,10 +38,10 @@
     "@mvasilkov/outdent": "1.0.5",
     "@next/mdx": "12.3.1",
     "@slack/web-api": "6.10.0",
-    "@wonderflow/react-components": "14.0.2",
-    "@wonderflow/symbols": "14.0.2",
-    "@wonderflow/themes": "14.0.2",
-    "@wonderflow/charts": "14.0.2",
+    "@wonderflow/react-components": "14.0.3",
+    "@wonderflow/symbols": "14.0.3",
+    "@wonderflow/themes": "14.0.3",
+    "@wonderflow/charts": "14.0.3",
     "ahooks": "3.7.11",
     "bezier-easing-editor": "0.8.0",
     "clsx": "1.2.1",
@@ -69,7 +69,7 @@
     "slugify": "1.6.6"
   },
   "devDependencies": {
-    "@wonderflow/config": "14.0.2",
+    "@wonderflow/config": "14.0.3",
     "@next/bundle-analyzer": "12.3.1",
     "@next/eslint-plugin-next": "12.3.1",
     "@types/mdx-js__react": "1.5.8",

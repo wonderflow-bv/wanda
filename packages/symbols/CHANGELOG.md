@@ -1,5 +1,11 @@
 # @wonderflow/symbols
 
+## 14.0.3
+
+### Patch Changes
+
+- 97636e9: Adds new triangle icon
+
 ## 14.0.2
 
 ## 14.0.1
