@@ -1,7 +1,7 @@
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_3205_2387)">
-<path opacity="0.5" d="M2 19L5 22L17 10L14 7L2 19Z" stroke="black" stroke-width="2" stroke-miterlimit="10" stroke-linecap="square"/>
-<path d="M11 10L14 13" stroke="black" stroke-width="2" stroke-miterlimit="10"/>
+<path opacity="0.5" d="M2 19L5 22L17 10L14 7L2 19Z" stroke="currentColor" fill="transparent" stroke-width="2" stroke-miterlimit="10" stroke-linecap="square"/>
+<path d="M11 10L14 13" stroke="currentColor" fill="transparent" stroke-width="2" stroke-miterlimit="10"/>
 <path d="M23 2.5C22.173 2.5 21.5 1.827 21.5 1C21.5 0.448 21.052 0 20.5 0C19.948 0 19.5 0.448 19.5 1C19.5 1.827 18.827 2.5 18 2.5C17.448 2.5 17 2.948 17 3.5C17 4.052 17.448 4.5 18 4.5C18.827 4.5 19.5 5.173 19.5 6C19.5 6.552 19.948 7 20.5 7C21.052 7 21.5 6.552 21.5 6C21.5 5.173 22.173 4.5 23 4.5C23.552 4.5 24 4.052 24 3.5C24 2.948 23.552 2.5 23 2.5Z" fill="black"/>
 <path d="M10 2.5C9.173 2.5 8.5 1.827 8.5 1C8.5 0.448 8.052 0 7.5 0C6.948 0 6.5 0.448 6.5 1C6.5 1.827 5.827 2.5 5 2.5C4.448 2.5 4 2.948 4 3.5C4 4.052 4.448 4.5 5 4.5C5.827 4.5 6.5 5.173 6.5 6C6.5 6.552 6.948 7 7.5 7C8.052 7 8.5 6.552 8.5 6C8.5 5.173 9.173 4.5 10 4.5C10.552 4.5 11 4.052 11 3.5C11 2.948 10.552 2.5 10 2.5Z" fill="black"/>
 <path d="M18 17.5C18.827 17.5 19.5 18.173 19.5 19C19.5 19.552 19.948 20 20.5 20C21.052 20 21.5 19.552 21.5 19C21.5 18.173 22.173 17.5 23 17.5C23.552 17.5 24 17.052 24 16.5C24 15.948 23.552 15.5 23 15.5C22.173 15.5 21.5 14.827 21.5 14C21.5 13.448 21.052 13 20.5 13C19.948 13 19.5 13.448 19.5 14C19.5 14.827 18.827 15.5 18 15.5C17.448 15.5 17 15.948 17 16.5C17 17.052 17.448 17.5 18 17.5Z" fill="black"/>
