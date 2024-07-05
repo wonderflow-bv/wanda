@@ -1,5 +1,11 @@
 # @wonderflow/symbols
 
+## 14.0.4
+
+### Patch Changes
+
+- 5c4c4ed: Update triangle icon and add wand icon
+
 ## 14.0.3
 
 ### Patch Changes

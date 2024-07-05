@@ -1,6 +1,6 @@
 {
   "name": "@wonderflow/charts",
-  "version": "14.0.3",
+  "version": "14.0.4",
   "description": "Wonderflow's Wanda Design System Charting Library",
   "author": "Wonderflow Design Team",
   "contributors": [
@@ -67,7 +67,7 @@
     "@types/react-dom": "17.0.14",
     "@types/react-test-renderer": "18.0.7",
     "@types/uuid": "9.0.8",
-    "@wonderflow/config": "14.0.3",
+    "@wonderflow/config": "14.0.4",
     "babel-loader": "8.2.5",
     "cpy-cli": "3.1.1",
     "postcss": "8.4.38",
