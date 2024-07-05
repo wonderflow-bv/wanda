@@ -1,5 +1,11 @@
 # @wonderflow/symbols
 
+## 14.0.5
+
+### Patch Changes
+
+- 5c2b6d0: fix icons consistency
+
 ## 14.0.4
 
 ### Patch Changes
