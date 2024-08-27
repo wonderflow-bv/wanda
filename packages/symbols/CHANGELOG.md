@@ -1,5 +1,7 @@
 # @wonderflow/symbols
 
+## 14.0.6
+
 ## 14.0.5
 
 ### Patch Changes

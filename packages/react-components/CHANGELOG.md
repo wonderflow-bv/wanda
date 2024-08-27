@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 14.0.6
+
+### Patch Changes
+
+- 6387249: card component ui bugfix
+
 ## 14.0.5
 
 ## 14.0.4
