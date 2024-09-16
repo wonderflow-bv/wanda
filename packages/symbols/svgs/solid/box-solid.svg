@@ -1,0 +1,14 @@
+<svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<g id="box-solid" clip-path="url(#clip0_3326_2462)">
+<g id="Vector">
+<path d="M10.3125 3.625H15.125L11.5625 0.625C11.4375 0.5625 11.25 0.5 11.125 0.5H9.125L10.3125 3.625Z" fill="black"/>
+<path d="M10.5 4.875V9.25H5.5V4.875H0.5V14.875C0.5 15.25 0.75 15.5 1.125 15.5H14.875C15.25 15.5 15.5 15.25 15.5 14.875V4.875H10.5Z" fill="black"/>
+<path d="M5.6875 3.625L6.875 0.5H4.875C4.75 0.5 4.5625 0.5625 4.5 0.625L0.875 3.625H5.6875Z" fill="black"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_3326_2462">
+<rect width="16" height="16" fill="white"/>
+</clipPath>
+</defs>
+</svg>
