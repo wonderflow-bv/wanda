@@ -1,5 +1,11 @@
 # @wonderflow/config
 
+## 14.0.7
+
+### Patch Changes
+
+- @wonderflow/tokens@14.0.7
+
 ## 14.0.6
 
 ### Patch Changes
