@@ -1,5 +1,11 @@
 # @wonderflow/symbols
 
+## 14.0.7
+
+### Patch Changes
+
+- 1fc5f7f: add scatter-chart and box icons
+
 ## 14.0.6
 
 ## 14.0.5
