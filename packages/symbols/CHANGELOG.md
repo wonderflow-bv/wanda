@@ -1,5 +1,11 @@
 # @wonderflow/symbols
 
+## 14.0.8
+
+### Patch Changes
+
+- aa84983: update scatter-chart-outline style
+
 ## 14.0.7
 
 ### Patch Changes
