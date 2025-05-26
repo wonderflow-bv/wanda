@@ -8,6 +8,7 @@ import React, {
 import {
   Elevator,
   Stack,
+  Text,
 } from '@/components';
 
 import * as styles from './product-card.module.css';
@@ -42,6 +43,10 @@ export type ProductCardProps = PropsWithClass<PropsWithChildren<{
    */
   isLoading?: boolean;
   /**
+   * Shows a colored cover with the first two letters of the title.
+   */
+  hasColoredCover?: boolean;
+  /**
    * Set an action to be performed when clicked.
    */
   onClick?: () => void;
@@ -50,6 +55,37 @@ export type ProductCardProps = PropsWithClass<PropsWithChildren<{
 & Pick<ProductCardHeaderProps, 'title' | 'titleRows' | 'subtitle' | 'menuActions'>
 & Pick<ProductCardKpisProps, 'rating' | 'feedbackCount' | 'votesCount' | 'votesRating' | 'users' | 'skus' | 'sentiment' | 'priceMin' | 'priceMax' | 'nps' | 'kpisRowGap' | 'kpiItems' | 'groups' | 'tgw' | 'skusCap' | 'usersCap' | 'currency' |
 'currencyDecimals'>
+
+const getColorFromString = (input: string): string => {
+  // Generate a hash from the input string
+  let hash = 0;
+  let color = '#';
+  const rgb = [];
+
+  for (let i = 0; i < input.length; i += 1) {
+    // eslint-disable-next-line no-bitwise
+    hash = input.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  for (let i = 0; i < 3; i += 1) {
+    // eslint-disable-next-line no-bitwise
+    const value = (hash >> (i * 8)) & 0xFF;
+    rgb.push(value);
+    color += (`00${value.toString(16)}`).slice(-2);
+  }
+
+  // Calculate luminance to check if the color is too light
+  const [r, g, b] = rgb.map(v => v / 255);
+  const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+
+  if (luminance > 0.8) {
+    const darkenedRgb = rgb.map(v => Math.floor(v * 0.6));
+    color = darkenedRgb.map(value => (`00${value.toString(16)}`).slice(-2)).join('');
+    color = `#${color}`;
+  }
+
+  return color;
+};
 
 export type ProductCardComponent = React.ForwardRefExoticComponent<ProductCardProps> & {
   Media: ProductCardMediaComponent;
@@ -90,6 +126,7 @@ export const ProductCard = forwardRef(({
   overlayActions,
   onClick,
   isLoading = false,
+  hasColoredCover = false,
   className,
   style,
   children,
@@ -138,6 +175,7 @@ export const ProductCard = forwardRef(({
         onClick={isLoading ? undefined : onClick}
         {...otherProps}
       >
+
         <Stack
           data-inner-element="ProductCard-Container"
           direction="row"
@@ -165,6 +203,14 @@ export const ProductCard = forwardRef(({
             direction={(direction === 'vertical') ? 'column' : 'row'}
             className={styles.Content}
           >
+
+            {hasColoredCover && !source?.length && (
+              <Stack style={{ backgroundColor: `${getColorFromString(title ?? '')}`, width: '100%', height: '125px' }} hAlign="center" vAlign="center" fill={false}>
+                <Text variant="heading-1" textAlign="center">
+                  {title?.slice(0, 2)}
+                </Text>
+              </Stack>
+            )}
 
             <ProductCard.Media
               source={source}

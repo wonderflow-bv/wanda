@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import { ProductCard } from './product-card';
 
@@ -45,6 +45,7 @@ describe('<ProductCard>', () => {
 
     expect(container).not.toBeNull();
   });
+
   test('it should render properly with menu actions', () => {
     const s = SourceImages.slice(0, 3);
     const { container } = render(
@@ -117,5 +118,34 @@ describe('<ProductCard>', () => {
     );
 
     expect(container).not.toBeNull();
+  });
+
+  test('it should render properly with colored cover', () => {
+    const { container } = render(
+      <ProductCard
+        title="title"
+        subtitle="subtitle"
+        direction="horizontal"
+        rating={1.2}
+        feedbackCount={1.2}
+        votesCount={1.2}
+        votesRating={1.2}
+        sentiment={1.2}
+        nps={1.2}
+        groups={1.2}
+        priceMin={1.2}
+        priceMax={1.2}
+        users={1.2}
+        skus={1.2}
+        kpiItems={2}
+        kpisRowGap={16}
+        bordered
+        highlightOnHover
+        hasColoredCover
+      />,
+    );
+
+    expect(container).not.toBeNull();
+    expect(screen.getByText('ti')).toBeInTheDocument();
   });
 });
