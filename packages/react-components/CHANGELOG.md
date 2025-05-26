@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 14.1.0
+
+### Minor Changes
+
+- e487b03: add colored product card cover
+
 ## 14.0.8
 
 ## 14.0.7

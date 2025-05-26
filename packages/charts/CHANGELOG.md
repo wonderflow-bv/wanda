@@ -1,5 +1,11 @@
 # @wonderflow/charts
 
+## 14.1.0
+
+### Patch Changes
+
+- 59ab63a: skip locale test
+
 ## 14.0.8
 
 ## 14.0.7
