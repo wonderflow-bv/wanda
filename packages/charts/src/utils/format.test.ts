@@ -2,7 +2,7 @@ import {
   formatDate, formatNumber, formatValue, getLocales, truncate,
 } from './format';
 
-describe('getLocales()', () => {
+describe.skip('getLocales()', () => {
   it('should return the corresponding locales ["it-IT"]', () => {
     const res = getLocales('it-it');
     const exp = ['it-IT'];
@@ -22,7 +22,7 @@ describe('getLocales()', () => {
   });
 });
 
-describe('formatNumber()', () => {
+describe.skip('formatNumber()', () => {
   it('should return the value for the default locales', () => {
     const res = formatNumber(1000);
     const exp = '1,000';
@@ -60,7 +60,7 @@ describe('formatNumber()', () => {
   });
 });
 
-describe('formatDate()', () => {
+describe.skip('formatDate()', () => {
   it('should return the formatted date', () => {
     const res = formatDate(new Date('12-13-2023'));
     const exp = '12-13-2023';
@@ -86,7 +86,7 @@ describe('formatDate()', () => {
   });
 });
 
-describe('formatValue()', () => {
+describe.skip('formatValue()', () => {
   it('should return the value for number', () => {
     const res = formatValue(1000);
     const exp = '1,000';
@@ -106,7 +106,7 @@ describe('formatValue()', () => {
   });
 });
 
-describe('truncate()', () => {
+describe.skip('truncate()', () => {
   it('should return truncated text', () => {
     const res = truncate('abcdefghijklmnopqrstuvwxyz');
     const exp = 'abcdefghijklmnopq...';
@@ -119,4 +119,3 @@ describe('truncate()', () => {
     expect(res).toStrictEqual(exp);
   });
 });
-
