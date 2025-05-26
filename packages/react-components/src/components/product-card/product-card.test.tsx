@@ -146,6 +146,8 @@ describe('<ProductCard>', () => {
     );
 
     expect(container).not.toBeNull();
-    expect(screen.getByText('ti')).toBeInTheDocument();
+
+    const coverText = screen.getByText('ti');
+    expect(coverText).toBeDefined();
   });
 });
