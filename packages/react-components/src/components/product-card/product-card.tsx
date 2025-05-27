@@ -205,8 +205,14 @@ export const ProductCard = forwardRef(({
           >
 
             {hasColoredCover && !source?.length && (
-              <Stack style={{ backgroundColor: `${getColorFromString(title ?? '')}`, width: '100%', height: '125px' }} hAlign="center" vAlign="center" fill={false}>
-                <Text variant="heading-1" textAlign="center">
+              <Stack
+                className={styles.ColoredCard}
+                style={{ backgroundColor: `${getColorFromString(title ?? '')}` }}
+                hAlign="center"
+                vAlign="center"
+                fill={false}
+              >
+                <Text variant="heading-1" textAlign="center" style={{ color: '#fff' }}>
                   {title?.slice(0, 2)}
                 </Text>
               </Stack>

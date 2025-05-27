@@ -3,6 +3,7 @@ declare const styles: {
   readonly "Row": string;
   readonly "Content": string;
   readonly "OverlayActions": string;
+  readonly "ColoredCard": string;
 };
 export = styles;
 

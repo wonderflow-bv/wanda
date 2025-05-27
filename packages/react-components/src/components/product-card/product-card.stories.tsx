@@ -186,3 +186,27 @@ withNoMedia.args = {
   footer: undefined,
 };
 
+export const withColoredCover = Template.bind({});
+withColoredCover.args = {
+  source: [],
+  subtitle: '',
+  title: 'My first board',
+  titleRows: 2,
+  kpiItems: 2,
+  rating: undefined,
+  sentiment: undefined,
+  feedbackCount: undefined,
+  votesCount: undefined,
+  votesRating: undefined,
+  nps: undefined,
+  groups: undefined,
+  tgw: undefined,
+  priceMin: undefined,
+  priceMax: undefined,
+  users: 1789,
+  usersCap: 1000,
+  skus: 234,
+  skusCap: 1000,
+  footer: undefined,
+  hasColoredCover: true,
+};
