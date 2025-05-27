@@ -1,5 +1,7 @@
 # @wonderflow/charts
 
+## 14.2.0
+
 ## 14.1.0
 
 ### Patch Changes
