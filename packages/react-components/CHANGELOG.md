@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 14.2.0
+
+### Minor Changes
+
+- 594bd4a: fix product card colored cover
+
 ## 14.1.0
 
 ### Minor Changes
