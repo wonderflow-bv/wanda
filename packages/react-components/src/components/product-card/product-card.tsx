@@ -1,3 +1,4 @@
+import tkns from '@wonderflow/tokens/platforms/web/tokens.json';
 import { useDebounce } from 'ahooks';
 import clsx from 'clsx';
 import React, {
@@ -57,34 +58,24 @@ export type ProductCardProps = PropsWithClass<PropsWithChildren<{
 'currencyDecimals'>
 
 const getColorFromString = (input: string): string => {
+  const colorPalette = tkns.color;
   // Generate a hash from the input string
   let hash = 0;
-  let color = '#';
-  const rgb = [];
-
   for (let i = 0; i < input.length; i += 1) {
     // eslint-disable-next-line no-bitwise
     hash = input.charCodeAt(i) + ((hash << 5) - hash);
   }
 
-  for (let i = 0; i < 3; i += 1) {
-    // eslint-disable-next-line no-bitwise
-    const value = (hash >> (i * 8)) & 0xFF;
-    rgb.push(value);
-    color += (`00${value.toString(16)}`).slice(-2);
-  }
+  // Get all color keys
+  const colorKeys = Object.keys(colorPalette);
+  // Pick a color family based on the hash
+  const colorFamily = colorKeys[Math.abs(hash) % colorKeys.length];
 
-  // Calculate luminance to check if the color is too light
-  const [r, g, b] = rgb.map(v => v / 255);
-  const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  // Return the first shade of the selected color family
+  const shades = colorPalette[colorFamily as keyof typeof colorPalette];
+  const firstShade = Object.values(shades)[5];
 
-  if (luminance > 0.8) {
-    const darkenedRgb = rgb.map(v => Math.floor(v * 0.6));
-    color = darkenedRgb.map(value => (`00${value.toString(16)}`).slice(-2)).join('');
-    color = `#${color}`;
-  }
-
-  return color;
+  return `hsl(${firstShade})`;
 };
 
 export type ProductCardComponent = React.ForwardRefExoticComponent<ProductCardProps> & {
