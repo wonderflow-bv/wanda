@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 14.2.1
+
+### Patch Changes
+
+- 5403942: minor upgrade of catalog cards coloring
+
 ## 14.2.0
 
 ### Minor Changes
