@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 14.2.2
+
+### Patch Changes
+
+- cba14dc: minor fix on product card colored view
+
 ## 14.2.1
 
 ### Patch Changes
