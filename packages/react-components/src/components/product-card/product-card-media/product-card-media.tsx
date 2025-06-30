@@ -70,10 +70,11 @@ export const ProductCardMedia = forwardRef(({
       img.onabort = () => resolve(placeholder);
     });
 
-    const images = source.slice(0, 4).map(async s => preloadImage(s));
+    const preloadImages = async () => {
+      const images = source.slice(0, 4).map(async s => preloadImage(s));
 
-    Promise.all(images)
-      .then((urls) => {
+      try {
+        const urls = await Promise.all(images);
         const t: ImageConfig[] = urls.map((el: string, i: number) => ({
           row: i < 2 ? '1' : '2',
           col: i % 2 === 0 ? '1' : '2',
@@ -83,11 +84,18 @@ export const ProductCardMedia = forwardRef(({
         if (t.length === 3) t[1].row = '1 / 3';
 
         setImgs(t);
-      })
-    // eslint-disable-next-line no-console
-      .catch(err => console.error(err));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch (err: unknown) {
+        setImgs([]);
+      }
+    };
+
+    void preloadImages();
+
+    return () => {
+      setImgs([]);
+    };
+  }, [source]);
 
   if (source.length === 0) return null;
 
