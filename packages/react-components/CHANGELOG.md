@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 14.2.4
+
+### Patch Changes
+
+- 7d95197: fix on product card preloading logic
+
 ## 14.2.3
 
 ### Patch Changes
