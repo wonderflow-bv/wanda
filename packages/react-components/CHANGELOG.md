@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 14.2.3
+
+### Patch Changes
+
+- 0f4c3f9: fix product card cover images preloading
+
 ## 14.2.2
 
 ### Patch Changes
