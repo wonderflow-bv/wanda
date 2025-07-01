@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 14.2.5
+
+### Patch Changes
+
+- 6aba27a: fix card media appearance
+
 ## 14.2.4
 
 ### Patch Changes
