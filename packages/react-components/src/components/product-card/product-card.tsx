@@ -209,13 +209,15 @@ export const ProductCard = forwardRef(({
               </Stack>
             )}
 
-            <ProductCard.Media
-              source={source}
-              isLoading={isLoading}
-              ratio={ratio}
-              data-inner-element="ProductCard-Media"
-              style={deboucedStyle}
-            />
+            {!hasColoredCover && source && (
+              <ProductCard.Media
+                source={source}
+                isLoading={isLoading}
+                ratio={ratio}
+                data-inner-element="ProductCard-Media"
+                style={deboucedStyle}
+              />
+            )}
 
             <Stack
               direction="column"
