@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 14.2.6
+
+### Patch Changes
+
+- fa5ddd9: fix minor product card media issues
+
 ## 14.2.5
 
 ### Patch Changes
