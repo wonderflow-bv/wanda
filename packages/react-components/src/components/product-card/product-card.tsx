@@ -67,7 +67,7 @@ const getColorFromString = (input: string): string => {
   }
 
   // Get all color keys
-  const colorKeys = Object.keys(colorPalette);
+  const colorKeys = Object.keys(colorPalette).filter((color: string) => color !== 'support');
   // Pick a color family based on the hash
   const colorFamily = colorKeys[Math.abs(hash) % colorKeys.length];
 
