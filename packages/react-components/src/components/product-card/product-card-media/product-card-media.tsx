@@ -60,39 +60,34 @@ export const ProductCardMedia = forwardRef(({
 }, forwardedRef: React.ForwardedRef<HTMLDivElement>) => {
   const [imgs, setImgs] = useState<ImageConfig[]>([]);
 
-  const preloadImage: (url: string) => Promise<string> = async (url: string) => new Promise((resolve) => {
-    const img = new Image();
-    const placeholder = 'https://wonderimages.gumlet.io/placeholders/image-placeholder.png';
-    img.src = url;
-    img.onload = () => resolve(url);
-    img.onerror = () => resolve(placeholder);
-    img.onabort = () => resolve(placeholder);
-  });
+  useEffect(() => {
+    const preloadImage: (url: string) => Promise<string> = async (url: string) => new Promise((resolve) => {
+      const img = new Image();
+      const placeholder = 'https://wonderimages.gumlet.io/placeholders/image-placeholder.png';
+      img.src = url;
+      img.onload = () => resolve(url);
+      img.onerror = () => resolve(placeholder);
+      img.onabort = () => resolve(placeholder);
+    });
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const preloadImages = async (source: string[]) => {
     const images = source.slice(0, 4).map(async s => preloadImage(s));
 
-    try {
-      const urls = await Promise.all(images);
-      const t: ImageConfig[] = urls.map((el: string, i: number) => ({
-        row: i < 2 ? '1' : '2',
-        col: i % 2 === 0 ? '1' : '2',
-        val: el,
-      }));
+    Promise.all(images)
+      .then((urls) => {
+        const t: ImageConfig[] = urls.map((el: string, i: number) => ({
+          row: i < 2 ? '1' : '2',
+          col: i % 2 === 0 ? '1' : '2',
+          val: el,
+        }));
 
-      if (t.length === 3) t[1].row = '1 / 3';
+        if (t.length === 3) t[1].row = '1 / 3';
 
-      setImgs(t);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (err: unknown) {
-      setImgs([]);
-    }
-  };
-
-  useEffect(() => {
-    void preloadImages(source);
-  }, [source, preloadImages]);
+        setImgs(t);
+      })
+    // eslint-disable-next-line no-console
+      .catch(err => console.error(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (source.length === 0) return null;
 
