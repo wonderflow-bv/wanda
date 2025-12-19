@@ -1,5 +1,11 @@
 # @wonderflow/symbols
 
+## 14.3.0
+
+### Minor Changes
+
+- aaa711d: add new icons
+
 ## 14.2.6
 
 ## 14.2.5
