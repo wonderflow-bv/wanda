@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 14.4.0
+
+### Minor Changes
+
+- f1e9f47: fix table selectedRows handling
+
 ## 14.3.0
 
 ## 14.2.6
