@@ -1,5 +1,13 @@
 # @wonderflow/config
 
+## 14.4.1
+
+### Patch Changes
+
+- d1b9187: update vercel ci version
+- Updated dependencies [d1b9187]
+  - @wonderflow/tokens@14.4.1
+
 ## 14.4.0
 
 ### Patch Changes

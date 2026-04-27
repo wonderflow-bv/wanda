@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 14.4.1
+
+### Patch Changes
+
+- d1b9187: update vercel ci version
+
 ## 14.4.0
 
 ### Minor Changes

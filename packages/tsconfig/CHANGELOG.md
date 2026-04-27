@@ -1,5 +1,11 @@
 # tsconfig
 
+## 10.0.1
+
+### Patch Changes
+
+- d1b9187: update vercel ci version
+
 ## 10.0.0
 
 ### Major Changes
