@@ -262,7 +262,6 @@ export const Table = <T extends Record<string, unknown>>({
     visibleColumns,
     setPageSize,
     setHiddenColumns,
-    toggleRowSelected,
     state: {
       pageSize,
       pageIndex,
@@ -282,7 +281,6 @@ export const Table = <T extends Record<string, unknown>>({
       autoResetHiddenColumns: false,
       autoResetPage: false,
       autoResetSortBy: false,
-      autoResetSelectedRows: false,
       selectSubRows,
       /**
        * This `paginateExpandedRows` prop prevent expanded rows to
@@ -364,25 +362,6 @@ export const Table = <T extends Record<string, unknown>>({
     selectedRowIdsState,
     onSelectedRowsChange,
   ]);
-
-  /**
-   * Sync the `selectedRowIds` prop into react-table's internal state whenever it changes.
-   * This is necessary for server-side pagination: when the consumer navigates to a new page,
-   * `data` changes and react-table would normally reset selections. With `autoResetSelectedRows: false`
-   * the reset is suppressed, but the internal state still won't reflect any externally-driven
-   * updates (e.g. restoring a persisted selection). This effect reconciles the two by
-   * deselecting ids removed from the prop and selecting ids newly added to it.
-   * `selectedRowIdsState` is intentionally omitted from deps to avoid an infinite loop.
-   */
-  useEffect(() => {
-    const currentIds = new Set(Object.keys(selectedRowIdsState));
-    const nextIds = new Set(selectedRowIds as string[]);
-
-    Object.keys(selectedRowIdsState).filter(id => !nextIds.has(id)).forEach(id => toggleRowSelected(id, false));
-
-    (selectedRowIds as string[]).filter(id => !currentIds.has(id)).forEach(id => toggleRowSelected(id, true));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedRowIds]);
 
   useUpdateEffect(() => {
     onSortChange?.(sortBy);
