@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 14.4.2
+
+### Patch Changes
+
+- 7018611: update vercel actions version
+
 ## 14.4.1
 
 ### Patch Changes

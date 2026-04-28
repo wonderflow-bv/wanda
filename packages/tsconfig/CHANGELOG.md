@@ -1,5 +1,11 @@
 # tsconfig
 
+## 10.0.2
+
+### Patch Changes
+
+- 7018611: update vercel actions version
+
 ## 10.0.1
 
 ### Patch Changes
