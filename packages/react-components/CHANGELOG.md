@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 14.4.3
+
+### Patch Changes
+
+- e3aa6cf: revert rows handling fix in table
+
 ## 14.4.2
 
 ### Patch Changes
