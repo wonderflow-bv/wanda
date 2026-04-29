@@ -41,4 +41,18 @@ describe('<ProductCardKpis>', () => {
 
     expect(container).not.toBeNull();
   });
+
+  test('it should render properly with a non-default currency', () => {
+    const { container } = render(
+      <ProductCardKpis
+        priceMin={5}
+        priceMax={20}
+        currency="BRL"
+        currencyDecimals={2}
+      />,
+    );
+
+    expect(container).not.toBeNull();
+    expect(container.textContent).toContain('R$');
+  });
 });
