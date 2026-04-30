@@ -1,5 +1,19 @@
 # @wonderflow/charts
 
+## 14.4.3
+
+## 14.4.2
+
+### Patch Changes
+
+- 7018611: update vercel actions version
+
+## 14.4.1
+
+### Patch Changes
+
+- d1b9187: update vercel ci version
+
 ## 14.4.0
 
 ## 14.3.0
