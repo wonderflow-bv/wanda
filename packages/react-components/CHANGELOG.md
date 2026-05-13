@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 14.5.0
+
+### Minor Changes
+
+- 7f8e2e6: Support new currencies
+
 ## 14.4.3
 
 ### Patch Changes
