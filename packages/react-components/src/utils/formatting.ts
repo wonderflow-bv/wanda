@@ -18,15 +18,40 @@ import { Currency } from '../components/product-card/product-card-kpis/product-c
 
 export const getCurrency = (currency?: Currency) => {
   switch (currency) {
+    case 'AED':
+      return 'Dh';
+    case 'AUD':
+      return 'A$';
+    case 'BRL':
+      return 'R$';
+    case 'CAD':
+      return 'C$';
+    case 'EGP':
+      return 'LE';
     case 'EUR':
       return '€';
-    case 'USD':
-      return '$';
     case 'GBP':
       return '£';
+    case 'INR':
+      return '₹';
     case 'JPY':
-    case 'CNY':
       return '¥';
+    case 'MXN':
+      return 'MX$';
+    case 'PLN':
+      return 'zł';
+    case 'SAR':
+      return 'SR';
+    case 'SEK':
+      return 'kr';
+    case 'SGD':
+      return 'S$';
+    case 'TRY':
+      return '₺';
+    case 'USD':
+      return '$';
+    case 'ZAR':
+      return 'R';
     default:
       return '';
   }

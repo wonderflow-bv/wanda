@@ -31,7 +31,7 @@ import {
 } from '../../../utils/formatting';
 import * as styles from './product-card-kpis.module.css';
 
-export type Currency = 'EUR' | 'USD' | 'GBP' | 'JPY' | 'CNY';
+export type Currency = 'AED' | 'AUD' | 'BRL' | 'CAD' | 'EGP' | 'EUR' | 'GBP' | 'INR' | 'JPY' | 'MXN' | 'PLN' | 'SAR' | 'SEK' | 'SGD' | 'TRY' | 'USD' | 'ZAR';
 
 export type ProductCardKpisProps = PropsWithClass<{
   /**
