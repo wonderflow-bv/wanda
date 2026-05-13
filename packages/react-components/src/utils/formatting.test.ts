@@ -161,16 +161,28 @@ describe('isGreaterThan()', () => {
 
 describe('getCurrency()', () => {
   const tests: Array<{ code: Currency | undefined; out: string }> = [
+    { code: 'AED', out: 'Dh' },
+    { code: 'AUD', out: 'A$' },
+    { code: 'BRL', out: 'R$' },
+    { code: 'CAD', out: 'C$' },
+    { code: 'EGP', out: 'LE' },
     { code: 'EUR', out: '€' },
-    { code: 'USD', out: '$' },
     { code: 'GBP', out: '£' },
+    { code: 'INR', out: '₹' },
     { code: 'JPY', out: '¥' },
-    { code: 'CNY', out: '¥' },
+    { code: 'MXN', out: 'MX$' },
+    { code: 'PLN', out: 'zł' },
+    { code: 'SAR', out: 'SR' },
+    { code: 'SEK', out: 'kr' },
+    { code: 'SGD', out: 'S$' },
+    { code: 'TRY', out: '₺' },
+    { code: 'USD', out: '$' },
+    { code: 'ZAR', out: 'R' },
     { code: undefined, out: '' },
   ];
 
   tests.map(t => (
-    it(`should return ${t.out}`, () => {
+    it(`should return "${t.out}" for ${t.code ?? 'undefined'}`, () => {
       const input = t.code;
       const output = getCurrency(input);
       const test = t.out;

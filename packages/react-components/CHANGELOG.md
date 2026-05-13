@@ -1,5 +1,23 @@
 # @wonderflow/react-components
 
+## 14.4.3
+
+### Patch Changes
+
+- e3aa6cf: revert rows handling fix in table
+
+## 14.4.2
+
+### Patch Changes
+
+- 7018611: update vercel actions version
+
+## 14.4.1
+
+### Patch Changes
+
+- d1b9187: update vercel ci version
+
 ## 14.4.0
 
 ### Minor Changes
