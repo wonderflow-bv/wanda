@@ -7,7 +7,7 @@ describe('<TableRow>', () => {
     const { container } = render(
       <table>
         <tbody>
-          <TableRow rowData={undefined} expandedRows={['test']} />
+          <TableRow rowData={undefined} expandedRowsKey="test" />
         </tbody>
       </table>,
     );

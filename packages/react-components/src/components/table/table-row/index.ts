@@ -16,4 +16,4 @@
 
 'use client';
 
-export { TableRow } from './table-row';
+export { MemoTableRow, TableRow } from './table-row';

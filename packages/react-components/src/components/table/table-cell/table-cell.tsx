@@ -15,7 +15,7 @@
  */
 
 import clsx from 'clsx';
-import { CSSProperties, forwardRef } from 'react';
+import { CSSProperties, forwardRef, memo } from 'react';
 
 import { Polymorphic, Symbol } from '@/components';
 
@@ -80,3 +80,5 @@ export const TableCell = forwardRef(({
     </Wrapper>
   );
 }) as PolymorphicCell;
+
+export const MemoTableCell = memo(TableCell) as typeof TableCell;

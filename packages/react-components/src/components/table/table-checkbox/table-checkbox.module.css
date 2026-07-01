@@ -1,5 +1,26 @@
 @layer components {
   .TableCheckbox {
     display: block;
+
+    /**
+     * `Checkbox`'s underlying input uses the shared `vibrancy` mixin
+     * (`backdrop-filter: blur(62px)`), which is fine for the handful of
+     * standalone checkboxes elsewhere in the design system, but is very
+     * expensive when stamped out per table row (hundreds of blurred,
+     * separately-composited layers in a single scrollable view). Table
+     * checkboxes are small, opaque controls that don't need the blur —
+     * fall back to a plain solid background instead.
+     */
+    & [data-inner-element='Checkbox'] {
+      backdrop-filter: none;
+
+      &:not(:checked):not(:indeterminate) {
+        background-color: var(--global-background);
+      }
+
+      &:active:not(:checked):not(:indeterminate) {
+        background-color: var(--dimmed-1);
+      }
+    }
   }
 }

@@ -15,15 +15,25 @@
  */
 
 import clsx from 'clsx';
-import { PropsWithChildren, useMemo } from 'react';
-import { IdType, Row } from 'react-table';
+import { memo, PropsWithChildren, useMemo } from 'react';
+import { Row } from 'react-table';
 
 import * as styles from './table-row.module.css';
 
 type TableRowProps<T extends Record<string, unknown>> = PropsWithChildren<PropsWithClass<{
   expanded?: boolean;
   rowData?: Row<T>;
-  expandedRows?: Array<IdType<T>>;
+  expandedRowsKey?: string;
+  /**
+   * Cheap, stable signature (e.g. `${row.id}:${isSelected}:${isExpanded}`)
+   * computed by the parent `Table`. `react-table` v7 returns a brand new
+   * `row` object (and new `getRowProps()`/cell elements) on every render,
+   * even for rows whose own state did not change, which defeats
+   * `React.memo`'s default shallow comparison. `MemoTableRow` uses this
+   * signature instead of `rowData`/`children` identity to decide whether a
+   * row actually needs to re-render.
+   */
+  rowSignature?: string;
 }>>
 
 export const TableRow = <T extends Record<string, unknown>>({
@@ -31,18 +41,22 @@ export const TableRow = <T extends Record<string, unknown>>({
   className,
   expanded,
   rowData,
-  expandedRows,
+  expandedRowsKey,
+  rowSignature: _rowSignature,
   ...otherProps
 }: TableRowProps<T>) => {
   const shouldHighlightRow = useMemo(() => {
-    const [currentParentRowId] = rowData?.id.match(/.*(?=\.)/) ?? [];
-    const isHighlight = expandedRows?.includes(currentParentRowId ?? '') && expandedRows.every((rowId) => {
-      const [parentRowMatch] = rowId.match(/.*(?=\.)/) ?? [];
+    if (!expandedRowsKey || !rowData) return false;
+    const [currentParentRowId] = (/.*(?=\.)/.exec(rowData.id)) ?? [];
+    if (!currentParentRowId) return false;
+    const expandedIds = expandedRowsKey.split('|');
+    const isHighlight = expandedIds.includes(currentParentRowId) && expandedIds.every((rowId) => {
+      const [parentRowMatch] = (/.*(?=\.)/.exec(rowId)) ?? [];
       return parentRowMatch !== currentParentRowId;
     });
 
-    return Boolean(isHighlight);
-  }, [expandedRows, rowData]);
+    return isHighlight;
+  }, [expandedRowsKey, rowData]);
 
   return (
     <tr
@@ -55,3 +69,27 @@ export const TableRow = <T extends Record<string, unknown>>({
     </tr>
   );
 };
+
+/**
+ * `react-table` v7's `useRowSelect`/`useExpanded` recompute the `rows`
+ * array (new object refs + new `cell.render('Cell')` elements per row) on
+ * every selection/expansion change, even for rows that did not actually
+ * change. That defeats `React.memo`'s default shallow comparison, so
+ * clicking one checkbox re-renders all 500 rows instead of the 1 or 2 that
+ * changed — the visible lag on select/select-all.
+ *
+ * Comparing on `rowSignature` (and the other primitive props) instead of
+ * `rowData`/`children` identity lets a row skip re-rendering when nothing
+ * that affects its output actually changed.
+ */
+const areRowPropsEqual = <T extends Record<string, unknown>>(
+  prevProps: TableRowProps<T>,
+  nextProps: TableRowProps<T>,
+) => (
+    prevProps.rowSignature === nextProps.rowSignature
+    && prevProps.expandedRowsKey === nextProps.expandedRowsKey
+    && prevProps.expanded === nextProps.expanded
+    && prevProps.className === nextProps.className
+  );
+
+export const MemoTableRow = memo(TableRow, areRowPropsEqual) as typeof TableRow;

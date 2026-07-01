@@ -16,4 +16,4 @@
 
 'use client';
 
-export { TableCell } from './table-cell';
+export { MemoTableCell, TableCell } from './table-cell';

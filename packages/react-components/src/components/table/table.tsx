@@ -17,10 +17,10 @@
 import { useUpdateEffect } from 'ahooks';
 import clsx from 'clsx';
 import {
-  AnimatePresence, domMax, LazyMotion, m,
+  AnimatePresence, domAnimation, LazyMotion, m,
 } from 'framer-motion';
 import {
-  ComponentType, CSSProperties, Fragment, ReactNode, useCallback, useEffect, useMemo,
+  ComponentType, CSSProperties, memo, ReactNode, useCallback, useEffect, useMemo,
 } from 'react';
 import {
   Hooks, IdType, Row,
@@ -36,13 +36,13 @@ import {
 } from '@/components';
 
 import * as styles from './table.module.css';
-import { TableCell } from './table-cell';
+import { MemoTableCell, TableCell } from './table-cell';
 import { TableCheckbox } from './table-checkbox';
 import { ToggleColumnsControl } from './table-controls';
 import { TableExpand } from './table-expand';
 import { TableHeader, TableHeaderProps } from './table-header';
 import { TablePagination, TablePaginationProps } from './table-pagination';
-import { TableRow } from './table-row';
+import { MemoTableRow, TableRow } from './table-row';
 import {
   CellType, CustomColumnInstanceType, CustomColumnsType,
   CustomSortingRule, HeaderGroupType, OptionalDataTypes, PaginationPageType,
@@ -186,6 +186,102 @@ export type TableProps<T extends Record<string, unknown>> = PropsWithClass & {
   onRowExpandChange?: (row: Row<T>) => void;
 }
 
+type TableBodyRowProps<T extends Record<string, unknown>> = {
+  row: Row<T>;
+  prepareRow: (row: Row<T>) => void;
+  expandedRowsKey?: string;
+  expandableRowComponent?: ComponentType<T>;
+  /**
+   * `true` when this row (or one of its sub rows) is currently selected.
+   * Derived by the parent from `state.selectedRowIds` — the immutable
+   * state map `react-table` actually replaces on every selection change.
+   *
+   * `row.isSelected` looks like the natural thing to read instead, but
+   * `prepareRow` *mutates the same `row` object in place* on every render,
+   * so a memo comparator reading `row.isSelected` off of it can end up
+   * comparing the object against itself: both "previous" and "next" props
+   * are the same reference by the time the comparison runs, so a real
+   * change (e.g. deselecting a row) can be silently missed and the row
+   * never re-renders.
+   */
+  isRowSelected: boolean;
+  isRowExpanded: boolean;
+};
+
+/**
+ * Owns `prepareRow` + `row.cells.map(cell => cell.render('Cell'))` for a
+ * single row. This work must happen *inside* the memo boundary: doing it in
+ * the parent's `.map()` (as before) means the ~10 cell renders for every
+ * one of the 500 rows still run on every selection change even though the
+ * resulting `<MemoTableRow>` bails out of its own re-render — `React.memo`
+ * only skips the child's render, it can't stop the parent from doing the
+ * work to build that child's props/children in the first place.
+ *
+ * Wrapping this component itself in `memo` (with a comparator based on
+ * `state.selectedRowIds`/`state.expanded`-derived booleans, not the
+ * mutable `row` object) means unaffected rows skip
+ * `prepareRow`/`cell.render('Cell')` entirely, not just the DOM diff.
+ */
+const TableBodyRowComponent = <T extends Record<string, unknown>>({
+  row,
+  prepareRow,
+  expandedRowsKey,
+  expandableRowComponent,
+  isRowSelected: _isRowSelected,
+  isRowExpanded: _isRowExpanded,
+}: TableBodyRowProps<T>) => {
+  prepareRow(row);
+
+  return (
+    <>
+      <MemoTableRow
+        {...row.getRowProps()}
+        expanded={(
+          row.isExpanded && !row.subRows.some(subrow => subrow.isExpanded && subrow.canExpand)
+        )}
+        rowData={row}
+        expandedRowsKey={expandedRowsKey}
+        rowSignature={`${row.id}:${row.isSelected ? 1 : 0}:${row.isExpanded ? 1 : 0}`}
+      >
+        {row.cells.map((cell: CellType<T>) => (
+          <MemoTableCell
+            collapsed={cell.column.isCollapsed}
+            width={cell.column.minWidth === 0 ? undefined : cell.column.minWidth}
+            align={cell.column.align}
+            {...cell.getCellProps()}
+          >
+            {cell.render('Cell')}
+          </MemoTableCell>
+        ))}
+      </MemoTableRow>
+      {(row.subRows && row.isExpanded && expandableRowComponent) && row.subRows.map(subRow => (
+        <MemoTableRow data-table-row-expander key={subRow.id}>
+          <MemoTableCell padding={false} colSpan={100}>
+            <TableExpand data={subRow.original} component={expandableRowComponent} />
+          </MemoTableCell>
+        </MemoTableRow>
+      ))}
+    </>
+  );
+};
+
+const areTableBodyRowPropsEqual = <T extends Record<string, unknown>>(
+  prevProps: TableBodyRowProps<T>,
+  nextProps: TableBodyRowProps<T>,
+) => (
+    prevProps.row.id === nextProps.row.id
+    && prevProps.row.original === nextProps.row.original
+    && prevProps.isRowSelected === nextProps.isRowSelected
+    && prevProps.isRowExpanded === nextProps.isRowExpanded
+    && prevProps.expandedRowsKey === nextProps.expandedRowsKey
+    && prevProps.expandableRowComponent === nextProps.expandableRowComponent
+  );
+
+const TableBodyRow = memo(
+  TableBodyRowComponent,
+  areTableBodyRowPropsEqual,
+) as typeof TableBodyRowComponent;
+
 export const Table = <T extends Record<string, unknown>>({
   className,
   style,
@@ -267,6 +363,7 @@ export const Table = <T extends Record<string, unknown>>({
       pageIndex,
       sortBy,
       selectedRowIds: selectedRowIdsState,
+      expanded: expandedState,
     },
   } = useTable(
     {
@@ -383,7 +480,12 @@ export const Table = <T extends Record<string, unknown>>({
     visibleColumns.filter((col: CustomColumnInstanceType<T>) => !col.isToggable)
   ), [visibleColumns]);
 
-  const expandedRows = useMemo(() => rows.filter(row => row.canExpand && row.isExpanded).map(r => r.id), [rows]);
+  const expandedRowsKey = useMemo(
+    () => (hasSomeExpandableRows
+      ? rows.filter(row => row.canExpand && row.isExpanded).map(r => r.id).join('|')
+      : ''),
+    [hasSomeExpandableRows, rows],
+  );
 
   const dynamicStyle: CSSProperties = {
     '--table-height': height,
@@ -398,7 +500,7 @@ export const Table = <T extends Record<string, unknown>>({
 
       {/* CONTEXT TOAST */}
       <AnimatePresence>
-        <LazyMotion features={domMax}>
+        <LazyMotion features={domAnimation}>
           {!!Object.keys(selectedRowIdsState).length && selectableRows && (
             <Stack
               as={m.div}
@@ -505,39 +607,17 @@ export const Table = <T extends Record<string, unknown>>({
                       </TableCell>
                     </TableRow>
                   )
-                  : rowEntries.map((row) => {
-                    prepareRow(row);
-                    return (
-                      <Fragment key={row.id}>
-                        <TableRow
-                          {...row.getRowProps()}
-                          expanded={(
-                            row.isExpanded && !row.subRows.some(subrow => subrow.isExpanded && subrow.canExpand)
-                          )}
-                          rowData={row}
-                          expandedRows={expandedRows}
-                        >
-                          {row.cells.map((cell: CellType<T>) => (
-                            <TableCell
-                              collapsed={cell.column.isCollapsed}
-                              width={cell.column.minWidth === 0 ? undefined : cell.column.minWidth}
-                              align={cell.column.align}
-                              {...cell.getCellProps()}
-                            >
-                              {cell.render('Cell')}
-                            </TableCell>
-                          ))}
-                        </TableRow>
-                        {(row.subRows && row.isExpanded && expandableRowComponent) && row.subRows.map(subRow => (
-                          <TableRow data-table-row-expander key={subRow.id}>
-                            <TableCell padding={false} colSpan={100}>
-                              <TableExpand data={subRow.original} component={expandableRowComponent} />
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                      </Fragment>
-                    );
-                  })}
+                  : rowEntries.map(row => (
+                    <TableBodyRow
+                      key={row.id}
+                      row={row}
+                      prepareRow={prepareRow}
+                      expandedRowsKey={expandedRowsKey}
+                      expandableRowComponent={expandableRowComponent}
+                      isRowSelected={Boolean(selectedRowIdsState[row.id])}
+                      isRowExpanded={Boolean(expandedState[row.id])}
+                    />
+                  ))}
               </tbody>
             </table>
           </div>
