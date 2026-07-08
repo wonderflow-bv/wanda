@@ -18,9 +18,9 @@ import { Cell, Column, Header } from '@tanstack/react-table';
 import { ReactNode } from 'react';
 
 /**
- * Row/column ids are always plain strings (see `Table`'s `getRowId`), the
- * generic parameter is kept only for source-compatibility with the
- * previous `react-table` v7-based `IdType<T>`.
+ * Row/column ids are always plain strings (see `Table`'s `getRowId` prop,
+ * which defaults to `row._id`), the generic parameter is kept only for
+ * source-compatibility with the previous `react-table` v7-based `IdType<T>`.
  */
 export type IdType<T> = Extract<keyof T, string> | (string & Record<never, never>);
 

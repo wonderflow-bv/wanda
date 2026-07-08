@@ -99,6 +99,13 @@ export type TableProps<T extends Record<string, unknown>> = PropsWithClass & {
    */
   persistSelectionAcrossPages?: boolean;
   /**
+   * Resolve a stable, unique id for each row. Defaults to `row._id`,
+   * falling back to a page-relative index when absent (unstable across
+   * pages — only safe for tables that never use `persistSelectionAcrossPages`
+   * or cross-page id lookups).
+   */
+  getRowId?: (originalRow: T & OptionalDataTypes<T>, relativeIndex: number, parent?: Row<T>) => string;
+  /**
    * Add an alternate style to the table rows
    */
   stripes?: boolean;
@@ -324,6 +331,7 @@ export const Table = <T extends Record<string, unknown>>({
   selectedRowIds = [],
   onSelectedRowsChange,
   persistSelectionAcrossPages = false,
+  getRowId,
   stripes,
   showSeparators = true,
   title,
@@ -369,12 +377,20 @@ export const Table = <T extends Record<string, unknown>>({
     return hiddenColumns;
   }, [defaultHiddenColumns, selectableRows, hasSomeExpandableRows]);
 
-  const getRowId = useCallback((
+  const resolvedGetRowId = useCallback((
     originalRow: T & OptionalDataTypes<T>,
     relativeIndex: number,
     parent?: Row<T>,
-  ) => (originalRow as { _id?: string })?._id || (parent && [parent.id, relativeIndex].join('.')) || relativeIndex.toString(),
-  []);
+  ) => {
+    if (getRowId) return getRowId(originalRow, relativeIndex, parent);
+
+    const rowId = (originalRow as { _id?: string })?._id;
+    if (rowId != null) return rowId;
+
+    if (parent) return [parent.id, relativeIndex].join('.');
+
+    return relativeIndex.toString();
+  }, [getRowId]);
 
   const [sorting, setSorting] = useState<SortingState>(() => initialSortBy as unknown as SortingState);
   const [expanded, setExpanded] = useState<ExpandedState>({});
@@ -449,7 +465,7 @@ export const Table = <T extends Record<string, unknown>>({
   const table = useReactTable<T>({
     data,
     columns: tableColumns,
-    getRowId,
+    getRowId: resolvedGetRowId,
     getSubRows: row => (row as OptionalDataTypes<T>).subRows,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
