@@ -1,5 +1,5 @@
 import { toTanStackColumns } from './to-tanstack-columns';
-import { CustomColumnsType } from './types';
+import { CellRenderProps, CustomColumnsType } from './types';
 
 type Row = { name: string; age: number };
 
@@ -96,7 +96,7 @@ describe('toTanStackColumns()', () => {
   });
 
   it('should render Cell with row and value from the resolved cell context', () => {
-    const Cell = jest.fn(({ value }: { value: number }) => `Age: ${value}`);
+    const Cell = jest.fn(({ value }: CellRenderProps<Row>) => `Age: ${value as number}`);
     const columns: CustomColumnsType<Row> = [
       { id: 'age', accessor: 'age', Cell },
     ];
