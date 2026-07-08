@@ -1,5 +1,5 @@
 /*
- * Copyright 2022-2023 Wonderflow Design Team
+ * Copyright 2022-2026 Wonderflow Design Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
+import { Row } from '@tanstack/react-table';
 import clsx from 'clsx';
 import { memo, PropsWithChildren, useMemo } from 'react';
-import { Row } from 'react-table';
 
 import * as styles from './table-row.module.css';
 
@@ -26,8 +26,8 @@ type TableRowProps<T extends Record<string, unknown>> = PropsWithChildren<PropsW
   expandedRowsKey?: string;
   /**
    * Cheap, stable signature (e.g. `${row.id}:${isSelected}:${isExpanded}`)
-   * computed by the parent `Table`. `react-table` v7 returns a brand new
-   * `row` object (and new `getRowProps()`/cell elements) on every render,
+   * computed by the parent `Table`. `@tanstack/react-table` returns new
+   * `row`/cell objects (and new rendered cell elements) on most renders,
    * even for rows whose own state did not change, which defeats
    * `React.memo`'s default shallow comparison. `MemoTableRow` uses this
    * signature instead of `rowData`/`children` identity to decide whether a
@@ -71,12 +71,12 @@ export const TableRow = <T extends Record<string, unknown>>({
 };
 
 /**
- * `react-table` v7's `useRowSelect`/`useExpanded` recompute the `rows`
- * array (new object refs + new `cell.render('Cell')` elements per row) on
- * every selection/expansion change, even for rows that did not actually
- * change. That defeats `React.memo`'s default shallow comparison, so
- * clicking one checkbox re-renders all 500 rows instead of the 1 or 2 that
- * changed — the visible lag on select/select-all.
+ * `@tanstack/react-table` recomputes the `rows` array (new object refs +
+ * new rendered cell elements per row) on every selection/expansion change,
+ * even for rows that did not actually change. That defeats `React.memo`'s
+ * default shallow comparison, so clicking one checkbox re-renders all 500
+ * rows instead of the 1 or 2 that changed — the visible lag on
+ * select/select-all.
  *
  * Comparing on `rowSignature` (and the other primitive props) instead of
  * `rowData`/`children` identity lets a row skip re-rendering when nothing

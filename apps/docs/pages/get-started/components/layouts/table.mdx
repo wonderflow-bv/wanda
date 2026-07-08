@@ -22,7 +22,7 @@ export const getStaticProps = () =>
       links: [
         {
           label: "Reference library",
-          url: "https://react-table.tanstack.com/docs/overview",
+          url: "https://tanstack.com/table/v8/docs/introduction",
         },
       ]
     }
@@ -293,12 +293,12 @@ const columns = [
 
 ## API Reference
 
-This component extends [`react-table`](https://react-table.tanstack.com/docs/overview) library, which exposes different props that enables multiple functionalities, including (but not limited to) sorting, pagination, and expanded rows.
+This component is built on top of [TanStack Table v8](https://tanstack.com/table/v8/docs/introduction), which powers sorting, pagination, expanded rows, and row selection under the hood.
 
 <Button
   kind="secondary"
   as="a"
-  href="https://react-table.tanstack.com/docs/api/overview"
+  href="https://tanstack.com/table/v8/docs/api/core/table"
   target="_blank"
   rel="noopener noreferrer"
 >Original API reference</Button>
@@ -320,7 +320,7 @@ This component extends [`react-table`](https://react-table.tanstack.com/docs/ove
         isToggable?: boolean;
       }\n
       Columns<T> = Array<Column<T> & ColumnOptions<T>>`,
-      typeLink: 'https://react-table.tanstack.com/docs/api/useTable#column-options',
+      typeLink: 'https://tanstack.com/table/v8/docs/guide/column-defs',
       default: "",
       required: true,
       description: "Define the columns and headers of the table.",
@@ -486,6 +486,13 @@ This component extends [`react-table`](https://react-table.tanstack.com/docs/ove
       default: "",
       required: false,
       description: "A function to trigger every time a row changes its selection status",
+    },
+    {
+      name: "persistSelectionAcrossPages",
+      type: ["boolean"],
+      default: "false",
+      required: false,
+      description: "When true, stops clearing selectedRowIds whenever data changes (e.g. a new page is fetched), so a consumer-owned superset selection can persist across pages. See packages/TABLE_CROSS_PAGE_SELECTION.md for the consumer-side requirements.",
     },
     {
       name: "selectedLabel",

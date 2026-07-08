@@ -3,16 +3,18 @@ import { fireEvent, render } from '@testing-library/react';
 import { CustomColumnInstanceType } from '../types';
 import { ToggleColumnsControl } from './toggle-columns';
 
-const COLUMNS = [
-  {
-    isToggable: true,
-    isVisible: true,
+const makeColumn = (id: string): CustomColumnInstanceType<Record<string, unknown>> => ({
+  id,
+  columnDef: {
+    id,
+    header: id,
+    meta: { isToggable: false },
   },
-  {
-    isToggable: true,
-    isVisible: true,
-  },
-] as Array<CustomColumnInstanceType<Record<string, unknown>>>;
+  getIsVisible: () => true,
+  toggleVisibility: jest.fn(),
+} as unknown as CustomColumnInstanceType<Record<string, unknown>>);
+
+const COLUMNS = [makeColumn('firstName'), makeColumn('lastName')];
 
 describe('<ToggleColumnsControl>', () => {
   test('it should render properly', () => {

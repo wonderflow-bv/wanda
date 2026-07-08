@@ -14,20 +14,30 @@
  * limitations under the License.
  */
 
+import {
+  ColumnDef,
+  createColumnHelper,
+  ExpandedState,
+  flexRender,
+  getCoreRowModel,
+  getExpandedRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  PaginationState,
+  Row,
+  RowSelectionState,
+  SortingState,
+  useReactTable,
+  VisibilityState,
+} from '@tanstack/react-table';
 import { useUpdateEffect } from 'ahooks';
 import clsx from 'clsx';
 import {
   AnimatePresence, domAnimation, LazyMotion, m,
 } from 'framer-motion';
 import {
-  ComponentType, CSSProperties, memo, ReactNode, useCallback, useEffect, useMemo,
+  ComponentType, CSSProperties, memo, ReactNode, useCallback, useEffect, useMemo, useState,
 } from 'react';
-import {
-  Hooks, IdType, Row,
-  SortingRule,
-  useExpanded, usePagination,
-  useRowSelect, useSortBy, useTable,
-} from 'react-table';
 import { useUIDSeed } from 'react-uid';
 
 import {
@@ -43,9 +53,9 @@ import { TableExpand } from './table-expand';
 import { TableHeader, TableHeaderProps } from './table-header';
 import { TablePagination, TablePaginationProps } from './table-pagination';
 import { MemoTableRow, TableRow } from './table-row';
+import { toTanStackColumns } from './to-tanstack-columns';
 import {
-  CellType, CustomColumnInstanceType, CustomColumnsType,
-  CustomSortingRule, HeaderGroupType, OptionalDataTypes, PaginationPageType,
+  CustomColumnsType, CustomSortingRule, IdType, OptionalDataTypes, PaginationPageType,
 } from './types';
 
 export type TableProps<T extends Record<string, unknown>> = PropsWithClass & {
@@ -74,6 +84,20 @@ export type TableProps<T extends Record<string, unknown>> = PropsWithClass & {
    * A function to trigger every time a row changes its selection status
    */
   onSelectedRowsChange?: (selectedRowIds: Array<IdType<T>>) => void;
+  /**
+   * When `true`, `Table` stops clearing `selectedRowIds` whenever `data`
+   * changes (e.g. navigating to a different server-fetched page). This lets
+   * a consumer-owned superset selection list persist across pages.
+   *
+   * This only concerns *persisting* previously-known selected ids: the
+   * header "select all" checkbox always stays scoped to the currently
+   * loaded rows. See `packages/TABLE_CROSS_PAGE_SELECTION.md` for the
+   * consumer-side requirements before enabling this.
+   *
+   * Defaults to `false`, matching `Table`'s historical behavior of
+   * resetting selection whenever `data` changes.
+   */
+  persistSelectionAcrossPages?: boolean;
   /**
    * Add an alternate style to the table rows
    */
@@ -175,7 +199,7 @@ export type TableProps<T extends Record<string, unknown>> = PropsWithClass & {
   /**
    * Set the initial sorted column and order by passing column id and order.
    */
-  initialSortBy?: Array<SortingRule<T>>;
+  initialSortBy?: Array<CustomSortingRule<T>>;
   /**
     * Callback run when a column is sorted
     */
@@ -188,73 +212,77 @@ export type TableProps<T extends Record<string, unknown>> = PropsWithClass & {
 
 type TableBodyRowProps<T extends Record<string, unknown>> = {
   row: Row<T>;
-  prepareRow: (row: Row<T>) => void;
   expandedRowsKey?: string;
   expandableRowComponent?: ComponentType<T>;
   /**
    * `true` when this row (or one of its sub rows) is currently selected.
-   * Derived by the parent from `state.selectedRowIds` — the immutable
-   * state map `react-table` actually replaces on every selection change.
-   *
-   * `row.isSelected` looks like the natural thing to read instead, but
-   * `prepareRow` *mutates the same `row` object in place* on every render,
-   * so a memo comparator reading `row.isSelected` off of it can end up
-   * comparing the object against itself: both "previous" and "next" props
-   * are the same reference by the time the comparison runs, so a real
-   * change (e.g. deselecting a row) can be silently missed and the row
-   * never re-renders.
+   * Passed down explicitly (rather than reading `row.getIsSelected()`
+   * directly inside the memo comparator) so the comparator can cheaply
+   * detect real selection changes without depending on `row` identity.
    */
   isRowSelected: boolean;
   isRowExpanded: boolean;
+  /**
+   * Stable signature (joined ids of `table.getVisibleLeafColumns()`) computed
+   * by the parent `Table`. Column visibility toggles don't change `row.id`,
+   * `row.original`, selection or expansion state, so without this the memo
+   * comparator below would bail out of re-rendering every row and
+   * `row.getVisibleCells()` would keep returning the previously visible
+   * columns even after the header updates.
+   */
+  columnVisibilityKey: string;
 };
 
 /**
- * Owns `prepareRow` + `row.cells.map(cell => cell.render('Cell'))` for a
- * single row. This work must happen *inside* the memo boundary: doing it in
- * the parent's `.map()` (as before) means the ~10 cell renders for every
- * one of the 500 rows still run on every selection change even though the
+ * Owns `row.getVisibleCells().map(cell => flexRender(...))` for a single
+ * row. This work must happen *inside* the memo boundary: doing it in the
+ * parent's `.map()` (as before) means the ~10 cell renders for every one of
+ * the 500 rows still run on every selection change even though the
  * resulting `<MemoTableRow>` bails out of its own re-render — `React.memo`
  * only skips the child's render, it can't stop the parent from doing the
  * work to build that child's props/children in the first place.
  *
  * Wrapping this component itself in `memo` (with a comparator based on
- * `state.selectedRowIds`/`state.expanded`-derived booleans, not the
- * mutable `row` object) means unaffected rows skip
- * `prepareRow`/`cell.render('Cell')` entirely, not just the DOM diff.
+ * `isRowSelected`/`isRowExpanded`, not `row` identity, since v8 hands out a
+ * new `row`/cell objects on most re-renders too) means unaffected rows skip
+ * `flexRender` entirely, not just the DOM diff.
  */
 const TableBodyRowComponent = <T extends Record<string, unknown>>({
   row,
-  prepareRow,
   expandedRowsKey,
   expandableRowComponent,
   isRowSelected: _isRowSelected,
   isRowExpanded: _isRowExpanded,
+  columnVisibilityKey: _columnVisibilityKey,
 }: TableBodyRowProps<T>) => {
-  prepareRow(row);
+  const canRenderSubRows = row.subRows.length > 0 && row.getIsExpanded() && expandableRowComponent;
 
   return (
     <>
       <MemoTableRow
-        {...row.getRowProps()}
-        expanded={(
-          row.isExpanded && !row.subRows.some(subrow => subrow.isExpanded && subrow.canExpand)
-        )}
+        expanded={
+          row.getIsExpanded() && !row.subRows.some(subRow => subRow.getIsExpanded() && subRow.getCanExpand())
+        }
         rowData={row}
         expandedRowsKey={expandedRowsKey}
-        rowSignature={`${row.id}:${row.isSelected ? 1 : 0}:${row.isExpanded ? 1 : 0}`}
+        rowSignature={`${row.id}:${row.getIsSelected() ? 1 : 0}:${row.getIsExpanded() ? 1 : 0}:${_columnVisibilityKey}`}
       >
-        {row.cells.map((cell: CellType<T>) => (
+        {row.getVisibleCells().map(cell => (
           <MemoTableCell
-            collapsed={cell.column.isCollapsed}
-            width={cell.column.minWidth === 0 ? undefined : cell.column.minWidth}
-            align={cell.column.align}
-            {...cell.getCellProps()}
+            key={cell.id}
+            collapsed={cell.column.columnDef.meta?.isCollapsed}
+            width={
+              cell.column.columnDef.meta?.minWidth === 0
+                ? undefined
+                : cell.column.columnDef.meta?.minWidth
+            }
+            align={cell.column.columnDef.meta?.align}
           >
-            {cell.render('Cell')}
+            {flexRender(cell.column.columnDef.cell, cell.getContext())}
           </MemoTableCell>
         ))}
       </MemoTableRow>
-      {(row.subRows && row.isExpanded && expandableRowComponent) && row.subRows.map(subRow => (
+      {canRenderSubRows && row.subRows.map(subRow => (
         <MemoTableRow data-table-row-expander key={subRow.id}>
           <MemoTableCell padding={false} colSpan={100}>
             <TableExpand data={subRow.original} component={expandableRowComponent} />
@@ -275,12 +303,17 @@ const areTableBodyRowPropsEqual = <T extends Record<string, unknown>>(
     && prevProps.isRowExpanded === nextProps.isRowExpanded
     && prevProps.expandedRowsKey === nextProps.expandedRowsKey
     && prevProps.expandableRowComponent === nextProps.expandableRowComponent
+    && prevProps.columnVisibilityKey === nextProps.columnVisibilityKey
   );
 
 const TableBodyRow = memo(
   TableBodyRowComponent,
   areTableBodyRowPropsEqual,
 ) as typeof TableBodyRowComponent;
+
+const arrayToRowSelection = <T extends Record<string, unknown>>(
+  ids: Array<IdType<T>>,
+): RowSelectionState => ids.reduce<RowSelectionState>((acc, id) => ({ ...acc, [id]: true }), {});
 
 export const Table = <T extends Record<string, unknown>>({
   className,
@@ -290,6 +323,7 @@ export const Table = <T extends Record<string, unknown>>({
   selectableRows,
   selectedRowIds = [],
   onSelectedRowsChange,
+  persistSelectionAcrossPages = false,
   stripes,
   showSeparators = true,
   title,
@@ -319,14 +353,12 @@ export const Table = <T extends Record<string, unknown>>({
   ...otherProps
 }: TableProps<T>) => {
   const uid = useUIDSeed();
+  const columnHelper = useMemo(() => createColumnHelper<T>(), []);
   const hasSomeExpandableRows = useMemo(() => data.some(d => d.subRows), [data]);
+
   const isManualPaginated = useMemo(
     () => Boolean(showPagination && onPaginationChange && totalRows),
     [showPagination, totalRows, onPaginationChange],
-  );
-  const manualPaginationPageCount = useMemo(
-    () => ((isManualPaginated && totalRows) ? Math.ceil(totalRows / itemsPerPage) : -1),
-    [isManualPaginated, totalRows, itemsPerPage],
   );
 
   const getHiddenColumns = useCallback(() => {
@@ -337,155 +369,193 @@ export const Table = <T extends Record<string, unknown>>({
     return hiddenColumns;
   }, [defaultHiddenColumns, selectableRows, hasSomeExpandableRows]);
 
-  const getRowId = useCallback((originalRow, relativeIndex, parent) => originalRow?._id || (parent && [parent.id, relativeIndex].join('.')) || relativeIndex.toString(),
-    []);
+  const getRowId = useCallback((
+    originalRow: T & OptionalDataTypes<T>,
+    relativeIndex: number,
+    parent?: Row<T>,
+  ) => (originalRow as { _id?: string })?._id || (parent && [parent.id, relativeIndex].join('.')) || relativeIndex.toString(),
+  []);
 
-  const computePageSize = useCallback(
-    () => ((data.length > 0) ? data.length : 9999),
-    [data],
+  const [sorting, setSorting] = useState<SortingState>(() => initialSortBy as unknown as SortingState);
+  const [expanded, setExpanded] = useState<ExpandedState>({});
+  const [pagination, setPagination] = useState<PaginationState>({
+    pageIndex: initialPageIndex,
+    pageSize: itemsPerPage,
+  });
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(
+    () => getHiddenColumns().reduce<VisibilityState>((acc, id) => ({ ...acc, [id]: false }), {}),
+  );
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>(
+    () => arrayToRowSelection(selectedRowIds),
   );
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    page,
-    pageCount,
-    gotoPage,
-    allColumns,
-    prepareRow,
-    visibleColumns,
-    setPageSize,
-    setHiddenColumns,
-    state: {
-      pageSize,
-      pageIndex,
-      sortBy,
-      selectedRowIds: selectedRowIdsState,
-      expanded: expandedState,
-    },
-  } = useTable(
-    {
-      columns,
-      data,
-      getRowId,
-      expandSubRows: Boolean(!expandableRowComponent),
-      manualPagination: isManualPaginated,
-      pageCount: manualPaginationPageCount,
-      manualSortBy: isManualSorted,
-      disableMultiSort: true,
-      autoResetHiddenColumns: false,
-      autoResetPage: false,
-      autoResetSortBy: false,
-      selectSubRows,
-      /**
-       * This `paginateExpandedRows` prop prevent expanded rows to
-       * be placed in the next page. But it breaks row selection
-       * paginateExpandedRows: !showPagination,
-       */
-      initialState: {
-        sortBy: initialSortBy,
-        pageIndex: initialPageIndex,
-        pageSize: showPagination ? itemsPerPage : computePageSize(),
-        hiddenColumns: getHiddenColumns(),
-        selectedRowIds: selectedRowIds.reduce<Record<IdType<string>, boolean>>((acc, curr) => ({
-          ...acc,
-          [curr]: true,
-        }), {}),
+  const manualPaginationPageCount = useMemo(
+    () => ((isManualPaginated && totalRows) ? Math.ceil(totalRows / pagination.pageSize) : -1),
+    [isManualPaginated, totalRows, pagination.pageSize],
+  );
+
+  const convertedColumns = useMemo(() => toTanStackColumns(columns), [columns]);
+
+  const tableColumns = useMemo<Array<ColumnDef<T>>>(() => {
+    const selectionColumn = columnHelper.display({
+      id: 'selection',
+      meta: { isCollapsed: true, isToggable: true },
+      header: ({ table }) => (
+        <TableCheckbox
+          checked={table.getIsAllPageRowsSelected()}
+          indeterminate={!table.getIsAllPageRowsSelected() && table.getIsSomePageRowsSelected()}
+          onChange={table.getToggleAllPageRowsSelectedHandler()}
+        />
+      ),
+      cell: ({ row }) => (
+        <TableCheckbox
+          checked={row.getIsSelected()}
+          indeterminate={row.getIsSomeSelected()}
+          disabled={!row.getCanSelect()}
+          onChange={row.getToggleSelectedHandler()}
+        />
+      ),
+    });
+
+    const expanderColumn = columnHelper.display({
+      id: 'expander',
+      meta: {
+        isToggable: true, expander: true, minWidth: 40, align: 'center',
       },
+      cell: ({ row }) => (row.getCanExpand()
+        ? (
+          <ToggleButton
+            kind="flat"
+            dimension="small"
+            restingIcon="chevron-right"
+            pressedIcon="chevron-down"
+            pressed={row.getIsExpanded()}
+            onClick={() => {
+              row.subRows
+                .filter(subRow => subRow.getIsExpanded())
+                .forEach(subRow => subRow.toggleExpanded(false));
+              row.toggleExpanded();
+
+              onRowExpandChange?.(row);
+            }}
+          />
+        )
+        : null),
+    });
+
+    return [selectionColumn, expanderColumn, ...convertedColumns];
+  }, [columnHelper, convertedColumns, onRowExpandChange]);
+
+  const table = useReactTable<T>({
+    data,
+    columns: tableColumns,
+    getRowId,
+    getSubRows: row => (row as OptionalDataTypes<T>).subRows,
+    getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    /**
+     * When `expandableRowComponent` is set, `Table` renders sub rows itself
+     * (via the dedicated `TableExpand` block below, fed from the
+     * pre-expansion row model) instead of letting them flatten into the
+     * table's own row list. Only include `getExpandedRowModel` — the thing
+     * that makes expanded sub rows flatten into `table.getRowModel().rows`
+     * through the *same* columns — when there's no custom renderer.
+     */
+    ...(expandableRowComponent ? {} : { getExpandedRowModel: getExpandedRowModel() }),
+    ...(showPagination ? { getPaginationRowModel: getPaginationRowModel() } : {}),
+    manualPagination: isManualPaginated,
+    pageCount: isManualPaginated ? manualPaginationPageCount : undefined,
+    manualSorting: isManualSorted,
+    enableMultiSort: false,
+    enableSubRowSelection: selectSubRows,
+    autoResetPageIndex: false,
+    /**
+     * Deliberately left at its default (unset): forcing
+     * `paginateExpandedRows: false` prevents expanded rows from spilling
+     * into the next page, but it also breaks row selection. Do not
+     * re-introduce that regression.
+     */
+    state: {
+      sorting, expanded, pagination, columnVisibility, rowSelection,
     },
-    useSortBy,
-    useExpanded,
-    usePagination,
-    useRowSelect,
-    (hooks: Hooks<T>) => {
-      const checkboxColumn: CustomColumnsType<T> = [{
-        id: 'selection',
-        isCollapsed: true,
-        isToggable: true,
-        Header: ({ getToggleAllPageRowsSelectedProps }) => (
-          <TableCheckbox {...getToggleAllPageRowsSelectedProps()} />
-        ),
-        Cell: ({ row }: { row: Row<T> }) => <TableCheckbox {...row.getToggleRowSelectedProps()} />,
-      }];
+    onSortingChange: setSorting,
+    onExpandedChange: setExpanded,
+    onPaginationChange: setPagination,
+    onColumnVisibilityChange: setColumnVisibility,
+    onRowSelectionChange: setRowSelection,
+  });
 
-      const expanderColumn: CustomColumnsType<T> = [{
-        id: 'expander',
-        isToggable: true,
-        expander: true,
-        minWidth: 40,
-        align: 'center',
-        Cell: ({ row }: { row: Row<T> }) => (row.canExpand
-          ? (
-            <ToggleButton
-              kind="flat"
-              dimension="small"
-              restingIcon="chevron-right"
-              pressedIcon="chevron-down"
-              {...row.getToggleRowExpandedProps()}
-              pressed={row.isExpanded}
-              onClick={() => {
-                const subRowsExpanded = row.subRows.filter(r => r.isExpanded);
-                subRowsExpanded.forEach(r => r.toggleRowExpanded(!r.isExpanded));
-                row.toggleRowExpanded(!row.isExpanded);
+  useUpdateEffect(() => {
+    setColumnVisibility(getHiddenColumns().reduce<VisibilityState>((acc, id) => ({ ...acc, [id]: false }), {}));
+  }, [getHiddenColumns]);
 
-                onRowExpandChange?.(row);
-              }}
-            />
-          )
-          : null),
-      }];
-
-      hooks.visibleColumns.push(columns => [
-        ...checkboxColumn,
-        ...expanderColumn,
-        ...columns,
-      ]);
-    },
+  const selectedRowIdsKey = useMemo(
+    () => [...selectedRowIds].sort((a, b) => (a < b ? -1 : Number(a > b))).join('\u0000'),
+    [selectedRowIds],
   );
 
+  /**
+   * Honors external changes to `selectedRowIds` made *after* mount (e.g. a
+   * "Clear selection" button), independently of `persistSelectionAcrossPages`.
+   * `react-table` v7 only ever seeded `selectedRowIds` into `initialState`,
+   * silently ignoring later prop updates — this fixes that in both modes.
+   */
   useUpdateEffect(() => {
-    const hiddenColumns = getHiddenColumns();
-    setHiddenColumns(hiddenColumns);
-  }, [
-    setHiddenColumns,
-    getHiddenColumns,
-  ]);
+    setRowSelection(arrayToRowSelection(selectedRowIds));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedRowIdsKey]);
+
+  /**
+   * Default behavior: clear selection whenever `data` changes (matching
+   * `Table`'s historical behavior). Opting into `persistSelectionAcrossPages`
+   * skips this, so a consumer-owned superset selection list survives page
+   * navigations for manual/server pagination.
+   */
+  useUpdateEffect(() => {
+    if (persistSelectionAcrossPages) return;
+    setRowSelection({});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
 
   useUpdateEffect(() => {
-    onSelectedRowsChange?.(Object.keys(selectedRowIdsState));
-  }, [
-    selectedRowIdsState,
-    onSelectedRowsChange,
-  ]);
+    onSelectedRowsChange?.(Object.keys(rowSelection) as Array<IdType<T>>);
+  }, [rowSelection, onSelectedRowsChange]);
 
   useUpdateEffect(() => {
-    onSortChange?.(sortBy);
-  }, [onSortChange, sortBy]);
+    onSortChange?.(sorting as unknown as Array<CustomSortingRule<T>>);
+  }, [sorting, onSortChange]);
 
   useUpdateEffect(() => {
-    void onPaginationChange?.({ pageIndex, pageSize });
-  }, [onPaginationChange, pageIndex, pageSize]);
+    void onPaginationChange?.({ pageIndex: pagination.pageIndex, pageSize: pagination.pageSize });
+  }, [onPaginationChange, pagination.pageIndex, pagination.pageSize]);
 
+  const pageCount = table.getPageCount();
   useEffect(() => {
-    if (pageIndex >= pageCount) {
-      gotoPage(0);
+    if (pagination.pageIndex >= pageCount) {
+      table.setPageIndex(0);
     }
-  }, [pageCount, pageIndex, gotoPage]);
+  }, [pageCount, pagination.pageIndex, table]);
 
-  const rowEntries = useMemo(() => (showPagination ? page : rows), [page, rows, showPagination]);
+  const rowEntries = table.getRowModel().rows;
 
-  const filteredVisibleColumns = useMemo(() => (
-    visibleColumns.filter((col: CustomColumnInstanceType<T>) => !col.isToggable)
-  ), [visibleColumns]);
+  const allColumns = table.getAllLeafColumns();
+  /**
+   * `table` is a new object every render (TanStack memoizes row/column
+   * model *computations* internally, not the `table` instance itself), so
+   * wrapping these in `useMemo` keyed on `table` would recompute every
+   * render anyway — they're cheap array filters, just derive them directly.
+   */
+  const filteredVisibleColumns = table.getVisibleLeafColumns()
+    .filter(col => !col.columnDef.meta?.isToggable);
 
-  const expandedRowsKey = useMemo(
-    () => (hasSomeExpandableRows
-      ? rows.filter(row => row.canExpand && row.isExpanded).map(r => r.id).join('|')
-      : ''),
-    [hasSomeExpandableRows, rows],
-  );
+  const columnVisibilityKey = table.getVisibleLeafColumns().map(col => col.id).join('|');
+
+  const expandedRowsKey = hasSomeExpandableRows
+    ? table.getPrePaginationRowModel().rows
+      .filter(row => row.getCanExpand() && row.getIsExpanded())
+      .map(r => r.id)
+      .join('|')
+    : '';
 
   const dynamicStyle: CSSProperties = {
     '--table-height': height,
@@ -501,7 +571,7 @@ export const Table = <T extends Record<string, unknown>>({
       {/* CONTEXT TOAST */}
       <AnimatePresence>
         <LazyMotion features={domAnimation}>
-          {!!Object.keys(selectedRowIdsState).length && selectableRows && (
+          {!!Object.keys(rowSelection).length && selectableRows && (
             <Stack
               as={m.div}
               className={styles.Toast}
@@ -525,9 +595,9 @@ export const Table = <T extends Record<string, unknown>>({
               exit={{ y: '-16px', opacity: 0 }}
             >
               <Text as="span" variant="body-1">
-                <b>{selectedLabel(Object.keys(selectedRowIdsState))}</b>
+                <b>{selectedLabel(Object.keys(rowSelection) as Array<IdType<T>>)}</b>
               </Text>
-              {selectedActions?.(Object.keys(selectedRowIdsState))}
+              {selectedActions?.(Object.keys(rowSelection) as Array<IdType<T>>)}
             </Stack>
           )}
 
@@ -535,8 +605,8 @@ export const Table = <T extends Record<string, unknown>>({
           {(showHeader || selectableRows) && (
             <m.div
               animate={{
-                y: Object.keys(selectedRowIdsState).length ? 20 : 0,
-                opacity: Object.keys(selectedRowIdsState).length ? 0 : 1,
+                y: Object.keys(rowSelection).length ? 20 : 0,
+                opacity: Object.keys(rowSelection).length ? 0 : 1,
                 transition: {
                   type: 'spring',
                   stiffness: 700,
@@ -570,26 +640,32 @@ export const Table = <T extends Record<string, unknown>>({
               data-table-separators={showSeparators}
               data-table-loading={loading}
               aria-labelledby={uid('table-title')}
-              {...getTableProps()}
               {...otherProps}
             >
 
               {/* THEAD */}
               {showTableHead && (
                 <thead className={styles.THead}>
-                  {headerGroups.map(headerGroup => (
-                    <TableRow {...headerGroup.getHeaderGroupProps()}>
-                      {headerGroup.headers.map((column: HeaderGroupType<T>) => (
+                  {table.getHeaderGroups().map(headerGroup => (
+                    <TableRow key={headerGroup.id}>
+                      {headerGroup.headers.map(header => (
                         <TableCell
+                          key={header.id}
                           as="th"
-                          width={column.minWidth === 0 ? undefined : column.minWidth}
-                          collapsed={column.isCollapsed}
-                          isSorted={column.isSorted}
-                          isSortedDesc={column.isSorted && column.isSortedDesc}
-                          align={column.align}
-                          {...column.getHeaderProps(column.getSortByToggleProps())}
+                          width={
+                            header.column.columnDef.meta?.minWidth === 0
+                              ? undefined
+                              : header.column.columnDef.meta?.minWidth
+                          }
+                          collapsed={header.column.columnDef.meta?.isCollapsed}
+                          isSorted={Boolean(header.column.getIsSorted())}
+                          isSortedDesc={header.column.getIsSorted() === 'desc'}
+                          align={header.column.columnDef.meta?.align}
+                          onClick={header.column.getToggleSortingHandler()}
                         >
-                          {column.render('Header')}
+                          {header.isPlaceholder
+                            ? null
+                            : flexRender(header.column.columnDef.header, header.getContext())}
                         </TableCell>
                       ))}
                     </TableRow>
@@ -598,7 +674,7 @@ export const Table = <T extends Record<string, unknown>>({
               )}
 
               {/* TBODY */}
-              <tbody {...getTableBodyProps()}>
+              <tbody>
                 {loading
                   ? (
                     <TableRow>
@@ -611,11 +687,11 @@ export const Table = <T extends Record<string, unknown>>({
                     <TableBodyRow
                       key={row.id}
                       row={row}
-                      prepareRow={prepareRow}
                       expandedRowsKey={expandedRowsKey}
                       expandableRowComponent={expandableRowComponent}
-                      isRowSelected={Boolean(selectedRowIdsState[row.id])}
-                      isRowExpanded={Boolean(expandedState[row.id])}
+                      isRowSelected={row.getIsSelected()}
+                      isRowExpanded={row.getIsExpanded()}
+                      columnVisibilityKey={columnVisibilityKey}
                     />
                   ))}
               </tbody>
@@ -630,16 +706,16 @@ export const Table = <T extends Record<string, unknown>>({
       }
 
       {/* PAGINATION */}
-      {(showPagination && filteredVisibleColumns.length > 0 && !!rows.length) && (
+      {(showPagination && filteredVisibleColumns.length > 0 && !!rowEntries.length) && (
         <TablePagination
           clusters={pageClusters}
-          pageSize={pageSize}
-          totalItems={totalRows ?? rows.length}
-          currentPage={pageIndex}
+          pageSize={pagination.pageSize}
+          totalItems={totalRows ?? table.getPrePaginationRowModel().rows.length}
+          currentPage={pagination.pageIndex}
           totalPages={pageCount}
           isManual={Boolean(isManualPaginated && totalRows)}
-          onPageSizeChange={setPageSize}
-          onPageClick={selected => gotoPage(selected)}
+          onPageSizeChange={table.setPageSize}
+          onPageClick={selected => table.setPageIndex(selected)}
         />
       )}
     </div>

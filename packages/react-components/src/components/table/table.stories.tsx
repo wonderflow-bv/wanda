@@ -295,6 +295,27 @@ ManualPagination.args = {
   selectableRows: true,
   showPagination: true,
   itemsPerPage: 5,
+  /**
+   * Without this flag, `Table` would clear its selection every time
+   * `data` changes (i.e. every page navigation, since this story
+   * fetches a fresh slice per page). This story owns a superset
+   * `selectedRowIds` list across pages, so it opts in to persistence.
+   */
+  persistSelectionAcrossPages: true,
+};
+
+export const ManualPaginationWithoutPersistence = ManualPaginationTemplate.bind({});
+ManualPaginationWithoutPersistence.args = {
+  columnsControl: true,
+  showHeader: true,
+  selectableRows: true,
+  showPagination: true,
+  itemsPerPage: 5,
+  /**
+   * `persistSelectionAcrossPages` is omitted (defaults to `false`): flip
+   * to a different page and the selection resets, since `data` changes
+   * on every manual page fetch. Contrast with `ManualPagination`.
+   */
 };
 
 export const Loading = Template.bind({});
