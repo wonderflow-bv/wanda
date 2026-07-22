@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 15.0.0
+
+### Major Changes
+
+- 4b13198: upgrade table to tanstack v8 table; support cross-page selection
+
 ## 14.5.0
 
 ### Minor Changes
