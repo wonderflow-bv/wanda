@@ -40,7 +40,11 @@ const nextConfig = withPlugins([
 ], {
   trailingSlash: false,
   pageExtensions: ['js', 'jsx', 'tsx', 'md', 'mdx', 'ts'],
-  swcMinify: true,
+  // Force the Terser/Babel minify path instead of swc. Vercel's build sandbox
+  // fails to load the native swc binary and falls back to swc-wasm, whose
+  // rayon threadpool panics with "operation not supported on this platform"
+  // (see packages/AGENTS.md). Revisit once Next.js is upgraded past 12.
+  swcMinify: false,
   images: {
     domains: ['media.hygraph.com', 'media.graphassets.com'],
   },
