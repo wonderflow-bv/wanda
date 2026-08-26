@@ -1,5 +1,15 @@
 # @wonderflow/symbols
 
+## 16.0.0
+
+### Major Changes
+
+- bd34cfa: New icon gauge
+
+### Minor Changes
+
+- 4c0a187: Add the gauge symbol in solid, outline, and duotone styles.
+
 ## 15.0.0
 
 ## 14.5.0
