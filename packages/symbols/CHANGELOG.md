@@ -1,5 +1,11 @@
 # @wonderflow/symbols
 
+## 16.1.0
+
+### Minor Changes
+
+- 4c725bf: New icons: at-sign, tools, hierarchy, money, data-upload, bolt and database (solid, outline and duotone)
+
 ## 16.0.0
 
 ### Major Changes
