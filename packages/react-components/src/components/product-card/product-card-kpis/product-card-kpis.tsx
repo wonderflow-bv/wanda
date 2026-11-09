@@ -17,9 +17,7 @@
 import { TokensTypes } from '@wonderflow/tokens/platforms/web';
 import tkns from '@wonderflow/tokens/platforms/web/tokens.json';
 import clsx from 'clsx';
-import {
-  CSSProperties, forwardRef, useMemo,
-} from 'react';
+import { forwardRef, useMemo } from 'react';
 
 import {
   Skeleton, Stack,
@@ -99,7 +97,7 @@ export type ProductCardKpisProps = PropsWithClass<{
   */
   skusCap?: number;
   /**
-   * Set the number of Kpis items to be displayed.
+   * Set the maximum number of Kpis items to be displayed (and the skeleton rows while loading).
    */
   kpiItems?: number;
   /**
@@ -147,7 +145,7 @@ export const ProductCardKpis = forwardRef(({
   const config: KpiItemType[] = useMemo(() => ([
     {
       property: 'feedback-rating',
-      value: formatKpiValue(rating, { decimal: 2, minRange: 0, maxRange: 5 }),
+      value: formatKpiValue(rating, { decimal: 1, minRange: 0, maxRange: 5 }),
       icon: 'feedback-rating',
       iconColor: isGreaterThan(3.99, rating) ? `hsl(${tkns.color.yellow['30']})` : undefined,
     },
@@ -158,29 +156,29 @@ export const ProductCardKpis = forwardRef(({
     },
     {
       property: 'feedback-count',
-      value: formatKpiValue(feedbackCount),
+      value: formatKpiValue(feedbackCount, { decimal: 0, minRange: 0, compact: true }),
       icon: 'message',
     },
     {
       property: 'votes-rating',
-      value: formatKpiValue(votesRating, { decimal: 2, minRange: 0, maxRange: 5 }),
+      value: formatKpiValue(votesRating, { decimal: 1, minRange: 0, maxRange: 5 }),
       icon: 'star',
       iconColor: isGreaterThan(3.99, votesRating) ? `hsl(${tkns.color.yellow['20']})` : undefined,
     },
     {
       property: 'votes-count',
-      value: formatKpiValue(votesCount),
+      value: formatKpiValue(votesCount, { decimal: 0, minRange: 0, compact: true }),
       icon: 'votes-count',
     },
     {
       property: 'sentiment',
-      value: formatKpiValue(sentiment, { decimal: 2, minRange: -1, maxRange: 1 }),
+      value: formatKpiValue(sentiment, { decimal: 1, minRange: -1, maxRange: 1 }),
       icon: 'hearts-suit',
       iconColor: isGreaterThan(0.5, sentiment) ? 'var(--highlight-red-foreground)' : undefined,
     },
     {
       property: 'tgw',
-      value: formatKpiValue(tgw, { decimal: 2, minRange: 0 }),
+      value: formatKpiValue(tgw, { decimal: 1, minRange: 0 }),
       icon: 'frown',
     },
     {
@@ -190,18 +188,22 @@ export const ProductCardKpis = forwardRef(({
     },
     {
       property: 'groups',
-      value: formatKpiValue(groups),
+      value: formatKpiValue(groups, { decimal: 0, minRange: 0, compact: true }),
       icon: 'grid',
     },
     {
       property: 'users',
-      value: formatKpiValue(users, { decimal: 0, minRange: 0, cap: usersCap }),
+      value: formatKpiValue(users, {
+        decimal: 0, minRange: 0, cap: usersCap, compact: true,
+      }),
       icon: 'users',
       iconColor: isValueOverCap(users, usersCap) ? 'var(--highlight-red-foreground)' : undefined,
     },
     {
       property: 'skus',
-      value: formatKpiValue(skus, { decimal: 0, minRange: 0, cap: skusCap }),
+      value: formatKpiValue(skus, {
+        decimal: 0, minRange: 0, cap: skusCap, compact: true,
+      }),
       icon: 'rectangle-barcode',
       iconColor: isValueOverCap(skus, skusCap) ? 'var(--highlight-red-foreground)' : undefined,
     },
@@ -223,31 +225,28 @@ export const ProductCardKpis = forwardRef(({
     skus,
     skusCap]);
 
-  const itemHeight = 20;
-  const dynamicStyle: CSSProperties = {
-    '--kpis-height': `${kpiItems * itemHeight + ((kpiItems - 1) * (+kpisRowGap))}px`,
-  };
-
   return (
-    <div className={clsx(styles.Kpis, className)} style={{ ...dynamicStyle, ...style }} ref={forwardedRef}>
+    <div className={clsx(styles.Kpis, className)} style={style} ref={forwardedRef}>
       {isLoading
         ? (
-          <Stack hPadding={24}>
+          <Stack>
             <Skeleton height="20px" width="50%" count={kpiItems} />
           </Stack>
         )
         : (
-          <Stack rowGap={kpisRowGap} hPadding={24}>
+          <Stack rowGap={kpisRowGap}>
             {config
               .filter(el => el.value)
+              .slice(0, kpiItems)
               .map(el => (
                 <Text
                   key={el.property}
+                  className={styles.Kpi}
                   variant="body-2"
                   decoratorStart={<Symbol source={el.icon} color={el.iconColor} weight="solid" />}
-                  decoratorSize="small"
+                  decoratorSize="medium"
                 >
-                  <b>{el.value}</b>
+                  {el.value}
                 </Text>
               ))}
           </Stack>

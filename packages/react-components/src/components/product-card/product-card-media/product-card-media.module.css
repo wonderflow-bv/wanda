@@ -3,6 +3,6 @@
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    margin: token(--space-4);
+    border: 1px solid var(--dimmed-1);
   }
 }

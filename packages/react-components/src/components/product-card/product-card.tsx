@@ -1,13 +1,11 @@
 import tkns from '@wonderflow/tokens/platforms/web/tokens.json';
-import { useDebounce } from 'ahooks';
 import clsx from 'clsx';
-import React, {
-  forwardRef, PropsWithChildren,
-  useRef,
-} from 'react';
+import React, { forwardRef, PropsWithChildren } from 'react';
 
 import {
+  Chip,
   Elevator,
+  Separator,
   Stack,
   Text,
 } from '@/components';
@@ -17,14 +15,13 @@ import { ProductCardFooter, ProductCardFooterComponent } from './product-card-fo
 import { ProductCardHeader, ProductCardHeaderComponent, ProductCardHeaderProps } from './product-card-header/product-card-header';
 import { ProductCardKpis, ProductCardKpisComponent, ProductCardKpisProps } from './product-card-kpis/product-card-kpis';
 import { ProductCardMedia, ProductCardMediaComponent, ProductCardMediaProps } from './product-card-media/product-card-media';
+import { ProductCardTopBar, ProductCardTopBarComponent, ProductCardTopBarProps } from './product-card-top-bar/product-card-top-bar';
 
 export type ProductCardProps = PropsWithClass<PropsWithChildren<{
   /**
-   * Change the product card layout.
-   */
-  direction?: 'vertical' | 'horizontal';
-  /**
    * Add a border to the card to increase its visual weight and contrast.
+   *
+   * @default true
    */
   bordered?: boolean;
   /**
@@ -51,9 +48,23 @@ export type ProductCardProps = PropsWithClass<PropsWithChildren<{
    * Set an action to be performed when clicked.
    */
   onClick?: () => void;
+  /**
+   * Set the name of the marketplace the product comes from.
+   * The top bar is rendered only when this is set.
+   */
+  sourceLabel?: ProductCardTopBarProps['sourceLabel'];
+  /**
+   * Set the logo of the marketplace, displayed before the `sourceLabel`.
+   */
+  sourceIcon?: ProductCardTopBarProps['sourceIcon'];
+  /**
+   * Set a label (e.g. "New") displayed as a badge over the top-right corner of the cover.
+   * It is not displayed while loading or when the card has no cover.
+   */
+  badge?: string;
 }>>
 & Pick<ProductCardMediaProps, 'ratio' | 'source'>
-& Pick<ProductCardHeaderProps, 'title' | 'titleRows' | 'subtitle' | 'menuActions'>
+& Pick<ProductCardHeaderProps, 'title' | 'titleRows' | 'subtitle'>
 & Pick<ProductCardKpisProps, 'rating' | 'feedbackCount' | 'votesCount' | 'votesRating' | 'users' | 'skus' | 'sentiment' | 'priceMin' | 'priceMax' | 'nps' | 'kpisRowGap' | 'kpiItems' | 'groups' | 'tgw' | 'skusCap' | 'usersCap' | 'currency' |
 'currencyDecimals'>
 
@@ -83,16 +94,15 @@ export type ProductCardComponent = React.ForwardRefExoticComponent<ProductCardPr
   Kpis: ProductCardKpisComponent;
   Header: ProductCardHeaderComponent;
   Footer: ProductCardFooterComponent;
+  TopBar: ProductCardTopBarComponent;
 };
 
 export const ProductCard = forwardRef(({
-  direction = 'vertical',
-  bordered = false,
+  bordered = true,
   highlightOnHover = false,
   title,
   titleRows = 3,
   subtitle,
-  menuActions,
   rating,
   feedbackCount,
   votesCount,
@@ -116,6 +126,9 @@ export const ProductCard = forwardRef(({
   footer,
   overlayActions,
   onClick,
+  sourceLabel,
+  sourceIcon,
+  badge,
   isLoading = false,
   hasColoredCover = false,
   className,
@@ -123,37 +136,15 @@ export const ProductCard = forwardRef(({
   children,
   ...otherProps
 }, forwardedRef: React.ForwardedRef<HTMLDivElement>) => {
-  const hasOverlay = !!(overlayActions && !menuActions && !onClick && !isLoading);
-  const hasMenu = !!(menuActions && !overlayActions && !onClick);
+  const hasOverlay = !!(overlayActions && !onClick && !isLoading);
   const hasHighlight = !!(onClick ?? highlightOnHover);
   const isClickable = !!(!isLoading && onClick);
 
-  const containerRef = useRef(null);
-
-  const mediaSizeStyle = (direction: 'vertical' | 'horizontal') => {
-    if (containerRef?.current) {
-      // @ts-expect-error: getBoundingClientRect()
-      const { width, height } = containerRef.current.getBoundingClientRect();
-
-      if (direction === 'vertical') {
-        return ({
-          flexGrow: 0,
-          height: 'auto',
-          width: '100%',
-        });
-      }
-
-      return ({
-        flexGrow: 0,
-        width: `${Math.min(width, height)}px`,
-        height: 'auto',
-      });
-    }
-
-    return ({});
-  };
-
-  const deboucedStyle = useDebounce(mediaSizeStyle(direction), { wait: 500 });
+  const hasTopBar = !!sourceLabel;
+  const hasColoredCard = hasColoredCover && !source?.length;
+  const hasMedia = !hasColoredCover && !!source?.length;
+  const hasCover = hasColoredCard || hasMedia;
+  const hasFooterSeparator = !!footer || isLoading;
 
   return (
     <Elevator resting={1} hover={hasHighlight ? 2 : undefined}>
@@ -161,41 +152,42 @@ export const ProductCard = forwardRef(({
         ref={forwardedRef}
         className={clsx(styles.Card, className)}
         style={{ ...style }}
+        fill={false}
         data-card-bordered={bordered}
         data-card-clickable={isClickable}
         onClick={isLoading ? undefined : onClick}
         {...otherProps}
       >
-
-        <Stack
-          data-inner-element="ProductCard-Container"
-          direction="row"
-          className={styles.Row}
-          fill={false}
-          ref={containerRef}
-        >
-          {hasOverlay && (
-            <Stack
-              direction="row"
-              hPadding={24}
-              vAlign="center"
-              hAlign="center"
-              className={styles.OverlayActions}
-              data-inner-element="ProductCard-OverlayActions"
-            >
-              <Stack>
-                {overlayActions}
-              </Stack>
-            </Stack>
-          )}
-
+        {hasOverlay && (
           <Stack
-            data-inner-element="ProductCard-Group"
-            direction={(direction === 'vertical') ? 'column' : 'row'}
-            className={styles.Content}
+            direction="row"
+            hPadding={24}
+            vAlign="center"
+            hAlign="center"
+            className={styles.OverlayActions}
+            data-inner-element="ProductCard-OverlayActions"
           >
+            <Stack>
+              {overlayActions}
+            </Stack>
+          </Stack>
+        )}
 
-            {hasColoredCover && !source?.length && (
+        {hasTopBar && (
+          <>
+            <ProductCard.TopBar
+              data-inner-element="ProductCard-TopBar"
+              sourceLabel={sourceLabel}
+              sourceIcon={sourceIcon}
+              isLoading={isLoading}
+            />
+            <Separator />
+          </>
+        )}
+
+        {hasCover && (
+          <div className={styles.Cover}>
+            {hasColoredCard && (
               <Stack
                 className={styles.ColoredCard}
                 style={{ backgroundColor: `${getColorFromString(title ?? '')}` }}
@@ -209,65 +201,66 @@ export const ProductCard = forwardRef(({
               </Stack>
             )}
 
-            {!hasColoredCover && source && (
+            {hasMedia && (
               <ProductCard.Media
                 source={source}
                 isLoading={isLoading}
                 ratio={ratio}
                 data-inner-element="ProductCard-Media"
-                style={deboucedStyle}
               />
             )}
 
-            <Stack
-              direction="column"
-            >
+            {badge && !isLoading && (
+              <Chip color="yellow" className={styles.Badge} data-inner-element="ProductCard-Badge">
+                {badge}
+              </Chip>
+            )}
+          </div>
+        )}
 
-              <ProductCard.Header
-                data-inner-element="ProductCard-Header"
-                title={title}
-                titleRows={titleRows}
-                subtitle={subtitle}
-                isLoading={isLoading}
-                menuActions={hasMenu && menuActions}
-              />
+        <ProductCard.Header
+          data-inner-element="ProductCard-Header"
+          title={title}
+          titleRows={titleRows}
+          subtitle={subtitle}
+          isLoading={isLoading}
+        />
 
-              <ProductCardKpis
-                data-inner-element="ProductCard-Kpis"
-                rating={rating}
-                feedbackCount={feedbackCount}
-                votesCount={votesCount}
-                votesRating={votesRating}
-                sentiment={sentiment}
-                nps={nps}
-                groups={groups}
-                tgw={tgw}
-                priceMin={priceMin}
-                priceMax={priceMax}
-                currency={currency}
-                currencyDecimals={currencyDecimals}
-                users={users}
-                usersCap={usersCap}
-                skus={skus}
-                skusCap={skusCap}
-                isLoading={isLoading}
-                kpiItems={kpiItems}
-                kpisRowGap={kpisRowGap}
-              />
+        <ProductCardKpis
+          data-inner-element="ProductCard-Kpis"
+          rating={rating}
+          feedbackCount={feedbackCount}
+          votesCount={votesCount}
+          votesRating={votesRating}
+          sentiment={sentiment}
+          nps={nps}
+          groups={groups}
+          tgw={tgw}
+          priceMin={priceMin}
+          priceMax={priceMax}
+          currency={currency}
+          currencyDecimals={currencyDecimals}
+          users={users}
+          usersCap={usersCap}
+          skus={skus}
+          skusCap={skusCap}
+          isLoading={isLoading}
+          kpiItems={kpiItems}
+          kpisRowGap={kpisRowGap}
+        />
 
-              {children && !isLoading && (
-                <Stack hPadding={24} data-inner-element="ProductCard-Children">
-                  {children}
-                </Stack>
-              )}
-
-              <ProductCard.Footer isLoading={isLoading} data-inner-element="ProductCard-Footer">
-                {footer}
-              </ProductCard.Footer>
-            </Stack>
+        {children && !isLoading && (
+          <Stack hPadding={16} data-inner-element="ProductCard-Children">
+            {children}
           </Stack>
+        )}
 
-        </Stack>
+        <div className={styles.Bottom}>
+          {hasFooterSeparator && <Separator />}
+          <ProductCard.Footer isLoading={isLoading} data-inner-element="ProductCard-Footer">
+            {footer}
+          </ProductCard.Footer>
+        </div>
       </Stack>
     </Elevator>
   );
@@ -279,3 +272,4 @@ ProductCard.Media = ProductCardMedia;
 ProductCard.Header = ProductCardHeader;
 ProductCard.Kpis = ProductCardKpis;
 ProductCard.Footer = ProductCardFooter;
+ProductCard.TopBar = ProductCardTopBar;

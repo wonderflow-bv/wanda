@@ -2,7 +2,6 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import {
   Button,
-  Menu,
   Stack,
   Text,
 } from '../..';
@@ -16,33 +15,6 @@ const OverlayButtons = (
   </Stack>
 );
 
-const MenuItems = (
-  <Menu>
-    <Menu.Item
-      autoFocus
-      icon="news"
-      value="1"
-    >
-      Stats
-    </Menu.Item>
-    <Menu.Item
-      icon="theater"
-      value="1"
-    >
-      Compare
-    </Menu.Item>
-    <Menu.Item
-      icon="grid"
-      value="1"
-      placement="right-start"
-      description="add product to group"
-    >
-      Add to group
-    </Menu.Item>
-  </Menu>
-
-);
-
 const SourceImages = [
   'https://products.gumlet.io/image-1675779605803.jpeg',
   'https://storage.googleapis.com/wonderflow-product-images/KITCHENAID%205KSM15%20SERIES.png',
@@ -50,16 +22,20 @@ const SourceImages = [
   // 'https://storage.googleapis.com/wonderflow-product-images/delonghi_coffee_MC%20NESPRESSO%20INISSIA.png',
 ];
 
+const SourceLogo = <img src="/amazon-logo.png" alt="Amazon" />;
+
 const story: ComponentMeta<typeof ProductCard> = {
   title: 'Domain Components/Product Card',
   component: ProductCard,
   args: {
-    direction: 'vertical',
-    bordered: false,
+    bordered: true,
     highlightOnHover: false,
     title: 'Product Card Title',
     titleRows: 3,
     subtitle: 'subtitle',
+    sourceLabel: 'Amazon',
+    sourceIcon: SourceLogo,
+    badge: 'New',
     rating: 4.3,
     nps: 23,
     feedbackCount: 123,
@@ -81,17 +57,12 @@ const story: ComponentMeta<typeof ProductCard> = {
     isLoading: false,
     ratio: '1',
     overlayActions: undefined,
-    menuActions: undefined,
     onClick: undefined,
     children: undefined,
     source: SourceImages.slice(0, 1),
-    footer: (<Text variant="body-2">Apr 2023</Text>),
+    footer: (<Text variant="body-3">Apr 2023</Text>),
   },
   argTypes: {
-    direction: {
-      options: ['vertical', 'horizontal'],
-      control: { type: 'select' },
-    },
     currency: {
       options: ['EUR', 'USD', 'GBP', 'JPY', 'CNY'],
       control: { type: 'select' },
@@ -110,14 +81,30 @@ const story: ComponentMeta<typeof ProductCard> = {
 
 export default story;
 
-const Template: ComponentStory<typeof ProductCard> = (args) => {
-  const { direction } = args;
-  return (<div style={{ maxWidth: direction === 'vertical' ? '250px' : '650px' }}><ProductCard {...args} /></div>
-  );
-};
+const Template: ComponentStory<typeof ProductCard> = args => (
+  <div style={{ width: '272px' }}><ProductCard {...args} /></div>
+);
 
 export const Default = Template.bind({});
 Default.args = {};
+
+export const withoutTopBar = Template.bind({});
+withoutTopBar.args = {
+  sourceLabel: undefined,
+  sourceIcon: undefined,
+  badge: undefined,
+};
+
+export const withSourceLabelOnly = Template.bind({});
+withSourceLabelOnly.args = {
+  sourceIcon: undefined,
+  badge: undefined,
+};
+
+export const loading = Template.bind({});
+loading.args = {
+  isLoading: true,
+};
 
 export const withFewKpis = Template.bind({});
 withFewKpis.args = {
@@ -140,11 +127,6 @@ withFewKpis.args = {
 export const withOverlayActions = Template.bind({});
 withOverlayActions.args = {
   overlayActions: OverlayButtons,
-};
-
-export const withMenuActions = Template.bind({});
-withMenuActions.args = {
-  menuActions: MenuItems,
 };
 
 export const clickable = Template.bind({});
@@ -188,6 +170,7 @@ withNoMedia.args = {
 
 export const withColoredCover = Template.bind({});
 withColoredCover.args = {
+  badge: 'New',
   source: [],
   subtitle: '',
   title: 'My first board',

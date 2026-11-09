@@ -111,6 +111,15 @@ describe('formatKpiValue()', () => {
     const res = formatKpiValue(10, { decimal: 0, cap: 100 });
     expect(res).toBe('10 / 100');
   });
+
+  it('should return the compact format for value and cap', () => {
+    expect(formatKpiValue(999, { decimal: 0, compact: true })).toBe('999');
+    expect(formatKpiValue(1234, { decimal: 0, compact: true })).toBe('1.2K');
+    expect(formatKpiValue(234000, { decimal: 0, compact: true })).toBe('234K');
+    expect(formatKpiValue(1789, { decimal: 0, compact: true, cap: 1000 })).toBe('1.8K / 1K');
+    expect(formatKpiValue(-5, { decimal: 0, compact: true, minRange: 0 })).toBe('0');
+    expect(formatKpiValue(undefined, { decimal: 0, compact: true })).toBe('');
+  });
 });
 
 describe('isValueOverCap()', () => {

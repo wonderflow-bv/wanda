@@ -95,6 +95,8 @@ export const clampValue = (value: number, minRange?: number, maxRange?: number) 
   return value;
 };
 
+const compactFormatter = new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 });
+
 export const formatKpiValue = (
   value?: number,
   option: {
@@ -102,20 +104,26 @@ export const formatKpiValue = (
     minRange?: number;
     maxRange?: number;
     cap?: number;
+    /**
+     * Use the compact notation (e.g. `1.2K`). When `true`, `decimal` is ignored.
+     */
+    compact?: boolean;
   } = { decimal: 0, minRange: 0 },
 ) => {
   const {
     decimal, minRange, maxRange, cap,
   } = option;
+  const isCompact = option.compact ?? false;
 
   const hasValue = typeof value === 'number';
   const d = typeof decimal === 'number' && decimal > 0 ? decimal : 0;
 
   if (hasValue) {
-    const res = clampValue(value, minRange, maxRange).toFixed(d);
+    const format = (n: number) => (isCompact ? compactFormatter.format(n) : n.toFixed(d));
+    const res = format(clampValue(value, minRange, maxRange));
 
     if (typeof cap === 'number' && cap > 0) {
-      const c = clampValue(cap, minRange, maxRange).toFixed(d);
+      const c = format(clampValue(cap, minRange, maxRange));
       return `${res} / ${c}`;
     }
 

@@ -1,7 +1,7 @@
 @layer components {
   .Card {
     background-color: var(--global-background);
-    border-radius: token(--radius-8);
+    border-radius: 12px;
     overflow: hidden;
     padding: 0;
     position: relative;
@@ -15,14 +15,18 @@
     }
   }
 
-
-  .Row {
+  .Cover {
     position: relative;
-    height: 100%;
   }
 
-  .Content {
-    flex-grow: 1;
+  .Badge {
+    position: absolute;
+    right: token(--space-16);
+    top: 10px;
+  }
+
+  .Bottom {
+    margin-top: auto;
   }
 
   .OverlayActions {

@@ -143,17 +143,6 @@ const Template: ComponentStory<typeof Container> = () => {
                       rating={4.51}
                       feedbackCount={3251}
                       footer="01 Aug 2023"
-                      menuActions={(
-                        <Menu>
-                          <Menu.Item
-                            autoFocus
-                            icon="news"
-                            value="1"
-                          >
-                            Stats
-                          </Menu.Item>
-                        </Menu>
-                      )}
                       highlightOnHover
                     />
                   </Grid.Item>

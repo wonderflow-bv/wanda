@@ -1,7 +1,8 @@
 declare const styles: {
   readonly "Card": string;
-  readonly "Row": string;
-  readonly "Content": string;
+  readonly "Cover": string;
+  readonly "Badge": string;
+  readonly "Bottom": string;
   readonly "OverlayActions": string;
   readonly "ColoredCard": string;
 };

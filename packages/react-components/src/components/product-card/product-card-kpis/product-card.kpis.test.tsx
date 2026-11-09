@@ -55,4 +55,33 @@ describe('<ProductCardKpis>', () => {
     expect(container).not.toBeNull();
     expect(container.textContent).toContain('R$');
   });
+
+  test('it should format decimals with one digit and counts in compact notation', () => {
+    const { container } = render(
+      <ProductCardKpis
+        rating={4.26}
+        sentiment={0.54}
+        feedbackCount={1234}
+        votesCount={234000}
+        users={1789}
+        usersCap={1000}
+        skus={12}
+        kpiItems={11}
+      />,
+    );
+
+    const text = container.textContent;
+    expect(text).toContain('4.3');
+    expect(text).toContain('0.5');
+    expect(text).toContain('1.2K');
+    expect(text).toContain('234K');
+    expect(text).toContain('1.8K / 1K');
+    expect(text).toContain('12');
+  });
+
+  test('it should render at most kpiItems rows', () => {
+    const { container } = render(<ProductCardKpis rating={4} feedbackCount={10} votesCount={20} kpiItems={2} />);
+
+    expect(container.querySelectorAll('p')).toHaveLength(2);
+  });
 });

@@ -31,7 +31,6 @@ describe('<ProductCardHeader>', () => {
         title="title"
         subtitle="subtitle"
         description="description"
-        menuActions={<div>some content</div>}
         isLoading
       />,
     );

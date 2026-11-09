@@ -2,7 +2,7 @@ import ComponentsNav from "@/data/components-nav";
 import { getLayoutProps } from "@/utils/get-layout-props";
 import { PropsTable } from "@/components/doc/props-table";
 import tkns from "@wonderflow/tokens/platforms/web/tokens.json";
-import { ProductCard, Menu } from '@wonderflow/react-components'
+import { ProductCard } from '@wonderflow/react-components'
 
 export const getStaticProps = () =>
   getLayoutProps({
@@ -15,7 +15,6 @@ export const getStaticProps = () =>
       features: [
         "Product Image Gallery",
         "Overlay Actions",
-        "Header Menu Actions",
         "Clickable",
       ]
     }
@@ -39,35 +38,14 @@ ProductCard is a variant of the Card component that displays product information
   feedbackCount={123}
   sentiment={0.51}
   footer="27 Apr 2023"
-  menuActions={<Menu>
-    <Menu.Item
-      icon="news"
-      value="1"
-    >
-      Stats
-    </Menu.Item>
-    <Menu.Item
-      icon="theater"
-      value="1"
-    >
-      Compare
-    </Menu.Item>
-    <Menu.Item
-      icon="grid"
-      value="1"
-      placement="right-start"
-    >
-      Add to group
-    </Menu.Item>
-  </Menu>}
   />
   </Stack>
 </LiveArea>
 
 ## Anatomy
 
-```tsx lines="1,5-14"
-import { ProductCard, Menu } from "@wonderflow/react-components";
+```tsx lines="1,5-13"
+import { ProductCard } from "@wonderflow/react-components";
 
 export default () => {
   return (
@@ -79,7 +57,6 @@ export default () => {
       sentiment={0.51}
       feedbackCount={123}
       footer="27 Apr 2023"
-      menuActions={<Menu>...</Menu>}
       />
   );
 };
@@ -93,10 +70,9 @@ The product Card is most often used inside the main content area. Cards in a gri
 
 ## Features
 
-### Orientation
-Cards can have a vertical or horizontal image orientation.
-
-![](https://wonderimages.gumlet.io/docs/productCard/product-card-orientation.png?format=png&q=100)
+### Top bar
+When `sourceLabel` is set, the card shows a top bar with the name (and optionally the logo, via `sourceIcon`) of the marketplace the product comes from.
+A `badge` (e.g. "New") can be displayed over the top-right corner of the cover.
 
 ### Media
 Card images are specifically designed to maintain the aspect ratio while filling the width of the card.
@@ -106,13 +82,9 @@ Card media can accommodate up to four cards.
 ![](https://wonderimages.gumlet.io/docs/productCard/product-card-media.png?format=png&q=100)
 
 ### Header
-The Card header serves as an area to display a title, optional subtitle and actions that
-are relevant to the entire card. In situations where additional actions are present,
-we utilise a Menu to accommodate them.
+The Card header serves as an area to display a title and an optional subtitle.
 
-<img src="https://wonderimages.gumlet.io/docs/productCard/product-card-header-menu.png?format=png&q=100" alt="" style={{width: "350px"}}/>
-
-For the Title, we recommend a maximum of three lines, with a minimum height of 84px.
+For the Title, we recommend a maximum of three lines.
 As for the subtitle, it is recommended to keep it to a single line.
 
 
@@ -130,17 +102,30 @@ We recommended showing a maximum of three KPIs.
 <PropsTable
   properties={[
     {
-      name: "direction",
-      type: ["enum"],
-      typeValue: "'vertical' | 'horizontal'",
-      default: "vertical",
+      name: "sourceLabel",
+      type: "string",
+      default: false,
       required: false,
-      description: "Change the product card layout.",
+      description: "Set the marketplace name. The top bar is rendered only when this is set.",
+    },
+    {
+      name: "sourceIcon",
+      type: "ReactNode",
+      default: false,
+      required: false,
+      description: "Set the marketplace logo, displayed in a 16px slot before the source label.",
+    },
+    {
+      name: "badge",
+      type: "string",
+      default: false,
+      required: false,
+      description: "Set a label displayed as a badge over the top-right corner of the cover.",
     },
     {
       name: "bordered",
       type: "boolean",
-      default: "false",
+      default: "true",
       required: false,
       description: "Add a border to the card to increase its visual weight and contrast.",
     },
@@ -340,14 +325,6 @@ We recommended showing a maximum of three KPIs.
         "Set the space between Kpis items.",
     },
     {
-      name: "menuActions",
-      type: ["ReactNode"],
-      default: false,
-      required: false,
-      description:
-        "Set the content to be displayed in the header menu.",
-    },
-    {
       name: "overlayActions",
       type: ["ReactNode"],
       default: false,
@@ -443,14 +420,6 @@ We recommended showing a maximum of three KPIs.
       default: 3,
       required: false,
       description: "Define how many lines the description should be clamped to.",
-    },
-    {
-      name: "menuActions",
-      type: ["ReactNode"],
-      default: false,
-      required: false,
-      description:
-        "Set the content to be displayed in the header menu.",
     },
     {
       name: "isLoading",

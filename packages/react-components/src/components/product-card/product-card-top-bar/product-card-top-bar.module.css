@@ -1,0 +1,58 @@
+@layer components {
+  .TopBar {
+    align-items: center;
+    display: flex;
+    gap: token(--space-8);
+    padding: token(--space-8) token(--space-16);
+  }
+
+  .Dots {
+    display: flex;
+    gap: token(--space-4);
+  }
+
+  .Dot {
+    block-size: 10px;
+    border-radius: 50%;
+    inline-size: 10px;
+    opacity: 20%;
+
+    &:nth-child(1) {
+      background-color: var(--dimmed-4);
+    }
+
+    &:nth-child(2) {
+      background-color: var(--dimmed-3);
+    }
+
+    &:nth-child(3) {
+      background-color: var(--dimmed-2);
+    }
+  }
+
+  .Pill {
+    align-items: center;
+    background-color: var(--dimmed-0);
+    block-size: 23px;
+    border-radius: 6px;
+    display: flex;
+    gap: token(--space-4);
+    padding: 0 token(--space-4);
+  }
+
+  .Icon {
+    align-items: center;
+    block-size: 16px;
+    display: inline-flex;
+    flex-shrink: 0;
+    inline-size: 16px;
+    justify-content: center;
+    overflow: hidden;
+
+    & > * {
+      block-size: 100%;
+      inline-size: 100%;
+      object-fit: contain;
+    }
+  }
+}

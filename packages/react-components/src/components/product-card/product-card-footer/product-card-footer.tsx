@@ -35,9 +35,7 @@ export const ProductCardFooter = forwardRef(({
   ...otherProps
 }, forwardedRef: React.ForwardedRef<HTMLDivElement>) => (
   <Stack
-    hPadding={24}
-    vPadding={24}
-    style={{ padding: children ? undefined : '0 24px 24px' }}
+    style={{ padding: children || isLoading ? '16px' : '0 16px 16px' }}
     {...otherProps}
     ref={forwardedRef}
   >
