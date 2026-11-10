@@ -51,7 +51,9 @@ const toTanStackColumn = <T extends Record<string, unknown>>(
 
   const cell: ColumnDef<T>['cell'] = Cell
     ? ctx => Cell({ row: ctx.row, value: ctx.getValue() })
-    : ctx => ctx.getValue() as ReactNode;
+    // `flexRender` mounts function cells as React components, and React 17
+    // throws if a component returns `undefined` (e.g. accessor on a missing key).
+    : ctx => (ctx.getValue() ?? null) as ReactNode;
 
   const shared = {
     id,
