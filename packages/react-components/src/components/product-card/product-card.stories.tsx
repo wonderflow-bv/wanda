@@ -168,6 +168,20 @@ withNoMedia.args = {
   footer: undefined,
 };
 
+export const withDescription = Template.bind({});
+withDescription.args = {
+  sourceLabel: undefined,
+  sourceIcon: undefined,
+  badge: undefined,
+  subtitle: '',
+  title: 'Domestic Appliances and Tools',
+  titleRows: 2,
+  description: 'Appliances and tools for everyday cooking, cleaning, and home maintenance.',
+  descriptionRows: 3,
+  kpiItems: 0,
+  footer: undefined,
+};
+
 export const withColoredCover = Template.bind({});
 withColoredCover.args = {
   badge: 'New',

@@ -20,6 +20,10 @@ import {
   ClampText, Skeleton, Stack, Text,
 } from '@/components';
 
+// `heading-6` line height (1.75rem) and the rows the title always occupies, to keep KPIs aligned across cards.
+const TITLE_LINE_HEIGHT_REM = 1.75;
+const TITLE_MIN_ROWS = 2;
+
 export type ProductCardHeaderProps = {
   /**
    * Set the subtitle or product brand.
@@ -31,6 +35,7 @@ export type ProductCardHeaderProps = {
   title?: string;
   /**
    * Define how many lines the title should be clamped to.
+   * The title area is always at least 2 rows tall (or `titleRows` if lower).
    */
   titleRows?: number;
   /**
@@ -75,11 +80,13 @@ export const ProductCardHeader = forwardRef(({
         {subtitle && <Text variant="subtitle-2">{subtitle}</Text>}
 
         {title && (
-          <ClampText rows={titleRows}>
-            <Text variant="heading-6">
-              {title}
-            </Text>
-          </ClampText>
+          <div style={{ minHeight: `${Math.min(titleRows, TITLE_MIN_ROWS) * TITLE_LINE_HEIGHT_REM}rem` }}>
+            <ClampText rows={titleRows}>
+              <Text variant="heading-6">
+                {title}
+              </Text>
+            </ClampText>
+          </div>
         )}
       </div>
 

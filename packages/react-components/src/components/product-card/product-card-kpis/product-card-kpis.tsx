@@ -98,6 +98,7 @@ export type ProductCardKpisProps = PropsWithClass<{
   skusCap?: number;
   /**
    * Set the maximum number of Kpis items to be displayed (and the skeleton rows while loading).
+   * When used through `ProductCard`, `0` hides the KPIs block (and its spacing) entirely.
    */
   kpiItems?: number;
   /**

@@ -64,7 +64,7 @@ export type ProductCardProps = PropsWithClass<PropsWithChildren<{
   badge?: string;
 }>>
 & Pick<ProductCardMediaProps, 'ratio' | 'source'>
-& Pick<ProductCardHeaderProps, 'title' | 'titleRows' | 'subtitle'>
+& Pick<ProductCardHeaderProps, 'title' | 'titleRows' | 'subtitle' | 'description' | 'descriptionRows'>
 & Pick<ProductCardKpisProps, 'rating' | 'feedbackCount' | 'votesCount' | 'votesRating' | 'users' | 'skus' | 'sentiment' | 'priceMin' | 'priceMax' | 'nps' | 'kpisRowGap' | 'kpiItems' | 'groups' | 'tgw' | 'skusCap' | 'usersCap' | 'currency' |
 'currencyDecimals'>
 
@@ -103,6 +103,8 @@ export const ProductCard = forwardRef(({
   title,
   titleRows = 3,
   subtitle,
+  description,
+  descriptionRows,
   rating,
   feedbackCount,
   votesCount,
@@ -144,6 +146,7 @@ export const ProductCard = forwardRef(({
   const hasColoredCard = hasColoredCover && !source?.length;
   const hasMedia = !hasColoredCover && !!source?.length;
   const hasCover = hasColoredCard || hasMedia;
+  const hasKpis = kpiItems !== 0;
   const hasFooterSeparator = !!footer || isLoading;
 
   return (
@@ -223,31 +226,35 @@ export const ProductCard = forwardRef(({
           title={title}
           titleRows={titleRows}
           subtitle={subtitle}
+          description={description}
+          descriptionRows={descriptionRows}
           isLoading={isLoading}
         />
 
-        <ProductCardKpis
-          data-inner-element="ProductCard-Kpis"
-          rating={rating}
-          feedbackCount={feedbackCount}
-          votesCount={votesCount}
-          votesRating={votesRating}
-          sentiment={sentiment}
-          nps={nps}
-          groups={groups}
-          tgw={tgw}
-          priceMin={priceMin}
-          priceMax={priceMax}
-          currency={currency}
-          currencyDecimals={currencyDecimals}
-          users={users}
-          usersCap={usersCap}
-          skus={skus}
-          skusCap={skusCap}
-          isLoading={isLoading}
-          kpiItems={kpiItems}
-          kpisRowGap={kpisRowGap}
-        />
+        {hasKpis && (
+          <ProductCardKpis
+            data-inner-element="ProductCard-Kpis"
+            rating={rating}
+            feedbackCount={feedbackCount}
+            votesCount={votesCount}
+            votesRating={votesRating}
+            sentiment={sentiment}
+            nps={nps}
+            groups={groups}
+            tgw={tgw}
+            priceMin={priceMin}
+            priceMax={priceMax}
+            currency={currency}
+            currencyDecimals={currencyDecimals}
+            users={users}
+            usersCap={usersCap}
+            skus={skus}
+            skusCap={skusCap}
+            isLoading={isLoading}
+            kpiItems={kpiItems}
+            kpisRowGap={kpisRowGap}
+          />
+        )}
 
         {children && !isLoading && (
           <Stack hPadding={16} data-inner-element="ProductCard-Children">

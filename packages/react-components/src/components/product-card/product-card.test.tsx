@@ -172,6 +172,17 @@ describe('<ProductCard>', () => {
     expect(container.querySelectorAll('hr')).toHaveLength(2);
   });
 
+  test('it should render the description and hide the KPIs block when kpiItems is 0', () => {
+    const { rerender } = render(<ProductCard title="title" rating={4.3} />);
+
+    expect(screen.queryByText('A description')).toBeNull();
+    expect(screen.getByText('4.3')).toBeDefined();
+
+    rerender(<ProductCard title="title" description="A description" rating={4.3} kpiItems={0} />);
+    expect(screen.getByText('A description')).toBeDefined();
+    expect(screen.queryByText('4.3')).toBeNull();
+  });
+
   test('it should be bordered by default', () => {
     const { container, rerender } = render(<ProductCard title="title" />);
 

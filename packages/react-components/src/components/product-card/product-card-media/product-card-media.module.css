@@ -1,6 +1,6 @@
 @layer components {
   .Image {
-    background-size: contain;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     border: 1px solid var(--dimmed-1);
