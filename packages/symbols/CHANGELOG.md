@@ -1,5 +1,11 @@
 # @wonderflow/symbols
 
+## 17.0.0
+
+### Major Changes
+
+- 3e4000e: restyle product card
+
 ## 16.1.0
 
 ### Minor Changes
