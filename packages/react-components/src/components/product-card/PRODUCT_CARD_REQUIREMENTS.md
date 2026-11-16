@@ -8,13 +8,12 @@ Goal: any further redesign must preserve every capability below. Visual styling 
 
 Single column, top to bottom:
 
-1. Overlay actions layer (optional, absolutely positioned over the whole card)
-2. Top bar (only if `sourceLabel`) + separator
-3. Cover: media collage **or** colored cover with initials (mutually exclusive), with an optional badge floating top-right
-4. Header: subtitle, title, optional description
-5. KPIs list
-6. Children slot (free content)
-7. Separator (only if `footer` is set or loading) + footer slot
+1. Top bar (only if `sourceLabel`) + separator
+2. Cover (always rendered): media collage if `source` has items, otherwise a colored cover with initials. It hosts an optional badge floating top-right and the optional overlay actions layer (absolutely positioned over the cover only)
+3. Header: subtitle, title, optional description
+4. KPIs list
+5. Children slot (free content)
+6. Separator (only if `footer` is set or loading) + footer slot
 
 The card is exposed as a compound component: `ProductCard.TopBar`, `.Media`, `.Header`, `.Kpis`, `.Footer` (also usable standalone).
 
@@ -32,11 +31,10 @@ Root: 1px `--dimmed-1` border (default on), radius 12, elevation 1.
 | `highlightOnHover` | `boolean` | `false` | Raises elevation on hover (resting 1 → hover 2). |
 | `onClick` | `() => void` | – | Makes the whole card clickable (also enables hover highlight). Ignored while loading. |
 | `isLoading` | `boolean` | `false` | Skeleton state for the whole card (see §6). |
-| `hasColoredCover` | `boolean` | `false` | Shows colored cover with title initials instead of media (see §5.2). |
 | `sourceLabel` | `string` | – | Marketplace name. The top bar is rendered only when set. |
 | `sourceIcon` | `ReactNode` | – | Marketplace logo, shown in a 16px slot before the label. |
 | `badge` | `string` | – | Yellow chip over the top-right corner of the cover (see §3). |
-| `overlayActions` | `ReactNode` | – | Content shown in an overlay layer (centered, 24px h-padding). |
+| `overlayActions` | `ReactNode` | – | Content shown in an overlay layer over the cover on hover (centered, 24px h-padding). |
 | `footer` | `ReactNode` | – | Free content for the footer slot. |
 | `children` | `ReactNode` | – | Free content between KPIs and footer (16px h-padding). Hidden while loading. |
 | `className`, `style`, other HTML props | – | – | Forwarded to the root. Ref is forwarded to the root `div`. |
@@ -49,14 +47,14 @@ Root: 1px `--dimmed-1` border (default on), radius 12, elevation 1.
 | Clickable card | `onClick` set **and** not loading |
 | Hover highlight | `onClick` set **or** `highlightOnHover` |
 
-The top bar is not interactive. The overlay covers the whole card, top bar included.
+The top bar is not interactive. The overlay covers the cover only (image or colored cover); the rest of the card is never covered.
 
 ### 1.2 Media
 
 | Prop | Type | Default | Behaviour |
 |---|---|---|---|
 | `source` | `string[]` | – | Image URLs. Max **4** used (rest ignored). |
-| `ratio` | `string` (CSS ratio syntax) | `'1'` | Aspect ratio of the media block. |
+| `ratio` | `string` (CSS ratio syntax) | `'1'` | Aspect ratio of the cover (media block or colored cover). |
 
 ### 1.3 Header
 
@@ -130,7 +128,7 @@ Notes:
 | Element | Condition | Rendering |
 |---|---|---|
 | Top bar | `sourceLabel` set | Three decorative 10px dots (`--dimmed-4/3/2`, 20% opacity, 4px gap) and a pill (`--dimmed-0`, radius 6, 23px high, 4px h-padding) with `sourceIcon` (16px slot) and `sourceLabel` in `body-3`. A separator sits below. Loading: skeleton pill. |
-| Badge | `badge` set, not loading, and the card has a cover (media or colored cover) | `Chip color="yellow"` absolutely positioned 16px from the right and 10px from the top of the cover. Stays below the overlay layer. |
+| Badge | `badge` set and not loading | `Chip color="yellow"` absolutely positioned 16px from the right and 10px from the top of the cover. Stays below the overlay layer. |
 
 Any other chips/tags must be passed via the `children` or `footer` slots.
 
@@ -158,12 +156,11 @@ The footer block sticks to the bottom of the card, so when a grid stretches card
 - **Title** — `heading-6`, multi-line clamp (default 3); hidden if empty.
 - **Description** — `body-2`, multi-line clamp (default 3); only via Header composition (see 1.3).
 
-### 5.2 Cover (mutually exclusive)
+### 5.2 Cover (always rendered, modes mutually exclusive)
 | Mode | Condition | Rendering |
 |---|---|---|
-| Colored cover | `hasColoredCover` **and** no `source` | Solid background colored deterministically from the title (hash → color family from design tokens, excluding `support`, shade index 5), showing the **first two letters of the title** in white `heading-1`, centered. |
-| Media collage | `!hasColoredCover` **and** `source` provided | Up to 4 images with `background-size: contain` (the whole image is always visible, never cropped), each with a 1px `--dimmed-1` border, aspect ratio from `ratio`. |
-| None | otherwise | No cover (and no badge). |
+| Media collage | `source` has at least one item | Up to 4 images with `background-size: cover`, each with a 1px `--dimmed-1` border, aspect ratio from `ratio`. |
+| Colored cover | otherwise | Solid background colored deterministically from the title (hash → color family from design tokens, excluding `support`, shade index 5), showing the **first two letters of the title** in white `heading-1`, centered. Same aspect ratio (`ratio`) as the media collage, so covers line up in a grid. |
 
 Media collage layouts (by image count):
 | Images | Layout |
@@ -176,7 +173,7 @@ Media collage layouts (by image count):
 Image loading: images are preloaded; on error/abort a placeholder image is used (`https://wonderimages.gumlet.io/placeholders/image-placeholder.png`). Image list is computed on mount only (does not react to later `source` changes).
 
 ### 5.3 Overlay actions
-Centered content layer over the whole card, only under the exclusivity rules in §1.1.
+Centered content layer over the cover only (it replaces the image or colored cover on hover, solid `--global-background`), only under the exclusivity rules in §1.1. It is never rendered over the header, KPIs or footer.
 
 ### 5.4 Children slot
 Free content between KPIs and footer.
@@ -188,7 +185,7 @@ Free content between KPIs and footer.
 | Area | Skeleton |
 |---|---|
 | Top bar | Skeleton pill (the dots stay) |
-| Media | Full-size block, no border radius |
+| Cover | Full-size skeleton block with the cover's aspect ratio, no border radius (also when there is no `source`) |
 | Badge | Hidden |
 | Header | Subtitle (50% width) if provided; title (28px high, 60%) if provided; description (80%) if provided |
 | KPIs | `kpiItems` bars, 20px high, 50% width |
@@ -204,5 +201,5 @@ Skeleton placeholders depend on which props are provided, so the layout stays st
 - Fixed 16px horizontal padding in top bar, header, KPIs, children, footer; keep it consistent.
 - Card height depends on its content (no fixed or reserved heights). In a grid that stretches cards to the same height, the footer stays aligned to the bottom.
 - Elevation: resting 1, hover 2 when interactive.
-- `data-inner-element` hooks (`ProductCard-OverlayActions`, `-TopBar`, `-Badge`, `-Media`, `-Header`, `-Kpis`, `-Children`, `-Footer`) and `data-card-bordered` / `data-card-clickable` attributes are used for styling/testing; keep or migrate deliberately.
+- `data-inner-element` hooks (`ProductCard-TopBar`, `-Cover`, `-Badge`, `-Media`, `-ColoredCover`, `-OverlayActions`, `-Header`, `-Kpis`, `-Children`, `-Footer`) and `data-card-bordered` / `data-card-clickable` attributes are used for styling/testing; keep or migrate deliberately.
 - Ref forwarding to root and sub-components; named exports only.

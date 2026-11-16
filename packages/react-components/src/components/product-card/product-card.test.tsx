@@ -118,7 +118,6 @@ describe('<ProductCard>', () => {
         kpisRowGap={16}
         bordered
         highlightOnHover
-        hasColoredCover
       />,
     );
 
@@ -140,21 +139,50 @@ describe('<ProductCard>', () => {
     expect(screen.getByAltText('logo')).toBeDefined();
   });
 
-  test('it should render the badge only over a cover and not while loading', () => {
+  test('it should render the badge over the cover and not while loading', () => {
     const { container, rerender } = render(<ProductCard title="title" source={SourceImages} badge="New" />);
     const badge = () => container.querySelector('[data-inner-element="ProductCard-Badge"]');
 
     expect(badge()).not.toBeNull();
     expect(screen.getByText('New')).toBeDefined();
 
-    rerender(<ProductCard title="title" hasColoredCover badge="New" />);
+    rerender(<ProductCard title="title" badge="New" />);
     expect(badge()).not.toBeNull();
 
     rerender(<ProductCard title="title" source={SourceImages} badge="New" isLoading />);
     expect(badge()).toBeNull();
 
-    rerender(<ProductCard title="title" badge="New" />);
+    rerender(<ProductCard title="title" badge="New" isLoading />);
     expect(badge()).toBeNull();
+  });
+
+  test('it should render the media or the colored cover, with overlay actions only inside the cover', () => {
+    const { container, rerender } = render(
+      <ProductCard title="title" source={SourceImages} overlayActions={<button type="button">Action</button>} />,
+    );
+    const cover = () => container.querySelector('[data-inner-element="ProductCard-Cover"]');
+    const media = () => container.querySelector('[data-inner-element="ProductCard-Media"]');
+    const coloredCover = () => container.querySelector('[data-inner-element="ProductCard-ColoredCover"]');
+    const overlay = () => container.querySelector('[data-inner-element="ProductCard-OverlayActions"]');
+
+    expect(media()).not.toBeNull();
+    expect(coloredCover()).toBeNull();
+    expect(cover()?.contains(overlay())).toBe(true);
+    expect(screen.getByText('Action')).toBeDefined();
+
+    rerender(<ProductCard title="title" overlayActions={<button type="button">Action</button>} />);
+    expect(media()).toBeNull();
+    expect(coloredCover()).not.toBeNull();
+    expect(screen.getByText('ti')).toBeDefined();
+    expect(cover()?.contains(overlay())).toBe(true);
+
+    rerender(<ProductCard title="title" overlayActions={<button type="button">Action</button>} onClick={jest.fn()} />);
+    expect(overlay()).toBeNull();
+
+    rerender(<ProductCard title="title" overlayActions={<button type="button">Action</button>} isLoading />);
+    expect(overlay()).toBeNull();
+    expect(cover()).not.toBeNull();
+    expect(coloredCover()).toBeNull();
   });
 
   test('it should render the footer separator only with a footer or while loading', () => {

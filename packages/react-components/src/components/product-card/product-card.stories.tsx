@@ -24,6 +24,23 @@ const SourceImages = [
 
 const SourceLogo = <img src="/amazon-logo.png" alt="Amazon" />;
 
+const NoKpis = {
+  rating: undefined,
+  nps: undefined,
+  feedbackCount: undefined,
+  votesRating: undefined,
+  votesCount: undefined,
+  sentiment: undefined,
+  tgw: undefined,
+  priceMin: undefined,
+  priceMax: undefined,
+  groups: undefined,
+  users: undefined,
+  usersCap: undefined,
+  skus: undefined,
+  skusCap: undefined,
+};
+
 const story: ComponentMeta<typeof ProductCard> = {
   title: 'Domain Components/Product Card',
   component: ProductCard,
@@ -85,82 +102,36 @@ const Template: ComponentStory<typeof ProductCard> = args => (
   <div style={{ width: '272px' }}><ProductCard {...args} /></div>
 );
 
+// Base
+
 export const Default = Template.bind({});
 Default.args = {};
 
-export const withoutTopBar = Template.bind({});
-withoutTopBar.args = {
-  sourceLabel: undefined,
-  sourceIcon: undefined,
-  badge: undefined,
-};
-
-export const withSourceLabelOnly = Template.bind({});
-withSourceLabelOnly.args = {
-  sourceIcon: undefined,
-  badge: undefined,
-};
-
-export const loading = Template.bind({});
-loading.args = {
+export const Loading = Template.bind({});
+Loading.args = {
   isLoading: true,
 };
 
-export const withFewKpis = Template.bind({});
-withFewKpis.args = {
-  rating: 4.3,
-  nps: undefined,
-  feedbackCount: 123,
-  votesRating: undefined,
-  votesCount: undefined,
-  sentiment: 0.54,
-  tgw: undefined,
-  priceMin: undefined,
-  priceMax: undefined,
-  groups: undefined,
-  users: undefined,
-  usersCap: undefined,
-  skus: undefined,
-  skusCap: undefined,
-};
+// Cover
 
-export const withOverlayActions = Template.bind({});
-withOverlayActions.args = {
-  overlayActions: OverlayButtons,
-};
-
-export const clickable = Template.bind({});
-clickable.args = {
-  onClick: () => console.log('pressed'),
-};
-
-export const withMultipleProducts = Template.bind({});
-withMultipleProducts.args = {
+export const WithMultipleImages = Template.bind({});
+WithMultipleImages.args = {
   source: SourceImages,
 };
 
-export const withBrokenImage = Template.bind({});
-withBrokenImage.args = {
+export const WithBrokenImage = Template.bind({});
+WithBrokenImage.args = {
   source: [...SourceImages, 'broken'],
 };
 
-export const withNoMedia = Template.bind({});
-withNoMedia.args = {
+export const WithColoredCover = Template.bind({});
+WithColoredCover.args = {
+  ...NoKpis,
   source: [],
   subtitle: '',
-  title: 'Wonderflow Space Catalog Label',
+  title: 'My first board',
   titleRows: 2,
   kpiItems: 2,
-  rating: undefined,
-  sentiment: undefined,
-  feedbackCount: undefined,
-  votesCount: undefined,
-  votesRating: undefined,
-  nps: undefined,
-  groups: undefined,
-  tgw: undefined,
-  priceMin: undefined,
-  priceMax: undefined,
   users: 1789,
   usersCap: 1000,
   skus: 234,
@@ -168,8 +139,33 @@ withNoMedia.args = {
   footer: undefined,
 };
 
-export const withDescription = Template.bind({});
-withDescription.args = {
+// Top bar
+
+export const WithoutTopBar = Template.bind({});
+WithoutTopBar.args = {
+  sourceLabel: undefined,
+  sourceIcon: undefined,
+  badge: undefined,
+};
+
+export const WithSourceLabelOnly = Template.bind({});
+WithSourceLabelOnly.args = {
+  sourceIcon: undefined,
+  badge: undefined,
+};
+
+// Content
+
+export const WithFewKpis = Template.bind({});
+WithFewKpis.args = {
+  ...NoKpis,
+  rating: 4.3,
+  feedbackCount: 123,
+  sentiment: 0.54,
+};
+
+export const WithDescription = Template.bind({});
+WithDescription.args = {
   sourceLabel: undefined,
   sourceIcon: undefined,
   badge: undefined,
@@ -182,28 +178,20 @@ withDescription.args = {
   footer: undefined,
 };
 
-export const withColoredCover = Template.bind({});
-withColoredCover.args = {
-  badge: 'New',
-  source: [],
-  subtitle: '',
-  title: 'My first board',
-  titleRows: 2,
-  kpiItems: 2,
-  rating: undefined,
-  sentiment: undefined,
-  feedbackCount: undefined,
-  votesCount: undefined,
-  votesRating: undefined,
-  nps: undefined,
-  groups: undefined,
-  tgw: undefined,
-  priceMin: undefined,
-  priceMax: undefined,
-  users: 1789,
-  usersCap: 1000,
-  skus: 234,
-  skusCap: 1000,
-  footer: undefined,
-  hasColoredCover: true,
+// Interactions
+
+export const Clickable = Template.bind({});
+Clickable.args = {
+  onClick: () => console.log('pressed'),
+};
+
+export const WithOverlayActions = Template.bind({});
+WithOverlayActions.args = {
+  overlayActions: OverlayButtons,
+};
+
+export const WithOverlayActionsOnColoredCover = Template.bind({});
+WithOverlayActionsOnColoredCover.args = {
+  ...WithColoredCover.args,
+  overlayActions: OverlayButtons,
 };

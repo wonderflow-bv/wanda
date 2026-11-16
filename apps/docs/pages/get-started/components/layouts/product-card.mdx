@@ -79,6 +79,11 @@ Card images are specifically designed to maintain the aspect ratio while filling
 This ensures that the images are displayed proportionally and avoids any distortion or stretching.
 Card media can accommodate up to four cards.
 
+When no `source` is provided, the card shows a colored cover with the first two letters of the title instead, using the same `ratio` as the images.
+
+### Overlay actions
+Content passed through `overlayActions` is displayed over the cover (the image or the colored cover) on hover. The rest of the card is never covered. Overlay actions are ignored when the card is clickable or loading.
+
 ![](https://wonderimages.gumlet.io/docs/productCard/product-card-media.png?format=png&q=100)
 
 ### Header

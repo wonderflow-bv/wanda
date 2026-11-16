@@ -3,9 +3,11 @@ import clsx from 'clsx';
 import React, { forwardRef, PropsWithChildren } from 'react';
 
 import {
+  AspectRatio,
   Chip,
   Elevator,
   Separator,
+  Skeleton,
   Stack,
   Text,
 } from '@/components';
@@ -29,7 +31,8 @@ export type ProductCardProps = PropsWithClass<PropsWithChildren<{
    */
   highlightOnHover?: boolean;
   /**
-   * Set the content to be displayed on the overlay layer.
+   * Set the content to be displayed over the cover (image or colored cover) on hover.
+   * Ignored when the card is clickable or loading.
    */
   overlayActions?: React.ReactNode;
   /**
@@ -40,10 +43,6 @@ export type ProductCardProps = PropsWithClass<PropsWithChildren<{
    * Set the loading state showing a skeleton.
    */
   isLoading?: boolean;
-  /**
-   * Shows a colored cover with the first two letters of the title.
-   */
-  hasColoredCover?: boolean;
   /**
    * Set an action to be performed when clicked.
    */
@@ -59,7 +58,7 @@ export type ProductCardProps = PropsWithClass<PropsWithChildren<{
   sourceIcon?: ProductCardTopBarProps['sourceIcon'];
   /**
    * Set a label (e.g. "New") displayed as a badge over the top-right corner of the cover.
-   * It is not displayed while loading or when the card has no cover.
+   * It is not displayed while loading.
    */
   badge?: string;
 }>>
@@ -132,7 +131,6 @@ export const ProductCard = forwardRef(({
   sourceIcon,
   badge,
   isLoading = false,
-  hasColoredCover = false,
   className,
   style,
   children,
@@ -143,9 +141,7 @@ export const ProductCard = forwardRef(({
   const isClickable = !!(!isLoading && onClick);
 
   const hasTopBar = !!sourceLabel;
-  const hasColoredCard = hasColoredCover && !source?.length;
-  const hasMedia = !hasColoredCover && !!source?.length;
-  const hasCover = hasColoredCard || hasMedia;
+  const hasMedia = !!source?.length;
   const hasKpis = kpiItems !== 0;
   const hasFooterSeparator = !!footer || isLoading;
 
@@ -161,21 +157,6 @@ export const ProductCard = forwardRef(({
         onClick={isLoading ? undefined : onClick}
         {...otherProps}
       >
-        {hasOverlay && (
-          <Stack
-            direction="row"
-            hPadding={24}
-            vAlign="center"
-            hAlign="center"
-            className={styles.OverlayActions}
-            data-inner-element="ProductCard-OverlayActions"
-          >
-            <Stack>
-              {overlayActions}
-            </Stack>
-          </Stack>
-        )}
-
         {hasTopBar && (
           <>
             <ProductCard.TopBar
@@ -188,38 +169,64 @@ export const ProductCard = forwardRef(({
           </>
         )}
 
-        {hasCover && (
-          <div className={styles.Cover}>
-            {hasColoredCard && (
-              <Stack
-                className={styles.ColoredCard}
-                style={{ backgroundColor: `${getColorFromString(title ?? '')}` }}
-                hAlign="center"
-                vAlign="center"
-                fill={false}
-              >
-                <Text variant="heading-1" textAlign="center" style={{ color: '#fff' }}>
-                  {title?.slice(0, 2)}
-                </Text>
-              </Stack>
-            )}
-
-            {hasMedia && (
+        <div className={styles.Cover} data-inner-element="ProductCard-Cover">
+          {hasMedia
+            ? (
               <ProductCard.Media
                 source={source}
                 isLoading={isLoading}
                 ratio={ratio}
                 data-inner-element="ProductCard-Media"
               />
+            )
+            : (
+              <AspectRatio ratio={ratio ?? '1'}>
+                {isLoading
+                  ? (
+                    <Skeleton
+                      style={{ borderRadius: '0', lineHeight: '2rem' }}
+                      width="inherit"
+                      height="inherit"
+                    />
+                  )
+                  : (
+                    <Stack
+                      className={styles.ColoredCard}
+                      style={{ backgroundColor: getColorFromString(title ?? '') }}
+                      hAlign="center"
+                      vAlign="center"
+                      fill={false}
+                      data-inner-element="ProductCard-ColoredCover"
+                    >
+                      <Text variant="heading-1" textAlign="center" style={{ color: '#fff' }}>
+                        {title?.slice(0, 2)}
+                      </Text>
+                    </Stack>
+                  )}
+              </AspectRatio>
             )}
 
-            {badge && !isLoading && (
-              <Chip color="yellow" className={styles.Badge} data-inner-element="ProductCard-Badge">
-                {badge}
-              </Chip>
-            )}
-          </div>
-        )}
+          {badge && !isLoading && (
+            <Chip color="yellow" className={styles.Badge} data-inner-element="ProductCard-Badge">
+              {badge}
+            </Chip>
+          )}
+
+          {hasOverlay && (
+            <Stack
+              direction="row"
+              hPadding={24}
+              vAlign="center"
+              hAlign="center"
+              className={styles.OverlayActions}
+              data-inner-element="ProductCard-OverlayActions"
+            >
+              <Stack>
+                {overlayActions}
+              </Stack>
+            </Stack>
+          )}
+        </div>
 
         <ProductCard.Header
           data-inner-element="ProductCard-Header"
