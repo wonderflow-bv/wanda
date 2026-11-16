@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 17.1.0
+
+### Minor Changes
+
+- 5010034: improved actions motion
+
 ## 17.0.0
 
 ### Major Changes

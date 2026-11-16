@@ -1,5 +1,7 @@
 # @wonderflow/symbols
 
+## 17.1.0
+
 ## 17.0.0
 
 ### Major Changes
