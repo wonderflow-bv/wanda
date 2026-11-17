@@ -20,6 +20,17 @@
     position: relative;
   }
 
+  .Card[data-card-locked='true'] {
+    & > :not(.Cover) {
+      flex-shrink: 0;
+    }
+
+    & .Cover {
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+  }
+
   .Badge {
     position: absolute;
     right: token(--space-16);
@@ -41,6 +52,10 @@
     &:hover {
       opacity: 100%;
     }
+  }
+
+  .Card[data-card-locked='true'] .OverlayActions:hover {
+    transition-delay: calc(token(--duration-100) + token(--duration-200));
   }
 
   .ColoredCard {

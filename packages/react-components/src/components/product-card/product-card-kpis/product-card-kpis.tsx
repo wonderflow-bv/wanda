@@ -17,11 +17,15 @@
 import { TokensTypes } from '@wonderflow/tokens/platforms/web';
 import tkns from '@wonderflow/tokens/platforms/web/tokens.json';
 import clsx from 'clsx';
-import { forwardRef, useMemo } from 'react';
+import {
+  forwardRef, MouseEvent, useCallback, useMemo, useState,
+} from 'react';
 
 import {
-  Skeleton, Stack,
-  Symbol, Text,
+  Button,
+  Skeleton,
+  Symbol,
+  Text,
 } from '@/components';
 
 import {
@@ -106,6 +110,32 @@ export type ProductCardKpisProps = PropsWithClass<{
    */
   kpisRowGap?: TokensTypes['space'];
   /**
+   * Show a toggle to reveal all the available Kpis, when more than `kpiItems` have a value.
+   *
+   * @default false
+   */
+  expandable?: boolean;
+  /**
+   * Set the label of the toggle when the Kpis are collapsed.
+   *
+   * @default 'Show more'
+   */
+  expandLabel?: string;
+  /**
+   * Set the label of the toggle when the Kpis are expanded.
+   *
+   * @default 'Show less'
+   */
+  collapseLabel?: string;
+  /**
+   * Control the expanded state. When not set, the state is handled internally.
+   */
+  isExpanded?: boolean;
+  /**
+   * Callback called when the toggle is pressed.
+   */
+  onExpandedChange?: (expanded: boolean) => void;
+  /**
    * Set the loading state showing a skeleton.
    */
   isLoading?: boolean;
@@ -139,6 +169,11 @@ export const ProductCardKpis = forwardRef(({
   skusCap,
   kpiItems = 3,
   kpisRowGap = 8,
+  expandable = false,
+  expandLabel = 'Show more',
+  collapseLabel = 'Show less',
+  isExpanded: isExpandedProp,
+  onExpandedChange,
   isLoading = false,
   className,
   style,
@@ -226,31 +261,79 @@ export const ProductCardKpis = forwardRef(({
     skus,
     skusCap]);
 
+  const [isExpandedState, setIsExpandedState] = useState(false);
+  const isExpanded = isExpandedProp ?? isExpandedState;
+
+  const availableKpis = config.filter(el => el.value);
+  const hasToggle = expandable && availableKpis.length > kpiItems;
+  const isShowingAll = isExpanded && hasToggle;
+  const defaultKpis = availableKpis.slice(0, kpiItems);
+  const extraKpis = hasToggle ? availableKpis.slice(kpiItems) : [];
+  const rowGap = kpisRowGap ? tkns.space[kpisRowGap] : 0;
+
+  const renderKpi = (el: KpiItemType) => (
+    <Text
+      key={el.property}
+      className={styles.Kpi}
+      variant="body-2"
+      decoratorStart={<Symbol source={el.icon} color={el.iconColor} weight="solid" />}
+      decoratorSize="medium"
+    >
+      {el.value}
+    </Text>
+  );
+
+  const handleToggle = useCallback((event: MouseEvent) => {
+    event.stopPropagation();
+    setIsExpandedState(!isExpanded);
+    onExpandedChange?.(!isExpanded);
+  }, [isExpanded, onExpandedChange]);
+
   return (
     <div className={clsx(styles.Kpis, className)} style={style} ref={forwardedRef}>
       {isLoading
         ? (
-          <Stack>
-            <Skeleton height="20px" width="50%" count={kpiItems} />
-          </Stack>
+          <div className={styles.Grid} style={{ rowGap }}>
+            {Array.from({ length: kpiItems }).map((_, i) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <Skeleton key={i} height="20px" width="100%" inline />
+            ))}
+          </div>
         )
         : (
-          <Stack rowGap={kpisRowGap}>
-            {config
-              .filter(el => el.value)
-              .slice(0, kpiItems)
-              .map(el => (
-                <Text
-                  key={el.property}
-                  className={styles.Kpi}
-                  variant="body-2"
-                  decoratorStart={<Symbol source={el.icon} color={el.iconColor} weight="solid" />}
-                  decoratorSize="medium"
-                >
-                  {el.value}
-                </Text>
-              ))}
-          </Stack>
+          <>
+            <div className={styles.Grid} style={{ rowGap }}>
+              {defaultKpis.map(renderKpi)}
+            </div>
+            {extraKpis.length > 0 && (
+              <div
+                className={styles.Extras}
+                data-extras-visible={isShowingAll}
+                aria-hidden={!isShowingAll}
+                data-inner-element="ProductCard-KpisExtras"
+              >
+                <div className={styles.ExtrasContent}>
+                  <div className={styles.Grid} style={{ rowGap, paddingBlockStart: rowGap }}>
+                    {extraKpis.map(renderKpi)}
+                  </div>
+                </div>
+              </div>
+            )}
+            {hasToggle && (
+              <Button
+                kind="flat"
+                dimension="small"
+                icon={isExpanded ? 'chevron-up' : 'chevron-down'}
+                iconPosition="right"
+                className={styles.Toggle}
+                aria-expanded={isExpanded}
+                data-inner-element="ProductCard-KpisToggle"
+                onClick={handleToggle}
+              >
+                {isExpanded ? collapseLabel : expandLabel}
+              </Button>
+            )}
+          </>
         )}
     </div>
   );

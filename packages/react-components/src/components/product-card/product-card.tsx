@@ -1,6 +1,9 @@
 import tkns from '@wonderflow/tokens/platforms/web/tokens.json';
 import clsx from 'clsx';
-import React, { forwardRef, PropsWithChildren } from 'react';
+import React, {
+  forwardRef, PropsWithChildren, useCallback, useEffect, useRef, useState,
+} from 'react';
+import { mergeRefs } from 'react-merge-refs';
 
 import {
   AspectRatio,
@@ -64,8 +67,11 @@ export type ProductCardProps = PropsWithClass<PropsWithChildren<{
 }>>
 & Pick<ProductCardMediaProps, 'ratio' | 'source'>
 & Pick<ProductCardHeaderProps, 'title' | 'titleRows' | 'subtitle' | 'description' | 'descriptionRows'>
-& Pick<ProductCardKpisProps, 'rating' | 'feedbackCount' | 'votesCount' | 'votesRating' | 'users' | 'skus' | 'sentiment' | 'priceMin' | 'priceMax' | 'nps' | 'kpisRowGap' | 'kpiItems' | 'groups' | 'tgw' | 'skusCap' | 'usersCap' | 'currency' |
+& Pick<ProductCardKpisProps, 'rating' | 'feedbackCount' | 'votesCount' | 'votesRating' | 'users' | 'skus' | 'sentiment' | 'priceMin' | 'priceMax' | 'nps' | 'kpisRowGap' | 'kpiItems' | 'expandable' | 'expandLabel' | 'collapseLabel' | 'groups' | 'tgw' | 'skusCap' | 'usersCap' | 'currency' |
 'currencyDecimals'>
+
+// Must be longer than the KPIs collapse animation (fade + slide).
+const LOCK_RELEASE_FALLBACK_MS = 500;
 
 const getColorFromString = (input: string): string => {
   const colorPalette = tkns.color;
@@ -122,6 +128,9 @@ export const ProductCard = forwardRef(({
   skusCap,
   kpiItems,
   kpisRowGap,
+  expandable,
+  expandLabel,
+  collapseLabel,
   ratio,
   source,
   footer,
@@ -136,6 +145,56 @@ export const ProductCard = forwardRef(({
   children,
   ...otherProps
 }, forwardedRef: React.ForwardedRef<HTMLDivElement>) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [isPeeking, setIsPeeking] = useState(false);
+  const [lockedHeight, setLockedHeight] = useState<number>();
+  const [isLocked, setIsLocked] = useState(false);
+
+  const isKpisExpanded = !!expandable && isExpanded && !isLoading;
+  const isShowingAllKpis = isKpisExpanded && !isPeeking;
+  const isKpisAvailable = !!expandable && !isLoading;
+
+  const unlock = useCallback(() => {
+    setIsLocked(false);
+    setLockedHeight(undefined);
+  }, []);
+
+  useEffect(() => {
+    if (!isKpisAvailable) {
+      setIsExpanded(false);
+      unlock();
+    }
+  }, [isKpisAvailable, unlock]);
+
+  useEffect(() => {
+    if (!isKpisExpanded) setIsPeeking(false);
+  }, [isKpisExpanded]);
+
+  // The lock is kept while the collapse animation plays, then released on transition end (or after a fallback delay).
+  useEffect(() => {
+    if (!isLocked || isKpisExpanded) return undefined;
+
+    const timeout = setTimeout(unlock, LOCK_RELEASE_FALLBACK_MS);
+    return () => clearTimeout(timeout);
+  }, [isLocked, isKpisExpanded, unlock]);
+
+  const handleExpandedChange = useCallback((expanded: boolean) => {
+    if (expanded && !isLocked) {
+      setLockedHeight(cardRef.current?.offsetHeight);
+      setIsLocked(true);
+    }
+
+    setIsExpanded(expanded);
+  }, [isLocked]);
+
+  const handleTransitionEnd = (event: React.TransitionEvent<HTMLDivElement>) => {
+    if (isLocked && !isKpisExpanded && event.propertyName === 'grid-template-rows') unlock();
+  };
+
+  const handleCoverMouseEnter = isKpisExpanded ? () => setIsPeeking(true) : undefined;
+  const handleCoverMouseLeave = isKpisExpanded ? () => setIsPeeking(false) : undefined;
+
   const hasOverlay = !!(overlayActions && !onClick && !isLoading);
   const hasHighlight = !!(onClick ?? highlightOnHover);
   const isClickable = !!(!isLoading && onClick);
@@ -148,13 +207,16 @@ export const ProductCard = forwardRef(({
   return (
     <Elevator resting={1} hover={hasHighlight ? 2 : undefined}>
       <Stack
-        ref={forwardedRef}
+        ref={mergeRefs([cardRef, forwardedRef])}
         className={clsx(styles.Card, className)}
-        style={{ ...style }}
+        style={{ ...style, height: isLocked ? lockedHeight : style?.height }}
         fill={false}
         data-card-bordered={bordered}
         data-card-clickable={isClickable}
+        data-card-expanded={isShowingAllKpis}
+        data-card-locked={isLocked}
         onClick={isLoading ? undefined : onClick}
+        onTransitionEnd={handleTransitionEnd}
         {...otherProps}
       >
         {hasTopBar && (
@@ -169,7 +231,12 @@ export const ProductCard = forwardRef(({
           </>
         )}
 
-        <div className={styles.Cover} data-inner-element="ProductCard-Cover">
+        <div
+          className={styles.Cover}
+          data-inner-element="ProductCard-Cover"
+          onMouseEnter={handleCoverMouseEnter}
+          onMouseLeave={handleCoverMouseLeave}
+        >
           {hasMedia
             ? (
               <ProductCard.Media
@@ -260,6 +327,11 @@ export const ProductCard = forwardRef(({
             isLoading={isLoading}
             kpiItems={kpiItems}
             kpisRowGap={kpisRowGap}
+            expandable={expandable}
+            expandLabel={expandLabel}
+            collapseLabel={collapseLabel}
+            isExpanded={isShowingAllKpis}
+            onExpandedChange={handleExpandedChange}
           />
         )}
 

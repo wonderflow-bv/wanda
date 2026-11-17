@@ -71,6 +71,9 @@ const story: ComponentMeta<typeof ProductCard> = {
     skusCap: 1000,
     kpiItems: 3,
     kpisRowGap: 8,
+    expandable: false,
+    expandLabel: 'Show more',
+    collapseLabel: 'Show less',
     isLoading: false,
     ratio: '1',
     overlayActions: undefined,
@@ -194,4 +197,21 @@ export const WithOverlayActionsOnColoredCover = Template.bind({});
 WithOverlayActionsOnColoredCover.args = {
   ...WithColoredCover.args,
   overlayActions: OverlayButtons,
+};
+
+export const ExpandableKpis = Template.bind({});
+ExpandableKpis.args = {
+  kpiItems: 2,
+  expandable: true,
+  overlayActions: OverlayButtons,
+};
+
+export const ExpandableKpisInGrid: ComponentStory<typeof ProductCard> = args => (
+  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 272px)', gap: '16px' }}>
+    <ProductCard {...args} />
+    <ProductCard {...args} expandable={false} />
+  </div>
+);
+ExpandableKpisInGrid.args = {
+  ...ExpandableKpis.args,
 };

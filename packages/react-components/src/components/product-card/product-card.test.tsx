@@ -1,4 +1,6 @@
-import { render, screen } from '@testing-library/react';
+import {
+  createEvent, fireEvent, render, screen,
+} from '@testing-library/react';
 
 import { ProductCard } from './product-card';
 
@@ -218,5 +220,92 @@ describe('<ProductCard>', () => {
 
     rerender(<ProductCard title="title" bordered={false} />);
     expect(container.querySelector('[data-card-bordered="false"]')).not.toBeNull();
+  });
+
+  describe('expandable KPIs', () => {
+    const kpis = {
+      rating: 4.3, nps: 23, feedbackCount: 123, votesRating: 2.3, tgw: 0.8,
+    };
+    const isHidden = (text: string) => !!screen.getByText(text).closest('[aria-hidden="true"]');
+    const toggle = () => screen.queryByRole('button', { name: /show (more|less)/i });
+
+    test('it should render the toggle only when expandable, with more KPIs than kpiItems, and not loading', () => {
+      const { rerender } = render(<ProductCard title="title" {...kpis} kpiItems={2} />);
+      expect(toggle()).toBeNull();
+
+      rerender(<ProductCard title="title" {...kpis} kpiItems={5} expandable />);
+      expect(toggle()).toBeNull();
+
+      rerender(<ProductCard title="title" {...kpis} kpiItems={2} expandable />);
+      expect(toggle()).not.toBeNull();
+
+      rerender(<ProductCard title="title" {...kpis} kpiItems={2} expandable isLoading />);
+      expect(toggle()).toBeNull();
+    });
+
+    test('it should expand and collapse the KPIs without triggering the card click', () => {
+      const onClick = jest.fn();
+      const { container } = render(
+        <ProductCard title="title" {...kpis} kpiItems={2} expandable onClick={onClick} />,
+      );
+      const card = () => container.querySelector('[data-card-expanded]');
+
+      expect(screen.getByText('4.3')).toBeDefined();
+      expect(screen.getByText('23')).toBeDefined();
+      expect(isHidden('123')).toBe(true);
+      expect(card()?.getAttribute('data-card-expanded')).toBe('false');
+
+      fireEvent.click(screen.getByRole('button', { name: 'Show more' }));
+      expect(isHidden('123')).toBe(false);
+      expect(isHidden('0.8')).toBe(false);
+      expect(toggle()?.getAttribute('aria-expanded')).toBe('true');
+      expect(toggle()?.textContent).toBe('Show less');
+      expect(card()?.getAttribute('data-card-expanded')).toBe('true');
+
+      fireEvent.click(screen.getByRole('button', { name: 'Show less' }));
+      expect(isHidden('123')).toBe(true);
+      expect(toggle()?.getAttribute('aria-expanded')).toBe('false');
+      expect(card()?.getAttribute('data-card-expanded')).toBe('false');
+      expect(onClick).not.toHaveBeenCalled();
+    });
+
+    test('it should keep the card locked while collapsing and release it when the transition ends', () => {
+      const { container } = render(<ProductCard title="title" {...kpis} kpiItems={2} expandable />);
+      const card = () => container.querySelector('[data-card-locked]');
+      const extras = () => container.querySelector('[data-inner-element="ProductCard-KpisExtras"]')!;
+
+      expect(card()?.getAttribute('data-card-locked')).toBe('false');
+
+      fireEvent.click(screen.getByRole('button', { name: 'Show more' }));
+      expect(card()?.getAttribute('data-card-locked')).toBe('true');
+
+      fireEvent.click(screen.getByRole('button', { name: 'Show less' }));
+      expect(card()?.getAttribute('data-card-locked')).toBe('true');
+
+      const transitionEnd = createEvent.transitionEnd(extras());
+      Object.defineProperty(transitionEnd, 'propertyName', { value: 'grid-template-rows' });
+      fireEvent(extras(), transitionEnd);
+      expect(card()?.getAttribute('data-card-locked')).toBe('false');
+    });
+
+    test('it should temporarily restore the default state while hovering the cover', () => {
+      const { container } = render(
+        <ProductCard title="title" {...kpis} kpiItems={2} expandable expandLabel="More" collapseLabel="Less" />,
+      );
+      const cover = container.querySelector('[data-inner-element="ProductCard-Cover"]')!;
+
+      fireEvent.click(screen.getByRole('button', { name: 'More' }));
+      expect(isHidden('123')).toBe(false);
+
+      fireEvent.mouseEnter(cover);
+      expect(isHidden('123')).toBe(true);
+      expect(screen.getByRole('button', { name: 'More' })).toBeDefined();
+      expect(container.querySelector('[data-card-expanded="false"]')).not.toBeNull();
+
+      fireEvent.mouseLeave(cover);
+      expect(isHidden('123')).toBe(false);
+      expect(screen.getByRole('button', { name: 'Less' })).toBeDefined();
+      expect(container.querySelector('[data-card-expanded="true"]')).not.toBeNull();
+    });
   });
 });
