@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 17.2.0
+
+### Minor Changes
+
+- a14acc4: new product card animation and icons
+
 ## 17.1.0
 
 ### Minor Changes
