@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 17.3.1
+
+### Patch Changes
+
+- 9fa63bd: product card image border fix
+
 ## 17.3.0
 
 ## 17.2.0
