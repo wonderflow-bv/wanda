@@ -159,7 +159,7 @@ The footer block sticks to the bottom of the card, so when a grid stretches card
 ### 5.2 Cover (always rendered, modes mutually exclusive)
 | Mode | Condition | Rendering |
 |---|---|---|
-| Media collage | `source` has at least one item | Up to 4 images with `background-size: cover`, each with a 1px `--dimmed-1` border, aspect ratio from `ratio`. |
+| Media collage | `source` has at least one item | Up to 4 images with `background-size: cover`, no side borders (so they span the full card width) and a single 1px `--dimmed-1` border below the whole collage, aspect ratio from `ratio`. |
 | Colored cover | otherwise | Solid background colored deterministically from the title (hash → color family from design tokens, excluding `support`, shade index 5), showing the **first two letters of the title** in white `heading-1`, centered. Same aspect ratio (`ratio`) as the media collage, so covers line up in a grid. |
 
 Media collage layouts (by image count):

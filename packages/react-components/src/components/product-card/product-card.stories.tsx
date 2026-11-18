@@ -108,7 +108,9 @@ const Template: ComponentStory<typeof ProductCard> = args => (
 // Base
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  kpiItems: 11,
+};
 
 export const Loading = Template.bind({});
 Loading.args = {

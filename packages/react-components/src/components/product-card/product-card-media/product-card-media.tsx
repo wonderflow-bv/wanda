@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import clsx from 'clsx';
 import {
   forwardRef, useEffect,
   useState,
@@ -94,7 +95,7 @@ export const ProductCardMedia = forwardRef(({
   return (
     <div
       ref={forwardedRef}
-      className={className}
+      className={clsx(styles.Media, className)}
       style={{ ...style }}
       {...otherProps}
     >
