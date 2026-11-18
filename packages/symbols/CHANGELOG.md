@@ -1,5 +1,11 @@
 # @wonderflow/symbols
 
+## 17.3.0
+
+### Minor Changes
+
+- 45ffefb: added new icon
+
 ## 17.2.0
 
 ### Minor Changes
