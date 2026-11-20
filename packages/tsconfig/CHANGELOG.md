@@ -1,5 +1,11 @@
 # tsconfig
 
+## 10.0.3
+
+### Patch Changes
+
+- f07c0b2: add loaded-bars icon
+
 ## 10.0.2
 
 ### Patch Changes

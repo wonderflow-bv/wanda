@@ -1,5 +1,11 @@
 # @wonderflow/themes
 
+## 17.4.0
+
+### Patch Changes
+
+- f07c0b2: add loaded-bars icon
+
 ## 17.3.1
 
 ## 17.3.0
