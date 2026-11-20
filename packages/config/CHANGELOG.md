@@ -1,5 +1,13 @@
 # @wonderflow/config
 
+## 17.4.0
+
+### Patch Changes
+
+- f07c0b2: add loaded-bars icon
+- Updated dependencies [f07c0b2]
+  - @wonderflow/tokens@17.4.0
+
 ## 17.3.1
 
 ### Patch Changes
