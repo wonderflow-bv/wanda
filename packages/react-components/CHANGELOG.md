@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 17.5.1
+
+### Patch Changes
+
+- 60dbf0d: fix product card animtion
+
 ## 17.5.0
 
 ### Minor Changes
