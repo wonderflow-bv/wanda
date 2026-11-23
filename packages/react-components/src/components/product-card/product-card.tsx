@@ -148,12 +148,31 @@ export const ProductCard = forwardRef(({
   const cardRef = useRef<HTMLDivElement>(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const [isPeeking, setIsPeeking] = useState(false);
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
   const [lockedHeight, setLockedHeight] = useState<number>();
   const [isLocked, setIsLocked] = useState(false);
+
+  const hasOverlay = !!(overlayActions && !onClick && !isLoading);
+  const hasHighlight = !!(onClick ?? highlightOnHover);
+  const isClickable = !!(!isLoading && onClick);
+
+  const hasTopBar = !!sourceLabel;
+  const hasMedia = !!source?.length;
+  const hasKpis = kpiItems !== 0;
+  const hasFooterSeparator = !!footer || isLoading;
 
   const isKpisExpanded = !!expandable && isExpanded && !isLoading;
   const isShowingAllKpis = isKpisExpanded && !isPeeking;
   const isKpisAvailable = !!expandable && !isLoading;
+  // While the overlay actions are open, the KPIs give their space back to the cover.
+  const isKpisHidden = hasOverlay && isOverlayOpen && hasKpis;
+
+  const lock = useCallback(() => {
+    if (isLocked) return;
+
+    setLockedHeight(cardRef.current?.offsetHeight);
+    setIsLocked(true);
+  }, [isLocked]);
 
   const unlock = useCallback(() => {
     setIsLocked(false);
@@ -171,38 +190,41 @@ export const ProductCard = forwardRef(({
     if (!isKpisExpanded) setIsPeeking(false);
   }, [isKpisExpanded]);
 
+  useEffect(() => {
+    if (!hasOverlay) setIsOverlayOpen(false);
+  }, [hasOverlay]);
+
   // The lock is kept while the collapse animation plays, then released on transition end (or after a fallback delay).
   useEffect(() => {
-    if (!isLocked || isKpisExpanded) return undefined;
+    if (!isLocked || isKpisExpanded || isOverlayOpen) return undefined;
 
     const timeout = setTimeout(unlock, LOCK_RELEASE_FALLBACK_MS);
     return () => clearTimeout(timeout);
-  }, [isLocked, isKpisExpanded, unlock]);
+  }, [isLocked, isKpisExpanded, isOverlayOpen, unlock]);
 
   const handleExpandedChange = useCallback((expanded: boolean) => {
-    if (expanded && !isLocked) {
-      setLockedHeight(cardRef.current?.offsetHeight);
-      setIsLocked(true);
-    }
+    if (expanded) lock();
 
     setIsExpanded(expanded);
-  }, [isLocked]);
+  }, [lock]);
 
   const handleTransitionEnd = (event: React.TransitionEvent<HTMLDivElement>) => {
-    if (isLocked && !isKpisExpanded && event.propertyName === 'grid-template-rows') unlock();
+    if (isLocked && !isKpisExpanded && !isOverlayOpen && event.propertyName === 'grid-template-rows') unlock();
   };
 
-  const handleCoverMouseEnter = isKpisExpanded ? () => setIsPeeking(true) : undefined;
-  const handleCoverMouseLeave = isKpisExpanded ? () => setIsPeeking(false) : undefined;
+  const handleCoverMouseEnter = () => {
+    if (hasOverlay) {
+      if (hasKpis) lock();
+      setIsOverlayOpen(true);
+    } else if (isKpisExpanded) {
+      setIsPeeking(true);
+    }
+  };
 
-  const hasOverlay = !!(overlayActions && !onClick && !isLoading);
-  const hasHighlight = !!(onClick ?? highlightOnHover);
-  const isClickable = !!(!isLoading && onClick);
-
-  const hasTopBar = !!sourceLabel;
-  const hasMedia = !!source?.length;
-  const hasKpis = kpiItems !== 0;
-  const hasFooterSeparator = !!footer || isLoading;
+  const handleCoverMouseLeave = () => {
+    if (hasOverlay) setIsOverlayOpen(false);
+    else if (isKpisExpanded) setIsPeeking(false);
+  };
 
   return (
     <Elevator resting={1} hover={hasHighlight ? 2 : undefined}>
@@ -215,6 +237,7 @@ export const ProductCard = forwardRef(({
         data-card-clickable={isClickable}
         data-card-expanded={isShowingAllKpis}
         data-card-locked={isLocked}
+        data-card-overlay-open={hasOverlay && isOverlayOpen}
         onClick={isLoading ? undefined : onClick}
         onTransitionEnd={handleTransitionEnd}
         {...otherProps}
@@ -306,33 +329,42 @@ export const ProductCard = forwardRef(({
         />
 
         {hasKpis && (
-          <ProductCardKpis
-            data-inner-element="ProductCard-Kpis"
-            rating={rating}
-            feedbackCount={feedbackCount}
-            votesCount={votesCount}
-            votesRating={votesRating}
-            sentiment={sentiment}
-            nps={nps}
-            groups={groups}
-            tgw={tgw}
-            priceMin={priceMin}
-            priceMax={priceMax}
-            currency={currency}
-            currencyDecimals={currencyDecimals}
-            users={users}
-            usersCap={usersCap}
-            skus={skus}
-            skusCap={skusCap}
-            isLoading={isLoading}
-            kpiItems={kpiItems}
-            kpisRowGap={kpisRowGap}
-            expandable={expandable}
-            expandLabel={expandLabel}
-            collapseLabel={collapseLabel}
-            isExpanded={isShowingAllKpis}
-            onExpandedChange={handleExpandedChange}
-          />
+          <div
+            className={styles.KpisCollapse}
+            data-kpis-hidden={isKpisHidden}
+            aria-hidden={isKpisHidden || undefined}
+            data-inner-element="ProductCard-KpisCollapse"
+          >
+            <div className={styles.KpisCollapseContent}>
+              <ProductCardKpis
+                data-inner-element="ProductCard-Kpis"
+                rating={rating}
+                feedbackCount={feedbackCount}
+                votesCount={votesCount}
+                votesRating={votesRating}
+                sentiment={sentiment}
+                nps={nps}
+                groups={groups}
+                tgw={tgw}
+                priceMin={priceMin}
+                priceMax={priceMax}
+                currency={currency}
+                currencyDecimals={currencyDecimals}
+                users={users}
+                usersCap={usersCap}
+                skus={skus}
+                skusCap={skusCap}
+                isLoading={isLoading}
+                kpiItems={kpiItems}
+                kpisRowGap={kpisRowGap}
+                expandable={expandable}
+                expandLabel={expandLabel}
+                collapseLabel={collapseLabel}
+                isExpanded={isShowingAllKpis}
+                onExpandedChange={handleExpandedChange}
+              />
+            </div>
+          </div>
         )}
 
         {children && !isLoading && (

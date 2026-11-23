@@ -1,9 +1,13 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { useRef } from 'react';
 
 import {
   Button,
+  Container,
+  Grid,
   Stack,
   Text,
+  useBreakpointsConfig,
 } from '../..';
 import { ProductCard } from './product-card';
 
@@ -208,12 +212,55 @@ ExpandableKpis.args = {
   overlayActions: OverlayButtons,
 };
 
-export const ExpandableKpisInGrid: ComponentStory<typeof ProductCard> = args => (
-  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 272px)', gap: '16px' }}>
-    <ProductCard {...args} />
-    <ProductCard {...args} expandable={false} />
-  </div>
+const GridOverlayButtons = (
+  <Stack rowGap={8}>
+    <Button>Stats</Button>
+    <Button kind="secondary">Compare</Button>
+    <Button kind="secondary">Add to group</Button>
+    <Button kind="secondary">Share</Button>
+    <Button kind="flat">Remove</Button>
+  </Stack>
 );
+
+// Same grid as the Wonderboard catalog (cards view): columns and gutters follow the container width.
+export const ExpandableKpisInGrid: ComponentStory<typeof ProductCard> = (args) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { value } = useBreakpointsConfig(
+    {
+      xs: { columns: 1, gutter: 16 },
+      sm: { columns: 2, gutter: 16 },
+      md: { columns: 3, gutter: 24 },
+      lg: { columns: 4, gutter: 24 },
+      xl: { columns: 6, gutter: 32 },
+      fallback: { columns: 1, gutter: 16 },
+    } as const,
+    containerRef,
+  );
+
+  return (
+    <Container>
+      <Stack vPadding={32} rowGap={32} fill={false} ref={containerRef}>
+        <div style={{ paddingTop: '12px' }}>
+          <Grid
+            rowGap={value.gutter}
+            columnGap={value.gutter}
+            columns={value.columns}
+            filling={false}
+          >
+            {Array.from({ length: 5 }).map((_, i) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <Grid.Item key={i}>
+                <ProductCard {...args} />
+              </Grid.Item>
+            ))}
+          </Grid>
+        </div>
+      </Stack>
+    </Container>
+  );
+};
+
 ExpandableKpisInGrid.args = {
   ...ExpandableKpis.args,
+  overlayActions: GridOverlayButtons,
 };

@@ -175,6 +175,8 @@ Image loading: images are preloaded; on error/abort a placeholder image is used 
 ### 5.3 Overlay actions
 Centered content layer over the cover only (it replaces the image or colored cover on hover, solid `--global-background`), only under the exclusivity rules in §1.1. It is never rendered over the header, KPIs or footer.
 
+To give the actions more room, hovering the cover (while the overlay is available) locks the card height, fades out and collapses the whole KPIs block (same fade + `grid-template-rows` animation as "Show more", wrapper `ProductCard-KpisCollapse`, `data-kpis-hidden`), and lets the cover grow into the freed space so the header shifts down. The actions fade in at the same time. On mouse leave the sequence is reversed and the height lock is released when the KPIs transition ends. If the KPIs are expanded, hovering hides them entirely (instead of the "peek" of the collapsed state) and they come back expanded on leave. Skipped when `kpiItems` is `0`. The state is exposed as `data-card-overlay-open` on the root.
+
 ### 5.4 Children slot
 Free content between KPIs and footer.
 
@@ -199,7 +201,7 @@ Skeleton placeholders depend on which props are provided, so the layout stays st
 
 ## 7. Non-functional requirements to keep
 - Fixed 16px horizontal padding in top bar, header, KPIs, children, footer; keep it consistent.
-- Card height depends on its content (no fixed or reserved heights). In a grid that stretches cards to the same height, the footer stays aligned to the bottom.
+- Card height depends on its content (no fixed or reserved heights); it is only locked temporarily while the KPIs expand/collapse or the overlay actions are open. In a grid that stretches cards to the same height, the footer stays aligned to the bottom.
 - Elevation: resting 1, hover 2 when interactive.
-- `data-inner-element` hooks (`ProductCard-TopBar`, `-Cover`, `-Badge`, `-Media`, `-ColoredCover`, `-OverlayActions`, `-Header`, `-Kpis`, `-Children`, `-Footer`) and `data-card-bordered` / `data-card-clickable` attributes are used for styling/testing; keep or migrate deliberately.
+- `data-inner-element` hooks (`ProductCard-TopBar`, `-Cover`, `-Badge`, `-Media`, `-ColoredCover`, `-OverlayActions`, `-Header`, `-KpisCollapse`, `-Kpis`, `-Children`, `-Footer`) and `data-card-bordered` / `data-card-clickable` / `data-card-overlay-open` attributes are used for styling/testing; keep or migrate deliberately.
 - Ref forwarding to root and sub-components; named exports only.

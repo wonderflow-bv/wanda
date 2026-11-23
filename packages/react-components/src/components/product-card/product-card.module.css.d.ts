@@ -3,6 +3,8 @@ declare const styles: {
   readonly "Cover": string;
   readonly "Badge": string;
   readonly "Bottom": string;
+  readonly "KpisCollapse": string;
+  readonly "KpisCollapseContent": string;
   readonly "OverlayActions": string;
   readonly "ColoredCard": string;
 };
