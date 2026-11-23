@@ -187,6 +187,39 @@ describe('<ProductCard>', () => {
     expect(coloredCover()).toBeNull();
   });
 
+  test('it should hide the KPIs and lock the card while the overlay actions are open, only when the overlay is available', () => {
+    const overlayActions = <button type="button">Action</button>;
+    const { container, rerender } = render(<ProductCard title="title" rating={4.3} overlayActions={overlayActions} />);
+    const card = () => container.querySelector('[data-card-locked]')!;
+    const cover = () => container.querySelector('[data-inner-element="ProductCard-Cover"]')!;
+    const kpis = () => container.querySelector('[data-inner-element="ProductCard-KpisCollapse"]')!;
+
+    expect(card().getAttribute('data-card-overlay-open')).toBe('false');
+    expect(kpis().getAttribute('data-kpis-hidden')).toBe('false');
+
+    fireEvent.mouseEnter(cover());
+    expect(card().getAttribute('data-card-overlay-open')).toBe('true');
+    expect(card().getAttribute('data-card-locked')).toBe('true');
+    expect(kpis().getAttribute('data-kpis-hidden')).toBe('true');
+    expect(kpis().getAttribute('aria-hidden')).toBe('true');
+
+    fireEvent.mouseLeave(cover());
+    expect(card().getAttribute('data-card-overlay-open')).toBe('false');
+    expect(kpis().getAttribute('data-kpis-hidden')).toBe('false');
+    expect(card().getAttribute('data-card-locked')).toBe('true');
+
+    const transitionEnd = createEvent.transitionEnd(kpis());
+    Object.defineProperty(transitionEnd, 'propertyName', { value: 'grid-template-rows' });
+    fireEvent(kpis(), transitionEnd);
+    expect(card().getAttribute('data-card-locked')).toBe('false');
+
+    rerender(<ProductCard title="title" rating={4.3} overlayActions={overlayActions} onClick={jest.fn()} />);
+    fireEvent.mouseEnter(cover());
+    expect(card().getAttribute('data-card-overlay-open')).toBe('false');
+    expect(card().getAttribute('data-card-locked')).toBe('false');
+    expect(kpis().getAttribute('data-kpis-hidden')).toBe('false');
+  });
+
   test('it should render the footer separator only with a footer or while loading', () => {
     const { container, rerender } = render(<ProductCard title="title" />);
 

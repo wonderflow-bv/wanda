@@ -6,6 +6,10 @@
     padding: 0;
     position: relative;
 
+    /* Timings of the hover sequence: KPIs fade, then collapse, while the overlay actions fade in. */
+    --kpis-fade: calc(token(--duration-100) * 0.75);
+    --kpis-collapse: calc(token(--duration-100) * 1.5);
+
     &[data-card-bordered='true'] {
       border: solid 1px var(--dimmed-1);
     }
@@ -41,21 +45,51 @@
     margin-top: auto;
   }
 
+  /* Collapses (fade, then height) while the overlay actions take the KPIs' space. */
+  .KpisCollapse {
+    display: grid;
+    grid-template-rows: 1fr;
+    opacity: 100%;
+    transition:
+      grid-template-rows var(--kpis-collapse) token(--easing-standard),
+      opacity var(--kpis-fade) token(--easing-standard) var(--kpis-collapse),
+      visibility 0s linear;
+    visibility: visible;
+
+    &[data-kpis-hidden='true'] {
+      grid-template-rows: 0fr;
+      opacity: 0%;
+      transition:
+        grid-template-rows var(--kpis-collapse) token(--easing-standard) var(--kpis-fade),
+        opacity var(--kpis-fade) token(--easing-standard),
+        visibility 0s linear calc(var(--kpis-fade) + var(--kpis-collapse));
+      visibility: hidden;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      &,
+      &[data-kpis-hidden='true'] {
+        transition: none;
+      }
+    }
+  }
+
+  .KpisCollapseContent {
+    min-height: 0;
+    overflow: hidden;
+  }
+
   .OverlayActions {
     background-color: var(--global-background);
     inset: 0;
     opacity: 0%;
     position: absolute;
-    transition: opacity token(--duration-300);
+    transition: opacity token(--duration-200);
     z-index: 1;
-
-    &:hover {
-      opacity: 100%;
-    }
   }
 
-  .Card[data-card-locked='true'] .OverlayActions:hover {
-    transition-delay: calc(token(--duration-100) + token(--duration-200));
+  .Card[data-card-overlay-open='true'] .OverlayActions {
+    opacity: 100%;
   }
 
   .ColoredCard {
