@@ -6,7 +6,7 @@
     padding: 0;
     position: relative;
 
-    /* Timings of the hover sequence: KPIs fade, then collapse, while the overlay actions fade in. */
+    /* Timings of the hover sequence: KPIs fade while they collapse, and the overlay actions fade in. */
     --kpis-fade: calc(token(--duration-100) * 0.75);
     --kpis-collapse: calc(token(--duration-100) * 1.5);
 
@@ -45,14 +45,14 @@
     margin-top: auto;
   }
 
-  /* Collapses (fade, then height) while the overlay actions take the KPIs' space. */
+  /* Fades and collapses at the same time (a single motion) while the overlay actions take the KPIs' space. */
   .KpisCollapse {
     display: grid;
     grid-template-rows: 1fr;
     opacity: 100%;
     transition:
       grid-template-rows var(--kpis-collapse) token(--easing-standard),
-      opacity var(--kpis-fade) token(--easing-standard) var(--kpis-collapse),
+      opacity var(--kpis-fade) token(--easing-standard) calc(var(--kpis-collapse) / 2),
       visibility 0s linear;
     visibility: visible;
 
@@ -60,9 +60,9 @@
       grid-template-rows: 0fr;
       opacity: 0%;
       transition:
-        grid-template-rows var(--kpis-collapse) token(--easing-standard) var(--kpis-fade),
+        grid-template-rows var(--kpis-collapse) token(--easing-standard),
         opacity var(--kpis-fade) token(--easing-standard),
-        visibility 0s linear calc(var(--kpis-fade) + var(--kpis-collapse));
+        visibility 0s linear var(--kpis-collapse);
       visibility: hidden;
     }
 

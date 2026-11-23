@@ -146,10 +146,12 @@ export const ProductCard = forwardRef(({
   ...otherProps
 }, forwardedRef: React.ForwardedRef<HTMLDivElement>) => {
   const cardRef = useRef<HTMLDivElement>(null);
+  const bottomRef = useRef<HTMLDivElement>(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const [isPeeking, setIsPeeking] = useState(false);
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
   const [lockedHeight, setLockedHeight] = useState<number>();
+  const [lockedGap, setLockedGap] = useState<number>();
   const [isLocked, setIsLocked] = useState(false);
 
   const hasOverlay = !!(overlayActions && !onClick && !isLoading);
@@ -171,12 +173,16 @@ export const ProductCard = forwardRef(({
     if (isLocked) return;
 
     setLockedHeight(cardRef.current?.offsetHeight);
+    // When the card is stretched (e.g. in a grid), the free space sits above the footer. It is frozen while locked,
+    // otherwise the cover would absorb it at once and jump before the KPIs animation even starts.
+    setLockedGap(bottomRef.current ? parseFloat(getComputedStyle(bottomRef.current).marginTop) || 0 : 0);
     setIsLocked(true);
   }, [isLocked]);
 
   const unlock = useCallback(() => {
     setIsLocked(false);
     setLockedHeight(undefined);
+    setLockedGap(undefined);
   }, []);
 
   useEffect(() => {
@@ -373,7 +379,11 @@ export const ProductCard = forwardRef(({
           </Stack>
         )}
 
-        <div className={styles.Bottom}>
+        <div
+          ref={bottomRef}
+          className={styles.Bottom}
+          style={{ marginTop: isLocked ? lockedGap : undefined }}
+        >
           {hasFooterSeparator && <Separator />}
           <ProductCard.Footer isLoading={isLoading} data-inner-element="ProductCard-Footer">
             {footer}
