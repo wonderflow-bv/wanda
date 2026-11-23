@@ -1,5 +1,11 @@
 # @wonderflow/config
 
+## 17.5.0
+
+### Patch Changes
+
+- @wonderflow/tokens@17.5.0
+
 ## 17.4.0
 
 ### Patch Changes

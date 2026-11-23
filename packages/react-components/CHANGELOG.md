@@ -1,5 +1,11 @@
 # @wonderflow/react-components
 
+## 17.5.0
+
+### Minor Changes
+
+- 7047169: improved actions display with animation
+
 ## 17.4.0
 
 ### Patch Changes
