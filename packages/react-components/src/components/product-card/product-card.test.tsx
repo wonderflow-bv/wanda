@@ -1,6 +1,7 @@
 import {
-  createEvent, fireEvent, render, screen,
+  createEvent, fireEvent, render, screen, waitFor,
 } from '@testing-library/react';
+import { useState } from 'react';
 
 import { ProductCard } from './product-card';
 
@@ -262,18 +263,54 @@ describe('<ProductCard>', () => {
     const isHidden = (text: string) => !!screen.getByText(text).closest('[aria-hidden="true"]');
     const toggle = () => screen.queryByRole('button', { name: /show (more|less)/i });
 
-    test('it should render the toggle only when expandable, with more KPIs than kpiItems, and not loading', () => {
+    test('it should render the toggle only when expandable and not loading, whatever the number of KPIs', () => {
       const { rerender } = render(<ProductCard title="title" {...kpis} kpiItems={2} />);
       expect(toggle()).toBeNull();
 
       rerender(<ProductCard title="title" {...kpis} kpiItems={5} expandable />);
-      expect(toggle()).toBeNull();
+      expect(toggle()).not.toBeNull();
 
-      rerender(<ProductCard title="title" {...kpis} kpiItems={2} expandable />);
+      rerender(<ProductCard title="title" rating={4.3} kpiItems={2} expandable />);
       expect(toggle()).not.toBeNull();
 
       rerender(<ProductCard title="title" {...kpis} kpiItems={2} expandable isLoading />);
       expect(toggle()).toBeNull();
+    });
+
+    test('it should reveal KPIs that arrive asynchronously after expanding, and keep them mounted while collapsing', async () => {
+      const Consumer = () => {
+        const [extra, setExtra] = useState({});
+
+        return (
+          <ProductCard
+            title="title"
+            rating={4.3}
+            nps={23}
+            {...extra}
+            kpiItems={2}
+            expandable
+            onExpandedChange={(expanded) => {
+              if (!expanded) setExtra({});
+              else setTimeout(() => setExtra({ feedbackCount: 123 }), 50);
+            }}
+          />
+        );
+      };
+
+      render(<Consumer />);
+      expect(screen.queryByText('123')).toBeNull();
+
+      fireEvent.click(screen.getByRole('button', { name: 'Show more' }));
+      expect(screen.getByRole('button', { name: 'Show less' })).toBeDefined();
+      expect(screen.queryByText('123')).toBeNull();
+
+      await waitFor(() => expect(isHidden('123')).toBe(false));
+
+      fireEvent.click(screen.getByRole('button', { name: 'Show less' }));
+      expect(screen.getByRole('button', { name: 'Show more' })).toBeDefined();
+      // The consumer dropped the KPIs, but they stay (hidden) until the collapse animation is over.
+      expect(isHidden('123')).toBe(true);
+      await waitFor(() => expect(screen.queryByText('123')).toBeNull());
     });
 
     test('it should expand and collapse the KPIs without triggering the card click', () => {

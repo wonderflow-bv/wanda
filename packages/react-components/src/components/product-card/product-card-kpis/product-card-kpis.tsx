@@ -18,7 +18,7 @@ import { TokensTypes } from '@wonderflow/tokens/platforms/web';
 import tkns from '@wonderflow/tokens/platforms/web/tokens.json';
 import clsx from 'clsx';
 import {
-  forwardRef, MouseEvent, useCallback, useMemo, useState,
+  forwardRef, MouseEvent, TransitionEvent, useCallback, useEffect, useMemo, useRef, useState,
 } from 'react';
 
 import {
@@ -110,7 +110,9 @@ export type ProductCardKpisProps = PropsWithClass<{
    */
   kpisRowGap?: TokensTypes['space'];
   /**
-   * Show a toggle to reveal all the available Kpis, when more than `kpiItems` have a value.
+   * Show a toggle to reveal the Kpis beyond `kpiItems`.
+   * The toggle does not depend on how many Kpis have a value: the consumer can provide them on demand
+   * (e.g. when `onExpandedChange` is called) and they are revealed with the same animation.
    *
    * @default false
    */
@@ -149,6 +151,9 @@ type KpiItemType = {
   icon: any;
   iconColor?: string;
 }
+
+// Must be longer than the extras collapse animation (delay + slide).
+const EXTRAS_UNMOUNT_FALLBACK_MS = 500;
 
 export const ProductCardKpis = forwardRef(({
   rating,
@@ -265,10 +270,46 @@ export const ProductCardKpis = forwardRef(({
   const isExpanded = isExpandedProp ?? isExpandedState;
 
   const availableKpis = config.filter(el => el.value);
-  const hasToggle = expandable && availableKpis.length > kpiItems;
-  const isShowingAll = isExpanded && hasToggle;
+  const hasToggle = expandable;
   const defaultKpis = availableKpis.slice(0, kpiItems);
-  const extraKpis = hasToggle ? availableKpis.slice(kpiItems) : [];
+  const extraKpis = expandable ? availableKpis.slice(kpiItems) : [];
+  const hasExtras = extraKpis.length > 0;
+
+  // The extras can be provided (and withdrawn) at any time, e.g. once an async request resolves or when the consumer
+  // collapses the card and drops them. To animate in both directions:
+  // - late extras are mounted hidden and revealed only after the browser has computed the hidden style,
+  //   otherwise there is nothing to transition from;
+  // - withdrawn extras are kept mounted (with their last values) until the collapse animation is over.
+  const extrasRef = useRef<HTMLDivElement>(null);
+  const lastExtrasRef = useRef(extraKpis);
+  if (hasExtras) lastExtrasRef.current = extraKpis;
+  const renderedExtras = hasExtras ? extraKpis : lastExtrasRef.current;
+
+  const [isRevealed, setIsRevealed] = useState(hasExtras);
+  const [isExtrasMounted, setIsExtrasMounted] = useState(hasExtras);
+
+  useEffect(() => {
+    if (hasExtras) {
+      setIsExtrasMounted(true);
+      // Reading a layout property forces a style recalculation: the hidden state is computed (and committed as the
+      // transition start) even if the commit, this effect and the reveal all happen within the same frame.
+      extrasRef.current?.getBoundingClientRect();
+      setIsRevealed(true);
+      return undefined;
+    }
+
+    setIsRevealed(false);
+    const timeout = setTimeout(() => setIsExtrasMounted(false), EXTRAS_UNMOUNT_FALLBACK_MS);
+    return () => clearTimeout(timeout);
+  }, [hasExtras]);
+
+  const handleExtrasTransitionEnd = (event: TransitionEvent<HTMLDivElement>) => {
+    if (!hasExtras && event.target === event.currentTarget && event.propertyName === 'grid-template-rows') {
+      setIsExtrasMounted(false);
+    }
+  };
+
+  const isShowingAll = isExpanded && hasToggle && hasExtras && isRevealed;
   const rowGap = kpisRowGap ? tkns.space[kpisRowGap] : 0;
 
   const renderKpi = (el: KpiItemType) => (
@@ -305,16 +346,18 @@ export const ProductCardKpis = forwardRef(({
             <div className={styles.Grid} style={{ rowGap }}>
               {defaultKpis.map(renderKpi)}
             </div>
-            {extraKpis.length > 0 && (
+            {(hasExtras || isExtrasMounted) && (
               <div
+                ref={extrasRef}
                 className={styles.Extras}
                 data-extras-visible={isShowingAll}
                 aria-hidden={!isShowingAll}
                 data-inner-element="ProductCard-KpisExtras"
+                onTransitionEnd={handleExtrasTransitionEnd}
               >
                 <div className={styles.ExtrasContent}>
                   <div className={styles.Grid} style={{ rowGap, paddingBlockStart: rowGap }}>
-                    {extraKpis.map(renderKpi)}
+                    {renderedExtras.map(renderKpi)}
                   </div>
                 </div>
               </div>

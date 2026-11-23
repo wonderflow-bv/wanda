@@ -1,5 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { useRef } from 'react';
+import {
+  ComponentProps, useEffect, useRef, useState,
+} from 'react';
 
 import {
   Button,
@@ -205,7 +207,50 @@ WithOverlayActionsOnColoredCover.args = {
   overlayActions: OverlayButtons,
 };
 
-export const ExpandableKpis = Template.bind({});
+const InitialKpis: ComponentProps<typeof ProductCard> = { ...NoKpis, rating: 4.3, nps: 23 };
+const ExtraKpis = { feedbackCount: 123, votesRating: 2.3, sentiment: 0.54 };
+
+// The card only reveals the KPIs it is given: the consumer provides the extra ones when the toggle is pressed.
+const ExpandableCard = (args: ComponentProps<typeof ProductCard>) => {
+  const [kpis, setKpis] = useState(InitialKpis);
+
+  const handleExpandedChange = (expanded: boolean) => {
+    if (expanded) setKpis({ ...InitialKpis, ...ExtraKpis });
+  };
+
+  return <ProductCard {...args} {...kpis} onExpandedChange={handleExpandedChange} />;
+};
+
+// Same as above, but the extra KPIs arrive after a fake network request, and are dropped as soon as the card collapses.
+const AsyncExpandableCard = (args: ComponentProps<typeof ProductCard>) => {
+  const [kpis, setKpis] = useState(InitialKpis);
+  const timeout = useRef<ReturnType<typeof setTimeout>>();
+
+  useEffect(() => () => clearTimeout(timeout.current), []);
+
+  const handleExpandedChange = (expanded: boolean) => {
+    clearTimeout(timeout.current);
+
+    if (expanded) timeout.current = setTimeout(() => setKpis({ ...InitialKpis, ...ExtraKpis }), 800);
+    else setKpis(InitialKpis);
+  };
+
+  return <ProductCard {...args} {...kpis} onExpandedChange={handleExpandedChange} />;
+};
+
+export const ExpandableKpisAsync: ComponentStory<typeof ProductCard> = args => (
+  <div style={{ width: '272px' }}><AsyncExpandableCard {...args} /></div>
+);
+
+ExpandableKpisAsync.args = {
+  kpiItems: 2,
+  expandable: true,
+};
+
+export const ExpandableKpis: ComponentStory<typeof ProductCard> = args => (
+  <div style={{ width: '272px' }}><ExpandableCard {...args} /></div>
+);
+
 ExpandableKpis.args = {
   kpiItems: 2,
   expandable: true,
@@ -250,7 +295,7 @@ export const ExpandableKpisInGrid: ComponentStory<typeof ProductCard> = (args) =
             {Array.from({ length: 5 }).map((_, i) => (
               // eslint-disable-next-line react/no-array-index-key
               <Grid.Item key={i}>
-                <ProductCard {...args} />
+                <ExpandableCard {...args} />
               </Grid.Item>
             ))}
           </Grid>
