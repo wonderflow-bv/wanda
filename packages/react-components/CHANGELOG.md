@@ -1,5 +1,12 @@
 # @wonderflow/react-components
 
+## 17.6.0
+
+### Minor Changes
+
+- f2aad90: product card: add the `onExpandedChange` prop and make the `expandable` toggle independent from the number of KPIs with a value, so the consumer can provide the extra KPIs on demand (even asynchronously: they animate in when they arrive, and stay mounted until the collapse animation ends when withdrawn)
+- f2aad90: improve async load more handling
+
 ## 17.5.1
 
 ### Patch Changes
