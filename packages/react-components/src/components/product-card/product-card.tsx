@@ -67,7 +67,7 @@ export type ProductCardProps = PropsWithClass<PropsWithChildren<{
 }>>
 & Pick<ProductCardMediaProps, 'ratio' | 'source'>
 & Pick<ProductCardHeaderProps, 'title' | 'titleRows' | 'subtitle' | 'description' | 'descriptionRows'>
-& Pick<ProductCardKpisProps, 'rating' | 'feedbackCount' | 'votesCount' | 'votesRating' | 'users' | 'skus' | 'sentiment' | 'priceMin' | 'priceMax' | 'nps' | 'kpisRowGap' | 'kpiItems' | 'expandable' | 'expandLabel' | 'collapseLabel' | 'groups' | 'tgw' | 'skusCap' | 'usersCap' | 'currency' |
+& Pick<ProductCardKpisProps, 'rating' | 'feedbackCount' | 'votesCount' | 'votesRating' | 'users' | 'skus' | 'sentiment' | 'priceMin' | 'priceMax' | 'nps' | 'kpisRowGap' | 'kpiItems' | 'expandable' | 'expandLabel' | 'collapseLabel' | 'onExpandedChange' | 'groups' | 'tgw' | 'skusCap' | 'usersCap' | 'currency' |
 'currencyDecimals'>
 
 // Must be longer than the KPIs collapse animation (fade + slide).
@@ -131,6 +131,7 @@ export const ProductCard = forwardRef(({
   expandable,
   expandLabel,
   collapseLabel,
+  onExpandedChange,
   ratio,
   source,
   footer,
@@ -212,7 +213,8 @@ export const ProductCard = forwardRef(({
     if (expanded) lock();
 
     setIsExpanded(expanded);
-  }, [lock]);
+    onExpandedChange?.(expanded);
+  }, [lock, onExpandedChange]);
 
   const handleTransitionEnd = (event: React.TransitionEvent<HTMLDivElement>) => {
     if (isLocked && !isKpisExpanded && !isOverlayOpen && event.propertyName === 'grid-template-rows') unlock();
